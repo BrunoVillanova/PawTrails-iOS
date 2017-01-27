@@ -7,9 +7,19 @@ target 'Snout' do
 
   # Pods for Snout
 
+   pod 'Firebase/Core'
+   pod 'Firebase/Auth'
+   pod 'GoogleSignIn'
+   pod 'Firebase/Database'
+
   target 'SnoutTests' do
     inherit! :search_paths
     # Pods for testing
+    pod 'Firebase/Core'
+    pod 'Firebase/Auth'
+    pod 'GoogleSignIn'
+    pod 'Firebase/Database'
+
   end
 
   target 'SnoutUITests' do

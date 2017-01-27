@@ -8,8 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		3120C8678B5ECFBA875241E3 /* Pods_SnoutTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34FD69F567853D3558E1E481 /* Pods_SnoutTests.framework */; };
+		440CEE461E3B848000F58A09 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 440CEE451E3B848000F58A09 /* GoogleService-Info.plist */; };
+		440CEE481E3B866200F58A09 /* FBAuthManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440CEE471E3B866200F58A09 /* FBAuthManagement.swift */; };
+		440CEE4E1E3B8DC500F58A09 /* RegisterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440CEE4D1E3B8DC500F58A09 /* RegisterPresenter.swift */; };
+		440CEE501E3B8E7900F58A09 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440CEE4F1E3B8E7900F58A09 /* RegisterViewController.swift */; };
+		440CEE521E3B90B900F58A09 /* ViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440CEE511E3B90B900F58A09 /* ViewUtils.swift */; };
+		440CEE541E3B93F300F58A09 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440CEE531E3B93F300F58A09 /* SignInViewController.swift */; };
+		440CEE561E3B945000F58A09 /* SignInPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440CEE551E3B945000F58A09 /* SignInPresenter.swift */; };
+		440CEE581E3B983700F58A09 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440CEE571E3B983700F58A09 /* InitialViewController.swift */; };
+		440CEE5A1E3B9AA300F58A09 /* InitialPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440CEE591E3B9AA300F58A09 /* InitialPresenter.swift */; };
+		440CEE5C1E3B9B1900F58A09 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440CEE5B1E3B9B1900F58A09 /* HomeViewController.swift */; };
+		440CEE5E1E3B9B2700F58A09 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440CEE5D1E3B9B2700F58A09 /* HomePresenter.swift */; };
 		4415FF431E3B822900A81B13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4415FF421E3B822900A81B13 /* AppDelegate.swift */; };
-		4415FF451E3B822900A81B13 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4415FF441E3B822900A81B13 /* ViewController.swift */; };
 		4415FF481E3B822900A81B13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4415FF461E3B822900A81B13 /* Main.storyboard */; };
 		4415FF4A1E3B822900A81B13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4415FF491E3B822900A81B13 /* Assets.xcassets */; };
 		4415FF4D1E3B822900A81B13 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4415FF4B1E3B822900A81B13 /* LaunchScreen.storyboard */; };
@@ -41,9 +51,19 @@
 		34FD69F567853D3558E1E481 /* Pods_SnoutTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnoutTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B9ED5A3D8EF67201561EC9A /* Pods-Snout.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snout.release.xcconfig"; path = "Pods/Target Support Files/Pods-Snout/Pods-Snout.release.xcconfig"; sourceTree = "<group>"; };
 		404A7E0E6DF1FE6BA79A9F21 /* Pods_SnoutUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnoutUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		440CEE451E3B848000F58A09 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		440CEE471E3B866200F58A09 /* FBAuthManagement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBAuthManagement.swift; sourceTree = "<group>"; };
+		440CEE4D1E3B8DC500F58A09 /* RegisterPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterPresenter.swift; path = Presenter/RegisterPresenter.swift; sourceTree = "<group>"; };
+		440CEE4F1E3B8E7900F58A09 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterViewController.swift; path = View/RegisterViewController.swift; sourceTree = "<group>"; };
+		440CEE511E3B90B900F58A09 /* ViewUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewUtils.swift; path = View/ViewUtils.swift; sourceTree = "<group>"; };
+		440CEE531E3B93F300F58A09 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignInViewController.swift; path = View/SignInViewController.swift; sourceTree = "<group>"; };
+		440CEE551E3B945000F58A09 /* SignInPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignInPresenter.swift; path = Presenter/SignInPresenter.swift; sourceTree = "<group>"; };
+		440CEE571E3B983700F58A09 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InitialViewController.swift; path = View/InitialViewController.swift; sourceTree = "<group>"; };
+		440CEE591E3B9AA300F58A09 /* InitialPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InitialPresenter.swift; path = Presenter/InitialPresenter.swift; sourceTree = "<group>"; };
+		440CEE5B1E3B9B1900F58A09 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = View/HomeViewController.swift; sourceTree = "<group>"; };
+		440CEE5D1E3B9B2700F58A09 /* HomePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
 		4415FF3F1E3B822900A81B13 /* Snout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4415FF421E3B822900A81B13 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4415FF441E3B822900A81B13 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4415FF471E3B822900A81B13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4415FF491E3B822900A81B13 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4415FF4C1E3B822900A81B13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -89,6 +109,49 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		440CEE491E3B8D0700F58A09 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				4415FF421E3B822900A81B13 /* AppDelegate.swift */,
+				4415FF491E3B822900A81B13 /* Assets.xcassets */,
+				4415FF4B1E3B822900A81B13 /* LaunchScreen.storyboard */,
+				4415FF4E1E3B822900A81B13 /* Info.plist */,
+				440CEE451E3B848000F58A09 /* GoogleService-Info.plist */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
+		440CEE4A1E3B8D2500F58A09 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				440CEE511E3B90B900F58A09 /* ViewUtils.swift */,
+				440CEE571E3B983700F58A09 /* InitialViewController.swift */,
+				440CEE4F1E3B8E7900F58A09 /* RegisterViewController.swift */,
+				440CEE531E3B93F300F58A09 /* SignInViewController.swift */,
+				440CEE5B1E3B9B1900F58A09 /* HomeViewController.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		440CEE4B1E3B8D2C00F58A09 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				440CEE591E3B9AA300F58A09 /* InitialPresenter.swift */,
+				440CEE4D1E3B8DC500F58A09 /* RegisterPresenter.swift */,
+				440CEE551E3B945000F58A09 /* SignInPresenter.swift */,
+				440CEE5D1E3B9B2700F58A09 /* HomePresenter.swift */,
+			);
+			name = Presenter;
+			sourceTree = "<group>";
+		};
+		440CEE4C1E3B8D3D00F58A09 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				440CEE471E3B866200F58A09 /* FBAuthManagement.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		4415FF361E3B822900A81B13 = {
 			isa = PBXGroup;
 			children = (
@@ -114,12 +177,11 @@
 		4415FF411E3B822900A81B13 /* Snout */ = {
 			isa = PBXGroup;
 			children = (
-				4415FF421E3B822900A81B13 /* AppDelegate.swift */,
-				4415FF441E3B822900A81B13 /* ViewController.swift */,
 				4415FF461E3B822900A81B13 /* Main.storyboard */,
-				4415FF491E3B822900A81B13 /* Assets.xcassets */,
-				4415FF4B1E3B822900A81B13 /* LaunchScreen.storyboard */,
-				4415FF4E1E3B822900A81B13 /* Info.plist */,
+				440CEE4C1E3B8D3D00F58A09 /* Model */,
+				440CEE4A1E3B8D2500F58A09 /* View */,
+				440CEE4B1E3B8D2C00F58A09 /* Presenter */,
+				440CEE491E3B8D0700F58A09 /* Assets */,
 			);
 			path = Snout;
 			sourceTree = "<group>";
@@ -285,6 +347,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4415FF4D1E3B822900A81B13 /* LaunchScreen.storyboard in Resources */,
+				440CEE461E3B848000F58A09 /* GoogleService-Info.plist in Resources */,
 				4415FF4A1E3B822900A81B13 /* Assets.xcassets in Resources */,
 				4415FF481E3B822900A81B13 /* Main.storyboard in Resources */,
 			);
@@ -449,8 +512,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4415FF451E3B822900A81B13 /* ViewController.swift in Sources */,
+				440CEE481E3B866200F58A09 /* FBAuthManagement.swift in Sources */,
+				440CEE521E3B90B900F58A09 /* ViewUtils.swift in Sources */,
+				440CEE541E3B93F300F58A09 /* SignInViewController.swift in Sources */,
+				440CEE4E1E3B8DC500F58A09 /* RegisterPresenter.swift in Sources */,
+				440CEE561E3B945000F58A09 /* SignInPresenter.swift in Sources */,
+				440CEE5C1E3B9B1900F58A09 /* HomeViewController.swift in Sources */,
+				440CEE5A1E3B9AA300F58A09 /* InitialPresenter.swift in Sources */,
 				4415FF431E3B822900A81B13 /* AppDelegate.swift in Sources */,
+				440CEE501E3B8E7900F58A09 /* RegisterViewController.swift in Sources */,
+				440CEE581E3B983700F58A09 /* InitialViewController.swift in Sources */,
+				440CEE5E1E3B9B2700F58A09 /* HomePresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -707,6 +779,7 @@
 				4415FF691E3B822A00A81B13 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4415FF6A1E3B822A00A81B13 /* Build configuration list for PBXNativeTarget "SnoutTests" */ = {
 			isa = XCConfigurationList;
@@ -715,6 +788,7 @@
 				4415FF6C1E3B822A00A81B13 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4415FF6D1E3B822A00A81B13 /* Build configuration list for PBXNativeTarget "SnoutUITests" */ = {
 			isa = XCConfigurationList;
@@ -723,6 +797,7 @@
 				4415FF6F1E3B822A00A81B13 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
