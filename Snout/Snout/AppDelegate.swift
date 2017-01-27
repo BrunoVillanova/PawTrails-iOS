@@ -8,19 +8,24 @@
 
 import UIKit
 import Firebase
+import GoogleSignIn
 
 let isDebug = true
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     var window: UIWindow?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+
         // Use Firebase library to configure APIs
         FIRApp.configure()
+        
+        // Google SignIn
+        GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
+        GIDSignIn.sharedInstance().delegate = self
         return true
     }
 
@@ -45,6 +50,68 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+
+    // MARK: - Google Sign In
+    @available(iOS 9.0, *)
+    func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any])
+        -> Bool {
+            return GIDSignIn.sharedInstance().handle(url,
+                                                        sourceApplication:options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
+                                                        annotation: [:])
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
+
+        if error != nil {
+            if let vc = self.window?.rootViewController?.presentedViewController as? InitialViewController {
+                vc.errorMessage((error?.localizedDescription)!)
+            }
+            return
+        }
+        
+        guard let authentication = user.authentication else { return }
+        let credential = FIRGoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
+        
+        FBAuthManagement.Instance.googleSignIn(credential: credential) { (error) in
+            if let vc = self.window?.rootViewController?.presentedViewController  as? InitialViewController {
+                if error != nil {
+                    vc.errorMessage(error!)
+                }else{
+                    vc.dismiss(animated: true, completion: nil)
+                }
+            }
+        }
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user:GIDGoogleUser!,
+                withError error: Error!) {
+        if let vc = self.window?.rootViewController as? HomeViewController {
+            self.window?.rootViewController?.presentingViewController?.dismiss(animated: true, completion: { 
+                vc.userNotSignedIn()
+            })
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

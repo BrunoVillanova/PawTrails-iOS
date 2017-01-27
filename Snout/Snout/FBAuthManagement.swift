@@ -29,6 +29,12 @@ class FBAuthManagement {
         }
     }
     
+    func googleSignIn(credential:FIRAuthCredential, completition: @escaping (_ error:String?) -> Void){
+        FIRAuth.auth()?.signIn(with: credential) { (user, error) in
+            completition(self.handleAuthErrors(error: error))
+        }
+    }
+    
     func signOut(completition: ((_ error:String?) -> Void)?) {
         let firebaseAuth = FIRAuth.auth()
         do {

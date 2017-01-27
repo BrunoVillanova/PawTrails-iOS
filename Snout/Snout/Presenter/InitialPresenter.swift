@@ -10,7 +10,6 @@ import Foundation
 
 protocol InitialView: NSObjectProtocol {
     func errorMessage(_ error:String)
-    func userCreated()
 }
 
 class InitialPresenter {
@@ -23,16 +22,6 @@ class InitialPresenter {
     
     func deteachView() {
         self.initialView = nil
-    }
-    
-    func register(email:String, password:String) {
-        FBAuthManagement.Instance.register(email, password) { (error) in
-            if error != nil {
-                self.initialView?.errorMessage(error!)
-            }else{
-                self.initialView?.userCreated()
-            }
-        }
     }
     
 }
