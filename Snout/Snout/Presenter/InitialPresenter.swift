@@ -8,8 +8,7 @@
 
 import Foundation
 
-protocol InitialView: NSObjectProtocol {
-    func errorMessage(_ error:String)
+protocol InitialView: NSObjectProtocol, View {
 }
 
 class InitialPresenter {

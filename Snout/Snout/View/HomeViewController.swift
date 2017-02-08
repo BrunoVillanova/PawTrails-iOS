@@ -15,10 +15,19 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter.attachView(self)
+//        self.presenter.checkSignInStatus()
+        SocketIOManager.sharedInstance.connectToServerWithNickname("try") { (data) in
+                if data != nil {
+                    print(data!)
+                }
+            SocketIOManager.sharedInstance.socket.emit("", "")
+        }
     }
     
     @IBAction func signOutAction(_ sender: UIBarButtonItem) {
-        self.presenter.signOut()
+//        self.presenter.signOut()
+        let randomNum:UInt32 = arc4random_uniform(100)
+        SocketIOManager.sharedInstance.sendMessage("msg \(randomNum)", withNickname: "\(UIDevice.current.description)")
     }
     
 }

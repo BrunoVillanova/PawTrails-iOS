@@ -8,8 +8,7 @@
 
 import Foundation
 
-protocol RegisterView: NSObjectProtocol {
-    func errorMessage(_ error:String)
+protocol RegisterView: NSObjectProtocol, View {
     func userCreated()
 }
 
@@ -26,7 +25,7 @@ class RegisterPresenter {
     }
     
     func register(email:String, password:String) {
-        FBAuthManagement.Instance.register(email, password) { (error) in
+        AuthManager.Instance.register(email, password) { (error) in
             if error != nil {
                 self.registerView?.errorMessage(error!)
             }else{

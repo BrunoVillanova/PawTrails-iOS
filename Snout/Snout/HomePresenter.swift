@@ -8,8 +8,7 @@
 
 import Foundation
 
-protocol HomeView: NSObjectProtocol {
-    func errorMessage(_ error:String)
+protocol HomeView: NSObjectProtocol, View {
     func userNotSignedIn()
 }
 
@@ -26,13 +25,13 @@ class HomePresenter {
     }
     
     func checkSignInStatus() {
-        if !FBAuthManagement.Instance.isSignedIn() {
-            self.homeView?.userNotSignedIn()
-        }
+//        if !AuthManager.Instance.isSignedIn() {
+//            self.homeView?.userNotSignedIn()
+//        }
     }
     
     func signOut(){
-        FBAuthManagement.Instance.signOut { (error) in
+        AuthManager.Instance.signOut { (error) in
             if error != nil {
                 self.homeView?.errorMessage(error!)
             }else{

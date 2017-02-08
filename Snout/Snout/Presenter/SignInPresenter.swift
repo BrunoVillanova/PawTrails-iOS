@@ -8,8 +8,7 @@
 
 import Foundation
 
-protocol SignInView: NSObjectProtocol {
-    func errorMessage(_ error:String)
+protocol SignInView: NSObjectProtocol, View {
     func userSignedIn()
 }
 
@@ -26,7 +25,7 @@ class SignInPresenter {
     }
     
     func signIn(email:String, password:String) {
-        FBAuthManagement.Instance.signIn(email, password) { (error) in
+        AuthManager.Instance.signIn(email, password) { (error) in
             if error != nil {
                 self.signInView?.errorMessage(error!)
             }else{
