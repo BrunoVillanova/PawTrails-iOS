@@ -15,45 +15,57 @@
 		440CEE581E3B983700F58A09 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440CEE571E3B983700F58A09 /* InitialViewController.swift */; };
 		440CEE5A1E3B9AA300F58A09 /* InitialPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440CEE591E3B9AA300F58A09 /* InitialPresenter.swift */; };
 		440CEE5C1E3B9B1900F58A09 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440CEE5B1E3B9B1900F58A09 /* HomeViewController.swift */; };
-		440CEE5E1E3B9B2700F58A09 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440CEE5D1E3B9B2700F58A09 /* HomePresenter.swift */; };
 		4415FF431E3B822900A81B13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4415FF421E3B822900A81B13 /* AppDelegate.swift */; };
 		4415FF481E3B822900A81B13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4415FF461E3B822900A81B13 /* Main.storyboard */; };
 		4415FF4A1E3B822900A81B13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4415FF491E3B822900A81B13 /* Assets.xcassets */; };
 		4415FF4D1E3B822900A81B13 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4415FF4B1E3B822900A81B13 /* LaunchScreen.storyboard */; };
 		4415FF581E3B822A00A81B13 /* SnoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4415FF571E3B822A00A81B13 /* SnoutTests.swift */; };
 		4415FF631E3B822A00A81B13 /* SnoutUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4415FF621E3B822A00A81B13 /* SnoutUITests.swift */; };
-		4446422F1E4B29910095C4DD /* Mapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446422E1E4B29910095C4DD /* Mapper.swift */; };
-		447D4BE11E44BDD7008F82F4 /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447D4BE01E44BDD7008F82F4 /* SocketIOManager.swift */; };
-		447D4BFC1E44BF4C008F82F4 /* SocketAckEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447D4BE41E44BF4C008F82F4 /* SocketAckEmitter.swift */; };
-		447D4BFD1E44BF4C008F82F4 /* SocketAckManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447D4BE51E44BF4C008F82F4 /* SocketAckManager.swift */; };
-		447D4BFE1E44BF4C008F82F4 /* SocketAnyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447D4BE61E44BF4C008F82F4 /* SocketAnyEvent.swift */; };
-		447D4BFF1E44BF4C008F82F4 /* SocketClientManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447D4BE71E44BF4C008F82F4 /* SocketClientManager.swift */; };
-		447D4C001E44BF4C008F82F4 /* SocketEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447D4BE81E44BF4C008F82F4 /* SocketEngine.swift */; };
-		447D4C011E44BF4C008F82F4 /* SocketEngineClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447D4BE91E44BF4C008F82F4 /* SocketEngineClient.swift */; };
-		447D4C021E44BF4C008F82F4 /* SocketEnginePacketType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447D4BEA1E44BF4C008F82F4 /* SocketEnginePacketType.swift */; };
-		447D4C031E44BF4C008F82F4 /* SocketEnginePollable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447D4BEB1E44BF4C008F82F4 /* SocketEnginePollable.swift */; };
-		447D4C041E44BF4C008F82F4 /* SocketEngineSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447D4BEC1E44BF4C008F82F4 /* SocketEngineSpec.swift */; };
-		447D4C051E44BF4C008F82F4 /* SocketEngineWebsocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447D4BED1E44BF4C008F82F4 /* SocketEngineWebsocket.swift */; };
-		447D4C061E44BF4C008F82F4 /* SocketEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447D4BEE1E44BF4C008F82F4 /* SocketEventHandler.swift */; };
-		447D4C071E44BF4C008F82F4 /* SocketExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447D4BEF1E44BF4C008F82F4 /* SocketExtensions.swift */; };
-		447D4C081E44BF4C008F82F4 /* SocketIOClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447D4BF01E44BF4C008F82F4 /* SocketIOClient.swift */; };
-		447D4C091E44BF4C008F82F4 /* SocketIOClientConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447D4BF11E44BF4C008F82F4 /* SocketIOClientConfiguration.swift */; };
-		447D4C0A1E44BF4C008F82F4 /* SocketIOClientOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447D4BF21E44BF4C008F82F4 /* SocketIOClientOption.swift */; };
-		447D4C0B1E44BF4C008F82F4 /* SocketIOClientSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447D4BF31E44BF4C008F82F4 /* SocketIOClientSpec.swift */; };
-		447D4C0C1E44BF4C008F82F4 /* SocketIOClientStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447D4BF41E44BF4C008F82F4 /* SocketIOClientStatus.swift */; };
-		447D4C0D1E44BF4C008F82F4 /* SocketLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447D4BF51E44BF4C008F82F4 /* SocketLogger.swift */; };
-		447D4C0E1E44BF4C008F82F4 /* SocketPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447D4BF61E44BF4C008F82F4 /* SocketPacket.swift */; };
-		447D4C0F1E44BF4C008F82F4 /* SocketParsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447D4BF71E44BF4C008F82F4 /* SocketParsable.swift */; };
-		447D4C101E44BF4C008F82F4 /* SocketStringReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447D4BF81E44BF4C008F82F4 /* SocketStringReader.swift */; };
-		447D4C111E44BF4C008F82F4 /* SocketTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447D4BF91E44BF4C008F82F4 /* SocketTypes.swift */; };
-		447D4C121E44BF4C008F82F4 /* SSLSecurity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447D4BFA1E44BF4C008F82F4 /* SSLSecurity.swift */; };
-		447D4C131E44BF4C008F82F4 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447D4BFB1E44BF4C008F82F4 /* WebSocket.swift */; };
+		44421A2C1E4CB8E7009755BD /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44421A2B1E4CB8E7009755BD /* ProfilePresenter.swift */; };
+		44421A2E1E4CB9A6009755BD /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44421A2D1E4CB9A6009755BD /* EditProfileViewController.swift */; };
+		44485F951E51B12800A3C47D /* Snout.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 44485F931E51B12800A3C47D /* Snout.xcdatamodeld */; };
+		44485F971E51B16500A3C47D /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44485F961E51B16500A3C47D /* CoreDataManager.swift */; };
+		44485FBD1E52076C00A3C47D /* countrycodes.csv in Resources */ = {isa = PBXBuildFile; fileRef = 44485FBC1E52076C00A3C47D /* countrycodes.csv */; };
+		44485FBF1E52079D00A3C47D /* CVSParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44485FBE1E52079D00A3C47D /* CVSParser.swift */; };
+		44498DFD1E4DBE6700F6D761 /* ChangePasswordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44498DFC1E4DBE6700F6D761 /* ChangePasswordPresenter.swift */; };
+		44498DFF1E4DC03100F6D761 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44498DFE1E4DC03100F6D761 /* ChangePasswordViewController.swift */; };
+		44498E011E4DCF4300F6D761 /* PetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44498E001E4DCF4300F6D761 /* PetsViewController.swift */; };
+		44498E031E4DCF8700F6D761 /* PetsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44498E021E4DCF8700F6D761 /* PetsPresenter.swift */; };
 		447D4C171E44C4F5008F82F4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 447D4C161E44C4F5008F82F4 /* MapKit.framework */; };
-		449098701E437AD900A37697 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4490986F1E437AD900A37697 /* AuthManager.swift */; };
 		44B179621E4B62690070A18B /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B179611E4B62690070A18B /* Presenter.swift */; };
-		44DF05751E48766600ACCD4D /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DF05741E48766600ACCD4D /* APIManager.swift */; };
-		44FE72391E4A1677007C7E24 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FE72381E4A1677007C7E24 /* Model.swift */; };
-		44FE723D1E4A2EF0007C7E24 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FE723C1E4A2EF0007C7E24 /* UserManager.swift */; };
+		44B179641E4B787A0070A18B /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B179631E4B787A0070A18B /* Errors.swift */; };
+		44B179661E4B78EF0070A18B /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B179651E4B78EF0070A18B /* Messages.swift */; };
+		44C7F71E1E4CD35700171170 /* PasswordRecoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F71D1E4CD35700171170 /* PasswordRecoveryViewController.swift */; };
+		44C7F7371E4CD3AE00171170 /* SocketAckEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F71F1E4CD3AE00171170 /* SocketAckEmitter.swift */; };
+		44C7F7381E4CD3AE00171170 /* SocketAckManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F7201E4CD3AE00171170 /* SocketAckManager.swift */; };
+		44C7F7391E4CD3AE00171170 /* SocketAnyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F7211E4CD3AE00171170 /* SocketAnyEvent.swift */; };
+		44C7F73A1E4CD3AE00171170 /* SocketClientManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F7221E4CD3AE00171170 /* SocketClientManager.swift */; };
+		44C7F73B1E4CD3AE00171170 /* SocketEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F7231E4CD3AE00171170 /* SocketEngine.swift */; };
+		44C7F73C1E4CD3AE00171170 /* SocketEngineClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F7241E4CD3AE00171170 /* SocketEngineClient.swift */; };
+		44C7F73D1E4CD3AE00171170 /* SocketEnginePacketType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F7251E4CD3AE00171170 /* SocketEnginePacketType.swift */; };
+		44C7F73E1E4CD3AE00171170 /* SocketEnginePollable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F7261E4CD3AE00171170 /* SocketEnginePollable.swift */; };
+		44C7F73F1E4CD3AE00171170 /* SocketEngineSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F7271E4CD3AE00171170 /* SocketEngineSpec.swift */; };
+		44C7F7401E4CD3AE00171170 /* SocketEngineWebsocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F7281E4CD3AE00171170 /* SocketEngineWebsocket.swift */; };
+		44C7F7411E4CD3AE00171170 /* SocketEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F7291E4CD3AE00171170 /* SocketEventHandler.swift */; };
+		44C7F7421E4CD3AE00171170 /* SocketExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F72A1E4CD3AE00171170 /* SocketExtensions.swift */; };
+		44C7F7431E4CD3AE00171170 /* SocketIOClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F72B1E4CD3AE00171170 /* SocketIOClient.swift */; };
+		44C7F7441E4CD3AE00171170 /* SocketIOClientConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F72C1E4CD3AE00171170 /* SocketIOClientConfiguration.swift */; };
+		44C7F7451E4CD3AE00171170 /* SocketIOClientOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F72D1E4CD3AE00171170 /* SocketIOClientOption.swift */; };
+		44C7F7461E4CD3AE00171170 /* SocketIOClientSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F72E1E4CD3AE00171170 /* SocketIOClientSpec.swift */; };
+		44C7F7471E4CD3AE00171170 /* SocketIOClientStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F72F1E4CD3AE00171170 /* SocketIOClientStatus.swift */; };
+		44C7F7481E4CD3AE00171170 /* SocketLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F7301E4CD3AE00171170 /* SocketLogger.swift */; };
+		44C7F7491E4CD3AE00171170 /* SocketPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F7311E4CD3AE00171170 /* SocketPacket.swift */; };
+		44C7F74A1E4CD3AE00171170 /* SocketParsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F7321E4CD3AE00171170 /* SocketParsable.swift */; };
+		44C7F74B1E4CD3AE00171170 /* SocketStringReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F7331E4CD3AE00171170 /* SocketStringReader.swift */; };
+		44C7F74C1E4CD3AE00171170 /* SocketTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F7341E4CD3AE00171170 /* SocketTypes.swift */; };
+		44C7F74D1E4CD3AE00171170 /* SSLSecurity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F7351E4CD3AE00171170 /* SSLSecurity.swift */; };
+		44C7F74E1E4CD3AE00171170 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F7361E4CD3AE00171170 /* WebSocket.swift */; };
+		44C7F7501E4CD3DA00171170 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F74F1E4CD3DA00171170 /* HomePresenter.swift */; };
+		44C7F7541E4CD3F200171170 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F7511E4CD3F200171170 /* APIManager.swift */; };
+		44C7F7551E4CD3F200171170 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F7521E4CD3F200171170 /* AuthManager.swift */; };
+		44C7F7561E4CD3F200171170 /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F7531E4CD3F200171170 /* SocketIOManager.swift */; };
+		44C7F7581E4CD43A00171170 /* PasswordRecoveryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F7571E4CD43A00171170 /* PasswordRecoveryPresenter.swift */; };
+		44FE723D1E4A2EF0007C7E24 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FE723C1E4A2EF0007C7E24 /* DataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,7 +94,6 @@
 		440CEE571E3B983700F58A09 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InitialViewController.swift; path = View/InitialViewController.swift; sourceTree = "<group>"; };
 		440CEE591E3B9AA300F58A09 /* InitialPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InitialPresenter.swift; path = Presenter/InitialPresenter.swift; sourceTree = "<group>"; };
 		440CEE5B1E3B9B1900F58A09 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = View/HomeViewController.swift; sourceTree = "<group>"; };
-		440CEE5D1E3B9B2700F58A09 /* HomePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
 		4415FF3F1E3B822900A81B13 /* Snout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4415FF421E3B822900A81B13 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4415FF471E3B822900A81B13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -95,38 +106,51 @@
 		4415FF5E1E3B822A00A81B13 /* SnoutUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnoutUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4415FF621E3B822A00A81B13 /* SnoutUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnoutUITests.swift; sourceTree = "<group>"; };
 		4415FF641E3B822A00A81B13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4446422E1E4B29910095C4DD /* Mapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Mapper.swift; path = Model/Mapper.swift; sourceTree = "<group>"; };
-		447D4BE01E44BDD7008F82F4 /* SocketIOManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketIOManager.swift; sourceTree = "<group>"; };
-		447D4BE41E44BF4C008F82F4 /* SocketAckEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketAckEmitter.swift; sourceTree = "<group>"; };
-		447D4BE51E44BF4C008F82F4 /* SocketAckManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketAckManager.swift; sourceTree = "<group>"; };
-		447D4BE61E44BF4C008F82F4 /* SocketAnyEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketAnyEvent.swift; sourceTree = "<group>"; };
-		447D4BE71E44BF4C008F82F4 /* SocketClientManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketClientManager.swift; sourceTree = "<group>"; };
-		447D4BE81E44BF4C008F82F4 /* SocketEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketEngine.swift; sourceTree = "<group>"; };
-		447D4BE91E44BF4C008F82F4 /* SocketEngineClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketEngineClient.swift; sourceTree = "<group>"; };
-		447D4BEA1E44BF4C008F82F4 /* SocketEnginePacketType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketEnginePacketType.swift; sourceTree = "<group>"; };
-		447D4BEB1E44BF4C008F82F4 /* SocketEnginePollable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketEnginePollable.swift; sourceTree = "<group>"; };
-		447D4BEC1E44BF4C008F82F4 /* SocketEngineSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketEngineSpec.swift; sourceTree = "<group>"; };
-		447D4BED1E44BF4C008F82F4 /* SocketEngineWebsocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketEngineWebsocket.swift; sourceTree = "<group>"; };
-		447D4BEE1E44BF4C008F82F4 /* SocketEventHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketEventHandler.swift; sourceTree = "<group>"; };
-		447D4BEF1E44BF4C008F82F4 /* SocketExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketExtensions.swift; sourceTree = "<group>"; };
-		447D4BF01E44BF4C008F82F4 /* SocketIOClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketIOClient.swift; sourceTree = "<group>"; };
-		447D4BF11E44BF4C008F82F4 /* SocketIOClientConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketIOClientConfiguration.swift; sourceTree = "<group>"; };
-		447D4BF21E44BF4C008F82F4 /* SocketIOClientOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketIOClientOption.swift; sourceTree = "<group>"; };
-		447D4BF31E44BF4C008F82F4 /* SocketIOClientSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketIOClientSpec.swift; sourceTree = "<group>"; };
-		447D4BF41E44BF4C008F82F4 /* SocketIOClientStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketIOClientStatus.swift; sourceTree = "<group>"; };
-		447D4BF51E44BF4C008F82F4 /* SocketLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketLogger.swift; sourceTree = "<group>"; };
-		447D4BF61E44BF4C008F82F4 /* SocketPacket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketPacket.swift; sourceTree = "<group>"; };
-		447D4BF71E44BF4C008F82F4 /* SocketParsable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketParsable.swift; sourceTree = "<group>"; };
-		447D4BF81E44BF4C008F82F4 /* SocketStringReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketStringReader.swift; sourceTree = "<group>"; };
-		447D4BF91E44BF4C008F82F4 /* SocketTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketTypes.swift; sourceTree = "<group>"; };
-		447D4BFA1E44BF4C008F82F4 /* SSLSecurity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSLSecurity.swift; sourceTree = "<group>"; };
-		447D4BFB1E44BF4C008F82F4 /* WebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
+		44421A2B1E4CB8E7009755BD /* ProfilePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfilePresenter.swift; path = Presenter/ProfilePresenter.swift; sourceTree = "<group>"; };
+		44421A2D1E4CB9A6009755BD /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditProfileViewController.swift; path = View/EditProfileViewController.swift; sourceTree = "<group>"; };
+		44485F941E51B12800A3C47D /* Snout.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Snout.xcdatamodel; sourceTree = "<group>"; };
+		44485F961E51B16500A3C47D /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		44485FBC1E52076C00A3C47D /* countrycodes.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = countrycodes.csv; sourceTree = "<group>"; };
+		44485FBE1E52079D00A3C47D /* CVSParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CVSParser.swift; path = Model/CVSParser.swift; sourceTree = "<group>"; };
+		44498DFC1E4DBE6700F6D761 /* ChangePasswordPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordPresenter.swift; sourceTree = "<group>"; };
+		44498DFE1E4DC03100F6D761 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChangePasswordViewController.swift; path = View/ChangePasswordViewController.swift; sourceTree = "<group>"; };
+		44498E001E4DCF4300F6D761 /* PetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetsViewController.swift; path = View/PetsViewController.swift; sourceTree = "<group>"; };
+		44498E021E4DCF8700F6D761 /* PetsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetsPresenter.swift; path = Presenter/PetsPresenter.swift; sourceTree = "<group>"; };
 		447D4C161E44C4F5008F82F4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		4490986F1E437AD900A37697 /* AuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		44B179611E4B62690070A18B /* Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Presenter.swift; path = Presenter/Presenter.swift; sourceTree = "<group>"; };
-		44DF05741E48766600ACCD4D /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
-		44FE72381E4A1677007C7E24 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Model.swift; path = Model/Model.swift; sourceTree = "<group>"; };
-		44FE723C1E4A2EF0007C7E24 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserManager.swift; path = Model/UserManager.swift; sourceTree = "<group>"; };
+		44B179631E4B787A0070A18B /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Errors.swift; path = Model/Errors.swift; sourceTree = "<group>"; };
+		44B179651E4B78EF0070A18B /* Messages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Messages.swift; path = Model/Messages.swift; sourceTree = "<group>"; };
+		44C7F71D1E4CD35700171170 /* PasswordRecoveryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PasswordRecoveryViewController.swift; path = View/PasswordRecoveryViewController.swift; sourceTree = "<group>"; };
+		44C7F71F1E4CD3AE00171170 /* SocketAckEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketAckEmitter.swift; path = SocketIO/SocketAckEmitter.swift; sourceTree = "<group>"; };
+		44C7F7201E4CD3AE00171170 /* SocketAckManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketAckManager.swift; path = SocketIO/SocketAckManager.swift; sourceTree = "<group>"; };
+		44C7F7211E4CD3AE00171170 /* SocketAnyEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketAnyEvent.swift; path = SocketIO/SocketAnyEvent.swift; sourceTree = "<group>"; };
+		44C7F7221E4CD3AE00171170 /* SocketClientManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketClientManager.swift; path = SocketIO/SocketClientManager.swift; sourceTree = "<group>"; };
+		44C7F7231E4CD3AE00171170 /* SocketEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketEngine.swift; path = SocketIO/SocketEngine.swift; sourceTree = "<group>"; };
+		44C7F7241E4CD3AE00171170 /* SocketEngineClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketEngineClient.swift; path = SocketIO/SocketEngineClient.swift; sourceTree = "<group>"; };
+		44C7F7251E4CD3AE00171170 /* SocketEnginePacketType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketEnginePacketType.swift; path = SocketIO/SocketEnginePacketType.swift; sourceTree = "<group>"; };
+		44C7F7261E4CD3AE00171170 /* SocketEnginePollable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketEnginePollable.swift; path = SocketIO/SocketEnginePollable.swift; sourceTree = "<group>"; };
+		44C7F7271E4CD3AE00171170 /* SocketEngineSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketEngineSpec.swift; path = SocketIO/SocketEngineSpec.swift; sourceTree = "<group>"; };
+		44C7F7281E4CD3AE00171170 /* SocketEngineWebsocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketEngineWebsocket.swift; path = SocketIO/SocketEngineWebsocket.swift; sourceTree = "<group>"; };
+		44C7F7291E4CD3AE00171170 /* SocketEventHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketEventHandler.swift; path = SocketIO/SocketEventHandler.swift; sourceTree = "<group>"; };
+		44C7F72A1E4CD3AE00171170 /* SocketExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketExtensions.swift; path = SocketIO/SocketExtensions.swift; sourceTree = "<group>"; };
+		44C7F72B1E4CD3AE00171170 /* SocketIOClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketIOClient.swift; path = SocketIO/SocketIOClient.swift; sourceTree = "<group>"; };
+		44C7F72C1E4CD3AE00171170 /* SocketIOClientConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketIOClientConfiguration.swift; path = SocketIO/SocketIOClientConfiguration.swift; sourceTree = "<group>"; };
+		44C7F72D1E4CD3AE00171170 /* SocketIOClientOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketIOClientOption.swift; path = SocketIO/SocketIOClientOption.swift; sourceTree = "<group>"; };
+		44C7F72E1E4CD3AE00171170 /* SocketIOClientSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketIOClientSpec.swift; path = SocketIO/SocketIOClientSpec.swift; sourceTree = "<group>"; };
+		44C7F72F1E4CD3AE00171170 /* SocketIOClientStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketIOClientStatus.swift; path = SocketIO/SocketIOClientStatus.swift; sourceTree = "<group>"; };
+		44C7F7301E4CD3AE00171170 /* SocketLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketLogger.swift; path = SocketIO/SocketLogger.swift; sourceTree = "<group>"; };
+		44C7F7311E4CD3AE00171170 /* SocketPacket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketPacket.swift; path = SocketIO/SocketPacket.swift; sourceTree = "<group>"; };
+		44C7F7321E4CD3AE00171170 /* SocketParsable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketParsable.swift; path = SocketIO/SocketParsable.swift; sourceTree = "<group>"; };
+		44C7F7331E4CD3AE00171170 /* SocketStringReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketStringReader.swift; path = SocketIO/SocketStringReader.swift; sourceTree = "<group>"; };
+		44C7F7341E4CD3AE00171170 /* SocketTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketTypes.swift; path = SocketIO/SocketTypes.swift; sourceTree = "<group>"; };
+		44C7F7351E4CD3AE00171170 /* SSLSecurity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSLSecurity.swift; path = SocketIO/SSLSecurity.swift; sourceTree = "<group>"; };
+		44C7F7361E4CD3AE00171170 /* WebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebSocket.swift; path = SocketIO/WebSocket.swift; sourceTree = "<group>"; };
+		44C7F74F1E4CD3DA00171170 /* HomePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomePresenter.swift; path = Presenter/HomePresenter.swift; sourceTree = "<group>"; };
+		44C7F7511E4CD3F200171170 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIManager.swift; path = Model/APIManager.swift; sourceTree = "<group>"; };
+		44C7F7521E4CD3F200171170 /* AuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthManager.swift; path = Model/AuthManager.swift; sourceTree = "<group>"; };
+		44C7F7531E4CD3F200171170 /* SocketIOManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketIOManager.swift; path = Model/SocketIOManager.swift; sourceTree = "<group>"; };
+		44C7F7571E4CD43A00171170 /* PasswordRecoveryPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PasswordRecoveryPresenter.swift; path = Presenter/PasswordRecoveryPresenter.swift; sourceTree = "<group>"; };
+		44FE723C1E4A2EF0007C7E24 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataManager.swift; path = Model/DataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,7 +196,11 @@
 				440CEE571E3B983700F58A09 /* InitialViewController.swift */,
 				440CEE4F1E3B8E7900F58A09 /* RegisterViewController.swift */,
 				440CEE531E3B93F300F58A09 /* SignInViewController.swift */,
+				44C7F71D1E4CD35700171170 /* PasswordRecoveryViewController.swift */,
 				440CEE5B1E3B9B1900F58A09 /* HomeViewController.swift */,
+				44421A2D1E4CB9A6009755BD /* EditProfileViewController.swift */,
+				44498DFE1E4DC03100F6D761 /* ChangePasswordViewController.swift */,
+				44498E001E4DCF4300F6D761 /* PetsViewController.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -181,10 +209,14 @@
 			isa = PBXGroup;
 			children = (
 				44B179611E4B62690070A18B /* Presenter.swift */,
+				44C7F74F1E4CD3DA00171170 /* HomePresenter.swift */,
 				440CEE591E3B9AA300F58A09 /* InitialPresenter.swift */,
 				440CEE4D1E3B8DC500F58A09 /* RegisterPresenter.swift */,
 				440CEE551E3B945000F58A09 /* SignInPresenter.swift */,
-				440CEE5D1E3B9B2700F58A09 /* HomePresenter.swift */,
+				44421A2B1E4CB8E7009755BD /* ProfilePresenter.swift */,
+				44C7F7571E4CD43A00171170 /* PasswordRecoveryPresenter.swift */,
+				44498DFC1E4DBE6700F6D761 /* ChangePasswordPresenter.swift */,
+				44498E021E4DCF8700F6D761 /* PetsPresenter.swift */,
 			);
 			name = Presenter;
 			sourceTree = "<group>";
@@ -192,14 +224,11 @@
 		440CEE4C1E3B8D3D00F58A09 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				44DF05741E48766600ACCD4D /* APIManager.swift */,
-				447D4BE01E44BDD7008F82F4 /* SocketIOManager.swift */,
-				447D4C151E44BF69008F82F4 /* SocketIO */,
-				4415FF421E3B822900A81B13 /* AppDelegate.swift */,
-				4490986F1E437AD900A37697 /* AuthManager.swift */,
-				44FE723C1E4A2EF0007C7E24 /* UserManager.swift */,
-				44FE72381E4A1677007C7E24 /* Model.swift */,
-				4446422E1E4B29910095C4DD /* Mapper.swift */,
+				44485FB91E51EFA600A3C47D /* Comunication */,
+				44485F931E51B12800A3C47D /* Snout.xcdatamodeld */,
+				44C7F7521E4CD3F200171170 /* AuthManager.swift */,
+				44FE723C1E4A2EF0007C7E24 /* DataManager.swift */,
+				44B179671E4B78FB0070A18B /* Utils */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -208,7 +237,6 @@
 			isa = PBXGroup;
 			children = (
 				4415FF411E3B822900A81B13 /* Snout */,
-				4415FF561E3B822A00A81B13 /* SnoutTests */,
 				4415FF611E3B822A00A81B13 /* SnoutUITests */,
 				4415FF401E3B822900A81B13 /* Products */,
 				91352D1B7E01CC1C0CF51D38 /* Frameworks */,
@@ -229,6 +257,7 @@
 			isa = PBXGroup;
 			children = (
 				4415FF461E3B822900A81B13 /* Main.storyboard */,
+				4415FF421E3B822900A81B13 /* AppDelegate.swift */,
 				440CEE4C1E3B8D3D00F58A09 /* Model */,
 				440CEE4A1E3B8D2500F58A09 /* View */,
 				440CEE4B1E3B8D2C00F58A09 /* Presenter */,
@@ -255,40 +284,63 @@
 			path = SnoutUITests;
 			sourceTree = "<group>";
 		};
+		44485FB91E51EFA600A3C47D /* Comunication */ = {
+			isa = PBXGroup;
+			children = (
+				44C7F7531E4CD3F200171170 /* SocketIOManager.swift */,
+				447D4C151E44BF69008F82F4 /* SocketIO */,
+				44C7F7511E4CD3F200171170 /* APIManager.swift */,
+				44485F961E51B16500A3C47D /* CoreDataManager.swift */,
+			);
+			name = Comunication;
+			sourceTree = "<group>";
+		};
 		447D4C151E44BF69008F82F4 /* SocketIO */ = {
 			isa = PBXGroup;
 			children = (
-				447D4BE41E44BF4C008F82F4 /* SocketAckEmitter.swift */,
-				447D4BE51E44BF4C008F82F4 /* SocketAckManager.swift */,
-				447D4BE61E44BF4C008F82F4 /* SocketAnyEvent.swift */,
-				447D4BE71E44BF4C008F82F4 /* SocketClientManager.swift */,
-				447D4BE81E44BF4C008F82F4 /* SocketEngine.swift */,
-				447D4BE91E44BF4C008F82F4 /* SocketEngineClient.swift */,
-				447D4BEA1E44BF4C008F82F4 /* SocketEnginePacketType.swift */,
-				447D4BEB1E44BF4C008F82F4 /* SocketEnginePollable.swift */,
-				447D4BEC1E44BF4C008F82F4 /* SocketEngineSpec.swift */,
-				447D4BED1E44BF4C008F82F4 /* SocketEngineWebsocket.swift */,
-				447D4BEE1E44BF4C008F82F4 /* SocketEventHandler.swift */,
-				447D4BEF1E44BF4C008F82F4 /* SocketExtensions.swift */,
-				447D4BF01E44BF4C008F82F4 /* SocketIOClient.swift */,
-				447D4BF11E44BF4C008F82F4 /* SocketIOClientConfiguration.swift */,
-				447D4BF21E44BF4C008F82F4 /* SocketIOClientOption.swift */,
-				447D4BF31E44BF4C008F82F4 /* SocketIOClientSpec.swift */,
-				447D4BF41E44BF4C008F82F4 /* SocketIOClientStatus.swift */,
-				447D4BF51E44BF4C008F82F4 /* SocketLogger.swift */,
-				447D4BF61E44BF4C008F82F4 /* SocketPacket.swift */,
-				447D4BF71E44BF4C008F82F4 /* SocketParsable.swift */,
-				447D4BF81E44BF4C008F82F4 /* SocketStringReader.swift */,
-				447D4BF91E44BF4C008F82F4 /* SocketTypes.swift */,
-				447D4BFA1E44BF4C008F82F4 /* SSLSecurity.swift */,
-				447D4BFB1E44BF4C008F82F4 /* WebSocket.swift */,
+				44C7F71F1E4CD3AE00171170 /* SocketAckEmitter.swift */,
+				44C7F7201E4CD3AE00171170 /* SocketAckManager.swift */,
+				44C7F7211E4CD3AE00171170 /* SocketAnyEvent.swift */,
+				44C7F7221E4CD3AE00171170 /* SocketClientManager.swift */,
+				44C7F7231E4CD3AE00171170 /* SocketEngine.swift */,
+				44C7F7241E4CD3AE00171170 /* SocketEngineClient.swift */,
+				44C7F7251E4CD3AE00171170 /* SocketEnginePacketType.swift */,
+				44C7F7261E4CD3AE00171170 /* SocketEnginePollable.swift */,
+				44C7F7271E4CD3AE00171170 /* SocketEngineSpec.swift */,
+				44C7F7281E4CD3AE00171170 /* SocketEngineWebsocket.swift */,
+				44C7F7291E4CD3AE00171170 /* SocketEventHandler.swift */,
+				44C7F72A1E4CD3AE00171170 /* SocketExtensions.swift */,
+				44C7F72B1E4CD3AE00171170 /* SocketIOClient.swift */,
+				44C7F72C1E4CD3AE00171170 /* SocketIOClientConfiguration.swift */,
+				44C7F72D1E4CD3AE00171170 /* SocketIOClientOption.swift */,
+				44C7F72E1E4CD3AE00171170 /* SocketIOClientSpec.swift */,
+				44C7F72F1E4CD3AE00171170 /* SocketIOClientStatus.swift */,
+				44C7F7301E4CD3AE00171170 /* SocketLogger.swift */,
+				44C7F7311E4CD3AE00171170 /* SocketPacket.swift */,
+				44C7F7321E4CD3AE00171170 /* SocketParsable.swift */,
+				44C7F7331E4CD3AE00171170 /* SocketStringReader.swift */,
+				44C7F7341E4CD3AE00171170 /* SocketTypes.swift */,
+				44C7F7351E4CD3AE00171170 /* SSLSecurity.swift */,
+				44C7F7361E4CD3AE00171170 /* WebSocket.swift */,
 			);
 			name = SocketIO;
+			sourceTree = "<group>";
+		};
+		44B179671E4B78FB0070A18B /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				44485FBC1E52076C00A3C47D /* countrycodes.csv */,
+				44B179631E4B787A0070A18B /* Errors.swift */,
+				44B179651E4B78EF0070A18B /* Messages.swift */,
+				44485FBE1E52079D00A3C47D /* CVSParser.swift */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 		91352D1B7E01CC1C0CF51D38 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4415FF561E3B822A00A81B13 /* SnoutTests */,
 				447D4C161E44C4F5008F82F4 /* MapKit.framework */,
 			);
 			name = Frameworks;
@@ -412,6 +464,7 @@
 				4415FF4D1E3B822900A81B13 /* LaunchScreen.storyboard in Resources */,
 				4415FF4A1E3B822900A81B13 /* Assets.xcassets in Resources */,
 				4415FF481E3B822900A81B13 /* Main.storyboard in Resources */,
+				44485FBD1E52076C00A3C47D /* countrycodes.csv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,47 +489,58 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				447D4BFC1E44BF4C008F82F4 /* SocketAckEmitter.swift in Sources */,
 				440CEE521E3B90B900F58A09 /* ViewUtils.swift in Sources */,
-				447D4C0F1E44BF4C008F82F4 /* SocketParsable.swift in Sources */,
-				447D4C071E44BF4C008F82F4 /* SocketExtensions.swift in Sources */,
+				44C7F73D1E4CD3AE00171170 /* SocketEnginePacketType.swift in Sources */,
+				44C7F74C1E4CD3AE00171170 /* SocketTypes.swift in Sources */,
+				44C7F7461E4CD3AE00171170 /* SocketIOClientSpec.swift in Sources */,
 				440CEE541E3B93F300F58A09 /* SignInViewController.swift in Sources */,
 				440CEE4E1E3B8DC500F58A09 /* RegisterPresenter.swift in Sources */,
-				44DF05751E48766600ACCD4D /* APIManager.swift in Sources */,
+				44C7F7481E4CD3AE00171170 /* SocketLogger.swift in Sources */,
 				440CEE561E3B945000F58A09 /* SignInPresenter.swift in Sources */,
-				447D4C021E44BF4C008F82F4 /* SocketEnginePacketType.swift in Sources */,
-				447D4BFE1E44BF4C008F82F4 /* SocketAnyEvent.swift in Sources */,
-				447D4C091E44BF4C008F82F4 /* SocketIOClientConfiguration.swift in Sources */,
-				447D4C031E44BF4C008F82F4 /* SocketEnginePollable.swift in Sources */,
-				447D4C0C1E44BF4C008F82F4 /* SocketIOClientStatus.swift in Sources */,
-				447D4C101E44BF4C008F82F4 /* SocketStringReader.swift in Sources */,
+				44C7F7581E4CD43A00171170 /* PasswordRecoveryPresenter.swift in Sources */,
+				44498DFD1E4DBE6700F6D761 /* ChangePasswordPresenter.swift in Sources */,
+				44C7F7391E4CD3AE00171170 /* SocketAnyEvent.swift in Sources */,
+				44C7F73E1E4CD3AE00171170 /* SocketEnginePollable.swift in Sources */,
+				44C7F73B1E4CD3AE00171170 /* SocketEngine.swift in Sources */,
+				44C7F7491E4CD3AE00171170 /* SocketPacket.swift in Sources */,
+				44C7F74E1E4CD3AE00171170 /* WebSocket.swift in Sources */,
+				44C7F7501E4CD3DA00171170 /* HomePresenter.swift in Sources */,
 				440CEE5C1E3B9B1900F58A09 /* HomeViewController.swift in Sources */,
-				447D4C041E44BF4C008F82F4 /* SocketEngineSpec.swift in Sources */,
-				447D4C0E1E44BF4C008F82F4 /* SocketPacket.swift in Sources */,
-				447D4C001E44BF4C008F82F4 /* SocketEngine.swift in Sources */,
-				4446422F1E4B29910095C4DD /* Mapper.swift in Sources */,
-				447D4BFF1E44BF4C008F82F4 /* SocketClientManager.swift in Sources */,
-				447D4C0B1E44BF4C008F82F4 /* SocketIOClientSpec.swift in Sources */,
-				447D4BFD1E44BF4C008F82F4 /* SocketAckManager.swift in Sources */,
-				447D4C061E44BF4C008F82F4 /* SocketEventHandler.swift in Sources */,
-				447D4C121E44BF4C008F82F4 /* SSLSecurity.swift in Sources */,
-				447D4C081E44BF4C008F82F4 /* SocketIOClient.swift in Sources */,
+				44C7F71E1E4CD35700171170 /* PasswordRecoveryViewController.swift in Sources */,
+				44421A2C1E4CB8E7009755BD /* ProfilePresenter.swift in Sources */,
+				44C7F73F1E4CD3AE00171170 /* SocketEngineSpec.swift in Sources */,
+				44C7F7541E4CD3F200171170 /* APIManager.swift in Sources */,
+				44C7F7371E4CD3AE00171170 /* SocketAckEmitter.swift in Sources */,
+				44C7F73A1E4CD3AE00171170 /* SocketClientManager.swift in Sources */,
 				440CEE5A1E3B9AA300F58A09 /* InitialPresenter.swift in Sources */,
-				447D4C051E44BF4C008F82F4 /* SocketEngineWebsocket.swift in Sources */,
-				447D4C131E44BF4C008F82F4 /* WebSocket.swift in Sources */,
-				447D4C111E44BF4C008F82F4 /* SocketTypes.swift in Sources */,
-				449098701E437AD900A37697 /* AuthManager.swift in Sources */,
+				44485F971E51B16500A3C47D /* CoreDataManager.swift in Sources */,
+				44C7F74A1E4CD3AE00171170 /* SocketParsable.swift in Sources */,
+				44C7F7381E4CD3AE00171170 /* SocketAckManager.swift in Sources */,
+				44C7F74B1E4CD3AE00171170 /* SocketStringReader.swift in Sources */,
 				4415FF431E3B822900A81B13 /* AppDelegate.swift in Sources */,
-				447D4C011E44BF4C008F82F4 /* SocketEngineClient.swift in Sources */,
+				44C7F7561E4CD3F200171170 /* SocketIOManager.swift in Sources */,
+				44485FBF1E52079D00A3C47D /* CVSParser.swift in Sources */,
+				44C7F7441E4CD3AE00171170 /* SocketIOClientConfiguration.swift in Sources */,
 				440CEE501E3B8E7900F58A09 /* RegisterViewController.swift in Sources */,
-				447D4BE11E44BDD7008F82F4 /* SocketIOManager.swift in Sources */,
-				447D4C0D1E44BF4C008F82F4 /* SocketLogger.swift in Sources */,
+				44B179641E4B787A0070A18B /* Errors.swift in Sources */,
 				44B179621E4B62690070A18B /* Presenter.swift in Sources */,
-				447D4C0A1E44BF4C008F82F4 /* SocketIOClientOption.swift in Sources */,
-				44FE72391E4A1677007C7E24 /* Model.swift in Sources */,
+				44C7F74D1E4CD3AE00171170 /* SSLSecurity.swift in Sources */,
+				44C7F73C1E4CD3AE00171170 /* SocketEngineClient.swift in Sources */,
+				44C7F7451E4CD3AE00171170 /* SocketIOClientOption.swift in Sources */,
+				44C7F7431E4CD3AE00171170 /* SocketIOClient.swift in Sources */,
+				44498E031E4DCF8700F6D761 /* PetsPresenter.swift in Sources */,
 				440CEE581E3B983700F58A09 /* InitialViewController.swift in Sources */,
-				44FE723D1E4A2EF0007C7E24 /* UserManager.swift in Sources */,
-				440CEE5E1E3B9B2700F58A09 /* HomePresenter.swift in Sources */,
+				44C7F7411E4CD3AE00171170 /* SocketEventHandler.swift in Sources */,
+				44485F951E51B12800A3C47D /* Snout.xcdatamodeld in Sources */,
+				44C7F7421E4CD3AE00171170 /* SocketExtensions.swift in Sources */,
+				44C7F7551E4CD3F200171170 /* AuthManager.swift in Sources */,
+				44FE723D1E4A2EF0007C7E24 /* DataManager.swift in Sources */,
+				44C7F7471E4CD3AE00171170 /* SocketIOClientStatus.swift in Sources */,
+				44C7F7401E4CD3AE00171170 /* SocketEngineWebsocket.swift in Sources */,
+				44498E011E4DCF4300F6D761 /* PetsViewController.swift in Sources */,
+				44421A2E1E4CB9A6009755BD /* EditProfileViewController.swift in Sources */,
+				44B179661E4B78EF0070A18B /* Messages.swift in Sources */,
+				44498DFF1E4DC03100F6D761 /* ChangePasswordViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -634,6 +698,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Snout/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = attitudetech.Snout;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -651,6 +716,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Snout/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = attitudetech.Snout;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -756,6 +822,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		44485F931E51B12800A3C47D /* Snout.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				44485F941E51B12800A3C47D /* Snout.xcdatamodel */,
+			);
+			currentVersion = 44485F941E51B12800A3C47D /* Snout.xcdatamodel */;
+			name = Snout.xcdatamodeld;
+			path = Model/Snout.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 4415FF371E3B822900A81B13 /* Project object */;
 }

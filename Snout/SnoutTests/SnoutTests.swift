@@ -26,27 +26,29 @@ class SnoutTests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
     
-    func testMapper() {
-        var address = [String:Any]()
-        address["line0"] = ""
-        address["line1"] = ""
-        address["city"] = ""
-        address["state_county"] = ""
-        address["country"] = ""
+    
+    func testRegister() {
         
-        var user = [String:Any]()
-        user["id"] = 9
-        user["email"] = "enjoy"
-        user["address"] = address
-        
-        do {
-            let a = try User(user)
-            print(a.print())
-        } catch {
-            print(error)
+        APIManager.Instance.performCall(.register) { (error, data) in
+            if error != nil {
+                print(error!)
+            }
         }
         
     }
+    
+    func testLogin() {
+        
+        AuthManager.Instance.signIn("test@liberati.name", "Attitude2017Tech") { (error) in
+            if error != nil {
+                print(error!)
+            }
+        }
+        
+    }
+    
+    
+
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
@@ -54,5 +56,16 @@ class SnoutTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 }

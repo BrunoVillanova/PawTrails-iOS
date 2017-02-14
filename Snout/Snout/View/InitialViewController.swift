@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InitialViewController: UIViewController {
+class InitialViewController: UIViewController, InitialView {
 
     fileprivate let presenter = InitialPresenter()
     
@@ -16,13 +16,11 @@ class InitialViewController: UIViewController {
         super.viewDidLoad()
         presenter.attachView(self)
     }
-
-}
-
-extension InitialViewController: InitialView {
     
-    func errorMessage(_ error: String) {
-        self.alert(title: "Warning", msg: error)
+    // MARK: - Initial View
+    
+    func errorMessage(_ error: errorMsg) {
+        self.alert(title: error.title, msg: error.msg)
     }
     
 }

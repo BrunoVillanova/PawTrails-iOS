@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SignInViewController: UIViewController {
+class SignInViewController: UIViewController, SignInView, UITextFieldDelegate {
     
     fileprivate let presenter = SignInPresenter()
 
@@ -20,27 +20,82 @@ class SignInViewController: UIViewController {
         super.viewDidLoad()
         self.presenter.attachView(self)
         if isDebug {
-            self.emailTextField.text = "test@try.com"
-            self.passwordTextField.text = "123456"
+            self.emailTextField.text = "test@liberati.name"
+            self.passwordTextField.text = "Attitude2017Tech"
         }
+        self.emailTextField.becomeFirstResponder()
     }
     
     @IBAction func signInAction(_ sender: UIButton) {
+        sign()
+    }
+    
+    func sign(){
         self.presenter.signIn(email: self.emailTextField.text ?? "", password: self.passwordTextField.text ?? "")
     }
     
-    @IBAction func cancelAction(_ sender: UIButton) {
+    @IBAction func cancelAction(_ sender: UIBarButtonItem) {
+        self.view.endEditing(true)
         self.dismiss(animated: true, completion: nil)
     }
-}
 
-extension SignInViewController: SignInView {
+    // MARK: - SignInView
     
-    func errorMessage(_ error: String) {
-        self.alert(title: "Error", msg: error)
+    func errorMessage(_ error: errorMsg) {
+        self.alert(title: error.title, msg: error.msg)
     }
     
     func userSignedIn() {
         self.presentingViewController!.presentingViewController!.dismiss(animated: true, completion: nil)
     }
+    
+    func emailFieldError(msg: String) {
+        self.emailTextField.shake()
+    }
+    
+    func passwordFieldError(msg: String) {
+        self.passwordTextField.shake()
+    }
+
+    // MARK: - UITextFieldDelegate
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if textField == self.emailTextField {
+            self.passwordTextField.becomeFirstResponder()
+        }else if textField == self.passwordTextField {
+            self.sign()
+        }else{
+            textField.resignFirstResponder()
+        }
+        return true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+
+    // MARK: - Navigation
+     
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "passwordRecovery" && (self.emailTextField.text?.isValidEmail)! {
+            let vc = segue.destination as! PasswordRecoveryViewController
+            vc.email = self.emailTextField.text
+        }
+    }
+ 
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

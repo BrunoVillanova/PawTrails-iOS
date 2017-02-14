@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RegisterViewController: UIViewController {
+class RegisterViewController: UIViewController, RegisterView, UITextFieldDelegate {
     
     fileprivate let presenter = RegisterPresenter()
 
@@ -19,29 +19,55 @@ class RegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.attachView(self)
-        if isDebug {
-            self.emailTextField.text = "test@try.com"
-            self.passwordTextField.text = "123456"
-        }
+        self.emailTextField.becomeFirstResponder()
     }
     
     @IBAction func registerAction(_ sender: UIButton) {
+        register()
+    }
+    
+    func register(){
         presenter.register(email: self.emailTextField.text ?? "", password: self.passwordTextField.text ?? "")
     }
     
-    @IBAction func cancelAction(_ sender: UIButton) {
+    @IBAction func cancelAction(_ sender: UIBarButtonItem) {
+        self.view.endEditing(true)
         self.dismiss(animated: true, completion: nil)
     }
-}
 
-extension RegisterViewController: RegisterView {
-    
-    func errorMessage(_ error: String) {
-        self.alert(title: "Error", msg: error)
+    // MARK: - RegisterView
+
+    func errorMessage(_ error: errorMsg) {
+        self.alert(title: error.title, msg: error.msg)
     }
     
     func userCreated() {
         self.presentingViewController!.presentingViewController!.dismiss(animated: true, completion: nil)
     }
     
+    func emailFieldError(msg: String) {
+        self.emailTextField.shake()
+    }
+    
+    func passwordFieldError(msg: String) {
+        self.passwordTextField.shake()
+    }
+    
+    // MARK: - UITextFieldDelegate
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if textField == self.emailTextField {
+            self.passwordTextField.becomeFirstResponder()
+        }else if textField == self.passwordTextField {
+            self.register()
+        }else{
+            textField.resignFirstResponder()
+        }
+        return true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 }

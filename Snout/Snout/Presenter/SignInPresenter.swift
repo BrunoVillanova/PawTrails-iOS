@@ -9,6 +9,8 @@
 import Foundation
 
 protocol SignInView: NSObjectProtocol, View {
+    func emailFieldError(msg:String)
+    func passwordFieldError(msg:String)
     func userSignedIn()
 }
 
@@ -25,13 +27,20 @@ class SignInPresenter {
     }
     
     func signIn(email:String, password:String) {
-        AuthManager.Instance.signIn(email, password) { (error) in
-            if error != nil {
-                self.signInView?.errorMessage(error!)
-            }else{
-                self.signInView?.userSignedIn()
+        if email.isValidEmail && password.isValidPassword {
+            AuthManager.Instance.signIn(email, password) { (error) in
+                DispatchQueue.main.async {
+                    if error != nil {
+                        self.signInView?.errorMessage(error!)
+                    }else{
+                        self.signInView?.userSignedIn()
+                    }
+                }
             }
+        }else if !email.isValidEmail {
+            self.signInView?.emailFieldError(msg: Message.Instance.authError(type: .EmailFormat).msg)
+        }else if !password.isValidPassword {
+            self.signInView?.passwordFieldError(msg: Message.Instance.authError(type: .WeakPassword).msg)
         }
     }
-    
 }
