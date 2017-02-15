@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol RegisterView: NSObjectProtocol, View {
+protocol RegisterView: NSObjectProtocol, View, ConnectionView {
     func emailFieldError(msg:String)
     func passwordFieldError(msg:String)
     func userCreated()
@@ -17,9 +17,11 @@ protocol RegisterView: NSObjectProtocol, View {
 class RegisterPresenter {
     
     weak fileprivate var registerView: RegisterView?
-    
+    private var reachability: Reachbility!
+
     func attachView(_ view: RegisterView){
         self.registerView = view
+        self.reachability = Reachbility(view)
     }
     
     func deteachView() {
@@ -27,7 +29,7 @@ class RegisterPresenter {
     }
     
     func register(email:String, password:String) {
-        if email.isValidEmail && password.isValidPassword {
+        if self.reachability.isConnected() && email.isValidEmail && password.isValidPassword {
             AuthManager.Instance.register(email, password) { (error) in
                 DispatchQueue.main.async {
                     if error != nil {

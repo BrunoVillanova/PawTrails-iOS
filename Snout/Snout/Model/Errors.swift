@@ -22,6 +22,21 @@ enum ServerError: Int {
     case HttpVersionNotsupported = 505
 }
 
+struct APIManagerError: Error {
+    
+    enum errorKind {
+        case httpResponseParse
+        case jsonParse
+        case requestError
+        case handleError
+    }
+
+    let call: APIManager.call
+    let httpCode: Int
+    let specificCode: Int
+    let kind: errorKind?
+}
+
 
 enum AuthenticationError: Int {
     case MissingEmail = 10

@@ -10,6 +10,11 @@ import Foundation
 
 typealias errorMsg = (title:String, msg:String)
 
+//struct errorMsg {
+//    let title:String
+//    let msg:String
+//}
+
 class Message {
     
     
@@ -21,13 +26,12 @@ class Message {
 //        self.language = language
 //    }
     
-    func connectionError(type:ConnectionError) -> errorMsg {
-        let title = lm("Connection Error")
+    func connectionError(type:ConnectionError) -> String {
         switch type {
-        case .ConnnectionRefused: return (title, lm("Refused"))
-        case .Timeout: return (title, lm("Timeout"))
-        case .NoConnection: return (title, lm("Lost Connection"))
-        case .Unknown: return (title, lm("Unknown Error"))
+        case .ConnnectionRefused: return lm("Connection Refused")
+        case .Timeout: return lm("Connection Timeout")
+        case .NoConnection: return lm("No Connection")
+        case .Unknown: return lm("Unknown Connection Error")
         }
     }
     
@@ -57,9 +61,14 @@ class Message {
         return ("Development Error", "\(whatever)")
     }
     
+    private func err(_ title:String, _ msg:String) -> errorMsg {
+        return errorMsg(lm(title), lm(msg))
+    }
     
-    fileprivate func lm(_ input:String) -> String {
+    private func lm(_ input:String) -> String {
         return input
     }
+    
+    
     
 }

@@ -10,15 +10,16 @@ import UIKit
 
 class SignInViewController: UIViewController, SignInView, UITextFieldDelegate {
     
-    fileprivate let presenter = SignInPresenter()
-
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
+    fileprivate let presenter = SignInPresenter()
+    fileprivate var notifier:Notifier!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter.attachView(self)
+        self.notifier = Notifier(with: self.view)
         if isDebug {
             self.emailTextField.text = "test@liberati.name"
             self.passwordTextField.text = "Attitude2017Tech"
@@ -56,7 +57,17 @@ class SignInViewController: UIViewController, SignInView, UITextFieldDelegate {
     func passwordFieldError(msg: String) {
         self.passwordTextField.shake()
     }
+    
+    // MARK: - Connection Notifications
 
+    func connectedToNetwork() {
+        self.notifier.connectedToNetwork()
+    }
+    
+    func notConnectedToNetwork() {
+        self.notifier.notConnectedToNetwork()
+    }
+    
     // MARK: - UITextFieldDelegate
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

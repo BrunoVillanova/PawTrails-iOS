@@ -10,15 +10,16 @@ import UIKit
 
 class RegisterViewController: UIViewController, RegisterView, UITextFieldDelegate {
     
-    fileprivate let presenter = RegisterPresenter()
-
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
+    fileprivate let presenter = RegisterPresenter()
+    fileprivate var notifier:Notifier!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.attachView(self)
+        self.presenter.attachView(self)
+        self.notifier = Notifier(with: self.view)
         self.emailTextField.becomeFirstResponder()
     }
     
@@ -52,6 +53,17 @@ class RegisterViewController: UIViewController, RegisterView, UITextFieldDelegat
     func passwordFieldError(msg: String) {
         self.passwordTextField.shake()
     }
+    
+    // MARK: - Connection Notifications
+        
+    func connectedToNetwork() {
+        self.notifier.connectedToNetwork()
+    }
+    
+    func notConnectedToNetwork() {
+        self.notifier.notConnectedToNetwork()
+    }
+
     
     // MARK: - UITextFieldDelegate
     

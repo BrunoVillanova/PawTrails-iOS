@@ -65,6 +65,7 @@
 		44C7F7551E4CD3F200171170 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F7521E4CD3F200171170 /* AuthManager.swift */; };
 		44C7F7561E4CD3F200171170 /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F7531E4CD3F200171170 /* SocketIOManager.swift */; };
 		44C7F7581E4CD43A00171170 /* PasswordRecoveryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F7571E4CD43A00171170 /* PasswordRecoveryPresenter.swift */; };
+		44F057631E54A728007E9C8F /* Notifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F057621E54A728007E9C8F /* Notifier.swift */; };
 		44FE723D1E4A2EF0007C7E24 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FE723C1E4A2EF0007C7E24 /* DataManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -150,6 +151,7 @@
 		44C7F7521E4CD3F200171170 /* AuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthManager.swift; path = Model/AuthManager.swift; sourceTree = "<group>"; };
 		44C7F7531E4CD3F200171170 /* SocketIOManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketIOManager.swift; path = Model/SocketIOManager.swift; sourceTree = "<group>"; };
 		44C7F7571E4CD43A00171170 /* PasswordRecoveryPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PasswordRecoveryPresenter.swift; path = Presenter/PasswordRecoveryPresenter.swift; sourceTree = "<group>"; };
+		44F057621E54A728007E9C8F /* Notifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Notifier.swift; path = View/Notifier.swift; sourceTree = "<group>"; };
 		44FE723C1E4A2EF0007C7E24 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataManager.swift; path = Model/DataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -193,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				440CEE511E3B90B900F58A09 /* ViewUtils.swift */,
+				44F057621E54A728007E9C8F /* Notifier.swift */,
 				440CEE571E3B983700F58A09 /* InitialViewController.swift */,
 				440CEE4F1E3B8E7900F58A09 /* RegisterViewController.swift */,
 				440CEE531E3B93F300F58A09 /* SignInViewController.swift */,
@@ -509,6 +512,7 @@
 				44C7F71E1E4CD35700171170 /* PasswordRecoveryViewController.swift in Sources */,
 				44421A2C1E4CB8E7009755BD /* ProfilePresenter.swift in Sources */,
 				44C7F73F1E4CD3AE00171170 /* SocketEngineSpec.swift in Sources */,
+				44F057631E54A728007E9C8F /* Notifier.swift in Sources */,
 				44C7F7541E4CD3F200171170 /* APIManager.swift in Sources */,
 				44C7F7371E4CD3AE00171170 /* SocketAckEmitter.swift in Sources */,
 				44C7F73A1E4CD3AE00171170 /* SocketClientManager.swift in Sources */,

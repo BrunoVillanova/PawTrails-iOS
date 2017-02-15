@@ -8,6 +8,10 @@
 
 import UIKit
 
+public enum notificationType{
+    case red, blue, green
+}
+
 extension UIViewController {
     
     func alert(title:String, msg:String, actionTitle: String = "Ok"){
@@ -35,3 +39,4 @@ extension UIView {
     }
 
 }
+

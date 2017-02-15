@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol SignInView: NSObjectProtocol, View {
+protocol SignInView: NSObjectProtocol, View, ConnectionView {
     func emailFieldError(msg:String)
     func passwordFieldError(msg:String)
     func userSignedIn()
@@ -16,18 +16,20 @@ protocol SignInView: NSObjectProtocol, View {
 
 class SignInPresenter {
     
-    weak fileprivate var signInView: SignInView?
+    weak private var signInView: SignInView?
+    private var reachability: Reachbility!
     
     func attachView(_ view: SignInView){
         self.signInView = view
+        self.reachability = Reachbility(view)
     }
     
     func deteachView() {
         self.signInView = nil
     }
-    
+
     func signIn(email:String, password:String) {
-        if email.isValidEmail && password.isValidPassword {
+        if self.reachability.isConnected() && email.isValidEmail && password.isValidPassword {
             AuthManager.Instance.signIn(email, password) { (error) in
                 DispatchQueue.main.async {
                     if error != nil {

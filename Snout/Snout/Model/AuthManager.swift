@@ -22,7 +22,7 @@ class AuthManager {
         UserDefaults.standard.setValue(token, forKey: tokenKey)
     }
     
-    fileprivate func getToken() -> String? {
+    func getToken() -> String? {
         return UserDefaults.standard.value(forKey: tokenKey) as? String ?? nil
     }
     
@@ -124,14 +124,14 @@ class AuthManager {
     }
 
     
-    fileprivate func handleAuthErrors(_ error: Int?, _ data: [String:Any]? = nil) -> errorMsg? {
-        if error != nil {
-            if let authError = AuthenticationError(rawValue: error!) {
-                return Message.Instance.authError(type: authError)
-            }else{
-                return Message.Instance.softwareDevelopmentError(data)
-            }
-        }
+    fileprivate func handleAuthErrors(_ error: APIManagerError?, _ data: [String:Any]? = nil) -> errorMsg? {
+//        if error != nil {
+//            if let authError = AuthenticationError(rawValue: error!) {
+//                return Message.Instance.authError(type: authError)
+//            }else{
+//                return Message.Instance.softwareDevelopmentError(data)
+//            }
+//        }
         return nil
     }
 
