@@ -15,6 +15,7 @@ class HomeViewController: UIViewController, HomeView, CLLocationManagerDelegate 
     @IBOutlet weak var mapView: MKMapView!
     
     fileprivate let locationManager = CLLocationManager()
+    fileprivate let petAnnotation = MKPointAnnotation()
     
     fileprivate let presenter = HomePresenter()
     
@@ -22,11 +23,13 @@ class HomeViewController: UIViewController, HomeView, CLLocationManagerDelegate 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.presenter.attachView(self)        
+        self.presenter.attachView(self)
+        addAnnotation()
+        centerMapOnLocation(petAnnotation.coordinate)
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        self.presenter.checkSignInStatus()
+//        self.presenter.checkSignInStatus()
 //        self.initLocationManager()
 //        self.checkAuthorizationStatus()
 //        self.startUpdatingLocation()
@@ -54,9 +57,14 @@ class HomeViewController: UIViewController, HomeView, CLLocationManagerDelegate 
     }
     
     func plotPoint(latitude:Double, longitude:Double) {
-        //
-        print(latitude)
-        print(longitude)
+        let div = 100000.0
+        let latd = (latitude/div)
+        let longd = (longitude/div)
+        print(latd, longd)
+        let lat = petAnnotation.coordinate.latitude + latd
+        let long = petAnnotation.coordinate.longitude + longd
+        petAnnotation.coordinate = CLLocationCoordinate2D(latitude: lat,longitude: long)
+        centerMapOnLocation(petAnnotation.coordinate)
     }
     
     // MARK: - CLLocationManagerDelegate
@@ -81,30 +89,31 @@ class HomeViewController: UIViewController, HomeView, CLLocationManagerDelegate 
         locationManager.stopUpdatingLocation()
     }
     
-    func centerMapOnLocation(_ location: CLLocation, _ regionRadius: CLLocationDistance = 1000.0){
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius * 2.0,regionRadius * 2.0)
+    func centerMapOnLocation(_ location: CLLocationCoordinate2D, _ regionRadius: CLLocationDistance = 100.0){
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location, regionRadius * 2.0,regionRadius * 2.0)
         mapView.setRegion(coordinateRegion, animated: true)
     }
     
-    func addAnnotation(_ title: String, _ location:CLLocationCoordinate2D){
-        let annotation =  MKPointAnnotation()
-        annotation.coordinate = CLLocationCoordinate2DMake(51.385493, 6.741528)
-        annotation.title = title
-        mapView.addAnnotation(annotation)
+    
+//    func addAnnotation(_ title: String, _ location:CLLocationCoordinate2D){
+    func addAnnotation(){
+        petAnnotation.coordinate = CLLocationCoordinate2DMake(39.6131615,2.6314731)
+        petAnnotation.title = title
+        mapView.addAnnotation(petAnnotation)
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        if first {
-            centerMapOnLocation(locations[0])
-            addAnnotation("Current Location", locations[0].coordinate)
-            first = false
-        }
-    }
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        
+//        if first {
+//            centerMapOnLocation(locations[0])
+//            addAnnotation("Current Location", locations[0].coordinate)
+//            first = false
+//        }
+//    }
     
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        self.alert(title: "Location Error", msg: error.localizedDescription)
-    }
+//    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+//        self.alert(title: "Location Error", msg: error.localizedDescription)
+//    }
 }
 
 
