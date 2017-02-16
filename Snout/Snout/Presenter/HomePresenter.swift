@@ -10,6 +10,7 @@ import Foundation
 
 protocol HomeView: NSObjectProtocol, View {
     func userNotSignedIn()
+    func plotPoint(latitude:Double, longitude:Double)
 }
 
 class HomePresenter {
@@ -18,6 +19,8 @@ class HomePresenter {
     
     func attachView(_ view: HomeView){
         self.homeView = view
+        SocketIOManager.Instance.startListeningUpdates()
+        getPoints()
     }
     
     func deteachView() {
@@ -28,6 +31,14 @@ class HomePresenter {
         if !AuthManager.Instance.isAuthenticated() {
             self.homeView?.userNotSignedIn()
         }
+    }
+    
+    func getPoints(){
+        SocketIOManager.Instance.getPoints({ (point) in
+            DispatchQueue.main.async(execute: { () -> Void in
+                self.homeView?.plotPoint(latitude: point.latitude, longitude: point.longitude)
+            })
+        })
     }
 }
 

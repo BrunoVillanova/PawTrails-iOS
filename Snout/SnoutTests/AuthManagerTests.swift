@@ -1,14 +1,15 @@
 //
-//  SnoutTests.swift
-//  SnoutTests
+//  AuthManagerTests.swift
+//  Snout
 //
 //  Created by Marc Perello on 16/02/2017.
 //  Copyright © 2017 AttitudeTech. All rights reserved.
 //
 
 import XCTest
+@testable import Snout
 
-class SnoutTests: XCTestCase {
+class AuthManagerTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
@@ -23,6 +24,20 @@ class SnoutTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+    }
+    
+    func testSignIn() {
+        let expect = expectation(description: "Example")
+        AuthManager.Instance.signIn(ezdebug.email, ezdebug.password) { (error) in
+            XCTAssert(error == nil, "Error found \(error)")
+            XCTAssert(AuthManager.Instance.isAuthenticated(), "Not authenticated properly")
+            expect.fulfill()
+        }
+        waitForExpectations(timeout: 1) { error in
+            if let error = error {
+                XCTFail("waitForExpectationsWithTimeout errored: \(error)")
+            }
+        }
     }
     
     func testPerformanceExample() {

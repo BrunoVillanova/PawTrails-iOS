@@ -36,6 +36,10 @@ class HomeViewController: UIViewController, HomeView, CLLocationManagerDelegate 
         //
         print("enjoy")
     }
+    
+    @IBAction func refreshAction(_ sender: UIBarButtonItem) {
+        SocketIOManager.Instance.sendTry()
+    }
 
     // MARK: - HomeView
     
@@ -47,6 +51,12 @@ class HomeViewController: UIViewController, HomeView, CLLocationManagerDelegate 
         if let vc = self.storyboard?.instantiateViewController(withIdentifier: "InitialViewController") as? InitialViewController {
             self.present(vc, animated: true, completion: nil)
         }
+    }
+    
+    func plotPoint(latitude:Double, longitude:Double) {
+        //
+        print(latitude)
+        print(longitude)
     }
     
     // MARK: - CLLocationManagerDelegate

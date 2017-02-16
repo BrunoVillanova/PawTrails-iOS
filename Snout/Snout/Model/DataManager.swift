@@ -81,7 +81,7 @@ class DataManager {
     func getUser(callback:userCallback) {
         
         if AuthManager.Instance.isAuthenticated() {
-            guard let id = AuthManager.Instance.getId() else {
+            guard let id = SharedPreferences.get(.id) else {
                 callback(UserError.IdNotFound.rawValue, nil)
                 return
             }

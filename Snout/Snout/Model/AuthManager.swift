@@ -14,39 +14,10 @@ typealias errorCallback = (_ error:errorMsg?) -> Void
 class AuthManager {
     
     static let Instance = AuthManager()
-    
-    private let tokenKey = "key"
-    private let idKey = "id"
-    
-    fileprivate func setToken(_ token:String){
-        UserDefaults.standard.setValue(token, forKey: tokenKey)
-    }
-    
-    func getToken() -> String? {
-        return UserDefaults.standard.value(forKey: tokenKey) as? String ?? nil
-    }
-    
-    fileprivate func removeToken() -> Bool {
-        UserDefaults.standard.removeObject(forKey: tokenKey)
-        return getToken() == nil
-    }
-    
-    fileprivate func setId(_ id:String){
-        UserDefaults.standard.setValue(id, forKey: idKey)
-    }
-    
-    func getId() -> String? {
-        return UserDefaults.standard.value(forKey: idKey) as? String ?? nil
-    }
-    
-    fileprivate func removeId() -> Bool {
-        UserDefaults.standard.removeObject(forKey: idKey)
-        return getId() == nil
-    }
-    
+
 
     func isAuthenticated() -> Bool {
-       return getToken() != nil && getId() != nil
+       return SharedPreferences.has(.id) && SharedPreferences.has(.token)
     }
     
     func register(_ email:String, _ password: String, completition: @escaping errorCallback) {
@@ -71,6 +42,17 @@ class AuthManager {
         }
     }
     
+    func signInSocial(_ email:String, _ token: String, completition: @escaping errorCallback){
+        let data = ["email":email, "token":token]
+        APIManager.Instance.performCall(.signinsocial, data) { (error, data) in
+            if error != nil {
+                completition(self.handleAuthErrors(error))
+            }else if data != nil {
+                self.succeedLoginOrRegister(data, completition: completition)
+            }
+        }
+    }
+    
     fileprivate func succeedLoginOrRegister(_ data:[String:Any]?, completition: @escaping errorCallback){
         guard let token = data!["token"] as? String else {
             completition(Message.Instance.authError(type: .EmptyUserTokenResponse))
@@ -84,13 +66,9 @@ class AuthManager {
             completition(Message.Instance.authError(type: .EmptyUserIdResponse))
             return
         }
-        self.setToken(token)
-        self.setId(userId)
+        SharedPreferences.set(.token, with: token)
+        SharedPreferences.set(.id, with: userId)
         DataManager.Instance.setUser(userData)
-        completition(nil)
-    }
-    
-    func socialSignIn(token:String, email:String, completition: @escaping errorCallback){
         completition(nil)
     }
     
@@ -98,7 +76,7 @@ class AuthManager {
         //wipe out DB
         try? CoreDataManager.Instance.delete(entity: "User")
         try? CoreDataManager.Instance.delete(entity: "Pet")
-        return self.removeToken() && self.removeId()
+        return SharedPreferences.remove(.id) && SharedPreferences.remove(.token)
     }
     
     func sendPasswordReset(_ email:String, completition: @escaping errorCallback) {

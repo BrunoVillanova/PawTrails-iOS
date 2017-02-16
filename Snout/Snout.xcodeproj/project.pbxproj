@@ -19,8 +19,10 @@
 		4415FF481E3B822900A81B13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4415FF461E3B822900A81B13 /* Main.storyboard */; };
 		4415FF4A1E3B822900A81B13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4415FF491E3B822900A81B13 /* Assets.xcassets */; };
 		4415FF4D1E3B822900A81B13 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4415FF4B1E3B822900A81B13 /* LaunchScreen.storyboard */; };
-		4415FF581E3B822A00A81B13 /* SnoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4415FF571E3B822A00A81B13 /* SnoutTests.swift */; };
-		4415FF631E3B822A00A81B13 /* SnoutUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4415FF621E3B822A00A81B13 /* SnoutUITests.swift */; };
+		441A0D4D1E55AF5200D02CE4 /* SharedPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441A0D4C1E55AF5200D02CE4 /* SharedPreferences.swift */; };
+		441A0D8D1E55E9B700D02CE4 /* SnoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441A0D8C1E55E9B700D02CE4 /* SnoutTests.swift */; };
+		441A0D951E55E9D100D02CE4 /* APIManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441A0D941E55E9D100D02CE4 /* APIManagerTests.swift */; };
+		441A0D971E55EEB700D02CE4 /* AuthManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441A0D961E55EEB700D02CE4 /* AuthManagerTests.swift */; };
 		44421A2C1E4CB8E7009755BD /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44421A2B1E4CB8E7009755BD /* ProfilePresenter.swift */; };
 		44421A2E1E4CB9A6009755BD /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44421A2D1E4CB9A6009755BD /* EditProfileViewController.swift */; };
 		44485F951E51B12800A3C47D /* Snout.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 44485F931E51B12800A3C47D /* Snout.xcdatamodeld */; };
@@ -67,17 +69,11 @@
 		44C7F7581E4CD43A00171170 /* PasswordRecoveryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F7571E4CD43A00171170 /* PasswordRecoveryPresenter.swift */; };
 		44F057631E54A728007E9C8F /* Notifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F057621E54A728007E9C8F /* Notifier.swift */; };
 		44FE723D1E4A2EF0007C7E24 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FE723C1E4A2EF0007C7E24 /* DataManager.swift */; };
+		F121E10D3FEC5C03F509590D /* Pods_Snout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE14D5881D717C1DB613D80C /* Pods_Snout.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		4415FF541E3B822A00A81B13 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4415FF371E3B822900A81B13 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4415FF3E1E3B822900A81B13;
-			remoteInfo = Snout;
-		};
-		4415FF5F1E3B822A00A81B13 /* PBXContainerItemProxy */ = {
+		441A0D8F1E55E9B700D02CE4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4415FF371E3B822900A81B13 /* Project object */;
 			proxyType = 1;
@@ -87,6 +83,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A73582914ED9F8568E503AD /* Pods-SnoutUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnoutUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SnoutUITests/Pods-SnoutUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		0B65C38058F1BC2B0701EC19 /* Pods-SnoutUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnoutUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SnoutUITests/Pods-SnoutUITests.release.xcconfig"; sourceTree = "<group>"; };
+		13DA2528FD76C823E7A873C0 /* Pods_SnoutTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnoutTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		440CEE4D1E3B8DC500F58A09 /* RegisterPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterPresenter.swift; path = Presenter/RegisterPresenter.swift; sourceTree = "<group>"; };
 		440CEE4F1E3B8E7900F58A09 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterViewController.swift; path = View/RegisterViewController.swift; sourceTree = "<group>"; };
 		440CEE511E3B90B900F58A09 /* ViewUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewUtils.swift; path = View/ViewUtils.swift; sourceTree = "<group>"; };
@@ -101,12 +100,14 @@
 		4415FF491E3B822900A81B13 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4415FF4C1E3B822900A81B13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4415FF4E1E3B822900A81B13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4415FF531E3B822A00A81B13 /* SnoutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnoutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4415FF571E3B822A00A81B13 /* SnoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnoutTests.swift; sourceTree = "<group>"; };
 		4415FF591E3B822A00A81B13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4415FF5E1E3B822A00A81B13 /* SnoutUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnoutUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4415FF621E3B822A00A81B13 /* SnoutUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnoutUITests.swift; sourceTree = "<group>"; };
-		4415FF641E3B822A00A81B13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		441A0D4C1E55AF5200D02CE4 /* SharedPreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SharedPreferences.swift; path = Model/SharedPreferences.swift; sourceTree = "<group>"; };
+		441A0D8A1E55E9B700D02CE4 /* SnoutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnoutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		441A0D8C1E55E9B700D02CE4 /* SnoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnoutTests.swift; sourceTree = "<group>"; };
+		441A0D8E1E55E9B700D02CE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		441A0D941E55E9D100D02CE4 /* APIManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManagerTests.swift; sourceTree = "<group>"; };
+		441A0D961E55EEB700D02CE4 /* AuthManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthManagerTests.swift; sourceTree = "<group>"; };
 		44421A2B1E4CB8E7009755BD /* ProfilePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfilePresenter.swift; path = Presenter/ProfilePresenter.swift; sourceTree = "<group>"; };
 		44421A2D1E4CB9A6009755BD /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditProfileViewController.swift; path = View/EditProfileViewController.swift; sourceTree = "<group>"; };
 		44485F941E51B12800A3C47D /* Snout.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Snout.xcdatamodel; sourceTree = "<group>"; };
@@ -151,8 +152,14 @@
 		44C7F7521E4CD3F200171170 /* AuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthManager.swift; path = Model/AuthManager.swift; sourceTree = "<group>"; };
 		44C7F7531E4CD3F200171170 /* SocketIOManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketIOManager.swift; path = Model/SocketIOManager.swift; sourceTree = "<group>"; };
 		44C7F7571E4CD43A00171170 /* PasswordRecoveryPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PasswordRecoveryPresenter.swift; path = Presenter/PasswordRecoveryPresenter.swift; sourceTree = "<group>"; };
+		44EE013FF109774F72778C25 /* Pods-SnoutTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnoutTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SnoutTests/Pods-SnoutTests.release.xcconfig"; sourceTree = "<group>"; };
 		44F057621E54A728007E9C8F /* Notifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Notifier.swift; path = View/Notifier.swift; sourceTree = "<group>"; };
 		44FE723C1E4A2EF0007C7E24 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataManager.swift; path = Model/DataManager.swift; sourceTree = "<group>"; };
+		6256AABC0648D33F7CF8CA44 /* Pods_SnoutUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnoutUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		86F90A5209E8A113FA7E0ED1 /* Pods-Snout.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snout.release.xcconfig"; path = "Pods/Target Support Files/Pods-Snout/Pods-Snout.release.xcconfig"; sourceTree = "<group>"; };
+		92D110285C06BEFA8BE21E58 /* Pods-SnoutTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnoutTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SnoutTests/Pods-SnoutTests.debug.xcconfig"; sourceTree = "<group>"; };
+		DE14D5881D717C1DB613D80C /* Pods_Snout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Snout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F35168446C287CB53BC30BFA /* Pods-Snout.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snout.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Snout/Pods-Snout.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,17 +168,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				447D4C171E44C4F5008F82F4 /* MapKit.framework in Frameworks */,
+				F121E10D3FEC5C03F509590D /* Pods_Snout.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4415FF501E3B822A00A81B13 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4415FF5B1E3B822A00A81B13 /* Frameworks */ = {
+		441A0D871E55E9B700D02CE4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -194,16 +195,13 @@
 		440CEE4A1E3B8D2500F58A09 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				440CEE511E3B90B900F58A09 /* ViewUtils.swift */,
-				44F057621E54A728007E9C8F /* Notifier.swift */,
-				440CEE571E3B983700F58A09 /* InitialViewController.swift */,
-				440CEE4F1E3B8E7900F58A09 /* RegisterViewController.swift */,
-				440CEE531E3B93F300F58A09 /* SignInViewController.swift */,
-				44C7F71D1E4CD35700171170 /* PasswordRecoveryViewController.swift */,
+				441A0D4B1E55A5A500D02CE4 /* Auth */,
 				440CEE5B1E3B9B1900F58A09 /* HomeViewController.swift */,
 				44421A2D1E4CB9A6009755BD /* EditProfileViewController.swift */,
 				44498DFE1E4DC03100F6D761 /* ChangePasswordViewController.swift */,
 				44498E001E4DCF4300F6D761 /* PetsViewController.swift */,
+				440CEE511E3B90B900F58A09 /* ViewUtils.swift */,
+				44F057621E54A728007E9C8F /* Notifier.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -240,9 +238,10 @@
 			isa = PBXGroup;
 			children = (
 				4415FF411E3B822900A81B13 /* Snout */,
-				4415FF611E3B822A00A81B13 /* SnoutUITests */,
+				441A0D8B1E55E9B700D02CE4 /* SnoutTests */,
 				4415FF401E3B822900A81B13 /* Products */,
 				91352D1B7E01CC1C0CF51D38 /* Frameworks */,
+				641B9CEE287A0C1DD11FF8FC /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -250,8 +249,7 @@
 			isa = PBXGroup;
 			children = (
 				4415FF3F1E3B822900A81B13 /* Snout.app */,
-				4415FF531E3B822A00A81B13 /* SnoutTests.xctest */,
-				4415FF5E1E3B822A00A81B13 /* SnoutUITests.xctest */,
+				441A0D8A1E55E9B700D02CE4 /* SnoutTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -278,13 +276,26 @@
 			path = SnoutTests;
 			sourceTree = "<group>";
 		};
-		4415FF611E3B822A00A81B13 /* SnoutUITests */ = {
+		441A0D4B1E55A5A500D02CE4 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				4415FF621E3B822A00A81B13 /* SnoutUITests.swift */,
-				4415FF641E3B822A00A81B13 /* Info.plist */,
+				440CEE571E3B983700F58A09 /* InitialViewController.swift */,
+				440CEE4F1E3B8E7900F58A09 /* RegisterViewController.swift */,
+				440CEE531E3B93F300F58A09 /* SignInViewController.swift */,
+				44C7F71D1E4CD35700171170 /* PasswordRecoveryViewController.swift */,
 			);
-			path = SnoutUITests;
+			name = Auth;
+			sourceTree = "<group>";
+		};
+		441A0D8B1E55E9B700D02CE4 /* SnoutTests */ = {
+			isa = PBXGroup;
+			children = (
+				441A0D8C1E55E9B700D02CE4 /* SnoutTests.swift */,
+				441A0D8E1E55E9B700D02CE4 /* Info.plist */,
+				441A0D941E55E9D100D02CE4 /* APIManagerTests.swift */,
+				441A0D961E55EEB700D02CE4 /* AuthManagerTests.swift */,
+			);
+			path = SnoutTests;
 			sourceTree = "<group>";
 		};
 		44485FB91E51EFA600A3C47D /* Comunication */ = {
@@ -336,8 +347,22 @@
 				44B179631E4B787A0070A18B /* Errors.swift */,
 				44B179651E4B78EF0070A18B /* Messages.swift */,
 				44485FBE1E52079D00A3C47D /* CVSParser.swift */,
+				441A0D4C1E55AF5200D02CE4 /* SharedPreferences.swift */,
 			);
 			name = Utils;
+			sourceTree = "<group>";
+		};
+		641B9CEE287A0C1DD11FF8FC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F35168446C287CB53BC30BFA /* Pods-Snout.debug.xcconfig */,
+				86F90A5209E8A113FA7E0ED1 /* Pods-Snout.release.xcconfig */,
+				92D110285C06BEFA8BE21E58 /* Pods-SnoutTests.debug.xcconfig */,
+				44EE013FF109774F72778C25 /* Pods-SnoutTests.release.xcconfig */,
+				0A73582914ED9F8568E503AD /* Pods-SnoutUITests.debug.xcconfig */,
+				0B65C38058F1BC2B0701EC19 /* Pods-SnoutUITests.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		91352D1B7E01CC1C0CF51D38 /* Frameworks */ = {
@@ -345,6 +370,9 @@
 			children = (
 				4415FF561E3B822A00A81B13 /* SnoutTests */,
 				447D4C161E44C4F5008F82F4 /* MapKit.framework */,
+				DE14D5881D717C1DB613D80C /* Pods_Snout.framework */,
+				13DA2528FD76C823E7A873C0 /* Pods_SnoutTests.framework */,
+				6256AABC0648D33F7CF8CA44 /* Pods_SnoutUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -356,9 +384,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4415FF671E3B822A00A81B13 /* Build configuration list for PBXNativeTarget "Snout" */;
 			buildPhases = (
+				8AF5FD915C2DF4D9FDA7E9EE /* [CP] Check Pods Manifest.lock */,
 				4415FF3B1E3B822900A81B13 /* Sources */,
 				4415FF3C1E3B822900A81B13 /* Frameworks */,
 				4415FF3D1E3B822900A81B13 /* Resources */,
+				781FA3DB6A4B01355A4CDFE5 /* [CP] Embed Pods Frameworks */,
+				241DA77305E20C5193A6A533 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -369,41 +400,23 @@
 			productReference = 4415FF3F1E3B822900A81B13 /* Snout.app */;
 			productType = "com.apple.product-type.application";
 		};
-		4415FF521E3B822A00A81B13 /* SnoutTests */ = {
+		441A0D891E55E9B700D02CE4 /* SnoutTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4415FF6A1E3B822A00A81B13 /* Build configuration list for PBXNativeTarget "SnoutTests" */;
+			buildConfigurationList = 441A0D911E55E9B700D02CE4 /* Build configuration list for PBXNativeTarget "SnoutTests" */;
 			buildPhases = (
-				4415FF4F1E3B822A00A81B13 /* Sources */,
-				4415FF501E3B822A00A81B13 /* Frameworks */,
-				4415FF511E3B822A00A81B13 /* Resources */,
+				441A0D861E55E9B700D02CE4 /* Sources */,
+				441A0D871E55E9B700D02CE4 /* Frameworks */,
+				441A0D881E55E9B700D02CE4 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				4415FF551E3B822A00A81B13 /* PBXTargetDependency */,
+				441A0D901E55E9B700D02CE4 /* PBXTargetDependency */,
 			);
 			name = SnoutTests;
 			productName = SnoutTests;
-			productReference = 4415FF531E3B822A00A81B13 /* SnoutTests.xctest */;
+			productReference = 441A0D8A1E55E9B700D02CE4 /* SnoutTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		4415FF5D1E3B822A00A81B13 /* SnoutUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 4415FF6D1E3B822A00A81B13 /* Build configuration list for PBXNativeTarget "SnoutUITests" */;
-			buildPhases = (
-				4415FF5A1E3B822A00A81B13 /* Sources */,
-				4415FF5B1E3B822A00A81B13 /* Frameworks */,
-				4415FF5C1E3B822A00A81B13 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				4415FF601E3B822A00A81B13 /* PBXTargetDependency */,
-			);
-			name = SnoutUITests;
-			productName = SnoutUITests;
-			productReference = 4415FF5E1E3B822A00A81B13 /* SnoutUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -425,13 +438,7 @@
 							};
 						};
 					};
-					4415FF521E3B822A00A81B13 = {
-						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = DJBJW6R236;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 4415FF3E1E3B822900A81B13;
-					};
-					4415FF5D1E3B822A00A81B13 = {
+					441A0D891E55E9B700D02CE4 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = DJBJW6R236;
 						ProvisioningStyle = Automatic;
@@ -453,8 +460,7 @@
 			projectRoot = "";
 			targets = (
 				4415FF3E1E3B822900A81B13 /* Snout */,
-				4415FF521E3B822A00A81B13 /* SnoutTests */,
-				4415FF5D1E3B822A00A81B13 /* SnoutUITests */,
+				441A0D891E55E9B700D02CE4 /* SnoutTests */,
 			);
 		};
 /* End PBXProject section */
@@ -471,14 +477,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4415FF511E3B822A00A81B13 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4415FF5C1E3B822A00A81B13 /* Resources */ = {
+		441A0D881E55E9B700D02CE4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -486,6 +485,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		241DA77305E20C5193A6A533 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Snout/Pods-Snout-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		781FA3DB6A4B01355A4CDFE5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Snout/Pods-Snout-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8AF5FD915C2DF4D9FDA7E9EE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4415FF3B1E3B822900A81B13 /* Sources */ = {
@@ -517,6 +564,7 @@
 				44C7F7371E4CD3AE00171170 /* SocketAckEmitter.swift in Sources */,
 				44C7F73A1E4CD3AE00171170 /* SocketClientManager.swift in Sources */,
 				440CEE5A1E3B9AA300F58A09 /* InitialPresenter.swift in Sources */,
+				441A0D4D1E55AF5200D02CE4 /* SharedPreferences.swift in Sources */,
 				44485F971E51B16500A3C47D /* CoreDataManager.swift in Sources */,
 				44C7F74A1E4CD3AE00171170 /* SocketParsable.swift in Sources */,
 				44C7F7381E4CD3AE00171170 /* SocketAckManager.swift in Sources */,
@@ -548,34 +596,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4415FF4F1E3B822A00A81B13 /* Sources */ = {
+		441A0D861E55E9B700D02CE4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4415FF581E3B822A00A81B13 /* SnoutTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4415FF5A1E3B822A00A81B13 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4415FF631E3B822A00A81B13 /* SnoutUITests.swift in Sources */,
+				441A0D951E55E9D100D02CE4 /* APIManagerTests.swift in Sources */,
+				441A0D971E55EEB700D02CE4 /* AuthManagerTests.swift in Sources */,
+				441A0D8D1E55E9B700D02CE4 /* SnoutTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		4415FF551E3B822A00A81B13 /* PBXTargetDependency */ = {
+		441A0D901E55E9B700D02CE4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 4415FF3E1E3B822900A81B13 /* Snout */;
-			targetProxy = 4415FF541E3B822A00A81B13 /* PBXContainerItemProxy */;
-		};
-		4415FF601E3B822A00A81B13 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4415FF3E1E3B822900A81B13 /* Snout */;
-			targetProxy = 4415FF5F1E3B822A00A81B13 /* PBXContainerItemProxy */;
+			targetProxy = 441A0D8F1E55E9B700D02CE4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -694,9 +731,11 @@
 		};
 		4415FF681E3B822A00A81B13 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F35168446C287CB53BC30BFA /* Pods-Snout.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = DJBJW6R236;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -712,9 +751,11 @@
 		};
 		4415FF691E3B822A00A81B13 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 86F90A5209E8A113FA7E0ED1 /* Pods-Snout.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = DJBJW6R236;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -728,10 +769,9 @@
 			};
 			name = Release;
 		};
-		4415FF6B1E3B822A00A81B13 /* Debug */ = {
+		441A0D921E55E9B700D02CE4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = DJBJW6R236;
 				INFOPLIST_FILE = SnoutTests/Info.plist;
@@ -743,10 +783,9 @@
 			};
 			name = Debug;
 		};
-		4415FF6C1E3B822A00A81B13 /* Release */ = {
+		441A0D931E55E9B700D02CE4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = DJBJW6R236;
 				INFOPLIST_FILE = SnoutTests/Info.plist;
@@ -755,34 +794,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Snout.app/Snout";
-			};
-			name = Release;
-		};
-		4415FF6E1E3B822A00A81B13 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = DJBJW6R236;
-				INFOPLIST_FILE = SnoutUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = attitudetech.SnoutUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = Snout;
-			};
-			name = Debug;
-		};
-		4415FF6F1E3B822A00A81B13 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = DJBJW6R236;
-				INFOPLIST_FILE = SnoutUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = attitudetech.SnoutUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = Snout;
 			};
 			name = Release;
 		};
@@ -807,23 +818,13 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4415FF6A1E3B822A00A81B13 /* Build configuration list for PBXNativeTarget "SnoutTests" */ = {
+		441A0D911E55E9B700D02CE4 /* Build configuration list for PBXNativeTarget "SnoutTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4415FF6B1E3B822A00A81B13 /* Debug */,
-				4415FF6C1E3B822A00A81B13 /* Release */,
+				441A0D921E55E9B700D02CE4 /* Debug */,
+				441A0D931E55E9B700D02CE4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		4415FF6D1E3B822A00A81B13 /* Build configuration list for PBXNativeTarget "SnoutUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				4415FF6E1E3B822A00A81B13 /* Debug */,
-				4415FF6F1E3B822A00A81B13 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

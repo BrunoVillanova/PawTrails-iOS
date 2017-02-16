@@ -43,14 +43,17 @@ class APIManager {
     
     static let Instance = APIManager()
     
-    private func setBody(with data:[String:Any]) -> Data? {
-        return try? JSONSerialization.data(withJSONObject: data)
+    private func setHeaders(_ call:call) -> [String:String] {
+        var headers = [
+            "content-type": "application/json",
+            "cache-control": "no-cache"
+        ]
+        if call.requiresToken { headers["token"] = SharedPreferences.get(.token) }
+        return headers
     }
     
-    private func setToken(to rq: inout URLRequest, _ call:call) {
-        if call.requiresToken {
-            rq.setValue(AuthManager.Instance.getToken(), forHTTPHeaderField: "token")
-        }
+    private func setBody(with data:[String:Any]) -> Data? {
+        return try? JSONSerialization.data(withJSONObject: data)
     }
     
     private func createRequest(_ call:call, _ data:[String:Any]?) -> URLRequest? {
@@ -63,14 +66,8 @@ class APIManager {
         request.cachePolicy = .useProtocolCachePolicy
         request.timeoutInterval = 10.0
         
-        request.allHTTPHeaderFields = [
-            "content-type": "application/json",
-            "cache-control": "no-cache"
-        ]
-   
+        request.allHTTPHeaderFields = setHeaders(call)
         request.httpBody = data != nil ? setBody(with: data!) : nil
-        
-        setToken(to: &request, call)
         
         return request
     }

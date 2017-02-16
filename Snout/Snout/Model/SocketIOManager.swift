@@ -19,10 +19,14 @@ import Foundation
 import UIKit
 
 class SocketIOManager: NSObject {
-    static let sharedInstance = SocketIOManager()
     
-    var socket: SocketIOClient = SocketIOClient(socketURL: URL(string: "http://192.168.1.20:3000")!)
+    static let Instance = SocketIOManager()
     
+    enum Notifications: String {
+        case receivedPoint = "receivedPoint"
+    }
+   
+    private var socket: SocketIOClient = SocketIOClient(socketURL: URL(string: "http://192.168.1.4:3000")!)
     
     override init() {
         super.init()
@@ -38,67 +42,114 @@ class SocketIOManager: NSObject {
         socket.disconnect()
     }
     
-    
-    func connectToServerWithNickname(_ nickname: String, completionHandler: @escaping (_ userList: [[String: AnyObject]]?) -> Void) {
-        socket.emit("connectUser", nickname)
-        
-        socket.on("userList") { ( dataArray, ack) -> Void in
-            completionHandler(dataArray[0] as? [[String: AnyObject]])
+    func startListeningUpdates() {
+        socket.on("points") { (dataArray, socketAck) -> Void in
+            print(dataArray)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: Notifications.receivedPoint.rawValue), object: dataArray[0] as! [String: Any])
         }
-        
-        listenForOtherMessages()
     }
     
-    
-    func exitChatWithNickname(_ nickname: String, completionHandler: () -> Void) {
-        socket.emit("exitUser", nickname)
-        completionHandler()
+    func getPoints(_ completionHandler: @escaping (_ pointInfo: (latitude:Double, longitude:Double)) -> Void) {
+        socket.on("newPoint") { (dataArray, socketAck) -> Void in
+            let lat = dataArray[0] as! Double
+            let long = dataArray[1] as! Double
+            completionHandler((lat,long))
+        }
     }
     
-    
-    func sendMessage(_ message: String, withNickname nickname: String) {
-
+    func sendTry(){
         if socket.status == SocketIOClientStatus.connected {
-            socket.emit("chatMessage", nickname, message)
+            socket.emit("try", "Hello!")
         }else{
             print(socket.status)
         }
     }
-    
-    
-    func getChatMessage(_ completionHandler: @escaping (_ messageInfo: [String: AnyObject]) -> Void) {
-        socket.on("newChatMessage") { (dataArray, socketAck) -> Void in
-            var messageDictionary = [String: Any]()
-            messageDictionary["nickname"] = dataArray[0] as! String
-            messageDictionary["message"] = dataArray[1] as! String
-            messageDictionary["date"] = dataArray[2] as! String
-            
-            completionHandler(messageDictionary as [String : AnyObject])
-        }
-    }
-    
-    
-    fileprivate func listenForOtherMessages() {
-        socket.on("userConnectUpdate") { (dataArray, socketAck) -> Void in
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "userWasConnectedNotification"), object: dataArray[0] as! [String: AnyObject])
-        }
-        
-        socket.on("userExitUpdate") { (dataArray, socketAck) -> Void in
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "userWasDisconnectedNotification"), object: dataArray[0] as! String)
-        }
-        
-        socket.on("userTypingUpdate") { (dataArray, socketAck) -> Void in
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "userTypingNotification"), object: dataArray[0] as? [String: AnyObject])
-        }
-    }
-    
-    
-    func sendStartTypingMessage(_ nickname: String) {
-        socket.emit("startType", nickname)
-    }
-    
-    
-    func sendStopTypingMessage(_ nickname: String) {
-        socket.emit("stopType", nickname)
-    }
+
 }
+
+//class SocketIOManager: NSObject {
+//    
+//    static let Instance = SocketIOManager()
+//    
+//    
+//    private var socket: SocketIOClient = SocketIOClient(socketURL: URL(string: "http://192.168.1.4:3000")!)
+//    
+//    override init() {
+//        super.init()
+//    }
+//    
+//    
+//    func establishConnection() {
+//        socket.connect()
+//    }
+//    
+//    
+//    func closeConnection() {
+//        socket.disconnect()
+//    }
+//    
+//    
+//    func connectToServerWithNickname(_ nickname: String, completionHandler: @escaping (_ userList: [[String: AnyObject]]?) -> Void) {
+//        socket.emit("connectUser", nickname)
+//        
+//        socket.on("userList") { ( dataArray, ack) -> Void in
+//            completionHandler(dataArray[0] as? [[String: AnyObject]])
+//        }
+//        
+//        listenForOtherMessages()
+//    }
+//    
+//    
+//    func exitChatWithNickname(_ nickname: String, completionHandler: () -> Void) {
+//        socket.emit("exitUser", nickname)
+//        completionHandler()
+//    }
+//    
+//    
+//    func sendMessage(_ message: String, withNickname nickname: String) {
+//        
+//        if socket.status == SocketIOClientStatus.connected {
+//            socket.emit("chatMessage", nickname, message)
+//        }else{
+//            print(socket.status)
+//        }
+//    }
+//    
+//    
+//    func getChatMessage(_ completionHandler: @escaping (_ messageInfo: [String: AnyObject]) -> Void) {
+//        socket.on("newChatMessage") { (dataArray, socketAck) -> Void in
+//            var messageDictionary = [String: Any]()
+//            messageDictionary["nickname"] = dataArray[0] as! String
+//            messageDictionary["message"] = dataArray[1] as! String
+//            messageDictionary["date"] = dataArray[2] as! String
+//            
+//            completionHandler(messageDictionary as [String : AnyObject])
+//        }
+//    }
+//    
+//    
+//    fileprivate func listenForOtherMessages() {
+//        socket.on("userConnectUpdate") { (dataArray, socketAck) -> Void in
+//            NotificationCenter.default.post(name: Notification.Name(rawValue: "userWasConnectedNotification"), object: dataArray[0] as! [String: AnyObject])
+//        }
+//        
+//        socket.on("userExitUpdate") { (dataArray, socketAck) -> Void in
+//            NotificationCenter.default.post(name: Notification.Name(rawValue: "userWasDisconnectedNotification"), object: dataArray[0] as! String)
+//        }
+//        
+//        socket.on("userTypingUpdate") { (dataArray, socketAck) -> Void in
+//            NotificationCenter.default.post(name: Notification.Name(rawValue: "userTypingNotification"), object: dataArray[0] as? [String: AnyObject])
+//        }
+//    }
+//    
+//    
+//    func sendStartTypingMessage(_ nickname: String) {
+//        socket.emit("startType", nickname)
+//    }
+//    
+//    
+//    func sendStopTypingMessage(_ nickname: String) {
+//        socket.emit("stopType", nickname)
+//    }
+//}
+

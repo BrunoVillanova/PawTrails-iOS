@@ -7,8 +7,14 @@
 //
 let isDebug = true
 
+public struct ezdebug {
+    public static let email = "test@liberati.name"
+    public static let password = "Attitude2017Tech"
+}
+
 import UIKit
-import CoreData
+import FacebookCore
+import FacebookLogin
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -28,7 +34,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
         // Set translucent. (Default value is already true, so this can be removed if desired.)
         UINavigationBar.appearance().isTranslucent = true
-        return true
+        
+        return SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        
+        
+        return SDKApplicationDelegate.shared.application(app, open: url, options: options)
+        
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
@@ -39,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-        SocketIOManager.sharedInstance.closeConnection()
+        SocketIOManager.Instance.closeConnection()
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -48,12 +62,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        SocketIOManager.sharedInstance.establishConnection()
+        SocketIOManager.Instance.establishConnection()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
+        SocketIOManager.Instance.closeConnection()
         try? CoreDataManager.Instance.save()
     }
     
