@@ -49,11 +49,13 @@ class Message {
             
         case .EmptyUserResponse: return (title, lm("Empty User Response"))
         case .EmptyUserTokenResponse: return (title, lm("Empty UserToken Response"))
+        case .EmptyUserAppIdResponse: return (title, lm("Empty AppId Response"))
         case .EmptyUserIdResponse: return (title, lm("Empty UserId Response"))
             
         case .UserNotFound: return (title, lm("User not found"))
         case .WrongCredentials: return (title, lm("The credentials provided are incorrect."))
         case .Unknown: return (title, lm("Unknown Error"))
+        default: return ("","")
         }
     }
     

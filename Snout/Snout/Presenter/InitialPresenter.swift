@@ -15,15 +15,15 @@ protocol InitialView: NSObjectProtocol, View {
 
 class InitialPresenter {
     
-    weak fileprivate var initialView: InitialView?
+    weak fileprivate var view: InitialView?
     
     func attachView(_ vc: InitialViewController){
-        self.initialView = vc
+        self.view = vc
         addSocialMediaButtons(to: vc.view)
     }
     
     func deteachView() {
-        self.initialView = nil
+        self.view = nil
     }
     
     //MARK: - Social Media

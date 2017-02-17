@@ -20,7 +20,7 @@ class CoreDataManager {
         }else{
             var out = [String:Any]()
             for (k,v) in data {
-                if !keys.contains(k) {
+                if !keys.contains(k){
                     out[k] = v
                 }
             }
@@ -73,7 +73,11 @@ class CoreDataManager {
         if let object = retrieve(entity: entity, withPredicate: NSPredicate(format: "\(id) == \(data[id]!)"))?.first {
             
             for (key,value) in remove(keys: skippedKeys, from: data) {
-                object.setValue(value, forKey: key)
+                if value is NSNull {
+                    //
+                }else{
+                    object.setValue(value, forKey: key)
+                }
             }
             
             if Storage.Instance.save() != Storage.SaveStatus.saved {

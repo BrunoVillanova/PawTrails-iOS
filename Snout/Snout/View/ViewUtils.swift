@@ -37,6 +37,9 @@ extension UIView {
         animation.values = [-15.0, 15.0, -10.0, 10.0, -5.0, 5.0, 0.0]
         layer.add(animation, forKey: "shake")
     }
-
+    
+    func round() {
+        self.layer.cornerRadius = 5
+        self.clipsToBounds = true
+    }
 }
-

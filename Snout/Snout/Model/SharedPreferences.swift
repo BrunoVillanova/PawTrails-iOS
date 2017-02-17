@@ -13,6 +13,7 @@ class SharedPreferences {
     enum key: String {
         case token = "token"
         case id = "id"
+        case appId = "appId"
     }
     
     static func get(_ p:key) -> String? {

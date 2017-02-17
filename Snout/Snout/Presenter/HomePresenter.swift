@@ -15,28 +15,28 @@ protocol HomeView: NSObjectProtocol, View {
 
 class HomePresenter {
     
-    weak fileprivate var homeView: HomeView?
+    weak fileprivate var view: HomeView?
     
     func attachView(_ view: HomeView){
-        self.homeView = view
+        self.view = view
         SocketIOManager.Instance.startListeningUpdates()
         getPoints()
     }
     
     func deteachView() {
-        self.homeView = nil
+        self.view = nil
     }
     
     func checkSignInStatus() {
         if !AuthManager.Instance.isAuthenticated() {
-            self.homeView?.userNotSignedIn()
+            self.view?.userNotSignedIn()
         }
     }
     
     func getPoints(){
         SocketIOManager.Instance.getPoints({ (point) in
             DispatchQueue.main.async(execute: { () -> Void in
-                self.homeView?.plotPoint(latitude: point.latitude, longitude: point.longitude)
+                self.view?.plotPoint(latitude: point.latitude, longitude: point.longitude)
             })
         })
     }

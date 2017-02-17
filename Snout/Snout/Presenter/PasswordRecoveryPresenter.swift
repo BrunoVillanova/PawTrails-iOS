@@ -16,25 +16,25 @@ protocol PasswordRecoveryView: NSObjectProtocol, View {
 
 class PasswordRecoveryPresenter {
     
-    weak fileprivate var passwordRecoveryView: PasswordRecoveryView?
+    weak fileprivate var view: PasswordRecoveryView?
     
     func attachView(_ view: PasswordRecoveryView){
-        self.passwordRecoveryView = view
+        self.view = view
     }
     
     func deteachView() {
-        self.passwordRecoveryView = nil
+        self.view = nil
     }
     
     func sendRecoveryEmail(email:String, checked: Bool) {
         if email.isValidEmail {
             if checked {
-                self.passwordRecoveryView?.emailSent()
+                self.view?.emailSent()
             }else{
-                self.passwordRecoveryView?.emailNotChecked()
+                self.view?.emailNotChecked()
             }
         }else{
-            self.passwordRecoveryView?.emailFieldError()
+            self.view?.emailFieldError()
         }
     }
 

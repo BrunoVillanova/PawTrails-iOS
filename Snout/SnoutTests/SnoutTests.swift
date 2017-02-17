@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import Snout
 
 class SnoutTests: XCTestCase {
     
@@ -23,6 +24,7 @@ class SnoutTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        DataManager.Instance.getCountryCodes()
     }
     
     func testPerformanceExample() {

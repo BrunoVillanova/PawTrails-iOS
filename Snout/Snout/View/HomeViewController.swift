@@ -29,9 +29,9 @@ class HomeViewController: UIViewController, HomeView, CLLocationManagerDelegate 
     }
     
     override func viewDidAppear(_ animated: Bool) {
-//        self.presenter.checkSignInStatus()
+        self.presenter.checkSignInStatus()
 //        self.initLocationManager()
-//        self.checkAuthorizationStatus()
+        self.checkAuthorizationStatus()
 //        self.startUpdatingLocation()
     }
     

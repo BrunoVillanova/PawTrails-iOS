@@ -17,7 +17,7 @@ class AuthManager {
 
 
     func isAuthenticated() -> Bool {
-       return SharedPreferences.has(.id) && SharedPreferences.has(.token)
+       return SharedPreferences.has(.id) && SharedPreferences.has(.token) && SharedPreferences.has(.appId)
     }
     
     func register(_ email:String, _ password: String, completition: @escaping errorCallback) {
@@ -58,6 +58,10 @@ class AuthManager {
             completition(Message.Instance.authError(type: .EmptyUserTokenResponse))
             return
         }
+        guard let appId = data!["appid"] as? String else {
+            completition(Message.Instance.authError(type: .EmptyUserTokenResponse))
+            return
+        }
         guard let userData = data!["user"] as? [String:Any] else {
             completition(Message.Instance.authError(type: .EmptyUserResponse))
             return
@@ -67,6 +71,7 @@ class AuthManager {
             return
         }
         SharedPreferences.set(.token, with: token)
+        SharedPreferences.set(.appId, with: appId)
         SharedPreferences.set(.id, with: userId)
         DataManager.Instance.setUser(userData)
         completition(nil)
@@ -91,7 +96,7 @@ class AuthManager {
     }
     
     func changeUsersPassword(_ email:String, _ password:String, _ newPassword:String, completition: @escaping errorCallback) {
-        let data = ["email":email, "password":password, "newPassword":newPassword]
+        let data = ["id": SharedPreferences.get(.id), "email":email, "password":password, "new_password":newPassword]
         APIManager.Instance.performCall(.passwordChange, data) { (error, data) in
             if error != nil {
                 completition(self.handleAuthErrors(error))
@@ -103,13 +108,13 @@ class AuthManager {
 
     
     fileprivate func handleAuthErrors(_ error: APIManagerError?, _ data: [String:Any]? = nil) -> errorMsg? {
-//        if error != nil {
-//            if let authError = AuthenticationError(rawValue: error!) {
-//                return Message.Instance.authError(type: authError)
-//            }else{
-//                return Message.Instance.softwareDevelopmentError(data)
-//            }
-//        }
+        if error != nil {
+            if let authError = AuthenticationError(rawValue: error!.specificCode) {
+                return Message.Instance.authError(type: authError)
+            }else{
+                return Message.Instance.softwareDevelopmentError(data)
+            }
+        }
         return nil
     }
 

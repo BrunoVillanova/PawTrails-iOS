@@ -46,8 +46,10 @@ class PetsViewController: UIViewController, PetsView, UICollectionViewDataSource
     }
     
     func editProfile(){
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "EditProfileViewController") as? EditProfileViewController {
-           self.present(vc, animated: true, completion: nil)
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "EditProfileTableViewController") as? EditProfileTableViewController {
+            let nav = UINavigationController(rootViewController: vc)
+            nav.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: .title1)]
+            self.present(nav, animated: true, completion: nil)
         }
     }
 
@@ -66,15 +68,13 @@ class PetsViewController: UIViewController, PetsView, UICollectionViewDataSource
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "userCell", for: indexPath) as! userCell
             cell.layer.cornerRadius = 5
             cell.clipsToBounds =  true
-            cell.imageView.layer.cornerRadius = 5
-            cell.imageView.clipsToBounds = true
+            cell.imageView.round()
             cell.EditProfile.addTarget(self, action: #selector(PetsViewController.editProfile), for: .touchUpInside)
             return cell
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! petCell
             cell.titleLabel.text = pets[indexPath.row - 1].name
-            cell.layer.cornerRadius = 5
-            cell.clipsToBounds =  true
+            cell.round()
             return cell
         }
     }

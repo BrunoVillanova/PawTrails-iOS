@@ -17,7 +17,7 @@ class APIManager {
      Contains the constants used to specify the interaction with the `APIManager`.
      */
     enum call {
-        case register, signin, signinsocial, signout, passwordReset, passwordChange, getuser, getpets
+        case register, signin, signinsocial, signout, passwordReset, passwordChange, getuser, setuser , getpets
         
         var requiresToken: Bool {
             switch self {
@@ -30,7 +30,9 @@ class APIManager {
             switch self {
             case .register: return "/users/register"
             case .signin: return "/users/login"
-            default: return "/register/"
+            case .passwordChange: return "/users/changepsw"
+            case .setuser: return "/users/edit"
+            default: return ""
             }
         }
         
@@ -48,12 +50,16 @@ class APIManager {
             "content-type": "application/json",
             "cache-control": "no-cache"
         ]
-        if call.requiresToken { headers["token"] = SharedPreferences.get(.token) }
+        if call.requiresToken {
+            headers["token"] = SharedPreferences.get(.token)
+            headers["appid"] = SharedPreferences.get(.appId)
+        }
         return headers
     }
     
-    private func setBody(with data:[String:Any]) -> Data? {
-        return try? JSONSerialization.data(withJSONObject: data)
+    private func setBody(with data:[String:Any]?) -> Data? {
+        print(data)
+        return data != nil ? try? JSONSerialization.data(withJSONObject: data) : nil
     }
     
     private func createRequest(_ call:call, _ data:[String:Any]?) -> URLRequest? {
@@ -67,8 +73,8 @@ class APIManager {
         request.timeoutInterval = 10.0
         
         request.allHTTPHeaderFields = setHeaders(call)
-        request.httpBody = data != nil ? setBody(with: data!) : nil
-        
+        print(request.allHTTPHeaderFields ?? "")
+        request.httpBody = setBody(with: data!)
         return request
     }
     
@@ -99,7 +105,6 @@ class APIManager {
                     }
                     self.handleResponse(call, httpResponse.statusCode, data, completition)
                 }
-                
             }.resume()
         }
         
@@ -108,9 +113,13 @@ class APIManager {
     private func parseResponse(_ data:Data?) -> [String:Any]? {
         if data != nil {
             do {
-                return try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as? [String:Any]
+                let out = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as? [String:Any] 
+                print(out ?? "couldn't parse json!")
+                return out
+//                return try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as? [String:Any]
             } catch {
                 print("Error -> \(error)")
+                print(String(data: data!, encoding: String.Encoding.utf8) ?? "not convertible to string either")
                 return nil
             }
         }
@@ -119,17 +128,10 @@ class APIManager {
     
     private func handleResponse(_ call: call, _ code: Int, _ data: Data?, _ completition: @escaping (_ error:APIManagerError?, _ data:[String:Any]?) -> Void ) {
         if code.isSuccess {
-            completition(nil, handleResults(data))
+            completition(nil, parseResponse(data))
         }else{
             completition(handleError(call, code, data), nil)
         }
-    }
-    
-    private func handleResults(_ data:Data?) -> [String:Any]? {
-        if let dict = parseResponse(data) {
-            return dict["results"] as? [String:Any]
-        }
-        return nil
     }
     
     private func handleError(_ call: call, _ code: Int, _ data: Data?) -> APIManagerError? {

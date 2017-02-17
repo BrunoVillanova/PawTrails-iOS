@@ -21,8 +21,8 @@ class SignInViewController: UIViewController, SignInView, UITextFieldDelegate {
         self.presenter.attachView(self)
         self.notifier = Notifier(with: self.view)
         if isDebug {
-            self.emailTextField.text = "test@liberati.name"
-            self.passwordTextField.text = "Attitude2017Tech"
+            self.emailTextField.text = ezdebug.email
+            self.passwordTextField.text = ezdebug.password
         }
         self.emailTextField.becomeFirstResponder()
     }

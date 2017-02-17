@@ -39,19 +39,13 @@ struct APIManagerError: Error {
 
 
 enum AuthenticationError: Int {
-    case MissingEmail = 10
-    case EmailFormat  = 11
-    case MissingPassword  = 12
-    case WeakPassword = 13
-    case UserAlreadyExists = 14
-    case UserDisabled = 15
-    
-    case UserNotFound  = 6
-    case WrongCredentials = 8
-    case EmptyUserResponse = 7
-    case EmptyUserTokenResponse = 5
-    case EmptyUserIdResponse = 4
-    case Unknown = 9
+    case MissingEmail = 10, EmailFormat, MissingPassword, WeakPassword, UserAlreadyExists, UserDisabled, DateOfBirth, GenderFormat, PhoneFormat, UserNotFound, WrongPassword, WrongCredentials
+
+    case EmptyUserResponse = 0
+    case EmptyUserTokenResponse = 1
+    case EmptyUserAppIdResponse = 2
+    case EmptyUserIdResponse = 3
+    case Unknown = -1
 }
 
 enum UserError: Int {

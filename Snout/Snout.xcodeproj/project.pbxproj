@@ -23,8 +23,7 @@
 		441A0D8D1E55E9B700D02CE4 /* SnoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441A0D8C1E55E9B700D02CE4 /* SnoutTests.swift */; };
 		441A0D951E55E9D100D02CE4 /* APIManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441A0D941E55E9D100D02CE4 /* APIManagerTests.swift */; };
 		441A0D971E55EEB700D02CE4 /* AuthManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441A0D961E55EEB700D02CE4 /* AuthManagerTests.swift */; };
-		44421A2C1E4CB8E7009755BD /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44421A2B1E4CB8E7009755BD /* ProfilePresenter.swift */; };
-		44421A2E1E4CB9A6009755BD /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44421A2D1E4CB9A6009755BD /* EditProfileViewController.swift */; };
+		44421A2C1E4CB8E7009755BD /* EditProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44421A2B1E4CB8E7009755BD /* EditProfilePresenter.swift */; };
 		44485F951E51B12800A3C47D /* Snout.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 44485F931E51B12800A3C47D /* Snout.xcdatamodeld */; };
 		44485F971E51B16500A3C47D /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44485F961E51B16500A3C47D /* CoreDataManager.swift */; };
 		44485FBD1E52076C00A3C47D /* countrycodes.csv in Resources */ = {isa = PBXBuildFile; fileRef = 44485FBC1E52076C00A3C47D /* countrycodes.csv */; };
@@ -33,6 +32,11 @@
 		44498DFF1E4DC03100F6D761 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44498DFE1E4DC03100F6D761 /* ChangePasswordViewController.swift */; };
 		44498E011E4DCF4300F6D761 /* PetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44498E001E4DCF4300F6D761 /* PetsViewController.swift */; };
 		44498E031E4DCF8700F6D761 /* PetsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44498E021E4DCF8700F6D761 /* PetsPresenter.swift */; };
+		447905161E5731F100A49AB3 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447905151E5731F100A49AB3 /* Reachability.swift */; };
+		447905181E573A4D00A49AB3 /* EditProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447905171E573A4D00A49AB3 /* EditProfileTableViewController.swift */; };
+		4479051A1E5742FC00A49AB3 /* PhonePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447905191E5742FC00A49AB3 /* PhonePresenter.swift */; };
+		4479051C1E5744A800A49AB3 /* PhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4479051B1E5744A800A49AB3 /* PhoneViewController.swift */; };
+		4479051E1E575A2100A49AB3 /* BirthdayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4479051D1E575A2100A49AB3 /* BirthdayViewController.swift */; };
 		447D4C171E44C4F5008F82F4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 447D4C161E44C4F5008F82F4 /* MapKit.framework */; };
 		44B179621E4B62690070A18B /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B179611E4B62690070A18B /* Presenter.swift */; };
 		44B179641E4B787A0070A18B /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B179631E4B787A0070A18B /* Errors.swift */; };
@@ -108,8 +112,7 @@
 		441A0D8E1E55E9B700D02CE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		441A0D941E55E9D100D02CE4 /* APIManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManagerTests.swift; sourceTree = "<group>"; };
 		441A0D961E55EEB700D02CE4 /* AuthManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthManagerTests.swift; sourceTree = "<group>"; };
-		44421A2B1E4CB8E7009755BD /* ProfilePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfilePresenter.swift; path = Presenter/ProfilePresenter.swift; sourceTree = "<group>"; };
-		44421A2D1E4CB9A6009755BD /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditProfileViewController.swift; path = View/EditProfileViewController.swift; sourceTree = "<group>"; };
+		44421A2B1E4CB8E7009755BD /* EditProfilePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditProfilePresenter.swift; path = Presenter/EditProfilePresenter.swift; sourceTree = "<group>"; };
 		44485F941E51B12800A3C47D /* Snout.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Snout.xcdatamodel; sourceTree = "<group>"; };
 		44485F961E51B16500A3C47D /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		44485FBC1E52076C00A3C47D /* countrycodes.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = countrycodes.csv; sourceTree = "<group>"; };
@@ -118,6 +121,11 @@
 		44498DFE1E4DC03100F6D761 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChangePasswordViewController.swift; path = View/ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		44498E001E4DCF4300F6D761 /* PetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetsViewController.swift; path = View/PetsViewController.swift; sourceTree = "<group>"; };
 		44498E021E4DCF8700F6D761 /* PetsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetsPresenter.swift; path = Presenter/PetsPresenter.swift; sourceTree = "<group>"; };
+		447905151E5731F100A49AB3 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		447905171E573A4D00A49AB3 /* EditProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditProfileTableViewController.swift; path = View/EditProfileTableViewController.swift; sourceTree = "<group>"; };
+		447905191E5742FC00A49AB3 /* PhonePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhonePresenter.swift; path = Presenter/PhonePresenter.swift; sourceTree = "<group>"; };
+		4479051B1E5744A800A49AB3 /* PhoneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhoneViewController.swift; path = View/PhoneViewController.swift; sourceTree = "<group>"; };
+		4479051D1E575A2100A49AB3 /* BirthdayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BirthdayViewController.swift; path = View/BirthdayViewController.swift; sourceTree = "<group>"; };
 		447D4C161E44C4F5008F82F4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		44B179611E4B62690070A18B /* Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Presenter.swift; path = Presenter/Presenter.swift; sourceTree = "<group>"; };
 		44B179631E4B787A0070A18B /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Errors.swift; path = Model/Errors.swift; sourceTree = "<group>"; };
@@ -188,6 +196,7 @@
 				4415FF491E3B822900A81B13 /* Assets.xcassets */,
 				4415FF4B1E3B822900A81B13 /* LaunchScreen.storyboard */,
 				4415FF4E1E3B822900A81B13 /* Info.plist */,
+				44485FBC1E52076C00A3C47D /* countrycodes.csv */,
 			);
 			name = Assets;
 			sourceTree = "<group>";
@@ -197,11 +206,13 @@
 			children = (
 				441A0D4B1E55A5A500D02CE4 /* Auth */,
 				440CEE5B1E3B9B1900F58A09 /* HomeViewController.swift */,
-				44421A2D1E4CB9A6009755BD /* EditProfileViewController.swift */,
-				44498DFE1E4DC03100F6D761 /* ChangePasswordViewController.swift */,
 				44498E001E4DCF4300F6D761 /* PetsViewController.swift */,
+				447905171E573A4D00A49AB3 /* EditProfileTableViewController.swift */,
+				44498DFE1E4DC03100F6D761 /* ChangePasswordViewController.swift */,
 				440CEE511E3B90B900F58A09 /* ViewUtils.swift */,
 				44F057621E54A728007E9C8F /* Notifier.swift */,
+				4479051B1E5744A800A49AB3 /* PhoneViewController.swift */,
+				4479051D1E575A2100A49AB3 /* BirthdayViewController.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -209,15 +220,14 @@
 		440CEE4B1E3B8D2C00F58A09 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				44B179611E4B62690070A18B /* Presenter.swift */,
+				447905141E57307E00A49AB3 /* Auth */,
 				44C7F74F1E4CD3DA00171170 /* HomePresenter.swift */,
-				440CEE591E3B9AA300F58A09 /* InitialPresenter.swift */,
-				440CEE4D1E3B8DC500F58A09 /* RegisterPresenter.swift */,
-				440CEE551E3B945000F58A09 /* SignInPresenter.swift */,
-				44421A2B1E4CB8E7009755BD /* ProfilePresenter.swift */,
-				44C7F7571E4CD43A00171170 /* PasswordRecoveryPresenter.swift */,
+				44421A2B1E4CB8E7009755BD /* EditProfilePresenter.swift */,
 				44498DFC1E4DBE6700F6D761 /* ChangePasswordPresenter.swift */,
 				44498E021E4DCF8700F6D761 /* PetsPresenter.swift */,
+				44B179611E4B62690070A18B /* Presenter.swift */,
+				447905151E5731F100A49AB3 /* Reachability.swift */,
+				447905191E5742FC00A49AB3 /* PhonePresenter.swift */,
 			);
 			name = Presenter;
 			sourceTree = "<group>";
@@ -225,11 +235,13 @@
 		440CEE4C1E3B8D3D00F58A09 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				44485FB91E51EFA600A3C47D /* Comunication */,
-				44485F931E51B12800A3C47D /* Snout.xcdatamodeld */,
 				44C7F7521E4CD3F200171170 /* AuthManager.swift */,
 				44FE723C1E4A2EF0007C7E24 /* DataManager.swift */,
-				44B179671E4B78FB0070A18B /* Utils */,
+				44C7F7511E4CD3F200171170 /* APIManager.swift */,
+				44485F961E51B16500A3C47D /* CoreDataManager.swift */,
+				44C7F7531E4CD3F200171170 /* SocketIOManager.swift */,
+				447D4C151E44BF69008F82F4 /* SocketIO */,
+				44485F931E51B12800A3C47D /* Snout.xcdatamodeld */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -259,6 +271,7 @@
 			children = (
 				4415FF461E3B822900A81B13 /* Main.storyboard */,
 				4415FF421E3B822900A81B13 /* AppDelegate.swift */,
+				44B179671E4B78FB0070A18B /* Utils */,
 				440CEE4C1E3B8D3D00F58A09 /* Model */,
 				440CEE4A1E3B8D2500F58A09 /* View */,
 				440CEE4B1E3B8D2C00F58A09 /* Presenter */,
@@ -298,15 +311,15 @@
 			path = SnoutTests;
 			sourceTree = "<group>";
 		};
-		44485FB91E51EFA600A3C47D /* Comunication */ = {
+		447905141E57307E00A49AB3 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				44C7F7531E4CD3F200171170 /* SocketIOManager.swift */,
-				447D4C151E44BF69008F82F4 /* SocketIO */,
-				44C7F7511E4CD3F200171170 /* APIManager.swift */,
-				44485F961E51B16500A3C47D /* CoreDataManager.swift */,
+				440CEE591E3B9AA300F58A09 /* InitialPresenter.swift */,
+				440CEE4D1E3B8DC500F58A09 /* RegisterPresenter.swift */,
+				440CEE551E3B945000F58A09 /* SignInPresenter.swift */,
+				44C7F7571E4CD43A00171170 /* PasswordRecoveryPresenter.swift */,
 			);
-			name = Comunication;
+			name = Auth;
 			sourceTree = "<group>";
 		};
 		447D4C151E44BF69008F82F4 /* SocketIO */ = {
@@ -343,7 +356,6 @@
 		44B179671E4B78FB0070A18B /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				44485FBC1E52076C00A3C47D /* countrycodes.csv */,
 				44B179631E4B787A0070A18B /* Errors.swift */,
 				44B179651E4B78EF0070A18B /* Messages.swift */,
 				44485FBE1E52079D00A3C47D /* CVSParser.swift */,
@@ -545,6 +557,7 @@
 				44C7F7461E4CD3AE00171170 /* SocketIOClientSpec.swift in Sources */,
 				440CEE541E3B93F300F58A09 /* SignInViewController.swift in Sources */,
 				440CEE4E1E3B8DC500F58A09 /* RegisterPresenter.swift in Sources */,
+				4479051C1E5744A800A49AB3 /* PhoneViewController.swift in Sources */,
 				44C7F7481E4CD3AE00171170 /* SocketLogger.swift in Sources */,
 				440CEE561E3B945000F58A09 /* SignInPresenter.swift in Sources */,
 				44C7F7581E4CD43A00171170 /* PasswordRecoveryPresenter.swift in Sources */,
@@ -557,7 +570,8 @@
 				44C7F7501E4CD3DA00171170 /* HomePresenter.swift in Sources */,
 				440CEE5C1E3B9B1900F58A09 /* HomeViewController.swift in Sources */,
 				44C7F71E1E4CD35700171170 /* PasswordRecoveryViewController.swift in Sources */,
-				44421A2C1E4CB8E7009755BD /* ProfilePresenter.swift in Sources */,
+				447905161E5731F100A49AB3 /* Reachability.swift in Sources */,
+				44421A2C1E4CB8E7009755BD /* EditProfilePresenter.swift in Sources */,
 				44C7F73F1E4CD3AE00171170 /* SocketEngineSpec.swift in Sources */,
 				44F057631E54A728007E9C8F /* Notifier.swift in Sources */,
 				44C7F7541E4CD3F200171170 /* APIManager.swift in Sources */,
@@ -567,9 +581,11 @@
 				441A0D4D1E55AF5200D02CE4 /* SharedPreferences.swift in Sources */,
 				44485F971E51B16500A3C47D /* CoreDataManager.swift in Sources */,
 				44C7F74A1E4CD3AE00171170 /* SocketParsable.swift in Sources */,
+				447905181E573A4D00A49AB3 /* EditProfileTableViewController.swift in Sources */,
 				44C7F7381E4CD3AE00171170 /* SocketAckManager.swift in Sources */,
 				44C7F74B1E4CD3AE00171170 /* SocketStringReader.swift in Sources */,
 				4415FF431E3B822900A81B13 /* AppDelegate.swift in Sources */,
+				4479051A1E5742FC00A49AB3 /* PhonePresenter.swift in Sources */,
 				44C7F7561E4CD3F200171170 /* SocketIOManager.swift in Sources */,
 				44485FBF1E52079D00A3C47D /* CVSParser.swift in Sources */,
 				44C7F7441E4CD3AE00171170 /* SocketIOClientConfiguration.swift in Sources */,
@@ -580,6 +596,7 @@
 				44C7F73C1E4CD3AE00171170 /* SocketEngineClient.swift in Sources */,
 				44C7F7451E4CD3AE00171170 /* SocketIOClientOption.swift in Sources */,
 				44C7F7431E4CD3AE00171170 /* SocketIOClient.swift in Sources */,
+				4479051E1E575A2100A49AB3 /* BirthdayViewController.swift in Sources */,
 				44498E031E4DCF8700F6D761 /* PetsPresenter.swift in Sources */,
 				440CEE581E3B983700F58A09 /* InitialViewController.swift in Sources */,
 				44C7F7411E4CD3AE00171170 /* SocketEventHandler.swift in Sources */,
@@ -590,7 +607,6 @@
 				44C7F7471E4CD3AE00171170 /* SocketIOClientStatus.swift in Sources */,
 				44C7F7401E4CD3AE00171170 /* SocketEngineWebsocket.swift in Sources */,
 				44498E011E4DCF4300F6D761 /* PetsViewController.swift in Sources */,
-				44421A2E1E4CB9A6009755BD /* EditProfileViewController.swift in Sources */,
 				44B179661E4B78EF0070A18B /* Messages.swift in Sources */,
 				44498DFF1E4DC03100F6D761 /* ChangePasswordViewController.swift in Sources */,
 			);
@@ -825,6 +841,7 @@
 				441A0D931E55E9B700D02CE4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

@@ -8,8 +8,8 @@
 let isDebug = true
 
 public struct ezdebug {
-    public static let email = "test@liberati.name"
-    public static let password = "Attitude2017Tech"
+    public static let email = "ios@test.com"
+    public static let password = "iOStest12345"
 }
 
 import UIKit

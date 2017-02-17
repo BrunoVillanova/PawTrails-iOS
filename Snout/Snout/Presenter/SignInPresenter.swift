@@ -16,16 +16,16 @@ protocol SignInView: NSObjectProtocol, View, ConnectionView {
 
 class SignInPresenter {
     
-    weak private var signInView: SignInView?
+    weak private var view: SignInView?
     private var reachability: Reachbility!
     
     func attachView(_ view: SignInView){
-        self.signInView = view
+        self.view = view
         self.reachability = Reachbility(view)
     }
     
     func deteachView() {
-        self.signInView = nil
+        self.view = nil
     }
 
     func signIn(email:String, password:String) {
@@ -33,16 +33,16 @@ class SignInPresenter {
             AuthManager.Instance.signIn(email, password) { (error) in
                 DispatchQueue.main.async {
                     if error != nil {
-                        self.signInView?.errorMessage(error!)
+                        self.view?.errorMessage(error!)
                     }else{
-                        self.signInView?.userSignedIn()
+                        self.view?.userSignedIn()
                     }
                 }
             }
         }else if !email.isValidEmail {
-            self.signInView?.emailFieldError(msg: Message.Instance.authError(type: .EmailFormat).msg)
+            self.view?.emailFieldError(msg: Message.Instance.authError(type: .EmailFormat).msg)
         }else if !password.isValidPassword {
-            self.signInView?.passwordFieldError(msg: Message.Instance.authError(type: .WeakPassword).msg)
+            self.view?.passwordFieldError(msg: Message.Instance.authError(type: .WeakPassword).msg)
         }
     }
 }

@@ -33,7 +33,7 @@ class AuthManagerTests: XCTestCase {
             XCTAssert(AuthManager.Instance.isAuthenticated(), "Not authenticated properly")
             expect.fulfill()
         }
-        waitForExpectations(timeout: 1) { error in
+        waitForExpectations(timeout: 10000) { error in
             if let error = error {
                 XCTFail("waitForExpectationsWithTimeout errored: \(error)")
             }

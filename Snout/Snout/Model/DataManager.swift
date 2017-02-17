@@ -19,6 +19,20 @@ extension String {
     }
 }
 
+extension Date {
+    
+    public var toStringShow: String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        return dateFormatter.string(from: self)
+    }
+    public var toStringServer: String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.string(from: self)
+    }
+}
+
 class DataManager {
     
     static let Instance = DataManager()
@@ -59,12 +73,14 @@ class DataManager {
     
     private func setCountryCode(_ data:Any?) -> CountryCode? {
         if let cc = data as? String {
+            if cc == "" { return nil }
             var countryCode = getCountryCode(cc)
             if countryCode == nil {
                 CSVParser.Instance.loadCountryCodes()
                 countryCode = getCountryCode(cc)
             }
             return countryCode
+            
         }
         return nil
     }
@@ -91,8 +107,9 @@ class DataManager {
                     callback(UserError.MoreThenOneUser.rawValue, nil)
                 }
                 callback(nil, results.first!)
+            }else{
+                callback(UserError.NoUserFound.rawValue, nil)
             }
-            callback(UserError.NoUserFound.rawValue, nil)
         }
     }
     
@@ -101,6 +118,38 @@ class DataManager {
     }
     
     // MARK: - Pet
-
     
+    // MARK: - Country Codes
+    
+    func getCountryCodes() -> [CountryCode]? {
+        let results = CoreDataManager.Instance.retrieve(entity: "CountryCode") as? [CountryCode]
+        if results == nil || results?.count == 0 {
+            CSVParser.Instance.loadCountryCodes()
+            return CoreDataManager.Instance.retrieve(entity: "CountryCode") as? [CountryCode]
+        }
+        return results
+    }
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 }
