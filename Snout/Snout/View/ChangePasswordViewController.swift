@@ -34,6 +34,10 @@ class ChangePasswordViewController: UIViewController, ChangePasswordView, UIText
         }
     }
     
+    deinit {
+        self.presenter.deteachView()
+    }
+    
     @IBAction func changeAction(_ sender: UIButton) {
         change()
     }

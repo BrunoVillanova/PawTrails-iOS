@@ -15,7 +15,8 @@ class CSVParser {
     
     fileprivate let name = "countrycodes"
     fileprivate let ext = "csv"
-    fileprivate let split = "\r\n"
+    fileprivate let lineSplit = "\r\n"
+    fileprivate let rowSplit = ","
     
     func loadCountryCodes() {
         
@@ -25,15 +26,17 @@ class CSVParser {
                 let content = try String(contentsOf: url, encoding: .utf8)
                 
                 
-                for line in content.components(separatedBy: split) {
+                for line in content.components(separatedBy: lineSplit) {
                     
-                    let row = line.components(separatedBy: ",")
+                    let row = line.components(separatedBy: rowSplit)
                     
-                    var element = [String:Any]()
-                    element["name"] = row[0]
-                    element["shortname"] = row[1]
-                    element["code"] = row[2]
-                    _ = try CoreDataManager.Instance.store(entity: "CountryCode", withData: element)
+                    if row.count == 3 {
+                        var element = [String:Any]()
+                        element["name"] = row[0]
+                        element["shortname"] = row[1]
+                        element["code"] = row[2]
+                        _ = try CoreDataManager.Instance.upsert(entity: "CountryCode", withData: element, withId: "code")
+                    }
                 }
                 
             } catch {

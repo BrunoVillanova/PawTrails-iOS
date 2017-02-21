@@ -15,18 +15,20 @@ class PhoneViewController: UIViewController, PhoneView, UIPickerViewDataSource, 
     @IBOutlet weak var countryLabel: UILabel!
     
     fileprivate let presenter = PhonePresenter()
-    var codes = [CountryCode]()
+    var phone:Phone? = nil
+    
+    fileprivate var codes = [CountryCode]()
+    fileprivate var selectedCC:CountryCode!
+    
     var parentEditor:EditProfileTableViewController!
-    var selectedCC:CountryCode!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter.attachView(self)
-        if parentEditor.user.phone != nil {
-            self.codeTextField.text = parentEditor.user.phone?.country_code?.code
-            self.numberTextField.text = parentEditor.user.phone?.number
-        }
-        self.codeTextField.becomeFirstResponder()
+    }
+    
+    deinit {
+        self.presenter.deteachView()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -43,6 +45,15 @@ class PhoneViewController: UIViewController, PhoneView, UIPickerViewDataSource, 
         picker.delegate = self
         picker.dataSource = self
         self.codeTextField.inputView = picker
+        if let ccc = phone == nil ? self.presenter.getCurrentCountryCode() : phone?.country_code?.shortname {
+            guard let index = codes.index(where: { (cc) -> Bool in   cc.shortname == ccc }) else {
+                return
+            }
+            picker.selectRow(index, inComponent: 0, animated: true)
+            self.countryLabel.text = codes[index].name
+            self.codeTextField.text = codes[index].code
+        }
+        self.numberTextField.text = phone?.number
     }
     
     func countryCodesNotFound() {

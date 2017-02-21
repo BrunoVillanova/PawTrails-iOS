@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		440CEE4E1E3B8DC500F58A09 /* RegisterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440CEE4D1E3B8DC500F58A09 /* RegisterPresenter.swift */; };
 		440CEE501E3B8E7900F58A09 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440CEE4F1E3B8E7900F58A09 /* RegisterViewController.swift */; };
-		440CEE521E3B90B900F58A09 /* ViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440CEE511E3B90B900F58A09 /* ViewUtils.swift */; };
 		440CEE541E3B93F300F58A09 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440CEE531E3B93F300F58A09 /* SignInViewController.swift */; };
 		440CEE561E3B945000F58A09 /* SignInPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440CEE551E3B945000F58A09 /* SignInPresenter.swift */; };
 		440CEE581E3B983700F58A09 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440CEE571E3B983700F58A09 /* InitialViewController.swift */; };
@@ -24,6 +23,8 @@
 		441A0D951E55E9D100D02CE4 /* APIManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441A0D941E55E9D100D02CE4 /* APIManagerTests.swift */; };
 		441A0D971E55EEB700D02CE4 /* AuthManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441A0D961E55EEB700D02CE4 /* AuthManagerTests.swift */; };
 		44421A2C1E4CB8E7009755BD /* EditProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44421A2B1E4CB8E7009755BD /* EditProfilePresenter.swift */; };
+		44457A2E1E5AF31400B43748 /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44457A2D1E5AF31400B43748 /* AddressViewController.swift */; };
+		44457A301E5AF32C00B43748 /* AddressPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44457A2F1E5AF32C00B43748 /* AddressPresenter.swift */; };
 		44485F951E51B12800A3C47D /* Snout.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 44485F931E51B12800A3C47D /* Snout.xcdatamodeld */; };
 		44485F971E51B16500A3C47D /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44485F961E51B16500A3C47D /* CoreDataManager.swift */; };
 		44485FBD1E52076C00A3C47D /* countrycodes.csv in Resources */ = {isa = PBXBuildFile; fileRef = 44485FBC1E52076C00A3C47D /* countrycodes.csv */; };
@@ -32,6 +33,11 @@
 		44498DFF1E4DC03100F6D761 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44498DFE1E4DC03100F6D761 /* ChangePasswordViewController.swift */; };
 		44498E011E4DCF4300F6D761 /* PetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44498E001E4DCF4300F6D761 /* PetsViewController.swift */; };
 		44498E031E4DCF8700F6D761 /* PetsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44498E021E4DCF8700F6D761 /* PetsPresenter.swift */; };
+		446548161E5C5CC900458CB7 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446548151E5C5CC900458CB7 /* UserManager.swift */; };
+		446548181E5C5D5600458CB7 /* AddressManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446548171E5C5D5600458CB7 /* AddressManager.swift */; };
+		4465481A1E5C5DA900458CB7 /* PhoneManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446548191E5C5DA900458CB7 /* PhoneManager.swift */; };
+		4465481E1E5C642000458CB7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4465481D1E5C642000458CB7 /* Extensions.swift */; };
+		446548221E5C8E9600458CB7 /* DataManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446548211E5C8E9600458CB7 /* DataManagerTest.swift */; };
 		447905161E5731F100A49AB3 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447905151E5731F100A49AB3 /* Reachability.swift */; };
 		447905181E573A4D00A49AB3 /* EditProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447905171E573A4D00A49AB3 /* EditProfileTableViewController.swift */; };
 		4479051A1E5742FC00A49AB3 /* PhonePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447905191E5742FC00A49AB3 /* PhonePresenter.swift */; };
@@ -92,7 +98,6 @@
 		13DA2528FD76C823E7A873C0 /* Pods_SnoutTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnoutTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		440CEE4D1E3B8DC500F58A09 /* RegisterPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterPresenter.swift; path = Presenter/RegisterPresenter.swift; sourceTree = "<group>"; };
 		440CEE4F1E3B8E7900F58A09 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterViewController.swift; path = View/RegisterViewController.swift; sourceTree = "<group>"; };
-		440CEE511E3B90B900F58A09 /* ViewUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewUtils.swift; path = View/ViewUtils.swift; sourceTree = "<group>"; };
 		440CEE531E3B93F300F58A09 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignInViewController.swift; path = View/SignInViewController.swift; sourceTree = "<group>"; };
 		440CEE551E3B945000F58A09 /* SignInPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignInPresenter.swift; path = Presenter/SignInPresenter.swift; sourceTree = "<group>"; };
 		440CEE571E3B983700F58A09 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InitialViewController.swift; path = View/InitialViewController.swift; sourceTree = "<group>"; };
@@ -113,6 +118,8 @@
 		441A0D941E55E9D100D02CE4 /* APIManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManagerTests.swift; sourceTree = "<group>"; };
 		441A0D961E55EEB700D02CE4 /* AuthManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthManagerTests.swift; sourceTree = "<group>"; };
 		44421A2B1E4CB8E7009755BD /* EditProfilePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditProfilePresenter.swift; path = Presenter/EditProfilePresenter.swift; sourceTree = "<group>"; };
+		44457A2D1E5AF31400B43748 /* AddressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddressViewController.swift; path = View/AddressViewController.swift; sourceTree = "<group>"; };
+		44457A2F1E5AF32C00B43748 /* AddressPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddressPresenter.swift; path = Presenter/AddressPresenter.swift; sourceTree = "<group>"; };
 		44485F941E51B12800A3C47D /* Snout.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Snout.xcdatamodel; sourceTree = "<group>"; };
 		44485F961E51B16500A3C47D /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		44485FBC1E52076C00A3C47D /* countrycodes.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = countrycodes.csv; sourceTree = "<group>"; };
@@ -121,6 +128,11 @@
 		44498DFE1E4DC03100F6D761 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChangePasswordViewController.swift; path = View/ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		44498E001E4DCF4300F6D761 /* PetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetsViewController.swift; path = View/PetsViewController.swift; sourceTree = "<group>"; };
 		44498E021E4DCF8700F6D761 /* PetsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetsPresenter.swift; path = Presenter/PetsPresenter.swift; sourceTree = "<group>"; };
+		446548151E5C5CC900458CB7 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserManager.swift; path = Model/UserManager.swift; sourceTree = "<group>"; };
+		446548171E5C5D5600458CB7 /* AddressManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddressManager.swift; path = Model/AddressManager.swift; sourceTree = "<group>"; };
+		446548191E5C5DA900458CB7 /* PhoneManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhoneManager.swift; path = Model/PhoneManager.swift; sourceTree = "<group>"; };
+		4465481D1E5C642000458CB7 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Model/Extensions.swift; sourceTree = "<group>"; };
+		446548211E5C8E9600458CB7 /* DataManagerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerTest.swift; sourceTree = "<group>"; };
 		447905151E5731F100A49AB3 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		447905171E573A4D00A49AB3 /* EditProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditProfileTableViewController.swift; path = View/EditProfileTableViewController.swift; sourceTree = "<group>"; };
 		447905191E5742FC00A49AB3 /* PhonePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhonePresenter.swift; path = Presenter/PhonePresenter.swift; sourceTree = "<group>"; };
@@ -209,10 +221,10 @@
 				44498E001E4DCF4300F6D761 /* PetsViewController.swift */,
 				447905171E573A4D00A49AB3 /* EditProfileTableViewController.swift */,
 				44498DFE1E4DC03100F6D761 /* ChangePasswordViewController.swift */,
-				440CEE511E3B90B900F58A09 /* ViewUtils.swift */,
 				44F057621E54A728007E9C8F /* Notifier.swift */,
 				4479051B1E5744A800A49AB3 /* PhoneViewController.swift */,
 				4479051D1E575A2100A49AB3 /* BirthdayViewController.swift */,
+				44457A2D1E5AF31400B43748 /* AddressViewController.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -222,12 +234,13 @@
 			children = (
 				447905141E57307E00A49AB3 /* Auth */,
 				44C7F74F1E4CD3DA00171170 /* HomePresenter.swift */,
+				44498E021E4DCF8700F6D761 /* PetsPresenter.swift */,
 				44421A2B1E4CB8E7009755BD /* EditProfilePresenter.swift */,
 				44498DFC1E4DBE6700F6D761 /* ChangePasswordPresenter.swift */,
-				44498E021E4DCF8700F6D761 /* PetsPresenter.swift */,
 				44B179611E4B62690070A18B /* Presenter.swift */,
 				447905151E5731F100A49AB3 /* Reachability.swift */,
 				447905191E5742FC00A49AB3 /* PhonePresenter.swift */,
+				44457A2F1E5AF32C00B43748 /* AddressPresenter.swift */,
 			);
 			name = Presenter;
 			sourceTree = "<group>";
@@ -237,11 +250,10 @@
 			children = (
 				44C7F7521E4CD3F200171170 /* AuthManager.swift */,
 				44FE723C1E4A2EF0007C7E24 /* DataManager.swift */,
-				44C7F7511E4CD3F200171170 /* APIManager.swift */,
-				44485F961E51B16500A3C47D /* CoreDataManager.swift */,
-				44C7F7531E4CD3F200171170 /* SocketIOManager.swift */,
-				447D4C151E44BF69008F82F4 /* SocketIO */,
+				4465481B1E5C624700458CB7 /* Communication */,
 				44485F931E51B12800A3C47D /* Snout.xcdatamodeld */,
+				4465481C1E5C625100458CB7 /* CoreDataModelsManagers */,
+				4465481D1E5C642000458CB7 /* Extensions.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -307,8 +319,30 @@
 				441A0D8E1E55E9B700D02CE4 /* Info.plist */,
 				441A0D941E55E9D100D02CE4 /* APIManagerTests.swift */,
 				441A0D961E55EEB700D02CE4 /* AuthManagerTests.swift */,
+				446548211E5C8E9600458CB7 /* DataManagerTest.swift */,
 			);
 			path = SnoutTests;
+			sourceTree = "<group>";
+		};
+		4465481B1E5C624700458CB7 /* Communication */ = {
+			isa = PBXGroup;
+			children = (
+				44C7F7511E4CD3F200171170 /* APIManager.swift */,
+				44485F961E51B16500A3C47D /* CoreDataManager.swift */,
+				44C7F7531E4CD3F200171170 /* SocketIOManager.swift */,
+				447D4C151E44BF69008F82F4 /* SocketIO */,
+			);
+			name = Communication;
+			sourceTree = "<group>";
+		};
+		4465481C1E5C625100458CB7 /* CoreDataModelsManagers */ = {
+			isa = PBXGroup;
+			children = (
+				446548151E5C5CC900458CB7 /* UserManager.swift */,
+				446548171E5C5D5600458CB7 /* AddressManager.swift */,
+				446548191E5C5DA900458CB7 /* PhoneManager.swift */,
+			);
+			name = CoreDataModelsManagers;
 			sourceTree = "<group>";
 		};
 		447905141E57307E00A49AB3 /* Auth */ = {
@@ -551,7 +585,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				440CEE521E3B90B900F58A09 /* ViewUtils.swift in Sources */,
 				44C7F73D1E4CD3AE00171170 /* SocketEnginePacketType.swift in Sources */,
 				44C7F74C1E4CD3AE00171170 /* SocketTypes.swift in Sources */,
 				44C7F7461E4CD3AE00171170 /* SocketIOClientSpec.swift in Sources */,
@@ -574,14 +607,18 @@
 				44421A2C1E4CB8E7009755BD /* EditProfilePresenter.swift in Sources */,
 				44C7F73F1E4CD3AE00171170 /* SocketEngineSpec.swift in Sources */,
 				44F057631E54A728007E9C8F /* Notifier.swift in Sources */,
+				44457A301E5AF32C00B43748 /* AddressPresenter.swift in Sources */,
 				44C7F7541E4CD3F200171170 /* APIManager.swift in Sources */,
 				44C7F7371E4CD3AE00171170 /* SocketAckEmitter.swift in Sources */,
 				44C7F73A1E4CD3AE00171170 /* SocketClientManager.swift in Sources */,
+				4465481E1E5C642000458CB7 /* Extensions.swift in Sources */,
 				440CEE5A1E3B9AA300F58A09 /* InitialPresenter.swift in Sources */,
+				446548181E5C5D5600458CB7 /* AddressManager.swift in Sources */,
 				441A0D4D1E55AF5200D02CE4 /* SharedPreferences.swift in Sources */,
 				44485F971E51B16500A3C47D /* CoreDataManager.swift in Sources */,
 				44C7F74A1E4CD3AE00171170 /* SocketParsable.swift in Sources */,
 				447905181E573A4D00A49AB3 /* EditProfileTableViewController.swift in Sources */,
+				44457A2E1E5AF31400B43748 /* AddressViewController.swift in Sources */,
 				44C7F7381E4CD3AE00171170 /* SocketAckManager.swift in Sources */,
 				44C7F74B1E4CD3AE00171170 /* SocketStringReader.swift in Sources */,
 				4415FF431E3B822900A81B13 /* AppDelegate.swift in Sources */,
@@ -599,12 +636,14 @@
 				4479051E1E575A2100A49AB3 /* BirthdayViewController.swift in Sources */,
 				44498E031E4DCF8700F6D761 /* PetsPresenter.swift in Sources */,
 				440CEE581E3B983700F58A09 /* InitialViewController.swift in Sources */,
+				4465481A1E5C5DA900458CB7 /* PhoneManager.swift in Sources */,
 				44C7F7411E4CD3AE00171170 /* SocketEventHandler.swift in Sources */,
 				44485F951E51B12800A3C47D /* Snout.xcdatamodeld in Sources */,
 				44C7F7421E4CD3AE00171170 /* SocketExtensions.swift in Sources */,
 				44C7F7551E4CD3F200171170 /* AuthManager.swift in Sources */,
 				44FE723D1E4A2EF0007C7E24 /* DataManager.swift in Sources */,
 				44C7F7471E4CD3AE00171170 /* SocketIOClientStatus.swift in Sources */,
+				446548161E5C5CC900458CB7 /* UserManager.swift in Sources */,
 				44C7F7401E4CD3AE00171170 /* SocketEngineWebsocket.swift in Sources */,
 				44498E011E4DCF4300F6D761 /* PetsViewController.swift in Sources */,
 				44B179661E4B78EF0070A18B /* Messages.swift in Sources */,
@@ -617,6 +656,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				441A0D951E55E9D100D02CE4 /* APIManagerTests.swift in Sources */,
+				446548221E5C8E9600458CB7 /* DataManagerTest.swift in Sources */,
 				441A0D971E55EEB700D02CE4 /* AuthManagerTests.swift in Sources */,
 				441A0D8D1E55E9B700D02CE4 /* SnoutTests.swift in Sources */,
 			);

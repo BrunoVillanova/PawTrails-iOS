@@ -1,12 +1,33 @@
 //
-//  ViewUtils.swift
+//  Extensions.swift
 //  Snout
 //
-//  Created by Marc Perello on 27/01/2017.
+//  Created by Marc Perello on 21/02/2017.
 //  Copyright © 2017 AttitudeTech. All rights reserved.
 //
 
 import UIKit
+
+extension String {
+    
+    public var isValidEmail:Bool {
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}")
+        return emailTest.evaluate(with: self)
+    }
+    
+    
+    public var isValidPassword:Bool {
+        let lower = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyz")
+        let upper = CharacterSet(charactersIn: "ABCDEFGHIJKLKMNOPQRSTUVWXYZ")
+        let numbers = CharacterSet(charactersIn: "0123456789")
+        //        let special = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ0123456789").inverted
+        return self.rangeOfCharacter(from: lower) != nil && self.rangeOfCharacter(from: upper) != nil && self.rangeOfCharacter(from: numbers) != nil && self.characters.count > 7
+    }
+    
+}
+
+
+// MARK:- View
 
 public enum notificationType{
     case red, blue, green
@@ -19,7 +40,7 @@ extension UIViewController {
         alert.addAction(UIAlertAction(title: actionTitle, style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
-
+    
     public var screenWidth: CGFloat {
         return UIScreen.main.bounds.width
     }

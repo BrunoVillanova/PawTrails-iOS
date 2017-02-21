@@ -26,20 +26,7 @@ class PetsPresenter {
     }
     
     func getPetsAndUser(){
-//        APIManager.Instance.performCall(.getpets) { (error, data) in
-//            //
-//        }
-//        let location = Location(latitude: 51.8902636,longitude: -8.4956673)
-//        var pets = [Pet]()
-//        for i in 1...10 {
-//            let pet = try? Pet(["id": i, "name": "name\(i)"])
-////            pet?.location = location
-////            pet?.location?.latitude = (pet?.location?.latitude)! - Double(i)
-////            pet?.location?.longitude = (pet?.location?.longitude)! + Double(i)
-//            pets.append(pet!)
-//        } 
-//        
-//        self.petsView?.loadPets(pets)
+
         DataManager.Instance.getUser { (error, user) in
             if error == nil && user != nil {
                 DispatchQueue.main.async {

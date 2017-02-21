@@ -21,7 +21,14 @@ class PetsViewController: UIViewController, PetsView, UICollectionViewDataSource
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.attachView(self)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         presenter.getPetsAndUser()
+    }
+    
+    deinit {
+        self.presenter.deteachView()
     }
     
     @IBAction func cancelAction(_ sender: UIBarButtonItem) {

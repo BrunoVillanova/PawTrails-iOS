@@ -28,6 +28,10 @@ class HomeViewController: UIViewController, HomeView, CLLocationManagerDelegate 
         centerMapOnLocation(petAnnotation.coordinate)
     }
     
+    deinit {
+        self.presenter.deteachView()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         self.presenter.checkSignInStatus()
 //        self.initLocationManager()

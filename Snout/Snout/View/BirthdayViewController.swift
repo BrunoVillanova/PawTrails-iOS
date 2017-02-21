@@ -13,20 +13,15 @@ class BirthdayViewController: UIViewController {
     @IBOutlet weak var datePicker: UIDatePicker!
     
     var parentEditor: EditProfileTableViewController!
+    var birthday: Date? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if parentEditor.user.date_of_birth != nil {
-            datePicker.setDate(parentEditor.user.date_of_birth!.toDate!, animated: true)
+        if birthday != nil {
+            datePicker.setDate(birthday!, animated: true)
         }
-        // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     override func viewWillDisappear(_ animated: Bool) {
         parentEditor.setBithdate(datePicker.date)
     }

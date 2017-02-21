@@ -34,6 +34,9 @@ class PhonePresenter {
         }
     }
     
+    func getCurrentCountryCode() -> String? {
+        return DataManager.Instance.getCurrentCountryCode()
+    }
     
 }
 

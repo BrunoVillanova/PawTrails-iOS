@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EditProfileTableViewController: UITableViewController, EditProfileView, UIPickerViewDataSource, UIPickerViewDelegate {
+class EditProfileTableViewController: UITableViewController, EditProfileView, UIPickerViewDataSource, UIPickerViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameTextField: UITextField!
@@ -20,8 +20,8 @@ class EditProfileTableViewController: UITableViewController, EditProfileView, UI
     @IBOutlet weak var phoneLabel: UILabel!
     
     fileprivate let presenter = EditProfilePresenter()
-    fileprivate let codes = ["undefined", "male", "female"]
-    var user:User!
+    
+    fileprivate let imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,19 +32,24 @@ class EditProfileTableViewController: UITableViewController, EditProfileView, UI
         picker.dataSource = self
         self.genderTextField.inputView = picker
         profileImageView.round()
+        self.imagePicker.delegate = self
     }
-
+    
+    deinit {
+        self.presenter.deteachView()
+    }
+    
     @IBAction func cancelAction(_ sender: UIBarButtonItem) {
         self.view.endEditing(true)
         self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func doneAction(_ sender: UIBarButtonItem) {
-        self.presenter.save(name: nameTextField.text, surname: surnameTextField.text, email: emailTextField.text, gender: genderLabel.text)
+        self.presenter.save(nameTextField.text, surnameTextField.text, emailTextField.text)
     }
     
     @IBAction func changeImageAction(_ sender: UIButton) {
-        self.alert(title: "Underconstruction", msg: "check later =)")
+        self.present(self.imagePicker, animated: true, completion: nil)
     }
 
     @IBAction func logoutAction(_ sender: UIButton) {
@@ -60,27 +65,36 @@ class EditProfileTableViewController: UITableViewController, EditProfileView, UI
     
     func setBithdate(_ date:Date){
         self.birthdayLabel.text = date.toStringShow
-        self.user.date_of_birth = date.toStringServer
+        self.presenter.setBirthday(date)
     }
     
     func setPhone(_ number:String, cc:CountryCode){
-//        self.user.phone = Phone()
-//        self.user.phone?.number = number
-//        self.user.phone?.country_code = cc
         self.phoneLabel.text = cc.code! + " " + number
+        self.presenter.setPhone(number, cc)
+    }
+    
+    func setAddress(_ data:[String:Any]){
+        self.presenter.setAddress(data)
     }
     
     // MARK: - EditProfileView
 
     func loadData(user: User) {
-        self.user = user
         self.nameTextField.text = user.name ?? ""
         self.surnameTextField.text = user.surname ?? ""
         self.emailTextField.text = user.email ?? ""
-        self.genderLabel.text = user.gender ?? ""
-        self.birthdayLabel.text = user.date_of_birth ?? ""
+        self.genderLabel.text = Gender(code: user.gender ?? "").name()
+        if let date = user.birthday as? Date {
+            self.birthdayLabel.text = date.toStringShow
+        }
         if user.phone != nil {
-            self.phoneLabel.text = user.phone!.country_code!.code! + " " + user.phone!.number!
+            guard let number = user.phone?.number else {
+                return
+            }
+            guard let code = user.phone?.country_code?.code else {
+                return
+            }
+            self.phoneLabel.text = code + " " + number
         }
     }
     
@@ -99,7 +113,8 @@ class EditProfileTableViewController: UITableViewController, EditProfileView, UI
     
     // MARK: - UIPickerViewDelegate
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.genderLabel.text = self.codes[row]
+        self.genderLabel.text = Gender(rawValue: row)?.name()
+        self.presenter.setGender(Gender(rawValue: row)!)
         self.view.endEditing(true)
     }
     
@@ -110,21 +125,41 @@ class EditProfileTableViewController: UITableViewController, EditProfileView, UI
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return codes.count
+        return Gender.count()
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return codes[row]
+        return Gender(rawValue: row)?.name()
     }
     
+    //MARK: - UIImagePickerControllerDelegate
+//    private func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+////        let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+////        myImageView.contentMode = .scaleAspectFit //3
+////        myImageView.image = chosenImage //4
+////        dismiss(animated:true, completion: nil) //5
+//    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        //
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        //
+    }
     
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is PhoneViewController {
             (segue.destination as! PhoneViewController).parentEditor = self
+            (segue.destination as! PhoneViewController).phone = self.presenter.getPhone()
         }else if segue.destination is BirthdayViewController {
             (segue.destination as! BirthdayViewController).parentEditor = self
+            (segue.destination as! BirthdayViewController).birthday = self.presenter.getBirthday()
+        }else if segue.destination is AddressViewController {
+            (segue.destination as! AddressViewController).parentEditor = self
+            (segue.destination as! AddressViewController).address = self.presenter.getAddress()
         }
     }
 

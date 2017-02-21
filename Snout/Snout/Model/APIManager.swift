@@ -58,8 +58,8 @@ class APIManager {
     }
     
     private func setBody(with data:[String:Any]?) -> Data? {
-        print(data)
-        return data != nil ? try? JSONSerialization.data(withJSONObject: data) : nil
+        print(data ?? "no data provided to build the request body")
+        return data != nil ? try? JSONSerialization.data(withJSONObject: data!) : nil
     }
     
     private func createRequest(_ call:call, _ data:[String:Any]?) -> URLRequest? {

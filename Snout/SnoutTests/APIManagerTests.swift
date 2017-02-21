@@ -26,8 +26,8 @@ class APIManagerTests: XCTestCase {
         let data = ["email":ezdebug.email, "password":ezdebug.password]
         APIManager.Instance.performCall(.signin, data) { (error, data) in
             XCTAssert(error == nil, "Found error login \(error) \(data)")
-            print(error)
-            print(data)
+            print(error ?? "missing errir in test signin")
+            print(data ?? "missing data in test signin")
             expect.fulfill()
         }
         waitForExpectations(timeout: 1) { error in

@@ -70,7 +70,7 @@ class CoreDataManager {
         }
         
         //Look for an existing object with id
-        if let object = retrieve(entity: entity, withPredicate: NSPredicate(format: "\(id) == \(data[id]!)"))?.first {
+        if let object = retrieve(entity: entity, withPredicate: NSPredicate(format: "%@ == %@", id, data[id] as! CVarArg))?.first {
             
             for (key,value) in remove(keys: skippedKeys, from: data) {
                 if value is NSNull {

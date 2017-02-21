@@ -1,15 +1,15 @@
 //
-//  SnoutTests.swift
-//  SnoutTests
+//  DataManagerTest.swift
+//  Snout
 //
-//  Created by Marc Perello on 16/02/2017.
+//  Created by Marc Perello on 21/02/2017.
 //  Copyright © 2017 AttitudeTech. All rights reserved.
 //
 
 import XCTest
 @testable import Snout
 
-class SnoutTests: XCTestCase {
+class DataManagerTest: XCTestCase {
     
     override func setUp() {
         super.setUp()
@@ -21,9 +21,16 @@ class SnoutTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testCountryCodes() {
+
+//        for i in CountryCodeManager.getAll()! {
+//            print(i.code! + " " + i.name!)
+//        }
+//    
+//        if let c = CountryCodeManager.get("970") {
+//            print(c.name)
+//        }
+        
     }
     
     func testPerformanceExample() {

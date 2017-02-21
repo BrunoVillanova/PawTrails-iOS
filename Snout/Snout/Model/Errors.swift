@@ -53,6 +53,7 @@ enum UserError: Int {
     case UserNotFound = 11
     case MoreThenOneUser  = 12
     case NoUserFound  = 13
+    case NotAuthenticated = 14
 }
 
 

@@ -14,7 +14,7 @@
         <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="shortname" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="phone" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Phone" inverseName="country_code" inverseEntity="Phone" syncable="YES"/>
+        <relationship name="phone" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Phone" inverseName="country_code" inverseEntity="Phone" syncable="YES"/>
     </entity>
     <entity name="Location" representedClassName="Location" syncable="YES" codeGenerationType="class">
         <attribute name="datetime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -34,7 +34,7 @@
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="phone" inverseEntity="User" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES" codeGenerationType="class">
-        <attribute name="date_of_birth" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="birthday" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="gender" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
