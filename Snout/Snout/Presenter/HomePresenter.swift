@@ -10,7 +10,9 @@ import Foundation
 
 protocol HomeView: NSObjectProtocol, View {
     func userNotSignedIn()
+    func checkLocationAuthorization()
     func plotPoint(latitude:Double, longitude:Double)
+    func reload(_ user: User, _ pets: [Pet])
 }
 
 class HomePresenter {
@@ -30,6 +32,9 @@ class HomePresenter {
     func checkSignInStatus() {
         if !AuthManager.Instance.isAuthenticated() {
             self.view?.userNotSignedIn()
+        }else{
+            getUser()
+            self.view?.checkLocationAuthorization()
         }
     }
     
@@ -40,5 +45,17 @@ class HomePresenter {
             })
         })
     }
+    
+    func getUser(){
+        
+        DataManager.Instance.getUser { (error, user) in
+            if error == nil && user != nil {
+                DispatchQueue.main.async {
+                    self.view?.reload(user!, [Pet]())
+                }
+            }
+        }
+    }
+
 }
 

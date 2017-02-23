@@ -95,10 +95,9 @@ class EditProfilePresenter {
     }
     
     func setPhone(_ number:String, _ cc:CountryCode){
-        self.phone = [
-            "number":number,
-            "country_code":cc.code ?? ""
-        ]
+        self.phone = [String:Any]()
+        self.phone?["number"] = number
+        self.phone?["country_code"] = cc.code ?? ""
     }
     
     func setAddress(_ data:[String:Any]){

@@ -11,14 +11,14 @@ target 'Snout' do
 
   target 'SnoutTests' do
     inherit! :search_paths
-    pod 'FacebookCore'
-    pod 'FacebookLogin'
+    #pod 'FacebookCore'
+    #pod 'FacebookLogin'
     #pod 'FacebookShare'
   end
 
-  target 'SnoutUITests' do
-    inherit! :search_paths
+  #target 'SnoutUITests' do
+ #   inherit! :search_paths
     # Pods for testing
-  end
+ # end
 
 end

@@ -64,8 +64,7 @@ class DataManager {
         return CountryCodeManager.getCurrent()
     }
     
-    
-        
+
         
         
         
@@ -89,36 +88,4 @@ class DataManager {
 }
 
 
-extension String {
-    
-    public var toDate: Date? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        return dateFormatter.date(from: self)
-    }
-    
-}
 
-extension Date {
-    
-    public var toStringShow: String? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy"
-        return dateFormatter.string(from: self)
-    }
-    public var toStringServer: String? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        return dateFormatter.string(from: self)
-    }
-}
-
-extension NSDate {
-    
-    public var toStringShow: String? {
-        return (self as Date).toStringShow
-    }
-    public var toStringServer: String? {
-        return (self as Date).toStringServer
-    }
-}

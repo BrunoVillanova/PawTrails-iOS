@@ -25,14 +25,18 @@ class EditProfileTableViewController: UITableViewController, EditProfileView, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableView.tableFooterView = UIView()
-        self.presenter.attachView(self)
+        profileImageView.round()
+        
+        presenter.attachView(self)
+        
         let picker = UIPickerView()
         picker.delegate = self
         picker.dataSource = self
-        self.genderTextField.inputView = picker
-        profileImageView.round()
-        self.imagePicker.delegate = self
+        genderTextField.inputView = picker
+        
+        imagePicker.delegate = self
     }
     
     deinit {
@@ -49,6 +53,8 @@ class EditProfileTableViewController: UITableViewController, EditProfileView, UI
     }
     
     @IBAction func changeImageAction(_ sender: UIButton) {
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .photoLibrary
         self.present(self.imagePicker, animated: true, completion: nil)
     }
 
@@ -141,11 +147,12 @@ class EditProfileTableViewController: UITableViewController, EditProfileView, UI
 //    }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        //
+//        let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        dismiss(animated: true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        //
+        dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Navigation

@@ -62,15 +62,15 @@ class CoreDataManager {
         return object
     }
     
-    func upsert(entity:String, withData data:[String:Any], withId id:String = "id", skippedKeys: [String] = []) throws -> NSManagedObject {
+    func upsert(entity:String, withData data:[String:Any], withId idKey:String = "id", skippedKeys: [String] = []) throws -> NSManagedObject {
         
         //Check input id
-        guard data[id] != nil else {
-            throw NSError(domain: "CDM upsert entity \(entity) failed reading input data \(id)", code: CoreDataManagerError.IdNotFoundInInput.rawValue, userInfo: ["data":data, "skippedkeys":skippedKeys])
+        guard let id = data[idKey] as? String else {
+            throw NSError(domain: "CDM upsert entity \(entity) failed reading input data \(idKey)", code: CoreDataManagerError.IdNotFoundInInput.rawValue, userInfo: ["data":data, "skippedkeys":skippedKeys])
         }
         
         //Look for an existing object with id
-        if let object = retrieve(entity: entity, withPredicate: NSPredicate(format: "%@ == %@", id, data[id] as! CVarArg))?.first {
+        if let object = retrieve(entity: entity, withPredicate: NSPredicate(format: "\(idKey) == %@", id))?.first {
             
             for (key,value) in remove(keys: skippedKeys, from: data) {
                 if value is NSNull {

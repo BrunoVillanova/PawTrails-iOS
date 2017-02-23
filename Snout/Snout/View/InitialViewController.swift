@@ -17,10 +17,17 @@ class InitialViewController: UIViewController, InitialView {
         presenter.attachView(self)
     }
     
+    @IBAction func FBAction(_ sender: UIButton) {
+    }
+    
     // MARK: - Initial View
     
     func errorMessage(_ error: errorMsg) {
         self.alert(title: error.title, msg: error.msg)
+    }
+    
+    func loggedSocialMedia() {
+        self.dismiss(animated: true, completion: nil)
     }
     
 }

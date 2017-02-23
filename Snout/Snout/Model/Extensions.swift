@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import CoreData
+import CoreLocation
 
 extension String {
     
@@ -26,6 +28,49 @@ extension String {
     
 }
 
+// MARK:- Data Management
+
+extension String {
+    
+    public var toDate: Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.date(from: self)
+    }
+    
+}
+
+extension Date {
+    
+    public var toStringShow: String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        return dateFormatter.string(from: self)
+    }
+    public var toStringServer: String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.string(from: self)
+    }
+}
+
+extension NSDate {
+    
+    public var toStringShow: String? {
+        return (self as Date).toStringShow
+    }
+    public var toStringServer: String? {
+        return (self as Date).toStringServer
+    }
+}
+
+extension CLLocationCoordinate2D {
+    
+    public var location: CLLocation {
+        return CLLocation(latitude: self.latitude, longitude: self.longitude)
+    }
+    
+}
 
 // MARK:- View
 
@@ -63,4 +108,30 @@ extension UIView {
         self.layer.cornerRadius = 5
         self.clipsToBounds = true
     }
+    
+    func circle() {
+        self.layer.cornerRadius = self.frame.height / 2.0
+        self.clipsToBounds = true
+    }
+    
+    func resetCorner() {
+        self.layer.cornerRadius = 0
+        self.clipsToBounds = true
+    }
+    
+    func border(color: UIColor = UIColor.blue, width: CGFloat = 1.0) {
+        self.layer.borderWidth = width
+        self.layer.borderColor = color.cgColor
+        self.layer.masksToBounds = true
+    }
 }
+
+
+
+
+
+
+
+
+
+

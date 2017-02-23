@@ -16,10 +16,10 @@ class UserManager {
     static func upsertUser(_ data: [String:Any]) {
         
         do {
-            if let user = try CoreDataManager.Instance.upsert(entity: "User", withData: data, skippedKeys: ["address", "mobile", "img_url", "date_of_birth"]) as? User {
+            if var user = try CoreDataManager.Instance.upsert(entity: "User", withData: data, skippedKeys: ["address", "mobile", "img_url", "date_of_birth"]) as? User {
                 user.birthday = getBirthdate(data["date_of_birth"])
-                user.setValue(AddressManager.upsertAddress(data["address"]), forKey: "address")
-                user.setValue(PhoneManager.store(data["mobile"]), forKey: "phone")
+                AddressManager.set(data["address"], to: &user)
+                PhoneManager.set(data["mobile"], to: &user)
                 try CoreDataManager.Instance.save()
             }
         } catch {

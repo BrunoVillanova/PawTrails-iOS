@@ -37,15 +37,14 @@ class AddressViewController: UIViewController, AddressView, UIPickerViewDelegate
     
     override func viewWillDisappear(_ animated: Bool) {
         if parentEditor != nil {
-            let data = [
-                "line0": firstLineTextField.text ?? "",
-                "line1": secondLineTextField.text ?? "",
-                "line2": thirdLineTextField.text ?? "",
-                "city": cityTextField.text ?? "",
-                "postal_code": postalCodeTextField.text ?? "",
-                "state": stateTextField.text ?? "",
-                "country": selectedCC?.shortname ?? ""
-            ]
+            var data = [String:Any]()
+            data["line0"] = firstLineTextField.text ?? ""
+            data["line1"] = secondLineTextField.text ?? ""
+            data["line2"] = thirdLineTextField.text ?? ""
+            data["city"] = cityTextField.text ?? ""
+            data["postal_code"] = postalCodeTextField.text ?? ""
+            data["state"] = stateTextField.text ?? ""
+            data["country"] = selectedCC?.shortname ?? ""
             self.parentEditor.setAddress(data)
         }
     }
@@ -66,7 +65,12 @@ class AddressViewController: UIViewController, AddressView, UIPickerViewDelegate
             postalCodeTextField.text = address?.postal_code
             stateTextField.text = address?.state
             countryTextField.text = address?.country
-//            if let index = self.codes.in
+            if address?.country != nil && address?.country != ""{
+                if let index = self.codes.index(where: { $0.shortname == address?.country }) {
+                    picker.selectRow(index, inComponent: 0, animated: true)
+                    self.countryTextField.text = codes[index].name! + ", " + codes[index].shortname!
+                }
+            }
         }
 
     }
@@ -83,6 +87,7 @@ class AddressViewController: UIViewController, AddressView, UIPickerViewDelegate
     // MARK: - UIPickerViewDelegate
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.countryTextField.text = codes[row].name! + ", " + codes[row].shortname!
+        self.selectedCC = codes[row]
     }
     
     // MARK: - UIPickerViewDataSource

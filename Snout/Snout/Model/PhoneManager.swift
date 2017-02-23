@@ -11,7 +11,17 @@ import Foundation
 class PhoneManager {
     
    
-    static func store(_ data:Any?) -> Phone? {
+    
+    static func set(_ data:Any?, to user: inout User){
+        
+        if user.phone == nil {
+            user.setValue(store(data), forKey: "phone")
+        }else{
+            update(&user.phone!, with: data)
+        }
+    }
+    
+    fileprivate static func store(_ data:Any?) -> Phone? {
         if let phoneData = data as? [String:Any] {
             if let phone = try? CoreDataManager.Instance.store(entity: "Phone", withData: phoneData, skippedKeys: ["country_code"]) as? Phone {
                 phone?.setValue(CountryCodeManager.get(phoneData["country_code"]), forKey: "country_code")
@@ -21,6 +31,23 @@ class PhoneManager {
         }
         return nil
     }
+    
+    fileprivate static func update(_ phone: inout Phone, with data: Any?) {
+        if let phoneData = data as? [String:Any] {
+            guard let number = phoneData["number"] as? String else {
+                return
+            }
+            guard let ccCode = phoneData["country_code"] as? String else {
+                return
+            }
+            guard let cc = CountryCodeManager.get(ccCode) else {
+                return
+            }
+            phone.number = number
+            phone.country_code = cc
+        }
+    }
+
     
 }
 

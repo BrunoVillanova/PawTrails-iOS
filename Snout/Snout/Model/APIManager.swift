@@ -46,10 +46,10 @@ class APIManager {
     static let Instance = APIManager()
     
     private func setHeaders(_ call:call) -> [String:String] {
-        var headers = [
-            "content-type": "application/json",
-            "cache-control": "no-cache"
-        ]
+        var headers = [String:String]()
+        headers["content-type"] = "application/json"
+        headers["cache-control"] = "no-cache"
+
         if call.requiresToken {
             headers["token"] = SharedPreferences.get(.token)
             headers["appid"] = SharedPreferences.get(.appId)
