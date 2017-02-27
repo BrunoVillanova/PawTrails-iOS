@@ -18,6 +18,7 @@ class EditProfileTableViewController: UITableViewController, EditProfileView, UI
     @IBOutlet weak var genderTextField: UITextField!
     @IBOutlet weak var birthdayLabel: UILabel!
     @IBOutlet weak var phoneLabel: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
     
     fileprivate let presenter = EditProfilePresenter()
     
@@ -70,17 +71,18 @@ class EditProfileTableViewController: UITableViewController, EditProfileView, UI
     }
     
     func setBithdate(_ date:Date){
-        self.birthdayLabel.text = date.toStringShow
         self.presenter.setBirthday(date)
+        self.birthdayLabel.text = date.toStringShow
     }
     
     func setPhone(_ number:String, cc:CountryCode){
-        self.phoneLabel.text = cc.code! + " " + number
         self.presenter.setPhone(number, cc)
+        self.phoneLabel.text = self.presenter.phoneDescription
     }
     
-    func setAddress(_ data:[String:Any]){
+    func setAddress(_ data:[String:String]){
         self.presenter.setAddress(data)
+        self.addressLabel.text = self.presenter.addressDescription
     }
     
     // MARK: - EditProfileView
@@ -93,15 +95,8 @@ class EditProfileTableViewController: UITableViewController, EditProfileView, UI
         if let date = user.birthday as? Date {
             self.birthdayLabel.text = date.toStringShow
         }
-        if user.phone != nil {
-            guard let number = user.phone?.number else {
-                return
-            }
-            guard let code = user.phone?.country_code?.code else {
-                return
-            }
-            self.phoneLabel.text = code + " " + number
-        }
+        self.phoneLabel.text = self.presenter.phoneDescription
+        self.addressLabel.text = self.presenter.addressDescription
     }
     
     func emailFormat() {

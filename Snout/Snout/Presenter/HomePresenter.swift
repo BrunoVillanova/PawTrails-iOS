@@ -21,8 +21,6 @@ class HomePresenter {
     
     func attachView(_ view: HomeView){
         self.view = view
-        SocketIOManager.Instance.startListeningUpdates()
-        getPoints()
     }
     
     func deteachView() {
@@ -38,13 +36,13 @@ class HomePresenter {
         }
     }
     
-    func getPoints(){
-        SocketIOManager.Instance.getPoints({ (point) in
-            DispatchQueue.main.async(execute: { () -> Void in
-                self.view?.plotPoint(latitude: point.latitude, longitude: point.longitude)
-            })
-        })
-    }
+//    func getPoints(){
+//        SocketIOManager.Instance.getPoints({ (point) in
+//            DispatchQueue.main.async(execute: { () -> Void in
+//                self.view?.plotPoint(latitude: point.latitude, longitude: point.longitude)
+//            })
+//        })
+//    }
     
     func getUser(){
         

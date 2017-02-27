@@ -50,9 +50,12 @@ class EditProfilePresenter {
     
     weak fileprivate var view: EditProfileView?
     
-    fileprivate var address:[String:Any]? = nil
+    fileprivate var address:[String:String]? = nil
     fileprivate var phone:[String:Any]? = nil
     fileprivate var user:User!
+    
+    var phoneDescription:String?
+    var addressDescription:String?
     
     func attachView(_ view: EditProfileView){
         self.view = view
@@ -69,10 +72,20 @@ class EditProfilePresenter {
                 self.view?.errorMessage(errorMsg("","\(error)"))
             }else if user != nil {
                 self.user = user
-                self.view?.loadData(user: user!)
+                if user?.phone != nil && user?.phone?.number != nil && user?.phone?.country_code != nil && user?.phone?.country_code?.code != nil {
+                    self.setPhone(user!.phone!.number!, user!.phone!.country_code!)
+                }
+                if user?.address != nil {
+                    self.address = user?.address?.toStringDict
+                    self.updateAddressDecripton()
+                }
+                DispatchQueue.main.async {
+                    self.view?.loadData(user: user!)
+                }
             }
         }
     }
+    
     
     func setGender(_ g:Gender){
         user.gender = g.code()
@@ -98,10 +111,25 @@ class EditProfilePresenter {
         self.phone = [String:Any]()
         self.phone?["number"] = number
         self.phone?["country_code"] = cc.code ?? ""
+        self.phoneDescription = cc.code! + " " + number
     }
     
-    func setAddress(_ data:[String:Any]){
+    func setAddress(_ data:[String:String]){
         self.address = data
+        updateAddressDecripton()
+    }
+    
+    private func updateAddressDecripton(){
+        if self.address == nil { return }
+        var desc = [String]()
+        if self.address?["line0"] != nil && self.address?["line0"] != "" { desc.append(self.address!["line0"]!)}
+        if self.address?["line1"] != nil && self.address?["line1"] != "" { desc.append(self.address!["line1"]!)}
+        if self.address?["line2"] != nil && self.address?["line2"] != "" { desc.append(self.address!["line2"]!)}
+        if self.address?["city"] != nil && self.address?["city"] != "" { desc.append(self.address!["city"]!)}
+        if self.address?["postal_code"] != nil && self.address?["postal_code"] != "" { desc.append(self.address!["postal_code"]!)}
+        if self.address?["state"] != nil && self.address?["state"] != "" { desc.append(self.address!["state"]!)}
+        if self.address?["country"] != nil && self.address?["country"] != "" { desc.append(self.address!["country"]!)}
+        self.addressDescription = desc.joined(separator: ", ")
     }
     
     func save(_ name:String?,_ surname:String?,_ email:String?) {
@@ -117,9 +145,6 @@ class EditProfilePresenter {
 
         }
     }
-
-
-
 
 
 

@@ -26,7 +26,7 @@ class SocketIOManager: NSObject {
         case receivedPoint = "receivedPoint"
     }
    
-    private var socket: SocketIOClient = SocketIOClient(socketURL: URL(string: "http://192.168.1.4:3000")!)
+    private var socket: SocketIOClient = SocketIOClient(socketURL: URL(string: "http://192.168.1.7:3000")!)
     
     override init() {
         super.init()
@@ -42,28 +42,36 @@ class SocketIOManager: NSObject {
         socket.disconnect()
     }
     
-    func startListeningUpdates() {
-        socket.on("points") { (dataArray, socketAck) -> Void in
-            print(dataArray)
-            NotificationCenter.default.post(name: Notification.Name(rawValue: Notifications.receivedPoint.rawValue), object: dataArray[0] as! [String: Any])
-        }
-    }
-    
-    func getPoints(_ completionHandler: @escaping (_ pointInfo: (latitude:Double, longitude:Double)) -> Void) {
-        socket.on("newPoint") { (dataArray, socketAck) -> Void in
-            let lat = dataArray[0] as! Double
-            let long = dataArray[1] as! Double
-            completionHandler((lat,long))
-        }
-    }
-    
-    func sendTry(){
+    func launch(name:String, frequency: Int = 5000) {
         if socket.status == SocketIOClientStatus.connected {
-            socket.emit("try", "Hello!")
+            socket.emit(name, frequency)
         }else{
-            print(socket.status)
+            print(socket.status.rawValue)
         }
     }
+    
+    func listen(name:String, _ completionHandler: @escaping (_ latitude:Double, _ longitude:Double) -> Void) {
+        socket.on(name) { (dataArray, socketAck) -> Void in
+            guard let lat = dataArray[0] as? Double else {
+                print(dataArray[0])
+                completionHandler(0,0)
+                return
+            }
+            guard let long = dataArray[1] as? Double else {
+                print(dataArray[0])
+                completionHandler(0,0)
+                return
+            }
+            completionHandler(lat,long)
+        }
+    }
+    
+//    func startListeningUpdates() {
+//        socket.on("points") { (dataArray, socketAck) -> Void in
+//            print(dataArray)
+//            NotificationCenter.default.post(name: Notification.Name(rawValue: Notifications.receivedPoint.rawValue), object: dataArray[0] as! [String: Any])
+//        }
+//    }
 
 }
 

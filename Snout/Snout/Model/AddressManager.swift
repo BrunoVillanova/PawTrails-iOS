@@ -30,8 +30,8 @@ class AddressManager {
     
     fileprivate static func update(_ address: inout Address, with data: Any?) {
         if let addressData = data as? [String:Any] {
-            for (k,v) in addressData {
-                address.setValue(v, forKey: k)
+            for k in address.entity.attributesByName.keys {
+                address.setValue(addressData[k], forKey: k)
             }
         }
     }

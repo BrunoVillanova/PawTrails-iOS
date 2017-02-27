@@ -18,12 +18,31 @@ class DataManager {
         UserManager.upsertUser(data)
     }
    
-    func getUser(callback:userCallback) {
+    func getUser(callback:@escaping userCallback) {
         
         if AuthManager.Instance.isAuthenticated() {
-            UserManager.getUser(callback)
+            loadUser(callback: callback)
         }else{
             callback(UserError.NotAuthenticated.rawValue, nil)
+        }
+    }
+    
+    private func loadUser(callback:@escaping userCallback) {
+        
+        APIManager.Instance.performCall(.getuser) { (error, data) in
+            if error == nil && data != nil {
+                guard let userData = data!["user"] as? [String:Any] else {
+                    callback(-1, nil)
+                    return
+                }
+                UserManager.upsertUser(userData)
+                UserManager.getUser(callback)
+            }else{
+                print(error ?? "")
+                print(data ?? "")
+//                callback(error?.specificCode, nil)
+                UserManager.getUser(callback)
+            }
         }
     }
     
@@ -35,8 +54,8 @@ class DataManager {
                     callback(-1, nil)
                     return
                 }
-                self.setUser(userData)
-                self.getUser(callback: callback)
+                UserManager.upsertUser(userData)
+                UserManager.getUser(callback)
             }else{
                 print(error ?? "")
                 print(data ?? "")

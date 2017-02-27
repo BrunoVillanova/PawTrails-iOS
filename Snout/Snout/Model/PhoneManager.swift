@@ -17,7 +17,11 @@ class PhoneManager {
         if user.phone == nil {
             user.setValue(store(data), forKey: "phone")
         }else{
-            update(&user.phone!, with: data)
+            if data != nil {
+                update(&user.phone!, with: data!)
+            }else{
+                user.setValue(nil, forKey: "phone")
+            }
         }
     }
     
@@ -32,7 +36,7 @@ class PhoneManager {
         return nil
     }
     
-    fileprivate static func update(_ phone: inout Phone, with data: Any?) {
+    fileprivate static func update(_ phone: inout Phone, with data: Any) {
         if let phoneData = data as? [String:Any] {
             guard let number = phoneData["number"] as? String else {
                 return
@@ -47,8 +51,6 @@ class PhoneManager {
             phone.country_code = cc
         }
     }
-
-    
 }
 
 class CountryCodeManager {

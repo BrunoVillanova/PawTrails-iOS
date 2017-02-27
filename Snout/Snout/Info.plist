@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Enjoy</string>
+	<string>Locate user on the screen</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
@@ -81,5 +81,9 @@
 		<string>fbauth2</string>
 		<string>fbshareextension</string>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>User and pet profile photos.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Scan QR Code</string>
 </dict>
 </plist>

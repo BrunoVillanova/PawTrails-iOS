@@ -37,6 +37,11 @@ class PhoneViewController: UIViewController, PhoneView, UIPickerViewDataSource, 
         }
     }
     
+    @IBAction func removeAction(_ sender: UIButton) {
+        parentEditor.setPhone("", cc: selectedCC)
+        self.view.endEditing(true)
+        self.navigationController?.dismiss(animated: true, completion: nil)
+    }
     // MARK: - PhoneView
     
     func loadCountryCodes(_ codes: [CountryCode]) {
@@ -52,6 +57,7 @@ class PhoneViewController: UIViewController, PhoneView, UIPickerViewDataSource, 
             picker.selectRow(index, inComponent: 0, animated: true)
             self.countryLabel.text = codes[index].name
             self.codeTextField.text = codes[index].code
+            self.selectedCC = codes[index]
         }
         self.numberTextField.text = phone?.number
     }

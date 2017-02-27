@@ -37,14 +37,14 @@ class AddressViewController: UIViewController, AddressView, UIPickerViewDelegate
     
     override func viewWillDisappear(_ animated: Bool) {
         if parentEditor != nil {
-            var data = [String:Any]()
+            var data = [String:String]()           
             data["line0"] = firstLineTextField.text ?? ""
             data["line1"] = secondLineTextField.text ?? ""
             data["line2"] = thirdLineTextField.text ?? ""
             data["city"] = cityTextField.text ?? ""
             data["postal_code"] = postalCodeTextField.text ?? ""
             data["state"] = stateTextField.text ?? ""
-            data["country"] = selectedCC?.shortname ?? ""
+            data["country"] = (selectedCC?.shortname != nil && self.countryTextField.text != nil && countryTextField.text != "") ? selectedCC?.shortname : ""
             self.parentEditor.setAddress(data)
         }
     }
@@ -69,7 +69,10 @@ class AddressViewController: UIViewController, AddressView, UIPickerViewDelegate
                 if let index = self.codes.index(where: { $0.shortname == address?.country }) {
                     picker.selectRow(index, inComponent: 0, animated: true)
                     self.countryTextField.text = codes[index].name! + ", " + codes[index].shortname!
+                    self.selectedCC = codes[index]
                 }
+            }else{
+                NSLog("%@", address ?? "address is null")
             }
         }
 

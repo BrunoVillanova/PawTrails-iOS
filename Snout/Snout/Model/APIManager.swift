@@ -26,18 +26,19 @@ class APIManager {
             }
         }
         
-        fileprivate var url: String {
+        fileprivate func url(_ id:String) -> String {
             switch self {
             case .register: return "/users/register"
             case .signin: return "/users/login"
             case .passwordChange: return "/users/changepsw"
             case .setuser: return "/users/edit"
+            case .getuser: return "/users/\(id)"
             default: return ""
             }
         }
         
         fileprivate var httpMethod: String {
-            return "POST"
+            return self == .getuser ? "GET" : "POST"
         }
     }
     
@@ -64,8 +65,8 @@ class APIManager {
     
     private func createRequest(_ call:call, _ data:[String:Any]?) -> URLRequest? {
         
-        
-        let url = APIManager.mainURL + call.url
+        let id = SharedPreferences.get(.id) ?? ""
+        let url = APIManager.mainURL + call.url(id)
         var request = URLRequest(url: URL(string: url)!)
         
         request.httpMethod = call.httpMethod
@@ -74,7 +75,7 @@ class APIManager {
         
         request.allHTTPHeaderFields = setHeaders(call)
         print(request.allHTTPHeaderFields ?? "")
-        request.httpBody = setBody(with: data!)
+        request.httpBody = setBody(with: data)
         return request
     }
     
@@ -115,6 +116,7 @@ class APIManager {
             do {
                 let out = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as? [String:Any] 
                 print(out ?? "couldn't parse json!")
+                print(String(data: data!, encoding: String.Encoding.utf8) ?? "not convertible to string either")
                 return out
 //                return try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as? [String:Any]
             } catch {

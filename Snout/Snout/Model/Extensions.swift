@@ -72,6 +72,24 @@ extension CLLocationCoordinate2D {
     
 }
 
+extension NSManagedObject {
+    
+    public var toStringDict: [String:String] {
+        var out = [String:String]()
+        for k in self.entity.attributesByName.keys {
+            if let value = self.value(forKey: k) as? String {
+                out[k] = value
+            }
+        }
+        return out
+    }
+    
+}
+
+public var blueSystem : UIColor {
+    return  UIColor(red: 0, green: 0.478431, blue: 1, alpha: 1)
+}
+
 // MARK:- View
 
 public enum notificationType{
@@ -104,8 +122,8 @@ extension UIView {
         layer.add(animation, forKey: "shake")
     }
     
-    func round() {
-        self.layer.cornerRadius = 5
+    func round(radius:CGFloat = 5) {
+        self.layer.cornerRadius = radius
         self.clipsToBounds = true
     }
     

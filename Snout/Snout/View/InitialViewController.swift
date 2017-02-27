@@ -18,6 +18,7 @@ class InitialViewController: UIViewController, InitialView {
     }
     
     @IBAction func FBAction(_ sender: UIButton) {
+        self.presenter.loginFB(vc: self)
     }
     
     // MARK: - Initial View
