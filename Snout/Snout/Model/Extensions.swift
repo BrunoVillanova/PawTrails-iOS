@@ -9,6 +9,9 @@
 import UIKit
 import CoreData
 import CoreLocation
+import MapKit
+
+// MARK:- Data Management
 
 extension String {
     
@@ -25,12 +28,6 @@ extension String {
         //        let special = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ0123456789").inverted
         return self.rangeOfCharacter(from: lower) != nil && self.rangeOfCharacter(from: upper) != nil && self.rangeOfCharacter(from: numbers) != nil && self.characters.count > 7
     }
-    
-}
-
-// MARK:- Data Management
-
-extension String {
     
     public var toDate: Date? {
         let dateFormatter = DateFormatter()
@@ -84,11 +81,42 @@ extension NSManagedObject {
         return out
     }
     
+    public var keys: [String] {
+        return Array(self.entity.attributesByName.keys)
+    }
+    
 }
 
 public var blueSystem : UIColor {
     return  UIColor(red: 0, green: 0.478431, blue: 1, alpha: 1)
 }
+
+// MARK:- MapView
+
+extension MKMapView {
+    
+    func setVisibleMapForAnnotations() {
+
+        if self.annotations.count == 1 {
+            self.centerOnMap(self.annotations.first!.coordinate)
+        }else{
+            var zoomRect = MKMapRectNull
+            for i in self.annotations {
+                let point = MKMapPointForCoordinate(i.coordinate)
+                zoomRect = MKMapRectUnion(zoomRect, MKMapRectMake(point.x, point.y, 20, 20))
+            }
+            self.setVisibleMapRect(zoomRect, edgePadding: UIEdgeInsetsMake(UIScreen.main.bounds.height/10, UIScreen.main.bounds.width/10, UIScreen.main.bounds.height/5, UIScreen.main.bounds.width/10), animated: true)
+        }
+        
+    }
+    
+    func centerOnMap(_ location: CLLocationCoordinate2D, with regionRadius: CLLocationDistance = 100.0){
+            let coordinateRegion = MKCoordinateRegionMakeWithDistance(location, regionRadius * 2.0,regionRadius * 2.0)
+            self.setRegion(coordinateRegion, animated: true)
+    }
+}
+
+
 
 // MARK:- View
 
@@ -103,13 +131,15 @@ extension UIViewController {
         alert.addAction(UIAlertAction(title: actionTitle, style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
+}
+
+extension UIColor {
     
-    public var screenWidth: CGFloat {
-        return UIScreen.main.bounds.width
-    }
-    
-    public var screenHeight: CGFloat {
-        return UIScreen.main.bounds.height
+    public static func random() -> UIColor {
+        let r = CGFloat(arc4random() % 255)
+        let g = CGFloat(arc4random() % 255)
+        let b = CGFloat(arc4random() % 255)
+        return UIColor(red: r/255.0, green: g/255.0, blue: b/255.0, alpha: 1.0)
     }
 }
 

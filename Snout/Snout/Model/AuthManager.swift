@@ -17,7 +17,7 @@ class AuthManager {
 
 
     func isAuthenticated() -> Bool {
-       return SharedPreferences.has(.id) && SharedPreferences.has(.token) && SharedPreferences.has(.appId)
+       return SharedPreferences.has(.id) && SharedPreferences.has(.token)
     }
     
     func register(_ email:String, _ password: String, completition: @escaping errorCallback) {
@@ -58,10 +58,6 @@ class AuthManager {
             completition(Message.Instance.authError(type: .EmptyUserTokenResponse))
             return
         }
-        guard let appId = data!["appid"] as? String else {
-            completition(Message.Instance.authError(type: .EmptyUserTokenResponse))
-            return
-        }
         guard let userData = data!["user"] as? [String:Any] else {
             completition(Message.Instance.authError(type: .EmptyUserResponse))
             return
@@ -71,7 +67,6 @@ class AuthManager {
             return
         }
         SharedPreferences.set(.token, with: token)
-        SharedPreferences.set(.appId, with: appId)
         SharedPreferences.set(.id, with: userId)
         DataManager.Instance.setUser(userData)
         completition(nil)

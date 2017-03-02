@@ -22,11 +22,20 @@ class SocketIOManager: NSObject {
     
     static let Instance = SocketIOManager()
     
-    enum Notifications: String {
-        case receivedPoint = "receivedPoint"
-    }
+//    enum Notifications: String {
+//        case receivedPoint = "receivedPoint"
+//    }
    
-    private var socket: SocketIOClient = SocketIOClient(socketURL: URL(string: "http://192.168.1.7:3000")!)
+    private var socket: SocketIOClient = SocketIOClient(socketURL: URL(string: "http://192.168.1.10:3000")!)
+//    private var socket: SocketIOClient = SocketIOClient(socketURL: URL(string: "http://localhost:3000")!)
+    
+//    private var socket: SocketIOClient {
+//        if #available(iOS 10.0, *) {
+//            return SocketIOClient(socketURL: URL(string: "http://192.168.1.7:3000")!)
+//        } else {
+//            return SocketIOClient(socketURL: URL(string: "http://localhost:3000")!)
+//        }
+//    }
     
     override init() {
         super.init()
@@ -42,16 +51,35 @@ class SocketIOManager: NSObject {
         socket.disconnect()
     }
     
-    func launch(name:String, frequency: Int = 5000) {
+    func connectionStatus() -> String {
+        switch socket.status {
+        case .notConnected: return "not connected"
+        case .disconnected: return "disconnected"
+        case .connecting: return "connecting"
+        case .connected: return "connected"
+        }
+    }
+    
+    func launch(name:String, frequency: Int = 1000) -> Bool {
         if socket.status == SocketIOClientStatus.connected {
-            socket.emit(name, frequency)
+            socket.emit("launch", self.masc(name), frequency)
+        }else{
+            print(connectionStatus())
+        }
+        return socket.status == SocketIOClientStatus.connected
+    }
+    
+    func stop(name:String){
+        if socket.status == SocketIOClientStatus.connected {
+            
+            socket.emit("stop", self.masc(name))
         }else{
             print(socket.status.rawValue)
         }
     }
     
     func listen(name:String, _ completionHandler: @escaping (_ latitude:Double, _ longitude:Double) -> Void) {
-        socket.on(name) { (dataArray, socketAck) -> Void in
+        socket.on(self.masc(name)) { (dataArray, socketAck) -> Void in
             guard let lat = dataArray[0] as? Double else {
                 print(dataArray[0])
                 completionHandler(0,0)
@@ -64,6 +92,13 @@ class SocketIOManager: NSObject {
             }
             completionHandler(lat,long)
         }
+    }
+    
+    private func masc(_ name:String) -> String {
+        if let id = UIDevice.current.identifierForVendor?.description {
+            return name + id
+        }
+        return name
     }
     
 //    func startListeningUpdates() {

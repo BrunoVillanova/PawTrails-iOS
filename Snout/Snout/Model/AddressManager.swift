@@ -15,7 +15,11 @@ class AddressManager {
         if user.address == nil {
             user.setValue(store(data), forKey: "address")
         }else{
-            update(&user.address!, with: data)
+            if data != nil {
+                update(&user.address!, with: data)
+            }else{
+                user.setValue(nil, forKey: "address")
+            }
         }
     }
     
@@ -30,7 +34,7 @@ class AddressManager {
     
     fileprivate static func update(_ address: inout Address, with data: Any?) {
         if let addressData = data as? [String:Any] {
-            for k in address.entity.attributesByName.keys {
+            for k in address.keys {
                 address.setValue(addressData[k], forKey: k)
             }
         }

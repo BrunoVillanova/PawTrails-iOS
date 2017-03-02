@@ -17,22 +17,22 @@ class APIManager {
      Contains the constants used to specify the interaction with the `APIManager`.
      */
     enum call {
-        case register, signin, signinsocial, signout, passwordReset, passwordChange, getuser, setuser , getpets
+        case register, signin, signinsocial, passwordReset, passwordChange, getuser, setuser , getpets
         
-        var requiresToken: Bool {
+        fileprivate var requiresToken: Bool {
             switch self {
             case .register, .signin, .signinsocial: return false
             default: return true
             }
         }
         
-        fileprivate func url(_ id:String) -> String {
+        fileprivate func url() -> String {
             switch self {
             case .register: return "/users/register"
             case .signin: return "/users/login"
             case .passwordChange: return "/users/changepsw"
             case .setuser: return "/users/edit"
-            case .getuser: return "/users/\(id)"
+            case .getuser: return "/users/\(SharedPreferences.get(.id) ?? "")"
             default: return ""
             }
         }
@@ -42,40 +42,21 @@ class APIManager {
         }
     }
     
-    private static let mainURL = "http://app.liberati.name/api"
+    fileprivate static let mainURL = "http://eu.pawtrails.pet/api"
     
     static let Instance = APIManager()
     
-    private func setHeaders(_ call:call) -> [String:String] {
-        var headers = [String:String]()
-        headers["content-type"] = "application/json"
-        headers["cache-control"] = "no-cache"
-
-        if call.requiresToken {
-            headers["token"] = SharedPreferences.get(.token)
-            headers["appid"] = SharedPreferences.get(.appId)
-        }
-        return headers
-    }
-    
-    private func setBody(with data:[String:Any]?) -> Data? {
-        print(data ?? "no data provided to build the request body")
-        return data != nil ? try? JSONSerialization.data(withJSONObject: data!) : nil
-    }
     
     private func createRequest(_ call:call, _ data:[String:Any]?) -> URLRequest? {
         
-        let id = SharedPreferences.get(.id) ?? ""
-        let url = APIManager.mainURL + call.url(id)
-        var request = URLRequest(url: URL(string: url)!)
+        var request = URLRequest(url: getURL(call))
         
         request.httpMethod = call.httpMethod
         request.cachePolicy = .useProtocolCachePolicy
         request.timeoutInterval = 10.0
         
         request.allHTTPHeaderFields = setHeaders(call)
-        print(request.allHTTPHeaderFields ?? "")
-        request.httpBody = setBody(with: data)
+        request.httpBody = setBody(of: call, with: data)
         return request
     }
     
@@ -92,7 +73,7 @@ class APIManager {
     func performCall(_ call:call, _ data:[String:Any]? = nil, completition: @escaping (_ error:APIManagerError?, _ data:[String:Any]?) -> Void) {
         
         if let request = createRequest(call, data) {
-            print(request)
+
             URLSession.shared.dataTask(with: request) { data, response, error in
                 
                 
@@ -147,6 +128,34 @@ class APIManager {
         }
         return APIManagerError(call: call, httpCode: code, specificCode: -1, kind: .handleError)
     }
+    
+    //MARK:- Request Helpers
+    
+    private func getURL(_ call:call) -> URL {
+        guard let url = URL(string: APIManager.mainURL + call.url()) else{
+            fatalError("Couldn't build URL \(call) \(APIManager.mainURL)")
+        }
+        print(url)
+        return url
+    }
+    
+    private func setHeaders(_ call:call) -> [String:String] {
+        var headers = [String:String]()
+        headers["content-type"] = "application/json"
+        headers["cache-control"] = "no-cache"
+        
+        if call.requiresToken {
+            headers["token"] = SharedPreferences.get(.token)
+        }
+        print(headers)
+        return headers
+    }
+    
+    private func setBody(of call:call, with data:[String:Any]?) -> Data? {
+        print(data ?? "No data provided to build the request body")
+        return data != nil ? try? JSONSerialization.data(withJSONObject: data!) : nil
+    }
+    
 }
 
 fileprivate extension Int {
@@ -158,8 +167,8 @@ fileprivate extension Int {
     var isClientError: Bool {
         return 400...499 ~= self
     }
-    
 }
+
 
 
 

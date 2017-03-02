@@ -10,10 +10,24 @@ import UIKit
 
 class PetProfileViewController: UIViewController {
 
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var firstLabel: UILabel!
+    @IBOutlet weak var secondLabel: UILabel!
+    @IBOutlet weak var thirdLabel: UILabel!
     @IBOutlet weak var blurView: UIVisualEffectView!
+    
+    var pet:_pet?
+    
     override func viewDidLoad() {
-        self.blurView.round(radius: 20)
         super.viewDidLoad()
+        self.blurView.round(radius: 20)
+        self.imageView.round()
+        if pet != nil {
+            self.firstLabel.text = pet?.name
+            self.secondLabel.text = pet!.tracking ? "Tracking ON" : "Tracking OFF"
+//            self.imageView.backgroundColor = pet?.color
+//            self.thirdLabel.text = "Last Position:\n\(pet!.location?.coordinate.latitude) / \(pet!.location?.coordinate.longitude)"
+        }
     }
     
     @IBAction func cancelAction(_ sender: UIButton) {

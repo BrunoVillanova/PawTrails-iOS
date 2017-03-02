@@ -28,6 +28,10 @@ class CoreDataManager {
         }
     }
     
+    private func remove(keys:[String], from data: [String]) -> [String]{
+        return data.filter({ (k) -> Bool in !keys.contains(k)})
+    }
+    
     func retrieve(entity:String, withPredicate predicate: NSPredicate? = nil) -> [NSManagedObject]? {
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
@@ -72,12 +76,8 @@ class CoreDataManager {
         //Look for an existing object with id
         if let object = retrieve(entity: entity, withPredicate: NSPredicate(format: "\(idKey) == %@", id))?.first {
             
-            for (key,value) in remove(keys: skippedKeys, from: data) {
-                if value is NSNull {
-                    //
-                }else{
-                    object.setValue(value, forKey: key)
-                }
+            for key in remove(keys: skippedKeys, from: object.keys) {
+                object.setValue(data[key], forKey: key)
             }
             
             if Storage.Instance.save() != Storage.SaveStatus.saved {

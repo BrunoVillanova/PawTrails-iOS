@@ -59,16 +59,14 @@ class UserManager {
         add(user.surname, withKey: "surname", to: &data)
         add(user.email, withKey: "email", to: &data)
         add(user.gender, withKey: "gender", to: &data)
-        add(user.birthday?.toStringServer, withKey: "date_of_birth", to: &data)
+        data["date_of_birth"] = user.birthday == nil ? "" : user.birthday!.toStringServer
         add(address, withKey: "address", to: &data)
         add(phone, withKey: "mobile", to: &data)
         return data
     }
 
     static private func add(_ element:Any?, withKey: String, to data: inout [String:Any]){
-        if element != nil {
-            data[withKey] = element!
-        }
+        data[withKey] = element == nil ? "" : element!
     }
 
     private static func getBirthdate(_ data: Any?) -> NSDate? {

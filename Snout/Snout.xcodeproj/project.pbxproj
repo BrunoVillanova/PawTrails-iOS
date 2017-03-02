@@ -32,13 +32,13 @@
 		44485FBF1E52079D00A3C47D /* CVSParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44485FBE1E52079D00A3C47D /* CVSParser.swift */; };
 		44498DFD1E4DBE6700F6D761 /* ChangePasswordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44498DFC1E4DBE6700F6D761 /* ChangePasswordPresenter.swift */; };
 		44498DFF1E4DC03100F6D761 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44498DFE1E4DC03100F6D761 /* ChangePasswordViewController.swift */; };
-		444AF1DB1E5F023200C72034 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 444AF1DA1E5F023200C72034 /* Info.plist */; };
 		444AF1DD1E5F024E00C72034 /* SnoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444AF1DC1E5F024E00C72034 /* SnoutTests.swift */; };
 		446548161E5C5CC900458CB7 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446548151E5C5CC900458CB7 /* UserManager.swift */; };
 		446548181E5C5D5600458CB7 /* AddressManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446548171E5C5D5600458CB7 /* AddressManager.swift */; };
 		4465481A1E5C5DA900458CB7 /* PhoneManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446548191E5C5DA900458CB7 /* PhoneManager.swift */; };
 		4465481E1E5C642000458CB7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4465481D1E5C642000458CB7 /* Extensions.swift */; };
 		446548221E5C8E9600458CB7 /* DataManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446548211E5C8E9600458CB7 /* DataManagerTest.swift */; };
+		447753D61E658BE90091DAC5 /* SocketIOTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447753D51E658BE90091DAC5 /* SocketIOTest.swift */; };
 		447905161E5731F100A49AB3 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447905151E5731F100A49AB3 /* Reachability.swift */; };
 		447905181E573A4D00A49AB3 /* EditProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447905171E573A4D00A49AB3 /* EditProfileTableViewController.swift */; };
 		4479051A1E5742FC00A49AB3 /* PhonePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447905191E5742FC00A49AB3 /* PhonePresenter.swift */; };
@@ -79,6 +79,7 @@
 		44C7F7561E4CD3F200171170 /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F7531E4CD3F200171170 /* SocketIOManager.swift */; };
 		44C7F7581E4CD43A00171170 /* PasswordRecoveryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F7571E4CD43A00171170 /* PasswordRecoveryPresenter.swift */; };
 		44F057631E54A728007E9C8F /* Notifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F057621E54A728007E9C8F /* Notifier.swift */; };
+		44F5FB8A1E6481580026D7AF /* UserProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F5FB891E6481580026D7AF /* UserProfileTests.swift */; };
 		44F8202B1E604C1C00704F75 /* AddChangeDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F8202A1E604C1C00704F75 /* AddChangeDeviceViewController.swift */; };
 		44F8202D1E6086B100704F75 /* PetProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F8202C1E6086B100704F75 /* PetProfileViewController.swift */; };
 		44FE723D1E4A2EF0007C7E24 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FE723C1E4A2EF0007C7E24 /* DataManager.swift */; };
@@ -133,6 +134,7 @@
 		446548191E5C5DA900458CB7 /* PhoneManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhoneManager.swift; path = Model/PhoneManager.swift; sourceTree = "<group>"; };
 		4465481D1E5C642000458CB7 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Model/Extensions.swift; sourceTree = "<group>"; };
 		446548211E5C8E9600458CB7 /* DataManagerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerTest.swift; sourceTree = "<group>"; };
+		447753D51E658BE90091DAC5 /* SocketIOTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketIOTest.swift; sourceTree = "<group>"; };
 		447905151E5731F100A49AB3 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		447905171E573A4D00A49AB3 /* EditProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditProfileTableViewController.swift; path = View/EditProfileTableViewController.swift; sourceTree = "<group>"; };
 		447905191E5742FC00A49AB3 /* PhonePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhonePresenter.swift; path = Presenter/PhonePresenter.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 		44C7F7531E4CD3F200171170 /* SocketIOManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketIOManager.swift; path = Model/SocketIOManager.swift; sourceTree = "<group>"; };
 		44C7F7571E4CD43A00171170 /* PasswordRecoveryPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PasswordRecoveryPresenter.swift; path = Presenter/PasswordRecoveryPresenter.swift; sourceTree = "<group>"; };
 		44F057621E54A728007E9C8F /* Notifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Notifier.swift; path = View/Notifier.swift; sourceTree = "<group>"; };
+		44F5FB891E6481580026D7AF /* UserProfileTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileTests.swift; sourceTree = "<group>"; };
 		44F8202A1E604C1C00704F75 /* AddChangeDeviceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddChangeDeviceViewController.swift; path = View/AddChangeDeviceViewController.swift; sourceTree = "<group>"; };
 		44F8202C1E6086B100704F75 /* PetProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetProfileViewController.swift; path = View/PetProfileViewController.swift; sourceTree = "<group>"; };
 		44FE723C1E4A2EF0007C7E24 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataManager.swift; path = Model/DataManager.swift; sourceTree = "<group>"; };
@@ -305,7 +308,9 @@
 				444AF1DC1E5F024E00C72034 /* SnoutTests.swift */,
 				441A0D941E55E9D100D02CE4 /* APIManagerTests.swift */,
 				441A0D961E55EEB700D02CE4 /* AuthManagerTests.swift */,
+				44F5FB891E6481580026D7AF /* UserProfileTests.swift */,
 				446548211E5C8E9600458CB7 /* DataManagerTest.swift */,
+				447753D51E658BE90091DAC5 /* SocketIOTest.swift */,
 			);
 			path = SnoutTests;
 			sourceTree = "<group>";
@@ -537,7 +542,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				444AF1DB1E5F023200C72034 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -714,8 +718,10 @@
 			files = (
 				441A0D951E55E9D100D02CE4 /* APIManagerTests.swift in Sources */,
 				444AF1DD1E5F024E00C72034 /* SnoutTests.swift in Sources */,
+				447753D61E658BE90091DAC5 /* SocketIOTest.swift in Sources */,
 				446548221E5C8E9600458CB7 /* DataManagerTest.swift in Sources */,
 				441A0D971E55EEB700D02CE4 /* AuthManagerTests.swift in Sources */,
+				44F5FB8A1E6481580026D7AF /* UserProfileTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -859,6 +865,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = attitudetech.Snout;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -880,6 +887,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = attitudetech.Snout;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
