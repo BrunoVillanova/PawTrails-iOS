@@ -10,6 +10,48 @@ import UIKit
 import MapKit
 import CoreLocation
 
+class Fence: NSObject {
+    
+    let layer: CALayer
+    var isCircle:Bool {
+        didSet {
+            updateCornerRadius()
+        }
+    }
+
+    
+    init(frame: CGRect, isCircle:Bool) {
+        layer = CALayer()
+        layer.frame = frame
+        layer.backgroundColor =  UIColor.blueSystem().withAlphaComponent(0.5).cgColor
+        self.isCircle = isCircle
+    }
+    
+    func setFrame(_ frame:CGRect) {
+        layer.frame = frame
+        updateCornerRadius()
+    }
+    
+    private func updateCornerRadius(){
+        layer.cornerRadius = isCircle ? layer.frame.width / 2.0 : 0.0
+    }
+    
+    var x0: CGFloat {
+        return layer.frame.origin.x
+    }
+    
+    var y0: CGFloat {
+        return layer.frame.origin.y
+    }
+    
+    var xf: CGFloat {
+        return x0 + layer.frame.width
+    }
+    
+    var yf: CGFloat {
+        return y0 + layer.frame.height
+    }
+}
 
 class SafeZoneViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegate {
 
@@ -18,39 +60,43 @@ class SafeZoneViewController: UIViewController, UITextFieldDelegate, MKMapViewDe
     @IBOutlet weak var iconTextField: UITextField!
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var distanceLabel: UILabel!
-    @IBOutlet weak var fenceView: UIView!
+
     @IBOutlet weak var squareButton: UIButton!
     @IBOutlet weak var circleButton: UIButton!
     
-    fileprivate var isSquare:Bool = true
-    fileprivate var distance:Int!
+    fileprivate var isCircle:Bool = true
     
     fileprivate var changingRegion = false
-    fileprivate let fenceSide = 50.0
-    fileprivate var latitudeValue:Double = 200.0
-    fileprivate var longitudeValue:Double = 200.0
+    
+    fileprivate var fence:Fence!
+    fileprivate let fenceSide: Double = 25.0
+    fileprivate var fenceDistance:Int = 25
+    fileprivate var altitude: CLLocationDistance!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        let note = MKPointAnnotation()
-        note.coordinate = CLLocationCoordinate2DMake(39.6131615,2.6314731)
-//        mapView.addAnnotation(note)
-//        mapView.setCenter(note.coordinate, animated: true)
-//        getFenceLimits()
-        self.circleButton.tintColor = UIColor.darkGray
-        self.squareButton.tintColor = UIButton.appearance().tintColor
-        setAltitudeValue()
+
+        mapView.showsUserLocation = true
+        mapView.showsCompass = false
+        
+        self.squareButton.tintColor = UIColor.darkGray
+        self.circleButton.tintColor = UIButton.appearance().tintColor
     }
     
-    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
-        setAltitudeValue()
-        updateDistance()
-        if mapView.camera.altitude < latitudeValue && !changingRegion {
-            changingRegion = true
-            mapView.setRegion(MKCoordinateRegionMakeWithDistance(mapView.centerCoordinate, latitudeValue, longitudeValue), animated: true)
-            changingRegion = false
+    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+        if !mapView.userLocation.coordinate.isDefaultZero && mapView.showsUserLocation {
+            mapView.centerOn(mapView.userLocation.coordinate, with: 50)
+            mapView.showsUserLocation = false
+            altitude = mapView.camera.altitude
+            
+            let region = MKCoordinateRegionMakeWithDistance(mapView.centerCoordinate, fenceSide, fenceSide)
+            let frame = mapView.convertRegion(region, toRectTo: self.view)
+            fence = Fence(frame: frame, isCircle: isCircle)
+            mapView.layer.addSublayer(fence.layer)
+            updateFenceDistance()
         }
     }
     
@@ -74,76 +120,69 @@ class SafeZoneViewController: UIViewController, UITextFieldDelegate, MKMapViewDe
         }
     }
     
-    func getFenceLimits() {
-        let s = fenceView.frame.height/2.0
-        let x0 = self.view.center.x
-        let y0 = self.view.center.y
-        var corners = [CLLocationCoordinate2D]()
-        if isSquare {
-            corners.append(mapView.convert(CGPoint.init(x: x0 - s, y: y0 - s), toCoordinateFrom: self.view))    // up   left
-            corners.append(mapView.convert(CGPoint.init(x: x0 + s, y: y0 - s), toCoordinateFrom: self.view))    // up   right
-            corners.append(mapView.convert(CGPoint.init(x: x0 + s, y: y0 + s), toCoordinateFrom: self.view))    // down right
-            corners.append(mapView.convert(CGPoint.init(x: x0 - s, y: y0 + s), toCoordinateFrom: self.view))    // down left
-        }else{
-            corners.append(mapView.convert(CGPoint.init(x: x0, y: y0), toCoordinateFrom: self.view))            // center
-            corners.append(mapView.convert(CGPoint.init(x: x0, y: y0 - s), toCoordinateFrom: self.view))        // center up
-        }
-        for i in corners {
-            print(i)
-            let note = MKPointAnnotation()
-            note.coordinate = i
-            mapView.addAnnotation(note)
-        }
-    }
-
-    func setAltitudeValue(){
-        latitudeValue = Double(view.center.y / (fenceView.frame.height / 2.0)) * fenceSide
-        longitudeValue = Double(view.center.x / (fenceView.frame.height / 2.0)) * fenceSide
-    }
-    
-    func updateDistance() {
-        let center = mapView.convert(CGPoint.init(x: self.view.center.x, y: self.view.center.y), toCoordinateFrom: self.view)
-        let upCenter = mapView.convert(CGPoint.init(x: self.view.center.x, y: self.view.center.y - (fenceView.frame.height/2.0)), toCoordinateFrom: self.view)
-        distance = Int(center.location.distance(from: upCenter.location))
-        self.distanceLabel.text = distance < 1000 ? "\(distance!) m" : "\(distance!/1000) km"
-    }
-
+//    func getFenceLimits() {
+//        let s = fenceView.frame.height/2.0
+//        let x0 = self.view.center.x
+//        let y0 = self.view.center.y
+//        var corners = [CLLocationCoordinate2D]()
+////        if isSquare {
+////            corners.append(mapView.convert(CGPoint.init(x: x0 - s, y: y0 - s), toCoordinateFrom: self.view))    // up   left
+////            corners.append(mapView.convert(CGPoint.init(x: x0 + s, y: y0 - s), toCoordinateFrom: self.view))    // up   right
+////            corners.append(mapView.convert(CGPoint.init(x: x0 + s, y: y0 + s), toCoordinateFrom: self.view))    // down right
+////            corners.append(mapView.convert(CGPoint.init(x: x0 - s, y: y0 + s), toCoordinateFrom: self.view))    // down left
+////        }else{
+//            corners.append(mapView.convert(CGPoint.init(x: x0, y: y0), toCoordinateFrom: self.view))            // center
+//            corners.append(mapView.convert(CGPoint.init(x: x0, y: y0 - s), toCoordinateFrom: self.view))        // center up
+////        }
+//        for i in corners {
+//            print(i)
+//            let note = MKPointAnnotation()
+//            note.coordinate = i
+//            mapView.addAnnotation(note)
+//        }
+//    }
     
     @IBAction func cancelAction(_ sender: UIButton) {
-
+        self.view.endEditing(true)
+        self.dismiss(animated: true, completion: nil)
     }
 
     @IBAction func squareAction(_ sender: UIButton) {
         self.circleButton.tintColor = UIColor.darkGray
         self.squareButton.tintColor = UIButton.appearance().tintColor
-        self.fenceView.resetCorner()
-        self.isSquare = true
+        self.fence.isCircle = false
     }
+    
     @IBAction func circleAction(_ sender: UIButton) {
         self.circleButton.tintColor = UIButton.appearance().tintColor
         self.squareButton.tintColor = UIColor.darkGray
-        self.fenceView.circle()
-        self.isSquare = false
+        self.fence.isCircle = true
     }
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     // MARK: - MKMapViewDelegate
 
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        updateDistance()
-        if mapView.camera.altitude < latitudeValue && !changingRegion {
-            changingRegion = true
-            mapView.setRegion(MKCoordinateRegionMakeWithDistance(mapView.centerCoordinate, latitudeValue, longitudeValue), animated: true)
-            changingRegion = false
+        
+        if fence != nil {
+            updateFenceDistance()
+            if !fenceDistanceIsIdle() && !changingRegion {
+                changingRegion = true
+                adjustZoom()
+                updateFenceDistance()
+                changingRegion = false
+            }
         }
+    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        
+        if let overlay = overlay as? MKCircle {
+            let circleRenderer = MKCircleRenderer(circle: overlay)
+            circleRenderer.fillColor = UIColor.blue.withAlphaComponent(0.5)
+            return circleRenderer
+        }
+        return MKOverlayRenderer()
     }
     
     // MARK: - UITextFieldDelegate
@@ -156,13 +195,35 @@ class SafeZoneViewController: UIViewController, UITextFieldDelegate, MKMapViewDe
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if #available(iOS 10.0, *), (nameTextField.text != nil){
+            if let emojis = EmojiManager.Instance.getEmojis(from: nameTextField.text!) {
+                self.iconTextField.placeholder = emojis.first
+            }
+        }
+    }
+    
+    // MARK: - Helper
+    
+    func updateFenceDistance() {
+        let x0y0 = mapView.convert(CGPoint(x: fence.x0, y: fence.y0), toCoordinateFrom: self.view)
+        let xfy0 = mapView.convert(CGPoint(x: fence.xf, y: fence.y0), toCoordinateFrom: self.view)
+        fenceDistance = Int(round(x0y0.location.distance(from: xfy0.location)))
+        self.distanceLabel.text = "\(fenceDistance)"
+    }
 
+    func fenceDistanceIsIdle() -> Bool {
+        return fenceDistance > Int(fenceSide)
+    }
     
-    
-    
-    
-    
-    
+    func adjustZoom() {
+        if altitude != nil {
+            let c = mapView.camera.copy() as! MKMapCamera
+            c.altitude = altitude
+            mapView.setCamera(c, animated: true)
+        }
+    }
     
     
     

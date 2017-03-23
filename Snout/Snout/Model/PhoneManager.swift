@@ -16,18 +16,16 @@ class PhoneManager {
         
         if user.phone == nil {
             user.setValue(store(data), forKey: "phone")
+        }else if data != nil {
+            update(&user.phone!, with: data!)
         }else{
-            if data != nil {
-                update(&user.phone!, with: data!)
-            }else{
-                user.setValue(nil, forKey: "phone")
-            }
+            user.setValue(nil, forKey: "phone")
         }
     }
     
     fileprivate static func store(_ data:Any?) -> Phone? {
         if let phoneData = data as? [String:Any] {
-            if let phone = try? CoreDataManager.Instance.store(entity: "Phone", withData: phoneData, skippedKeys: ["country_code"]) as? Phone {
+            if let phone = try? CoreDataManager.Instance.store("Phone", with: phoneData.filtered(by:["country_code"])) as? Phone {
                 phone?.setValue(CountryCodeManager.get(phoneData["country_code"]), forKey: "country_code")
                 _ = try? CoreDataManager.Instance.save()
                 return phone
@@ -70,7 +68,7 @@ class CountryCodeManager {
     }
     
     static func get(_ code:String) -> CountryCode? {
-        if let ccResults = CoreDataManager.Instance.retrieve(entity: "CountryCode", withPredicate: NSPredicate(format: "code == %@",code)) as? [CountryCode] {
+        if let ccResults = CoreDataManager.Instance.retrieve("CountryCode", with: NSPredicate("code", .equal, code)) as? [CountryCode] {
             if ccResults.count == 1 {
                 return ccResults.first!
             }
@@ -83,10 +81,10 @@ class CountryCodeManager {
     }
     
     static func getAll() -> [CountryCode]? {
-        let results = CoreDataManager.Instance.retrieve(entity: "CountryCode") as? [CountryCode]
+        let results = CoreDataManager.Instance.retrieve("CountryCode") as? [CountryCode]
         if results == nil || results?.count == 0 {
             CSVParser.Instance.loadCountryCodes()
-            return CoreDataManager.Instance.retrieve(entity: "CountryCode") as? [CountryCode]
+            return CoreDataManager.Instance.retrieve("CountryCode") as? [CountryCode]
         }
         return results
     }

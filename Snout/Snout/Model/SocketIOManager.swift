@@ -26,7 +26,7 @@ class SocketIOManager: NSObject {
 //        case receivedPoint = "receivedPoint"
 //    }
    
-    private var socket: SocketIOClient = SocketIOClient(socketURL: URL(string: "http://192.168.1.10:3000")!)
+    private var socket: SocketIOClient = SocketIOClient(socketURL: URL(string: "http://192.168.1.11:3000")!)
 //    private var socket: SocketIOClient = SocketIOClient(socketURL: URL(string: "http://localhost:3000")!)
     
 //    private var socket: SocketIOClient {
@@ -51,6 +51,10 @@ class SocketIOManager: NSObject {
         socket.disconnect()
     }
     
+    func isConnected() -> Bool {
+        return socket.status == SocketIOClientStatus.connected
+    }
+    
     func connectionStatus() -> String {
         switch socket.status {
         case .notConnected: return "not connected"
@@ -60,13 +64,12 @@ class SocketIOManager: NSObject {
         }
     }
     
-    func launch(name:String, frequency: Int = 1000) -> Bool {
-        if socket.status == SocketIOClientStatus.connected {
+    func launch(name:String, frequency: Int = 1000) {
+        if isConnected() {
             socket.emit("launch", self.masc(name), frequency)
         }else{
             print(connectionStatus())
         }
-        return socket.status == SocketIOClientStatus.connected
     }
     
     func stop(name:String){

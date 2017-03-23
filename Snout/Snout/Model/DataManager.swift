@@ -15,7 +15,7 @@ class DataManager {
     // MARK: - User
     
     func setUser(_ data: [String:Any]){
-        UserManager.upsertUser(data)
+        UserManager.upsert(data)
     }
    
     func getUser(callback:@escaping userCallback) {
@@ -29,49 +29,84 @@ class DataManager {
     
     private func loadUser(callback:@escaping userCallback) {
         
-        APIManager.Instance.performCall(.getuser) { (error, data) in
+        APIManager.Instance.perform(call: .getUser) { (error, data) in
             if error == nil && data != nil {
-                guard let userData = data!["user"] as? [String:Any] else {
-                    callback(-1, nil)
-                    return
-                }
-                UserManager.upsertUser(userData)
-                UserManager.getUser(callback)
+                self.handleUser(with: data, callback)
             }else{
-                print(error ?? "")
-                print(data ?? "")
-//                callback(error?.specificCode, nil)
-                UserManager.getUser(callback)
+                self.handeUser(with: error, data, callback)
             }
         }
     }
     
+    private func handleUser(with data:[String:Any]?, _ callback:@escaping userCallback) {
+        guard let userData = data!["user"] as? [String:Any] else {
+            callback(-1, nil)
+            return
+        }
+        UserManager.upsert(userData)
+        UserManager.get(callback)
+    }
+    
+    private func handeUser(with error:APIManagerError?, _ data:[String:Any]?, _ callback:@escaping userCallback) {
+        print(error ?? "")
+        print(data ?? "")
+        //                callback(error?.specificCode, nil)
+        UserManager.get(callback)
+    }
+    
     func saveUser(user:User, phone:[String:Any]?, address:[String:Any]?, callback: @escaping userCallback) {
        
-        APIManager.Instance.performCall(.setuser, UserManager.parseUser(user, phone, address)) { (error, data) in
+        APIManager.Instance.perform(call: .setUser, with: UserManager.parse(user, phone, address)) { (error, data) in
             if error == nil && data != nil {
-                guard let userData = data!["user"] as? [String:Any] else {
-                    callback(-1, nil)
-                    return
-                }
-                UserManager.upsertUser(userData)
-                UserManager.getUser(callback)
+                self.handleUser(with: data, callback)
             }else{
-                print(error ?? "")
-                print(data ?? "")
-                callback(error?.specificCode, nil)
+                self.handeUser(with: error, data, callback)
             }
         }
     }
     
     func removeUser() -> Bool {
         if AuthManager.Instance.isAuthenticated() {
-            return UserManager.removeUser()
+            return UserManager.remove()
         }
         return true
     }
     
     // MARK: - Pet
+    
+    // MARK: - Tracking
+    
+    func trackingIsIdle() -> Bool {
+        return SocketIOManager.Instance.isConnected()
+    }
+    
+    func startTracking(pet:_pet, callback: @escaping petTrackingCallback){
+        // Send RQ to API which provides channel and verification?
+        
+        //        guard let name = pet.name else {
+        //            fatalError()
+        //        }
+        
+        if !trackingIsIdle() {return}
+        
+        let name = pet.name
+        SocketIOManager.Instance.launch(name: name)
+        SocketIOManager.Instance.listen(name: name, { (lat, long) in
+            //set last location
+            callback((lat, long))
+        })
+    }
+    
+    func stopTracking(pet:_pet){
+        // Stop live tracking
+        
+        if !trackingIsIdle() {return}
+        
+        let name = pet.name
+        
+        SocketIOManager.Instance.stop(name: name)
+    }
+    
     
     // MARK: - Country Codes
     
@@ -79,31 +114,66 @@ class DataManager {
         return CountryCodeManager.getAll()
     }
     
-    func getCurrentCountryCode() -> String? {
-        return CountryCodeManager.getCurrent()
+    func getCurrentCountryShortName() -> String {
+        return CountryCodeManager.getCurrent() ?? "IE"
     }
     
 
+    // MARK: - Search
+    
+    /**
+     First request search to local storage whilst performs a call to the REST API to update information, once the information is updated it callsback the information.
+     
+     - Parameter text: Search text.
+     - Parameter callback: Returns the updated information.
+     - Parameter data: .
+
+     - Returns: The local information available.
+     */
+    func performSearch(_ text:String, callback:(_ data:[String]) -> Swift.Void) -> [String] {
+        
+        // RQ
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+//        callback(AddressManager.search(text))
+        return AddressManager.search(text)
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
 
 

@@ -27,7 +27,7 @@ class UserProfileTests: XCTestCase {
     
     func getUser(callback: @escaping (User)->Swift.Void) {
         
-        UserManager.getUser { (error, user) in
+        UserManager.get { (error, user) in
             
             XCTAssertNil(error, "Error while getting User \(error)")
             XCTAssertNotNil(user, "User is nil :(\(error)")

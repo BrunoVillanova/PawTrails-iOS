@@ -13,10 +13,10 @@ import Foundation
 class UserManager {
     
     
-    static func upsertUser(_ data: [String:Any]) {
+    static func upsert(_ data: [String:Any]) {
         
         do {
-            if var user = try CoreDataManager.Instance.upsert(entity: "User", withData: data, skippedKeys: ["address", "mobile", "img_url", "date_of_birth"]) as? User {
+            if var user = try CoreDataManager.Instance.upsert("User", with: data.filtered(by: ["address", "mobile", "img_url", "date_of_birth"])) as? User {
                 user.birthday = getBirthdate(data["date_of_birth"])
                 AddressManager.set(data["address"], to: &user)
                 PhoneManager.set(data["mobile"], to: &user)
@@ -27,32 +27,33 @@ class UserManager {
         }
     }
     
-    static func getUser(_ callback:userCallback) {
+    static func get(_ callback:userCallback) {
         
         guard let id = SharedPreferences.get(.id) else {
             callback(UserError.IdNotFound.rawValue, nil)
             return
         }
         
-        if let results = CoreDataManager.Instance.retrieve(entity: "User", withPredicate: NSPredicate(format: "id == \(id)")) as? [User] {
+        if let results = CoreDataManager.Instance.retrieve("User", with: NSPredicate("id", .equal, id)) as? [User] {
             if results.count > 1 {
                 callback(UserError.MoreThenOneUser.rawValue, nil)
+            }else{
+                callback(nil, results.first!)
             }
-            callback(nil, results.first!)
         }else{
             callback(UserError.NoUserFound.rawValue, nil)
         }
     }
 
-    static func removeUser() -> Bool {
+    static func remove() -> Bool {
         guard let id = SharedPreferences.get(.id) else {
             return false
         }
-        try? CoreDataManager.Instance.delete(entity: "user", withPredicate: NSPredicate(format: "id == \(id)"))
+        try? CoreDataManager.Instance.delete(entity: "user", withPredicate: NSPredicate("id", .equal, id))
         return true
     }
     
-    static func parseUser(_ user:User,_ phone:[String:Any]?,_ address:[String:Any]?) -> [String:Any] {
+    static func parse(_ user:User,_ phone:[String:Any]?,_ address:[String:Any]?) -> [String:Any] {
         var data = [String:Any]()
         data["id"] = user.id
         add(user.name, withKey: "name", to: &data)

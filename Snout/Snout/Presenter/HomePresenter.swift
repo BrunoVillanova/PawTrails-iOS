@@ -51,6 +51,10 @@ class HomePresenter {
                     self.testPets()
                     self.view?.reload()
                 }
+            }else{
+                DispatchQueue.main.async {
+                    self.view?.errorMessage(errorMsg("Unable to get user info", "\(error)"))
+                }
             }
         }
     }
@@ -64,40 +68,35 @@ class HomePresenter {
     
     //Socket IO
     
-    
     func startTracking(_ i: Int){
-        if self.pets.indices.contains(i) {
-            let pet = self.pets[i]
-            
-            if SocketIOManager.Instance.launch(name: pet.name) {
-
-                SocketIOManager.Instance.listen(name: pet.name, { (lat, long) in
-                    
-                    if pet.tracking {
-                        self.view?.updateTracking(pet.name, lat: lat, long: long)
-                    }else{
-                        pet.tracking = true
-                        DispatchQueue.main.async {
-                            self.view?.startTracking(pet.name, lat: lat, long: long)
-                        }
-                    }
-                })
-            }else{
-                self.view?.errorMessage(errorMsg(title:"Error", msg: "Couldn't connect with the server"))
-            }
-        }else{
-            self.view?.errorMessage(errorMsg(title:"Error", msg: "Couldn't find the pet"))
+        
+        if !self.pets.indices.contains(i) || !DataManager.Instance.trackingIsIdle() {
+            self.view?.errorMessage(errorMsg(title:"Error", msg: "Tracking is not available for this pet: \(SocketIOManager.Instance.connectionStatus())"))
         }
+        let pet = self.pets[i]
+        DataManager.Instance.startTracking(pet: pet, callback: { (lat,long) in
+            if pet.tracking {
+                DispatchQueue.main.async {
+                    self.view?.updateTracking(pet.name, lat: lat, long: long)
+                }
+            }else{
+                pet.tracking = true
+                DispatchQueue.main.async {
+                    self.view?.startTracking(pet.name, lat: lat, long: long)
+                }
+            }
+        })
     }
     
     func stopTracking(_ i: Int){
-        if self.pets.indices.contains(i) {
-            let pet = self.pets[i]
-            pet.tracking = false
-            SocketIOManager.Instance.stop(name: pet.name)
-            self.view?.stopTracking(pet.name)
-        }else{
+        if !self.pets.indices.contains(i) {
             self.view?.errorMessage(errorMsg(title:"Error", msg: "Couldn't find the pet"))
+        }
+        let pet = self.pets[i]
+        pet.tracking = false
+        DataManager.Instance.stopTracking(pet: pet)
+        DispatchQueue.main.async {
+            self.view?.stopTracking(pet.name)
         }
     }
     

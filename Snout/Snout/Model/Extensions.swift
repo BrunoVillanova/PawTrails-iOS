@@ -11,6 +11,44 @@ import CoreData
 import CoreLocation
 import MapKit
 
+// MARK:- Own Data Management
+
+extension Phone {
+    
+    var toString:String? {
+        
+        guard let number = self.number else {
+            return nil
+        }
+        
+        guard let country_code = self.country_code else {
+            return nil
+        }
+        return "\(country_code.code!) \(number)"
+    }
+    
+}
+
+extension Address {
+    
+    var toString: String? {
+        
+        let address = self.toStringDict
+        
+        if address.count == 0 { return nil }
+        
+        var desc = [String]()
+        if address["line0"] != nil && address["line0"] != "" { desc.append(address["line0"]!)}
+        if address["line1"] != nil && address["line1"] != "" { desc.append(address["line1"]!)}
+        if address["line2"] != nil && address["line2"] != "" { desc.append(address["line2"]!)}
+        if address["city"] != nil && address["city"] != "" { desc.append(address["city"]!)}
+        if address["postal_code"] != nil && address["postal_code"] != "" { desc.append(address["postal_code"]!)}
+        if address["state"] != nil && address["state"] != "" { desc.append(address["state"]!)}
+        if address["country"] != nil && address["country"] != "" { desc.append(address["country"]!)}
+        return desc.joined(separator: ", ")
+
+    }
+}
 // MARK:- Data Management
 
 extension String {
@@ -41,7 +79,7 @@ extension Date {
     
     public var toStringShow: String? {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy"
+        dateFormatter.dateStyle = .medium
         return dateFormatter.string(from: self)
     }
     public var toStringServer: String? {
@@ -67,6 +105,10 @@ extension CLLocationCoordinate2D {
         return CLLocation(latitude: self.latitude, longitude: self.longitude)
     }
     
+    public var isDefaultZero: Bool {
+        return self.latitude == 0 && self.longitude == 0 
+    }
+    
 }
 
 extension NSManagedObject {
@@ -87,8 +129,49 @@ extension NSManagedObject {
     
 }
 
-public var blueSystem : UIColor {
-    return  UIColor(red: 0, green: 0.478431, blue: 1, alpha: 1)
+public enum NSPredicateOperation: String {
+    case equal = "=="
+    case contains = "CONTAINS[cd]"
+    case beginsWith = "BEGINSWITH[cd]"
+}
+
+extension NSPredicate {
+    
+    fileprivate enum concatOperation: String {
+        case and = "&&"
+        case or = "||"
+    }
+    
+    convenience init(_ left:String, _ operation:NSPredicateOperation, _ right:Any) {
+        self.init(format: "\(left) \(operation.rawValue) '\(right)'")
+    }
+    
+    func and(_ left:String, _ op:NSPredicateOperation, _ right:Any) -> NSPredicate {
+        return concatFormat(.and, left, op, right)
+    }
+    
+    func or(_ left:String, _ op:NSPredicateOperation, _ right:Any) -> NSPredicate {
+        return concatFormat(.or, left, op, right)
+    }
+    
+    fileprivate func concatFormat(_ concatOp: concatOperation, _ left:String, _ op:NSPredicateOperation, _ right:Any) -> NSPredicate {
+        return NSPredicate(format: "\(self.predicateFormat) \(concatOp.rawValue) \(left) \(op.rawValue) %@", argumentArray: [right])
+    }
+}
+
+extension Dictionary {
+    
+    /// Returns a new dictionary filtering the specified keys
+    func filtered(by keys:[String]) -> Dictionary {
+        
+        let out = NSMutableDictionary(dictionary: self)
+       
+        for key in keys {
+            out.removeObject(forKey: key)
+        }
+        return NSDictionary(dictionary: out) as! Dictionary<Key, Value>
+    }
+    
 }
 
 // MARK:- MapView
@@ -98,7 +181,7 @@ extension MKMapView {
     func setVisibleMapForAnnotations() {
 
         if self.annotations.count == 1 {
-            self.centerOnMap(self.annotations.first!.coordinate)
+            self.centerOn(self.annotations.first!.coordinate)
         }else{
             var zoomRect = MKMapRectNull
             for i in self.annotations {
@@ -110,9 +193,9 @@ extension MKMapView {
         
     }
     
-    func centerOnMap(_ location: CLLocationCoordinate2D, with regionRadius: CLLocationDistance = 100.0){
+    func centerOn(_ location: CLLocationCoordinate2D, with regionRadius: CLLocationDistance = 100.0){
             let coordinateRegion = MKCoordinateRegionMakeWithDistance(location, regionRadius * 2.0,regionRadius * 2.0)
-            self.setRegion(coordinateRegion, animated: true)
+            self.setRegion(coordinateRegion, animated: false)
     }
 }
 
@@ -120,16 +203,26 @@ extension MKMapView {
 
 // MARK:- View
 
-public enum notificationType{
-    case red, blue, green
-}
-
 extension UIViewController {
     
     func alert(title:String, msg:String, actionTitle: String = "Ok"){
         let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: actionTitle, style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    @IBAction func dismissAction(sender: UIButton){
+        self.view.endEditing(true)
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func dismissBarAction(sender: UIBarButtonItem){
+        self.view.endEditing(true)
+        self.navigationController?.dismiss(animated: true, completion: nil)
+    }
+    
+    var notifier: Notifier {
+        return Notifier(with: self.view)
     }
 }
 
@@ -141,6 +234,15 @@ extension UIColor {
         let b = CGFloat(arc4random() % 255)
         return UIColor(red: r/255.0, green: g/255.0, blue: b/255.0, alpha: 1.0)
     }
+    
+    public static func orange() -> UIColor {
+        return UIColor(red: 251.0/255.0, green: 141.0/255.0, blue: 43.0/255.0, alpha: 1.0)
+    }
+    
+    public static func blueSystem() -> UIColor {
+        return UIColor(red: 0, green: 0.478431, blue: 1, alpha: 1)
+    }
+    
 }
 
 extension UIView {
@@ -172,6 +274,27 @@ extension UIView {
         self.layer.borderColor = color.cgColor
         self.layer.masksToBounds = true
     }
+    
+    func underline(color: UIColor = UIColor.lightGray, width: CGFloat = 1.0) {
+        
+        let border = CALayer()
+        border.borderColor = color.cgColor
+        border.frame = CGRect(x:0, y:self.frame.size.height - width, width:self.frame.size.width, height:self.frame.size.height)
+        border.borderWidth = width
+        self.layer.addSublayer(border)
+        self.layer.masksToBounds = true
+    }
+    
+    func rightSeparator(color: UIColor = UIColor.lightText, width: CGFloat = 1.0) {
+        
+        let border = CALayer()
+        border.borderColor = color.cgColor
+        border.frame = CGRect(x:self.frame.size.width - width, y:0, width:self.frame.size.width, height:self.frame.size.height)
+        border.borderWidth = width
+        self.layer.addSublayer(border)
+        self.layer.masksToBounds = true
+    }
+    
 }
 
 

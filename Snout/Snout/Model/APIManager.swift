@@ -8,74 +8,82 @@
 
 import Foundation
 
-/**
- The `APIManager` provides an infrastructure to communicate with the `REST API`.
- */
-class APIManager {
+/// The APICallType enum defines constants that can be used to specify the type of interactions that take place with the APIManager requests.
+public enum APICallType {
     
-    /**
-     Contains the constants used to specify the interaction with the `APIManager`.
-     */
-    enum call {
-        case register, signin, signinsocial, passwordReset, passwordChange, getuser, setuser , getpets
-        
-        fileprivate var requiresToken: Bool {
-            switch self {
-            case .register, .signin, .signinsocial: return false
-            default: return true
-            }
-        }
-        
-        fileprivate func url() -> String {
-            switch self {
-            case .register: return "/users/register"
-            case .signin: return "/users/login"
-            case .passwordChange: return "/users/changepsw"
-            case .setuser: return "/users/edit"
-            case .getuser: return "/users/\(SharedPreferences.get(.id) ?? "")"
-            default: return ""
-            }
-        }
-        
-        fileprivate var httpMethod: String {
-            return self == .getuser ? "GET" : "POST"
+    case signUp, signin, signinsocial, passwordReset, passwordChange, getUser, setUser , getPet, setPet, trackPet
+    
+    fileprivate var requiresToken: Bool {
+        switch self {
+        case .signUp, .signin, .signinsocial: return false
+        default: return true
         }
     }
     
-    fileprivate static let mainURL = "http://eu.pawtrails.pet/api"
+    fileprivate var path: String {
+        switch self {
+        case .signUp: return "/users/register"
+        case .signin: return "/users/login"
+        case .passwordChange: return "/users/changepsw"
+        case .setUser: return "/users/edit"
+        case .getUser: return "/users/\(SharedPreferences.get(.id) ?? "")"
+        default: return ""
+        }
+    }
+    
+    fileprivate var httpMethod: String {
+        return self == .getUser ? "GET" : "POST"
+    }
+    
+    fileprivate var requiresBody: Bool {
+        switch self {
+        case .getUser, .getPet: return false
+        default: return true
+        }
+    }
+}
+
+
+
+/// The `APIManager` provides an infrastructure to communicate with the `RESTAPI`.
+class APIManager {
     
     static let Instance = APIManager()
     
+    fileprivate static let mainURL = "http://eu.pawtrails.pet/api"
     
-    private func createRequest(_ call:call, _ data:[String:Any]?) -> URLRequest? {
+    private func createRequest(for call:APICallType, with data:[String:Any]?) -> URLRequest? {
         
-        var request = URLRequest(url: getURL(call))
+        if call.requiresBody && data == nil {
+            print("\(call) requires body")
+            return nil
+        }
+        
+        var request = URLRequest(url: URL(call))
         
         request.httpMethod = call.httpMethod
         request.cachePolicy = .useProtocolCachePolicy
         request.timeoutInterval = 10.0
         
-        request.allHTTPHeaderFields = setHeaders(call)
+        request.allHTTPHeaderFields = setHeaders(of: call)
         request.httpBody = setBody(of: call, with: data)
+        
         return request
     }
     
-    /**
-     Performs a call to the REST API.
-     
-     - Parameter call: Defines the request.
-     - Parameter data: *Optional* includes the data sent as part of the request.
-     - Parameter completition: Performs the callback once the response is ready.
-     - Parameter error: An error object that indicates why the request failed, or `nil` if the request was successful.
-     - Parameter data: The data returned or `nil` if error.
-     
-     */
-    func performCall(_ call:call, _ data:[String:Any]? = nil, completition: @escaping (_ error:APIManagerError?, _ data:[String:Any]?) -> Void) {
+    /// Performs the request defined by the `APICallType` sending the data provided and and calls a handler upon completion.
+    ///
+    /// - Parameters:
+    ///   - call: The [APICallType](APIManager) defines the request.
+    ///   - data: *Optional* includes the data sent as part of the request.
+    ///   - completition: Handles callback
+    ///   - error: An error object that indicates why the request failed, or `nil` if the request was successful.
+    ///   - data: The data returned or `nil` if error.
+    func perform(call:APICallType, with data:[String:Any]? = nil, completition: @escaping (_ error:APIManagerError?,_ data:[String:Any]?) -> Void) {
         
-        if let request = createRequest(call, data) {
+        if let request = createRequest(for: call, with: data) {
 
             URLSession.shared.dataTask(with: request) { data, response, error in
-                
                 
                 if error != nil{
                     print("Error -> \(error)")
@@ -85,7 +93,7 @@ class APIManager {
                         completition(APIManagerError(call: call, httpCode: -1, specificCode: -1, kind: .httpResponseParse), nil)
                         return
                     }
-                    self.handleResponse(call, httpResponse.statusCode, data, completition)
+                    self.handleResponse(for: call, httpResponse.statusCode, data, completition)
                 }
             }.resume()
         }
@@ -109,7 +117,7 @@ class APIManager {
         return nil
     }
     
-    private func handleResponse(_ call: call, _ code: Int, _ data: Data?, _ completition: @escaping (_ error:APIManagerError?, _ data:[String:Any]?) -> Void ) {
+    private func handleResponse(for call: APICallType, _ code: Int, _ data: Data?, _ completition: @escaping (_ error:APIManagerError?, _ data:[String:Any]?) -> Void ) {
         if code.isSuccess {
             completition(nil, parseResponse(data))
         }else{
@@ -117,7 +125,7 @@ class APIManager {
         }
     }
     
-    private func handleError(_ call: call, _ code: Int, _ data: Data?) -> APIManagerError? {
+    private func handleError(_ call: APICallType, _ code: Int, _ data: Data?) -> APIManagerError? {
         
         if code.isClientError {
             guard let dict = parseResponse(data) else {
@@ -131,15 +139,7 @@ class APIManager {
     
     //MARK:- Request Helpers
     
-    private func getURL(_ call:call) -> URL {
-        guard let url = URL(string: APIManager.mainURL + call.url()) else{
-            fatalError("Couldn't build URL \(call) \(APIManager.mainURL)")
-        }
-        print(url)
-        return url
-    }
-    
-    private func setHeaders(_ call:call) -> [String:String] {
+    private func setHeaders(of call:APICallType) -> [String:String] {
         var headers = [String:String]()
         headers["content-type"] = "application/json"
         headers["cache-control"] = "no-cache"
@@ -151,11 +151,10 @@ class APIManager {
         return headers
     }
     
-    private func setBody(of call:call, with data:[String:Any]?) -> Data? {
+    private func setBody(of call:APICallType, with data:[String:Any]?) -> Data? {
         print(data ?? "No data provided to build the request body")
         return data != nil ? try? JSONSerialization.data(withJSONObject: data!) : nil
     }
-    
 }
 
 fileprivate extension Int {
@@ -166,6 +165,16 @@ fileprivate extension Int {
     
     var isClientError: Bool {
         return 400...499 ~= self
+    }
+}
+
+fileprivate extension URL {
+    
+    init(_ call: APICallType) {
+        guard let url = URL(string: APIManager.mainURL + call.path) else{
+            fatalError("Couldn't build URL \(call) \(APIManager.mainURL)")
+        }
+        self = url
     }
 }
 

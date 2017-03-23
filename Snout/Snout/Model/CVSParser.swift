@@ -35,7 +35,7 @@ class CSVParser {
                         element["name"] = row[0]
                         element["shortname"] = row[1]
                         element["code"] = row[2]
-                        _ = try CoreDataManager.Instance.upsert(entity: "CountryCode", withData: element, withId: "code")
+                        _ = try CoreDataManager.Instance.upsert("CountryCode", with: element, withId: "code")
                     }
                 }
                 

@@ -23,7 +23,10 @@
         <relationship name="pet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pet" inverseName="last_location" inverseEntity="Pet" syncable="YES"/>
     </entity>
     <entity name="Pet" representedClassName="Pet" syncable="YES" codeGenerationType="class">
+        <attribute name="gender" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="Binary" storedInTruthFile="YES" syncable="YES"/>
+        <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tracking" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="last_location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="pet" inverseEntity="Location" syncable="YES"/>
@@ -38,7 +41,9 @@
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="gender" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="Binary" storedInTruthFile="YES" syncable="YES"/>
         <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isLocationShared" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="notification" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="surname" optional="YES" attributeType="String" syncable="YES"/>
@@ -49,8 +54,8 @@
         <element name="Address" positionX="18" positionY="144" width="128" height="165"/>
         <element name="CountryCode" positionX="-18" positionY="108" width="128" height="105"/>
         <element name="Location" positionX="-54" positionY="18" width="128" height="105"/>
-        <element name="Pet" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="Pet" positionX="-63" positionY="-18" width="128" height="150"/>
         <element name="Phone" positionX="-18" positionY="117" width="128" height="90"/>
-        <element name="User" positionX="-36" positionY="45" width="128" height="195"/>
+        <element name="User" positionX="-36" positionY="45" width="128" height="225"/>
     </elements>
 </model>

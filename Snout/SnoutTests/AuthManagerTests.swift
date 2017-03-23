@@ -24,12 +24,12 @@ class AuthManagerTests: XCTestCase {
     func testRegister() {
         let expect = expectation(description: "Example")
         let email = "register1@test.com"
-        AuthManager.Instance.register(email, ezdebug.password) { (error) in
+        AuthManager.Instance.signUp(email, ezdebug.password) { (error) in
             
             XCTAssertNil(error, "Error while registration \(error)")
             XCTAssert(AuthManager.Instance.isAuthenticated(), "Not authenticated properly")
             
-            UserManager.getUser({ (error, user) in
+            UserManager.get({ (error, user) in
                 
                 XCTAssertNil(error, "Found error getting user form CDST \(error)")
                 XCTAssertNotNil(error, "User is nil :(")

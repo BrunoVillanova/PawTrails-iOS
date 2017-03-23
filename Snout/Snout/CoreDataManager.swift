@@ -10,29 +10,19 @@ import UIKit
 import CoreData
 
 
+/// The `CoreDataManager` simplifies the use of **CoreData**
 class CoreDataManager {
     
     static let Instance = CoreDataManager()
     
-    private func remove(keys:[String], from data: [String:Any]) -> [String:Any]{
-        if keys.count == 0 {
-            return data
-        }else{
-            var out = [String:Any]()
-            for (k,v) in data {
-                if !keys.contains(k){
-                    out[k] = v
-                }
-            }
-            return out
-        }
-    }
     
-    private func remove(keys:[String], from data: [String]) -> [String]{
-        return data.filter({ (k) -> Bool in !keys.contains(k)})
-    }
-    
-    func retrieve(entity:String, withPredicate predicate: NSPredicate? = nil) -> [NSManagedObject]? {
+    /// Retrieves the entities requested following the criteria defined by the *optional* predicate.
+    ///
+    /// - Parameters:
+    ///   - entity: Name of the entity to request.
+    ///   - predicate: *Optional* predicate to filter fetch.
+    /// - Returns: An array with **more than one element** or *nil*.
+    func retrieve(_ entity:String, with predicate: NSPredicate? = nil) -> [NSManagedObject]? {
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
         fetchRequest.predicate = predicate
@@ -42,12 +32,20 @@ class CoreDataManager {
             return data.count > 0 ? data as? [NSManagedObject] : nil
             
         } catch {
-            debugPrint("CDM get entity: \(entity) withPredicate: \(predicate) error: \(error)")
+            debugPrint("CDM retrieve entity: \(entity) withPredicate: \(predicate) error: \(error)")
         }
         return nil
     }
     
-    func store(entity:String, withData data:[String:Any], skippedKeys: [String] = []) throws ->  NSManagedObject {
+    /// Store the given data into the entity.
+    ///
+    /// - Parameters:
+    ///   - entity: Name of the entity to save.
+    ///   - data: Dictionary with information to store.
+
+    /// - Returns: The saved object.
+    /// - Throws: `Creating an entityDescription`, `Saving`.
+    func store(_ entity:String, with data:[String:Any]) throws ->  NSManagedObject {
         
         
         guard let entityDescription = NSEntityDescription.entity(forEntityName: entity, in: Storage.Instance.context) else {
@@ -56,7 +54,7 @@ class CoreDataManager {
         
         let object = NSManagedObject(entity: entityDescription, insertInto: Storage.Instance.context)
         
-        for (key,value) in remove(keys: skippedKeys, from: data) {
+        for (key,value) in data {
             object.setValue(value, forKey: key)
         }
         
@@ -66,31 +64,45 @@ class CoreDataManager {
         return object
     }
     
-    func upsert(entity:String, withData data:[String:Any], withId idKey:String = "id", skippedKeys: [String] = []) throws -> NSManagedObject {
+    /// Updates the current element or insert it as a new one if that one does not exists.
+    ///
+    /// - Parameters:
+    ///   - entity: Name of the entity to upsert.
+    ///   - data: Dictionary with information to upsert.
+    ///   - idKey: Identify the element, it **must** be the same in the `Local Storage` and in the `Dictionary` provided.
+    /// - Returns: The upserted object.
+    /// - Throws: `Creating an entityDescription`, `Saving`.
+    func upsert(_ entity:String, with data:[String:Any], withId idKey:String = "id") throws -> NSManagedObject {
         
         //Check input id
         guard let id = data[idKey] as? String else {
-            throw NSError(domain: "CDM upsert entity \(entity) failed reading input data \(idKey)", code: CoreDataManagerError.IdNotFoundInInput.rawValue, userInfo: ["data":data, "skippedkeys":skippedKeys])
+            throw NSError(domain: "CDM upsert entity \(entity) failed reading input data \(idKey)", code: CoreDataManagerError.IdNotFoundInInput.rawValue, userInfo: ["data":data])
         }
         
         //Look for an existing object with id
-        if let object = retrieve(entity: entity, withPredicate: NSPredicate(format: "\(idKey) == %@", id))?.first {
+        if let object = retrieve(entity, with: NSPredicate(idKey, NSPredicateOperation.equal, id))?.first {
             
-            for key in remove(keys: skippedKeys, from: object.keys) {
-                object.setValue(data[key], forKey: key)
+            for (key,value) in data {
+                object.setValue(value, forKey: key)
             }
+
+            if Storage.Instance.save() != Storage.SaveStatus.saved { throw NSError(domain: "Not Saved Properly", code: CoreDataManagerError.NotSavedProperly.rawValue, userInfo: data) }
             
-            if Storage.Instance.save() != Storage.SaveStatus.saved {
-                throw NSError(domain: "Not Saved Properly", code: CoreDataManagerError.NotSavedProperly.rawValue, userInfo: data)
-            }
             return object
         }else{
-            return try store(entity: entity, withData: data, skippedKeys: skippedKeys)
+            return try store(entity, with: data)
         }
     }
     
+    /// Deletes the entity specifies following the criteria defined by the predicate.
+    ///
+    /// - Parameters:
+    ///   - entity: Name of the entity to delete.
+    ///   - predicate: *Optional* predicate to filter fetch.
+    /// - Throws: `Object not found`.
     func delete(entity: String, withPredicate predicate: NSPredicate? = nil) throws {
-        guard let results = retrieve(entity: entity, withPredicate: predicate) else {
+        
+        guard let results = retrieve(entity, with: predicate) else {
             throw NSError(domain: "Object to delete not found", code: CoreDataManagerError.ObjectNotFound.rawValue, userInfo: ["entity":entity, "predicate":predicate.debugDescription])
         }
         
@@ -99,12 +111,17 @@ class CoreDataManager {
         }
     }
     
+    /// Attempts to commit unsaved changes to registered objects.
+    ///
+    /// - Throws: `Not saved properly`.
     func save() throws {
         if Storage.Instance.save() != Storage.SaveStatus.saved {
             throw NSError(domain: "Not Saved Properly", code: CoreDataManagerError.NotSavedProperly.rawValue)
         }
     }
-
+    
+    //MARK:- Helpers
+    
 }
 
 /// NSPersistentStoreCoordinator extension

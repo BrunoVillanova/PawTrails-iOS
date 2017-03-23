@@ -30,7 +30,7 @@ class DataManagerTest: XCTestCase {
 //        if let c = CountryCodeManager.get("970") {
 //            print(c.name)
 //        }
-        if let users = CoreDataManager.Instance.retrieve(entity: "User") as? [User] {
+        if let users = CoreDataManager.Instance.retrieve("User") as? [User] {
             for i in users {
                 NSLog("%@", i)
             }

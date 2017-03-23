@@ -16,7 +16,8 @@ protocol PhoneView: NSObjectProtocol, View {
 class PhonePresenter {
     
     weak fileprivate var view: PhoneView?
-    
+    var codes = [CountryCode]()
+
     func attachView(_ view: PhoneView){
         self.view = view
         getCountryCodes()
@@ -26,17 +27,6 @@ class PhonePresenter {
         self.view = nil
     }
     
-    func getCountryCodes(){
-        if let codes = DataManager.Instance.getCountryCodes() {
-            self.view?.loadCountryCodes(codes)
-        }else{
-            self.view?.countryCodesNotFound()
-        }
-    }
-    
-    func getCurrentCountryCode() -> String? {
-        return DataManager.Instance.getCurrentCountryCode()
-    }
     
 }
 

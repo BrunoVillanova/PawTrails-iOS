@@ -12,29 +12,19 @@ class BirthdayViewController: UIViewController {
     
     @IBOutlet weak var datePicker: UIDatePicker!
     
-    var parentEditor: EditProfileTableViewController!
-    var birthday: Date? = nil
+    var parentEditor: EditProfilePresenter!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if birthday != nil {
-            datePicker.setDate(birthday!, animated: true)
+        if let birthday = parentEditor.getBirthday() {
+            datePicker.setDate(birthday, animated: true)
         }
     }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        parentEditor.setBithdate(datePicker.date)
-    }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func saveAction(_ sender: UIBarButtonItem) {
+        parentEditor.set(birthday: datePicker.date)
+        self.view.endEditing(true)
+        self.navigationController?.dismiss(animated: true, completion: nil)
     }
-    */
 
 }

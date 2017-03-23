@@ -31,7 +31,7 @@ struct APIManagerError: Error {
         case handleError
     }
 
-    let call: APIManager.call
+    let call: APICallType
     let httpCode: Int
     let specificCode: Int
     let kind: errorKind?

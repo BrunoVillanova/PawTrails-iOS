@@ -20,9 +20,9 @@ class AuthManager {
        return SharedPreferences.has(.id) && SharedPreferences.has(.token)
     }
     
-    func register(_ email:String, _ password: String, completition: @escaping errorCallback) {
+    func signUp(_ email:String, _ password: String, completition: @escaping errorCallback) {
         let data = ["email":email, "password":password]
-        APIManager.Instance.performCall(.register, data) { (error, data) in
+        APIManager.Instance.perform(call: .signUp, with: data) { (error, data) in
             if error != nil {
                 completition(self.handleAuthErrors(error, data))
             }else if data != nil {
@@ -33,7 +33,7 @@ class AuthManager {
     
     func signIn(_ email:String, _ password: String, completition: @escaping errorCallback) {
         let data = ["email":email, "password":password]
-        APIManager.Instance.performCall(.signin, data) { (error, data) in
+        APIManager.Instance.perform(call: .signin, with: data) { (error, data) in
             if error != nil {
                 completition(self.handleAuthErrors(error))
             }else if data != nil {
@@ -44,7 +44,7 @@ class AuthManager {
     
     func signInSocial(_ email:String, _ token: String, completition: @escaping errorCallback){
         let data = ["email":email, "token":token]
-        APIManager.Instance.performCall(.signinsocial, data) { (error, data) in
+        APIManager.Instance.perform(call: .signinsocial, with: data) { (error, data) in
             if error != nil {
                 completition(self.handleAuthErrors(error))
             }else if data != nil {
@@ -81,7 +81,7 @@ class AuthManager {
     
     func sendPasswordReset(_ email:String, completition: @escaping errorCallback) {
         let data = ["email":email]
-        APIManager.Instance.performCall(.passwordReset, data) { (error, data) in
+        APIManager.Instance.perform(call: .passwordReset, with: data) { (error, data) in
             if error != nil {
                 completition(self.handleAuthErrors(error))
             }else{
@@ -91,8 +91,8 @@ class AuthManager {
     }
     
     func changeUsersPassword(_ email:String, _ password:String, _ newPassword:String, completition: @escaping errorCallback) {
-        let data = ["id": SharedPreferences.get(.id), "email":email, "password":password, "new_password":newPassword]
-        APIManager.Instance.performCall(.passwordChange, data) { (error, data) in
+        let data = ["id": SharedPreferences.get(.id) ?? "", "email":email, "password":password, "new_password":newPassword]
+        APIManager.Instance.perform(call: .passwordChange, with: data) { (error, data) in
             if error != nil {
                 completition(self.handleAuthErrors(error))
             }else{
