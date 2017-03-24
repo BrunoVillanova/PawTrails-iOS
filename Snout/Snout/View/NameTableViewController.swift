@@ -30,9 +30,10 @@ class NameTableViewController: UITableViewController, UITextFieldDelegate {
     
     @IBAction func saveAction(_ sender: UIBarButtonItem?) {
         parentEditor.set(name: nameTextField.text)
-        parentEditor.set(name: surnameTextField.text)
+        parentEditor.set(surname: surnameTextField.text)
+        parentEditor.refresh()
         view.endEditing(true)
-        navigationController?.dismiss(animated: true, completion: nil)
+        _ = self.navigationController?.popViewController(animated: true)
     }
     
     // MARK: - UITextFieldDelegate

@@ -48,6 +48,15 @@ extension Address {
         return desc.joined(separator: ", ")
 
     }
+    
+    func update(with data:[String:String]) {
+        for (k,v) in data {
+            if self.keys.contains(k) {
+                self.setValue(v, forKey: k)
+            }
+        }
+    }
+
 }
 // MARK:- Data Management
 
@@ -122,6 +131,7 @@ extension NSManagedObject {
         }
         return out
     }
+    
     
     public var keys: [String] {
         return Array(self.entity.attributesByName.keys)
@@ -285,7 +295,7 @@ extension UIView {
         self.layer.masksToBounds = true
     }
     
-    func rightSeparator(color: UIColor = UIColor.lightText, width: CGFloat = 1.0) {
+    func rightSeparator(color: UIColor = UIColor.lightGray, width: CGFloat = 0.5) {
         
         let border = CALayer()
         border.borderColor = color.cgColor

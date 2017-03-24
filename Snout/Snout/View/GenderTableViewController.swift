@@ -22,8 +22,9 @@ class GenderTableViewController: UITableViewController {
     
     @IBAction func saveAction(_ sender: UIBarButtonItem) {
         parentEditor.set(gender: selected)
+        parentEditor.refresh()
         view.endEditing(true)
-        navigationController?.dismiss(animated: true, completion: nil)
+        _ = self.navigationController?.popViewController(animated: true)
     }
 
 

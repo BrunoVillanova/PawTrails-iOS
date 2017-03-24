@@ -45,13 +45,7 @@ class EditProfileTableViewController: UITableViewController, EditProfileView , U
         print("Saved")
 //        self.presenter.save()
     }
-    
-    @IBAction func changeImageAction(_ sender: UIButton) {
-        imagePicker.allowsEditing = false
-        imagePicker.sourceType = .photoLibrary
-        self.present(self.imagePicker, animated: true, completion: nil)
-    }
-    
+        
     // MARK: - EditProfileView
 
     func loadData(user: User) {
@@ -68,8 +62,7 @@ class EditProfileTableViewController: UITableViewController, EditProfileView , U
         }
         
         phoneLabel.text = user.phone?.toString
-        if let address = user.address?.toString {  addressLabel.text = addressLabel.text?.replacingOccurrences(of: "Undefined", with: address) }
-        
+        addressLabel.text = user.address?.toString        
     }
     
     func emailFormat() {

@@ -28,8 +28,9 @@ class EmailTableViewController: UITableViewController, UITextFieldDelegate {
             emailTextField.shake()
         }else{
             parentEditor.set(email: emailTextField.text)
-            self.view.endEditing(true)
-            self.navigationController?.dismiss(animated: true, completion: nil)
+            parentEditor.refresh()
+            view.endEditing(true)
+            _ = self.navigationController?.popViewController(animated: true)
         }
     }
 

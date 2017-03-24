@@ -23,8 +23,9 @@ class BirthdayViewController: UIViewController {
     
     @IBAction func saveAction(_ sender: UIBarButtonItem) {
         parentEditor.set(birthday: datePicker.date)
-        self.view.endEditing(true)
-        self.navigationController?.dismiss(animated: true, completion: nil)
+        parentEditor.refresh()
+        view.endEditing(true)
+        _ = self.navigationController?.popViewController(animated: true)
     }
 
 }

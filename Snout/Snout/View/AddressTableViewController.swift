@@ -75,6 +75,9 @@ class AddressTableViewController: UITableViewController, UIPickerViewDelegate, U
         data["state"] = stateTextField.text ?? ""
         data["country"] = (selectedCC?.shortname != nil && self.countryTextField.text != nil && countryTextField.text != "") ? selectedCC?.shortname : ""
         self.parentEditor.set(address: data)
+        parentEditor.refresh()
+        view.endEditing(true)
+        _ = self.navigationController?.popViewController(animated: true)
     }
 
     // MARK: - UIPickerViewDelegate

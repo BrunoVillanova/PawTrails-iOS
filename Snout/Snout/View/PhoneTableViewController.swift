@@ -46,6 +46,9 @@ class PhoneTableViewController: UITableViewController, UIPickerViewDataSource, U
     
     @IBAction func saveAction(_ sender: UIBarButtonItem?) {
         parentEditor.set(phone: numberTextField.text, selectedCC)
+        parentEditor.refresh()
+        view.endEditing(true)
+        _ = self.navigationController?.popViewController(animated: true)
     }
     
     // MARK: - UIPickerViewDelegate

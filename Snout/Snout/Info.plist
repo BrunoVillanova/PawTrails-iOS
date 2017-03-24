@@ -61,13 +61,13 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Scan QR Code</string>
+	<string>Change profile photo or scan tracking device</string>
 	<key>NSContactsUsageDescription</key>
 	<string>Your contacts photos and information</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Locate user on the screen</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>User and pet profile photos.</string>
+	<string>Change profile photo</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -89,5 +89,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>

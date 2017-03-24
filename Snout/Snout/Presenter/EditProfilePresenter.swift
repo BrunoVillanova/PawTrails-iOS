@@ -53,6 +53,10 @@ class EditProfilePresenter {
         }
     }
     
+    func refresh(){
+        self.view?.loadData(user: user)
+    }
+    
     //MARK:- Getters
     
     func getName() -> String? {
@@ -116,10 +120,13 @@ class EditProfilePresenter {
         self.phone = [String:Any]()
         self.phone?["number"] = number
         self.phone?["country_code"] = cc.code ?? ""
+        user.phone?.number = number
+        user.phone?.country_code = cc
     }
     
     func set(address data:[String:String]){
         self.address = data
+        user.address?.update(with: data)
     }
     
     
