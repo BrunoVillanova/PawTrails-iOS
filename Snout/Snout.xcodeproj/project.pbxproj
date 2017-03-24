@@ -608,7 +608,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" e76cedb9a39947937435de66d038998aa19bd740 d8c0f054e2259863ecb27f88ba96c68c04ea392f7493f39457b4532c5e6a7a42";
+			shellScript = "#\"${PODS_ROOT}/Fabric/run\" e76cedb9a39947937435de66d038998aa19bd740 d8c0f054e2259863ecb27f88ba96c68c04ea392f7493f39457b4532c5e6a7a42";
 		};
 		7EBF939C6B838E47B68754AC /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

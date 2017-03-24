@@ -1,0 +1,1830 @@
+136.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphPropertyName.swift:36:10	public init?(_ string: String)
+135.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphPropertyName.swift:36:10	public init?(_ string: String)
+97.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookLogin/Sources/Login/LoginResult.swift:36:12	internal init(sdkResult: FBSDKLoginManagerLoginResult?, error: Error?)
+95.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:592:18	private func processOneRawMessage(inBuffer buffer: UnsafeBufferPointer<UInt8>) -> UnsafeBufferPointer<UInt8>
+94.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:592:18	private func processOneRawMessage(inBuffer buffer: UnsafeBufferPointer<UInt8>) -> UnsafeBufferPointer<UInt8>
+92.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEvent.Builtin.swift:35:22	public static func completedRegistration(registrationMethod: String? = default, valueToSum: Double? = default, extraParameters: ParametersDictionary = default) -> AppEvent
+91.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookLogin/Sources/Login/LoginResult.swift:36:12	internal init(sdkResult: FBSDKLoginManagerLoginResult?, error: Error?)
+83.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/PhoneManager.swift:15:17	static func set(_ data: Any?, to user: inout User)
+83.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/UserManager.swift:16:17	static func upsert(_ data: [String : Any])
+82.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/AddressManager.swift:13:17	static func set(_ data: Any?, to user: inout User)
+81.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/InitialPresenter.swift:35:10	func loginFB(vc: InitialViewController)
+78.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/InitialPresenter.swift:35:10	func loginFB(vc: InitialViewController)
+78.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/AddressManager.swift:13:17	static func set(_ data: Any?, to user: inout User)
+77.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/UserManager.swift:16:17	static func upsert(_ data: [String : Any])
+77.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/PetManager.swift:18:17	static func upsertPet(_ data: [String : Any])
+76.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/LocationManager.swift:13:17	static func set(_ data: Any?, to pet: inout Pet)
+76.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/PhoneManager.swift:15:17	static func set(_ data: Any?, to user: inout User)
+75.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/PetManager.swift:18:17	static func upsertPet(_ data: [String : Any])
+75.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/LocationManager.swift:13:17	static func set(_ data: Any?, to pet: inout Pet)
+72.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketParsable.swift:35:18	private func handleConnect(_ packetNamespace: String)
+72.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/AddressViewController.swift:38:19	@objc override func viewWillDisappear(_ animated: Bool)
+71.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/PhoneViewController.swift:34:19	@objc override func viewWillDisappear(_ animated: Bool)
+71.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngineWebsocket.swift:35:10	func probeWebSocket()
+70.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/PetProfileViewController.swift:21:19	@objc override func viewDidLoad()
+69.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/PhoneViewController.swift:34:19	@objc override func viewWillDisappear(_ animated: Bool)
+69.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngineWebsocket.swift:35:10	func probeWebSocket()
+65.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClientSpec.swift:38:10	func didError(reason: String)
+65.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/AuthManager.swift:23:10	func register(_ email: String, _ password: String, completition: @escaping errorCallback)
+64.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/CoreDataManager.swift:25:10	func retrieve(_ entity: String, with predicate: NSPredicate? = default) -> [NSManagedObject]?
+64.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEvent.Builtin.swift:35:22	public static func completedRegistration(registrationMethod: String? = default, valueToSum: Double? = default, extraParameters: ParametersDictionary = default) -> AppEvent
+63.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/PetProfileViewController.swift:21:19	@objc override func viewDidLoad()
+63.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/ChangePasswordViewController.swift:22:19	@objc override func viewDidLoad()
+63.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEnginePollable.swift:65:10	func createRequestForPostWithPostWait() -> URLRequest
+62.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SSLSecurity.swift:71:24	public convenience init(usePublicKeys: Bool = default)
+62.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/ChangePasswordViewController.swift:22:19	@objc override func viewDidLoad()
+62.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEnginePollable.swift:65:10	func createRequestForPostWithPostWait() -> URLRequest
+60.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClientSpec.swift:38:10	func didError(reason: String)
+59.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/SignInViewController.swift:19:19	@objc override func viewDidLoad()
+59.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/SignInViewController.swift:19:19	@objc override func viewDidLoad()
+59.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/CVSParser.swift:21:10	func loadCountryCodes()
+59.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/AuthManager.swift:23:10	func register(_ email: String, _ password: String, completition: @escaping errorCallback)
+59.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/AddressViewController.swift:38:19	@objc override func viewWillDisappear(_ animated: Bool)
+59.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/GraphRequest/GraphAPIVersion.swift:36:55	(closure)
+59.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SSLSecurity.swift:71:24	public convenience init(usePublicKeys: Bool = default)
+58.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/GraphRequest/GraphAPIVersion.swift:36:55	(closure)
+58.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/SignInPresenter.swift:31:10	func signIn(email: String, password: String)
+58.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/RegisterPresenter.swift:31:10	func register(email: String, password: String)
+57.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/AppInvite/AppInvite.PromoCode.swift:103:27	fileprivate static func truncate(string: String) -> String
+57.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/GraphRequest/GraphRequestProtocol.Bridge.swift:23:46	get {}
+57.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/AddChangeDeviceViewController.swift:94:10	@objc func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!)
+57.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/CVSParser.swift:21:10	func loadCountryCodes()
+57.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketParsable.swift:35:18	private func handleConnect(_ packetNamespace: String)
+57.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/RegisterPresenter.swift:31:10	func register(email: String, password: String)
+56.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/InitialPresenter.swift:37:76	(closure)
+56.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/GraphRequest/GraphRequestProtocol.Bridge.swift:23:46	get {}
+56.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/SignInPresenter.swift:31:10	func signIn(email: String, password: String)
+56.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/UserProfile/UserProfile.FetchResult.swift:35:12	internal init(sdkProfile: FBSDKProfile?, error: Error?)
+55.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/AddChangeDeviceViewController.swift:94:10	@objc func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!)
+55.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/InitialPresenter.swift:37:76	(closure)
+54.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/EditProfileTableViewController.swift:27:19	@objc override func viewDidLoad()
+53.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/Permissions/ReadPermission.swift:41:44	get {}
+53.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/Permissions/ReadPermission.swift:41:44	get {}
+53.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/Permissions/PublishPermission.swift:41:44	get {}
+53.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/Permissions/PublishPermission.swift:41:44	get {}
+52.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngineSpec.swift:64:32	get {}
+52.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/CoreDataManager.swift:25:10	func retrieve(_ entity: String, with predicate: NSPredicate? = default) -> [NSManagedObject]?
+51.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngineSpec.swift:64:32	get {}
+50.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/HomeViewController.swift:83:20	@IBAction @objc func handleLongPressure(_ sender: UILongPressGestureRecognizer)
+50.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/HomeViewController.swift:83:20	@IBAction @objc func handleLongPressure(_ sender: UILongPressGestureRecognizer)
+49.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/DataManager.swift:41:18	private func handleUser(with data: [String : Any]?, _ callback: @escaping userCallback)
+49.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/AppInvite/AppInvite.PromoCode.swift:103:27	fileprivate static func truncate(string: String) -> String
+49.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/Permissions/Permission.swift:71:29	get {}
+49.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/DataManager.swift:41:18	private func handleUser(with data: [String : Any]?, _ callback: @escaping userCallback)
+48.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/AddressViewController.swift:54:10	@objc func loadCountries(_ codes: [CountryCode])
+47.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/PasswordRecoveryPresenter.swift:29:10	func sendRecoveryEmail(email: String, checked: Bool)
+47.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/PasswordRecoveryPresenter.swift:29:10	func sendRecoveryEmail(email: String, checked: Bool)
+46.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClientOption.swift:53:36	get {}
+45.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/EditProfilePresenter.swift:24:10	func name() -> String
+45.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/UserProfile/UserProfile.FetchResult.swift:35:12	internal init(sdkProfile: FBSDKProfile?, error: Error?)
+45.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/EditProfilePresenter.swift:24:10	func name() -> String
+45.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/Notifier.swift:22:10	func connectedToNetwork()
+45.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketLogger.swift:39:10	func log(_ message: String, type: String, args: Any...)
+45.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClientOption.swift:53:36	get {}
+45.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketLogger.swift:39:10	func log(_ message: String, type: String, args: Any...)
+45.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/AddressViewController.swift:54:10	@objc func loadCountries(_ codes: [CountryCode])
+44.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/EditProfileTableViewController.swift:62:20	@IBAction @objc func logoutAction(_ sender: UIButton)
+44.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/EditProfileTableViewController.swift:27:19	@objc override func viewDidLoad()
+44.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEventName.swift:91:31	get {}
+44.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/Notifier.swift:22:10	func connectedToNetwork()
+44.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEventName.swift:91:31	get {}
+43.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/SafeZoneViewController.swift:76:19	@objc override func viewDidLoad()
+43.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/PasswordRecoveryViewController.swift:23:19	@objc override func viewDidLoad()
+43.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:70:9	final didSet {}
+42.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:70:9	final didSet {}
+42.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/PasswordRecoveryViewController.swift:23:19	@objc override func viewDidLoad()
+42.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/UserProfile/UserProfile.swift:106:22	public static func fetch(userId: String, completion: @escaping Completion)
+42.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/Permissions/Permission.swift:71:29	get {}
+41.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEventParameterName.swift:120:29	get {}
+40.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEventParameterName.swift:120:29	get {}
+40.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/PhoneViewController.swift:47:10	@objc func loadCountryCodes(_ codes: [CountryCode])
+40.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/PhoneViewController.swift:47:10	@objc func loadCountryCodes(_ codes: [CountryCode])
+40.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/EditProfileTableViewController.swift:62:20	@IBAction @objc func logoutAction(_ sender: UIButton)
+40.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SSLSecurity.swift:133:17	public func isValid(_ trust: SecTrust, domain: String?) -> Bool
+39.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/SafeZoneViewController.swift:209:10	@objc func updateFenceDistance()
+39.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/EditProfilePresenter.swift:122:18	private func updateAddressDecripton()
+38.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/SafeZoneViewController.swift:76:19	@objc override func viewDidLoad()
+38.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/EmojiManager.swift:18:5	init()
+38.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/AddChangeDeviceViewController.swift:65:10	@objc func loadCameraOutput()
+38.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/SafeZoneViewController.swift:209:10	@objc func updateFenceDistance()
+38.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketAckManager.swift:67:19	mutating func timeoutAck(_ ack: Int, onQueue: DispatchQueue)
+37.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/EditProfilePresenter.swift:122:18	private func updateAddressDecripton()
+37.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/Common/AccessToken.swift:141:49	get {}
+37.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/BirthdayViewController.swift:18:19	@objc override func viewDidLoad()
+36.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEnginePollable.swift:48:18	private func addHeaders(for req: URLRequest) -> URLRequest
+36.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/EmojiManager.swift:18:5	init()
+36.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketAckManager.swift:67:19	mutating func timeoutAck(_ ack: Int, onQueue: DispatchQueue)
+36.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/UserProfile/UserProfile.swift:106:22	public static func fetch(userId: String, completion: @escaping Completion)
+35.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/AddChangeDeviceViewController.swift:65:10	@objc func loadCameraOutput()
+35.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/HomePresenter.swift:45:10	func getUser()
+35.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Reachability.swift:28:24	@objc private func checkConnection()
+35.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketAckEmitter.swift:65:5	@objc deinit
+35.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/HomePresenter.swift:58:10	func testPets()
+35.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/HomePresenter.swift:47:38	(closure)
+35.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/HomePresenter.swift:45:10	func getUser()
+34.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/GraphRequest/GraphRequestConnection.swift:89:15	public func add<T : GraphRequestProtocol>(_ request: T, batchEntryName: String? = default, completion: Completion<T>? = default)
+34.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEnginePollable.swift:48:18	private func addHeaders(for req: URLRequest) -> URLRequest
+34.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketAckEmitter.swift:65:5	@objc deinit
+34.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/HomePresenter.swift:47:38	(closure)
+34.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookLogin/Sources/Login/LoginButtonDelegateBridge.swift:26:8	@objc func setupAsDelegateFor(_ sdkLoginButton: FBSDKLoginButton, loginButton: LoginButton)
+34.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookLogin/Sources/Login/LoginButton.swift:78:10	public init(frame: CGRect? = default, readPermissions: [ReadPermission])
+34.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/ChangePasswordPresenter.swift:42:10	func changePassword(password: String, newPassword: String, newPassword2: String)
+33.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/HomePresenter.swift:58:10	func testPets()
+33.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/CoreDataManager.swift:156:17	static func coordinator(name: String) throws -> NSPersistentStoreCoordinator?
+33.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookLogin/Sources/Login/LoginButtonDelegateBridge.swift:26:8	@objc func setupAsDelegateFor(_ sdkLoginButton: FBSDKLoginButton, loginButton: LoginButton)
+33.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Reachability.swift:28:24	@objc private func checkConnection()
+33.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/GraphRequest/GraphRequestConnection.swift:89:15	public func add<T : GraphRequestProtocol>(_ request: T, batchEntryName: String? = default, completion: Completion<T>? = default)
+33.0ms	/Users/iosdeveloper/Library/Developer/Xcode/DerivedData/Snout-cjrhpaafncyectajklpaktuzslug/Build/Intermediates/Snout.build/Debug-iphoneos/Snout.build/DerivedSources/CoreDataGenerated/Snout/Address+CoreDataProperties.swift:16:32	@nonobjc public class func fetchRequest() -> NSFetchRequest<Address>
+33.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketAnyEvent.swift:30:45	@objc override final get {}
+32.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/AddressViewController.swift:28:19	@objc override func viewDidLoad()
+32.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/CoreDataManager.swift:156:17	static func coordinator(name: String) throws -> NSPersistentStoreCoordinator?
+32.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/BirthdayViewController.swift:18:19	@objc override func viewDidLoad()
+32.5ms	/Users/iosdeveloper/Library/Developer/Xcode/DerivedData/Snout-cjrhpaafncyectajklpaktuzslug/Build/Intermediates/Snout.build/Debug-iphoneos/Snout.build/DerivedSources/CoreDataGenerated/Snout/CountryCode+CoreDataProperties.swift:16:32	@nonobjc public class func fetchRequest() -> NSFetchRequest<CountryCode>
+32.1ms	/Users/iosdeveloper/Library/Developer/Xcode/DerivedData/Snout-cjrhpaafncyectajklpaktuzslug/Build/Intermediates/Snout.build/Debug-iphoneos/Snout.build/DerivedSources/CoreDataGenerated/Snout/Phone+CoreDataProperties.swift:16:32	@nonobjc public class func fetchRequest() -> NSFetchRequest<Phone>
+32.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngineSpec.swift:78:10	func createBinaryDataForSend(using data: Data) -> Either<Data, String>
+32.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/ChangePasswordPresenter.swift:42:10	func changePassword(password: String, newPassword: String, newPassword2: String)
+32.0ms	/Users/iosdeveloper/Library/Developer/Xcode/DerivedData/Snout-cjrhpaafncyectajklpaktuzslug/Build/Intermediates/Snout.build/Debug-iphoneos/Snout.build/DerivedSources/CoreDataGenerated/Snout/Pet+CoreDataProperties.swift:16:32	@nonobjc public class func fetchRequest() -> NSFetchRequest<Pet>
+32.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketAnyEvent.swift:30:45	@objc override final get {}
+31.8ms	/Users/iosdeveloper/Library/Developer/Xcode/DerivedData/Snout-cjrhpaafncyectajklpaktuzslug/Build/Intermediates/Snout.build/Debug-iphoneos/Snout.build/DerivedSources/CoreDataGenerated/Snout/Location+CoreDataProperties.swift:16:32	@nonobjc public class func fetchRequest() -> NSFetchRequest<Location>
+31.8ms	/Users/iosdeveloper/Library/Developer/Xcode/DerivedData/Snout-cjrhpaafncyectajklpaktuzslug/Build/Intermediates/Snout.build/Debug-iphoneos/Snout.build/DerivedSources/CoreDataGenerated/Snout/CountryCode+CoreDataProperties.swift:16:32	@nonobjc public class func fetchRequest() -> NSFetchRequest<CountryCode>
+31.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/HomeViewController.swift:300:10	func blurView(_ action: blurViewAction, speed: Double = default, animated: Bool = default)
+31.5ms	/Users/iosdeveloper/Library/Developer/Xcode/DerivedData/Snout-cjrhpaafncyectajklpaktuzslug/Build/Intermediates/Snout.build/Debug-iphoneos/Snout.build/DerivedSources/CoreDataGenerated/Snout/Pet+CoreDataProperties.swift:16:32	@nonobjc public class func fetchRequest() -> NSFetchRequest<Pet>
+31.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngineSpec.swift:78:10	func createBinaryDataForSend(using data: Data) -> Either<Data, String>
+31.1ms	/Users/iosdeveloper/Library/Developer/Xcode/DerivedData/Snout-cjrhpaafncyectajklpaktuzslug/Build/Intermediates/Snout.build/Debug-iphoneos/Snout.build/DerivedSources/CoreDataGenerated/Snout/Location+CoreDataProperties.swift:16:32	@nonobjc public class func fetchRequest() -> NSFetchRequest<Location>
+31.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/HomeViewController.swift:300:10	func blurView(_ action: blurViewAction, speed: Double = default, animated: Bool = default)
+31.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEventsLogger.swift:86:22	public static func activate(_ application: UIApplication = default)
+31.0ms	/Users/iosdeveloper/Library/Developer/Xcode/DerivedData/Snout-cjrhpaafncyectajklpaktuzslug/Build/Intermediates/Snout.build/Debug-iphoneos/Snout.build/DerivedSources/CoreDataGenerated/Snout/Phone+CoreDataProperties.swift:16:32	@nonobjc public class func fetchRequest() -> NSFetchRequest<Phone>
+31.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEventsLogger.swift:86:22	public static func activate(_ application: UIApplication = default)
+30.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/RegisterViewController.swift:19:19	@objc override func viewDidLoad()
+30.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/Common/AccessToken.swift:141:49	get {}
+30.6ms	/Users/iosdeveloper/Library/Developer/Xcode/DerivedData/Snout-cjrhpaafncyectajklpaktuzslug/Build/Intermediates/Snout.build/Debug-iphoneos/Snout.build/DerivedSources/CoreDataGenerated/Snout/Address+CoreDataProperties.swift:16:32	@nonobjc public class func fetchRequest() -> NSFetchRequest<Address>
+30.5ms	/Users/iosdeveloper/Library/Developer/Xcode/DerivedData/Snout-cjrhpaafncyectajklpaktuzslug/Build/Intermediates/Snout.build/Debug-iphoneos/Snout.build/DerivedSources/CoreDataGenerated/Snout/User+CoreDataProperties.swift:16:32	@nonobjc public class func fetchRequest() -> NSFetchRequest<User>
+30.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SSLSecurity.swift:133:17	public func isValid(_ trust: SecTrust, domain: String?) -> Bool
+30.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/Common/SDKSettings.swift:144:5	get {}
+29.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookLogin/Sources/Login/LoginButton.swift:78:10	public init(frame: CGRect? = default, readPermissions: [ReadPermission])
+29.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content Sharing/GraphSharer.swift:117:5	final get {}
+29.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/RegisterViewController.swift:19:19	@objc override func viewDidLoad()
+29.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Reachability.swift:44:18	private func isConnectedToNetwork() -> Bool
+29.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Reachability.swift:44:18	private func isConnectedToNetwork() -> Bool
+29.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/AddressViewController.swift:28:19	@objc override func viewDidLoad()
+29.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/GameRequest/GameRequest.Recipient.swift:47:29	get {}
+29.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/SocketIOManager.swift:54:10	@objc func isConnected() -> Bool
+28.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/AddChangeDeviceViewController.swift:23:19	@objc override func viewDidLoad()
+28.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/SocketIOManager.swift:84:10	@objc func listen(name: String, _ completionHandler: @escaping (_ latitude: Double, _ longitude: Double) -> Void)
+28.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/Common/Hashtag.swift:57:29	get {}
+28.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketLogger.swift:47:18	private func abstractLog(_ logType: String, message: String, type: String, args: [Any])
+28.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:134:17	@objc public final func connect(timeoutAfter: Int, withHandler handler: (() -> Void)?)
+28.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/SocketIOManager.swift:85:36	(closure)
+28.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content Sharing/GraphSharer.swift:117:5	final get {}
+28.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketLogger.swift:47:18	private func abstractLog(_ logType: String, message: String, type: String, args: [Any])
+28.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphAction.swift:46:56	get {}
+27.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/AddChangeDeviceViewController.swift:23:19	@objc override func viewDidLoad()
+27.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/ShareDialog/ShareDialog.swift:72:5	final get {}
+27.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookLogin/Sources/Login/LoginManager.swift:78:15	public final func logIn(_ permissions: [ReadPermission] = default, viewController: UIViewController? = default, completion: ((LoginResult) -> Void)? = default)
+27.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:306:18	private func initStreamsWithData(_ data: Data, _ port: Int)
+27.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/SocketIOManager.swift:54:10	@objc func isConnected() -> Bool
+27.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/RegisterViewController.swift:33:10	@objc func register()
+27.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:306:18	private func initStreamsWithData(_ data: Data, _ port: Int)
+27.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketPacket.swift:104:18	private func createPacketString() -> String
+27.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/ShareButton.swift:52:19	@objc required public init?(coder aDecoder: NSCoder)
+27.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/RegisterViewController.swift:33:10	@objc func register()
+27.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/DataManager.swift:30:18	private func loadUser(callback: @escaping userCallback)
+27.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/SendButton.swift:52:19	@objc required public init?(coder aDecoder: NSCoder)
+27.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/SocketIOManager.swift:84:10	@objc func listen(name: String, _ completionHandler: @escaping (_ latitude: Double, _ longitude: Double) -> Void)
+27.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/MessageDialog/MessageDialog.swift:45:5	final get {}
+27.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/Common/Hashtag.swift:57:29	get {}
+27.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/AppInvite/AppInvite.PromoCode.swift:50:29	get {}
+27.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/DataManager.swift:32:53	(closure)
+27.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/ShareDialog/ShareDialog.swift:72:5	final get {}
+26.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketParsable.swift:65:10	func parseString(_ message: String) -> Either<String, SocketPacket>
+26.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookLogin/Sources/Login/LoginManager.swift:78:15	public final func logIn(_ permissions: [ReadPermission] = default, viewController: UIViewController? = default, completion: ((LoginResult) -> Void)? = default)
+26.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/SocketIOManager.swift:85:36	(closure)
+26.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphAction.swift:46:56	get {}
+26.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/ShareButton.swift:52:19	@objc required public init?(coder aDecoder: NSCoder)
+26.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/GameRequest/GameRequest.Recipient.swift:47:29	get {}
+26.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/SendButton.swift:52:19	@objc required public init?(coder aDecoder: NSCoder)
+26.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/MessageDialog/MessageDialog.swift:45:5	final get {}
+26.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/DataManager.swift:30:18	private func loadUser(callback: @escaping userCallback)
+25.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/ChangePasswordPresenter.swift:29:10	func attachView(_ view: ChangePasswordView)
+25.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/ChangePasswordPresenter.swift:29:10	func attachView(_ view: ChangePasswordView)
+25.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketPacket.swift:104:18	private func createPacketString() -> String
+25.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/DataManager.swift:32:53	(closure)
+25.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:829:18	private func dequeueWrite(_ data: Data, code: OpCode, writeCompletion: (() -> ())? = default)
+25.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/AppInvite/AppInvite.PromoCode.swift:50:29	get {}
+25.3ms	/Users/iosdeveloper/Library/Developer/Xcode/DerivedData/Snout-cjrhpaafncyectajklpaktuzslug/Build/Intermediates/Snout.build/Debug-iphoneos/Snout.build/DerivedSources/CoreDataGenerated/Snout/User+CoreDataProperties.swift:16:32	@nonobjc public class func fetchRequest() -> NSFetchRequest<User>
+25.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/EditProfilePresenter.swift:69:22	fileprivate func getUser()
+25.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/EditProfilePresenter.swift:69:22	fileprivate func getUser()
+25.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/ChangePasswordPresenter.swift:31:48	(closure)
+25.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/ChangePasswordPresenter.swift:31:48	(closure)
+25.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/Common/SDKSettings.swift:144:5	get {}
+25.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:830:33	(closure)
+24.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphPropertyValue.swift:31:24	internal static func valueFrom(openGraphObjectValue value: Any) -> OpenGraphPropertyValue?
+24.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/EditProfilePresenter.swift:70:38	(closure)
+24.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/EditProfilePresenter.swift:70:38	(closure)
+24.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/SafeZoneViewController.swift:107:10	@objc func keyboardWillShow(notification: Notification)
+24.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:134:17	@objc public final func connect(timeoutAfter: Int, withHandler handler: (() -> Void)?)
+23.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/SafeZoneViewController.swift:107:10	@objc func keyboardWillShow(notification: Notification)
+23.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketParsable.swift:65:10	func parseString(_ message: String) -> Either<String, SocketPacket>
+23.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/AddressManager.swift:26:17	static func search(_ key: String) -> [String]
+23.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:829:18	private func dequeueWrite(_ data: Data, code: OpCode, writeCompletion: (() -> ())? = default)
+22.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/PasswordRecoveryViewController.swift:34:20	@IBAction @objc func checkAction(_ sender: UIButton)
+22.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:830:33	(closure)
+22.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:72:12	public init(socketURL: URL, config: SocketIOClientConfiguration = default)
+22.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphPropertyValue.swift:31:24	internal static func valueFrom(openGraphObjectValue value: Any) -> OpenGraphPropertyValue?
+21.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketParsable.swift:43:18	private func handlePacket(_ pack: SocketPacket)
+21.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/HomePresenter.swift:67:10	func startTracking(_ i: Int)
+21.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:291:18	private func generateWebSocketKey() -> String
+21.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/PasswordRecoveryViewController.swift:34:20	@IBAction @objc func checkAction(_ sender: UIButton)
+21.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketAckManager.swift:60:19	mutating func executeAck(_ ack: Int, with items: [Any], onQueue: DispatchQueue)
+21.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/AddressManager.swift:26:17	static func search(_ key: String) -> [String]
+21.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:291:18	private func generateWebSocketKey() -> String
+20.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/HomePresenter.swift:67:10	func startTracking(_ i: Int)
+20.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/SignInViewController.swift:94:20	@objc override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+20.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/SignInViewController.swift:94:20	@objc override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+20.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketParsable.swift:151:10	func parseBinaryData(_ data: Data)
+20.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketAckManager.swift:60:19	mutating func executeAck(_ ack: Int, with items: [Any], onQueue: DispatchQueue)
+20.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketAckEmitter.swift:69:17	@objc public final func timingOut(after seconds: Int, callback: @escaping AckCallback)
+20.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketParsable.swift:151:10	func parseBinaryData(_ data: Data)
+20.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketAckEmitter.swift:69:17	@objc public final func timingOut(after seconds: Int, callback: @escaping AckCallback)
+19.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEventHandler.swift:32:10	func executeCallback(with items: [Any], withAck ack: Int, withSocket socket: SocketIOClient)
+19.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketPacket.swift:51:29	get {}
+19.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/SafeZoneViewController.swift:199:10	@objc func textFieldDidEndEditing(_ textField: UITextField)
+19.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEventsLogger.swift:100:22	public static func log(_ event: AppEventLoggable, accessToken: AccessToken? = default)
+19.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketPacket.swift:51:29	get {}
+19.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketPacket.swift:43:21	get {}
+19.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEventHandler.swift:32:10	func executeCallback(with items: [Any], withAck ack: Int, withSocket socket: SocketIOClient)
+18.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEventsLogger.swift:100:22	public static func log(_ event: AppEventLoggable, accessToken: AccessToken? = default)
+18.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/SafeZoneViewController.swift:199:10	@objc func textFieldDidEndEditing(_ textField: UITextField)
+18.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketParsable.swift:43:18	private func handlePacket(_ pack: SocketPacket)
+18.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:72:12	public init(socketURL: URL, config: SocketIOClientConfiguration = default)
+18.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/UserManager.swift:56:17	static func parse(_ user: User, _ phone: [String : Any]?, _ address: [String : Any]?) -> [String : Any]
+18.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketExtensions.swift:45:25	private static func keyValueToSocketIOClientOption(key: String, value: Any) -> SocketIOClientOption?
+18.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/GraphRequest/GraphRequestDataAttachment.swift:55:67	get {}
+17.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketPacket.swift:43:21	get {}
+17.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/SafeZoneViewController.swift:23:5	@objc init(frame: CGRect, isCircle: Bool)
+17.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/GraphRequest/GraphRequestDataAttachment.swift:55:67	get {}
+16.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/Extensions.swift:24:37	get {}
+16.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/UserManager.swift:56:17	static func parse(_ user: User, _ phone: [String : Any]?, _ address: [String : Any]?) -> [String : Any]
+16.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/Extensions.swift:24:37	get {}
+16.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SSLSecurity.swift:93:12	public init(certs: [SSLCert], usePublicKeys: Bool)
+16.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:210:18	private final func createURLs() -> (URL, URL)
+15.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/HomeViewController.swift:171:10	@objc func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
+15.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:210:18	private final func createURLs() -> (URL, URL)
+15.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/HomeViewController.swift:171:10	@objc func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
+15.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEnginePollable.swift:115:10	func doLongPoll(for req: URLRequest)
+15.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/Common/SDKApplicationDelegate.swift:84:15	@available(iOS 9.0, *)
+15.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEnginePollable.swift:116:29	(closure)
+15.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SSLSecurity.swift:93:12	public init(certs: [SSLCert], usePublicKeys: Bool)
+14.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEnginePollable.swift:115:10	func doLongPoll(for req: URLRequest)
+14.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/Common/SDKApplicationDelegate.swift:84:15	@available(iOS 9.0, *)
+14.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEnginePollable.swift:116:29	(closure)
+14.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/APIManager.swift:82:10	func perform(call: APICallType, with data: [String : Any]? = default, completition: @escaping (_ error: APIManagerError?, _ data: [String : Any]?) -> Void)
+14.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/Notifier.swift:30:18	private func notification(title: String, type: notificationType = default) -> UIView
+14.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/AddressViewController.swift:91:10	@objc func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
+14.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/PhoneManager.swift:26:29	fileprivate static func store(_ data: Any?) -> Phone?
+14.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/AddressViewController.swift:91:10	@objc func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
+14.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/EmojiManager.swift:38:17	public func getEmojis(from text: String) -> [String]?
+13.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/LocationManager.swift:35:29	fileprivate static func update(_ location: inout Location, with data: Any?)
+13.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/Notifier.swift:30:18	private func notification(title: String, type: notificationType = default) -> UIView
+13.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/LocationManager.swift:35:29	fileprivate static func update(_ location: inout Location, with data: Any?)
+13.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/SafeZoneViewController.swift:23:5	@objc init(frame: CGRect, isCircle: Bool)
+13.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/PhoneManager.swift:26:29	fileprivate static func store(_ data: Any?) -> Phone?
+13.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/Extensions.swift:196:10	@objc dynamic func shake()
+13.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/Photo/PhotoShareContent.swift:84:60	get {}
+13.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:469:18	private final func sendPing()
+13.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/Extensions.swift:178:10	@objc dynamic func alert(title: String, msg: String, actionTitle: String = default)
+13.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/Photo/PhotoShareContent.swift:84:60	get {}
+13.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketExtensions.swift:45:25	private static func keyValueToSocketIOClientOption(key: String, value: Any) -> SocketIOClientOption?
+13.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:469:18	private final func sendPing()
+12.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/AddChangeDeviceViewController.swift:47:10	@objc func loadCameraInput() -> Bool
+12.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:176:17	@objc public final func connect()
+12.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/EmojiManager.swift:38:17	public func getEmojis(from text: String) -> [String]?
+12.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/AddChangeDeviceViewController.swift:47:10	@objc func loadCameraInput() -> Bool
+12.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:176:17	@objc public final func connect()
+12.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/Extensions.swift:196:10	@objc dynamic func shake()
+12.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/Extensions.swift:78:46	@objc dynamic get {}
+12.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:409:18	private final func _tryReconnect()
+12.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/Common/AccessToken.swift:129:63	get {}
+12.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketExtensions.swift:33:10	func toJSON() throws -> Data
+12.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:455:18	private final func resetEngine()
+12.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookLogin/Sources/Login/LoginButton.swift:46:5	final didSet {}
+11.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/Extensions.swift:78:46	@objc dynamic get {}
+11.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/APIManager.swift:82:10	func perform(call: APICallType, with data: [String : Any]? = default, completition: @escaping (_ error: APIManagerError?, _ data: [String : Any]?) -> Void)
+11.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphObject.swift:82:10	public init(dictionaryLiteral elements: (OpenGraphPropertyName, OpenGraphPropertyValue)...)
+11.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SSLSecurity.swift:97:55	(closure)
+11.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/CoreDataManager.swift:75:10	func upsert(_ entity: String, with data: [String : Any], withId idKey: String = default) throws -> NSManagedObject
+11.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphObject.swift:82:10	public init(dictionaryLiteral elements: (OpenGraphPropertyName, OpenGraphPropertyValue)...)
+11.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/Extensions.swift:178:10	@objc dynamic func alert(title: String, msg: String, actionTitle: String = default)
+11.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/Extensions.swift:147:10	@objc dynamic func setVisibleMapForAnnotations()
+11.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/Extensions.swift:147:10	@objc dynamic func setVisibleMapForAnnotations()
+11.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/Common/AccessToken.swift:129:63	get {}
+11.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClientConfiguration.swift:85:26	public mutating func insert(_ element: Element, replacing replace: Bool = default)
+11.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/GameRequest/GameRequest.SDKDelegate.swift:28:10	@objc func gameRequestDialog(_ gameRequestDialog: FBSDKGameRequestDialog?, didCompleteWithResults results: [AnyHashable : Any]?)
+11.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/AppInvite/AppInvite.SDKDelegate.swift:35:10	@objc func appInviteDialog(_ appInviteDialog: FBSDKAppInviteDialog?, didCompleteWithResults results: [AnyHashable : Any]?)
+11.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:456:18	private func dequeueInput()
+11.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:409:18	private final func _tryReconnect()
+11.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:455:18	private final func resetEngine()
+11.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/Extensions.swift:127:10	func filtered(by keys: [String]) -> Dictionary
+11.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClientConfiguration.swift:85:26	public mutating func insert(_ element: Element, replacing replace: Bool = default)
+11.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketExtensions.swift:33:10	func toJSON() throws -> Data
+11.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/AppInvite/AppInvite.SDKDelegate.swift:35:10	@objc func appInviteDialog(_ appInviteDialog: FBSDKAppInviteDialog?, didCompleteWithResults results: [AnyHashable : Any]?)
+11.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SSLSecurity.swift:97:55	(closure)
+11.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:381:17	@objc public func stream(_ aStream: Stream, handle eventCode: Stream.Event)
+11.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:381:17	@objc public func stream(_ aStream: Stream, handle eventCode: Stream.Event)
+11.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/Common/AccessToken.swift:145:50	get {}
+10.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/HomeViewController.swift:207:10	@objc func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?
+10.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/HomeViewController.swift:207:10	@objc func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?
+10.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:773:18	private func processResponse(_ response: WSResponse) -> Bool
+10.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:773:18	private func processResponse(_ response: WSResponse) -> Bool
+10.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:456:18	private func dequeueInput()
+10.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SSLSecurity.swift:98:56	(closure)
+10.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/EditProfileTableViewController.swift:90:10	@objc func loadData(user: User)
+10.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/Internal/Extensions/Dictionary+KeyValueMap.swift:20:8	func keyValueMap<K, V>(_ transform: (Element) throws -> (K, V)) rethrows -> [K : V]
+10.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/Common/AccessToken.swift:145:50	get {}
+10.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphObject.swift:54:56	get {}
+10.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:162:12	@objc public init(url: URL, protocols: [String]? = default)
+10.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/GameRequest/GameRequest.SDKDelegate.swift:28:10	@objc func gameRequestDialog(_ gameRequestDialog: FBSDKGameRequestDialog?, didCompleteWithResults results: [AnyHashable : Any]?)
+10.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/Common/PostSharingResult.swift:38:5	get {}
+10.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookLogin/Sources/Login/LoginButton.swift:46:5	final didSet {}
+10.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:162:12	@objc public init(url: URL, protocols: [String]? = default)
+10.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SSLSecurity.swift:98:56	(closure)
+10.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/Extensions.swift:127:10	func filtered(by keys: [String]) -> Dictionary
+10.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/Internal/Extensions/Dictionary+KeyValueMap.swift:20:8	func keyValueMap<K, V>(_ transform: (Element) throws -> (K, V)) rethrows -> [K : V]
+10.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/RegisterViewController.swift:73:10	@objc func textFieldShouldReturn(_ textField: UITextField) -> Bool
+10.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/ChangePasswordViewController.swift:93:10	@objc func textFieldShouldReturn(_ textField: UITextField) -> Bool
+10.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/Common/PostSharingResult.swift:38:5	get {}
+10.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:503:18	private func processHTTP(_ buffer: UnsafePointer<UInt8>, bufferLen: Int) -> Int
+10.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/CoreDataManager.swift:75:10	func upsert(_ entity: String, with data: [String : Any], withId idKey: String = default) throws -> NSManagedObject
+10.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphObject.swift:54:56	get {}
+9.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/EditProfileTableViewController.swift:65:79	(closure)
+9.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/Extensions.swift:187:24	@objc public dynamic static func random() -> UIColor
+9.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/CoreDataManager.swift:48:10	func store(_ entity: String, with data: [String : Any]) throws -> NSManagedObject
+9.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/SignInViewController.swift:76:10	@objc func textFieldShouldReturn(_ textField: UITextField) -> Bool
+9.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEvent.Builtin.swift:117:22	public static func rated<T : UnsignedInteger>(contentType: String? = default, contentId: String? = default, maxRatingValue: T? = default, valueToSum: Double? = default, extraParameters: ParametersDictionary = default) -> AppEvent
+9.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/ChangePasswordViewController.swift:93:10	@objc func textFieldShouldReturn(_ textField: UITextField) -> Bool
+9.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:503:18	private func processHTTP(_ buffer: UnsafePointer<UInt8>, bufferLen: Int) -> Int
+9.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:83:12	public init(client: SocketEngineClient, url: URL, config: SocketIOClientConfiguration)
+9.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/CoreDataManager.swift:48:10	func store(_ entity: String, with data: [String : Any]) throws -> NSManagedObject
+9.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:248:18	private func createHTTPRequest()
+9.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/RegisterViewController.swift:73:10	@objc func textFieldShouldReturn(_ textField: UITextField) -> Bool
+9.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/HomePresenter.swift:87:10	func stopTracking(_ i: Int)
+9.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/APIManager.swift:103:18	private func parseResponse(_ data: Data?) -> [String : Any]?
+9.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/SignInViewController.swift:76:10	@objc func textFieldShouldReturn(_ textField: UITextField) -> Bool
+9.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/HomeViewController.swift:285:10	@objc func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+9.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketStringReader.swift:28:23	get {}
+9.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/ShareButton.swift:30:5	final didSet {}
+9.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/SendButton.swift:30:5	final didSet {}
+9.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/BirthdayViewController.swift:25:19	@objc override func viewWillDisappear(_ animated: Bool)
+9.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/ShareButton.swift:30:5	final didSet {}
+9.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/SendButton.swift:30:5	final didSet {}
+9.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Internal/SDKSharingDelegateBridge.swift:38:8	@objc func sharer(_ sharer: FBSDKSharing, didCompleteWithResults results: [AnyHashable : Any]?)
+9.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Internal/SDKSharingDelegateBridge.swift:38:8	@objc func sharer(_ sharer: FBSDKSharing, didCompleteWithResults results: [AnyHashable : Any]?)
+9.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/HomeViewController.swift:50:19	@objc override func viewDidLoad()
+9.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:248:18	private func createHTTPRequest()
+9.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/HomePresenter.swift:87:10	func stopTracking(_ i: Int)
+9.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/HomeViewController.swift:50:19	@objc override func viewDidLoad()
+9.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketStringReader.swift:28:23	get {}
+8.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/Extensions.swift:187:24	@objc public dynamic static func random() -> UIColor
+8.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/APIManager.swift:55:18	private func createRequest(for call: APICallType, with data: [String : Any]?) -> URLRequest?
+8.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/LikeButton.swift:36:5	@objc get {}
+8.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/UserProfile/UserProfile.swift:110:19	(closure)
+8.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/PhoneViewController.swift:90:10	@objc func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
+8.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngineWebsocket.swift:43:17	public func sendWebSocketMessage(_ str: String, withType type: SocketEnginePacketType, withData datas: [Data])
+8.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/Extensions.swift:88:31	@objc dynamic get {}
+8.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/Extensions.swift:32:30	get {}
+8.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEvent.Builtin.swift:117:22	public static func rated<T : UnsignedInteger>(contentType: String? = default, contentId: String? = default, maxRatingValue: T? = default, valueToSum: Double? = default, extraParameters: ParametersDictionary = default) -> AppEvent
+8.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/BirthdayViewController.swift:25:19	@objc override func viewWillDisappear(_ animated: Bool)
+8.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:536:18	private func validateResponse(_ buffer: UnsafePointer<UInt8>, bufferLen: Int) -> Int
+8.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/SignInPresenter.swift:34:42	(closure)
+8.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/Extensions.swift:32:30	get {}
+8.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/APIManager.swift:103:18	private func parseResponse(_ data: Data?) -> [String : Any]?
+8.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/LikeButton.swift:36:5	@objc get {}
+8.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/HomeViewController.swift:285:10	@objc func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+8.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngineSpec.swift:71:34	get {}
+8.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/APIManager.swift:55:18	private func createRequest(for call: APICallType, with data: [String : Any]?) -> URLRequest?
+8.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketPacket.swift:127:18	private func _fillInPlaceholders(_ object: Any) -> Any
+8.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:205:17	@objc public final func emit(_ event: String, with items: [Any])
+8.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/PhoneViewController.swift:90:10	@objc func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
+8.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/PhoneViewController.swift:74:10	@objc func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
+8.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:83:12	public init(client: SocketEngineClient, url: URL, config: SocketIOClientConfiguration)
+8.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/RegisterPresenter.swift:34:42	(closure)
+8.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/GraphRequest/GraphRequest.swift:60:10	public init(graphPath: String, parameters: [String : Any] = default, accessToken: AccessToken? = default, httpMethod: GraphRequestHTTPMethod = default, apiVersion: GraphAPIVersion = default)
+8.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/EditProfileTableViewController.swift:65:79	(closure)
+8.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketPacket.swift:56:23	get {}
+8.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngineSpec.swift:71:34	get {}
+8.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/SignInPresenter.swift:34:42	(closure)
+8.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/RegisterPresenter.swift:34:42	(closure)
+8.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/Extensions.swift:88:31	@objc dynamic get {}
+8.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/EditProfileTableViewController.swift:90:10	@objc func loadData(user: User)
+8.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketPacket.swift:56:23	get {}
+8.0ms	<invalid loc>	init?(rawValue: Int)
+8.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/PhoneViewController.swift:74:10	@objc func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
+8.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketPacket.swift:127:18	private func _fillInPlaceholders(_ object: Any) -> Any
+8.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:205:17	@objc public final func emit(_ event: String, with items: [Any])
+7.9ms	<invalid loc>	init?(rawValue: Int)
+7.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:110:24	@objc public convenience init(socketURL: NSURL, config: NSDictionary?)
+7.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/GraphRequest/GraphRequest.swift:60:10	public init(graphPath: String, parameters: [String : Any] = default, accessToken: AccessToken? = default, httpMethod: GraphRequestHTTPMethod = default, apiVersion: GraphAPIVersion = default)
+7.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/UserProfile/UserProfile.swift:110:19	(closure)
+7.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/HomeViewController.swift:124:10	@objc func reload()
+7.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/SafeZoneViewController.swift:190:10	@objc func textFieldShouldReturn(_ textField: UITextField) -> Bool
+7.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/AppDelegate.swift:40:10	@objc func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = default) -> Bool
+7.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SSLSecurity.swift:74:47	(closure)
+7.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/SafeZoneViewController.swift:190:10	@objc func textFieldShouldReturn(_ textField: UITextField) -> Bool
+7.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:536:18	private func validateResponse(_ buffer: UnsafePointer<UInt8>, bufferLen: Int) -> Int
+7.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngineWebsocket.swift:43:17	public func sendWebSocketMessage(_ str: String, withType type: SocketEnginePacketType, withData datas: [Data])
+7.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/HomeViewController.swift:124:10	@objc func reload()
+7.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:438:18	private func processInputStream()
+7.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/AppDelegate.swift:40:10	@objc func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = default) -> Bool
+7.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/GameRequest/GameRequest.swift:95:66	get {}
+7.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEvent.swift:46:10	public init(name: AppEventName, parameters: ParametersDictionary = default, valueToSum: Double? = default)
+7.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/UserManager.swift:30:17	static func get(_ callback: userCallback)
+7.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketParsable.swift:31:18	private func isCorrectNamespace(_ nsp: String) -> Bool
+7.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClientConfiguration.swift:54:9	get {}
+7.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/GameRequest/GameRequest.swift:95:66	get {}
+6.8ms	<invalid loc>	get {}
+6.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:198:17	public func disconnect(forceTimeout: TimeInterval? = default, closeCode: UInt16 = default)
+6.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketStringReader.swift:42:19	@discardableResult mutating func advance(by: Int) -> String.Index
+6.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketParsable.swift:31:18	private func isCorrectNamespace(_ nsp: String) -> Bool
+6.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEnginePollable.swift:105:10	func doRequest(for req: URLRequest, callbackWith callback: @escaping (Data?, URLResponse?, Error?) -> Void)
+6.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:155:18	private final func handleBase64(message: String)
+6.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/Common/SDKLoggingBehavior.swift:61:12	internal init?(sdkStringValue: String)
+6.6ms	<invalid loc>	get {}
+6.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:480:18	private func processTCPHandshake(_ buffer: UnsafePointer<UInt8>, bufferLen: Int)
+6.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:480:18	private func processTCPHandshake(_ buffer: UnsafePointer<UInt8>, bufferLen: Int)
+6.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketStringReader.swift:42:19	@discardableResult mutating func advance(by: Int) -> String.Index
+6.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:245:18	private final func createWebsocketAndConnect()
+6.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:438:18	private func processInputStream()
+6.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:198:17	public func disconnect(forceTimeout: TimeInterval? = default, closeCode: UInt16 = default)
+6.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:245:18	private final func createWebsocketAndConnect()
+6.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:155:18	private final func handleBase64(message: String)
+6.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/UserManager.swift:30:17	static func get(_ callback: userCallback)
+6.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/PetManager.swift:29:17	static func getPet(id: Int, _ callback: petCallback)
+6.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEvent.swift:46:10	public init(name: AppEventName, parameters: ParametersDictionary = default, valueToSum: Double? = default)
+6.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEnginePollable.swift:105:10	func doRequest(for req: URLRequest, callbackWith callback: @escaping (Data?, URLResponse?, Error?) -> Void)
+6.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/HomePresenter.swift:99:10	func testTrackingAllPets()
+6.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/Common/SDKLoggingBehavior.swift:61:12	internal init?(sdkStringValue: String)
+6.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/SafeZoneViewController.swift:165:10	@objc func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool)
+6.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:110:24	@objc public convenience init(socketURL: NSURL, config: NSDictionary?)
+6.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SSLSecurity.swift:74:47	(closure)
+6.2ms	<invalid loc>	init?(rawValue: Int)
+6.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/HomePresenter.swift:99:10	func testTrackingAllPets()
+6.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/EditProfilePresenter.swift:110:10	func setPhone(_ number: String, _ cc: CountryCode)
+6.1ms	<invalid loc>	get {}
+6.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/CoreDataManager.swift:190:22	get {}
+6.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/HomeViewController.swift:189:10	@objc func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
+6.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClientConfiguration.swift:54:9	get {}
+6.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:128:24	@objc public convenience init(client: SocketEngineClient, url: URL, options: NSDictionary?)
+6.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/APIManager.swift:86:55	(closure)
+6.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/CoreDataManager.swift:190:22	get {}
+6.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/Common/SDKSettings.swift:111:5	get {}
+5.9ms	<invalid loc>	init?(rawValue: Int)
+5.9ms	<invalid loc>	init?(rawValue: Int)
+5.9ms	<invalid loc>	get {}
+5.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/SafeZoneViewController.swift:165:10	@objc func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool)
+5.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/HomeViewController.swift:189:10	@objc func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
+5.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/SocketIOManager.swift:100:18	private func masc(_ name: String) -> String
+5.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/PhoneManager.swift:79:17	static func getCurrent() -> String?
+5.8ms	<invalid loc>	get {}
+5.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:128:24	@objc public convenience init(client: SocketEngineClient, url: URL, options: NSDictionary?)
+5.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/EditProfilePresenter.swift:110:10	func setPhone(_ number: String, _ cc: CountryCode)
+5.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/AuthManager.swift:56:22	fileprivate func succeedLoginOrRegister(_ data: [String : Any]?, completition: @escaping errorCallback)
+5.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/CoreDataManager.swift:190:67	(closure)
+5.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/AppInvite/AppInvite.PromoCode.swift:73:10	public init(stringLiteral value: String)
+5.7ms	<invalid loc>	get {}
+5.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketClientManager.swift:69:15	@objc open func removeSocket(_ socket: SocketIOClient) -> SocketIOClient?
+5.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/CoreDataManager.swift:190:67	(closure)
+5.6ms	<invalid loc>	init?(rawValue: UInt8)
+5.6ms	<invalid loc>	get {}
+5.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/AddChangeDeviceViewController.swift:80:10	@objc func addSquarAroudQRCode()
+5.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:416:17	@objc public final func parseEngineMessage(_ message: String, fromPolling: Bool)
+5.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/PetManager.swift:29:17	static func getPet(id: Int, _ callback: petCallback)
+5.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/LikeControl.swift:38:10	public init(frame: CGRect? = default, object: LikableObject)
+5.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/LikeControl.swift:38:10	public init(frame: CGRect? = default, object: LikableObject)
+5.5ms	<invalid loc>	init?(rawValue: Int)
+5.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/PhoneManager.swift:70:17	static func get(_ code: String) -> CountryCode?
+5.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/APIManager.swift:128:18	private func handleError(_ call: APICallType, _ code: Int, _ data: Data?) -> APIManagerError?
+5.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:295:17	@objc public final func handleEvent(_ event: String, data: [Any], isInternalMessage: Bool, withAck ack: Int = default)
+5.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEnginePollable.swift:204:17	public func sendPollMessage(_ message: String, withType type: SocketEnginePacketType, withData datas: [Data])
+5.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/PhoneManager.swift:79:17	static func getCurrent() -> String?
+5.3ms	<invalid loc>	get {}
+5.3ms	<invalid loc>	get {}
+5.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/HomeViewController.swift:305:61	(closure)
+5.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketExtensions.swift:92:10	func toSocketConfiguration() -> SocketIOClientConfiguration
+5.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:416:17	@objc public final func parseEngineMessage(_ message: String, fromPolling: Bool)
+5.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketClientManager.swift:69:15	@objc open func removeSocket(_ socket: SocketIOClient) -> SocketIOClient?
+5.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/SocketIOManager.swift:100:18	private func masc(_ name: String) -> String
+5.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/PhoneManager.swift:83:17	static func getAll() -> [CountryCode]?
+5.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/CoreDataManager.swift:192:40	(closure)
+5.2ms	<invalid loc>	get {}
+5.2ms	<invalid loc>	get {}
+5.2ms	<invalid loc>	get {}
+5.2ms	<invalid loc>	get {}
+5.2ms	<invalid loc>	get {}
+5.2ms	<invalid loc>	get {}
+5.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/AddChangeDeviceViewController.swift:80:10	@objc func addSquarAroudQRCode()
+5.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/APIManager.swift:23:34	get {}
+5.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/CoreDataManager.swift:192:40	(closure)
+5.1ms	<invalid loc>	init?(rawValue: UInt8)
+5.1ms	<invalid loc>	get {}
+5.1ms	<invalid loc>	get {}
+5.1ms	<invalid loc>	get {}
+5.1ms	<invalid loc>	get {}
+5.1ms	<invalid loc>	get {}
+5.1ms	<invalid loc>	get {}
+5.1ms	<invalid loc>	get {}
+5.1ms	<invalid loc>	get {}
+5.1ms	<invalid loc>	get {}
+5.0ms	<invalid loc>	get {}
+5.0ms	<invalid loc>	get {}
+5.0ms	<invalid loc>	get {}
+5.0ms	<invalid loc>	get {}
+5.0ms	<invalid loc>	get {}
+5.0ms	<invalid loc>	get {}
+5.0ms	<invalid loc>	get {}
+5.0ms	<invalid loc>	get {}
+5.0ms	<invalid loc>	get {}
+5.0ms	<invalid loc>	get {}
+5.0ms	<invalid loc>	get {}
+5.0ms	<invalid loc>	get {}
+5.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/APIManager.swift:86:55	(closure)
+4.9ms	<invalid loc>	get {}
+4.9ms	<invalid loc>	get {}
+4.9ms	<invalid loc>	get {}
+4.9ms	<invalid loc>	get {}
+4.9ms	<invalid loc>	get {}
+4.9ms	<invalid loc>	get {}
+4.9ms	<invalid loc>	get {}
+4.9ms	<invalid loc>	get {}
+4.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/HomeViewController.swift:305:61	(closure)
+4.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketExtensions.swift:92:10	func toSocketConfiguration() -> SocketIOClientConfiguration
+4.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/AppInvite/AppInvite.PromoCode.swift:73:10	public init(stringLiteral value: String)
+4.8ms	<invalid loc>	init?(rawValue: Int)
+4.8ms	<invalid loc>	get {}
+4.8ms	<invalid loc>	get {}
+4.8ms	<invalid loc>	get {}
+4.8ms	<invalid loc>	get {}
+4.8ms	<invalid loc>	get {}
+4.8ms	<invalid loc>	get {}
+4.8ms	<invalid loc>	get {}
+4.8ms	<invalid loc>	get {}
+4.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/PhoneManager.swift:83:17	static func getAll() -> [CountryCode]?
+4.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/Extensions.swift:70:36	get {}
+4.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/AuthManager.swift:25:66	(closure)
+4.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/APIManager.swift:23:34	get {}
+4.7ms	<invalid loc>	get {}
+4.7ms	<invalid loc>	get {}
+4.7ms	<invalid loc>	get {}
+4.7ms	<invalid loc>	get {}
+4.7ms	<invalid loc>	get {}
+4.7ms	<invalid loc>	get {}
+4.7ms	<invalid loc>	get {}
+4.7ms	<invalid loc>	get {}
+4.7ms	<invalid loc>	get {}
+4.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClientConfiguration.swift:81:17	public func index(after i: Index) -> Index
+4.6ms	<invalid loc>	get {}
+4.6ms	<invalid loc>	get {}
+4.6ms	<invalid loc>	get {}
+4.6ms	<invalid loc>	get {}
+4.6ms	<invalid loc>	get {}
+4.6ms	<invalid loc>	get {}
+4.6ms	<invalid loc>	get {}
+4.6ms	<invalid loc>	get {}
+4.6ms	<invalid loc>	get {}
+4.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/SafeZoneViewController.swift:89:10	@objc func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation)
+4.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/PhoneManager.swift:70:17	static func get(_ code: String) -> CountryCode?
+4.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/Messages.swift:62:10	func softwareDevelopmentError(_ whatever: [String : Any]?) -> errorMsg
+4.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/APIManager.swift:128:18	private func handleError(_ call: APICallType, _ code: Int, _ data: Data?) -> APIManagerError?
+4.5ms	<invalid loc>	init?(rawValue: UInt16)
+4.5ms	<invalid loc>	init?(rawValue: Int)
+4.5ms	<invalid loc>	get {}
+4.5ms	<invalid loc>	get {}
+4.5ms	<invalid loc>	get {}
+4.5ms	<invalid loc>	get {}
+4.5ms	<invalid loc>	get {}
+4.5ms	<invalid loc>	get {}
+4.5ms	<invalid loc>	get {}
+4.5ms	<invalid loc>	get {}
+4.5ms	<invalid loc>	get {}
+4.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/Extensions.swift:70:36	get {}
+4.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/AuthManager.swift:56:22	fileprivate func succeedLoginOrRegister(_ data: [String : Any]?, completition: @escaping errorCallback)
+4.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/ShareError.swift:46:12	internal init?(error: NSError)
+4.4ms	<invalid loc>	get {}
+4.4ms	<invalid loc>	get {}
+4.4ms	<invalid loc>	get {}
+4.4ms	<invalid loc>	get {}
+4.4ms	<invalid loc>	get {}
+4.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/SafeZoneViewController.swift:178:10	@objc func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer
+4.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketParsable.swift:137:10	func parseSocketMessage(_ message: String)
+4.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEnginePollable.swift:204:17	public func sendPollMessage(_ message: String, withType type: SocketEnginePacketType, withData datas: [Data])
+4.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SSLSecurity.swift:225:10	func certificateChain(_ trust: SecTrust) -> [Data]
+4.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SSLSecurity.swift:225:10	func certificateChain(_ trust: SecTrust) -> [Data]
+4.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEvent.Builtin.swift:229:22	public static func initiatedCheckout<T : UnsignedInteger>(contentType: String? = default, contentId: String? = default, itemCount: T? = default, paymentInfoAvailable: Bool? = default, currency: String? = default, valueToSum: Double? = default, extraParameters: ParametersDictionary = default) -> AppEvent
+4.3ms	<invalid loc>	init?(rawValue: Int)
+4.3ms	<invalid loc>	init?(rawValue: Int)
+4.3ms	<invalid loc>	get {}
+4.3ms	<invalid loc>	get {}
+4.3ms	<invalid loc>	get {}
+4.3ms	<invalid loc>	get {}
+4.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/SafeZoneViewController.swift:89:10	@objc func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation)
+4.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/EditProfileTableViewController.swift:155:19	@objc override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+4.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:486:33	(closure)
+4.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketParsable.swift:137:10	func parseSocketMessage(_ message: String)
+4.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphShareContent.swift:89:69	get {}
+4.2ms	<invalid loc>	init?(rawValue: String)
+4.2ms	<invalid loc>	get {}
+4.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/SignInViewController.swift:37:10	@objc func sign()
+4.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/SafeZoneViewController.swift:178:10	@objc func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer
+4.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:486:33	(closure)
+4.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:362:33	(closure)
+4.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClientConfiguration.swift:81:17	public func index(after i: Index) -> Index
+4.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/LikeControl.AuxilaryStyle.swift:81:22	public static func ==(lhs: LikeControl.AuxilaryStyle, rhs: LikeControl.AuxilaryStyle) -> Bool
+4.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/ShareError.swift:46:12	internal init?(error: NSError)
+4.1ms	<invalid loc>	init?(rawValue: UInt16)
+4.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/SafeZoneViewController.swift:35:18	private func updateCornerRadius()
+4.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/PhoneViewController.swift:40:20	@IBAction @objc func removeAction(_ sender: UIButton)
+4.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/Messages.swift:62:10	func softwareDevelopmentError(_ whatever: [String : Any]?) -> errorMsg
+4.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/AuthManager.swift:25:66	(closure)
+4.0ms	<invalid loc>	init?(rawValue: String)
+4.0ms	<invalid loc>	init?(rawValue: String)
+4.0ms	<invalid loc>	init?(rawValue: String)
+4.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/SafeZoneViewController.swift:35:18	private func updateCornerRadius()
+4.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEnginePollable.swift:147:18	private func flushWaitingForPost()
+4.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/APIManager.swift:173:5	init(_ call: APICallType)
+4.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/ShareButton.swift:68:24	@objc public override func sizeToFit()
+4.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookLogin/Sources/Login/LoginButton.swift:135:24	@objc public override dynamic func sizeToFit()
+3.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/PhoneViewController.swift:40:20	@IBAction @objc func removeAction(_ sender: UIButton)
+3.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/PasswordRecoveryViewController.swift:64:10	@objc func emailSent()
+3.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/PasswordRecoveryViewController.swift:64:10	@objc func emailSent()
+3.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/EditProfilePresenter.swift:40:5	init(code: String)
+3.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphShareContent.swift:89:69	get {}
+3.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphAction.swift:61:67	get {}
+3.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookLogin/Sources/Login/LoginButton.swift:135:24	@objc public override dynamic func sizeToFit()
+3.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEvent.Builtin.swift:229:22	public static func initiatedCheckout<T : UnsignedInteger>(contentType: String? = default, contentId: String? = default, itemCount: T? = default, paymentInfoAvailable: Bool? = default, currency: String? = default, valueToSum: Double? = default, extraParameters: ParametersDictionary = default) -> AppEvent
+3.8ms	<invalid loc>	get {}
+3.8ms	<invalid loc>	get {}
+3.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/EditProfileTableViewController.swift:155:19	@objc override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+3.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:564:25	private static func readUint64(_ buffer: UnsafePointer<UInt8>, offset: Int) -> UInt64
+3.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:362:33	(closure)
+3.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEnginePollable.swift:147:18	private func flushWaitingForPost()
+3.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/EditProfilePresenter.swift:40:5	init(code: String)
+3.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/ShareButton.swift:68:24	@objc public override func sizeToFit()
+3.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/SendButton.swift:68:24	@objc public override func sizeToFit()
+3.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/LikeButton.swift:98:24	@objc public override func sizeToFit()
+3.7ms	<invalid loc>	get {}
+3.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:295:17	@objc public final func handleEvent(_ event: String, data: [Any], isInternalMessage: Bool, withAck ack: Int = default)
+3.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:255:17	@objc public final func engineDidClose(reason: String)
+3.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/APIManager.swift:173:5	init(_ call: APICallType)
+3.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/LikeControl.AuxilaryStyle.swift:81:22	public static func ==(lhs: LikeControl.AuxilaryStyle, rhs: LikeControl.AuxilaryStyle) -> Bool
+3.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/Common/SDKSettings.swift:111:5	get {}
+3.6ms	<invalid loc>	init?(rawValue: String)
+3.6ms	<invalid loc>	get {}
+3.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/PasswordRecoveryViewController.swift:42:20	@IBAction @objc func sendAction(_ sender: UIButton)
+3.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:225:10	final func _emit(_ data: [Any], ack: Int? = default)
+3.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/SendButton.swift:68:24	@objc public override func sizeToFit()
+3.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/LikeButton.swift:98:24	@objc public override func sizeToFit()
+3.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/GraphRequest/GraphRequestConnection.Delegate.swift:26:8	@objc func setupAsDelegateFor(_ connection: FBSDKGraphRequestConnection)
+3.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:358:18	private final func handleOpen(openData: String)
+3.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/LikeControl.swift:142:24	@objc public override dynamic func sizeToFit()
+3.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphPropertyValue.swift:62:42	get {}
+3.4ms	<invalid loc>	init?(rawValue: String)
+3.4ms	<invalid loc>	get {}
+3.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/EditProfileTableViewController.swift:73:10	@objc func setBithdate(_ date: Date)
+3.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:255:17	@objc public final func engineDidClose(reason: String)
+3.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/SharedPreferences.swift:18:17	static func get(_ p: key) -> String?
+3.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/GraphRequest/GraphRequestConnection.Delegate.swift:26:8	@objc func setupAsDelegateFor(_ connection: FBSDKGraphRequestConnection)
+3.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/PasswordRecoveryViewController.swift:42:20	@IBAction @objc func sendAction(_ sender: UIButton)
+3.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:564:25	private static func readUint64(_ buffer: UnsafePointer<UInt8>, offset: Int) -> UInt64
+3.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:500:17	@objc public final func write(_ msg: String, withType type: SocketEnginePacketType, withData data: [Data])
+3.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/LikeControl.swift:142:24	@objc public override dynamic func sizeToFit()
+3.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/AppInvite/AppInvite.SDKDelegate.swift:27:10	@objc func setupAsDelegateFor(_ dialog: FBSDKAppInviteDialog)
+3.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphAction.swift:61:67	get {}
+3.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content Sharing/GraphSharer.swift:37:5	final get {}
+3.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content Sharing/GraphSharer.swift:37:5	final get {}
+3.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/EditProfileTableViewController.swift:73:10	@objc func setBithdate(_ date: Date)
+3.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:226:25	(closure)
+3.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:225:10	final func _emit(_ data: [Any], ack: Int? = default)
+3.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:358:18	private final func handleOpen(openData: String)
+3.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphPropertyValue.swift:62:42	get {}
+3.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphObject.swift:91:72	get {}
+3.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketPacket.swift:89:18	private func completeMessage(_ message: String) -> String
+3.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketPacket.swift:176:17	static func shred(_ data: Any, binary: inout [Data]) -> Any
+3.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:501:25	(closure)
+3.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/SharedPreferences.swift:18:17	static func get(_ p: key) -> String?
+3.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/PhoneManager.swift:56:29	fileprivate static func get(_ data: Any?) -> CountryCode?
+3.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/Extensions.swift:107:17	convenience init(_ left: String, _ operation: NSPredicateOperation, _ right: Any)
+3.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphObject.swift:91:72	get {}
+3.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/Internal/Extensions/Dictionary+KeyValueMap.swift:22:17	(closure)
+3.0ms	<invalid loc>	init()
+3.0ms	<invalid loc>	get {}
+3.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:810:18	private func errorWithDetail(_ detail: String, code: UInt16) -> NSError
+3.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketStringReader.swift:56:19	mutating func readUntilOccurence(of string: String) -> String
+3.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketClientManager.swift:52:9	@objc get {}
+3.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/Extensions.swift:107:17	convenience init(_ left: String, _ operation: NSPredicateOperation, _ right: Any)
+3.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/AppInvite/AppInvite.SDKDelegate.swift:27:10	@objc func setupAsDelegateFor(_ dialog: FBSDKAppInviteDialog)
+2.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:810:18	private func errorWithDetail(_ detail: String, code: UInt16) -> NSError
+2.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:557:25	private static func readUint16(_ buffer: UnsafePointer<UInt8>, offset: Int) -> UInt16
+2.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:226:25	(closure)
+2.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:500:17	@objc public final func write(_ msg: String, withType type: SocketEnginePacketType, withData data: [Data])
+2.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketClientManager.swift:52:9	@objc get {}
+2.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/Extensions.swift:119:22	fileprivate func concatFormat(_ concatOp: concatOperation, _ left: String, _ op: NSPredicateOperation, _ right: Any) -> NSPredicate
+2.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/SendButton.swift:59:24	@objc public override func layoutSubviews()
+2.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/GameRequest/GameRequest.SDKDelegate.swift:41:10	@objc func setupAsDelegateFor(_ dialog: FBSDKGameRequestDialog)
+2.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/AppInvite/AppInvite.swift:73:63	get {}
+2.8ms	<invalid loc>	init?(rawValue: String)
+2.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketPacket.swift:89:18	private func completeMessage(_ message: String) -> String
+2.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/AddressManager.swift:53:29	fileprivate static func update(_ address: inout Address, with data: Any?)
+2.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/CoreDataManager.swift:121:18	private func remove(keys: [String], from data: [String : Any]) -> [String : Any]
+2.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/GameRequest/GameRequest.Recipient.swift:63:22	public static func ==(lhs: GameRequest.Recipient, rhs: GameRequest.Recipient) -> Bool
+2.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/GameRequest/GameRequest.Recipient.swift:63:22	public static func ==(lhs: GameRequest.Recipient, rhs: GameRequest.Recipient) -> Bool
+2.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/Internal/Extensions/Dictionary+KeyValueMap.swift:22:17	(closure)
+2.7ms	<invalid loc>	get {}
+2.7ms	<invalid loc>	get {}
+2.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/AddressViewController.swift:106:10	@objc func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
+2.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/AddressViewController.swift:106:10	@objc func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
+2.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:583:25	private static func writeUint64(_ buffer: UnsafeMutablePointer<UInt8>, offset: Int, value: UInt64)
+2.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:583:25	private static func writeUint64(_ buffer: UnsafeMutablePointer<UInt8>, offset: Int, value: UInt64)
+2.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketStringReader.swift:56:19	mutating func readUntilOccurence(of string: String) -> String
+2.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClientConfiguration.swift:58:9	set {}
+2.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:530:17	@objc public final func websocketDidDisconnect(socket: WebSocket, error: NSError?)
+2.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/SharedPreferences.swift:26:17	static func remove(_ p: key) -> Bool
+2.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/Extensions.swift:119:22	fileprivate func concatFormat(_ concatOp: concatOperation, _ left: String, _ op: NSPredicateOperation, _ right: Any) -> NSPredicate
+2.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/DataManager.swift:57:10	func saveUser(user: User, phone: [String : Any]?, address: [String : Any]?, callback: @escaping userCallback)
+2.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/ShareButton.swift:59:24	@objc public override func layoutSubviews()
+2.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/SendButton.swift:59:24	@objc public override func layoutSubviews()
+2.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/AddChangeDeviceViewController.swift:36:10	@objc func loadCamera() -> Bool
+2.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/AddChangeDeviceViewController.swift:36:10	@objc func loadCamera() -> Bool
+2.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:557:25	private static func readUint16(_ buffer: UnsafePointer<UInt8>, offset: Int) -> UInt16
+2.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketPacket.swift:176:17	static func shred(_ data: Any, binary: inout [Data]) -> Any
+2.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:284:10	@objc final func handleAck(_ ack: Int, data: [Any])
+2.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:242:10	@objc final func emitAck(_ ack: Int, with items: [Any])
+2.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:501:25	(closure)
+2.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:410:17	@objc public final func parseEngineData(_ data: Data)
+2.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:295:18	private final func disconnectPolling(reason: String)
+2.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/EditProfilePresenter.swift:135:10	func save(_ name: String?, _ surname: String?, _ email: String?)
+2.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/DataManager.swift:57:10	func saveUser(user: User, phone: [String : Any]?, address: [String : Any]?, callback: @escaping userCallback)
+2.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/ShareButton.swift:59:24	@objc public override func layoutSubviews()
+2.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/GameRequest/GameRequest.SDKDelegate.swift:41:10	@objc func setupAsDelegateFor(_ dialog: FBSDKGameRequestDialog)
+2.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/Video/VideoShareContent.swift:89:60	get {}
+2.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEvent.Builtin.swift:52:22	public static func completedTutorial(successful: Bool? = default, valueToSum: Double? = default, extraParameters: ParametersDictionary = default) -> AppEvent
+2.5ms	<invalid loc>	init?(rawValue: String)
+2.5ms	<invalid loc>	init?(rawValue: Int)
+2.5ms	<invalid loc>	get {}
+2.5ms	<invalid loc>	get {}
+2.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/SafeZoneViewController.swift:220:10	@objc func adjustZoom()
+2.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClientConfiguration.swift:68:9	set {}
+2.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClientConfiguration.swift:64:9	get {}
+2.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClientConfiguration.swift:64:9	get {}
+2.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:300:27	(closure)
+2.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:242:10	@objc final func emitAck(_ ack: Int, with items: [Any])
+2.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:119:18	private final func addEngine() -> SocketEngineSpec
+2.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:530:17	@objc public final func websocketDidDisconnect(socket: WebSocket, error: NSError?)
+2.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/EditProfilePresenter.swift:135:10	func save(_ name: String?, _ surname: String?, _ email: String?)
+2.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/PhoneManager.swift:56:29	fileprivate static func get(_ data: Any?) -> CountryCode?
+2.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/DataManager.swift:21:10	func getUser(callback: @escaping userCallback)
+2.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/AuthManager.swift:93:10	func changeUsersPassword(_ email: String, _ password: String, _ newPassword: String, completition: @escaping errorCallback)
+2.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/APIManager.swift:142:18	private func setHeaders(of call: APICallType) -> [String : String]
+2.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/CoreDataManager.swift:202:22	get {}
+2.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/CoreDataManager.swift:121:18	private func remove(keys: [String], from data: [String : Any]) -> [String : Any]
+2.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/LikeButton.swift:89:24	@objc public override func layoutSubviews()
+2.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Internal/SDKSharingDelegateBridge.swift:30:8	@objc func setupAsDelegateFor(_ sharer: FBSDKSharing)
+2.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Internal/SDKSharingDelegateBridge.swift:30:8	@objc func setupAsDelegateFor(_ sharer: FBSDKSharing)
+2.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Internal/ContentBridger.swift:36:24	internal static func bridgeToObjC<C : ContentProtocol>(_ content: C) -> FBSDKSharingContent?
+2.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/AppInvite/AppInvite.swift:73:63	get {}
+2.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/Link/LinkShareContent.swift:119:69	get {}
+2.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/Common/SDKSettings.swift:114:5	set {}
+2.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/Common/SDKSettings.swift:114:5	set {}
+2.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEvent.Builtin.swift:94:22	public static func searched(contentId: String? = default, searchedString: String? = default, successful: Bool? = default, valueToSum: Double? = default, extraParameters: ParametersDictionary = default) -> AppEvent
+2.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEvent.Builtin.swift:71:22	public static func viewedContent(contentType: String? = default, contentId: String? = default, currency: String? = default, valueToSum: Double? = default, extraParameters: ParametersDictionary = default) -> AppEvent
+2.4ms	<invalid loc>	init?(rawValue: Int)
+2.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:318:17	@objc public final func joinNamespace(_ namespace: String)
+2.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:243:25	(closure)
+2.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:410:17	@objc public final func parseEngineData(_ data: Data)
+2.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:296:24	(closure)
+2.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:295:18	private final func disconnectPolling(reason: String)
+2.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/DataManager.swift:50:18	private func handeUser(with error: APIManagerError?, _ data: [String : Any]?, _ callback: @escaping userCallback)
+2.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/DataManager.swift:50:18	private func handeUser(with error: APIManagerError?, _ data: [String : Any]?, _ callback: @escaping userCallback)
+2.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/AuthManager.swift:45:10	func signInSocial(_ email: String, _ token: String, completition: @escaping errorCallback)
+2.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/LikeControl.swift:133:24	@objc public override dynamic func layoutSubviews()
+2.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/LikeControl.swift:133:24	@objc public override dynamic func layoutSubviews()
+2.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/MessageDialog/MessageDialog.swift:32:10	public init(content: Content)
+2.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/MessageDialog/MessageDialog.swift:32:10	public init(content: Content)
+2.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphPropertyName.swift:64:31	get {}
+2.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/GraphRequest/GraphRequestConnection.Delegate.swift:36:8	@objc dynamic func requestConnection(_ connection: FBSDKGraphRequestConnection!, didSendBodyData bytesWritten: Int, totalBytesWritten: Int, totalBytesExpectedToWrite: Int)
+2.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/Common/SDKSettings.swift:153:5	set {}
+2.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/Common/SDKSettings.swift:153:5	set {}
+2.3ms	<invalid loc>	get {}
+2.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/HomeViewController.swift:308:16	(closure)
+2.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:575:25	private static func writeUint16(_ buffer: UnsafeMutablePointer<UInt8>, offset: Int, value: UInt16)
+2.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:441:10	final func emitTest(event: String, _ data: Any...)
+2.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:318:17	@objc public final func joinNamespace(_ namespace: String)
+2.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:284:10	@objc final func handleAck(_ ack: Int, data: [Any])
+2.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/SocketIOManager.swift:75:10	@objc func stop(name: String)
+2.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/DataManager.swift:21:10	func getUser(callback: @escaping userCallback)
+2.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/AuthManager.swift:93:10	func changeUsersPassword(_ email: String, _ password: String, _ newPassword: String, completition: @escaping errorCallback)
+2.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/AuthManager.swift:34:10	func signIn(_ email: String, _ password: String, completition: @escaping errorCallback)
+2.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/APIManager.swift:34:40	get {}
+2.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/CoreDataManager.swift:99:10	func delete(entity: String, withPredicate predicate: NSPredicate? = default) throws
+2.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/LikeButton.swift:89:24	@objc public override func layoutSubviews()
+2.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Internal/ContentBridger.swift:36:24	internal static func bridgeToObjC<C : ContentProtocol>(_ content: C) -> FBSDKSharingContent?
+2.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/Video/VideoShareContent.swift:89:60	get {}
+2.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphPropertyName.swift:86:10	public init(stringLiteral value: String)
+2.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphPropertyName.swift:86:10	public init(stringLiteral value: String)
+2.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/Link/LinkShareContent.swift:119:69	get {}
+2.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/GraphRequest/GraphRequestConnection.Delegate.swift:36:8	@objc dynamic func requestConnection(_ connection: FBSDKGraphRequestConnection!, didSendBodyData bytesWritten: Int, totalBytesWritten: Int, totalBytesExpectedToWrite: Int)
+2.2ms	<invalid loc>	get {}
+2.2ms	<invalid loc>	get {}
+2.2ms	<invalid loc>	get {}
+2.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/HomeViewController.swift:308:16	(closure)
+2.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:310:17	@objc public final func leaveNamespace()
+2.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:310:17	@objc public final func leaveNamespace()
+2.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:243:25	(closure)
+2.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:154:48	(closure)
+2.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:318:18	private final func flushProbeWait()
+2.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:296:24	(closure)
+2.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SSLSecurity.swift:243:19	@nonobjc func publicKeyChain(_ trust: SecTrust) -> [SecKey]
+2.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/AddressPresenter.swift:29:10	func getCountryCodes()
+2.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/UserManager.swift:69:25	private static func add(_ element: Any?, withKey: String, to data: inout [String : Any])
+2.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/SocketIOManager.swift:75:10	@objc func stop(name: String)
+2.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/DataManager.swift:59:100	(closure)
+2.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/AddressManager.swift:53:29	fileprivate static func update(_ address: inout Address, with data: Any?)
+2.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/APIManager.swift:154:18	private func setBody(of call: APICallType, with data: [String : Any]?) -> Data?
+2.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/APIManager.swift:142:18	private func setHeaders(of call: APICallType) -> [String : String]
+2.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphPropertyContaining.swift:40:5	get {}
+2.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphAction.swift:71:12	internal init(sdkAction: FBSDKShareOpenGraphAction)
+2.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphAction.swift:71:12	internal init(sdkAction: FBSDKShareOpenGraphAction)
+2.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEvent.Builtin.swift:94:22	public static func searched(contentId: String? = default, searchedString: String? = default, successful: Bool? = default, valueToSum: Double? = default, extraParameters: ParametersDictionary = default) -> AppEvent
+2.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEvent.Builtin.swift:52:22	public static func completedTutorial(successful: Bool? = default, valueToSum: Double? = default, extraParameters: ParametersDictionary = default) -> AppEvent
+2.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEvent.Builtin.swift:187:22	public static func addedToWishlist(contentType: String? = default, contentId: String? = default, currency: String? = default, valueToSum: Double? = default, extraParameters: ParametersDictionary = default) -> AppEvent
+2.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEvent.Builtin.swift:164:22	public static func addedToCart(contentType: String? = default, contentId: String? = default, currency: String? = default, valueToSum: Double? = default, extraParameters: ParametersDictionary = default) -> AppEvent
+2.1ms	<invalid loc>	get {}
+2.1ms	<invalid loc>	get {}
+2.1ms	<invalid loc>	get {}
+2.1ms	<invalid loc>	get {}
+2.1ms	<invalid loc>	get {}
+2.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:575:25	private static func writeUint16(_ buffer: UnsafeMutablePointer<UInt8>, offset: Int, value: UInt16)
+2.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketPacket.swift:74:19	mutating func addData(_ data: Data) -> Bool
+2.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClientConfiguration.swift:68:9	set {}
+2.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClientConfiguration.swift:58:9	set {}
+2.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:119:18	private final func addEngine() -> SocketEngineSpec
+2.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEnginePollable.swift:161:29	(closure)
+2.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEnginePollable.swift:161:29	(closure)
+2.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:318:18	private final func flushProbeWait()
+2.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketAckEmitter.swift:40:17	public final func with(_ items: SocketData...)
+2.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/Messages.swift:38:10	func authError(type: AuthenticationError) -> errorMsg
+2.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/Messages.swift:38:10	func authError(type: AuthenticationError) -> errorMsg
+2.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/DataManager.swift:59:100	(closure)
+2.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/APIManager.swift:34:40	get {}
+2.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/APIManager.swift:154:18	private func setBody(of call: APICallType, with data: [String : Any]?) -> Data?
+2.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/CoreDataManager.swift:99:10	func delete(entity: String, withPredicate predicate: NSPredicate? = default) throws
+2.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/CoreDataManager.swift:202:82	(closure)
+2.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphPropertyContaining.swift:40:5	get {}
+2.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookLogin/Sources/Login/LoginButton.swift:98:10	public init(frame: CGRect? = default, publishPermissions: [PublishPermission])
+2.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/UserProfile/UserProfile.PictureView.swift:84:20	fileprivate final func setupSDKProfilePictureView()
+2.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEvent.Builtin.swift:71:22	public static func viewedContent(contentType: String? = default, contentId: String? = default, currency: String? = default, valueToSum: Double? = default, extraParameters: ParametersDictionary = default) -> AppEvent
+2.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEvent.Builtin.swift:187:22	public static func addedToWishlist(contentType: String? = default, contentId: String? = default, currency: String? = default, valueToSum: Double? = default, extraParameters: ParametersDictionary = default) -> AppEvent
+2.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEvent.Builtin.swift:164:22	public static func addedToCart(contentType: String? = default, contentId: String? = default, currency: String? = default, valueToSum: Double? = default, extraParameters: ParametersDictionary = default) -> AppEvent
+2.0ms	<invalid loc>	init?(rawValue: Int)
+2.0ms	<invalid loc>	init()
+2.0ms	<invalid loc>	get {}
+2.0ms	<invalid loc>	get {}
+2.0ms	<invalid loc>	get {}
+2.0ms	<invalid loc>	get {}
+2.0ms	<invalid loc>	get {}
+2.0ms	<invalid loc>	get {}
+2.0ms	<invalid loc>	get {}
+2.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketExtensions.swift:39:53	get {}
+2.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SSLSecurity.swift:243:19	@nonobjc func publicKeyChain(_ trust: SecTrust) -> [SecKey]
+2.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/PhonePresenter.swift:29:10	func getCountryCodes()
+2.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/UserManager.swift:69:25	private static func add(_ element: Any?, withKey: String, to data: inout [String : Any])
+2.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/Extensions.swift:66:37	get {}
+2.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/AuthManager.swift:45:10	func signInSocial(_ email: String, _ token: String, completition: @escaping errorCallback)
+2.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/APIManager.swift:162:25	get {}
+2.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/APIManager.swift:162:25	get {}
+2.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/CoreDataManager.swift:202:22	get {}
+2.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphObject.swift:99:12	internal init(sdkGraphObject: FBSDKShareOpenGraphObject)
+2.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphAction.swift:51:5	get {}
+2.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookLogin/Sources/Login/LoginButton.swift:98:10	public init(frame: CGRect? = default, publishPermissions: [PublishPermission])
+2.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/UserProfile/UserProfile.swift:159:5	get {}
+1.9ms	<invalid loc>	init?(rawValue: Int)
+1.9ms	<invalid loc>	init?(rawValue: Int)
+1.9ms	<invalid loc>	init?(rawValue: Int)
+1.9ms	<invalid loc>	get {}
+1.9ms	<invalid loc>	get {}
+1.9ms	<invalid loc>	get {}
+1.9ms	<invalid loc>	get {}
+1.9ms	<invalid loc>	get {}
+1.9ms	<invalid loc>	get {}
+1.9ms	<invalid loc>	get {}
+1.9ms	<invalid loc>	get {}
+1.9ms	<invalid loc>	get {}
+1.9ms	<invalid loc>	get {}
+1.9ms	<invalid loc>	get {}
+1.9ms	<invalid loc>	get {}
+1.9ms	<invalid loc>	get {}
+1.9ms	<invalid loc>	get {}
+1.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/SafeZoneViewController.swift:220:10	@objc func adjustZoom()
+1.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/HomeViewController.swift:130:10	@objc func startTracking(_ name: String, lat: Double, long: Double)
+1.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:179:10	@objc final func didDisconnect(reason: String)
+1.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:154:48	(closure)
+1.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketExtensions.swift:39:53	get {}
+1.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketAckEmitter.swift:40:17	public final func with(_ items: SocketData...)
+1.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/PhonePresenter.swift:29:10	func getCountryCodes()
+1.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/HomePresenter.swift:37:10	func checkSignInStatus()
+1.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/AddressPresenter.swift:29:10	func getCountryCodes()
+1.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/SharedPreferences.swift:31:17	static func has(_ p: key) -> Bool
+1.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/PhoneManager.swift:37:29	fileprivate static func update(_ phone: inout Phone, with data: Any)
+1.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/AuthManager.swift:34:10	func signIn(_ email: String, _ password: String, completition: @escaping errorCallback)
+1.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/ShareDialog/ShareDialog.swift:32:5	final get {}
+1.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/Photo/Photo.swift:66:56	get {}
+1.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphObject.swift:99:12	internal init(sdkGraphObject: FBSDKShareOpenGraphObject)
+1.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphAction.swift:51:5	get {}
+1.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/UserProfile/UserProfile.PictureView.swift:84:20	fileprivate final func setupSDKProfilePictureView()
+1.9ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEvent.swift:37:14	get {}
+1.8ms	<invalid loc>	init?(rawValue: Int)
+1.8ms	<invalid loc>	get {}
+1.8ms	<invalid loc>	get {}
+1.8ms	<invalid loc>	get {}
+1.8ms	<invalid loc>	get {}
+1.8ms	<invalid loc>	get {}
+1.8ms	<invalid loc>	get {}
+1.8ms	<invalid loc>	get {}
+1.8ms	<invalid loc>	get {}
+1.8ms	<invalid loc>	get {}
+1.8ms	<invalid loc>	get {}
+1.8ms	<invalid loc>	get {}
+1.8ms	<invalid loc>	get {}
+1.8ms	<invalid loc>	get {}
+1.8ms	<invalid loc>	get {}
+1.8ms	<invalid loc>	get {}
+1.8ms	<invalid loc>	get {}
+1.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/HomeViewController.swift:130:10	@objc func startTracking(_ name: String, lat: Double, long: Double)
+1.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:893:18	private func doDisconnect(_ error: NSError?)
+1.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketPacket.swift:74:19	mutating func addData(_ data: Data) -> Bool
+1.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:221:17	@objc public final func emitWithAck(_ event: String, with items: [Any]) -> OnAckCallback
+1.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEnginePollable.swift:185:10	func parsePollingMessage(_ str: String)
+1.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/ShareDialog/ShareDialog.swift:32:5	final get {}
+1.8ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/Photo/Photo.swift:66:56	get {}
+1.7ms	<invalid loc>	get {}
+1.7ms	<invalid loc>	get {}
+1.7ms	<invalid loc>	get {}
+1.7ms	<invalid loc>	get {}
+1.7ms	<invalid loc>	get {}
+1.7ms	<invalid loc>	get {}
+1.7ms	<invalid loc>	get {}
+1.7ms	<invalid loc>	get {}
+1.7ms	<invalid loc>	get {}
+1.7ms	<invalid loc>	get {}
+1.7ms	<invalid loc>	get {}
+1.7ms	<invalid loc>	get {}
+1.7ms	<invalid loc>	get {}
+1.7ms	<invalid loc>	get {}
+1.7ms	<invalid loc>	get {}
+1.7ms	<invalid loc>	get {}
+1.7ms	<invalid loc>	get {}
+1.7ms	<invalid loc>	get {}
+1.7ms	<invalid loc>	get {}
+1.7ms	<invalid loc>	get {}
+1.7ms	<invalid loc>	get {}
+1.7ms	<invalid loc>	get {}
+1.7ms	<invalid loc>	get {}
+1.7ms	<invalid loc>	get {}
+1.7ms	<invalid loc>	get {}
+1.7ms	<invalid loc>	get {}
+1.7ms	<invalid loc>	get {}
+1.7ms	<invalid loc>	get {}
+1.7ms	<invalid loc>	get {}
+1.7ms	<invalid loc>	get {}
+1.7ms	<invalid loc>	get {}
+1.7ms	<invalid loc>	get {}
+1.7ms	<invalid loc>	get {}
+1.7ms	<invalid loc>	get {}
+1.7ms	<invalid loc>	get {}
+1.7ms	<invalid loc>	get {}
+1.7ms	<invalid loc>	get {}
+1.7ms	<invalid loc>	get {}
+1.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:893:18	private func doDisconnect(_ error: NSError?)
+1.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:760:18	private func processRawMessagesInBuffer(_ pointer: UnsafePointer<UInt8>, bufferLen: Int)
+1.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:760:18	private func processRawMessagesInBuffer(_ pointer: UnsafePointer<UInt8>, bufferLen: Int)
+1.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:407:18	private func disconnectStream(_ error: NSError?)
+1.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:328:17	@objc public final func off(_ event: String)
+1.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:221:17	@objc public final func emitWithAck(_ event: String, with items: [Any]) -> OnAckCallback
+1.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:179:10	@objc final func didDisconnect(reason: String)
+1.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEnginePollable.swift:185:10	func parsePollingMessage(_ str: String)
+1.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:321:25	(closure)
+1.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketAckEmitter.swift:31:31	@objc final get {}
+1.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/EditProfilePresenter.swift:139:83	(closure)
+1.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/EditProfilePresenter.swift:139:83	(closure)
+1.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/SharedPreferences.swift:26:17	static func remove(_ p: key) -> Bool
+1.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/AuthManager.swift:105:22	fileprivate func handleAuthErrors(_ error: APIManagerError?, _ data: [String : Any]? = default) -> errorMsg?
+1.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/CoreDataManager.swift:202:82	(closure)
+1.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/AppInvite/AppInvite.PromoCode.swift:37:12	public init?(string: String)
+1.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphObject.swift:59:5	get {}
+1.7ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/UserProfile/UserProfile.swift:159:5	get {}
+1.6ms	<invalid loc>	init?(rawValue: Int)
+1.6ms	<invalid loc>	init()
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	<invalid loc>	get {}
+1.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/SafeZoneViewController.swift:47:21	@objc get {}
+1.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/ChangePasswordViewController.swift:45:10	@objc func change()
+1.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/ChangePasswordViewController.swift:45:10	@objc func change()
+1.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:407:18	private func disconnectStream(_ error: NSError?)
+1.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketStringReader.swift:48:19	mutating func read(count: Int) -> String
+1.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClientOption.swift:102:10	func getSocketIOOptionValue() -> Any
+1.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:441:10	final func emitTest(event: String, _ data: Any...)
+1.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:335:17	@objc public final func off(id: UUID)
+1.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:335:17	@objc public final func off(id: UUID)
+1.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:328:17	@objc public final func off(_ event: String)
+1.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:304:17	@objc public final func doFastUpgrade()
+1.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:138:18	private final func checkAndHandleEngineError(_ msg: String)
+1.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:138:18	private final func checkAndHandleEngineError(_ msg: String)
+1.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/HomePresenter.swift:37:10	func checkSignInStatus()
+1.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/PhoneManager.swift:37:29	fileprivate static func update(_ phone: inout Phone, with data: Any)
+1.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/AuthManager.swift:105:22	fileprivate func handleAuthErrors(_ error: APIManagerError?, _ data: [String : Any]? = default) -> errorMsg?
+1.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/AppInvite/AppInvite.PromoCode.swift:37:12	public init?(string: String)
+1.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/AppInvite/AppInvite.Dialog.swift:38:7	final get {}
+1.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/Video/Video.swift:55:56	get {}
+1.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/Video/Video.swift:55:56	get {}
+1.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content Sharing/GraphSharer.swift:71:10	public init(content: Content)
+1.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/Common/SDKApplicationDelegate.swift:67:15	@available(iOS, deprecated: 9.0, message: "Please use application(open:options:).") @discardableResult public final func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool
+1.6ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEvent.Builtin.swift:298:22	public static func spentCredits(contentType: String? = default, contentId: String? = default, valueToSum: Double? = default, extraParameters: ParametersDictionary = default) -> AppEvent
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	<invalid loc>	get {}
+1.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/SafeZoneViewController.swift:47:21	@objc get {}
+1.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/HomeViewController.swift:296:9	init(direction: Int)
+1.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/HomeViewController.swift:141:10	@objc func stopTracking(_ name: String)
+1.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketPacket.swift:150:25	private static func findType(_ binCount: Int, ack: Bool) -> PacketType
+1.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:300:27	(closure)
+1.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:321:25	(closure)
+1.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:164:18	private final func closeOutEngine(reason: String)
+1.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/SocketIOManager.swift:67:10	@objc func launch(name: String, frequency: Int = default)
+1.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/Extensions.swift:66:37	get {}
+1.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/AuthManager.swift:47:70	(closure)
+1.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/GameRequest/GameRequest.swift:89:22	public static func ==(lhs: GameRequest, rhs: GameRequest) -> Bool
+1.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/AppInvite/AppInvite.swift:67:22	public static func ==(lhs: AppInvite, rhs: AppInvite) -> Bool
+1.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphObject.swift:59:5	get {}
+1.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content Sharing/GraphSharer.swift:71:10	public init(content: Content)
+1.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/Common/AccessToken.swift:63:10	public init(appId: String = default, authenticationToken: String, userId: String? = default, refreshDate: Date = default, expirationDate: Date = default, grantedPermissions: Set<Permission>? = default, declinedPermissions: Set<Permission>? = default)
+1.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/Common/AccessToken.swift:63:10	public init(appId: String = default, authenticationToken: String, userId: String? = default, refreshDate: Date = default, expirationDate: Date = default, grantedPermissions: Set<Permission>? = default, declinedPermissions: Set<Permission>? = default)
+1.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEventParameterName.swift:71:31	get {}
+1.5ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEvent.Builtin.swift:298:22	public static func spentCredits(contentType: String? = default, contentId: String? = default, valueToSum: Double? = default, extraParameters: ParametersDictionary = default) -> AppEvent
+1.4ms	<invalid loc>	init()
+1.4ms	<invalid loc>	init()
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	<invalid loc>	get {}
+1.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketStringReader.swift:48:19	mutating func read(count: Int) -> String
+1.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketPacket.swift:150:25	private static func findType(_ binCount: Int, ack: Bool) -> PacketType
+1.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClientOption.swift:102:10	func getSocketIOOptionValue() -> Any
+1.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:489:18	private final func upgradeTransport()
+1.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:304:17	@objc public final func doFastUpgrade()
+1.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:276:17	@objc public final func disconnect(reason: String)
+1.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketAckManager.swift:30:24	get {}
+1.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketAckEmitter.swift:27:48	@objc override init()
+1.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/SocketIOManager.swift:67:10	@objc func launch(name: String, frequency: Int = default)
+1.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/DataManager.swift:83:10	func startTracking(pet: _pet, callback: @escaping petTrackingCallback)
+1.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/AuthManager.swift:82:10	func sendPasswordReset(_ email: String, completition: @escaping errorCallback)
+1.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/AuthManager.swift:36:64	(closure)
+1.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/CoreDataManager.swift:225:18	mutating get {}
+1.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/ShareDialog/ShareDialog.swift:59:10	public init(content: Content)
+1.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/ShareDialog/ShareDialog.swift:59:10	public init(content: Content)
+1.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/GameRequest/GameRequest.swift:89:22	public static func ==(lhs: GameRequest, rhs: GameRequest) -> Bool
+1.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/Video/Video.swift:49:22	public static func ==(lhs: Video, rhs: Video) -> Bool
+1.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphAction.swift:95:22	public static func ==(lhs: OpenGraphAction, rhs: OpenGraphAction) -> Bool
+1.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/Common/Hashtag.swift:34:10	public init?(_ string: String)
+1.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/Common/Hashtag.swift:34:10	public init?(_ string: String)
+1.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookLogin/Sources/Login/LoginManager.swift:114:15	public final func logOut()
+1.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookLogin/Sources/Login/LoginManager.swift:114:15	public final func logOut()
+1.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEventsLogger.swift:135:22	public static func log(_ eventName: String, parameters: AppEvent.ParametersDictionary = default, valueToSum: Double? = default, accessToken: AccessToken? = default)
+1.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEventsLogger.swift:135:22	public static func log(_ eventName: String, parameters: AppEvent.ParametersDictionary = default, valueToSum: Double? = default, accessToken: AccessToken? = default)
+1.4ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEvent.Builtin.swift:208:22	public static func addedPaymentInfo(successful: Bool? = default, valueToSum: Double? = default, extraParameters: ParametersDictionary = default) -> AppEvent
+1.3ms	<invalid loc>	init?(rawValue: Int)
+1.3ms	<invalid loc>	init(_exponent: Int32, _length: UInt32, _isNegative: UInt32, _isCompact: UInt32, _reserved: UInt32, _mantissa: (UInt16, UInt16, UInt16, UInt16, UInt16, UInt16, UInt16, UInt16))
+1.3ms	<invalid loc>	init()
+1.3ms	<invalid loc>	init()
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	<invalid loc>	get {}
+1.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/HomeViewController.swift:167:10	@objc func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
+1.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/HomeViewController.swift:167:10	@objc func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
+1.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/HomeViewController.swift:141:10	@objc func stopTracking(_ name: String)
+1.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:344:17	@discardableResult @objc public final func on(_ event: String, callback: @escaping NormalCallback) -> UUID
+1.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:344:17	@discardableResult @objc public final func on(_ event: String, callback: @escaping NormalCallback) -> UUID
+1.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:164:18	private final func createOnAck(_ items: [Any]) -> OnAckCallback
+1.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:164:18	private final func closeOutEngine(reason: String)
+1.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketAckManager.swift:30:24	get {}
+1.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/Extensions.swift:162:10	@objc dynamic func centerOn(_ location: CLLocationCoordinate2D, with regionRadius: CLLocationDistance = default)
+1.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/AuthManager.swift:82:10	func sendPasswordReset(_ email: String, completition: @escaping errorCallback)
+1.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/AuthManager.swift:47:70	(closure)
+1.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/CoreDataManager.swift:113:10	func save() throws
+1.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/GameRequest/GameRequest.RecipientsFilter.swift:47:66	get {}
+1.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/AppInvite/AppInvite.swift:67:22	public static func ==(lhs: AppInvite, rhs: AppInvite) -> Bool
+1.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/Video/Video.swift:49:22	public static func ==(lhs: Video, rhs: Video) -> Bool
+1.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/Photo/Photo.swift:93:22	public static func ==(lhs: Photo, rhs: Photo) -> Bool
+1.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphObject.swift:101:44	(closure)
+1.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphAction.swift:95:22	public static func ==(lhs: OpenGraphAction, rhs: OpenGraphAction) -> Bool
+1.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphAction.swift:75:39	(closure)
+1.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content Sharing/GraphSharer.swift:90:15	public final func share() throws
+1.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookLogin/Sources/Login/LoginManager.swift:101:15	public final func logIn(_ permissions: [PublishPermission] = default, viewController: UIViewController? = default, completion: ((LoginResult) -> Void)? = default)
+1.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEventsLogger.swift:181:5	final get {}
+1.3ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEventsLogger.swift:181:5	final get {}
+1.2ms	<invalid loc>	init?(rawValue: Int)
+1.2ms	<invalid loc>	init?(rawValue: Int)
+1.2ms	<invalid loc>	init?(rawValue: Int)
+1.2ms	<invalid loc>	init(_exponent: Int32, _length: UInt32, _isNegative: UInt32, _isCompact: UInt32, _reserved: UInt32, _mantissa: (UInt16, UInt16, UInt16, UInt16, UInt16, UInt16, UInt16, UInt16))
+1.2ms	<invalid loc>	init()
+1.2ms	<invalid loc>	init()
+1.2ms	<invalid loc>	init()
+1.2ms	<invalid loc>	init()
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	<invalid loc>	get {}
+1.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:819:18	private func writeError(_ code: UInt16)
+1.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:819:18	private func writeError(_ code: UInt16)
+1.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:164:18	private final func createOnAck(_ items: [Any]) -> OnAckCallback
+1.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngineSpec.swift:93:10	func doubleEncodeUTF8(_ string: String) -> String
+1.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:489:18	private final func upgradeTransport()
+1.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:336:17	@objc public final func flushWaitingForPostToWebSocket()
+1.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:276:17	@objc public final func disconnect(reason: String)
+1.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/Extensions.swift:162:10	@objc dynamic func centerOn(_ location: CLLocationCoordinate2D, with regionRadius: CLLocationDistance = default)
+1.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/DataManager.swift:83:10	func startTracking(pet: _pet, callback: @escaping petTrackingCallback)
+1.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/AuthManager.swift:36:64	(closure)
+1.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/CoreDataManager.swift:225:18	mutating get {}
+1.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/ShareButton.swift:41:10	public init(frame: CGRect? = default, content: C? = default)
+1.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/ShareButton.swift:41:10	public init(frame: CGRect? = default, content: C? = default)
+1.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/SendButton.swift:41:10	public init(frame: CGRect? = default, content: C? = default)
+1.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/SendButton.swift:41:10	public init(frame: CGRect? = default, content: C? = default)
+1.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/LikableObject.swift:66:22	public static func ==(lhs: LikableObject, rhs: LikableObject) -> Bool
+1.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/GameRequest/GameRequest.Dialog.swift:67:17	public final func show() throws
+1.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/GameRequest/GameRequest.Dialog.swift:52:12	public init(request: GameRequest)
+1.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/Photo/Photo.swift:93:22	public static func ==(lhs: Photo, rhs: Photo) -> Bool
+1.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphObject.swift:47:10	public init()
+1.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphObject.swift:47:10	public init()
+1.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphObject.swift:101:44	(closure)
+1.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphAction.swift:75:39	(closure)
+1.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content Sharing/GraphSharer.swift:90:15	public final func share() throws
+1.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookLogin/Sources/Login/LoginManager.swift:101:15	public final func logIn(_ permissions: [PublishPermission] = default, viewController: UIViewController? = default, completion: ((LoginResult) -> Void)? = default)
+1.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookLogin/Sources/Login/LoginButtonDelegateBridge.swift:33:8	@objc dynamic func loginButton(_ sdkButton: FBSDKLoginButton!, didCompleteWith sdkResult: FBSDKLoginManagerLoginResult?, error: Error?)
+1.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEventParameterName.swift:71:31	get {}
+1.2ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEvent.Builtin.swift:208:22	public static func addedPaymentInfo(successful: Bool? = default, valueToSum: Double? = default, extraParameters: ParametersDictionary = default) -> AppEvent
+1.1ms	<invalid loc>	init(_exponent: Int32, _length: UInt32, _isNegative: UInt32, _isCompact: UInt32, _reserved: UInt32, _mantissa: (UInt16, UInt16, UInt16, UInt16, UInt16, UInt16, UInt16, UInt16))
+1.1ms	<invalid loc>	init()
+1.1ms	<invalid loc>	infix static func ==(a: SDKLoggingBehavior, b: SDKLoggingBehavior) -> Bool
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	<invalid loc>	get {}
+1.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/SafeZoneViewController.swift:216:10	@objc func fenceDistanceIsIdle() -> Bool
+1.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/SafeZoneViewController.swift:216:10	@objc func fenceDistanceIsIdle() -> Bool
+1.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/View/HomeViewController.swift:296:9	init(direction: Int)
+1.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:898:29	(closure)
+1.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:284:18	private func addHeader(_ urlRequest: CFHTTPMessage, key: String, val: String)
+1.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketStringReader.swift:32:34	get {}
+1.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketStringReader.swift:32:34	get {}
+1.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketPacket.swift:119:27	private mutating func fillInPlaceholders()
+1.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:400:18	private final func tryReconnect(reason: String)
+1.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:356:17	@discardableResult @objc public final func once(_ event: String, callback: @escaping NormalCallback) -> UUID
+1.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngineSpec.swift:93:10	func doubleEncodeUTF8(_ string: String) -> String
+1.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:132:5	@objc deinit
+1.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketAckEmitter.swift:31:31	@objc final get {}
+1.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/SharedPreferences.swift:31:17	static func has(_ p: key) -> Bool
+1.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/LocationManager.swift:26:29	fileprivate static func store(_ data: Any?) -> Location?
+1.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/LikeControl.swift:29:34	@objc override init(frame: CGRect)
+1.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/LikeButton.swift:62:10	public init(frame: CGRect? = default, object: LikableObject)
+1.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/LikeButton.swift:62:10	public init(frame: CGRect? = default, object: LikableObject)
+1.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/LikableObject.swift:66:22	public static func ==(lhs: LikableObject, rhs: LikableObject) -> Bool
+1.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/ShareDialog/ShareDialog.swift:116:15	public final func show() throws
+1.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/GameRequest/GameRequest.swift:73:10	public init(title: String, message: String)
+1.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/GameRequest/GameRequest.RecipientsFilter.swift:47:66	get {}
+1.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/GameRequest/GameRequest.Dialog.swift:52:12	public init(request: GameRequest)
+1.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/AppInvite/AppInvite.Dialog.swift:61:12	public init(invite: AppInvite)
+1.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/AppInvite/AppInvite.Dialog.swift:38:7	final get {}
+1.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/Common/Hashtag.swift:69:22	public static func ==(lhs: Hashtag, rhs: Hashtag) -> Bool
+1.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/Common/Hashtag.swift:69:22	public static func ==(lhs: Hashtag, rhs: Hashtag) -> Bool
+1.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookLogin/Sources/Login/LoginButton.swift:117:19	@objc public required init?(coder decoder: NSCoder)
+1.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/GraphRequest/GraphResponse.swift:49:33	get {}
+1.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/GraphRequest/GraphResponse.swift:49:33	get {}
+1.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/Common/SDKApplicationDelegate.swift:48:15	@discardableResult public final func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = default) -> Bool
+1.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEventName.swift:157:22	public static func ==(lhs: AppEventName, rhs: AppEventName) -> Bool
+1.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEvent.swift:61:10	public init(name: String, parameters: ParametersDictionary = default, valueToSum: Double? = default)
+1.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEvent.swift:61:10	public init(name: String, parameters: ParametersDictionary = default, valueToSum: Double? = default)
+1.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEvent.Builtin.swift:280:22	public static func unlockedAchievement(description: String? = default, valueToSum: Double? = default, extraParameters: ParametersDictionary = default) -> AppEvent
+1.1ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEvent.Builtin.swift:263:22	public static func achievedLevel(level: AppEventParameterValueType? = default, valueToSum: Double? = default, extraParameters: ParametersDictionary = default) -> AppEvent
+1.0ms	<invalid loc>	init()
+1.0ms	<invalid loc>	init()
+1.0ms	<invalid loc>	init()
+1.0ms	<invalid loc>	init()
+1.0ms	<invalid loc>	init()
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	<invalid loc>	get {}
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:898:29	(closure)
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:420:18	private func cleanupStream()
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/WebSocket.swift:420:18	private func cleanupStream()
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketPacket.swift:201:17	static func deconstructData(_ data: [Any]) -> ([Any], [Data])
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketPacket.swift:119:27	private mutating func fillInPlaceholders()
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketIOClient.swift:356:17	@discardableResult @objc public final func once(_ event: String, callback: @escaping NormalCallback) -> UUID
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:336:17	@objc public final func flushWaitingForPostToWebSocket()
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketEngine.swift:132:5	@objc deinit
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/SocketIO/SocketAckManager.swift:44:14	private func <(lhs: SocketAck, rhs: SocketAck) -> Bool
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Presenter/HomePresenter.swift:73:64	(closure)
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/LocationManager.swift:26:29	fileprivate static func store(_ data: Any?) -> Location?
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/Extensions.swift:18:34	get {}
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/Model/AuthManager.swift:75:10	func signOut() -> Bool
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Snout/CoreDataManager.swift:113:10	func save() throws
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/LikeControl.swift:29:34	@objc override init(frame: CGRect)
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/LikeButton.swift:30:33	@objc override init(frame: CGRect)
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Views/LikeButton.swift:30:33	@objc override init(frame: CGRect)
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Internal/SDKSharingDelegateBridge.swift:51:8	@objc func sharer(_ sharer: FBSDKSharing, didFailWithError error: Error)
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Internal/ContentBridger.swift:60:64	@objc override init()
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/ShareDialog/ShareDialog.swift:116:15	public final func show() throws
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/GameRequest/GameRequest.swift:73:10	public init(title: String, message: String)
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/AppInvite/AppInvite.PromoCode.swift:62:22	public static func ==(lhs: AppInvite.PromoCode, rhs: AppInvite.PromoCode) -> Bool
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/AppInvite/AppInvite.Dialog.swift:76:17	public final func show() throws
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Dialogs/AppInvite/AppInvite.Dialog.swift:61:12	public init(invite: AppInvite)
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphPropertyName.swift:64:31	get {}
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphAction.swift:38:10	public init(type: String)
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookShare/Sources/Share/Content/OpenGraph/OpenGraphAction.swift:38:10	public init(type: String)
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookLogin/Sources/Login/LoginButtonDelegateBridge.swift:33:8	@objc dynamic func loginButton(_ sdkButton: FBSDKLoginButton!, didCompleteWith sdkResult: FBSDKLoginManagerLoginResult?, error: Error?)
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookLogin/Sources/Login/LoginButton.swift:117:19	@objc public required init?(coder decoder: NSCoder)
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/UserProfile/UserProfile.swift:71:10	public init(userId: String, firstName: String? = default, middleName: String? = default, lastName: String? = default, fullName: String? = default, profileURL: URL? = default, refreshDate: Date = default)
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/Permissions/Permission.swift:83:22	public static func ==(lhs: Permission, rhs: Permission) -> Bool
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/Permissions/Permission.swift:83:22	public static func ==(lhs: Permission, rhs: Permission) -> Bool
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/Internal/Extensions/Dictionary+KeyValueMap.swift:29:8	func keyValueFlatMap<K, V>(_ transform: (Element) throws -> (K?, V?)) rethrows -> [K : V]
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/GraphRequest/GraphRequestProtocol.swift:62:15	public func start(_ completion: GraphRequestConnection.Completion<Self>? = default)
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/GraphRequest/GraphRequestProtocol.swift:62:15	public func start(_ completion: GraphRequestConnection.Completion<Self>? = default)
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/GraphRequest/GraphRequestConnection.swift:142:20	fileprivate func sdkRequestCompletion<T : GraphRequestProtocol>(from completion: @escaping Completion<T>) -> SDKRequestCompletion
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/Common/AccessToken.swift:90:5	get {}
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEventParameterName.swift:132:22	public static func ==(lhs: AppEventParameterName, rhs: AppEventParameterName) -> Bool
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEventParameterName.swift:132:22	public static func ==(lhs: AppEventParameterName, rhs: AppEventParameterName) -> Bool
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEventName.swift:157:22	public static func ==(lhs: AppEventName, rhs: AppEventName) -> Bool
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEvent.swift:37:14	get {}
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEvent.Builtin.swift:280:22	public static func unlockedAchievement(description: String? = default, valueToSum: Double? = default, extraParameters: ParametersDictionary = default) -> AppEvent
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEvent.Builtin.swift:263:22	public static func achievedLevel(level: AppEventParameterValueType? = default, valueToSum: Double? = default, extraParameters: ParametersDictionary = default) -> AppEvent
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEvent.Builtin.swift:145:22	public static func purchased(amount: Double, currency: String? = default, extraParameters: ParametersDictionary = default) -> AppEvent
+1.0ms	/Users/iosdeveloper/Documents/Xcode Projects/Snout/Snout/Pods/FacebookCore/Sources/Core/AppEvents/AppEvent.Builtin.swift:145:22	public static func purchased(amount: Double, currency: String? = default, extraParameters: ParametersDictionary = default) -> AppEvent
