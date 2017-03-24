@@ -144,9 +144,9 @@ class APIManagerTests: XCTestCase {
                 "country_code":"34"
             ]
             let address = [
-                "line0": "l1",
-                "line1": "l2",
-                "line2": "l2",
+                "line0": "Unit 12",
+                "line1": "Business Park",
+                "line2": "Line 3",
                 "city": "Cork",
                 "postal_code": "58745",
                 "state": "Munster",
