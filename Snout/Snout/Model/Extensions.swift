@@ -24,7 +24,23 @@ extension Phone {
         guard let country_code = self.country_code else {
             return nil
         }
-        return "\(country_code.code!) \(number)"
+        return "\(country_code) \(number)"
+    }
+    
+    var toServerDict: [String:Any]? {
+        
+        guard let number = self.number else {
+            return nil
+        }
+        
+        guard let code = self.country_code else {
+            return nil
+        }
+       
+        var phoneData = [String:Any]()
+        phoneData["number"] = number
+        phoneData["country_code"] = code
+        return phoneData
     }
     
 }
@@ -234,6 +250,62 @@ extension UIViewController {
     var notifier: Notifier {
         return Notifier(with: self.view)
     }
+    
+    func showLoadingView() {
+        let loadingView = UIVisualEffectView(frame: view.bounds)
+        loadingView.effect = UIBlurEffect.init(style: .extraLight)
+        loadingView.tag = 1
+        
+        let activity = UIActivityIndicatorView(frame: view.bounds)
+        activity.activityIndicatorViewStyle = .whiteLarge
+        activity.color = UIColor.orange()
+        activity.startAnimating()
+        activity.tag = 1
+        
+        loadingView.addSubview(activity)
+        
+        loadingView.alpha = 0.0
+        
+        view.addSubview(loadingView)
+        
+        UIView.animate(withDuration: 0.6) {
+            loadingView.alpha = 1.0
+        }
+    }
+    
+    func hideLoadingView() {
+        if let loadingView = view.subviews.first(where: { $0.tag == 1 }) as? UIVisualEffectView {
+            UIView.animate(withDuration: 0.4, animations: {
+                loadingView.alpha = 0
+            }, completion: { (success) in
+                if success {
+                    loadingView.removeFromSuperview()
+                }
+            })
+        }
+    }
+    
+    func hideLoadingView(with success:Bool){
+        
+        let label = UILabel(frame: view.bounds)
+        label.text = "✓"
+        label.font = UIFont.systemFont(ofSize: 70)
+        label.textAlignment = .center
+        label.textColor = UIColor.orange()
+        
+     
+        if let loadingView = view.subviews.first(where: { $0.tag == 1 }) as? UIVisualEffectView {
+
+            if let activity = loadingView.subviews.first(where: { $0.tag == 1 }) as? UIActivityIndicatorView {
+                activity.removeFromSuperview()
+                loadingView.addSubview(label)
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(1), execute: { 
+                    self.hideLoadingView()
+                })
+            }
+        }
+    }
+    
 }
 
 extension UIColor {

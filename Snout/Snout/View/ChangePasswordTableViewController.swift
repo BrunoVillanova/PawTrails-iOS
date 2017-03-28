@@ -13,9 +13,6 @@ class ChangePasswordTableViewController: UITableViewController, ChangePasswordVi
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var newPasswordTextField: UITextField!
     @IBOutlet weak var newPassword2TextField: UITextField!
-//    @IBOutlet weak var oldPasswordLabel: UILabel!
-//    @IBOutlet weak var newPasswordLabel: UILabel!
-//    @IBOutlet weak var noMatchLabel: UILabel!
     
     fileprivate let presenter = ChangePasswordPresenter()
     
@@ -23,40 +20,29 @@ class ChangePasswordTableViewController: UITableViewController, ChangePasswordVi
         super.viewDidLoad()
         self.presenter.attachView(self)
 
-//        self.oldPasswordLabel.isHidden = true
-//        self.newPasswordLabel.isHidden = true
-//        self.noMatchLabel.isHidden = true
         self.passwordTextField.becomeFirstResponder()
-        if isDebug {
+        /*if isDebug {
             self.passwordTextField.text = ezdebug.email
             self.newPasswordTextField.text = ezdebug.password + "2"
             self.newPassword2TextField.text = ezdebug.password + "2"
-        }
+        }*/
     }
     
     deinit {
         self.presenter.deteachView()
     }
     
-    @IBAction func changeAction(_ sender: UIButton) {
+    @IBAction func doneAction(_ sender: UIBarButtonItem) {
         change()
     }
     
     func change(){
-//        self.oldPasswordLabel.isHidden = true
-//        self.newPasswordLabel.isHidden = true
-//        self.noMatchLabel.isHidden = true
         self.presenter.changePassword(password: passwordTextField.text ?? "", newPassword: newPasswordTextField.text ?? "", newPassword2: newPassword2TextField.text ?? "")
     }
     
-    @IBAction func cancelAction(_ sender: UIBarButtonItem) {
-        self.view.endEditing(true)
-        dismiss(animated: true, completion: nil)
-    }
-
     // MARK: - CLLocationManagerDelegate
 
-    func errorMessage(_ error: errorMsg) {
+    func errorMessage(_ error: ErrorMsg) {
         self.alert(title: error.title, msg: error.msg)
     }
 
@@ -85,7 +71,7 @@ class ChangePasswordTableViewController: UITableViewController, ChangePasswordVi
     
     func passwordChanged() {
         self.view.endEditing(true)
-        self.dismiss(animated: true, completion: nil)
+        _ = self.navigationController?.popViewController(animated: true)
     }
 
     // MARK: - UITextFieldDelegate

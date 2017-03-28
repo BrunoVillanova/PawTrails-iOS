@@ -33,7 +33,7 @@ class SettingsPresenter {
         if AuthManager.Instance.signOut() {
             self.view?.userNotSigned()
         }else{
-            self.view?.errorMessage(errorMsg(title:"Couldn't Logout 😱", msg:""))
+            self.view?.errorMessage(ErrorMsg(title:"Couldn't Logout 😱", msg:""))
         }
     }
     
@@ -44,10 +44,17 @@ class SettingsPresenter {
     fileprivate func getUser() {
         DataManager.Instance.getUser { (error, user) in
             if error != nil {
-                self.view?.errorMessage(errorMsg("","\(error)"))
+                self.view?.errorMessage(ErrorMsg(title: "",msg: "\(error)"))
             }else if user != nil {
                 DispatchQueue.main.async {
-                    self.view?.loadUser(name: user?.name, image: nil, sharedLocation: false)
+                    var name:String? = nil
+                    if user!.name != nil {
+                        name = user!.name!
+                    }
+                    if user!.name != nil && user!.surname != nil {
+                        name?.append(" \(user!.surname!)")
+                    }
+                    self.view?.loadUser(name: name, image: nil, sharedLocation: false)
                 }
             }
         }

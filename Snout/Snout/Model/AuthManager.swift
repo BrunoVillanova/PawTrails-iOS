@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias errorCallback = (_ error:errorMsg?) -> Void
+typealias errorCallback = (_ error:ErrorMsg?) -> Void
 
 
 class AuthManager {
@@ -21,7 +21,7 @@ class AuthManager {
     }
     
     func signUp(_ email:String, _ password: String, completition: @escaping errorCallback) {
-        let data = ["email":email, "password":password]
+        let data = isDebug ? ["email":email, "password":password, "is4test":ezdebug.is4test] : ["email":email, "password":password]
         APIManager.Instance.perform(call: .signUp, with: data) { (error, data) in
             if error != nil {
                 completition(self.handleAuthErrors(error, data))
@@ -32,7 +32,7 @@ class AuthManager {
     }
     
     func signIn(_ email:String, _ password: String, completition: @escaping errorCallback) {
-        let data = ["email":email, "password":password]
+        let data = isDebug ? ["email":email, "password":password, "is4test":ezdebug.is4test] : ["email":email, "password":password]
         APIManager.Instance.perform(call: .signin, with: data) { (error, data) in
             if error != nil {
                 completition(self.handleAuthErrors(error))
@@ -80,7 +80,8 @@ class AuthManager {
     }
     
     func sendPasswordReset(_ email:String, completition: @escaping errorCallback) {
-        let data = ["email":email]
+        let data = isDebug ? ["email":email, "is4test":ezdebug.is4test] : ["email":email]
+
         APIManager.Instance.perform(call: .passwordReset, with: data) { (error, data) in
             if error != nil {
                 completition(self.handleAuthErrors(error))
@@ -102,13 +103,9 @@ class AuthManager {
     }
 
     
-    fileprivate func handleAuthErrors(_ error: APIManagerError?, _ data: [String:Any]? = nil) -> errorMsg? {
+    fileprivate func handleAuthErrors(_ error: APIManagerError?, _ data: [String:Any]? = nil) -> ErrorMsg? {
         if error != nil {
-            if let authError = AuthenticationError(rawValue: error!.specificCode) {
-                return Message.Instance.authError(type: authError)
-            }else{
-                return Message.Instance.softwareDevelopmentError(data)
-            }
+            return error?.info()
         }
         return nil
     }

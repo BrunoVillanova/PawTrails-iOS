@@ -88,7 +88,7 @@ class UserProfileTests: XCTestCase {
                 XCTAssert(user.birthday?.toStringServer == birthday.toStringServer, "Birthday not saved properly")
                 XCTAssert(user.notification == notification, "Notification not saved properly")
                 XCTAssert(user.phone?.number == phone["number"], "Phone number not saved properly")
-                XCTAssert(user.phone?.country_code?.code == phone["country_code"], "Phone cc not saved properly")
+                XCTAssert(user.phone?.country_code == phone["country_code"], "Phone cc not saved properly")
                 XCTAssert(user.address?.line0 == address["line0"], "Address line0 not saved properly")
                 XCTAssert(user.address?.line1 == address["line1"], "Address line1 not saved properly")
                 XCTAssert(user.address?.line2 == address["line2"], "Address line2 not saved properly")

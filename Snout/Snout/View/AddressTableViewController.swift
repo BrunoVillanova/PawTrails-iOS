@@ -66,15 +66,16 @@ class AddressTableViewController: UITableViewController, UIPickerViewDelegate, U
     
     @IBAction func saveAction(_ sender: UIBarButtonItem?) {
         
-        var data = [String:String]()
-        data["line0"] = firstLineTextField.text ?? ""
-        data["line1"] = secondLineTextField.text ?? ""
-        data["line2"] = thirdLineTextField.text ?? ""
-        data["city"] = cityTextField.text ?? ""
-        data["postal_code"] = postalCodeTextField.text ?? ""
-        data["state"] = stateTextField.text ?? ""
-        data["country"] = (selectedCC?.shortname != nil && self.countryTextField.text != nil && countryTextField.text != "") ? selectedCC?.shortname : ""
-        self.parentEditor.set(address: data)
+        var address = _Address()
+        address.line0 = firstLineTextField.text
+        address.line1 = secondLineTextField.text
+        address.line2 = thirdLineTextField.text
+        address.city = cityTextField.text
+        address.postal_code = postalCodeTextField.text
+        address.state = stateTextField.text
+        address.country = (selectedCC?.shortname != nil && self.countryTextField.text != nil && countryTextField.text != "") ? selectedCC?.shortname : nil
+        
+        self.parentEditor.set(address: address)
         parentEditor.refresh()
         view.endEditing(true)
         _ = self.navigationController?.popViewController(animated: true)

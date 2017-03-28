@@ -12,7 +12,8 @@ class PasswordRecoveryViewController: UIViewController, PasswordRecoveryView, UI
 
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var checkButton: UIButton!
-    
+    @IBOutlet weak var sendButton: UIButton!
+
     fileprivate let unchecked = " ⃝"
     fileprivate let checked = "◉"
     
@@ -22,12 +23,15 @@ class PasswordRecoveryViewController: UIViewController, PasswordRecoveryView, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.presenter.attachView(self)
-        self.checkButton.setTitle(unchecked, for: .normal)
+        presenter.attachView(self)
+        checkButton.setTitle(unchecked, for: .normal)
+        emailTextField.underline()
+        sendButton.round()
+        
         if email != nil {
-            self.emailTextField.text = email
+            emailTextField.text = email
         }else{
-            self.emailTextField.becomeFirstResponder()
+            emailTextField.becomeFirstResponder()
         }
     }
     
@@ -42,14 +46,10 @@ class PasswordRecoveryViewController: UIViewController, PasswordRecoveryView, UI
     @IBAction func sendAction(_ sender: UIButton) {
         self.presenter.sendRecoveryEmail(email: self.emailTextField.text ?? "", checked: checkButton.titleLabel?.text == checked)
     }
-    @IBAction func cancelAction(_ sender: Any) {
-        self.view.endEditing(true)
-        self.dismiss(animated: true, completion: nil)
-    }
 
     // MARK: - PasswordRecoveryView
     
-    func errorMessage(_ error: errorMsg) {
+    func errorMessage(_ error: ErrorMsg) {
         self.alert(title: error.title, msg: error.msg)
     }
     
@@ -62,11 +62,20 @@ class PasswordRecoveryViewController: UIViewController, PasswordRecoveryView, UI
     }
     
     func emailSent() {
+        self.view.endEditing(true)
         let alert = UIAlertController(title: "Recovery email sent", message: "Check your email and recover your password", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
             self.presentingViewController?.dismiss(animated: true, completion: nil)
         }))
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func beginLoadingContent() {
+        showLoadingView()
+    }
+    
+    func endLoadingContent() {
+        hideLoadingView()
     }
 
     // MARK: - UITextFieldDelegate
@@ -79,4 +88,13 @@ class PasswordRecoveryViewController: UIViewController, PasswordRecoveryView, UI
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.underline(color: UIColor.orange())
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textField.underline()
+    }
+
 }

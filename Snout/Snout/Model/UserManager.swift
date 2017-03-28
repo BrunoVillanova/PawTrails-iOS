@@ -16,14 +16,47 @@ class UserManager {
     static func upsert(_ data: [String:Any]) {
         
         do {
-            if var user = try CoreDataManager.Instance.upsert("User", with: data.filtered(by: ["address", "mobile", "img_url", "date_of_birth"])) as? User {
+            if let user = try CoreDataManager.Instance.upsert("User", with: data.filtered(by: ["address", "mobile", "img_url", "date_of_birth"])) as? User {
                 user.birthday = getBirthdate(data["date_of_birth"])
-                AddressManager.set(data["address"], to: &user)
-                PhoneManager.set(data["mobile"], to: &user)
+                
+                // Address
+                
+                if let addressData = data["address"] as? [String:Any] {
+                    
+                    if user.address == nil { // Create
+                        user.address = try CoreDataManager.Instance.store("Address", with: addressData) as? Address
+
+                    }else{ // Update
+                        for key in user.address!.keys {
+                            user.address!.setValue(addressData[key], forKey: key)
+                        }
+                    }
+                }else{ //Remove
+                    user.setValue(nil, forKey: "address")
+                }
+                
+                // Phone
+                
+                if let phoneData = data["mobile"] as? [String:Any] {
+                    
+                    if user.phone == nil { // Create
+                        user.phone = try CoreDataManager.Instance.store("Phone", with: phoneData) as? Phone
+                        
+                    }else{ // Update
+                        for key in user.phone!.keys {
+                            user.phone!.setValue(phoneData[key], forKey: key)
+                        }
+                    }
+                    
+                }else{ //Remove
+                    user.setValue(nil, forKey: "phone")
+                }
+
                 try CoreDataManager.Instance.save()
             }
         } catch {
             //
+            debugPrint(error)
         }
     }
     
@@ -60,7 +93,8 @@ class UserManager {
         add(user.surname, withKey: "surname", to: &data)
         add(user.email, withKey: "email", to: &data)
         add(user.gender, withKey: "gender", to: &data)
-        data["date_of_birth"] = user.birthday == nil ? "" : user.birthday!.toStringServer
+        add(user.birthday?.toStringServer, withKey: "date_of_birth", to: &data)
+//        data["date_of_birth"] = user.birthday == nil ? "" : user.birthday!.toStringServer
         add(address, withKey: "address", to: &data)
         add(phone, withKey: "mobile", to: &data)
         return data
@@ -78,3 +112,45 @@ class UserManager {
     }
     
 }
+
+class CountryCodeManager {
+    
+    fileprivate static func get(_ data:Any?) -> CountryCode? {
+        if let cc = data as? String {
+            if cc == "" { return nil }
+            var countryCode = get(cc)
+            if countryCode == nil {
+                CSVParser.Instance.loadCountryCodes()
+                countryCode = get(cc)
+            }
+            return countryCode
+            
+        }
+        return nil
+    }
+    
+    static func get(_ code:String) -> CountryCode? {
+        if let ccResults = CoreDataManager.Instance.retrieve("CountryCode", with: NSPredicate("code", .equal, code)) as? [CountryCode] {
+            if ccResults.count == 1 {
+                return ccResults.first!
+            }
+        }
+        return nil
+    }
+    
+    static func getCurrent() -> String? {
+        return Locale.current.regionCode
+    }
+    
+    static func getAll() -> [CountryCode]? {
+        let results = CoreDataManager.Instance.retrieve("CountryCode") as? [CountryCode]
+        if results == nil || results?.count == 0 {
+            CSVParser.Instance.loadCountryCodes()
+            return CoreDataManager.Instance.retrieve("CountryCode") as? [CountryCode]
+        }
+        return results
+    }
+    
+}
+
+

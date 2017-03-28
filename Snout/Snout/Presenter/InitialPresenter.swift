@@ -15,6 +15,7 @@ protocol InitialView: NSObjectProtocol, View, ConnectionView {
     func emailFieldError(msg:String)
     func passwordFieldError(msg:String)
     func userAuthenticated()
+    func verifyAccount(_ email:String)
 }
 
 class InitialPresenter {
@@ -37,7 +38,11 @@ class InitialPresenter {
             AuthManager.Instance.signIn(email!, password!) { (error) in
                 DispatchQueue.main.async {
                     if error != nil {
-                        self.view?.errorMessage(error!)
+                        if error?.code == ErrorCode.AccountNotVerified {
+                            self.view?.verifyAccount(email!)
+                        }else{
+                            self.view?.errorMessage(error!)
+                        }
                     }else{
                         self.view?.userAuthenticated()
                     }
@@ -53,7 +58,7 @@ class InitialPresenter {
                     if error != nil {
                         self.view?.errorMessage(error!)
                     }else{
-                        self.view?.userAuthenticated()
+                        self.view?.verifyAccount(email!)
                     }
                 }
             }
@@ -93,7 +98,7 @@ class InitialPresenter {
         loginManager.logIn([ .publicProfile, .email ], viewController: vc) { loginResult in
             switch loginResult {
             case .failed(let error):
-                self.view?.errorMessage(errorMsg(title:"Error login Facebook", msg:"\(error)"))
+                self.view?.errorMessage(ErrorMsg(title:"Error login Facebook", msg:"\(error)"))
             case .cancelled:
                 print("User cancelled login.")
             case .success(let grantedPermissions, let declinedPermissions, let accessToken):

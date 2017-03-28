@@ -15,7 +15,7 @@ public enum APICallType {
     
     fileprivate var requiresToken: Bool {
         switch self {
-        case .signUp, .signin, .signinsocial: return false
+        case .signUp, .signin, .signinsocial, .passwordReset: return false
         default: return true
         }
     }
@@ -25,6 +25,7 @@ public enum APICallType {
         case .signUp: return "/users/register"
         case .signin: return "/users/login"
         case .passwordChange: return "/users/changepsw"
+        case .passwordReset: return "/users/resetpsw"
         case .setUser: return "/users/edit"
         case .getUser: return "/users/\(SharedPreferences.get(.id) ?? "")"
         default: return ""
@@ -55,11 +56,13 @@ class APIManager {
     private func createRequest(for call:APICallType, with data:[String:Any]?) -> URLRequest? {
         
         if call.requiresBody && data == nil {
-            print("\(call) requires body")
+            debugPrint("\(call) requires body")
             return nil
         }
         
         var request = URLRequest(url: URL(call))
+        
+        debugPrint(request)
         
         request.httpMethod = call.httpMethod
         request.cachePolicy = .useProtocolCachePolicy
@@ -83,38 +86,46 @@ class APIManager {
         
         if let request = createRequest(for: call, with: data) {
 
-            URLSession.shared.dataTask(with: request) { data, response, error in
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
                 
                 if error != nil{
-                    print("Error -> \(error)")
-                    completition(APIManagerError(call: call, httpCode: -1, specificCode: -1, kind: .requestError), nil)
+                    debugPrint("Error -> \(error)")
+                    completition(APIManagerError(call: call, kind: .requestError, httpCode:nil, error: error, errorCode:nil), nil)
                 }else{
                     guard let httpResponse = response as? HTTPURLResponse else {
-                        completition(APIManagerError(call: call, httpCode: -1, specificCode: -1, kind: .httpResponseParse), nil)
+                        completition(APIManagerError(call: call, kind: .httpResponseParse, httpCode: nil, error:nil, errorCode:nil), nil)
                         return
                     }
                     self.handleResponse(for: call, httpResponse.statusCode, data, completition)
                 }
-            }.resume()
+            }
+            
+            task.resume()
         }
         
     }
     
     private func parseResponse(_ data:Data?) -> [String:Any]? {
-        if data != nil {
-            do {
-                let out = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as? [String:Any] 
-                print(out ?? "couldn't parse json!")
-                print(String(data: data!, encoding: String.Encoding.utf8) ?? "not convertible to string either")
+        
+        if data == nil { return nil }
+        
+        do {
+            if let out = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as? [String:Any] {
+                debugPrint(out)
                 return out
-//                return try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as? [String:Any]
-            } catch {
-                print("Error -> \(error)")
-                print(String(data: data!, encoding: String.Encoding.utf8) ?? "not convertible to string either")
+            }else if let rs = String(data: data!, encoding: String.Encoding.utf8) {
+                debugPrint(rs)
+                return ["no_JSON_RS":rs]
+            }else{
+                debugPrint("couldn't parse to string")
                 return nil
             }
+            
+        } catch {
+            debugPrint("Error parsing to json -> \(error)")
+            debugPrint("Output -> \(String(data: data!, encoding: String.Encoding.utf8))")
+            return nil
         }
-        return nil
     }
     
     private func handleResponse(for call: APICallType, _ code: Int, _ data: Data?, _ completition: @escaping (_ error:APIManagerError?, _ data:[String:Any]?) -> Void ) {
@@ -127,14 +138,17 @@ class APIManager {
     
     private func handleError(_ call: APICallType, _ code: Int, _ data: Data?) -> APIManagerError? {
         
-        if code.isClientError {
-            guard let dict = parseResponse(data) else {
-                return APIManagerError(call: call, httpCode: code, specificCode: -1, kind: .jsonParse)
-            }
-            let specificCode = dict["errors"] as? String ?? "-2"
-            return APIManagerError(call: call, httpCode: code, specificCode: Int(specificCode)!, kind: .handleError)
+        guard let dict = parseResponse(data) else {
+            return APIManagerError(call: call, kind: .jsonParse, httpCode:nil, error:nil, errorCode:nil)
         }
-        return APIManagerError(call: call, httpCode: code, specificCode: -1, kind: .handleError)
+        
+        if code.isClientError {
+            let specificCode = dict["errors"] as? String ?? "-1"
+            let code = Int(specificCode) ?? -1
+            return APIManagerError(call: call, kind: .clientError, httpCode: code, error: nil, errorCode: ErrorCode(rawValue: code))
+        }
+        debugPrint("No client error", call, code, dict)
+        return APIManagerError(call: call, kind: .noClientError, httpCode: code, error: nil, errorCode: nil)
     }
     
     //MARK:- Request Helpers
@@ -153,7 +167,7 @@ class APIManager {
     
     private func setBody(of call:APICallType, with data:[String:Any]?) -> Data? {
         print(data ?? "No data provided to build the request body")
-        return data != nil ? try? JSONSerialization.data(withJSONObject: data!) : nil
+        return data != nil ? try? JSONSerialization.data(withJSONObject: data!, options: []) : nil
     }
 }
 

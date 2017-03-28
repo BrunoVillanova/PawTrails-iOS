@@ -9,7 +9,7 @@
 import Foundation
 
 enum Gender: Int {
-    case female = 0,male,undefined
+    case female = 0,male, undefined
     
     static func count() -> Int {
         return 3
@@ -17,17 +17,9 @@ enum Gender: Int {
     
     var name:String? {
         switch self {
-        case .female: return "female"
-        case .male: return "male"
-        default: return nil
-        }
-    }
-    
-    var printName:String {
-        switch self {
         case .female: return "Female"
         case .male: return "Male"
-        default: return "Not Specified"
+        case .undefined: return "Not Specified"
         }
     }
     
@@ -35,19 +27,20 @@ enum Gender: Int {
         switch self {
         case .female: return "F"
         case .male: return "M"
-        default: return nil
+        case .undefined: return "U"
         }
     }
     
-    init(code:String?) {
+    static func build(code:String?)  -> Gender? {
         if let code = code {
             switch code {
-            case "F": self = .female
-            case "M": self = .male
-            default: self = .undefined
+            case "F": return Gender.female
+            case "M": return .male
+            case "U": return .undefined
+            default: return nil
             }
         }else{
-            self = .undefined
+            return nil
         }
     }
 }

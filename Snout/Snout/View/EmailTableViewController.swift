@@ -21,6 +21,7 @@ class EmailTableViewController: UITableViewController, UITextFieldDelegate {
         if #available(iOS 10.0, *) {
             emailTextField.textContentType = UITextContentType.emailAddress
         }
+        emailTextField.becomeFirstResponder()
     }
     
     @IBAction func saveAction(_ sender: UIBarButtonItem?) {

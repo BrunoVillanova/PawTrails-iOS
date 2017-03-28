@@ -10,6 +10,7 @@ let isDebug = true
 public struct ezdebug {
     public static let email = "ios@test.com"
     public static let password = "iOStest12345"
+    public static let is4test = "marc@attitudetech.ie"
 }
 
 import UIKit
@@ -24,7 +25,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //func print(items: Any..., separator: String = " ", terminator: String = "\n") {} Uncomment for release version
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-//        AuthManager.Instance.isSignedIn()
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+
+        if AuthManager.Instance.isAuthenticated() {
+            
+            let root = storyboard.instantiateViewController(withIdentifier: "tabBarController")
+            window?.rootViewController = root
+        }else{
+            let initial = storyboard.instantiateViewController(withIdentifier: "InitialViewController") as? InitialViewController
+            window?.rootViewController = initial
+        }
         
 //        // Sets background to a blank/empty image
 //        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
@@ -52,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-        SocketIOManager.Instance.closeConnection()
+//        SocketIOManager.Instance.closeConnection()
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -61,7 +72,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        SocketIOManager.Instance.establishConnection()
+//        SocketIOManager.Instance.establishConnection()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {

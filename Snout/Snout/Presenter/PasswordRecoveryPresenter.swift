@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol PasswordRecoveryView: NSObjectProtocol, View {
+protocol PasswordRecoveryView: NSObjectProtocol, View, LoadingView {
     func emailFieldError()
     func emailNotChecked()
     func emailSent()
@@ -29,7 +29,20 @@ class PasswordRecoveryPresenter {
     func sendRecoveryEmail(email:String, checked: Bool) {
         if email.isValidEmail {
             if checked {
-                self.view?.emailSent()
+                self.view?.beginLoadingContent()
+                AuthManager.Instance.sendPasswordReset(email, completition: { (error) in
+                    if let error = error {
+                        DispatchQueue.main.async {
+                            self.view?.endLoadingContent()
+                            self.view?.errorMessage(error)
+                        }
+                    }else{
+                        DispatchQueue.main.async {
+                            self.view?.endLoadingContent()
+                            self.view?.emailSent()
+                        }
+                    }
+                })
             }else{
                 self.view?.emailNotChecked()
             }

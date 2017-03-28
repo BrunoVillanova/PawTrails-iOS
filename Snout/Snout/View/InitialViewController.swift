@@ -42,7 +42,7 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate 
             self.passwordTextField.text = ezdebug.password
         }
     }
-    
+        
     @IBAction func loginAction(_ sender: UIButton?) {
         presenter.signIn(email: emailTextField.text, password:passwordTextField.text)
     }
@@ -113,11 +113,16 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate 
     
     // MARK: - Initial View
     
-    func errorMessage(_ error: errorMsg) {
+    func errorMessage(_ error: ErrorMsg) {
         self.alert(title: error.title, msg: error.msg)
     }
     
     func userAuthenticated() {
+        guard let window = UIApplication.shared.delegate?.window else { return }
+        guard let root = storyboard?.instantiateViewController(withIdentifier: "tabBarController") else { return }
+        
+        window?.rootViewController = root
+        
         self.view.endEditing(true)
         self.dismiss(animated: true, completion: nil)
     }
@@ -130,11 +135,18 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate 
         self.passwordTextField.shake()
     }
     
-    
     func loggedSocialMedia() {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    func verifyAccount(_ email:String) {
 
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "EmailVerificationViewController") as? EmailVerificationViewController {
+            vc.email = email
+            self.present(vc, animated: true, completion: nil)
+        }
+    }
+    
     // MARK: - Connection Notifications
     
     func connectedToNetwork() {

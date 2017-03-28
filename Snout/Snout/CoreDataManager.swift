@@ -55,7 +55,7 @@ class CoreDataManager {
         let object = NSManagedObject(entity: entityDescription, insertInto: Storage.Instance.context)
         
         for (key,value) in data {
-            object.setValue(value, forKey: key)
+            if object.keys.contains(key) { object.setValue(value, forKey: key) }
         }
         
         if Storage.Instance.save() != Storage.SaveStatus.saved {
@@ -83,7 +83,7 @@ class CoreDataManager {
         if let object = retrieve(entity, with: NSPredicate(idKey, NSPredicateOperation.equal, id))?.first {
             
             for (key,value) in data {
-                object.setValue(value, forKey: key)
+                if object.keys.contains(key) { object.setValue(value, forKey: key) }
             }
 
             if Storage.Instance.save() != Storage.SaveStatus.saved { throw NSError(domain: "Not Saved Properly", code: CoreDataManagerError.NotSavedProperly.rawValue, userInfo: data) }

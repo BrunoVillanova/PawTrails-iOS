@@ -18,10 +18,15 @@ class DataManager {
         UserManager.upsert(data)
     }
    
-    func getUser(callback:@escaping userCallback) {
+    func getUser(withUpdate: Bool = true, callback:@escaping userCallback) {
         
         if AuthManager.Instance.isAuthenticated() {
-            loadUser(callback: callback)
+            
+            if withUpdate {
+                loadUser(callback: callback)
+            }else{
+                UserManager.get(callback)
+            }
         }else{
             callback(UserError.NotAuthenticated.rawValue, nil)
         }
@@ -39,8 +44,12 @@ class DataManager {
     }
     
     private func handleUser(with data:[String:Any]?, _ callback:@escaping userCallback) {
-        guard let userData = data!["user"] as? [String:Any] else {
-            callback(-1, nil)
+//        guard let userData = data!["user"] as? [String:Any] else {
+//            callback(-1, nil)
+//            debugPrint("User not found in json \(data)")
+//            return
+//        }
+        guard let userData = data else {
             return
         }
         UserManager.upsert(userData)
@@ -136,7 +145,8 @@ class DataManager {
         
         
 //        callback(AddressManager.search(text))
-        return AddressManager.search(text)
+        //return AddressManager.search(text)
+        return [String]()
     }
     
     

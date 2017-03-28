@@ -9,7 +9,7 @@
 import Foundation
 
 protocol View {
-    func errorMessage(_ error:errorMsg)
+    func errorMessage(_ error:ErrorMsg)
 }
 
 protocol ConnectionView {
@@ -17,4 +17,7 @@ protocol ConnectionView {
     func notConnectedToNetwork()
 }
 
-
+protocol LoadingView {
+    func beginLoadingContent()
+    func endLoadingContent()
+}

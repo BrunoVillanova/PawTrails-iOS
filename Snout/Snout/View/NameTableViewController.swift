@@ -25,7 +25,7 @@ class NameTableViewController: UITableViewController, UITextFieldDelegate {
             nameTextField.textContentType = UITextContentType.name
             surnameTextField.textContentType = UITextContentType.familyName
         }
-        
+        nameTextField.becomeFirstResponder()
     }
     
     @IBAction func saveAction(_ sender: UIBarButtonItem?) {

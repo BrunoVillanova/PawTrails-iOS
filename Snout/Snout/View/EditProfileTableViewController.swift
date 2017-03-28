@@ -42,39 +42,33 @@ class EditProfileTableViewController: UITableViewController, EditProfileView , U
 
     
     @IBAction func doneAction(_ sender: UIBarButtonItem) {
-        print("Saved")
-//        self.presenter.save()
+        self.presenter.save()
     }
         
     // MARK: - EditProfileView
 
-    func loadData(user: User) {
+    func loadData(user:User, phone:_Phone?, address:_Address?) {
         
         let name = user.name ?? ""
         let surname = user.surname ?? ""
         
         nameLabel.text = "\(name) \(surname)"
         emailLabel.text = user.email
-        genderLabel.text = Gender(code: user.gender).name
+        genderLabel.text = Gender.build(code: user.gender)?.name
         
         if let date = user.birthday as? Date {
             birthdayLabel.text = date.toStringShow
         }
         
-        phoneLabel.text = user.phone?.toString
-        addressLabel.text = user.address?.toString        
-    }
-    
-    func emailFormat() {
-//        self.emailTextField.shake()
+        phoneLabel.text = phone?.toString
+        addressLabel.text = address?.toString        
     }
     
     func saved() {
-        self.view.endEditing(true)
-        self.navigationController?.dismiss(animated: true, completion: nil)
+        _ = self.navigationController?.popViewController(animated: true)
     }
     
-    func errorMessage(_ error: errorMsg) {
+    func errorMessage(_ error: ErrorMsg) {
         self.alert(title: error.title, msg: error.msg)
     }
     
@@ -82,7 +76,6 @@ class EditProfileTableViewController: UITableViewController, EditProfileView , U
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-//            profileImage.contentMode = .scaleAspectFit
             profileImage.image = chosenImage
         }
         dismiss(animated:true, completion: nil)

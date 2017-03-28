@@ -13,18 +13,20 @@ class SettingsTableViewController: UITableViewController, SettingsView {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var sharedLocationSwitch: UISwitch!
+    @IBOutlet weak var profileCell: UITableViewCell!
     
     fileprivate let presenter = SettingsPresenter()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.attachView(self)
+        profileCell.separatorInset = UIEdgeInsets(top: 0, left: profileCell.bounds.width, bottom: 0, right: 0)
     }
     
     deinit {
         presenter.deteachView()
     }
-    
+        
     @IBAction func shareLocationValueChanged(_ sender: UISwitch) {
         presenter.shareLocation(value: sender.isOn)
     }
@@ -47,7 +49,7 @@ class SettingsTableViewController: UITableViewController, SettingsView {
         }
     }
     
-    func errorMessage(_ error: errorMsg) {
+    func errorMessage(_ error: ErrorMsg) {
         self.alert(title: error.title, msg: error.msg)
     }
 
@@ -63,15 +65,5 @@ class SettingsTableViewController: UITableViewController, SettingsView {
             self.present(alert, animated: true, completion: nil)
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

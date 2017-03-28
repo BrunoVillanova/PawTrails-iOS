@@ -74,7 +74,6 @@ class HomeViewController: UIViewController, HomeView, UICollectionViewDataSource
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        self.presenter.checkSignInStatus()
 //        blurView(.close)
     }
     
@@ -109,14 +108,8 @@ class HomeViewController: UIViewController, HomeView, UICollectionViewDataSource
     
     // MARK: - HomeView
     
-    func errorMessage(_ error: errorMsg) {
+    func errorMessage(_ error: ErrorMsg) {
         self.alert(title: error.title, msg: error.msg)
-    }
-    
-    func userNotSignedIn() {
-        if let vc = self.storyboard?.instantiateViewController(withIdentifier: "InitialViewController") as? InitialViewController {
-            self.present(vc, animated: true, completion: nil)
-        }
     }
     
     func reload() {
@@ -138,7 +131,7 @@ class HomeViewController: UIViewController, HomeView, UICollectionViewDataSource
     
     func stopTracking(_ name: String) {
         guard let a = self.annotations[name] else {
-            self.errorMessage(errorMsg(title:"", msg:""))
+            self.errorMessage(ErrorMsg(title:"", msg:""))
             return
         }
         self.mapView.removeAnnotation(a)

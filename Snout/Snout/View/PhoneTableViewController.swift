@@ -33,19 +33,18 @@ class PhoneTableViewController: UITableViewController, UIPickerViewDataSource, U
         
         var index = parentEditor.getCountryCodeIndex()
         if let phone = parentEditor.getPhone() {
-            codeTextField.text = phone.country_code?.code
+            codeTextField.text = phone.code
             numberTextField.text = phone.number
-            if let shortname = phone.country_code?.shortname {
-                index = parentEditor.getCountryCodeIndex(countryShortName: shortname)
-            }
+            index = parentEditor.getCountryCodeIndex(countryCode: phone.code)
         }
         picker.selectRow(index, inComponent: 0, animated: true)
         selectedCC = parentEditor.CountryCodes[index]
 
+        numberTextField.becomeFirstResponder()
     }
     
     @IBAction func saveAction(_ sender: UIBarButtonItem?) {
-        parentEditor.set(phone: numberTextField.text, selectedCC)
+        parentEditor.set(phone: numberTextField.text, selectedCC.code)
         parentEditor.refresh()
         view.endEditing(true)
         _ = self.navigationController?.popViewController(animated: true)

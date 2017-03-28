@@ -14,7 +14,6 @@
         <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="shortname" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="phone" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Phone" inverseName="country_code" inverseEntity="Phone" syncable="YES"/>
     </entity>
     <entity name="Location" representedClassName="Location" syncable="YES" codeGenerationType="class">
         <attribute name="datetime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -32,8 +31,8 @@
         <relationship name="last_location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="pet" inverseEntity="Location" syncable="YES"/>
     </entity>
     <entity name="Phone" representedClassName="Phone" syncable="YES" codeGenerationType="class">
+        <attribute name="country_code" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="number" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="country_code" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CountryCode" inverseName="phone" inverseEntity="CountryCode" syncable="YES"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="phone" inverseEntity="User" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES" codeGenerationType="class">
@@ -52,7 +51,7 @@
     </entity>
     <elements>
         <element name="Address" positionX="18" positionY="144" width="128" height="165"/>
-        <element name="CountryCode" positionX="-18" positionY="108" width="128" height="105"/>
+        <element name="CountryCode" positionX="-18" positionY="108" width="128" height="90"/>
         <element name="Location" positionX="-54" positionY="18" width="128" height="105"/>
         <element name="Pet" positionX="-63" positionY="-18" width="128" height="150"/>
         <element name="Phone" positionX="-18" positionY="117" width="128" height="90"/>

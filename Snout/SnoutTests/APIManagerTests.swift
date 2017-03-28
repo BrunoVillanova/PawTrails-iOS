@@ -13,25 +13,25 @@ class APIManagerTests: XCTestCase {
     
     func testSignUp() {
         
-        let expect = expectation(description: "signUp")
-        let email = "registerAPI0@test.com"
-        let data = ["email":email, "password":ezdebug.password]
-        APIManager.Instance.perform(call: .signUp, with: data) { (error, data) in
-            
-            if error == nil && data != nil {
-                
-                self.XCTFound(key: "token", in: data!)
-                let userData = self.XCTGet(key: "user", in: data!) as? [String:Any]
-                self.XCTFound(key: "id", in: userData!)
-                self.XCTFound(key: "email", in: userData!)
-                
-                XCTAssert(userData?["email"] is String, "Failed to login email wrong format")
-                XCTAssert(userData?["email"] as! String == email, "Failed to login with proper email")
-                
-            }else{ XCTFail("Error register in \(AuthenticationError(rawValue: error!.specificCode)) \(error) \(data)") }
-            expect.fulfill()
-        }
-        waitForExpectations(timeout: 100) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(error)") } }
+//        let expect = expectation(description: "signUp")
+//        let email = "registerAPI0@test.com"
+//        let data = isDebug ? ["email":email, "password":ezdebug.password, "is4test":ezdebug.is4test] : ["email":email, "password":ezdebug.password]
+//        APIManager.Instance.perform(call: .signUp, with: data) { (error, data) in
+//            
+//            if error == nil && data != nil {
+//                
+//                self.XCTFound(key: "token", in: data!)
+//                let userData = self.XCTGet(key: "user", in: data!) as? [String:Any]
+//                self.XCTFound(key: "id", in: userData!)
+//                self.XCTFound(key: "email", in: userData!)
+//                
+//                XCTAssert(userData?["email"] is String, "Failed to login email wrong format")
+//                XCTAssert(userData?["email"] as! String == email, "Failed to login with proper email")
+//                
+//            }else{ XCTFail("Error register in \(AuthenticationError(rawValue: error!.specificCode)) \(error) \(data)") }
+//            expect.fulfill()
+//        }
+//        waitForExpectations(timeout: 100) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(error)") } }
     }
 
     func testSignIn() {
@@ -45,7 +45,8 @@ class APIManagerTests: XCTestCase {
     
     func signIn(callback: @escaping (_ id:String,_ token:String) -> Swift.Void) {
         
-        let data = ["email":ezdebug.email, "password":ezdebug.password]
+        let data = isDebug ? ["email":ezdebug.email, "password":ezdebug.password, "is4test":ezdebug.is4test] : ["email":ezdebug.email, "password":ezdebug.password]
+
         APIManager.Instance.perform(call: .signin,  with: data) { (error, data) in
             
             if error == nil && data != nil {
@@ -60,28 +61,27 @@ class APIManagerTests: XCTestCase {
                 
                 callback(id,token)
                 
-            }else { XCTFail("Error signin in \(AuthenticationError(rawValue: error!.specificCode)) \(error) \(data)") }
+            }else { XCTFail("Error signin in \(error) \(data)") }
         }
     }
 
     func testPasswordChange() {
         
         let expect = expectation(description: "password change")
-        
-        AuthManager.Instance.signIn(ezdebug.email, ezdebug.password) { (error) in
-            XCTAssert(error == nil, "Couldn't sign in properly \(error)")
-            
+
+        signIn { (id, token) in
+                        
             let newPassword = "Attitude2004"
             
             let data = ["id":SharedPreferences.get(.id), "email":ezdebug.email, "password":ezdebug.password, "new_password":newPassword]
             APIManager.Instance.perform(call: .passwordChange, with: data) { (error, data) in
                 
-                XCTAssert(error == nil, "Error password change in \(AuthenticationError(rawValue: error!.specificCode)) \(error) \(data)")
+                XCTAssert(error == nil, "Error password change in \(error) \(data)")
                 
                 let data = ["id":SharedPreferences.get(.id), "email":ezdebug.email, "password":newPassword, "new_password":ezdebug.password]
                 APIManager.Instance.perform(call: .passwordChange, with: data) { (error, data) in
                     
-                    XCTAssert(error == nil, "Error password change in \(AuthenticationError(rawValue: error!.specificCode)) \(error) \(data)")
+                    XCTAssert(error == nil, "Error password change in \(error) \(data)")
                     
                     AuthManager.Instance.signIn(ezdebug.email, ezdebug.password) { (error) in
                         XCTAssert(error == nil, "Couldn't sign in properly once the password is changed back\(error)")
@@ -89,10 +89,24 @@ class APIManagerTests: XCTestCase {
                     expect.fulfill()
                 }
             }
-
+            
         }
         
+        waitForExpectations(timeout: 100) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(error)") } }
+    }
+    
+    func testPasswordReset() {
         
+        let expect = expectation(description: "password reset")
+        
+        
+        
+            let data = ["email":ezdebug.email, "is4test":ezdebug.is4test]
+            APIManager.Instance.perform(call: .passwordReset, with: data) { (error, data) in
+                
+                XCTAssert(error == nil, "Error password reset in \(error) \(data)")
+                expect.fulfill()
+            }
         
         waitForExpectations(timeout: 100) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(error)") } }
     }
@@ -117,7 +131,7 @@ class APIManagerTests: XCTestCase {
                     XCTAssert(userData?["email"] is String, "Failed to login email wrong format")
                     XCTAssert(userData?["email"] as! String == ezdebug.email, "Failed to login with proper email")
                     
-                }else { XCTFail("Error get user in \(AuthenticationError(rawValue: error!.specificCode)) \(error) \(data)") }
+                }else { XCTFail("Error get user in \(error) \(data)") }
                 
                 expect.fulfill()
             }
@@ -190,7 +204,7 @@ class APIManagerTests: XCTestCase {
                     self.XCTMatch(key: "state", value: address["state"]!, in: addressData!)
                     self.XCTMatch(key: "country", value: address["country"]!, in: addressData!)
                     
-                }else { XCTFail("Error set user in \(AuthenticationError(rawValue: error!.specificCode)) \(error) \(data)") }
+                }else { XCTFail("Error set user in \(error) \(data)") }
                 
                 expect.fulfill()
             }

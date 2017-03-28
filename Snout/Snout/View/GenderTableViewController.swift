@@ -41,7 +41,7 @@ class GenderTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let rowGender = Gender(rawValue: indexPath.row)
-        cell.textLabel?.text = rowGender?.printName
+        cell.textLabel?.text = rowGender?.name
         if selected != nil && rowGender == selected {
             cell.accessoryType = .checkmark
         }else{
@@ -54,7 +54,7 @@ class GenderTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let newSelected = Gender(rawValue: indexPath.row)
-        selected = newSelected == selected ? nil : newSelected
+        selected = newSelected?.code == selected?.code ? nil : newSelected
         tableView.reloadData()
     }
 }
