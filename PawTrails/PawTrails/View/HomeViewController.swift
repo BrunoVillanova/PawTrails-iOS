@@ -295,6 +295,7 @@ class HomeViewController: UIViewController, HomeView, UICollectionViewDataSource
             self = direction < 0 ? .open : .close
         }
     }
+    
     func blurView(_ action:blurViewAction, speed:Double = 1, animated:Bool = true){
         
         if (self.bottomConstraintBlurView.constant == closed && action == .close) || (self.bottomConstraintBlurView.constant == opened && action == .open) { return }

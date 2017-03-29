@@ -14,7 +14,7 @@
         <!--Initial View Controller-->
         <scene sceneID="H9f-sw-6bR">
             <objects>
-                <viewController storyboardIdentifier="InitialViewController" modalPresentationStyle="formSheet" id="wPd-hI-X1n" customClass="InitialViewController" customModule="Snout" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InitialViewController" modalPresentationStyle="formSheet" id="wPd-hI-X1n" customClass="InitialViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="WIo-61-4c8"/>
                         <viewControllerLayoutGuide type="bottom" id="KbY-nY-EOs"/>
@@ -176,7 +176,7 @@
         <!--Password Reset-->
         <scene sceneID="oZ3-kz-c46">
             <objects>
-                <viewController id="vvB-yd-XBa" customClass="PasswordRecoveryViewController" customModule="Snout" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vvB-yd-XBa" customClass="PasswordRecoveryViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PfO-OB-dLr"/>
                         <viewControllerLayoutGuide type="bottom" id="awd-Kh-Mu6"/>
@@ -302,7 +302,7 @@
         <!--Email Verification View Controller-->
         <scene sceneID="fvI-j4-lrR">
             <objects>
-                <viewController storyboardIdentifier="EmailVerificationViewController" id="Lsh-oL-XDQ" customClass="EmailVerificationViewController" customModule="Snout" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EmailVerificationViewController" id="Lsh-oL-XDQ" customClass="EmailVerificationViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="f57-rc-isD"/>
                         <viewControllerLayoutGuide type="bottom" id="YNN-lW-AbA"/>
@@ -413,7 +413,7 @@
         <!--Live Tracking-->
         <scene sceneID="fFJ-S6-oIM">
             <objects>
-                <viewController storyboardIdentifier="HomeViewController" id="auV-2k-l2V" customClass="HomeViewController" customModule="Snout" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeViewController" id="auV-2k-l2V" customClass="HomeViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ulH-xU-m5b"/>
                         <viewControllerLayoutGuide type="bottom" id="th9-E2-uKN"/>
@@ -424,6 +424,7 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" mapType="standard" pitchEnabled="NO" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S6I-re-dOo">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <gestureRecognizers/>
                                 <connections>
                                     <outlet property="delegate" destination="auV-2k-l2V" id="EAs-j6-3d4"/>
                                 </connections>
@@ -480,7 +481,7 @@
                                                 <inset key="sectionInset" minX="15" minY="15" maxX="0.0" maxY="15"/>
                                             </collectionViewFlowLayout>
                                             <cells>
-                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="btN-Pd-gvQ" customClass="petCell" customModule="Snout" customModuleProvider="target">
+                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="btN-Pd-gvQ" customClass="petCell" customModule="PawTrails" customModuleProvider="target">
                                                     <rect key="frame" x="15" y="15" width="50" height="50"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -596,23 +597,23 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="chR-JO-BWQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.20000000000000001" id="1gV-aF-sGr">
-                    <connections>
-                        <action selector="handleLongPressure:" destination="auV-2k-l2V" id="D5Z-zj-IiU"/>
-                    </connections>
-                </pongPressGestureRecognizer>
                 <panGestureRecognizer minimumNumberOfTouches="1" id="6z1-Mn-rAM">
                     <connections>
                         <action selector="handlePanGesture:" destination="auV-2k-l2V" id="7eg-1G-pA4"/>
                     </connections>
                 </panGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.20000000000000001" id="1gV-aF-sGr">
+                    <connections>
+                        <action selector="handleLongPressure:" destination="auV-2k-l2V" id="D5Z-zj-IiU"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-367" y="1526"/>
         </scene>
         <!--Profile-->
         <scene sceneID="7Wm-be-A9C">
             <objects>
-                <tableViewController storyboardIdentifier="EditProfileTableViewController" modalPresentationStyle="overCurrentContext" hidesBottomBarWhenPushed="YES" id="1W5-qA-pEh" customClass="EditProfileTableViewController" customModule="Snout" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="EditProfileTableViewController" modalPresentationStyle="overCurrentContext" hidesBottomBarWhenPushed="YES" id="1W5-qA-pEh" customClass="EditProfileTableViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="aER-ul-5OM">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -841,7 +842,7 @@
         <!--Name-->
         <scene sceneID="iy0-ta-qpo">
             <objects>
-                <tableViewController id="1Iw-o5-Cbp" customClass="NameTableViewController" customModule="Snout" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="1Iw-o5-Cbp" customClass="NameTableViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="669-LA-CHl">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -916,7 +917,7 @@
         <!--Settings-->
         <scene sceneID="aa3-8W-466">
             <objects>
-                <tableViewController id="YRf-QV-0gp" customClass="SettingsTableViewController" customModule="Snout" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="YRf-QV-0gp" customClass="SettingsTableViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="vFq-C3-rfv">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1124,7 +1125,7 @@
         <!--Pet Profile View Controller-->
         <scene sceneID="ztL-s7-rSj">
             <objects>
-                <viewController storyboardIdentifier="PetProfileViewController" modalPresentationStyle="overFullScreen" id="v1l-8D-UJM" customClass="PetProfileViewController" customModule="Snout" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PetProfileViewController" modalPresentationStyle="overFullScreen" id="v1l-8D-UJM" customClass="PetProfileViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="emT-Rj-QEg"/>
                         <viewControllerLayoutGuide type="bottom" id="h76-1J-Y4p"/>
@@ -1217,12 +1218,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pqR-3k-IM2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="537" y="-232"/>
+            <point key="canvasLocation" x="721" y="-232"/>
         </scene>
         <!--Birthday-->
         <scene sceneID="CZ1-0K-4ks">
             <objects>
-                <viewController id="vHC-95-dY5" customClass="BirthdayViewController" customModule="Snout" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vHC-95-dY5" customClass="BirthdayViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CRG-ET-LdY"/>
                         <viewControllerLayoutGuide type="bottom" id="fsl-PD-Yro"/>
@@ -1274,7 +1275,7 @@
         <!--Change Password-->
         <scene sceneID="x0O-ko-f29">
             <objects>
-                <tableViewController id="6Q7-a7-ekB" customClass="ChangePasswordTableViewController" customModule="Snout" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="6Q7-a7-ekB" customClass="ChangePasswordTableViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="5HU-al-NDv">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1400,7 +1401,7 @@
         <!--Add Change Device View Controller-->
         <scene sceneID="vpG-6i-6mo">
             <objects>
-                <viewController storyboardIdentifier="AddChangeDeviceViewController" id="79d-nB-rUo" customClass="AddChangeDeviceViewController" customModule="Snout" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddChangeDeviceViewController" id="79d-nB-rUo" customClass="AddChangeDeviceViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="TwM-OK-Ahc"/>
                         <viewControllerLayoutGuide type="bottom" id="Ajl-se-QQa"/>
@@ -1478,12 +1479,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TZr-Ea-Duu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-425" y="-231"/>
+            <point key="canvasLocation" x="-654" y="-233"/>
         </scene>
         <!--Safe Zone View Controller-->
         <scene sceneID="w7P-qh-gew">
             <objects>
-                <viewController storyboardIdentifier="SafeZoneViewController" id="iTZ-fr-z35" customClass="SafeZoneViewController" customModule="Snout" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SafeZoneViewController" id="iTZ-fr-z35" customClass="SafeZoneViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mVS-mM-Yrk"/>
                         <viewControllerLayoutGuide type="bottom" id="xz2-ra-vVT"/>
@@ -1662,7 +1663,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LdF-y2-LEC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="51" y="-232"/>
+            <point key="canvasLocation" x="28" y="-233"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="ffa-2u-1m5">
@@ -1686,7 +1687,7 @@
         <!--Email-->
         <scene sceneID="1Fb-Uz-mf9">
             <objects>
-                <tableViewController id="15R-a6-foB" customClass="EmailTableViewController" customModule="Snout" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="15R-a6-foB" customClass="EmailTableViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="IeY-Tx-HTt">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1740,7 +1741,7 @@
         <!--Set Gender-->
         <scene sceneID="uEi-Th-MGY">
             <objects>
-                <tableViewController id="uq1-JV-qvb" customClass="GenderTableViewController" customModule="Snout" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="uq1-JV-qvb" customClass="GenderTableViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="tUW-Dn-ONk">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1785,7 +1786,7 @@
         <!--Phone-->
         <scene sceneID="5oq-pB-sDD">
             <objects>
-                <tableViewController id="6Id-Rj-4AA" customClass="PhoneTableViewController" customModule="Snout" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="6Id-Rj-4AA" customClass="PhoneTableViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="2SO-sk-CB3">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1847,7 +1848,7 @@
         <!--Address-->
         <scene sceneID="p0H-t0-Nje">
             <objects>
-                <tableViewController id="Lne-KY-ge5" customClass="AddressTableViewController" customModule="Snout" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="Lne-KY-ge5" customClass="AddressTableViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="QyT-pM-Pm7">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -23,6 +23,9 @@
 		44277A0C1E7A987C00B336BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44277A0A1E7A987C00B336BD /* LaunchScreen.storyboard */; };
 		443D2C6A1E6D721000F7ACFA /* PetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443D2C691E6D721000F7ACFA /* PetManager.swift */; };
 		443D2C6C1E6D736B00F7ACFA /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443D2C6B1E6D736B00F7ACFA /* LocationManager.swift */; };
+		4440C5CB1E8BA568007A13B1 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4440C5CA1E8BA568007A13B1 /* ViewExtensions.swift */; };
+		4440C5CD1E8BA5D0007A13B1 /* ModelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4440C5CC1E8BA5D0007A13B1 /* ModelExtensions.swift */; };
+		4440C5CF1E8BA64E007A13B1 /* MapExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4440C5CE1E8BA64E007A13B1 /* MapExtensions.swift */; };
 		44421A2C1E4CB8E7009755BD /* EditProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44421A2B1E4CB8E7009755BD /* EditProfilePresenter.swift */; };
 		44457A2E1E5AF31400B43748 /* AddressTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44457A2D1E5AF31400B43748 /* AddressTableViewController.swift */; };
 		44485F951E51B12800A3C47D /* PawTrails.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 44485F931E51B12800A3C47D /* PawTrails.xcdatamodeld */; };
@@ -122,6 +125,9 @@
 		44277A0B1E7A987C00B336BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		443D2C691E6D721000F7ACFA /* PetManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetManager.swift; path = Model/PetManager.swift; sourceTree = "<group>"; };
 		443D2C6B1E6D736B00F7ACFA /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationManager.swift; path = Model/LocationManager.swift; sourceTree = "<group>"; };
+		4440C5CA1E8BA568007A13B1 /* ViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
+		4440C5CC1E8BA5D0007A13B1 /* ModelExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelExtensions.swift; sourceTree = "<group>"; };
+		4440C5CE1E8BA64E007A13B1 /* MapExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapExtensions.swift; sourceTree = "<group>"; };
 		44421A2B1E4CB8E7009755BD /* EditProfilePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditProfilePresenter.swift; path = Presenter/EditProfilePresenter.swift; sourceTree = "<group>"; };
 		44457A2D1E5AF31400B43748 /* AddressTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddressTableViewController.swift; path = View/AddressTableViewController.swift; sourceTree = "<group>"; };
 		44485F941E51B12800A3C47D /* PawTrails.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PawTrails.xcdatamodel; sourceTree = "<group>"; };
@@ -245,7 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				44B179611E4B62690070A18B /* Presenter.swift */,
-				447905141E57307E00A49AB3 /* Auth */,
+				447905141E57307E00A49AB3 /* Authentication */,
 				44C7F74F1E4CD3DA00171170 /* HomePresenter.swift */,
 				447440E71E8400EF0069EA85 /* SettingsPresenter.swift */,
 				44421A2B1E4CB8E7009755BD /* EditProfilePresenter.swift */,
@@ -290,7 +296,6 @@
 			isa = PBXGroup;
 			children = (
 				4415FF421E3B822900A81B13 /* AppDelegate.swift */,
-				4465481D1E5C642000458CB7 /* Extensions.swift */,
 				440CEE4C1E3B8D3D00F58A09 /* Model */,
 				440CEE4A1E3B8D2500F58A09 /* View */,
 				440CEE4B1E3B8D2C00F58A09 /* Presenter */,
@@ -324,6 +329,17 @@
 			path = PawTrailsTests;
 			sourceTree = "<group>";
 		};
+		4440C5D01E8BA6B0007A13B1 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4440C5CE1E8BA64E007A13B1 /* MapExtensions.swift */,
+				4440C5CC1E8BA5D0007A13B1 /* ModelExtensions.swift */,
+				4440C5CA1E8BA568007A13B1 /* ViewExtensions.swift */,
+				4465481D1E5C642000458CB7 /* Extensions.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		4465481B1E5C624700458CB7 /* Communication */ = {
 			isa = PBXGroup;
 			children = (
@@ -346,7 +362,7 @@
 			name = CoreDataModelsManagers;
 			sourceTree = "<group>";
 		};
-		447905141E57307E00A49AB3 /* Auth */ = {
+		447905141E57307E00A49AB3 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
 				440CEE591E3B9AA300F58A09 /* InitialPresenter.swift */,
@@ -354,7 +370,7 @@
 				44498DFC1E4DBE6700F6D761 /* ChangePasswordPresenter.swift */,
 				445A6DC81E896B6F0042736E /* EmailVerificationPresenter.swift */,
 			);
-			name = Auth;
+			name = Authentication;
 			sourceTree = "<group>";
 		};
 		447D4C151E44BF69008F82F4 /* SocketIO */ = {
@@ -391,6 +407,7 @@
 		44B179671E4B78FB0070A18B /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				4440C5D01E8BA6B0007A13B1 /* Extensions */,
 				447905151E5731F100A49AB3 /* Reachability.swift */,
 				44B179631E4B787A0070A18B /* Errors.swift */,
 				44B179651E4B78EF0070A18B /* Messages.swift */,
@@ -612,7 +629,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#\"${PODS_ROOT}/Fabric/run\" e76cedb9a39947937435de66d038998aa19bd740 d8c0f054e2259863ecb27f88ba96c68c04ea392f7493f39457b4532c5e6a7a42";
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" e76cedb9a39947937435de66d038998aa19bd740 d8c0f054e2259863ecb27f88ba96c68c04ea392f7493f39457b4532c5e6a7a42";
 		};
 		7EBF939C6B838E47B68754AC /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -667,6 +684,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				44C7F73D1E4CD3AE00171170 /* SocketEnginePacketType.swift in Sources */,
+				4440C5CD1E8BA5D0007A13B1 /* ModelExtensions.swift in Sources */,
 				447440E61E8400CF0069EA85 /* SettingsTableViewController.swift in Sources */,
 				44C7F74C1E4CD3AE00171170 /* SocketTypes.swift in Sources */,
 				44C7F7461E4CD3AE00171170 /* SocketIOClientSpec.swift in Sources */,
@@ -687,6 +705,7 @@
 				44C7F71E1E4CD35700171170 /* PasswordRecoveryViewController.swift in Sources */,
 				449A978F1E82DAC00032DCE5 /* EmailTableViewController.swift in Sources */,
 				447905161E5731F100A49AB3 /* Reachability.swift in Sources */,
+				4440C5CF1E8BA64E007A13B1 /* MapExtensions.swift in Sources */,
 				44421A2C1E4CB8E7009755BD /* EditProfilePresenter.swift in Sources */,
 				44C7F73F1E4CD3AE00171170 /* SocketEngineSpec.swift in Sources */,
 				44C7F7541E4CD3F200171170 /* APIManager.swift in Sources */,
@@ -712,6 +731,7 @@
 				440C5E181E701643000C3827 /* EmojiManager.swift in Sources */,
 				44C7F7441E4CD3AE00171170 /* SocketIOClientConfiguration.swift in Sources */,
 				44B179641E4B787A0070A18B /* Errors.swift in Sources */,
+				4440C5CB1E8BA568007A13B1 /* ViewExtensions.swift in Sources */,
 				44B179621E4B62690070A18B /* Presenter.swift in Sources */,
 				44C7F74D1E4CD3AE00171170 /* SSLSecurity.swift in Sources */,
 				44C7F73C1E4CD3AE00171170 /* SocketEngineClient.swift in Sources */,

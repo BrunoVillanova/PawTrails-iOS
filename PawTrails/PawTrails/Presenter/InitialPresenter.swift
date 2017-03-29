@@ -9,6 +9,7 @@
 import Foundation
 import FacebookCore
 import FacebookLogin
+import TwitterKit
 
 protocol InitialView: NSObjectProtocol, View, ConnectionView {
     func loggedSocialMedia()
@@ -124,18 +125,45 @@ class InitialPresenter {
     }
     
     func loginTW(vc: InitialViewController) {
-//        let loginManager = LoginManager()
-//        loginManager.logIn([ .publicProfile, .email ], viewController: vc) { loginResult in
-//            switch loginResult {
-//            case .failed(let error):
-//                self.view?.errorMessage(errorMsg(title:"Error login Facebook", msg:"\(error)"))
-//            case .cancelled:
-//                print("User cancelled login.")
-//            case .success(let grantedPermissions, let declinedPermissions, let accessToken):
-//                print("Logged in! \(grantedPermissions) \(declinedPermissions) \(accessToken)")
-//                self.view?.loggedSocialMedia()
-//            }
-//        }
+
+        Twitter.sharedInstance().logIn(with: vc, methods: .webBased) { (session, error) in
+            if let error = error {
+                DispatchQueue.main.async {
+                    self.view?.errorMessage(ErrorMsg(title:"Error Twitter Login", msg:"\(error.localizedDescription)"))
+                }
+            }else if let session = session {
+                // log in
+                debugPrint(session)
+                // return
+                let client = TWTRAPIClient.withCurrentUser()
+                let request = client.urlRequest(withMethod: "GET",
+                                                url: "https://api.twitter.com/1.1/account/verify_credentials.json",
+                                                          parameters: ["include_email": "true", "skip_status": "true"],
+                                                          error: nil)
+                
+                client.sendTwitterRequest(request) { response, data, connectionError in
+                
+                    if let data = data {
+                        
+                        if let json = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments) as? [String:Any] {
+                            debugPrint(json ?? "no json provided")
+                            
+                            if let email = json?["email"] {
+                                print(email)
+                            }
+                            
+                        }else{
+                            debugPrint("json parse failed")
+                        }
+                    }else{
+                        debugPrint("nil data :(")
+                    }
+                    
+                }
+                self.view?.loggedSocialMedia()
+            }
+        }
+        
     }
     
     

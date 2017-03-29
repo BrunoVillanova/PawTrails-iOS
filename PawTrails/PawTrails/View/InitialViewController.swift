@@ -41,6 +41,9 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate 
             self.emailTextField.text = ezdebug.email
             self.passwordTextField.text = ezdebug.password
         }
+        
+        setTopBar()
+//        UIApplication.shared.statusBarStyle = .default
     }
         
     @IBAction func loginAction(_ sender: UIButton?) {
@@ -136,7 +139,7 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate 
     }
     
     func loggedSocialMedia() {
-        self.dismiss(animated: true, completion: nil)
+        userAuthenticated()
     }
     
     func verifyAccount(_ email:String) {

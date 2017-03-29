@@ -15,7 +15,8 @@ public struct ezdebug {
 
 import UIKit
 import FacebookCore
-
+import Fabric
+import TwitterKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -48,10 +49,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UIApplication.shared.statusBarStyle = .lightContent
         
+        Fabric.with([Twitter.self])
+        
         return SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        
+        if Twitter.sharedInstance().application(app, open: url, options: options) { return true }
+        
         return SDKApplicationDelegate.shared.application(app, open: url, options: options)
     }
 //

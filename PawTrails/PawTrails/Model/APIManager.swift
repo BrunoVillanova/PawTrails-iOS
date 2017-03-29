@@ -136,19 +136,19 @@ class APIManager {
         }
     }
     
-    private func handleError(_ call: APICallType, _ code: Int, _ data: Data?) -> APIManagerError? {
+    private func handleError(_ call: APICallType, _ httpCode: Int, _ data: Data?) -> APIManagerError? {
         
         guard let dict = parseResponse(data) else {
             return APIManagerError(call: call, kind: .jsonParse, httpCode:nil, error:nil, errorCode:nil)
         }
         
-        if code.isClientError {
+        if httpCode.isClientError {
             let specificCode = dict["errors"] as? String ?? "-1"
             let code = Int(specificCode) ?? -1
-            return APIManagerError(call: call, kind: .clientError, httpCode: code, error: nil, errorCode: ErrorCode(rawValue: code))
+            return APIManagerError(call: call, kind: .clientError, httpCode: httpCode, error: nil, errorCode: ErrorCode(rawValue: code))
         }
-        debugPrint("No client error", call, code, dict)
-        return APIManagerError(call: call, kind: .noClientError, httpCode: code, error: nil, errorCode: nil)
+        debugPrint("No client error", call, httpCode, dict)
+        return APIManagerError(call: call, kind: .noClientError, httpCode: httpCode, error: nil, errorCode: nil)
     }
     
     //MARK:- Request Helpers
