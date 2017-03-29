@@ -13,6 +13,7 @@ protocol HomeView: NSObjectProtocol, View, ConnectionView {
     func startTracking(_ name: String, lat:Double, long:Double)
     func updateTracking(_ name: String, lat:Double, long:Double)
     func stopTracking(_ name: String)
+    func userNotSigned()
 }
 
 class HomePresenter {
@@ -37,16 +38,17 @@ class HomePresenter {
     func getUser(){
         
         DataManager.Instance.getUser { (error, user) in
+            DispatchQueue.main.async {
+
             if error == nil && user != nil {
                 self.user = user
-                DispatchQueue.main.async {
-                    self.view?.reload()
-                }
+                self.view?.reload()
+            }else if error == UserError.NotAuthenticated {
+                self.view?.userNotSigned()
             }else{
-                DispatchQueue.main.async {
-                    self.view?.errorMessage(ErrorMsg(title: "Unable to get user info", msg: "\(error)"))
-                }
+                self.view?.errorMessage(ErrorMsg(title: "Unable to get user info", msg: "\(error)"))
             }
+        }
         }
     }
     

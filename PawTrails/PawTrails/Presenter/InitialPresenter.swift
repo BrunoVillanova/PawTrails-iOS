@@ -101,28 +101,27 @@ class InitialPresenter {
             case .failed(let error):
                 self.view?.errorMessage(ErrorMsg(title:"Error login Facebook", msg:"\(error)"))
             case .cancelled:
-                print("User cancelled login.")
+                debugPrint("User cancelled login.")
             case .success(let grantedPermissions, let declinedPermissions, let accessToken):
-                print("Logged in! \(grantedPermissions) \(declinedPermissions) \(accessToken)")
+                debugPrint("Logged in! \(grantedPermissions) \(declinedPermissions) \(accessToken)")
                 self.view?.loggedSocialMedia()
             }
         }
     }
     
-    func loginG(vc: InitialViewController) {
-//        let loginManager = LoginManager()
-//        loginManager.logIn([ .publicProfile, .email ], viewController: vc) { loginResult in
-//            switch loginResult {
-//            case .failed(let error):
-//                self.view?.errorMessage(errorMsg(title:"Error login Facebook", msg:"\(error)"))
-//            case .cancelled:
-//                print("User cancelled login.")
-//            case .success(let grantedPermissions, let declinedPermissions, let accessToken):
-//                print("Logged in! \(grantedPermissions) \(declinedPermissions) \(accessToken)")
-//                self.view?.loggedSocialMedia()
-//            }
-//        }
+    //Google
+    
+    func loginG() {
+        GIDSignIn.sharedInstance().signIn()
     }
+    
+    func successGLogin(email:String) {
+        debugPrint("Logged in with G!",email)
+        //loginSM
+        self.view?.loggedSocialMedia()
+    }
+    
+    //Twitter
     
     func loginTW(vc: InitialViewController) {
 

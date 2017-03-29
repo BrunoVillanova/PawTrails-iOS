@@ -28,7 +28,7 @@ class DataManager {
                 UserManager.get(callback)
             }
         }else{
-            callback(UserError.NotAuthenticated.rawValue, nil)
+            callback(UserError.NotAuthenticated, nil)
         }
     }
     

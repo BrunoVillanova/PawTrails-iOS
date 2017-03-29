@@ -19,44 +19,54 @@ import Fabric
 import TwitterKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     var window: UIWindow?
+    let storyboard = UIStoryboard(name: "Main", bundle: nil)
     
     //func print(items: Any..., separator: String = " ", terminator: String = "\n") {} Uncomment for release version
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
 
         if AuthManager.Instance.isAuthenticated() {
-            
-            let root = storyboard.instantiateViewController(withIdentifier: "tabBarController")
-            window?.rootViewController = root
+            loadHomeScreen()
         }else{
-            let initial = storyboard.instantiateViewController(withIdentifier: "InitialViewController") as? InitialViewController
-            window?.rootViewController = initial
+            loadAuthenticationScreen()
         }
         
-//        // Sets background to a blank/empty image
-//        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
-//        // Sets shadow (line below the bar) to a blank image
-//        UINavigationBar.appearance().shadowImage = UIImage()
-//        // Sets the translucent background color
-//        UINavigationBar.appearance().backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
-//        // Set translucent. (Default value is already true, so this can be removed if desired.)
-//        UINavigationBar.appearance().isTranslucent = true
-        
+        // Set Status Bar Style
         UIApplication.shared.statusBarStyle = .lightContent
+        
+        // Social Media Logins
         
         Fabric.with([Twitter.self])
         
-        return SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+        let facebook = SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+        var configureError: NSError?
+        GGLContext.sharedInstance().configureWithError(&configureError)
+        assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        GIDSignIn.sharedInstance().delegate = self
+
+        
+        return true && facebook
+    }
+    
+    func loadHomeScreen() {
+        let root = storyboard.instantiateViewController(withIdentifier: "tabBarController")
+        window?.rootViewController = root
+    }
+    
+    func loadAuthenticationScreen() {
+        let initial = storyboard.instantiateViewController(withIdentifier: "InitialViewController") as? InitialViewController
+        window?.rootViewController = initial
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         
         if Twitter.sharedInstance().application(app, open: url, options: options) { return true }
+        
+        _ = GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
         
         return SDKApplicationDelegate.shared.application(app, open: url, options: options)
     }
@@ -86,6 +96,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Saves changes in the application's managed object context before the application terminates.
         SocketIOManager.Instance.closeConnection()
         try? CoreDataManager.Instance.save()
+    }
+    
+    //MARK:- GIDSignInDelegate
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if let root = window?.rootViewController as? InitialViewController {
+            
+            if (error == nil) {
+                // Perform any operations on signed in user here.
+                //            let userId = user.userID                  // For client-side use only!
+                //            let idToken = user.authentication.idToken // Safe to send to the server
+                //            let fullName = user.profile.name
+                //            let givenName = user.profile.givenName
+                //            let familyName = user.profile.familyName
+                //            let email = user.profile.email
+                debugPrint(user, user.profile.email)
+                root.successGoogleLogin(email: user.profile.email)
+            } else {
+                root.alert(title: "", msg: error.localizedDescription)
+            }
+
+            
+        }
+
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user:GIDGoogleUser!, withError error: Error!) {
+        if AuthManager.Instance.signOut() {
+            loadAuthenticationScreen()
+        }else{
+            debugPrint("Not Sign Out properly", user.debugDescription, error.localizedDescription)
+        }
     }
     
 }

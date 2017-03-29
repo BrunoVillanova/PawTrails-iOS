@@ -76,6 +76,7 @@ class AuthManager {
         //wipe out DB
         try? CoreDataManager.Instance.delete(entity: "User")
         try? CoreDataManager.Instance.delete(entity: "Pet")
+        GIDSignIn.sharedInstance().signOut()
         return SharedPreferences.remove(.id) && SharedPreferences.remove(.token)
     }
     

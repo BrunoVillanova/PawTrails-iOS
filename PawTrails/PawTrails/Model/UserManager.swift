@@ -6,7 +6,7 @@
 //  Copyright © 2017 AttitudeTech. All rights reserved.
 //
 
-typealias userCallback = (_ error:Int?, _ user:User?) -> Void
+typealias userCallback = (_ error:UserError?, _ user:User?) -> Void
 
 import Foundation
 
@@ -63,18 +63,18 @@ class UserManager {
     static func get(_ callback:userCallback) {
         
         guard let id = SharedPreferences.get(.id) else {
-            callback(UserError.IdNotFound.rawValue, nil)
+            callback(UserError.IdNotFound, nil)
             return
         }
         
         if let results = CoreDataManager.Instance.retrieve("User", with: NSPredicate("id", .equal, id)) as? [User] {
             if results.count > 1 {
-                callback(UserError.MoreThenOneUser.rawValue, nil)
+                callback(UserError.MoreThenOneUser, nil)
             }else{
                 callback(nil, results.first!)
             }
         }else{
-            callback(UserError.NoUserFound.rawValue, nil)
+            callback(UserError.NoUserFound, nil)
         }
     }
 

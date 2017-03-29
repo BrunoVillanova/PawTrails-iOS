@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InitialViewController: UIViewController, InitialView, UITextFieldDelegate {
+class InitialViewController: UIViewController, InitialView, UITextFieldDelegate, GIDSignInUIDelegate {
 
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
@@ -44,8 +44,9 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate 
         
         setTopBar()
 //        UIApplication.shared.statusBarStyle = .default
+        GIDSignIn.sharedInstance().uiDelegate = self
     }
-        
+    
     @IBAction func loginAction(_ sender: UIButton?) {
         presenter.signIn(email: emailTextField.text, password:passwordTextField.text)
     }
@@ -55,7 +56,7 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate 
     }
     
     @IBAction func googleLogin(_ sender: UIButton) {
-        presenter.loginG(vc: self)
+        presenter.loginG()
     }
     
     @IBAction func twitterLogin(_ sender: UIButton) {
@@ -150,6 +151,10 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate 
         }
     }
     
+    func successGoogleLogin(email:String){
+        presenter.successGLogin(email: email)
+    }
+        
     // MARK: - Connection Notifications
     
     func connectedToNetwork() {
@@ -199,4 +204,5 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate 
         }
     }
     
+    // MARK:- GIDSignInUIDelegate    
 }

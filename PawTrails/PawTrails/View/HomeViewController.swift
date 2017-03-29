@@ -136,6 +136,12 @@ class HomeViewController: UIViewController, HomeView, UICollectionViewDataSource
         self.collectionView.reloadData()
     }
     
+    func userNotSigned() {
+        if let vc = self.storyboard?.instantiateViewController(withIdentifier: "InitialViewController") as? InitialViewController {
+            self.present(vc, animated: true, completion: nil)
+        }
+    }
+    
     // MARK: - Connection Notifications
     
     func connectedToNetwork() {
