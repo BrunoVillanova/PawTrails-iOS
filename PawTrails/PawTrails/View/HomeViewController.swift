@@ -1,6 +1,6 @@
 //
 //  HomeViewController.swift
-//  Snout
+//  PawTrails
 //
 //  Created by Marc Perello on 27/01/2017.
 //  Copyright © 2017 AttitudeTech. All rights reserved.
@@ -10,14 +10,14 @@ import UIKit
 import MapKit
 //import CoreLocation
 
-class _pet {
-    var name:String
-    var tracking:Bool
-    init(_ _name:String) {
-        name = _name
-        tracking = false
-    }
-}
+//class _pet {
+//    var name:String
+//    var tracking:Bool
+//    init(_ _name:String) {
+//        name = _name
+//        tracking = false
+//    }
+//}
 
 class HomeViewController: UIViewController, HomeView, UICollectionViewDataSource, UICollectionViewDelegate, UIGestureRecognizerDelegate, MKMapViewDelegate, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
 
@@ -52,7 +52,7 @@ class HomeViewController: UIViewController, HomeView, UICollectionViewDataSource
         self.blurView.round(radius: 20)
         
         mapView.showsScale = false
-        mapView.showsUserLocation = false
+        mapView.showsUserLocation = true
 //        blurView(.open, animated: false)
         
         //search
@@ -72,16 +72,6 @@ class HomeViewController: UIViewController, HomeView, UICollectionViewDataSource
     
     override func viewDidAppear(_ animated: Bool) {
 //        blurView(.close)
-    }
-    
-    @IBAction func handleLongPressure(_ sender: UILongPressGestureRecognizer) {
-        
-        guard let indexPath = collectionView.indexPathForItem(at: sender.location(in: collectionView)) else {return}
-        if indexPath.section != 0 {return}
-        guard let vc = storyboard?.instantiateViewController(withIdentifier: "PetProfileViewController") as? PetProfileViewController else {return}
-        
-        vc.pet = self.presenter.pets[indexPath.row]
-        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func handlePanGesture(_ sender: UIPanGestureRecognizer) {
@@ -168,9 +158,9 @@ class HomeViewController: UIViewController, HomeView, UICollectionViewDataSource
         cell.imageView.backgroundColor = UIColor.blueSystem()
 
         if indexPath.section == 0 {
-            let pet = self.presenter.pets[indexPath.row]
+//            let pet = self.presenter.pets[indexPath.row]
             cell.imageView.image = UIImage()
-            cell.imageView.alpha = pet.tracking ? 1.0 : 0.4
+//            cell.imageView.alpha = pet.tracking ? 1.0 : 0.4
         }else{
             cell.imageView.image = UIImage(named: "add")
             cell.imageView.alpha = 1.0
@@ -184,13 +174,13 @@ class HomeViewController: UIViewController, HomeView, UICollectionViewDataSource
         
         if indexPath.section == 0 {
 
-            if self.presenter.pets[indexPath.row].tracking {
-                self.presenter.stopTracking(indexPath.row)
-            }else{
-                self.presenter.startTracking(indexPath.row)
-            }
+//            if self.presenter.pets[indexPath.row].tracking {
+//                self.presenter.stopTracking(indexPath.row)
+//            }else{
+//                self.presenter.startTracking(indexPath.row)
+//            }
         }else if indexPath.section == 1 {
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "AddChangeDeviceViewController") as? AddChangeDeviceViewController {
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "ScanQRViewController") as? ScanQRViewController {
                 self.present(vc, animated: true, completion: nil)
             }
         }

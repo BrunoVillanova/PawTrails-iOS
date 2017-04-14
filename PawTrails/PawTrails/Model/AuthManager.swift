@@ -1,6 +1,6 @@
 //
 //  ModelManager.swift
-//  Snout
+//  PawTrails
 //
 //  Created by Marc Perello on 02/02/2017.
 //  Copyright © 2017 AttitudeTech. All rights reserved.
@@ -20,12 +20,16 @@ class AuthManager {
        return SharedPreferences.has(.id) && SharedPreferences.has(.token)
     }
     
+    func socialMedia() -> String? {
+        return SharedPreferences.get(.socialnetwork) 
+    }
+    
     func signUp(_ email:String, _ password: String, completition: @escaping errorCallback) {
         let data = isDebug ? ["email":email, "password":password, "is4test":ezdebug.is4test] : ["email":email, "password":password]
         APIManager.Instance.perform(call: .signUp, with: data) { (error, data) in
             if error != nil {
                 completition(self.handleAuthErrors(error, data))
-            }else if data != nil {
+            }else if let data = data {
                 self.succeedLoginOrRegister(data, completition: completition)
             }
         }
@@ -36,35 +40,39 @@ class AuthManager {
         APIManager.Instance.perform(call: .signin, with: data) { (error, data) in
             if error != nil {
                 completition(self.handleAuthErrors(error))
-            }else if data != nil {
+            }else if let data = data {
                 self.succeedLoginOrRegister(data, completition: completition)
             }
         }
     }
     
-    func signInSocial(_ email:String, _ token: String, completition: @escaping errorCallback){
-        let data = ["email":email, "token":token]
-        APIManager.Instance.perform(call: .signinsocial, with: data) { (error, data) in
+    func login(socialMedia: SocialMedia, _ token: String, completition: @escaping errorCallback){
+        let data = ["loginToken":token]
+        APIManager.Instance.perform(call: APICallType(socialMedia), with: data) { (error, data) in
             if error != nil {
                 completition(self.handleAuthErrors(error))
-            }else if data != nil {
+            }else if let data = data {
                 self.succeedLoginOrRegister(data, completition: completition)
             }
         }
     }
     
-    fileprivate func succeedLoginOrRegister(_ data:[String:Any]?, completition: @escaping errorCallback){
-        guard let token = data!["token"] as? String else {
+    fileprivate func succeedLoginOrRegister(_ data:[String:Any], completition: @escaping errorCallback){
+        
+        guard let token = data["token"] as? String else {
             completition(Message.Instance.authError(type: .EmptyUserTokenResponse))
             return
         }
-        guard let userData = data!["user"] as? [String:Any] else {
+        guard let userData = data["user"] as? [String:Any] else {
             completition(Message.Instance.authError(type: .EmptyUserResponse))
             return
         }
         guard let userId = userData["id"] as? String else {
             completition(Message.Instance.authError(type: .EmptyUserIdResponse))
             return
+        }
+        if let socialNetwork = data["social_network"] as? String {
+            SharedPreferences.set(.socialnetwork, with: socialNetwork)
         }
         SharedPreferences.set(.token, with: token)
         SharedPreferences.set(.id, with: userId)
@@ -102,7 +110,6 @@ class AuthManager {
             }
         }
     }
-
     
     fileprivate func handleAuthErrors(_ error: APIManagerError?, _ data: [String:Any]? = nil) -> ErrorMsg? {
         if error != nil {

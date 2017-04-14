@@ -1,6 +1,6 @@
 //
 //  InitialPresenter.swift
-//  Snout
+//  PawTrails
 //
 //  Created by Marc Perello on 27/01/2017.
 //  Copyright © 2017 AttitudeTech. All rights reserved.
@@ -100,11 +100,20 @@ class InitialPresenter {
             switch loginResult {
             case .failed(let error):
                 self.view?.errorMessage(ErrorMsg(title:"Error login Facebook", msg:"\(error)"))
-            case .cancelled:
-                debugPrint("User cancelled login.")
-            case .success(let grantedPermissions, let declinedPermissions, let accessToken):
-                debugPrint("Logged in! \(grantedPermissions) \(declinedPermissions) \(accessToken)")
-                self.view?.loggedSocialMedia()
+                break
+            case .success(_, _, let accessToken):
+                print(accessToken.authenticationToken)
+                AuthManager.Instance.login(socialMedia: .facebook, accessToken.authenticationToken, completition: { (error) in
+                    DispatchQueue.main.async {
+                        if error == nil {
+                            self.view?.loggedSocialMedia()
+                        }else{
+                            self.view?.errorMessage(error!)
+                        }
+                    }
+                })
+            default:
+                break
             }
         }
     }
@@ -112,13 +121,27 @@ class InitialPresenter {
     //Google
     
     func loginG() {
-        GIDSignIn.sharedInstance().signIn()
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if appDelegate.configureGoogleLogin() {
+            GIDSignIn.sharedInstance().signIn()
+        }else{
+            view?.errorMessage(ErrorMsg.init(title: "Error", msg: "Couldn't initialize Google Login"))
+        }
+        
     }
     
-    func successGLogin(email:String) {
-        debugPrint("Logged in with G!",email)
-        //loginSM
-        self.view?.loggedSocialMedia()
+    func successGLogin(token:String) {
+        print(token)
+        AuthManager.Instance.login(socialMedia: .google, token, completition: { (error) in
+            DispatchQueue.main.async {
+                if error == nil {
+                    self.view?.loggedSocialMedia()
+                }else{
+                    self.view?.errorMessage(error!)
+                }
+            }
+        })
     }
     
     //Twitter
@@ -131,60 +154,17 @@ class InitialPresenter {
                     self.view?.errorMessage(ErrorMsg(title:"Error Twitter Login", msg:"\(error.localizedDescription)"))
                 }
             }else if let session = session {
-                // log in
-                debugPrint(session)
-                // return
-                let client = TWTRAPIClient.withCurrentUser()
-                let request = client.urlRequest(withMethod: "GET",
-                                                url: "https://api.twitter.com/1.1/account/verify_credentials.json",
-                                                          parameters: ["include_email": "true", "skip_status": "true"],
-                                                          error: nil)
-                
-                client.sendTwitterRequest(request) { response, data, connectionError in
-                
-                    if let data = data {
-                        
-                        if let json = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments) as? [String:Any] {
-                            debugPrint(json ?? "no json provided")
-                            
-                            if let email = json?["email"] {
-                                print(email)
-                            }
-                            
+                print(session.authToken)
+                AuthManager.Instance.login(socialMedia: .twitter, session.authToken, completition: { (error) in
+                    DispatchQueue.main.async {
+                        if error == nil {
+                            self.view?.loggedSocialMedia()
                         }else{
-                            debugPrint("json parse failed")
+                            self.view?.errorMessage(error!)
                         }
-                    }else{
-                        debugPrint("nil data :(")
                     }
-                    
-                }
-                self.view?.loggedSocialMedia()
+                })
             }
         }
-        
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }

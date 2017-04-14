@@ -1,6 +1,6 @@
 //
 //  InitialViewController.swift
-//  Snout
+//  PawTrails
 //
 //  Created by Marc Perello on 27/01/2017.
 //  Copyright © 2017 AttitudeTech. All rights reserved.
@@ -110,11 +110,7 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
         }
         
     }
-    
-    @IBAction func FBAction(_ sender: Any) {
-        self.presenter.loginFB(vc: self)
-    }
-    
+        
     // MARK: - Initial View
     
     func errorMessage(_ error: ErrorMsg) {
@@ -151,8 +147,8 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
         }
     }
     
-    func successGoogleLogin(email:String){
-        presenter.successGLogin(email: email)
+    func successGoogleLogin(token:String){
+        presenter.successGLogin(token: token)
     }
         
     // MARK: - Connection Notifications
@@ -204,5 +200,6 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
         }
     }
     
-    // MARK:- GIDSignInUIDelegate    
+    // MARK:- GIDSignInUIDelegate   
+
 }

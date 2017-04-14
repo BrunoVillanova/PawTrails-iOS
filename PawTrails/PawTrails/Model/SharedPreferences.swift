@@ -1,6 +1,6 @@
 //
 //  SharedPreferences.swift
-//  Snout
+//  PawTrails
 //
 //  Created by Marc Perello on 16/02/2017.
 //  Copyright © 2017 AttitudeTech. All rights reserved.
@@ -13,6 +13,7 @@ public class SharedPreferences {
     enum key: String {
         case token = "token"
         case id = "id"
+        case socialnetwork = "socialnetwork"
     }
     
     static func get(_ p:key) -> String? {

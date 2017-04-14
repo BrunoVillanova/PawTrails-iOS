@@ -1,6 +1,6 @@
 //
 //  UserManager.swift
-//  Snout
+//  PawTrails
 //
 //  Created by Marc Perello on 21/02/2017.
 //  Copyright © 2017 AttitudeTech. All rights reserved.
@@ -16,7 +16,7 @@ class UserManager {
     static func upsert(_ data: [String:Any]) {
         
         do {
-            if let user = try CoreDataManager.Instance.upsert("User", with: data.filtered(by: ["address", "mobile", "img_url", "date_of_birth"])) as? User {
+            if let user = try CoreDataManager.Instance.upsert("User", with: data.filtered(by: ["address", "mobile", "img_url", "date_of_birth", "social_network", "social_network_id", "img_url"])) as? User {
                 user.birthday = getBirthdate(data["date_of_birth"])
                 
                 // Address
@@ -51,6 +51,22 @@ class UserManager {
                 }else{ //Remove
                     user.setValue(nil, forKey: "phone")
                 }
+                
+                // Image
+                
+                if let imageURL = data["img_url"] as? String {
+                    
+                    if user.imageURL == nil || (user.imageURL != nil && user.imageURL != imageURL) {
+                        user.imageURL = imageURL
+                        if let url = URL(string: imageURL) {
+                            do {
+                                try user.image = Data(contentsOf: url) as NSData
+                            } catch {
+                                //
+                            }
+                        }
+                    }
+                }
 
                 try CoreDataManager.Instance.save()
             }
@@ -74,7 +90,7 @@ class UserManager {
                 callback(nil, results.first!)
             }
         }else{
-            callback(UserError.NoUserFound, nil)
+            callback(UserError.UserNotFoundInDataBase, nil)
         }
     }
 
@@ -94,7 +110,6 @@ class UserManager {
         add(user.email, withKey: "email", to: &data)
         add(user.gender, withKey: "gender", to: &data)
         add(user.birthday?.toStringServer, withKey: "date_of_birth", to: &data)
-//        data["date_of_birth"] = user.birthday == nil ? "" : user.birthday!.toStringServer
         add(address, withKey: "address", to: &data)
         add(phone, withKey: "mobile", to: &data)
         return data

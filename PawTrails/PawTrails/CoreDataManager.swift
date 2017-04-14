@@ -1,6 +1,6 @@
 //
 //  CoreDataManager.swift
-//  Snout
+//  PawTrails
 //
 //  Created by Marc Perello on 13/02/2017.
 //  Copyright © 2017 AttitudeTech. All rights reserved.
@@ -32,7 +32,7 @@ class CoreDataManager {
             return data.count > 0 ? data as? [NSManagedObject] : nil
             
         } catch {
-            debugPrint("CDM retrieve entity: \(entity) withPredicate: \(predicate) error: \(error)")
+            debugPrint("CDM retrieve entity: \(entity) withPredicate: \(String(describing: predicate)) error: \(error)")
         }
         return nil
     }
@@ -177,7 +177,7 @@ fileprivate struct Storage {
         container.loadPersistentStores { (storeDescription, error) in
             print("CoreData: Inited \(storeDescription)")
             guard error == nil else {
-                print("CoreData: Unresolved error \(error)")
+                print("CoreData: Unresolved error \(String(describing: error))")
                 return
             }
         }

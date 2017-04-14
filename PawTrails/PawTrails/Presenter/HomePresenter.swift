@@ -1,6 +1,6 @@
 //
 //  HomePresenter.swift
-//  Snout
+//  PawTrails
 //
 //  Created by Marc Perello on 27/01/2017.
 //  Copyright © 2017 AttitudeTech. All rights reserved.
@@ -46,61 +46,61 @@ class HomePresenter {
             }else if error == UserError.NotAuthenticated {
                 self.view?.userNotSigned()
             }else{
-                self.view?.errorMessage(ErrorMsg(title: "Unable to get user info", msg: "\(error)"))
+                self.view?.errorMessage(ErrorMsg(title: "Unable to get user info", msg: "\(String(describing: error))"))
             }
         }
         }
     }
     
     func testPets() {
-        self.pets = [_pet]()
-        for i in 0...200 {
-            self.pets.append(_pet("pet\(i)"))
-        }
+//        self.pets = [_pet]()
+//        for i in 0...200 {
+//            self.pets.append(_pet("pet\(i)"))
+//        }
     }
     
     //Socket IO
     
     func startTracking(_ i: Int){
         
-        if !self.pets.indices.contains(i) || !DataManager.Instance.trackingIsIdle() {
-            self.view?.errorMessage(ErrorMsg(title:"Error", msg: "Tracking is not available for this pet: \(SocketIOManager.Instance.connectionStatus())"))
-        }
-        let pet = self.pets[i]
-        DataManager.Instance.startTracking(pet: pet, callback: { (lat,long) in
-            if pet.tracking {
-                DispatchQueue.main.async {
-                    self.view?.updateTracking(pet.name, lat: lat, long: long)
-                }
-            }else{
-                pet.tracking = true
-                DispatchQueue.main.async {
-                    self.view?.startTracking(pet.name, lat: lat, long: long)
-                }
-            }
-        })
+//        if !self.pets.indices.contains(i) || !DataManager.Instance.trackingIsIdle() {
+//            self.view?.errorMessage(ErrorMsg(title:"Error", msg: "Tracking is not available for this pet: \(SocketIOManager.Instance.connectionStatus())"))
+//        }
+//        let pet = self.pets[i]
+//        DataManager.Instance.startTracking(pet: pet, callback: { (lat,long) in
+//            if pet.tracking {
+//                DispatchQueue.main.async {
+//                    self.view?.updateTracking(pet.name, lat: lat, long: long)
+//                }
+//            }else{
+//                pet.tracking = true
+//                DispatchQueue.main.async {
+//                    self.view?.startTracking(pet.name, lat: lat, long: long)
+//                }
+//            }
+//        })
     }
     
     func stopTracking(_ i: Int){
-        if !self.pets.indices.contains(i) {
-            self.view?.errorMessage(ErrorMsg(title:"Error", msg: "Couldn't find the pet"))
-        }
-        let pet = self.pets[i]
-        pet.tracking = false
-        DataManager.Instance.stopTracking(pet: pet)
-        DispatchQueue.main.async {
-            self.view?.stopTracking(pet.name)
-        }
+//        if !self.pets.indices.contains(i) {
+//            self.view?.errorMessage(ErrorMsg(title:"Error", msg: "Couldn't find the pet"))
+//        }
+//        let pet = self.pets[i]
+//        pet.tracking = false
+//        DataManager.Instance.stopTracking(pet: pet)
+//        DispatchQueue.main.async {
+//            self.view?.stopTracking(pet.name)
+//        }
     }
     
     func testTrackingAllPets(){
-        for i in 0...self.pets.count - 1 {
-            if self.pets[i].tracking  {
-                self.stopTracking(i)
-            }else{
-                self.startTracking(i)
-            }
-        }
+//        for i in 0...self.pets.count - 1 {
+//            if self.pets[i].tracking  {
+//                self.stopTracking(i)
+//            }else{
+//                self.startTracking(i)
+//            }
+//        }
     }
     
     

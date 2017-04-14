@@ -1,6 +1,6 @@
 //
 //  Presenter.swift
-//  Snout
+//  PawTrails
 //
 //  Created by Marc Perello on 08/02/2017.
 //  Copyright © 2017 AttitudeTech. All rights reserved.

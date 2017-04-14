@@ -1,6 +1,6 @@
 //
 //  APIManagerTests.swift
-//  Snout
+//  PawTrails
 //
 //  Created by Marc Perello on 16/02/2017.
 //  Copyright © 2017 AttitudeTech. All rights reserved.
@@ -40,7 +40,7 @@ class APIManagerTests: XCTestCase {
         signIn { (_, _) in
             expect.fulfill()
         }
-        waitForExpectations(timeout: 100) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(error)") } }
+        waitForExpectations(timeout: 100) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
     }
     
     func signIn(callback: @escaping (_ id:String,_ token:String) -> Swift.Void) {
@@ -61,7 +61,7 @@ class APIManagerTests: XCTestCase {
                 
                 callback(id,token)
                 
-            }else { XCTFail("Error signin in \(error) \(data)") }
+            }else { XCTFail("Error signin in \(String(describing: error)) \(String(describing: data))") }
         }
     }
 
@@ -72,19 +72,28 @@ class APIManagerTests: XCTestCase {
         signIn { (id, token) in
                         
             let newPassword = "Attitude2004"
+            var data = [String:Any]()
+            data["id"] = SharedPreferences.get(.id)
+            data["email"] = ezdebug.email
+            data["password"] = ezdebug.password
+            data["new_password"] = newPassword
             
-            let data = ["id":SharedPreferences.get(.id), "email":ezdebug.email, "password":ezdebug.password, "new_password":newPassword]
             APIManager.Instance.perform(call: .passwordChange, with: data) { (error, data) in
                 
-                XCTAssert(error == nil, "Error password change in \(error) \(data)")
+                XCTAssert(error == nil, "Error password change in \(String(describing: error)) \(String(describing: data))")
                 
-                let data = ["id":SharedPreferences.get(.id), "email":ezdebug.email, "password":newPassword, "new_password":ezdebug.password]
+                var data = [String:Any]()
+                data["id"] = SharedPreferences.get(.id)
+                data["email"] = ezdebug.email
+                data["password"] = newPassword
+                data["new_password"] = ezdebug.password
+
                 APIManager.Instance.perform(call: .passwordChange, with: data) { (error, data) in
                     
-                    XCTAssert(error == nil, "Error password change in \(error) \(data)")
+                    XCTAssert(error == nil, "Error password change in \(String(describing: error)) \(String(describing: data))")
                     
                     AuthManager.Instance.signIn(ezdebug.email, ezdebug.password) { (error) in
-                        XCTAssert(error == nil, "Couldn't sign in properly once the password is changed back\(error)")
+                        XCTAssert(error == nil, "Couldn't sign in properly once the password is changed back\(String(describing: error))")
                     }
                     expect.fulfill()
                 }
@@ -102,7 +111,7 @@ class APIManagerTests: XCTestCase {
         let data = ["email":ezdebug.email, "is4test":ezdebug.is4test]
         APIManager.Instance.perform(call: .passwordReset, with: data) { (error, data) in
             
-            XCTAssert(error == nil, "Error password reset in \(error) \(data)")
+            XCTAssert(error == nil, "Error password reset in \(String(describing: error)) \(String(describing: data))")
             expect.fulfill()
         }
         
@@ -129,7 +138,7 @@ class APIManagerTests: XCTestCase {
                     XCTAssert(userData?["email"] is String, "Failed to login email wrong format")
                     XCTAssert(userData?["email"] as! String == ezdebug.email, "Failed to login with proper email")
                     
-                }else { XCTFail("Error get user in \(error) \(data)") }
+                }else { XCTFail("Error get user in \(String(describing: error)) \(String(describing: data))") }
                 
                 expect.fulfill()
             }
@@ -166,7 +175,7 @@ class APIManagerTests: XCTestCase {
             ]
             
             var data = [String:Any]()
-            data["id"] = SharedPreferences.get(.id)      
+            data["id"] = SharedPreferences.get(.id)
             data["name"] = name
             data["surname"] = surname
             data["gender"] = gender
@@ -202,13 +211,39 @@ class APIManagerTests: XCTestCase {
                     self.XCTMatch(key: "state", value: address["state"]!, in: addressData!)
                     self.XCTMatch(key: "country", value: address["country"]!, in: addressData!)
                     
-                }else { XCTFail("Error set user in \(error) \(data)") }
+                }else { XCTFail("Error set user in \(String(describing: error)) \(String(describing: data))") }
                 
                 expect.fulfill()
             }
         }
         
-        waitForExpectations(timeout: 1000) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(error)") } }
+        waitForExpectations(timeout: 1000) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
+    }
+    
+    func testSetUserImage() {
+        
+        let expect = expectation(description: "set user")
+        
+        signIn { (id, token) in
+            
+            SharedPreferences.set(.id, with: id)
+            SharedPreferences.set(.token, with: token)
+            
+            
+            var data = [String:Any]()
+            data["path"] = "user"
+            data["userid"] = SharedPreferences.get(.id)
+            data["picture"] = UIImageJPEGRepresentation(UIImage(named: "logo")!, 0.9)
+            
+            APIManager.Instance.perform(call: .userImageUpload, with: data) { (error, data) in
+                
+                if error == nil && data != nil {
+                }else { XCTFail("Error set user image in \(String(describing: error)) \(String(describing: data))") }
+                expect.fulfill()
+            }
+        }
+        
+        waitForExpectations(timeout: 1000) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
     }
 }
 
@@ -228,10 +263,10 @@ public extension XCTest {
             return
         }
         if data[key] is T  {
-            XCTAssert((data[key] as! T) == value, "\(key) not match \(data[key]) != \(value)")
+            XCTAssert((data[key] as! T) == value, "\(key) not match \(String(describing: data[key])) != \(value)")
             return
         }else{
-            XCTFail("\(key) has wrong object type match \(data[key]) != \(value)")
+            XCTFail("\(key) has wrong object type match \(String(describing: data[key])) != \(value)")
             return
         }
     }

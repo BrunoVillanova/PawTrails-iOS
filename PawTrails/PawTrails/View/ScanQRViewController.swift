@@ -1,0 +1,128 @@
+//
+//  ScanQRViewController.swift
+//  PawTrails
+//
+//  Created by Marc Perello on 24/02/2017.
+//  Copyright © 2017 AttitudeTech. All rights reserved.
+//
+
+import UIKit
+import AVFoundation
+
+class ScanQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+
+    var isAddDevice:Bool! = true
+    
+    @IBOutlet weak var cameraView: UIView!
+    @IBOutlet weak var loadingActivityIndicator: UIActivityIndicatorView!
+    
+    fileprivate var captureSession:AVCaptureSession?
+    fileprivate var videoPreviewLayer: AVCaptureVideoPreviewLayer?
+    fileprivate var qrCodeFrameView: UIView?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupSession()
+        setupPreview()
+        startSession()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        stopSession()
+    }
+    
+    func setupSession() {
+
+        let captureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
+        
+        do {
+            let input = try AVCaptureDeviceInput(device: captureDevice)
+            
+            captureSession = AVCaptureSession()
+            captureSession?.addInput(input)
+            
+        } catch {
+            print(error)
+        }
+    }
+    
+    func setupPreview() {
+
+        let captureMetadataOutput = AVCaptureMetadataOutput()
+        captureSession?.addOutput(captureMetadataOutput)
+        
+        captureMetadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+        captureMetadataOutput.metadataObjectTypes = [AVMetadataObjectTypeQRCode]
+        
+        // Video preview
+        videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        videoPreviewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
+        videoPreviewLayer?.frame = cameraView.layer.bounds
+        cameraView.layer.addSublayer(videoPreviewLayer!)
+    }
+    
+    func addSquarAroudQRCode() {
+        // Initialize QR Code Frame to highlight the QR code
+        qrCodeFrameView = UIView()
+        
+        if let qrCodeFrameView = qrCodeFrameView {
+            qrCodeFrameView.layer.borderColor = UIColor.blue.cgColor
+            qrCodeFrameView.layer.borderWidth = 2
+            cameraView.addSubview(qrCodeFrameView)
+            cameraView.bringSubview(toFront: qrCodeFrameView)
+        }
+    }
+    
+    func startSession() {
+        
+        guard let session = captureSession else { return }
+        
+        if !session.isRunning {
+            videoQueue().async {
+                session.startRunning()
+                DispatchQueue.main.async {
+                    self.loadingActivityIndicator.stopAnimating()
+                    self.addSquarAroudQRCode()
+                }
+            }
+        }
+    }
+    
+    func stopSession() {
+        guard let session = captureSession else { return }
+        
+        if session.isRunning {
+            videoQueue().async {
+                session.stopRunning()
+            }
+        }
+    }
+    
+    func videoQueue() -> DispatchQueue {
+        return DispatchQueue.global(qos: .default)
+    }
+    
+    // MARK: - AVCaptureMetadataOutputObjectsDelegate
+    
+    func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
+        
+        if metadataObjects == nil || metadataObjects.count == 0 {
+            qrCodeFrameView?.frame = CGRect.zero
+            return
+        }
+
+        let metadataObj = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
+        
+        if metadataObj.type == AVMetadataObjectTypeQRCode {
+
+            let barCodeObject = videoPreviewLayer?.transformedMetadataObject(for: metadataObj)
+            qrCodeFrameView?.frame = barCodeObject!.bounds
+            
+            if metadataObj.stringValue != nil {
+                print(metadataObj.stringValue)
+                // Check Code and Go next
+            }
+        }
+    }
+
+}

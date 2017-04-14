@@ -140,6 +140,18 @@ extension UIViewController {
         }
     }
     
+    // Image Compression
+    
+    func encode(_ image: UIImage) -> Data? {
+        var compression: CGFloat = 1.0
+        var data: Data?
+        repeat {
+            data = UIImageJPEGRepresentation(image, compression)!
+            compression -= 0.1
+        } while data != nil && data!.count > Constants.maxImageSize  && compression >= 0
+        return data
+    }
+    
 }
 
 extension UIColor {

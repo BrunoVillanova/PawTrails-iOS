@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  Snout
+//  PawTrails
 //
 //  Created by Marc Perello on 27/01/2017.
 //  Copyright © 2017 AttitudeTech. All rights reserved.
@@ -28,28 +28,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
+        // Set Status Bar Style
+        UIApplication.shared.statusBarStyle = .lightContent
+
+        
         if AuthManager.Instance.isAuthenticated() {
+            
+            if let socialMedia = AuthManager.Instance.socialMedia() {
+                
+                if let sm = SocialMedia(rawValue: socialMedia) {
+                    switch sm {
+                    case .facebook:                       
+                        return SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+                    case .twitter:
+                        Fabric.with([Twitter.self])
+                        break
+                    case .google:
+                        _ = configureGoogleLogin()
+                        break
+                    default:
+                        break
+                    }
+                }
+                
+            }
             loadHomeScreen()
         }else{
             loadAuthenticationScreen()
         }
-        
-        // Set Status Bar Style
-        UIApplication.shared.statusBarStyle = .lightContent
-        
-        // Social Media Logins
-        
-        Fabric.with([Twitter.self])
-        
-        let facebook = SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
-        
+        return true
+    }
+    
+    func configureGoogleLogin() -> Bool {
         var configureError: NSError?
         GGLContext.sharedInstance().configureWithError(&configureError)
-        assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        assert(configureError == nil, "Error configuring Google services: \(String(describing: configureError))")
         GIDSignIn.sharedInstance().delegate = self
+        return configureError == nil
 
-        
-        return true && facebook
     }
     
     func loadHomeScreen() {
@@ -104,15 +120,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         if let root = window?.rootViewController as? InitialViewController {
             
             if (error == nil) {
-                // Perform any operations on signed in user here.
-                //            let userId = user.userID                  // For client-side use only!
-                //            let idToken = user.authentication.idToken // Safe to send to the server
-                //            let fullName = user.profile.name
-                //            let givenName = user.profile.givenName
-                //            let familyName = user.profile.familyName
-                //            let email = user.profile.email
-                debugPrint(user, user.profile.email)
-                root.successGoogleLogin(email: user.profile.email)
+                root.successGoogleLogin(token: user.authentication.idToken)
             } else {
                 root.alert(title: "", msg: error.localizedDescription)
             }

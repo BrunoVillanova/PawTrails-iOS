@@ -1,6 +1,6 @@
 //
 //  PhoneViewController.swift
-//  Snout
+//  PawTrails
 //
 //  Created by Marc Perello on 17/02/2017.
 //  Copyright © 2017 AttitudeTech. All rights reserved.
@@ -15,7 +15,7 @@ class PhoneTableViewController: UITableViewController, UIPickerViewDataSource, U
     
     fileprivate var selectedCC:CountryCode!
     
-    var parentEditor:EditProfilePresenter!
+    var parentEditor:EditUserProfilePresenter!
     
     override func viewDidLoad() {
         super.viewDidLoad()

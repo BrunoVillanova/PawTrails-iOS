@@ -1,6 +1,6 @@
 //
 //  APIManager.swift
-//  Snout
+//  PawTrails
 //
 //  Created by Marc Perello on 06/02/2017.
 //  Copyright © 2017 AttitudeTech. All rights reserved.
@@ -8,14 +8,21 @@
 
 import Foundation
 
+public enum SocialMedia: String {
+    case facebook = "FB"
+    case google = "GL"
+    case twitter = "TW"
+    case weibo = "WB"
+}
+
 /// The APICallType enum defines constants that can be used to specify the type of interactions that take place with the APIManager requests.
 public enum APICallType {
     
-    case signUp, signin, signinsocial, passwordReset, passwordChange, getUser, setUser , getPet, setPet, trackPet
+    case signUp, signin, facebookLogin, googleLogin, twitterLogin, weiboLogin, passwordReset, passwordChange, getUser, setUser, userImageUpload, petImageUpload, checkDevice, getPets, getPet, setPet, trackPet
     
     fileprivate var requiresToken: Bool {
         switch self {
-        case .signUp, .signin, .signinsocial, .passwordReset: return false
+        case .signUp, .signin, .facebookLogin, .googleLogin, .twitterLogin, .weiboLogin, .passwordReset: return false
         default: return true
         }
     }
@@ -24,9 +31,14 @@ public enum APICallType {
         switch self {
         case .signUp: return "/users/register"
         case .signin: return "/users/login"
+        case .facebookLogin: return "/users/login/facebook"
+        case .googleLogin: return "/users/login/google"
+        case .twitterLogin: return "/users/login/twitter"
+        case .weiboLogin: return "/users/login/weibo"
         case .passwordChange: return "/users/changepsw"
         case .passwordReset: return "/users/resetpsw"
         case .setUser: return "/users/edit"
+        case .userImageUpload, .petImageUpload: return "/images/upload"
         case .getUser: return "/users/\(SharedPreferences.get(.id) ?? "")"
         default: return ""
         }
@@ -42,6 +54,15 @@ public enum APICallType {
         default: return true
         }
     }
+    
+    init(_ SocialMedia: SocialMedia) {
+        switch SocialMedia {
+        case .facebook: self = .facebookLogin
+        case .twitter: self = .twitterLogin
+        case .google: self = .googleLogin
+        case .weibo: self = .weiboLogin
+        }
+    }
 }
 
 
@@ -53,6 +74,14 @@ class APIManager {
     
     fileprivate static let mainURL = "http://eu.pawtrails.pet/api"
     
+    fileprivate let boundary = "%%%PawTrails%%%"
+    
+    /// Creates a `URLRequest` given the specific `APICall` and adds the information contained in `data`.
+    ///
+    /// - Parameters:
+    ///   - call: Defines the call type.
+    ///   - data: *Optional* includes the data to sent as part of the request.
+    /// - Returns: URLRequest containing all the information given.
     private func createRequest(for call:APICallType, with data:[String:Any]?) -> URLRequest? {
         
         if call.requiresBody && data == nil {
@@ -74,7 +103,7 @@ class APIManager {
         return request
     }
     
-    /// Performs the request defined by the `APICallType` sending the data provided and and calls a handler upon completion.
+    /// Performs the request defined by the `APICallType` sending the data provided and calls a handler upon completion.
     ///
     /// - Parameters:
     ///   - call: The [APICallType](APIManager) defines the request.
@@ -85,11 +114,11 @@ class APIManager {
     func perform(call:APICallType, with data:[String:Any]? = nil, completition: @escaping (_ error:APIManagerError?,_ data:[String:Any]?) -> Void) {
         
         if let request = createRequest(for: call, with: data) {
-
+            
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
                 
                 if error != nil{
-                    debugPrint("Error -> \(error)")
+                    debugPrint("Error -> \(String(describing: error))")
                     completition(APIManagerError(call: call, kind: .requestError, httpCode:nil, error: error, errorCode:nil), nil)
                 }else{
                     guard let httpResponse = response as? HTTPURLResponse else {
@@ -105,6 +134,10 @@ class APIManager {
         
     }
     
+    /// Attempts to transform the data in format `Data` into a json structure as a `dictionary`.
+    ///
+    /// - Parameter data: input of information.
+    /// - Returns: json answer as a `dictionary`
     private func parseResponse(_ data:Data?) -> [String:Any]? {
         
         if data == nil { return nil }
@@ -123,7 +156,7 @@ class APIManager {
             
         } catch {
             debugPrint("Error parsing to json -> \(error)")
-            debugPrint("Output -> \(String(data: data!, encoding: String.Encoding.utf8))")
+            debugPrint("Output -> \(String(describing: String(data: data!, encoding: String.Encoding.utf8)))")
             return nil
         }
     }
@@ -143,9 +176,13 @@ class APIManager {
         }
         
         if httpCode.isClientError {
-            let specificCode = dict["errors"] as? String ?? "-1"
-            let code = Int(specificCode) ?? -1
-            return APIManagerError(call: call, kind: .clientError, httpCode: httpCode, error: nil, errorCode: ErrorCode(rawValue: code))
+            if httpCode.isUnauthorized {
+                return APIManagerError(call: call, kind: .clientError, httpCode: httpCode, error: nil, errorCode: ErrorCode.Unauthorized)
+            }else{
+                let specificCode = dict["errors"] as? String ?? "-1"
+                let code = Int(specificCode) ?? -1
+                return APIManagerError(call: call, kind: .clientError, httpCode: httpCode, error: nil, errorCode: ErrorCode(rawValue: code))
+            }
         }
         debugPrint("No client error", call, httpCode, dict)
         return APIManagerError(call: call, kind: .noClientError, httpCode: httpCode, error: nil, errorCode: nil)
@@ -155,19 +192,58 @@ class APIManager {
     
     private func setHeaders(of call:APICallType) -> [String:String] {
         var headers = [String:String]()
-        headers["content-type"] = "application/json"
+        
+        if call == .userImageUpload || call == .petImageUpload {
+            headers["content-type"] = "multipart/form-data; boundary=\(boundary)"
+        }else{
+            headers["content-type"] = "application/json"
+        }
         headers["cache-control"] = "no-cache"
         
-        if call.requiresToken {
-            headers["token"] = SharedPreferences.get(.token)
-        }
+        if call.requiresToken { headers["token"] = SharedPreferences.get(.token) }
+        
         print(headers)
         return headers
     }
     
     private func setBody(of call:APICallType, with data:[String:Any]?) -> Data? {
         print(data ?? "No data provided to build the request body")
-        return data != nil ? try? JSONSerialization.data(withJSONObject: data!, options: []) : nil
+        if call == .userImageUpload || call == .petImageUpload {
+
+            let boundaryStart = "--\(boundary)\r\n"
+            let boundaryEnd = "--\(boundary)--\r\n"
+            
+            var body = Data()
+            
+            let mimetype = "jpg"
+
+            
+            for (key, value) in data! {
+                
+                if key == "picture" {
+                    body.append(boundaryStart)
+                    body.append("Content-Disposition: form-data; name=\"\(key)\"; filename=\"image\"\r\n")
+                    body.append("Content-Type: \(mimetype)\r\n\r\n")
+                    body.append(value as! Data)
+                }else{
+                    body.append(boundaryStart)
+                    body.append("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n")
+                    body.append("\(value)")
+                }
+                body.append("\r\n")
+            }
+            body.append(boundaryEnd)
+            
+            print(String(data: body, encoding: .utf8) ?? "Mec")
+            
+            return body
+
+            
+//            print(body)
+//            return body.data(using: String.Encoding.utf8)
+        }else{
+            return data != nil ? try? JSONSerialization.data(withJSONObject: data!, options: []) : nil
+        }
     }
 }
 
@@ -179,6 +255,10 @@ fileprivate extension Int {
     
     var isClientError: Bool {
         return 400...499 ~= self
+    }
+    
+    var isUnauthorized: Bool {
+        return self == 401
     }
 }
 
@@ -192,8 +272,25 @@ fileprivate extension URL {
     }
 }
 
+fileprivate extension NSMutableData {
+    func appendString(_ string: String) {
+        let data = string.data(using: String.Encoding.utf8, allowLossyConversion: false)
+        append(data!)
+    }
+}
 
-
+fileprivate extension Data {
+    
+    /// Append string to NSMutableData
+    ///
+    /// - parameter string:       The string to be added to the `NSMutableData`.
+    
+    mutating func append(_ string: String) {
+        if let data = string.data(using: .utf8) {
+            append(data)
+        }
+    }
+}
 
 
 

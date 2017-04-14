@@ -1,6 +1,6 @@
 //
 //  Messages.swift
-//  Snout
+//  PawTrails
 //
 //  Created by Marc Perello on 08/02/2017.
 //  Copyright © 2017 AttitudeTech. All rights reserved.
@@ -60,6 +60,7 @@ class Message {
         let title = lm("Error")
         switch code {
             
+        case .Unauthorized: return ErrorMsg(code, title, lm("User Not Authorized"))
         case .MissingEmail: return ErrorMsg(code, title, lm("Missing email"))
         case .EmailFormat: return ErrorMsg(code, title, lm("Incorrect email format"))
         case .MissingPassword: return ErrorMsg(code, title, lm("Missing password"))
@@ -92,7 +93,7 @@ class Message {
     }
     
     func softwareDevelopmentError(_ whatever:[String:Any]?) -> ErrorMsg {
-        return ErrorMsg(ErrorCode.Unknown, "Development Error", "\(whatever)")
+        return ErrorMsg(ErrorCode.Unknown, "Development Error", "\(String(describing: whatever))")
     }
     
    

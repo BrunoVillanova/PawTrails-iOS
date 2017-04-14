@@ -1,6 +1,6 @@
 //
 //  AuthManagerTests.swift
-//  Snout
+//  PawTrails
 //
 //  Created by Marc Perello on 16/02/2017.
 //  Copyright © 2017 AttitudeTech. All rights reserved.
@@ -21,7 +21,7 @@ class UserProfileTests: XCTestCase {
             expect.fulfill()
         }
         waitForExpectations(timeout: 100) { error in
-            XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(error)")
+            XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
     
@@ -29,20 +29,20 @@ class UserProfileTests: XCTestCase {
         
         UserManager.get { (error, user) in
             
-            XCTAssertNil(error, "Error while getting User \(error)")
-            XCTAssertNotNil(user, "User is nil :(\(error)")
+            XCTAssertNil(error, "Error while getting User \(String(describing: error))")
+            XCTAssertNotNil(user, "User is nil :(\(String(describing: error))")
             if user == nil {XCTFail()}
             callback(user!)
         }
         
     }
     
-    func saveUser(user:User, phone:[String:Any]?, address:[String:Any]?, callback: @escaping (User)->Swift.Void) {
+    func saveUser(user:User, phone:[String:Any]?, address:[String:Any]?, imageData: Data?, callback: @escaping (User)->Swift.Void) {
         
-        DataManager.Instance.saveUser(user: user, phone: phone, address: address, callback: { (error, user) in
+        DataManager.Instance.saveUser(user: user, phone: phone, address: address, imageData: imageData, callback: { (error, user) in
             
-            XCTAssertNil(error, "Error while saving User \(error)")
-            XCTAssertNotNil(user, "User is nil :(\(error)")
+            XCTAssertNil(error, "Error while saving User \(String(describing: error))")
+            XCTAssertNotNil(user, "User is nil :(\(String(describing: error))")
             callback(user!)
         })
     }
@@ -79,8 +79,11 @@ class UserProfileTests: XCTestCase {
             user.gender = gender
             user.birthday = birthday as NSDate?
             user.notification = notification
+            
+            let image = UIImage(named: "logo")
+            let data = UIImageJPEGRepresentation(image!, 0.5)
 
-            self.saveUser(user: user, phone: phone, address: address, callback: { (user) in
+            self.saveUser(user: user, phone: phone, address: address, imageData: data, callback: { (user) in
                 
                 XCTAssert(user.name == name, "Name not saved properly")
                 XCTAssert(user.surname == surname, "Surname not saved properly")
@@ -101,7 +104,7 @@ class UserProfileTests: XCTestCase {
         }
         
         waitForExpectations(timeout: 100) { error in
-            XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(error)")
+            XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
     
@@ -118,7 +121,7 @@ class UserProfileTests: XCTestCase {
             user.gender = nil
             user.birthday = nil
             
-            self.saveUser(user: user, phone: nil, address: nil, callback: { (user) in
+            self.saveUser(user: user, phone: nil, address: nil, imageData: nil, callback: { (user) in
                 
                 XCTAssert(user.name == nil, "Name not saved properly")
                 XCTAssert(user.surname == nil, "Surname not saved properly")
@@ -132,7 +135,7 @@ class UserProfileTests: XCTestCase {
         }
         
         waitForExpectations(timeout: 100) { error in
-            XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(error)")
+            XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
     

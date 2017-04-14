@@ -1,6 +1,6 @@
 //
 //  SocketIOManagement.swift
-//  Snout
+//  PawTrails
 //
 //  Created by Marc Perello on 03/02/2017.
 //  Copyright © 2017 AttitudeTech. All rights reserved.
@@ -26,16 +26,24 @@ class SocketIOManager: NSObject {
 //        case receivedPoint = "receivedPoint"
 //    }
    
-    private var socket: SocketIOClient = SocketIOClient(socketURL: URL(string: "http://192.168.1.11:3000")!)
+//    private var socket: SocketIOClient = SocketIOClient(socketURL: URL(string: "http://192.168.1.11:3000")!)
 //    private var socket: SocketIOClient = SocketIOClient(socketURL: URL(string: "http://localhost:3000")!)
     
-//    private var socket: SocketIOClient {
-//        if #available(iOS 10.0, *) {
-//            return SocketIOClient(socketURL: URL(string: "http://192.168.1.7:3000")!)
-//        } else {
-//            return SocketIOClient(socketURL: URL(string: "http://localhost:3000")!)
-//        }
-//    }
+    //    private var socket: SocketIOClient {
+    //        if #available(iOS 10.0, *) {
+    //            return SocketIOClient(socketURL: URL(string: "http://192.168.1.7:3000")!)
+    //        } else {
+    //            return SocketIOClient(socketURL: URL(string: "http://localhost:3000")!)
+    //        }
+    //    }
+    
+    private var socket: SocketIOClient {
+        
+        guard let token = SharedPreferences.get(.token) else {
+            return SocketIOClient(socketURL: URL(string: "http://192.168.1.11:3000")!)
+        }
+        return SocketIOClient(socketURL: URL(string: "http://192.168.1.11:3000")!, config: [.connectParams(["token":token])])
+    }
     
     override init() {
         super.init()
@@ -44,6 +52,8 @@ class SocketIOManager: NSObject {
     
     func establishConnection() {
         socket.connect()
+        
+        
     }
     
     

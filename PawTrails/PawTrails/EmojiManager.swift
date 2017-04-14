@@ -1,6 +1,6 @@
 //
 //  EmojiiManager.swift
-//  Snout
+//  PawTrails
 //
 //  Created by Marc Perello on 08/03/2017.
 //  Copyright © 2017 AttitudeTech. All rights reserved.

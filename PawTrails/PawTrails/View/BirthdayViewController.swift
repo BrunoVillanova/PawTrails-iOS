@@ -1,6 +1,6 @@
 //
 //  BirthdayViewController.swift
-//  Snout
+//  PawTrails
 //
 //  Created by Marc Perello on 17/02/2017.
 //  Copyright © 2017 AttitudeTech. All rights reserved.
@@ -12,13 +12,14 @@ class BirthdayViewController: UIViewController {
     
     @IBOutlet weak var datePicker: UIDatePicker!
     
-    var parentEditor: EditProfilePresenter!
+    var parentEditor: EditUserProfilePresenter!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         if let birthday = parentEditor.getBirthday() {
             datePicker.setDate(birthday, animated: true)
         }
+        
     }
     
     @IBAction func saveAction(_ sender: UIBarButtonItem) {

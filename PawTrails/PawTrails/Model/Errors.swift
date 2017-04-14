@@ -1,6 +1,6 @@
 //
 //  Errors.swift
-//  Snout
+//  PawTrails
 //
 //  Created by Marc Perello on 08/02/2017.
 //  Copyright © 2017 AttitudeTech. All rights reserved.
@@ -40,6 +40,7 @@ struct APIManagerError: Error {
 enum ErrorCode: Int {
     
     case Unknown = -1
+    case Unauthorized = 0
     case MissingEmail = 10
     case EmailFormat = 11
     case MissingPassword = 12
@@ -79,10 +80,11 @@ enum AuthenticationError: Int {
 }
 
 enum UserError: Int {
+    case UserNotFoundInDataBase = 8
+    case UserNotFoundInResponse = 9
     case IdNotFound = 10
     case UserNotFound = 11
     case MoreThenOneUser  = 12
-    case NoUserFound  = 13
     case NotAuthenticated = 14
 }
 

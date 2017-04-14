@@ -13,20 +13,30 @@
 		440CEE581E3B983700F58A09 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440CEE571E3B983700F58A09 /* InitialViewController.swift */; };
 		440CEE5A1E3B9AA300F58A09 /* InitialPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440CEE591E3B9AA300F58A09 /* InitialPresenter.swift */; };
 		440CEE5C1E3B9B1900F58A09 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440CEE5B1E3B9B1900F58A09 /* HomeViewController.swift */; };
+		4414AE6B1EA0DD5B004A5134 /* PawTrailsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4414AE6A1EA0DD5B004A5134 /* PawTrailsTests.swift */; };
+		4414AE771EA0DD8C004A5134 /* APIManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4414AE721EA0DD8C004A5134 /* APIManagerTests.swift */; };
+		4414AE781EA0DD8C004A5134 /* AuthManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4414AE731EA0DD8C004A5134 /* AuthManagerTests.swift */; };
+		4414AE791EA0DD8C004A5134 /* DataManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4414AE741EA0DD8C004A5134 /* DataManagerTest.swift */; };
+		4414AE7A1EA0DD8C004A5134 /* SocketIOTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4414AE751EA0DD8C004A5134 /* SocketIOTest.swift */; };
+		4414AE7B1EA0DD8C004A5134 /* UserProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4414AE761EA0DD8C004A5134 /* UserProfileTests.swift */; };
 		4415FF431E3B822900A81B13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4415FF421E3B822900A81B13 /* AppDelegate.swift */; };
 		4415FF481E3B822900A81B13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4415FF461E3B822900A81B13 /* Main.storyboard */; };
 		4415FF4A1E3B822900A81B13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4415FF491E3B822900A81B13 /* Assets.xcassets */; };
 		4417E7F41E841600007DDD49 /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4417E7F31E841600007DDD49 /* Gender.swift */; };
 		441A0D4D1E55AF5200D02CE4 /* SharedPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441A0D4C1E55AF5200D02CE4 /* SharedPreferences.swift */; };
-		441A0D951E55E9D100D02CE4 /* APIManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441A0D941E55E9D100D02CE4 /* APIManagerTests.swift */; };
-		441A0D971E55EEB700D02CE4 /* AuthManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441A0D961E55EEB700D02CE4 /* AuthManagerTests.swift */; };
+		441D72F31E9E37490031BB1E /* AddPetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441D72F21E9E37490031BB1E /* AddPetPresenter.swift */; };
+		441D72F51E9E57ED0031BB1E /* AddPetDeviceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441D72F41E9E57ED0031BB1E /* AddPetDeviceTableViewController.swift */; };
+		4424DCF91E8E9F2300ACDF07 /* UserProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4424DCF81E8E9F2300ACDF07 /* UserProfileTableViewController.swift */; };
+		4424DCFD1E8E9F9400ACDF07 /* PetsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4424DCFC1E8E9F9400ACDF07 /* PetsTableViewController.swift */; };
+		4424DCFF1E8EA1D900ACDF07 /* UserProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4424DCFE1E8EA1D900ACDF07 /* UserProfilePresenter.swift */; };
 		44277A0C1E7A987C00B336BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44277A0A1E7A987C00B336BD /* LaunchScreen.storyboard */; };
+		44329CB41EA1129400325A13 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44329CB31EA1129400325A13 /* Constants.swift */; };
 		443D2C6A1E6D721000F7ACFA /* PetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443D2C691E6D721000F7ACFA /* PetManager.swift */; };
 		443D2C6C1E6D736B00F7ACFA /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443D2C6B1E6D736B00F7ACFA /* LocationManager.swift */; };
 		4440C5CB1E8BA568007A13B1 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4440C5CA1E8BA568007A13B1 /* ViewExtensions.swift */; };
 		4440C5CD1E8BA5D0007A13B1 /* ModelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4440C5CC1E8BA5D0007A13B1 /* ModelExtensions.swift */; };
 		4440C5CF1E8BA64E007A13B1 /* MapExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4440C5CE1E8BA64E007A13B1 /* MapExtensions.swift */; };
-		44421A2C1E4CB8E7009755BD /* EditProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44421A2B1E4CB8E7009755BD /* EditProfilePresenter.swift */; };
+		44421A2C1E4CB8E7009755BD /* EditUserProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44421A2B1E4CB8E7009755BD /* EditUserProfilePresenter.swift */; };
 		44457A2E1E5AF31400B43748 /* AddressTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44457A2D1E5AF31400B43748 /* AddressTableViewController.swift */; };
 		44485F951E51B12800A3C47D /* PawTrails.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 44485F931E51B12800A3C47D /* PawTrails.xcdatamodeld */; };
 		44485F971E51B16500A3C47D /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44485F961E51B16500A3C47D /* CoreDataManager.swift */; };
@@ -35,24 +45,30 @@
 		44498DFD1E4DBE6700F6D761 /* ChangePasswordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44498DFC1E4DBE6700F6D761 /* ChangePasswordPresenter.swift */; };
 		44498DFF1E4DC03100F6D761 /* ChangePasswordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44498DFE1E4DC03100F6D761 /* ChangePasswordTableViewController.swift */; };
 		444ACEFC1E894AF500A9A086 /* EmailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444ACEFB1E894AF500A9A086 /* EmailVerificationViewController.swift */; };
-		444AF1DD1E5F024E00C72034 /* PawTrailsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444AF1DC1E5F024E00C72034 /* PawTrailsTests.swift */; };
 		444E00CD1E857B2200CAA250 /* SearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444E00CC1E857B2200CAA250 /* SearchManager.swift */; };
 		445A6DC91E896B6F0042736E /* EmailVerificationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445A6DC81E896B6F0042736E /* EmailVerificationPresenter.swift */; };
 		446548161E5C5CC900458CB7 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446548151E5C5CC900458CB7 /* UserManager.swift */; };
 		4465481E1E5C642000458CB7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4465481D1E5C642000458CB7 /* Extensions.swift */; };
-		446548221E5C8E9600458CB7 /* DataManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446548211E5C8E9600458CB7 /* DataManagerTest.swift */; };
 		447440E61E8400CF0069EA85 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447440E51E8400CF0069EA85 /* SettingsTableViewController.swift */; };
 		447440E81E8400EF0069EA85 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447440E71E8400EF0069EA85 /* SettingsPresenter.swift */; };
-		447753D61E658BE90091DAC5 /* SocketIOTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447753D51E658BE90091DAC5 /* SocketIOTest.swift */; };
 		447905161E5731F100A49AB3 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447905151E5731F100A49AB3 /* Reachability.swift */; };
-		447905181E573A4D00A49AB3 /* EditProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447905171E573A4D00A49AB3 /* EditProfileTableViewController.swift */; };
+		447905181E573A4D00A49AB3 /* EditUserProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447905171E573A4D00A49AB3 /* EditUserProfileTableViewController.swift */; };
 		4479051C1E5744A800A49AB3 /* PhoneTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4479051B1E5744A800A49AB3 /* PhoneTableViewController.swift */; };
 		4479051E1E575A2100A49AB3 /* BirthdayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4479051D1E575A2100A49AB3 /* BirthdayViewController.swift */; };
+		447AC7E21E9CDAF700D2D2B2 /* PetNameTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447AC7E11E9CDAF700D2D2B2 /* PetNameTableViewController.swift */; };
+		447AC7E41E9CDB1C00D2D2B2 /* PetTypeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447AC7E31E9CDB1C00D2D2B2 /* PetTypeTableViewController.swift */; };
+		447AC7E61E9CDB4600D2D2B2 /* PetGenderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447AC7E51E9CDB4600D2D2B2 /* PetGenderTableViewController.swift */; };
+		447AC7E81E9CDB8500D2D2B2 /* PetBreedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447AC7E71E9CDB8500D2D2B2 /* PetBreedTableViewController.swift */; };
+		447AC7EA1E9CDB9700D2D2B2 /* PetBirthdayTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447AC7E91E9CDB9700D2D2B2 /* PetBirthdayTableViewController.swift */; };
+		447AC7EC1E9CDBB200D2D2B2 /* PetWeightTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447AC7EB1E9CDBB200D2D2B2 /* PetWeightTableViewController.swift */; };
 		447D4C171E44C4F5008F82F4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 447D4C161E44C4F5008F82F4 /* MapKit.framework */; };
 		449747BF1E8BE4C200C3431F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 449747BE1E8BE4C200C3431F /* GoogleService-Info.plist */; };
 		449A978D1E82DA940032DCE5 /* NameTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A978C1E82DA940032DCE5 /* NameTableViewController.swift */; };
 		449A978F1E82DAC00032DCE5 /* EmailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A978E1E82DAC00032DCE5 /* EmailTableViewController.swift */; };
 		449A97911E82DADD0032DCE5 /* GenderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A97901E82DADD0032DCE5 /* GenderTableViewController.swift */; };
+		44A1AC4B1E923CEE003EF6CA /* PetsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A1AC4A1E923CEE003EF6CA /* PetsPageViewController.swift */; };
+		44A1AC4E1E9240A9003EF6CA /* PetActivityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A1AC4D1E9240A9003EF6CA /* PetActivityTableViewController.swift */; };
+		44A1AC501E92923A003EF6CA /* PetsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A1AC4F1E92923A003EF6CA /* PetsPresenter.swift */; };
 		44B179621E4B62690070A18B /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B179611E4B62690070A18B /* Presenter.swift */; };
 		44B179641E4B787A0070A18B /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B179631E4B787A0070A18B /* Errors.swift */; };
 		44B179661E4B78EF0070A18B /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B179651E4B78EF0070A18B /* Messages.swift */; };
@@ -86,21 +102,19 @@
 		44C7F7551E4CD3F200171170 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F7521E4CD3F200171170 /* AuthManager.swift */; };
 		44C7F7561E4CD3F200171170 /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F7531E4CD3F200171170 /* SocketIOManager.swift */; };
 		44C7F7581E4CD43A00171170 /* PasswordRecoveryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F7571E4CD43A00171170 /* PasswordRecoveryPresenter.swift */; };
-		44F5FB8A1E6481580026D7AF /* UserProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F5FB891E6481580026D7AF /* UserProfileTests.swift */; };
-		44F8202B1E604C1C00704F75 /* AddChangeDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F8202A1E604C1C00704F75 /* AddChangeDeviceViewController.swift */; };
-		44F8202D1E6086B100704F75 /* PetProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F8202C1E6086B100704F75 /* PetProfileViewController.swift */; };
+		44D73CF11E929FB000D8DF97 /* AddPetDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D73CF01E929FB000D8DF97 /* AddPetDetailsTableViewController.swift */; };
+		44F8202B1E604C1C00704F75 /* ScanQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F8202A1E604C1C00704F75 /* ScanQRViewController.swift */; };
+		44F8202D1E6086B100704F75 /* PetProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F8202C1E6086B100704F75 /* PetProfileTableViewController.swift */; };
 		44FE723D1E4A2EF0007C7E24 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FE723C1E4A2EF0007C7E24 /* DataManager.swift */; };
-		753F53052119EED22E04BE96 /* Pods_SnoutTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 754A776083E072AC16A405DB /* Pods_SnoutTests.framework */; };
-		E7B8ABEA7CFFDD69A6B1EB61 /* Pods_PawTrailsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C09631478A96AC78EA751AA /* Pods_PawTrailsTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		441A0D8F1E55E9B700D02CE4 /* PBXContainerItemProxy */ = {
+		4414AE6D1EA0DD5B004A5134 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4415FF371E3B822900A81B13 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 4415FF3E1E3B822900A81B13;
-			remoteInfo = Snout;
+			remoteInfo = PawTrails;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -113,6 +127,14 @@
 		440CEE571E3B983700F58A09 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InitialViewController.swift; path = View/InitialViewController.swift; sourceTree = "<group>"; };
 		440CEE591E3B9AA300F58A09 /* InitialPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InitialPresenter.swift; path = Presenter/InitialPresenter.swift; sourceTree = "<group>"; };
 		440CEE5B1E3B9B1900F58A09 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = View/HomeViewController.swift; sourceTree = "<group>"; };
+		4414AE681EA0DD5B004A5134 /* PawTrailsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PawTrailsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4414AE6A1EA0DD5B004A5134 /* PawTrailsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PawTrailsTests.swift; sourceTree = "<group>"; };
+		4414AE6C1EA0DD5B004A5134 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4414AE721EA0DD8C004A5134 /* APIManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManagerTests.swift; sourceTree = "<group>"; };
+		4414AE731EA0DD8C004A5134 /* AuthManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthManagerTests.swift; sourceTree = "<group>"; };
+		4414AE741EA0DD8C004A5134 /* DataManagerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerTest.swift; sourceTree = "<group>"; };
+		4414AE751EA0DD8C004A5134 /* SocketIOTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketIOTest.swift; sourceTree = "<group>"; };
+		4414AE761EA0DD8C004A5134 /* UserProfileTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileTests.swift; sourceTree = "<group>"; };
 		4415FF3F1E3B822900A81B13 /* PawTrails.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PawTrails.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4415FF421E3B822900A81B13 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4415FF471E3B822900A81B13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -120,16 +142,20 @@
 		4415FF4E1E3B822900A81B13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4417E7F31E841600007DDD49 /* Gender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
 		441A0D4C1E55AF5200D02CE4 /* SharedPreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SharedPreferences.swift; path = Model/SharedPreferences.swift; sourceTree = "<group>"; };
-		441A0D8A1E55E9B700D02CE4 /* PawTrailsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PawTrailsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		441A0D941E55E9D100D02CE4 /* APIManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = APIManagerTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		441A0D961E55EEB700D02CE4 /* AuthManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthManagerTests.swift; sourceTree = "<group>"; };
+		441D72F21E9E37490031BB1E /* AddPetPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddPetPresenter.swift; path = Presenter/AddPetPresenter.swift; sourceTree = "<group>"; };
+		441D72F41E9E57ED0031BB1E /* AddPetDeviceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddPetDeviceTableViewController.swift; path = View/AddPetDeviceTableViewController.swift; sourceTree = "<group>"; };
+		4424DCF81E8E9F2300ACDF07 /* UserProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserProfileTableViewController.swift; path = View/UserProfileTableViewController.swift; sourceTree = "<group>"; };
+		4424DCFC1E8E9F9400ACDF07 /* PetsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetsTableViewController.swift; path = View/PetsTableViewController.swift; sourceTree = "<group>"; };
+		4424DCFE1E8EA1D900ACDF07 /* UserProfilePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserProfilePresenter.swift; path = Presenter/UserProfilePresenter.swift; sourceTree = "<group>"; };
 		44277A0B1E7A987C00B336BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		44329CB21EA0F75600325A13 /* Test.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Test.playground; sourceTree = "<group>"; };
+		44329CB31EA1129400325A13 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		443D2C691E6D721000F7ACFA /* PetManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetManager.swift; path = Model/PetManager.swift; sourceTree = "<group>"; };
 		443D2C6B1E6D736B00F7ACFA /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationManager.swift; path = Model/LocationManager.swift; sourceTree = "<group>"; };
 		4440C5CA1E8BA568007A13B1 /* ViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		4440C5CC1E8BA5D0007A13B1 /* ModelExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelExtensions.swift; sourceTree = "<group>"; };
 		4440C5CE1E8BA64E007A13B1 /* MapExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapExtensions.swift; sourceTree = "<group>"; };
-		44421A2B1E4CB8E7009755BD /* EditProfilePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditProfilePresenter.swift; path = Presenter/EditProfilePresenter.swift; sourceTree = "<group>"; };
+		44421A2B1E4CB8E7009755BD /* EditUserProfilePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditUserProfilePresenter.swift; path = Presenter/EditUserProfilePresenter.swift; sourceTree = "<group>"; };
 		44457A2D1E5AF31400B43748 /* AddressTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddressTableViewController.swift; path = View/AddressTableViewController.swift; sourceTree = "<group>"; };
 		44485F941E51B12800A3C47D /* PawTrails.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PawTrails.xcdatamodel; sourceTree = "<group>"; };
 		44485F961E51B16500A3C47D /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -138,26 +164,31 @@
 		44498DFC1E4DBE6700F6D761 /* ChangePasswordPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordPresenter.swift; sourceTree = "<group>"; };
 		44498DFE1E4DC03100F6D761 /* ChangePasswordTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChangePasswordTableViewController.swift; path = View/ChangePasswordTableViewController.swift; sourceTree = "<group>"; };
 		444ACEFB1E894AF500A9A086 /* EmailVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmailVerificationViewController.swift; path = View/EmailVerificationViewController.swift; sourceTree = "<group>"; };
-		444AF1DA1E5F023200C72034 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		444AF1DC1E5F024E00C72034 /* PawTrailsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PawTrailsTests.swift; sourceTree = "<group>"; };
 		444E00CC1E857B2200CAA250 /* SearchManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchManager.swift; path = Model/SearchManager.swift; sourceTree = "<group>"; };
 		445A6DC81E896B6F0042736E /* EmailVerificationPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailVerificationPresenter.swift; sourceTree = "<group>"; };
 		446548151E5C5CC900458CB7 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserManager.swift; path = Model/UserManager.swift; sourceTree = "<group>"; };
 		4465481D1E5C642000458CB7 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Model/Extensions.swift; sourceTree = "<group>"; };
-		446548211E5C8E9600458CB7 /* DataManagerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerTest.swift; sourceTree = "<group>"; };
 		447440E51E8400CF0069EA85 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsTableViewController.swift; path = View/SettingsTableViewController.swift; sourceTree = "<group>"; };
 		447440E71E8400EF0069EA85 /* SettingsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsPresenter.swift; path = Presenter/SettingsPresenter.swift; sourceTree = "<group>"; };
-		447753D51E658BE90091DAC5 /* SocketIOTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketIOTest.swift; sourceTree = "<group>"; };
 		447905151E5731F100A49AB3 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
-		447905171E573A4D00A49AB3 /* EditProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditProfileTableViewController.swift; path = View/EditProfileTableViewController.swift; sourceTree = "<group>"; };
+		447905171E573A4D00A49AB3 /* EditUserProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditUserProfileTableViewController.swift; path = View/EditUserProfileTableViewController.swift; sourceTree = "<group>"; };
 		4479051B1E5744A800A49AB3 /* PhoneTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhoneTableViewController.swift; path = View/PhoneTableViewController.swift; sourceTree = "<group>"; };
 		4479051D1E575A2100A49AB3 /* BirthdayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BirthdayViewController.swift; path = View/BirthdayViewController.swift; sourceTree = "<group>"; };
+		447AC7E11E9CDAF700D2D2B2 /* PetNameTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetNameTableViewController.swift; path = View/PetNameTableViewController.swift; sourceTree = "<group>"; };
+		447AC7E31E9CDB1C00D2D2B2 /* PetTypeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetTypeTableViewController.swift; sourceTree = "<group>"; };
+		447AC7E51E9CDB4600D2D2B2 /* PetGenderTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetGenderTableViewController.swift; path = View/PetGenderTableViewController.swift; sourceTree = "<group>"; };
+		447AC7E71E9CDB8500D2D2B2 /* PetBreedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetBreedTableViewController.swift; path = View/PetBreedTableViewController.swift; sourceTree = "<group>"; };
+		447AC7E91E9CDB9700D2D2B2 /* PetBirthdayTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetBirthdayTableViewController.swift; path = View/PetBirthdayTableViewController.swift; sourceTree = "<group>"; };
+		447AC7EB1E9CDBB200D2D2B2 /* PetWeightTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetWeightTableViewController.swift; path = View/PetWeightTableViewController.swift; sourceTree = "<group>"; };
 		447D4C161E44C4F5008F82F4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		449747B91E8BCB6600C3431F /* PawTrails-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PawTrails-Bridging-Header.h"; sourceTree = "<group>"; };
 		449747BE1E8BE4C200C3431F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		449A978C1E82DA940032DCE5 /* NameTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NameTableViewController.swift; path = View/NameTableViewController.swift; sourceTree = "<group>"; };
 		449A978E1E82DAC00032DCE5 /* EmailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmailTableViewController.swift; path = View/EmailTableViewController.swift; sourceTree = "<group>"; };
 		449A97901E82DADD0032DCE5 /* GenderTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GenderTableViewController.swift; path = View/GenderTableViewController.swift; sourceTree = "<group>"; };
+		44A1AC4A1E923CEE003EF6CA /* PetsPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetsPageViewController.swift; path = View/PetsPageViewController.swift; sourceTree = "<group>"; };
+		44A1AC4D1E9240A9003EF6CA /* PetActivityTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetActivityTableViewController.swift; path = View/PetActivityTableViewController.swift; sourceTree = "<group>"; };
+		44A1AC4F1E92923A003EF6CA /* PetsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetsPresenter.swift; path = Presenter/PetsPresenter.swift; sourceTree = "<group>"; };
 		44B179611E4B62690070A18B /* Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Presenter.swift; path = Presenter/Presenter.swift; sourceTree = "<group>"; };
 		44B179631E4B787A0070A18B /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Errors.swift; path = Model/Errors.swift; sourceTree = "<group>"; };
 		44B179651E4B78EF0070A18B /* Messages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Messages.swift; path = Model/Messages.swift; sourceTree = "<group>"; };
@@ -191,9 +222,9 @@
 		44C7F7521E4CD3F200171170 /* AuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = AuthManager.swift; path = Model/AuthManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		44C7F7531E4CD3F200171170 /* SocketIOManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketIOManager.swift; path = Model/SocketIOManager.swift; sourceTree = "<group>"; };
 		44C7F7571E4CD43A00171170 /* PasswordRecoveryPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PasswordRecoveryPresenter.swift; path = Presenter/PasswordRecoveryPresenter.swift; sourceTree = "<group>"; };
-		44F5FB891E6481580026D7AF /* UserProfileTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileTests.swift; sourceTree = "<group>"; };
-		44F8202A1E604C1C00704F75 /* AddChangeDeviceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddChangeDeviceViewController.swift; path = View/AddChangeDeviceViewController.swift; sourceTree = "<group>"; };
-		44F8202C1E6086B100704F75 /* PetProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetProfileViewController.swift; path = View/PetProfileViewController.swift; sourceTree = "<group>"; };
+		44D73CF01E929FB000D8DF97 /* AddPetDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddPetDetailsTableViewController.swift; path = View/AddPetDetailsTableViewController.swift; sourceTree = "<group>"; };
+		44F8202A1E604C1C00704F75 /* ScanQRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScanQRViewController.swift; path = View/ScanQRViewController.swift; sourceTree = "<group>"; };
+		44F8202C1E6086B100704F75 /* PetProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetProfileTableViewController.swift; path = View/PetProfileTableViewController.swift; sourceTree = "<group>"; };
 		44FE723C1E4A2EF0007C7E24 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = DataManager.swift; path = Model/DataManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		4D52BC7BE2AEDBF19B3D09AB /* Pods-PawTrailsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PawTrailsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PawTrailsTests/Pods-PawTrailsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		754A776083E072AC16A405DB /* Pods_SnoutTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnoutTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -203,21 +234,19 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		4414AE651EA0DD5B004A5134 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4415FF3C1E3B822900A81B13 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				447D4C171E44C4F5008F82F4 /* MapKit.framework in Frameworks */,
 				3808F92C4AE1F8421B70B99A /* Pods_PawTrails.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		441A0D871E55E9B700D02CE4 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				753F53052119EED22E04BE96 /* Pods_SnoutTests.framework in Frameworks */,
-				E7B8ABEA7CFFDD69A6B1EB61 /* Pods_PawTrailsTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,11 +272,11 @@
 				4415FF461E3B822900A81B13 /* Main.storyboard */,
 				441A0D4B1E55A5A500D02CE4 /* Auth */,
 				440CEE5B1E3B9B1900F58A09 /* HomeViewController.swift */,
+				4424DCFC1E8E9F9400ACDF07 /* PetsTableViewController.swift */,
+				4424DCF81E8E9F2300ACDF07 /* UserProfileTableViewController.swift */,
 				447440E51E8400CF0069EA85 /* SettingsTableViewController.swift */,
+				447AC7DE1E9CD9A800D2D2B2 /* Pet */,
 				44F820281E604BC700704F75 /* User Profile */,
-				440BB75F1E5DE63B00D2D68B /* SafeZoneViewController.swift */,
-				44F8202A1E604C1C00704F75 /* AddChangeDeviceViewController.swift */,
-				44F8202C1E6086B100704F75 /* PetProfileViewController.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -259,7 +288,10 @@
 				447905141E57307E00A49AB3 /* Authentication */,
 				44C7F74F1E4CD3DA00171170 /* HomePresenter.swift */,
 				447440E71E8400EF0069EA85 /* SettingsPresenter.swift */,
-				44421A2B1E4CB8E7009755BD /* EditProfilePresenter.swift */,
+				44421A2B1E4CB8E7009755BD /* EditUserProfilePresenter.swift */,
+				4424DCFE1E8EA1D900ACDF07 /* UserProfilePresenter.swift */,
+				44A1AC4F1E92923A003EF6CA /* PetsPresenter.swift */,
+				441D72F21E9E37490031BB1E /* AddPetPresenter.swift */,
 			);
 			name = Presenter;
 			sourceTree = "<group>";
@@ -267,9 +299,9 @@
 		440CEE4C1E3B8D3D00F58A09 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4465481B1E5C624700458CB7 /* Communication */,
 				44C7F7521E4CD3F200171170 /* AuthManager.swift */,
 				44FE723C1E4A2EF0007C7E24 /* DataManager.swift */,
-				4465481B1E5C624700458CB7 /* Communication */,
 				4465481C1E5C625100458CB7 /* CoreDataModelsManagers */,
 				44485F931E51B12800A3C47D /* PawTrails.xcdatamodeld */,
 				4417E7F31E841600007DDD49 /* Gender.swift */,
@@ -277,11 +309,25 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		4414AE691EA0DD5B004A5134 /* PawTrailsTests */ = {
+			isa = PBXGroup;
+			children = (
+				4414AE721EA0DD8C004A5134 /* APIManagerTests.swift */,
+				4414AE731EA0DD8C004A5134 /* AuthManagerTests.swift */,
+				4414AE741EA0DD8C004A5134 /* DataManagerTest.swift */,
+				4414AE751EA0DD8C004A5134 /* SocketIOTest.swift */,
+				4414AE761EA0DD8C004A5134 /* UserProfileTests.swift */,
+				4414AE6A1EA0DD5B004A5134 /* PawTrailsTests.swift */,
+				4414AE6C1EA0DD5B004A5134 /* Info.plist */,
+			);
+			path = PawTrailsTests;
+			sourceTree = "<group>";
+		};
 		4415FF361E3B822900A81B13 = {
 			isa = PBXGroup;
 			children = (
 				4415FF411E3B822900A81B13 /* PawTrails */,
-				441A0D8B1E55E9B700D02CE4 /* PawTrailsTests */,
+				4414AE691EA0DD5B004A5134 /* PawTrailsTests */,
 				4415FF401E3B822900A81B13 /* Products */,
 				91352D1B7E01CC1C0CF51D38 /* Frameworks */,
 				5795D868A9539C4E257F965D /* Pods */,
@@ -292,7 +338,7 @@
 			isa = PBXGroup;
 			children = (
 				4415FF3F1E3B822900A81B13 /* PawTrails.app */,
-				441A0D8A1E55E9B700D02CE4 /* PawTrailsTests.xctest */,
+				4414AE681EA0DD5B004A5134 /* PawTrailsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -300,11 +346,11 @@
 		4415FF411E3B822900A81B13 /* PawTrails */ = {
 			isa = PBXGroup;
 			children = (
+				44329CB21EA0F75600325A13 /* Test.playground */,
 				4415FF421E3B822900A81B13 /* AppDelegate.swift */,
 				440CEE4C1E3B8D3D00F58A09 /* Model */,
 				440CEE4A1E3B8D2500F58A09 /* View */,
 				440CEE4B1E3B8D2C00F58A09 /* Presenter */,
-				440CEE491E3B8D0700F58A09 /* Assets */,
 				44B179671E4B78FB0070A18B /* Utils */,
 			);
 			path = PawTrails;
@@ -318,20 +364,6 @@
 				444ACEFB1E894AF500A9A086 /* EmailVerificationViewController.swift */,
 			);
 			name = Auth;
-			sourceTree = "<group>";
-		};
-		441A0D8B1E55E9B700D02CE4 /* PawTrailsTests */ = {
-			isa = PBXGroup;
-			children = (
-				444AF1DA1E5F023200C72034 /* Info.plist */,
-				444AF1DC1E5F024E00C72034 /* PawTrailsTests.swift */,
-				441A0D941E55E9D100D02CE4 /* APIManagerTests.swift */,
-				441A0D961E55EEB700D02CE4 /* AuthManagerTests.swift */,
-				44F5FB891E6481580026D7AF /* UserProfileTests.swift */,
-				446548211E5C8E9600458CB7 /* DataManagerTest.swift */,
-				447753D51E658BE90091DAC5 /* SocketIOTest.swift */,
-			);
-			path = PawTrailsTests;
 			sourceTree = "<group>";
 		};
 		4440C5D01E8BA6B0007A13B1 /* Extensions */ = {
@@ -378,6 +410,39 @@
 			name = Authentication;
 			sourceTree = "<group>";
 		};
+		447AC7DE1E9CD9A800D2D2B2 /* Pet */ = {
+			isa = PBXGroup;
+			children = (
+				447AC7DF1E9CD9BB00D2D2B2 /* Add Pet */,
+				44A1AC4C1E924044003EF6CA /* Pet Profile */,
+			);
+			name = Pet;
+			sourceTree = "<group>";
+		};
+		447AC7DF1E9CD9BB00D2D2B2 /* Add Pet */ = {
+			isa = PBXGroup;
+			children = (
+				441D72F41E9E57ED0031BB1E /* AddPetDeviceTableViewController.swift */,
+				44F8202A1E604C1C00704F75 /* ScanQRViewController.swift */,
+				44D73CF01E929FB000D8DF97 /* AddPetDetailsTableViewController.swift */,
+				447AC7E01E9CDADD00D2D2B2 /* PetDetails */,
+			);
+			name = "Add Pet";
+			sourceTree = "<group>";
+		};
+		447AC7E01E9CDADD00D2D2B2 /* PetDetails */ = {
+			isa = PBXGroup;
+			children = (
+				447AC7E11E9CDAF700D2D2B2 /* PetNameTableViewController.swift */,
+				447AC7E31E9CDB1C00D2D2B2 /* PetTypeTableViewController.swift */,
+				447AC7E51E9CDB4600D2D2B2 /* PetGenderTableViewController.swift */,
+				447AC7E71E9CDB8500D2D2B2 /* PetBreedTableViewController.swift */,
+				447AC7E91E9CDB9700D2D2B2 /* PetBirthdayTableViewController.swift */,
+				447AC7EB1E9CDBB200D2D2B2 /* PetWeightTableViewController.swift */,
+			);
+			name = PetDetails;
+			sourceTree = "<group>";
+		};
 		447D4C151E44BF69008F82F4 /* SocketIO */ = {
 			isa = PBXGroup;
 			children = (
@@ -409,9 +474,21 @@
 			name = SocketIO;
 			sourceTree = "<group>";
 		};
+		44A1AC4C1E924044003EF6CA /* Pet Profile */ = {
+			isa = PBXGroup;
+			children = (
+				44A1AC4A1E923CEE003EF6CA /* PetsPageViewController.swift */,
+				44F8202C1E6086B100704F75 /* PetProfileTableViewController.swift */,
+				44A1AC4D1E9240A9003EF6CA /* PetActivityTableViewController.swift */,
+				440BB75F1E5DE63B00D2D68B /* SafeZoneViewController.swift */,
+			);
+			name = "Pet Profile";
+			sourceTree = "<group>";
+		};
 		44B179671E4B78FB0070A18B /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				440CEE491E3B8D0700F58A09 /* Assets */,
 				4440C5D01E8BA6B0007A13B1 /* Extensions */,
 				447905151E5731F100A49AB3 /* Reachability.swift */,
 				44B179631E4B787A0070A18B /* Errors.swift */,
@@ -419,6 +496,7 @@
 				44485FBE1E52079D00A3C47D /* CVSParser.swift */,
 				441A0D4C1E55AF5200D02CE4 /* SharedPreferences.swift */,
 				440C5E171E701643000C3827 /* EmojiManager.swift */,
+				44329CB31EA1129400325A13 /* Constants.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -426,7 +504,7 @@
 		44F820281E604BC700704F75 /* User Profile */ = {
 			isa = PBXGroup;
 			children = (
-				447905171E573A4D00A49AB3 /* EditProfileTableViewController.swift */,
+				447905171E573A4D00A49AB3 /* EditUserProfileTableViewController.swift */,
 				449A978C1E82DA940032DCE5 /* NameTableViewController.swift */,
 				449A978E1E82DAC00032DCE5 /* EmailTableViewController.swift */,
 				449A97901E82DADD0032DCE5 /* GenderTableViewController.swift */,
@@ -464,6 +542,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		4414AE671EA0DD5B004A5134 /* PawTrailsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4414AE6F1EA0DD5B004A5134 /* Build configuration list for PBXNativeTarget "PawTrailsTests" */;
+			buildPhases = (
+				4414AE641EA0DD5B004A5134 /* Sources */,
+				4414AE651EA0DD5B004A5134 /* Frameworks */,
+				4414AE661EA0DD5B004A5134 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4414AE6E1EA0DD5B004A5134 /* PBXTargetDependency */,
+			);
+			name = PawTrailsTests;
+			productName = PawTrailsTests;
+			productReference = 4414AE681EA0DD5B004A5134 /* PawTrailsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		4415FF3E1E3B822900A81B13 /* PawTrails */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4415FF671E3B822A00A81B13 /* Build configuration list for PBXNativeTarget "PawTrails" */;
@@ -485,37 +581,22 @@
 			productReference = 4415FF3F1E3B822900A81B13 /* PawTrails.app */;
 			productType = "com.apple.product-type.application";
 		};
-		441A0D891E55E9B700D02CE4 /* PawTrailsTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 441A0D911E55E9B700D02CE4 /* Build configuration list for PBXNativeTarget "PawTrailsTests" */;
-			buildPhases = (
-				EFEEB5B11AFC2F65D691536B /* [CP] Check Pods Manifest.lock */,
-				441A0D861E55E9B700D02CE4 /* Sources */,
-				441A0D871E55E9B700D02CE4 /* Frameworks */,
-				441A0D881E55E9B700D02CE4 /* Resources */,
-				2DF9C7CD34AD19CCE9310139 /* [CP] Embed Pods Frameworks */,
-				0FDFCD244E67A2CE708731E8 /* [CP] Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				441A0D901E55E9B700D02CE4 /* PBXTargetDependency */,
-			);
-			name = PawTrailsTests;
-			productName = SnoutTests;
-			productReference = 441A0D8A1E55E9B700D02CE4 /* PawTrailsTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		4415FF371E3B822900A81B13 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0820;
+				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = AttitudeTech;
 				TargetAttributes = {
+					4414AE671EA0DD5B004A5134 = {
+						CreatedOnToolsVersion = 8.3;
+						DevelopmentTeam = DJBJW6R236;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 4415FF3E1E3B822900A81B13;
+					};
 					4415FF3E1E3B822900A81B13 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 7E2855LEH4;
@@ -529,12 +610,6 @@
 								enabled = 1;
 							};
 						};
-					};
-					441A0D891E55E9B700D02CE4 = {
-						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 7E2855LEH4;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 4415FF3E1E3B822900A81B13;
 					};
 				};
 			};
@@ -552,12 +627,19 @@
 			projectRoot = "";
 			targets = (
 				4415FF3E1E3B822900A81B13 /* PawTrails */,
-				441A0D891E55E9B700D02CE4 /* PawTrailsTests */,
+				4414AE671EA0DD5B004A5134 /* PawTrailsTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		4414AE661EA0DD5B004A5134 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4415FF3D1E3B822900A81B13 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -570,46 +652,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		441A0D881E55E9B700D02CE4 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0FDFCD244E67A2CE708731E8 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PawTrailsTests/Pods-PawTrailsTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2DF9C7CD34AD19CCE9310139 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PawTrailsTests/Pods-PawTrailsTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		40EE3AB9E61FBE7E41A589E5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -668,24 +713,22 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PawTrails/Pods-PawTrails-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EFEEB5B11AFC2F65D691536B /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		4414AE641EA0DD5B004A5134 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4414AE7B1EA0DD8C004A5134 /* UserProfileTests.swift in Sources */,
+				4414AE771EA0DD8C004A5134 /* APIManagerTests.swift in Sources */,
+				4414AE7A1EA0DD8C004A5134 /* SocketIOTest.swift in Sources */,
+				4414AE791EA0DD8C004A5134 /* DataManagerTest.swift in Sources */,
+				4414AE781EA0DD8C004A5134 /* AuthManagerTests.swift in Sources */,
+				4414AE6B1EA0DD5B004A5134 /* PawTrailsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4415FF3B1E3B822900A81B13 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -705,7 +748,7 @@
 				44C7F73B1E4CD3AE00171170 /* SocketEngine.swift in Sources */,
 				44C7F7491E4CD3AE00171170 /* SocketPacket.swift in Sources */,
 				443D2C6C1E6D736B00F7ACFA /* LocationManager.swift in Sources */,
-				44F8202B1E604C1C00704F75 /* AddChangeDeviceViewController.swift in Sources */,
+				44F8202B1E604C1C00704F75 /* ScanQRViewController.swift in Sources */,
 				44C7F74E1E4CD3AE00171170 /* WebSocket.swift in Sources */,
 				44C7F7501E4CD3DA00171170 /* HomePresenter.swift in Sources */,
 				440CEE5C1E3B9B1900F58A09 /* HomeViewController.swift in Sources */,
@@ -713,7 +756,8 @@
 				449A978F1E82DAC00032DCE5 /* EmailTableViewController.swift in Sources */,
 				447905161E5731F100A49AB3 /* Reachability.swift in Sources */,
 				4440C5CF1E8BA64E007A13B1 /* MapExtensions.swift in Sources */,
-				44421A2C1E4CB8E7009755BD /* EditProfilePresenter.swift in Sources */,
+				44421A2C1E4CB8E7009755BD /* EditUserProfilePresenter.swift in Sources */,
+				44D73CF11E929FB000D8DF97 /* AddPetDetailsTableViewController.swift in Sources */,
 				44C7F73F1E4CD3AE00171170 /* SocketEngineSpec.swift in Sources */,
 				44C7F7541E4CD3F200171170 /* APIManager.swift in Sources */,
 				44C7F7371E4CD3AE00171170 /* SocketAckEmitter.swift in Sources */,
@@ -723,17 +767,24 @@
 				447440E81E8400EF0069EA85 /* SettingsPresenter.swift in Sources */,
 				443D2C6A1E6D721000F7ACFA /* PetManager.swift in Sources */,
 				441A0D4D1E55AF5200D02CE4 /* SharedPreferences.swift in Sources */,
+				441D72F51E9E57ED0031BB1E /* AddPetDeviceTableViewController.swift in Sources */,
 				44485F971E51B16500A3C47D /* CoreDataManager.swift in Sources */,
+				447AC7EC1E9CDBB200D2D2B2 /* PetWeightTableViewController.swift in Sources */,
 				440BB7601E5DE63B00D2D68B /* SafeZoneViewController.swift in Sources */,
 				449A978D1E82DA940032DCE5 /* NameTableViewController.swift in Sources */,
 				44C7F74A1E4CD3AE00171170 /* SocketParsable.swift in Sources */,
-				447905181E573A4D00A49AB3 /* EditProfileTableViewController.swift in Sources */,
+				447905181E573A4D00A49AB3 /* EditUserProfileTableViewController.swift in Sources */,
 				44457A2E1E5AF31400B43748 /* AddressTableViewController.swift in Sources */,
+				447AC7E41E9CDB1C00D2D2B2 /* PetTypeTableViewController.swift in Sources */,
 				4417E7F41E841600007DDD49 /* Gender.swift in Sources */,
 				44C7F7381E4CD3AE00171170 /* SocketAckManager.swift in Sources */,
 				44C7F74B1E4CD3AE00171170 /* SocketStringReader.swift in Sources */,
+				447AC7EA1E9CDB9700D2D2B2 /* PetBirthdayTableViewController.swift in Sources */,
+				441D72F31E9E37490031BB1E /* AddPetPresenter.swift in Sources */,
+				44A1AC501E92923A003EF6CA /* PetsPresenter.swift in Sources */,
 				4415FF431E3B822900A81B13 /* AppDelegate.swift in Sources */,
 				44C7F7561E4CD3F200171170 /* SocketIOManager.swift in Sources */,
+				44329CB41EA1129400325A13 /* Constants.swift in Sources */,
 				44485FBF1E52079D00A3C47D /* CVSParser.swift in Sources */,
 				440C5E181E701643000C3827 /* EmojiManager.swift in Sources */,
 				44C7F7441E4CD3AE00171170 /* SocketIOClientConfiguration.swift in Sources */,
@@ -743,12 +794,15 @@
 				44C7F74D1E4CD3AE00171170 /* SSLSecurity.swift in Sources */,
 				44C7F73C1E4CD3AE00171170 /* SocketEngineClient.swift in Sources */,
 				44C7F7451E4CD3AE00171170 /* SocketIOClientOption.swift in Sources */,
+				4424DCF91E8E9F2300ACDF07 /* UserProfileTableViewController.swift in Sources */,
 				44C7F7431E4CD3AE00171170 /* SocketIOClient.swift in Sources */,
+				447AC7E61E9CDB4600D2D2B2 /* PetGenderTableViewController.swift in Sources */,
 				444E00CD1E857B2200CAA250 /* SearchManager.swift in Sources */,
-				44F8202D1E6086B100704F75 /* PetProfileViewController.swift in Sources */,
+				44F8202D1E6086B100704F75 /* PetProfileTableViewController.swift in Sources */,
 				4479051E1E575A2100A49AB3 /* BirthdayViewController.swift in Sources */,
 				440CEE581E3B983700F58A09 /* InitialViewController.swift in Sources */,
 				44C7F7411E4CD3AE00171170 /* SocketEventHandler.swift in Sources */,
+				4424DCFF1E8EA1D900ACDF07 /* UserProfilePresenter.swift in Sources */,
 				449A97911E82DADD0032DCE5 /* GenderTableViewController.swift in Sources */,
 				44485F951E51B12800A3C47D /* PawTrails.xcdatamodeld in Sources */,
 				44C7F7421E4CD3AE00171170 /* SocketExtensions.swift in Sources */,
@@ -756,33 +810,25 @@
 				44FE723D1E4A2EF0007C7E24 /* DataManager.swift in Sources */,
 				44C7F7471E4CD3AE00171170 /* SocketIOClientStatus.swift in Sources */,
 				446548161E5C5CC900458CB7 /* UserManager.swift in Sources */,
+				447AC7E21E9CDAF700D2D2B2 /* PetNameTableViewController.swift in Sources */,
 				445A6DC91E896B6F0042736E /* EmailVerificationPresenter.swift in Sources */,
+				447AC7E81E9CDB8500D2D2B2 /* PetBreedTableViewController.swift in Sources */,
+				44A1AC4B1E923CEE003EF6CA /* PetsPageViewController.swift in Sources */,
+				4424DCFD1E8E9F9400ACDF07 /* PetsTableViewController.swift in Sources */,
 				44C7F7401E4CD3AE00171170 /* SocketEngineWebsocket.swift in Sources */,
 				44B179661E4B78EF0070A18B /* Messages.swift in Sources */,
 				44498DFF1E4DC03100F6D761 /* ChangePasswordTableViewController.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		441A0D861E55E9B700D02CE4 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				441A0D951E55E9D100D02CE4 /* APIManagerTests.swift in Sources */,
-				444AF1DD1E5F024E00C72034 /* PawTrailsTests.swift in Sources */,
-				447753D61E658BE90091DAC5 /* SocketIOTest.swift in Sources */,
-				446548221E5C8E9600458CB7 /* DataManagerTest.swift in Sources */,
-				441A0D971E55EEB700D02CE4 /* AuthManagerTests.swift in Sources */,
-				44F5FB8A1E6481580026D7AF /* UserProfileTests.swift in Sources */,
+				44A1AC4E1E9240A9003EF6CA /* PetActivityTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		441A0D901E55E9B700D02CE4 /* PBXTargetDependency */ = {
+		4414AE6E1EA0DD5B004A5134 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 4415FF3E1E3B822900A81B13 /* PawTrails */;
-			targetProxy = 441A0D8F1E55E9B700D02CE4 /* PBXContainerItemProxy */;
+			targetProxy = 4414AE6D1EA0DD5B004A5134 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -806,6 +852,39 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		4414AE701EA0DD5B004A5134 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9E19542014392915F71D4DE0 /* Pods-PawTrails.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				DEVELOPMENT_TEAM = DJBJW6R236;
+				INFOPLIST_FILE = PawTrailsTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = attitudetech.PawTrailsTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PawTrails.app/PawTrails";
+			};
+			name = Debug;
+		};
+		4414AE711EA0DD5B004A5134 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				DEVELOPMENT_TEAM = DJBJW6R236;
+				INFOPLIST_FILE = PawTrailsTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = attitudetech.PawTrailsTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PawTrails.app/PawTrails";
+			};
+			name = Release;
+		};
 		4415FF651E3B822A00A81B13 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -846,7 +925,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -890,7 +969,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -933,6 +1012,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7E2855LEH4;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -952,47 +1032,18 @@
 			};
 			name = Release;
 		};
-		441A0D921E55E9B700D02CE4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4D52BC7BE2AEDBF19B3D09AB /* Pods-PawTrailsTests.debug.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = 7E2855LEH4;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
-				INFOPLIST_FILE = SnoutTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = attitudetech.SnoutTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PawTrails.app/PawTrails";
-			};
-			name = Debug;
-		};
-		441A0D931E55E9B700D02CE4 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 20B5DA5019D7976016EA8DF9 /* Pods-PawTrailsTests.release.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = 7E2855LEH4;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
-				INFOPLIST_FILE = SnoutTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = attitudetech.SnoutTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PawTrails.app/PawTrails";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		4414AE6F1EA0DD5B004A5134 /* Build configuration list for PBXNativeTarget "PawTrailsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4414AE701EA0DD5B004A5134 /* Debug */,
+				4414AE711EA0DD5B004A5134 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		4415FF3A1E3B822900A81B13 /* Build configuration list for PBXProject "PawTrails" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1007,15 +1058,6 @@
 			buildConfigurations = (
 				4415FF681E3B822A00A81B13 /* Debug */,
 				4415FF691E3B822A00A81B13 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		441A0D911E55E9B700D02CE4 /* Build configuration list for PBXNativeTarget "PawTrailsTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				441A0D921E55E9B700D02CE4 /* Debug */,
-				441A0D931E55E9B700D02CE4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

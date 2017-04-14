@@ -1,6 +1,6 @@
 //
 //  UserManager.swift
-//  Snout
+//  PawTrails
 //
 //  Created by Marc Perello on 07/02/2017.
 //  Copyright © 2017 AttitudeTech. All rights reserved.
@@ -45,11 +45,12 @@ class DataManager {
     
     private func handleUser(with data:[String:Any]?, _ callback:@escaping userCallback) {
 //        guard let userData = data!["user"] as? [String:Any] else {
-//            callback(-1, nil)
 //            debugPrint("User not found in json \(data)")
 //            return
 //        }
         guard let userData = data else {
+            debugPrint("User not found in json \(String(describing: data))")
+            callback(UserError.UserNotFoundInResponse, nil)
             return
         }
         UserManager.upsert(userData)
@@ -59,12 +60,33 @@ class DataManager {
     private func handeUser(with error:APIManagerError?, _ data:[String:Any]?, _ callback:@escaping userCallback) {
         print(error ?? "")
         print(data ?? "")
-        //                callback(error?.specificCode, nil)
+        // callback(error?.specificCode, nil)
         UserManager.get(callback)
     }
     
-    func saveUser(user:User, phone:[String:Any]?, address:[String:Any]?, callback: @escaping userCallback) {
+    func saveUser(user:User, phone:[String:Any]?, address:[String:Any]?, imageData: Data?, callback: @escaping userCallback) {
        
+        if let imageData = imageData {
+            
+            var data = [String:Any]()
+            data["path"] = "user"
+            data["userid"] = user.id
+            data["picture"] = imageData
+            
+            APIManager.Instance.perform(call: .userImageUpload, with: data, completition: { (error, data) in
+                if error == nil && data != nil {
+                    self.saveUser(user: user, phone: phone, address: address, callback: callback)
+                }else{
+                    self.handeUser(with: error, data, callback)
+                }
+            })
+            
+        }else{
+            saveUser(user: user, phone: phone, address: address, callback: callback)
+        }
+    }
+    
+    fileprivate func saveUser(user:User, phone:[String:Any]?, address:[String:Any]?, callback: @escaping userCallback){
         APIManager.Instance.perform(call: .setUser, with: UserManager.parse(user, phone, address)) { (error, data) in
             if error == nil && data != nil {
                 self.handleUser(with: data, callback)
@@ -83,6 +105,18 @@ class DataManager {
     
     // MARK: - Pet
     
+    func getPets(callback: @escaping petsCallback) {
+    
+        APIManager.Instance.perform(call: .getPets) { (error, data) in
+            if error == nil && data != nil {
+                
+            }else{
+                
+            }
+        }
+
+    }
+    
     // MARK: - Tracking
     
     func trackingIsIdle() -> Bool {
@@ -98,12 +132,12 @@ class DataManager {
         
         if !trackingIsIdle() {return}
         
-        let name = pet.name
-        SocketIOManager.Instance.launch(name: name)
-        SocketIOManager.Instance.listen(name: name, { (lat, long) in
-            //set last location
-            callback((lat, long))
-        })
+//        let name = pet.name
+//        SocketIOManager.Instance.launch(name: name)
+//        SocketIOManager.Instance.listen(name: name, { (lat, long) in
+//            //set last location
+//            callback((lat, long))
+//        })
     }
     
     func stopTracking(pet:_pet){
@@ -111,9 +145,9 @@ class DataManager {
         
         if !trackingIsIdle() {return}
         
-        let name = pet.name
+//        let name = pet.name
         
-        SocketIOManager.Instance.stop(name: name)
+//        SocketIOManager.Instance.stop(name: name)
     }
     
     
