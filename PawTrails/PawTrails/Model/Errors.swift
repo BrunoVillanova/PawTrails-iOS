@@ -88,6 +88,22 @@ enum UserError: Int {
     case NotAuthenticated = 14
 }
 
+enum PetError: Int {
+    case PetNotFoundInDataBase = 8
+    case PetNotFoundInResponse = 9
+    case IdNotFound = 10
+    case MoreThenOnePet  = 12
+    case NotAuthenticated = 14
+}
+
+enum BreedError: Int {
+    case BreedNotFoundInDataBase = 8
+//    case PetNotFoundInResponse = 9
+//    case IdNotFound = 10
+//    case MoreThenOnePet  = 12
+//    case NotAuthenticated = 14
+}
+
 
 enum CoreDataManagerError: Int {
     case IdNotFoundInInput = 0

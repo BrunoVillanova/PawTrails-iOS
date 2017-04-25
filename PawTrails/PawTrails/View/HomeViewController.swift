@@ -23,8 +23,9 @@ class HomeViewController: UIViewController, HomeView, UICollectionViewDataSource
 
     @IBOutlet weak var mapView: MKMapView!
     
-    @IBOutlet weak var actionBlurView: UIVisualEffectView!
-    @IBOutlet weak var searchConstraint: NSLayoutConstraint!
+    @IBOutlet weak var searchView: UIView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var searchRightConstraint: NSLayoutConstraint!
 
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var bottomConstraintBlurView: NSLayoutConstraint!
@@ -37,7 +38,7 @@ class HomeViewController: UIViewController, HomeView, UICollectionViewDataSource
     fileprivate let presenter = HomePresenter()
     
     fileprivate let closed:CGFloat = -170.0, opened:CGFloat = -40.0
-    fileprivate let closedSearch:CGFloat = 235, openedSearch:CGFloat = 0
+    fileprivate let closedSearch:CGFloat = 299, openedSearch:CGFloat = 0
     
     fileprivate var annotations = [String:MKLocation]()
     
@@ -48,11 +49,30 @@ class HomeViewController: UIViewController, HomeView, UICollectionViewDataSource
         super.viewDidLoad()
         
         self.presenter.attachView(self)
-        self.actionBlurView.round()
+        self.searchView.round()
         self.blurView.round(radius: 20)
         
         mapView.showsScale = false
-        mapView.showsUserLocation = true
+        mapView.showsUserLocation = false
+        
+        searchBar.backgroundColor = UIColor.orange().withAlphaComponent(0.8)
+        
+        if let textFieldInsideSearchBar = self.searchBar.value(forKey: "searchField") as? UITextField {
+            
+            if let glassIconView = textFieldInsideSearchBar.leftView as? UIImageView {
+                
+                //Magnifying glass
+                glassIconView.image = glassIconView.image?.withRenderingMode(.alwaysTemplate)
+                glassIconView.tintColor = .white
+            }
+            
+            textFieldInsideSearchBar.clearButtonMode = .never
+        }
+        
+        searchBar.showsCancelButton = false
+        
+        setTopBar()
+        
 //        blurView(.open, animated: false)
         
         //search
@@ -72,6 +92,9 @@ class HomeViewController: UIViewController, HomeView, UICollectionViewDataSource
     
     override func viewDidAppear(_ animated: Bool) {
 //        blurView(.close)
+        let location = CLLocationCoordinate2D(latitude: 51.87, longitude: -8.46)
+        startTracking("Pepito", lat: location.latitude, long: location.longitude)
+        mapView.centerOn(location)
     }
     
     @IBAction func handlePanGesture(_ sender: UIPanGestureRecognizer) {
@@ -204,31 +227,62 @@ class HomeViewController: UIViewController, HomeView, UICollectionViewDataSource
             }
             
             if let annotationView = annotationView {
-//                let mkl = annotation as! MKLocation
-                // Configure your annotation view here
-//                annotationView.canShowCallout = true
-//                annotationView.backgroundColor = mkl.color
-//                annotationView.frame.size = CGSize(width: 15, height: 15)
-//                let leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-//                leftView.round()
-//                leftView.backgroundColor = mkl.color
-//                annotationView.leftCalloutAccessoryView = leftView
-                annotationView.image = UIImage(named: "pet")
+                let mkl = annotation as! MKLocation
+                
+                // Annotation
+                annotationView.canShowCallout = true
+                annotationView.backgroundColor = mkl.color
+                annotationView.frame.size = CGSize(width: 20, height: 20)
+                
+//                annotationView.image = UIImage(named: "logo")
                 annotationView.circle()
                 annotationView.backgroundColor = UIColor.white
                 annotationView.border(color: UIColor.random(), width: 2.0)
                 annotationView.clipsToBounds = false
                 annotationView.canShowCallout = true
 
+                // Callout
                 let leftView = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
-                leftView.backgroundColor = UIColor.red
+                leftView.backgroundColor = UIColor.orange()
+                let label = UILabel(frame: leftView.frame)
+                label.textAlignment = .center
+                label.text = "Track"
+                leftView.addSubview(label)
                 annotationView.leftCalloutAccessoryView = leftView
+                
+                
+                
+//                let rightView = UIView(frame: leftView.frame)
+//                rightView.backgroundColor = UIColor.red
+//                annotationView.rightCalloutAccessoryView = rightView
+                
+                let detailView = UIView(frame: CGRect(x: 0, y: 0, width: 140, height: 100))
+                
+                let title = UILabel(frame: CGRect(x: 30, y: 10, width: 180, height: 40))
+                title.text = "Billy"
+                title.font = UIFont.preferredFont(forTextStyle: .headline)
+                detailView.addSubview(title)
+                
+                let subtitle = UILabel(frame: CGRect(x: 30, y: 50, width: 180, height: 40))
+                subtitle.text = "College Road West"
+                subtitle.font = UIFont.preferredFont(forTextStyle: .body)
+                detailView.addSubview(subtitle)
+
+                let callout = UILabel(frame: CGRect(x: 30, y: 90, width: 180, height: 40))
+                callout.text = "3 hours 12 min ago"
+                callout.font = UIFont.preferredFont(forTextStyle: .body)
+                callout.textColor = UIColor.lightText
+                detailView.addSubview(callout)
+                
+                annotationView.rightCalloutAccessoryView = detailView
+//                let callout = MKAnnotation()
                 
             }
             return annotationView
         }
         return nil
     }
+    
     
     // MARK: - UISearchBarDelegate
     
@@ -247,24 +301,31 @@ class HomeViewController: UIViewController, HomeView, UICollectionViewDataSource
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-//        if self.searchConstraint.constant == closedSearch {
-//            UIView.animate(withDuration: 0.5, animations: {
-//                self.searchConstraint.constant = self.openedSearch
-//            })
-//        }
+        UIView.animate(withDuration: 0.5, animations: {
+            self.searchRightConstraint.constant = self.openedSearch
+            searchBar.showsCancelButton = true
+            self.view.layoutIfNeeded()
+        })
     }
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-//        if self.searchConstraint.constant == openedSearch {
-//            UIView.animate(withDuration: 0.5, animations: {
-//                self.searchConstraint.constant = self.closedSearch
-//            })
-//        }
-//        searchBar.resignFirstResponder()
+        searchBar.text = ""
+        UIView.animate(withDuration: 0.5, animations: {
+            self.searchRightConstraint.constant = self.closedSearch
+            searchBar.showsCancelButton = false
+            self.view.layoutIfNeeded()
+        })
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.endEditing(true)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
+    
+    
     
     // MARK: - UITableViewDataSource
     
@@ -322,6 +383,7 @@ class MKLocation: MKPointAnnotation {
         self.color = color
         super.init()
         self.title = title
+        self.subtitle = "College Road West - 3 hours 12 minutes ago"
         self.coordinate = CLLocationCoordinate2DMake(lat, long)
     }
     
@@ -330,6 +392,17 @@ class MKLocation: MKPointAnnotation {
     }
     
 }
+
+//class MKLocationView: MKAnnotationView {
+//
+//    
+//    init(title:String, subtitle:String) {
+//        super.init()
+//        self.title = title
+//        self.coordinate = CLLocationCoordinate2DMake(lat, long)
+//    }
+//    
+//}
 
 
 

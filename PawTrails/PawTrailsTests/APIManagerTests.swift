@@ -43,7 +43,7 @@ class APIManagerTests: XCTestCase {
         waitForExpectations(timeout: 100) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
     }
     
-    func signIn(callback: @escaping (_ id:String,_ token:String) -> Swift.Void) {
+    public func signIn(callback: @escaping (_ id:String,_ token:String) -> Swift.Void) {
         
         let data = isDebug ? ["email":ezdebug.email, "password":ezdebug.password, "is4test":ezdebug.is4test] : ["email":ezdebug.email, "password":ezdebug.password]
 
@@ -245,6 +245,33 @@ class APIManagerTests: XCTestCase {
         
         waitForExpectations(timeout: 1000) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
     }
+    
+    func testBreeds() {
+        
+        let expect = expectation(description: "get breeds")
+        
+        signIn { (id, token) in
+            
+            SharedPreferences.set(.id, with: id)
+            SharedPreferences.set(.token, with: token)
+            
+//            let call = APICallType.dogBreeds
+            let call = APICallType.catBreeds
+
+            APIManager.Instance.perform(call: call) { (error, data) in
+                
+                if error == nil, let data = data {
+                    for (key, value) in data {
+                        print(key, value)
+                    }
+                }else { XCTFail("Error get dog breeds \(String(describing: error)) \(String(describing: data))") }
+                expect.fulfill()
+            }
+        }
+        
+        waitForExpectations(timeout: 1000) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
+    }
+
 }
 
 public extension XCTest {

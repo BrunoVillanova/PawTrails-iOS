@@ -43,7 +43,7 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
         }
         
         setTopBar()
-//        UIApplication.shared.statusBarStyle = .default
+
         GIDSignIn.sharedInstance().uiDelegate = self
     }
     

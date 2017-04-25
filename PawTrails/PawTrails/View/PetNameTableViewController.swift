@@ -8,20 +8,41 @@
 
 import UIKit
 
-class PetNameTableViewController: UITableViewController {
+class PetNameTableViewController: UITableViewController, UITextFieldDelegate {
 
     @IBOutlet weak var nameTextField: UITextField!
     
-    var parentEditor: AddPetPresenter!
+    var parentEditor: AddEditPetPresenter!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         nameTextField.text = parentEditor.getName()
+        nameTextField.becomeFirstResponder()
+        nameTextField.delegate = self
     }
     
-    @IBAction func doneAction(_ sender: UIBarButtonItem) {
+    @IBAction func doneAction(_ sender: UIBarButtonItem?) {
         parentEditor.set(name: nameTextField.text)
         parentEditor.refresh()
-        _ = self.navigationController?.popViewController(animated: true)
+        view.endEditing(true)
+        _ = navigationController?.popViewController(animated: true)
     }
+    
+    // MARK: - UITextFieldDelegate
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if textField == self.nameTextField {
+            doneAction(nil)
+        }else{
+            textField.resignFirstResponder()
+        }
+        return true
+    }
+    
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+
 }

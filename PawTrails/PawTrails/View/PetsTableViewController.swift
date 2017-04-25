@@ -1,5 +1,5 @@
 //
-//  PetsTableViewController.swift
+//  PetsViewController.swift
 //  PawTrails
 //
 //  Created by Marc Perello on 31/03/2017.
@@ -8,70 +8,99 @@
 
 import UIKit
 
-class PetsTableViewController: UITableViewController {
+class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, PetsView {
+
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var noPetsFound: UILabel!
     
-    var pets = [String]()
+    fileprivate let presenter = PetsPresenter()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        for i in 1...10 {
-            pets.append("Pet #\(i)")
+        tableView.tableFooterView = UIView()
+        presenter.attachView(self)
+        
+        navigationItem.leftBarButtonItem = presenter.pets.count > 0 ? editButtonItem : nil
+        navigationItem.leftBarButtonItem?.action = #selector(PetsViewController.editAction(_:))
+        
+        UIApplication.shared.statusBarStyle = .lightContent
+    }
+    
+    deinit {
+        presenter.deteachView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        noPetsFound.isHidden = true
+        presenter.getPets()
+    }
+    
+    func editAction(_ sender: UIBarButtonItem) {
+        UIView.animate(withDuration: 0.4) {
+            self.editButtonItem.title = self.tableView.isEditing ? "Edit" : "Done"
+            self.editButtonItem.style = self.tableView.isEditing ? .plain : .done
+            self.tableView.isEditing = !self.tableView.isEditing
         }
     }
+    
 
-    // MARK: - Table view data source
+    // MARK: - PetsView
+    
+    func errorMessage(_ error: ErrorMsg) {
+        alert(title: error.title, msg: error.msg)
+    }
+    
+    func loadPets() {
+        tableView.reloadData()
+    }
+    
+    func petsNotFound() {
+        navigationItem.leftBarButtonItem = nil
+        noPetsFound.isHidden = false
+    }
+    
+    // MARK: - UITableViewDataSource
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return pets.count
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return presenter.pets.count
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! petListCell
-        cell.titleLabel.text = pets[indexPath.row]
-        cell.petImageView.image = UIImage(named: "set_avatar")
+        cell.titleLabel.text = presenter.pets[indexPath.row].name
+        if let imageData = presenter.pets[indexPath.row].image as Data? {
+            cell.petImageView.image = UIImage(data: imageData)
+        }else{
+            cell.petImageView.image = nil
+        }
+        cell.subtitleLabel.text = presenter.pets[indexPath.row].breed
         cell.petImageView.circle()
         cell.trackButton.circle()
         return cell
     }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            let petName = presenter.pets[indexPath.row].name ?? ""
+            
+            popUpDestructive(title: "Remove \(petName)", msg: "If you proceed you will loose all the information of this pet.", cancelHandler: { (cancel) in
+                tableView.reloadRows(at: [indexPath], with: .none)
+            }, proceedHandler: { (remove) in
+                if self.presenter.removePet(at: indexPath.row) {
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                }else{
+                    self.alert(title: "", msg: "Couldn't remove the pet")
+                }
+            })
+            
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 
     // MARK: - Navigation
 
@@ -83,7 +112,7 @@ class PetsTableViewController: UITableViewController {
         if segue.destination is PetsPageViewController {
             
             if let index = tableView.indexPathForSelectedRow {
-                (segue.destination as! PetsPageViewController).pet = pets[index.row]
+                (segue.destination as! PetsPageViewController).pet = presenter.pets[index.row]
             }
             
         }

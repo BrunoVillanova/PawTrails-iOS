@@ -18,12 +18,10 @@ class PetsPresenter {
     
     weak private var view: PetsView?
     
-//    var pets = [Pet]()
-    var pets = ["Billy"]
+    var pets = [Pet]()
     
     func attachView(_ view: PetsView){
         self.view = view
-        getPets()
     }
     
     func deteachView() {
@@ -33,13 +31,27 @@ class PetsPresenter {
     func getPets() {
         DataManager.Instance.getPets { (error, pets) in
             DispatchQueue.main.async {
-                if error != nil {
-                    self.view?.errorMessage(ErrorMsg(title: "",msg: "\(String(describing: error))"))
-                }else if pets != nil {
+                if let error = error {
+                    if error == PetError.PetNotFoundInDataBase {
+                        self.view?.petsNotFound()
+                    }else{
+                        self.view?.errorMessage(ErrorMsg(title: "",msg: "\(error)"))
+                    }
+                }else if let pets = pets {
+                    self.pets = pets
                     self.view?.loadPets()
                 }
             }
         }
+    }
+    
+    func removePet(at index: Int) -> Bool {
+        guard let petId = pets[index].id else { return false }
+        if DataManager.Instance.removePet(petId) {
+            pets.remove(at: index)
+            return true
+        }
+        return false
     }
     
 }

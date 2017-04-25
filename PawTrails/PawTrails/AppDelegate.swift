@@ -14,7 +14,9 @@ public struct ezdebug {
 }
 
 import UIKit
+
 import FacebookCore
+
 import Fabric
 import TwitterKit
 
@@ -23,14 +25,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     var window: UIWindow?
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    
-    //func print(items: Any..., separator: String = " ", terminator: String = "\n") {} Uncomment for release version
-    
+        
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         // Set Status Bar Style
         UIApplication.shared.statusBarStyle = .lightContent
-
+         
+        GIDSignIn.sharedInstance().disconnect()
         
         if AuthManager.Instance.isAuthenticated() {
             
@@ -65,11 +66,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         assert(configureError == nil, "Error configuring Google services: \(String(describing: configureError))")
         GIDSignIn.sharedInstance().delegate = self
         return configureError == nil
-
     }
     
     func loadHomeScreen() {
-        let root = storyboard.instantiateViewController(withIdentifier: "tabBarController")
+        let root = storyboard.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
+        root.selectedIndex = 1
         window?.rootViewController = root
     }
     
@@ -82,9 +83,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         if Twitter.sharedInstance().application(app, open: url, options: options) { return true }
         
-        _ = GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+        let google = GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
         
-        return SDKApplicationDelegate.shared.application(app, open: url, options: options)
+        return SDKApplicationDelegate.shared.application(app, open: url, options: options) || google
     }
 //
     func applicationWillResignActive(_ application: UIApplication) {
@@ -120,12 +121,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         if let root = window?.rootViewController as? InitialViewController {
             
             if (error == nil) {
+                print(user.authentication.idToken)
+                print("\n")
+                print(user.authentication.idTokenExpirationDate)
+                print("\n")
                 root.successGoogleLogin(token: user.authentication.idToken)
             } else {
                 root.alert(title: "", msg: error.localizedDescription)
             }
 
             
+        }else{
+            //Mec
+            print("Shit")
         }
 
     }

@@ -1,5 +1,5 @@
 //
-//  AddPetDetailsTableViewController.swift
+//  AddEditPetDetailsTableViewController.swift
 //  PawTrails
 //
 //  Created by Marc Perello on 03/04/2017.
@@ -8,11 +8,11 @@
 
 import UIKit
 
-class AddPetDetailsTableViewController: UITableViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, AddPetView {
+class AddEditPetDetailsTableViewController: UITableViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, AddEditPetView {
 
     fileprivate var headerView: UIView!
-    @IBOutlet weak var imageButton: UIButton!
-    
+
+    @IBOutlet weak var petImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var genderLabel: UILabel!
@@ -21,15 +21,22 @@ class AddPetDetailsTableViewController: UITableViewController, UINavigationContr
     @IBOutlet weak var weightLabel: UILabel!
     
     fileprivate let imagePicker = UIImagePickerController()
-    fileprivate let presenter = AddPetPresenter()
+    fileprivate let presenter = AddEditPetPresenter()
     
     var deviceCode: String!
+    var pet: Pet!
+    var parentEditor:PetProfileTableViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if pet != nil {
+            navigationItem.title = "Edit Pet"
+        }
+        
         imagePicker.delegate = self
-        imageButton.round()
-        presenter.attachView(self)
+        petImageView.circle()
+        presenter.attachView(self, pet)
         presenter.set(deviceCode: deviceCode)
     }
 
@@ -37,60 +44,63 @@ class AddPetDetailsTableViewController: UITableViewController, UINavigationContr
         presenter.deteachView()
     }
     
-    @IBAction func editImageAction(_ sender: UIButton) {
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Take a Photo", style: .default, handler: { (photo) in
-            self.imagePicker.allowsEditing = true
-            self.imagePicker.sourceType = .camera
-            self.present(self.imagePicker, animated: true, completion: nil)
-        }))
-        alert.addAction(UIAlertAction(title: "Choose from Gallery", style: .default, handler: { (galery) in
-            self.imagePicker.allowsEditing = true
-            self.imagePicker.sourceType = .photoLibrary
-            self.present(self.imagePicker, animated: true, completion: nil)
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-        self.present(alert, animated: true, completion: nil)
-
+    @IBAction func doneAction(_ sender: UIBarButtonItem?) {
+        presenter.done()
     }
     
-    @IBAction func doneAction(_ sender: UIBarButtonItem?) {
-        //save
-        self.dismiss(animated: true, completion: nil)
-    }
+    //MARK: - UITableViewDelegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 1 && indexPath.row == 0 {
             doneAction(nil)
+        }else if indexPath.section == 0 && indexPath.row == 0 {
+            alert(imagePicker)
         }
+
     }
     
-    //MARK: - AddPetView
+    //MARK: - AddEditPetView
     
-    func load(pet: _pet) {
-        nameLabel.text = pet.name
-        typeLabel.text = pet.type
-        genderLabel.text = pet.gender?.name
-        breedLabel.text = pet.breed
-        birthdayLabel.text = pet.birthday?.toStringShow
-        weightLabel.text = pet.weight?.toString()
+    func loadPet() {
+        if let imageData = presenter.getImageData() as Data? {
+            petImageView.image = UIImage(data: imageData)
+        }
+        nameLabel.text = presenter.getName()
+        typeLabel.text = presenter.getType()
+        genderLabel.text = presenter.getGender()?.name
+        breedLabel.text = presenter.getBreedsText()
+        birthdayLabel.text = presenter.getBirthday()?.toStringShow
+        weightLabel.text = presenter.getWeight()?.toString()
         tableView.reloadData()
     }
     
-    func created() {
-        dismiss(animated: true, completion: nil)
+    func doneSuccessfully() {
+        if pet == nil {
+            dismiss(animated: true, completion: nil)
+        }else{
+            _ = navigationController?.popViewController(animated: true)
+        }
     }
     
     func errorMessage(_ error: ErrorMsg) {
         alert(title: error.title, msg: error.msg)
     }
+    
+    func beginLoadingContent() {
+        showLoadingView()
+    }
+    
+    func endLoadingContent() {
+        hideLoadingView()
+    }
+
 
     //MARK: - UIImagePickerControllerDelegate
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            imageButton.setBackgroundImage(chosenImage, for: .normal)
+        if let chosenImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+            petImageView.image = chosenImage
+            presenter.set(imageData: chosenImage.encoded)
         }
         dismiss(animated:true, completion: nil)
     }
@@ -110,7 +120,7 @@ class AddPetDetailsTableViewController: UITableViewController, UINavigationContr
             break
         case is PetGenderTableViewController: (segue.destination as! PetGenderTableViewController).parentEditor = presenter
             break
-        case is PetBreedTableViewController: (segue.destination as! PetBreedTableViewController).parentEditor = presenter
+        case is PetBreedViewController: (segue.destination as! PetBreedViewController).parentEditor = presenter
             break
         case is PetBirthdayTableViewController: (segue.destination as! PetBirthdayTableViewController).parentEditor = presenter
             break

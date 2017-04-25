@@ -21,7 +21,7 @@ class HomePresenter {
     weak fileprivate var view: HomeView?
     private var reachability: Reachbility!
 
-    var pets = [_pet]()
+    var pets = [Pet]()
     var user:User!
     
     

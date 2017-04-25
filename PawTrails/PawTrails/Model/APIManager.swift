@@ -18,7 +18,9 @@ public enum SocialMedia: String {
 /// The APICallType enum defines constants that can be used to specify the type of interactions that take place with the APIManager requests.
 public enum APICallType {
     
-    case signUp, signin, facebookLogin, googleLogin, twitterLogin, weiboLogin, passwordReset, passwordChange, getUser, setUser, userImageUpload, petImageUpload, checkDevice, getPets, getPet, setPet, trackPet
+    case signUp, signin, facebookLogin, googleLogin, twitterLogin, weiboLogin, passwordReset, passwordChange,
+    getUser, setUser, userImageUpload,
+    getPets, getPet, getPetUsers, setPet, petImageUpload, dogBreeds, catBreeds, checkDevice
     
     fileprivate var requiresToken: Bool {
         switch self {
@@ -29,6 +31,7 @@ public enum APICallType {
     
     fileprivate var path: String {
         switch self {
+            
         case .signUp: return "/users/register"
         case .signin: return "/users/login"
         case .facebookLogin: return "/users/login/facebook"
@@ -37,20 +40,33 @@ public enum APICallType {
         case .weiboLogin: return "/users/login/weibo"
         case .passwordChange: return "/users/changepsw"
         case .passwordReset: return "/users/resetpsw"
+            
+        case .getUser: return "/users/\(SharedPreferences.get(.id) ?? "")"
         case .setUser: return "/users/edit"
         case .userImageUpload, .petImageUpload: return "/images/upload"
-        case .getUser: return "/users/\(SharedPreferences.get(.id) ?? "")"
-        default: return ""
+            
+        case .getPets: return "/pets/"
+        case .getPet: return "/pets/"
+        case .getPetUsers: return "/pets/"
+        case .setPet: return "/pets/"
+        case .dogBreeds: return "/lists/petbreeds/\(Type.dog.rawValue)"
+        case .catBreeds: return "/lists/petbreeds/\(Type.cat.rawValue)"
+        case .checkDevice: return "/pets/"
+
+//        default: return ""
         }
     }
     
     fileprivate var httpMethod: String {
-        return self == .getUser ? "GET" : "POST"
+        switch self {
+        case .getUser, .dogBreeds, .catBreeds: return "GET"
+        default: return "POST"
+        }
     }
     
     fileprivate var requiresBody: Bool {
         switch self {
-        case .getUser, .getPet: return false
+        case .getUser, .getPet, .dogBreeds, .catBreeds: return false
         default: return true
         }
     }

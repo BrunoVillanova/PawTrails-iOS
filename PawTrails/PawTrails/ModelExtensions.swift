@@ -87,6 +87,16 @@ extension NSManagedObject {
         return out
     }
     
+    public var toDict: [String:Any] {
+        var out = [String:Any]()
+        for k in self.entity.attributesByName.keys {
+            if let value = self.value(forKey: k) {
+                out[k] = value
+            }
+        }
+        return out
+    }
+    
     
     public var keys: [String] {
         return Array(self.entity.attributesByName.keys)

@@ -1,5 +1,5 @@
 //
-//  SafeZoneViewController.swift
+//  AddEditSafeZoneViewController.swift
 //  PawTrails
 //
 //  Created by Marc Perello on 22/02/2017.
@@ -10,50 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class Fence: NSObject {
-    
-    let layer: CALayer
-    var isCircle:Bool {
-        didSet {
-            updateCornerRadius()
-        }
-    }
-
-    
-    init(frame: CGRect, isCircle:Bool) {
-        layer = CALayer()
-        layer.frame = frame
-        layer.backgroundColor =  UIColor.blueSystem().withAlphaComponent(0.5).cgColor
-        self.isCircle = isCircle
-    }
-    
-    func setFrame(_ frame:CGRect) {
-        layer.frame = frame
-        updateCornerRadius()
-    }
-    
-    private func updateCornerRadius(){
-        layer.cornerRadius = isCircle ? layer.frame.width / 2.0 : 0.0
-    }
-    
-    var x0: CGFloat {
-        return layer.frame.origin.x
-    }
-    
-    var y0: CGFloat {
-        return layer.frame.origin.y
-    }
-    
-    var xf: CGFloat {
-        return x0 + layer.frame.width
-    }
-    
-    var yf: CGFloat {
-        return y0 + layer.frame.height
-    }
-}
-
-class SafeZoneViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegate {
+class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegate, CLLocationManagerDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var nameTextField: UITextField!
@@ -73,22 +30,41 @@ class SafeZoneViewController: UIViewController, UITextFieldDelegate, MKMapViewDe
     fileprivate var fenceDistance:Int = 25
     fileprivate var altitude: CLLocationDistance!
     
+    fileprivate var manager = CLLocationManager()
+    
+    var safezone: SafeZone!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-
+        
         mapView.showsUserLocation = true
         mapView.showsCompass = false
         
-        self.squareButton.tintColor = UIColor.darkGray
-        self.circleButton.tintColor = UIButton.appearance().tintColor
+        self.circleButton.tintColor = UIColor.darkGray
+        self.squareButton.tintColor = UIButton.appearance().tintColor
+        manager.delegate = self
+        manager.requestWhenInUseAuthorization()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .notDetermined || status == .denied {
+            let dublinCoordinates = CLLocationCoordinate2D(latitude: 53.3498, longitude: 6.2603)
+            self.setUpMap(coordinates: dublinCoordinates)
+        }
     }
     
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
         if !mapView.userLocation.coordinate.isDefaultZero && mapView.showsUserLocation {
-            mapView.centerOn(mapView.userLocation.coordinate, with: 50)
+            setUpMap(coordinates: mapView.userLocation.coordinate)
+        }
+    }
+    
+    func setUpMap(coordinates: CLLocationCoordinate2D) {
+        if fence == nil {
+            mapView.centerOn(coordinates, with: 50, animated: true)
             mapView.showsUserLocation = false
             altitude = mapView.camera.altitude
             
@@ -142,10 +118,6 @@ class SafeZoneViewController: UIViewController, UITextFieldDelegate, MKMapViewDe
 //        }
 //    }
     
-    @IBAction func cancelAction(_ sender: UIButton) {
-        self.view.endEditing(true)
-        self.dismiss(animated: true, completion: nil)
-    }
 
     @IBAction func squareAction(_ sender: UIButton) {
         self.circleButton.tintColor = UIColor.darkGray
@@ -159,6 +131,9 @@ class SafeZoneViewController: UIViewController, UITextFieldDelegate, MKMapViewDe
         self.fence.isCircle = true
     }
 
+    @IBAction func doneAction(_ sender: UIBarButtonItem) {
+        dismissBarAction(sender: sender)
+    }
 
     // MARK: - MKMapViewDelegate
 
@@ -196,13 +171,13 @@ class SafeZoneViewController: UIViewController, UITextFieldDelegate, MKMapViewDe
         self.view.endEditing(true)
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if #available(iOS 10.0, *), (nameTextField.text != nil){
-            if let emojis = EmojiManager.Instance.getEmojis(from: nameTextField.text!) {
-                self.iconTextField.placeholder = emojis.first
-            }
-        }
-    }
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+//        if #available(iOS 10.0, *), (nameTextField.text != nil){
+//            if let emojis = EmojiManager.Instance.getEmojis(from: nameTextField.text!) {
+//                self.iconTextField.placeholder = emojis.first
+//            }
+//        }
+//    }
     
     // MARK: - Helper
     
@@ -210,7 +185,7 @@ class SafeZoneViewController: UIViewController, UITextFieldDelegate, MKMapViewDe
         let x0y0 = mapView.convert(CGPoint(x: fence.x0, y: fence.y0), toCoordinateFrom: self.view)
         let xfy0 = mapView.convert(CGPoint(x: fence.xf, y: fence.y0), toCoordinateFrom: self.view)
         fenceDistance = Int(round(x0y0.location.distance(from: xfy0.location)))
-        self.distanceLabel.text = "\(fenceDistance)"
+        self.distanceLabel.text = "\(fenceDistance) meters"
     }
 
     func fenceDistanceIsIdle() -> Bool {

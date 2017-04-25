@@ -13,7 +13,7 @@ class PetBirthdayTableViewController: UITableViewController {
     @IBOutlet weak var birthdayLabel: UILabel!
     @IBOutlet weak var birthdayPicker: UIDatePicker!
     
-    var parentEditor: AddPetPresenter!
+    var parentEditor: AddEditPetPresenter!
 
     override func viewDidLoad() {
         super.viewDidLoad()

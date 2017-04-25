@@ -35,9 +35,9 @@ class AddPetDeviceTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.destination is AddPetDetailsTableViewController {
+        if segue.destination is AddEditPetDetailsTableViewController {
             self.view.endEditing(true)
-            (segue.destination as! AddPetDetailsTableViewController).deviceCode = deviceCodeTextField.text!
+            (segue.destination as! AddEditPetDetailsTableViewController).deviceCode = deviceCodeTextField.text!
         }
     }
 }

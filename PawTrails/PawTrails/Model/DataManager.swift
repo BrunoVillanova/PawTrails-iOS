@@ -105,16 +105,77 @@ class DataManager {
     
     // MARK: - Pet
     
-    func getPets(callback: @escaping petsCallback) {
+    func getPet(_ petId:Int, callback: @escaping petCallback) {
+        
+//        APIManager.Instance.perform(call: .getPet) { (error, data) in
+//            if error == nil && data != nil {
+//                
+//            }else{
+//                
+//            }
+//        }
+        PetManager.getPet(petId, callback)
+    }
     
-        APIManager.Instance.perform(call: .getPets) { (error, data) in
-            if error == nil && data != nil {
-                
-            }else{
-                
-            }
-        }
+    func removePet(_ petId: String) -> Bool {
+       return PetManager.removePet(id: petId)
+    }
+    
+    func getPets(callback: @escaping petsCallback) {
+        
+//        APIManager.Instance.perform(call: .getPets) { (error, data) in
+//            if error == nil && data != nil {
+//                
+//            }else{
+//                
+//            }
+//        }
 
+        PetManager.getPets(callback)
+    }
+    
+    func setPet(_ data: [String:Any], callback: @escaping petUpsertCallback){
+        PetManager.upsertPet(data)
+        callback(nil)
+    }
+    
+    func getPetUsers(_ petId: Int, callback: @escaping petUsersCallback){
+        
+//        APIManager.Instance.perform(call: .getPetUsers) { (error, data) in
+//            if error == nil && data != nil {
+//                
+//            }else{
+//                
+//            }
+//        }
+        var users = [_petUser]()
+        for i in 1...5 {
+            var user = _petUser()
+            user.name = "User \(i)"
+            user.surname = "Surname"
+            user.isOwner = i == 2
+            users.append(user)
+        }
+        callback(nil, users)
+    }
+    
+    func getBreeds(for type: Type, withUpdate: Bool = true, callback: @escaping breedCallback) {
+        
+        if withUpdate {
+            BreedManager.get(for: type, callback: { (error, breeds) in
+                if error == nil, let breeds = breeds {
+                    callback(nil, breeds)
+                }else{
+                    BreedManager.retrieve(for: type, callback: callback)
+                }
+            })
+        }else{
+            BreedManager.retrieve(for: type, callback: callback)
+        }
+    }
+    
+    func loadBreeds(for type: Type) {
+        BreedManager.get(for: type, callback: { (_, _) in })
     }
     
     // MARK: - Tracking
@@ -123,7 +184,7 @@ class DataManager {
         return SocketIOManager.Instance.isConnected()
     }
     
-    func startTracking(pet:_pet, callback: @escaping petTrackingCallback){
+    func startTracking(pet:Pet, callback: @escaping petTrackingCallback){
         // Send RQ to API which provides channel and verification?
         
         //        guard let name = pet.name else {
@@ -140,7 +201,7 @@ class DataManager {
 //        })
     }
     
-    func stopTracking(pet:_pet){
+    func stopTracking(pet:Pet){
         // Stop live tracking
         
         if !trackingIsIdle() {return}

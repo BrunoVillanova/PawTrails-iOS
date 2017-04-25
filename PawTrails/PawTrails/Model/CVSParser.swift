@@ -13,12 +13,13 @@ class CSVParser {
     
     static let Instance = CSVParser()
     
-    fileprivate let name = "countrycodes"
     fileprivate let ext = "csv"
-    fileprivate let lineSplit = "\r\n"
+    fileprivate let lineSplit = "\n"
     fileprivate let rowSplit = ","
     
     func loadCountryCodes() {
+        
+        let name = "countrycodes"
         
         if let url = Bundle.main.url(forResource: name, withExtension: ext) {
             
@@ -44,4 +45,36 @@ class CSVParser {
             }
         }
     }
+    
+//    func getBreeds(for type: Type) -> [String]? {
+//        
+//        guard let typeName = type.name else { return nil }
+//        
+//        let name = "\(typeName.lowercased())breeds"
+//        
+//        if let url = Bundle.main.url(forResource: name, withExtension: ext) {
+//            
+//            do {
+//                let content = try String(contentsOf: url, encoding: .utf8)
+//                
+//                var breeds = [String]()
+//                
+//                for line in content.components(separatedBy: "\n") {
+//                    
+//                    let row = line.components(separatedBy: rowSplit)
+//                    
+//                    if row.count == 1 {
+//                        breeds.append(row[0])
+//                    }
+//                }
+//                
+//                return breeds
+//                
+//            } catch {
+//                debugPrint(error)
+//            }
+//        }
+//        return nil
+//    }
+    
 }

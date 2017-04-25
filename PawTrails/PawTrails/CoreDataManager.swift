@@ -21,12 +21,13 @@ class CoreDataManager {
     /// - Parameters:
     ///   - entity: Name of the entity to request.
     ///   - predicate: *Optional* predicate to filter fetch.
+    ///   - sortedBy: *Optional* sorts the results of the fetch.
     /// - Returns: An array with **more than one element** or *nil*.
-    func retrieve(_ entity:String, with predicate: NSPredicate? = nil) -> [NSManagedObject]? {
+    func retrieve(_ entity:String, with predicate: NSPredicate? = nil, sortedBy: [NSSortDescriptor]? = nil) -> [NSManagedObject]? {
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
         fetchRequest.predicate = predicate
-        
+        fetchRequest.sortDescriptors = sortedBy
         do {
             let data = try Storage.Instance.context.fetch(fetchRequest)
             return data.count > 0 ? data as? [NSManagedObject] : nil
@@ -85,12 +86,61 @@ class CoreDataManager {
             for (key,value) in data {
                 if object.keys.contains(key) { object.setValue(value, forKey: key) }
             }
-
+            
             if Storage.Instance.save() != Storage.SaveStatus.saved { throw NSError(domain: "Not Saved Properly", code: CoreDataManagerError.NotSavedProperly.rawValue, userInfo: data) }
             
             return object
         }else{
             return try store(entity, with: data)
+        }
+    }
+    
+    /// Updates the current element or insert it as a new one if that one does not exists.
+    ///
+    /// - Parameters:
+    ///   - entity: Name of the entity to upsert.
+    ///   - data: Dictionary with information to upsert.
+    ///   - restrictions: Identify the element, it **must** be the same in the `Local Storage` and in the `Dictionary` provided.
+    /// - Returns: The upserted object.
+    /// - Throws: `Creating an entityDescription`, `Saving`.
+    func upsert(_ entity:String, with data:[String:Any], withRestriction restrictions:[String]) throws -> NSManagedObject {
+        
+        if restrictions.count == 0 {
+            return try upsert(entity, with: data)
+        }else if restrictions.count == 1 {
+            return try upsert(entity, with: data, withId: restrictions[0])
+        }
+        
+        var predicate: NSPredicate?
+        
+        //Check input restrictions
+        for restriction in restrictions {
+            
+            if let value = data[restriction] {
+                
+                if predicate == nil {
+                    predicate = NSPredicate(restriction, .equal, value)
+                }else{
+                    predicate = predicate?.and(restriction, .equal, value)
+                }
+                
+            }else{
+                throw NSError(domain: "CDM upsert entity \(entity) failed reading input data \(restriction)", code: CoreDataManagerError.IdNotFoundInInput.rawValue, userInfo: ["data":data])
+            }
+        }
+        
+        //Look for an existing object with id
+        if let object = retrieve(entity, with: predicate)?.first {
+            
+            for (key,value) in data {
+                if object.keys.contains(key) { object.setValue(value, forKey: key) }
+            }
+            
+            if Storage.Instance.save() != Storage.SaveStatus.saved { throw NSError(domain: "Not Saved Properly", code: CoreDataManagerError.NotSavedProperly.rawValue, userInfo: data) }
+            
+            return object
+        }else{
+            return try self.store(entity, with: data)
         }
     }
     
@@ -109,6 +159,8 @@ class CoreDataManager {
         for i in results {
             Storage.Instance.context.delete(i)
         }
+        
+        try save()
     }
     
     /// Attempts to commit unsaved changes to registered objects.

@@ -90,7 +90,7 @@ class EditUserProfileTableViewController: UITableViewController, EditUserProfile
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let chosenImage = info[UIImagePickerControllerEditedImage] as? UIImage {
             
-            if let data = encode(chosenImage) {
+            if let data = chosenImage.encoded {
                 if data.count <= Constants.maxImageSize {
                     profileImage.image = chosenImage
                     presenter.set(image: data)

@@ -25,23 +25,57 @@ enum notificationType {
 
 extension UIViewController {
     
-//    func alert(title:String, msg:String, actionTitle: String = "Ok"){
-//        let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
-//        alert.addAction(UIAlertAction(title: actionTitle, style: .default, handler: nil))
-//        self.present(alert, animated: true, completion: nil)
-//    }
+    func popUp(title:String, msg:String, actionTitle: String = "Ok"){
+        let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: actionTitle, style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func popUpDestructive(title:String, msg:String, cancelHandler: ((UIAlertAction)->Void)?, proceedHandler: ((UIAlertAction)->Void)?){
+        let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: cancelHandler))
+        alert.addAction(UIAlertAction(title: "Proceed", style: .destructive, handler: proceedHandler))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func popUp(title:String, msg:String, cancelHandler: ((UIAlertAction)->Void)?, proceedHandler: ((UIAlertAction)->Void)?){
+        let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: cancelHandler))
+        alert.addAction(UIAlertAction(title: "Proceed", style: .default, handler: proceedHandler))
+        self.present(alert, animated: true, completion: nil)
+    }
     
     func setTopBar(color: UIColor = UIColor.orange()) {
         let topBar = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 20))
-        topBar.backgroundColor = color
+        topBar.backgroundColor = color.withAlphaComponent(0.8)
         view.addSubview(topBar)
     }
     
-    func alert(title:String, msg:String){
-        self.showNotification(title: msg, type: .red)
+    func alert(title:String, msg:String, type: notificationType = .red){
+        self.showNotification(title: msg, type: type)
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(3)) {
             self.hideNotification()
         }
+    }
+    
+    // Alert for Image Picker
+    
+    func alert(_ imagePicker:UIImagePickerController) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Take a Photo", style: .default, handler: { (photo) in
+            imagePicker.allowsEditing = true
+            imagePicker.sourceType = .camera
+            self.present(imagePicker, animated: true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "Choose from Gallery", style: .default, handler: { (galery) in
+            imagePicker.allowsEditing = true
+            imagePicker.sourceType = .photoLibrary
+            self.present(imagePicker, animated: true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
+
     }
     
     @IBAction func dismissAction(sender: UIButton){
@@ -52,6 +86,11 @@ extension UIViewController {
     @IBAction func dismissBarAction(sender: UIBarButtonItem){
         self.view.endEditing(true)
         self.navigationController?.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func popAction(sender: UIBarButtonItem?){
+        self.view.endEditing(true)
+        _ = self.navigationController?.popViewController(animated: true)
     }
     
     // Connection Notifier
@@ -139,17 +178,29 @@ extension UIViewController {
             }
         }
     }
+}
+
+extension UIImage {
     
-    // Image Compression
-    
-    func encode(_ image: UIImage) -> Data? {
+    public var encoded: Data? {
         var compression: CGFloat = 1.0
         var data: Data?
         repeat {
-            data = UIImageJPEGRepresentation(image, compression)!
+            data = UIImageJPEGRepresentation(self, compression)!
             compression -= 0.1
         } while data != nil && data!.count > Constants.maxImageSize  && compression >= 0
         return data
+    }
+    
+    convenience init?(color: UIColor, size: CGSize) {
+        let rect = CGRect(origin: .zero, size: size)
+        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
+        color.setFill()
+        UIRectFill(rect)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        guard let cgImage = image?.cgImage else { return nil }
+        self.init(cgImage: cgImage)
     }
     
 }

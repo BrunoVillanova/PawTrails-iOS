@@ -14,33 +14,39 @@ class PetTypeTableViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var dogCell: UITableViewCell!
     @IBOutlet weak var otherTextField: UITextField!
     
-    var parentEditor: AddPetPresenter!
+    var parentEditor: AddEditPetPresenter!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let type = parentEditor.getType() {
+        if let typeName = parentEditor.getType() {
+            
+            if let type = Type.build(code: typeName) {
                 switch type {
-                case "cat": catCell.accessoryType = .checkmark
+                case .cat: catCell.accessoryType = .checkmark
                     break
-                case "dog": dogCell.accessoryType = .checkmark
+                case .dog: dogCell.accessoryType = .checkmark
                     break
                 default:
-                    otherTextField.text = type
+                    otherTextField.text = typeName
                 }
             }
-
+        }
+        
     }
     
     @IBAction func doneAction(_ sender: UIBarButtonItem) {
         
         var type: String? = nil
         if catCell.accessoryType == .checkmark {
-            type = "cat"
+            type = "Cat"
         }else if dogCell.accessoryType == .checkmark {
-            type = "dog"
+            type = "Dog"
         }else if otherTextField.text != nil {
             type = otherTextField.text
+        }
+        if type != parentEditor.getType() {
+            parentEditor.set(breeds: nil)
         }
         parentEditor.set(type: type)
         parentEditor.refresh()
@@ -50,7 +56,7 @@ class PetTypeTableViewController: UITableViewController, UITextFieldDelegate {
     //MARK:- UITableViewDelegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        otherTextField.resignFirstResponder()
         if let cell = tableView.cellForRow(at: indexPath) {
             
             switch cell {

@@ -10,59 +10,51 @@ import UIKit
 
 class PetGenderTableViewController: UITableViewController {
 
-    @IBOutlet weak var femaleCell: UITableViewCell!
-    @IBOutlet weak var maleCell: UITableViewCell!
     
-    var parentEditor: AddPetPresenter!
+    var parentEditor: AddEditPetPresenter!
     
+    fileprivate var selected: Gender?
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if let gender = parentEditor.getGender() {
-                switch gender {
-                case .female: femaleCell.accessoryType = .checkmark
-                    break
-                case .male: maleCell.accessoryType = .checkmark
-                default:
-                    break
-                }
-            }
+        tableView.tableFooterView = UIView()
+        selected = parentEditor.getGender()
 
     }
 
     @IBAction func doneAction(_ sender: UIBarButtonItem) {
-        var gender: Gender? = nil
-        if femaleCell.accessoryType == .checkmark {
-            gender = Gender.female
-        }else if maleCell.accessoryType == .checkmark {
-            gender = Gender.male
-        }
-        parentEditor.set(gender: gender)
+        parentEditor.set(gender: selected)
         parentEditor.refresh()
         _ = self.navigationController?.popViewController(animated: true)
+    }
+    
+    // MARK: - TableViewDataSource
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return Gender.count()
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let rowGender = Gender(rawValue: indexPath.row)
+        cell.textLabel?.text = rowGender?.name
+        if selected != nil && rowGender == selected {
+            cell.accessoryType = .checkmark
+        }else{
+            cell.accessoryType = .none
+        }
+        return cell
     }
     
     //MARK:- UITableViewDelegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        switch indexPath.row {
-        case 0:
-            if femaleCell.accessoryType == .checkmark {
-                femaleCell.accessoryType = .none
-            }else{
-                femaleCell.accessoryType = .checkmark
-                maleCell.accessoryType = .none
-            }
-            break
-        case 1:
-            if maleCell.accessoryType == .checkmark {
-                maleCell.accessoryType = .none
-            }else{
-                maleCell.accessoryType = .checkmark
-                femaleCell.accessoryType = .none
-            }        default:
-            break
-        }
+        let newSelected = Gender(rawValue: indexPath.row)
+        selected = newSelected?.code == selected?.code ? nil : newSelected
+        tableView.reloadData()
     }
 }

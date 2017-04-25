@@ -23,12 +23,11 @@ class GenderTableViewController: UITableViewController {
     @IBAction func saveAction(_ sender: UIBarButtonItem) {
         parentEditor.set(gender: selected)
         parentEditor.refresh()
-        view.endEditing(true)
         _ = self.navigationController?.popViewController(animated: true)
     }
 
 
-    // MARK: - Table view data source
+    // MARK: - TableViewDataSource
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1

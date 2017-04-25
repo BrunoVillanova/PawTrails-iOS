@@ -27,9 +27,9 @@ extension MKMapView {
         
     }
     
-    func centerOn(_ location: CLLocationCoordinate2D, with regionRadius: CLLocationDistance = 100.0){
+    func centerOn(_ location: CLLocationCoordinate2D, with regionRadius: CLLocationDistance = 100.0, animated: Bool = false){
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location, regionRadius * 2.0,regionRadius * 2.0)
-        self.setRegion(coordinateRegion, animated: false)
+        self.setRegion(coordinateRegion, animated: animated)
     }
 }
 

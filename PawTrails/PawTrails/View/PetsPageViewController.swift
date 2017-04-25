@@ -14,10 +14,8 @@ class PetsPageViewController: UIViewController {
     @IBOutlet weak var topNavigationItem: UINavigationItem!
     @IBOutlet weak var profile: UIView!
     @IBOutlet weak var activity: UIView!
-    @IBOutlet weak var zones: UIView!
-    @IBOutlet weak var users: UIView!
     
-    var pet: String!
+    var pet: Pet!
     
     var pages = [UIView]()
 
@@ -25,14 +23,21 @@ class PetsPageViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = UIColor.white
-        topNavigationItem.prompt = pet
+//        topNavigationItem.prompt = pet.name
         
-        pages = [profile,activity,zones,users]
-        enableView(at: 1)
+        profile.alpha = 0.0
+        activity.alpha = 0.0
+        
+        pages = [profile,activity]
+        
+        enableView(at: 0)
         
 //        navigationController?.navigationBar.topItem?.title =
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        topNavigationItem.prompt = pet.name
+    }
     
     @IBAction func segmentValueChanged(_ sender: UISegmentedControl) {
         
@@ -61,6 +66,18 @@ class PetsPageViewController: UIViewController {
 
         }
     }
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        switch segue.destination {
+        case is PetProfileTableViewController: (segue.destination as! PetProfileTableViewController).pet = pet
+        case is PetActivityViewController: (segue.destination as! PetActivityViewController).pet = pet
+        default: break
+        }
+    }
+
 }
 
 
