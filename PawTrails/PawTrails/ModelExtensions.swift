@@ -11,6 +11,25 @@ import CoreData
 
 // MARK:- Own Data Management
 
+extension Pet {
+    
+    var breeds: String? {
+        
+        var breeds: String?
+        
+        if let first = firstBreed {
+            breeds = first.name
+            
+            if let second = secondBreed {
+                breeds = breeds?.appending(" - \(second.name ?? "")")
+            }
+        }
+        return breeds
+        
+    }
+    
+}
+
 extension Phone {
     
     var toString:String? {

@@ -28,7 +28,7 @@ class UserProfileTableViewController: UITableViewController, UserProfileView, UI
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        presenter.getUser()
+        presenter.loadUser()
         if let selectedIndexes = tableView.indexPathsForSelectedRows {
             for selectedIndex in selectedIndexes {
                 tableView.deselectRow(at: selectedIndex, animated: true)
@@ -55,6 +55,7 @@ class UserProfileTableViewController: UITableViewController, UserProfileView, UI
         if let imageData = user.image {
             profileImageView.image = UIImage(data: imageData as Data)
         }
+        tableView.reloadData()
     }
     
     func errorMessage(_ error: ErrorMsg) {
@@ -72,4 +73,35 @@ class UserProfileTableViewController: UITableViewController, UserProfileView, UI
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         view.backgroundColor = UIColor.white
     }
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.destination is EditUserProfileTableViewController {
+            (segue.destination as! EditUserProfileTableViewController).user = presenter.user
+        }
+        
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

@@ -61,7 +61,7 @@ class PawTrailsTests: XCTestCase {
     
     func testExample2() {
 
-        PetManager.upsertTest()
+//        PetManager.upsertTest()
         
     }
     

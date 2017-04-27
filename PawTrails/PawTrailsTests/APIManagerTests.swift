@@ -127,7 +127,7 @@ class APIManagerTests: XCTestCase {
             SharedPreferences.set(.id, with: id)
             SharedPreferences.set(.token, with: token)
             
-            APIManager.Instance.perform(call: .getUser) { (error, data) in
+            APIManager.Instance.perform(call: .getUser, withKey: id) { (error, data) in
                 
                 if error == nil && data != nil {
                     
@@ -235,7 +235,7 @@ class APIManagerTests: XCTestCase {
             data["userid"] = SharedPreferences.get(.id)
             data["picture"] = UIImageJPEGRepresentation(UIImage(named: "logo")!, 0.9)
             
-            APIManager.Instance.perform(call: .userImageUpload, with: data) { (error, data) in
+            APIManager.Instance.perform(call: .imageUpload, with: data) { (error, data) in
                 
                 if error == nil && data != nil {
                 }else { XCTFail("Error set user image in \(String(describing: error)) \(String(describing: data))") }
@@ -255,10 +255,10 @@ class APIManagerTests: XCTestCase {
             SharedPreferences.set(.id, with: id)
             SharedPreferences.set(.token, with: token)
             
-//            let call = APICallType.dogBreeds
-            let call = APICallType.catBreeds
+            let type = Type.cat
+//            let type = Type.dog
 
-            APIManager.Instance.perform(call: call) { (error, data) in
+            APIManager.Instance.perform(call: .getBreeds, withKey: type.rawValue) { (error, data) in
                 
                 if error == nil, let data = data {
                     for (key, value) in data {

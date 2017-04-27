@@ -30,17 +30,17 @@ class PetUsersPresenter {
     }
     
     func getUsers() {
-        DataManager.Instance.getPetUsers(0, callback: { (error, users) in
-            DispatchQueue.main.async {
-                if let error = error {
-                    self.view?.errorMessage(ErrorMsg(title: "",msg: "\(error)"))
-                }else if let users = users {
-                    self.users = users
-                    self.view?.loadUsers()
-                }
-            }
-            
-        })
+//        DataManager.Instance.getPetUsers(0, callback: { (error, users) in
+//            DispatchQueue.main.async {
+//                if let error = error {
+//                    self.view?.errorMessage(ErrorMsg(title: "",msg: "\(error)"))
+//                }else if let users = users {
+//                    self.users = users
+//                    self.view?.loadUsers()
+//                }
+//            }
+//            
+//        })
     }
     
 }

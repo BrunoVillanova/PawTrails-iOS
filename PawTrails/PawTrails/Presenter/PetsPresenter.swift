@@ -22,6 +22,7 @@ class PetsPresenter {
     
     func attachView(_ view: PetsView){
         self.view = view
+        getPets()
     }
     
     func deteachView() {
@@ -29,6 +30,23 @@ class PetsPresenter {
     }
     
     func getPets() {
+        DataManager.Instance.getPets { (error, pets) in
+            DispatchQueue.main.async {
+                if let error = error {
+                    if error == PetError.PetNotFoundInDataBase {
+                        self.view?.petsNotFound()
+                    }else{
+                        self.view?.errorMessage(ErrorMsg(title: "",msg: "\(error)"))
+                    }
+                }else if let pets = pets {
+                    self.pets = pets
+                    self.view?.loadPets()
+                }
+            }
+        }
+    }
+    
+    func loadPets() {
         DataManager.Instance.getPets { (error, pets) in
             DispatchQueue.main.async {
                 if let error = error {

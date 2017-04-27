@@ -17,11 +17,13 @@ protocol UserProfileView: NSObjectProtocol, View {
 class UserProfilePresenter {
     
     weak private var view: UserProfileView?
+    var user:User!
     
     var CountryCodes = [CountryCode]()
     
     func attachView(_ view: UserProfileView){
         self.view = view
+        getUser()
     }
     
     func deteachView() {
@@ -33,8 +35,22 @@ class UserProfilePresenter {
             DispatchQueue.main.async {
                 if error != nil {
                     self.view?.errorMessage(ErrorMsg(title: "",msg: "\(String(describing: error))"))
-                }else if user != nil {
-                    self.view?.load(user:user!)
+                }else if let user = user {
+                    self.user = user
+                    self.view?.load(user:user)
+                }
+            }
+        }
+    }
+    
+    func loadUser() {
+        DataManager.Instance.loadUser { (error, user) in
+            DispatchQueue.main.async {
+                if error != nil {
+                    self.view?.errorMessage(ErrorMsg(title: "",msg: "\(String(describing: error))"))
+                }else if let user = user {
+                    self.user = user
+                    self.view?.load(user:user)
                 }
             }
         }

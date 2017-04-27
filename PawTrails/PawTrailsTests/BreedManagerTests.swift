@@ -38,19 +38,26 @@ class BreedManagerTests: XCTestCase {
                 
                 if error == nil, let breeds = breeds {
                     
-                    if let savedBreeds = BreedManager.retrieve(for: type) {
+                    BreedManager.retrieve(for: type, callback: { (error, savedBreeds) in
                         
-                        if savedBreeds.count != breeds.count {
-                            XCTFail("Breeds not saved properly \(String(describing: savedBreeds.count)) found \(String(describing: breeds)) expected")
-                        }else{
-                            for b in breeds {
-                                if !savedBreeds.contains(b) {
-                                    XCTFail("Not found \(String(describing: b)) in \(String(describing: savedBreeds)) expected")
+                        if error == nil, let savedBreeds = savedBreeds {
+                            if savedBreeds.count != breeds.count {
+                                XCTFail("Breeds not saved properly \(String(describing: savedBreeds.count)) found \(String(describing: breeds)) expected")
+                            }else{
+                                for b in breeds {
+                                    if !savedBreeds.contains(b) {
+                                        XCTFail("Not found \(String(describing: b)) in \(String(describing: savedBreeds)) expected")
+                                    }
                                 }
+                                expect.fulfill()
                             }
-                            expect.fulfill()
+                        }else{
+                            XCTFail("Error get breeds \(String(describing: error)) \(String(describing: breeds))")
                         }
-                    }else { XCTFail("Error get breeds \(String(describing: error)) \(String(describing: breeds))") }
+                        
+                    })
+                }else{
+                    XCTFail("Error get breeds \(String(describing: error)) \(String(describing: breeds))")
                 }
                 
             }

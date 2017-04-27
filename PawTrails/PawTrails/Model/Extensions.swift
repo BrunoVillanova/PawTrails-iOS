@@ -66,18 +66,33 @@ extension Dictionary {
     func filtered(by keys:[String]) -> Dictionary {
         
         let out = NSMutableDictionary(dictionary: self)
-       
+        
         for key in keys {
             out.removeObject(forKey: key)
         }
         return NSDictionary(dictionary: out) as! Dictionary<Key, Value>
     }
     
+    /// filters the values by the specified keys
+    mutating func filter(by keys:[String]) {
+        self = filtered(by: keys)
+    }
 }
 
 
 
+extension Dictionary where Key == String, Value == Any {
+    
+    /// Changes nil values to String.Empty
+    mutating func jsonSetup() {
+        for (key,_) in self {
+            if self[key] == nil {
+                self.updateValue("", forKey: key)
+            }
+        }
+    }
 
+}
 
 
 

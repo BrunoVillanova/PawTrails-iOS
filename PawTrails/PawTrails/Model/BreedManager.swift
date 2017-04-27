@@ -16,9 +16,7 @@ class BreedManager {
         
         if type != .other {
             
-            let call: APICallType = type == .cat ? .catBreeds : .dogBreeds
-            
-        APIManager.Instance.perform(call: call, completition: { (error, data) in
+            APIManager.Instance.perform(call: .getBreeds, withKey: type.rawValue, completition: { (error, data) in
             if let error = error {
                 // shit
                 print(error)

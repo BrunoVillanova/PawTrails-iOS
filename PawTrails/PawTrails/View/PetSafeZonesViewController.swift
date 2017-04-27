@@ -18,6 +18,7 @@ class PetSafeZonesViewController: UIViewController, UITableViewDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Safe Zones Edit"
+        navigationItem.prompt = pet.name
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(PetSafeZonesViewController.addSafeZone))
         noElementsLabel.isHidden = (pet.safezones != nil && pet.safezones!.count > 0)
         tableView.tableFooterView = UIView()

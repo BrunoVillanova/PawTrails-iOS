@@ -62,16 +62,16 @@ class PetBreedViewController: UIViewController,  UITableViewDataSource, UITableV
     @IBAction func doneAction(_ sender: UIBarButtonItem?) {
         
         if let indexA = selectedA {
-            
+            parentEditor.set(first: filteredBreeds[indexA.row])
             if let indexB = selectedB {
-                parentEditor.set(breeds: [filteredBreeds[indexA.row].name!, filteredBreeds[indexB.row].name!])
-            }else{
-                parentEditor.set(breeds: [filteredBreeds[indexA.row].name!])
+                parentEditor.set(second: filteredBreeds[indexB.row])
             }
         }else if let otherBreed = otherBreed {
-            parentEditor.set(breeds: [otherBreed])
+//            parentEditor.set(breeds: [otherBreed])
+            print(otherBreed)
         }else {
-            parentEditor.set(breeds: nil)
+            parentEditor.set(first: nil)
+            parentEditor.set(second: nil)
         }
         parentEditor.refresh()
         _ = self.navigationController?.popViewController(animated: true)
@@ -102,11 +102,11 @@ class PetBreedViewController: UIViewController,  UITableViewDataSource, UITableV
             
             if 1...2 ~= breeds.count {
                 
-                if let index = filteredBreeds.index(where: { $0.name == breeds[0] }) {
+                if let index = filteredBreeds.index(where: { $0.id == breeds[0].id }) {
                     selectedA = IndexPath(row: index, section: 0)
                 }
                 
-                if breeds.count == 2, let index = filteredBreeds.index(where: { $0.name == breeds[1] }) {
+                if breeds.count == 2, let index = filteredBreeds.index(where: { $0.id == breeds[1].id }) {
                     selectedB = IndexPath(row: index, section: 0)
                     segmentControl.selectedSegmentIndex = 1
                 }

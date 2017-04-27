@@ -31,8 +31,6 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 20.0))
 
         petImageView.circle()
-        
-//        usersTableViewCell.contentView.frame.height = 0
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,7 +44,8 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
             if let imageData = pet.image {
                 petImageView.image = UIImage(data: imageData as Data)
             }
-            breedLabel.text = pet.breed
+            
+            breedLabel.text = pet.breeds
             genderLabel.text = Gender.build(code: pet.gender)?.name
             typeLabel.text = pet.type
             weightLabel.text = pet.weight?.toString()
@@ -146,7 +145,8 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
                 if let owner = pet.owner {
                     let imageData = owner.image ?? NSData()
                     cell.elementImageView.image = UIImage(data: imageData as Data)
-                    cell.titleLabel.text = owner.name
+                    let fullName = "\(owner.name ?? "") \(owner.surname ?? "")"
+                    cell.titleLabel.text = fullName
                 }else{
                     cell.elementImageView.image = nil
                     cell.titleLabel.text = "Owner"

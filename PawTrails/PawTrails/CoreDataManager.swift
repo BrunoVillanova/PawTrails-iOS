@@ -79,20 +79,10 @@ class CoreDataManager {
         guard let id = data[idKey] as? String else {
             throw NSError(domain: "CDM upsert entity \(entity) failed reading input data \(idKey)", code: CoreDataManagerError.IdNotFoundInInput.rawValue, userInfo: ["data":data])
         }
+
+        let predicate = NSPredicate(idKey, NSPredicateOperation.equal, id)
         
-        //Look for an existing object with id
-        if let object = retrieve(entity, with: NSPredicate(idKey, NSPredicateOperation.equal, id))?.first {
-            
-            for (key,value) in data {
-                if object.keys.contains(key) { object.setValue(value, forKey: key) }
-            }
-            
-            if Storage.Instance.save() != Storage.SaveStatus.saved { throw NSError(domain: "Not Saved Properly", code: CoreDataManagerError.NotSavedProperly.rawValue, userInfo: data) }
-            
-            return object
-        }else{
-            return try store(entity, with: data)
-        }
+        return try upsert(entity, withPredicate: predicate, withData: data)
     }
     
     /// Updates the current element or insert it as a new one if that one does not exists.
@@ -111,6 +101,13 @@ class CoreDataManager {
             return try upsert(entity, with: data, withId: restrictions[0])
         }
         
+        let predicate = try buildPredicate(with: restrictions, from: data)
+        
+        return try upsert(entity, withPredicate: predicate, withData: data)
+        
+    }
+    
+    private func buildPredicate(with restrictions:[String], from data:[String:Any]) throws -> NSPredicate? {
         var predicate: NSPredicate?
         
         //Check input restrictions
@@ -125,20 +122,33 @@ class CoreDataManager {
                 }
                 
             }else{
-                throw NSError(domain: "CDM upsert entity \(entity) failed reading input data \(restriction)", code: CoreDataManagerError.IdNotFoundInInput.rawValue, userInfo: ["data":data])
+                throw NSError(domain: "CDM buildPredicate failed reading input data \(restriction)", code: CoreDataManagerError.IdNotFoundInInput.rawValue, userInfo: ["data":data])
             }
         }
         
-        //Look for an existing object with id
+        return predicate
+    }
+    
+    private func upsert(_ entity: String, withPredicate predicate: NSPredicate?, withData data: [String:Any]) throws -> NSManagedObject {
+        
+        //Update
         if let object = retrieve(entity, with: predicate)?.first {
             
-            for (key,value) in data {
-                if object.keys.contains(key) { object.setValue(value, forKey: key) }
+//            for (key,value) in data {
+//                if object.keys.contains(key) { object.setValue(value, forKey: key) }
+//            }
+//            print(data)
+            for key in object.keys {
+                if !(object.value(forKey: key)  is NSManagedObject) && !(object.value(forKey: key)  is NSData)  {
+//                    debugPrint(key,object.value(forKey: key) ?? "")
+                    object.setValue(data[key], forKey: key)
+                }
             }
             
             if Storage.Instance.save() != Storage.SaveStatus.saved { throw NSError(domain: "Not Saved Properly", code: CoreDataManagerError.NotSavedProperly.rawValue, userInfo: data) }
             
             return object
+        //Create
         }else{
             return try self.store(entity, with: data)
         }

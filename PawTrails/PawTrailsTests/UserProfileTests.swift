@@ -37,14 +37,13 @@ class UserProfileTests: XCTestCase {
         
     }
     
-    func saveUser(user:User, phone:[String:Any]?, address:[String:Any]?, imageData: Data?, callback: @escaping (User)->Swift.Void) {
+    func save(_ userData:[String:Any], callback: @escaping (User)->Swift.Void) {
         
-        DataManager.Instance.saveUser(user: user, phone: phone, address: address, imageData: imageData, callback: { (error, user) in
-            
+        DataManager.Instance.set(user: userData) { (error, user) in
             XCTAssertNil(error, "Error while saving User \(String(describing: error))")
             XCTAssertNotNil(user, "User is nil :(\(String(describing: error))")
             callback(user!)
-        })
+        }
     }
     
     func testBasicReadWrite() {
@@ -80,10 +79,21 @@ class UserProfileTests: XCTestCase {
             user.birthday = birthday as NSDate?
             user.notification = notification
             
-            let image = UIImage(named: "logo")
-            let data = UIImageJPEGRepresentation(image!, 0.5)
+//            let image = UIImage(named: "logo")
+//            let data = UIImageJPEGRepresentation(image!, 0.5)
+            
+            var userData = [String:Any]()
+            userData["name"] = name
+            userData["surname"] = surname
+            userData["gender"] = gender
+            userData["date_of_birth"] = birthday.toStringServer
+            userData["notification"] = notification
+            userData["phone"] = phone
+            userData["address"] = address
+            
+            
 
-            self.saveUser(user: user, phone: phone, address: address, imageData: data, callback: { (user) in
+            self.save(userData, callback: { (user) in
                 
                 XCTAssert(user.name == name, "Name not saved properly")
                 XCTAssert(user.surname == surname, "Surname not saved properly")
@@ -116,12 +126,18 @@ class UserProfileTests: XCTestCase {
         
         self.getUser { (user) in
             
-            user.name = nil
-            user.surname = nil
-            user.gender = nil
-            user.birthday = nil
+            var userData = [String:Any]()
+            userData["name"] = ""
+            userData["surname"] = ""
+            userData["gender"] = ""
+            userData["birthday"] = ""
+            userData["notification"] = ""
+            userData["phone"] = ""
+            userData["address"] = ""
             
-            self.saveUser(user: user, phone: nil, address: nil, imageData: nil, callback: { (user) in
+            
+            
+            self.save(userData, callback: { (user) in
                 
                 XCTAssert(user.name == nil, "Name not saved properly")
                 XCTAssert(user.surname == nil, "Surname not saved properly")

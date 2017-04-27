@@ -14,7 +14,7 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var noPetsFound: UILabel!
     
     fileprivate let presenter = PetsPresenter()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
@@ -32,7 +32,7 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewWillAppear(_ animated: Bool) {
         noPetsFound.isHidden = true
-        presenter.getPets()
+        presenter.loadPets()
     }
     
     func editAction(_ sender: UIBarButtonItem) {
@@ -77,9 +77,11 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }else{
             cell.petImageView.image = nil
         }
-        cell.subtitleLabel.text = presenter.pets[indexPath.row].breed
+        cell.subtitleLabel.text = presenter.pets[indexPath.row].breeds
         cell.petImageView.circle()
         cell.trackButton.circle()
+        cell.trackButton.addTarget(self, action: #selector(PetsViewController.trackButtonAction(sender:)), for: .touchUpInside)
+        cell.trackButton.tag = indexPath.row
         return cell
     }
     
@@ -101,20 +103,25 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
     }
+    
+    func trackButtonAction(sender: UIButton){
+
+        if let home = tabBarController?.viewControllers?.first as? HomeViewController {
+            home.trackingPet = presenter.pets[sender.tag]
+            tabBarController?.selectedIndex = 0
+        }
+        
+    }
 
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
         
         if segue.destination is PetsPageViewController {
             
             if let index = tableView.indexPathForSelectedRow {
                 (segue.destination as! PetsPageViewController).pet = presenter.pets[index.row]
             }
-            
         }
         
     }

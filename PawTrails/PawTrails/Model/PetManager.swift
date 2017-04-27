@@ -7,10 +7,11 @@
 //
 
 
-typealias petUpsertCallback = (_ error:PetError?) -> Void
+typealias petCheckDeviceCallback = (_ isIdle:Bool) -> Void
+typealias petErrorCallback = (_ error:PetError?) -> Void
 typealias petCallback = (_ error:PetError?, _ pet:Pet?) -> Void
 typealias petsCallback = (_ error:PetError?, _ pets:[Pet]?) -> Void
-typealias petUsersCallback = (_ error:PetError?, _ users:[_petUser]?) -> Void
+typealias petUsersCallback = (_ error:PetError?, _ users:[PetUser]?) -> Void
 typealias petTrackingCallback = (_ location:(Double, Double)) -> Void
 
 import Foundation
@@ -21,21 +22,32 @@ class PetManager {
     static func upsertPet(_ data: [String:Any]) {
         
         do {
-            if let pet = try CoreDataManager.Instance.upsert("Pet", with: data.filtered(by:["last_location", "owner", "guests"])) as? Pet {
+            if let pet = try CoreDataManager.Instance.upsert("Pet", with: data.filtered(by:["breed", "breed1", "weight"])) as? Pet {
                 
-                if let ownerData = data["owner"] as? [String:Any] {
+                
+                if let weightAmount = data["weight"] as? Double {
                     
-                    if pet.owner == nil { // Create
-                        pet.owner = try CoreDataManager.Instance.store("PetUser", with: ownerData) as? PetUser
-                        
-                    }else{ // Update
-                        for key in pet.owner!.keys {
-                            pet.owner!.setValue(ownerData[key], forKey: key)
-                        }
+                    if pet.weight != nil {
+                        pet.weight?.amount = weightAmount
+                    }else{
+                        pet.weight = Weight(weightAmount, unit: .kg)
                     }
-//                }else{ //Remove
-//                    pet.setValue(nil, forKey: "owner")
+                    
+                }else{
+                    pet.weight = nil
                 }
+                
+//                if let ownerData = data["owner"] as? [String:Any] {
+//                    
+//                    if pet.owner == nil { // Create
+//                        pet.owner = try CoreDataManager.Instance.store("PetUser", with: ownerData) as? PetUser
+//                        
+//                    }else{ // Update
+//                        for key in pet.owner!.keys {
+//                            pet.owner!.setValue(ownerData[key], forKey: key)
+//                        }
+//                    }
+//                }
 
                 try CoreDataManager.Instance.save()
             }
@@ -79,5 +91,88 @@ class PetManager {
         }
         return false
     }
+    
+    static func getFriends(callback: petUsersCallback){
+        
+        getPets { (error, pets) in
+            
+            if error == nil, let pets = pets {
+                
+                var friends = [PetUser]()
+                //option 1
+                for pet in pets {
+                    if var users = pet.guests?.allObjects as? [PetUser] {
+                        if let owner = pet.owner { users.append(owner) }
+                        for user in users {
+                            if !friends.contains(user) { friends.append(user) }
+                        }
+                    }
+                }
+                
+//                //option 2
+//                for pet in pets {
+//                    if let users = pet.guests?.allObjects as? [PetUser] { friends.append(contentsOf: users) }
+//                    if let owner = pet.owner { friends.append(owner) }
+//                }
+//                friends = Array(Set(friends))
+                
+                callback(nil, friends)
+            }else{
+                callback(error, nil)
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
 

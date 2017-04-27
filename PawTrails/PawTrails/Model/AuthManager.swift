@@ -74,6 +74,9 @@ class AuthManager {
         if let socialNetwork = data["social_network"] as? String {
             SharedPreferences.set(.socialnetwork, with: socialNetwork)
         }
+        if let socialNetworkId = data["social_network_id"] as? String {
+            SharedPreferences.set(.socialnetworkId, with: socialNetworkId)
+        }
         SharedPreferences.set(.token, with: token)
         SharedPreferences.set(.id, with: userId)
         DataManager.Instance.setUser(userData)

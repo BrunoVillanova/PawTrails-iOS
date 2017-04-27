@@ -16,16 +16,18 @@ class PetUsersViewController: UIViewController, UITableViewDataSource, UITableVi
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Pet Users Edit"
+        navigationItem.title = "Users Edit"
+        navigationItem.prompt = pet.name
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(PetUsersViewController.addUser))
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         tableView.tableFooterView = UIView()
     }
     
     func addUser() {
-//        if let vc = storyboard?.instantiateViewController(withIdentifier: "AddPetUserViewController") {
-//            present(vc, animated: true, completion: nil)
-//        }
-        popUp(title: "Under Construction", msg: "Available Soon")
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "AddPetUserViewController") as? AddPetUserViewController {
+            vc.pet = pet
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     // MARK: - UITableViewDataSource
@@ -39,36 +41,36 @@ class PetUsersViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! basicTableViewCell
         if indexPath.row == 0 {
             // Owner
-            cell.imageView?.circle()
+            cell.leftImageView?.circle()
 //            cell.imageView?.backgroundColor = UIColor.orange()
 //            cell.imageView?.border(color: .orange(), width: 2.0)
-            cell.detailTextLabel?.text = "Owner"
+            cell.rightDetailLabel?.text = "Owner"
             
             if let owner = pet.owner {
                 let imageData = owner.image ?? NSData()
-                cell.imageView?.image = UIImage(data: imageData as Data)
-                cell.textLabel?.text = owner.name
+                cell.leftImageView?.image = UIImage(data: imageData as Data)
+                cell.titleLabel?.text = owner.name
             }else{
-                cell.imageView?.image = nil
-                cell.textLabel?.text = "Owner name"
+                cell.leftImageView?.image = nil
+                cell.titleLabel?.text = "Owner name"
             }
         }else{
             // Guests
-            cell.imageView?.circle()
+            cell.leftImageView?.circle()
 //            cell.imageView?.backgroundColor = UIColor.lightGray
 //            cell.imageView?.border(color: .clear, width: 2.0)
-            cell.detailTextLabel?.text = "Guest"
+            cell.rightDetailLabel?.text = "Guest"
 
             if let guest = pet.guests?.allObjects[indexPath.row - 1] as? PetUser {
                 let imageData = guest.image ?? NSData()
-                cell.imageView?.image = UIImage(data: imageData as Data)
-                cell.textLabel?.text = guest.name
+                cell.leftImageView?.image = UIImage(data: imageData as Data)
+                cell.titleLabel?.text = guest.name
             }else{
-                cell.imageView?.image = nil
-                cell.textLabel?.text = "Guest name"
+                cell.leftImageView?.image = nil
+                cell.titleLabel?.text = "Guest name"
             }
         }
         return cell
@@ -123,21 +125,44 @@ class PetUsersViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
+
+class basicTableViewCell: UITableViewCell {
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var rightDetailLabel: UILabel!
+    @IBOutlet weak var leftImageView: UIImageView!
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

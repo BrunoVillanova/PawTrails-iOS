@@ -31,7 +31,8 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
         super.viewDidLoad()
         
         if pet != nil {
-            navigationItem.title = "Edit Pet"
+            navigationItem.title = "Edit"
+            navigationItem.prompt = pet.name
         }
         
         imagePicker.delegate = self
@@ -48,6 +49,10 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
         presenter.done()
     }
     
+    @IBAction func neutredValueChanged(_ sender: UISwitch) {
+        presenter.set(neutred: sender.isOn)
+    }
+    
     //MARK: - UITableViewDelegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -56,7 +61,6 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
         }else if indexPath.section == 0 && indexPath.row == 0 {
             alert(imagePicker)
         }
-
     }
     
     //MARK: - AddEditPetView

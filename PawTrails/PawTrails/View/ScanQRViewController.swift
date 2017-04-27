@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class ScanQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+class ScanQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, DeviceCodeView {
 
     var isAddDevice:Bool! = true
     
@@ -20,17 +20,67 @@ class ScanQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
     fileprivate var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     fileprivate var qrCodeFrameView: UIView?
     
+    fileprivate let presenter = DeviceCodePresenter()
+    
+    fileprivate var isCheckingCode: Bool = false
+    fileprivate var attempts: Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.attachView(self)
         setupSession()
         setupPreview()
         startSession()
+    }
+    
+    deinit {
+        presenter.deteachView()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         stopSession()
     }
     
+    // MARK: - DeviceCodeView
+    
+    func errorMessage(_ error: ErrorMsg) {
+        alert(title: error.title, msg: error.msg)
+    }
+    
+    func codeFormat() {
+        alert(title: "Erro", msg: "Code Format")
+    }
+    
+    func wrongCode() {
+        attempts += 1
+        if attempts <= 3 {
+            isCheckingCode = false
+        }else{
+            alert(title: "Error", msg: "Wrong Code")
+        }
+    }
+    
+    func idle(_ code: String) {
+        stopSession()
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "AddEditPetDetailsTableViewController") as? AddEditPetDetailsTableViewController {
+            vc.deviceCode = code
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    // MARK: - Connection Notifications
+    
+    func connectedToNetwork() {
+        hideNotification()
+    }
+    
+    func notConnectedToNetwork() {
+        showNotification(title: Message.Instance.connectionError(type: .NoConnection), type: .red)
+    }
+
+
+    // MARK: - Camera
+
     func setupSession() {
 
         let captureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
@@ -118,9 +168,9 @@ class ScanQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
             let barCodeObject = videoPreviewLayer?.transformedMetadataObject(for: metadataObj)
             qrCodeFrameView?.frame = barCodeObject!.bounds
             
-            if metadataObj.stringValue != nil {
-                print(metadataObj.stringValue)
-                // Check Code and Go next
+            if !isCheckingCode, let code = metadataObj.stringValue {
+                isCheckingCode = true
+                presenter.check(code)
             }
         }
     }

@@ -44,6 +44,8 @@ class HomeViewController: UIViewController, HomeView, UICollectionViewDataSource
     
     var data = [String]()
     let tableView = UITableView(frame: CGRect(x:20,y:80,width:335,height:120), style: .plain)
+
+    var trackingPet: Pet?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,6 +97,10 @@ class HomeViewController: UIViewController, HomeView, UICollectionViewDataSource
         let location = CLLocationCoordinate2D(latitude: 51.87, longitude: -8.46)
         startTracking("Pepito", lat: location.latitude, long: location.longitude)
         mapView.centerOn(location)
+        
+        if let trackingPet = trackingPet {
+            alert(title: "", msg: "Tracking \(trackingPet.name ?? "pet")", type: .blue)
+        }
     }
     
     @IBAction func handlePanGesture(_ sender: UIPanGestureRecognizer) {

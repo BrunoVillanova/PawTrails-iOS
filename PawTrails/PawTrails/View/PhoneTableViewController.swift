@@ -36,6 +36,8 @@ class PhoneTableViewController: UITableViewController, UIPickerViewDataSource, U
             codeTextField.text = phone.code
             numberTextField.text = phone.number
             index = parentEditor.getCountryCodeIndex(countryCode: phone.code)
+        }else{
+            
         }
         picker.selectRow(index, inComponent: 0, animated: true)
         selectedCC = parentEditor.CountryCodes[index]

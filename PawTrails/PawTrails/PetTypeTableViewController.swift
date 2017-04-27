@@ -46,7 +46,8 @@ class PetTypeTableViewController: UITableViewController, UITextFieldDelegate {
             type = otherTextField.text
         }
         if type != parentEditor.getType() {
-            parentEditor.set(breeds: nil)
+            parentEditor.set(first: nil)
+            parentEditor.set(second: nil)
         }
         parentEditor.set(type: type)
         parentEditor.refresh()

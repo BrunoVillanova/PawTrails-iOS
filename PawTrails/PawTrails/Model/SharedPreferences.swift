@@ -14,6 +14,7 @@ public class SharedPreferences {
         case token = "token"
         case id = "id"
         case socialnetwork = "socialnetwork"
+        case socialnetworkId = "socialnetworkId"
     }
     
     static func get(_ p:key) -> String? {

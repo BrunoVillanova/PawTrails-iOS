@@ -24,6 +24,9 @@ class PetUserTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.title = "User Profile"
+        navigationItem.prompt = petName
+        
         if petUser == nil {
             popAction(sender: nil)
         }else{

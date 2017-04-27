@@ -26,12 +26,16 @@ class AddEditPetPresenter {
     weak private var view: AddEditPetView?
     
     private var data = [String:Any]()
+    private var firstBreed: Breed?
+    private var secondBreed: Breed?
     private var editMode: Bool = false
     
     func attachView(_ view: AddEditPetView, _ pet: Pet?){
         self.view = view
         if let pet = pet {
             data = pet.toDict
+            firstBreed = pet.firstBreed
+            secondBreed = pet.secondBreed
             editMode = true
             view.loadPet()
         }
@@ -43,9 +47,7 @@ class AddEditPetPresenter {
     
     
     //MARK:- Getters
-    
-    
-    
+
     func getImageData() -> Data? {
         return data["image"] as? Data
     }
@@ -62,12 +64,20 @@ class AddEditPetPresenter {
         return Gender.build(code: data["gender"] as? String)
     }
     
-    func getBreeds() -> [String]? {
-        return (data["breed"] as? String)?.components(separatedBy: " - ")
+    func getBreeds() -> [Breed]? {
+        if firstBreed == nil && secondBreed == nil { return nil }
+        var breeds = [Breed]()
+        if let firstBreed = firstBreed { breeds.append(firstBreed) }
+        if let secondBreed = secondBreed { breeds.append(secondBreed) }
+        return breeds
     }
     
     func getBreedsText() -> String? {
-        return data["breed"] as? String
+        
+        if let breeds = getBreeds() {
+            return (breeds.map { $0.name } as! [String]).joined(separator: " - ")
+        }
+        return nil
     }
     
     func getBirthday() -> Date? {
@@ -76,6 +86,10 @@ class AddEditPetPresenter {
     
     func getWeight() -> Weight? {
         return data["weight"] as? Weight
+    }
+    
+    func getNeutred() -> Bool? {
+        return data["neutred"] as? Bool
     }
     
     //MARK:- Setters
@@ -96,8 +110,12 @@ class AddEditPetPresenter {
         data["gender"] = gender?.code
     }
 
-    func set(breeds: [String]?) {
-        data["breed"] = breeds?.joined(separator: " - ")
+    func set(first: Breed?) {
+        firstBreed = first
+    }
+    
+    func set(second: Breed?) {
+        secondBreed = second
     }
     
     func set(birthday:Date?){
@@ -110,6 +128,10 @@ class AddEditPetPresenter {
     
     func set(imageData:Data?){
         data["image"] = imageData
+    }
+    
+    func set(neutred:Bool?){
+        data["neutred"] = neutred
     }
     
     func refresh(){
@@ -145,6 +167,10 @@ class AddEditPetPresenter {
     }
     
     private func savePet(){
+        
+        if let firstBreed = firstBreed { data["breed"] = firstBreed.id }
+        if let secondBreed = secondBreed { data["breed1"] = secondBreed.id }
+        
         DataManager.Instance.setPet(data, callback: { (error) in
             DispatchQueue.main.async {
                 self.view?.endLoadingContent()

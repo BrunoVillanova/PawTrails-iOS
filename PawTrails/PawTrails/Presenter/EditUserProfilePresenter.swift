@@ -9,9 +9,182 @@
 import Foundation
 
 protocol EditUserProfileView: NSObjectProtocol, View {
-    func loadData(user:User, phone:_Phone?, address:_Address?)
+    func loadData()
     func saved()
 }
+
+class EditUserProfilePresenter {
+    
+    weak private var view: EditUserProfileView?
+    
+    private var address:_Address? = nil
+    private var phone:_Phone? = nil
+    private var imageData: Data? = nil
+    
+    private var data = [String:Any]()
+    
+    var CountryCodes = [CountryCode]()
+    
+    func attachView(_ view: EditUserProfileView, _ user:User?){
+        self.view = view
+        load(user)
+        getCountryCodes()
+    }
+    
+    func deteachView() {
+        self.view = nil
+    }
+    
+    fileprivate func load(_ user: User?) {
+        
+        if let user = user {
+            
+            self.data = user.toDict
+            
+            if let phone = user.phone { self.set(phone: phone.number, phone.country_code) }
+            if let address = user.address { self.set(address: _Address(from: address)) }
+            
+            DispatchQueue.main.async {
+                self.view?.loadData()
+            }
+            
+        }else{
+            self.view?.errorMessage(ErrorMsg(title:"",msg:"couldn't load user"))
+        }
+    }
+    
+    func refresh(){
+        self.view?.loadData()
+    }
+    
+    //MARK:- Getters
+    
+    func getName() -> String? {
+        return data["name"] as? String
+    }
+    
+    func getSurName() -> String? {
+        return data["surname"] as? String
+    }
+    
+    func getEmail() -> String? {
+        return data["email"] as? String
+    }
+    
+    func getGender() -> Gender? {
+        return Gender.build(code: data["gender"] as? String)
+    }
+    
+    func getBirthday() -> Date? {
+        return data["birthday"] as? Date
+    }
+    
+    func getPhone() -> _Phone? {
+        return phone
+    }
+    
+    func getAddress() -> _Address? {
+        return address
+    }
+    
+    func getImage() -> Data? {
+        return data["image"] as? Data
+    }
+    
+    func socialMediaLoggedIn() -> Bool {
+        return data["socialNetwork"] != nil
+    }
+    
+    //MARK:- Setters
+    
+    func set(name: String?) {
+        data["name"] = name ?? ""
+    }
+    
+    func set(surname: String?) {
+        data["surname"] = surname ?? ""
+    }
+    
+    func set(email: String?) {
+        data["email"] = email ?? ""
+    }
+    
+    func set(gender:Gender?){
+        data["gender"] = gender?.code ?? ""
+    }
+    
+    func set(birthday:Date?){
+        data["birthday"] = birthday ?? ""
+    }
+    
+    func set(phone number:String?, _ country_code:String?){
+        
+        if let number = number, let country_code = country_code {
+            self.phone = _Phone(number: number, code: country_code)
+        }else{
+            self.phone = nil
+        }
+    }
+    
+    func set(address data:_Address){
+        self.address = data
+    }
+    
+    func set(image data:Data){
+        imageData = data
+    }
+    
+    
+    func save() {
+        
+        if let imageData = imageData {
+            var data = [String:Any]()
+            data["path"] = "user"
+            data["userid"] = data["id"]
+            data["picture"] = imageData
+            
+            DataManager.Instance.set(image: data, callback: { (success) in
+                if success {
+                    self.imageData = nil
+                    self.save()
+                }
+            })
+        }
+        
+        data["date_of_birth"] = (data["birthday"] as! Date).toStringServer
+        data.filter(by: ["image", "imageURL", "birthday"])
+        data["mobile"] = phone?.getJson()
+        data["address"] = address?.getJson()
+                
+        DataManager.Instance.set(user: data) { (error, user) in
+            if error == nil {
+                DispatchQueue.main.async(execute: { () -> Void in
+                    self.view?.saved()
+                })
+            }
+        }
+    }
+
+    // Helpers
+    
+    func getCountryCodes(){
+        if let cc = DataManager.Instance.getCountryCodes() {
+            CountryCodes = cc
+        }else{
+            debugPrint("No CC")
+        }
+    }
+    
+    
+    func getCountryCodeIndex(countryCode: String) -> Int {
+        return CountryCodes.index(where: { (cc) -> Bool in   cc.code == countryCode }) ?? 0
+    }
+    
+    func getCountryCodeIndex(countryShortName: String = DataManager.Instance.getCurrentCountryShortName()) -> Int {
+        return CountryCodes.index(where: { (cc) -> Bool in   cc.shortname == countryShortName }) ?? 0
+    }
+}
+
 
 struct _Phone {
     var number:String
@@ -22,7 +195,6 @@ struct _Phone {
     }
     
     var toString:String {
-        
         return "\(code) \(number)"
     }
 }
@@ -84,157 +256,5 @@ struct _Address {
         return nil
         
     }
-}
-
-class EditUserProfilePresenter {
-    
-    weak private var view: EditUserProfileView?
-    
-    private var address:_Address? = nil
-    private var phone:_Phone? = nil
-    private var imageData: Data? = nil
-    private var user:User!
-    
-    var CountryCodes = [CountryCode]()
-    
-    func attachView(_ view: EditUserProfileView){
-        self.view = view
-        getUser()
-        getCountryCodes()
-    }
-    
-    func deteachView() {
-        self.view = nil
-    }
-    
-    fileprivate func getUser() {
-        
-        DataManager.Instance.getUser { (error, user) in
-            
-            if error != nil {
-                self.view?.errorMessage(ErrorMsg(title:"",msg:"\(String(describing: error))"))
-            }else if let user = user {
-                
-                self.user = user
-                
-                if let phone = user.phone { self.set(phone: phone.number, phone.country_code) }
-                if let address = user.address { self.set(address: _Address(from: address)) }
-                if let imageData = user.image { self.set(image: imageData as Data) }
-                
-                DispatchQueue.main.async {
-                    self.view?.loadData(user: user, phone: self.phone, address: self.address)
-                }
-            }
-        }
-    }
-    
-    func refresh(){
-        self.view?.loadData(user: user, phone:phone, address:address)
-    }
-    
-    //MARK:- Getters
-    
-    func getName() -> String? {
-        return user.name
-    }
-    
-    func getSurName() -> String? {
-        return user.surname
-    }
-    
-    func getEmail() -> String? {
-        return user.email
-    }
-    
-    func getGender() -> Gender? {
-        return Gender.build(code: user.gender)
-    }
-    
-    func getBirthday() -> Date? {
-        return user.birthday as Date?
-    }
-    
-    func getPhone() -> _Phone? {
-        return phone
-    }
-    
-    func getAddress() -> _Address? {
-        return address
-    }
-    
-    //MARK:- Setters
-    
-    func set(name: String?) {
-        user.name = name
-    }
-    
-    func set(surname: String?) {
-        user.surname = surname
-    }
-    
-    func set(email: String?) {
-        user.email = email
-    }
-    
-    func set(gender:Gender?){
-        user.gender = gender?.code
-    }
-    
-    func set(birthday:Date?){
-        user.birthday = birthday as NSDate?
-    }
-    
-    func set(phone number:String?, _ country_code:String?){
-        
-        if number == nil || (number != nil && number == "") || country_code == nil || (country_code != nil && country_code == "") {
-            self.phone = nil
-        }else{
-            self.phone = _Phone(number: number!, code: country_code!)
-        }
-    }
-    
-    func set(address data:_Address){
-        self.address = data
-    }
-    
-    func set(image data:Data){
-        imageData = data
-    }
-    
-    
-    func save() {
-        
-        DataManager.Instance.saveUser(user: user, phone: phone?.getJson(), address: address?.getJson(), imageData: imageData) { (error, user) in
-            if error == nil {
-                DispatchQueue.main.async(execute: { () -> Void in
-                    self.view?.saved()
-                })
-            }
-        }
-    }
-
-    // Helpers
-    
-    func getCountryCodes(){
-        if let cc = DataManager.Instance.getCountryCodes() {
-            CountryCodes = cc
-        }else{
-            debugPrint("No CC")
-        }
-    }
-    
-    
-    func getCountryCodeIndex(countryCode: String) -> Int {
-        return CountryCodes.index(where: { (cc) -> Bool in   cc.code == countryCode }) ?? 0
-    }
-    
-    func getCountryCodeIndex(countryShortName: String = DataManager.Instance.getCurrentCountryShortName()) -> Int {
-        return CountryCodes.index(where: { (cc) -> Bool in   cc.shortname == countryShortName }) ?? 0
-    }
-    
-    
-    
-    
-    
 }
 

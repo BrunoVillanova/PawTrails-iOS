@@ -19,8 +19,8 @@ public enum SocialMedia: String {
 public enum APICallType {
     
     case signUp, signin, facebookLogin, googleLogin, twitterLogin, weiboLogin, passwordReset, passwordChange,
-    getUser, setUser, userImageUpload,
-    getPets, getPet, getPetUsers, setPet, petImageUpload, dogBreeds, catBreeds, checkDevice
+    getUser, setUser, imageUpload,
+    getPets, getPet, getPetUsers, setPet, getBreeds, checkDevice
     
     fileprivate var requiresToken: Bool {
         switch self {
@@ -29,7 +29,7 @@ public enum APICallType {
         }
     }
     
-    fileprivate var path: String {
+    fileprivate func path(with key: Any) -> String {
         switch self {
             
         case .signUp: return "/users/register"
@@ -41,32 +41,31 @@ public enum APICallType {
         case .passwordChange: return "/users/changepsw"
         case .passwordReset: return "/users/resetpsw"
             
-        case .getUser: return "/users/\(SharedPreferences.get(.id) ?? "")"
+        case .getUser: return "/users/\(key)"
         case .setUser: return "/users/edit"
-        case .userImageUpload, .petImageUpload: return "/images/upload"
+        case .imageUpload: return "/images/upload"
             
         case .getPets: return "/pets/"
         case .getPet: return "/pets/"
         case .getPetUsers: return "/pets/"
         case .setPet: return "/pets/"
-        case .dogBreeds: return "/lists/petbreeds/\(Type.dog.rawValue)"
-        case .catBreeds: return "/lists/petbreeds/\(Type.cat.rawValue)"
-        case .checkDevice: return "/pets/"
-
-//        default: return ""
+        case .getBreeds: return "/lists/petbreeds/\(key)"
+        case .checkDevice: return "/pets/devices/\(key)/checkCode"
+            
+            //        default: return ""
         }
     }
     
     fileprivate var httpMethod: String {
         switch self {
-        case .getUser, .dogBreeds, .catBreeds: return "GET"
+        case .getUser, .getBreeds, .checkDevice: return "GET"
         default: return "POST"
         }
     }
     
     fileprivate var requiresBody: Bool {
         switch self {
-        case .getUser, .getPet, .dogBreeds, .catBreeds: return false
+        case .getUser, .getPet, .getBreeds, .checkDevice: return false
         default: return true
         }
     }
@@ -98,14 +97,14 @@ class APIManager {
     ///   - call: Defines the call type.
     ///   - data: *Optional* includes the data to sent as part of the request.
     /// - Returns: URLRequest containing all the information given.
-    private func createRequest(for call:APICallType, with data:[String:Any]?) -> URLRequest? {
+    private func createRequest(for call:APICallType, with key:Any, and data:[String:Any]?) -> URLRequest? {
         
         if call.requiresBody && data == nil {
             debugPrint("\(call) requires body")
             return nil
         }
         
-        var request = URLRequest(url: URL(call))
+        var request = URLRequest(url: URL(call, with: key))
         
         debugPrint(request)
         
@@ -127,9 +126,9 @@ class APIManager {
     ///   - completition: Handles callback
     ///   - error: An error object that indicates why the request failed, or `nil` if the request was successful.
     ///   - data: The data returned or `nil` if error.
-    func perform(call:APICallType, with data:[String:Any]? = nil, completition: @escaping (_ error:APIManagerError?,_ data:[String:Any]?) -> Void) {
+    func perform(call:APICallType, withKey key:Any = "", with data:[String:Any]? = nil, completition: @escaping (_ error:APIManagerError?,_ data:[String:Any]?) -> Void) {
         
-        if let request = createRequest(for: call, with: data) {
+        if let request = createRequest(for: call, with: key, and: data) {
             
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
                 
@@ -155,6 +154,7 @@ class APIManager {
     /// - Parameter data: input of information.
     /// - Returns: json answer as a `dictionary`
     private func parseResponse(_ data:Data?) -> [String:Any]? {
+        print("RESPONSE")
         
         if data == nil { return nil }
         
@@ -164,7 +164,7 @@ class APIManager {
                 return out
             }else if let rs = String(data: data!, encoding: String.Encoding.utf8) {
                 debugPrint(rs)
-                return ["no_JSON_RS":rs]
+                return nil
             }else{
                 debugPrint("couldn't parse to string")
                 return nil
@@ -209,7 +209,7 @@ class APIManager {
     private func setHeaders(of call:APICallType) -> [String:String] {
         var headers = [String:String]()
         
-        if call == .userImageUpload || call == .petImageUpload {
+        if call == .imageUpload {
             headers["content-type"] = "multipart/form-data; boundary=\(boundary)"
         }else{
             headers["content-type"] = "application/json"
@@ -223,8 +223,9 @@ class APIManager {
     }
     
     private func setBody(of call:APICallType, with data:[String:Any]?) -> Data? {
+        print("REQUEST BODY")
         print(data ?? "No data provided to build the request body")
-        if call == .userImageUpload || call == .petImageUpload {
+        if call == .imageUpload {
 
             let boundaryStart = "--\(boundary)\r\n"
             let boundaryEnd = "--\(boundary)--\r\n"
@@ -253,10 +254,6 @@ class APIManager {
             print(String(data: body, encoding: .utf8) ?? "Mec")
             
             return body
-
-            
-//            print(body)
-//            return body.data(using: String.Encoding.utf8)
         }else{
             return data != nil ? try? JSONSerialization.data(withJSONObject: data!, options: []) : nil
         }
@@ -280,8 +277,8 @@ fileprivate extension Int {
 
 fileprivate extension URL {
     
-    init(_ call: APICallType) {
-        guard let url = URL(string: APIManager.mainURL + call.path) else{
+    init(_ call: APICallType, with key: Any) {
+        guard let url = URL(string: APIManager.mainURL + call.path(with: key)) else{
             fatalError("Couldn't build URL \(call) \(APIManager.mainURL)")
         }
         self = url

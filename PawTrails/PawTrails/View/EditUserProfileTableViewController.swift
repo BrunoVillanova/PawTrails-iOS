@@ -21,15 +21,16 @@ class EditUserProfileTableViewController: UITableViewController, EditUserProfile
     @IBOutlet weak var emailCell: UITableViewCell!
     @IBOutlet weak var passwordChangeCell: UITableViewCell!
     
+    var user:User!
+    
     fileprivate let presenter = EditUserProfilePresenter()
     
     fileprivate let imagePicker = UIImagePickerController()
-    
     fileprivate let datePicker = UIDatePicker()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.attachView(self)
+        presenter.attachView(self, user)
         
         tableView.tableFooterView = UIView()
         
@@ -49,27 +50,24 @@ class EditUserProfileTableViewController: UITableViewController, EditUserProfile
         
     // MARK: - EditUserProfileView
 
-    func loadData(user:User, phone:_Phone?, address:_Address?) {
+    func loadData() {
         
-        let name = user.name ?? ""
-        let surname = user.surname ?? ""
+        let name = presenter.getName() ?? ""
+        let surname = presenter.getSurName() ?? ""
         
         nameLabel.text = "\(name) \(surname)"
-        emailLabel.text = user.email
-        genderLabel.text = Gender.build(code: user.gender)?.name
+        emailLabel.text = presenter.getEmail()
+        genderLabel.text = presenter.getGender()?.name
+        birthdayLabel.text = presenter.getBirthday()?.toStringShow
         
-        if let date = user.birthday as Date? {
-            birthdayLabel.text = date.toStringShow
-        }
+        phoneLabel.text = presenter.getPhone()?.toString
+        addressLabel.text = presenter.getAddress()?.toString
         
-        phoneLabel.text = phone?.toString
-        addressLabel.text = address?.toString
-        
-        if let imageData = user.image {
+        if let imageData = presenter.getImage()  {
             profileImage.image = UIImage(data: imageData as Data)
         }
         
-        if user.socialNetwork != nil {
+        if presenter.socialMediaLoggedIn() {
             emailCell.accessoryType = .none
             emailCell.selectionStyle = .none
             emailCell.isUserInteractionEnabled = false
