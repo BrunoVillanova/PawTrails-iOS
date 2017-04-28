@@ -151,7 +151,7 @@ class EditUserProfilePresenter {
             })
         }
         
-        data["date_of_birth"] = (data["birthday"] as! Date).toStringServer
+        data["date_of_birth"] = (data["birthday"] as! Date?)?.toStringServer ?? ""
         data.filter(by: ["image", "imageURL", "birthday"])
         data["mobile"] = phone?.getJson()
         data["address"] = address?.getJson()

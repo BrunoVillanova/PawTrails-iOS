@@ -134,13 +134,8 @@ class CoreDataManager {
         //Update
         if let object = retrieve(entity, with: predicate)?.first {
             
-//            for (key,value) in data {
-//                if object.keys.contains(key) { object.setValue(value, forKey: key) }
-//            }
-//            print(data)
             for key in object.keys {
                 if !(object.value(forKey: key)  is NSManagedObject) && !(object.value(forKey: key)  is NSData)  {
-//                    debugPrint(key,object.value(forKey: key) ?? "")
                     object.setValue(data[key], forKey: key)
                 }
             }

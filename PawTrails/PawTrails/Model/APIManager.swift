@@ -20,7 +20,7 @@ public enum APICallType {
     
     case signUp, signin, facebookLogin, googleLogin, twitterLogin, weiboLogin, passwordReset, passwordChange,
     getUser, setUser, imageUpload,
-    getPets, getPet, getPetUsers, setPet, getBreeds, checkDevice
+    registerPet, getPets, getPet, getPetUsers, setPet, getBreeds, checkDevice, unregisterPet
     
     fileprivate var requiresToken: Bool {
         switch self {
@@ -45,12 +45,14 @@ public enum APICallType {
         case .setUser: return "/users/edit"
         case .imageUpload: return "/images/upload"
             
-        case .getPets: return "/pets/"
-        case .getPet: return "/pets/"
+        case .registerPet: return "/pets/register"
+        case .getPets: return "/pets/my/list"
+        case .getPet: return "/pets/\(key)"
         case .getPetUsers: return "/pets/"
-        case .setPet: return "/pets/"
+        case .setPet: return "/pets/\(key)/edit"
         case .getBreeds: return "/lists/petbreeds/\(key)"
         case .checkDevice: return "/pets/devices/\(key)/checkCode"
+        case .unregisterPet: return "/pets/\(key)/remove"
             
             //        default: return ""
         }
@@ -58,14 +60,14 @@ public enum APICallType {
     
     fileprivate var httpMethod: String {
         switch self {
-        case .getUser, .getBreeds, .checkDevice: return "GET"
+        case .getUser, .getBreeds, .checkDevice, .getPets, .getPet: return "GET"
         default: return "POST"
         }
     }
     
     fileprivate var requiresBody: Bool {
         switch self {
-        case .getUser, .getPet, .getBreeds, .checkDevice: return false
+        case .getUser, .getBreeds, .checkDevice, .getPets, .getPet: return false
         default: return true
         }
     }

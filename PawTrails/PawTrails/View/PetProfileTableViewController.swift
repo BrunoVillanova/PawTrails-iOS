@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PetProfileTableViewController: UITableViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class PetProfileTableViewController: UITableViewController, UICollectionViewDelegate, UICollectionViewDataSource, PetView {
 
     @IBOutlet weak var petImageView: UIImageView!
     @IBOutlet weak var breedLabel: UILabel!
@@ -20,13 +20,18 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
     @IBOutlet weak var usersCollectionView: UICollectionView!
     @IBOutlet weak var usersTableViewCell: UITableViewCell!
     @IBOutlet weak var safezonesTableViewCell: UITableViewCell!
+    @IBOutlet weak var addSafeZoneTableViewCell: UITableViewCell!
     
     var pet:Pet!
     
-    let sectionNames = ["info", "users", "safe zones"]
+    fileprivate let sectionNames = ["info", "users", "safe zones"]
+    
+    fileprivate let presenter = PetPresenter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.attachView(self)
+        if let pet = pet { load(pet) }
         
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 20.0))
 
@@ -34,26 +39,44 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        loadPet()
+        presenter.loadPet(with: pet.id ?? "")
     }
+    
+    //MARK: - PetView
+    
+    func errorMessage(_ error: ErrorMsg) {
+        alert(title: error.title, msg: error.msg)
+    }
+    
+    func load(_ pet: Pet) {
         
-    func loadPet() {
-        
-        if let pet = pet {
-            
-            if let imageData = pet.image {
-                petImageView.image = UIImage(data: imageData as Data)
-            }
-            
-            breedLabel.text = pet.breeds
-            genderLabel.text = Gender.build(code: pet.gender)?.name
-            typeLabel.text = pet.type
-            weightLabel.text = pet.weight?.toString()
-            birthdayLabel.text = pet.birthday?.toStringShow
-            
-            usersCollectionView.reloadData()
-            safeZonesCollectionView.reloadData()
+        if let imageData = pet.image {
+            petImageView.image = UIImage(data: imageData as Data)
         }
+        
+        breedLabel.text = pet.breeds
+        genderLabel.text = Gender(rawValue: Int(pet.gender))?.name
+        typeLabel.text = pet.typeString
+        weightLabel.text = pet.weight?.toString()
+        birthdayLabel.text = pet.birthday?.toStringShow
+        
+        usersCollectionView.reloadData()
+        
+
+        if pet.safezones != nil && pet.safezones!.count > 0 {
+            addSafeZoneTableViewCell.isHidden = true
+            safezonesTableViewCell.isHidden = false
+            safeZonesCollectionView.reloadData()
+        }else{
+            addSafeZoneTableViewCell.isHidden = false
+            safezonesTableViewCell.isHidden = true
+        }
+
+        tableView.reloadData()
+    }
+    
+    func petNotFound() {
+        alert(title: "", msg: "couldn't load pet")
     }
     
     
@@ -111,6 +134,16 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
         default:
             break
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if indexPath.section == 2 && ((indexPath.row == 0 && safezonesTableViewCell.isHidden) || (indexPath.row == 1 && addSafeZoneTableViewCell.isHidden)){
+            return 0
+        }else{
+            return super.tableView(tableView, heightForRowAt: indexPath)
+        }
+        
     }
     
     // MARK: - UICollectionDataSource

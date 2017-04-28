@@ -60,6 +60,16 @@ enum ErrorCode: Int {
     case OTPexpired = 27
     case SQLBadFormat = 28
     case AccountNotVerified = 29
+    case SocialNetworkError = 32
+    case PathFormat = 33
+    case MissingUserId = 34
+    case MissingPetId = 35
+    case MissingImageFile = 36
+    case IncorrectImageMime = 37
+    case ImageFileSize = 38
+    case UploadFailed = 39
+    
+    case DeviceIdNotFound = 41
     
     init(code:Int) {
         self = ErrorCode(rawValue: code) ?? ErrorCode.Unknown
@@ -94,13 +104,14 @@ enum PetError: Int {
     case IdNotFound = 10
     case MoreThenOnePet  = 12
     case NotAuthenticated = 14
+    case PetsNotFoundInResponse = 15
 }
 
 enum BreedError: Int {
     case BreedNotFoundInDataBase = 8
 //    case PetNotFoundInResponse = 9
 //    case IdNotFound = 10
-//    case MoreThenOnePet  = 12
+    case MoreThenOneBreed  = 12
 //    case NotAuthenticated = 14
 }
 

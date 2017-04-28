@@ -28,6 +28,7 @@ class AddEditPetPresenter {
     private var data = [String:Any]()
     private var firstBreed: Breed?
     private var secondBreed: Breed?
+    private var otherBreed: String?
     private var editMode: Bool = false
     
     func attachView(_ view: AddEditPetView, _ pet: Pet?){
@@ -56,12 +57,30 @@ class AddEditPetPresenter {
         return data["name"] as? String
     }
     
-    func getType() -> String? {
-        return data["type"] as? String
+    func getType() -> Type? {
+        if let code = data["type"] as? Int16 {
+            return Type(rawValue: Int(code))
+        }
+        return nil
+    }
+    
+    func getTypeDescription() -> String? {
+        return data["type_descr"] as? String
+    }
+    
+    func getTypeText() -> String? {
+        if let type = getType() {
+            if let description = getTypeDescription() { return type.name + " - " + description }
+            return type.name
+        }
+        return nil
     }
     
     func getGender() -> Gender? {
-        return Gender.build(code: data["gender"] as? String)
+        if let code = data["gender"] as? Int16 {
+            return Gender(rawValue: Int(code))
+        }
+        return nil
     }
     
     func getBreeds() -> [Breed]? {
@@ -77,7 +96,11 @@ class AddEditPetPresenter {
         if let breeds = getBreeds() {
             return (breeds.map { $0.name } as! [String]).joined(separator: " - ")
         }
-        return nil
+        return data["otherBreed"] as? String
+    }
+    
+    func getOtherBreed() -> String? {
+        return data["otherBreed"] as? String
     }
     
     func getBirthday() -> Date? {
@@ -95,43 +118,53 @@ class AddEditPetPresenter {
     //MARK:- Setters
     
     func set(deviceCode: String?) {
-        data["deviceCode"] = deviceCode
+        data["deviceCode"] = deviceCode ?? ""
     }
     
     func set(name: String?) {
-        data["name"] = name
+        data["name"] = name ?? ""
     }
     
-    func set(type: String?) {
-        data["type"] = type
+    func set(type: Type?) {
+        data["type"] = type?.rawValue.toInt16 ?? ""
+    }
+    
+    func set(typeDescription: String?) {
+        data["type_descr"] = typeDescription ?? ""
     }
     
     func set(gender:Gender?){
-        data["gender"] = gender?.code
+        data["gender"] = gender?.rawValue.toInt16 ?? ""
     }
 
     func set(first: Breed?) {
         firstBreed = first
+        data["breed"] = first?.id
     }
     
     func set(second: Breed?) {
         secondBreed = second
+        data["breed1"] = second?.id
+    }
+    
+    func set(otherBreed: String?) {
+        data["otherBreed"] = otherBreed ?? ""
     }
     
     func set(birthday:Date?){
-        data["birthday"] = birthday
+        data["birthday"] = birthday ?? ""
     }
     
     func set(weight:Weight?){
-        data["weight"] = weight
+        data["weight"] = weight ?? ""
     }
     
     func set(imageData:Data?){
-        data["image"] = imageData
+        data["image"] = imageData ?? ""
     }
     
     func set(neutred:Bool?){
-        data["neutred"] = neutred
+        data["neutred"] = neutred ?? ""
     }
     
     func refresh(){
@@ -139,48 +172,48 @@ class AddEditPetPresenter {
     }
     
     func done(){
+        
         view?.beginLoadingContent()
         
-        if editMode {
-            savePet()
+        data["date_of_birth"] = (data["birthday"] as! Date?)?.toStringServer ?? ""
+        data["weight"] = (data["weight"] as! Weight?)?.amount ?? ""
+        data["breed_descr"] = data["otherBreed"] ?? ""
+        
+        data["type"] = getType()?.code ?? ""
+        data["gender"] = getGender()?.code ?? ""
+        
+        data.filter(by: ["image", "imageURL", "birthday"])
+        
+        if editMode, let id = data["id"] as? String {
+            
+            
+            DataManager.Instance.setPet(id, data, callback: { (error) in
+                DispatchQueue.main.async {
+                    self.view?.endLoadingContent()
+                    if let error = error {
+                        self.view?.errorMessage(ErrorMsg(title: "Error", msg: "\(error)"))
+                    }else{
+                        self.view?.doneSuccessfully()
+                    }
+                }
+            })
+            
         }else{
 
-            data["id"] = data["deviceCode"]
+            data["device_code"] = data["deviceCode"]
+            data.removeValue(forKey: "deviceCode")
 
-            DataManager.Instance.getUser(callback: { (error, user) in
-                
-                if error == nil, let user = user {
-                    
-                    var ownerData = [String:Any]()
-                    ownerData["id"] = user.id
-                    ownerData["name"] = user.name
-                    ownerData["surname"] = user.surname
-                    ownerData["email"] = user.email
-                    ownerData["imageURL"] = user.imageURL
-                    ownerData["image"] = user.image
-
-                    self.data["owner"] = ownerData
-                    self.savePet()
+            DataManager.Instance.register(pet: data, callback: { (error) in
+                DispatchQueue.main.async {
+                    self.view?.endLoadingContent()
+                    if error == nil {
+                        self.view?.doneSuccessfully()
+                    }else{
+                        self.view?.errorMessage(ErrorMsg(title: "", msg: ""))
+                    }
                 }
             })
         }
-    }
-    
-    private func savePet(){
-        
-        if let firstBreed = firstBreed { data["breed"] = firstBreed.id }
-        if let secondBreed = secondBreed { data["breed1"] = secondBreed.id }
-        
-        DataManager.Instance.setPet(data, callback: { (error) in
-            DispatchQueue.main.async {
-                self.view?.endLoadingContent()
-                if let error = error {
-                    self.view?.errorMessage(ErrorMsg(title: "Error", msg: "\(error)"))
-                }else{
-                    self.view?.doneSuccessfully()
-                }
-            }
-        })
     }
 }
 

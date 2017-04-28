@@ -8,16 +8,15 @@ target 'PawTrails' do
 	pod 'FacebookCore'
 	pod 'FacebookLogin'
 
-  pod 'Fabric'
-  pod 'TwitterKit'
+  	pod 'Fabric'
+  	pod 'TwitterKit'
 
-  pod 'Google/SignIn'
+  	#pod 'Google/SignIn'
 
   # Pods for PawTrails
 
   target 'PawTrailsTests' do
-    inherit! :search_paths
-    # Pods for testing
+    inherit! :search_paths  	
   end
 
 end

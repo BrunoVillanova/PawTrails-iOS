@@ -47,7 +47,7 @@ class PetsPresenter {
     }
     
     func loadPets() {
-        DataManager.Instance.getPets { (error, pets) in
+        DataManager.Instance.loadPets { (error, pets) in
             DispatchQueue.main.async {
                 if let error = error {
                     if error == PetError.PetNotFoundInDataBase {

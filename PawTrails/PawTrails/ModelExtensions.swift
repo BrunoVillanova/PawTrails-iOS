@@ -23,9 +23,22 @@ extension Pet {
             if let second = secondBreed {
                 breeds = breeds?.appending(" - \(second.name ?? "")")
             }
+        }else if let other = breedDescription {
+            breeds = other
         }
         return breeds
         
+    }
+    
+    var typeString: String? {
+        
+        if let type = Type(rawValue: Int(type)) {
+            if let typeDescription = type_descr {
+                return type.name + " - " + typeDescription
+            }
+            return type.name
+        }
+        return nil
     }
     
 }

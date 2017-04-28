@@ -38,7 +38,6 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
         imagePicker.delegate = self
         petImageView.circle()
         presenter.attachView(self, pet)
-        presenter.set(deviceCode: deviceCode)
     }
 
     deinit {
@@ -70,7 +69,7 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
             petImageView.image = UIImage(data: imageData)
         }
         nameLabel.text = presenter.getName()
-        typeLabel.text = presenter.getType()
+        typeLabel.text = presenter.getTypeText()
         genderLabel.text = presenter.getGender()?.name
         breedLabel.text = presenter.getBreedsText()
         birthdayLabel.text = presenter.getBirthday()?.toStringShow

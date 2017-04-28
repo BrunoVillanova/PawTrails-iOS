@@ -17,7 +17,7 @@ class UserManager {
         
         do {
             if let user = try CoreDataManager.Instance.upsert("User", with: data.filtered(by: ["address", "mobile", "img_url", "date_of_birth", "social_network", "social_network_id", "img_url"])) as? User {
-                user.birthday = getBirthdate(data["date_of_birth"])
+                user.birthday = (data["date_of_birth"] as? String)?.toDate
                 
                 // Address
                 
@@ -119,12 +119,12 @@ class UserManager {
         data[withKey] = element == nil ? "" : element!
     }
 
-    private static func getBirthdate(_ data: Any?) -> NSDate? {
-        if let dateData = data as? String {
-            return dateData.toDate as NSDate?
-        }
-        return nil
-    }
+//    private static func getBirthdate(_ data: Any?) -> NSDate? {
+//        if let dateData = data as? String {
+//            return dateData.toDate as NSDate?
+//        }
+//        return nil
+//    }
     
 }
 

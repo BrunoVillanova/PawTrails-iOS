@@ -19,6 +19,7 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
         presenter.attachView(self)
+        noPetsFound.isHidden = true
         
         navigationItem.leftBarButtonItem = presenter.pets.count > 0 ? editButtonItem : nil
         navigationItem.leftBarButtonItem?.action = #selector(PetsViewController.editAction(_:))
@@ -31,6 +32,9 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        if let index = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: index, animated: true)
+        }
         noPetsFound.isHidden = true
         presenter.loadPets()
     }
@@ -51,7 +55,10 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func loadPets() {
-        tableView.reloadData()
+        noPetsFound.isHidden = presenter.pets.count > 0
+//        if tableView.numberOfRows(inSection: 0) != presenter.pets.count {
+            tableView.reloadSections([0], with: UITableViewRowAnimation.none)
+//        }
     }
     
     func petsNotFound() {
@@ -112,7 +119,7 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         
     }
-
+    
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

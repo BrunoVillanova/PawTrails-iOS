@@ -27,10 +27,10 @@ extension String {
         return self.rangeOfCharacter(from: lower) != nil && self.rangeOfCharacter(from: upper) != nil && self.rangeOfCharacter(from: numbers) != nil && self.characters.count > 7
     }
     
-    public var toDate: Date? {
+    public var toDate: NSDate? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        return dateFormatter.date(from: self)
+        return dateFormatter.date(from: self)! as NSDate
     }
     
 }
@@ -59,6 +59,13 @@ extension NSDate {
     }
 }
 
+extension Int {
+    
+    public var toInt16: Int16 {
+        return Int16(self)
+    }
+    
+}
 
 extension Dictionary {
     

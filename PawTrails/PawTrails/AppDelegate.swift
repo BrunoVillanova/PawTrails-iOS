@@ -21,7 +21,8 @@ import Fabric
 import TwitterKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
+//class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
+    class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -31,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         // Set Status Bar Style
         UIApplication.shared.statusBarStyle = .lightContent
          
-        GIDSignIn.sharedInstance().disconnect()
+//        GIDSignIn.sharedInstance().disconnect()
         
         if AuthManager.Instance.isAuthenticated() {
             
@@ -61,11 +62,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     }
     
     func configureGoogleLogin() -> Bool {
-        var configureError: NSError?
-        GGLContext.sharedInstance().configureWithError(&configureError)
-        assert(configureError == nil, "Error configuring Google services: \(String(describing: configureError))")
-        GIDSignIn.sharedInstance().delegate = self
-        return configureError == nil
+//        var configureError: NSError?
+//        GGLContext.sharedInstance().configureWithError(&configureError)
+//        assert(configureError == nil, "Error configuring Google services: \(String(describing: configureError))")
+//        GIDSignIn.sharedInstance().delegate = self
+//        return configureError == nil
+        return true
     }
     
     func loadHomeScreen() {
@@ -83,9 +85,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         if Twitter.sharedInstance().application(app, open: url, options: options) { return true }
         
-        let google = GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+//        let google = GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
         
-        return SDKApplicationDelegate.shared.application(app, open: url, options: options) || google
+        return SDKApplicationDelegate.shared.application(app, open: url, options: options) //|| google
     }
 //
     func applicationWillResignActive(_ application: UIApplication) {
@@ -117,34 +119,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     //MARK:- GIDSignInDelegate
     
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        if let root = window?.rootViewController as? InitialViewController {
-            
-            if (error == nil) {
-                print(user.authentication.idToken)
-                print("\n")
-                print(user.authentication.idTokenExpirationDate)
-                print("\n")
-                root.successGoogleLogin(token: user.authentication.idToken)
-            } else {
-                root.alert(title: "", msg: error.localizedDescription)
-            }
-
-            
-        }else{
-            //Mec
-            print("Shit")
-        }
-
-    }
-    
-    func sign(_ signIn: GIDSignIn!, didDisconnectWith user:GIDGoogleUser!, withError error: Error!) {
-        if AuthManager.Instance.signOut() {
-            loadAuthenticationScreen()
-        }else{
-            debugPrint("Not Sign Out properly", user.debugDescription, error.localizedDescription)
-        }
-    }
+//    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+//        if let root = window?.rootViewController as? InitialViewController {
+//            
+//            if (error == nil) {
+//                print(user.authentication.idToken)
+//                print("\n")
+//                print(user.authentication.idTokenExpirationDate)
+//                print("\n")
+//                root.successGoogleLogin(token: user.authentication.idToken)
+//            } else {
+//                root.alert(title: "", msg: error.localizedDescription)
+//            }
+//
+//            
+//        }else{
+//            //Mec
+//            print("Shit")
+//        }
+//
+//    }
+//    
+//    func sign(_ signIn: GIDSignIn!, didDisconnectWith user:GIDGoogleUser!, withError error: Error!) {
+//        if AuthManager.Instance.signOut() {
+//            loadAuthenticationScreen()
+//        }else{
+//            debugPrint("Not Sign Out properly", user.debugDescription, error.localizedDescription)
+//        }
+//    }
     
 }
 

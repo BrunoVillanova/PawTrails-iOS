@@ -21,7 +21,6 @@ class PetBreedViewController: UIViewController,  UITableViewDataSource, UITableV
     
     var selectedA:IndexPath?
     var selectedB:IndexPath?
-    var otherBreed: String?
     
     var parentEditor: AddEditPetPresenter!
     var presenter = PetBreedsPresenter()
@@ -34,23 +33,22 @@ class PetBreedViewController: UIViewController,  UITableViewDataSource, UITableV
     
         tableView.tableFooterView = UIView()
         
-        if let typeName = parentEditor.getType() {
+        if let type = parentEditor.getType() {
+
             noTypeSelected.isHidden = true
-            if let type = Type.build(code: typeName) {
-                
-                if type == .other {
-                    searchBar.isHidden = true
-                    tableView.allowsSelection = false
-                }
-                
-                if type == .other || type == .cat {
-                    segmentControl.isHidden = true
-                    tableTopConstraint.constant = 0
-                }
-                
-                self.type = type
-                presenter.getBreeds(for: type)
+            
+            if type == .other {
+                searchBar.isHidden = true
+                tableView.allowsSelection = false
             }
+            
+            if type == .other || type == .cat {
+                segmentControl.isHidden = true
+                tableTopConstraint.constant = 0
+            }
+            
+            self.type = type
+            presenter.getBreeds(for: type)
         }else{
             segmentControl.isHidden = true
             tableView.isHidden = true
@@ -58,7 +56,7 @@ class PetBreedViewController: UIViewController,  UITableViewDataSource, UITableV
         }
         
     }
-
+    
     @IBAction func doneAction(_ sender: UIBarButtonItem?) {
         
         if let indexA = selectedA {
@@ -66,12 +64,17 @@ class PetBreedViewController: UIViewController,  UITableViewDataSource, UITableV
             if let indexB = selectedB {
                 parentEditor.set(second: filteredBreeds[indexB.row])
             }
-        }else if let otherBreed = otherBreed {
-//            parentEditor.set(breeds: [otherBreed])
-            print(otherBreed)
-        }else {
+            parentEditor.set(otherBreed: nil)
+        }else if (type != nil) && type == .other {
+            if let row = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? otherBreedCell {
+                parentEditor.set(first: nil)
+                parentEditor.set(second: nil)
+                parentEditor.set(otherBreed: row.breedTextField?.text)
+            }
+        }else{
             parentEditor.set(first: nil)
             parentEditor.set(second: nil)
+            parentEditor.set(otherBreed: nil)
         }
         parentEditor.refresh()
         _ = self.navigationController?.popViewController(animated: true)
@@ -140,6 +143,7 @@ class PetBreedViewController: UIViewController,  UITableViewDataSource, UITableV
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellOther", for: indexPath) as! otherBreedCell
             cell.breedTextField.delegate = self
             cell.breedTextField.becomeFirstResponder()
+            cell.breedTextField.text = parentEditor.getOtherBreed()
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
@@ -232,7 +236,6 @@ class PetBreedViewController: UIViewController,  UITableViewDataSource, UITableV
     // MARK: - UITextFieldDelegate
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        otherBreed = textField.text
         doneAction(nil)
         return true
     }

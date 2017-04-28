@@ -25,9 +25,9 @@ class AddPetDeviceTableViewController: UITableViewController, DeviceCodeView {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        if deviceCodeTextField.text != nil {
-            deviceCodeTextField.becomeFirstResponder()
-        }
+//        if deviceCodeTextField.text != nil {
+//            deviceCodeTextField.becomeFirstResponder()
+//        }
     }
 
     // MARK: - DeviceCodeView

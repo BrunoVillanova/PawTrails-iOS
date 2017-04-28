@@ -15,35 +15,38 @@ class PetTypeTableViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var otherTextField: UITextField!
     
     var parentEditor: AddEditPetPresenter!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if let typeName = parentEditor.getType() {
+        
+        if let type = parentEditor.getType() {
             
-            if let type = Type.build(code: typeName) {
-                switch type {
-                case .cat: catCell.accessoryType = .checkmark
-                    break
-                case .dog: dogCell.accessoryType = .checkmark
-                    break
-                default:
-                    otherTextField.text = typeName
-                }
+            switch type {
+            case .cat: catCell.accessoryType = .checkmark
+                break
+            case .dog: dogCell.accessoryType = .checkmark
+                break
+            default:
+                break
             }
+        }
+        
+        if let other = parentEditor.getTypeDescription() {
+            otherTextField.text = other
         }
         
     }
     
     @IBAction func doneAction(_ sender: UIBarButtonItem) {
         
-        var type: String? = nil
+        var type: Type? = nil
         if catCell.accessoryType == .checkmark {
-            type = "Cat"
+            type = Type.cat
         }else if dogCell.accessoryType == .checkmark {
-            type = "Dog"
+            type = Type.dog
         }else if otherTextField.text != nil {
-            type = otherTextField.text
+            type = Type.other
+            parentEditor.set(typeDescription: otherTextField.text)
         }
         if type != parentEditor.getType() {
             parentEditor.set(first: nil)

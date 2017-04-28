@@ -22,33 +22,61 @@ class PetManager {
     static func upsertPet(_ data: [String:Any]) {
         
         do {
-            if let pet = try CoreDataManager.Instance.upsert("Pet", with: data.filtered(by:["breed", "breed1", "weight"])) as? Pet {
+            if let pet = try CoreDataManager.Instance.upsert("Pet", with: data.filtered(by: ["type", "gender"])) as? Pet {
                 
+                pet.birthday = (data["date_of_birth"] as? String)?.toDate
                 
+                // Weight
                 if let weightAmount = data["weight"] as? Double {
                     
-                    if pet.weight != nil {
-                        pet.weight?.amount = weightAmount
-                    }else{
+//                    if pet.weight != nil {
+//                        pet.weight?.amount = weightAmount
+//                    }else{
                         pet.weight = Weight(weightAmount, unit: .kg)
-                    }
-                    
+//                    }
                 }else{
                     pet.weight = nil
                 }
                 
-//                if let ownerData = data["owner"] as? [String:Any] {
-//                    
-//                    if pet.owner == nil { // Create
-//                        pet.owner = try CoreDataManager.Instance.store("PetUser", with: ownerData) as? PetUser
-//                        
-//                    }else{ // Update
-//                        for key in pet.owner!.keys {
-//                            pet.owner!.setValue(ownerData[key], forKey: key)
-//                        }
-//                    }
-//                }
+                //Details
+                
+                if let typeCode = data["type"] as? String {
+                    if let type = Type.build(code: typeCode)?.rawValue {
+                        pet.type = Int16(type)
+                    }else{
+                        pet.type = -1
+                    }
+                }
 
+                if let genderCode = data["gender"] as? String {
+                    if let gender = Gender.build(code: genderCode)?.rawValue {
+                        pet.gender = Int16(gender)
+                    }else{
+                        pet.gender = -1
+                    }
+                }
+                
+                // Breeds
+                if let type = Type(rawValue: Int(pet.type)) {
+                    
+                    // First Breed
+                    if let breedId = data["breed"] as? Int {
+                        pet.firstBreed = BreedManager.retrieve(for: type, breedId: "\(breedId)")
+                    }else{
+                        pet.setValue(nil, forKey: "firstBreed")
+                    }
+                    
+                    // Second Breed
+                    if let breedId = data["breed1"] as? Int {
+                        pet.secondBreed = BreedManager.retrieve(for: type, breedId: "\(breedId)")
+                    }else{
+                        pet.setValue(nil, forKey: "secondBreed")
+                    }
+                }
+                
+                // Other Breed
+                pet.breedDescription = data["breed_descr"] as? String
+                
                 try CoreDataManager.Instance.save()
             }
         } catch {
@@ -56,7 +84,19 @@ class PetManager {
         }
     }
     
-    static func getPet(_ id:Int, _ callback:petCallback) {
+    static func upsertPets(_ data: [String:Any], _ callback:petsCallback){
+        
+        if let petsData = data["pets"] as? [[String:Any]] {
+            for petData in petsData {
+                upsertPet(petData)
+            }
+            getPets(callback)
+        }else{
+            callback(PetError.PetsNotFoundInResponse, nil)
+        }
+    }
+    
+    static func getPet(_ id:String, _ callback:petCallback) {
         
         if let results = CoreDataManager.Instance.retrieve("Pet", with: NSPredicate("id", .equal, id)) as? [Pet] {
             if results.count > 1 {
@@ -109,12 +149,12 @@ class PetManager {
                     }
                 }
                 
-//                //option 2
-//                for pet in pets {
-//                    if let users = pet.guests?.allObjects as? [PetUser] { friends.append(contentsOf: users) }
-//                    if let owner = pet.owner { friends.append(owner) }
-//                }
-//                friends = Array(Set(friends))
+                //                //option 2
+                //                for pet in pets {
+                //                    if let users = pet.guests?.allObjects as? [PetUser] { friends.append(contentsOf: users) }
+                //                    if let owner = pet.owner { friends.append(owner) }
+                //                }
+                //                friends = Array(Set(friends))
                 
                 callback(nil, friends)
             }else{

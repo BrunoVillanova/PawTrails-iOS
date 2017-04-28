@@ -124,7 +124,7 @@ class InitialPresenter {
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         if appDelegate.configureGoogleLogin() {
-            GIDSignIn.sharedInstance().signIn()
+//            GIDSignIn.sharedInstance().signIn()
         }else{
             view?.errorMessage(ErrorMsg.init(title: "Error", msg: "Couldn't initialize Google Login"))
         }
