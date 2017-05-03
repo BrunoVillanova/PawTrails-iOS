@@ -45,7 +45,10 @@ public class Weight: NSObject, NSCoding {
         aCoder.encode(amount, forKey: "amount")
     }
     
-    func toString() -> String {
-        return "\(amount) \(unit.name)"
+    public var toString:String {
+        let amountStr = "\(amount)"
+        let unitStr = unit.name
+        return amountStr.appending(" ").appending(unitStr)
+        
     }
 }

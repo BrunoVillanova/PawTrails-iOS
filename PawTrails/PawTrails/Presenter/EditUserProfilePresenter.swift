@@ -140,27 +140,31 @@ class EditUserProfilePresenter {
         if let imageData = imageData {
             var data = [String:Any]()
             data["path"] = "user"
-            data["userid"] = data["id"]
+            data["userid"] = SharedPreferences.get(.id)
             data["picture"] = imageData
             
             DataManager.Instance.set(image: data, callback: { (success) in
                 if success {
                     self.imageData = nil
                     self.save()
+                }else{
+                    DispatchQueue.main.async {
+                        self.view?.errorMessage(ErrorMsg(title: "", msg: "couldn't upload the image"))
+                    }
                 }
             })
-        }
-        
-        data["date_of_birth"] = (data["birthday"] as! Date?)?.toStringServer ?? ""
-        data.filter(by: ["image", "imageURL", "birthday"])
-        data["mobile"] = phone?.getJson()
-        data["address"] = address?.getJson()
-                
-        DataManager.Instance.set(user: data) { (error, user) in
-            if error == nil {
-                DispatchQueue.main.async(execute: { () -> Void in
-                    self.view?.saved()
-                })
+        }else{
+            data["date_of_birth"] = (data["birthday"] as! Date?)?.toStringServer ?? ""
+            data.filter(by: ["image", "imageURL", "birthday"])
+            data["mobile"] = phone?.getJson()
+            data["address"] = address?.getJson()
+            
+            DataManager.Instance.set(user: data) { (error, user) in
+                if error == nil {
+                    DispatchQueue.main.async(execute: { () -> Void in
+                        self.view?.saved()
+                    })
+                }
             }
         }
     }

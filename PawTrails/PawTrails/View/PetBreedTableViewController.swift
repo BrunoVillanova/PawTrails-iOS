@@ -58,23 +58,18 @@ class PetBreedViewController: UIViewController,  UITableViewDataSource, UITableV
     }
     
     @IBAction func doneAction(_ sender: UIBarButtonItem?) {
-        
+        parentEditor.set(first: nil)
+        parentEditor.set(second: nil)
+        parentEditor.set(otherBreed: nil)
         if let indexA = selectedA {
             parentEditor.set(first: filteredBreeds[indexA.row])
             if let indexB = selectedB {
                 parentEditor.set(second: filteredBreeds[indexB.row])
             }
-            parentEditor.set(otherBreed: nil)
         }else if (type != nil) && type == .other {
             if let row = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? otherBreedCell {
-                parentEditor.set(first: nil)
-                parentEditor.set(second: nil)
                 parentEditor.set(otherBreed: row.breedTextField?.text)
             }
-        }else{
-            parentEditor.set(first: nil)
-            parentEditor.set(second: nil)
-            parentEditor.set(otherBreed: nil)
         }
         parentEditor.refresh()
         _ = self.navigationController?.popViewController(animated: true)

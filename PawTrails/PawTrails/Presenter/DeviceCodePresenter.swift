@@ -12,6 +12,7 @@ protocol DeviceCodeView: NSObjectProtocol, View, ConnectionView {
     func idle(_ code: String)
     func wrongCode()
     func codeFormat()
+    func codeChanged()
 }
 
 class DeviceCodePresenter {
@@ -31,7 +32,7 @@ class DeviceCodePresenter {
 
     func check(_ code: String?){
         
-        if code == nil || (code != nil && code == "") {
+        if code == nil || (code != nil && (code == "" || !code!.isValidCode)) {
             view?.codeFormat()
         }else if let code = code {
             DataManager.Instance.check(code, callback: { (idle) in
@@ -43,6 +44,18 @@ class DeviceCodePresenter {
                     }
                 }
             })
+        }
+    }
+    
+    func change(_ code:String, to petId: String){
+        DataManager.Instance.change(code, of: petId) { (error) in
+            DispatchQueue.main.async {
+                if let error = error {
+                    self.view?.errorMessage(ErrorMsg(title: "", msg: "\(error)"))
+                }else{
+                    self.view?.codeChanged()
+                }
+            }
         }
     }
 }

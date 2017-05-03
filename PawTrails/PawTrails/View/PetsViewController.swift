@@ -21,7 +21,7 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         presenter.attachView(self)
         noPetsFound.isHidden = true
         
-        navigationItem.leftBarButtonItem = presenter.pets.count > 0 ? editButtonItem : nil
+        navigationItem.leftBarButtonItem = nil
         navigationItem.leftBarButtonItem?.action = #selector(PetsViewController.editAction(_:))
         
         UIApplication.shared.statusBarStyle = .lightContent
@@ -46,7 +46,6 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
             self.tableView.isEditing = !self.tableView.isEditing
         }
     }
-    
 
     // MARK: - PetsView
     
@@ -57,15 +56,16 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func loadPets() {
         noPetsFound.isHidden = presenter.pets.count > 0
 //        if tableView.numberOfRows(inSection: 0) != presenter.pets.count {
-            tableView.reloadSections([0], with: UITableViewRowAnimation.none)
+//            tableView.reloadSections([0], with: UITableViewRowAnimation.none)
 //        }
+        tableView.reloadData()
     }
     
     func petsNotFound() {
-        navigationItem.leftBarButtonItem = nil
+        tableView.reloadData()
         noPetsFound.isHidden = false
     }
-    
+        
     // MARK: - UITableViewDataSource
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -78,13 +78,14 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! petListCell
-        cell.titleLabel.text = presenter.pets[indexPath.row].name
-        if let imageData = presenter.pets[indexPath.row].image as Data? {
+        let pet = presenter.pets[indexPath.row]
+        cell.titleLabel.text = pet.name
+        if let imageData = pet.image as Data? {
             cell.petImageView.image = UIImage(data: imageData)
         }else{
             cell.petImageView.image = nil
         }
-        cell.subtitleLabel.text = presenter.pets[indexPath.row].breeds
+        cell.subtitleLabel.text = pet.breeds
         cell.petImageView.circle()
         cell.trackButton.circle()
         cell.trackButton.addTarget(self, action: #selector(PetsViewController.trackButtonAction(sender:)), for: .touchUpInside)
@@ -92,24 +93,20 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return cell
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            let petName = presenter.pets[indexPath.row].name ?? ""
-            
-            popUpDestructive(title: "Remove \(petName)", msg: "If you proceed you will loose all the information of this pet.", cancelHandler: { (cancel) in
-                tableView.reloadRows(at: [indexPath], with: .none)
-            }, proceedHandler: { (remove) in
-                if self.presenter.removePet(at: indexPath.row) {
-                    tableView.deleteRows(at: [indexPath], with: .fade)
-                }else{
-                    self.alert(title: "", msg: "Couldn't remove the pet")
-                }
-            })
-            
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }
-    }
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//            let petName = presenter.pets[indexPath.row].name ?? ""
+//            
+//            popUpDestructive(title: "Remove \(petName)", msg: "If you proceed you will loose all the information of this pet.", cancelHandler: { (cancel) in
+//                tableView.reloadRows(at: [indexPath], with: .none)
+//            }, proceedHandler: { (remove) in
+//                self.presenter.removePet(at: indexPath.row)
+//            })
+//            
+//        } else if editingStyle == .insert {
+//            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+//        }
+//    }
     
     func trackButtonAction(sender: UIButton){
 

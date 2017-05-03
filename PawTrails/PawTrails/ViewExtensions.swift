@@ -25,9 +25,9 @@ enum notificationType {
 
 extension UIViewController {
     
-    func popUp(title:String, msg:String, actionTitle: String = "Ok"){
+    func popUp(title:String, msg:String, actionTitle: String = "Ok", handler: ((UIAlertAction)->Void)? = nil){
         let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: actionTitle, style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: actionTitle, style: .default, handler: handler))
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -78,12 +78,12 @@ extension UIViewController {
 
     }
     
-    @IBAction func dismissAction(sender: UIButton){
+    @IBAction func dismissAction(sender: UIButton?){
         self.view.endEditing(true)
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func dismissBarAction(sender: UIBarButtonItem){
+    @IBAction func dismissBarAction(sender: UIBarButtonItem?){
         self.view.endEditing(true)
         self.navigationController?.dismiss(animated: true, completion: nil)
     }

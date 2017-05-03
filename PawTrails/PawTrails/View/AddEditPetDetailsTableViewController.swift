@@ -34,10 +34,10 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
             navigationItem.title = "Edit"
             navigationItem.prompt = pet.name
         }
-        
+                
         imagePicker.delegate = self
         petImageView.circle()
-        presenter.attachView(self, pet)
+        presenter.attachView(self, pet, deviceCode)
     }
 
     deinit {
@@ -48,8 +48,8 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
         presenter.done()
     }
     
-    @IBAction func neutredValueChanged(_ sender: UISwitch) {
-        presenter.set(neutred: sender.isOn)
+    @IBAction func neuteredValueChanged(_ sender: UISwitch) {
+        presenter.set(neutered: sender.isOn)
     }
     
     //MARK: - UITableViewDelegate
@@ -73,7 +73,7 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
         genderLabel.text = presenter.getGender()?.name
         breedLabel.text = presenter.getBreedsText()
         birthdayLabel.text = presenter.getBirthday()?.toStringShow
-        weightLabel.text = presenter.getWeight()?.toString()
+        weightLabel.text = presenter.getWeight()?.toString
         tableView.reloadData()
     }
     
@@ -103,7 +103,7 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let chosenImage = info[UIImagePickerControllerEditedImage] as? UIImage {
             petImageView.image = chosenImage
-            presenter.set(imageData: chosenImage.encoded)
+            presenter.set(image: chosenImage.encoded)
         }
         dismiss(animated:true, completion: nil)
     }

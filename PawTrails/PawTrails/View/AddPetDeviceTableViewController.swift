@@ -8,16 +8,20 @@
 
 import UIKit
 
-class AddPetDeviceTableViewController: UITableViewController, DeviceCodeView {
+class AddPetDeviceTableViewController: UITableViewController, UITextFieldDelegate, DeviceCodeView {
 
     @IBOutlet weak var deviceCodeTextField: UITextField!
     
     fileprivate let presenter = DeviceCodePresenter()
     fileprivate var isDeviceIdle = false
+    var petId: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.attachView(self)
+        if petId != nil {
+            navigationItem.rightBarButtonItem?.title = "Change"
+        }
     }
     
     deinit {
@@ -25,9 +29,9 @@ class AddPetDeviceTableViewController: UITableViewController, DeviceCodeView {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-//        if deviceCodeTextField.text != nil {
-//            deviceCodeTextField.becomeFirstResponder()
-//        }
+        if deviceCodeTextField.text != nil {
+            deviceCodeTextField.becomeFirstResponder()
+        }
     }
 
     // MARK: - DeviceCodeView
@@ -44,9 +48,16 @@ class AddPetDeviceTableViewController: UITableViewController, DeviceCodeView {
         alert(title: "Error", msg: "Wrong Code")
     }
     
+    func codeChanged() {
+        dismissAction(sender: nil)
+    }
+    
     func idle(_ code: String) {
         isDeviceIdle = true
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "AddEditPetDetailsTableViewController") as? AddEditPetDetailsTableViewController {
+        
+        if let petId = petId {
+            presenter.change(code, to: petId)
+        }else if let vc = storyboard?.instantiateViewController(withIdentifier: "AddEditPetDetailsTableViewController") as? AddEditPetDetailsTableViewController {
             vc.deviceCode = code
             navigationController?.pushViewController(vc, animated: true)
         }
@@ -62,11 +73,25 @@ class AddPetDeviceTableViewController: UITableViewController, DeviceCodeView {
         showNotification(title: Message.Instance.connectionError(type: .NoConnection), type: .red)
     }
     
+    // MARK: - UITextFieldDelegate
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == deviceCodeTextField {
+            presenter.check(textField.text)
+        }
+        return true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+
+    
     // MARK: - Navigation
 
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         
-        if identifier == "addPetDetails" {
+        if !isDeviceIdle && identifier == "addPetDetails" {
             presenter.check(deviceCodeTextField.text)
             return isDeviceIdle
         }
@@ -78,6 +103,9 @@ class AddPetDeviceTableViewController: UITableViewController, DeviceCodeView {
         if segue.destination is AddEditPetDetailsTableViewController {
             self.view.endEditing(true)
             (segue.destination as! AddEditPetDetailsTableViewController).deviceCode = deviceCodeTextField.text!
+        }else if segue.destination is ScanQRViewController {
+            self.view.endEditing(true)
+            (segue.destination as! ScanQRViewController).petId = self.petId
         }
     }
 }

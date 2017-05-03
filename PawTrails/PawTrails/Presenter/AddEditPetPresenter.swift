@@ -30,15 +30,19 @@ class AddEditPetPresenter {
     private var secondBreed: Breed?
     private var otherBreed: String?
     private var editMode: Bool = false
+    private var imageData: Data? = nil
     
-    func attachView(_ view: AddEditPetView, _ pet: Pet?){
+    func attachView(_ view: AddEditPetView, _ pet: Pet?, _ deviceCode: String?){
         self.view = view
         if let pet = pet {
             data = pet.toDict
-            firstBreed = pet.firstBreed
-            secondBreed = pet.secondBreed
+            set(first: pet.firstBreed)
+            set(second: pet.secondBreed)
             editMode = true
             view.loadPet()
+        }
+        if let deviceCode = deviceCode {
+            set(deviceCode: deviceCode)
         }
     }
     
@@ -70,7 +74,7 @@ class AddEditPetPresenter {
     
     func getTypeText() -> String? {
         if let type = getType() {
-            if let description = getTypeDescription() { return type.name + " - " + description }
+            if let description = getTypeDescription(), description != "" { return type.name + " - " + description }
             return type.name
         }
         return nil
@@ -96,11 +100,11 @@ class AddEditPetPresenter {
         if let breeds = getBreeds() {
             return (breeds.map { $0.name } as! [String]).joined(separator: " - ")
         }
-        return data["otherBreed"] as? String
+        return data["breed_descr"] as? String
     }
     
     func getOtherBreed() -> String? {
-        return data["otherBreed"] as? String
+        return data["breed_descr"] as? String
     }
     
     func getBirthday() -> Date? {
@@ -111,14 +115,14 @@ class AddEditPetPresenter {
         return data["weight"] as? Weight
     }
     
-    func getNeutred() -> Bool? {
-        return data["neutred"] as? Bool
+    func getNeutered() -> Bool? {
+        return data["neutered"] as? Bool
     }
     
     //MARK:- Setters
     
     func set(deviceCode: String?) {
-        data["deviceCode"] = deviceCode ?? ""
+        data["device_code"] = deviceCode ?? ""
     }
     
     func set(name: String?) {
@@ -148,7 +152,7 @@ class AddEditPetPresenter {
     }
     
     func set(otherBreed: String?) {
-        data["otherBreed"] = otherBreed ?? ""
+        data["breed_descr"] = otherBreed ?? ""
     }
     
     func set(birthday:Date?){
@@ -159,12 +163,12 @@ class AddEditPetPresenter {
         data["weight"] = weight ?? ""
     }
     
-    func set(imageData:Data?){
-        data["image"] = imageData ?? ""
+    func set(image data:Data?){
+        imageData = data
     }
     
-    func set(neutred:Bool?){
-        data["neutred"] = neutred ?? ""
+    func set(neutered:Bool?){
+        data["neutered"] = neutered ?? ""
     }
     
     func refresh(){
@@ -172,12 +176,53 @@ class AddEditPetPresenter {
     }
     
     func done(){
+
+        if editMode, let id = data["id"] as? String, imageData != nil {
+            saveImatge(petId: id)
+        }else{
+            save()
+        }
+    }
+    
+    private func saveImatge(petId:String){
+        
+        if let imageData = imageData {
+            var data = [String:Any]()
+            data["path"] = "pet"
+            data["petid"] = petId
+            data["picture"] = imageData
+            print(imageData.count/1024)
+            
+            DataManager.Instance.set(image: data, callback: { (success) in
+                if success {
+                    self.imageData = nil
+                    if self.editMode {
+                        self.save()
+                    }else{
+                        DispatchQueue.main.async {
+                            self.view?.endLoadingContent()
+                            self.view?.doneSuccessfully()
+                        }
+                    }
+                }else{
+                    DispatchQueue.main.async {
+                        self.view?.endLoadingContent()
+                        self.view?.errorMessage(ErrorMsg(title: "", msg: "couldn't upload the image"))
+                    }
+                }
+            })
+        }
+    }
+    
+    private func save(){
         
         view?.beginLoadingContent()
-        
-        data["date_of_birth"] = (data["birthday"] as! Date?)?.toStringServer ?? ""
-        data["weight"] = (data["weight"] as! Weight?)?.amount ?? ""
-        data["breed_descr"] = data["otherBreed"] ?? ""
+        if let birthdate = data["birthday"] as? Date? {
+            data["date_of_birth"] = birthdate?.toStringServer ?? ""
+        }
+        if let weight = data["weight"] as? Weight {
+            data["weight"] = weight.amount
+        }
         
         data["type"] = getType()?.code ?? ""
         data["gender"] = getGender()?.code ?? ""
@@ -185,7 +230,6 @@ class AddEditPetPresenter {
         data.filter(by: ["image", "imageURL", "birthday"])
         
         if editMode, let id = data["id"] as? String {
-            
             
             DataManager.Instance.setPet(id, data, callback: { (error) in
                 DispatchQueue.main.async {
@@ -199,17 +243,22 @@ class AddEditPetPresenter {
             })
             
         }else{
+            
+            DataManager.Instance.register(pet: data, callback: { (error, pet) in
 
-            data["device_code"] = data["deviceCode"]
-            data.removeValue(forKey: "deviceCode")
-
-            DataManager.Instance.register(pet: data, callback: { (error) in
-                DispatchQueue.main.async {
-                    self.view?.endLoadingContent()
-                    if error == nil {
-                        self.view?.doneSuccessfully()
+                if error == nil {
+                    if self.imageData != nil, let pet = pet {
+                        self.saveImatge(petId: pet.id!)
                     }else{
-                        self.view?.errorMessage(ErrorMsg(title: "", msg: ""))
+                        DispatchQueue.main.async {
+                            self.view?.endLoadingContent()
+                            self.view?.doneSuccessfully()
+                        }
+                    }
+                }else{
+                    DispatchQueue.main.async {
+                        self.view?.endLoadingContent()
+                        self.view?.errorMessage(ErrorMsg(title: "", msg: "couldn't upload the image"))
                     }
                 }
             })

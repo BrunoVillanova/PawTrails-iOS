@@ -51,6 +51,7 @@ class PetsPresenter {
             DispatchQueue.main.async {
                 if let error = error {
                     if error == PetError.PetNotFoundInDataBase {
+                        self.pets.removeAll()
                         self.view?.petsNotFound()
                     }else{
                         self.view?.errorMessage(ErrorMsg(title: "",msg: "\(error)"))
@@ -62,14 +63,4 @@ class PetsPresenter {
             }
         }
     }
-    
-    func removePet(at index: Int) -> Bool {
-        guard let petId = pets[index].id else { return false }
-        if DataManager.Instance.removePet(petId) {
-            pets.remove(at: index)
-            return true
-        }
-        return false
-    }
-    
 }

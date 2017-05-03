@@ -179,6 +179,7 @@ class CoreDataManager {
     
     //MARK:- Helpers
     
+    
 }
 
 /// NSPersistentStoreCoordinator extension
@@ -252,7 +253,7 @@ fileprivate struct Storage {
     
     private lazy var managedObjectContext: NSManagedObjectContext = {
         let coordinator = self.persistentStoreCoordinator
-        var managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        var managedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = coordinator
         return managedObjectContext
     }()

@@ -23,7 +23,7 @@ extension Pet {
             if let second = secondBreed {
                 breeds = breeds?.appending(" - \(second.name ?? "")")
             }
-        }else if let other = breedDescription {
+        }else if let other = breed_descr {
             breeds = other
         }
         return breeds
@@ -39,6 +39,28 @@ extension Pet {
             return type.name
         }
         return nil
+    }
+    
+    var owner: PetUser? {
+        
+        if let users = users?.allObjects as? [PetUser] {
+            let owners = users.filter({ $0.isOwner })
+            if owners.count == 1 {return owners[0]}
+        }
+        return nil
+    }
+    
+    var isOwner: Bool {
+        
+        guard let currentId = SharedPreferences.get(.id) else { return false }
+        guard let petId = owner?.id else { return false }
+        return currentId == petId
+    }
+    
+    func isOwner(_ user: PetUser) -> Bool {
+        guard let userId = user.id else { return false }
+        guard let petId = owner?.id else { return false }
+        return userId == petId
     }
     
 }

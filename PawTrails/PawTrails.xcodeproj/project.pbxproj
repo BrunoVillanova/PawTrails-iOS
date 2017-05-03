@@ -34,6 +34,7 @@
 		4424E9761EB3430C004CC5FA /* PetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4424E9751EB3430C004CC5FA /* PetPresenter.swift */; };
 		442690D81EADEE3100E2B63F /* PetActivityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442690D71EADEE3100E2B63F /* PetActivityTableViewController.swift */; };
 		44277A0C1E7A987C00B336BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44277A0A1E7A987C00B336BD /* LaunchScreen.storyboard */; };
+		442FB06D1EBA00B9004486F8 /* PetUserPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442FB06C1EBA00B9004486F8 /* PetUserPresenter.swift */; };
 		44329CB41EA1129400325A13 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44329CB31EA1129400325A13 /* Constants.swift */; };
 		44340F3D1EB22B4900EB4312 /* PetManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44340F3C1EB22B4900EB4312 /* PetManagerTest.swift */; };
 		443936FF1EA770EF0044831E /* PetUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443936FE1EA770EF0044831E /* PetUsersViewController.swift */; };
@@ -45,6 +46,14 @@
 		4440C5CB1E8BA568007A13B1 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4440C5CA1E8BA568007A13B1 /* ViewExtensions.swift */; };
 		4440C5CD1E8BA5D0007A13B1 /* ModelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4440C5CC1E8BA5D0007A13B1 /* ModelExtensions.swift */; };
 		4440C5CF1E8BA64E007A13B1 /* MapExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4440C5CE1E8BA64E007A13B1 /* MapExtensions.swift */; };
+		4441ACA61EB8C72500FBE27F /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4441ACA51EB8C72500FBE27F /* SafariServices.framework */; };
+		4441ACA81EB8C72E00FBE27F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4441ACA71EB8C72E00FBE27F /* SystemConfiguration.framework */; };
+		4441ACAA1EB8C7CF00FBE27F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4441ACA91EB8C7CF00FBE27F /* GoogleService-Info.plist */; };
+		4441ACB11EB8CC7A00FBE27F /* GoogleAppUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4441ACAC1EB8CC7A00FBE27F /* GoogleAppUtilities.framework */; };
+		4441ACB31EB8CC7A00FBE27F /* GoogleSignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4441ACAE1EB8CC7A00FBE27F /* GoogleSignIn.framework */; };
+		4441ACB41EB8CC7A00FBE27F /* GoogleSignInDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4441ACAF1EB8CC7A00FBE27F /* GoogleSignInDependencies.framework */; };
+		4441ACB51EB8CC7A00FBE27F /* GoogleSymbolUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4441ACB01EB8CC7A00FBE27F /* GoogleSymbolUtilities.framework */; };
+		4441ACB61EB8CC8D00FBE27F /* GoogleSignIn.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4441ACAD1EB8CC7A00FBE27F /* GoogleSignIn.bundle */; };
 		44421A2C1E4CB8E7009755BD /* EditUserProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44421A2B1E4CB8E7009755BD /* EditUserProfilePresenter.swift */; };
 		44444C8D1EA8A55B0080E328 /* Weight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44444C8C1EA8A55B0080E328 /* Weight.swift */; };
 		44457A2E1E5AF31400B43748 /* AddressTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44457A2D1E5AF31400B43748 /* AddressTableViewController.swift */; };
@@ -55,7 +64,6 @@
 		44498DFD1E4DBE6700F6D761 /* ChangePasswordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44498DFC1E4DBE6700F6D761 /* ChangePasswordPresenter.swift */; };
 		44498DFF1E4DC03100F6D761 /* ChangePasswordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44498DFE1E4DC03100F6D761 /* ChangePasswordTableViewController.swift */; };
 		444ACEFC1E894AF500A9A086 /* EmailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444ACEFB1E894AF500A9A086 /* EmailVerificationViewController.swift */; };
-		444D2E021EAF9E4D004BB20D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 444D2E011EAF9E4D004BB20D /* GoogleService-Info.plist */; };
 		444E00CD1E857B2200CAA250 /* SearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444E00CC1E857B2200CAA250 /* SearchManager.swift */; };
 		445A6DC91E896B6F0042736E /* EmailVerificationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445A6DC81E896B6F0042736E /* EmailVerificationPresenter.swift */; };
 		446548161E5C5CC900458CB7 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446548151E5C5CC900458CB7 /* UserManager.swift */; };
@@ -166,6 +174,7 @@
 		4424E9751EB3430C004CC5FA /* PetPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetPresenter.swift; path = Presenter/PetPresenter.swift; sourceTree = "<group>"; };
 		442690D71EADEE3100E2B63F /* PetActivityTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetActivityTableViewController.swift; path = View/PetActivityTableViewController.swift; sourceTree = "<group>"; };
 		44277A0B1E7A987C00B336BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		442FB06C1EBA00B9004486F8 /* PetUserPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetUserPresenter.swift; sourceTree = "<group>"; };
 		44329CB21EA0F75600325A13 /* Test.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Test.playground; sourceTree = "<group>"; };
 		44329CB31EA1129400325A13 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		44340F3C1EB22B4900EB4312 /* PetManagerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetManagerTest.swift; sourceTree = "<group>"; };
@@ -178,6 +187,14 @@
 		4440C5CA1E8BA568007A13B1 /* ViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		4440C5CC1E8BA5D0007A13B1 /* ModelExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelExtensions.swift; sourceTree = "<group>"; };
 		4440C5CE1E8BA64E007A13B1 /* MapExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapExtensions.swift; sourceTree = "<group>"; };
+		4441ACA51EB8C72500FBE27F /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
+		4441ACA71EB8C72E00FBE27F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		4441ACA91EB8C7CF00FBE27F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4441ACAC1EB8CC7A00FBE27F /* GoogleAppUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleAppUtilities.framework; sourceTree = "<group>"; };
+		4441ACAD1EB8CC7A00FBE27F /* GoogleSignIn.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleSignIn.bundle; sourceTree = "<group>"; };
+		4441ACAE1EB8CC7A00FBE27F /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSignIn.framework; sourceTree = "<group>"; };
+		4441ACAF1EB8CC7A00FBE27F /* GoogleSignInDependencies.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSignInDependencies.framework; sourceTree = "<group>"; };
+		4441ACB01EB8CC7A00FBE27F /* GoogleSymbolUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSymbolUtilities.framework; sourceTree = "<group>"; };
 		44421A2B1E4CB8E7009755BD /* EditUserProfilePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditUserProfilePresenter.swift; path = Presenter/EditUserProfilePresenter.swift; sourceTree = "<group>"; };
 		44444C8C1EA8A55B0080E328 /* Weight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Weight.swift; path = Model/Weight.swift; sourceTree = "<group>"; };
 		44457A2D1E5AF31400B43748 /* AddressTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddressTableViewController.swift; path = View/AddressTableViewController.swift; sourceTree = "<group>"; };
@@ -188,7 +205,6 @@
 		44498DFC1E4DBE6700F6D761 /* ChangePasswordPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordPresenter.swift; sourceTree = "<group>"; };
 		44498DFE1E4DC03100F6D761 /* ChangePasswordTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChangePasswordTableViewController.swift; path = View/ChangePasswordTableViewController.swift; sourceTree = "<group>"; };
 		444ACEFB1E894AF500A9A086 /* EmailVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmailVerificationViewController.swift; path = View/EmailVerificationViewController.swift; sourceTree = "<group>"; };
-		444D2E011EAF9E4D004BB20D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		444E00CC1E857B2200CAA250 /* SearchManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchManager.swift; path = Model/SearchManager.swift; sourceTree = "<group>"; };
 		445A6DC81E896B6F0042736E /* EmailVerificationPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailVerificationPresenter.swift; sourceTree = "<group>"; };
 		446548151E5C5CC900458CB7 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserManager.swift; path = Model/UserManager.swift; sourceTree = "<group>"; };
@@ -267,6 +283,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4441ACA81EB8C72E00FBE27F /* SystemConfiguration.framework in Frameworks */,
+				4441ACA61EB8C72500FBE27F /* SafariServices.framework in Frameworks */,
 				35B268DF2DC9C7D7C0CBF782 /* Pods_PawTrailsTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -275,8 +293,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4441ACB51EB8CC7A00FBE27F /* GoogleSymbolUtilities.framework in Frameworks */,
+				4441ACB11EB8CC7A00FBE27F /* GoogleAppUtilities.framework in Frameworks */,
 				447D4C171E44C4F5008F82F4 /* MapKit.framework in Frameworks */,
 				3808F92C4AE1F8421B70B99A /* Pods_PawTrails.framework in Frameworks */,
+				4441ACB41EB8CC7A00FBE27F /* GoogleSignInDependencies.framework in Frameworks */,
+				4441ACB31EB8CC7A00FBE27F /* GoogleSignIn.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,7 +308,7 @@
 		440CEE491E3B8D0700F58A09 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				444D2E011EAF9E4D004BB20D /* GoogleService-Info.plist */,
+				4441ACAB1EB8CC6F00FBE27F /* Google */,
 				449747B91E8BCB6600C3431F /* PawTrails-Bridging-Header.h */,
 				4415FF491E3B822900A81B13 /* Assets.xcassets */,
 				4415FF4E1E3B822900A81B13 /* Info.plist */,
@@ -316,6 +338,7 @@
 			isa = PBXGroup;
 			children = (
 				44B179611E4B62690070A18B /* Presenter.swift */,
+				447905141E57307E00A49AB3 /* Authentication */,
 				4475FB271EB0F68700E9990D /* User */,
 				44C7F74F1E4CD3DA00171170 /* HomePresenter.swift */,
 				447440E71E8400EF0069EA85 /* SettingsPresenter.swift */,
@@ -409,6 +432,19 @@
 			name = Extensions;
 			sourceTree = "<group>";
 		};
+		4441ACAB1EB8CC6F00FBE27F /* Google */ = {
+			isa = PBXGroup;
+			children = (
+				4441ACAC1EB8CC7A00FBE27F /* GoogleAppUtilities.framework */,
+				4441ACAD1EB8CC7A00FBE27F /* GoogleSignIn.bundle */,
+				4441ACAE1EB8CC7A00FBE27F /* GoogleSignIn.framework */,
+				4441ACAF1EB8CC7A00FBE27F /* GoogleSignInDependencies.framework */,
+				4441ACB01EB8CC7A00FBE27F /* GoogleSymbolUtilities.framework */,
+				4441ACA91EB8C7CF00FBE27F /* GoogleService-Info.plist */,
+			);
+			name = Google;
+			sourceTree = "<group>";
+		};
 		4465481B1E5C624700458CB7 /* Communication */ = {
 			isa = PBXGroup;
 			children = (
@@ -447,7 +483,6 @@
 		4475FB271EB0F68700E9990D /* User */ = {
 			isa = PBXGroup;
 			children = (
-				447905141E57307E00A49AB3 /* Authentication */,
 				44421A2B1E4CB8E7009755BD /* EditUserProfilePresenter.swift */,
 				4424DCFE1E8EA1D900ACDF07 /* UserProfilePresenter.swift */,
 			);
@@ -464,6 +499,7 @@
 				440821A91EB0A08D0000751B /* AddPetUserPresenter.swift */,
 				4475FB251EB0D73700E9990D /* DeviceCodePresenter.swift */,
 				4424E9751EB3430C004CC5FA /* PetPresenter.swift */,
+				442FB06C1EBA00B9004486F8 /* PetUserPresenter.swift */,
 			);
 			name = Pet;
 			sourceTree = "<group>";
@@ -590,6 +626,8 @@
 		91352D1B7E01CC1C0CF51D38 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4441ACA71EB8C72E00FBE27F /* SystemConfiguration.framework */,
+				4441ACA51EB8C72500FBE27F /* SafariServices.framework */,
 				447D4C161E44C4F5008F82F4 /* MapKit.framework */,
 				199033D371CC47C9192C6703 /* Pods_Snout.framework */,
 				754A776083E072AC16A405DB /* Pods_SnoutTests.framework */,
@@ -707,11 +745,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				444D2E021EAF9E4D004BB20D /* GoogleService-Info.plist in Resources */,
+				4441ACB61EB8CC8D00FBE27F /* GoogleSignIn.bundle in Resources */,
 				4415FF4A1E3B822900A81B13 /* Assets.xcassets in Resources */,
 				44277A0C1E7A987C00B336BD /* LaunchScreen.storyboard in Resources */,
 				4415FF481E3B822900A81B13 /* Main.storyboard in Resources */,
 				44485FBD1E52076C00A3C47D /* countrycodes.csv in Resources */,
+				4441ACAA1EB8C7CF00FBE27F /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -930,6 +969,7 @@
 				44FE723D1E4A2EF0007C7E24 /* DataManager.swift in Sources */,
 				44C7F7471E4CD3AE00171170 /* SocketIOClientStatus.swift in Sources */,
 				443937011EA771590044831E /* PetUsersPresenter.swift in Sources */,
+				442FB06D1EBA00B9004486F8 /* PetUserPresenter.swift in Sources */,
 				446548161E5C5CC900458CB7 /* UserManager.swift in Sources */,
 				447AC7E21E9CDAF700D2D2B2 /* PetNameTableViewController.swift in Sources */,
 				445A6DC91E896B6F0042736E /* EmailVerificationPresenter.swift in Sources */,
@@ -986,6 +1026,34 @@
 				INFOPLIST_FILE = PawTrailsTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"Accounts\"",
+					"-framework",
+					"\"CoreData\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreMedia\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"Social\"",
+					"-framework",
+					"\"UIKit\"",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = attitudetech.PawTrailsTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
@@ -1004,6 +1072,34 @@
 				INFOPLIST_FILE = PawTrailsTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"Accounts\"",
+					"-framework",
+					"\"CoreData\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreMedia\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"Social\"",
+					"-framework",
+					"\"UIKit\"",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = attitudetech.PawTrailsTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
@@ -1116,6 +1212,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/PawTrails",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/PawTrails/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1144,6 +1241,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/PawTrails",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/PawTrails/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

@@ -14,14 +14,14 @@ class PetBirthdayTableViewController: UITableViewController {
     @IBOutlet weak var birthdayPicker: UIDatePicker!
     
     var parentEditor: AddEditPetPresenter!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         if let birthday = parentEditor.getBirthday() {
-                birthdayPicker.setDate(birthday, animated: false)
-            }
-
+            birthdayPicker.setDate(birthday, animated: false)
+        }
+        
         birthdayLabel.text = birthdayPicker.date.toStringShow
     }
     
@@ -34,5 +34,5 @@ class PetBirthdayTableViewController: UITableViewController {
     @IBAction func datepickerValueChanged(_ sender: UIDatePicker) {
         birthdayLabel.text = sender.date.toStringShow
     }
-
+    
 }

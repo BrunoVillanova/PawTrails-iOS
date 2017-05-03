@@ -11,6 +11,7 @@ import Foundation
 protocol PetUsersView: NSObjectProtocol, View {
     func usersNotFound()
     func loadUsers()
+    func userRemoved()
 }
 
 
@@ -22,25 +23,45 @@ class PetUsersPresenter {
     
     func attachView(_ view: PetUsersView){
         self.view = view
-        getUsers()
     }
     
     func deteachView() {
         self.view = nil
     }
     
-    func getUsers() {
-//        DataManager.Instance.getPetUsers(0, callback: { (error, users) in
-//            DispatchQueue.main.async {
-//                if let error = error {
-//                    self.view?.errorMessage(ErrorMsg(title: "",msg: "\(error)"))
-//                }else if let users = users {
-//                    self.users = users
-//                    self.view?.loadUsers()
-//                }
-//            }
-//            
-//        })
+    func removeUser(by userId:String, of petId: String) {
+        
+        if let currentUserId = SharedPreferences.get(.id) {
+            
+            var data = [String: Any]()
+            data["user_id"] = userId
+            
+            if userId == currentUserId {
+                DataManager.Instance.removeSharedUser(by: data, to: petId, callback: { (error) in
+                    DispatchQueue.main.async {
+                        if let error = error {
+                            debugPrint(error)
+                            self.view?.errorMessage(ErrorMsg(title: "", msg: "\(error)"))
+                        }else{
+                            self.view?.userRemoved()
+                        }
+                    }
+                })
+                
+                
+                
+            }else{
+                DataManager.Instance.leaveSharedPet(by: data, to: petId, callback: { (error) in
+                    DispatchQueue.main.async {
+                        if let error = error {
+                            debugPrint(error)
+                            self.view?.errorMessage(ErrorMsg(title: "", msg: "\(error)"))
+                        }else{
+                            self.view?.userRemoved()
+                        }
+                    }
+                })
+            }
+        }
     }
-    
 }

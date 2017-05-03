@@ -39,7 +39,7 @@ class DataManager {
     }
         
     func set(image data:[String:Any]?, callback: @escaping ((Bool)->())){
-        APIManager.Instance.perform(call: .imageUpload) { (error, data) in
+        APIManager.Instance.perform(call: .imageUpload, with: data) { (error, data) in
             callback(error == nil)
         }
     }
@@ -81,15 +81,31 @@ class DataManager {
         }
     }
     
-    func register(pet data: [String:Any], callback: @escaping petErrorCallback) {
+    func change(_ deviceCode: String, of petId:String, callback: @escaping petErrorCallback){
+        var data = [String:Any]()
+        data["device_code"] = deviceCode
+        APIManager.Instance.perform(call: .changeDevice, withKey: petId, with: data)  { (error, data) in
+            if error == nil {
+                if PetManager.removePet(id: petId) {
+                    callback(nil)
+                }else{
+                    callback(PetError.PetNotFoundInDataBase)
+                    
+                }
+            }else{
+                callback(PetError.PetNotFoundInResponse)
+            }
+        }
+    }
+    
+    func register(pet data: [String:Any], callback: @escaping petCallback) {
         APIManager.Instance.perform(call: .registerPet, with: data) { (error, data) in
             
             if error == nil, let data = data {
-                PetManager.upsertPet(data)
-                callback(nil)
+                PetManager.upsertPet(data, callback: callback)
             }else{
                 print("Error registerin pet \(String(describing: error))")
-                callback(PetError.IdNotFound)
+                callback(PetError.IdNotFound, nil)
             }
         }
     }
@@ -107,8 +123,20 @@ class DataManager {
         }
     }
     
-    func removePet(_ petId: String) -> Bool {
-       return PetManager.removePet(id: petId)
+    func removePet(_ petId: String, callback: @escaping petErrorCallback) {
+        
+        APIManager.Instance.perform(call: .unregisterPet, withKey: petId)  { (error, data) in
+            if error == nil {
+                if PetManager.removePet(id: petId) {
+                    callback(nil)
+                }else{
+                    callback(PetError.PetNotFoundInDataBase)
+                    
+                }
+            }else{
+                callback(PetError.PetNotFoundInResponse)
+            }
+        }
     }
     
     func getPets(callback: @escaping petsCallback) {
@@ -131,25 +159,76 @@ class DataManager {
         APIManager.Instance.perform(call: .setPet, withKey: petId, with: data)  { (error, data) in
             if error == nil, let data = data {
                 PetManager.upsertPet(data)
+                print("done saving")
+                callback(nil)
+            }else{
+                callback(PetError.PetNotFoundInResponse)
             }
         }
-        
-        
-        callback(nil)
     }
     
-    func getPetFriends(callback: @escaping petUsersCallback){
-        
-        // API Call??
-        PetManager.getFriends(callback: callback)
-    }
     
+    // MARK: - Pet Breeds
+
     func getBreeds(for type: Type, callback: @escaping breedsCallback) {
         BreedManager.retrieve(for: type, callback: callback)
     }
     
     func loadBreeds(for type: Type, callback: @escaping breedsCallback) {
         BreedManager.load(for: type, callback: callback)
+    }
+    
+    
+    
+    // MARK: - Pet Sharing
+
+    func getPetFriends(callback: @escaping petUsersCallback){
+        
+        // API Call??
+        PetManager.getFriends(callback: callback)
+    }
+    
+    func loadSharedPetUsers(for petId: String, callback: petUsersCallback?) {
+        APIManager.Instance.perform(call: .getSharedPetUsers, withKey: petId, with: nil) { (error, data) in
+            if error == nil, let data = data, let callback = callback {
+
+                PetManager.upsertPetUsers(data, into: petId)
+                PetManager.getPetUsers(for: petId, callback: callback)
+            }else if let callback = callback {
+                callback(PetError.IdNotFound, nil)
+            }
+        }
+    }
+    
+    func addSharedUser(by data: [String:Any], to petId: String, callback: @escaping petErrorCallback) {
+        APIManager.Instance.perform(call: .sharePet, withKey: petId, with: data) { (error, data) in
+            if error == nil, let data = data {
+                print(data)
+                callback(nil)
+            }
+        }
+    }
+    
+    func removeSharedUser(by data: [String:Any], to petId: String, callback: @escaping petErrorCallback) {
+        APIManager.Instance.perform(call: .removeSharedPet, withKey: petId, with: data) { (error, data) in
+            if error == nil, let data = data {
+                debugPrint(data)
+                callback(nil)
+            }else{
+                callback(PetError.MoreThenOnePet)
+            }
+        }
+    }
+    
+    func leaveSharedPet(by data: [String:Any], to petId: String, callback: @escaping petErrorCallback) {
+        APIManager.Instance.perform(call: .leaveSharedPet, withKey: petId, with: data) { (error, data) in
+            if error == nil, let data = data {
+                debugPrint(data)
+                callback(nil)
+            }else{
+                callback(PetError.MoreThenOnePet)
+            }
+        }
     }
     
     // MARK: - Tracking

@@ -18,8 +18,9 @@ import Foundation
 
 class PetManager {
     
+    //MARK:- Pet Profile
     
-    static func upsertPet(_ data: [String:Any]) {
+    static func upsertPet(_ data: [String:Any], callback: petCallback? = nil) {
         
         do {
             if let pet = try CoreDataManager.Instance.upsert("Pet", with: data.filtered(by: ["type", "gender"])) as? Pet {
@@ -29,11 +30,11 @@ class PetManager {
                 // Weight
                 if let weightAmount = data["weight"] as? Double {
                     
-//                    if pet.weight != nil {
-//                        pet.weight?.amount = weightAmount
-//                    }else{
-                        pet.weight = Weight(weightAmount, unit: .kg)
-//                    }
+                    //                    if pet.weight != nil {
+                    //                        pet.weight?.amount = weightAmount
+                    //                    }else{
+                    pet.weight = Weight(weightAmount, unit: .kg)
+                    //                    }
                 }else{
                     pet.weight = nil
                 }
@@ -47,7 +48,7 @@ class PetManager {
                         pet.type = -1
                     }
                 }
-
+                
                 if let genderCode = data["gender"] as? String {
                     if let gender = Gender.build(code: genderCode)?.rawValue {
                         pet.gender = Int16(gender)
@@ -74,25 +75,108 @@ class PetManager {
                     }
                 }
                 
-                // Other Breed
-                pet.breedDescription = data["breed_descr"] as? String
+                // Image
+                
+                if let imageURL = data["img_url"] as? String {
+                    
+                    if pet.imageURL == nil || (pet.imageURL != nil && pet.imageURL != imageURL) {
+                        pet.imageURL = imageURL
+                        if let url = URL(string: imageURL) {
+                            try pet.image = Data(contentsOf: url) as NSData
+                        }
+                    }
+                }
                 
                 try CoreDataManager.Instance.save()
+                
+                if let callback = callback {
+                    callback(nil, pet)
+                }
+            }else if let callback = callback {
+                callback(PetError.PetNotFoundInResponse, nil)
             }
+
         } catch {
             debugPrint(error)
+            if let callback = callback {
+                callback(PetError.PetNotFoundInResponse, nil)
+            }
         }
+        
+    }
+    
+    static func upsertPetList(_ data: [String:Any]) {
+        
+        guard let id = data["id"] as? String else { return }
+        
+        getPet(id, { (error, pet) in
+            
+            if let pet = pet {
+                if let name = data["name"] as? String {
+                    pet.name = name
+                }
+                if let imageURL = data["img_url"] as? String {
+                    
+                    if pet.imageURL == nil || (pet.imageURL != nil && pet.imageURL != imageURL) {
+                        pet.imageURL = imageURL
+                        if let url = URL(string: imageURL) {
+                            do {
+                                try pet.image = Data(contentsOf: url) as NSData
+                            } catch {
+                                debugPrint(error)
+                            }
+                        }
+                    }
+                }
+            }else{
+                upsertPet(data)
+            }
+        })
     }
     
     static func upsertPets(_ data: [String:Any], _ callback:petsCallback){
         
         if let petsData = data["pets"] as? [[String:Any]] {
-            for petData in petsData {
-                upsertPet(petData)
-            }
+            getPets({ (error, pets) in
+                //Update
+                if let pets = pets {
+                    var ids = pets.map({ $0.id! })
+                    for petData in petsData {
+                        if let index = ids.index(of: petData["id"] as! String) {
+                            ids.remove(at: index)
+                        }
+                        upsertPetList(petData)
+                    }
+                    for id in ids {
+                        _ = removePet(id: id)
+                    }
+                //Insert
+                }else{
+                    for petData in petsData {
+                        upsertPetList(petData)
+                    }
+                }
+            })
             getPets(callback)
         }else{
             callback(PetError.PetsNotFoundInResponse, nil)
+        }
+    }
+    
+    static func set(_ deviceCode: String, _ id: String, _ callback:petErrorCallback){
+        getPet(id) { (error, pet) in
+            if error == nil, let pet = pet {
+                do {
+                    pet.deviceCode = deviceCode
+                    try CoreDataManager.Instance.save()
+                    callback(nil)
+                }catch {
+                    debugPrint(error)
+                    callback(PetError.PetsNotFoundInResponse)
+                }
+            }else{
+                callback(error)
+            }
         }
     }
     
@@ -132,19 +216,81 @@ class PetManager {
         return false
     }
     
+    //MARK:- Pet Sharing Users
+    
+    static func upsertPetUser(_ data: [String:Any]) -> PetUser? {
+        do {
+            if let user = try CoreDataManager.Instance.upsert("PetUser", with: data) as? PetUser {
+                
+                // Image
+                
+                if let imageURL = data["img_url"] as? String {
+                    
+                    if user.imageURL == nil || (user.imageURL != nil && user.imageURL != imageURL) {
+                        user.imageURL = imageURL
+                        if let url = URL(string: imageURL) {
+                            try user.image = Data(contentsOf: url) as NSData
+                        }
+                    }
+                }
+                
+                user.isOwner = data["is_owner"] as? Bool ?? false
+                
+                return user
+            }
+        } catch {
+            debugPrint(error)
+        }
+        return nil
+    }
+    
+    static func upsertPetUsers(_ data: [String:Any], into petId: String){
+        
+        if let petUsersData = data["users"] as? [[String:Any]] {
+            getPet(petId) { (error, pet) in
+                if let pet = pet {
+                    do {
+                        let users = pet.mutableSetValue(forKey: "users")
+                        users.removeAllObjects()
+                        
+                        for petUserData in petUsersData {
+                            if let petUser = upsertPetUser(petUserData) {
+                                users.add(petUser)
+                            }
+                        }
+                        pet.setValue(users, forKey: "users")
+                        try CoreDataManager.Instance.save()
+                    }catch{
+                        debugPrint(error)
+                    }
+                }
+            }
+        }
+    }
+    
+    static func getPetUsers(for petId:String, callback: @escaping petUsersCallback){
+        getPet(petId) { (error, pet) in
+            if let pet = pet {
+                if let users = pet.users?.allObjects as? [PetUser] {
+                    callback(nil, users)
+                }
+            }
+            callback(PetError.MoreThenOnePet, nil)
+        }
+    }
+    
     static func getFriends(callback: petUsersCallback){
         
         getPets { (error, pets) in
             
-            if error == nil, let pets = pets {
+            if error == nil, let pets = pets, let id = SharedPreferences.get(.id) {
                 
                 var friends = [PetUser]()
                 //option 1
                 for pet in pets {
-                    if var users = pet.guests?.allObjects as? [PetUser] {
-                        if let owner = pet.owner { users.append(owner) }
+                    if let users = pet.users?.allObjects as? [PetUser] {
                         for user in users {
-                            if !friends.contains(user) { friends.append(user) }
+                            if !friends.contains(user) && user.id != id { friends.append(user) }
                         }
                     }
                 }

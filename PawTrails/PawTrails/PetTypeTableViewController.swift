@@ -40,6 +40,7 @@ class PetTypeTableViewController: UITableViewController, UITextFieldDelegate {
     @IBAction func doneAction(_ sender: UIBarButtonItem) {
         
         var type: Type? = nil
+        parentEditor.set(typeDescription: nil)
         if catCell.accessoryType == .checkmark {
             type = Type.cat
         }else if dogCell.accessoryType == .checkmark {
@@ -51,6 +52,7 @@ class PetTypeTableViewController: UITableViewController, UITextFieldDelegate {
         if type != parentEditor.getType() {
             parentEditor.set(first: nil)
             parentEditor.set(second: nil)
+            parentEditor.set(otherBreed: nil)
         }
         parentEditor.set(type: type)
         parentEditor.refresh()

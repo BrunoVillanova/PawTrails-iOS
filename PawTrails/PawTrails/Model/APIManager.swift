@@ -20,7 +20,8 @@ public enum APICallType {
     
     case signUp, signin, facebookLogin, googleLogin, twitterLogin, weiboLogin, passwordReset, passwordChange,
     getUser, setUser, imageUpload,
-    registerPet, getPets, getPet, getPetUsers, setPet, getBreeds, checkDevice, unregisterPet
+    registerPet, getPets, getPet, setPet, getBreeds, checkDevice, changeDevice, unregisterPet,
+    sharePet, getSharedPetUsers, removeSharedPet,leaveSharedPet
     
     fileprivate var requiresToken: Bool {
         switch self {
@@ -48,26 +49,31 @@ public enum APICallType {
         case .registerPet: return "/pets/register"
         case .getPets: return "/pets/my/list"
         case .getPet: return "/pets/\(key)"
-        case .getPetUsers: return "/pets/"
         case .setPet: return "/pets/\(key)/edit"
         case .getBreeds: return "/lists/petbreeds/\(key)"
         case .checkDevice: return "/pets/devices/\(key)/checkCode"
+        case .changeDevice: return "/pets/\(key)/devicechange"
         case .unregisterPet: return "/pets/\(key)/remove"
+
+        case .sharePet: return "/pets/share/\(key)/add"
+        case .getSharedPetUsers: return "/pets/share/\(key)/userslist"
+        case .removeSharedPet: return "/pets/share/\(key)/del"
+        case .leaveSharedPet: return "/pets/share/\(key)/leave"
             
-            //        default: return ""
+//        default: return ""
         }
     }
     
     fileprivate var httpMethod: String {
         switch self {
-        case .getUser, .getBreeds, .checkDevice, .getPets, .getPet: return "GET"
+        case .getUser, .getBreeds, .checkDevice, .getPets, .getPet, .getSharedPetUsers, .unregisterPet: return "GET"
         default: return "POST"
         }
     }
     
     fileprivate var requiresBody: Bool {
         switch self {
-        case .getUser, .getBreeds, .checkDevice, .getPets, .getPet: return false
+        case .getUser, .getBreeds, .checkDevice, .getPets, .getPet, .getSharedPetUsers, .unregisterPet: return false
         default: return true
         }
     }
@@ -234,7 +240,7 @@ class APIManager {
             
             var body = Data()
             
-            let mimetype = "jpg"
+            let mimetype = "image/jpg"
 
             
             for (key, value) in data! {

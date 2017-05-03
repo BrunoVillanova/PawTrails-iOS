@@ -27,12 +27,16 @@ extension String {
         return self.rangeOfCharacter(from: lower) != nil && self.rangeOfCharacter(from: upper) != nil && self.rangeOfCharacter(from: numbers) != nil && self.characters.count > 7
     }
     
+    public var isValidCode:Bool {
+        return URL(string:self) != nil
+    }
+    
     public var toDate: NSDate? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         return dateFormatter.date(from: self)! as NSDate
     }
-    
+
 }
 
 extension Date {

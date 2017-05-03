@@ -24,7 +24,9 @@ class ScanQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
     
     fileprivate var isCheckingCode: Bool = false
     fileprivate var attempts: Int = 0
-    
+
+    var petId:String?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.attachView(self)
@@ -59,10 +61,18 @@ class ScanQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
             alert(title: "Error", msg: "Wrong Code")
         }
     }
-    
+    func codeChanged() {
+//        if let vc = navigationController?.viewControllers.first(where: { $0 is PetProfileTableViewController }) {
+//            navigationController?.popToViewController(vc, animated: true)
+//        }
+        dismissAction(sender: nil)
+    }
+
     func idle(_ code: String) {
         stopSession()
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "AddEditPetDetailsTableViewController") as? AddEditPetDetailsTableViewController {
+        if let petId = petId {
+            presenter.change(code, to: petId)
+        }else if let vc = storyboard?.instantiateViewController(withIdentifier: "AddEditPetDetailsTableViewController") as? AddEditPetDetailsTableViewController {
             vc.deviceCode = code
             navigationController?.pushViewController(vc, animated: true)
         }

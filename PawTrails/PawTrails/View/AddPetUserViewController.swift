@@ -29,7 +29,7 @@ class AddPetUserViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     @IBAction func doneAction(_ sender: UIBarButtonItem?) {
-        presenter.addPetUser(by: emailTextField()?.text)
+        presenter.addPetUser(by: emailTextField()?.text, to: pet.id)
     }
     // MARK: - AddPetUserView
     
@@ -38,11 +38,15 @@ class AddPetUserViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func loadFriends() {
-//        tableView.reloadData()
+        tableView.reloadData()
     }
     
     func successfullyAdded() {
-        popUp(title: "Success", msg: "The user has been added properly to the pet")
+        popUp(title: "Success", msg: "The user has been added properly to the pet") { (done) in
+            if let vc = self.navigationController?.viewControllers.first(where: { $0 is PetProfileTableViewController }) {
+                self.navigationController?.popToViewController(vc, animated: true)
+            }
+        }
     }
     
     func emailFormat() {
@@ -73,11 +77,7 @@ class AddPetUserViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if presenter.friends.count > 0 {
-            return section == 0 ? 1 : presenter.friends.count
-//        }else{
-//            return 1
-//        }
+        return section == 0 ? 1 : presenter.friends.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -103,6 +103,8 @@ class AddPetUserViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         view.endEditing(true)
+        let user = presenter.friends[indexPath.row]
+        presenter.addPetUser(by: user.email, to: pet.id)
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

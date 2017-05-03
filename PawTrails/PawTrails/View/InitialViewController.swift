@@ -8,8 +8,8 @@
 
 import UIKit
 
-//class InitialViewController: UIViewController, InitialView, UITextFieldDelegate, GIDSignInUIDelegate {
-    class InitialViewController: UIViewController, InitialView, UITextFieldDelegate {
+class InitialViewController: UIViewController, InitialView, UITextFieldDelegate, GIDSignInUIDelegate {
+//    class InitialViewController: UIViewController, InitialView, UITextFieldDelegate {
 
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
@@ -45,7 +45,7 @@ import UIKit
         
         setTopBar()
 
-//        GIDSignIn.sharedInstance().uiDelegate = self
+        GIDSignIn.sharedInstance().uiDelegate = self
     }
     
     @IBAction func loginAction(_ sender: UIButton?) {

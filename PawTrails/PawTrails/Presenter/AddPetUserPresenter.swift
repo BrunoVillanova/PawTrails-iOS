@@ -45,12 +45,22 @@ class AddPetUserPresenter {
         }
     }
     
-    func addPetUser(by email: String?) {
+    func addPetUser(by email: String?, to petId: String?) {
         
         if email == nil || (email != nil && !email!.isValidEmail) {
             view?.emailFormat()
-        }else{
-            //rq
+        }else if let petId = petId {
+            var data = [String:Any]()
+            data["email"] = email
+            DataManager.Instance.addSharedUser(by: data, to: petId, callback: { (error) in
+                DispatchQueue.main.async {
+                    if let error = error {
+                        self.view?.errorMessage(ErrorMsg(title: "", msg: "\(error)"))
+                    }else{
+                        self.view?.successfullyAdded()
+                    }
+                }
+            })
         }
         
     }
