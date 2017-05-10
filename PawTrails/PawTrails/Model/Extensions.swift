@@ -39,6 +39,14 @@ extension String {
 
 }
 
+extension Double {
+    
+    public var toWeightString: String {
+        return "\(self)Kg"
+    }
+    
+}
+
 extension Date {
     
     public var toStringShow: String? {
@@ -104,6 +112,7 @@ extension Dictionary where Key == String, Value == Any {
     }
 
 }
+
 
 
 

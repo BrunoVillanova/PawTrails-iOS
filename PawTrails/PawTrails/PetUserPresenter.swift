@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol PetUserView: NSObjectProtocol, View {
+protocol PetUserView: NSObjectProtocol, View, LoadingView {
     func removed()
 }
 
@@ -27,11 +27,11 @@ class PetUserPresenter {
     
     
     func removePet(with id: String) {
-        
+        view?.beginLoadingContent()
         DataManager.Instance.removePet(id) { (error) in
             DispatchQueue.main.async {
+                self.view?.endLoadingContent()
                 if let error = error {
-                    
                     self.view?.errorMessage(ErrorMsg(title: "", msg: "\(error)"))
                 }else{
                     self.view?.removed()
@@ -41,12 +41,11 @@ class PetUserPresenter {
     }
     
     func leavePet(with id: String) {
-        var data = [String:Any]()
-        data["user_id"] = SharedPreferences.get(.id)
-        DataManager.Instance.leaveSharedPet(by: data, to: id) { (error) in
+        view?.beginLoadingContent()
+        DataManager.Instance.leaveSharedPet(by: id) { (error) in
             DispatchQueue.main.async {
+                self.view?.endLoadingContent()
                 if let error = error {
-                    
                     self.view?.errorMessage(ErrorMsg(title: "", msg: "\(error)"))
                 }else{
                     self.view?.removed()
@@ -57,12 +56,13 @@ class PetUserPresenter {
     
     
     func removePetUser(with id: String, from petId: String) {
+        view?.beginLoadingContent()
         var data = [String:Any]()
         data["user_id"] = id
         DataManager.Instance.removeSharedUser(by: data, to: petId) { (error) in
             DispatchQueue.main.async {
+                self.view?.endLoadingContent()
                 if let error = error {
-                    
                     self.view?.errorMessage(ErrorMsg(title: "", msg: "\(error)"))
                 }else{
                     self.view?.removed()

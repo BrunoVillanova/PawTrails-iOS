@@ -39,7 +39,9 @@ class PetsPresenter {
                         self.view?.errorMessage(ErrorMsg(title: "",msg: "\(error)"))
                     }
                 }else if let pets = pets {
-                    self.pets = pets
+                    self.pets = pets.sorted(by: { (p1, p2) -> Bool in
+                        return p1.id! > p2.id!
+                    })
                     self.view?.loadPets()
                 }
             }
@@ -57,7 +59,9 @@ class PetsPresenter {
                         self.view?.errorMessage(ErrorMsg(title: "",msg: "\(error)"))
                     }
                 }else if let pets = pets {
-                    self.pets = pets
+                    self.pets = pets.sorted(by: { (p1, p2) -> Bool in
+                        return p1.id! > p2.id!
+                    })
                     self.view?.loadPets()
                 }
             }

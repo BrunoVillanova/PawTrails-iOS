@@ -40,7 +40,7 @@
         <attribute name="tracking" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="type_descr" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="weight" optional="YES" attributeType="Transformable" customClassName="Weight" syncable="YES"/>
+        <attribute name="weight" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" customClassName="Weight" syncable="YES"/>
         <relationship name="firstBreed" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Breed" inverseName="petFirst" inverseEntity="Breed" syncable="YES"/>
         <relationship name="last_location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="pet" inverseEntity="Location" syncable="YES"/>
         <relationship name="safezones" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SafeZone" inverseName="pet" inverseEntity="SafeZone" syncable="YES"/>
@@ -56,6 +56,7 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="surname" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="petUsers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Pet" inverseName="users" inverseEntity="Pet" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="friends" inverseEntity="User" syncable="YES"/>
     </entity>
     <entity name="Phone" representedClassName="Phone" syncable="YES" codeGenerationType="class">
         <attribute name="country_code" optional="YES" attributeType="String" syncable="YES"/>
@@ -86,6 +87,7 @@
         <attribute name="notification" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="surname" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="address" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Address" inverseName="user" inverseEntity="Address" syncable="YES"/>
+        <relationship name="friends" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PetUser" inverseName="user" inverseEntity="PetUser" syncable="YES"/>
         <relationship name="phone" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Phone" inverseName="user" inverseEntity="Phone" syncable="YES"/>
     </entity>
     <elements>
@@ -94,10 +96,10 @@
         <element name="CountryCode" positionX="-18" positionY="108" width="128" height="90"/>
         <element name="Location" positionX="-54" positionY="18" width="128" height="90"/>
         <element name="Pet" positionX="-63" positionY="-18" width="128" height="315"/>
-        <element name="PetUser" positionX="-27" positionY="135" width="128" height="165"/>
+        <element name="PetUser" positionX="-27" positionY="135" width="128" height="180"/>
         <element name="Phone" positionX="-18" positionY="117" width="128" height="90"/>
         <element name="Point" positionX="-9" positionY="153" width="128" height="105"/>
         <element name="SafeZone" positionX="-18" positionY="144" width="128" height="120"/>
-        <element name="User" positionX="-36" positionY="45" width="128" height="210"/>
+        <element name="User" positionX="-36" positionY="45" width="128" height="225"/>
     </elements>
 </model>

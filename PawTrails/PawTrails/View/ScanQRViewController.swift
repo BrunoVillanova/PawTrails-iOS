@@ -58,13 +58,15 @@ class ScanQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         if attempts <= 3 {
             isCheckingCode = false
         }else{
-            alert(title: "Error", msg: "Wrong Code")
+            stopSession()
+            popUp(title: "Warning", msg: "The code is not correct", actionTitle: "Dismiss", handler: { (dismiss) in
+                self.attempts = 0
+                self.isCheckingCode = false
+                self.startSession()
+            })
         }
     }
     func codeChanged() {
-//        if let vc = navigationController?.viewControllers.first(where: { $0 is PetProfileTableViewController }) {
-//            navigationController?.popToViewController(vc, animated: true)
-//        }
         dismissAction(sender: nil)
     }
 
@@ -121,7 +123,7 @@ class ScanQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         cameraView.layer.addSublayer(videoPreviewLayer!)
     }
     
-    func addSquarAroudQRCode() {
+    func addSquareAroundQRCode() {
         // Initialize QR Code Frame to highlight the QR code
         qrCodeFrameView = UIView()
         
@@ -133,6 +135,10 @@ class ScanQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         }
     }
     
+    func removeSquareAroundQRCode() {
+        qrCodeFrameView?.removeFromSuperview()
+    }
+    
     func startSession() {
         
         guard let session = captureSession else { return }
@@ -142,7 +148,7 @@ class ScanQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
                 session.startRunning()
                 DispatchQueue.main.async {
                     self.loadingActivityIndicator.stopAnimating()
-                    self.addSquarAroudQRCode()
+                    self.addSquareAroundQRCode()
                 }
             }
         }
@@ -154,6 +160,9 @@ class ScanQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         if session.isRunning {
             videoQueue().async {
                 session.stopRunning()
+                DispatchQueue.main.async {
+                    self.removeSquareAroundQRCode()
+                }
             }
         }
     }

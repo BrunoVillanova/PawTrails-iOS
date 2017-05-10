@@ -51,7 +51,7 @@ class PetUsersPresenter {
                 
                 
             }else{
-                DataManager.Instance.leaveSharedPet(by: data, to: petId, callback: { (error) in
+                DataManager.Instance.leaveSharedPet(by: petId, callback: { (error) in
                     DispatchQueue.main.async {
                         if let error = error {
                             debugPrint(error)

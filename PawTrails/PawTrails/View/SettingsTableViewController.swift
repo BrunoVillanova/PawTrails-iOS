@@ -25,11 +25,11 @@ class SettingsTableViewController: UITableViewController, SettingsView {
     // MARK: - SettingsView
     
     func userNotSigned() {
-        if let vc = self.storyboard?.instantiateViewController(withIdentifier: "InitialViewController") as? InitialViewController {
-            self.present(vc, animated: true, completion: {
-                self.tabBarController?.selectedIndex = 0
-            })
+
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            appDelegate.loadAuthenticationScreen()
         }
+        
     }
     
     func errorMessage(_ error: ErrorMsg) {

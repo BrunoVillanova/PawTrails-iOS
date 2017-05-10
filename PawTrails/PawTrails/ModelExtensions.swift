@@ -12,7 +12,7 @@ import CoreData
 // MARK:- Own Data Management
 
 extension Pet {
-    
+        
     var breeds: String? {
         
         var breeds: String?
@@ -27,7 +27,6 @@ extension Pet {
             breeds = other
         }
         return breeds
-        
     }
     
     var typeString: String? {
@@ -63,6 +62,14 @@ extension Pet {
         return userId == petId
     }
     
+    var sharedUsers: [PetUser]? {
+        if let petUsers = users?.allObjects as? [PetUser] {
+            return petUsers.sorted(by: { (pu1, pu2) -> Bool in
+                return pu1.isOwner
+            })
+        }
+        return nil
+    }
 }
 
 extension Phone {

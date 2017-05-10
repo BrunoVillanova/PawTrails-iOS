@@ -13,6 +13,6 @@ class Constants {
     // Image Max Size
     
     static let maxImageSize = 2 * 1024 * 1024 // In Bytes 2MB
-
+    static let maxWeight = 9999.999
     
 }

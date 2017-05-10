@@ -67,6 +67,10 @@ class DataManager {
         return true
     }
     
+    func getUserFriends(){
+        
+    }
+    
     // MARK: - Pet
     
     func check(_ deviceCode: String, callback: @escaping petCheckDeviceCallback){
@@ -182,18 +186,27 @@ class DataManager {
     
     // MARK: - Pet Sharing
 
-    func getPetFriends(callback: @escaping petUsersCallback){
+    func loadPetFriends(callback: @escaping petUsersCallback){
         
-        // API Call??
-        PetManager.getFriends(callback: callback)
+        APIManager.Instance.perform(call: .friends) { (error, data) in
+            if error == nil, let data = data {
+                PetUserManager.upsertFriends(data)
+                PetUserManager.getFriends(callback: callback)
+            }
+        }
+        
+        PetUserManager.getFriends(callback: callback)
+    }
+    
+    func getPetFriends(callback: @escaping petUsersCallback){
+        PetUserManager.getFriends(callback: callback)
     }
     
     func loadSharedPetUsers(for petId: String, callback: petUsersCallback?) {
         APIManager.Instance.perform(call: .getSharedPetUsers, withKey: petId, with: nil) { (error, data) in
             if error == nil, let data = data, let callback = callback {
-
-                PetManager.upsertPetUsers(data, into: petId)
-                PetManager.getPetUsers(for: petId, callback: callback)
+                PetUserManager.upsert(data, into: petId)
+                PetUserManager.get(for: petId, callback: callback)
             }else if let callback = callback {
                 callback(PetError.IdNotFound, nil)
             }
@@ -202,29 +215,32 @@ class DataManager {
     
     func addSharedUser(by data: [String:Any], to petId: String, callback: @escaping petErrorCallback) {
         APIManager.Instance.perform(call: .sharePet, withKey: petId, with: data) { (error, data) in
-            if error == nil, let data = data {
-                print(data)
-                callback(nil)
+            if error == nil {
+                self.loadSharedPetUsers(for: petId, callback: { (error, pet) in
+                    callback(error)
+                })
             }
         }
     }
     
     func removeSharedUser(by data: [String:Any], to petId: String, callback: @escaping petErrorCallback) {
         APIManager.Instance.perform(call: .removeSharedPet, withKey: petId, with: data) { (error, data) in
-            if error == nil, let data = data {
-                debugPrint(data)
-                callback(nil)
+            if error == nil {
+                self.loadSharedPetUsers(for: petId, callback: { (error, pet) in
+                    callback(error)
+                })
             }else{
                 callback(PetError.MoreThenOnePet)
             }
         }
     }
     
-    func leaveSharedPet(by data: [String:Any], to petId: String, callback: @escaping petErrorCallback) {
-        APIManager.Instance.perform(call: .leaveSharedPet, withKey: petId, with: data) { (error, data) in
-            if error == nil, let data = data {
-                debugPrint(data)
-                callback(nil)
+    func leaveSharedPet(by petId: String, callback: @escaping petErrorCallback) {
+        APIManager.Instance.perform(call: .leaveSharedPet, withKey: petId) { (error, data) in
+            if error == nil {
+                self.loadSharedPetUsers(for: petId, callback: { (error, pet) in
+                    callback(error)
+                })
             }else{
                 callback(PetError.MoreThenOnePet)
             }

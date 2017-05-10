@@ -37,15 +37,9 @@ class PetUserTableViewController: UITableViewController, PetUserView {
             nameLabel.text = petUser.name
             surnameLabel.text = petUser.surname
             
-
-            
-            let color: UIColor = pet.isOwner(petUser) ? .orange() : .lightGray
             let imageData = petUser.image ?? NSData()
-            imageView.circle()
-            imageView.border(color: color, width: 2.0)
-            imageView.backgroundColor = .white
             imageView.image = UIImage(data: imageData as Data)
-            imageView.border(color: color, width: 2.0)
+            imageView.setupLayout(isPetOwner: pet.isOwner(petUser))
             
             let name = pet.name ?? ""
             emailLabel.text = petUser.email
@@ -105,18 +99,28 @@ class PetUserTableViewController: UITableViewController, PetUserView {
         let petOwnerId = pet.owner?.id ?? "*"
         let appUserId = SharedPreferences.get(.id) ?? "§"
         
-        if currentUserId == petOwnerId && petOwnerId == appUserId {
+        if appUserId == petOwnerId && appUserId != currentUserId {
+            if let petPage = navigationController?.viewControllers.first(where: { $0 is PetsPageViewController}) as? PetsPageViewController {
+                navigationController?.popToViewController(petPage, animated: true)
+            }
+        }else{
             navigationController?.navigationBar.topItem?.prompt = nil
             navigationController?.popToRootViewController(animated: true)
-        }else{
-            if let vc = self.navigationController?.viewControllers.first(where: { $0 is PetProfileTableViewController }) {
-                self.navigationController?.popToViewController(vc, animated: true)
-            }
+
         }
     }
     
     func errorMessage(_ error: ErrorMsg) {
         alert(title: "", msg: error.msg)
+    }
+
+    
+    func beginLoadingContent() {
+        showLoadingView()
+    }
+    
+    func endLoadingContent() {
+        hideLoadingView()
     }
     
     // MARK: - UITableViewDataSource

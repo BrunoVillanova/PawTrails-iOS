@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol AddPetUserView: NSObjectProtocol, View, ConnectionView {
+protocol AddPetUserView: NSObjectProtocol, View, ConnectionView, LoadingView {
     func loadFriends()
     func successfullyAdded()
     func emailFormat()
@@ -50,10 +50,12 @@ class AddPetUserPresenter {
         if email == nil || (email != nil && !email!.isValidEmail) {
             view?.emailFormat()
         }else if let petId = petId {
+            view?.beginLoadingContent()
             var data = [String:Any]()
             data["email"] = email
             DataManager.Instance.addSharedUser(by: data, to: petId, callback: { (error) in
                 DispatchQueue.main.async {
+                    self.view?.endLoadingContent()
                     if let error = error {
                         self.view?.errorMessage(ErrorMsg(title: "", msg: "\(error)"))
                     }else{

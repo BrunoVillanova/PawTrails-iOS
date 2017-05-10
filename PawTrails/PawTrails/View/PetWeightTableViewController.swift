@@ -21,14 +21,8 @@ class PetWeightTableViewController: UITableViewController {
         
         if let weight = parentEditor.getWeight() {
             
-//            switch weight.unit {
-//            case .kg: selectKg()
-//                break
-//            case .lbs: selectLbs()
-//                break
-//            }
-            
-            weightAmountTextField.text = "\(weight.amount)"
+//            weightAmountTextField.text = "\(weight.amount)"
+            weightAmountTextField.text = "\(weight)"
         }
         weightAmountTextField.becomeFirstResponder()
 
@@ -39,16 +33,32 @@ class PetWeightTableViewController: UITableViewController {
         
         if let textAmount = weightAmountTextField.text {
             if let amount = Double(textAmount) {
-                parentEditor.set(weight: Weight( amount, unit: .kg))
+                if amount > Constants.maxWeight {
+                    alert(title: "", msg: "This weight is too high")
+                }else{
+//                    set(Weight(amount))
+                    set(amount)
+                }
             }else{
                 weightAmountTextField.shake()
             }
         }else{
-            parentEditor.set(weight: nil)
+            set(nil)
         }
+    }
+    
+//    private func set(_ weight: Weight?){
+//        parentEditor.set(weight: weight)
+//        parentEditor.refresh()
+//        _ = self.navigationController?.popViewController(animated: true)
+//    }
+    
+    private func set(_ weight: Double?){
+        parentEditor.set(weight: weight)
         parentEditor.refresh()
         _ = self.navigationController?.popViewController(animated: true)
     }
+    
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        if indexPath.section == 0 {

@@ -20,7 +20,7 @@ class BreedManager {
             APIManager.Instance.perform(call: .getBreeds, withKey: type.code, completition: { (error, data) in
                 if let error = error {
                     // shit
-                    print(error)
+                    debugPrint(error)
                 }else if let breedsData = data?["breeds"] as? [[String:Any]] {
                     do {
                         for var breedData in breedsData {
@@ -66,7 +66,7 @@ class BreedManager {
         do {
             try CoreDataManager.Instance.delete(entity: "Breed", withPredicate: NSPredicate("type", .equal, type.rawValue))
         } catch {
-            print(error)
+            debugPrint(error)
         }
     }
     
@@ -77,7 +77,7 @@ class BreedManager {
                     load(for: .cat, callback: { (error, breeds) in
                         if let breeds = breeds {
                             for i in breeds {
-                                print(i)
+                                debugPrint(i)
                             }
                         }
                     })
@@ -88,7 +88,7 @@ class BreedManager {
                     load(for: .dog, callback: { (error, breeds) in
                         if let breeds = breeds {
                             for i in breeds {
-                                print(i)
+                                debugPrint(i)
                             }
                         }
                     })

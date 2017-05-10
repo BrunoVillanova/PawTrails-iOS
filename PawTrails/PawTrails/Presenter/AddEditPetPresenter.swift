@@ -111,8 +111,12 @@ class AddEditPetPresenter {
         return data["birthday"] as? Date
     }
     
-    func getWeight() -> Weight? {
-        return data["weight"] as? Weight
+//    func getWeight() -> Weight? {
+//        return data["weight"] as? Weight
+//    }
+    
+    func getWeight() -> Double? {
+        return data["weight"] as? Double
     }
     
     func getNeutered() -> Bool? {
@@ -159,7 +163,11 @@ class AddEditPetPresenter {
         data["birthday"] = birthday ?? ""
     }
     
-    func set(weight:Weight?){
+//    func set(weight:Weight?){
+//        data["weight"] = weight ?? ""
+//    }
+    
+    func set(weight:Double?){
         data["weight"] = weight ?? ""
     }
     
@@ -220,9 +228,9 @@ class AddEditPetPresenter {
         if let birthdate = data["birthday"] as? Date? {
             data["date_of_birth"] = birthdate?.toStringServer ?? ""
         }
-        if let weight = data["weight"] as? Weight {
-            data["weight"] = weight.amount
-        }
+//        if let weight = data["weight"] as? Weight {
+//            data["weight"] = weight.amount
+//        }
         
         data["type"] = getType()?.code ?? ""
         data["gender"] = getGender()?.code ?? ""

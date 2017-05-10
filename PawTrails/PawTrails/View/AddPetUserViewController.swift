@@ -29,6 +29,7 @@ class AddPetUserViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     @IBAction func doneAction(_ sender: UIBarButtonItem?) {
+        view.endEditing(true)
         presenter.addPetUser(by: emailTextField()?.text, to: pet.id)
     }
     // MARK: - AddPetUserView
@@ -42,15 +43,15 @@ class AddPetUserViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func successfullyAdded() {
-        popUp(title: "Success", msg: "The user has been added properly to the pet") { (done) in
-            if let vc = self.navigationController?.viewControllers.first(where: { $0 is PetProfileTableViewController }) {
-                self.navigationController?.popToViewController(vc, animated: true)
-            }
+        
+        if let petProfile = navigationController?.viewControllers.first(where: { $0 is PetsPageViewController}) as? PetsPageViewController {
+            navigationController?.popToViewController(petProfile, animated: true)
         }
     }
     
     func emailFormat() {
         emailTextField()?.shake()
+        emailTextField()?.becomeFirstResponder()
     }
     
     func emailTextField() -> UITextField? {
@@ -60,6 +61,14 @@ class AddPetUserViewController: UIViewController, UITableViewDataSource, UITable
         return nil
     }
     
+    func beginLoadingContent() {
+        showLoadingView()
+    }
+    
+    func endLoadingContent() {
+        hideLoadingView()
+    }
+        
     // MARK: - Connection Notifications
     
     func connectedToNetwork() {
@@ -115,6 +124,9 @@ class AddPetUserViewController: UIViewController, UITableViewDataSource, UITable
     // MARK: - UITextFieldDelegate
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == emailTextField() {
+            doneAction(nil)
+        }
         return true
     }
     

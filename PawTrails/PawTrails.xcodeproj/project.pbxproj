@@ -86,6 +86,7 @@
 		447AC7EA1E9CDB9700D2D2B2 /* PetBirthdayTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447AC7E91E9CDB9700D2D2B2 /* PetBirthdayTableViewController.swift */; };
 		447AC7EC1E9CDBB200D2D2B2 /* PetWeightTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447AC7EB1E9CDBB200D2D2B2 /* PetWeightTableViewController.swift */; };
 		447D4C171E44C4F5008F82F4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 447D4C161E44C4F5008F82F4 /* MapKit.framework */; };
+		448010171EC213BF007D22D7 /* PetUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448010161EC213BF007D22D7 /* PetUserManager.swift */; };
 		449A978D1E82DA940032DCE5 /* NameTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A978C1E82DA940032DCE5 /* NameTableViewController.swift */; };
 		449A978F1E82DAC00032DCE5 /* EmailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A978E1E82DAC00032DCE5 /* EmailTableViewController.swift */; };
 		449A97911E82DADD0032DCE5 /* GenderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A97901E82DADD0032DCE5 /* GenderTableViewController.swift */; };
@@ -227,6 +228,7 @@
 		447AC7E91E9CDB9700D2D2B2 /* PetBirthdayTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetBirthdayTableViewController.swift; path = View/PetBirthdayTableViewController.swift; sourceTree = "<group>"; };
 		447AC7EB1E9CDBB200D2D2B2 /* PetWeightTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetWeightTableViewController.swift; path = View/PetWeightTableViewController.swift; sourceTree = "<group>"; };
 		447D4C161E44C4F5008F82F4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		448010161EC213BF007D22D7 /* PetUserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetUserManager.swift; path = Model/PetUserManager.swift; sourceTree = "<group>"; };
 		449747B91E8BCB6600C3431F /* PawTrails-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PawTrails-Bridging-Header.h"; sourceTree = "<group>"; };
 		449A978C1E82DA940032DCE5 /* NameTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NameTableViewController.swift; path = View/NameTableViewController.swift; sourceTree = "<group>"; };
 		449A978E1E82DAC00032DCE5 /* EmailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmailTableViewController.swift; path = View/EmailTableViewController.swift; sourceTree = "<group>"; };
@@ -464,6 +466,7 @@
 				443D2C6B1E6D736B00F7ACFA /* LocationManager.swift */,
 				444E00CC1E857B2200CAA250 /* SearchManager.swift */,
 				4467CDE61EAF40560092DA56 /* BreedManager.swift */,
+				448010161EC213BF007D22D7 /* PetUserManager.swift */,
 			);
 			name = CoreDataModelsManagers;
 			sourceTree = "<group>";
@@ -928,6 +931,7 @@
 				44C7F74A1E4CD3AE00171170 /* SocketParsable.swift in Sources */,
 				447905181E573A4D00A49AB3 /* EditUserProfileTableViewController.swift in Sources */,
 				44457A2E1E5AF31400B43748 /* AddressTableViewController.swift in Sources */,
+				448010171EC213BF007D22D7 /* PetUserManager.swift in Sources */,
 				446CBF091EAA458D007C4659 /* PetProfileTableViewController.swift in Sources */,
 				443936FF1EA770EF0044831E /* PetUsersViewController.swift in Sources */,
 				4424E9761EB3430C004CC5FA /* PetPresenter.swift in Sources */,

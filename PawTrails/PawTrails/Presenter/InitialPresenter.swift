@@ -145,6 +145,8 @@ class InitialPresenter {
     
     func loginTW(vc: InitialViewController) {
 
+
+        Twitter.sharedInstance().start(withConsumerKey: "FM1jiu1Iceq2IwDS6aT41X046", consumerSecret: "QGLiyOInRuZ3DlRXk0mxjWSi1hVUPEhAWl1b92wHp2B5C1Qys9")
         Twitter.sharedInstance().logIn(with: vc, methods: .webBased) { (session, error) in
             if let error = error {
                 DispatchQueue.main.async {

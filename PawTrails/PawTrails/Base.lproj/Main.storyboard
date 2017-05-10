@@ -1433,6 +1433,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="dWy-cf-3Fz" kind="show" id="n8B-6I-XOd"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="uTb-G1-RSh" style="IBUITableViewCellStyleDefault" id="Z5r-4J-DCO">
                                         <rect key="frame" x="0.0" y="251.5" width="375" height="44"/>
@@ -1450,6 +1453,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="2uh-aq-Mya" kind="show" id="NiL-Yk-3hf"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="SwN-gN-zFy" style="IBUITableViewCellStyleDefault" id="FXT-2u-E37">
                                         <rect key="frame" x="0.0" y="295.5" width="375" height="44"/>
@@ -1467,6 +1473,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="NRd-8c-4gT" kind="show" id="TaB-iy-MoE"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -1506,7 +1515,107 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d6o-AI-j0t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-357" y="2998"/>
+            <point key="canvasLocation" x="401" y="4669"/>
+        </scene>
+        <!--Tutorial-->
+        <scene sceneID="wSI-74-ret">
+            <objects>
+                <viewController hidesBottomBarWhenPushed="YES" id="dWy-cf-3Fz" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="95R-GQ-jWV"/>
+                        <viewControllerLayoutGuide type="bottom" id="Lr9-Rl-3F1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="W7A-Oh-SQ5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Under Construction" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pdd-OI-KXN">
+                                <rect key="frame" x="80" y="293" width="215" height="80"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <color key="textColor" red="0.99932557339999994" green="0.63401025529999999" blue="0.2850541472" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Pdd-OI-KXN" firstAttribute="top" secondItem="95R-GQ-jWV" secondAttribute="bottom" constant="229" id="bqD-g1-LH8"/>
+                            <constraint firstItem="Pdd-OI-KXN" firstAttribute="leading" secondItem="W7A-Oh-SQ5" secondAttribute="leadingMargin" constant="64" id="jT3-8D-hQ6"/>
+                            <constraint firstItem="Pdd-OI-KXN" firstAttribute="centerY" secondItem="W7A-Oh-SQ5" secondAttribute="centerY" id="tdK-04-LwS"/>
+                            <constraint firstItem="Pdd-OI-KXN" firstAttribute="centerX" secondItem="W7A-Oh-SQ5" secondAttribute="centerX" id="u0r-dy-dFZ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Tutorial" id="Cy1-l3-Pq1"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uZf-LL-XiZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2372" y="4548"/>
+        </scene>
+        <!--Policy and Privacy-->
+        <scene sceneID="13D-xl-Rxr">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="2uh-aq-Mya" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0mA-vP-V54"/>
+                        <viewControllerLayoutGuide type="bottom" id="8l1-dw-Ar2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="D7b-KS-yAN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Irl-ap-dJF">
+                                <rect key="frame" x="16" y="64" width="343" height="546"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="8l1-dw-Ar2" firstAttribute="top" secondItem="Irl-ap-dJF" secondAttribute="bottom" constant="8" symbolic="YES" id="DPm-X2-jZB"/>
+                            <constraint firstItem="Irl-ap-dJF" firstAttribute="top" secondItem="0mA-vP-V54" secondAttribute="bottom" id="kif-xq-Y57"/>
+                            <constraint firstItem="Irl-ap-dJF" firstAttribute="leading" secondItem="D7b-KS-yAN" secondAttribute="leadingMargin" id="mWn-Cc-vmF"/>
+                            <constraint firstItem="Irl-ap-dJF" firstAttribute="trailing" secondItem="D7b-KS-yAN" secondAttribute="trailingMargin" id="zKw-1Q-pwi"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Policy and Privacy" id="LJd-BC-cqQ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gB8-2i-MUg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1716" y="4955"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="HRX-08-psL">
+            <objects>
+                <viewController hidesBottomBarWhenPushed="YES" id="NRd-8c-4gT" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kMr-Ll-1Ty"/>
+                        <viewControllerLayoutGuide type="bottom" id="X3q-zS-2Bq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0fd-Ep-gbl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Under Construction" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZuO-Kl-huh">
+                                <rect key="frame" x="80" y="293" width="215" height="80"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <color key="textColor" red="0.99932557339999994" green="0.63401025529999999" blue="0.2850541472" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ZuO-Kl-huh" firstAttribute="top" secondItem="kMr-Ll-1Ty" secondAttribute="bottom" constant="229" id="2TR-bG-yNc"/>
+                            <constraint firstItem="ZuO-Kl-huh" firstAttribute="centerX" secondItem="0fd-Ep-gbl" secondAttribute="centerX" id="doz-Ku-Xji"/>
+                            <constraint firstItem="ZuO-Kl-huh" firstAttribute="leading" secondItem="0fd-Ep-gbl" secondAttribute="leadingMargin" constant="64" id="sPd-ny-N3y"/>
+                            <constraint firstItem="ZuO-Kl-huh" firstAttribute="centerY" secondItem="0fd-Ep-gbl" secondAttribute="centerY" id="sje-Vx-wSj"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="jV6-qC-WpG"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cPq-GO-J5V" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1076" y="5367"/>
         </scene>
         <!--Pet Activity View Controller-->
         <scene sceneID="xYI-Ky-gz0">
@@ -1737,7 +1846,7 @@
                     <toolbarItems/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zIm-LO-vV9">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="zIm-LO-vV9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2124,7 +2233,7 @@
         <!--Add Pet-->
         <scene sceneID="dgh-qr-2zI">
             <objects>
-                <tableViewController storyboardIdentifier="AddEditPetDetailsTableViewController" id="K64-4m-oVn" customClass="AddEditPetDetailsTableViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="AddEditPetDetailsTableViewController" hidesBottomBarWhenPushed="YES" id="K64-4m-oVn" customClass="AddEditPetDetailsTableViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="pT5-Fg-agq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2373,6 +2482,7 @@
                         <outlet property="breedLabel" destination="9Ql-Wb-9ny" id="iep-OA-vSu"/>
                         <outlet property="genderLabel" destination="Zz1-KC-2at" id="uRV-W8-7By"/>
                         <outlet property="nameLabel" destination="qKv-2g-yhZ" id="Jo0-kR-k7R"/>
+                        <outlet property="neuteredSwitch" destination="z8v-J1-4fr" id="KAh-ZJ-hqc"/>
                         <outlet property="petImageView" destination="Gfh-gH-drR" id="Rxn-tx-mKX"/>
                         <outlet property="typeLabel" destination="Cmh-fj-Ot9" id="HMR-oA-rzj"/>
                         <outlet property="weightLabel" destination="0rq-aT-GEU" id="nne-ds-frA"/>
@@ -2951,7 +3061,7 @@
                     <toolbarItems/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jzF-xM-HdV">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="jzF-xM-HdV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2973,7 +3083,7 @@
         <!--Pet Safe Zones View Controller-->
         <scene sceneID="7ga-wH-clf">
             <objects>
-                <viewController storyboardIdentifier="PetSafeZonesViewController" id="XHF-SE-Yre" customClass="PetSafeZonesViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PetSafeZonesViewController" hidesBottomBarWhenPushed="YES" id="XHF-SE-Yre" customClass="PetSafeZonesViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="r3y-89-Bvc"/>
                         <viewControllerLayoutGuide type="bottom" id="ZWP-Pc-csH"/>
@@ -3060,7 +3170,7 @@
         <!--Pet Users View Controller-->
         <scene sceneID="j0Z-GX-ba7">
             <objects>
-                <viewController storyboardIdentifier="PetUsersViewController" automaticallyAdjustsScrollViewInsets="NO" id="Fjs-uz-VqZ" customClass="PetUsersViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PetUsersViewController" automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="Fjs-uz-VqZ" customClass="PetUsersViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QEc-Qw-0aY"/>
                         <viewControllerLayoutGuide type="bottom" id="vcY-rp-7cT"/>
@@ -3156,7 +3266,7 @@
         <!--New Safe Zone-->
         <scene sceneID="Qzc-0P-vEL">
             <objects>
-                <viewController storyboardIdentifier="AddAddEditSafeZoneViewController" hidesBottomBarWhenPushed="YES" id="8Zf-5y-qkK" customClass="AddEditSafeZoneViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddEditSafeZoneViewController" hidesBottomBarWhenPushed="YES" id="8Zf-5y-qkK" customClass="AddEditSafeZoneViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rhu-hG-YN7"/>
                         <viewControllerLayoutGuide type="bottom" id="w5y-5n-bo4"/>
@@ -3552,7 +3662,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="40" id="CBR-ov-ZFK">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="40" id="CBR-ov-ZFK">
                                         <rect key="frame" x="0.0" y="735" width="375" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CBR-ov-ZFK" id="8ws-We-P79">
@@ -3560,17 +3670,17 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Safe Zone" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Hj-aL-Ubs">
-                                                    <rect key="frame" x="8" y="3" width="359" height="32"/>
+                                                    <rect key="frame" x="8" y="7" width="359" height="27"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <color key="textColor" red="0.99932557339999994" green="0.63401025529999999" blue="0.2850541472" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="8Hj-aL-Ubs" secondAttribute="bottom" constant="4.5" id="ZyE-RI-DOg"/>
-                                                <constraint firstItem="8Hj-aL-Ubs" firstAttribute="top" secondItem="8ws-We-P79" secondAttribute="top" constant="3" id="h2Z-Yb-DWu"/>
-                                                <constraint firstAttribute="trailing" secondItem="8Hj-aL-Ubs" secondAttribute="trailing" constant="8" id="jWK-ii-aja"/>
-                                                <constraint firstItem="8Hj-aL-Ubs" firstAttribute="leading" secondItem="8ws-We-P79" secondAttribute="leading" constant="8" id="rlN-oc-k7F"/>
+                                                <constraint firstAttribute="trailing" secondItem="8Hj-aL-Ubs" secondAttribute="trailing" constant="8" id="hCn-ad-Osu"/>
+                                                <constraint firstAttribute="bottom" secondItem="8Hj-aL-Ubs" secondAttribute="bottom" constant="6" id="j7X-f2-erJ"/>
+                                                <constraint firstItem="8Hj-aL-Ubs" firstAttribute="leading" secondItem="8ws-We-P79" secondAttribute="leading" constant="8" id="q91-Js-9bY"/>
+                                                <constraint firstItem="8Hj-aL-Ubs" firstAttribute="top" secondItem="8ws-We-P79" secondAttribute="top" constant="7" id="qpk-aa-8qM"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -3661,7 +3771,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qzG-6X-GZ1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2072.8000000000002" y="1278.7106446776613"/>
+            <point key="canvasLocation" x="2024.8" y="1278.7106446776613"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="W9c-kp-hyA">
@@ -3670,7 +3780,7 @@
                     <toolbarItems/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yuu-d7-Gjo">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="yuu-d7-Gjo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -3869,7 +3979,7 @@
                                                     </constraints>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="done"/>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -3935,7 +4045,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="FkB-WL-xaa" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="520-Oc-3mm">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="520-Oc-3mm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

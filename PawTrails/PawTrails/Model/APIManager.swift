@@ -19,7 +19,7 @@ public enum SocialMedia: String {
 public enum APICallType {
     
     case signUp, signin, facebookLogin, googleLogin, twitterLogin, weiboLogin, passwordReset, passwordChange,
-    getUser, setUser, imageUpload,
+    getUser, setUser, imageUpload, friends,
     registerPet, getPets, getPet, setPet, getBreeds, checkDevice, changeDevice, unregisterPet,
     sharePet, getSharedPetUsers, removeSharedPet,leaveSharedPet
     
@@ -45,6 +45,7 @@ public enum APICallType {
         case .getUser: return "/users/\(key)"
         case .setUser: return "/users/edit"
         case .imageUpload: return "/images/upload"
+        case .friends: return "/users/myfriends"
             
         case .registerPet: return "/pets/register"
         case .getPets: return "/pets/my/list"
@@ -66,14 +67,14 @@ public enum APICallType {
     
     fileprivate var httpMethod: String {
         switch self {
-        case .getUser, .getBreeds, .checkDevice, .getPets, .getPet, .getSharedPetUsers, .unregisterPet: return "GET"
+        case .getUser, .getBreeds, .checkDevice, .getPets, .getPet, .getSharedPetUsers, .unregisterPet, .leaveSharedPet, .friends :return "GET"
         default: return "POST"
         }
     }
     
     fileprivate var requiresBody: Bool {
         switch self {
-        case .getUser, .getBreeds, .checkDevice, .getPets, .getPet, .getSharedPetUsers, .unregisterPet: return false
+        case .getUser, .getBreeds, .checkDevice, .getPets, .getPet, .getSharedPetUsers, .unregisterPet, .leaveSharedPet : return false
         default: return true
         }
     }

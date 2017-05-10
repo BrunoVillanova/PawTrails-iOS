@@ -60,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     }
     
     func configureGoogleLogin() {
-        GIDSignIn.sharedInstance().clientID = "94659934079-iis98tm91v48vb6cjvnvbkj08puobbb4.apps.googleusercontent.com"
+        GIDSignIn.sharedInstance().clientID = "994470408291-80qh373cjbu149ft6hb93c5dcslt2oup.apps.googleusercontent.com"
         GIDSignIn.sharedInstance().delegate = self
     }
     

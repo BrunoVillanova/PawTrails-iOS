@@ -47,7 +47,9 @@ class AuthManager {
     }
     
     func login(socialMedia: SocialMedia, _ token: String, completition: @escaping errorCallback){
-        let data = ["loginToken":token]
+        var data = [String:Any]()
+        data["loginToken"] = token
+        if socialMedia == .google { data["itsIOS"] = 1 }
         APIManager.Instance.perform(call: APICallType(socialMedia), with: data) { (error, data) in
             if error != nil {
                 completition(self.handleAuthErrors(error))

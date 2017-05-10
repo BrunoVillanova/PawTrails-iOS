@@ -180,6 +180,22 @@ extension UIViewController {
     }
 }
 
+extension UINavigationController {
+    
+    func popTo<T>(viewController: T, handler: ((_ viewController:T)->())? = nil) {
+        
+        for element in viewControllers as Array {
+            if element.isKind(of: T.self as! AnyClass) {
+                if let handler = handler {
+                    handler(element as! T)
+                    self.popToViewController(element, animated: true)
+                }
+                break
+            }
+        }
+    }
+}
+
 extension UIImage {
     
     public var encoded: Data? {
@@ -202,7 +218,6 @@ extension UIImage {
         guard let cgImage = image?.cgImage else { return nil }
         self.init(cgImage: cgImage)
     }
-    
 }
 
 extension UIColor {
@@ -273,5 +288,24 @@ extension UIView {
         self.layer.addSublayer(border)
         self.layer.masksToBounds = true
     }
+}
+
+extension UIImageView {
     
+    func setupLayout(isPetOwner: Bool){
+        self.circle()
+        self.backgroundColor = UIColor.white
+        let color: UIColor = isPetOwner ? .orange() : .darkGray
+        self.border(color: color, width: 2.0)
+    }
+
+}
+
+extension UICollectionView {
+    
+    func reloadAnimated() {
+        let range = Range(uncheckedBounds: (0, self.numberOfSections))
+        let indexSet = IndexSet(integersIn: range)
+        self.reloadSections(indexSet)
+    }
 }

@@ -18,6 +18,8 @@ class PetBirthdayTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        birthdayPicker.maximumDate = Date()
+        
         if let birthday = parentEditor.getBirthday() {
             birthdayPicker.setDate(birthday, animated: false)
         }

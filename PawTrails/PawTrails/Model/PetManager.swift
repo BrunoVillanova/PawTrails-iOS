@@ -11,7 +11,6 @@ typealias petCheckDeviceCallback = (_ isIdle:Bool) -> Void
 typealias petErrorCallback = (_ error:PetError?) -> Void
 typealias petCallback = (_ error:PetError?, _ pet:Pet?) -> Void
 typealias petsCallback = (_ error:PetError?, _ pets:[Pet]?) -> Void
-typealias petUsersCallback = (_ error:PetError?, _ users:[PetUser]?) -> Void
 typealias petTrackingCallback = (_ location:(Double, Double)) -> Void
 
 import Foundation
@@ -28,16 +27,16 @@ class PetManager {
                 pet.birthday = (data["date_of_birth"] as? String)?.toDate
                 
                 // Weight
-                if let weightAmount = data["weight"] as? Double {
-                    
-                    //                    if pet.weight != nil {
-                    //                        pet.weight?.amount = weightAmount
-                    //                    }else{
-                    pet.weight = Weight(weightAmount, unit: .kg)
-                    //                    }
-                }else{
-                    pet.weight = nil
-                }
+//                if let weightAmount = data["weight"] as? Double {
+//                    
+//                    //                    if pet.weight != nil {
+//                    //                        pet.weight?.amount = weightAmount
+//                    //                    }else{
+//                    pet.weight = Weight(weightAmount, unit: .kg)
+//                    //                    }
+//                }else{
+//                    pet.weight = nil
+//                }
                 
                 //Details
                 
@@ -61,15 +60,15 @@ class PetManager {
                 if let type = Type(rawValue: Int(pet.type)) {
                     
                     // First Breed
-                    if let breedId = data["breed"] as? Int {
-                        pet.firstBreed = BreedManager.retrieve(for: type, breedId: "\(breedId)")
+                    if let firstBreedId = data["breed"] as? Int {
+                        pet.firstBreed = BreedManager.retrieve(for: type, breedId: "\(firstBreedId)")
                     }else{
                         pet.setValue(nil, forKey: "firstBreed")
                     }
                     
                     // Second Breed
-                    if let breedId = data["breed1"] as? Int {
-                        pet.secondBreed = BreedManager.retrieve(for: type, breedId: "\(breedId)")
+                    if let secondBreedId = data["breed1"] as? Int {
+                        pet.secondBreed = BreedManager.retrieve(for: type, breedId: "\(secondBreedId)")
                     }else{
                         pet.setValue(nil, forKey: "secondBreed")
                     }
@@ -216,100 +215,7 @@ class PetManager {
         return false
     }
     
-    //MARK:- Pet Sharing Users
-    
-    static func upsertPetUser(_ data: [String:Any]) -> PetUser? {
-        do {
-            if let user = try CoreDataManager.Instance.upsert("PetUser", with: data) as? PetUser {
-                
-                // Image
-                
-                if let imageURL = data["img_url"] as? String {
-                    
-                    if user.imageURL == nil || (user.imageURL != nil && user.imageURL != imageURL) {
-                        user.imageURL = imageURL
-                        if let url = URL(string: imageURL) {
-                            try user.image = Data(contentsOf: url) as NSData
-                        }
-                    }
-                }
-                
-                user.isOwner = data["is_owner"] as? Bool ?? false
-                
-                return user
-            }
-        } catch {
-            debugPrint(error)
-        }
-        return nil
-    }
-    
-    static func upsertPetUsers(_ data: [String:Any], into petId: String){
-        
-        if let petUsersData = data["users"] as? [[String:Any]] {
-            getPet(petId) { (error, pet) in
-                if let pet = pet {
-                    do {
-                        let users = pet.mutableSetValue(forKey: "users")
-                        users.removeAllObjects()
-                        
-                        for petUserData in petUsersData {
-                            if let petUser = upsertPetUser(petUserData) {
-                                users.add(petUser)
-                            }
-                        }
-                        pet.setValue(users, forKey: "users")
-                        try CoreDataManager.Instance.save()
-                    }catch{
-                        debugPrint(error)
-                    }
-                }
-            }
-        }
-    }
-    
-    static func getPetUsers(for petId:String, callback: @escaping petUsersCallback){
-        getPet(petId) { (error, pet) in
-            if let pet = pet {
-                if let users = pet.users?.allObjects as? [PetUser] {
-                    callback(nil, users)
-                }
-            }
-            callback(PetError.MoreThenOnePet, nil)
-        }
-    }
-    
-    static func getFriends(callback: petUsersCallback){
-        
-        getPets { (error, pets) in
-            
-            if error == nil, let pets = pets, let id = SharedPreferences.get(.id) {
-                
-                var friends = [PetUser]()
-                //option 1
-                for pet in pets {
-                    if let users = pet.users?.allObjects as? [PetUser] {
-                        for user in users {
-                            if !friends.contains(user) && user.id != id { friends.append(user) }
-                        }
-                    }
-                }
-                
-                //                //option 2
-                //                for pet in pets {
-                //                    if let users = pet.guests?.allObjects as? [PetUser] { friends.append(contentsOf: users) }
-                //                    if let owner = pet.owner { friends.append(owner) }
-                //                }
-                //                friends = Array(Set(friends))
-                
-                callback(nil, friends)
-            }else{
-                callback(error, nil)
-            }
-        }
-    }
-    
-    
+
     
     
     

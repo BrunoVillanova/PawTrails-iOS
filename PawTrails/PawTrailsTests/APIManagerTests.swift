@@ -43,9 +43,9 @@ class APIManagerTests: XCTestCase {
         waitForExpectations(timeout: 100) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
     }
     
-    public func signIn(callback: @escaping (_ id:String,_ token:String) -> Swift.Void) {
+    public func signIn(email: String = ezdebug.email, password: String = ezdebug.password, callback: @escaping (_ id:String,_ token:String) -> Swift.Void) {
         
-        let data = isDebug ? ["email":ezdebug.email, "password":ezdebug.password, "is4test":ezdebug.is4test] : ["email":ezdebug.email, "password":ezdebug.password]
+        let data = isDebug ? ["email":email, "password":password, "is4test":ezdebug.is4test] : ["email":email, "password":password]
 
         APIManager.Instance.perform(call: .signin,  with: data) { (error, data) in
             
@@ -57,7 +57,7 @@ class APIManagerTests: XCTestCase {
                 self.XCTFound(key: "email", in: userData!)
                 
                 XCTAssert(userData?["email"] is String, "Failed to login email wrong format")
-                XCTAssert(userData?["email"] as! String == ezdebug.email, "Failed to login with proper email")
+                XCTAssert(userData?["email"] as! String == email, "Failed to login with proper email")
                 
                 callback(id,token)
                 
@@ -129,14 +129,13 @@ class APIManagerTests: XCTestCase {
             
             APIManager.Instance.perform(call: .getUser, withKey: id) { (error, data) in
                 
-                if error == nil && data != nil {
+                if error == nil, let userData = data {
                     
-                    let userData = self.XCTGet(key: "user", in: data!) as? [String:Any]
-                    self.XCTFound(key: "id", in: userData!)
-                    self.XCTFound(key: "email", in: userData!)
+                    self.XCTFound(key: "id", in: userData)
+                    self.XCTFound(key: "email", in: userData)
                     
-                    XCTAssert(userData?["email"] is String, "Failed to login email wrong format")
-                    XCTAssert(userData?["email"] as! String == ezdebug.email, "Failed to login with proper email")
+                    XCTAssert(userData["email"] is String, "Failed to login email wrong format")
+                    XCTAssert(userData["email"] as! String == ezdebug.email, "Failed to login with proper email")
                     
                 }else { XCTFail("Error get user in \(String(describing: error)) \(String(describing: data))") }
                 

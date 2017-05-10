@@ -19,6 +19,8 @@ class PetPresenter {
     
     weak private var view: PetView?
     
+    var users = [PetUser]()
+    
     func attachView(_ view: PetView){
         self.view = view
     }
@@ -38,6 +40,9 @@ class PetPresenter {
                         self.view?.errorMessage(ErrorMsg(title: "",msg: "\(error)"))
                     }
                 }else if let pet = pet {
+                    if let petUsers = pet.sharedUsers {
+                        self.users = petUsers
+                    }
                     self.view?.load(pet)
                 }
             }

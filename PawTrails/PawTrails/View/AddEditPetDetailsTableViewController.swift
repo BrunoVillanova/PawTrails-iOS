@@ -19,6 +19,7 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
     @IBOutlet weak var breedLabel: UILabel!
     @IBOutlet weak var birthdayLabel: UILabel!
     @IBOutlet weak var weightLabel: UILabel!
+    @IBOutlet weak var neuteredSwitch: UISwitch!
     
     fileprivate let imagePicker = UIImagePickerController()
     fileprivate let presenter = AddEditPetPresenter()
@@ -73,7 +74,8 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
         genderLabel.text = presenter.getGender()?.name
         breedLabel.text = presenter.getBreedsText()
         birthdayLabel.text = presenter.getBirthday()?.toStringShow
-        weightLabel.text = presenter.getWeight()?.toString
+        weightLabel.text = presenter.getWeight()?.toWeightString
+        neuteredSwitch.setOn(presenter.getNeutered() ?? false, animated: true)
         tableView.reloadData()
     }
     
