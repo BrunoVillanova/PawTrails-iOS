@@ -18,7 +18,8 @@ class PetsPresenter {
     
     weak private var view: PetsView?
     
-    var pets = [Pet]()
+    var ownedPets = [Pet]()
+    var sharedPets = [Pet]()
     
     func attachView(_ view: PetsView){
         self.view = view
@@ -27,6 +28,13 @@ class PetsPresenter {
     
     func deteachView() {
         self.view = nil
+    }
+    
+    func getPet(with id: Int) -> Pet? {
+        let id = Int16(id)
+        var pets = ownedPets
+        pets.append(contentsOf: sharedPets)
+        return pets.first(where: { $0.id == id })
     }
     
     func getPets() {
@@ -39,9 +47,8 @@ class PetsPresenter {
                         self.view?.errorMessage(ErrorMsg(title: "",msg: "\(error)"))
                     }
                 }else if let pets = pets {
-                    self.pets = pets.sorted(by: { (p1, p2) -> Bool in
-                        return p1.id! > p2.id!
-                    })
+                    self.ownedPets = pets.filter({ $0.isOwner })
+                    self.sharedPets = pets.filter({ !$0.isOwner })
                     self.view?.loadPets()
                 }
             }
@@ -53,15 +60,15 @@ class PetsPresenter {
             DispatchQueue.main.async {
                 if let error = error {
                     if error == PetError.PetNotFoundInDataBase {
-                        self.pets.removeAll()
+                        self.ownedPets.removeAll()
+                        self.sharedPets.removeAll()
                         self.view?.petsNotFound()
                     }else{
                         self.view?.errorMessage(ErrorMsg(title: "",msg: "\(error)"))
                     }
                 }else if let pets = pets {
-                    self.pets = pets.sorted(by: { (p1, p2) -> Bool in
-                        return p1.id! > p2.id!
-                    })
+                    self.ownedPets = pets.filter({ $0.isOwner })
+                    self.sharedPets = pets.filter({ !$0.isOwner })
                     self.view?.loadPets()
                 }
             }

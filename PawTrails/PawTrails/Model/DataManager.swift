@@ -15,29 +15,32 @@ class DataManager {
     // MARK: - User
     
     func setUser(_ data: [String:Any]){
-        UserManager.upsert(data)
+        DispatchQueue.main.async {
+            UserManager.upsert(data)
+        }
     }
     
     func getUser(callback:@escaping userCallback){
-        UserManager.get(callback)
+        DispatchQueue.main.async {
+            UserManager.get(callback)
+        }
     }
     
     func loadUser(callback:@escaping userCallback) {
         
         APIManager.Instance.perform(call: .getUser, withKey: SharedPreferences.get(.id)!) { (error, data) in
             if error == nil, let data = data {
-
-                UserManager.upsert(data)
-                UserManager.get(callback)
+                self.setUser(data)
+                self.getUser(callback: callback)
             }else{
                 print(error ?? "")
                 print(data ?? "")
                 // check db first and the
-                 callback(UserError.UserNotFound, nil)
+                callback(UserError.UserNotFound, nil)
             }
         }
     }
-        
+    
     func set(image data:[String:Any]?, callback: @escaping ((Bool)->())){
         APIManager.Instance.perform(call: .imageUpload, with: data) { (error, data) in
             callback(error == nil)
@@ -48,9 +51,8 @@ class DataManager {
         
         APIManager.Instance.perform(call: .setUser, with: data) { (error, data) in
             if error == nil, let data = data {
-                
-                UserManager.upsert(data)
-                UserManager.get(callback)
+                self.setUser(data)
+                self.getUser(callback: callback)
             }else{
                 print(error ?? "")
                 print(data ?? "")
@@ -73,40 +75,43 @@ class DataManager {
     
     // MARK: - Pet
     
-    func check(_ deviceCode: String, callback: @escaping petCheckDeviceCallback){
-        APIManager.Instance.perform(call: .checkDevice, withKey: deviceCode) { (error, data) in
-            if error == nil, let data = data {
-                if let available = data["available"] as? Bool {
-                    callback(available)
-                    return
-                }
-            }
-            callback(false)
+    private func setPet(_ data:[String:Any], callback: petCallback? = nil) {
+        DispatchQueue.main.async {
+            PetManager.upsertPet(data, callback: callback)
         }
     }
     
-    func change(_ deviceCode: String, of petId:String, callback: @escaping petErrorCallback){
+    func check(_ deviceCode: String, callback: @escaping petCheckDeviceCallback){
+        APIManager.Instance.perform(call: .checkDevice, withKey: deviceCode) { (error, data) in
+            if error == nil, let data = data, let available = data["available"] as? Bool {
+                callback(available)
+            }else{
+                callback(false)
+            }
+        }
+    }
+    
+    func change(_ deviceCode: String, of petId:Int16, callback: @escaping petErrorCallback){
         var data = [String:Any]()
         data["device_code"] = deviceCode
         APIManager.Instance.perform(call: .changeDevice, withKey: petId, with: data)  { (error, data) in
-            if error == nil {
-                if PetManager.removePet(id: petId) {
-                    callback(nil)
-                }else{
-                    callback(PetError.PetNotFoundInDataBase)
-                    
-                }
-            }else{
-                callback(PetError.PetNotFoundInResponse)
-            }
+            //            if error == nil {
+            //                if PetManager.removePet(id: petId) {
+            //                    callback(nil)
+            //                }else{
+            //                    callback(PetError.PetNotFoundInDataBase)
+            //
+            //                }
+            //            }else{
+            //                callback(PetError.PetNotFoundInResponse)
+            //            }
         }
     }
     
     func register(pet data: [String:Any], callback: @escaping petCallback) {
         APIManager.Instance.perform(call: .registerPet, with: data) { (error, data) in
-            
             if error == nil, let data = data {
-                PetManager.upsertPet(data, callback: callback)
+                self.setPet(data, callback: callback)
             }else{
                 print("Error registerin pet \(String(describing: error))")
                 callback(PetError.IdNotFound, nil)
@@ -114,28 +119,31 @@ class DataManager {
         }
     }
     
-    func getPet(_ petId:String, callback: @escaping petCallback) {
-        PetManager.getPet(petId, callback)
+    func getPet(_ petId:Int16, callback: @escaping petCallback) {
+        DispatchQueue.main.async {
+            PetManager.getPet(petId, callback)
+        }
     }
     
-    func loadPet(_ petId:String, callback: @escaping petCallback) {
+    func loadPet(_ petId:Int16, callback: @escaping petCallback) {
         APIManager.Instance.perform(call: .getPet, withKey: petId) { (error, data) in
             if error == nil, let data = data {
-                PetManager.upsertPet(data)
-                PetManager.getPet(petId, callback)
+                self.setPet(data, callback: callback)
             }
         }
     }
     
-    func removePet(_ petId: String, callback: @escaping petErrorCallback) {
+    func removePet(_ petId: Int16, callback: @escaping petErrorCallback) {
         
         APIManager.Instance.perform(call: .unregisterPet, withKey: petId)  { (error, data) in
             if error == nil {
-                if PetManager.removePet(id: petId) {
-                    callback(nil)
-                }else{
-                    callback(PetError.PetNotFoundInDataBase)
-                    
+                DispatchQueue.main.async {
+                    if PetManager.removePet(id: petId) {
+                        callback(nil)
+                    }else{
+                        callback(PetError.PetNotFoundInDataBase)
+                        
+                    }
                 }
             }else{
                 callback(PetError.PetNotFoundInResponse)
@@ -148,7 +156,7 @@ class DataManager {
     }
     
     func loadPets(callback: @escaping petsCallback) {
-        BreedManager.check()
+        checkBreeds()
         APIManager.Instance.perform(call: .getPets) { (error, data) in
             if error == nil, let data = data {
                 PetManager.upsertPets(data, callback)
@@ -158,12 +166,11 @@ class DataManager {
         }
     }
     
-    func setPet(_ petId: String, _ data: [String:Any], callback: @escaping petErrorCallback){
+    func setPet(_ petId: Int16, _ data: [String:Any], callback: @escaping petErrorCallback){
         
         APIManager.Instance.perform(call: .setPet, withKey: petId, with: data)  { (error, data) in
             if error == nil, let data = data {
-                PetManager.upsertPet(data)
-                print("done saving")
+                self.setPet(data)
                 callback(nil)
             }else{
                 callback(PetError.PetNotFoundInResponse)
@@ -173,25 +180,47 @@ class DataManager {
     
     
     // MARK: - Pet Breeds
-
+    
+    func checkBreeds() {
+        
+        for type in [Type.cat, Type.dog] {
+            BreedManager.retrieve(for: type) { (error, breeds) in
+                if breeds == nil { self.loadBreeds(for: type, callback: { (_, _) in })}
+            }
+        }
+    }
+    
+    
     func getBreeds(for type: Type, callback: @escaping breedsCallback) {
         BreedManager.retrieve(for: type, callback: callback)
     }
     
     func loadBreeds(for type: Type, callback: @escaping breedsCallback) {
-        BreedManager.load(for: type, callback: callback)
+        
+        if type == .cat || type == .dog {
+            
+            APIManager.Instance.perform(call: .getBreeds, withKey: type.code, completition: { (error, data) in
+                if error == nil, let data = data {
+                    DispatchQueue.main.async {
+                        BreedManager.upsert(data, for: type, callback: callback)
+                    }
+                }
+            })
+        }
     }
     
     
     
     // MARK: - Pet Sharing
-
+    
     func loadPetFriends(callback: @escaping petUsersCallback){
         
         APIManager.Instance.perform(call: .friends) { (error, data) in
             if error == nil, let data = data {
-                PetUserManager.upsertFriends(data)
-                PetUserManager.getFriends(callback: callback)
+                DispatchQueue.main.async {
+                    PetUserManager.upsertFriends(data)
+                    PetUserManager.getFriends(callback: callback)
+                }
             }
         }
         
@@ -202,18 +231,20 @@ class DataManager {
         PetUserManager.getFriends(callback: callback)
     }
     
-    func loadSharedPetUsers(for petId: String, callback: petUsersCallback?) {
+    func loadSharedPetUsers(for petId: Int16, callback: petUsersCallback?) {
         APIManager.Instance.perform(call: .getSharedPetUsers, withKey: petId, with: nil) { (error, data) in
             if error == nil, let data = data, let callback = callback {
-                PetUserManager.upsert(data, into: petId)
-                PetUserManager.get(for: petId, callback: callback)
+                DispatchQueue.main.async {
+                    PetUserManager.upsert(data, into: petId)
+                    PetUserManager.get(for: petId, callback: callback)
+                }
             }else if let callback = callback {
                 callback(PetError.IdNotFound, nil)
             }
         }
     }
     
-    func addSharedUser(by data: [String:Any], to petId: String, callback: @escaping petErrorCallback) {
+    func addSharedUser(by data: [String:Any], to petId: Int16, callback: @escaping petErrorCallback) {
         APIManager.Instance.perform(call: .sharePet, withKey: petId, with: data) { (error, data) in
             if error == nil {
                 self.loadSharedPetUsers(for: petId, callback: { (error, pet) in
@@ -223,7 +254,7 @@ class DataManager {
         }
     }
     
-    func removeSharedUser(by data: [String:Any], to petId: String, callback: @escaping petErrorCallback) {
+    func removeSharedUser(by data: [String:Any], to petId: Int16, callback: @escaping petErrorCallback) {
         APIManager.Instance.perform(call: .removeSharedPet, withKey: petId, with: data) { (error, data) in
             if error == nil {
                 self.loadSharedPetUsers(for: petId, callback: { (error, pet) in
@@ -235,7 +266,7 @@ class DataManager {
         }
     }
     
-    func leaveSharedPet(by petId: String, callback: @escaping petErrorCallback) {
+    func leaveSharedPet(by petId: Int16, callback: @escaping petErrorCallback) {
         APIManager.Instance.perform(call: .leaveSharedPet, withKey: petId) { (error, data) in
             if error == nil {
                 self.loadSharedPetUsers(for: petId, callback: { (error, pet) in
@@ -262,12 +293,12 @@ class DataManager {
         
         if !trackingIsIdle() {return}
         
-//        let name = pet.name
-//        SocketIOManager.Instance.launch(name: name)
-//        SocketIOManager.Instance.listen(name: name, { (lat, long) in
-//            //set last location
-//            callback((lat, long))
-//        })
+        //        let name = pet.name
+        //        SocketIOManager.Instance.launch(name: name)
+        //        SocketIOManager.Instance.listen(name: name, { (lat, long) in
+        //            //set last location
+        //            callback((lat, long))
+        //        })
     }
     
     func stopTracking(pet:Pet){
@@ -275,9 +306,9 @@ class DataManager {
         
         if !trackingIsIdle() {return}
         
-//        let name = pet.name
+        //        let name = pet.name
         
-//        SocketIOManager.Instance.stop(name: name)
+        //        SocketIOManager.Instance.stop(name: name)
     }
     
     
@@ -291,7 +322,7 @@ class DataManager {
         return CountryCodeManager.getCurrent() ?? "IE"
     }
     
-
+    
     // MARK: - Search
     
     /**
@@ -300,7 +331,7 @@ class DataManager {
      - Parameter text: Search text.
      - Parameter callback: Returns the updated information.
      - Parameter data: .
-
+     
      - Returns: The local information available.
      */
     func performSearch(_ text:String, callback:(_ data:[String]) -> Swift.Void) -> [String] {
@@ -308,7 +339,7 @@ class DataManager {
         // RQ
         
         
-//        callback(AddressManager.search(text))
+        //        callback(AddressManager.search(text))
         //return AddressManager.search(text)
         return [String]()
     }

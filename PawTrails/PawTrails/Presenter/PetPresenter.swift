@@ -29,7 +29,7 @@ class PetPresenter {
         self.view = nil
     }
     
-    func getPet(with id: String) {
+    func getPet(with id: Int16) {
 
         DataManager.Instance.getPet(id) { (error, pet) in
             DispatchQueue.main.async {
@@ -49,7 +49,7 @@ class PetPresenter {
         }
     }
     
-    func loadPet(with id: String) {
+    func loadPet(with id: Int16) {
         
         DataManager.Instance.loadPet(id) { (error, pet) in
             DispatchQueue.main.async {
@@ -66,7 +66,7 @@ class PetPresenter {
         }
     }
     
-    func removePet(with id: String) {
+    func removePet(with id: Int16) {
         
         DataManager.Instance.removePet(id) { (error) in
             DispatchQueue.main.async {
@@ -80,7 +80,7 @@ class PetPresenter {
         }
     }
     
-    func leavePet(with id: String) {
+    func leavePet(with id: Int16) {
         var data = [String:Any]()
         data["user_id"] = SharedPreferences.get(.id)
         DataManager.Instance.removeSharedUser(by: data, to: id) { (error) in
@@ -96,7 +96,7 @@ class PetPresenter {
     }
     
     
-    func loadPetUsers(for id: String){
+    func loadPetUsers(for id: Int16){
         DataManager.Instance.loadSharedPetUsers(for: id) { (error, users) in
             if error == nil && users != nil {
                self.getPet(with: id)

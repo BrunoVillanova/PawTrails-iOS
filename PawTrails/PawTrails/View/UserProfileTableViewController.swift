@@ -47,7 +47,7 @@ class UserProfileTableViewController: UITableViewController, UserProfileView, UI
         }
         nameLabel.text = fullname
         emailLabel.text = user.email
-        genderLabel.text = Gender.build(code: user.gender)?.name
+        genderLabel.text = Gender(rawValue: user.gender)?.name
         birthdayLabel.text = user.birthday?.toStringShow
         phoneLabel.text = user.phone?.toString
         addressLabel.text = user.address?.toString

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16E195" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Address" representedClassName="Address" syncable="YES" codeGenerationType="class">
+    <entity name="Address" representedClassName="Address" syncable="YES">
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="line0" optional="YES" attributeType="String" syncable="YES"/>
@@ -10,31 +10,32 @@
         <attribute name="state" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="address" inverseEntity="User" syncable="YES"/>
     </entity>
-    <entity name="Breed" representedClassName="Breed" syncable="YES" codeGenerationType="class">
-        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+    <entity name="Breed" representedClassName="Breed" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="petFirst" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pet" inverseName="firstBreed" inverseEntity="Pet" syncable="YES"/>
-        <relationship name="petSecond" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pet" inverseName="secondBreed" inverseEntity="Pet" syncable="YES"/>
+        <relationship name="petFirst" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Pet" inverseName="firstBreed" inverseEntity="Pet" syncable="YES"/>
+        <relationship name="petSecond" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Pet" inverseName="secondBreed" inverseEntity="Pet" syncable="YES"/>
     </entity>
-    <entity name="CountryCode" representedClassName="CountryCode" syncable="YES" codeGenerationType="class">
+    <entity name="CountryCode" representedClassName="CountryCode" syncable="YES">
         <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="shortname" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Location" representedClassName="Location" syncable="YES" codeGenerationType="class">
+    <entity name="Location" representedClassName="Location" syncable="YES">
         <attribute name="datetime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="pet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pet" inverseName="last_location" inverseEntity="Pet" syncable="YES"/>
         <relationship name="point" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Point" inverseName="locations" inverseEntity="Point" syncable="YES"/>
     </entity>
-    <entity name="Pet" representedClassName="Pet" syncable="YES" codeGenerationType="class">
+    <entity name="Pet" representedClassName="Pet" syncable="YES">
         <attribute name="birthday" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="breed_descr" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="deviceCode" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="gender" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="Binary" storedInTruthFile="YES" syncable="YES"/>
         <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isOwner" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="neutered" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="tracking" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
@@ -47,40 +48,40 @@
         <relationship name="secondBreed" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Breed" inverseName="petSecond" inverseEntity="Breed" syncable="YES"/>
         <relationship name="users" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PetUser" inverseName="petUsers" inverseEntity="PetUser" syncable="YES"/>
     </entity>
-    <entity name="PetUser" representedClassName="PetUser" syncable="YES" codeGenerationType="class">
+    <entity name="PetUser" representedClassName="PetUser" syncable="YES">
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="Binary" storedInTruthFile="YES" syncable="YES"/>
         <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isOwner" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="surname" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="petUsers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Pet" inverseName="users" inverseEntity="Pet" syncable="YES"/>
-        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="friends" inverseEntity="User" syncable="YES"/>
+        <relationship name="user" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="friends" inverseEntity="User" syncable="YES"/>
     </entity>
-    <entity name="Phone" representedClassName="Phone" syncable="YES" codeGenerationType="class">
+    <entity name="Phone" representedClassName="Phone" syncable="YES">
         <attribute name="country_code" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="number" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="phone" inverseEntity="User" syncable="YES"/>
     </entity>
-    <entity name="Point" representedClassName="Point" syncable="YES" codeGenerationType="class">
+    <entity name="Point" representedClassName="Point" syncable="YES">
         <attribute name="latitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="longitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Location" inverseName="point" inverseEntity="Location" syncable="YES"/>
         <relationship name="safezones" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SafeZone" inverseName="point" inverseEntity="SafeZone" syncable="YES"/>
     </entity>
-    <entity name="SafeZone" representedClassName="SafeZone" syncable="YES" codeGenerationType="class">
+    <entity name="SafeZone" representedClassName="SafeZone" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="preview" optional="YES" attributeType="Binary" storedInTruthFile="YES" syncable="YES"/>
         <attribute name="shape" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="pet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pet" inverseName="safezones" inverseEntity="Pet" syncable="YES"/>
         <relationship name="point" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Point" inverseName="safezones" inverseEntity="Point" syncable="YES"/>
     </entity>
-    <entity name="User" representedClassName="User" syncable="YES" codeGenerationType="class">
+    <entity name="User" representedClassName="User" syncable="YES">
         <attribute name="birthday" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="gender" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="gender" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="Binary" storedInTruthFile="YES" syncable="YES"/>
         <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -95,7 +96,7 @@
         <element name="Breed" positionX="-18" positionY="135" width="128" height="120"/>
         <element name="CountryCode" positionX="-18" positionY="108" width="128" height="90"/>
         <element name="Location" positionX="-54" positionY="18" width="128" height="90"/>
-        <element name="Pet" positionX="-63" positionY="-18" width="128" height="315"/>
+        <element name="Pet" positionX="-63" positionY="-18" width="128" height="330"/>
         <element name="PetUser" positionX="-27" positionY="135" width="128" height="180"/>
         <element name="Phone" positionX="-18" positionY="117" width="128" height="90"/>
         <element name="Point" positionX="-9" positionY="153" width="128" height="105"/>

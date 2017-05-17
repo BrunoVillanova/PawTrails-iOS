@@ -31,10 +31,10 @@ extension String {
         return URL(string:self) != nil
     }
     
-    public var toDate: NSDate? {
+    public var toDate: Date? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        return dateFormatter.date(from: self)! as NSDate
+        return dateFormatter.date(from: self)
     }
 
 }
@@ -77,6 +77,9 @@ extension Int {
         return Int16(self)
     }
     
+    public var toString: String {
+        return "\(self)"
+    }
 }
 
 extension Dictionary {
@@ -110,8 +113,72 @@ extension Dictionary where Key == String, Value == Any {
             }
         }
     }
+    
+    func tryCastInteger(for key:String) -> Int? {
+        if let value = self[key] {
+            if value is Int { return value as? Int }
+            if value is String { return Int(value as! String) }
+        }
+        return nil
+    }
 
 }
+
+extension Data {
+    
+    
+    static func build(with url:String) -> Data? {
+        if let url = URL(string: url) {
+            do {
+                return try Data(contentsOf: url)
+            } catch {
+                return nil
+            }
+        }
+        return nil
+    }
+    
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

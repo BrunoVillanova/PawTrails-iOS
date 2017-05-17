@@ -14,12 +14,12 @@ class AddPetDeviceTableViewController: UITableViewController, UITextFieldDelegat
     
     fileprivate let presenter = DeviceCodePresenter()
     fileprivate var isDeviceIdle = false
-    var petId: String?
+    var petId: Int16 = -1
     
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.attachView(self)
-        if petId != nil {
+        if petId != 0 {
             navigationItem.rightBarButtonItem?.title = "Change"
         }
     }
@@ -55,7 +55,7 @@ class AddPetDeviceTableViewController: UITableViewController, UITextFieldDelegat
     func idle(_ code: String) {
         isDeviceIdle = true
         
-        if let petId = petId {
+        if petId != -1 {
             presenter.change(code, to: petId)
         }else if let vc = storyboard?.instantiateViewController(withIdentifier: "AddEditPetDetailsTableViewController") as? AddEditPetDetailsTableViewController {
             vc.deviceCode = code

@@ -63,7 +63,7 @@ class AddEditPetPresenter {
     
     func getType() -> Type? {
         if let code = data["type"] as? Int16 {
-            return Type(rawValue: Int(code))
+            return Type(rawValue: code)
         }
         return nil
     }
@@ -82,7 +82,7 @@ class AddEditPetPresenter {
     
     func getGender() -> Gender? {
         if let code = data["gender"] as? Int16 {
-            return Gender(rawValue: Int(code))
+            return Gender(rawValue: code)
         }
         return nil
     }
@@ -134,7 +134,7 @@ class AddEditPetPresenter {
     }
     
     func set(type: Type?) {
-        data["type"] = type?.rawValue.toInt16 ?? ""
+        data["type"] = type?.rawValue ?? ""
     }
     
     func set(typeDescription: String?) {
@@ -142,7 +142,7 @@ class AddEditPetPresenter {
     }
     
     func set(gender:Gender?){
-        data["gender"] = gender?.rawValue.toInt16 ?? ""
+        data["gender"] = gender?.rawValue ?? ""
     }
 
     func set(first: Breed?) {
@@ -185,14 +185,14 @@ class AddEditPetPresenter {
     
     func done(){
 
-        if editMode, let id = data["id"] as? String, imageData != nil {
+        if editMode, let id = data["id"] as? Int16, imageData != nil {
             saveImatge(petId: id)
         }else{
             save()
         }
     }
     
-    private func saveImatge(petId:String){
+    private func saveImatge(petId:Int16){
         
         if let imageData = imageData {
             var data = [String:Any]()
@@ -237,7 +237,7 @@ class AddEditPetPresenter {
         
         data.filter(by: ["image", "imageURL", "birthday"])
         
-        if editMode, let id = data["id"] as? String {
+        if editMode, let id = data["id"] as? Int16 {
             
             DataManager.Instance.setPet(id, data, callback: { (error) in
                 DispatchQueue.main.async {
@@ -256,7 +256,7 @@ class AddEditPetPresenter {
 
                 if error == nil {
                     if self.imageData != nil, let pet = pet {
-                        self.saveImatge(petId: pet.id!)
+                        self.saveImatge(petId: pet.id)
                     }else{
                         DispatchQueue.main.async {
                             self.view?.endLoadingContent()

@@ -11,7 +11,7 @@ import FacebookCore
 import FacebookLogin
 import TwitterKit
 
-protocol InitialView: NSObjectProtocol, View, ConnectionView {
+protocol InitialView: NSObjectProtocol, View, ConnectionView, LoadingView {
     func loggedSocialMedia()
     func emailFieldError(msg:String)
     func passwordFieldError(msg:String)
@@ -34,10 +34,11 @@ class InitialPresenter {
     }
     
     func signIn(email:String?, password:String?) {
-        
+        view?.beginLoadingContent()
         if validInput(email, password) && reachability.isConnected() {
             AuthManager.Instance.signIn(email!, password!) { (error) in
                 DispatchQueue.main.async {
+                    self.view?.endLoadingContent()
                     if error != nil {
                         if error?.code == ErrorCode.AccountNotVerified {
                             self.view?.verifyAccount(email!)
@@ -53,9 +54,11 @@ class InitialPresenter {
     }
     
     func signUp(email:String?, password:String?) {
+        view?.beginLoadingContent()
         if validInput(email, password) && reachability.isConnected() {
             AuthManager.Instance.signUp(email!, password!) { (error) in
                 DispatchQueue.main.async {
+                    self.view?.endLoadingContent()
                     if error != nil {
                         self.view?.errorMessage(error!)
                     }else{
@@ -102,7 +105,6 @@ class InitialPresenter {
                 self.view?.errorMessage(ErrorMsg(title:"Error login Facebook", msg:"\(error)"))
                 break
             case .success(_, _, let accessToken):
-                print(accessToken.authenticationToken)
                 AuthManager.Instance.login(socialMedia: .facebook, accessToken.authenticationToken, completition: { (error) in
                     DispatchQueue.main.async {
                         if error == nil {
@@ -121,7 +123,6 @@ class InitialPresenter {
     //Google
     
     func loginG() {
-        
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             appDelegate.configureGoogleLogin()
             GIDSignIn.sharedInstance().signIn()
@@ -144,7 +145,6 @@ class InitialPresenter {
     //Twitter
     
     func loginTW(vc: InitialViewController) {
-
 
         Twitter.sharedInstance().start(withConsumerKey: "FM1jiu1Iceq2IwDS6aT41X046", consumerSecret: "QGLiyOInRuZ3DlRXk0mxjWSi1hVUPEhAWl1b92wHp2B5C1Qys9")
         Twitter.sharedInstance().logIn(with: vc, methods: .webBased) { (session, error) in

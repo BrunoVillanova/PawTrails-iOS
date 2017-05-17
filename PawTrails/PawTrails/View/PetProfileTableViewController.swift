@@ -9,12 +9,13 @@
 import UIKit
 
 class PetProfileTableViewController: UITableViewController, UICollectionViewDelegate, UICollectionViewDataSource, PetView {
-
+    
     @IBOutlet weak var petImageView: UIImageView!
     @IBOutlet weak var breedLabel: UILabel!
     @IBOutlet weak var weightLabel: UILabel!
     @IBOutlet weak var genderLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
+    @IBOutlet weak var neuteredLabel: UILabel!
     @IBOutlet weak var birthdayLabel: UILabel!
     @IBOutlet weak var safeZonesCollectionView: UICollectionView!
     @IBOutlet weak var usersCollectionView: UICollectionView!
@@ -35,25 +36,21 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
         usersCollectionView.reloadData()
         if let pet = pet {
             load(pet)
-            if let id = pet.id {
-                presenter.loadPet(with: id)
-                presenter.loadPetUsers(for: id)
-            }
+            presenter.loadPet(with: pet.id)
+            presenter.loadPetUsers(for: pet.id)
             removeLeaveLabel.text = pet.isOwner ? "Remove Pet" : "Leave Pet"
         }
         
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 20.0))
-
-        petImageView.circle()
-    }
+        }
     
     override func viewWillAppear(_ animated: Bool) {
-//        presenter.loadPet(with: pet.id ?? "")
-        presenter.getPet(with: pet.id ?? "")
+        //        presenter.loadPet(with: pet.id ?? "")
+        presenter.getPet(with: pet.id)
     }
     
     func reloadUsers() {
-        presenter.loadPetUsers(for: pet.id ?? "")
+        presenter.loadPetUsers(for: pet.id)
     }
     
     //MARK: - PetView
@@ -63,22 +60,20 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
     }
     
     func load(_ pet: Pet) {
-
+        
         if let imageData = pet.image {
             petImageView.image = UIImage(data: imageData as Data)
         }
         
         breedLabel.text = pet.breeds
-        genderLabel.text = Gender(rawValue: Int(pet.gender))?.name
+        genderLabel.text = Gender(rawValue: pet.gender)?.name
         typeLabel.text = pet.typeString
         weightLabel.text = pet.weight.toWeightString
         birthdayLabel.text = pet.birthday?.toStringShow
+        neuteredLabel.text = pet.neutered ? "Yes" : "No"
         
-        
-
         usersCollectionView.reloadAnimated()
         
-
         if pet.safezones != nil && pet.safezones!.count > 0 {
             addSafeZoneTableViewCell.isHidden = true
             safezonesTableViewCell.isHidden = false
@@ -139,7 +134,7 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
     }
     
     func editPressed(sender: UIButton){
-
+        
         switch sender.tag {
         case 0:
             if let vc = storyboard?.instantiateViewController(withIdentifier: "AddEditPetDetailsTableViewController") as? AddEditPetDetailsTableViewController {
@@ -165,6 +160,15 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
         
         if indexPath.section == 2 && ((indexPath.row == 0 && safezonesTableViewCell.isHidden) || (indexPath.row == 1 && addSafeZoneTableViewCell.isHidden)){
             return 0
+        }else if indexPath.section == 0 && indexPath.row == 1 {
+
+            let label = UILabel(frame: CGRect(x: 0.0, y: 0.0, width: breedLabel.frame.width, height: CGFloat(MAXFLOAT)))
+            label.numberOfLines = 0
+            label.lineBreakMode = .byWordWrapping
+            label.font = UIFont.preferredFont(forTextStyle: .body)
+            label.text = breedLabel.text
+            label.sizeToFit()
+            return 36.0 + label.frame.height
         }else{
             return super.tableView(tableView, heightForRowAt: indexPath)
         }
@@ -177,16 +181,14 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
         
         if indexPath.section == 3 && indexPath.row == 1 {
             // Leave/Remove Pet
-            if let id = pet.id {
-                if pet.isOwner {
-                    popUpDestructive(title: "Remove \(pet.name ?? "this pet")", msg: "If you proceed you will loose all the information of this pet.", cancelHandler: nil, proceedHandler: { (remove) in
-                        self.presenter.removePet(with: id)
-                    })
-                }else{
-                    popUpDestructive(title: "Leave \(pet.name ?? "this pet")", msg: "If you proceed you will leave this pet sharing list.", cancelHandler: nil, proceedHandler: { (remove) in
-                        self.presenter.leavePet(with: id)
-                    })
-                }
+            if pet.isOwner {
+                popUpDestructive(title: "Remove \(pet.name ?? "this pet")", msg: "If you proceed you will loose all the information of this pet.", cancelHandler: nil, proceedHandler: { (remove) in
+                    self.presenter.removePet(with: self.pet.id)
+                })
+            }else{
+                popUpDestructive(title: "Leave \(pet.name ?? "this pet")", msg: "If you proceed you will leave this pet sharing list.", cancelHandler: nil, proceedHandler: { (remove) in
+                    self.presenter.leavePet(with: self.pet.id)
+                })
             }
             self.tableView.deselectRow(at: indexPath, animated: true)
         } else if indexPath.section == 2 && indexPath.row == 1 && addSafeZoneTableViewCell.isHidden == false {
@@ -199,7 +201,7 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
         case safeZonesCollectionView: return pet.safezones?.count ?? 0
@@ -207,7 +209,7 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
         default: return 0
         }
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == safeZonesCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! petProfileSafeZoneCollectionCell
@@ -219,15 +221,15 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
             
             let user = presenter.users[indexPath.row]
             
-            let imageData = user.image ?? NSData()
-            cell.elementImageView.image = UIImage(data: imageData as Data)
+            let imageData = user.image ?? Data()
+            cell.elementImageView.image = UIImage(data: imageData)
             cell.elementImageView.setupLayout(isPetOwner: user.isOwner)
             
             let fullName = "\(user.name ?? "") \(user.surname ?? "")"
             cell.titleLabel.text = fullName
-
-
-
+            
+            
+            
             return cell
         }else{
             return UICollectionViewCell()
@@ -253,7 +255,7 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
             navigationController?.pushViewController(vc, animated: true)
         }
     }
-        
+    
     func present(_ user: PetUser, isOwner: Bool) {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "PetUserTableViewController") as? PetUserTableViewController {
             vc.petUser = user
@@ -263,10 +265,10 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
     }
     
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
+        
         if segue.identifier == "changeDevice" {
             if let navigationController = segue.destination as? UINavigationController {
                 if let childVC = navigationController.topViewController as? AddPetDeviceTableViewController {
@@ -275,7 +277,7 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
             }
         }
     }
-
+    
 }
 
 class petProfileSafeZoneCollectionCell: UICollectionViewCell {

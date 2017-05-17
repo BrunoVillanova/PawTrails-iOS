@@ -59,9 +59,7 @@ class CoreDataManager {
             if object.keys.contains(key) { object.setValue(value, forKey: key) }
         }
         
-        if Storage.Instance.save() != Storage.SaveStatus.saved {
-            throw NSError(domain: "Not Saved Properly", code: CoreDataManagerError.NotSavedProperly.rawValue, userInfo: data)
-        }
+        try save(userInfo: data)
         return object
     }
     
@@ -76,7 +74,7 @@ class CoreDataManager {
     func upsert(_ entity:String, with data:[String:Any], withId idKey:String = "id") throws -> NSManagedObject {
         
         //Check input id
-        guard let id = data[idKey] as? String else {
+        guard let id = data[idKey] else {
             throw NSError(domain: "CDM upsert entity \(entity) failed reading input data \(idKey)", code: CoreDataManagerError.IdNotFoundInInput.rawValue, userInfo: ["data":data])
         }
 
@@ -139,9 +137,7 @@ class CoreDataManager {
                     object.setValue(data[key], forKey: key)
                 }
             }
-            
-            if Storage.Instance.save() != Storage.SaveStatus.saved { throw NSError(domain: "Not Saved Properly", code: CoreDataManagerError.NotSavedProperly.rawValue, userInfo: data) }
-            
+            try save(userInfo: data)
             return object
         //Create
         }else{
@@ -164,17 +160,15 @@ class CoreDataManager {
         for i in results {
             Storage.Instance.context.delete(i)
         }
-        
         try save()
     }
     
     /// Attempts to commit unsaved changes to registered objects.
     ///
     /// - Throws: `Not saved properly`.
-    func save() throws {
-        if Storage.Instance.save() != Storage.SaveStatus.saved {
-            throw NSError(domain: "Not Saved Properly", code: CoreDataManagerError.NotSavedProperly.rawValue)
-        }
+    func save(userInfo: [AnyHashable : Any]? = nil) throws {
+        let status = Storage.Instance.save()
+        if status != .hasNoChanges || status != .saved { throw NSError(domain: "Not Saved Properly", code: CoreDataManagerError.NotSavedProperly.rawValue, userInfo:userInfo) }
     }
     
     //MARK:- Helpers

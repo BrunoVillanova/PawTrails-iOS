@@ -49,8 +49,8 @@ class PetUsersViewController: UIViewController, UITableViewDataSource, UITableVi
         let fullName = "\(user.name ?? "") \(user.surname ?? "")"
         cell.titleLabel?.text = fullName
         
-        let imageData = user.image ?? NSData()
-        cell.leftImageView?.image = UIImage(data: imageData as Data)
+        let imageData = user.image ?? Data()
+        cell.leftImageView?.image = UIImage(data: imageData)
         cell.leftImageView?.setupLayout(isPetOwner: user == pet.owner)
 
         cell.rightDetailLabel.text = user == pet.owner ? "owner" : "guest"

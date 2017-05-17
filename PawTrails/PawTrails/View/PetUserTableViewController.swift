@@ -23,6 +23,11 @@ class PetUserTableViewController: UITableViewController, PetUserView {
     
     fileprivate let presenter = PetUserPresenter()
     
+    fileprivate var currentUserId = -1
+    fileprivate var petOwnerId = -2
+    fileprivate var appUserId = -3
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.attachView(self)
@@ -37,16 +42,16 @@ class PetUserTableViewController: UITableViewController, PetUserView {
             nameLabel.text = petUser.name
             surnameLabel.text = petUser.surname
             
-            let imageData = petUser.image ?? NSData()
-            imageView.image = UIImage(data: imageData as Data)
+            let imageData = petUser.image ?? Data()
+            imageView.image = UIImage(data: imageData)
             imageView.setupLayout(isPetOwner: pet.isOwner(petUser))
             
             let name = pet.name ?? ""
             emailLabel.text = petUser.email
            
-            let currentUserId = petUser.id ?? "="
-            let petOwnerId = pet.owner?.id ?? "*"
-            let appUserId = SharedPreferences.get(.id) ?? "§"
+            currentUserId = Int(petUser.id)
+            petOwnerId = pet.owner?.id ?? -2
+            appUserId = Int(SharedPreferences.get(.id) ?? -3)
 
             if currentUserId == petOwnerId && petOwnerId == appUserId {
                 // Remove Pet
@@ -72,32 +77,25 @@ class PetUserTableViewController: UITableViewController, PetUserView {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.section == 1, let petId = pet.id, let userId = petUser.id {
-            
-            let currentUserId = petUser.id ?? "="
-            let petOwnerId = pet.owner?.id ?? "*"
-            let appUserId = SharedPreferences.get(.id) ?? "§"
-            
-            if currentUserId == petOwnerId && petOwnerId == appUserId {
-                // Remove Pet
-                presenter.removePet(with: petId)
-            }else if appUserId == petOwnerId && appUserId != currentUserId {
-                // Owner Remove that user
-                presenter.removePetUser(with: userId, from: petId)
-            }else if appUserId == currentUserId && appUserId != petOwnerId {
-                // That user leaves pet
-                presenter.leavePet(with: petId)
-            }
-        }
+//        if indexPath.section == 1 {
+//            
+//            if currentUserId == petOwnerId && petOwnerId == appUserId {
+//                // Remove Pet
+//                presenter.removePet(with: pet.id)
+//            }else if appUserId == petOwnerId && appUserId != currentUserId {
+//                // Owner Remove that user
+//                presenter.removePetUser(with: petUser.id, from: pet.id)
+//            }else if appUserId == currentUserId && appUserId != petOwnerId {
+//                // That user leaves pet
+//                presenter.leavePet(with: pet.id)
+//            }
+//        }
         
     }
     
     // MARK:- PetUserView
     
     func removed() {
-        let currentUserId = petUser.id ?? "="
-        let petOwnerId = pet.owner?.id ?? "*"
-        let appUserId = SharedPreferences.get(.id) ?? "§"
         
         if appUserId == petOwnerId && appUserId != currentUserId {
             if let petPage = navigationController?.viewControllers.first(where: { $0 is PetsPageViewController}) as? PetsPageViewController {

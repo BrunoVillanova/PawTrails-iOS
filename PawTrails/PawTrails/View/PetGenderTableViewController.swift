@@ -40,7 +40,7 @@ class PetGenderTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        let rowGender = Gender(rawValue: indexPath.row)
+        let rowGender = Gender(rawValue: Int16(indexPath.row))
         cell.textLabel?.text = rowGender?.name
         if selected != nil && rowGender == selected {
             cell.accessoryType = .checkmark
@@ -53,7 +53,7 @@ class PetGenderTableViewController: UITableViewController {
     //MARK:- UITableViewDelegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let newSelected = Gender(rawValue: indexPath.row)
+        let newSelected = Gender(rawValue: Int16(indexPath.row))
         selected = newSelected?.code == selected?.code ? nil : newSelected
         tableView.reloadData()
     }

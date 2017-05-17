@@ -9,7 +9,7 @@
 import Foundation
 
 
-public enum Gender: Int {
+public enum Gender: Int16 {
     case female = 0,male, undefined
     
     static func count() -> Int {
@@ -46,7 +46,7 @@ public enum Gender: Int {
     }
 }
 
-public enum Type: Int {
+public enum Type: Int16 {
     
     case other = 1
     case dog = 2

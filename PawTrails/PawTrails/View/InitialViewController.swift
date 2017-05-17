@@ -151,7 +151,15 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
     func successGoogleLogin(token:String){
         presenter.successGLogin(token: token)
     }
-        
+    
+    func beginLoadingContent() {
+        showLoadingView()
+    }
+    
+    func endLoadingContent() {
+        hideLoadingView()
+    }
+    
     // MARK: - Connection Notifications
     
     func connectedToNetwork() {
