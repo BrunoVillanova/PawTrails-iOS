@@ -49,14 +49,18 @@ class PetManager {
                         
                         // First Breed
                         if let firstBreedId = data["breed"] as? Int {
-                            pet.firstBreed = BreedManager.retrieve(for: type, breedId: "\(firstBreedId)")
+                            BreedManager.retrieve(for: type, breedId: firstBreedId, callback: { (error, breed) in
+                                if error == nil { pet.firstBreed = breed }
+                            })
                         }else{
                             pet.setValue(nil, forKey: "firstBreed")
                         }
                         
                         // Second Breed
                         if let secondBreedId = data["breed1"] as? Int {
-                            pet.secondBreed = BreedManager.retrieve(for: type, breedId: "\(secondBreedId)")
+                            BreedManager.retrieve(for: type, breedId: secondBreedId, callback: { (error, breed) in
+                                if error == nil { pet.secondBreed = breed }
+                            })
                         }else{
                             pet.setValue(nil, forKey: "secondBreed")
                         }
@@ -144,8 +148,8 @@ class PetManager {
                         upsertPetList(petData)
                     }
                 }
+                getPets(callback)
             })
-            getPets(callback)
         }else{
             callback(PetError.PetsNotFoundInResponse, nil)
         }

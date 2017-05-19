@@ -28,13 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
-        do {
-            try CoreDataManager.Instance.delete(entity: "User")
-            try CoreDataManager.Instance.delete(entity: "Pet")
-        } catch {
-            
-        }
-        
+
+//        _ = AuthManager.Instance.signOut()
         
         // Set Status Bar Style
         UIApplication.shared.statusBarStyle = .lightContent

@@ -69,8 +69,15 @@ class DataManager {
         return true
     }
     
-    func getUserFriends(){
-        
+    func loadUserFriends(callback: @escaping petUsersCallback){
+        APIManager.Instance.perform(call: .friends) { (error, data) in
+            if error == nil, let data = data {
+                DispatchQueue.main.async {
+                    PetUserManager.upsertFriends(data)
+                    PetUserManager.getFriends(callback: callback)
+                }
+            }
+        }
     }
     
     // MARK: - Pet
@@ -184,6 +191,7 @@ class DataManager {
     func checkBreeds() {
         
         for type in [Type.cat, Type.dog] {
+            
             BreedManager.retrieve(for: type) { (error, breeds) in
                 if breeds == nil { self.loadBreeds(for: type, callback: { (_, _) in })}
             }
@@ -201,15 +209,13 @@ class DataManager {
             
             APIManager.Instance.perform(call: .getBreeds, withKey: type.code, completition: { (error, data) in
                 if error == nil, let data = data {
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.sync {
                         BreedManager.upsert(data, for: type, callback: callback)
                     }
                 }
             })
         }
     }
-    
-    
     
     // MARK: - Pet Sharing
     
@@ -269,7 +275,43 @@ class DataManager {
     func leaveSharedPet(by petId: Int16, callback: @escaping petErrorCallback) {
         APIManager.Instance.perform(call: .leaveSharedPet, withKey: petId) { (error, data) in
             if error == nil {
-                self.loadSharedPetUsers(for: petId, callback: { (error, pet) in
+                callback(nil)
+            }else{
+                callback(PetError.MoreThenOnePet)
+            }
+        }
+    }
+    
+    // MARK: - Pet Safe Zones
+    
+    func loadSafeZones(of petId:Int16, callback: @escaping petErrorCallback) {
+        
+        APIManager.Instance.perform(call: .listSafeZones, withKey: petId) { (error, data) in
+            if error == nil, let data = data {
+                DispatchQueue.main.async {
+                    SafeZoneManager.upsertList(data, into: petId)
+                    callback(nil)
+                }
+            }else{
+                callback(PetError.IdNotFound)
+            }
+        }
+    }
+    
+    func addSafeZone(by data: [String:Any], to petId: Int16, callback: @escaping petErrorCallback) {
+        APIManager.Instance.perform(call: .addSafeZone, with: data) { (error, data) in
+            if error == nil {
+                self.loadSafeZones(of: petId, callback: { (error) in
+                    callback(error)
+                })
+            }
+        }
+    }
+    
+    func setSafeZone(by data: [String:Any], to petId: Int16, callback: @escaping petErrorCallback) {
+        APIManager.Instance.perform(call: .setSafeZone, with: data) { (error, data) in
+            if error == nil {
+                self.loadSafeZones(of: petId, callback: { (error) in
                     callback(error)
                 })
             }else{
@@ -278,6 +320,22 @@ class DataManager {
         }
     }
     
+    func removeSafeZone(by safezoneId: Int16, to petId: Int16, callback: @escaping petErrorCallback) {
+        APIManager.Instance.perform(call: .removeSafeZone, withKey: safezoneId) { (error, data) in
+            if error == nil {
+                self.loadSafeZones(of: petId, callback: { (error) in
+                    callback(error)
+                })
+            }else{
+                callback(PetError.MoreThenOnePet)
+            }
+        }
+    }
+    
+    func setSafeZone(_ safezone: SafeZone, imageData:Data){
+        SafeZoneManager.set(safezone: safezone, imageData: imageData)
+    }
+
     // MARK: - Tracking
     
     func trackingIsIdle() -> Bool {

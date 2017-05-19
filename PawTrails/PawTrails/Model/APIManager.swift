@@ -21,7 +21,8 @@ public enum APICallType {
     case signUp, signin, facebookLogin, googleLogin, twitterLogin, weiboLogin, passwordReset, passwordChange,
     getUser, setUser, imageUpload, friends,
     registerPet, getPets, getPet, setPet, getBreeds, checkDevice, changeDevice, unregisterPet,
-    sharePet, getSharedPetUsers, removeSharedPet,leaveSharedPet
+    sharePet, getSharedPetUsers, removeSharedPet,leaveSharedPet,
+    addSafeZone, setSafeZone, getSafeZone, listSafeZones, removeSafeZone
     
     fileprivate var requiresToken: Bool {
         switch self {
@@ -61,20 +62,26 @@ public enum APICallType {
         case .removeSharedPet: return "/pets/share/\(key)/del"
         case .leaveSharedPet: return "/pets/share/\(key)/leave"
             
+        case .addSafeZone: return "/pets/safezones/add"
+        case .setSafeZone: return "/pets/safezones/mod"
+        case .getSafeZone: return "/pets/safezones/view/\(key)"
+        case .removeSafeZone: return "/pets/safezones/del/\(key)"
+        case .listSafeZones: return "/pets/safezones/list/\(key)"
+
 //        default: return ""
         }
     }
     
     fileprivate var httpMethod: String {
         switch self {
-        case .getUser, .getBreeds, .checkDevice, .getPets, .getPet, .getSharedPetUsers, .unregisterPet, .leaveSharedPet, .friends :return "GET"
+        case .getUser, .getBreeds, .checkDevice, .getPets, .getPet, .getSharedPetUsers, .unregisterPet, .leaveSharedPet, .friends, .getSafeZone, .listSafeZones, .removeSafeZone : return "GET"
         default: return "POST"
         }
     }
     
     fileprivate var requiresBody: Bool {
         switch self {
-        case .getUser, .getBreeds, .checkDevice, .getPets, .getPet, .getSharedPetUsers, .unregisterPet, .leaveSharedPet : return false
+        case .getUser, .getBreeds, .checkDevice, .getPets, .getPet, .getSharedPetUsers, .unregisterPet, .leaveSharedPet, .friends, .getSafeZone, .listSafeZones, .removeSafeZone : return false
         default: return true
         }
     }

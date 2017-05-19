@@ -64,6 +64,17 @@ extension Pet {
         }
         return nil
     }
+    
+    var sortedSafeZones: [SafeZone]? {
+        if let safezones = safezones?.allObjects as? [SafeZone] {
+            return safezones.sorted(by: { (sz1, sz2) -> Bool in
+                return sz1.id > sz2.id
+            })
+        }
+        return nil
+    }
+    
+    
 }
 
 extension Phone {

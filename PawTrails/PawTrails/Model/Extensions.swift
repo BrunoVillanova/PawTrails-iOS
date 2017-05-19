@@ -45,6 +45,13 @@ extension Double {
         return "\(self)Kg"
     }
     
+    public var toDegrees: Double {
+        return self * 180.0 / Double.pi
+    }
+    
+    public var square: Double {
+        return pow(self, 2.0)
+    }
 }
 
 extension Date {
@@ -117,11 +124,18 @@ extension Dictionary where Key == String, Value == Any {
     func tryCastInteger(for key:String) -> Int? {
         if let value = self[key] {
             if value is Int { return value as? Int }
-            if value is String { return Int(value as! String) }
+            if value is String, let intValue = Int(value as! String) { return intValue }
         }
         return nil
     }
-
+    
+    func tryCastDouble(for key:String) -> Double? {
+        if let value = self[key] {
+            if value is Double { return value as? Double }
+            if value is String, let doubleValue = Double(value as! String) { return doubleValue }
+        }
+        return nil
+    }    
 }
 
 extension Data {
@@ -142,7 +156,13 @@ extension Data {
     
 }
 
+extension CGPoint {
 
+    func distance(to point:CGPoint) -> Double {
+        return sqrt(Double(pow(abs(self.x-point.x), 2)+pow(abs(self.y-point.y), 2)))
+    }
+    
+}
 
 
 

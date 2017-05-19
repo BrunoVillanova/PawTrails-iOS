@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MapKit
 
-class PetProfileTableViewController: UITableViewController, UICollectionViewDelegate, UICollectionViewDataSource, PetView {
+class PetProfileTableViewController: UITableViewController, UICollectionViewDelegate, UICollectionViewDataSource, MKMapViewDelegate, PetView {
     
     @IBOutlet weak var petImageView: UIImageView!
     @IBOutlet weak var breedLabel: UILabel!
@@ -38,6 +39,7 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
             load(pet)
             presenter.loadPet(with: pet.id)
             presenter.loadPetUsers(for: pet.id)
+            presenter.loadSafeZone(for: pet.id)
             removeLeaveLabel.text = pet.isOwner ? "Remove Pet" : "Leave Pet"
         }
         
@@ -160,7 +162,7 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
         
         if indexPath.section == 2 && ((indexPath.row == 0 && safezonesTableViewCell.isHidden) || (indexPath.row == 1 && addSafeZoneTableViewCell.isHidden)){
             return 0
-        }else if indexPath.section == 0 && indexPath.row == 1 {
+        }else if indexPath.section == 0 && indexPath.row == 1 && breedLabel.text != nil && breedLabel.text != "" {
 
             let label = UILabel(frame: CGRect(x: 0.0, y: 0.0, width: breedLabel.frame.width, height: CGFloat(MAXFLOAT)))
             label.numberOfLines = 0
@@ -204,7 +206,7 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
-        case safeZonesCollectionView: return pet.safezones?.count ?? 0
+        case safeZonesCollectionView: return presenter.safezones.count
         case usersCollectionView: return presenter.users.count
         default: return 0
         }
@@ -213,8 +215,24 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == safeZonesCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! petProfileSafeZoneCollectionCell
-            cell.elementImageView.backgroundColor = UIColor.red
-            cell.titleLabel.text = "Safe Zone \(indexPath.row)"
+            
+            let safezone = presenter.safezones[indexPath.row]
+            cell.elementImageView.backgroundColor = UIColor.red.withAlphaComponent(0.5)
+            cell.titleLabel.text = safezone.name
+            cell.activeSwitch.isOn = safezone.active
+            cell.activeSwitch.tag = indexPath.row
+            cell.activeSwitch.addTarget(self, action: #selector(changeSwitchAction(sender:)), for: UIControlEvents.valueChanged)
+            
+            if safezone.preview == nil, let center = safezone.point1?.coordinates, let topCenter = safezone.point2?.coordinates {
+                MKMapView.getSnapShot(with: center, topCenter: topCenter, isCircle: safezone.shape, into: view, delegate: self, handler: { (image) in
+                    cell.elementImageView.image = image
+                    if let image = image, let data = UIImagePNGRepresentation(image) {
+                        self.presenter.set(safezone: safezone, imageData: data)
+                    }
+                })
+            }else{
+                cell.elementImageView.backgroundColor = UIColor.orange().withAlphaComponent(0.8)
+            }
             return cell
         }else if collectionView == usersCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! petProfileUserCollectionCell
@@ -227,9 +245,6 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
             
             let fullName = "\(user.name ?? "") \(user.surname ?? "")"
             cell.titleLabel.text = fullName
-            
-            
-            
             return cell
         }else{
             return UICollectionViewCell()
@@ -239,9 +254,7 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == safeZonesCollectionView {
             
-            if let safezone = pet.safezones?.allObjects[indexPath.row] as? SafeZone {
-                present(safezone)
-            }
+            present(presenter.safezones[indexPath.row])
             
         }else if collectionView == usersCollectionView {
             let user = presenter.users[indexPath.row]
@@ -249,9 +262,17 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
         }
     }
     
+    func changeSwitchAction(sender: UISwitch){
+        let sz = presenter.safezones[sender.tag]
+        print(sz.name ?? "nahahhaha")
+//        sz.active = sender.isOn
+//        safeZonesCollectionView.reloadData()
+    }
+    
     func present(_ safezone: SafeZone?) {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "AddEditSafeZoneViewController") as? AddEditSafeZoneViewController {
             vc.safezone = safezone
+            vc.petId = pet.id
             navigationController?.pushViewController(vc, animated: true)
         }
     }
@@ -278,11 +299,16 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
         }
     }
     
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        return mapView.getRenderer(overlay: overlay)
+    }
+    
 }
 
 class petProfileSafeZoneCollectionCell: UICollectionViewCell {
     @IBOutlet weak var elementImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var activeSwitch: UISwitch!
 }
 
 class petProfileUserCollectionCell: UICollectionViewCell {

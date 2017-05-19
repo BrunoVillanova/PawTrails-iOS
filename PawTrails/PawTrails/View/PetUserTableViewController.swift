@@ -49,9 +49,11 @@ class PetUserTableViewController: UITableViewController, PetUserView {
             let name = pet.name ?? ""
             emailLabel.text = petUser.email
            
-            currentUserId = Int(petUser.id)
-            petOwnerId = pet.owner?.id ?? -2
-            appUserId = Int(SharedPreferences.get(.id) ?? -3)
+            if let owner = pet.owner, let id = SharedPreferences.get(.id) {
+                currentUserId = Int(petUser.id)
+                petOwnerId = Int(owner.id)
+                appUserId = Int(id) ?? -3
+            }
 
             if currentUserId == petOwnerId && petOwnerId == appUserId {
                 // Remove Pet
@@ -77,19 +79,19 @@ class PetUserTableViewController: UITableViewController, PetUserView {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-//        if indexPath.section == 1 {
-//            
-//            if currentUserId == petOwnerId && petOwnerId == appUserId {
-//                // Remove Pet
-//                presenter.removePet(with: pet.id)
-//            }else if appUserId == petOwnerId && appUserId != currentUserId {
-//                // Owner Remove that user
-//                presenter.removePetUser(with: petUser.id, from: pet.id)
-//            }else if appUserId == currentUserId && appUserId != petOwnerId {
-//                // That user leaves pet
-//                presenter.leavePet(with: pet.id)
-//            }
-//        }
+        if indexPath.section == 1 {
+            
+            if currentUserId == petOwnerId && petOwnerId == appUserId {
+                // Remove Pet
+                presenter.removePet(with: pet.id)
+            }else if appUserId == petOwnerId && appUserId != currentUserId {
+                // Owner Remove that user
+                presenter.removePetUser(with: petUser.id, from: pet.id)
+            }else if appUserId == currentUserId && appUserId != petOwnerId {
+                // That user leaves pet
+                presenter.leavePet(with: pet.id)
+            }
+        }
         
     }
     

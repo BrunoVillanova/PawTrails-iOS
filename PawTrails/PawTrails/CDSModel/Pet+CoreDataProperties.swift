@@ -31,7 +31,6 @@ extension Pet {
     @NSManaged public var weight: Double
     @NSManaged public var isOwner: Bool
     @NSManaged public var firstBreed: Breed?
-    @NSManaged public var last_location: Location?
     @NSManaged public var safezones: NSSet?
     @NSManaged public var secondBreed: Breed?
     @NSManaged public var users: NSSet?

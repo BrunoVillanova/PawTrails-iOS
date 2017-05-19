@@ -45,6 +45,18 @@ extension UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    func popUpUserLocationDenied(){
+        DispatchQueue.main.async(execute: {
+            let alert = UIAlertController(title: "Warning, location is not allowed", message: "Please enable it in Settings app under Privacy, Location Services.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Go to Settings", style: .default, handler: { (alert: UIAlertAction!) in
+                UIApplication.shared.openURL(NSURL(string:UIApplicationOpenSettingsURLString)! as URL)
+            }))
+            self.present(alert, animated: true, completion: nil)
+        })
+
+    }
+    
     func setTopBar(color: UIColor = UIColor.orange()) {
         let topBar = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 20))
         topBar.backgroundColor = color.withAlphaComponent(0.8)
@@ -308,4 +320,5 @@ extension UICollectionView {
         let indexSet = IndexSet(integersIn: range)
         self.reloadSections(indexSet)
     }
+
 }

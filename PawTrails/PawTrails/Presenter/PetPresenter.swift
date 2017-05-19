@@ -20,6 +20,7 @@ class PetPresenter {
     weak private var view: PetView?
     
     var users = [PetUser]()
+    var safezones = [SafeZone]()
     
     func attachView(_ view: PetView){
         self.view = view
@@ -42,6 +43,9 @@ class PetPresenter {
                 }else if let pet = pet {
                     if let petUsers = pet.sharedUsers {
                         self.users = petUsers
+                    }
+                    if let safezones = pet.sortedSafeZones {
+                        self.safezones = safezones
                     }
                     self.view?.load(pet)
                 }
@@ -99,8 +103,46 @@ class PetPresenter {
     func loadPetUsers(for id: Int16){
         DataManager.Instance.loadSharedPetUsers(for: id) { (error, users) in
             if error == nil && users != nil {
-               self.getPet(with: id)
+                self.getPet(with: id)
             }
         }
     }
+    
+    func loadSafeZone(for id: Int16){
+        DataManager.Instance.loadSafeZones(of: id) { (error) in
+            if error == nil {
+                self.getPet(with: id)
+            }
+        }
+    }
+    
+    func set(safezone: SafeZone, imageData:Data){
+        DataManager.Instance.setSafeZone(safezone, imageData: imageData)
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

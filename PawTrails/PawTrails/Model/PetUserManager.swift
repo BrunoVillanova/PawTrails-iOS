@@ -46,7 +46,7 @@ class PetUserManager {
         
         if let petUsersData = data["users"] as? [[String:Any]] {
             PetManager.getPet(petId) { (error, pet) in
-                if let pet = pet {
+                if error == nil, let pet = pet {
                     do {
                         let users = pet.mutableSetValue(forKey: "users")
                         users.removeAllObjects()

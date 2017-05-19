@@ -2,7 +2,7 @@
 //  SafeZone+CoreDataProperties.swift
 //  PawTrails
 //
-//  Created by Marc Perello on 16/05/2017.
+//  Created by Marc Perello on 17/05/2017.
 //  Copyright © 2017 AttitudeTech. All rights reserved.
 //
 
@@ -16,46 +16,30 @@ extension SafeZone {
         return NSFetchRequest<SafeZone>(entityName: "SafeZone")
     }
 
-    @NSManaged public var id: Int16
     @NSManaged public var name: String?
-    @NSManaged public var preview: Data?
-    @NSManaged public var shape: String?
-    @NSManaged public var pet: Pet?
-    @NSManaged public var point: NSOrderedSet?
+    @NSManaged public var preview: NSData?
+    @NSManaged public var shape: Bool
+    @NSManaged public var id: Int16
+    @NSManaged public var active: Bool
+    @NSManaged public var point1: Point?
+    @NSManaged public var point2: Point?
+    @NSManaged public var pet: NSSet?
 
 }
 
-// MARK: Generated accessors for point
+// MARK: Generated accessors for pet
 extension SafeZone {
 
-    @objc(insertObject:inPointAtIndex:)
-    @NSManaged public func insertIntoPoint(_ value: Point, at idx: Int)
+    @objc(addPetObject:)
+    @NSManaged public func addToPet(_ value: Pet)
 
-    @objc(removeObjectFromPointAtIndex:)
-    @NSManaged public func removeFromPoint(at idx: Int)
+    @objc(removePetObject:)
+    @NSManaged public func removeFromPet(_ value: Pet)
 
-    @objc(insertPoint:atIndexes:)
-    @NSManaged public func insertIntoPoint(_ values: [Point], at indexes: NSIndexSet)
+    @objc(addPet:)
+    @NSManaged public func addToPet(_ values: NSSet)
 
-    @objc(removePointAtIndexes:)
-    @NSManaged public func removeFromPoint(at indexes: NSIndexSet)
-
-    @objc(replaceObjectInPointAtIndex:withObject:)
-    @NSManaged public func replacePoint(at idx: Int, with value: Point)
-
-    @objc(replacePointAtIndexes:withPoint:)
-    @NSManaged public func replacePoint(at indexes: NSIndexSet, with values: [Point])
-
-    @objc(addPointObject:)
-    @NSManaged public func addToPoint(_ value: Point)
-
-    @objc(removePointObject:)
-    @NSManaged public func removeFromPoint(_ value: Point)
-
-    @objc(addPoint:)
-    @NSManaged public func addToPoint(_ values: NSOrderedSet)
-
-    @objc(removePoint:)
-    @NSManaged public func removeFromPoint(_ values: NSOrderedSet)
+    @objc(removePet:)
+    @NSManaged public func removeFromPet(_ values: NSSet)
 
 }
