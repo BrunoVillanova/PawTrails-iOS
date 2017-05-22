@@ -25,7 +25,7 @@ class ScanQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
     fileprivate var isCheckingCode: Bool = false
     fileprivate var attempts: Int = 0
 
-    var petId:String?
+    var petId:Int16 = -1
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,7 +72,7 @@ class ScanQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
 
     func idle(_ code: String) {
         stopSession()
-        if let petId = petId {
+        if petId != -1 {
             presenter.change(code, to: petId)
         }else if let vc = storyboard?.instantiateViewController(withIdentifier: "AddEditPetDetailsTableViewController") as? AddEditPetDetailsTableViewController {
             vc.deviceCode = code

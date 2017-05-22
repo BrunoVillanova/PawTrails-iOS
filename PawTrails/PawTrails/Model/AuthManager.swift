@@ -87,8 +87,16 @@ class AuthManager {
     
     func signOut() -> Bool {
         //wipe out DB
-        try? CoreDataManager.Instance.delete(entity: "User")
-        try? CoreDataManager.Instance.delete(entity: "Pet")
+//        try? CoreDataManager.Instance.delete(entity: "User")
+//        try? CoreDataManager.Instance.delete(entity: "Address")
+//        try? CoreDataManager.Instance.delete(entity: "Phone")
+//        try? CoreDataManager.Instance.delete(entity: "CountryCode")
+//        try? CoreDataManager.Instance.delete(entity: "Pet")
+//        try? CoreDataManager.Instance.delete(entity: "Breed")
+//        try? CoreDataManager.Instance.delete(entity: "PetUser")
+//        try? CoreDataManager.Instance.delete(entity: "SafeZone")
+        CoreDataManager.Instance.deleteAll()
+        
 //        GIDSignIn.sharedInstance().signOut()
         return SharedPreferences.remove(.id) && SharedPreferences.remove(.token)
     }

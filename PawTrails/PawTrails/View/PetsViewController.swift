@@ -17,6 +17,7 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        tableView.view
         tableView.tableFooterView = UIView()
         presenter.attachView(self)
         noPetsFound.isHidden = true
@@ -54,7 +55,7 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func loadPets() {
-        noPetsFound.isHidden = presenter.pets.count > 0
+        noPetsFound.isHidden = presenter.sharedPets.count != 0 || presenter.ownedPets.count != 0
 //        if tableView.numberOfRows(inSection: 0) != presenter.pets.count {
 //            tableView.reloadSections([0], with: UITableViewRowAnimation.none)
 //        }
@@ -69,16 +70,16 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // MARK: - UITableViewDataSource
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.pets.count
+        return section == 0 ? presenter.ownedPets.count : presenter.sharedPets.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! petListCell
-        let pet = presenter.pets[indexPath.row]
+        let pet = indexPath.section == 0 ? presenter.ownedPets[indexPath.row] : presenter.sharedPets[indexPath.row]
         cell.titleLabel.text = pet.name
         if let imageData = pet.image as Data? {
             cell.petImageView.image = UIImage(data: imageData)
@@ -89,32 +90,20 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         cell.petImageView.circle()
         cell.trackButton.circle()
         cell.trackButton.addTarget(self, action: #selector(PetsViewController.trackButtonAction(sender:)), for: .touchUpInside)
-        cell.trackButton.tag = indexPath.row
+        cell.trackButton.tag = Int(pet.id)
         return cell
     }
     
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == .delete {
-//            let petName = presenter.pets[indexPath.row].name ?? ""
-//            
-//            popUpDestructive(title: "Remove \(petName)", msg: "If you proceed you will loose all the information of this pet.", cancelHandler: { (cancel) in
-//                tableView.reloadRows(at: [indexPath], with: .none)
-//            }, proceedHandler: { (remove) in
-//                self.presenter.removePet(at: indexPath.row)
-//            })
-//            
-//        } else if editingStyle == .insert {
-//            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-//        }
-//    }
-    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return section == 0 ? "Owned" : "Shared"
+    }
+
     func trackButtonAction(sender: UIButton){
 
         if let home = tabBarController?.viewControllers?.first as? HomeViewController {
-            home.trackingPet = presenter.pets[sender.tag]
+            home.trackingPet = presenter.getPet(with: sender.tag)
             tabBarController?.selectedIndex = 0
         }
-        
     }
     
     // MARK: - Navigation
@@ -124,10 +113,9 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if segue.destination is PetsPageViewController {
             
             if let index = tableView.indexPathForSelectedRow {
-                (segue.destination as! PetsPageViewController).pet = presenter.pets[index.row]
+                (segue.destination as! PetsPageViewController).pet = index.section == 0 ? presenter.ownedPets[index.row] : presenter.sharedPets[index.row]
             }
         }
-        
     }
 }
 

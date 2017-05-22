@@ -31,7 +31,7 @@ extension Pet {
     
     var typeString: String? {
         
-        if let type = Type(rawValue: Int(type)) {
+        if let type = Type(rawValue: type) {
             if let typeDescription = type_descr {
                 return type.name + " - " + typeDescription
             }
@@ -49,17 +49,11 @@ extension Pet {
         return nil
     }
     
-    var isOwner: Bool {
-        
-        guard let currentId = SharedPreferences.get(.id) else { return false }
-        guard let petId = owner?.id else { return false }
-        return currentId == petId
-    }
-    
     func isOwner(_ user: PetUser) -> Bool {
-        guard let userId = user.id else { return false }
-        guard let petId = owner?.id else { return false }
-        return userId == petId
+//        guard let userId = user.id else { return false }
+//        guard let petId = owner?.id else { return false }
+//        return userId == petId
+        return true
     }
     
     var sharedUsers: [PetUser]? {
@@ -70,6 +64,17 @@ extension Pet {
         }
         return nil
     }
+    
+    var sortedSafeZones: [SafeZone]? {
+        if let safezones = safezones?.allObjects as? [SafeZone] {
+            return safezones.sorted(by: { (sz1, sz2) -> Bool in
+                return sz1.id > sz2.id
+            })
+        }
+        return nil
+    }
+    
+    
 }
 
 extension Phone {
@@ -162,7 +167,6 @@ extension NSManagedObject {
     public var keys: [String] {
         return Array(self.entity.attributesByName.keys)
     }
-    
 }
 
 public enum NSPredicateOperation: String {

@@ -29,7 +29,7 @@ class PetUsersPresenter {
         self.view = nil
     }
     
-    func removeUser(by userId:String, of petId: String) {
+    func removeUser(by userId:String, of petId: Int16) {
         
         if let currentUserId = SharedPreferences.get(.id) {
             

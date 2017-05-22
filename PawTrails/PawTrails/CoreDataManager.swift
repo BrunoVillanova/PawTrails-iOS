@@ -59,9 +59,7 @@ class CoreDataManager {
             if object.keys.contains(key) { object.setValue(value, forKey: key) }
         }
         
-        if Storage.Instance.save() != Storage.SaveStatus.saved {
-            throw NSError(domain: "Not Saved Properly", code: CoreDataManagerError.NotSavedProperly.rawValue, userInfo: data)
-        }
+        try save(entity, userInfo: data)
         return object
     }
     
@@ -76,7 +74,7 @@ class CoreDataManager {
     func upsert(_ entity:String, with data:[String:Any], withId idKey:String = "id") throws -> NSManagedObject {
         
         //Check input id
-        guard let id = data[idKey] as? String else {
+        guard let id = data[idKey] else {
             throw NSError(domain: "CDM upsert entity \(entity) failed reading input data \(idKey)", code: CoreDataManagerError.IdNotFoundInInput.rawValue, userInfo: ["data":data])
         }
 
@@ -134,14 +132,12 @@ class CoreDataManager {
         //Update
         if let object = retrieve(entity, with: predicate)?.first {
             
-            for key in object.keys {
-                if !(object.value(forKey: key)  is NSManagedObject) && !(object.value(forKey: key)  is NSData)  {
-                    object.setValue(data[key], forKey: key)
-                }
-            }
-            
-            if Storage.Instance.save() != Storage.SaveStatus.saved { throw NSError(domain: "Not Saved Properly", code: CoreDataManagerError.NotSavedProperly.rawValue, userInfo: data) }
-            
+//            for key in object.keys {
+//                if !(object.value(forKey: key)  is NSManagedObject) && !(object.value(forKey: key)  is NSData)  {
+//                    object.setValue(data[key], forKey: key)
+//                }
+//            }
+//            try save(entity, userInfo: data)
             return object
         //Create
         }else{
@@ -164,21 +160,38 @@ class CoreDataManager {
         for i in results {
             Storage.Instance.context.delete(i)
         }
-        
         try save()
+    }
+    
+    func deleteAll() {
+        
+        let entities = ["User", "Phone", "Address", "Pet", "PetUser", "SafeZone", "Breed", "Point"]
+        
+        for i in entities {
+            let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: i)
+            let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
+            
+            do {
+                try Storage.Instance.context.execute(deleteRequest)
+                let status = Storage.Instance.save()
+                if status == .rolledBack {
+                    debugPrint("Rolled back deleting \(i)")
+                }
+            } catch {
+                debugPrint(error)
+            }
+        }
+        
+        
     }
     
     /// Attempts to commit unsaved changes to registered objects.
     ///
     /// - Throws: `Not saved properly`.
-    func save() throws {
-        if Storage.Instance.save() != Storage.SaveStatus.saved {
-            throw NSError(domain: "Not Saved Properly", code: CoreDataManagerError.NotSavedProperly.rawValue)
-        }
+    func save(_ entity: String = "", userInfo: [AnyHashable : Any]? = nil) throws {
+        let status = Storage.Instance.save()
+        if status == .rolledBack { throw NSError(domain: "\(entity) Not Saved Properly", code: CoreDataManagerError.NotSavedProperly.rawValue, userInfo:userInfo) }
     }
-    
-    //MARK:- Helpers
-    
     
 }
 
@@ -255,6 +268,7 @@ fileprivate struct Storage {
         let coordinator = self.persistentStoreCoordinator
         var managedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = coordinator
+//        managedObjectContext.mergePolicy = NSMergePolicy(merge: NSMergePolicyType.mergeByPropertyObjectTrumpMergePolicyType)
         return managedObjectContext
     }()
     
@@ -280,6 +294,7 @@ fileprivate struct Storage {
                 try context.save()
                 return .saved
             } catch {
+                debugPrint("Couldn't Save", error)
                 context.rollback()
                 return .rolledBack
             }

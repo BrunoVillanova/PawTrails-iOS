@@ -45,7 +45,7 @@ class AddPetUserPresenter {
         }
     }
     
-    func addPetUser(by email: String?, to petId: String?) {
+    func addPetUser(by email: String?, to petId: Int16?) {
         
         if email == nil || (email != nil && !email!.isValidEmail) {
             view?.emailFormat()

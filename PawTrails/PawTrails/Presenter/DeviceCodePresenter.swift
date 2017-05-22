@@ -47,7 +47,7 @@ class DeviceCodePresenter {
         }
     }
     
-    func change(_ code:String, to petId: String){
+    func change(_ code:String, to petId: Int16){
         DataManager.Instance.change(code, of: petId) { (error) in
             DispatchQueue.main.async {
                 if let error = error {

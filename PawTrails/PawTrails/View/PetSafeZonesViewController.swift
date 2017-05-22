@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MapKit
 
-class PetSafeZonesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class PetSafeZonesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noElementsLabel: UILabel!
@@ -25,13 +26,16 @@ class PetSafeZonesViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func addSafeZone() {
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "AddAddEditSafeZoneViewController") {
-//            present(vc, animated: true, completion: nil)
-//            navigationController?.present(vc, animated: true, completion: nil)
+        present()
+    }
+    
+    func present(safezone: SafeZone? = nil){
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "AddEditSafeZoneViewController") as? AddEditSafeZoneViewController {
+            vc.safezone = safezone
+            vc.petId = pet.id
             tabBarController?.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(vc, animated: true)
         }
-        
     }
     
     // MARK: - UITableViewDataSource
@@ -41,38 +45,43 @@ class PetSafeZonesViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return pet.safezones?.count ?? 0
+        return pet.sortedSafeZones?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! safeZoneTableViewCell
-        if let safeZone = pet.safezones?.allObjects[indexPath.row] as? SafeZone {
-            cell.nameLabel.text = safeZone.name
-            if let preview = safeZone.preview {
+        if let safezone = pet.sortedSafeZones?[indexPath.row] {
+            cell.nameLabel.text = safezone.name
+            cell.activeSwitch.isOn = safezone.active
+            if let preview = safezone.preview {
                 cell.mapImageView.image = UIImage(data: preview as Data)
             }else{
-                cell.mapImageView.backgroundColor = UIColor.random()
+                if safezone.preview == nil, let center = safezone.point1?.coordinates, let topCenter = safezone.point2?.coordinates {
+                    MKMapView.getSnapShot(with: center, topCenter: topCenter, isCircle: safezone.shape, into: view, delegate: self, handler: { (image) in
+                        cell.mapImageView.image = image
+                    })
+                }
             }
         }
         return cell
     }
     
     // MARK: - UITableViewDelegate
-
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if let safeZone = pet.sortedSafeZones?[indexPath.row] {
+            present(safezone: safeZone)
+        }
     }
-    */
-
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        return mapView.getRenderer(overlay: overlay)
+    }
 }
 
 class safeZoneTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var mapImageView: UIImageView!
+    @IBOutlet weak var activeSwitch: UISwitch!
 }

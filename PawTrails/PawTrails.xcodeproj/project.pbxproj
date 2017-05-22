@@ -9,6 +9,22 @@
 /* Begin PBXBuildFile section */
 		35B268DF2DC9C7D7C0CBF782 /* Pods_PawTrailsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C09631478A96AC78EA751AA /* Pods_PawTrailsTests.framework */; };
 		3808F92C4AE1F8421B70B99A /* Pods_PawTrails.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D38C295A9EECD1391940C8D3 /* Pods_PawTrails.framework */; };
+		4400E83E1ECB3227005846F0 /* PetUser+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4400E82A1ECB3227005846F0 /* PetUser+CoreDataClass.swift */; };
+		4400E83F1ECB3227005846F0 /* PetUser+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4400E82B1ECB3227005846F0 /* PetUser+CoreDataProperties.swift */; };
+		4400E8401ECB3227005846F0 /* Address+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4400E82C1ECB3227005846F0 /* Address+CoreDataClass.swift */; };
+		4400E8411ECB3227005846F0 /* Address+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4400E82D1ECB3227005846F0 /* Address+CoreDataProperties.swift */; };
+		4400E8441ECB3227005846F0 /* CountryCode+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4400E8301ECB3227005846F0 /* CountryCode+CoreDataClass.swift */; };
+		4400E8451ECB3227005846F0 /* CountryCode+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4400E8311ECB3227005846F0 /* CountryCode+CoreDataProperties.swift */; };
+		4400E8461ECB3227005846F0 /* Phone+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4400E8321ECB3227005846F0 /* Phone+CoreDataClass.swift */; };
+		4400E8471ECB3227005846F0 /* Phone+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4400E8331ECB3227005846F0 /* Phone+CoreDataProperties.swift */; };
+		4400E84A1ECB3227005846F0 /* Pet+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4400E8361ECB3227005846F0 /* Pet+CoreDataClass.swift */; };
+		4400E84B1ECB3227005846F0 /* Pet+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4400E8371ECB3227005846F0 /* Pet+CoreDataProperties.swift */; };
+		4400E84C1ECB3227005846F0 /* Breed+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4400E8381ECB3227005846F0 /* Breed+CoreDataClass.swift */; };
+		4400E84D1ECB3227005846F0 /* Breed+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4400E8391ECB3227005846F0 /* Breed+CoreDataProperties.swift */; };
+		4400E84E1ECB3227005846F0 /* SafeZone+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4400E83A1ECB3227005846F0 /* SafeZone+CoreDataClass.swift */; };
+		4400E8501ECB3227005846F0 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4400E83C1ECB3227005846F0 /* User+CoreDataClass.swift */; };
+		4400E8551ECB3E8D005846F0 /* SafeZone+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4400E8541ECB3E8D005846F0 /* SafeZone+CoreDataProperties.swift */; };
+		4400E8591ECB4DB0005846F0 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4400E8581ECB4DB0005846F0 /* User+CoreDataProperties.swift */; };
 		440821A81EB09E900000751B /* AddPetUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440821A71EB09E900000751B /* AddPetUserViewController.swift */; };
 		440821AA1EB0A08D0000751B /* AddPetUserPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440821A91EB0A08D0000751B /* AddPetUserPresenter.swift */; };
 		440BB7601E5DE63B00D2D68B /* AddEditSafeZoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440BB75F1E5DE63B00D2D68B /* AddEditSafeZoneViewController.swift */; };
@@ -40,9 +56,8 @@
 		443936FF1EA770EF0044831E /* PetUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443936FE1EA770EF0044831E /* PetUsersViewController.swift */; };
 		443937011EA771590044831E /* PetUsersPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443937001EA771590044831E /* PetUsersPresenter.swift */; };
 		443937031EA78A7B0044831E /* PetBreedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443937021EA78A7B0044831E /* PetBreedPresenter.swift */; };
-		443937071EA795300044831E /* Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443937061EA795300044831E /* Details.swift */; };
+		443937071EA795300044831E /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443937061EA795300044831E /* Helpers.swift */; };
 		443D2C6A1E6D721000F7ACFA /* PetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443D2C691E6D721000F7ACFA /* PetManager.swift */; };
-		443D2C6C1E6D736B00F7ACFA /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443D2C6B1E6D736B00F7ACFA /* LocationManager.swift */; };
 		4440C5CB1E8BA568007A13B1 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4440C5CA1E8BA568007A13B1 /* ViewExtensions.swift */; };
 		4440C5CD1E8BA5D0007A13B1 /* ModelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4440C5CC1E8BA5D0007A13B1 /* ModelExtensions.swift */; };
 		4440C5CF1E8BA64E007A13B1 /* MapExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4440C5CE1E8BA64E007A13B1 /* MapExtensions.swift */; };
@@ -55,7 +70,6 @@
 		4441ACB51EB8CC7A00FBE27F /* GoogleSymbolUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4441ACB01EB8CC7A00FBE27F /* GoogleSymbolUtilities.framework */; };
 		4441ACB61EB8CC8D00FBE27F /* GoogleSignIn.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4441ACAD1EB8CC7A00FBE27F /* GoogleSignIn.bundle */; };
 		44421A2C1E4CB8E7009755BD /* EditUserProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44421A2B1E4CB8E7009755BD /* EditUserProfilePresenter.swift */; };
-		44444C8D1EA8A55B0080E328 /* Weight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44444C8C1EA8A55B0080E328 /* Weight.swift */; };
 		44457A2E1E5AF31400B43748 /* AddressTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44457A2D1E5AF31400B43748 /* AddressTableViewController.swift */; };
 		44485F951E51B12800A3C47D /* PawTrails.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 44485F931E51B12800A3C47D /* PawTrails.xcdatamodeld */; };
 		44485F971E51B16500A3C47D /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44485F961E51B16500A3C47D /* CoreDataManager.swift */; };
@@ -64,7 +78,6 @@
 		44498DFD1E4DBE6700F6D761 /* ChangePasswordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44498DFC1E4DBE6700F6D761 /* ChangePasswordPresenter.swift */; };
 		44498DFF1E4DC03100F6D761 /* ChangePasswordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44498DFE1E4DC03100F6D761 /* ChangePasswordTableViewController.swift */; };
 		444ACEFC1E894AF500A9A086 /* EmailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444ACEFB1E894AF500A9A086 /* EmailVerificationViewController.swift */; };
-		444E00CD1E857B2200CAA250 /* SearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444E00CC1E857B2200CAA250 /* SearchManager.swift */; };
 		445A6DC91E896B6F0042736E /* EmailVerificationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445A6DC81E896B6F0042736E /* EmailVerificationPresenter.swift */; };
 		446548161E5C5CC900458CB7 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446548151E5C5CC900458CB7 /* UserManager.swift */; };
 		4465481E1E5C642000458CB7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4465481D1E5C642000458CB7 /* Extensions.swift */; };
@@ -90,6 +103,8 @@
 		449A978D1E82DA940032DCE5 /* NameTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A978C1E82DA940032DCE5 /* NameTableViewController.swift */; };
 		449A978F1E82DAC00032DCE5 /* EmailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A978E1E82DAC00032DCE5 /* EmailTableViewController.swift */; };
 		449A97911E82DADD0032DCE5 /* GenderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A97901E82DADD0032DCE5 /* GenderTableViewController.swift */; };
+		449DE9271ECC751A00449E65 /* SafeZoneManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449DE9261ECC751A00449E65 /* SafeZoneManager.swift */; };
+		449DE9291ECC811E00449E65 /* AddEditSafeZonePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449DE9281ECC811E00449E65 /* AddEditSafeZonePresenter.swift */; };
 		44A1AC4B1E923CEE003EF6CA /* PetsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A1AC4A1E923CEE003EF6CA /* PetsPageViewController.swift */; };
 		44A1AC4E1E9240A9003EF6CA /* PetSafeZonesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A1AC4D1E9240A9003EF6CA /* PetSafeZonesViewController.swift */; };
 		44A1AC501E92923A003EF6CA /* PetsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A1AC4F1E92923A003EF6CA /* PetsPresenter.swift */; };
@@ -128,7 +143,6 @@
 		44C7F7581E4CD43A00171170 /* PasswordRecoveryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F7571E4CD43A00171170 /* PasswordRecoveryPresenter.swift */; };
 		44D73CF11E929FB000D8DF97 /* AddEditPetDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D73CF01E929FB000D8DF97 /* AddEditPetDetailsTableViewController.swift */; };
 		44F8202B1E604C1C00704F75 /* ScanQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F8202A1E604C1C00704F75 /* ScanQRViewController.swift */; };
-		44FA6C591EAE49A600D979AB /* Fence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FA6C581EAE49A600D979AB /* Fence.swift */; };
 		44FE723D1E4A2EF0007C7E24 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FE723C1E4A2EF0007C7E24 /* DataManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -146,6 +160,22 @@
 		199033D371CC47C9192C6703 /* Pods_Snout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Snout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C09631478A96AC78EA751AA /* Pods_PawTrailsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PawTrailsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		20B5DA5019D7976016EA8DF9 /* Pods-PawTrailsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PawTrailsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PawTrailsTests/Pods-PawTrailsTests.release.xcconfig"; sourceTree = "<group>"; };
+		4400E82A1ECB3227005846F0 /* PetUser+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "PetUser+CoreDataClass.swift"; path = "CDSModel/PetUser+CoreDataClass.swift"; sourceTree = "<group>"; };
+		4400E82B1ECB3227005846F0 /* PetUser+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "PetUser+CoreDataProperties.swift"; path = "CDSModel/PetUser+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		4400E82C1ECB3227005846F0 /* Address+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Address+CoreDataClass.swift"; path = "CDSModel/Address+CoreDataClass.swift"; sourceTree = "<group>"; };
+		4400E82D1ECB3227005846F0 /* Address+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Address+CoreDataProperties.swift"; path = "CDSModel/Address+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		4400E8301ECB3227005846F0 /* CountryCode+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CountryCode+CoreDataClass.swift"; path = "CDSModel/CountryCode+CoreDataClass.swift"; sourceTree = "<group>"; };
+		4400E8311ECB3227005846F0 /* CountryCode+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CountryCode+CoreDataProperties.swift"; path = "CDSModel/CountryCode+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		4400E8321ECB3227005846F0 /* Phone+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Phone+CoreDataClass.swift"; path = "CDSModel/Phone+CoreDataClass.swift"; sourceTree = "<group>"; };
+		4400E8331ECB3227005846F0 /* Phone+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Phone+CoreDataProperties.swift"; path = "CDSModel/Phone+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		4400E8361ECB3227005846F0 /* Pet+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Pet+CoreDataClass.swift"; path = "CDSModel/Pet+CoreDataClass.swift"; sourceTree = "<group>"; };
+		4400E8371ECB3227005846F0 /* Pet+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Pet+CoreDataProperties.swift"; path = "CDSModel/Pet+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		4400E8381ECB3227005846F0 /* Breed+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Breed+CoreDataClass.swift"; path = "CDSModel/Breed+CoreDataClass.swift"; sourceTree = "<group>"; };
+		4400E8391ECB3227005846F0 /* Breed+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Breed+CoreDataProperties.swift"; path = "CDSModel/Breed+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		4400E83A1ECB3227005846F0 /* SafeZone+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SafeZone+CoreDataClass.swift"; path = "CDSModel/SafeZone+CoreDataClass.swift"; sourceTree = "<group>"; };
+		4400E83C1ECB3227005846F0 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "User+CoreDataClass.swift"; path = "CDSModel/User+CoreDataClass.swift"; sourceTree = "<group>"; };
+		4400E8541ECB3E8D005846F0 /* SafeZone+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SafeZone+CoreDataProperties.swift"; path = "CDSModel/SafeZone+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		4400E8581ECB4DB0005846F0 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "User+CoreDataProperties.swift"; path = "CDSModel/User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		440821A71EB09E900000751B /* AddPetUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddPetUserViewController.swift; path = View/AddPetUserViewController.swift; sourceTree = "<group>"; };
 		440821A91EB0A08D0000751B /* AddPetUserPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddPetUserPresenter.swift; path = Presenter/AddPetUserPresenter.swift; sourceTree = "<group>"; };
 		440BB75F1E5DE63B00D2D68B /* AddEditSafeZoneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddEditSafeZoneViewController.swift; path = View/AddEditSafeZoneViewController.swift; sourceTree = "<group>"; };
@@ -182,9 +212,8 @@
 		443936FE1EA770EF0044831E /* PetUsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetUsersViewController.swift; path = View/PetUsersViewController.swift; sourceTree = "<group>"; };
 		443937001EA771590044831E /* PetUsersPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetUsersPresenter.swift; path = Presenter/PetUsersPresenter.swift; sourceTree = "<group>"; };
 		443937021EA78A7B0044831E /* PetBreedPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetBreedPresenter.swift; path = Presenter/PetBreedPresenter.swift; sourceTree = "<group>"; };
-		443937061EA795300044831E /* Details.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Details.swift; path = Model/Details.swift; sourceTree = "<group>"; };
+		443937061EA795300044831E /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Helpers.swift; path = Model/Helpers.swift; sourceTree = "<group>"; };
 		443D2C691E6D721000F7ACFA /* PetManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetManager.swift; path = Model/PetManager.swift; sourceTree = "<group>"; };
-		443D2C6B1E6D736B00F7ACFA /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationManager.swift; path = Model/LocationManager.swift; sourceTree = "<group>"; };
 		4440C5CA1E8BA568007A13B1 /* ViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		4440C5CC1E8BA5D0007A13B1 /* ModelExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelExtensions.swift; sourceTree = "<group>"; };
 		4440C5CE1E8BA64E007A13B1 /* MapExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapExtensions.swift; sourceTree = "<group>"; };
@@ -197,7 +226,6 @@
 		4441ACAF1EB8CC7A00FBE27F /* GoogleSignInDependencies.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSignInDependencies.framework; sourceTree = "<group>"; };
 		4441ACB01EB8CC7A00FBE27F /* GoogleSymbolUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSymbolUtilities.framework; sourceTree = "<group>"; };
 		44421A2B1E4CB8E7009755BD /* EditUserProfilePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditUserProfilePresenter.swift; path = Presenter/EditUserProfilePresenter.swift; sourceTree = "<group>"; };
-		44444C8C1EA8A55B0080E328 /* Weight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Weight.swift; path = Model/Weight.swift; sourceTree = "<group>"; };
 		44457A2D1E5AF31400B43748 /* AddressTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddressTableViewController.swift; path = View/AddressTableViewController.swift; sourceTree = "<group>"; };
 		44485F941E51B12800A3C47D /* PawTrails.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PawTrails.xcdatamodel; sourceTree = "<group>"; };
 		44485F961E51B16500A3C47D /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -206,7 +234,6 @@
 		44498DFC1E4DBE6700F6D761 /* ChangePasswordPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordPresenter.swift; sourceTree = "<group>"; };
 		44498DFE1E4DC03100F6D761 /* ChangePasswordTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChangePasswordTableViewController.swift; path = View/ChangePasswordTableViewController.swift; sourceTree = "<group>"; };
 		444ACEFB1E894AF500A9A086 /* EmailVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmailVerificationViewController.swift; path = View/EmailVerificationViewController.swift; sourceTree = "<group>"; };
-		444E00CC1E857B2200CAA250 /* SearchManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchManager.swift; path = Model/SearchManager.swift; sourceTree = "<group>"; };
 		445A6DC81E896B6F0042736E /* EmailVerificationPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailVerificationPresenter.swift; sourceTree = "<group>"; };
 		446548151E5C5CC900458CB7 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserManager.swift; path = Model/UserManager.swift; sourceTree = "<group>"; };
 		4465481D1E5C642000458CB7 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Model/Extensions.swift; sourceTree = "<group>"; };
@@ -233,6 +260,8 @@
 		449A978C1E82DA940032DCE5 /* NameTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NameTableViewController.swift; path = View/NameTableViewController.swift; sourceTree = "<group>"; };
 		449A978E1E82DAC00032DCE5 /* EmailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmailTableViewController.swift; path = View/EmailTableViewController.swift; sourceTree = "<group>"; };
 		449A97901E82DADD0032DCE5 /* GenderTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GenderTableViewController.swift; path = View/GenderTableViewController.swift; sourceTree = "<group>"; };
+		449DE9261ECC751A00449E65 /* SafeZoneManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SafeZoneManager.swift; path = Model/SafeZoneManager.swift; sourceTree = "<group>"; };
+		449DE9281ECC811E00449E65 /* AddEditSafeZonePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddEditSafeZonePresenter.swift; path = Presenter/AddEditSafeZonePresenter.swift; sourceTree = "<group>"; };
 		44A1AC4A1E923CEE003EF6CA /* PetsPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetsPageViewController.swift; path = View/PetsPageViewController.swift; sourceTree = "<group>"; };
 		44A1AC4D1E9240A9003EF6CA /* PetSafeZonesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetSafeZonesViewController.swift; path = View/PetSafeZonesViewController.swift; sourceTree = "<group>"; };
 		44A1AC4F1E92923A003EF6CA /* PetsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetsPresenter.swift; path = Presenter/PetsPresenter.swift; sourceTree = "<group>"; };
@@ -271,7 +300,6 @@
 		44C7F7571E4CD43A00171170 /* PasswordRecoveryPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PasswordRecoveryPresenter.swift; path = Presenter/PasswordRecoveryPresenter.swift; sourceTree = "<group>"; };
 		44D73CF01E929FB000D8DF97 /* AddEditPetDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddEditPetDetailsTableViewController.swift; path = View/AddEditPetDetailsTableViewController.swift; sourceTree = "<group>"; };
 		44F8202A1E604C1C00704F75 /* ScanQRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScanQRViewController.swift; path = View/ScanQRViewController.swift; sourceTree = "<group>"; };
-		44FA6C581EAE49A600D979AB /* Fence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fence.swift; sourceTree = "<group>"; };
 		44FE723C1E4A2EF0007C7E24 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = DataManager.swift; path = Model/DataManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		4D52BC7BE2AEDBF19B3D09AB /* Pods-PawTrailsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PawTrailsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PawTrailsTests/Pods-PawTrailsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		754A776083E072AC16A405DB /* Pods_SnoutTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnoutTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -307,6 +335,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4400E8521ECB3238005846F0 /* CDS Classes */ = {
+			isa = PBXGroup;
+			children = (
+				4400E82A1ECB3227005846F0 /* PetUser+CoreDataClass.swift */,
+				4400E82C1ECB3227005846F0 /* Address+CoreDataClass.swift */,
+				4400E8301ECB3227005846F0 /* CountryCode+CoreDataClass.swift */,
+				4400E8321ECB3227005846F0 /* Phone+CoreDataClass.swift */,
+				4400E8361ECB3227005846F0 /* Pet+CoreDataClass.swift */,
+				4400E8381ECB3227005846F0 /* Breed+CoreDataClass.swift */,
+				4400E83A1ECB3227005846F0 /* SafeZone+CoreDataClass.swift */,
+				4400E83C1ECB3227005846F0 /* User+CoreDataClass.swift */,
+			);
+			name = "CDS Classes";
+			sourceTree = "<group>";
+		};
+		4400E8531ECB3246005846F0 /* CDS Properties */ = {
+			isa = PBXGroup;
+			children = (
+				4400E8581ECB4DB0005846F0 /* User+CoreDataProperties.swift */,
+				4400E8371ECB3227005846F0 /* Pet+CoreDataProperties.swift */,
+				4400E82B1ECB3227005846F0 /* PetUser+CoreDataProperties.swift */,
+				4400E82D1ECB3227005846F0 /* Address+CoreDataProperties.swift */,
+				4400E8311ECB3227005846F0 /* CountryCode+CoreDataProperties.swift */,
+				4400E8331ECB3227005846F0 /* Phone+CoreDataProperties.swift */,
+				4400E8391ECB3227005846F0 /* Breed+CoreDataProperties.swift */,
+				4400E8541ECB3E8D005846F0 /* SafeZone+CoreDataProperties.swift */,
+			);
+			name = "CDS Properties";
+			sourceTree = "<group>";
+		};
 		440CEE491E3B8D0700F58A09 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -327,7 +385,6 @@
 				440CEE5B1E3B9B1900F58A09 /* HomeViewController.swift */,
 				4424DCFC1E8E9F9400ACDF07 /* PetsViewController.swift */,
 				4424DCF81E8E9F2300ACDF07 /* UserProfileTableViewController.swift */,
-				447440E51E8400CF0069EA85 /* SettingsTableViewController.swift */,
 				441A0D4B1E55A5A500D02CE4 /* Auth */,
 				447AC7DF1E9CD9BB00D2D2B2 /* Add/Edit Pet */,
 				44A1AC4C1E924044003EF6CA /* Pet Profile */,
@@ -352,14 +409,14 @@
 		440CEE4C1E3B8D3D00F58A09 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4400E8521ECB3238005846F0 /* CDS Classes */,
+				4400E8531ECB3246005846F0 /* CDS Properties */,
 				4465481B1E5C624700458CB7 /* Communication */,
 				44C7F7521E4CD3F200171170 /* AuthManager.swift */,
 				44FE723C1E4A2EF0007C7E24 /* DataManager.swift */,
 				4465481C1E5C625100458CB7 /* CoreDataModelsManagers */,
 				44485F931E51B12800A3C47D /* PawTrails.xcdatamodeld */,
-				443937061EA795300044831E /* Details.swift */,
-				44444C8C1EA8A55B0080E328 /* Weight.swift */,
-				44FA6C581EAE49A600D979AB /* Fence.swift */,
+				443937061EA795300044831E /* Helpers.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -416,6 +473,7 @@
 		441A0D4B1E55A5A500D02CE4 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				447440E51E8400CF0069EA85 /* SettingsTableViewController.swift */,
 				440CEE571E3B983700F58A09 /* InitialViewController.swift */,
 				44C7F71D1E4CD35700171170 /* PasswordRecoveryViewController.swift */,
 				444ACEFB1E894AF500A9A086 /* EmailVerificationViewController.swift */,
@@ -463,10 +521,9 @@
 			children = (
 				446548151E5C5CC900458CB7 /* UserManager.swift */,
 				443D2C691E6D721000F7ACFA /* PetManager.swift */,
-				443D2C6B1E6D736B00F7ACFA /* LocationManager.swift */,
-				444E00CC1E857B2200CAA250 /* SearchManager.swift */,
 				4467CDE61EAF40560092DA56 /* BreedManager.swift */,
 				448010161EC213BF007D22D7 /* PetUserManager.swift */,
+				449DE9261ECC751A00449E65 /* SafeZoneManager.swift */,
 			);
 			name = CoreDataModelsManagers;
 			sourceTree = "<group>";
@@ -496,13 +553,14 @@
 			isa = PBXGroup;
 			children = (
 				44A1AC4F1E92923A003EF6CA /* PetsPresenter.swift */,
-				441D72F21E9E37490031BB1E /* AddEditPetPresenter.swift */,
-				443937001EA771590044831E /* PetUsersPresenter.swift */,
-				443937021EA78A7B0044831E /* PetBreedPresenter.swift */,
-				440821A91EB0A08D0000751B /* AddPetUserPresenter.swift */,
-				4475FB251EB0D73700E9990D /* DeviceCodePresenter.swift */,
 				4424E9751EB3430C004CC5FA /* PetPresenter.swift */,
+				441D72F21E9E37490031BB1E /* AddEditPetPresenter.swift */,
+				443937021EA78A7B0044831E /* PetBreedPresenter.swift */,
+				4475FB251EB0D73700E9990D /* DeviceCodePresenter.swift */,
 				442FB06C1EBA00B9004486F8 /* PetUserPresenter.swift */,
+				443937001EA771590044831E /* PetUsersPresenter.swift */,
+				440821A91EB0A08D0000751B /* AddPetUserPresenter.swift */,
+				449DE9281ECC811E00449E65 /* AddEditSafeZonePresenter.swift */,
 			);
 			name = Pet;
 			sourceTree = "<group>";
@@ -890,6 +948,7 @@
 				4440C5CD1E8BA5D0007A13B1 /* ModelExtensions.swift in Sources */,
 				447440E61E8400CF0069EA85 /* SettingsTableViewController.swift in Sources */,
 				44C7F74C1E4CD3AE00171170 /* SocketTypes.swift in Sources */,
+				4400E8401ECB3227005846F0 /* Address+CoreDataClass.swift in Sources */,
 				44C7F7461E4CD3AE00171170 /* SocketIOClientSpec.swift in Sources */,
 				4479051C1E5744A800A49AB3 /* PhoneTableViewController.swift in Sources */,
 				44C7F7481E4CD3AE00171170 /* SocketLogger.swift in Sources */,
@@ -898,9 +957,9 @@
 				44498DFD1E4DBE6700F6D761 /* ChangePasswordPresenter.swift in Sources */,
 				44C7F7391E4CD3AE00171170 /* SocketAnyEvent.swift in Sources */,
 				44C7F73E1E4CD3AE00171170 /* SocketEnginePollable.swift in Sources */,
+				4400E84D1ECB3227005846F0 /* Breed+CoreDataProperties.swift in Sources */,
 				44C7F73B1E4CD3AE00171170 /* SocketEngine.swift in Sources */,
 				44C7F7491E4CD3AE00171170 /* SocketPacket.swift in Sources */,
-				443D2C6C1E6D736B00F7ACFA /* LocationManager.swift in Sources */,
 				44F8202B1E604C1C00704F75 /* ScanQRViewController.swift in Sources */,
 				44C7F74E1E4CD3AE00171170 /* WebSocket.swift in Sources */,
 				44C7F7501E4CD3DA00171170 /* HomePresenter.swift in Sources */,
@@ -908,6 +967,7 @@
 				44C7F71E1E4CD35700171170 /* PasswordRecoveryViewController.swift in Sources */,
 				449A978F1E82DAC00032DCE5 /* EmailTableViewController.swift in Sources */,
 				4475D42D1EAF7C4F007E8304 /* PetUserTableViewController.swift in Sources */,
+				4400E84C1ECB3227005846F0 /* Breed+CoreDataClass.swift in Sources */,
 				447905161E5731F100A49AB3 /* Reachability.swift in Sources */,
 				4440C5CF1E8BA64E007A13B1 /* MapExtensions.swift in Sources */,
 				44421A2C1E4CB8E7009755BD /* EditUserProfilePresenter.swift in Sources */,
@@ -917,20 +977,25 @@
 				44C7F7371E4CD3AE00171170 /* SocketAckEmitter.swift in Sources */,
 				44C7F73A1E4CD3AE00171170 /* SocketClientManager.swift in Sources */,
 				4465481E1E5C642000458CB7 /* Extensions.swift in Sources */,
+				4400E83F1ECB3227005846F0 /* PetUser+CoreDataProperties.swift in Sources */,
 				440CEE5A1E3B9AA300F58A09 /* InitialPresenter.swift in Sources */,
+				4400E8441ECB3227005846F0 /* CountryCode+CoreDataClass.swift in Sources */,
+				4400E84E1ECB3227005846F0 /* SafeZone+CoreDataClass.swift in Sources */,
 				447440E81E8400EF0069EA85 /* SettingsPresenter.swift in Sources */,
 				443D2C6A1E6D721000F7ACFA /* PetManager.swift in Sources */,
-				44444C8D1EA8A55B0080E328 /* Weight.swift in Sources */,
+				4400E8471ECB3227005846F0 /* Phone+CoreDataProperties.swift in Sources */,
 				441A0D4D1E55AF5200D02CE4 /* SharedPreferences.swift in Sources */,
 				441D72F51E9E57ED0031BB1E /* AddPetDeviceTableViewController.swift in Sources */,
-				443937071EA795300044831E /* Details.swift in Sources */,
+				443937071EA795300044831E /* Helpers.swift in Sources */,
 				44485F971E51B16500A3C47D /* CoreDataManager.swift in Sources */,
 				447AC7EC1E9CDBB200D2D2B2 /* PetWeightTableViewController.swift in Sources */,
 				440BB7601E5DE63B00D2D68B /* AddEditSafeZoneViewController.swift in Sources */,
 				449A978D1E82DA940032DCE5 /* NameTableViewController.swift in Sources */,
+				4400E84A1ECB3227005846F0 /* Pet+CoreDataClass.swift in Sources */,
 				44C7F74A1E4CD3AE00171170 /* SocketParsable.swift in Sources */,
 				447905181E573A4D00A49AB3 /* EditUserProfileTableViewController.swift in Sources */,
 				44457A2E1E5AF31400B43748 /* AddressTableViewController.swift in Sources */,
+				4400E8411ECB3227005846F0 /* Address+CoreDataProperties.swift in Sources */,
 				448010171EC213BF007D22D7 /* PetUserManager.swift in Sources */,
 				446CBF091EAA458D007C4659 /* PetProfileTableViewController.swift in Sources */,
 				443936FF1EA770EF0044831E /* PetUsersViewController.swift in Sources */,
@@ -938,21 +1003,24 @@
 				447AC7E41E9CDB1C00D2D2B2 /* PetTypeTableViewController.swift in Sources */,
 				44C7F7381E4CD3AE00171170 /* SocketAckManager.swift in Sources */,
 				44C7F74B1E4CD3AE00171170 /* SocketStringReader.swift in Sources */,
+				4400E8591ECB4DB0005846F0 /* User+CoreDataProperties.swift in Sources */,
 				4467CDE71EAF40560092DA56 /* BreedManager.swift in Sources */,
 				447AC7EA1E9CDB9700D2D2B2 /* PetBirthdayTableViewController.swift in Sources */,
 				441D72F31E9E37490031BB1E /* AddEditPetPresenter.swift in Sources */,
 				440821AA1EB0A08D0000751B /* AddPetUserPresenter.swift in Sources */,
 				44A1AC501E92923A003EF6CA /* PetsPresenter.swift in Sources */,
 				4415FF431E3B822900A81B13 /* AppDelegate.swift in Sources */,
-				44FA6C591EAE49A600D979AB /* Fence.swift in Sources */,
 				44C7F7561E4CD3F200171170 /* SocketIOManager.swift in Sources */,
 				44329CB41EA1129400325A13 /* Constants.swift in Sources */,
 				4475FB261EB0D73700E9990D /* DeviceCodePresenter.swift in Sources */,
 				44485FBF1E52079D00A3C47D /* CVSParser.swift in Sources */,
+				4400E8501ECB3227005846F0 /* User+CoreDataClass.swift in Sources */,
 				440C5E181E701643000C3827 /* EmojiManager.swift in Sources */,
 				44C7F7441E4CD3AE00171170 /* SocketIOClientConfiguration.swift in Sources */,
 				44B179641E4B787A0070A18B /* Errors.swift in Sources */,
 				4440C5CB1E8BA568007A13B1 /* ViewExtensions.swift in Sources */,
+				4400E8461ECB3227005846F0 /* Phone+CoreDataClass.swift in Sources */,
+				449DE9291ECC811E00449E65 /* AddEditSafeZonePresenter.swift in Sources */,
 				44B179621E4B62690070A18B /* Presenter.swift in Sources */,
 				44C7F74D1E4CD3AE00171170 /* SSLSecurity.swift in Sources */,
 				44C7F73C1E4CD3AE00171170 /* SocketEngineClient.swift in Sources */,
@@ -960,10 +1028,10 @@
 				4424DCF91E8E9F2300ACDF07 /* UserProfileTableViewController.swift in Sources */,
 				44C7F7431E4CD3AE00171170 /* SocketIOClient.swift in Sources */,
 				447AC7E61E9CDB4600D2D2B2 /* PetGenderTableViewController.swift in Sources */,
-				444E00CD1E857B2200CAA250 /* SearchManager.swift in Sources */,
 				440821A81EB09E900000751B /* AddPetUserViewController.swift in Sources */,
 				4479051E1E575A2100A49AB3 /* BirthdayViewController.swift in Sources */,
 				440CEE581E3B983700F58A09 /* InitialViewController.swift in Sources */,
+				449DE9271ECC751A00449E65 /* SafeZoneManager.swift in Sources */,
 				44C7F7411E4CD3AE00171170 /* SocketEventHandler.swift in Sources */,
 				4424DCFF1E8EA1D900ACDF07 /* UserProfilePresenter.swift in Sources */,
 				449A97911E82DADD0032DCE5 /* GenderTableViewController.swift in Sources */,
@@ -978,12 +1046,16 @@
 				447AC7E21E9CDAF700D2D2B2 /* PetNameTableViewController.swift in Sources */,
 				445A6DC91E896B6F0042736E /* EmailVerificationPresenter.swift in Sources */,
 				447AC7E81E9CDB8500D2D2B2 /* PetBreedTableViewController.swift in Sources */,
+				4400E83E1ECB3227005846F0 /* PetUser+CoreDataClass.swift in Sources */,
 				44A1AC4B1E923CEE003EF6CA /* PetsPageViewController.swift in Sources */,
+				4400E8451ECB3227005846F0 /* CountryCode+CoreDataProperties.swift in Sources */,
+				4400E84B1ECB3227005846F0 /* Pet+CoreDataProperties.swift in Sources */,
 				4424DCFD1E8E9F9400ACDF07 /* PetsViewController.swift in Sources */,
 				44C7F7401E4CD3AE00171170 /* SocketEngineWebsocket.swift in Sources */,
 				44B179661E4B78EF0070A18B /* Messages.swift in Sources */,
 				44498DFF1E4DC03100F6D761 /* ChangePasswordTableViewController.swift in Sources */,
 				44A1AC4E1E9240A9003EF6CA /* PetSafeZonesViewController.swift in Sources */,
+				4400E8551ECB3E8D005846F0 /* SafeZone+CoreDataProperties.swift in Sources */,
 				443937031EA78A7B0044831E /* PetBreedPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

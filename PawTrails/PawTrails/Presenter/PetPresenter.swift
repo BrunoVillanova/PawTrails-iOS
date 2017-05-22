@@ -20,6 +20,7 @@ class PetPresenter {
     weak private var view: PetView?
     
     var users = [PetUser]()
+    var safezones = [SafeZone]()
     
     func attachView(_ view: PetView){
         self.view = view
@@ -29,7 +30,7 @@ class PetPresenter {
         self.view = nil
     }
     
-    func getPet(with id: String) {
+    func getPet(with id: Int16) {
 
         DataManager.Instance.getPet(id) { (error, pet) in
             DispatchQueue.main.async {
@@ -43,13 +44,16 @@ class PetPresenter {
                     if let petUsers = pet.sharedUsers {
                         self.users = petUsers
                     }
+                    if let safezones = pet.sortedSafeZones {
+                        self.safezones = safezones
+                    }
                     self.view?.load(pet)
                 }
             }
         }
     }
     
-    func loadPet(with id: String) {
+    func loadPet(with id: Int16) {
         
         DataManager.Instance.loadPet(id) { (error, pet) in
             DispatchQueue.main.async {
@@ -66,7 +70,7 @@ class PetPresenter {
         }
     }
     
-    func removePet(with id: String) {
+    func removePet(with id: Int16) {
         
         DataManager.Instance.removePet(id) { (error) in
             DispatchQueue.main.async {
@@ -80,7 +84,7 @@ class PetPresenter {
         }
     }
     
-    func leavePet(with id: String) {
+    func leavePet(with id: Int16) {
         var data = [String:Any]()
         data["user_id"] = SharedPreferences.get(.id)
         DataManager.Instance.removeSharedUser(by: data, to: id) { (error) in
@@ -96,11 +100,49 @@ class PetPresenter {
     }
     
     
-    func loadPetUsers(for id: String){
+    func loadPetUsers(for id: Int16){
         DataManager.Instance.loadSharedPetUsers(for: id) { (error, users) in
             if error == nil && users != nil {
-               self.getPet(with: id)
+                self.getPet(with: id)
             }
         }
     }
+    
+    func loadSafeZone(for id: Int16){
+        DataManager.Instance.loadSafeZones(of: id) { (error) in
+            if error == nil {
+                self.getPet(with: id)
+            }
+        }
+    }
+    
+    func set(safezone: SafeZone, imageData:Data){
+        DataManager.Instance.setSafeZone(safezone, imageData: imageData)
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

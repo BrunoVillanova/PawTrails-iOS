@@ -13,36 +13,31 @@ typealias breedCallback = (_ error:BreedError?, _ breed:Breed?) -> Void
 
 class BreedManager {
     
-    static func load(for type:Type, callback: breedsCallback? = nil){
+    static func upsert(_ data: [String:Any], for type:Type, callback: breedsCallback? = nil){
         
-        if type != .other {
-            
-            APIManager.Instance.perform(call: .getBreeds, withKey: type.code, completition: { (error, data) in
-                if let error = error {
-                    // shit
-                    debugPrint(error)
-                }else if let breedsData = data?["breeds"] as? [[String:Any]] {
-                    do {
-                        for var breedData in breedsData {
+        if let breedsData = data["breeds"] as? [[String:Any]] {
+            do {
+                for var breedData in breedsData {
+                    
+                    if let id = breedData.tryCastInteger(for: "id") {
+
+                        if let breed = try CoreDataManager.Instance.upsert("Breed", with: ["id":id, "type":type.rawValue], withRestriction: ["id","type"]) as? Breed {
                             
-                            breedData["type"] = type.rawValue
-                            
-                            _ = try CoreDataManager.Instance.upsert("Breed", with: breedData, withRestriction: ["type", "id"])
-                            
-                        }
-                    } catch {
-                        if let callback = callback {
-                            callback(nil, nil)
+                            breed.type = type.rawValue
+                            breed.name = breedData["name"] as? String
+                            try CoreDataManager.Instance.save()
                         }
                     }
-                    retrieve(for: type, callback: callback)
                 }
-            })
-            
+            } catch {
+                print(error)
+                if let callback = callback { callback(BreedError.MoreThenOneBreed, nil) }
+            }
+            if let callback = callback { retrieve(for: type, callback: callback) }
         }
     }
-    
-    
+
+
     static func retrieve(for type:Type, callback: breedsCallback? = nil) {
         if let breeds =  CoreDataManager.Instance.retrieve("Breed", with: NSPredicate("type", .equal, type.rawValue), sortedBy: [NSSortDescriptor.init(key: "name", ascending: true)]) as? [Breed] {
             if let callback = callback {
@@ -53,13 +48,22 @@ class BreedManager {
         }
     }
     
-    static func retrieve(for type:Type, breedId: String) -> Breed? {
+    static func retrieve(for type:Type, breedId: Int, callback: @escaping breedCallback) {
         if let breeds =  CoreDataManager.Instance.retrieve("Breed", with: NSPredicate("type", .equal, type.rawValue).and("id", .equal, breedId), sortedBy: [NSSortDescriptor.init(key: "name", ascending: true)]) as? [Breed] {
             if breeds.count == 1 {
-                return breeds.first
+                callback(nil, breeds.first)
+            }else{
+                callback(BreedError.MoreThenOneBreed, nil)
             }
+        }else{
+            DataManager.Instance.loadBreeds(for: type, callback: { (error, breeds) in
+                if error == nil, let breeds = breeds {
+                    callback(nil, breeds.first(where: { $0.id == Int16(breedId) && $0.type == type.rawValue}))
+                }else{
+                    callback(BreedError.BreedNotFoundInDataBase, nil)
+                }
+            })
         }
-        return nil
     }
     
     static func remove(for type:Type) {
@@ -68,33 +72,6 @@ class BreedManager {
         } catch {
             debugPrint(error)
         }
-    }
-    
-    static func check() {
-//        DispatchQueue.main.sync {
-            retrieve(for: .cat) { (error, breeds) in
-                if breeds == nil {
-                    load(for: .cat, callback: { (error, breeds) in
-                        if let breeds = breeds {
-                            for i in breeds {
-                                debugPrint(i)
-                            }
-                        }
-                    })
-                }
-            }
-            retrieve(for: .dog) { (error, breeds) in
-                if breeds == nil {
-                    load(for: .dog, callback: { (error, breeds) in
-                        if let breeds = breeds {
-                            for i in breeds {
-                                debugPrint(i)
-                            }
-                        }
-                    })
-                }
-            }
-//        }
     }
     
     

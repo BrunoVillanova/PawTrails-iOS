@@ -15,35 +15,38 @@ class PetUserManager {
 
     static func upsert(_ data: [String:Any]) -> PetUser? {
         do {
-            if let user = try CoreDataManager.Instance.upsert("PetUser", with: data) as? PetUser {
+            
+            if let id = data.tryCastInteger(for: "id") {
                 
-                // Image
-                
-                if let imageURL = data["img_url"] as? String {
+                if let user = try CoreDataManager.Instance.upsert("PetUser", with: ["id":id]) as? PetUser {
                     
-                    if user.imageURL == nil || (user.imageURL != nil && user.imageURL != imageURL) {
-                        user.imageURL = imageURL
-                        if let url = URL(string: imageURL) {
-                            try user.image = Data(contentsOf: url) as NSData
+                    user.name = data["name"] as? String
+                    user.surname = data["surname"] as? String
+                    user.email = data["email"] as? String
+                    user.isOwner = data["is_owner"] as? Bool ?? false
+                    
+                    if let imageURL = data["img_url"] as? String {
+                        
+                        if user.imageURL == nil || (user.imageURL != nil && user.imageURL != imageURL) {
+                            user.imageURL = imageURL
+                            user.image = Data.build(with: imageURL)
                         }
                     }
+                    return user
                 }
-                
-                user.isOwner = data["is_owner"] as? Bool ?? false
-                
-                return user
             }
+            
         } catch {
             debugPrint(error)
         }
         return nil
     }
     
-    static func upsert(_ data: [String:Any], into petId: String){
+    static func upsert(_ data: [String:Any], into petId: Int16){
         
         if let petUsersData = data["users"] as? [[String:Any]] {
             PetManager.getPet(petId) { (error, pet) in
-                if let pet = pet {
+                if error == nil, let pet = pet {
                     do {
                         let users = pet.mutableSetValue(forKey: "users")
                         users.removeAllObjects()
@@ -88,7 +91,7 @@ class PetUserManager {
         }
     }
     
-    static func get(for petId:String, callback: @escaping petUsersCallback){
+    static func get(for petId:Int16, callback: @escaping petUsersCallback){
         PetManager.getPet(petId) { (error, pet) in
             if let pet = pet, let users = pet.users?.allObjects as? [PetUser] {
                 callback(nil, users)

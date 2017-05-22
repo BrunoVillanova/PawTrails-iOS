@@ -26,7 +26,7 @@ class PetUserPresenter {
     }
     
     
-    func removePet(with id: String) {
+    func removePet(with id: Int16) {
         view?.beginLoadingContent()
         DataManager.Instance.removePet(id) { (error) in
             DispatchQueue.main.async {
@@ -40,7 +40,7 @@ class PetUserPresenter {
         }
     }
     
-    func leavePet(with id: String) {
+    func leavePet(with id: Int16) {
         view?.beginLoadingContent()
         DataManager.Instance.leaveSharedPet(by: id) { (error) in
             DispatchQueue.main.async {
@@ -55,7 +55,7 @@ class PetUserPresenter {
     }
     
     
-    func removePetUser(with id: String, from petId: String) {
+    func removePetUser(with id: Int16, from petId: Int16) {
         view?.beginLoadingContent()
         var data = [String:Any]()
         data["user_id"] = id

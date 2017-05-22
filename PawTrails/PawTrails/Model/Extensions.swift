@@ -31,10 +31,10 @@ extension String {
         return URL(string:self) != nil
     }
     
-    public var toDate: NSDate? {
+    public var toDate: Date? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        return dateFormatter.date(from: self)! as NSDate
+        return dateFormatter.date(from: self)
     }
 
 }
@@ -45,6 +45,13 @@ extension Double {
         return "\(self)Kg"
     }
     
+    public var toDegrees: Double {
+        return self * 180.0 / Double.pi
+    }
+    
+    public var square: Double {
+        return pow(self, 2.0)
+    }
 }
 
 extension Date {
@@ -77,6 +84,9 @@ extension Int {
         return Int16(self)
     }
     
+    public var toString: String {
+        return "\(self)"
+    }
 }
 
 extension Dictionary {
@@ -110,8 +120,85 @@ extension Dictionary where Key == String, Value == Any {
             }
         }
     }
-
+    
+    func tryCastInteger(for key:String) -> Int? {
+        if let value = self[key] {
+            if value is Int { return value as? Int }
+            if value is String, let intValue = Int(value as! String) { return intValue }
+        }
+        return nil
+    }
+    
+    func tryCastDouble(for key:String) -> Double? {
+        if let value = self[key] {
+            if value is Double { return value as? Double }
+            if value is String, let doubleValue = Double(value as! String) { return doubleValue }
+        }
+        return nil
+    }    
 }
+
+extension Data {
+    
+    
+    static func build(with url:String) -> Data? {
+        if let url = URL(string: url) {
+            do {
+                return try Data(contentsOf: url)
+            } catch {
+                return nil
+            }
+        }
+        return nil
+    }
+    
+    
+    
+}
+
+extension CGPoint {
+
+    func distance(to point:CGPoint) -> Double {
+        return sqrt(Double(pow(abs(self.x-point.x), 2)+pow(abs(self.y-point.y), 2)))
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
