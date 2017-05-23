@@ -56,7 +56,7 @@ class UserProfileTests: XCTestCase {
             
             let name = "John"
             let surname = "Smith"
-            let gender = "F"
+            let gender = Gender.female
             let birthday = Date()
             let notification = true
             let phone = [
@@ -75,8 +75,8 @@ class UserProfileTests: XCTestCase {
 
             user.name = name
             user.surname = surname
-            user.gender = gender
-            user.birthday = birthday as NSDate?
+            user.gender = gender.rawValue
+            user.birthday = birthday
             user.notification = notification
             
 //            let image = UIImage(named: "logo")
@@ -85,7 +85,7 @@ class UserProfileTests: XCTestCase {
             var userData = [String:Any]()
             userData["name"] = name
             userData["surname"] = surname
-            userData["gender"] = gender
+            userData["gender"] = gender.code
             userData["date_of_birth"] = birthday.toStringServer
             userData["notification"] = notification
             userData["phone"] = phone
@@ -97,7 +97,7 @@ class UserProfileTests: XCTestCase {
                 
                 XCTAssert(user.name == name, "Name not saved properly")
                 XCTAssert(user.surname == surname, "Surname not saved properly")
-                XCTAssert(user.gender == gender, "Gender not saved properly")
+                XCTAssert(user.gender == gender.rawValue, "Gender not saved properly")
                 XCTAssert(user.birthday?.toStringServer == birthday.toStringServer, "Birthday not saved properly")
                 XCTAssert(user.notification == notification, "Notification not saved properly")
                 XCTAssert(user.phone?.number == phone["number"], "Phone number not saved properly")

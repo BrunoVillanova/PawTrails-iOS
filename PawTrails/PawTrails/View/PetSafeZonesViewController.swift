@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class PetSafeZonesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate {
+class PetSafeZonesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noElementsLabel: UILabel!
@@ -57,7 +57,7 @@ class PetSafeZonesViewController: UIViewController, UITableViewDelegate, UITable
                 cell.mapImageView.image = UIImage(data: preview as Data)
             }else{
                 if safezone.preview == nil, let center = safezone.point1?.coordinates, let topCenter = safezone.point2?.coordinates {
-                    MKMapView.getSnapShot(with: center, topCenter: topCenter, isCircle: safezone.shape, into: view, delegate: self, handler: { (image) in
+                    MKMapView.getSnapShot(with: center, topCenter: topCenter, isCircle: safezone.shape, into: view, handler: { (image) in
                         cell.mapImageView.image = image
                     })
                 }
@@ -69,14 +69,10 @@ class PetSafeZonesViewController: UIViewController, UITableViewDelegate, UITable
     // MARK: - UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         if let safeZone = pet.sortedSafeZones?[indexPath.row] {
             present(safezone: safeZone)
+            tableView.deselectRow(at: indexPath, animated: false)
         }
-    }
-    
-    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        return mapView.getRenderer(overlay: overlay)
     }
 }
 

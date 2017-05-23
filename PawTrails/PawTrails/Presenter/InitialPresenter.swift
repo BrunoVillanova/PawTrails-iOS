@@ -34,8 +34,9 @@ class InitialPresenter {
     }
     
     func signIn(email:String?, password:String?) {
-        view?.beginLoadingContent()
+        
         if validInput(email, password) && reachability.isConnected() {
+            view?.beginLoadingContent()
             AuthManager.Instance.signIn(email!, password!) { (error) in
                 DispatchQueue.main.async {
                     self.view?.endLoadingContent()
@@ -54,8 +55,9 @@ class InitialPresenter {
     }
     
     func signUp(email:String?, password:String?) {
-        view?.beginLoadingContent()
+        
         if validInput(email, password) && reachability.isConnected() {
+            view?.beginLoadingContent()
             AuthManager.Instance.signUp(email!, password!) { (error) in
                 DispatchQueue.main.async {
                     self.view?.endLoadingContent()
@@ -86,10 +88,10 @@ class InitialPresenter {
             return false
         }
         
-        if !password!.isValidPassword {
-            self.view?.passwordFieldError(msg: Message.Instance.authError(type: .WeakPassword).msg)
-            return false
-        }
+//        if !password!.isValidPassword {
+//            self.view?.passwordFieldError(msg: Message.Instance.authError(type: .WeakPassword).msg)
+//            return false
+//        }
         return true
     }
     

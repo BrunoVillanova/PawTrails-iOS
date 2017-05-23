@@ -9,7 +9,8 @@
 import Foundation
 
 protocol PetsView: NSObjectProtocol, View {
-    func loadPets()
+    func loadSharedPets()
+    func loadOwnedPets()
     func petsNotFound()
 }
 
@@ -38,6 +39,11 @@ class PetsPresenter {
     }
     
     func getPets() {
+        getOwnedPets()
+        getSharedPets()
+    }
+    
+    private func getOwnedPets(){
         DataManager.Instance.getPets { (error, pets) in
             DispatchQueue.main.async {
                 if let error = error {
@@ -47,9 +53,25 @@ class PetsPresenter {
                         self.view?.errorMessage(ErrorMsg(title: "",msg: "\(error)"))
                     }
                 }else if let pets = pets {
-                    self.ownedPets = pets.filter({ $0.isOwner })
-                    self.sharedPets = pets.filter({ !$0.isOwner })
-                    self.view?.loadPets()
+                    self.ownedPets = pets
+                    self.view?.loadOwnedPets()
+                }
+            }
+        }
+    }
+    
+    private func getSharedPets(){
+        DataManager.Instance.getPets(owned: false) { (error, pets) in
+            DispatchQueue.main.async {
+                if let error = error {
+                    if error == PetError.PetNotFoundInDataBase {
+                        self.view?.petsNotFound()
+                    }else{
+                        self.view?.errorMessage(ErrorMsg(title: "",msg: "\(error)"))
+                    }
+                }else if let pets = pets {
+                    self.sharedPets = pets
+                    self.view?.loadSharedPets()
                 }
             }
         }
@@ -66,10 +88,8 @@ class PetsPresenter {
                     }else{
                         self.view?.errorMessage(ErrorMsg(title: "",msg: "\(error)"))
                     }
-                }else if let pets = pets {
-                    self.ownedPets = pets.filter({ $0.isOwner })
-                    self.sharedPets = pets.filter({ !$0.isOwner })
-                    self.view?.loadPets()
+                }else {
+                    self.getPets()
                 }
             }
         }

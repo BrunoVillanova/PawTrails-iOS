@@ -185,9 +185,9 @@ class PetManager {
         }
     }
     
-    static func getPets(_ callback:petsCallback) {
-        
-        if let results = CoreDataManager.Instance.retrieve("Pet") as? [Pet] {
+    static func getPets(owned:Bool = true, _ callback:petsCallback) {
+
+        if let results = CoreDataManager.Instance.retrieve("Pet", with: NSPredicate.init(format: "isOwner == \(owned)"), sortedBy: [NSSortDescriptor(key: "name", ascending: true)]) as? [Pet] {
             if results.count > 0 {
                 callback(nil, results)
             }else{

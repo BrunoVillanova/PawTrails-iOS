@@ -87,7 +87,6 @@ extension UIViewController {
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         self.present(alert, animated: true, completion: nil)
-
     }
     
     @IBAction func dismissAction(sender: UIButton?){
@@ -115,13 +114,16 @@ extension UIViewController {
     
     func showNotification(title:String, type:notificationType = .blue) {
         
-        let viewHeight:CGFloat = 64, labelHeight: CGFloat = 24
+        let yOffset:CGFloat = navigationController?.navigationBar.frame.height ?? 0.0
+        debugPrint(yOffset)
         
-        let notificationView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: viewHeight))
+        let viewHeight:CGFloat = 64, labelYOffset: CGFloat = 24
+        
+        let notificationView = UIView(frame: CGRect(x: 0.0, y: yOffset, width: self.view.bounds.width, height: viewHeight))
         notificationView.backgroundColor = type.color
         notificationView.tag = 2
         
-        let label = UILabel(frame: CGRect(x: 0, y: labelHeight, width: self.view.bounds.width, height: 40))
+        let label = UILabel(frame: CGRect(x: 0, y: labelYOffset, width: self.view.bounds.width, height: 40))
         label.text = title
         label.textColor = UIColor.white
         label.font = UIFont.preferredFont(forTextStyle: .headline)
@@ -309,6 +311,24 @@ extension UIImageView {
         self.backgroundColor = UIColor.white
         let color: UIColor = isPetOwner ? .orange() : .darkGray
         self.border(color: color, width: 2.0)
+    }
+
+}
+
+extension CGRect {
+    
+    init(center: CGPoint, topCenter: CGPoint) {
+        let side = center.distance(to: topCenter)
+        self.init(x: Double(center.x) - side, y: Double(center.y) - side, width: side*2.0, height: side*2.0)
+    }
+    
+}
+
+extension UITableView {
+    
+    func reload(section: Int, with animation: UITableViewRowAnimation) {
+        let indexSet = IndexSet(integer: section)
+        self.reloadSections(indexSet, with: animation)
     }
 
 }

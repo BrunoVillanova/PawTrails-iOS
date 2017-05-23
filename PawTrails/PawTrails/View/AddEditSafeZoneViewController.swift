@@ -25,9 +25,9 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     @IBOutlet weak var removeButton: UIButton!
     @IBOutlet weak var activeSwitch: UISwitch!
     
-    @IBOutlet weak var bottomContraints: NSLayoutConstraint!
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
     
-    fileprivate var opened:CGFloat = -255.0, closed:CGFloat = -60.0
+    fileprivate var opened:CGFloat = 395.0, closed:CGFloat = 610
     
     fileprivate var isCircle:Bool = true
     
@@ -35,8 +35,7 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     
     fileprivate var fence:Fence!
     fileprivate let fenceSide: Double = 50.0 //meters
-    fileprivate var fenceDistance:Int = 50
-    fileprivate var minimumAltitude: CLLocationDistance!
+    fileprivate var fenceDistance:Int = 50 //meters
     
     fileprivate var  manager = CLLocationManager()
 
@@ -50,13 +49,13 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.attachView(self)
-        
+        blurView.round()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         mapView.showsUserLocation = false
         mapView.showsCompass = false
-        mapView.mapType = .satellite
+        mapView.mapType = .hybrid
         
         if let safezone = safezone {
             navigationItem.title = "Edit Safe Zone"
@@ -80,12 +79,11 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
             guard let center = safezone.point1?.coordinates else { return }
             guard let topCenter = safezone.point2?.coordinates else { return }
 
-            minimumAltitude = MKMapView.minimumAltitude(for: 50)
             fence = mapView.load(with: center, topCenter: topCenter, isCircle: isCircle, into: view)
             
         }else{
             let sonhugoCoordinate = CLLocationCoordinate2D(latitude: 39.592217, longitude: 2.662322)
-            minimumAltitude = mapView.getMinimumAltitude(for: 50, coordinate: sonhugoCoordinate)
+            mapView.centerOn(sonhugoCoordinate, with: 50, animated: false)
             fence = mapView.load(with: sonhugoCoordinate, isCircle: isCircle, into: view)
         }
         updateFenceDistance()
@@ -118,9 +116,13 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
         isCircle = true
     }
 
-    @IBAction func doneAction(_ sender: UIBarButtonItem) {
+    @IBAction func doneAction(_ sender: UIBarButtonItem?) {
         if let petId = petId {
-            presenter.addEditSafeZone(safezoneId: safezone?.id ?? -1, name: nameTextField.text, isCircle: isCircle, active: activeSwitch.isOn, points: geoCodeFence(), into: petId)
+            if fence.isIdle {
+                presenter.addEditSafeZone(safezoneId: safezone?.id ?? -1, name: nameTextField.text, isCircle: isCircle, active: activeSwitch.isOn, points: geoCodeFence(), into: petId)
+            }else{
+                alert(title: "", msg: "The area is too small. Please, zoom out.", type: .red)
+            }
         }
     }
     
@@ -151,13 +153,30 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
 
     }
     
+//    var y:CGFloat = 0.0
+    let factor:CGFloat = 0.5
     @IBAction func handlePanGesture(_ sender: UIPanGestureRecognizer) {
         
-        let y = sender.translation(in: self.view).y / 2.5
-        if (y < 0 && bottomContraints.constant > opened) || (y > 0 && bottomContraints.constant < closed) { bottomContraints.constant += y }
+        
+        var y = sender.location(in: view).y
+
+//        if (y < 0 && bottomContraints.constant > opened) || (y > 0 && bottomContraints.constant < closed) { bottomContraints.constant += y }
+        
+        debugPrint(y, topConstraint.constant, sender.velocity(in: view))
+        
+        let isOpening = sender.translation(in: self.view).y < 0
+
+        let distance = abs(y - opened)
+        if isOpening && y < opened {
+            y += distance * 0.5
+        }else if !isOpening && y > closed {
+//            y -= distance * 0.2
+        }
+        
+        topConstraint.constant = y
         
         if sender.state == .ended {
-            blurView(y < 0 ? .open : .close, speed: 0.5)
+            blurView(isOpening ? .open : .close, speed: 0.5)
         }
     }
     
@@ -238,7 +257,6 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
             updateFenceDistance()
             if !fenceDistanceIsIdle() && !changingRegion {
                 changingRegion = true
-                adjustZoom()
                 updateFenceDistance()
                 changingRegion = false
             }
@@ -248,36 +266,14 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         return mapView.getRenderer(overlay: overlay)
     }
-//
-//    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-//        if let annotation = annotation as? MKLocation {
-//            // Better to make this class property
-//            let annotationIdentifier = "mkl"
-//            
-//            var annotationView: MKAnnotationView?
-//            if let dequeuedAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier) {
-//                annotationView = dequeuedAnnotationView
-//                annotationView?.annotation = annotation
-//            }
-//            else {
-//                annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
-//                annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-//            }
-//            
-//            if let annotationView = annotationView {
-//                annotationView.backgroundColor = annotation.color
-//                annotationView.frame.size = CGSize(width: 15, height: 15)
-//                annotationView.circle()
-//            }
-//            return annotationView
-//        }
-//        return nil
-//    }
     
     // MARK: - UITextFieldDelegate
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+        if textField == nameTextField {
+            textField.resignFirstResponder()
+            doneAction(nil)
+        }
         return true
     }
     
@@ -289,24 +285,16 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     
     func updateFenceDistance() {
         if let fence = fence {
-            let x0y0 = mapView.convert(CGPoint(x: fence.x0, y: fence.y0), toCoordinateFrom: self.view)
-            let xfy0 = mapView.convert(CGPoint(x: fence.xf, y: fence.y0), toCoordinateFrom: self.view)
+            let x0y0 = mapView.convert(CGPoint(x: fence.x0, y: fence.y0), toCoordinateFrom: view)
+            let xfy0 = mapView.convert(CGPoint(x: fence.xf, y: fence.y0), toCoordinateFrom: view)
             fenceDistance = Int(round(x0y0.location.distance(from: xfy0.location)))
-            
+            fence.isIdle = fenceDistanceIsIdle()
             self.distanceLabel.text = fenceDistance < 1000 ? "\(fenceDistance) m" : "\(Double(fenceDistance)/1000.0) km"
         }
     }
 
     func fenceDistanceIsIdle() -> Bool {
-        return fenceDistance > Int(fenceSide)
-    }
-    
-    func adjustZoom() {
-        if minimumAltitude != nil {
-            let c = mapView.camera.copy() as! MKMapCamera
-            c.altitude = minimumAltitude
-            mapView.setCamera(c, animated: true)
-        }
+        return fenceDistance >= Int(fenceSide)
     }
     
     func keyboardWillShow(notification:Notification) {
@@ -337,19 +325,23 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     
     func blurView(_ action:blurViewAction, speed:Double = 1, animated:Bool = true){
         
-        if (self.bottomContraints.constant == closed && action == .close) || (self.bottomContraints.constant == opened && action == .open) { return }
+//        if (self.topConstraint.constant == closed && action == .close) || (self.topConstraint.constant == opened && action == .open) { return }
         
-        if animated {
-            UIView.animate(withDuration: speed, animations: {
-                let dy = action == .open ? self.blurView.frame.minY - self.blurView.center.y : self.blurView.center.y - self.blurView.frame.minY
-                self.blurView.transform = CGAffineTransform(translationX: 0, y: dy)
-            }) { (done) in
-                self.bottomContraints.constant = action == .open ? self.opened : self.closed
-                self.blurView.transform = CGAffineTransform.identity
-            }
-        }else{
-            self.bottomContraints.constant = action == .open ? self.opened : self.closed
-        }
+//        if animated {
+//            UIView.animate(withDuration: speed, animations: {
+//                let dy = action == .open ? self.blurView.frame.minY - self.blurView.center.y : self.blurView.center.y - self.blurView.frame.minY
+//                self.blurView.transform = CGAffineTransform(translationX: 0, y: dy)
+//            }) { (done) in
+//                self.bottomContraints.constant = action == .open ? self.opened : self.closed
+//                self.blurView.transform = CGAffineTransform.identity
+//            }
+//        }else{
+            self.topConstraint.constant = action == .open ? self.opened : self.closed
+//        }
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.8, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+        
     }
 
     

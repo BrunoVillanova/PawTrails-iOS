@@ -58,22 +58,26 @@ class Message {
     
     func getMessage(from code:ErrorCode) -> ErrorMsg {
         let title = lm("Error")
-        switch code {
-            
-        case .Unauthorized: return ErrorMsg(code, title, lm("User Not Authorized"))
-        case .MissingEmail: return ErrorMsg(code, title, lm("Missing email"))
-        case .EmailFormat: return ErrorMsg(code, title, lm("Incorrect email format"))
-        case .MissingPassword: return ErrorMsg(code, title, lm("Missing password"))
-        case .WeakPassword: return ErrorMsg(code, title, lm("Weak password"))
-        case .UserAlreadyExists: return ErrorMsg(code, title, lm("The user already exists"))
-        case .UserDisabled: return ErrorMsg(code, title, lm("Disabled User"))
-        case .AccountNotVerified: return ErrorMsg(code, title, lm("Account not verified"))
-        case .UserNotFound: return ErrorMsg(code, title, lm("User not found"))
-        case .WrongCredentials: return ErrorMsg(code, title, lm("Wrong password"))
-        case .WrongPassword: return ErrorMsg(code, title, lm("Wrong password"))
-            
-        default: return ErrorMsg(ErrorCode.Unknown, title, lm("Unknown error"))
-        }
+//        switch code {
+//            
+//        case .Unauthorized: return ErrorMsg(code, title, lm("User Not Authorized"))
+//        case .MissingEmail: return ErrorMsg(code, title, lm("Missing email"))
+//        case .EmailFormat: return ErrorMsg(code, title, lm("Incorrect email format"))
+//        case .MissingPassword: return ErrorMsg(code, title, lm("Missing password"))
+//        case .WeakPassword: return ErrorMsg(code, title, lm("Weak password"))
+//        case .UserAlreadyExists: return ErrorMsg(code, title, lm("The user already exists"))
+//        case .UserDisabled: return ErrorMsg(code, title, lm("Disabled User"))
+//
+//            
+//        case .AccountNotVerified: return ErrorMsg(code, title, lm("Account not verified"))
+//        case .UserNotFound: return ErrorMsg(code, title, lm("User not found"))
+//        case .WrongCredentials: return ErrorMsg(code, title, lm("Wrong password"))
+//        case .WrongPassword: return ErrorMsg(code, title, lm("Wrong password"))
+//            
+//        default: return ErrorMsg(ErrorCode.Unknown, title, lm("Unknown error"))
+//        }
+        
+        return ErrorMsg(code, title, "\(code)")
     }
     
     func authError(type:AuthenticationError) -> ErrorMsg {

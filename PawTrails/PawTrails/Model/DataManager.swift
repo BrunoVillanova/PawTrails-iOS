@@ -158,8 +158,8 @@ class DataManager {
         }
     }
     
-    func getPets(callback: @escaping petsCallback) {
-        PetManager.getPets(callback)
+    func getPets(owned: Bool = true,callback: @escaping petsCallback) {
+        PetManager.getPets(owned: owned, callback)
     }
     
     func loadPets(callback: @escaping petsCallback) {

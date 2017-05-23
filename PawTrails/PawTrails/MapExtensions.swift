@@ -78,23 +78,7 @@ extension MKMapView {
         
         let fence = Fence(centerPoint, topCenterPoint, isCircle: isCircle)
         
-        if paintShapes {
-            if isCircle {
-                let circle = MKCircle(center: center, radius: center.location.distance(from: topCenter.location))
-                add(circle)
-            }else{
-                
-                let p1 = self.convert(CGPoint.init(x: fence.x0, y: fence.y0), toCoordinateFrom: view)
-                let p2 = self.convert(CGPoint.init(x: fence.xf, y: fence.y0), toCoordinateFrom: view)
-                let p3 = self.convert(CGPoint.init(x: fence.xf, y: fence.yf), toCoordinateFrom: view)
-                let p4 = self.convert(CGPoint.init(x: fence.x0, y: fence.yf), toCoordinateFrom: view)
-                
-                let poligon = MKPolygon(coordinates: [p1, p2, p3, p4], count: 4)
-                add(poligon)
-            }
-        }else{
-            add(fence)
-        }
+        add(fence)
         
         return fence
     }
@@ -119,29 +103,47 @@ extension MKMapView {
     
     // Create SnapShot
     
-    static func getSnapShot(with center: CLLocationCoordinate2D, topCenter: CLLocationCoordinate2D, isCircle: Bool, into view: UIView, delegate: MKMapViewDelegate, handler: @escaping ((UIImage?)->())){
+    static func getSnapShot(with center: CLLocationCoordinate2D, topCenter: CLLocationCoordinate2D, isCircle: Bool, into view: UIView, handler: @escaping ((UIImage?)->())){
+        
         let mapView = MKMapView(frame: view.frame)
         let camera = mapView.camera
         camera.pitch = 0.0
         mapView.setCamera(camera, animated: false)
-        _ = mapView.load(with: center, topCenter: topCenter, isCircle: isCircle, into: view)
         
-        let circle = MKCircle(center: center, radius: center.location.distance(from: topCenter.location))
-        mapView.add(circle)
+        _ = mapView.load(with: center, topCenter: topCenter, isCircle: isCircle, into: view, paintShapes: true)
         
         let options = MKMapSnapshotOptions()
         options.region = mapView.region
         options.scale = UIScreen.main.scale
-        options.size = mapView.frame.size
+//        options.size = mapView.frame.size
+        options.size = CGSize(width: 375, height: 200)
         options.mapType = .satellite
         options.showsBuildings = true
         options.showsPointsOfInterest = true
         options.camera = mapView.camera
         
         let shotter = MKMapSnapshotter(options: options)
-        shotter.start(completionHandler: { (snapshot, error) in
+        shotter.start(/*with: DispatchQueue.global(), */completionHandler: { (snapshot, error) in
             if error == nil, let snapshot = snapshot {
-                handler(snapshot.image)
+
+                let center = snapshot.point(for: center)
+                let topCenter = snapshot.point(for: topCenter)
+
+                let frame = CGRect(center: center, topCenter: topCenter)
+                
+                let image = snapshot.image
+
+                UIGraphicsBeginImageContextWithOptions(image.size, true, image.scale)
+                image.draw(at: CGPoint.zero)
+                
+                let path = isCircle ? UIBezierPath(ovalIn: frame) : UIBezierPath(rect: frame)
+                Fence.idleColor.set()
+                path.fill()
+                
+                let imageWithSafeZone = UIGraphicsGetImageFromCurrentImageContext()
+                UIGraphicsEndImageContext()
+                
+                handler(imageWithSafeZone)
             }else{
                 handler(nil)
             }
