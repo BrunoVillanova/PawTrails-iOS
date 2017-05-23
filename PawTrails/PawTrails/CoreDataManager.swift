@@ -28,6 +28,7 @@ class CoreDataManager {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
         fetchRequest.predicate = predicate
         fetchRequest.sortDescriptors = sortedBy
+        debugPrint(predicate?.predicateFormat ?? " ")
         do {
             let data = try Storage.Instance.context.fetch(fetchRequest)
             return data.count > 0 ? data as? [NSManagedObject] : nil

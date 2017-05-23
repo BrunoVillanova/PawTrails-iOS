@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class PetProfileTableViewController: UITableViewController, UICollectionViewDelegate, UICollectionViewDataSource, MKMapViewDelegate, PetView {
+class PetProfileTableViewController: UITableViewController, UICollectionViewDelegate, UICollectionViewDataSource, PetView {
     
     @IBOutlet weak var petImageView: UIImageView!
     @IBOutlet weak var breedLabel: UILabel!
@@ -223,11 +223,17 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
             cell.activeSwitch.tag = indexPath.row
             cell.activeSwitch.addTarget(self, action: #selector(changeSwitchAction(sender:)), for: UIControlEvents.valueChanged)
             
-            if safezone.preview == nil, let center = safezone.point1?.coordinates, let topCenter = safezone.point2?.coordinates {
-                MKMapView.getSnapShot(with: center, topCenter: topCenter, isCircle: safezone.shape, into: view, delegate: self, handler: { (image) in
-                    cell.elementImageView.image = image
+            if let preview = safezone.preview {
+                cell.elementImageView.image = UIImage(data: preview as Data)
+            }else if safezone.preview == nil, let center = safezone.point1?.coordinates, let topCenter = safezone.point2?.coordinates {
+                debugPrint("Asking for map building \(safezone.id)")
+                MKMapView.getSnapShot(with: center, topCenter: topCenter, isCircle: safezone.shape, into: view, handler: { (image) in
+                    
                     if let image = image, let data = UIImagePNGRepresentation(image) {
+                        cell.elementImageView.image = image
                         self.presenter.set(safezone: safezone, imageData: data)
+                    }else{
+                        cell.elementImageView.backgroundColor = UIColor.orange().withAlphaComponent(0.8)
                     }
                 })
             }else{
@@ -297,10 +303,6 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
                 }
             }
         }
-    }
-    
-    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        return mapView.getRenderer(overlay: overlay)
     }
     
 }

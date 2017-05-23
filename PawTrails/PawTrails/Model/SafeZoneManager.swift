@@ -27,6 +27,9 @@ class SafeZoneManager {
                         safezone.shape = shape == 0
                     }
                     
+                    let p1 = safezone.point1
+                    let p2 = safezone.point2
+                    
                     if let point1Data = data["point1"] as? [String:Any] {
                         safezone.point1 = Point(point1Data)
                     }
@@ -34,8 +37,15 @@ class SafeZoneManager {
                     if let point2Data = data["point2"] as? [String:Any] {
                         safezone.point2 = Point(point2Data)
                     }
+                    debugPrint(p1?.toDict ?? "")
+                    debugPrint(safezone.point1?.toDict ?? "")
+                    debugPrint(p1?.toDict ?? "")
+                    debugPrint(safezone.point2?.toDict ?? "")
+                    if p1 == nil || p2 == nil || (p1 != nil && p2 != nil && (p1 != safezone.point1 || p2 != safezone.point2)) {
+                        safezone.preview = nil
+                        debugPrint("update safezone screen")
+                    }
                     
-                    safezone.preview = nil
                     
                     try CoreDataManager.Instance.save()
                     return safezone

@@ -97,19 +97,19 @@ class BreedManagerTests: XCTestCase {
         
         APIManagerTests().signIn { (id, token) in
             
-            SharedPreferences.set(.id, with: id)
-            SharedPreferences.set(.token, with: token)
-            
-            BreedManager.load(for: type) { (error, breeds) in
-                
-                if error == nil && breeds != nil {
-                    callback(true)
-                }else{
-                    print("Error get breeds \(String(describing: error)) \(String(describing: breeds))")
-                    callback(false)
-                }
-                
-            }
+//            SharedPreferences.set(.id, with: id)
+//            SharedPreferences.set(.token, with: token)
+//            
+//            BreedManager.load(for: type) { (error, breeds) in
+//                
+//                if error == nil && breeds != nil {
+//                    callback(true)
+//                }else{
+//                    print("Error get breeds \(String(describing: error)) \(String(describing: breeds))")
+//                    callback(false)
+//                }
+//                
+//            }
         }
     }
     

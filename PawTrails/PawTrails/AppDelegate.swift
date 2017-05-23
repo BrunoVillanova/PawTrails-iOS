@@ -59,6 +59,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         }else{
             loadAuthenticationScreen()
         }
+//        let initial = storyboard.instantiateViewController(withIdentifier: "AddEditSafeZoneViewController") as? AddEditSafeZoneViewController
+//        window?.rootViewController = initial
+//
         return true
     }
     

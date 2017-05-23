@@ -118,6 +118,10 @@ public class Point: NSObject, NSCoding {
         aCoder.encode(latitude, forKey: "latitude")
         aCoder.encode(longitude, forKey: "longitude")
     }
+    
+    static func == (lhs: Point, rhs: Point) -> Bool {
+        return lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
+    }
 }
 
 
@@ -130,26 +134,33 @@ class Fence: NSObject {
             updateCornerRadius()
         }
     }
+    var isIdle:Bool {
+        didSet {
+            updateFillColor()
+        }
+    }
+    
+    static var idleColor = UIColor.orange().withAlphaComponent(0.5)
+    static var noIdleColor = UIColor.red.withAlphaComponent(0.5)
     
     convenience init(_ center: CGPoint, _ topCenter: CGPoint, isCircle: Bool) {
-        
-        let side = center.distance(to: topCenter)
-        let frame = CGRect(x: Double(center.x) - side, y: Double(center.y) - side, width: side*2.0, height: side*2.0)
-        self.init(frame: frame, isCircle: isCircle)
+        self.init(frame: CGRect(center: center, topCenter: topCenter), isCircle: isCircle)
     }
     
     init(frame: CGRect, isCircle:Bool) {
         self.isCircle = isCircle
+        isIdle = true
         
         layer = CALayer()
         layer.frame = frame
-        layer.backgroundColor =  UIColor.orange().withAlphaComponent(0.5).cgColor
+        layer.backgroundColor =  Fence.idleColor.cgColor
         layer.cornerRadius = isCircle ? layer.frame.width / 2.0 : 0.0
         
         line = CALayer()
         line.frame = CGRect(x: layer.frame.origin.x + layer.frame.width / 2.0, y: layer.frame.origin.y, width: 1.0, height: layer.frame.height/2.0)
         line.backgroundColor = UIColor.orange().cgColor
     }
+    
     
     func setFrame(_ frame:CGRect) {
         layer.frame = frame
@@ -158,6 +169,10 @@ class Fence: NSObject {
     
     private func updateCornerRadius(){
         layer.cornerRadius = isCircle ? layer.frame.width / 2.0 : 0.0
+    }
+    
+    private func updateFillColor(){
+        layer.backgroundColor = isIdle ? Fence.idleColor.cgColor : Fence.noIdleColor.cgColor
     }
     
     var x0: CGFloat { return layer.frame.origin.x }

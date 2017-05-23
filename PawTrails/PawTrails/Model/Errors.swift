@@ -40,6 +40,8 @@ struct APIManagerError: Error {
 enum ErrorCode: Int {
     
     case Unknown = -1
+    case NotFound = -2
+
     case Unauthorized = 0
     case MissingEmail = 10
     case EmailFormat = 11
@@ -53,14 +55,15 @@ enum ErrorCode: Int {
     case UserNotFound = 19
     case WrongPassword = 20
     case WrongCredentials = 21
+    
     case TooManyRequests = 23
     case WrongOTP = 24
     case PasswordUnmatch = 25
     case OTPnotFound = 26
     case OTPexpired = 27
-    case SQLBadFormat = 28
     case AccountNotVerified = 29
     case SocialNetworkError = 32
+    
     case PathFormat = 33
     case MissingUserId = 34
     case MissingPetId = 35
@@ -70,9 +73,25 @@ enum ErrorCode: Int {
     case UploadFailed = 39
     
     case DeviceIdNotFound = 41
+    case WrongBreed = 43
+    case MissingPetName = 44
+    case WeightOutOfRange = 47
+    case DeviceNotAvailable = 48
+    
+    case NotEnoughRights = 50
+    case MissingRelationUserPet = 52
+    
+    case MissingSafeZoneName = 53
+    case WrongShapeFormat = 54
+    case CoordinatesOutOfBounds = 55
+    case SafeZoneNotFound = 56
     
     init(code:Int) {
         self = ErrorCode(rawValue: code) ?? ErrorCode.Unknown
+    }
+    
+    var description: String {
+        return "error \(self.rawValue):\(self)"
     }
 
 }

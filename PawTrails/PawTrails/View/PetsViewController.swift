@@ -17,14 +17,10 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        tableView.view
+
         tableView.tableFooterView = UIView()
         presenter.attachView(self)
         noPetsFound.isHidden = true
-        
-        navigationItem.leftBarButtonItem = nil
-        navigationItem.leftBarButtonItem?.action = #selector(PetsViewController.editAction(_:))
-        
         UIApplication.shared.statusBarStyle = .lightContent
     }
     
@@ -36,16 +32,7 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if let index = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: index, animated: true)
         }
-        noPetsFound.isHidden = true
         presenter.loadPets()
-    }
-    
-    func editAction(_ sender: UIBarButtonItem) {
-        UIView.animate(withDuration: 0.4) {
-            self.editButtonItem.title = self.tableView.isEditing ? "Edit" : "Done"
-            self.editButtonItem.style = self.tableView.isEditing ? .plain : .done
-            self.tableView.isEditing = !self.tableView.isEditing
-        }
     }
 
     // MARK: - PetsView
@@ -54,12 +41,14 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         alert(title: error.title, msg: error.msg)
     }
     
-    func loadPets() {
+    func loadOwnedPets() {
         noPetsFound.isHidden = presenter.sharedPets.count != 0 || presenter.ownedPets.count != 0
-//        if tableView.numberOfRows(inSection: 0) != presenter.pets.count {
-//            tableView.reloadSections([0], with: UITableViewRowAnimation.none)
-//        }
-        tableView.reloadData()
+        tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+    }
+    
+    func loadSharedPets() {
+        noPetsFound.isHidden = presenter.sharedPets.count != 0 || presenter.ownedPets.count != 0
+        tableView.reloadSections(IndexSet(integer: 1), with: .automatic)
     }
     
     func petsNotFound() {
@@ -118,7 +107,6 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
 }
-
 
 class petListCell: UITableViewCell {
     @IBOutlet weak var petImageView: UIImageView!
