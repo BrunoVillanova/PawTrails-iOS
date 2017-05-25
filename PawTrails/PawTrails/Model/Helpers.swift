@@ -86,7 +86,8 @@ public enum Type: Int16 {
 }
 
 public enum Shape: Int16 {
-    case circle = 0,square
+    case circle = 2
+    case square = 4
     
     static func count() -> Int {
         return 2
@@ -156,7 +157,7 @@ class Fence: NSObject {
     
     let layer: CALayer
     let line: CALayer
-    var isCircle:Bool {
+    var shape:Shape {
         didSet {
             updateCornerRadius()
         }
@@ -170,18 +171,18 @@ class Fence: NSObject {
     static var idleColor = UIColor.orange().withAlphaComponent(0.5)
     static var noIdleColor = UIColor.red.withAlphaComponent(0.5)
     
-    convenience init(_ center: CGPoint, _ topCenter: CGPoint, isCircle: Bool) {
-        self.init(frame: CGRect(center: center, topCenter: topCenter), isCircle: isCircle)
+    convenience init(_ center: CGPoint, _ topCenter: CGPoint, shape: Shape) {
+        self.init(frame: CGRect(center: center, topCenter: topCenter), shape: shape)
     }
     
-    init(frame: CGRect, isCircle:Bool) {
-        self.isCircle = isCircle
+    init(frame: CGRect, shape:Shape) {
+        self.shape = shape
         isIdle = true
         
         layer = CALayer()
         layer.frame = frame
         layer.backgroundColor =  Fence.idleColor.cgColor
-        layer.cornerRadius = isCircle ? layer.frame.width / 2.0 : 0.0
+        layer.cornerRadius = shape == .circle ? layer.frame.width / 2.0 : 0.0
         
         line = CALayer()
         line.frame = CGRect(x: layer.frame.origin.x + layer.frame.width / 2.0, y: layer.frame.origin.y, width: 1.0, height: layer.frame.height/2.0)
@@ -195,7 +196,7 @@ class Fence: NSObject {
     }
     
     private func updateCornerRadius(){
-        layer.cornerRadius = isCircle ? layer.frame.width / 2.0 : 0.0
+        layer.cornerRadius = shape == .circle ? layer.frame.width / 2.0 : 0.0
     }
     
     private func updateFillColor(){

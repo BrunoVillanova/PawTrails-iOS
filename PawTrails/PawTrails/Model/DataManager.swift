@@ -163,8 +163,20 @@ class DataManager {
         }
     }
     
-    func getPets(owned: Bool = true,callback: @escaping petsCallback) {
-        PetManager.getPets(owned: owned, callback)
+    func getPets(callback: @escaping petsCallback) {
+        PetManager.getPets(callback)
+    }
+    
+    func getPetsSplitted(callback: @escaping petsSplittedCallback) {
+        PetManager.getPets { (error, pets) in
+            if let pets = pets {
+                let owned = pets.filter({ $0.isOwner == true })
+                let shared = pets.filter({ $0.isOwner == false })
+                callback(error, owned, shared)
+            }else{
+                callback(error, nil, nil)
+            }
+        }
     }
     
     func loadPets(callback: @escaping petsCallback) {

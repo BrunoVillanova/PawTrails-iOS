@@ -27,12 +27,14 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     
-    fileprivate var opened:CGFloat = 395.0, closed:CGFloat = 610
+    fileprivate var opened:CGFloat = 360.0, closed:CGFloat = 600
     
-    fileprivate var isCircle:Bool = true
+    fileprivate var shape:Shape = Shape.circle
     
     fileprivate var changingRegion = false
     
+    fileprivate var focused = false
+
     fileprivate var fence:Fence!
     fileprivate let fenceSide: Double = 50.0 //meters
     fileprivate var fenceDistance:Int = 50 //meters
@@ -43,13 +45,13 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     
     var safezone: SafeZone?
     var petId: Int16!
+    var isOwner: Bool!
     
-    var focused = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.attachView(self)
-        blurView.round()
+        blurView.round(radius: 18)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
@@ -61,16 +63,28 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
             navigationItem.title = "Edit Safe Zone"
 
             nameTextField.text = safezone.name
-            isCircle = safezone.shape
+            if let shape = Shape(rawValue: safezone.shape) {
+                self.shape = shape
+            }
             activeSwitch.isOn = safezone.active
 
+            if !isOwner {
+                userFocusButton.isEnabled = false
+                nameTextField.isEnabled = false
+                iconTextField.isEnabled = false
+                circleButton.isEnabled = false
+                squareButton.isEnabled = false
+                activeSwitch.isEnabled = false
+                removeButton.isHidden = true
+            }
+            
         }else{
             navigationItem.title = "New Safe Zone"
             removeButton.isHidden = true
         }
         
-        self.circleButton.tintColor = isCircle ? UIColor.orange() : UIColor.darkGray
-        self.squareButton.tintColor = isCircle ?  UIColor.darkGray : UIColor.orange()
+        self.circleButton.tintColor = shape == .circle ? UIColor.orange() : UIColor.darkGray
+        self.squareButton.tintColor = shape == .circle ?  UIColor.darkGray : UIColor.orange()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -79,12 +93,12 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
             guard let center = safezone.point1?.coordinates else { return }
             guard let topCenter = safezone.point2?.coordinates else { return }
 
-            fence = mapView.load(with: center, topCenter: topCenter, isCircle: isCircle, into: view)
+            fence = mapView.load(with: center, topCenter: topCenter, shape: shape, into: view)
             
         }else{
             let sonhugoCoordinate = CLLocationCoordinate2D(latitude: 39.592217, longitude: 2.662322)
             mapView.centerOn(sonhugoCoordinate, with: 50, animated: false)
-            fence = mapView.load(with: sonhugoCoordinate, isCircle: isCircle, into: view)
+            fence = mapView.load(with: sonhugoCoordinate, shape: shape, into: view)
         }
         updateFenceDistance()
         self.blurView(.close)
@@ -105,21 +119,21 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     @IBAction func squareAction(_ sender: UIButton) {
         circleButton.tintColor = UIColor.darkGray
         squareButton.tintColor = UIColor.orange()
-        fence.isCircle = false
-        isCircle = false
+        fence.shape = .square
+        shape = .square
     }
     
     @IBAction func circleAction(_ sender: UIButton) {
         circleButton.tintColor = UIColor.orange()
         squareButton.tintColor = UIColor.darkGray
-        fence.isCircle = true
-        isCircle = true
+        fence.shape = .circle
+        shape = .circle
     }
 
     @IBAction func doneAction(_ sender: UIBarButtonItem?) {
         if let petId = petId {
             if fence.isIdle {
-                presenter.addEditSafeZone(safezoneId: safezone?.id ?? -1, name: nameTextField.text, isCircle: isCircle, active: activeSwitch.isOn, points: geoCodeFence(), into: petId)
+                presenter.addEditSafeZone(safezoneId: safezone?.id ?? -1, name: nameTextField.text, shape: shape, active: activeSwitch.isOn, points: geoCodeFence(), into: petId)
             }else{
                 alert(title: "", msg: "The area is too small. Please, zoom out.", type: .red)
             }
@@ -153,31 +167,22 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
 
     }
     
-//    var y:CGFloat = 0.0
-    let factor:CGFloat = 0.5
-    @IBAction func handlePanGesture(_ sender: UIPanGestureRecognizer) {
-        
-        
-        var y = sender.location(in: view).y
 
-//        if (y < 0 && bottomContraints.constant > opened) || (y > 0 && bottomContraints.constant < closed) { bottomContraints.constant += y }
-        
-        debugPrint(y, topConstraint.constant, sender.velocity(in: view))
+
+    @IBAction func handlePanGesture(_ sender: UIPanGestureRecognizer) {
+
+        var y = sender.location(in: view).y
         
         let isOpening = sender.translation(in: self.view).y < 0
 
-        let distance = abs(y - opened)
         if isOpening && y < opened {
+            let distance = abs(y - opened)
             y += distance * 0.5
-        }else if !isOpening && y > closed {
-//            y -= distance * 0.2
         }
         
         topConstraint.constant = y
         
-        if sender.state == .ended {
-            blurView(isOpening ? .open : .close, speed: 0.5)
-        }
+        if sender.state == .ended { blurView(isOpening ? .open : .close, speed: 0.5)  }
     }
     
     //MARK: - AddEditSafeZoneView

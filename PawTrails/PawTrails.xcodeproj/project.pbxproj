@@ -533,6 +533,16 @@
 			name = Google;
 			sourceTree = "<group>";
 		};
+		445459FC1ED6ED2400F12BE7 /* Pet Shared Users */ = {
+			isa = PBXGroup;
+			children = (
+				443936FE1EA770EF0044831E /* PetUsersViewController.swift */,
+				4475D42C1EAF7C4F007E8304 /* PetUserTableViewController.swift */,
+				440821A71EB09E900000751B /* AddPetUserViewController.swift */,
+			);
+			name = "Pet Shared Users";
+			sourceTree = "<group>";
+		};
 		4465481B1E5C624700458CB7 /* Communication */ = {
 			isa = PBXGroup;
 			children = (
@@ -556,16 +566,13 @@
 			name = CoreDataModelsManagers;
 			sourceTree = "<group>";
 		};
-		4475D42B1EAF7324007E8304 /* Helpers */ = {
+		4475D42B1EAF7324007E8304 /* Pet SafeZone */ = {
 			isa = PBXGroup;
 			children = (
 				44A1AC4D1E9240A9003EF6CA /* PetSafeZonesViewController.swift */,
 				440BB75F1E5DE63B00D2D68B /* AddEditSafeZoneViewController.swift */,
-				443936FE1EA770EF0044831E /* PetUsersViewController.swift */,
-				4475D42C1EAF7C4F007E8304 /* PetUserTableViewController.swift */,
-				440821A71EB09E900000751B /* AddPetUserViewController.swift */,
 			);
-			name = Helpers;
+			name = "Pet SafeZone";
 			sourceTree = "<group>";
 		};
 		4475FB271EB0F68700E9990D /* User */ = {
@@ -665,7 +672,8 @@
 				44A1AC4A1E923CEE003EF6CA /* PetsPageViewController.swift */,
 				446CBF081EAA458D007C4659 /* PetProfileTableViewController.swift */,
 				442690D71EADEE3100E2B63F /* PetActivityTableViewController.swift */,
-				4475D42B1EAF7324007E8304 /* Helpers */,
+				445459FC1ED6ED2400F12BE7 /* Pet Shared Users */,
+				4475D42B1EAF7324007E8304 /* Pet SafeZone */,
 			);
 			name = "Pet Profile";
 			sourceTree = "<group>";

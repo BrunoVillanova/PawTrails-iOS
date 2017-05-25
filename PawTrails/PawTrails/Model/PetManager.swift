@@ -11,6 +11,7 @@ typealias petCheckDeviceCallback = (_ isIdle:Bool) -> Void
 typealias petErrorCallback = (_ error:PetError?) -> Void
 typealias petCallback = (_ error:PetError?, _ pet:Pet?) -> Void
 typealias petsCallback = (_ error:PetError?, _ pets:[Pet]?) -> Void
+typealias petsSplittedCallback = (_ error:PetError?, _ owned:[Pet]?, _ shared:[Pet]?) -> Void
 typealias petTrackingCallback = (_ location:(Double, Double)) -> Void
 
 import Foundation
@@ -185,9 +186,9 @@ class PetManager {
         }
     }
     
-    static func getPets(owned:Bool = true, _ callback:petsCallback) {
+    static func getPets(_ callback:petsCallback) {
 
-        if let results = CoreDataManager.Instance.retrieve("Pet", with: NSPredicate.init(format: "isOwner == \(owned)"), sortedBy: [NSSortDescriptor(key: "name", ascending: true)]) as? [Pet] {
+        if let results = CoreDataManager.Instance.retrieve("Pet", sortedBy: [NSSortDescriptor(key: "name", ascending: true)]) as? [Pet] {
             if results.count > 0 {
                 callback(nil, results)
             }else{

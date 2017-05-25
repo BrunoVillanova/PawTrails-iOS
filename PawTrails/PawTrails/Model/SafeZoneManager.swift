@@ -23,8 +23,12 @@ class SafeZoneManager {
                     
                     safezone.name = data["name"] as? String
                     safezone.active = data["active"] as? Bool ?? false
-                    if let shape = data.tryCastInteger(for: "shape") {
-                        safezone.shape = shape == 0
+                    if let shapeCode = data.tryCastInteger(for: "shape") {
+                        if let shape = Shape(rawValue: Int16(shapeCode)) {
+                            safezone.shape = shape.rawValue
+                        }else{
+                            debugPrint("WTF")
+                        }
                     }
                     
                     let p1 = safezone.point1

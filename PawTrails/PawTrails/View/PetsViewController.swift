@@ -17,7 +17,7 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tableView.tableFooterView = UIView()
         presenter.attachView(self)
         noPetsFound.isHidden = true
@@ -41,14 +41,9 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         alert(title: error.title, msg: error.msg)
     }
     
-    func loadOwnedPets() {
+    func loadPets() {
         noPetsFound.isHidden = presenter.sharedPets.count != 0 || presenter.ownedPets.count != 0
-        tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
-    }
-    
-    func loadSharedPets() {
-        noPetsFound.isHidden = presenter.sharedPets.count != 0 || presenter.ownedPets.count != 0
-        tableView.reloadSections(IndexSet(integer: 1), with: .automatic)
+        tableView.reloadData()
     }
     
     func petsNotFound() {
@@ -59,7 +54,10 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // MARK: - UITableViewDataSource
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        var number = 0
+        if presenter.ownedPets.count != 0 { number += 1 }
+        if presenter.sharedPets.count != 0 { number += 1 }
+        return number
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -84,7 +82,14 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return section == 0 ? "Owned" : "Shared"
+        if presenter.sharedPets.count != 0 && presenter.ownedPets.count != 0 {
+            return section == 0 ? "Owned" : "Shared"
+        }else if presenter.sharedPets.count != 0 {
+            return "Shared"
+        }else if presenter.ownedPets.count != 0 {
+            return "Owned"
+        }
+        return nil
     }
 
     func trackButtonAction(sender: UIButton){
