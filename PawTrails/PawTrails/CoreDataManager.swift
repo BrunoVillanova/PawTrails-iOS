@@ -166,7 +166,7 @@ class CoreDataManager {
     
     func deleteAll() {
         
-        let entities = ["User", "Phone", "Address", "Pet", "PetUser", "SafeZone", "Breed", "Point"]
+        let entities = ["User", "Phone", "Address", "Pet", "PetUser", "SafeZone", "Breed"]
         
         for i in entities {
             let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: i)

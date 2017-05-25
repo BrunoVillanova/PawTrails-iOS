@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import FacebookCore
+import FacebookLogin
 
 typealias errorCallback = (_ error:ErrorMsg?) -> Void
 
@@ -37,7 +39,7 @@ class AuthManager {
     
     func signIn(_ email:String, _ password: String, completition: @escaping errorCallback) {
         let data = isDebug ? ["email":email, "password":password, "is4test":ezdebug.is4test] : ["email":email, "password":password]
-        APIManager.Instance.perform(call: .signin, with: data) { (error, data) in
+        APIManager.Instance.perform(call: .signIn, with: data) { (error, data) in
             if error != nil {
                 completition(self.handleAuthErrors(error))
             }else if let data = data {
@@ -81,22 +83,35 @@ class AuthManager {
         }
         SharedPreferences.set(.token, with: token)
         SharedPreferences.set(.id, with: userId)
-        DataManager.Instance.setUser(userData)
-        completition(nil)
+        DataManager.Instance.setUser(userData) { (error, user) in
+            if error == nil && user != nil {
+                completition(nil)
+            }else {
+                completition(ErrorMsg(title: "", msg: "\(error ?? UserError.UserNotFound)"))
+            }
+        }
     }
     
     func signOut() -> Bool {
         //wipe out DB
-//        try? CoreDataManager.Instance.delete(entity: "User")
-//        try? CoreDataManager.Instance.delete(entity: "Address")
-//        try? CoreDataManager.Instance.delete(entity: "Phone")
-//        try? CoreDataManager.Instance.delete(entity: "CountryCode")
-//        try? CoreDataManager.Instance.delete(entity: "Pet")
-//        try? CoreDataManager.Instance.delete(entity: "Breed")
-//        try? CoreDataManager.Instance.delete(entity: "PetUser")
-//        try? CoreDataManager.Instance.delete(entity: "SafeZone")
+
         CoreDataManager.Instance.deleteAll()
-        
+        if let socialMedia = AuthManager.Instance.socialMedia() {
+            if let sm = SocialMedia(rawValue: socialMedia) {
+                switch sm {
+                case .facebook:
+                    let loginManager = LoginManager()
+                    loginManager.logOut()
+//                case .twitter:
+//                    Fabric.with([Twitter.self])
+                case .google:
+                    GIDSignIn.sharedInstance().signOut()
+                default:
+                    break
+                }
+            }
+        }
+
 //        GIDSignIn.sharedInstance().signOut()
         return SharedPreferences.remove(.id) && SharedPreferences.remove(.token)
     }
@@ -125,10 +140,7 @@ class AuthManager {
     }
     
     fileprivate func handleAuthErrors(_ error: APIManagerError?, _ data: [String:Any]? = nil) -> ErrorMsg? {
-        if error != nil {
-            return error?.info()
-        }
-        return nil
+        return error?.info()
     }
 
     
