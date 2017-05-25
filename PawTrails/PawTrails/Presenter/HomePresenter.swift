@@ -39,16 +39,33 @@ class HomePresenter {
         
         DataManager.Instance.getUser { (error, user) in
             DispatchQueue.main.async {
-
-            if error == nil && user != nil {
-                self.user = user
-                self.view?.reload()
-            }else if error == UserError.NotAuthenticated {
-                self.view?.userNotSigned()
-            }else{
-                self.view?.errorMessage(ErrorMsg(title: "Unable to get user info", msg: "\(String(describing: error))"))
+                
+                if error == nil && user != nil {
+                    self.user = user
+                    self.view?.reload()
+                }else if error == UserError.NotAuthenticated {
+                    self.view?.userNotSigned()
+                }else{
+                    self.view?.errorMessage(ErrorMsg(title: "Unable to get user info", msg: "\(String(describing: error))"))
+                }
             }
         }
+    }
+    
+    func getPets(){
+                
+        DataManager.Instance.getUser { (error, user) in
+            DispatchQueue.main.async {
+                
+                if error == nil && user != nil {
+                    self.user = user
+                    self.view?.reload()
+                }else if error == UserError.NotAuthenticated {
+                    self.view?.userNotSigned()
+                }else{
+                    self.view?.errorMessage(ErrorMsg(title: "Unable to get user info", msg: "\(String(describing: error))"))
+                }
+            }
         }
     }
     

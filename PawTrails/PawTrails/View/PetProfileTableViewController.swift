@@ -76,10 +76,23 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
         
         usersCollectionView.reloadAnimated()
         
-        if pet.safezones != nil && pet.safezones!.count > 0 {
+        if presenter.safezones.count > 0 {
             addSafeZoneTableViewCell.isHidden = true
             safezonesTableViewCell.isHidden = false
-            safeZonesCollectionView.reloadData()
+
+            let safezonesGroup = DispatchGroup()
+            
+            for safezone in self.presenter.safezones {
+                safezonesGroup.enter()
+                self.buildMap(for: safezone, handler: {
+                    safezonesGroup.leave()
+                })
+            }
+            
+            safezonesGroup.notify(queue: .main, execute: {
+                self.safeZonesCollectionView.reloadData()
+            })
+
         }else if pet.isOwner {
             addSafeZoneTableViewCell.isHidden = false
             safezonesTableViewCell.isHidden = true
@@ -225,17 +238,17 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
             
             if let preview = safezone.preview {
                 cell.elementImageView.image = UIImage(data: preview as Data)
-            }else if safezone.preview == nil, let center = safezone.point1?.coordinates, let topCenter = safezone.point2?.coordinates {
-                debugPrint("Asking for map building \(safezone.id)")
-                MKMapView.getSnapShot(with: center, topCenter: topCenter, isCircle: safezone.shape, into: view, handler: { (image) in
-                    
-                    if let image = image, let data = UIImagePNGRepresentation(image) {
-                        cell.elementImageView.image = image
-                        self.presenter.set(safezone: safezone, imageData: data)
-                    }else{
-                        cell.elementImageView.backgroundColor = UIColor.orange().withAlphaComponent(0.8)
-                    }
-                })
+//            }else if safezone.preview == nil, let center = safezone.point1?.coordinates, let topCenter = safezone.point2?.coordinates, let shape = Shape(rawValue: safezone.shape) {
+//
+//                MKMapView.getSnapShot(with: center, topCenter: topCenter, shape: shape, into: view, handler: { (image) in
+//                    
+//                    if let image = image, let data = UIImagePNGRepresentation(image) {
+//                        cell.elementImageView.image = image
+//                        self.presenter.set(safezone: safezone, imageData: data)
+//                    }else{
+//                        cell.elementImageView.backgroundColor = UIColor.orange().withAlphaComponent(0.8)
+//                    }
+//                })
             }else{
                 cell.elementImageView.backgroundColor = UIColor.orange().withAlphaComponent(0.8)
             }
@@ -254,6 +267,18 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
             return cell
         }else{
             return UICollectionViewCell()
+        }
+    }
+    
+    func buildMap(for safezone: SafeZone, handler: @escaping (()->())) {
+        if safezone.preview == nil, let center = safezone.point1?.coordinates, let topCenter = safezone.point2?.coordinates, let shape = Shape(rawValue: safezone.shape) {
+            
+            MKMapView.getSnapShot(with: center, topCenter: topCenter, shape: shape, into: view, handler: { (image) in
+                if let image = image, let data = UIImagePNGRepresentation(image) {
+                    self.presenter.set(safezone: safezone, imageData: data)
+                    handler()
+                }
+            })
         }
     }
     
@@ -279,6 +304,7 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
         if let vc = storyboard?.instantiateViewController(withIdentifier: "AddEditSafeZoneViewController") as? AddEditSafeZoneViewController {
             vc.safezone = safezone
             vc.petId = pet.id
+            vc.isOwner = pet.isOwner
             navigationController?.pushViewController(vc, animated: true)
         }
     }

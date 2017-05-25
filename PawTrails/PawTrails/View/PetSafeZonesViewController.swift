@@ -33,6 +33,7 @@ class PetSafeZonesViewController: UIViewController, UITableViewDelegate, UITable
         if let vc = storyboard?.instantiateViewController(withIdentifier: "AddEditSafeZoneViewController") as? AddEditSafeZoneViewController {
             vc.safezone = safezone
             vc.petId = pet.id
+            vc.isOwner = pet.isOwner
             tabBarController?.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(vc, animated: true)
         }
@@ -56,8 +57,8 @@ class PetSafeZonesViewController: UIViewController, UITableViewDelegate, UITable
             if let preview = safezone.preview {
                 cell.mapImageView.image = UIImage(data: preview as Data)
             }else{
-                if safezone.preview == nil, let center = safezone.point1?.coordinates, let topCenter = safezone.point2?.coordinates {
-                    MKMapView.getSnapShot(with: center, topCenter: topCenter, isCircle: safezone.shape, into: view, handler: { (image) in
+                if safezone.preview == nil, let center = safezone.point1?.coordinates, let topCenter = safezone.point2?.coordinates, let shape = Shape(rawValue: safezone.shape) {
+                    MKMapView.getSnapShot(with: center, topCenter: topCenter, shape: shape, into: view, handler: { (image) in
                         cell.mapImageView.image = image
                     })
                 }

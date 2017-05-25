@@ -55,15 +55,15 @@ extension MKMapView {
         return self.camera.altitude
     }
     
-    func load(with coordinate: CLLocationCoordinate2D, isCircle: Bool, into view: UIView, fenceSide: Double = 50) -> Fence {
+    func load(with coordinate: CLLocationCoordinate2D, shape: Shape, into view: UIView, fenceSide: Double = 50) -> Fence {
         let region = MKCoordinateRegionMakeWithDistance(self.centerCoordinate, fenceSide, fenceSide)
         let frame = self.convertRegion(region, toRectTo: view)
-        let fence = Fence(frame: frame, isCircle: isCircle)
+        let fence = Fence(frame: frame, shape: shape)
         add(fence)
         return fence
     }
     
-    func load(with center: CLLocationCoordinate2D, topCenter:CLLocationCoordinate2D, isCircle: Bool, into view: UIView, paintShapes: Bool = false) -> Fence {
+    func load(with center: CLLocationCoordinate2D, topCenter:CLLocationCoordinate2D, shape: Shape, into view: UIView, paintShapes: Bool = false) -> Fence {
 
 //        self.addAnnotation(center, color: UIColor.yellow)
 //        self.addAnnotation(topCenter)
@@ -76,7 +76,7 @@ extension MKMapView {
         let centerPoint = self.convert(center, toPointTo: view)
         let topCenterPoint = self.convert(topCenter, toPointTo: view)
         
-        let fence = Fence(centerPoint, topCenterPoint, isCircle: isCircle)
+        let fence = Fence(centerPoint, topCenterPoint, shape: shape)
         
         add(fence)
         
@@ -103,14 +103,14 @@ extension MKMapView {
     
     // Create SnapShot
     
-    static func getSnapShot(with center: CLLocationCoordinate2D, topCenter: CLLocationCoordinate2D, isCircle: Bool, into view: UIView, handler: @escaping ((UIImage?)->())){
+    static func getSnapShot(with center: CLLocationCoordinate2D, topCenter: CLLocationCoordinate2D, shape: Shape, into view: UIView, handler: @escaping ((UIImage?)->())){
         
         let mapView = MKMapView(frame: view.frame)
         let camera = mapView.camera
         camera.pitch = 0.0
         mapView.setCamera(camera, animated: false)
         
-        _ = mapView.load(with: center, topCenter: topCenter, isCircle: isCircle, into: view, paintShapes: true)
+        _ = mapView.load(with: center, topCenter: topCenter, shape: shape, into: view, paintShapes: true)
         
         let options = MKMapSnapshotOptions()
         options.region = mapView.region
@@ -136,7 +136,7 @@ extension MKMapView {
                 UIGraphicsBeginImageContextWithOptions(image.size, true, image.scale)
                 image.draw(at: CGPoint.zero)
                 
-                let path = isCircle ? UIBezierPath(ovalIn: frame) : UIBezierPath(rect: frame)
+                let path = shape == .circle ? UIBezierPath(ovalIn: frame) : UIBezierPath(rect: frame)
                 Fence.idleColor.set()
                 path.fill()
                 
