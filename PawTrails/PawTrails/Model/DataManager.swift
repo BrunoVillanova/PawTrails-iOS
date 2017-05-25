@@ -14,9 +14,9 @@ class DataManager {
     
     // MARK: - User
     
-    func setUser(_ data: [String:Any]){
+    func setUser(_ data: [String:Any], callback: userCallback? = nil){
         DispatchQueue.main.async {
-            UserManager.upsert(data)
+            UserManager.upsert(data, callback: callback)
         }
     }
     
@@ -28,7 +28,12 @@ class DataManager {
     
     func loadUser(callback:@escaping userCallback) {
         
-        APIManager.Instance.perform(call: .getUser, withKey: SharedPreferences.get(.id)!) { (error, data) in
+        guard let id = SharedPreferences.get(.id) else {
+            callback(UserError.IdNotFound, nil)
+            return
+        }
+        
+        APIManager.Instance.perform(call: .getUser, withKey: id) { (error, data) in
             if error == nil, let data = data {
                 self.setUser(data)
                 self.getUser(callback: callback)

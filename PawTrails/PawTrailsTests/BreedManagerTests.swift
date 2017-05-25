@@ -95,7 +95,7 @@ class BreedManagerTests: XCTestCase {
     
     func loadBreeds(for type:Type, callback: @escaping ((Bool)->())) {
         
-        APIManagerTests().signIn { (id, token) in
+        APIAuthenticationTests().signIn { (id, token) in
             
 //            SharedPreferences.set(.id, with: id)
 //            SharedPreferences.set(.token, with: token)

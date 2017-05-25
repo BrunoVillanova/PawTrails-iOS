@@ -36,6 +36,13 @@ extension String {
         dateFormatter.dateFormat = "yyyy-MM-dd"
         return dateFormatter.date(from: self)
     }
+    
+    public var toInt16: Int16? {
+        if let value = Int.init(self) {
+            return Int16(value)
+        }
+        return nil
+    }
 
 }
 
@@ -165,6 +172,38 @@ extension CGPoint {
 }
 
 
+//public extension XCTest {
+//    
+//    public func XCTFound(key:String, in data:[String:Any]){
+//        guard data[key] != nil else {
+//            XCTFail("Error \(key) not found")
+//            return
+//        }
+//    }
+//    
+//    public func XCTMatch <T: Equatable> (key:String, value:T, in data:[String:Any]){
+//        guard data[key] != nil else {
+//            XCTFail("Error \(key) not found")
+//            return
+//        }
+//        if data[key] is T  {
+//            XCTAssert((data[key] as! T) == value, "\(key) not match \(String(describing: data[key])) != \(value)")
+//            return
+//        }else{
+//            XCTFail("\(key) has wrong object type match \(String(describing: data[key])) != \(value)")
+//            return
+//        }
+//    }
+//    
+//    public func XCTGet(key:String, in data:[String:Any]) -> Any {
+//        guard let out = data[key] else {
+//            XCTFail("Error \(key) not found")
+//            return ""
+//        }
+//        return out
+//    }
+//    
+//}
 
 
 
