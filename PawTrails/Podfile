@@ -17,6 +17,7 @@ target 'PawTrails' do
 
   target 'PawTrailsTests' do
     inherit! :search_paths  	
+    use_frameworks!
   end
 
 end

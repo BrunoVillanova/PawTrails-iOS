@@ -57,6 +57,7 @@ enum ErrorCode: Int {
     case WrongCredentials = 21
     
     case TooManyRequests = 23
+    
     case WrongOTP = 24
     case PasswordUnmatch = 25
     case OTPnotFound = 26
@@ -75,6 +76,7 @@ enum ErrorCode: Int {
     case DeviceIdNotFound = 41
     case WrongBreed = 43
     case MissingPetName = 44
+    case AlreadyShared = 46
     case WeightOutOfRange = 47
     case DeviceNotAvailable = 48
     

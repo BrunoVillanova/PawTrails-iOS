@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
-
+        var out = true
 //        _ = AuthManager.Instance.signOut()
         
         // Set Status Bar Style
@@ -42,13 +42,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 
                 if let sm = SocialMedia(rawValue: socialMedia) {
                     switch sm {
-                    case .facebook:                       
-                        return SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+                    case .facebook:
+                        out = SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+//                        if AccessToken.current == nil {
+//                            return signOut()
+//                        }
                     case .twitter:
                         Fabric.with([Twitter.self])
                         break
-                    case .google: configureGoogleLogin()
-                        break
+                    case .google:
+                        configureGoogleLogin()
+//                        GIDSignIn.sharedInstance().signInSilently()
                     default:
                         break
                     }
@@ -62,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 //        let initial = storyboard.instantiateViewController(withIdentifier: "AddEditSafeZoneViewController") as? AddEditSafeZoneViewController
 //        window?.rootViewController = initial
 //
-        return true
+        return out
     }
     
     func configureGoogleLogin() {
@@ -79,6 +83,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     func loadAuthenticationScreen() {
         let initial = storyboard.instantiateViewController(withIdentifier: "InitialViewController") as? InitialViewController
         window?.rootViewController = initial
+    }
+    
+    func signOut() -> Bool {
+        loadAuthenticationScreen()
+        return AuthManager.Instance.signOut()
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
@@ -140,10 +149,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     }
     
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user:GIDGoogleUser!, withError error: Error!) {
-        if AuthManager.Instance.signOut() {
-            loadAuthenticationScreen()
-        }else{
-            debugPrint("Not Sign Out properly", user.debugDescription, error.localizedDescription)
+        if let error = error {
+            debugPrint(error)
         }
     }
     

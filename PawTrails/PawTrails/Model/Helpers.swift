@@ -85,6 +85,33 @@ public enum Type: Int16 {
     }
 }
 
+public enum Shape: Int16 {
+    case circle = 0,square
+    
+    static func count() -> Int {
+        return 2
+    }
+    
+    var code:String? {
+        switch self {
+        case .circle: return "2"
+        case .square: return "4"
+        }
+    }
+    
+    static func build(code:String?)  -> Shape? {
+        if let code = code {
+            switch code {
+            case "2": return Shape.circle
+            case "4": return Shape.square
+            default: return nil
+            }
+        }else{
+            return nil
+        }
+    }
+}
+
 public class Point: NSObject, NSCoding {
     
     var latitude: Double

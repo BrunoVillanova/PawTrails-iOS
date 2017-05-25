@@ -88,7 +88,7 @@ class UserManager {
     
     static func get(_ callback:userCallback) {
         
-        guard let id = SharedPreferences.get(.id) else {
+        guard let id = SharedPreferences.get(.id)?.toInt16 else {
             callback(UserError.IdNotFound, nil)
             return
         }
