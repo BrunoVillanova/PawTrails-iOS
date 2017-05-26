@@ -30,6 +30,8 @@ class PetPresenter {
         self.view = nil
     }
     
+    //MARK:- Pet
+    
     func getPet(with id: Int16) {
 
         DataManager.Instance.getPet(id) { (error, pet) in
@@ -84,6 +86,8 @@ class PetPresenter {
         }
     }
     
+    //MARK:- Users
+    
     func leavePet(with id: Int16) {
         var data = [String:Any]()
         data["user_id"] = SharedPreferences.get(.id)
@@ -98,8 +102,7 @@ class PetPresenter {
             }
         }
     }
-    
-    
+
     func loadPetUsers(for id: Int16){
         DataManager.Instance.loadSharedPetUsers(for: id) { (error, users) in
             if error == nil && users != nil {
@@ -107,6 +110,8 @@ class PetPresenter {
             }
         }
     }
+    
+    //MARK:- Safe Zones
     
     func loadSafeZone(for id: Int16){
         DataManager.Instance.loadSafeZones(of: id) { (error) in
@@ -120,7 +125,21 @@ class PetPresenter {
         DataManager.Instance.setSafeZone(safezone, imageData: imageData)
     }
     
-    
+    func setSafeZoneStatus(id: Int16, petId: Int16, status: Bool){
+        
+        DataManager.Instance.setSafeZoneStatus(enabled: status, for: id, into: petId) { (error) in
+            DispatchQueue.main.async {
+                
+                if let error = error {
+                    self.view?.errorMessage(ErrorMsg.init(title: "", msg: "\(error)"))
+                }else{
+                    self.getPet(with: petId)
+                }
+                
+            }
+        }
+        
+    }
     
     
     
