@@ -68,7 +68,7 @@ class PetUserManager {
     
     static func upsertFriends(_ data: [String:Any]){
         
-        if let petUsersData = data["users"] as? [[String:Any]] {
+        if let petUsersData = data["friendlist"] as? [[String:Any]] {
             
             UserManager.get({ (error, user) in
                 if let user = user {

@@ -16,7 +16,7 @@ class PetUsersViewController: UIViewController, UITableViewDataSource, UITableVi
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Users Edit"
+        navigationItem.title = "Users"
         navigationItem.prompt = pet.name
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(PetUsersViewController.addUser))
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)

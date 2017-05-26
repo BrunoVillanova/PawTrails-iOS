@@ -21,11 +21,11 @@ class AddPetUserPresenter {
     
     var friends = [PetUser]()
     
-    
     func attachView(_ view: AddPetUserView){
         self.view = view
         self.reachability = Reachbility(view)
         getFriends()
+        loadFriends()
     }
     
     func deteachView() {
@@ -34,6 +34,19 @@ class AddPetUserPresenter {
     
     func getFriends(){
         DataManager.Instance.getPetFriends { (error, friends) in
+            DispatchQueue.main.async {
+                if error == nil, let friends = friends {
+                    self.friends = friends
+                    self.view?.loadFriends()
+                }else{
+                    self.view?.errorMessage(ErrorMsg(title: "", msg: "\(error.debugDescription)"))
+                }
+            }
+        }
+    }
+    
+    func loadFriends(){
+        DataManager.Instance.loadPetFriends { (error, friends) in
             DispatchQueue.main.async {
                 if error == nil, let friends = friends {
                     self.friends = friends

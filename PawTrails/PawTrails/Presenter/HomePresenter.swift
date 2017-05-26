@@ -9,10 +9,11 @@
 import Foundation
 
 protocol HomeView: NSObjectProtocol, View, ConnectionView {
+    func loadMapElements()
     func reload()
-    func startTracking(_ name: String, lat:Double, long:Double)
-    func updateTracking(_ name: String, lat:Double, long:Double)
-    func stopTracking(_ name: String)
+//    func startTracking(_ id: Int16, _ name: String, lat:Double, long:Double)
+//    func updateTracking(_ id: Int16, lat:Double, long:Double)
+//    func stopTracking(_ id: Int16)
     func userNotSigned()
 }
 
@@ -22,13 +23,13 @@ class HomePresenter {
     private var reachability: Reachbility!
 
     var pets = [Pet]()
+    var safeZones = [SafeZone]()
     var user:User!
     
     
     func attachView(_ view: HomeView){
         self.view = view
         self.reachability = Reachbility(view)
-        self.getUser()
     }
     
     func deteachView() {
@@ -53,15 +54,15 @@ class HomePresenter {
     }
     
     func getPets(){
-                
-        DataManager.Instance.getUser { (error, user) in
+        
+        DataManager.Instance.getPets { (error, pets) in
+            
             DispatchQueue.main.async {
                 
-                if error == nil && user != nil {
-                    self.user = user
-                    self.view?.reload()
-                }else if error == UserError.NotAuthenticated {
-                    self.view?.userNotSigned()
+                if error == nil, let pets = pets {
+                    self.pets = pets
+                    self.view?.loadMapElements()
+                    self.getSafeZones()
                 }else{
                     self.view?.errorMessage(ErrorMsg(title: "Unable to get user info", msg: "\(String(describing: error))"))
                 }
@@ -69,12 +70,23 @@ class HomePresenter {
         }
     }
     
-    func testPets() {
-//        self.pets = [_pet]()
-//        for i in 0...200 {
-//            self.pets.append(_pet("pet\(i)"))
-//        }
+    func getSafeZones(){
+        
+        safeZones.removeAll()
+        
+        for pet in pets {
+            if let safezones = pet.sortedSafeZones {
+                safeZones.append(contentsOf: safezones)
+            }
+        }
+        
+        DispatchQueue.main.async {
+            self.view?.loadMapElements()
+        }
     }
+    
+
+    
     
     //Socket IO
     

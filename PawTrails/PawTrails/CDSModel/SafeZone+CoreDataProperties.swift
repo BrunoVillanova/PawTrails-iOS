@@ -17,13 +17,13 @@ extension SafeZone {
     }
 
     @NSManaged public var name: String?
-    @NSManaged public var preview: NSData?
+    @NSManaged public var preview: Data?
     @NSManaged public var shape: Int16
     @NSManaged public var id: Int16
     @NSManaged public var active: Bool
     @NSManaged public var point1: Point?
     @NSManaged public var point2: Point?
-    @NSManaged public var pet: NSSet?
+    @NSManaged public var pet: Pet?
 
 }
 

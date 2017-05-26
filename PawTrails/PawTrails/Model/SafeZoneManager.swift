@@ -92,7 +92,7 @@ class SafeZoneManager {
     static func set(safezone: SafeZone, imageData: Data){
         DispatchQueue.main.async {
             do {
-                safezone.preview = imageData as NSData
+                safezone.preview = imageData
                 try CoreDataManager.Instance.save()
             }catch{
                 debugPrint(error)

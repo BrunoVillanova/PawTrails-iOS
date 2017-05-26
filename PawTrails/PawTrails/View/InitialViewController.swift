@@ -20,6 +20,8 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
     @IBOutlet weak var socialMediaBar: UIStackView!
     @IBOutlet weak var socialSeparator: UIImageView!
     
+    
+    
     fileprivate let presenter = InitialPresenter()
     
     override func viewDidLoad() {

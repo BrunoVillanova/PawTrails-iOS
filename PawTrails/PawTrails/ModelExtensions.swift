@@ -73,8 +73,6 @@ extension Pet {
         }
         return nil
     }
-    
-    
 }
 
 extension Phone {
