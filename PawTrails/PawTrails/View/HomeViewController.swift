@@ -8,16 +8,6 @@
 
 import UIKit
 import MapKit
-//import CoreLocation
-
-//class _pet {
-//    var name:String
-//    var tracking:Bool
-//    init(_ _name:String) {
-//        name = _name
-//        tracking = false
-//    }
-//}
 
 class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegate, MKMapViewDelegate, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
 
@@ -55,12 +45,12 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     
     fileprivate var annotations = [MKLocationId:MKLocation]()
     
-    var data = [String]()
-
-    var trackingPet: Pet?
+    var data = [searchElement]()
     
     var selectedPet: Pet?
     var selectedSafeZone: SafeZone?
+    
+    var petCoordinates = [CLLocationCoordinate2D]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -136,17 +126,7 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
             presentSafeZone(selected)
         }
     }
-    
 
-//    @IBAction func changeMapInfo(_ sender: UIButton) {
-//        mapView.mapType = mapView.mapType == MKMapType.standard ? MKMapType.satellite : MKMapType.standard
-//    }
-    
-//    @IBAction func locationAction(_ sender: UIButton) {
-        // Authorization
-//        mapView.showsUserLocation = !mapView.showsUserLocation
-//    }
-    
     // MARK: - HomeView
     
     func errorMessage(_ error: ErrorMsg) {
@@ -155,10 +135,13 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     
     func loadMapElements(){
         // Pets
+        petCoordinates.removeAll()
         for pet in presenter.pets {
             let location = CLLocationCoordinate2D.CorkRandom
             let id = MKLocationId(id: pet.id, type: .pet)
             let color = pet.isOwner ? UIColor.orange() : UIColor.darkGray
+            
+            petCoordinates.append(location)
             
             if annotations[id] == nil {
                 startTracking(id, coordinate: location, color: color)
@@ -166,7 +149,6 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
                 updateTracking(id, coordinate: location)
             }
         }
-        self.mapView.setVisibleMapForAnnotations()
         
         // SafeZones
         for safezone in presenter.safeZones {
@@ -183,6 +165,7 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
                 }
             }
         }
+        focusOnPets()
     }
     
     func reload() {
@@ -262,6 +245,8 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
         
         if let annotation = view.annotation as? MKLocation {
             
+            mapView.centerOn(annotation.coordinate, animated: true)
+            
             switch annotation.id.type {
             case .pet:
                 if let pet = presenter.pets.first(where: { $0.id == annotation.id.id }) {
@@ -276,6 +261,14 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
             }
             
         }
+    }
+    
+    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+        focusOnPets()
+    }
+    
+    func focusOnPets(){
+        mapView.setVisibleMapFor(self.petCoordinates)
     }
     
     func showPetDetails(_ pet: Pet) {
@@ -340,16 +333,18 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 
+        data.removeAll()
         if searchText != "" {
-            
-            self.data = DataManager.Instance.performSearch(searchText) { (data) in
-                self.data = data
+
+            for pet in presenter.pets.filter({ $0.name!.lowercased().contains(searchText.lowercased()) }) {
+                data.append(searchElement(id: MKLocationId(id: pet.id, type: .pet), object: pet))
             }
-            print(data)
-            DispatchQueue.main.async {
-                self.searchTableView.reloadData()
+            
+            for safezone in presenter.safeZones.filter({ $0.name!.lowercased().contains(searchText.lowercased()) }) {
+                data.append(searchElement(id: MKLocationId(id: safezone.id, type: .safezone), object: safezone))
             }
         }
+        self.searchTableView.reloadData()
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
@@ -375,7 +370,6 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     }
     
     func showSearchBar(){
-        self.searchTableView.reloadData()
         performSearch(action: .open)
     }
     
@@ -397,24 +391,42 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! petSearchCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! searchCell
         
-        cell.petImageView.circle()
+        cell.searchImageView.circle()
+        cell.searchImageView.backgroundColor = UIColor.orange()
+        
+        var name: String?
+        var image: Data?
         
         if data.count == 0 {
-            
             let pet = presenter.pets[indexPath.row]
-            cell.petNameLabel?.text = pet.name
             
-            if let data = pet.image {
-                cell.petImageView?.image = UIImage(data: data)
-            }else{
-                cell.petImageView?.image = nil
-            }
+            name = pet.name
+            image = pet.image
+            
         }else {
-            cell.petNameLabel?.text = data[indexPath.row]
-            cell.petImageView?.image = nil
+            
+            let element = data[indexPath.row]
+            
+            if element.id.type == .pet, let pet = element.object as? Pet {
+                
+                name = pet.name
+                image = pet.image
+                
+            }else if element.id.type == .safezone, let safezone = element.object as? SafeZone {
+                
+                name = safezone.name
+                image = Data()
+                
+            }else{
+                
+                name = nil
+                image = nil
+            }
         }
+        cell.searchNameLabel?.text = name
+        if let image = image { cell.searchImageView?.image = UIImage(data: image) }
         return cell
     }
     
@@ -423,9 +435,24 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if data.count == 0 {
             let pet = presenter.pets[indexPath.row]
-            presentPet(pet)
+            hideSearchBar()
+            showPetDetails(pet)
         }else {
-            alert(title: "", msg: "Under Construction")
+            let element = data[indexPath.row]
+            
+            if let coordinate = annotations[element.id]?.coordinate {
+                mapView.centerOn(coordinate, animated: true)
+            }
+            
+            if element.id.type == .pet, let pet = element.object as? Pet {
+                
+                hideSearchBar()
+                showPetDetails(pet)
+            }else if element.id.type == .safezone, let safezone = element.object as? SafeZone {
+                
+                hideSearchBar()
+                showSafeZoneDetails(safezone)
+            }
         }
     }
 
@@ -441,8 +468,11 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
         self.topConstraintBlurView.constant = action == .open ? self.opened : self.closed
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.8, options: UIViewAnimationOptions.curveEaseInOut, animations: {
             self.view.layoutIfNeeded()
-        }, completion: nil)
-        
+        }) { (_) in
+            if action == .close {
+                self.focusOnPets()
+            }
+        }
     }
 
     func performSearch(action:Action) {
@@ -456,12 +486,17 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
             }
         }) { (success) in
             if action == .open {
+                self.searchTableView.reloadData()
                 self.searchResultsView.isHidden = false
             }
         }
     }
 }
 
+struct searchElement {
+    var id: MKLocationId
+    var object: Any
+}
 
 enum pinType: Int {
     case pet = 0, safezone, pi
@@ -506,9 +541,9 @@ class MKLocation: MKPointAnnotation {
 
 
 
-class petSearchCell: UITableViewCell {
-    @IBOutlet weak var petImageView: UIImageView!
-    @IBOutlet weak var petNameLabel: UILabel!
+class searchCell: UITableViewCell {
+    @IBOutlet weak var searchImageView: UIImageView!
+    @IBOutlet weak var searchNameLabel: UILabel!
 }
 
 
