@@ -337,6 +337,19 @@ class DataManager {
         }
     }
     
+    func setSafeZoneStatus(enabled: Bool,for id: Int16, into petId: Int16, callback: @escaping petErrorCallback) {
+        let data: [String:Any] = ["id":id, "active":enabled]
+        APIManager.Instance.perform(call: .setSafeZone, with: data) { (error, data) in
+            if error == nil {
+                self.loadSafeZones(of: petId, callback: { (error) in
+                    callback(error)
+                })
+            }else{
+                callback(PetError.MoreThenOnePet)
+            }
+        }
+    }
+    
     func removeSafeZone(by safezoneId: Int16, to petId: Int16, callback: @escaping petErrorCallback) {
         APIManager.Instance.perform(call: .removeSafeZone, withKey: safezoneId) { (error, data) in
             if error == nil {

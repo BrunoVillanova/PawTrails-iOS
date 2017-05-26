@@ -294,10 +294,8 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
     }
     
     func changeSwitchAction(sender: UISwitch){
-        let sz = presenter.safezones[sender.tag]
-        print(sz.name ?? "nahahhaha")
-//        sz.active = sender.isOn
-//        safeZonesCollectionView.reloadData()
+        let safezone = presenter.safezones[sender.tag]
+        presenter.setSafeZoneStatus(id: safezone.id, petId: pet.id, status: sender.isOn)
     }
     
     func present(_ safezone: SafeZone?) {
