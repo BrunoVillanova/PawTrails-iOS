@@ -19,7 +19,7 @@ import MapKit
 //    }
 //}
 
-class HomeViewController: UIViewController, HomeView, UICollectionViewDataSource, UICollectionViewDelegate, UIGestureRecognizerDelegate, MKMapViewDelegate, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
+class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegate, MKMapViewDelegate, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     
@@ -27,65 +27,76 @@ class HomeViewController: UIViewController, HomeView, UICollectionViewDataSource
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var searchRightConstraint: NSLayoutConstraint!
 
+    @IBOutlet weak var searchResultsView: UIVisualEffectView!
+    @IBOutlet weak var searchTableView: UITableView!
+    
+    
     @IBOutlet weak var blurView: UIVisualEffectView!
-    @IBOutlet weak var bottomConstraintBlurView: NSLayoutConstraint!
-
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var userImageView: UIImageView!
-    @IBOutlet weak var userNameLabel: UILabel!
-    @IBOutlet weak var userSurnameLabel: UILabel!
+    @IBOutlet weak var topConstraintBlurView: NSLayoutConstraint!
+    
+    @IBOutlet weak var petDetailView: UIView!
+    @IBOutlet weak var petImageView: UIImageView!
+    @IBOutlet weak var batteryImageView: UIImageView!
+    @IBOutlet weak var signalImageView: UIImageView!
+    @IBOutlet weak var petTitleLabel: UILabel!
+    @IBOutlet weak var petSubtitleLabel: UILabel!
+    @IBOutlet weak var startTripButton: UIButton!
+    
+    @IBOutlet weak var safeZoneDetailView: UIView!
+    @IBOutlet weak var safeZoneTitleLabel: UILabel!
+    @IBOutlet weak var showSafeZoneButton: UIButton!
+    
     
     fileprivate let presenter = HomePresenter()
     
-    fileprivate let closed:CGFloat = -170.0, opened:CGFloat = -40.0
+    fileprivate var opened:CGFloat = 415.0, closed:CGFloat = 600
+    
     fileprivate let closedSearch:CGFloat = 299, openedSearch:CGFloat = 0
     
-    fileprivate var annotations = [String:MKLocation]()
+    fileprivate var annotations = [MKLocationId:MKLocation]()
     
     var data = [String]()
-    let tableView = UITableView(frame: CGRect(x:20,y:80,width:335,height:120), style: .plain)
 
     var trackingPet: Pet?
+    
+    var selectedPet: Pet?
+    var selectedSafeZone: SafeZone?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.presenter.attachView(self)
-        self.searchView.round()
-        self.blurView.round(radius: 20)
+        presenter.attachView(self)
         
+        setTopBar()
+
         mapView.showsScale = false
         mapView.showsUserLocation = false
+
+        topConstraintBlurView.constant = closed
+        blurView.round(radius: 18)
+
+        petDetailView.isHidden = true
+        petImageView.circle()
+        batteryImageView.circle()
+        signalImageView.circle()
+        startTripButton.round()
         
+        safeZoneDetailView.isHidden = true
+        showSafeZoneButton.round()
+
+        searchView.round()
         searchBar.backgroundColor = UIColor.orange().withAlphaComponent(0.8)
-        
-        if let textFieldInsideSearchBar = self.searchBar.value(forKey: "searchField") as? UITextField {
+        if let textFieldInsideSearchBar = self.searchBar.value(forKey: "searchField") as? UITextField, let glassIconView = textFieldInsideSearchBar.leftView as? UIImageView {
             
-            if let glassIconView = textFieldInsideSearchBar.leftView as? UIImageView {
-                
-                //Magnifying glass
-                glassIconView.image = glassIconView.image?.withRenderingMode(.alwaysTemplate)
-                glassIconView.tintColor = .white
-            }
-            
+            glassIconView.image = glassIconView.image?.withRenderingMode(.alwaysTemplate)
+            glassIconView.tintColor = .white
             textFieldInsideSearchBar.clearButtonMode = .never
         }
         
         searchBar.showsCancelButton = false
-        
-        setTopBar()
-        
-//        blurView(.open, animated: false)
-        
-        //search
-//        tableView.delegate = self
-//        tableView.dataSource = self
-//        tableView.isScrollEnabled = true
-//        tableView.isHidden = true
-//        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-//        tableView.tableFooterView = UIView()
-//        tableView.backgroundColor = UIColor.clear
-//        self.view.addSubview(tableView)
+        searchResultsView.round()
+        searchResultsView.isHidden = true
+        searchTableView.tableFooterView = UIView()
      }
     
     deinit {
@@ -93,25 +104,39 @@ class HomeViewController: UIViewController, HomeView, UICollectionViewDataSource
     }
     
     override func viewDidAppear(_ animated: Bool) {
-//        blurView(.close)
-        let location = CLLocationCoordinate2D(latitude: 51.87, longitude: -8.46)
-        startTracking("Pepito", lat: location.latitude, long: location.longitude)
-        mapView.centerOn(location)
-        
-        if let trackingPet = trackingPet {
-            alert(title: "", msg: "Tracking \(trackingPet.name ?? "pet")", type: .blue)
-        }
+        presenter.getPets()
     }
     
     @IBAction func handlePanGesture(_ sender: UIPanGestureRecognizer) {
         
-//        let y = sender.translation(in: self.view).y / 2.5
-//        if (y < 0 && bottomConstraintBlurView.constant > opened) || (y > 0 && bottomConstraintBlurView.constant < closed) { bottomConstraintBlurView.constant += y }
-//        
-//        if sender.state == .ended {
-//            blurView(y < 0 ? .open : .close, speed: 0.5)
-//        }
+        var y = sender.location(in: view).y
+        
+        let isOpening = sender.translation(in: self.view).y < 0
+        
+        if isOpening && y < opened {
+            let distance = abs(y - opened)
+            y += distance * 0.5
+        }
+        
+        topConstraintBlurView.constant = y
+        
+        if sender.state == .ended { perform(action: isOpening ? .open : .close, speed: 0.5)  }
     }
+    
+    @IBAction func startTripAction(sender: UIButton?){
+        
+        if let selected = selectedPet {
+            presentPet(selected)
+        }
+    }
+    
+    @IBAction func showSafeZoneAction(sender: UIButton?){
+        
+        if let selected = selectedSafeZone {
+            presentSafeZone(selected)
+        }
+    }
+    
 
 //    @IBAction func changeMapInfo(_ sender: UIButton) {
 //        mapView.mapType = mapView.mapType == MKMapType.standard ? MKMapType.satellite : MKMapType.standard
@@ -128,31 +153,59 @@ class HomeViewController: UIViewController, HomeView, UICollectionViewDataSource
         self.alert(title: error.title, msg: error.msg)
     }
     
-    func reload() {
-        self.userNameLabel.text = self.presenter.user.name
-        self.userSurnameLabel.text = self.presenter.user.surname        
-        self.collectionView.reloadData()
-    }
-    
-    func startTracking(_ name: String, lat:Double, long:Double) {
-        self.annotations[name] = MKLocation(title: name, lat: lat, long: long)
-        self.mapView.addAnnotation(self.annotations[name]!)
+    func loadMapElements(){
+        // Pets
+        for pet in presenter.pets {
+            let location = CLLocationCoordinate2D.CorkRandom
+            let id = MKLocationId(id: pet.id, type: .pet)
+            let color = pet.isOwner ? UIColor.orange() : UIColor.darkGray
+            
+            if annotations[id] == nil {
+                startTracking(id, coordinate: location, color: color)
+            }else{
+                updateTracking(id, coordinate: location)
+            }
+        }
         self.mapView.setVisibleMapForAnnotations()
-        self.collectionView.reloadData()
+        
+        // SafeZones
+        for safezone in presenter.safeZones {
+            
+            if let location = safezone.point1?.coordinates {
+                
+                let id = MKLocationId(id: safezone.id, type: .safezone)
+                let color = UIColor.green
+                
+                if annotations[id] == nil {
+                    startTracking(id, coordinate: location, color: color)
+                }else{
+                    updateTracking(id, coordinate: location)
+                }
+            }
+        }
     }
     
-    func updateTracking(_ name: String, lat:Double, long:Double) {
-        self.annotations[name]?.move(lat: lat, long: long)
+    func reload() {
+        self.petTitleLabel.text = self.presenter.user.name
+        self.petSubtitleLabel.text = self.presenter.user.surname
     }
     
-    func stopTracking(_ name: String) {
-        guard let a = self.annotations[name] else {
+    func startTracking(_ id: MKLocationId, coordinate:CLLocationCoordinate2D, color: UIColor) {
+        self.annotations[id] = MKLocation(id: id, coordinate: coordinate, color: color)
+        self.mapView.addAnnotation(self.annotations[id]!)
+    }
+    
+    func updateTracking(_ id: MKLocationId, coordinate:CLLocationCoordinate2D) {
+        self.annotations[id]?.move(coordinate:coordinate)
+    }
+    
+    func stopTracking(_ id: MKLocationId) {
+        guard let a = self.annotations[id] else {
             self.errorMessage(ErrorMsg(title:"", msg:""))
             return
         }
         self.mapView.removeAnnotation(a)
-        self.annotations.removeValue(forKey: name)
-        self.collectionView.reloadData()
+        self.annotations.removeValue(forKey: id)
     }
     
     func userNotSigned() {
@@ -169,50 +222,6 @@ class HomeViewController: UIViewController, HomeView, UICollectionViewDataSource
     
     func notConnectedToNetwork() {
         showNotification(title: Message.Instance.connectionError(type: .NoConnection), type: .red)
-    }
-    
-    // MARK: - UICollectionViewDataSource
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == 0 ? self.presenter.pets.count : 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! petCell
-        cell.circle()
-        cell.imageView.backgroundColor = UIColor.blueSystem()
-
-        if indexPath.section == 0 {
-//            let pet = self.presenter.pets[indexPath.row]
-            cell.imageView.image = UIImage()
-//            cell.imageView.alpha = pet.tracking ? 1.0 : 0.4
-        }else{
-            cell.imageView.image = UIImage(named: "add")
-            cell.imageView.alpha = 1.0
-        }
-        return cell
-    }
-    
-    // MARK: - UICollectionViewDelegate
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        if indexPath.section == 0 {
-
-//            if self.presenter.pets[indexPath.row].tracking {
-//                self.presenter.stopTracking(indexPath.row)
-//            }else{
-//                self.presenter.startTracking(indexPath.row)
-//            }
-        }else if indexPath.section == 1 {
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "ScanQRViewController") as? ScanQRViewController {
-                self.present(vc, animated: true, completion: nil)
-            }
-        }
     }
     
     // MARK: - MKMapViewDelegate
@@ -236,91 +245,118 @@ class HomeViewController: UIViewController, HomeView, UICollectionViewDataSource
                 let mkl = annotation as! MKLocation
                 
                 // Annotation
-                annotationView.canShowCallout = true
-                annotationView.backgroundColor = mkl.color
+                annotationView.canShowCallout = false
                 annotationView.frame.size = CGSize(width: 20, height: 20)
                 
-//                annotationView.image = UIImage(named: "logo")
                 annotationView.circle()
                 annotationView.backgroundColor = UIColor.white
-                annotationView.border(color: UIColor.random(), width: 2.0)
+                annotationView.border(color: mkl.color, width: 2.0)
                 annotationView.clipsToBounds = false
-                annotationView.canShowCallout = true
-
-                // Callout
-                let leftView = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
-                leftView.backgroundColor = UIColor.orange()
-                let label = UILabel(frame: leftView.frame)
-                label.textAlignment = .center
-                label.text = "Track"
-                leftView.addSubview(label)
-                annotationView.leftCalloutAccessoryView = leftView
-                
-                
-                
-//                let rightView = UIView(frame: leftView.frame)
-//                rightView.backgroundColor = UIColor.red
-//                annotationView.rightCalloutAccessoryView = rightView
-                
-                let detailView = UIView(frame: CGRect(x: 0, y: 0, width: 140, height: 100))
-                
-                let title = UILabel(frame: CGRect(x: 30, y: 10, width: 180, height: 40))
-                title.text = "Billy"
-                title.font = UIFont.preferredFont(forTextStyle: .headline)
-                detailView.addSubview(title)
-                
-                let subtitle = UILabel(frame: CGRect(x: 30, y: 50, width: 180, height: 40))
-                subtitle.text = "College Road West"
-                subtitle.font = UIFont.preferredFont(forTextStyle: .body)
-                detailView.addSubview(subtitle)
-
-                let callout = UILabel(frame: CGRect(x: 30, y: 90, width: 180, height: 40))
-                callout.text = "3 hours 12 min ago"
-                callout.font = UIFont.preferredFont(forTextStyle: .body)
-                callout.textColor = UIColor.lightText
-                detailView.addSubview(callout)
-                
-                annotationView.rightCalloutAccessoryView = detailView
-//                let callout = MKAnnotation()
-                
             }
             return annotationView
         }
         return nil
     }
     
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        
+        if let annotation = view.annotation as? MKLocation {
+            
+            switch annotation.id.type {
+            case .pet:
+                if let pet = presenter.pets.first(where: { $0.id == annotation.id.id }) {
+                    showPetDetails(pet)
+                }
+            case .safezone:
+                if let safezone = presenter.safeZones.first(where: { $0.id == annotation.id.id }) {
+                    showSafeZoneDetails(safezone)
+                }
+            default:
+                break
+            }
+            
+        }
+    }
+    
+    func showPetDetails(_ pet: Pet) {
+        
+        safeZoneDetailView.isHidden = true
+        petDetailView.isHidden = false
+        
+        if let data = pet.image {
+            petImageView.image = UIImage(data: data)
+        }
+        petTitleLabel.text = pet.name
+        petSubtitleLabel.text = pet.breeds
+        selectedPet = pet
+        perform(action: .open)
+    }
+    
+    func showSafeZoneDetails(_ safezone: SafeZone) {
+        
+        safeZoneDetailView.isHidden = false
+        petDetailView.isHidden = true
+
+        safeZoneTitleLabel.text = safezone.name
+        selectedSafeZone = safezone
+        perform(action: .open)
+    }
+    
+    func getNavigationController() -> UINavigationController {
+        let nc = UINavigationController()
+        nc.navigationBar.barTintColor = UIColor.orange()
+        nc.navigationBar.tintColor = UIColor.white
+        nc.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+        return nc
+    }
+    
+    func presentPet(_ pet: Pet) {
+        
+        let nc = getNavigationController()
+        
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "PetsPageViewController") as? PetsPageViewController {
+            vc.pet = pet
+            vc.fromMap = true
+            nc.pushViewController(vc, animated: true)
+            present(nc, animated: true, completion: nil)
+        }
+    }
+    
+    func presentSafeZone(_ safezone: SafeZone) {
+        
+        let nc = getNavigationController()
+        
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "AddEditSafeZoneViewController") as? AddEditSafeZoneViewController {
+            vc.safezone = safezone
+            vc.petId = safezone.pet?.id
+            vc.isOwner = safezone.pet?.isOwner ?? false
+            vc.fromMap = true
+            nc.pushViewController(vc, animated: true)
+            present(nc, animated: true, completion: nil)
+        }
+    }
     
     // MARK: - UISearchBarDelegate
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        tableView.isHidden = searchText == ""
-//        if searchText != "" {
-//            
-//            self.data = DataManager.Instance.performSearch(searchText) { (data) in
-//                self.data = data
-//            }
-//            print(data)
-//            DispatchQueue.main.async {
-//                self.tableView.reloadData()
-//            }
-//        }
+
+        if searchText != "" {
+            
+            self.data = DataManager.Instance.performSearch(searchText) { (data) in
+                self.data = data
+            }
+            print(data)
+            DispatchQueue.main.async {
+                self.searchTableView.reloadData()
+            }
+        }
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        UIView.animate(withDuration: 0.5, animations: {
-            self.searchRightConstraint.constant = self.openedSearch
-            searchBar.showsCancelButton = true
-            self.view.layoutIfNeeded()
-        })
+        showSearchBar()
     }
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        searchBar.text = ""
-        UIView.animate(withDuration: 0.5, animations: {
-            self.searchRightConstraint.constant = self.closedSearch
-            searchBar.showsCancelButton = false
-            self.view.layoutIfNeeded()
-        })
-        searchBar.resignFirstResponder()
+        hideSearchBar()
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -329,9 +365,26 @@ class HomeViewController: UIViewController, HomeView, UICollectionViewDataSource
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
+    
+        if topConstraintBlurView.constant == opened && touches.count == 1, let touch = touches.first {
+            let touchPoint = touch.location(in: view)
+            if touchPoint.y < opened {
+                perform(action: .close)
+            }
+        }
     }
     
+    func showSearchBar(){
+        self.searchTableView.reloadData()
+        performSearch(action: .open)
+    }
     
+    func hideSearchBar(){
+        searchBar.text = ""
+        performSearch(action: .close)
+        searchBar.resignFirstResponder()
+
+    }
     
     // MARK: - UITableViewDataSource
     
@@ -340,75 +393,144 @@ class HomeViewController: UIViewController, HomeView, UICollectionViewDataSource
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
+        return data.count == 0 ? presenter.pets.count : data.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = data[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! petSearchCell
+        
+        cell.petImageView.circle()
+        
+        if data.count == 0 {
+            
+            let pet = presenter.pets[indexPath.row]
+            cell.petNameLabel?.text = pet.name
+            
+            if let data = pet.image {
+                cell.petImageView?.image = UIImage(data: data)
+            }else{
+                cell.petImageView?.image = nil
+            }
+        }else {
+            cell.petNameLabel?.text = data[indexPath.row]
+            cell.petImageView?.image = nil
+        }
         return cell
     }
     
-    // MARK: - Helpers
+    // MARK: - UITableViewDelegate
     
-    enum blurViewAction {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if data.count == 0 {
+            let pet = presenter.pets[indexPath.row]
+            presentPet(pet)
+        }else {
+            alert(title: "", msg: "Under Construction")
+        }
+    }
+
+    
+    // MARK: - AnimationHelpers
+    
+    enum Action {
         case open, close
-        
-        init(direction:Int) {
-            self = direction < 0 ? .open : .close
-        }
     }
     
-    func blurView(_ action:blurViewAction, speed:Double = 1, animated:Bool = true){
+    func perform(action:Action, speed:Double = 1, animated:Bool = true){
         
-        if (self.bottomConstraintBlurView.constant == closed && action == .close) || (self.bottomConstraintBlurView.constant == opened && action == .open) { return }
+        self.topConstraintBlurView.constant = action == .open ? self.opened : self.closed
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.8, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+            self.view.layoutIfNeeded()
+        }, completion: nil)
         
-        if animated {
-            UIView.animate(withDuration: speed, animations: {
-                let dy = action == .open ? self.blurView.frame.minY - self.blurView.center.y : self.blurView.center.y - self.blurView.frame.minY
-                self.blurView.transform = CGAffineTransform(translationX: 0, y: dy)
-            }) { (done) in
-                self.bottomConstraintBlurView.constant = action == .open ? self.opened : self.closed
-                self.blurView.transform = CGAffineTransform.identity
+    }
+
+    func performSearch(action:Action) {
+        
+        UIView.animate(withDuration: 0.5, animations: { 
+            self.searchRightConstraint.constant = action == .open ? self.openedSearch : self.closedSearch
+            self.searchBar.showsCancelButton = action == .open
+            self.view.layoutIfNeeded()
+            if action == .close {
+                self.searchResultsView.isHidden = true
             }
-        }else{
-            self.bottomConstraintBlurView.constant = action == .open ? self.opened : self.closed
+        }) { (success) in
+            if action == .open {
+                self.searchResultsView.isHidden = false
+            }
         }
+    }
+}
+
+
+enum pinType: Int {
+    case pet = 0, safezone, pi
+}
+
+class MKLocationId: Hashable {
+    var id: Int16
+    var type: pinType
+    
+    init(id : Int16, type: pinType) {
+        self.id = id
+        self.type = type
+    }
+    
+    var hashValue: Int {
+        return id.hashValue ^ type.hashValue
+    }
+    
+    static func == (lhs: MKLocationId, rhs: MKLocationId) -> Bool {
+        return lhs.id == rhs.id && lhs.type == rhs.type
     }
 
 }
 
-class petCell: UICollectionViewCell {
-    @IBOutlet weak var imageView: UIImageView!
-}
 
 class MKLocation: MKPointAnnotation {
     var color:UIColor
+    var id: MKLocationId
     
-    init(title:String, lat:Double, long:Double, color: UIColor = UIColor.blueSystem()) {
+    init(id : MKLocationId, coordinate:CLLocationCoordinate2D, color: UIColor = UIColor.random()) {
+        self.id = id
         self.color = color
         super.init()
-        self.title = title
-        self.subtitle = "College Road West - 3 hours 12 minutes ago"
-        self.coordinate = CLLocationCoordinate2DMake(lat, long)
+        self.coordinate = coordinate
     }
     
-    func move(lat:Double, long:Double){
-        self.coordinate = CLLocationCoordinate2DMake(lat, long)
+    func move(coordinate:CLLocationCoordinate2D){
+        self.coordinate = coordinate
     }
     
 }
 
-//class MKLocationView: MKAnnotationView {
-//
-//    
-//    init(title:String, subtitle:String) {
-//        super.init()
-//        self.title = title
-//        self.coordinate = CLLocationCoordinate2DMake(lat, long)
-//    }
-//    
-//}
+
+
+class petSearchCell: UITableViewCell {
+    @IBOutlet weak var petImageView: UIImageView!
+    @IBOutlet weak var petNameLabel: UILabel!
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

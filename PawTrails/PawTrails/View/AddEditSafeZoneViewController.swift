@@ -46,7 +46,7 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     var safezone: SafeZone?
     var petId: Int16!
     var isOwner: Bool!
-    
+    var fromMap: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,6 +61,7 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
         
         if let safezone = safezone {
             navigationItem.title = "Edit Safe Zone"
+            navigationItem.prompt = safezone.pet?.name
 
             nameTextField.text = safezone.name
             if let shape = Shape(rawValue: safezone.shape) {
@@ -77,10 +78,14 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
                 activeSwitch.isEnabled = false
                 removeButton.isHidden = true
             }
-            
         }else{
             navigationItem.title = "New Safe Zone"
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(popAction(sender:)))
             removeButton.isHidden = true
+        }
+        
+        if fromMap {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(dismissAction(sender: )))
         }
         
         self.circleButton.tintColor = shape == .circle ? UIColor.orange() : UIColor.darkGray
@@ -330,19 +335,7 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     
     func blurView(_ action:blurViewAction, speed:Double = 1, animated:Bool = true){
         
-//        if (self.topConstraint.constant == closed && action == .close) || (self.topConstraint.constant == opened && action == .open) { return }
-        
-//        if animated {
-//            UIView.animate(withDuration: speed, animations: {
-//                let dy = action == .open ? self.blurView.frame.minY - self.blurView.center.y : self.blurView.center.y - self.blurView.frame.minY
-//                self.blurView.transform = CGAffineTransform(translationX: 0, y: dy)
-//            }) { (done) in
-//                self.bottomContraints.constant = action == .open ? self.opened : self.closed
-//                self.blurView.transform = CGAffineTransform.identity
-//            }
-//        }else{
-            self.topConstraint.constant = action == .open ? self.opened : self.closed
-//        }
+        self.topConstraint.constant = action == .open ? self.opened : self.closed
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.8, options: UIViewAnimationOptions.curveEaseInOut, animations: {
             self.view.layoutIfNeeded()
         }, completion: nil)

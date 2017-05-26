@@ -66,7 +66,7 @@
         <attribute name="point2" optional="YES" attributeType="Transformable" customClassName="Point" syncable="YES"/>
         <attribute name="preview" optional="YES" attributeType="Binary" storedInTruthFile="YES" syncable="YES"/>
         <attribute name="shape" optional="YES" attributeType="Integer 16" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="pet" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Pet" inverseName="safezones" inverseEntity="Pet" syncable="YES"/>
+        <relationship name="pet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pet" inverseName="safezones" inverseEntity="Pet" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES">
         <attribute name="birthday" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>

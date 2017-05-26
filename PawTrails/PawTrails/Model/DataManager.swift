@@ -246,8 +246,6 @@ class DataManager {
                 }
             }
         }
-        
-        PetUserManager.getFriends(callback: callback)
     }
     
     func getPetFriends(callback: @escaping petUsersCallback){

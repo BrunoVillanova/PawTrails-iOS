@@ -76,7 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     func loadHomeScreen() {
         let root = storyboard.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
-        root.selectedIndex = 1
+        root.selectedIndex = 0
         window?.rootViewController = root
     }
     

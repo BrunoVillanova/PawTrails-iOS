@@ -238,17 +238,6 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
             
             if let preview = safezone.preview {
                 cell.elementImageView.image = UIImage(data: preview as Data)
-//            }else if safezone.preview == nil, let center = safezone.point1?.coordinates, let topCenter = safezone.point2?.coordinates, let shape = Shape(rawValue: safezone.shape) {
-//
-//                MKMapView.getSnapShot(with: center, topCenter: topCenter, shape: shape, into: view, handler: { (image) in
-//                    
-//                    if let image = image, let data = UIImagePNGRepresentation(image) {
-//                        cell.elementImageView.image = image
-//                        self.presenter.set(safezone: safezone, imageData: data)
-//                    }else{
-//                        cell.elementImageView.backgroundColor = UIColor.orange().withAlphaComponent(0.8)
-//                    }
-//                })
             }else{
                 cell.elementImageView.backgroundColor = UIColor.orange().withAlphaComponent(0.8)
             }
