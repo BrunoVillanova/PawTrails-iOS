@@ -13,7 +13,7 @@ import MapKit
 extension MKMapView {
     
     func addAnnotation(_ coordinate: CLLocationCoordinate2D, color: UIColor = UIColor.red){
-        self.addAnnotation(MKLocation(title: "", lat: coordinate.latitude, long: coordinate.longitude, color: color))
+        self.addAnnotation(MKLocation(id: MKLocationId(id: 0, type: .pet), coordinate: coordinate, color: color))
     }
     
     func setVisibleMapForAnnotations() {
@@ -175,22 +175,18 @@ extension CLLocationCoordinate2D {
         return self.latitude == 0 && self.longitude == 0
     }
     
-    /*
-     -(CLLocationCoordinate2D)translateCoord:(CLLocationCoordinate2D)coord MetersLat:(double)metersLat MetersLong:(double)metersLong{
-     
-     CLLocationCoordinate2D tempCoord;
-     
-     MKCoordinateRegion tempRegion = MKCoordinateRegionMakeWithDistance(coord, metersLat, metersLong);
-     MKCoordinateSpan tempSpan = tempRegion.span;
-     
-     tempCoord.latitude = coord.latitude + tempSpan.latitudeDelta;
-     tempCoord.longitude = coord.longitude + tempSpan.longitudeDelta;
-     
-     return tempCoord;
-     
-     }
-     
-     */
+    public static var Cork: CLLocationCoordinate2D {
+        return CLLocationCoordinate2D(latitude: 51.8969, longitude: 8.4863)
+    }
+    
+    public static var CorkRandom: CLLocationCoordinate2D {
+        
+        let latitude = self.Cork.latitude
+        let longitude = self.Cork.longitude
+        let dLat = Double(arc4random() % 10000)/1000000.0
+        let dLong = Double(arc4random() % 10000)/1000000.0
+        return CLLocationCoordinate2D(latitude: latitude + dLat, longitude: longitude + dLong)
+    }
     
     func translate(metersLat:Double, metersLong:Double) -> CLLocationCoordinate2D {
         

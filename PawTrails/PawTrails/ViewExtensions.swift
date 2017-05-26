@@ -254,6 +254,7 @@ extension UIColor {
 }
 
 extension UIView {
+    
     func shake() {
         let animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
         animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
@@ -301,6 +302,16 @@ extension UIView {
         border.borderWidth = width
         self.layer.addSublayer(border)
         self.layer.masksToBounds = true
+    }
+    
+    func shadow(color:UIColor = UIColor.darkGray) {
+        let shadowPath = UIBezierPath(rect: bounds)
+        layer.masksToBounds = false
+        layer.shadowColor = color.cgColor
+        layer.shadowOffset = CGSize(width: 0.0, height: 5.0)
+        layer.shadowOpacity = 0.5
+        layer.shadowPath = shadowPath.cgPath
+
     }
 }
 

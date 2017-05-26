@@ -85,7 +85,15 @@ class AuthManager {
         SharedPreferences.set(.id, with: userId)
         DataManager.Instance.setUser(userData) { (error, user) in
             if error == nil && user != nil {
-                completition(nil)
+                
+                DataManager.Instance.loadPets(callback: { (error, pets) in
+                    if let error = error {
+                        completition(ErrorMsg(title: "", msg: "\(error)"))
+                    }else{
+                        completition(nil)
+                    }
+                })
+                
             }else {
                 completition(ErrorMsg(title: "", msg: "\(error ?? UserError.UserNotFound)"))
             }

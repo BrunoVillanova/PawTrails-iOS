@@ -18,7 +18,7 @@ class PetSafeZonesViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Safe Zones Edit"
+        navigationItem.title = "Safe Zones"
         navigationItem.prompt = pet.name
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(PetSafeZonesViewController.addSafeZone))
         noElementsLabel.isHidden = (pet.safezones != nil && pet.safezones!.count > 0)
@@ -35,6 +35,7 @@ class PetSafeZonesViewController: UIViewController, UITableViewDelegate, UITable
             vc.petId = pet.id
             vc.isOwner = pet.isOwner
             tabBarController?.hidesBottomBarWhenPushed = true
+            navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .done, target: self, action: #selector(popAction(sender:)))
             navigationController?.pushViewController(vc, animated: true)
         }
     }

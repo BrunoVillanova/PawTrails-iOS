@@ -95,7 +95,7 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func trackButtonAction(sender: UIButton){
 
         if let home = tabBarController?.viewControllers?.first as? HomeViewController {
-            home.trackingPet = presenter.getPet(with: sender.tag)
+            home.selectedPet = presenter.getPet(with: sender.tag)
             tabBarController?.selectedIndex = 0
         }
     }
