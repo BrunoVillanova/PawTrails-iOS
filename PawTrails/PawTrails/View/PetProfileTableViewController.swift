@@ -22,7 +22,6 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
     @IBOutlet weak var usersCollectionView: UICollectionView!
     @IBOutlet weak var usersTableViewCell: UITableViewCell!
     @IBOutlet weak var safezonesTableViewCell: UITableViewCell!
-    @IBOutlet weak var addSafeZoneTableViewCell: UITableViewCell!
     @IBOutlet weak var removeLeaveLabel: UILabel!
     
     var pet:Pet!
@@ -33,22 +32,25 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.attachView(self)
+//        tableView.backgroundColor = UIColor.clear
+        presenter.attachView(self, pet:pet)
         usersCollectionView.reloadData()
         if let pet = pet {
             load(pet)
-            presenter.loadPet(with: pet.id)
-            presenter.loadPetUsers(for: pet.id)
-            presenter.loadSafeZone(for: pet.id)
+            reloadPetInfo()
+            reloadUsers()
+            reloadSafeZones()
             removeLeaveLabel.text = pet.isOwner ? "Remove Pet" : "Leave Pet"
         }
-        
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 20.0))
-        }
+    }
+
+    func reloadPetInfo() {
+        presenter.loadPet(with: pet.id)
+    }
     
-    override func viewWillAppear(_ animated: Bool) {
-        //        presenter.loadPet(with: pet.id ?? "")
-        presenter.getPet(with: pet.id)
+    func reloadSafeZones() {
+        presenter.loadSafeZone(for: pet.id)
     }
     
     func reloadUsers() {
@@ -77,7 +79,6 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
         usersCollectionView.reloadAnimated()
         
         if presenter.safezones.count > 0 {
-            addSafeZoneTableViewCell.isHidden = true
             safezonesTableViewCell.isHidden = false
 
             let safezonesGroup = DispatchGroup()
@@ -92,12 +93,23 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
             safezonesGroup.notify(queue: .main, execute: {
                 self.safeZonesCollectionView.reloadData()
             })
-
+            
+            let safezonesGroup2 = DispatchGroup()
+            
+            for safezone in self.presenter.safezones {
+                safezonesGroup2.enter()
+                self.buildAddress(for: safezone, handler: {
+                    safezonesGroup2.leave()
+                })
+            }
+            
+            safezonesGroup2.notify(queue: .main, execute: {
+                self.safeZonesCollectionView.reloadData()
+            })
+            
         }else if pet.isOwner {
-            addSafeZoneTableViewCell.isHidden = false
             safezonesTableViewCell.isHidden = true
         }else {
-            addSafeZoneTableViewCell.isHidden = true
             safezonesTableViewCell.isHidden = true
         }
         removeLeaveLabel.text = pet.isOwner ? "Remove Pet" : "Leave Pet"
@@ -112,9 +124,41 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
         popAction(sender: nil)
     }
     
-    
     // MARK: - UITableViewDataSource
     
+//    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        
+//        let headerView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: tableView.frame.width, height: 35.0))
+//        
+//        let titleWidth = headerView.frame.width * 0.7
+//        let margin:CGFloat = 10.0
+//        
+//        let title = UILabel(frame: CGRect(x: margin, y: 0.0, width: titleWidth, height: headerView.frame.height - margin))
+//        title.text = sectionNames[section].uppercased()
+//        title.font = UIFont.init(name: "HelveticaNeue-Bold", size: 28.0)
+//        title.textColor = UIColor.black
+//        headerView.addSubview(title)
+//        
+//        if pet.isOwner && section != 3 {
+//            
+//            let editButtonWidth = headerView.frame.width - titleWidth - margin
+//            
+//            let editButton = UIButton(frame: CGRect(x: titleWidth, y: 0.0, width: editButtonWidth, height: headerView.frame.height - margin))
+//            let title = section == 0 ? "Edit" : "Add"
+//            editButton.setTitle(title, for: .normal)
+//            editButton.contentHorizontalAlignment = .right
+//            editButton.setTitleColor(UIColor.orange(), for: .normal)
+//            editButton.isEnabled = true
+//            editButton.tag = section
+//            editButton.addTarget(self, action: #selector(editPressed(sender:)), for: .touchDown)
+//            headerView.addSubview(editButton)
+//        }
+//        return headerView
+//    }
+//    
+//    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 35.0
+//    }
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let headerView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: tableView.frame.width, height: 23))
@@ -147,7 +191,7 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 20.0
     }
-    
+
     func editPressed(sender: UIButton){
         
         switch sender.tag {
@@ -157,13 +201,15 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
                 navigationController?.pushViewController(vc, animated: true)
             }
         case 1:
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "PetUsersViewController") as? PetUsersViewController {
-                vc.pet = pet
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "AddPetUserViewController") as? AddPetUserViewController {
+                vc.petName = pet.name ?? ""
+                vc.petId = pet.id
                 navigationController?.pushViewController(vc, animated: true)
             }
         case 2:
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "PetSafeZonesViewController") as? PetSafeZonesViewController {
-                vc.pet = pet
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "AddEditSafeZoneViewController") as? AddEditSafeZoneViewController {
+                vc.petId = pet.id
+                vc.isOwner = pet.isOwner
                 navigationController?.pushViewController(vc, animated: true)
             }
         default:
@@ -173,7 +219,7 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if indexPath.section == 2 && ((indexPath.row == 0 && safezonesTableViewCell.isHidden) || (indexPath.row == 1 && addSafeZoneTableViewCell.isHidden)){
+        if indexPath.section == 2 && ((indexPath.row == 0 && safezonesTableViewCell.isHidden) || (indexPath.row == 1 && safezonesTableViewCell.isHidden)){
             return 0
         }else if indexPath.section == 0 && indexPath.row == 1 && breedLabel.text != nil && breedLabel.text != "" {
 
@@ -206,8 +252,6 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
                 })
             }
             self.tableView.deselectRow(at: indexPath, animated: true)
-        } else if indexPath.section == 2 && indexPath.row == 1 && addSafeZoneTableViewCell.isHidden == false {
-            present(nil)
         }
     }
     
@@ -228,10 +272,11 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == safeZonesCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! petProfileSafeZoneCollectionCell
-            
+            cell.round()    
             let safezone = presenter.safezones[indexPath.row]
             cell.elementImageView.backgroundColor = UIColor.red.withAlphaComponent(0.5)
             cell.titleLabel.text = safezone.name
+            cell.subtitleLabel.text = safezone.address
             cell.activeSwitch.isOn = safezone.active
             cell.activeSwitch.tag = indexPath.row
             cell.activeSwitch.addTarget(self, action: #selector(changeSwitchAction(sender:)), for: UIControlEvents.valueChanged)
@@ -271,6 +316,18 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
         }
     }
     
+    func buildAddress(for safezone: SafeZone, handler: @escaping (()->())) {
+        if safezone.address == nil, let center = safezone.point1?.coordinates {
+            
+            center.getStreetName(handler: { (address) in
+                if let address = address {
+                    self.presenter.set(safezone: safezone, address: address)
+                    handler()
+                }
+            })
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == safeZonesCollectionView {
             
@@ -284,7 +341,17 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
     
     func changeSwitchAction(sender: UISwitch){
         let safezone = presenter.safezones[sender.tag]
-        presenter.setSafeZoneStatus(id: safezone.id, petId: pet.id, status: sender.isOn)
+        presenter.setSafeZoneStatus(id: safezone.id, petId: pet.id, status: sender.isOn) { (success) in
+            if !success {
+                DispatchQueue.main.async {
+                    sender.isOn = !sender.isOn
+                }
+            }else if success && sender.isOn {
+                self.popUp(title: "Hey", msg: "Turned On")
+            }else if success && !sender.isOn {
+                self.popUp(title: "Hey", msg: "Turned Off")
+            }
+        }
     }
     
     func present(_ safezone: SafeZone?) {
@@ -305,8 +372,6 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
     }
     
     // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "changeDevice" {
@@ -323,6 +388,7 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
 class petProfileSafeZoneCollectionCell: UICollectionViewCell {
     @IBOutlet weak var elementImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var activeSwitch: UISwitch!
 }
 

@@ -22,8 +22,10 @@ class PetPresenter {
     var users = [PetUser]()
     var safezones = [SafeZone]()
     
-    func attachView(_ view: PetView){
+    func attachView(_ view: PetView, pet:Pet?){
         self.view = view
+        if let users = pet?.sharedUsers { self.users = users }
+        if let safezones = pet?.sortedSafeZones { self.safezones = safezones }
     }
     
     func deteachView() {
@@ -37,10 +39,10 @@ class PetPresenter {
         DataManager.Instance.getPet(id) { (error, pet) in
             DispatchQueue.main.async {
                 if let error = error {
-                    if error == PetError.PetNotFoundInDataBase {
+                    if error.DBError == DatabaseError.NotFound {
                         self.view?.petNotFound()
                     }else{
-                        self.view?.errorMessage(ErrorMsg(title: "",msg: "\(error)"))
+                        self.view?.errorMessage(error.msg)
                     }
                 }else if let pet = pet {
                     if let petUsers = pet.sharedUsers {
@@ -60,10 +62,10 @@ class PetPresenter {
         DataManager.Instance.loadPet(id) { (error, pet) in
             DispatchQueue.main.async {
                 if let error = error {
-                    if error == PetError.PetNotFoundInDataBase {
+                    if error.DBError == DatabaseError.NotFound {
                         self.view?.petNotFound()
                     }else{
-                        self.view?.errorMessage(ErrorMsg(title: "",msg: "\(error)"))
+                        self.view?.errorMessage(error.msg)
                     }
                 }else if let pet = pet {
                     self.view?.load(pet)
@@ -78,7 +80,7 @@ class PetPresenter {
             DispatchQueue.main.async {
                 if let error = error {
                     
-                    self.view?.errorMessage(ErrorMsg(title: "", msg: "\(error)"))
+                    self.view?.errorMessage(error.msg)
                 }else{
                     self.view?.petRemoved()
                 }
@@ -89,13 +91,11 @@ class PetPresenter {
     //MARK:- Users
     
     func leavePet(with id: Int16) {
-        var data = [String:Any]()
-        data["user_id"] = SharedPreferences.get(.id)
-        DataManager.Instance.removeSharedUser(by: data, to: id) { (error) in
+        DataManager.Instance.leaveSharedPet(by: id) { (error) in
             DispatchQueue.main.async {
                 if let error = error {
                     
-                    self.view?.errorMessage(ErrorMsg(title: "", msg: "\(error)"))
+                    self.view?.errorMessage(error.msg)
                 }else{
                     self.view?.petRemoved()
                 }
@@ -125,17 +125,22 @@ class PetPresenter {
         DataManager.Instance.setSafeZone(safezone, imageData: imageData)
     }
     
-    func setSafeZoneStatus(id: Int16, petId: Int16, status: Bool){
+    func set(safezone: SafeZone, address:String){
+        DataManager.Instance.setSafeZone(safezone, address: address)
+    }
+    
+    func setSafeZoneStatus(id: Int16, petId: Int16, status: Bool, callback: @escaping (Bool)->() ){
         
         DataManager.Instance.setSafeZoneStatus(enabled: status, for: id, into: petId) { (error) in
-            DispatchQueue.main.async {
-                
-                if let error = error {
-                    self.view?.errorMessage(ErrorMsg.init(title: "", msg: "\(error)"))
-                }else{
-                    self.getPet(with: petId)
+            
+            if let error = error {
+                DispatchQueue.main.async {
+                    self.view?.errorMessage(error.msg)
                 }
-                
+                callback(false)
+            }else{
+                self.loadSafeZone(for: petId)
+                callback(true)
             }
         }
         

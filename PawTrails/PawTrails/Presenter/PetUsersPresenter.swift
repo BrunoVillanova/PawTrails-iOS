@@ -41,7 +41,7 @@ class PetUsersPresenter {
                     DispatchQueue.main.async {
                         if let error = error {
                             debugPrint(error)
-                            self.view?.errorMessage(ErrorMsg(title: "", msg: "\(error)"))
+                            self.view?.errorMessage(error.msg)
                         }else{
                             self.view?.userRemoved()
                         }
@@ -55,7 +55,7 @@ class PetUsersPresenter {
                     DispatchQueue.main.async {
                         if let error = error {
                             debugPrint(error)
-                            self.view?.errorMessage(ErrorMsg(title: "", msg: "\(error)"))
+                            self.view?.errorMessage(error.msg)
                         }else{
                             self.view?.userRemoved()
                         }

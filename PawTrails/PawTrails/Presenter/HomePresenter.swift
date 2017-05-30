@@ -44,10 +44,10 @@ class HomePresenter {
                 if error == nil && user != nil {
                     self.user = user
                     self.view?.reload()
-                }else if error == UserError.NotAuthenticated {
+                }else if error?.APIError?.errorCode == ErrorCode.Unauthorized {
                     self.view?.userNotSigned()
-                }else{
-                    self.view?.errorMessage(ErrorMsg(title: "Unable to get user info", msg: "\(String(describing: error))"))
+                }else if let error = error {
+                    self.view?.errorMessage(error.msg)
                 }
             }
         }
@@ -63,8 +63,8 @@ class HomePresenter {
                     self.pets = pets
                     self.view?.loadMapElements()
                     self.getSafeZones()
-                }else{
-                    self.view?.errorMessage(ErrorMsg(title: "Unable to get user info", msg: "\(String(describing: error))"))
+                }else if let error = error {
+                    self.view?.errorMessage(error.msg)
                 }
             }
         }

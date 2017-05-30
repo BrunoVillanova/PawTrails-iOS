@@ -184,7 +184,7 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     
     func stopTracking(_ id: MKLocationId) {
         guard let a = self.annotations[id] else {
-            self.errorMessage(ErrorMsg(title:"", msg:""))
+//            self.errorMessage(ErrorMsg(title:"", msg:""))
             return
         }
         self.mapView.removeAnnotation(a)

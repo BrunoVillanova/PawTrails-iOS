@@ -100,13 +100,15 @@ class PetUserTableViewController: UITableViewController, PetUserView {
     func removed() {
         
         if appUserId == petOwnerId && appUserId != currentUserId {
-            if let petPage = navigationController?.viewControllers.first(where: { $0 is PetsPageViewController}) as? PetsPageViewController {
-                navigationController?.popToViewController(petPage, animated: true)
+            if let parent = navigationController?.viewControllers.first(where: { $0 is PetsPageViewController}) as? PetsPageViewController {
+                if let profile = parent.profileTableViewController {
+                    profile.reloadSafeZones()
+                }
+                navigationController?.popToViewController(parent, animated: true)
             }
         }else{
             navigationController?.navigationBar.topItem?.prompt = nil
             navigationController?.popToRootViewController(animated: true)
-
         }
     }
     

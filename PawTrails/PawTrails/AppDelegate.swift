@@ -29,12 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         var out = true
-//        _ = AuthManager.Instance.signOut()
         
         // Set Status Bar Style
         UIApplication.shared.statusBarStyle = .lightContent
-         
-//        GIDSignIn.sharedInstance().disconnect()
         
         if AuthManager.Instance.isAuthenticated() {
             
@@ -44,15 +41,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                     switch sm {
                     case .facebook:
                         out = SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
-//                        if AccessToken.current == nil {
-//                            return signOut()
-//                        }
                     case .twitter:
                         Fabric.with([Twitter.self])
                         break
                     case .google:
                         configureGoogleLogin()
-//                        GIDSignIn.sharedInstance().signInSilently()
                     default:
                         break
                     }
@@ -76,18 +69,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     func loadHomeScreen() {
         let root = storyboard.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
-        root.selectedIndex = 0
+        root.selectedIndex = 1
         window?.rootViewController = root
     }
     
     func loadAuthenticationScreen() {
         let initial = storyboard.instantiateViewController(withIdentifier: "InitialViewController") as? InitialViewController
         window?.rootViewController = initial
-    }
-    
-    func signOut() -> Bool {
-        loadAuthenticationScreen()
-        return AuthManager.Instance.signOut()
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
@@ -107,7 +95,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-//        SocketIOManager.Instance.closeConnection()
+        SocketIOManager.Instance.closeConnection()
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -116,7 +104,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-//        SocketIOManager.Instance.establishConnection()
+        SocketIOManager.Instance.establishConnection()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {

@@ -8,10 +8,10 @@
 
 
 typealias petCheckDeviceCallback = (_ isIdle:Bool) -> Void
-typealias petErrorCallback = (_ error:PetError?) -> Void
-typealias petCallback = (_ error:PetError?, _ pet:Pet?) -> Void
-typealias petsCallback = (_ error:PetError?, _ pets:[Pet]?) -> Void
-typealias petsSplittedCallback = (_ error:PetError?, _ owned:[Pet]?, _ shared:[Pet]?) -> Void
+typealias petErrorCallback = (_ error:DataManagerError?) -> Void
+typealias petCallback = (_ error:DataManagerError?, _ pet:Pet?) -> Void
+typealias petsCallback = (_ error:DataManagerError?, _ pets:[Pet]?) -> Void
+typealias petsSplittedCallback = (_ error:DataManagerError?, _ owned:[Pet]?, _ shared:[Pet]?) -> Void
 typealias petTrackingCallback = (_ location:(Double, Double)) -> Void
 
 import Foundation
@@ -67,6 +67,7 @@ class PetManager {
                         }
                     }
                     pet.type_descr = data["type_descr"] as? String
+                    pet.breed_descr = data["breed_descr"] as? String
                     
                     
                     // Image
@@ -84,16 +85,21 @@ class PetManager {
                     if let callback = callback {
                         callback(nil, pet)
                     }
+                    return
                 }
+                
+            }else{
+                if let callback = callback { callback(DataManagerError(APIError: nil, responseError: ResponseError.IdNotFound, DBError: nil), nil)}
+                return
             }
             
         } catch {
             debugPrint(error)
-            if let callback = callback {
-                callback(PetError.PetNotFoundInResponse, nil)
-            }
+            if let callback = callback { callback(DataManagerError.init(DBError: DatabaseError.Unknown, error: error), nil)}
+            return
         }
-        
+        if let callback = callback { callback(nil, nil) }
+        fatalError("Missing Something")
     }
     
     static func upsertPetList(_ data: [String:Any]) {
@@ -149,10 +155,15 @@ class PetManager {
                         upsertPetList(petData)
                     }
                 }
-                getPets(callback)
+                
+                if ( pets != nil && pets!.count > 0) || petsData.count > 0 {
+                    getPets(callback)
+                }else{
+                    callback(nil, nil)
+                }
             })
         }else{
-            callback(PetError.PetsNotFoundInResponse, nil)
+            callback(DataManagerError(responseError: ResponseError.NotFound), nil)
         }
     }
     
@@ -165,10 +176,10 @@ class PetManager {
                     callback(nil)
                 }catch {
                     debugPrint(error)
-                    callback(PetError.PetsNotFoundInResponse)
+                    callback(DataManagerError.init(DBError: DatabaseError.Unknown, error: error))
                 }
             }else{
-                callback(error)
+                callback(DataManagerError(error: error))
             }
         }
     }
@@ -177,25 +188,21 @@ class PetManager {
         
         if let results = CoreDataManager.Instance.retrieve("Pet", with: NSPredicate("id", .equal, id)) as? [Pet] {
             if results.count > 1 {
-                callback(PetError.MoreThenOnePet, nil)
+                callback(DataManagerError.init(DBError: DatabaseError.DuplicatedEntry), nil)
             }else{
                 callback(nil, results.first!)
             }
         }else{
-            callback(PetError.PetNotFoundInDataBase, nil)
+            callback(DataManagerError.init(DBError: DatabaseError.NotFound), nil)
         }
     }
     
     static func getPets(_ callback:petsCallback) {
 
         if let results = CoreDataManager.Instance.retrieve("Pet", sortedBy: [NSSortDescriptor(key: "name", ascending: true)]) as? [Pet] {
-            if results.count > 0 {
-                callback(nil, results)
-            }else{
-                callback(PetError.PetNotFoundInDataBase, nil)
-            }
+            callback(nil, results)
         }else{
-            callback(PetError.PetNotFoundInDataBase, nil)
+            callback(DataManagerError.init(DBError: DatabaseError.NotFound), nil)
         }
     }
     

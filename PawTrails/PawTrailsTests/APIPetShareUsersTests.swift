@@ -453,7 +453,7 @@ class APIPetShareUsersTests: XCTestCase {
                             SharedPreferences.set(.id, with: id)
                             SharedPreferences.set(.token, with: token)
                             
-                            APIManager.Instance.perform(call: .leaveSharedPet, withKey: petId, with: nil, completition: { (error, data) in
+                            APIManager.Instance.perform(call: .leaveSharedPet, withKey: petId, completition: { (error, data) in
                                 
                                 XCTAssertNil(error, "Error \(String(describing: error))")
                                 XCTAssertNotNil(data, "No data :(")

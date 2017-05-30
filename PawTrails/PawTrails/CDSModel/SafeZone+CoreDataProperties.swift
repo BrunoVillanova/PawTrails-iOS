@@ -17,6 +17,7 @@ extension SafeZone {
     }
 
     @NSManaged public var name: String?
+    @NSManaged public var address: String?
     @NSManaged public var preview: Data?
     @NSManaged public var shape: Int16
     @NSManaged public var id: Int16

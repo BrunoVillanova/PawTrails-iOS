@@ -32,7 +32,7 @@ class PetUserPresenter {
             DispatchQueue.main.async {
                 self.view?.endLoadingContent()
                 if let error = error {
-                    self.view?.errorMessage(ErrorMsg(title: "", msg: "\(error)"))
+                    self.view?.errorMessage(error.msg)
                 }else{
                     self.view?.removed()
                 }
@@ -46,7 +46,7 @@ class PetUserPresenter {
             DispatchQueue.main.async {
                 self.view?.endLoadingContent()
                 if let error = error {
-                    self.view?.errorMessage(ErrorMsg(title: "", msg: "\(error)"))
+                    self.view?.errorMessage(error.msg)
                 }else{
                     self.view?.removed()
                 }
@@ -63,7 +63,7 @@ class PetUserPresenter {
             DispatchQueue.main.async {
                 self.view?.endLoadingContent()
                 if let error = error {
-                    self.view?.errorMessage(ErrorMsg(title: "", msg: "\(error)"))
+                    self.view?.errorMessage(error.msg)
                 }else{
                     self.view?.removed()
                 }

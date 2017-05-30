@@ -38,8 +38,8 @@ class AddPetUserPresenter {
                 if error == nil, let friends = friends {
                     self.friends = friends
                     self.view?.loadFriends()
-                }else{
-                    self.view?.errorMessage(ErrorMsg(title: "", msg: "\(error.debugDescription)"))
+                }else if let error = error {
+                    self.view?.errorMessage(error.msg)
                 }
             }
         }
@@ -51,8 +51,8 @@ class AddPetUserPresenter {
                 if error == nil, let friends = friends {
                     self.friends = friends
                     self.view?.loadFriends()
-                }else{
-                    self.view?.errorMessage(ErrorMsg(title: "", msg: "\(error.debugDescription)"))
+                }else if let error = error {
+                    self.view?.errorMessage(error.msg)
                 }
             }
         }
@@ -70,7 +70,7 @@ class AddPetUserPresenter {
                 DispatchQueue.main.async {
                     self.view?.endLoadingContent()
                     if let error = error {
-                        self.view?.errorMessage(ErrorMsg(title: "", msg: "\(error)"))
+                        self.view?.errorMessage(error.msg)
                     }else{
                         self.view?.successfullyAdded()
                     }

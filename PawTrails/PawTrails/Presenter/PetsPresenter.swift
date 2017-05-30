@@ -42,10 +42,12 @@ class PetsPresenter {
         DataManager.Instance.getPetsSplitted { (error, owned, shared) in
             DispatchQueue.main.async {
                 if let error = error {
-                    if error == PetError.PetNotFoundInDataBase {
+                    if error.DBError == DatabaseError.NotFound {
+                        self.ownedPets.removeAll()
+                        self.sharedPets.removeAll()
                         self.view?.petsNotFound()
                     }else{
-                        self.view?.errorMessage(ErrorMsg(title: "",msg: "\(error)"))
+                        self.view?.errorMessage(error.msg)
                     }
                 }else if let owned = owned, let shared = shared {
                     self.ownedPets = owned
@@ -66,12 +68,12 @@ class PetsPresenter {
         DataManager.Instance.loadPets { (error, pets) in
             DispatchQueue.main.async {
                 if let error = error {
-                    if error == PetError.PetNotFoundInDataBase {
+                    if error.DBError == DatabaseError.NotFound {
                         self.ownedPets.removeAll()
                         self.sharedPets.removeAll()
                         self.view?.petsNotFound()
                     }else{
-                        self.view?.errorMessage(ErrorMsg(title: "",msg: "\(error)"))
+                        self.view?.errorMessage(error.msg)
                     }
                 }else {
                     self.getPets()
