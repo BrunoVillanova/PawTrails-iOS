@@ -201,8 +201,13 @@ class AddEditPetPresenter {
             data["picture"] = imageData
             print(imageData.count/1024)
             
-            DataManager.Instance.set(image: data, callback: { (success) in
-                if success {
+            DataManager.Instance.set(image: data, callback: { (error) in
+                if let error = error {
+                    DispatchQueue.main.async {
+                        self.view?.endLoadingContent()
+                        self.view?.errorMessage(error.msg)
+                    }
+                }else{
                     self.imageData = nil
                     if self.editMode {
                         self.save()
@@ -211,11 +216,6 @@ class AddEditPetPresenter {
                             self.view?.endLoadingContent()
                             self.view?.doneSuccessfully()
                         }
-                    }
-                }else{
-                    DispatchQueue.main.async {
-                        self.view?.endLoadingContent()
-                        self.view?.errorMessage(ErrorMsg(title: "", msg: "couldn't upload the image"))
                     }
                 }
             })
@@ -243,7 +243,7 @@ class AddEditPetPresenter {
                 DispatchQueue.main.async {
                     self.view?.endLoadingContent()
                     if let error = error {
-                        self.view?.errorMessage(ErrorMsg(title: "Error", msg: "\(error)"))
+                        self.view?.errorMessage(error.msg)
                     }else{
                         self.view?.doneSuccessfully()
                     }
@@ -254,19 +254,17 @@ class AddEditPetPresenter {
             
             DataManager.Instance.register(pet: data, callback: { (error, pet) in
 
-                if error == nil {
-                    if self.imageData != nil, let pet = pet {
-                        self.saveImatge(petId: pet.id)
-                    }else{
-                        DispatchQueue.main.async {
-                            self.view?.endLoadingContent()
-                            self.view?.doneSuccessfully()
-                        }
+                if let error = error {
+                    DispatchQueue.main.async {
+                        self.view?.endLoadingContent()
+                        self.view?.errorMessage(error.msg)
                     }
+                }else if self.imageData != nil, let pet = pet {
+                    self.saveImatge(petId: pet.id)
                 }else{
                     DispatchQueue.main.async {
                         self.view?.endLoadingContent()
-                        self.view?.errorMessage(ErrorMsg(title: "", msg: "couldn't upload the image"))
+                        self.view?.doneSuccessfully()
                     }
                 }
             })

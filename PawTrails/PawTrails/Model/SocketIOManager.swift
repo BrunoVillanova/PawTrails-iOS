@@ -22,38 +22,29 @@ class SocketIOManager: NSObject {
     
     static let Instance = SocketIOManager()
     
-//    enum Notifications: String {
-//        case receivedPoint = "receivedPoint"
-//    }
-   
-//    private var socket: SocketIOClient = SocketIOClient(socketURL: URL(string: "http://192.168.1.11:3000")!)
-//    private var socket: SocketIOClient = SocketIOClient(socketURL: URL(string: "http://localhost:3000")!)
-    
-    //    private var socket: SocketIOClient {
-    //        if #available(iOS 10.0, *) {
-    //            return SocketIOClient(socketURL: URL(string: "http://192.168.1.7:3000")!)
-    //        } else {
-    //            return SocketIOClient(socketURL: URL(string: "http://localhost:3000")!)
-    //        }
-    //    }
-    
-    private var socket: SocketIOClient {
-        
-        guard let token = SharedPreferences.get(.token) else {
-            return SocketIOClient(socketURL: URL(string: "http://192.168.1.11:3000")!)
-        }
-        return SocketIOClient(socketURL: URL(string: "http://192.168.1.11:3000")!, config: [.connectParams(["token":token])])
-    }
+    private let urlString = "http://eu.pawtrails.pet:4654"
+    private var socket: SocketIOClient!
     
     override init() {
+        if let token = SharedPreferences.get(.token) {
+            socket = SocketIOClient(socketURL: URL(string: urlString)!, config: [.connectParams(["token":token, "user":"101"]), .log(true)])
+        }else {
+            socket = SocketIOClient(socketURL: URL(string: urlString)!)
+        }
         super.init()
     }
     
     
     func establishConnection() {
+        
+        socket.on("connect") { (data, ack) in
+            self.startPetUpdates(for: 43)
+        }
+        socket.on("gpsData") { (data, ack) in
+            debugPrint("gpsData response", data, ack)
+            self.handleGPSUpdates(data)
+        }
         socket.connect()
-        
-        
     }
     
     
@@ -74,25 +65,9 @@ class SocketIOManager: NSObject {
         }
     }
     
-    func launch(name:String, frequency: Int = 1000) {
-        if isConnected() {
-            socket.emit("launch", self.masc(name), frequency)
-        }else{
-            print(connectionStatus())
-        }
-    }
-    
-    func stop(name:String){
-        if socket.status == SocketIOClientStatus.connected {
-            
-            socket.emit("stop", self.masc(name))
-        }else{
-            print(socket.status.rawValue)
-        }
-    }
     
     func listen(name:String, _ completionHandler: @escaping (_ latitude:Double, _ longitude:Double) -> Void) {
-        socket.on(self.masc(name)) { (dataArray, socketAck) -> Void in
+        socket.on(name) { (dataArray, socketAck) -> Void in
             guard let lat = dataArray[0] as? Double else {
                 print(dataArray[0])
                 completionHandler(0,0)
@@ -107,12 +82,39 @@ class SocketIOManager: NSObject {
         }
     }
     
-    private func masc(_ name:String) -> String {
-        if let id = UIDevice.current.identifierForVendor?.description {
-            return name + id
+    func startPetUpdates(for id: Int16) {
+        
+        if socket.status == .connected {
+            socket.emit("room", "\(Int(id))")
         }
-        return name
     }
+    
+    private func handleGPSUpdates(_ data: [Any]){
+        if let json = data.first as? [String:Any] {
+            if json["errors"] is Int && (json["errors"] as! Int) == 0, let infoGPS = json["terminalgps"] as? [String:Any] {
+                
+                let id = infoGPS.tryCastInteger(for: "deviceId") ?? -1
+                let latitude = infoGPS.tryCastDouble(for: "lat") ?? -1.0
+                let longitude = infoGPS.tryCastDouble(for: "lon") ?? -1.0
+                let battery = infoGPS.tryCastInteger(for: "battery") ?? -1
+                if let signalString = infoGPS["satellites"] as? String {
+                    let components = signalString.components(separatedBy: "-")
+                    if components.count == 2 {
+                        let min = Int(components[0]) ?? 0
+                        let max = Int(components[1]) ?? 0
+                        let sum = min + max
+                        if sum > 0 {
+                            let signal = sum/2
+                            debugPrint(id, latitude, longitude, battery, signal)
+                        }
+                    }
+                }
+                
+                
+            }
+        }
+    }
+    
     
 //    func startListeningUpdates() {
 //        socket.on("points") { (dataArray, socketAck) -> Void in

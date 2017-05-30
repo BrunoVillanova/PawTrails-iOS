@@ -67,7 +67,9 @@ class ScanQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         }
     }
     func codeChanged() {
-        dismissAction(sender: nil)
+        alert(title: "", msg: "Code Changed Successfully", type: .green, disableTime: 2, handler: {
+            self.dismissAction(sender: nil)
+        })
     }
 
     func idle(_ code: String) {

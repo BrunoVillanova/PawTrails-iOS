@@ -72,7 +72,8 @@ class EditUserProfilePresenter {
     }
     
     func getGender() -> Gender? {
-        return Gender.build(code: data["gender"] as? String)
+        if let code = data["gender"] as? Int16 { return Gender(rawValue: code) }
+        return nil
     }
     
     func getBirthday() -> Date? {
@@ -143,14 +144,14 @@ class EditUserProfilePresenter {
             data["userid"] = SharedPreferences.get(.id)
             data["picture"] = imageData
             
-            DataManager.Instance.set(image: data, callback: { (success) in
-                if success {
+            DataManager.Instance.set(image: data, callback: { (error) in
+                if let error = error {
+                    DispatchQueue.main.async {
+                        self.view?.errorMessage(error.msg)
+                    }
+                }else{
                     self.imageData = nil
                     self.save()
-                }else{
-                    DispatchQueue.main.async {
-                        self.view?.errorMessage(ErrorMsg(title: "", msg: "couldn't upload the image"))
-                    }
                 }
             })
         }else{

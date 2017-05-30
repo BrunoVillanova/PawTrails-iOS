@@ -171,8 +171,6 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
         alert(title: "", msg: "Under Construction", type: .blue)
 
     }
-    
-
 
     @IBAction func handlePanGesture(_ sender: UIPanGestureRecognizer) {
 
@@ -197,8 +195,11 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     }
     
     func success() {
-        if let petProfile = navigationController?.viewControllers.first(where: { $0 is PetsPageViewController}) as? PetsPageViewController {
-            navigationController?.popToViewController(petProfile, animated: true)
+        if let parent = navigationController?.viewControllers.first(where: { $0 is PetsPageViewController}) as? PetsPageViewController {
+            if let profile = parent.profileTableViewController {
+                profile.reloadSafeZones()
+            }
+            navigationController?.popToViewController(parent, animated: true)
         }
     }
     

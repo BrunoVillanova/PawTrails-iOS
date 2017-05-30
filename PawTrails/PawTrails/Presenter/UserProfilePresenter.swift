@@ -33,8 +33,8 @@ class UserProfilePresenter {
     func getUser() {
         DataManager.Instance.getUser { (error, user) in
             DispatchQueue.main.async {
-                if error != nil {
-                    self.view?.errorMessage(ErrorMsg(title: "",msg: "\(String(describing: error))"))
+                if let error = error {
+                    self.view?.errorMessage(error.msg)
                 }else if let user = user {
                     self.user = user
                     self.view?.load(user:user)
@@ -46,8 +46,8 @@ class UserProfilePresenter {
     func loadUser() {
         DataManager.Instance.loadUser { (error, user) in
             DispatchQueue.main.async {
-                if error != nil {
-                    self.view?.errorMessage(ErrorMsg(title: "",msg: "\(String(describing: error))"))
+                if let error = error {
+                    self.view?.errorMessage(error.msg)
                 }else if let user = user {
                     self.user = user
                     self.view?.load(user:user)

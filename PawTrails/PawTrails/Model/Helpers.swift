@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import MapKit
+//import MapKit
 
 public enum Gender: Int16 {
     case female = 0,male, undefined

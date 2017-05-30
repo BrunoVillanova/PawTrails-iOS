@@ -10,7 +10,7 @@ import Foundation
 import FacebookCore
 import FacebookLogin
 
-typealias errorCallback = (_ error:ErrorMsg?) -> Void
+typealias errorCallback = (_ error:DataManagerError?) -> Void
 
 
 class AuthManager {
@@ -64,15 +64,15 @@ class AuthManager {
     fileprivate func succeedLoginOrRegister(_ data:[String:Any], completition: @escaping errorCallback){
         
         guard let token = data["token"] as? String else {
-            completition(Message.Instance.authError(type: .EmptyUserTokenResponse))
+            completition(DataManagerError.init(responseError: ResponseError.NotFound))
             return
         }
         guard let userData = data["user"] as? [String:Any] else {
-            completition(Message.Instance.authError(type: .EmptyUserResponse))
+            completition(DataManagerError.init(responseError: ResponseError.NotFound))
             return
         }
         guard let userId = userData["id"] as? String else {
-            completition(Message.Instance.authError(type: .EmptyUserIdResponse))
+            completition(DataManagerError.init(responseError: ResponseError.NotFound))
             return
         }
         if let socialNetwork = data["social_network"] as? String {
@@ -88,14 +88,13 @@ class AuthManager {
                 
                 DataManager.Instance.loadPets(callback: { (error, pets) in
                     if let error = error {
-                        completition(ErrorMsg(title: "", msg: "\(error)"))
+                        completition(error)
                     }else{
                         completition(nil)
                     }
                 })
-                
             }else {
-                completition(ErrorMsg(title: "", msg: "\(error ?? UserError.UserNotFound)"))
+                completition(error)
             }
         }
     }
@@ -147,8 +146,8 @@ class AuthManager {
         }
     }
     
-    fileprivate func handleAuthErrors(_ error: APIManagerError?, _ data: [String:Any]? = nil) -> ErrorMsg? {
-        return error?.info()
+    fileprivate func handleAuthErrors(_ error: APIManagerError?, _ data: [String:Any]? = nil) -> DataManagerError? {
+        return DataManagerError(APIError: error)
     }
 
     

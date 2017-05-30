@@ -197,6 +197,11 @@ extension CLLocationCoordinate2D {
         return translatedCoordinate
     }
     
+    func getStreetName(handler: @escaping ((String?)->())) {
+        CLGeocoder().reverseGeocodeLocation(self.location) { (placemarks, error) in
+            handler(placemarks?.first?.name)
+        }
+    }
 }
 
 extension Point {

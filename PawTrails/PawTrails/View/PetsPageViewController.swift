@@ -69,6 +69,10 @@ class PetsPageViewController: UIViewController {
         }
     }
     
+    var profileTableViewController: PetProfileTableViewController? {
+        return childViewControllers.first(where: { $0 is PetProfileTableViewController }) as? PetProfileTableViewController
+    }
+    
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
