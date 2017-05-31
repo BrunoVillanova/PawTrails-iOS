@@ -3303,28 +3303,26 @@
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AsS-on-tby">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AsS-on-tby">
                                             <rect key="frame" x="260" y="18" width="35" height="35"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="35" id="0mq-l2-QLl"/>
                                                 <constraint firstAttribute="height" constant="35" id="9tc-uf-Vcg"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="38"/>
-                                            <state key="normal" title="U">
+                                            <state key="normal" backgroundImage="tabbar-profile">
                                                 <color key="titleColor" red="0.99932557339999994" green="0.63401025529999999" blue="0.2850541472" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
                                             <connections>
                                                 <action selector="userFocusAction:" destination="8Zf-5y-qkK" eventType="touchUpInside" id="qHl-bV-Ex5"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qfQ-EX-b0r">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qfQ-EX-b0r">
                                             <rect key="frame" x="307" y="18" width="35" height="35"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="35" id="nN2-RE-mt2"/>
                                                 <constraint firstAttribute="width" constant="35" id="tQm-Hz-KEd"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="38"/>
-                                            <state key="normal" title="P">
+                                            <state key="normal" backgroundImage="paw">
                                                 <color key="titleColor" red="0.99932557339999994" green="0.63401025529999999" blue="0.2850541472" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
                                             <connections>
@@ -3359,6 +3357,14 @@
                                                 <action selector="removeAction:" destination="8Zf-5y-qkK" eventType="touchUpInside" id="PaS-VY-0bH"/>
                                             </connections>
                                         </button>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="opt-2T-JeX">
+                                            <rect key="frame" x="286" y="17" width="37" height="37"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="37" id="Ia8-zr-xUo"/>
+                                                <constraint firstAttribute="width" constant="37" id="w98-6J-dyQ"/>
+                                            </constraints>
+                                            <color key="color" red="0.99932557339999994" green="0.63401025529999999" blue="0.2850541472" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </activityIndicatorView>
                                     </subviews>
                                     <gestureRecognizers/>
                                     <constraints>
@@ -3371,6 +3377,7 @@
                                         <constraint firstItem="Jss-RV-bJf" firstAttribute="leading" secondItem="rd5-pL-Kx5" secondAttribute="trailing" constant="7" id="F8D-bV-9YV"/>
                                         <constraint firstItem="qfQ-EX-b0r" firstAttribute="top" secondItem="KKU-mm-DPr" secondAttribute="top" constant="18" id="HCw-Lj-Leh"/>
                                         <constraint firstItem="GLz-df-ZEn" firstAttribute="top" secondItem="3Zh-Kh-MB4" secondAttribute="bottom" constant="15" id="Iju-TI-BdX"/>
+                                        <constraint firstItem="opt-2T-JeX" firstAttribute="top" secondItem="KKU-mm-DPr" secondAttribute="top" constant="17" id="Kge-PD-pPj"/>
                                         <constraint firstItem="rd5-pL-Kx5" firstAttribute="top" secondItem="3Zh-Kh-MB4" secondAttribute="bottom" constant="14" id="MXn-De-MXe"/>
                                         <constraint firstItem="g2Y-eE-TCE" firstAttribute="leading" secondItem="KKU-mm-DPr" secondAttribute="leading" constant="18" id="Owh-nV-UpN"/>
                                         <constraint firstItem="ElE-zY-OPI" firstAttribute="top" secondItem="qfQ-EX-b0r" secondAttribute="bottom" constant="15" id="QCN-Mz-5o8"/>
@@ -3381,6 +3388,7 @@
                                         <constraint firstItem="nqs-VG-Fzb" firstAttribute="centerX" secondItem="KKU-mm-DPr" secondAttribute="centerX" id="WjV-JX-oyi"/>
                                         <constraint firstItem="GLz-df-ZEn" firstAttribute="leading" secondItem="KKU-mm-DPr" secondAttribute="leading" constant="18" id="YXQ-xc-02I"/>
                                         <constraint firstItem="nqs-VG-Fzb" firstAttribute="top" secondItem="Abj-M4-6G8" secondAttribute="bottom" constant="8" id="aiV-Pe-dBX"/>
+                                        <constraint firstAttribute="trailing" secondItem="opt-2T-JeX" secondAttribute="trailing" constant="37" id="buQ-4P-HKd"/>
                                         <constraint firstAttribute="trailing" secondItem="Abj-M4-6G8" secondAttribute="trailing" constant="18" id="f8C-Ja-plG"/>
                                         <constraint firstItem="Abj-M4-6G8" firstAttribute="top" secondItem="g2Y-eE-TCE" secondAttribute="bottom" constant="8" id="ic9-5C-mLp"/>
                                         <constraint firstItem="ElE-zY-OPI" firstAttribute="leading" secondItem="Jss-RV-bJf" secondAttribute="trailing" constant="12" id="j6W-mi-OoF"/>
@@ -3434,6 +3442,7 @@
                         <outlet property="circleButton" destination="Jss-RV-bJf" id="wT9-DX-FvT"/>
                         <outlet property="distanceLabel" destination="UGi-ra-Ixb" id="a9H-6O-ElP"/>
                         <outlet property="iconTextField" destination="GLz-df-ZEn" id="wcS-Ug-pwP"/>
+                        <outlet property="loadingFocus" destination="opt-2T-JeX" id="h2G-g5-UvT"/>
                         <outlet property="mapView" destination="Iqu-el-XS5" id="p7b-Y7-uaJ"/>
                         <outlet property="nameTextField" destination="3Zh-Kh-MB4" id="cmn-pW-8hY"/>
                         <outlet property="petFocusButton" destination="qfQ-EX-b0r" id="RsA-N0-zWS"/>
@@ -4186,6 +4195,7 @@
         <image name="login_line" width="348" height="7"/>
         <image name="login_twitter" width="27" height="23"/>
         <image name="logo" width="64" height="64"/>
+        <image name="paw" width="25" height="25"/>
         <image name="qrcode" width="64" height="64"/>
         <image name="tabbar-logo" width="25" height="25"/>
         <image name="tabbar-pin" width="25" height="25"/>

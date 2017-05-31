@@ -19,7 +19,7 @@ class AddPetDeviceTableViewController: UITableViewController, UITextFieldDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.attachView(self)
-        if petId != 0 {
+        if petId != -1 {
             navigationItem.rightBarButtonItem?.title = "Change"
         }
     }

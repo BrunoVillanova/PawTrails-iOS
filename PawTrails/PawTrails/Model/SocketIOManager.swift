@@ -18,6 +18,15 @@ import Foundation
 
 import UIKit
 
+enum Listener: String {
+    case gpsUpdates = "GPS"
+    case unknown = "-"
+    
+    var notificationName: NSNotification.Name {
+        return Notification.Name(rawValue: self.rawValue)
+    }
+}
+
 class SocketIOManager: NSObject {
     
     static let Instance = SocketIOManager()
@@ -25,9 +34,12 @@ class SocketIOManager: NSObject {
     private let urlString = "http://eu.pawtrails.pet:4654"
     private var socket: SocketIOClient!
     
+    private var openGPSUpdates = [Int16:Bool]()
+    
     override init() {
         if let token = SharedPreferences.get(.token) {
-            socket = SocketIOClient(socketURL: URL(string: urlString)!, config: [.connectParams(["token":token, "user":"101"]), .log(true)])
+//            socket = SocketIOClient(socketURL: URL(string: urlString)!, config: [.connectParams(["token":token, "user":"94"]), .log(true)])
+            socket = SocketIOClient(socketURL: URL(string: urlString)!, config: [.connectParams(["token":token, "user":"94"])])
         }else {
             socket = SocketIOClient(socketURL: URL(string: urlString)!)
         }
@@ -36,14 +48,6 @@ class SocketIOManager: NSObject {
     
     
     func establishConnection() {
-        
-        socket.on("connect") { (data, ack) in
-            self.startPetUpdates(for: 43)
-        }
-        socket.on("gpsData") { (data, ack) in
-            debugPrint("gpsData response", data, ack)
-            self.handleGPSUpdates(data)
-        }
         socket.connect()
     }
     
@@ -65,20 +69,22 @@ class SocketIOManager: NSObject {
         }
     }
     
+    //Pet
     
-    func listen(name:String, _ completionHandler: @escaping (_ latitude:Double, _ longitude:Double) -> Void) {
-        socket.on(name) { (dataArray, socketAck) -> Void in
-            guard let lat = dataArray[0] as? Double else {
-                print(dataArray[0])
-                completionHandler(0,0)
-                return
+    func getPetGPSData(id: Int16, callback: @escaping ((GPSData?)->())){
+        
+        socket.once("gpsData", callback: { (data, ack) in
+            debugPrint("gpsData response", data, ack)
+            callback(self.handleGPSUpdates(data))
+        })
+        
+        if isConnected() {
+            self.startPetUpdates(for: 25)
+        }else{
+            socket.on("connect") { (data, ack) in
+                self.startPetUpdates(for: 25)
             }
-            guard let long = dataArray[1] as? Double else {
-                print(dataArray[0])
-                completionHandler(0,0)
-                return
-            }
-            completionHandler(lat,long)
+            socket.connect()
         }
     }
     
@@ -89,39 +95,19 @@ class SocketIOManager: NSObject {
         }
     }
     
-    private func handleGPSUpdates(_ data: [Any]){
+    private func handleGPSUpdates(_ data: [Any]) -> GPSData? {
+        
         if let json = data.first as? [String:Any] {
-            if json["errors"] is Int && (json["errors"] as! Int) == 0, let infoGPS = json["terminalgps"] as? [String:Any] {
-                
-                let id = infoGPS.tryCastInteger(for: "deviceId") ?? -1
-                let latitude = infoGPS.tryCastDouble(for: "lat") ?? -1.0
-                let longitude = infoGPS.tryCastDouble(for: "lon") ?? -1.0
-                let battery = infoGPS.tryCastInteger(for: "battery") ?? -1
-                if let signalString = infoGPS["satellites"] as? String {
-                    let components = signalString.components(separatedBy: "-")
-                    if components.count == 2 {
-                        let min = Int(components[0]) ?? 0
-                        let max = Int(components[1]) ?? 0
-                        let sum = min + max
-                        if sum > 0 {
-                            let signal = sum/2
-                            debugPrint(id, latitude, longitude, battery, signal)
-                        }
-                    }
-                }
-                
-                
+            
+            if let error = json["errors"] as? Int, error != 0 {
+                debugPrint(error)
+            }else if let infoGPS = json["terminalgps"] as? [String:Any] {
+                return GPSData(infoGPS)
+                //                NotificationCenter.default.post(Notification.init(name: Listeners.gpsUpdates.notificationName, object: info, userInfo: nil))
             }
         }
+        return nil
     }
-    
-    
-//    func startListeningUpdates() {
-//        socket.on("points") { (dataArray, socketAck) -> Void in
-//            print(dataArray)
-//            NotificationCenter.default.post(name: Notification.Name(rawValue: Notifications.receivedPoint.rawValue), object: dataArray[0] as! [String: Any])
-//        }
-//    }
 
 }
 

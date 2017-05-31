@@ -163,6 +163,39 @@ extension MKMapView {
         }
         return MKOverlayRenderer()
     }
+    
+    func getAnnotationView(annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        if annotation is MKLocation {
+            // Better to make this class property
+            let annotationIdentifier = "mkl"
+            
+            var annotationView: MKAnnotationView?
+            if let dequeuedAnnotationView = self.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier) {
+                annotationView = dequeuedAnnotationView
+                annotationView?.annotation = annotation
+            }
+            else {
+                annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
+                annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            }
+            
+            if let annotationView = annotationView {
+                let mkl = annotation as! MKLocation
+                
+                // Annotation
+                annotationView.canShowCallout = false
+                annotationView.frame.size = CGSize(width: 20, height: 20)
+                
+                annotationView.circle()
+                annotationView.backgroundColor = mkl.color
+                annotationView.border(color: UIColor.white, width: 2.5)
+                annotationView.clipsToBounds = false
+            }
+            return annotationView
+        }
+        return nil
+    }
 }
 
 extension CLLocationCoordinate2D {

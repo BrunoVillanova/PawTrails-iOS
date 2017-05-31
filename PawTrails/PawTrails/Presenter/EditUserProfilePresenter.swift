@@ -159,12 +159,15 @@ class EditUserProfilePresenter {
             data.filter(by: ["image", "imageURL", "birthday"])
             data["mobile"] = phone?.getJson()
             data["address"] = address?.getJson()
+            data["gender"] = getGender()?.code ?? ""
             
             DataManager.Instance.set(user: data) { (error, user) in
-                if error == nil {
-                    DispatchQueue.main.async(execute: { () -> Void in
+                DispatchQueue.main.async {
+                    if let error = error {
+                        self.view?.errorMessage(error.msg)
+                    }else{
                         self.view?.saved()
-                    })
+                    }
                 }
             }
         }

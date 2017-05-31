@@ -11,6 +11,7 @@ import Foundation
 protocol HomeView: NSObjectProtocol, View, ConnectionView {
     func loadMapElements()
     func reload()
+    func noPetsFound()
 //    func startTracking(_ id: Int16, _ name: String, lat:Double, long:Double)
 //    func updateTracking(_ id: Int16, lat:Double, long:Double)
 //    func stopTracking(_ id: Int16)
@@ -64,7 +65,11 @@ class HomePresenter {
                     self.view?.loadMapElements()
                     self.getSafeZones()
                 }else if let error = error {
-                    self.view?.errorMessage(error.msg)
+                    if error.DBError == DatabaseError.NotFound {
+                        self.view?.noPetsFound()
+                    }else{
+                        self.view?.errorMessage(error.msg)
+                    }
                 }
             }
         }
