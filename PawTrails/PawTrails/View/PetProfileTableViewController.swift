@@ -44,6 +44,10 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
         }
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 20.0))
     }
+    
+    deinit {
+        presenter.deteachView()
+    }
 
     func reloadPetInfo() {
         presenter.loadPet(with: pet.id)
@@ -159,6 +163,7 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
 //    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 //        return 35.0
 //    }
+    
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let headerView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: tableView.frame.width, height: 23))
@@ -177,7 +182,8 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
             let editButtonWidth = headerView.frame.width - titleWidth - margin
             
             let editButton = UIButton(frame: CGRect(x: titleWidth, y: 0.0, width: editButtonWidth, height: headerView.frame.height - margin))
-            editButton.setTitle("Edit", for: .normal)
+            let title = section == 0 ? "Edit" : "Add"
+            editButton.setTitle(title, for: .normal)
             editButton.contentHorizontalAlignment = .right
             editButton.setTitleColor(UIColor.orange(), for: .normal)
             editButton.isEnabled = true
@@ -280,6 +286,7 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
             cell.activeSwitch.isOn = safezone.active
             cell.activeSwitch.tag = indexPath.row
             cell.activeSwitch.addTarget(self, action: #selector(changeSwitchAction(sender:)), for: UIControlEvents.valueChanged)
+            cell.activeSwitch.isEnabled = pet.isOwner
             
             if let preview = safezone.preview {
                 cell.elementImageView.image = UIImage(data: preview as Data)

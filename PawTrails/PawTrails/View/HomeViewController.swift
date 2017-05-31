@@ -197,6 +197,10 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
         }
     }
     
+    func noPetsFound() {
+        alert(title: "", msg: "No pets found", type: .blue)
+    }
+    
     // MARK: - Connection Notifications
     
     func connectedToNetwork() {
@@ -210,35 +214,7 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     // MARK: - MKMapViewDelegate
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        if annotation is MKLocation {
-            // Better to make this class property
-            let annotationIdentifier = "mkl"
-            
-            var annotationView: MKAnnotationView?
-            if let dequeuedAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier) {
-                annotationView = dequeuedAnnotationView
-                annotationView?.annotation = annotation
-            }
-            else {
-                annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
-                annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-            }
-            
-            if let annotationView = annotationView {
-                let mkl = annotation as! MKLocation
-                
-                // Annotation
-                annotationView.canShowCallout = false
-                annotationView.frame.size = CGSize(width: 20, height: 20)
-                
-                annotationView.circle()
-                annotationView.backgroundColor = UIColor.white
-                annotationView.border(color: mkl.color, width: 2.0)
-                annotationView.clipsToBounds = false
-            }
-            return annotationView
-        }
-        return nil
+        return mapView.getAnnotationView(annotation: annotation)
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {

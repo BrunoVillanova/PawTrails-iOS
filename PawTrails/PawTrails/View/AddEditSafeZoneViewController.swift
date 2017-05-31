@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegate,/* CLLocationManagerDelegate,*/ AddEditSafeZoneView {
+class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegate, CLLocationManagerDelegate, AddEditSafeZoneView {
 
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var nameTextField: UITextField!
@@ -20,6 +20,8 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
 
     @IBOutlet weak var userFocusButton: UIButton!
     @IBOutlet weak var petFocusButton: UIButton!
+    @IBOutlet weak var loadingFocus: UIActivityIndicatorView!
+    
     @IBOutlet weak var squareButton: UIButton!
     @IBOutlet weak var circleButton: UIButton!
     @IBOutlet weak var removeButton: UIButton!
@@ -33,7 +35,7 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     
     fileprivate var changingRegion = false
     
-    fileprivate var focused = false
+    fileprivate var focused = true
 
     fileprivate var fence:Fence!
     fileprivate let fenceSide: Double = 50.0 //meters
@@ -42,6 +44,8 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     fileprivate var  manager = CLLocationManager()
 
     fileprivate let presenter = AddEditSafeZonePresenter()
+    
+    fileprivate var petLocation:MKLocation? = nil
     
     var safezone: SafeZone?
     var petId: Int16!
@@ -55,9 +59,15 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
-        mapView.showsUserLocation = false
+        mapView.showsUserLocation = true
         mapView.showsCompass = false
         mapView.mapType = .hybrid
+        mapView.delegate = self
+        
+        manager.delegate = self
+        
+        loadingFocus.isHidden = true
+        loadingFocus.hidesWhenStopped = true
         
         if let safezone = safezone {
             navigationItem.title = "Edit Safe Zone"
@@ -70,13 +80,15 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
             activeSwitch.isOn = safezone.active
 
             if !isOwner {
-                userFocusButton.isEnabled = false
+                userFocusButton.isHidden = true
+                petFocusButton.isHidden = true
                 nameTextField.isEnabled = false
                 iconTextField.isEnabled = false
                 circleButton.isEnabled = false
                 squareButton.isEnabled = false
                 activeSwitch.isEnabled = false
                 removeButton.isHidden = true
+                navigationItem.rightBarButtonItem = nil
             }
         }else{
             navigationItem.title = "New Safe Zone"
@@ -155,21 +167,42 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
 
     @IBAction func userFocusAction(_ sender: UIButton) {
         focused = false
-        mapView.showsUserLocation = true
-//        let status = CLLocationManager.authorizationStatus()
-//        if status == .notDetermined {
-//            manager.requestWhenInUseAuthorization()
-//        }else if status == .denied {
-//            
-//        }else {
-//            manager.requestLocation()
-//        }
+        
+        let status = CLLocationManager.authorizationStatus()
+        if status == .notDetermined {
+            manager.requestWhenInUseAuthorization()
+        }else if status == .denied {
+            popUpUserLocationDenied()
+        }else {
+            beginLoadingLocation()
+            manager.requestLocation()
+        }
     }
 
     @IBAction func petFocusAction(_ sender: UIButton) {
         focused = false
-        alert(title: "", msg: "Under Construction", type: .blue)
-
+        beginLoadingLocation()
+        loadPetLocation()
+    }
+    
+    func loadPetLocation(){
+        SocketIOManager.Instance.getPetGPSData(id: petId) { (GPSData) in
+            DispatchQueue.main.async {
+                self.endLoadingLocation()
+                if let GPSData = GPSData {
+                    self.focused = true
+                    if let petLocation = self.petLocation {
+                        petLocation.move(coordinate: GPSData.point.coordinates)
+                    }else{
+                        self.petLocation = MKLocation(id: MKLocationId.init(id: 0, type: .pet), coordinate: GPSData.point.coordinates)
+                        self.mapView.addAnnotation(self.petLocation!)
+                    }
+                    self.mapView.centerOn(GPSData.point.coordinates, with: 51, animated: true)
+                }else{
+                    self.alert(title: "", msg: "Couldn't locate pet", type: .red)
+                }
+            }
+        }
     }
 
     @IBAction func handlePanGesture(_ sender: UIPanGestureRecognizer) {
@@ -228,36 +261,43 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     
     //MARK:- User Location Manager
     
-    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-        if !mapView.userLocation.coordinate.isDefaultZero && !focused {
-            focused = true
-            mapView.centerOn(userLocation.coordinate, with: 50, animated: true)
+    func beginLoadingLocation(){
+        userFocusButton.isHidden = true
+        petFocusButton.isHidden = true
+        loadingFocus.startAnimating()
+        loadingFocus.isHidden = false
+    }
+    
+    func endLoadingLocation() {
+        loadingFocus.stopAnimating()
+        userFocusButton.isHidden = false
+        petFocusButton.isHidden = false
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .notDetermined || status == .denied {
+            alert(title: "", msg: "User location not granted", type: .blue)
+        }else if !focused {
+            manager.requestLocation()
+            beginLoadingLocation()
         }
     }
     
-    func mapView(_ mapView: MKMapView, didFailToLocateUserWithError error: Error) {
-        alert(title: "", msg: "Couldn't Locate User", type: .red)
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+
+        if let location = locations.first, !focused {
+            focused = true
+            mapView.centerOn(location.coordinate, with: 51, animated: true)
+            endLoadingLocation()
+        }
     }
     
-//    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-//        if status == .notDetermined || status == .denied {
-//            alert(title: "", msg: "User location not granted", type: .blue)
-//        }else{
-//            manager.requestLocation()
-//        }
-//    }
-//    
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//
-//        if let location = locations.first, !focused {
-//            focused = true
-//            mapView.centerOn(location.coordinate, with: 50, animated: true)
-//        }
-//    }
-//    
-//    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-//        alert(title: "", msg: "User location failed", type: .red)
-//    }
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        if !focused {
+            endLoadingLocation()
+            alert(title: "", msg: "User location failed", type: .red)
+        }
+    }
 
 
     // MARK: - MKMapViewDelegate
@@ -277,6 +317,11 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         return mapView.getRenderer(overlay: overlay)
     }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        return mapView.getAnnotationView(annotation: annotation)
+    }
+
     
     // MARK: - UITextFieldDelegate
     
