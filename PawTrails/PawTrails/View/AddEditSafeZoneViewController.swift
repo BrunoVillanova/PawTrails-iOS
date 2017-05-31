@@ -11,13 +11,13 @@ import MapKit
 import CoreLocation
 
 class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegate, CLLocationManagerDelegate, AddEditSafeZoneView {
-
+    
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var iconTextField: UITextField!
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var distanceLabel: UILabel!
-
+    
     @IBOutlet weak var userFocusButton: UIButton!
     @IBOutlet weak var petFocusButton: UIButton!
     @IBOutlet weak var loadingFocus: UIActivityIndicatorView!
@@ -36,13 +36,13 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     fileprivate var changingRegion = false
     
     fileprivate var focused = true
-
+    
     fileprivate var fence:Fence!
     fileprivate let fenceSide: Double = 50.0 //meters
     fileprivate var fenceDistance:Int = 50 //meters
     
     fileprivate var  manager = CLLocationManager()
-
+    
     fileprivate let presenter = AddEditSafeZonePresenter()
     
     fileprivate var petLocation:MKLocation? = nil
@@ -65,6 +65,8 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
         mapView.delegate = self
         
         manager.delegate = self
+        let status = CLLocationManager.authorizationStatus()
+        if status == .notDetermined { manager.requestWhenInUseAuthorization() }
         
         loadingFocus.isHidden = true
         loadingFocus.hidesWhenStopped = true
@@ -72,13 +74,13 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
         if let safezone = safezone {
             navigationItem.title = "Edit Safe Zone"
             navigationItem.prompt = safezone.pet?.name
-
+            
             nameTextField.text = safezone.name
             if let shape = Shape(rawValue: safezone.shape) {
                 self.shape = shape
             }
             activeSwitch.isOn = safezone.active
-
+            
             if !isOwner {
                 userFocusButton.isHidden = true
                 petFocusButton.isHidden = true
@@ -109,7 +111,7 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
             
             guard let center = safezone.point1?.coordinates else { return }
             guard let topCenter = safezone.point2?.coordinates else { return }
-
+            
             fence = mapView.load(with: center, topCenter: topCenter, shape: shape, into: view)
             
         }else{
@@ -127,12 +129,12 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     }
     
     func geoCodeFence() -> (Point,Point) {
-
+        
         let point1 = Point(coordinates: mapView.convert(fence.center, toCoordinateFrom: view))
         let point2 = Point(coordinates: mapView.convert(fence.topCenter, toCoordinateFrom: view))
         return (point1, point2)
     }
-
+    
     @IBAction func squareAction(_ sender: UIButton) {
         circleButton.tintColor = UIColor.darkGray
         squareButton.tintColor = UIColor.orange()
@@ -146,7 +148,7 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
         fence.shape = .circle
         shape = .circle
     }
-
+    
     @IBAction func doneAction(_ sender: UIBarButtonItem?) {
         if let petId = petId {
             if fence.isIdle {
@@ -164,7 +166,7 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
             })
         }
     }
-
+    
     @IBAction func userFocusAction(_ sender: UIButton) {
         focused = false
         
@@ -178,7 +180,7 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
             manager.requestLocation()
         }
     }
-
+    
     @IBAction func petFocusAction(_ sender: UIButton) {
         focused = false
         beginLoadingLocation()
@@ -204,13 +206,13 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
             }
         }
     }
-
+    
     @IBAction func handlePanGesture(_ sender: UIPanGestureRecognizer) {
-
+        
         var y = sender.location(in: view).y
         
         let isOpening = sender.translation(in: self.view).y < 0
-
+        
         if isOpening && y < opened {
             let distance = abs(y - opened)
             y += distance * 0.5
@@ -284,7 +286,7 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-
+        
         if let location = locations.first, !focused {
             focused = true
             mapView.centerOn(location.coordinate, with: 51, animated: true)
@@ -298,10 +300,10 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
             alert(title: "", msg: "User location failed", type: .red)
         }
     }
-
-
+    
+    
     // MARK: - MKMapViewDelegate
-
+    
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         
         if fence != nil {
@@ -321,7 +323,7 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         return mapView.getAnnotationView(annotation: annotation)
     }
-
+    
     
     // MARK: - UITextFieldDelegate
     
@@ -348,7 +350,7 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
             self.distanceLabel.text = fenceDistance < 1000 ? "\(fenceDistance) m" : "\(Double(fenceDistance)/1000.0) km"
         }
     }
-
+    
     func fenceDistanceIsIdle() -> Bool {
         return fenceDistance >= Int(fenceSide)
     }
@@ -368,7 +370,7 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
             self.blurView.transform = CGAffineTransform.identity
         }
     }
-
+    
     // MARK: - AnimationHelpers
     
     enum blurViewAction {
@@ -387,12 +389,12 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
         }, completion: nil)
         
     }
-
     
     
     
     
-
+    
+    
     
     
     
