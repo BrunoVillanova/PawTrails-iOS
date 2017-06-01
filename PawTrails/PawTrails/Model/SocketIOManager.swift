@@ -71,12 +71,19 @@ class SocketIOManager: NSObject {
     
     //Pet
     
-    func getPetGPSData(id: Int16, callback: @escaping ((GPSData?)->())){
+    func getPetGPSData(id: Int16, withUpdates: Bool = false, callback: @escaping ((GPSData?)->())){
         
-        socket.once("gpsData", callback: { (data, ack) in
-            debugPrint("gpsData response", data, ack)
-            callback(self.handleGPSUpdates(data))
-        })
+        if withUpdates {
+            socket.on("gpsData", callback: { (data, ack) in
+                debugPrint("gpsData Update response", data, ack)
+                callback(self.handleGPSUpdates(data))
+            })
+        }else{
+            socket.once("gpsData", callback: { (data, ack) in
+                debugPrint("gpsData response", data, ack)
+                callback(self.handleGPSUpdates(data))
+            })
+        }
         
         if isConnected() {
             self.startPetUpdates(for: 25)
@@ -87,6 +94,7 @@ class SocketIOManager: NSObject {
             socket.connect()
         }
     }
+    
     
     func startPetUpdates(for id: Int16) {
         

@@ -23,6 +23,7 @@ class AddPetUserViewController: UIViewController, UITableViewDataSource, UITable
         
         navigationItem.title = "Add User"
         navigationItem.prompt = petName
+
     }
     
     deinit {
@@ -96,6 +97,9 @@ class AddPetUserViewController: UIViewController, UITableViewDataSource, UITable
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "emailCell", for: indexPath) as! singleTextFormTableViewCell
             cell.textField.delegate = self
+            if #available(iOS 10.0, *) {
+                cell.textField.textContentType = UITextContentType.emailAddress
+            }
             if presenter.friends.count == 0 {
                 cell.textField.becomeFirstResponder()
             }
