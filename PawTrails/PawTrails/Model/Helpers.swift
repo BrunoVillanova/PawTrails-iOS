@@ -268,8 +268,26 @@ public class GPSData: NSObject {
 //        aCoder.encode(longitude, forKey: "longitude")
 //    }
     
+    var distanceTime: String {
+        return Date().offset(from: serverDate)
+    }
+    
     static func == (lhs: GPSData, rhs: GPSData) -> Bool {
         return lhs.point == rhs.point && lhs.signal == rhs.signal && lhs.battery == rhs.battery
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
 

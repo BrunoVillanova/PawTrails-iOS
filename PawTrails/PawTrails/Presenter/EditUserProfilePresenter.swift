@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol EditUserProfileView: NSObjectProtocol, View {
+protocol EditUserProfileView: NSObjectProtocol, View, LoadingView {
     func loadData()
     func saved()
 }
@@ -137,7 +137,7 @@ class EditUserProfilePresenter {
     
     
     func save() {
-        
+        view?.beginLoadingContent()
         if let imageData = imageData {
             var data = [String:Any]()
             data["path"] = "user"
@@ -147,6 +147,7 @@ class EditUserProfilePresenter {
             DataManager.Instance.set(image: data, callback: { (error) in
                 if let error = error {
                     DispatchQueue.main.async {
+                        self.view?.endLoadingContent()
                         self.view?.errorMessage(error.msg)
                     }
                 }else{
@@ -163,6 +164,7 @@ class EditUserProfilePresenter {
             
             DataManager.Instance.set(user: data) { (error, user) in
                 DispatchQueue.main.async {
+                    self.view?.endLoadingContent()
                     if let error = error {
                         self.view?.errorMessage(error.msg)
                     }else{

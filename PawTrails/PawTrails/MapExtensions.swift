@@ -235,6 +235,12 @@ extension CLLocationCoordinate2D {
             handler(placemarks?.first?.name)
         }
     }
+    
+    func getStreetFullName(handler: @escaping ((String?)->())) {
+        CLGeocoder().reverseGeocodeLocation(self.location) { (placemarks, error) in
+            handler(placemarks?.first?.thoroughfare)
+        }
+    }
 }
 
 extension Point {

@@ -12,6 +12,9 @@ import MapKit
 class PetProfileTableViewController: UITableViewController, UICollectionViewDelegate, UICollectionViewDataSource, PetView {
     
     @IBOutlet weak var petImageView: UIImageView!
+    @IBOutlet weak var signalImageView: UIImageView!
+    @IBOutlet weak var batteryImageView: UIImageView!
+    @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var breedLabel: UILabel!
     @IBOutlet weak var weightLabel: UILabel!
     @IBOutlet weak var genderLabel: UILabel!
@@ -34,14 +37,39 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
         super.viewDidLoad()
 //        tableView.backgroundColor = UIColor.clear
         presenter.attachView(self, pet:pet)
-        usersCollectionView.reloadData()
+
+//        usersCollectionView.register(petProfileUserCollectionCell.self, forCellWithReuseIdentifier: "cell")
+//        safeZonesCollectionView.register(petProfileSafeZoneCollectionCell.self, forCellWithReuseIdentifier: "cell")
+        
+        petImageView.circle()
+        signalImageView.circle()
+        batteryImageView.circle()
+        
         if let pet = pet {
             load(pet)
             reloadPetInfo()
             reloadUsers()
             reloadSafeZones()
             removeLeaveLabel.text = pet.isOwner ? "Remove Pet" : "Leave Pet"
+            
+            SocketIOManager.Instance.getPetGPSData(id: pet.id) { (data) in
+                if let data = data {
+                    DispatchQueue.main.async {
+                        self.signalImageView.backgroundColor = UIColor.orange()
+                        self.batteryImageView.backgroundColor = UIColor.orange()
+                    }
+                    data.point.coordinates.getStreetFullName(handler: { (name) in
+                        DispatchQueue.main.async {
+                            if let name = name {
+                                self.locationLabel.text = "\(name)\n\(data.distanceTime)"
+                            }
+                        }
+                    })
+                }
+            }
         }
+        
+        
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 20.0))
     }
     

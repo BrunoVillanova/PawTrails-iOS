@@ -33,6 +33,10 @@ class PasswordRecoveryViewController: UIViewController, PasswordRecoveryView, UI
         }else{
             emailTextField.becomeFirstResponder()
         }
+        
+        if #available(iOS 10.0, *) {
+            self.emailTextField.textContentType = UITextContentType.emailAddress
+        }
     }
     
     @IBAction func checkAction(_ sender: UIButton) {

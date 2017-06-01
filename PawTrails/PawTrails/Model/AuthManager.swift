@@ -83,19 +83,50 @@ class AuthManager {
         }
         SharedPreferences.set(.token, with: token)
         SharedPreferences.set(.id, with: userId)
+        
+        var errors = [DataManagerError]()
+        let queue = DispatchQueue(label: "ErrorQueue", qos: .default, attributes: .concurrent, autoreleaseFrequency: .inherit, target: nil)
+        let tasks = DispatchGroup()
+        
+        tasks.enter()
         DataManager.Instance.setUser(userData) { (error, user) in
-            if error == nil && user != nil {
-                
-                DataManager.Instance.loadPets(callback: { (error, pets) in
-                    if let error = error {
-                        completition(error)
-                    }else{
+            if let error = error {
+                queue.async {
+                    errors.append(error)
+                }
+            }
+            tasks.leave()
+        }
+        
+        tasks.enter()
+        DataManager.Instance.loadPets(callback: { (error, pets) in
+            if let error = error {
+                queue.async {
+                    errors.append(error)
+                }
+            }
+            tasks.leave()
+        })
+        
+        _ = DataManager.Instance.getCountryCodes()
+        
+        tasks.notify(queue: .main) { 
+            
+            queue.sync {
+                if errors.count == 0 {
+                    DispatchQueue.main.async {
                         completition(nil)
                     }
-                })
-            }else {
-                completition(error)
+                }else{
+                    DispatchQueue.main.async {
+                        for error in errors {
+                            debugPrint(error.localizedDescription)
+                        }
+                        completition(errors.first)
+                    }
+                }
             }
+            
         }
     }
     
