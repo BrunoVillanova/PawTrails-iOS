@@ -16,14 +16,14 @@ class PetsPageViewController: UIViewController {
     @IBOutlet weak var activity: UIView!
     
     var pet: Pet!
-    
+    var fromMap: Bool = false
+
     var pages = [UIView]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = UIColor.white
-//        topNavigationItem.prompt = pet.name
         
         profile.alpha = 0.0
         activity.alpha = 0.0
@@ -32,7 +32,9 @@ class PetsPageViewController: UIViewController {
         
         enableView(at: 0)
         
-//        navigationController?.navigationBar.topItem?.title =
+        if fromMap {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(dismissAction(sender: )))
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -65,6 +67,10 @@ class PetsPageViewController: UIViewController {
             }
 
         }
+    }
+    
+    var profileTableViewController: PetProfileTableViewController? {
+        return childViewControllers.first(where: { $0 is PetProfileTableViewController }) as? PetProfileTableViewController
     }
     
     // MARK: - Navigation

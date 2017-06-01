@@ -29,41 +29,42 @@ class DataManager {
     func loadUser(callback:@escaping userCallback) {
         
         guard let id = SharedPreferences.get(.id) else {
-            callback(UserError.IdNotFound, nil)
+            callback(DataManagerError(DBError: DatabaseError.IdNotFound), nil)
             return
         }
         
         APIManager.Instance.perform(call: .getUser, withKey: id) { (error, data) in
-            if error == nil, let data = data {
-                self.setUser(data)
-                self.getUser(callback: callback)
-            }else{
-                print(error ?? "")
-                print(data ?? "")
-                // check db first and the
-                callback(UserError.UserNotFound, nil)
-            }
+            self.handleUser(error, data, callback: callback)
         }
     }
     
-    func set(image data:[String:Any]?, callback: @escaping ((Bool)->())){
+    func set(image data:[String:Any]?, callback: @escaping errorCallback){
         APIManager.Instance.perform(call: .imageUpload, with: data) { (error, data) in
-            callback(error == nil)
+            if let error = error {
+                callback(DataManagerError.init(APIError: error))
+            }else{
+                callback(nil)
+            }
         }
     }
     
     func set(user data:[String:Any], callback: @escaping userCallback) {
         
         APIManager.Instance.perform(call: .setUser, with: data) { (error, data) in
-            if error == nil, let data = data {
-                self.setUser(data)
-                self.getUser(callback: callback)
-            }else{
-                print(error ?? "")
-                print(data ?? "")
-                // check db first and the
-                callback(UserError.UserNotFound, nil)
-            }
+            self.handleUser(error, data, callback: callback)
+        }
+    }
+    
+    func handleUser(_ error:APIManagerError?,_ data:[String:Any]?, callback: @escaping userCallback) {
+        if error == nil, let data = data {
+            self.setUser(data)
+            self.getUser(callback: callback)
+        }else if let error = error {
+            callback(DataManagerError(APIError: error), nil)
+        }else{
+            print(error ?? "")
+            print(data ?? "")
+            callback(nil, nil)
         }
     }
     
@@ -107,16 +108,11 @@ class DataManager {
         var data = [String:Any]()
         data["device_code"] = deviceCode
         APIManager.Instance.perform(call: .changeDevice, withKey: petId, with: data)  { (error, data) in
-            //            if error == nil {
-            //                if PetManager.removePet(id: petId) {
-            //                    callback(nil)
-            //                }else{
-            //                    callback(PetError.PetNotFoundInDataBase)
-            //
-            //                }
-            //            }else{
-            //                callback(PetError.PetNotFoundInResponse)
-            //            }
+            if let error = error {
+                callback(DataManagerError(APIError: error))
+            }else{
+                callback(nil)
+            }
         }
     }
     
@@ -124,9 +120,12 @@ class DataManager {
         APIManager.Instance.perform(call: .registerPet, with: data) { (error, data) in
             if error == nil, let data = data {
                 self.setPet(data, callback: callback)
+            }else if let error = error {
+                callback(DataManagerError(APIError: error), nil)
             }else{
-                print("Error registerin pet \(String(describing: error))")
-                callback(PetError.IdNotFound, nil)
+                print(error ?? "")
+                print(data ?? "")
+                callback(nil, nil)
             }
         }
     }
@@ -153,18 +152,29 @@ class DataManager {
                     if PetManager.removePet(id: petId) {
                         callback(nil)
                     }else{
-                        callback(PetError.PetNotFoundInDataBase)
-                        
+                        callback(DataManagerError.init(DBError: DatabaseError.NotFound))
                     }
                 }
-            }else{
-                callback(PetError.PetNotFoundInResponse)
+            }else if let error = error {
+                callback(DataManagerError(APIError: error))
             }
         }
     }
     
-    func getPets(owned: Bool = true,callback: @escaping petsCallback) {
-        PetManager.getPets(owned: owned, callback)
+    func getPets(callback: @escaping petsCallback) {
+        PetManager.getPets(callback)
+    }
+    
+    func getPetsSplitted(callback: @escaping petsSplittedCallback) {
+        PetManager.getPets { (error, pets) in
+            if let pets = pets {
+                let owned = pets.filter({ $0.isOwner == true })
+                let shared = pets.filter({ $0.isOwner == false })
+                callback(error, owned, shared)
+            }else{
+                callback(error, nil, nil)
+            }
+        }
     }
     
     func loadPets(callback: @escaping petsCallback) {
@@ -172,8 +182,12 @@ class DataManager {
         APIManager.Instance.perform(call: .getPets) { (error, data) in
             if error == nil, let data = data {
                 PetManager.upsertPets(data, callback)
+            }else if let error = error {
+                callback(DataManagerError(APIError: error), nil)
             }else{
-                callback(PetError.PetsNotFoundInResponse, nil)
+                print(error ?? "")
+                print(data ?? "")
+                callback(nil, nil)
             }
         }
     }
@@ -184,8 +198,12 @@ class DataManager {
             if error == nil, let data = data {
                 self.setPet(data)
                 callback(nil)
+            }else if let error = error {
+                callback(DataManagerError(APIError: error))
             }else{
-                callback(PetError.PetNotFoundInResponse)
+                print(error ?? "")
+                print(data ?? "")
+                callback(nil)
             }
         }
     }
@@ -217,6 +235,12 @@ class DataManager {
                     DispatchQueue.main.sync {
                         BreedManager.upsert(data, for: type, callback: callback)
                     }
+                }else if let error = error {
+                    callback(DataManagerError(APIError: error), nil)
+                }else{
+                    print(error ?? "")
+                    print(data ?? "")
+                    callback(nil, nil)
                 }
             })
         }
@@ -234,8 +258,6 @@ class DataManager {
                 }
             }
         }
-        
-        PetUserManager.getFriends(callback: callback)
     }
     
     func getPetFriends(callback: @escaping petUsersCallback){
@@ -249,8 +271,12 @@ class DataManager {
                     PetUserManager.upsert(data, into: petId)
                     PetUserManager.get(for: petId, callback: callback)
                 }
+            }else if let error = error, let callback = callback {
+                callback(DataManagerError(APIError: error), nil)
             }else if let callback = callback {
-                callback(PetError.IdNotFound, nil)
+                print(error ?? "")
+                print(data ?? "")
+                callback(nil, nil)
             }
         }
     }
@@ -261,6 +287,8 @@ class DataManager {
                 self.loadSharedPetUsers(for: petId, callback: { (error, pet) in
                     callback(error)
                 })
+            }else if let error = error {
+                callback(DataManagerError(APIError: error))
             }
         }
     }
@@ -271,8 +299,8 @@ class DataManager {
                 self.loadSharedPetUsers(for: petId, callback: { (error, pet) in
                     callback(error)
                 })
-            }else{
-                callback(PetError.MoreThenOnePet)
+            }else if let error = error {
+                callback(DataManagerError(APIError: error))
             }
         }
     }
@@ -281,8 +309,8 @@ class DataManager {
         APIManager.Instance.perform(call: .leaveSharedPet, withKey: petId) { (error, data) in
             if error == nil {
                 callback(nil)
-            }else{
-                callback(PetError.MoreThenOnePet)
+            }else if let error = error {
+                callback(DataManagerError(APIError: error))
             }
         }
     }
@@ -297,8 +325,12 @@ class DataManager {
                     SafeZoneManager.upsertList(data, into: petId)
                     callback(nil)
                 }
-            }else{
-                callback(PetError.IdNotFound)
+            }else if let error = error {
+                callback(DataManagerError(APIError: error))
+            }else {
+                print(error ?? "")
+                print(data ?? "")
+                callback(nil)
             }
         }
     }
@@ -309,6 +341,8 @@ class DataManager {
                 self.loadSafeZones(of: petId, callback: { (error) in
                     callback(error)
                 })
+            }else if let error = error {
+                callback(DataManagerError(APIError: error))
             }
         }
     }
@@ -319,8 +353,21 @@ class DataManager {
                 self.loadSafeZones(of: petId, callback: { (error) in
                     callback(error)
                 })
-            }else{
-                callback(PetError.MoreThenOnePet)
+            }else if let error = error {
+                callback(DataManagerError(APIError: error))
+            }
+        }
+    }
+    
+    func setSafeZoneStatus(enabled: Bool,for id: Int16, into petId: Int16, callback: @escaping petErrorCallback) {
+        let data: [String:Any] = ["id":id, "active":enabled]
+        APIManager.Instance.perform(call: .setSafeZone, with: data) { (error, data) in
+            if error == nil {
+                self.loadSafeZones(of: petId, callback: { (error) in
+                    callback(error)
+                })
+            }else if let error = error {
+                callback(DataManagerError(APIError: error))
             }
         }
     }
@@ -331,8 +378,8 @@ class DataManager {
                 self.loadSafeZones(of: petId, callback: { (error) in
                     callback(error)
                 })
-            }else{
-                callback(PetError.MoreThenOnePet)
+            }else if let error = error {
+                callback(DataManagerError(APIError: error))
             }
         }
     }
@@ -340,7 +387,11 @@ class DataManager {
     func setSafeZone(_ safezone: SafeZone, imageData:Data){
         SafeZoneManager.set(safezone: safezone, imageData: imageData)
     }
-
+    
+    func setSafeZone(_ safezone: SafeZone, address:String){
+        SafeZoneManager.set(safezone: safezone, address: address)
+    }
+    
     // MARK: - Tracking
     
     func trackingIsIdle() -> Bool {

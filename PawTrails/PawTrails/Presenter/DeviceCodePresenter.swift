@@ -51,7 +51,7 @@ class DeviceCodePresenter {
         DataManager.Instance.change(code, of: petId) { (error) in
             DispatchQueue.main.async {
                 if let error = error {
-                    self.view?.errorMessage(ErrorMsg(title: "", msg: "\(error)"))
+                    self.view?.errorMessage(error.msg)
                 }else{
                     self.view?.codeChanged()
                 }

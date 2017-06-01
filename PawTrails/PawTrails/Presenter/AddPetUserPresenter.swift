@@ -21,11 +21,11 @@ class AddPetUserPresenter {
     
     var friends = [PetUser]()
     
-    
     func attachView(_ view: AddPetUserView){
         self.view = view
         self.reachability = Reachbility(view)
         getFriends()
+        loadFriends()
     }
     
     func deteachView() {
@@ -38,8 +38,21 @@ class AddPetUserPresenter {
                 if error == nil, let friends = friends {
                     self.friends = friends
                     self.view?.loadFriends()
-                }else{
-                    self.view?.errorMessage(ErrorMsg(title: "", msg: "\(error.debugDescription)"))
+                }else if let error = error {
+                    self.view?.errorMessage(error.msg)
+                }
+            }
+        }
+    }
+    
+    func loadFriends(){
+        DataManager.Instance.loadPetFriends { (error, friends) in
+            DispatchQueue.main.async {
+                if error == nil, let friends = friends {
+                    self.friends = friends
+                    self.view?.loadFriends()
+                }else if let error = error {
+                    self.view?.errorMessage(error.msg)
                 }
             }
         }
@@ -57,7 +70,7 @@ class AddPetUserPresenter {
                 DispatchQueue.main.async {
                     self.view?.endLoadingContent()
                     if let error = error {
-                        self.view?.errorMessage(ErrorMsg(title: "", msg: "\(error)"))
+                        self.view?.errorMessage(error.msg)
                     }else{
                         self.view?.successfullyAdded()
                     }

@@ -48,7 +48,10 @@ class PetBreedViewController: UIViewController,  UITableViewDataSource, UITableV
             }
             
             self.type = type
-            presenter.getBreeds(for: type)
+            
+            if type == .cat || type == .dog {
+                presenter.getBreeds(for: type)
+            }
         }else{
             segmentControl.isHidden = true
             tableView.isHidden = true

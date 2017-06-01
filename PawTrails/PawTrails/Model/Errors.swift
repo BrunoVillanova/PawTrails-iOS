@@ -8,14 +8,6 @@
 
 import Foundation
 
-
-//enum ServerError: Int {
-//    case InternalError = 500
-//    case NotImplemented = 501
-//    case ServiceUnavailable = 503
-//    case HttpVersionNotsupported = 505
-//}
-
 struct APIManagerError: Error {
     
     enum errorKind {
@@ -34,6 +26,16 @@ struct APIManagerError: Error {
     
     func info() -> ErrorMsg? {
         return errorCode != nil ? Message.Instance.getMessage(from: errorCode!) : nil
+    }
+    
+    var localizedDescription: String {
+        var out = ""
+        out = out.appending("Call: \(call)")
+        out = out.appending(", Type: \(kind)")
+        out = out.appending(", HTTPCode: \(httpCode ?? -1)")
+        out = out.appending(", ErrorCode: \(errorCode ?? ErrorCode.Unknown)")
+        out = out.appending(", GeneralError: \(error.debugDescription)")
+        return out
     }
 }
 
@@ -110,32 +112,42 @@ enum AuthenticationError: Int {
     case Unknown = -1
 }
 
-enum UserError: Int {
-    case UserNotFoundInDataBase = 8
-    case UserNotFoundInResponse = 9
-    case IdNotFound = 10
-    case UserNotFound = 11
-    case MoreThenOneUser  = 12
-    case NotAuthenticated = 14
+
+enum DatabaseError: Int {
+    case NotFound = 0, IdNotFound, DuplicatedEntry, AlreadyExists, Unknown
 }
 
-enum PetError: Int {
-    case PetNotFoundInDataBase = 8
-    case PetNotFoundInResponse = 9
-    case IdNotFound = 10
-    case MoreThenOnePet  = 12
-    case NotAuthenticated = 14
-    case PetsNotFoundInResponse = 15
+enum ResponseError: Int {
+    case NotFound = 0, IdNotFound, Unknown
 }
 
-enum BreedError: Int {
-    case BreedNotFoundInDataBase = 8
-//    case PetNotFoundInResponse = 9
-//    case IdNotFound = 10
-    case MoreThenOneBreed  = 12
-//    case NotAuthenticated = 14
+struct DataManagerError: Error {
+    
+    let APIError: APIManagerError?
+    let responseError: ResponseError?
+    let DBError: DatabaseError?
+    let error: Error?
+    
+    var localizedDescription: String {
+        var out = ""
+        if let errorCode = APIError?.errorCode { out = out.appending("APIError: \(errorCode)")}
+        if let responseError = responseError { out = out.appending(", ResponseError: \(responseError)") }
+        if let DBError = DBError { out = out.appending(", DBError: \(DBError)") }
+        if let error = error { out = out.appending(", DBError: \(error.localizedDescription)") }
+        return out
+    }
+    
+    init(APIError: APIManagerError? = nil, responseError: ResponseError? = nil, DBError: DatabaseError? = nil, error:Error? = nil) {
+        self.APIError = APIError
+        self.responseError = responseError
+        self.DBError = DBError
+        self.error = error
+    }
+    
+    var msg: ErrorMsg {
+        return ErrorMsg(title: "", msg: self.localizedDescription)
+    }
 }
-
 
 enum CoreDataManagerError: Int {
     case IdNotFoundInInput = 0

@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import MapKit
+//import MapKit
 
 public enum Gender: Int16 {
     case female = 0,male, undefined
@@ -86,7 +86,8 @@ public enum Type: Int16 {
 }
 
 public enum Shape: Int16 {
-    case circle = 0,square
+    case circle = 2
+    case square = 4
     
     static func count() -> Int {
         return 2
@@ -151,12 +152,11 @@ public class Point: NSObject, NSCoding {
     }
 }
 
-
-class Fence: NSObject {
+public class Fence: NSObject {
     
     let layer: CALayer
     let line: CALayer
-    var isCircle:Bool {
+    var shape:Shape {
         didSet {
             updateCornerRadius()
         }
@@ -170,18 +170,18 @@ class Fence: NSObject {
     static var idleColor = UIColor.orange().withAlphaComponent(0.5)
     static var noIdleColor = UIColor.red.withAlphaComponent(0.5)
     
-    convenience init(_ center: CGPoint, _ topCenter: CGPoint, isCircle: Bool) {
-        self.init(frame: CGRect(center: center, topCenter: topCenter), isCircle: isCircle)
+    convenience init(_ center: CGPoint, _ topCenter: CGPoint, shape: Shape) {
+        self.init(frame: CGRect(center: center, topCenter: topCenter), shape: shape)
     }
     
-    init(frame: CGRect, isCircle:Bool) {
-        self.isCircle = isCircle
+    init(frame: CGRect, shape:Shape) {
+        self.shape = shape
         isIdle = true
         
         layer = CALayer()
         layer.frame = frame
         layer.backgroundColor =  Fence.idleColor.cgColor
-        layer.cornerRadius = isCircle ? layer.frame.width / 2.0 : 0.0
+        layer.cornerRadius = shape == .circle ? layer.frame.width / 2.0 : 0.0
         
         line = CALayer()
         line.frame = CGRect(x: layer.frame.origin.x + layer.frame.width / 2.0, y: layer.frame.origin.y, width: 1.0, height: layer.frame.height/2.0)
@@ -195,7 +195,7 @@ class Fence: NSObject {
     }
     
     private func updateCornerRadius(){
-        layer.cornerRadius = isCircle ? layer.frame.width / 2.0 : 0.0
+        layer.cornerRadius = shape == .circle ? layer.frame.width / 2.0 : 0.0
     }
     
     private func updateFillColor(){
@@ -215,3 +215,79 @@ class Fence: NSObject {
     }
 
 }
+
+//public class GPSData: NSObject, NSCoding {
+public class GPSData: NSObject {
+    
+    var point: Point
+    var signal: Int
+    var battery: Int
+    var serverDate: Date
+    
+    override init() {
+        point = Point()
+        signal = 0
+        battery = 0
+        serverDate = Date()
+    }
+    
+//    init(_ point: Point, _ signal: Int, _ battery: Int) {
+//        self.point = point
+//        self.signal = signal
+//        self.battery = battery
+//    }
+    
+    init(_ data:[String:Any]) {
+
+        point = Point(data)
+        signal = 0
+        if let signalString = data["satellites"] as? String {
+            let components = signalString.components(separatedBy: "-")
+            if components.count == 2 {
+                let min = Double(components[0]) ?? 0
+                let max = Double(components[1]) ?? 0
+                let sum = min + max
+                if sum > 0 { signal = Int(sum/2.0) }
+            }
+        }
+        battery = data.tryCastInteger(for: "battery") ?? -1
+        if let serverTime = data.tryCastDouble(for: "serverTime") {
+            serverDate = Date.init(timeIntervalSince1970: TimeInterval(serverTime))
+        }else{
+            serverDate = Date()
+        }
+    }
+    
+//    required public init?(coder aDecoder: NSCoder) {
+//        latitude = aDecoder.decodeDouble(forKey: "latitude")
+//        longitude = aDecoder.decodeDouble(forKey: "longitude")
+//    }
+//    
+//    public func encode(with aCoder: NSCoder) {
+//        aCoder.encode(latitude, forKey: "latitude")
+//        aCoder.encode(longitude, forKey: "longitude")
+//    }
+    
+    var distanceTime: String {
+        return Date().offset(from: serverDate)
+    }
+    
+    static func == (lhs: GPSData, rhs: GPSData) -> Bool {
+        return lhs.point == rhs.point && lhs.signal == rhs.signal && lhs.battery == rhs.battery
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
+

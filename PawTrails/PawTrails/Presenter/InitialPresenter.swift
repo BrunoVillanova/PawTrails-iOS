@@ -40,11 +40,11 @@ class InitialPresenter {
             AuthManager.Instance.signIn(email!, password!) { (error) in
                 DispatchQueue.main.async {
                     self.view?.endLoadingContent()
-                    if error != nil {
-                        if error?.code == ErrorCode.AccountNotVerified {
+                    if let error = error {
+                        if error.APIError?.errorCode == ErrorCode.AccountNotVerified {
                             self.view?.verifyAccount(email!)
                         }else{
-                            self.view?.errorMessage(error!)
+                            self.view?.errorMessage(error.msg)
                         }
                     }else{
                         self.view?.userAuthenticated()
@@ -61,8 +61,8 @@ class InitialPresenter {
             AuthManager.Instance.signUp(email!, password!) { (error) in
                 DispatchQueue.main.async {
                     self.view?.endLoadingContent()
-                    if error != nil {
-                        self.view?.errorMessage(error!)
+                    if let error = error {
+                        self.view?.errorMessage(error.msg)
                     }else{
                         self.view?.verifyAccount(email!)
                     }
@@ -104,15 +104,15 @@ class InitialPresenter {
         loginManager.logIn([ .publicProfile, .email ], viewController: vc) { loginResult in
             switch loginResult {
             case .failed(let error):
-                self.view?.errorMessage(ErrorMsg(title:"Error login Facebook", msg:"\(error)"))
+                self.view?.errorMessage(DataManagerError(error: error).msg)
                 break
             case .success(_, _, let accessToken):
                 AuthManager.Instance.login(socialMedia: .facebook, accessToken.authenticationToken, completition: { (error) in
                     DispatchQueue.main.async {
-                        if error == nil {
-                            self.view?.loggedSocialMedia()
+                        if let error = error {
+                            self.view?.errorMessage(error.msg)
                         }else{
-                            self.view?.errorMessage(error!)
+                            self.view?.loggedSocialMedia()
                         }
                     }
                 })
@@ -135,10 +135,10 @@ class InitialPresenter {
         print(token)
         AuthManager.Instance.login(socialMedia: .google, token, completition: { (error) in
             DispatchQueue.main.async {
-                if error == nil {
-                    self.view?.loggedSocialMedia()
+                if let error = error {
+                    self.view?.errorMessage(error.msg)
                 }else{
-                    self.view?.errorMessage(error!)
+                    self.view?.loggedSocialMedia()
                 }
             }
         })
@@ -152,16 +152,16 @@ class InitialPresenter {
         Twitter.sharedInstance().logIn(with: vc, methods: .webBased) { (session, error) in
             if let error = error {
                 DispatchQueue.main.async {
-                    self.view?.errorMessage(ErrorMsg(title:"Error Twitter Login", msg:"\(error.localizedDescription)"))
+                    self.view?.errorMessage(DataManagerError(error: error).msg)
                 }
             }else if let session = session {
                 print(session.authToken)
                 AuthManager.Instance.login(socialMedia: .twitter, session.authToken, completition: { (error) in
                     DispatchQueue.main.async {
-                        if error == nil {
-                            self.view?.loggedSocialMedia()
+                        if let error = error {
+                            self.view?.errorMessage(error.msg)
                         }else{
-                            self.view?.errorMessage(error!)
+                            self.view?.loggedSocialMedia()
                         }
                     }
                 })

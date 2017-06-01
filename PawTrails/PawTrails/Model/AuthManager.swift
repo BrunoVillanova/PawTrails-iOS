@@ -10,7 +10,7 @@ import Foundation
 import FacebookCore
 import FacebookLogin
 
-typealias errorCallback = (_ error:ErrorMsg?) -> Void
+typealias errorCallback = (_ error:DataManagerError?) -> Void
 
 
 class AuthManager {
@@ -64,15 +64,15 @@ class AuthManager {
     fileprivate func succeedLoginOrRegister(_ data:[String:Any], completition: @escaping errorCallback){
         
         guard let token = data["token"] as? String else {
-            completition(Message.Instance.authError(type: .EmptyUserTokenResponse))
+            completition(DataManagerError.init(responseError: ResponseError.NotFound))
             return
         }
         guard let userData = data["user"] as? [String:Any] else {
-            completition(Message.Instance.authError(type: .EmptyUserResponse))
+            completition(DataManagerError.init(responseError: ResponseError.NotFound))
             return
         }
         guard let userId = userData["id"] as? String else {
-            completition(Message.Instance.authError(type: .EmptyUserIdResponse))
+            completition(DataManagerError.init(responseError: ResponseError.NotFound))
             return
         }
         if let socialNetwork = data["social_network"] as? String {
@@ -83,12 +83,50 @@ class AuthManager {
         }
         SharedPreferences.set(.token, with: token)
         SharedPreferences.set(.id, with: userId)
+        
+        var errors = [DataManagerError]()
+        let queue = DispatchQueue(label: "ErrorQueue", qos: .default, attributes: .concurrent, autoreleaseFrequency: .inherit, target: nil)
+        let tasks = DispatchGroup()
+        
+        tasks.enter()
         DataManager.Instance.setUser(userData) { (error, user) in
-            if error == nil && user != nil {
-                completition(nil)
-            }else {
-                completition(ErrorMsg(title: "", msg: "\(error ?? UserError.UserNotFound)"))
+            if let error = error {
+                queue.async {
+                    errors.append(error)
+                }
             }
+            tasks.leave()
+        }
+        
+        tasks.enter()
+        DataManager.Instance.loadPets(callback: { (error, pets) in
+            if let error = error {
+                queue.async {
+                    errors.append(error)
+                }
+            }
+            tasks.leave()
+        })
+        
+        _ = DataManager.Instance.getCountryCodes()
+        
+        tasks.notify(queue: .main) { 
+            
+            queue.sync {
+                if errors.count == 0 {
+                    DispatchQueue.main.async {
+                        completition(nil)
+                    }
+                }else{
+                    DispatchQueue.main.async {
+                        for error in errors {
+                            debugPrint(error.localizedDescription)
+                        }
+                        completition(errors.first)
+                    }
+                }
+            }
+            
         }
     }
     
@@ -139,8 +177,8 @@ class AuthManager {
         }
     }
     
-    fileprivate func handleAuthErrors(_ error: APIManagerError?, _ data: [String:Any]? = nil) -> ErrorMsg? {
-        return error?.info()
+    fileprivate func handleAuthErrors(_ error: APIManagerError?, _ data: [String:Any]? = nil) -> DataManagerError? {
+        return DataManagerError(APIError: error)
     }
 
     

@@ -10,16 +10,18 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegate,/* CLLocationManagerDelegate,*/ AddEditSafeZoneView {
-
+class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegate, CLLocationManagerDelegate, AddEditSafeZoneView {
+    
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var iconTextField: UITextField!
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var distanceLabel: UILabel!
-
+    
     @IBOutlet weak var userFocusButton: UIButton!
     @IBOutlet weak var petFocusButton: UIButton!
+    @IBOutlet weak var loadingFocus: UIActivityIndicatorView!
+    
     @IBOutlet weak var squareButton: UIButton!
     @IBOutlet weak var circleButton: UIButton!
     @IBOutlet weak var removeButton: UIButton!
@@ -27,50 +29,81 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     
-    fileprivate var opened:CGFloat = 395.0, closed:CGFloat = 610
+    fileprivate var opened:CGFloat = 360.0, closed:CGFloat = 600
     
-    fileprivate var isCircle:Bool = true
+    fileprivate var shape:Shape = Shape.circle
     
     fileprivate var changingRegion = false
+    
+    fileprivate var focused = true
     
     fileprivate var fence:Fence!
     fileprivate let fenceSide: Double = 50.0 //meters
     fileprivate var fenceDistance:Int = 50 //meters
     
     fileprivate var  manager = CLLocationManager()
-
+    
     fileprivate let presenter = AddEditSafeZonePresenter()
+    
+    fileprivate var petLocation:MKLocation? = nil
     
     var safezone: SafeZone?
     var petId: Int16!
-    
-    var focused = false
+    var isOwner: Bool!
+    var fromMap: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.attachView(self)
-        blurView.round()
+        blurView.round(radius: 18)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
-        mapView.showsUserLocation = false
+        mapView.showsUserLocation = true
         mapView.showsCompass = false
         mapView.mapType = .hybrid
+        mapView.delegate = self
+        
+        manager.delegate = self
+        let status = CLLocationManager.authorizationStatus()
+        if status == .notDetermined { manager.requestWhenInUseAuthorization() }
+        
+        loadingFocus.isHidden = true
+        loadingFocus.hidesWhenStopped = true
         
         if let safezone = safezone {
             navigationItem.title = "Edit Safe Zone"
-
+            navigationItem.prompt = safezone.pet?.name
+            
             nameTextField.text = safezone.name
-            isCircle = safezone.shape
+            if let shape = Shape(rawValue: safezone.shape) {
+                self.shape = shape
+            }
             activeSwitch.isOn = safezone.active
-
+            
+            if !isOwner {
+                userFocusButton.isHidden = true
+                petFocusButton.isHidden = true
+                nameTextField.isEnabled = false
+                iconTextField.isEnabled = false
+                circleButton.isEnabled = false
+                squareButton.isEnabled = false
+                activeSwitch.isEnabled = false
+                removeButton.isHidden = true
+                navigationItem.rightBarButtonItem = nil
+            }
         }else{
             navigationItem.title = "New Safe Zone"
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(popAction(sender:)))
             removeButton.isHidden = true
         }
         
-        self.circleButton.tintColor = isCircle ? UIColor.orange() : UIColor.darkGray
-        self.squareButton.tintColor = isCircle ?  UIColor.darkGray : UIColor.orange()
+        if fromMap {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(dismissAction(sender: )))
+        }
+        
+        self.circleButton.tintColor = shape == .circle ? UIColor.orange() : UIColor.darkGray
+        self.squareButton.tintColor = shape == .circle ?  UIColor.darkGray : UIColor.orange()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -78,13 +111,13 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
             
             guard let center = safezone.point1?.coordinates else { return }
             guard let topCenter = safezone.point2?.coordinates else { return }
-
-            fence = mapView.load(with: center, topCenter: topCenter, isCircle: isCircle, into: view)
+            
+            fence = mapView.load(with: center, topCenter: topCenter, shape: shape, into: view)
             
         }else{
             let sonhugoCoordinate = CLLocationCoordinate2D(latitude: 39.592217, longitude: 2.662322)
             mapView.centerOn(sonhugoCoordinate, with: 50, animated: false)
-            fence = mapView.load(with: sonhugoCoordinate, isCircle: isCircle, into: view)
+            fence = mapView.load(with: sonhugoCoordinate, shape: shape, into: view)
         }
         updateFenceDistance()
         self.blurView(.close)
@@ -96,30 +129,30 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     }
     
     func geoCodeFence() -> (Point,Point) {
-
+        
         let point1 = Point(coordinates: mapView.convert(fence.center, toCoordinateFrom: view))
         let point2 = Point(coordinates: mapView.convert(fence.topCenter, toCoordinateFrom: view))
         return (point1, point2)
     }
-
+    
     @IBAction func squareAction(_ sender: UIButton) {
         circleButton.tintColor = UIColor.darkGray
         squareButton.tintColor = UIColor.orange()
-        fence.isCircle = false
-        isCircle = false
+        fence.shape = .square
+        shape = .square
     }
     
     @IBAction func circleAction(_ sender: UIButton) {
         circleButton.tintColor = UIColor.orange()
         squareButton.tintColor = UIColor.darkGray
-        fence.isCircle = true
-        isCircle = true
+        fence.shape = .circle
+        shape = .circle
     }
-
+    
     @IBAction func doneAction(_ sender: UIBarButtonItem?) {
         if let petId = petId {
             if fence.isIdle {
-                presenter.addEditSafeZone(safezoneId: safezone?.id ?? -1, name: nameTextField.text, isCircle: isCircle, active: activeSwitch.isOn, points: geoCodeFence(), into: petId)
+                presenter.addEditSafeZone(safezoneId: safezone?.id ?? -1, name: nameTextField.text, shape: shape, active: activeSwitch.isOn, points: geoCodeFence(), into: petId)
             }else{
                 alert(title: "", msg: "The area is too small. Please, zoom out.", type: .red)
             }
@@ -133,51 +166,65 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
             })
         }
     }
-
+    
     @IBAction func userFocusAction(_ sender: UIButton) {
         focused = false
-        mapView.showsUserLocation = true
-//        let status = CLLocationManager.authorizationStatus()
-//        if status == .notDetermined {
-//            manager.requestWhenInUseAuthorization()
-//        }else if status == .denied {
-//            
-//        }else {
-//            manager.requestLocation()
-//        }
-    }
-
-    @IBAction func petFocusAction(_ sender: UIButton) {
-        focused = false
-        alert(title: "", msg: "Under Construction", type: .blue)
-
+        
+        if !mapView.userLocation.coordinate.isDefaultZero {
+            mapView.centerOn(mapView.userLocation.coordinate, with: 51, animated: true)
+        }else{
+            let status = CLLocationManager.authorizationStatus()
+            if status == .notDetermined {
+                manager.requestWhenInUseAuthorization()
+            }else if status == .denied {
+                popUpUserLocationDenied()
+            }else {
+                beginLoadingLocation()
+                manager.requestLocation()
+            }
+        }
     }
     
-//    var y:CGFloat = 0.0
-    let factor:CGFloat = 0.5
+    @IBAction func petFocusAction(_ sender: UIButton) {
+        focused = false
+        beginLoadingLocation()
+        loadPetLocation()
+    }
+    
+    func loadPetLocation(){
+        SocketIOManager.Instance.getPetGPSData(id: petId) { (GPSData) in
+            DispatchQueue.main.async {
+                self.endLoadingLocation()
+                if let GPSData = GPSData {
+                    self.focused = true
+                    if let petLocation = self.petLocation {
+                        petLocation.move(coordinate: GPSData.point.coordinates)
+                    }else{
+                        self.petLocation = MKLocation(id: MKLocationId.init(id: 0, type: .pet), coordinate: GPSData.point.coordinates)
+                        self.mapView.addAnnotation(self.petLocation!)
+                    }
+                    self.mapView.centerOn(GPSData.point.coordinates, with: 51, animated: true)
+                }else{
+                    self.alert(title: "", msg: "Couldn't locate pet", type: .red)
+                }
+            }
+        }
+    }
+    
     @IBAction func handlePanGesture(_ sender: UIPanGestureRecognizer) {
         
-        
         var y = sender.location(in: view).y
-
-//        if (y < 0 && bottomContraints.constant > opened) || (y > 0 && bottomContraints.constant < closed) { bottomContraints.constant += y }
-        
-        debugPrint(y, topConstraint.constant, sender.velocity(in: view))
         
         let isOpening = sender.translation(in: self.view).y < 0
-
-        let distance = abs(y - opened)
+        
         if isOpening && y < opened {
+            let distance = abs(y - opened)
             y += distance * 0.5
-        }else if !isOpening && y > closed {
-//            y -= distance * 0.2
         }
         
         topConstraint.constant = y
         
-        if sender.state == .ended {
-            blurView(isOpening ? .open : .close, speed: 0.5)
-        }
+        if sender.state == .ended { blurView(isOpening ? .open : .close, speed: 0.5)  }
     }
     
     //MARK: - AddEditSafeZoneView
@@ -187,8 +234,11 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     }
     
     func success() {
-        if let petProfile = navigationController?.viewControllers.first(where: { $0 is PetsPageViewController}) as? PetsPageViewController {
-            navigationController?.popToViewController(petProfile, animated: true)
+        if let parent = navigationController?.viewControllers.first(where: { $0 is PetsPageViewController}) as? PetsPageViewController {
+            if let profile = parent.profileTableViewController {
+                profile.reloadSafeZones()
+            }
+            navigationController?.popToViewController(parent, animated: true)
         }
     }
     
@@ -217,40 +267,47 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     
     //MARK:- User Location Manager
     
-    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-        if !mapView.userLocation.coordinate.isDefaultZero && !focused {
-            focused = true
-            mapView.centerOn(userLocation.coordinate, with: 50, animated: true)
+    func beginLoadingLocation(){
+        userFocusButton.isHidden = true
+        petFocusButton.isHidden = true
+        loadingFocus.startAnimating()
+        loadingFocus.isHidden = false
+    }
+    
+    func endLoadingLocation() {
+        loadingFocus.stopAnimating()
+        userFocusButton.isHidden = false
+        petFocusButton.isHidden = false
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .notDetermined || status == .denied {
+            alert(title: "", msg: "User location not granted", type: .blue)
+        }else if !focused {
+            manager.requestLocation()
+            beginLoadingLocation()
         }
     }
     
-    func mapView(_ mapView: MKMapView, didFailToLocateUserWithError error: Error) {
-        alert(title: "", msg: "Couldn't Locate User", type: .red)
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        if let location = locations.first, !focused {
+            focused = true
+            mapView.centerOn(location.coordinate, with: 51, animated: true)
+            endLoadingLocation()
+        }
     }
     
-//    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-//        if status == .notDetermined || status == .denied {
-//            alert(title: "", msg: "User location not granted", type: .blue)
-//        }else{
-//            manager.requestLocation()
-//        }
-//    }
-//    
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//
-//        if let location = locations.first, !focused {
-//            focused = true
-//            mapView.centerOn(location.coordinate, with: 50, animated: true)
-//        }
-//    }
-//    
-//    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-//        alert(title: "", msg: "User location failed", type: .red)
-//    }
-
-
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        if !focused {
+            endLoadingLocation()
+            alert(title: "", msg: "User location failed", type: .red)
+        }
+    }
+    
+    
     // MARK: - MKMapViewDelegate
-
+    
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         
         if fence != nil {
@@ -266,6 +323,11 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         return mapView.getRenderer(overlay: overlay)
     }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        return mapView.getAnnotationView(annotation: annotation)
+    }
+    
     
     // MARK: - UITextFieldDelegate
     
@@ -292,7 +354,7 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
             self.distanceLabel.text = fenceDistance < 1000 ? "\(fenceDistance) m" : "\(Double(fenceDistance)/1000.0) km"
         }
     }
-
+    
     func fenceDistanceIsIdle() -> Bool {
         return fenceDistance >= Int(fenceSide)
     }
@@ -312,7 +374,7 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
             self.blurView.transform = CGAffineTransform.identity
         }
     }
-
+    
     // MARK: - AnimationHelpers
     
     enum blurViewAction {
@@ -325,30 +387,18 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     
     func blurView(_ action:blurViewAction, speed:Double = 1, animated:Bool = true){
         
-//        if (self.topConstraint.constant == closed && action == .close) || (self.topConstraint.constant == opened && action == .open) { return }
-        
-//        if animated {
-//            UIView.animate(withDuration: speed, animations: {
-//                let dy = action == .open ? self.blurView.frame.minY - self.blurView.center.y : self.blurView.center.y - self.blurView.frame.minY
-//                self.blurView.transform = CGAffineTransform(translationX: 0, y: dy)
-//            }) { (done) in
-//                self.bottomContraints.constant = action == .open ? self.opened : self.closed
-//                self.blurView.transform = CGAffineTransform.identity
-//            }
-//        }else{
-            self.topConstraint.constant = action == .open ? self.opened : self.closed
-//        }
+        self.topConstraint.constant = action == .open ? self.opened : self.closed
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.8, options: UIViewAnimationOptions.curveEaseInOut, animations: {
             self.view.layoutIfNeeded()
         }, completion: nil)
         
     }
-
     
     
     
     
-
+    
+    
     
     
     

@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias petUsersCallback = (_ error:PetError?, _ users:[PetUser]?) -> Void
+typealias petUsersCallback = (_ error:DataManagerError?, _ users:[PetUser]?) -> Void
 
 class PetUserManager {
     
@@ -68,7 +68,7 @@ class PetUserManager {
     
     static func upsertFriends(_ data: [String:Any]){
         
-        if let petUsersData = data["users"] as? [[String:Any]] {
+        if let petUsersData = data["friendlist"] as? [[String:Any]] {
             
             UserManager.get({ (error, user) in
                 if let user = user {
@@ -96,7 +96,7 @@ class PetUserManager {
             if let pet = pet, let users = pet.users?.allObjects as? [PetUser] {
                 callback(nil, users)
             }else{
-                callback(PetError.MoreThenOnePet, nil)
+                callback(DataManagerError(DBError: DatabaseError.DuplicatedEntry), nil)
             }
         }
     }
@@ -107,7 +107,7 @@ class PetUserManager {
             if let user = user {
                 callback(nil,user.friends?.allObjects as? [PetUser])
             }else{
-                callback(PetError.PetNotFoundInDataBase, nil)
+                callback(DataManagerError(DBError: DatabaseError.NotFound), nil)
             }
         })
     }

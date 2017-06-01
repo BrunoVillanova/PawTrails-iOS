@@ -8,8 +8,8 @@
 
 import Foundation
 
-typealias safezonesCallback = ((_ error:Error?, _ safezones:[SafeZone]?) -> Void)
-typealias safezoneCallback = (_ error:Error?, _ safezone:SafeZone?) -> Void
+typealias safezonesCallback = ((_ error:DataManagerError?, _ safezones:[SafeZone]?) -> Void)
+typealias safezoneCallback = (_ error:DataManagerError?, _ safezone:SafeZone?) -> Void
 
 class SafeZoneManager {
     
@@ -23,8 +23,10 @@ class SafeZoneManager {
                     
                     safezone.name = data["name"] as? String
                     safezone.active = data["active"] as? Bool ?? false
-                    if let shape = data.tryCastInteger(for: "shape") {
-                        safezone.shape = shape == 0
+                    if let shapeCode = data.tryCastInteger(for: "shape") {
+                        if let shape = Shape(rawValue: Int16(shapeCode)) {
+                            safezone.shape = shape.rawValue
+                        }
                     }
                     
                     let p1 = safezone.point1
@@ -43,6 +45,7 @@ class SafeZoneManager {
                     debugPrint(safezone.point2?.toDict ?? "")
                     if p1 == nil || p2 == nil || (p1 != nil && p2 != nil && (p1 != safezone.point1 || p2 != safezone.point2)) {
                         safezone.preview = nil
+                        safezone.address = nil
                         debugPrint("update safezone screen")
                     }
                     
@@ -88,7 +91,18 @@ class SafeZoneManager {
     static func set(safezone: SafeZone, imageData: Data){
         DispatchQueue.main.async {
             do {
-                safezone.preview = imageData as NSData
+                safezone.preview = imageData
+                try CoreDataManager.Instance.save()
+            }catch{
+                debugPrint(error)
+            }
+        }
+    }
+    
+    static func set(safezone: SafeZone, address: String){
+        DispatchQueue.main.async {
+            do {
+                safezone.address = address
                 try CoreDataManager.Instance.save()
             }catch{
                 debugPrint(error)

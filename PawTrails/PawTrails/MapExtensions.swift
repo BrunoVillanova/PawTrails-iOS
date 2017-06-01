@@ -13,7 +13,7 @@ import MapKit
 extension MKMapView {
     
     func addAnnotation(_ coordinate: CLLocationCoordinate2D, color: UIColor = UIColor.red){
-        self.addAnnotation(MKLocation(title: "", lat: coordinate.latitude, long: coordinate.longitude, color: color))
+        self.addAnnotation(MKLocation(id: MKLocationId(id: 0, type: .pet), coordinate: coordinate, color: color))
     }
     
     func setVisibleMapForAnnotations() {
@@ -55,15 +55,15 @@ extension MKMapView {
         return self.camera.altitude
     }
     
-    func load(with coordinate: CLLocationCoordinate2D, isCircle: Bool, into view: UIView, fenceSide: Double = 50) -> Fence {
+    func load(with coordinate: CLLocationCoordinate2D, shape: Shape, into view: UIView, fenceSide: Double = 50) -> Fence {
         let region = MKCoordinateRegionMakeWithDistance(self.centerCoordinate, fenceSide, fenceSide)
         let frame = self.convertRegion(region, toRectTo: view)
-        let fence = Fence(frame: frame, isCircle: isCircle)
+        let fence = Fence(frame: frame, shape: shape)
         add(fence)
         return fence
     }
     
-    func load(with center: CLLocationCoordinate2D, topCenter:CLLocationCoordinate2D, isCircle: Bool, into view: UIView, paintShapes: Bool = false) -> Fence {
+    func load(with center: CLLocationCoordinate2D, topCenter:CLLocationCoordinate2D, shape: Shape, into view: UIView, paintShapes: Bool = false) -> Fence {
 
 //        self.addAnnotation(center, color: UIColor.yellow)
 //        self.addAnnotation(topCenter)
@@ -76,7 +76,7 @@ extension MKMapView {
         let centerPoint = self.convert(center, toPointTo: view)
         let topCenterPoint = self.convert(topCenter, toPointTo: view)
         
-        let fence = Fence(centerPoint, topCenterPoint, isCircle: isCircle)
+        let fence = Fence(centerPoint, topCenterPoint, shape: shape)
         
         add(fence)
         
@@ -103,14 +103,14 @@ extension MKMapView {
     
     // Create SnapShot
     
-    static func getSnapShot(with center: CLLocationCoordinate2D, topCenter: CLLocationCoordinate2D, isCircle: Bool, into view: UIView, handler: @escaping ((UIImage?)->())){
+    static func getSnapShot(with center: CLLocationCoordinate2D, topCenter: CLLocationCoordinate2D, shape: Shape, into view: UIView, handler: @escaping ((UIImage?)->())){
         
         let mapView = MKMapView(frame: view.frame)
         let camera = mapView.camera
         camera.pitch = 0.0
         mapView.setCamera(camera, animated: false)
         
-        _ = mapView.load(with: center, topCenter: topCenter, isCircle: isCircle, into: view, paintShapes: true)
+        _ = mapView.load(with: center, topCenter: topCenter, shape: shape, into: view, paintShapes: true)
         
         let options = MKMapSnapshotOptions()
         options.region = mapView.region
@@ -136,7 +136,7 @@ extension MKMapView {
                 UIGraphicsBeginImageContextWithOptions(image.size, true, image.scale)
                 image.draw(at: CGPoint.zero)
                 
-                let path = isCircle ? UIBezierPath(ovalIn: frame) : UIBezierPath(rect: frame)
+                let path = shape == .circle ? UIBezierPath(ovalIn: frame) : UIBezierPath(rect: frame)
                 Fence.idleColor.set()
                 path.fill()
                 
@@ -163,6 +163,39 @@ extension MKMapView {
         }
         return MKOverlayRenderer()
     }
+    
+    func getAnnotationView(annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        if annotation is MKLocation {
+            // Better to make this class property
+            let annotationIdentifier = "mkl"
+            
+            var annotationView: MKAnnotationView?
+            if let dequeuedAnnotationView = self.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier) {
+                annotationView = dequeuedAnnotationView
+                annotationView?.annotation = annotation
+            }
+            else {
+                annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
+                annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            }
+            
+            if let annotationView = annotationView {
+                let mkl = annotation as! MKLocation
+                
+                // Annotation
+                annotationView.canShowCallout = false
+                annotationView.frame.size = CGSize(width: 20, height: 20)
+                
+                annotationView.circle()
+                annotationView.backgroundColor = mkl.color
+                annotationView.border(color: UIColor.white, width: 2.5)
+                annotationView.clipsToBounds = false
+            }
+            return annotationView
+        }
+        return nil
+    }
 }
 
 extension CLLocationCoordinate2D {
@@ -175,22 +208,18 @@ extension CLLocationCoordinate2D {
         return self.latitude == 0 && self.longitude == 0
     }
     
-    /*
-     -(CLLocationCoordinate2D)translateCoord:(CLLocationCoordinate2D)coord MetersLat:(double)metersLat MetersLong:(double)metersLong{
-     
-     CLLocationCoordinate2D tempCoord;
-     
-     MKCoordinateRegion tempRegion = MKCoordinateRegionMakeWithDistance(coord, metersLat, metersLong);
-     MKCoordinateSpan tempSpan = tempRegion.span;
-     
-     tempCoord.latitude = coord.latitude + tempSpan.latitudeDelta;
-     tempCoord.longitude = coord.longitude + tempSpan.longitudeDelta;
-     
-     return tempCoord;
-     
-     }
-     
-     */
+    public static var Cork: CLLocationCoordinate2D {
+        return CLLocationCoordinate2D(latitude: 51.8969, longitude: 8.4863)
+    }
+    
+    public static var CorkRandom: CLLocationCoordinate2D {
+        
+        let latitude = self.Cork.latitude
+        let longitude = self.Cork.longitude
+        let dLat = Double(arc4random() % 10000)/1000000.0
+        let dLong = Double(arc4random() % 10000)/1000000.0
+        return CLLocationCoordinate2D(latitude: latitude + dLat, longitude: longitude + dLong)
+    }
     
     func translate(metersLat:Double, metersLong:Double) -> CLLocationCoordinate2D {
         
@@ -201,6 +230,17 @@ extension CLLocationCoordinate2D {
         return translatedCoordinate
     }
     
+    func getStreetName(handler: @escaping ((String?)->())) {
+        CLGeocoder().reverseGeocodeLocation(self.location) { (placemarks, error) in
+            handler(placemarks?.first?.name)
+        }
+    }
+    
+    func getStreetFullName(handler: @escaping ((String?)->())) {
+        CLGeocoder().reverseGeocodeLocation(self.location) { (placemarks, error) in
+            handler(placemarks?.first?.thoroughfare)
+        }
+    }
 }
 
 extension Point {

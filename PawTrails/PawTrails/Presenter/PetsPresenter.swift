@@ -9,8 +9,7 @@
 import Foundation
 
 protocol PetsView: NSObjectProtocol, View {
-    func loadSharedPets()
-    func loadOwnedPets()
+    func loadPets()
     func petsNotFound()
 }
 
@@ -39,41 +38,29 @@ class PetsPresenter {
     }
     
     func getPets() {
-        getOwnedPets()
-        getSharedPets()
-    }
-    
-    private func getOwnedPets(){
-        DataManager.Instance.getPets { (error, pets) in
+        
+        DataManager.Instance.getPetsSplitted { (error, owned, shared) in
             DispatchQueue.main.async {
                 if let error = error {
-                    if error == PetError.PetNotFoundInDataBase {
+                    if error.DBError == DatabaseError.NotFound {
+                        self.ownedPets.removeAll()
+                        self.sharedPets.removeAll()
                         self.view?.petsNotFound()
                     }else{
-                        self.view?.errorMessage(ErrorMsg(title: "",msg: "\(error)"))
+                        self.view?.errorMessage(error.msg)
                     }
-                }else if let pets = pets {
-                    self.ownedPets = pets
-                    self.view?.loadOwnedPets()
+                }else if let owned = owned, let shared = shared {
+                    self.ownedPets = owned
+                    self.sharedPets = shared
+                    self.view?.loadPets()
+                }else{
+                    self.ownedPets.removeAll()
+                    self.sharedPets.removeAll()
                 }
             }
         }
-    }
-    
-    private func getSharedPets(){
-        DataManager.Instance.getPets(owned: false) { (error, pets) in
-            DispatchQueue.main.async {
-                if let error = error {
-                    if error == PetError.PetNotFoundInDataBase {
-                        self.view?.petsNotFound()
-                    }else{
-                        self.view?.errorMessage(ErrorMsg(title: "",msg: "\(error)"))
-                    }
-                }else if let pets = pets {
-                    self.sharedPets = pets
-                    self.view?.loadSharedPets()
-                }
-            }
+        
+        DataManager.Instance.getPets { (error, pets) in
         }
     }
     
@@ -81,12 +68,12 @@ class PetsPresenter {
         DataManager.Instance.loadPets { (error, pets) in
             DispatchQueue.main.async {
                 if let error = error {
-                    if error == PetError.PetNotFoundInDataBase {
+                    if error.DBError == DatabaseError.NotFound {
                         self.ownedPets.removeAll()
                         self.sharedPets.removeAll()
                         self.view?.petsNotFound()
                     }else{
-                        self.view?.errorMessage(ErrorMsg(title: "",msg: "\(error)"))
+                        self.view?.errorMessage(error.msg)
                     }
                 }else {
                     self.getPets()

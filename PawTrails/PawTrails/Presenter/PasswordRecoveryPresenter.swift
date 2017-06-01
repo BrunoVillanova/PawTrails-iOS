@@ -34,7 +34,7 @@ class PasswordRecoveryPresenter {
                     if let error = error {
                         DispatchQueue.main.async {
                             self.view?.endLoadingContent()
-                            self.view?.errorMessage(error)
+                            self.view?.errorMessage(error.msg)
                         }
                     }else{
                         DispatchQueue.main.async {

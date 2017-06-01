@@ -28,7 +28,7 @@ class AddEditSafeZonePresenter {
     }
 
     
-    func addEditSafeZone(safezoneId: Int16, name: String?, isCircle: Bool, active: Bool, points: (Point,Point), into petId: Int16){
+    func addEditSafeZone(safezoneId: Int16, name: String?, shape: Shape, active: Bool, points: (Point,Point), into petId: Int16){
         
         if name == nil || (name != nil && name == "") {
             view?.missingName()
@@ -36,7 +36,7 @@ class AddEditSafeZonePresenter {
             
             var data = [String:Any]()
             data["name"] = name
-            data["shape"] = isCircle ? "0" : "1"
+            data["shape"] = shape.code
             data["point1"] = points.0.toDict
             data["point2"] = points.1.toDict
             data["active"] = active
@@ -46,7 +46,7 @@ class AddEditSafeZonePresenter {
                 DataManager.Instance.setSafeZone(by: data, to: petId, callback: { (error) in
                     DispatchQueue.main.async {
                         if let error = error {
-                            self.view?.errorMessage(ErrorMsg(title: "", msg: "\(error)"))
+                            self.view?.errorMessage(error.msg)
                         }else{
                             self.view?.success()
                         }
@@ -57,7 +57,7 @@ class AddEditSafeZonePresenter {
                 DataManager.Instance.addSafeZone(by: data, to: petId, callback: { (error) in
                     DispatchQueue.main.async {
                         if let error = error {
-                            self.view?.errorMessage(ErrorMsg(title: "", msg: "\(error)"))
+                            self.view?.errorMessage(error.msg)
                         }else{
                             self.view?.success()
                         }
@@ -72,7 +72,7 @@ class AddEditSafeZonePresenter {
         DataManager.Instance.removeSafeZone(by: id, to: petId) { (error) in
             DispatchQueue.main.async {
                 if let error = error {
-                    self.view?.errorMessage(ErrorMsg(title: "", msg: "\(error)"))
+                    self.view?.errorMessage(error.msg)
                 }else{
                     self.view?.success()
                 }
