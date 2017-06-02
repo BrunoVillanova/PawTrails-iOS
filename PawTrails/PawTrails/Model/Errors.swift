@@ -112,7 +112,6 @@ enum AuthenticationError: Int {
     case Unknown = -1
 }
 
-
 enum DatabaseError: Int {
     case NotFound = 0, IdNotFound, DuplicatedEntry, AlreadyExists, Unknown
 }
@@ -185,3 +184,8 @@ enum CoreDataManagerError: Int {
 }
 
 
+enum SocketIOError: Int {
+    case waiting = 0
+    case unauthorized = 30
+    case noDevice = 31
+}

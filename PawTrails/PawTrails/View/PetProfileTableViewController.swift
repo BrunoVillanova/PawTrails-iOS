@@ -52,7 +52,7 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
             reloadSafeZones()
             removeLeaveLabel.text = pet.isOwner ? "Remove Pet" : "Leave Pet"
             
-            SocketIOManager.Instance.getPetGPSData(id: pet.id) { (data) in
+            SocketIOManager.Instance.getPetGPSData(id: 25) { (error, data) in
                 if let data = data {
                     DispatchQueue.main.async {
                         self.signalImageView.backgroundColor = UIColor.orange()
