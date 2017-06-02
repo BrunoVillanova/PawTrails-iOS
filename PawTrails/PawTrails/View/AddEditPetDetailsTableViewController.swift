@@ -26,7 +26,6 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
     
     var deviceCode: String!
     var pet: Pet!
-    var parentEditor:PetProfileTableViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,6 +82,12 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
         if pet == nil {
             dismiss(animated: true, completion: nil)
         }else{
+            
+            if let parent = navigationController?.viewControllers.first(where: { $0 is PetsPageViewController }) as? PetsPageViewController {
+                if let profile = parent.profileTableViewController {
+                    profile.reloadPetInfo()
+                }
+            }
             _ = navigationController?.popViewController(animated: true)
         }
     }

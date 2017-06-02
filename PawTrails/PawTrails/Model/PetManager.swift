@@ -8,10 +8,10 @@
 
 
 typealias petCheckDeviceCallback = (_ isIdle:Bool) -> Void
-typealias petErrorCallback = (_ error:PetError?) -> Void
-typealias petCallback = (_ error:PetError?, _ pet:Pet?) -> Void
-typealias petsCallback = (_ error:PetError?, _ pets:[Pet]?) -> Void
-typealias petsSplittedCallback = (_ error:PetError?, _ owned:[Pet]?, _ shared:[Pet]?) -> Void
+typealias petErrorCallback = (_ error:DataManagerError?) -> Void
+typealias petCallback = (_ error:DataManagerError?, _ pet:Pet?) -> Void
+typealias petsCallback = (_ error:DataManagerError?, _ pets:[Pet]?) -> Void
+typealias petsSplittedCallback = (_ error:DataManagerError?, _ owned:[Pet]?, _ shared:[Pet]?) -> Void
 typealias petTrackingCallback = (_ location:(Double, Double)) -> Void
 
 import Foundation
@@ -20,7 +20,7 @@ class PetManager {
     
     //MARK:- Pet Profile
     
-    static func upsertPet(_ data: [String:Any], callback: petCallback? = nil) {
+    static func upsert(_ data: [String:Any], callback: petCallback? = nil) {
         
         do {
             
@@ -67,6 +67,7 @@ class PetManager {
                         }
                     }
                     pet.type_descr = data["type_descr"] as? String
+                    pet.breed_descr = data["breed_descr"] as? String
                     
                     
                     // Image
@@ -84,23 +85,28 @@ class PetManager {
                     if let callback = callback {
                         callback(nil, pet)
                     }
+                    return
                 }
+                
+            }else{
+                if let callback = callback { callback(DataManagerError(responseError: ResponseError.IdNotFound), nil)}
+                return
             }
             
         } catch {
             debugPrint(error)
-            if let callback = callback {
-                callback(PetError.PetNotFoundInResponse, nil)
-            }
+            if let callback = callback { callback(DataManagerError(error: error), nil)}
+            return
         }
-        
+        if let callback = callback { callback(nil, nil) }
+        fatalError("Missing Something")
     }
     
-    static func upsertPetList(_ data: [String:Any]) {
+    private static func _upsertList(_ data: [String:Any]) {
         
         guard let id = data.tryCastInteger(for: "id") else { return }
         
-        getPet(Int16(id), { (error, pet) in
+        get(Int16(id), { (error, pet) in
             
             if let pet = pet {
                 do{
@@ -122,15 +128,15 @@ class PetManager {
                     
                 }
             }else{
-                upsertPet(data)
+                upsert(data)
             }
         })
     }
     
-    static func upsertPets(_ data: [String:Any], _ callback:petsCallback){
+    static func upsertList(_ data: [String:Any], _ callback:petsCallback){
         
         if let petsData = data["pets"] as? [[String:Any]] {
-            getPets({ (error, pets) in
+            get({ (error, pets) in
                 //Update
                 if let pets = pets {
                     var ids = pets.map({ $0.id })
@@ -138,26 +144,31 @@ class PetManager {
                         if let index = ids.index(of: petData["id"] as! Int16) {
                             ids.remove(at: index)
                         }
-                        upsertPetList(petData)
+                        _upsertList(petData)
                     }
                     for id in ids {
-                        _ = removePet(id: id)
+                        _ = remove(id: id)
                     }
                     //Insert
                 }else{
                     for petData in petsData {
-                        upsertPetList(petData)
+                        _upsertList(petData)
                     }
                 }
-                getPets(callback)
+                
+                if ( pets != nil && pets!.count > 0) || petsData.count > 0 {
+                    get(callback)
+                }else{
+                    callback(nil, nil)
+                }
             })
         }else{
-            callback(PetError.PetsNotFoundInResponse, nil)
+            callback(DataManagerError(responseError: ResponseError.NotFound), nil)
         }
     }
     
     static func set(_ deviceCode: String, _ id: Int16, _ callback:petErrorCallback){
-        getPet(id) { (error, pet) in
+        get(id) { (error, pet) in
             if error == nil, let pet = pet {
                 do {
                     pet.deviceCode = deviceCode
@@ -165,41 +176,37 @@ class PetManager {
                     callback(nil)
                 }catch {
                     debugPrint(error)
-                    callback(PetError.PetsNotFoundInResponse)
+                    callback(DataManagerError(error: error))
                 }
             }else{
-                callback(error)
+                callback(DataManagerError(error: error))
             }
         }
     }
     
-    static func getPet(_ id:Int16, _ callback:petCallback) {
+    static func get(_ id:Int16, _ callback:petCallback) {
         
         if let results = CoreDataManager.Instance.retrieve("Pet", with: NSPredicate("id", .equal, id)) as? [Pet] {
             if results.count > 1 {
-                callback(PetError.MoreThenOnePet, nil)
+                callback(DataManagerError.init(DBError: DatabaseError.DuplicatedEntry), nil)
             }else{
                 callback(nil, results.first!)
             }
         }else{
-            callback(PetError.PetNotFoundInDataBase, nil)
+            callback(DataManagerError.init(DBError: DatabaseError.NotFound), nil)
         }
     }
     
-    static func getPets(_ callback:petsCallback) {
+    static func get(_ callback:petsCallback) {
 
         if let results = CoreDataManager.Instance.retrieve("Pet", sortedBy: [NSSortDescriptor(key: "name", ascending: true)]) as? [Pet] {
-            if results.count > 0 {
-                callback(nil, results)
-            }else{
-                callback(PetError.PetNotFoundInDataBase, nil)
-            }
+            callback(nil, results)
         }else{
-            callback(PetError.PetNotFoundInDataBase, nil)
+            callback(DataManagerError.init(DBError: DatabaseError.NotFound), nil)
         }
     }
     
-    static func removePet(id: Int16) -> Bool {
+    static func remove(id: Int16) -> Bool {
         do {
             try CoreDataManager.Instance.delete(entity: "Pet", withPredicate: NSPredicate("id", .equal, id))
             return true

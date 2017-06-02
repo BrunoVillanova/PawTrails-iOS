@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol EditUserProfileView: NSObjectProtocol, View {
+protocol EditUserProfileView: NSObjectProtocol, View, LoadingView {
     func loadData()
     func saved()
 }
@@ -72,7 +72,8 @@ class EditUserProfilePresenter {
     }
     
     func getGender() -> Gender? {
-        return Gender.build(code: data["gender"] as? String)
+        if let code = data["gender"] as? Int16 { return Gender(rawValue: code) }
+        return nil
     }
     
     func getBirthday() -> Date? {
@@ -136,21 +137,22 @@ class EditUserProfilePresenter {
     
     
     func save() {
-        
+        view?.beginLoadingContent()
         if let imageData = imageData {
             var data = [String:Any]()
             data["path"] = "user"
             data["userid"] = SharedPreferences.get(.id)
             data["picture"] = imageData
             
-            DataManager.Instance.set(image: data, callback: { (success) in
-                if success {
+            DataManager.Instance.set(image: data, callback: { (error) in
+                if let error = error {
+                    DispatchQueue.main.async {
+                        self.view?.endLoadingContent()
+                        self.view?.errorMessage(error.msg)
+                    }
+                }else{
                     self.imageData = nil
                     self.save()
-                }else{
-                    DispatchQueue.main.async {
-                        self.view?.errorMessage(ErrorMsg(title: "", msg: "couldn't upload the image"))
-                    }
                 }
             })
         }else{
@@ -158,12 +160,16 @@ class EditUserProfilePresenter {
             data.filter(by: ["image", "imageURL", "birthday"])
             data["mobile"] = phone?.getJson()
             data["address"] = address?.getJson()
+            data["gender"] = getGender()?.code ?? ""
             
-            DataManager.Instance.set(user: data) { (error, user) in
-                if error == nil {
-                    DispatchQueue.main.async(execute: { () -> Void in
+            DataManager.Instance.save(user: data) { (error, user) in
+                DispatchQueue.main.async {
+                    self.view?.endLoadingContent()
+                    if let error = error {
+                        self.view?.errorMessage(error.msg)
+                    }else{
                         self.view?.saved()
-                    })
+                    }
                 }
             }
         }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias petUsersCallback = (_ error:PetError?, _ users:[PetUser]?) -> Void
+typealias petUsersCallback = (_ error:DataManagerError?, _ users:[PetUser]?) -> Void
 
 class PetUserManager {
     
@@ -45,7 +45,7 @@ class PetUserManager {
     static func upsert(_ data: [String:Any], into petId: Int16){
         
         if let petUsersData = data["users"] as? [[String:Any]] {
-            PetManager.getPet(petId) { (error, pet) in
+            PetManager.get(petId) { (error, pet) in
                 if error == nil, let pet = pet {
                     do {
                         let users = pet.mutableSetValue(forKey: "users")
@@ -66,7 +66,7 @@ class PetUserManager {
         }
     }
     
-    static func upsertFriends(_ data: [String:Any]){
+    static func upsertFriends(_ data: [String:Any], callback: petUsersCallback? = nil){
         
         if let petUsersData = data["friendlist"] as? [[String:Any]] {
             
@@ -83,20 +83,30 @@ class PetUserManager {
                         }
                         user.setValue(friends, forKey: "friends")
                         try CoreDataManager.Instance.save()
+                        if let callback = callback { callback(nil, friends.allObjects as? [PetUser]) }
+                        return
                     }catch{
                         debugPrint(error)
+                        if let callback = callback { callback(DataManagerError(error: error), nil) }
+                        return
                     }
+                }else{
+                    if let callback = callback { callback(error, nil) }
+                    return
                 }
             })
+        }else if let callback = callback {
+            callback(DataManagerError(responseError: ResponseError.NotFound), nil)
+            return
         }
     }
     
     static func get(for petId:Int16, callback: @escaping petUsersCallback){
-        PetManager.getPet(petId) { (error, pet) in
+        PetManager.get(petId) { (error, pet) in
             if let pet = pet, let users = pet.users?.allObjects as? [PetUser] {
                 callback(nil, users)
             }else{
-                callback(PetError.MoreThenOnePet, nil)
+                callback(DataManagerError(DBError: DatabaseError.DuplicatedEntry), nil)
             }
         }
     }
@@ -107,7 +117,7 @@ class PetUserManager {
             if let user = user {
                 callback(nil,user.friends?.allObjects as? [PetUser])
             }else{
-                callback(PetError.PetNotFoundInDataBase, nil)
+                callback(DataManagerError(DBError: DatabaseError.NotFound), nil)
             }
         })
     }

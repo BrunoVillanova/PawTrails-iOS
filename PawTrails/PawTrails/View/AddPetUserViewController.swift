@@ -12,7 +12,8 @@ class AddPetUserViewController: UIViewController, UITableViewDataSource, UITable
 
     @IBOutlet weak var tableView: UITableView!
     
-    var pet:Pet!
+    var petName: String!
+    var petId: Int16!
     
     fileprivate let presenter = AddPetUserPresenter()
     
@@ -21,7 +22,8 @@ class AddPetUserViewController: UIViewController, UITableViewDataSource, UITable
         presenter.attachView(self)
         
         navigationItem.title = "Add User"
-        navigationItem.prompt = pet.name
+        navigationItem.prompt = petName
+
     }
     
     deinit {
@@ -30,7 +32,7 @@ class AddPetUserViewController: UIViewController, UITableViewDataSource, UITable
     
     @IBAction func doneAction(_ sender: UIBarButtonItem?) {
         view.endEditing(true)
-        presenter.addPetUser(by: emailTextField()?.text, to: pet.id)
+        presenter.addPetUser(by: emailTextField()?.text, to: petId)
     }
     // MARK: - AddPetUserView
     
@@ -43,9 +45,11 @@ class AddPetUserViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func successfullyAdded() {
-        
-        if let petProfile = navigationController?.viewControllers.first(where: { $0 is PetsPageViewController}) as? PetsPageViewController {
-            navigationController?.popToViewController(petProfile, animated: true)
+        if let parent = navigationController?.viewControllers.first(where: { $0 is PetsPageViewController}) as? PetsPageViewController {
+            if let profile = parent.profileTableViewController {
+                profile.reloadUsers()
+            }
+            navigationController?.popToViewController(parent, animated: true)
         }
     }
     
@@ -93,6 +97,9 @@ class AddPetUserViewController: UIViewController, UITableViewDataSource, UITable
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "emailCell", for: indexPath) as! singleTextFormTableViewCell
             cell.textField.delegate = self
+            if #available(iOS 10.0, *) {
+                cell.textField.textContentType = UITextContentType.emailAddress
+            }
             if presenter.friends.count == 0 {
                 cell.textField.becomeFirstResponder()
             }
@@ -100,7 +107,7 @@ class AddPetUserViewController: UIViewController, UITableViewDataSource, UITable
         }else if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "friendsCell", for: indexPath)
             let friend = presenter.friends[indexPath.row]
-            let fullName = "\(friend.name ?? "") \(friend.surname ?? "")"
+            let fullName = (friend.name == nil && friend.name == nil) ?  friend.email ?? "-" : "\(friend.name ?? "") \(friend.surname ?? "")"
             cell.textLabel?.text = fullName
             return cell
         }else{
@@ -113,7 +120,7 @@ class AddPetUserViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         view.endEditing(true)
         let user = presenter.friends[indexPath.row]
-        presenter.addPetUser(by: user.email, to: pet.id)
+        presenter.addPetUser(by: user.email, to: petId)
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

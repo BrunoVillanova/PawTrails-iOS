@@ -60,6 +60,7 @@
     </entity>
     <entity name="SafeZone" representedClassName="SafeZone" syncable="YES">
         <attribute name="active" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="point1" optional="YES" attributeType="Transformable" customClassName="Point" syncable="YES"/>
@@ -89,7 +90,7 @@
         <element name="Pet" positionX="-63" positionY="-18" width="128" height="315"/>
         <element name="PetUser" positionX="-27" positionY="135" width="128" height="180"/>
         <element name="Phone" positionX="-18" positionY="117" width="128" height="90"/>
-        <element name="SafeZone" positionX="-18" positionY="144" width="128" height="165"/>
+        <element name="SafeZone" positionX="-18" positionY="144" width="128" height="180"/>
         <element name="User" positionX="-36" positionY="45" width="128" height="225"/>
     </elements>
 </model>

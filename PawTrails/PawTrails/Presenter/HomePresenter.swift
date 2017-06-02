@@ -11,6 +11,7 @@ import Foundation
 protocol HomeView: NSObjectProtocol, View, ConnectionView {
     func loadMapElements()
     func reload()
+    func noPetsFound()
 //    func startTracking(_ id: Int16, _ name: String, lat:Double, long:Double)
 //    func updateTracking(_ id: Int16, lat:Double, long:Double)
 //    func stopTracking(_ id: Int16)
@@ -44,10 +45,10 @@ class HomePresenter {
                 if error == nil && user != nil {
                     self.user = user
                     self.view?.reload()
-                }else if error == UserError.NotAuthenticated {
+                }else if error?.APIError?.errorCode == ErrorCode.Unauthorized {
                     self.view?.userNotSigned()
-                }else{
-                    self.view?.errorMessage(ErrorMsg(title: "Unable to get user info", msg: "\(String(describing: error))"))
+                }else if let error = error {
+                    self.view?.errorMessage(error.msg)
                 }
             }
         }
@@ -63,8 +64,12 @@ class HomePresenter {
                     self.pets = pets
                     self.view?.loadMapElements()
                     self.getSafeZones()
-                }else{
-                    self.view?.errorMessage(ErrorMsg(title: "Unable to get user info", msg: "\(String(describing: error))"))
+                }else if let error = error {
+                    if error.DBError == DatabaseError.NotFound {
+                        self.view?.noPetsFound()
+                    }else{
+                        self.view?.errorMessage(error.msg)
+                    }
                 }
             }
         }

@@ -31,6 +31,7 @@ class APITablesTests: XCTestCase {
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(data, "No data :(")
+            XCTAssertNotNil(data?["classes"], "No Tables")
             expect.fulfill()
         }
         
@@ -48,6 +49,7 @@ class APITablesTests: XCTestCase {
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(data, "No data :(")
+            XCTAssertNotNil(data?["breeds"], "No Tables")
             expect.fulfill()
         }
         
@@ -65,6 +67,7 @@ class APITablesTests: XCTestCase {
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(data, "No data :(")
+            XCTAssertNotNil(data?["breeds"], "No Tables")
             expect.fulfill()
         }
         
@@ -73,20 +76,20 @@ class APITablesTests: XCTestCase {
         }
     }
     
-//    func testPetBreedsError() {
-//        let expect = expectation(description: "Breeds")
-//        
-//        APIManager.Instance.perform(call: .getBreeds, withKey: "") { (error, data) in
-//            
-//            XCTAssertNotNil(error)
-//            XCTAssert(error?.errorCode == ErrorCode.MissingUserId, "Wrong Error \(String(describing: error?.errorCode))")
-//            expect.fulfill()
-//        }
-//        
-//        waitForExpectations(timeout: 100) { error in
-//            XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
-//        }
-//    }
+    func testPetBreedsError() {
+        let expect = expectation(description: "Breeds")
+        
+        APIManager.Instance.perform(call: .getBreeds, withKey: "") { (error, data) in
+            
+            XCTAssertNotNil(error)
+            XCTAssert(error?.errorCode == ErrorCode.NotFound, "Wrong Error \(String(describing: error?.errorCode))")
+            expect.fulfill()
+        }
+        
+        waitForExpectations(timeout: 100) { error in
+            XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
+        }
+    }
     
     func testCountriesOk() {
         
@@ -96,6 +99,7 @@ class APITablesTests: XCTestCase {
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(data, "No data :(")
+            XCTAssertNotNil(data?["countries"], "No Tables")
             expect.fulfill()
         }
         
@@ -112,6 +116,7 @@ class APITablesTests: XCTestCase {
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(data, "No data :(")
+            XCTAssertNotNil(data?["continents"], "No Tables")
             expect.fulfill()
         }
         

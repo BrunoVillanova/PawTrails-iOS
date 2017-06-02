@@ -8,8 +8,8 @@
 
 import Foundation
 
-typealias breedsCallback = ((_ error:BreedError?, _ breeds:[Breed]?) -> Void)
-typealias breedCallback = (_ error:BreedError?, _ breed:Breed?) -> Void
+typealias breedsCallback = ((_ error:DataManagerError?, _ breeds:[Breed]?) -> Void)
+typealias breedCallback = (_ error:DataManagerError?, _ breed:Breed?) -> Void
 
 class BreedManager {
     
@@ -30,13 +30,15 @@ class BreedManager {
                     }
                 }
             } catch {
-                print(error)
-                if let callback = callback { callback(BreedError.MoreThenOneBreed, nil) }
+                debugPrint(error)
+                if let callback = callback { callback(DataManagerError(error: error), nil)}
+                return
             }
             if let callback = callback { retrieve(for: type, callback: callback) }
+        }else if let callback = callback {
+            callback(DataManagerError.init(responseError: ResponseError.NotFound), nil)
         }
     }
-
 
     static func retrieve(for type:Type, callback: breedsCallback? = nil) {
         if let breeds =  CoreDataManager.Instance.retrieve("Breed", with: NSPredicate("type", .equal, type.rawValue), sortedBy: [NSSortDescriptor.init(key: "name", ascending: true)]) as? [Breed] {
@@ -44,7 +46,7 @@ class BreedManager {
                 callback(nil, breeds)
             }
         }else if let callback = callback {
-            callback(BreedError.BreedNotFoundInDataBase, nil)
+            callback(DataManagerError(DBError: DatabaseError.NotFound), nil)
         }
     }
     
@@ -53,14 +55,14 @@ class BreedManager {
             if breeds.count == 1 {
                 callback(nil, breeds.first)
             }else{
-                callback(BreedError.MoreThenOneBreed, nil)
+                callback(DataManagerError(DBError: DatabaseError.DuplicatedEntry), nil)
             }
         }else{
             DataManager.Instance.loadBreeds(for: type, callback: { (error, breeds) in
                 if error == nil, let breeds = breeds {
                     callback(nil, breeds.first(where: { $0.id == Int16(breedId) && $0.type == type.rawValue}))
                 }else{
-                    callback(BreedError.BreedNotFoundInDataBase, nil)
+                    callback(DataManagerError(DBError: DatabaseError.NotFound), nil)
                 }
             })
         }

@@ -54,8 +54,8 @@ class ChangePasswordPresenter {
         }else{
             AuthManager.Instance.changeUsersPassword(userEmail, password, newPassword, completition: { (error) in
                 DispatchQueue.main.async {
-                    if error != nil {
-                        self.view?.errorMessage(error!)
+                    if let error = error {
+                        self.view?.errorMessage(error.msg)
                     }else{
                         self.view?.passwordChanged()
                     }

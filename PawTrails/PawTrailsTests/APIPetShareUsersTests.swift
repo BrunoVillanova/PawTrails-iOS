@@ -114,8 +114,16 @@ class APIPetShareUsersTests: XCTestCase {
                     data["email"] = self.email
                     
                     APIManager.Instance.perform(call: .sharePet, withKey: petId, with: data) { (error, data) in
-                        assert(error == nil, "Error \(String(describing: error))")
-                        assert(data != nil, "No Data returned")
+                        XCTAssertNil(error, "Error \(String(describing: error))")
+                        XCTAssertNotNil(data, "No data :(")
+                        
+                        if let data = data {
+                            XCTAssertNotNil(data["id"] as? String, "id")
+                            XCTAssertNotNil(data["email"] as? String, "email")
+                            XCTAssertNotNil(data["is_owner"] as? Bool, "is_owner")
+                        }else{
+                            XCTFail()
+                        }
                         
                         if let id = data?.tryCastInteger(for: "id") {
                             self.remove(sharedUser: id, from: petId, callback: { (success) in
@@ -124,7 +132,6 @@ class APIPetShareUsersTests: XCTestCase {
                                 expect.fulfill()
                             })
                         }
-                        
                     }
                 }
             }
@@ -453,7 +460,7 @@ class APIPetShareUsersTests: XCTestCase {
                             SharedPreferences.set(.id, with: id)
                             SharedPreferences.set(.token, with: token)
                             
-                            APIManager.Instance.perform(call: .leaveSharedPet, withKey: petId, with: nil, completition: { (error, data) in
+                            APIManager.Instance.perform(call: .leaveSharedPet, withKey: petId, completition: { (error, data) in
                                 
                                 XCTAssertNil(error, "Error \(String(describing: error))")
                                 XCTAssertNotNil(data, "No data :(")

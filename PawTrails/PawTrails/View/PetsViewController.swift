@@ -15,6 +15,8 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     fileprivate let presenter = PetsPresenter()
     
+    var locationTime: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,6 +24,8 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         presenter.attachView(self)
         noPetsFound.isHidden = true
         UIApplication.shared.statusBarStyle = .lightContent
+        
+
     }
     
     deinit {
@@ -33,6 +37,24 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
             tableView.deselectRow(at: index, animated: true)
         }
         presenter.loadPets()
+        //DispatchQueue in the future
+        
+        
+        SocketIOManager.Instance.getPetGPSData(id: 25) { (error,data) in
+            if let data = data {
+                data.point.coordinates.getStreetFullName(handler: { (name) in
+                    DispatchQueue.main.async {
+                        if let name = name {
+                            self.locationTime = "\(name)\n\(data.distanceTime)"
+                            self.tableView.reloadData()
+                        }
+                    }
+                })
+            }else{
+                self.alert(title: "", msg: "couldn't get realtime updates", type: .red)
+            }
+        }
+ 
     }
 
     // MARK: - PetsView
@@ -67,13 +89,17 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! petListCell
         let pet = indexPath.section == 0 ? presenter.ownedPets[indexPath.row] : presenter.sharedPets[indexPath.row]
+        cell.batteryImageView.circle()
+        cell.batteryImageView.backgroundColor = UIColor.orange()
+        cell.signalImageView.circle()
+        cell.signalImageView.backgroundColor = UIColor.orange()
         cell.titleLabel.text = pet.name
         if let imageData = pet.image as Data? {
             cell.petImageView.image = UIImage(data: imageData)
         }else{
             cell.petImageView.image = nil
         }
-        cell.subtitleLabel.text = pet.breeds
+        cell.subtitleLabel.text = self.locationTime
         cell.petImageView.circle()
         cell.trackButton.circle()
         cell.trackButton.addTarget(self, action: #selector(PetsViewController.trackButtonAction(sender:)), for: .touchUpInside)
@@ -116,6 +142,8 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
 class petListCell: UITableViewCell {
     @IBOutlet weak var petImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var signalImageView: UIImageView!
+    @IBOutlet weak var batteryImageView: UIImageView!
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var trackButton: UIButton!
 }

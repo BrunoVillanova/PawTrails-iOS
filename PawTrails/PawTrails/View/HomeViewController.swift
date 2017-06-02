@@ -49,9 +49,7 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     
     var selectedPet: Pet?
     var selectedSafeZone: SafeZone?
-    
-    var petCoordinates = [CLLocationCoordinate2D]()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -135,16 +133,15 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     
     func loadMapElements(){
         // Pets
-        petCoordinates.removeAll()
         for pet in presenter.pets {
             let location = CLLocationCoordinate2D.CorkRandom
             let id = MKLocationId(id: pet.id, type: .pet)
             let color = pet.isOwner ? UIColor.orange() : UIColor.darkGray
             
-            petCoordinates.append(location)
-            
             if annotations[id] == nil {
                 startTracking(id, coordinate: location, color: color)
+                print(id)
+                launchSocketIO(for: id)
             }else{
                 updateTracking(id, coordinate: location)
             }
@@ -168,6 +165,21 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
         focusOnPets()
     }
     
+    func launchSocketIO(for key:MKLocationId){
+
+        SocketIOManager.Instance.getPetGPSData(id: 25, withUpdates: true, callback: { (error, data) in
+                if let data = data {
+                    print("Update Position \(data.point.toDict) \(key.id)")
+                    self.updateTracking(key, coordinate: data.point.coordinates)
+                    if !(!self.petDetailView.isHidden || !self.safeZoneDetailView.isHidden) {
+                        DispatchQueue.main.async {
+                            self.focusOnPets()
+                        }
+                    }
+                }
+            })
+    }
+    
     func reload() {
         self.petTitleLabel.text = self.presenter.user.name
         self.petSubtitleLabel.text = self.presenter.user.surname
@@ -184,7 +196,7 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     
     func stopTracking(_ id: MKLocationId) {
         guard let a = self.annotations[id] else {
-            self.errorMessage(ErrorMsg(title:"", msg:""))
+//            self.errorMessage(ErrorMsg(title:"", msg:""))
             return
         }
         self.mapView.removeAnnotation(a)
@@ -195,6 +207,10 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
         if let vc = self.storyboard?.instantiateViewController(withIdentifier: "InitialViewController") as? InitialViewController {
             self.present(vc, animated: true, completion: nil)
         }
+    }
+    
+    func noPetsFound() {
+        alert(title: "", msg: "No pets found", type: .blue)
     }
     
     // MARK: - Connection Notifications
@@ -210,35 +226,7 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     // MARK: - MKMapViewDelegate
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        if annotation is MKLocation {
-            // Better to make this class property
-            let annotationIdentifier = "mkl"
-            
-            var annotationView: MKAnnotationView?
-            if let dequeuedAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier) {
-                annotationView = dequeuedAnnotationView
-                annotationView?.annotation = annotation
-            }
-            else {
-                annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
-                annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-            }
-            
-            if let annotationView = annotationView {
-                let mkl = annotation as! MKLocation
-                
-                // Annotation
-                annotationView.canShowCallout = false
-                annotationView.frame.size = CGSize(width: 20, height: 20)
-                
-                annotationView.circle()
-                annotationView.backgroundColor = UIColor.white
-                annotationView.border(color: mkl.color, width: 2.0)
-                annotationView.clipsToBounds = false
-            }
-            return annotationView
-        }
-        return nil
+        return mapView.getAnnotationView(annotation: annotation)
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
@@ -268,7 +256,8 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     }
     
     func focusOnPets(){
-        mapView.setVisibleMapFor(self.petCoordinates)
+        let coordinates = Array(self.annotations.values).filter({ $0.id.type == .pet }).map({ $0.coordinate })
+        mapView.setVisibleMapFor(coordinates)
     }
     
     func showPetDetails(_ pet: Pet) {

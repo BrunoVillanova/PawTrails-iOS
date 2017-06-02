@@ -9,13 +9,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PawTrails/Model/PetUserManager.swift"
-            timestampString = "517421696.68539"
+            filePath = "PawTrails/Model/SocketIOManager.swift"
+            timestampString = "518109320.742399"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
-            landmarkName = "upsertFriends(_:)"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "getPetGPSData(id:withUpdates:callback:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,44 +25,44 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PawTrails/Model/PetUserManager.swift"
-            timestampString = "517421700.283073"
+            filePath = "PawTrails/Model/SocketIOManager.swift"
+            timestampString = "518100844.451978"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
-            landmarkName = "upsertFriends(_:)"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "establishConnection(_:)"
             landmarkType = "7">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "static PawTrails.PetUserManager.upsertFriends (Swift.Dictionary&lt;Swift.String, Any&gt;) -&gt; ()"
+                  symbolName = "PawTrails.SocketIOManager.(establishConnection (Swift.Optional&lt;() -&gt; ()&gt;) -&gt; ()).(closure #1)"
                   moduleName = "PawTrails"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/iosdeveloper/Documents/Xcode%20Projects/PawTrails/PawTrails/PawTrails/Model/PetUserManager.swift"
-                  timestampString = "517421700.511323"
+                  urlString = "file:///Users/iosdeveloper/Documents/Xcode%20Projects/PawTrails/PawTrails/PawTrails/Model/SocketIOManager.swift"
+                  timestampString = "518100844.673032"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "71"
-                  endingLineNumber = "71"
-                  offsetFromSymbolStart = "20">
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
+                  offsetFromSymbolStart = "36">
                </Location>
                <Location
                   shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "static PawTrails.PetUserManager.upsertFriends (Swift.Dictionary&lt;Swift.String, Any&gt;) -&gt; ()"
+                  symbolName = "PawTrails.SocketIOManager.(establishConnection (Swift.Optional&lt;() -&gt; ()&gt;) -&gt; ()).(closure #1)"
                   moduleName = "PawTrails"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/iosdeveloper/Documents/Xcode%20Projects/PawTrails/PawTrails/PawTrails/Model/PetUserManager.swift"
-                  timestampString = "517421700.513539"
+                  urlString = "file:///Users/iosdeveloper/Documents/Xcode%20Projects/PawTrails/PawTrails/PawTrails/Model/SocketIOManager.swift"
+                  timestampString = "518100844.674363"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "71"
-                  endingLineNumber = "71"
-                  offsetFromSymbolStart = "272">
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
+                  offsetFromSymbolStart = "148">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -73,46 +73,14 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PawTrails/Model/PetUserManager.swift"
-            timestampString = "517421758.279421"
+            filePath = "PawTrails/Model/SocketIOManager.swift"
+            timestampString = "518109320.742399"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
-            landmarkName = "upsert(_:)"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
+            landmarkName = "getPetGPSData(id:withUpdates:callback:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static PawTrails.PetUserManager.upsert (Swift.Dictionary&lt;Swift.String, Any&gt;) -&gt; Swift.Optional&lt;PawTrails.PetUser&gt;"
-                  moduleName = "PawTrails"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/iosdeveloper/Documents/Xcode%20Projects/PawTrails/PawTrails/PawTrails/Model/PetUserManager.swift"
-                  timestampString = "517421922.666745"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "19"
-                  endingLineNumber = "19"
-                  offsetFromSymbolStart = "32">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static PawTrails.PetUserManager.upsert (Swift.Dictionary&lt;Swift.String, Any&gt;) -&gt; Swift.Optional&lt;PawTrails.PetUser&gt;"
-                  moduleName = "PawTrails"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/iosdeveloper/Documents/Xcode%20Projects/PawTrails/PawTrails/PawTrails/Model/PetUserManager.swift"
-                  timestampString = "517421922.668442"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "19"
-                  endingLineNumber = "19"
-                  offsetFromSymbolStart = "92">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

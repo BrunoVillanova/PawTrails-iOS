@@ -43,18 +43,40 @@ class APIPetSafeZonesTests: XCTestCase {
             
             if let petid = pet?.tryCastInteger(for: "id") {
                 
-                var data = [String:Any]()
-                data["name"] = "SZ Test"
-                data["shape"] = Shape.circle.code
-                data["point1"] = self.point1
-                data["point2"] = self.point2
-                data["active"] = true
-                data["petid"] = petid
+                var _data = [String:Any]()
+                _data["name"] = "SZ Test"
+                _data["shape"] = Shape.circle.code
+                _data["point1"] = self.point1
+                _data["point2"] = self.point2
+                _data["active"] = true
+                _data["petid"] = petid
                 
-                APIManager.Instance.perform(call: .addSafeZone, with: data) { (error, data) in
+                APIManager.Instance.perform(call: .addSafeZone, with: _data) { (error, data) in
                     XCTAssertNil(error, "Error \(String(describing: error))")
                     XCTAssertNotNil(data, "No data :(")
                     
+                    if let data = data {
+                        XCTAssert(data["name"] as? String == _data["name"] as? String, "name")
+                        XCTAssert(data["shape"] as? Int == _data["shape"] as? Int, "shape")
+                        
+                        if let p1 = data["point1"] as? [String:Any] {
+                            XCTAssert(p1["lat"] as? Double == self.point1["lat"] as? Double, "lat")
+                            XCTAssert(p1["lon"] as? Double == self.point1["lon"] as? Double, "lat")
+                        }else{
+                            XCTFail()
+                        }
+                        
+                        if let p2 = data["point2"] as? [String:Any] {
+                            XCTAssert(p2["lat"] as? Double == self.point2["lat"] as? Double, "lat")
+                            XCTAssert(p2["lon"] as? Double == self.point2["lon"] as? Double, "lon")
+                        }else{
+                            XCTFail()
+                        }
+                        XCTAssert(data["active"] as? Bool == _data["active"] as? Bool, "active")
+                    }else{
+                        XCTFail()
+                    }
+
                     if let id = data?.tryCastInteger(for: "id") {
                         callback(petid, id)
                     }else{
@@ -64,6 +86,7 @@ class APIPetSafeZonesTests: XCTestCase {
             }
         }
     }
+    
     
     func remove(safezone id: Int, callback: @escaping ((Bool)->())){
         APIManager.Instance.perform(call: .removeSafeZone, withKey: id) { (error, data) in
@@ -82,17 +105,39 @@ class APIPetSafeZonesTests: XCTestCase {
             
             if let id = pet?.tryCastInteger(for: "id") {
                 
-                var data = [String:Any]()
-                data["name"] = "SZ Test"
-                data["shape"] = Shape.circle.code
-                data["point1"] = self.point1
-                data["point2"] = self.point2
-                data["active"] = true
-                data["petid"] = id
+                var _data = [String:Any]()
+                _data["name"] = "SZ Test"
+                _data["shape"] = Shape.circle.code
+                _data["point1"] = self.point1
+                _data["point2"] = self.point2
+                _data["active"] = true
+                _data["petid"] = id
                 
-                APIManager.Instance.perform(call: .addSafeZone, with: data) { (error, data) in
+                APIManager.Instance.perform(call: .addSafeZone, with: _data) { (error, data) in
                     XCTAssertNil(error, "Error \(String(describing: error))")
                     XCTAssertNotNil(data, "No data :(")
+                    
+                    if let data = data {
+                        XCTAssert(data["name"] as? String == _data["name"] as? String, "name")
+                        XCTAssert(data["shape"] as? Int == _data["shape"] as? Int, "shape")
+                        
+                        if let p1 = data["point1"] as? [String:Any] {
+                            XCTAssert(p1["lat"] as? Double == self.point1["lat"] as? Double, "lat")
+                            XCTAssert(p1["lon"] as? Double == self.point1["lon"] as? Double, "lat")
+                        }else{
+                            XCTFail()
+                        }
+                        
+                        if let p2 = data["point2"] as? [String:Any] {
+                            XCTAssert(p2["lat"] as? Double == self.point2["lat"] as? Double, "lat")
+                            XCTAssert(p2["lon"] as? Double == self.point2["lon"] as? Double, "lon")
+                        }else{
+                            XCTFail()
+                        }
+                        XCTAssert(data["active"] as? Bool == _data["active"] as? Bool, "active")
+                    }else{
+                        XCTFail()
+                    }
                     
                     if let id = data?.tryCastInteger(for: "id") {
                         self.remove(safezone: id, callback: { (success) in
@@ -204,18 +249,40 @@ class APIPetSafeZonesTests: XCTestCase {
             
             if let petid = petid, let id = id {
                 
-                var data = [String:Any]()
-                data["id"] = id
-                data["name"] = "SZ Test"
-                data["shape"] = Shape.circle.code
-                data["point1"] = self.point1
-                data["point2"] = self.point2
-                data["active"] = true
-                data["petid"] = petid
+                var _data = [String:Any]()
+                _data["id"] = id
+                _data["name"] = "SZ Test"
+                _data["shape"] = Shape.circle.code
+                _data["point1"] = self.point1
+                _data["point2"] = self.point2
+                _data["active"] = true
+                _data["petid"] = petid
                 
-                APIManager.Instance.perform(call: .setSafeZone, with: data) { (error, data) in
+                APIManager.Instance.perform(call: .setSafeZone, with: _data) { (error, data) in
                     XCTAssertNil(error, "Error \(String(describing: error))")
                     XCTAssertNotNil(data, "No data :(")
+                    
+                    if let data = data {
+                        XCTAssert(data["name"] as? String == _data["name"] as? String, "name")
+                        XCTAssert(data["shape"] as? Int == _data["shape"] as? Int, "shape")
+                        
+                        if let p1 = data["point1"] as? [String:Any] {
+                            XCTAssert(p1["lat"] as? Double == self.point1["lat"] as? Double, "lat")
+                            XCTAssert(p1["lon"] as? Double == self.point1["lon"] as? Double, "lat")
+                        }else{
+                            XCTFail()
+                        }
+                        
+                        if let p2 = data["point2"] as? [String:Any] {
+                            XCTAssert(p2["lat"] as? Double == self.point2["lat"] as? Double, "lat")
+                            XCTAssert(p2["lon"] as? Double == self.point2["lon"] as? Double, "lon")
+                        }else{
+                            XCTFail()
+                        }
+                        XCTAssert(data["active"] as? Bool == _data["active"] as? Bool, "active")
+                    }else{
+                        XCTFail()
+                    }
                     
                     self.remove(safezone: id, callback: { (success) in
                         XCTAssert(success, "Not removes properly")

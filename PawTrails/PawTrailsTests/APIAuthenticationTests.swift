@@ -27,7 +27,13 @@ class APIAuthenticationTests: XCTestCase {
             guard let id = userData.tryCastInteger(for: "id") else {
                 fatalError("id missing")
             }
-            callback("\(id)",token)
+            UserManager.upsert(userData, callback: { (error, user) in
+                if error != nil || user == nil {
+                    fatalError("couldn't load user")
+                }
+                callback("\(id)",token)
+            })
+            
         }
     }
     

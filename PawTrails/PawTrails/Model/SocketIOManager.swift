@@ -18,42 +18,44 @@ import Foundation
 
 import UIKit
 
+enum Listener: String {
+    case gpsUpdates = "GPS"
+    case unknown = "-"
+    
+    var notificationName: NSNotification.Name {
+        return Notification.Name(rawValue: self.rawValue)
+    }
+}
+
 class SocketIOManager: NSObject {
     
     static let Instance = SocketIOManager()
     
-//    enum Notifications: String {
-//        case receivedPoint = "receivedPoint"
-//    }
-   
-//    private var socket: SocketIOClient = SocketIOClient(socketURL: URL(string: "http://192.168.1.11:3000")!)
-//    private var socket: SocketIOClient = SocketIOClient(socketURL: URL(string: "http://localhost:3000")!)
+//    private let urlString = "http://eu.pawtrails.pet:4654"
+    private let urlString = "http://eu.pawtrails.pet:2004"
+    private var socket: SocketIOClient!
     
-    //    private var socket: SocketIOClient {
-    //        if #available(iOS 10.0, *) {
-    //            return SocketIOClient(socketURL: URL(string: "http://192.168.1.7:3000")!)
-    //        } else {
-    //            return SocketIOClient(socketURL: URL(string: "http://localhost:3000")!)
-    //        }
-    //    }
-    
-    private var socket: SocketIOClient {
-        
-        guard let token = SharedPreferences.get(.token) else {
-            return SocketIOClient(socketURL: URL(string: "http://192.168.1.11:3000")!)
-        }
-        return SocketIOClient(socketURL: URL(string: "http://192.168.1.11:3000")!, config: [.connectParams(["token":token])])
-    }
+    private var openGPSUpdates = [Int16:Bool]()
     
     override init() {
+//        if let token = SharedPreferences.get(.token) {
+//            socket = SocketIOClient(socketURL: URL(string: urlString)!, config: [.connectParams(["token":token, "user":"94"]), .log(true)])
+//            socket = SocketIOClient(socketURL: URL(string: urlString)!, config: [.connectParams(["token":token, "user":"94"])])
+//        }else {
+            socket = SocketIOClient(socketURL: URL(string: urlString)!)
+//        }
         super.init()
     }
     
     
-    func establishConnection() {
+    func establishConnection(_ callback: (()->())? = nil) {
+        socket.on("connect") { (data, ack) in
+            if let token = SharedPreferences.get(.token) {
+                self.socket.emit("authCheck", with: [token])
+            }
+            if let callback = callback { callback() }
+        }
         socket.connect()
-        
-        
     }
     
     
@@ -74,52 +76,57 @@ class SocketIOManager: NSObject {
         }
     }
     
-    func launch(name:String, frequency: Int = 1000) {
+    //Pet
+    
+    typealias socketIOCallback = (SocketIOError?,GPSData?) -> Void
+    
+    func getPetGPSData(id: Int16, withUpdates: Bool = false, callback: @escaping socketIOCallback){
+        
+        if withUpdates {
+            socket.on("gpsData", callback: { (data, ack) in
+                debugPrint("gpsData Update response", data, ack)
+                self.handleGPSUpdates(data, callback: callback)
+            })
+        }else{
+            socket.once("gpsData", callback: { (data, ack) in
+                debugPrint("gpsData response", data, ack)
+                self.handleGPSUpdates(data, callback: callback)
+            })
+        }
+        
         if isConnected() {
-            socket.emit("launch", self.masc(name), frequency)
+            self.startPetUpdates(for: id)
         }else{
-            print(connectionStatus())
+            establishConnection({ 
+                self.startPetUpdates(for: id)
+            })
         }
     }
     
-    func stop(name:String){
-        if socket.status == SocketIOClientStatus.connected {
+    
+    func startPetUpdates(for id: Int16) {
+        
+        if socket.status == .connected {
+            debugPrint("emit", id)
+            socket.emit("room", "\(Int(id))")
+        }
+    }
+    
+    private func handleGPSUpdates(_ data: [Any], callback: @escaping socketIOCallback) {
+    
+        if let json = data.first as? [String:Any] {
             
-            socket.emit("stop", self.masc(name))
-        }else{
-            print(socket.status.rawValue)
-        }
-    }
-    
-    func listen(name:String, _ completionHandler: @escaping (_ latitude:Double, _ longitude:Double) -> Void) {
-        socket.on(self.masc(name)) { (dataArray, socketAck) -> Void in
-            guard let lat = dataArray[0] as? Double else {
-                print(dataArray[0])
-                completionHandler(0,0)
-                return
+            if json["unauthorized"] != nil { callback(SocketIOError.unauthorized, nil) }
+            else if json["waiting ..."] != nil { callback(SocketIOError.unauthorized, nil) }
+            else if let error = json["errors"] as? Int, error != 0 {
+                debugPrint(error)
+            }else {
+                callback(nil,GPSData(json))
+                //                NotificationCenter.default.post(Notification.init(name: Listeners.gpsUpdates.notificationName, object: info, userInfo: nil))
             }
-            guard let long = dataArray[1] as? Double else {
-                print(dataArray[0])
-                completionHandler(0,0)
-                return
-            }
-            completionHandler(lat,long)
         }
+        callback(nil, nil)
     }
-    
-    private func masc(_ name:String) -> String {
-        if let id = UIDevice.current.identifierForVendor?.description {
-            return name + id
-        }
-        return name
-    }
-    
-//    func startListeningUpdates() {
-//        socket.on("points") { (dataArray, socketAck) -> Void in
-//            print(dataArray)
-//            NotificationCenter.default.post(name: Notification.Name(rawValue: Notifications.receivedPoint.rawValue), object: dataArray[0] as! [String: Any])
-//        }
-//    }
 
 }
 

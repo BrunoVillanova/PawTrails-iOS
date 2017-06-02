@@ -6,7 +6,7 @@
 //  Copyright © 2017 AttitudeTech. All rights reserved.
 //
 
-typealias userCallback = (_ error:UserError?, _ user:User?) -> Void
+typealias userCallback = (_ error:DataManagerError?, _ user:User?) -> Void
 
 import Foundation
 
@@ -73,43 +73,50 @@ class UserManager {
                     }
                     
                     try CoreDataManager.Instance.save()
-                    
                     if let callback = callback { callback(nil, user) }
                     return
                 }
                 
+            }else{
+                if let callback = callback { callback(DataManagerError(responseError: ResponseError.IdNotFound), nil)}
+                return
             }
         } catch {
-            //
             debugPrint(error)
+            if let callback = callback { callback(DataManagerError(error: error), nil)}
+            return
         }
         if let callback = callback { callback(nil, nil) }
+        fatalError("Missing Something")
     }
     
     static func get(_ callback:userCallback) {
         
         guard let id = SharedPreferences.get(.id)?.toInt16 else {
-            callback(UserError.IdNotFound, nil)
+            callback(DataManagerError(DBError: DatabaseError.IdNotFound), nil)
             return
         }
         
         if let results = CoreDataManager.Instance.retrieve("User", with: NSPredicate("id", .equal, id)) as? [User] {
             if results.count > 1 {
-                callback(UserError.MoreThenOneUser, nil)
+                callback(DataManagerError(DBError: DatabaseError.DuplicatedEntry), nil)
             }else{
                 callback(nil, results.first!)
             }
         }else{
-            callback(UserError.UserNotFoundInDataBase, nil)
+            callback(DataManagerError(DBError: DatabaseError.NotFound), nil)
         }
     }
-
+    
     static func remove() -> Bool {
         guard let id = SharedPreferences.get(.id) else {
             return false
         }
-        try? CoreDataManager.Instance.delete(entity: "user", withPredicate: NSPredicate("id", .equal, id))
-        return true
+        do {
+            try CoreDataManager.Instance.delete(entity: "User", withPredicate: NSPredicate("id", .equal, id))
+            return true
+        } catch {}
+        return false
     }
     
 }
