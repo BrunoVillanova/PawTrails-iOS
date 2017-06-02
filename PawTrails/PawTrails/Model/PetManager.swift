@@ -20,7 +20,7 @@ class PetManager {
     
     //MARK:- Pet Profile
     
-    static func upsertPet(_ data: [String:Any], callback: petCallback? = nil) {
+    static func upsert(_ data: [String:Any], callback: petCallback? = nil) {
         
         do {
             
@@ -89,24 +89,24 @@ class PetManager {
                 }
                 
             }else{
-                if let callback = callback { callback(DataManagerError(APIError: nil, responseError: ResponseError.IdNotFound, DBError: nil), nil)}
+                if let callback = callback { callback(DataManagerError(responseError: ResponseError.IdNotFound), nil)}
                 return
             }
             
         } catch {
             debugPrint(error)
-            if let callback = callback { callback(DataManagerError.init(DBError: DatabaseError.Unknown, error: error), nil)}
+            if let callback = callback { callback(DataManagerError(error: error), nil)}
             return
         }
         if let callback = callback { callback(nil, nil) }
         fatalError("Missing Something")
     }
     
-    static func upsertPetList(_ data: [String:Any]) {
+    private static func _upsertList(_ data: [String:Any]) {
         
         guard let id = data.tryCastInteger(for: "id") else { return }
         
-        getPet(Int16(id), { (error, pet) in
+        get(Int16(id), { (error, pet) in
             
             if let pet = pet {
                 do{
@@ -128,15 +128,15 @@ class PetManager {
                     
                 }
             }else{
-                upsertPet(data)
+                upsert(data)
             }
         })
     }
     
-    static func upsertPets(_ data: [String:Any], _ callback:petsCallback){
+    static func upsertList(_ data: [String:Any], _ callback:petsCallback){
         
         if let petsData = data["pets"] as? [[String:Any]] {
-            getPets({ (error, pets) in
+            get({ (error, pets) in
                 //Update
                 if let pets = pets {
                     var ids = pets.map({ $0.id })
@@ -144,20 +144,20 @@ class PetManager {
                         if let index = ids.index(of: petData["id"] as! Int16) {
                             ids.remove(at: index)
                         }
-                        upsertPetList(petData)
+                        _upsertList(petData)
                     }
                     for id in ids {
-                        _ = removePet(id: id)
+                        _ = remove(id: id)
                     }
                     //Insert
                 }else{
                     for petData in petsData {
-                        upsertPetList(petData)
+                        _upsertList(petData)
                     }
                 }
                 
                 if ( pets != nil && pets!.count > 0) || petsData.count > 0 {
-                    getPets(callback)
+                    get(callback)
                 }else{
                     callback(nil, nil)
                 }
@@ -168,7 +168,7 @@ class PetManager {
     }
     
     static func set(_ deviceCode: String, _ id: Int16, _ callback:petErrorCallback){
-        getPet(id) { (error, pet) in
+        get(id) { (error, pet) in
             if error == nil, let pet = pet {
                 do {
                     pet.deviceCode = deviceCode
@@ -176,7 +176,7 @@ class PetManager {
                     callback(nil)
                 }catch {
                     debugPrint(error)
-                    callback(DataManagerError.init(DBError: DatabaseError.Unknown, error: error))
+                    callback(DataManagerError(error: error))
                 }
             }else{
                 callback(DataManagerError(error: error))
@@ -184,7 +184,7 @@ class PetManager {
         }
     }
     
-    static func getPet(_ id:Int16, _ callback:petCallback) {
+    static func get(_ id:Int16, _ callback:petCallback) {
         
         if let results = CoreDataManager.Instance.retrieve("Pet", with: NSPredicate("id", .equal, id)) as? [Pet] {
             if results.count > 1 {
@@ -197,7 +197,7 @@ class PetManager {
         }
     }
     
-    static func getPets(_ callback:petsCallback) {
+    static func get(_ callback:petsCallback) {
 
         if let results = CoreDataManager.Instance.retrieve("Pet", sortedBy: [NSSortDescriptor(key: "name", ascending: true)]) as? [Pet] {
             callback(nil, results)
@@ -206,7 +206,7 @@ class PetManager {
         }
     }
     
-    static func removePet(id: Int16) -> Bool {
+    static func remove(id: Int16) -> Bool {
         do {
             try CoreDataManager.Instance.delete(entity: "Pet", withPredicate: NSPredicate("id", .equal, id))
             return true

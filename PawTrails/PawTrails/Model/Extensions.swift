@@ -183,7 +183,18 @@ extension Dictionary where Key == String, Value == Any {
             if value is String, let doubleValue = Double(value as! String) { return doubleValue }
         }
         return nil
-    }    
+    }
+    
+    var detailedDescription: String {
+        
+        var out = "\n"
+        
+        for (key,value) in self {
+            out.append("\(key):\(value) as \(type(of: value))\n")
+        }
+        
+        return out
+    }
 }
 
 extension Data {
