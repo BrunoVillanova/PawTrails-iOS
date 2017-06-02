@@ -192,10 +192,13 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     }
     
     func loadPetLocation(){
-        SocketIOManager.Instance.getPetGPSData(id: petId) { (GPSData) in
+        
+        
+        SocketIOManager.Instance.getPetGPSData(id: 25, withUpdates: true) { (error,GPSData) in
             DispatchQueue.main.async {
-                self.endLoadingLocation()
+                
                 if let GPSData = GPSData {
+                    
                     self.focused = true
                     if let petLocation = self.petLocation {
                         petLocation.move(coordinate: GPSData.point.coordinates)
@@ -204,8 +207,11 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
                         self.mapView.addAnnotation(self.petLocation!)
                     }
                     self.mapView.centerOn(GPSData.point.coordinates, with: 51, animated: true)
-                }else{
-                    self.alert(title: "", msg: "Couldn't locate pet", type: .red)
+                }else if let error = error {
+                    if error == SocketIOError.unauthorized {
+                        self.endLoadingLocation()
+                        self.alert(title: "", msg: "Couldn't locate pet", type: .red)
+                    }
                 }
             }
         }

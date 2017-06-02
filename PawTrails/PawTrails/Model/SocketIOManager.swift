@@ -78,25 +78,27 @@ class SocketIOManager: NSObject {
     
     //Pet
     
-    func getPetGPSData(id: Int16, withUpdates: Bool = false, callback: @escaping ((GPSData?)->())){
+    typealias socketIOCallback = (SocketIOError?,GPSData?) -> Void
+    
+    func getPetGPSData(id: Int16, withUpdates: Bool = false, callback: @escaping socketIOCallback){
         
         if withUpdates {
             socket.on("gpsData", callback: { (data, ack) in
                 debugPrint("gpsData Update response", data, ack)
-                callback(self.handleGPSUpdates(data))
+                self.handleGPSUpdates(data, callback: callback)
             })
         }else{
             socket.once("gpsData", callback: { (data, ack) in
                 debugPrint("gpsData response", data, ack)
-                callback(self.handleGPSUpdates(data))
+                self.handleGPSUpdates(data, callback: callback)
             })
         }
         
         if isConnected() {
-            self.startPetUpdates(for: 25)
+            self.startPetUpdates(for: id)
         }else{
             establishConnection({ 
-                self.startPetUpdates(for: 25)
+                self.startPetUpdates(for: id)
             })
         }
     }
@@ -105,22 +107,25 @@ class SocketIOManager: NSObject {
     func startPetUpdates(for id: Int16) {
         
         if socket.status == .connected {
+            debugPrint("emit", id)
             socket.emit("room", "\(Int(id))")
         }
     }
     
-    private func handleGPSUpdates(_ data: [Any]) -> GPSData? {
-        
+    private func handleGPSUpdates(_ data: [Any], callback: @escaping socketIOCallback) {
+    
         if let json = data.first as? [String:Any] {
             
-            if let error = json["errors"] as? Int, error != 0 {
+            if json["unauthorized"] != nil { callback(SocketIOError.unauthorized, nil) }
+            else if json["waiting ..."] != nil { callback(SocketIOError.unauthorized, nil) }
+            else if let error = json["errors"] as? Int, error != 0 {
                 debugPrint(error)
             }else {
-                return GPSData(json)
+                callback(nil,GPSData(json))
                 //                NotificationCenter.default.post(Notification.init(name: Listeners.gpsUpdates.notificationName, object: info, userInfo: nil))
             }
         }
-        return nil
+        callback(nil, nil)
     }
 
 }

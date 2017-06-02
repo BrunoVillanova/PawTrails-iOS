@@ -39,7 +39,8 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         presenter.loadPets()
         //DispatchQueue in the future
         
-        SocketIOManager.Instance.getPetGPSData(id: 25) { (data) in
+        
+        SocketIOManager.Instance.getPetGPSData(id: 25) { (error,data) in
             if let data = data {
                 data.point.coordinates.getStreetFullName(handler: { (name) in
                     DispatchQueue.main.async {
