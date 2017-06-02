@@ -167,7 +167,7 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     
     func launchSocketIO(for key:MKLocationId){
 
-        SocketIOManager.Instance.getPetGPSData(id: key.id, withUpdates: true, callback: { (data) in
+        SocketIOManager.Instance.getPetGPSData(id: 25, withUpdates: true, callback: { (error, data) in
                 if let data = data {
                     print("Update Position \(data.point.toDict) \(key.id)")
                     self.updateTracking(key, coordinate: data.point.coordinates)
