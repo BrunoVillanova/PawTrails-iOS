@@ -31,7 +31,7 @@ class BreedManager {
                 }
             } catch {
                 debugPrint(error)
-                if let callback = callback { callback(DataManagerError.init(DBError: DatabaseError.Unknown, error: error), nil)}
+                if let callback = callback { callback(DataManagerError(error: error), nil)}
                 return
             }
             if let callback = callback { retrieve(for: type, callback: callback) }
@@ -39,7 +39,6 @@ class BreedManager {
             callback(DataManagerError.init(responseError: ResponseError.NotFound), nil)
         }
     }
-
 
     static func retrieve(for type:Type, callback: breedsCallback? = nil) {
         if let breeds =  CoreDataManager.Instance.retrieve("Breed", with: NSPredicate("type", .equal, type.rawValue), sortedBy: [NSSortDescriptor.init(key: "name", ascending: true)]) as? [Breed] {

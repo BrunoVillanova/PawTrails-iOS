@@ -78,12 +78,12 @@ class UserManager {
                 }
                 
             }else{
-                if let callback = callback { callback(DataManagerError(APIError: nil, responseError: ResponseError.IdNotFound, DBError: nil), nil)}
+                if let callback = callback { callback(DataManagerError(responseError: ResponseError.IdNotFound), nil)}
                 return
             }
         } catch {
             debugPrint(error)
-            if let callback = callback { callback(DataManagerError.init(DBError: DatabaseError.Unknown, error: error), nil)}
+            if let callback = callback { callback(DataManagerError(error: error), nil)}
             return
         }
         if let callback = callback { callback(nil, nil) }
@@ -112,8 +112,11 @@ class UserManager {
         guard let id = SharedPreferences.get(.id) else {
             return false
         }
-        try? CoreDataManager.Instance.delete(entity: "user", withPredicate: NSPredicate("id", .equal, id))
-        return true
+        do {
+            try CoreDataManager.Instance.delete(entity: "User", withPredicate: NSPredicate("id", .equal, id))
+            return true
+        } catch {}
+        return false
     }
     
 }

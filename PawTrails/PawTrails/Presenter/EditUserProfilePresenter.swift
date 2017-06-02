@@ -162,7 +162,7 @@ class EditUserProfilePresenter {
             data["address"] = address?.getJson()
             data["gender"] = getGender()?.code ?? ""
             
-            DataManager.Instance.set(user: data) { (error, user) in
+            DataManager.Instance.save(user: data) { (error, user) in
                 DispatchQueue.main.async {
                     self.view?.endLoadingContent()
                     if let error = error {

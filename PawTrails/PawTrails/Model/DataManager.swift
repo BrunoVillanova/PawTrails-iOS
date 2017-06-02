@@ -48,17 +48,16 @@ class DataManager {
         }
     }
     
-    func set(user data:[String:Any], callback: @escaping userCallback) {
+    func save(user data:[String:Any], callback: @escaping userCallback) {
         
         APIManager.Instance.perform(call: .setUser, with: data) { (error, data) in
             self.handleUser(error, data, callback: callback)
         }
     }
     
-    func handleUser(_ error:APIManagerError?,_ data:[String:Any]?, callback: @escaping userCallback) {
+    private func handleUser(_ error:APIManagerError?,_ data:[String:Any]?, callback: @escaping userCallback) {
         if error == nil, let data = data {
-            self.setUser(data)
-            self.getUser(callback: callback)
+            self.setUser(data, callback: callback)
         }else if let error = error {
             callback(DataManagerError(APIError: error), nil)
         }else{
@@ -69,19 +68,17 @@ class DataManager {
     }
     
     func removeUser() -> Bool {
-        if AuthManager.Instance.isAuthenticated() {
-            return UserManager.remove()
-        }
-        return true
+        return AuthManager.Instance.isAuthenticated() && UserManager.remove()
     }
     
     func loadUserFriends(callback: @escaping petUsersCallback){
         APIManager.Instance.perform(call: .friends) { (error, data) in
             if error == nil, let data = data {
                 DispatchQueue.main.async {
-                    PetUserManager.upsertFriends(data)
-                    PetUserManager.getFriends(callback: callback)
+                    PetUserManager.upsertFriends(data, callback: callback)
                 }
+            }else if let error = error {
+                callback(DataManagerError(APIError: error), nil)
             }
         }
     }
@@ -90,7 +87,7 @@ class DataManager {
     
     private func setPet(_ data:[String:Any], callback: petCallback? = nil) {
         DispatchQueue.main.async {
-            PetManager.upsertPet(data, callback: callback)
+            PetManager.upsert(data, callback: callback)
         }
     }
     
@@ -132,7 +129,7 @@ class DataManager {
     
     func getPet(_ petId:Int16, callback: @escaping petCallback) {
         DispatchQueue.main.async {
-            PetManager.getPet(petId, callback)
+            PetManager.get(petId, callback)
         }
     }
     
@@ -149,7 +146,7 @@ class DataManager {
         APIManager.Instance.perform(call: .unregisterPet, withKey: petId)  { (error, data) in
             if error == nil {
                 DispatchQueue.main.async {
-                    if PetManager.removePet(id: petId) {
+                    if PetManager.remove(id: petId) {
                         callback(nil)
                     }else{
                         callback(DataManagerError.init(DBError: DatabaseError.NotFound))
@@ -162,11 +159,11 @@ class DataManager {
     }
     
     func getPets(callback: @escaping petsCallback) {
-        PetManager.getPets(callback)
+        PetManager.get(callback)
     }
     
     func getPetsSplitted(callback: @escaping petsSplittedCallback) {
-        PetManager.getPets { (error, pets) in
+        PetManager.get { (error, pets) in
             if let pets = pets {
                 let owned = pets.filter({ $0.isOwner == true })
                 let shared = pets.filter({ $0.isOwner == false })
@@ -181,7 +178,7 @@ class DataManager {
         checkBreeds()
         APIManager.Instance.perform(call: .getPets) { (error, data) in
             if error == nil, let data = data {
-                PetManager.upsertPets(data, callback)
+                PetManager.upsertList(data, callback)
             }else if let error = error {
                 callback(DataManagerError(APIError: error), nil)
             }else{

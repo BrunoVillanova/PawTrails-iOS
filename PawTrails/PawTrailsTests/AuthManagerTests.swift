@@ -11,11 +11,23 @@ import XCTest
 
 class AuthManagerTests: XCTestCase {
     
+    override func setUp() {
+        let expect = expectation(description: "Example")
+        APIAuthenticationTests().signIn { (id, token) in
+            SharedPreferences.set(.id, with: id)
+            SharedPreferences.set(.token, with: token)
+            expect.fulfill()
+        }
+        waitForExpectations(timeout: 100) { error in
+            XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
+        }
+    }
+    
     //MARK:- SignUp
     
     func testSignUpOk() {
         let expect = expectation(description: "SignUp")
-        let email = "register11@test.com"
+        let email = "register00@test.com"
         AuthManager.Instance.signUp(email, ezdebug.password) { (error) in
             
             XCTAssertNil(error, "Error while registration \(String(describing: error))")
@@ -25,8 +37,19 @@ class AuthManagerTests: XCTestCase {
                 
                 XCTAssertNil(error, "Error while getting User \(String(describing: error))")
                 XCTAssertNotNil(user, "User is nil :(\(String(describing: error))")
+                XCTAssert(user?.id != nil, "Error in id")
                 XCTAssert(user?.email == email, "Error in email while registration")
-                expect.fulfill()
+                
+                guard let id = user?.id else {
+                    XCTFail()
+                    return
+                }
+
+                
+                APIManager.Instance.perform(call: .deleteUser, withKey: id, completition: { (error, data) in
+                    XCTAssertNil(error, "Error setting profile \(String(describing: error))")
+                    expect.fulfill()
+                })
             })
             
         }
@@ -44,7 +67,7 @@ class AuthManagerTests: XCTestCase {
         AuthManager.Instance.signUp(email, password) { (error) in
             
             XCTAssertNotNil(error)
-            XCTAssert(error?.code == ErrorCode.MissingEmail, "Wrong Error")
+            XCTAssert(error?.APIError?.errorCode == ErrorCode.MissingEmail, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
             
             expect.fulfill()
         }
@@ -62,7 +85,7 @@ class AuthManagerTests: XCTestCase {
         AuthManager.Instance.signUp(email, password) { (error) in
             
             XCTAssertNotNil(error)
-            XCTAssert(error?.code == ErrorCode.EmailFormat, "Wrong Error")
+            XCTAssert(error?.APIError?.errorCode == ErrorCode.EmailFormat, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
             
             expect.fulfill()
         }
@@ -80,7 +103,7 @@ class AuthManagerTests: XCTestCase {
         AuthManager.Instance.signUp(email, password) { (error) in
             
             XCTAssertNotNil(error)
-            XCTAssert(error?.code == ErrorCode.MissingPassword, "Wrong Error")
+            XCTAssert(error?.APIError?.errorCode == ErrorCode.MissingPassword, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
             
             expect.fulfill()
         }
@@ -98,7 +121,7 @@ class AuthManagerTests: XCTestCase {
         AuthManager.Instance.signUp(email, password) { (error) in
             
             XCTAssertNotNil(error)
-            XCTAssert(error?.code == ErrorCode.WeakPassword, "Wrong Error")
+            XCTAssert(error?.APIError?.errorCode == ErrorCode.WeakPassword, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
             
             expect.fulfill()
         }
@@ -116,7 +139,7 @@ class AuthManagerTests: XCTestCase {
         AuthManager.Instance.signUp(email, password) { (error) in
             
             XCTAssertNotNil(error)
-            XCTAssert(error?.code == ErrorCode.UserAlreadyExists, "Wrong Error")
+            XCTAssert(error?.APIError?.errorCode == ErrorCode.UserAlreadyExists, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
             
             expect.fulfill()
         }
@@ -155,7 +178,7 @@ class AuthManagerTests: XCTestCase {
         AuthManager.Instance.signIn(email, password) { (error) in
             
             XCTAssertNotNil(error)
-            XCTAssert(error?.code == ErrorCode.MissingEmail, "Wrong Error")
+            XCTAssert(error?.APIError?.errorCode == ErrorCode.MissingEmail, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
             
             expect.fulfill()
         }
@@ -173,7 +196,7 @@ class AuthManagerTests: XCTestCase {
         AuthManager.Instance.signIn(email, password) { (error) in
             
             XCTAssertNotNil(error)
-            XCTAssert(error?.code == ErrorCode.EmailFormat, "Wrong Error")
+            XCTAssert(error?.APIError?.errorCode == ErrorCode.EmailFormat, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
             
             expect.fulfill()
         }
@@ -191,7 +214,7 @@ class AuthManagerTests: XCTestCase {
         AuthManager.Instance.signIn(email, password) { (error) in
             
             XCTAssertNotNil(error)
-            XCTAssert(error?.code == ErrorCode.MissingPassword, "Wrong Error")
+            XCTAssert(error?.APIError?.errorCode == ErrorCode.MissingPassword, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
             
             expect.fulfill()
         }
@@ -209,7 +232,7 @@ class AuthManagerTests: XCTestCase {
         AuthManager.Instance.signIn(email, password) { (error) in
             
             XCTAssertNotNil(error)
-            XCTAssert(error?.code == ErrorCode.WrongCredentials, "Wrong Error")
+            XCTAssert(error?.APIError?.errorCode == ErrorCode.WrongCredentials, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
             
             expect.fulfill()
         }
@@ -229,7 +252,7 @@ class AuthManagerTests: XCTestCase {
 //        AuthManager.Instance.signIn(email, password) { (error) in
 //            
 //            XCTAssertNotNil(error)
-//            XCTAssert(error?.code == ErrorCode.MissingPassword, "Wrong Error")
+//            XCTAssert(error?.APIError?.errorCode == ErrorCode.MissingPassword, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
 //            
 //            expect.fulfill()
 //        }
@@ -266,7 +289,7 @@ class AuthManagerTests: XCTestCase {
         AuthManager.Instance.sendPasswordReset(email) { (error) in
             
             XCTAssertNotNil(error)
-            XCTAssert(error?.code == ErrorCode.MissingEmail, "Wrong Error")
+            XCTAssert(error?.APIError?.errorCode == ErrorCode.MissingEmail, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
             
             expect.fulfill()
         }
@@ -283,7 +306,7 @@ class AuthManagerTests: XCTestCase {
         AuthManager.Instance.sendPasswordReset(email) { (error) in
             
             XCTAssertNotNil(error)
-            XCTAssert(error?.code == ErrorCode.EmailFormat, "Wrong Error")
+            XCTAssert(error?.APIError?.errorCode == ErrorCode.EmailFormat, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
             
             expect.fulfill()
         }
@@ -300,7 +323,7 @@ class AuthManagerTests: XCTestCase {
         AuthManager.Instance.sendPasswordReset(email) { (error) in
             
             XCTAssertNotNil(error)
-            XCTAssert(error?.code == ErrorCode.UserNotFound, "Wrong Error")
+            XCTAssert(error?.APIError?.errorCode == ErrorCode.UserNotFound, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
             
             expect.fulfill()
         }
@@ -343,7 +366,7 @@ class AuthManagerTests: XCTestCase {
         AuthManager.Instance.changeUsersPassword(email, password, newPassword) { (error) in
             
             XCTAssertNotNil(error)
-            XCTAssert(error?.code == ErrorCode.MissingEmail, "Wrong Error")
+            XCTAssert(error?.APIError?.errorCode == ErrorCode.MissingEmail, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
             expect.fulfill()
             
         }
@@ -362,7 +385,7 @@ class AuthManagerTests: XCTestCase {
         AuthManager.Instance.changeUsersPassword(email, password, newPassword) { (error) in
             
             XCTAssertNotNil(error)
-            XCTAssert(error?.code == ErrorCode.EmailFormat, "Wrong Error")
+            XCTAssert(error?.APIError?.errorCode == ErrorCode.EmailFormat, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
             expect.fulfill()
             
         }
@@ -374,14 +397,14 @@ class AuthManagerTests: XCTestCase {
     func testChangePasswordMissingPassword() {
         let expect = expectation(description: "ChangePassword")
         
-        let email = ezdebug.password
+        let email = ezdebug.email
         let password = ""
         let newPassword = ezdebug.password + ";"
         
         AuthManager.Instance.changeUsersPassword(email, password, newPassword) { (error) in
             
             XCTAssertNotNil(error)
-            XCTAssert(error?.code == ErrorCode.MissingPassword, "Wrong Error")
+            XCTAssert(error?.APIError?.errorCode == ErrorCode.MissingPassword, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
             expect.fulfill()
             
         }
@@ -393,14 +416,14 @@ class AuthManagerTests: XCTestCase {
     func testChangePasswordMissingPassword2() {
         let expect = expectation(description: "ChangePassword")
         
-        let email = ezdebug.password
+        let email = ezdebug.email
         let password = ezdebug.password
         let newPassword = ""
         
         AuthManager.Instance.changeUsersPassword(email, password, newPassword) { (error) in
             
             XCTAssertNotNil(error)
-            XCTAssert(error?.code == ErrorCode.MissingPassword, "Wrong Error")
+            XCTAssert(error?.APIError?.errorCode == ErrorCode.MissingPassword, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
             expect.fulfill()
             
         }
@@ -412,14 +435,14 @@ class AuthManagerTests: XCTestCase {
     func testChangePasswordWeakPassword() {
         let expect = expectation(description: "ChangePassword")
         
-        let email = ezdebug.password
+        let email = ezdebug.email
         let password = ezdebug.password
         let newPassword = "hey"
         
         AuthManager.Instance.changeUsersPassword(email, password, newPassword) { (error) in
             
             XCTAssertNotNil(error)
-            XCTAssert(error?.code == ErrorCode.MissingPassword, "Wrong Error")
+            XCTAssert(error?.APIError?.errorCode == ErrorCode.WeakPassword, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
             expect.fulfill()
             
         }
@@ -431,14 +454,14 @@ class AuthManagerTests: XCTestCase {
     func testChangePasswordWrongPassword() {
         let expect = expectation(description: "ChangePassword")
         
-        let email = ezdebug.password
+        let email = ezdebug.email
         let password = ezdebug.password + "hello"
         let newPassword = ezdebug.password + ";;"
         
         AuthManager.Instance.changeUsersPassword(email, password, newPassword) { (error) in
             
             XCTAssertNotNil(error)
-            XCTAssert(error?.code == ErrorCode.WrongPassword, "Wrong Error")
+            XCTAssert(error?.APIError?.errorCode == ErrorCode.WrongPassword, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
             expect.fulfill()
             
         }
