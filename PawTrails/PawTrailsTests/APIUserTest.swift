@@ -121,7 +121,7 @@ class APIUserTest: XCTestCase {
         APIManager.Instance.perform(call: .setUser, with: userData) { (error, data) in
             
             XCTAssertNotNil(error)
-            XCTAssert(error?.errorCode == ErrorCode.DateOfBirth, "Wrong Error")
+            XCTAssert(error?.errorCode == ErrorCode.DateOfBirth, "Wrong Error \(String(describing: error?.errorCode))")
             
             expect.fulfill()
         }
@@ -143,7 +143,7 @@ class APIUserTest: XCTestCase {
         APIManager.Instance.perform(call: .setUser, with: userData) { (error, data) in
             
             XCTAssertNotNil(error)
-            XCTAssert(error?.errorCode == ErrorCode.GenderFormat, "Wrong Error")
+            XCTAssert(error?.errorCode == ErrorCode.GenderFormat, "Wrong Error \(String(describing: error?.errorCode))")
             
             expect.fulfill()
         }
@@ -170,7 +170,7 @@ class APIUserTest: XCTestCase {
         APIManager.Instance.perform(call: .setUser, with: userData) { (error, data) in
             
             XCTAssertNotNil(error)
-            XCTAssert(error?.errorCode == ErrorCode.PhoneFormat, "Wrong Error")
+            XCTAssert(error?.errorCode == ErrorCode.PhoneFormat, "Wrong Error \(String(describing: error?.errorCode))")
             
             expect.fulfill()
         }
@@ -181,7 +181,7 @@ class APIUserTest: XCTestCase {
     }
     
 
-    //MARK:- EditProfile
+    //MARK:- ReadProfile
     
     func testReadUserProfileOk() {
         
@@ -197,6 +197,9 @@ class APIUserTest: XCTestCase {
             
             XCTAssertNil(error, "Error setting profile \(String(describing: error))")
             XCTAssertNotNil(data, "No data :(")
+            XCTAssertNotNil(data?["id"], "Missinging Id")
+            XCTAssertNotNil(data?["email"], "Missinging Email")
+
             expect.fulfill()
         }
         
@@ -233,6 +236,7 @@ class APIUserTest: XCTestCase {
             
             XCTAssertNil(error, "Error FriendList \(String(describing: error))")
             XCTAssertNotNil(data, "No data :(")
+            XCTAssertNotNil(data?["friendlist"], "No Friendlist found")
             expect.fulfill()
         }
         

@@ -83,6 +83,14 @@ class EditUserProfileTableViewController: UITableViewController, EditUserProfile
         self.alert(title: error.title, msg: error.msg)
     }
     
+    func beginLoadingContent() {
+        showLoadingView()
+    }
+    
+    func endLoadingContent() {
+        hideLoadingView()
+    }
+    
     //MARK: - UIImagePickerControllerDelegate
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {

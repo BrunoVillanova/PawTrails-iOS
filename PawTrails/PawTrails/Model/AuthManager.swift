@@ -29,7 +29,7 @@ class AuthManager {
     func signUp(_ email:String, _ password: String, completition: @escaping errorCallback) {
         let data = isDebug ? ["email":email, "password":password, "is4test":ezdebug.is4test] : ["email":email, "password":password]
         APIManager.Instance.perform(call: .signUp, with: data) { (error, data) in
-            if error != nil {
+            if let error = error {
                 completition(self.handleAuthErrors(error, data))
             }else if let data = data {
                 self.succeedLoginOrRegister(data, completition: completition)
@@ -40,7 +40,7 @@ class AuthManager {
     func signIn(_ email:String, _ password: String, completition: @escaping errorCallback) {
         let data = isDebug ? ["email":email, "password":password, "is4test":ezdebug.is4test] : ["email":email, "password":password]
         APIManager.Instance.perform(call: .signIn, with: data) { (error, data) in
-            if error != nil {
+            if let error = error {
                 completition(self.handleAuthErrors(error))
             }else if let data = data {
                 self.succeedLoginOrRegister(data, completition: completition)
@@ -53,7 +53,7 @@ class AuthManager {
         data["loginToken"] = token
         if socialMedia == .google { data["itsIOS"] = 1 }
         APIManager.Instance.perform(call: APICallType(socialMedia), with: data) { (error, data) in
-            if error != nil {
+            if let error = error {
                 completition(self.handleAuthErrors(error))
             }else if let data = data {
                 self.succeedLoginOrRegister(data, completition: completition)
@@ -83,19 +83,50 @@ class AuthManager {
         }
         SharedPreferences.set(.token, with: token)
         SharedPreferences.set(.id, with: userId)
+        
+        var errors = [DataManagerError]()
+        let queue = DispatchQueue(label: "ErrorQueue", qos: .default, attributes: .concurrent, autoreleaseFrequency: .inherit, target: nil)
+        let tasks = DispatchGroup()
+        
+        tasks.enter()
         DataManager.Instance.setUser(userData) { (error, user) in
-            if error == nil && user != nil {
-                
-                DataManager.Instance.loadPets(callback: { (error, pets) in
-                    if let error = error {
-                        completition(error)
-                    }else{
+            if let error = error {
+                queue.async {
+                    errors.append(error)
+                }
+            }
+            tasks.leave()
+        }
+        
+        tasks.enter()
+        DataManager.Instance.loadPets(callback: { (error, pets) in
+            if let error = error {
+                queue.async {
+                    errors.append(error)
+                }
+            }
+            tasks.leave()
+        })
+        
+        _ = DataManager.Instance.getCountryCodes()
+        
+        tasks.notify(queue: .main) { 
+            
+            queue.sync {
+                if errors.count == 0 {
+                    DispatchQueue.main.async {
                         completition(nil)
                     }
-                })
-            }else {
-                completition(error)
+                }else{
+                    DispatchQueue.main.async {
+                        for error in errors {
+                            debugPrint(error.localizedDescription)
+                        }
+                        completition(errors.first)
+                    }
+                }
             }
+            
         }
     }
     
@@ -127,7 +158,7 @@ class AuthManager {
         let data = isDebug ? ["email":email, "is4test":ezdebug.is4test] : ["email":email]
 
         APIManager.Instance.perform(call: .passwordReset, with: data) { (error, data) in
-            if error != nil {
+            if let error = error {
                 completition(self.handleAuthErrors(error))
             }else{
                 completition(nil)
@@ -138,7 +169,7 @@ class AuthManager {
     func changeUsersPassword(_ email:String, _ password:String, _ newPassword:String, completition: @escaping errorCallback) {
         let data = ["id": SharedPreferences.get(.id) ?? "", "email":email, "password":password, "new_password":newPassword]
         APIManager.Instance.perform(call: .passwordChange, with: data) { (error, data) in
-            if error != nil {
+            if let error = error {
                 completition(self.handleAuthErrors(error))
             }else{
                 completition(nil)
@@ -146,7 +177,7 @@ class AuthManager {
         }
     }
     
-    fileprivate func handleAuthErrors(_ error: APIManagerError?, _ data: [String:Any]? = nil) -> DataManagerError? {
+    fileprivate func handleAuthErrors(_ error: APIManagerError, _ data: [String:Any]? = nil) -> DataManagerError? {
         return DataManagerError(APIError: error)
     }
 

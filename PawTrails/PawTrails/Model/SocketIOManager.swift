@@ -31,23 +31,30 @@ class SocketIOManager: NSObject {
     
     static let Instance = SocketIOManager()
     
-    private let urlString = "http://eu.pawtrails.pet:4654"
+//    private let urlString = "http://eu.pawtrails.pet:4654"
+    private let urlString = "http://eu.pawtrails.pet:2004"
     private var socket: SocketIOClient!
     
     private var openGPSUpdates = [Int16:Bool]()
     
     override init() {
-        if let token = SharedPreferences.get(.token) {
+//        if let token = SharedPreferences.get(.token) {
 //            socket = SocketIOClient(socketURL: URL(string: urlString)!, config: [.connectParams(["token":token, "user":"94"]), .log(true)])
-            socket = SocketIOClient(socketURL: URL(string: urlString)!, config: [.connectParams(["token":token, "user":"94"])])
-        }else {
+//            socket = SocketIOClient(socketURL: URL(string: urlString)!, config: [.connectParams(["token":token, "user":"94"])])
+//        }else {
             socket = SocketIOClient(socketURL: URL(string: urlString)!)
-        }
+//        }
         super.init()
     }
     
     
-    func establishConnection() {
+    func establishConnection(_ callback: (()->())? = nil) {
+        socket.on("connect") { (data, ack) in
+            if let token = SharedPreferences.get(.token) {
+                self.socket.emit("authCheck", with: [token])
+            }
+            if let callback = callback { callback() }
+        }
         socket.connect()
     }
     
@@ -71,22 +78,29 @@ class SocketIOManager: NSObject {
     
     //Pet
     
-    func getPetGPSData(id: Int16, callback: @escaping ((GPSData?)->())){
+    func getPetGPSData(id: Int16, withUpdates: Bool = false, callback: @escaping ((GPSData?)->())){
         
-        socket.once("gpsData", callback: { (data, ack) in
-            debugPrint("gpsData response", data, ack)
-            callback(self.handleGPSUpdates(data))
-        })
+        if withUpdates {
+            socket.on("gpsData", callback: { (data, ack) in
+                debugPrint("gpsData Update response", data, ack)
+                callback(self.handleGPSUpdates(data))
+            })
+        }else{
+            socket.once("gpsData", callback: { (data, ack) in
+                debugPrint("gpsData response", data, ack)
+                callback(self.handleGPSUpdates(data))
+            })
+        }
         
         if isConnected() {
             self.startPetUpdates(for: 25)
         }else{
-            socket.on("connect") { (data, ack) in
+            establishConnection({ 
                 self.startPetUpdates(for: 25)
-            }
-            socket.connect()
+            })
         }
     }
+    
     
     func startPetUpdates(for id: Int16) {
         
@@ -101,8 +115,8 @@ class SocketIOManager: NSObject {
             
             if let error = json["errors"] as? Int, error != 0 {
                 debugPrint(error)
-            }else if let infoGPS = json["terminalgps"] as? [String:Any] {
-                return GPSData(infoGPS)
+            }else {
+                return GPSData(json)
                 //                NotificationCenter.default.post(Notification.init(name: Listeners.gpsUpdates.notificationName, object: info, userInfo: nil))
             }
         }

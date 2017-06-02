@@ -34,13 +34,13 @@
 		440CEE5C1E3B9B1900F58A09 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440CEE5B1E3B9B1900F58A09 /* HomeViewController.swift */; };
 		4414AE6B1EA0DD5B004A5134 /* PawTrailsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4414AE6A1EA0DD5B004A5134 /* PawTrailsTests.swift */; };
 		4414AE781EA0DD8C004A5134 /* AuthManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4414AE731EA0DD8C004A5134 /* AuthManagerTests.swift */; };
-		4414AE791EA0DD8C004A5134 /* DataManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4414AE741EA0DD8C004A5134 /* DataManagerTest.swift */; };
 		4414AE7A1EA0DD8C004A5134 /* SocketIOTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4414AE751EA0DD8C004A5134 /* SocketIOTest.swift */; };
-		4414AE7B1EA0DD8C004A5134 /* DataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4414AE761EA0DD8C004A5134 /* DataManagerTests.swift */; };
+		4414AE7B1EA0DD8C004A5134 /* DataManagerUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4414AE761EA0DD8C004A5134 /* DataManagerUserTests.swift */; };
 		4415FF431E3B822900A81B13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4415FF421E3B822900A81B13 /* AppDelegate.swift */; };
 		4415FF481E3B822900A81B13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4415FF461E3B822900A81B13 /* Main.storyboard */; };
 		4415FF4A1E3B822900A81B13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4415FF491E3B822900A81B13 /* Assets.xcassets */; };
 		441A0D4D1E55AF5200D02CE4 /* SharedPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441A0D4C1E55AF5200D02CE4 /* SharedPreferences.swift */; };
+		441CEBED1EE16F8F00A37877 /* DataManagerPetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441CEBEC1EE16F8F00A37877 /* DataManagerPetTests.swift */; };
 		441D72F31E9E37490031BB1E /* AddEditPetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441D72F21E9E37490031BB1E /* AddEditPetPresenter.swift */; };
 		441D72F51E9E57ED0031BB1E /* AddPetDeviceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441D72F41E9E57ED0031BB1E /* AddPetDeviceTableViewController.swift */; };
 		4424DCF91E8E9F2300ACDF07 /* UserProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4424DCF81E8E9F2300ACDF07 /* UserProfileTableViewController.swift */; };
@@ -190,16 +190,16 @@
 		4414AE681EA0DD5B004A5134 /* PawTrailsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PawTrailsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4414AE6A1EA0DD5B004A5134 /* PawTrailsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PawTrailsTests.swift; sourceTree = "<group>"; };
 		4414AE6C1EA0DD5B004A5134 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4414AE731EA0DD8C004A5134 /* AuthManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthManagerTests.swift; sourceTree = "<group>"; };
-		4414AE741EA0DD8C004A5134 /* DataManagerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerTest.swift; sourceTree = "<group>"; };
+		4414AE731EA0DD8C004A5134 /* AuthManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AuthManagerTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		4414AE751EA0DD8C004A5134 /* SocketIOTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketIOTest.swift; sourceTree = "<group>"; };
-		4414AE761EA0DD8C004A5134 /* DataManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerTests.swift; sourceTree = "<group>"; };
+		4414AE761EA0DD8C004A5134 /* DataManagerUserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerUserTests.swift; sourceTree = "<group>"; };
 		4415FF3F1E3B822900A81B13 /* PawTrails.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PawTrails.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4415FF421E3B822900A81B13 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4415FF471E3B822900A81B13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4415FF491E3B822900A81B13 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4415FF4E1E3B822900A81B13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		441A0D4C1E55AF5200D02CE4 /* SharedPreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SharedPreferences.swift; path = Model/SharedPreferences.swift; sourceTree = "<group>"; };
+		441CEBEC1EE16F8F00A37877 /* DataManagerPetTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerPetTests.swift; sourceTree = "<group>"; };
 		441D72F21E9E37490031BB1E /* AddEditPetPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddEditPetPresenter.swift; path = Presenter/AddEditPetPresenter.swift; sourceTree = "<group>"; };
 		441D72F41E9E57ED0031BB1E /* AddPetDeviceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddPetDeviceTableViewController.swift; path = View/AddPetDeviceTableViewController.swift; sourceTree = "<group>"; };
 		4424DCF81E8E9F2300ACDF07 /* UserProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserProfileTableViewController.swift; path = View/UserProfileTableViewController.swift; sourceTree = "<group>"; };
@@ -432,12 +432,10 @@
 		4414AE691EA0DD5B004A5134 /* PawTrailsTests */ = {
 			isa = PBXGroup;
 			children = (
-				442F8A531ED6C9BC002626F7 /* API */,
-				4414AE731EA0DD8C004A5134 /* AuthManagerTests.swift */,
-				4414AE741EA0DD8C004A5134 /* DataManagerTest.swift */,
-				4414AE761EA0DD8C004A5134 /* DataManagerTests.swift */,
-				4414AE751EA0DD8C004A5134 /* SocketIOTest.swift */,
 				4414AE6A1EA0DD5B004A5134 /* PawTrailsTests.swift */,
+				442F8A531ED6C9BC002626F7 /* API */,
+				4452CD781EE06A89007AFD27 /* Managers */,
+				4414AE751EA0DD8C004A5134 /* SocketIOTest.swift */,
 				4414AE6C1EA0DD5B004A5134 /* Info.plist */,
 				4467CDE81EAF48D40092DA56 /* BreedManagerTests.swift */,
 			);
@@ -527,6 +525,16 @@
 				4441ACA91EB8C7CF00FBE27F /* GoogleService-Info.plist */,
 			);
 			name = Google;
+			sourceTree = "<group>";
+		};
+		4452CD781EE06A89007AFD27 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				4414AE731EA0DD8C004A5134 /* AuthManagerTests.swift */,
+				4414AE761EA0DD8C004A5134 /* DataManagerUserTests.swift */,
+				441CEBEC1EE16F8F00A37877 /* DataManagerPetTests.swift */,
+			);
+			name = Managers;
 			sourceTree = "<group>";
 		};
 		445459FC1ED6ED2400F12BE7 /* Pet Shared Users */ = {
@@ -957,13 +965,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				448BE96A1ED490D900665608 /* APIImageUploadTest.swift in Sources */,
-				4414AE7B1EA0DD8C004A5134 /* DataManagerTests.swift in Sources */,
+				441CEBED1EE16F8F00A37877 /* DataManagerPetTests.swift in Sources */,
+				4414AE7B1EA0DD8C004A5134 /* DataManagerUserTests.swift in Sources */,
 				4452EEF41ED5CF03004E13DC /* APIPetSafeZonesTests.swift in Sources */,
 				4467CDE91EAF48D40092DA56 /* BreedManagerTests.swift in Sources */,
 				44340F3D1EB22B4900EB4312 /* APIPetProfileTests.swift in Sources */,
 				4414AE7A1EA0DD8C004A5134 /* SocketIOTest.swift in Sources */,
 				4452EEF21ED59A93004E13DC /* APIPetShareUsersTests.swift in Sources */,
-				4414AE791EA0DD8C004A5134 /* DataManagerTest.swift in Sources */,
 				4414AE781EA0DD8C004A5134 /* AuthManagerTests.swift in Sources */,
 				4414AE6B1EA0DD5B004A5134 /* PawTrailsTests.swift in Sources */,
 				4452EEF61ED5DD41004E13DC /* APIAuthenticationTests.swift in Sources */,

@@ -64,7 +64,7 @@ class SafeZoneManager {
         
         if let safezonesData = data["safezones"] as? [[String:Any]] {
             
-            PetManager.getPet(petId) { (error, pet) in
+            PetManager.get(petId) { (error, pet) in
                 if error == nil, let pet = pet {
                     
                     do {

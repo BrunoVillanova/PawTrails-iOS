@@ -170,14 +170,18 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     @IBAction func userFocusAction(_ sender: UIButton) {
         focused = false
         
-        let status = CLLocationManager.authorizationStatus()
-        if status == .notDetermined {
-            manager.requestWhenInUseAuthorization()
-        }else if status == .denied {
-            popUpUserLocationDenied()
-        }else {
-            beginLoadingLocation()
-            manager.requestLocation()
+        if !mapView.userLocation.coordinate.isDefaultZero {
+            mapView.centerOn(mapView.userLocation.coordinate, with: 51, animated: true)
+        }else{
+            let status = CLLocationManager.authorizationStatus()
+            if status == .notDetermined {
+                manager.requestWhenInUseAuthorization()
+            }else if status == .denied {
+                popUpUserLocationDenied()
+            }else {
+                beginLoadingLocation()
+                manager.requestLocation()
+            }
         }
     }
     

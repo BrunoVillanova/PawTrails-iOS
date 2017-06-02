@@ -24,6 +24,8 @@ class APIImageUploadTest: XCTestCase {
         }
     }
 
+    //MARK:- User
+    
     func testUploadUserImageOk() {
         
         let expect = expectation(description: "UploadImage")
@@ -37,6 +39,11 @@ class APIImageUploadTest: XCTestCase {
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(data, "No data :(")
+            XCTAssertNotNil(data?["img_url"], "No image url")
+            
+            if let urlString = data?["img_url"] as? String, URL(string: urlString) == nil {
+                    fatalError("No proper url \(urlString)")
+            }
             expect.fulfill()
         }
         
@@ -86,23 +93,31 @@ class APIImageUploadTest: XCTestCase {
         }
     }
     
+    //MARK:- Pet
+    
     func testUploadPetImageOk() {
         
         let expect = expectation(description: "UploadImage")
         
-        PetManager.getPets { (error, pets) in
+        PetManager.get { (error, pets) in
             
             if error == nil, let pets = pets {
                 
                 var data = [String:Any]()
                 data["path"] = "pet"
-                data["petid"] = pets.first?.id ?? -1
+                data["petid"] = pets.first(where: {$0.isOwner == true})?.id ?? -1
                 data["picture"] = UIImageJPEGRepresentation(UIImage(named: "logo")!, 0.9)
                 
                 APIManager.Instance.perform(call: .imageUpload, with: data) { (error, data) in
                     
                     XCTAssertNil(error, "Error \(String(describing: error))")
                     XCTAssertNotNil(data, "No data :(")
+                    XCTAssertNotNil(data?["path"], "No path")
+                    XCTAssertNotNil(data?["img_url"], "No image url")
+                    
+                    if let urlString = data?["img_url"] as? String, URL(string: urlString) == nil {
+                        fatalError("No proper url \(urlString)")
+                    }
                     expect.fulfill()
                 }
             }

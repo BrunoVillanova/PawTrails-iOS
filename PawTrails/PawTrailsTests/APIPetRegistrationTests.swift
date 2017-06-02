@@ -85,21 +85,33 @@ class APIPetRegistrationTests: XCTestCase {
         
         let expect = expectation(description: "RegisterPet")
         
-        var data = [String:Any]()
+        var _data = [String:Any]()
         
-        data["device_code"] = deviceCode
-        data["name"] = "Paw"
-        data["type"] = Type.cat.name.lowercased()
-        data["gender"] = "U"
-        data["breed"] = 204
-        data["date_of_birth"] = "2015-12-13"
-        data["weight"] = 5.128
-        data["neutered"] = true
+        _data["device_code"] = deviceCode
+        _data["name"] = "Paw"
+        _data["type"] = Type.cat.name.lowercased()
+        _data["gender"] = "U"
+        _data["breed"] = 204
+        _data["date_of_birth"] = "2015-12-13"
+        _data["weight"] = 5.128
+        _data["neutered"] = true
         
-        APIManager.Instance.perform(call: .registerPet, with: data) { (error, data) in
+        APIManager.Instance.perform(call: .registerPet, with: _data) { (error, data) in
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(data, "No data :(")
+            
+            if let data = data {
+                XCTAssert(data["name"] as? String == _data["name"] as? String, "name")
+                XCTAssert(data["type"] as? String == _data["type"] as? String, "type")
+                XCTAssert(data["gender"] as? String == _data["gender"] as? String, "gender")
+                XCTAssert(data["breed"] as? Int == _data["breed"] as? Int, "breed")
+                XCTAssert(data["date_of_birth"] as? String == _data["date_of_birth"] as? String, "date_of_birth")
+                XCTAssert(data["neutered"] as? Bool == _data["neutered"] as? Bool, "neutered")
+            }else{
+                XCTFail()
+            }
+            
             
             if let id = data?.tryCastInteger(for: "id") {
                 
@@ -119,23 +131,37 @@ class APIPetRegistrationTests: XCTestCase {
         
         let expect = expectation(description: "RegisterPet")
         
-        var data = [String:Any]()
+        var _data = [String:Any]()
         
-        data["device_code"] = deviceCode
-        data["name"] = "Paw"
-        data["type"] = "dog"
-        data["type_descr"] = ""
-        data["gender"] = "F"
-        data["breed"] = 5
-        data["breed_descr"] = ""
-        data["date_of_birth"] = "2015-05-13"
-        data["weight"] = 2.3
-        data["neutered"] = true
+        _data["device_code"] = deviceCode
+        _data["name"] = "Paw"
+        _data["type"] = "dog"
+        _data["type_descr"] = ""
+        _data["gender"] = "F"
+        _data["breed"] = 5
+        _data["breed_descr"] = ""
+        _data["date_of_birth"] = "2015-05-13"
+        _data["weight"] = 2.3
+        _data["neutered"] = true
         
-        APIManager.Instance.perform(call: .registerPet, with: data) { (error, data) in
+        APIManager.Instance.perform(call: .registerPet, with: _data) { (error, data) in
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(data, "No data :(")
+            
+            if let data = data {
+                XCTAssert(data["name"] as? String == _data["name"] as? String, "name")
+                XCTAssert(data["type"] as? String == _data["type"] as? String, "type")
+                XCTAssert(data["type_descr"] as? String == _data["type_descr"] as? String, "type_descr")
+                XCTAssert(data["gender"] as? String == _data["gender"] as? String, "gender")
+                XCTAssert(data["breed"] as? Int == _data["breed"] as? Int, "breed")
+                XCTAssert(data["breed_descr"] as? String == _data["breed_descr"] as? String, "breed_descr")
+                XCTAssert(data["date_of_birth"] as? String == _data["date_of_birth"] as? String, "date_of_birth")
+                XCTAssert(data["weight"] as? Double == _data["weight"] as? Double, "weight")
+                XCTAssert(data["neutered"] as? Bool == _data["neutered"] as? Bool, "neutered")
+            }else{
+                XCTFail()
+            }
             
             if let id = data?.tryCastInteger(for: "id") {
                 
@@ -155,25 +181,40 @@ class APIPetRegistrationTests: XCTestCase {
         
         let expect = expectation(description: "RegisterPet")
         
-        var data = [String:Any]()
+        var _data = [String:Any]()
         
-        data["device_code"] = deviceCode
-        data["name"] = "Paw"
-        data["type"] = "dog"
-        data["type_descr"] = ""
-        data["gender"] = "F"
-        data["breed"] = 5
-        data["breed1"] = 6
-        data["breed_descr"] = ""
-        data["date_of_birth"] = "2015-05-13"
-        data["weight"] = 2.3
-        data["neutered"] = true
+        _data["device_code"] = deviceCode
+        _data["name"] = "Paw"
+        _data["type"] = "dog"
+        _data["type_descr"] = ""
+        _data["gender"] = "F"
+        _data["breed"] = 5
+        _data["breed1"] = 6
+        _data["breed_descr"] = ""
+        _data["date_of_birth"] = "2015-05-13"
+        _data["weight"] = 2.3
+        _data["neutered"] = true
         
         
-        APIManager.Instance.perform(call: .registerPet, with: data) { (error, data) in
+        APIManager.Instance.perform(call: .registerPet, with: _data) { (error, data) in
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(data, "No data :(")
+
+            if let data = data {
+                XCTAssert(data["name"] as? String == _data["name"] as? String, "name")
+                XCTAssert(data["type"] as? String == _data["type"] as? String, "type")
+                XCTAssert(data["type_descr"] as? String == _data["type_descr"] as? String, "type_descr")
+                XCTAssert(data["gender"] as? String == _data["gender"] as? String, "gender")
+                XCTAssert(data["breed"] as? Int == _data["breed"] as? Int, "breed")
+                XCTAssert(data["breed1"] as? Int == _data["breed1"] as? Int, "breed1")
+                XCTAssert(data["breed_descr"] as? String == _data["breed_descr"] as? String, "breed_descr")
+                XCTAssert(data["date_of_birth"] as? String == _data["date_of_birth"] as? String, "date_of_birth")
+                XCTAssert(data["weight"] as? Double == _data["weight"] as? Double, "weight")
+                XCTAssert(data["neutered"] as? Bool == _data["neutered"] as? Bool, "neutered")
+            }else{
+                XCTFail()
+            }
             
             if let id = data?.tryCastInteger(for: "id") {
                 
@@ -193,21 +234,35 @@ class APIPetRegistrationTests: XCTestCase {
         
         let expect = expectation(description: "RegisterPet")
         
-        var data = [String:Any]()
+        var _data = [String:Any]()
         
-        data["device_code"] = deviceCode
-        data["name"] = "Paw"
-        data["type"] = "other"
-        data["type_descr"] = "Horse"
-        data["breed_descr"] = "Percheron"
-        data["date_of_birth"] = "2015-12-13"
-        data["weight"] = 5000.95
-        data["neutered"] = true
+        _data["device_code"] = deviceCode
+        _data["name"] = "Paw"
+        _data["type"] = "other"
+        _data["type_descr"] = "Horse"
+        _data["breed_descr"] = "Percheron"
+        _data["date_of_birth"] = "2015-12-13"
+        _data["weight"] = 5000.95
+        _data["neutered"] = true
         
-        APIManager.Instance.perform(call: .registerPet, with: data) { (error, data) in
+        APIManager.Instance.perform(call: .registerPet, with: _data) { (error, data) in
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(data, "No data :(")
+            
+            if let data = data {
+                XCTAssert(data["name"] as? String == _data["name"] as? String, "name")
+                XCTAssert(data["type"] as? String == _data["type"] as? String, "type")
+                XCTAssert(data["type_descr"] as? String == _data["type_descr"] as? String, "type_descr")
+                XCTAssert(data["gender"] as? String == _data["gender"] as? String, "gender")
+                XCTAssert(data["breed_descr"] as? String == _data["breed_descr"] as? String, "breed_descr")
+                XCTAssert(data["date_of_birth"] as? String == _data["date_of_birth"] as? String, "date_of_birth")
+                XCTAssert(data["weight"] as? Double == _data["weight"] as? Double, "weight")
+                XCTAssert(data["neutered"] as? Bool == _data["neutered"] as? Bool, "neutered")
+            }else{
+                XCTFail()
+            }
+
             if let id = data?.tryCastInteger(for: "id") {
                 
                 self.remove(id, { (success) in

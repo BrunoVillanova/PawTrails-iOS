@@ -93,10 +93,10 @@ public enum Shape: Int16 {
         return 2
     }
     
-    var code:String? {
+    var code:Int {
         switch self {
-        case .circle: return "2"
-        case .square: return "4"
+        case .circle: return 2
+        case .square: return 4
         }
     }
     
@@ -221,12 +221,14 @@ public class GPSData: NSObject {
     
     var point: Point
     var signal: Int
+    var satellites: Int
     var battery: Int
     var serverDate: Date
     
     override init() {
         point = Point()
         signal = 0
+        satellites = 0
         battery = 0
         serverDate = Date()
     }
@@ -238,20 +240,25 @@ public class GPSData: NSObject {
 //    }
     
     init(_ data:[String:Any]) {
-
-        point = Point(data)
-        signal = 0
-        if let signalString = data["satellites"] as? String {
-            let components = signalString.components(separatedBy: "-")
+        
+        if let pointData = data["location"] as? [String:Any] {
+            point = Point(pointData)
+        }else{
+            point = Point()
+        }
+        signal = data.tryCastInteger(for: "networkLvl") ?? -1
+        satellites = -1
+        if let satellites = data["gpsAccuracy"] as? String {
+            let components = satellites.components(separatedBy: "-")
             if components.count == 2 {
                 let min = Double(components[0]) ?? 0
                 let max = Double(components[1]) ?? 0
                 let sum = min + max
-                if sum > 0 { signal = Int(sum/2.0) }
+                if sum > 0 { self.satellites = Int(sum/2.0) }
             }
         }
-        battery = data.tryCastInteger(for: "battery") ?? -1
-        if let serverTime = data.tryCastDouble(for: "serverTime") {
+        battery = data.tryCastInteger(for: "batteryLvl") ?? -1
+        if let serverTime = data.tryCastDouble(for: "time") {
             serverDate = Date.init(timeIntervalSince1970: TimeInterval(serverTime))
         }else{
             serverDate = Date()
@@ -268,8 +275,26 @@ public class GPSData: NSObject {
 //        aCoder.encode(longitude, forKey: "longitude")
 //    }
     
+    var distanceTime: String {
+        return Date().offset(from: serverDate)
+    }
+    
     static func == (lhs: GPSData, rhs: GPSData) -> Bool {
         return lhs.point == rhs.point && lhs.signal == rhs.signal && lhs.battery == rhs.battery
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
 

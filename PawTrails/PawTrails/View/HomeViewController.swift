@@ -49,9 +49,7 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     
     var selectedPet: Pet?
     var selectedSafeZone: SafeZone?
-    
-    var petCoordinates = [CLLocationCoordinate2D]()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -135,16 +133,15 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     
     func loadMapElements(){
         // Pets
-        petCoordinates.removeAll()
         for pet in presenter.pets {
             let location = CLLocationCoordinate2D.CorkRandom
             let id = MKLocationId(id: pet.id, type: .pet)
             let color = pet.isOwner ? UIColor.orange() : UIColor.darkGray
             
-            petCoordinates.append(location)
-            
             if annotations[id] == nil {
                 startTracking(id, coordinate: location, color: color)
+                print(id)
+                launchSocketIO(for: id)
             }else{
                 updateTracking(id, coordinate: location)
             }
@@ -166,6 +163,21 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
             }
         }
         focusOnPets()
+    }
+    
+    func launchSocketIO(for key:MKLocationId){
+
+        SocketIOManager.Instance.getPetGPSData(id: key.id, withUpdates: true, callback: { (data) in
+                if let data = data {
+                    print("Update Position \(data.point.toDict) \(key.id)")
+                    self.updateTracking(key, coordinate: data.point.coordinates)
+                    if !(!self.petDetailView.isHidden || !self.safeZoneDetailView.isHidden) {
+                        DispatchQueue.main.async {
+                            self.focusOnPets()
+                        }
+                    }
+                }
+            })
     }
     
     func reload() {
@@ -244,7 +256,8 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     }
     
     func focusOnPets(){
-        mapView.setVisibleMapFor(self.petCoordinates)
+        let coordinates = Array(self.annotations.values).filter({ $0.id.type == .pet }).map({ $0.coordinate })
+        mapView.setVisibleMapFor(coordinates)
     }
     
     func showPetDetails(_ pet: Pet) {
