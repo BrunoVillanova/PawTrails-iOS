@@ -137,7 +137,35 @@ struct DataManagerError: Error {
         return out
     }
     
-    init(APIError: APIManagerError? = nil, responseError: ResponseError? = nil, DBError: DatabaseError? = nil, error:Error? = nil) {
+    init(APIError: APIManagerError) {
+        self.APIError = APIError
+        self.responseError = nil
+        self.DBError = nil
+        self.error = nil
+    }
+    
+    init(responseError: ResponseError) {
+        self.APIError = nil
+        self.responseError = responseError
+        self.DBError = nil
+        self.error = nil
+    }
+    
+    init(DBError: DatabaseError) {
+        self.APIError = nil
+        self.responseError = nil
+        self.DBError = DBError
+        self.error = nil
+    }
+    
+    init(error:Error? = nil) {
+        self.APIError = nil
+        self.responseError = nil
+        self.DBError = nil
+        self.error = error
+    }
+    
+    init(APIError: APIManagerError?, responseError: ResponseError?, DBError: DatabaseError?, error:Error?) {
         self.APIError = APIError
         self.responseError = responseError
         self.DBError = DBError

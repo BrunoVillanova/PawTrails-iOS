@@ -25,6 +25,7 @@ public enum APICallType {
     sharePet, getSharedPetUsers, removeSharedPet,leaveSharedPet,
     addSafeZone, setSafeZone, getSafeZone, listSafeZones, removeSafeZone
     
+    /// Defines APICallType need of token
     fileprivate var requiresToken: Bool {
         switch self {
         case .signUp, .signIn, .facebookLogin, .googleLogin, .twitterLogin, .weiboLogin, .passwordReset: return false
@@ -32,6 +33,10 @@ public enum APICallType {
         }
     }
     
+    /// APICallType path
+    ///
+    /// - Parameter key: *optional* it helps to build the path
+    /// - Returns: the url path for the specific APICallType
     fileprivate func path(with key: Any) -> String {
         switch self {
             
@@ -122,7 +127,6 @@ class APIManager {
     private func createRequest(for call:APICallType, with key:Any, and data:[String:Any]?) -> URLRequest? {
         
         if call.requiresBody && data == nil {
-//            debugPrint("\(call) requires body")
             fatalError("\(call) requires body")
         }
         
@@ -154,8 +158,8 @@ class APIManager {
             
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
                 
-                if error != nil{
-                    debugPrint("Error -> \(String(describing: error))")
+                if let error = error {
+                    debugPrint("Error -> \( error)")
                     completition(APIManagerError(call: call, kind: .requestError, httpCode:nil, error: error, errorCode:nil), nil)
                 }else{
                     guard let httpResponse = response as? HTTPURLResponse else {
@@ -216,19 +220,23 @@ class APIManager {
         }else if httpCode.isNotFound {
             return APIManagerError(call: call, kind: .clientError, httpCode: httpCode, error: nil, errorCode: ErrorCode.NotFound)
         }else {
-        
-            guard let dict = parseResponse(data) else {
-                return APIManagerError(call: call, kind: .jsonParse, httpCode:nil, error:nil, errorCode:nil)
-            }
             
             if httpCode.isClientError {
+                
+                guard let dict = parseResponse(data) else {
+                    return APIManagerError(call: call, kind: .jsonParse, httpCode:nil, error:nil, errorCode:nil)
+                }
                 
                 let code = dict.tryCastInteger(for: "errors") ?? -1
                 return APIManagerError(call: call, kind: .clientError, httpCode: httpCode, error: nil, errorCode: ErrorCode(rawValue: code))
                 
+            }else if let data = data {
+                debugPrint("No client error", call, httpCode, String(data: data, encoding: String.Encoding.utf8) ?? "couldn't cast response to string")
+                return APIManagerError(call: call, kind: .noClientError, httpCode: httpCode, error: nil, errorCode: nil)
+            }else{
+                debugPrint("No client error", call, httpCode, "empty response")
+                return APIManagerError(call: call, kind: .noClientError, httpCode: httpCode, error: nil, errorCode: nil)
             }
-            debugPrint("No client error", call, httpCode, dict)
-            return APIManagerError(call: call, kind: .noClientError, httpCode: httpCode, error: nil, errorCode: nil)
         }
     }
     
@@ -244,7 +252,10 @@ class APIManager {
         }
         headers["cache-control"] = "no-cache"
         
-        if call.requiresToken { headers["token"] = SharedPreferences.get(.token) }
+        if call.requiresToken  {
+            if let token = SharedPreferences.get(.token) { headers["token"] = token }
+            else { debugPrint("missing token for \(call)") }
+        }
         
         print(headers)
         return headers
