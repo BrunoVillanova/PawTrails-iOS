@@ -54,7 +54,7 @@ class AddEditSafeZonePresenter {
                 })
             }else{
                 data["petid"] = petId
-                DataManager.Instance.addSafeZone(by: data, to: petId, callback: { (error) in
+                DataManager.Instance.addSafeZone(by: data, to: petId, callback: { (error, _) in
                     DispatchQueue.main.async {
                         if let error = error {
                             self.view?.errorMessage(error.msg)

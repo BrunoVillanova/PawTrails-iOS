@@ -23,7 +23,7 @@ class APIPetRegistrationTests: XCTestCase {
             SharedPreferences.set(.token, with: token)
             expect.fulfill()
         }
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -42,7 +42,7 @@ class APIPetRegistrationTests: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -58,7 +58,7 @@ class APIPetRegistrationTests: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -75,7 +75,7 @@ class APIPetRegistrationTests: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -107,7 +107,7 @@ class APIPetRegistrationTests: XCTestCase {
             }
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -124,7 +124,7 @@ class APIPetRegistrationTests: XCTestCase {
             expect.fulfill()
             
         })
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -153,7 +153,7 @@ class APIPetRegistrationTests: XCTestCase {
                 })
             }
         }
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
         
@@ -203,7 +203,7 @@ class APIPetRegistrationTests: XCTestCase {
             }
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -253,7 +253,7 @@ class APIPetRegistrationTests: XCTestCase {
             }
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -306,7 +306,7 @@ class APIPetRegistrationTests: XCTestCase {
             }
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -353,7 +353,7 @@ class APIPetRegistrationTests: XCTestCase {
             }
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -380,7 +380,7 @@ class APIPetRegistrationTests: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -407,7 +407,7 @@ class APIPetRegistrationTests: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -435,7 +435,7 @@ class APIPetRegistrationTests: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -463,7 +463,7 @@ class APIPetRegistrationTests: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -492,7 +492,7 @@ class APIPetRegistrationTests: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -511,7 +511,7 @@ class APIPetRegistrationTests: XCTestCase {
     //            expect.fulfill()
     //        }
     //
-    //        waitForExpectations(timeout: 100) { error in
+    //        waitForExpectations(timeout: 10) { error in
     //            XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
     //        }
     //    }
@@ -528,7 +528,7 @@ class APIPetRegistrationTests: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }

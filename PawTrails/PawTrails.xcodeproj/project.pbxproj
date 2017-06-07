@@ -82,10 +82,10 @@
 		4452EEF41ED5CF03004E13DC /* APIPetSafeZonesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4452EEF31ED5CF03004E13DC /* APIPetSafeZonesTests.swift */; };
 		4452EEF61ED5DD41004E13DC /* APIAuthenticationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4452EEF51ED5DD41004E13DC /* APIAuthenticationTests.swift */; };
 		445A6DC91E896B6F0042736E /* EmailVerificationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445A6DC81E896B6F0042736E /* EmailVerificationPresenter.swift */; };
+		446231401EE6BE4200B53C1D /* DataManagerPetSharingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4462313F1EE6BE4200B53C1D /* DataManagerPetSharingTests.swift */; };
 		446548161E5C5CC900458CB7 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446548151E5C5CC900458CB7 /* UserManager.swift */; };
 		4465481E1E5C642000458CB7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4465481D1E5C642000458CB7 /* Extensions.swift */; };
 		4467CDE71EAF40560092DA56 /* BreedManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4467CDE61EAF40560092DA56 /* BreedManager.swift */; };
-		4467CDE91EAF48D40092DA56 /* BreedManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4467CDE81EAF48D40092DA56 /* BreedManagerTests.swift */; };
 		446CBF091EAA458D007C4659 /* PetProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446CBF081EAA458D007C4659 /* PetProfileTableViewController.swift */; };
 		447440E61E8400CF0069EA85 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447440E51E8400CF0069EA85 /* SettingsTableViewController.swift */; };
 		447440E81E8400EF0069EA85 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447440E71E8400EF0069EA85 /* SettingsPresenter.swift */; };
@@ -145,6 +145,7 @@
 		44C7F7551E4CD3F200171170 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F7521E4CD3F200171170 /* AuthManager.swift */; };
 		44C7F7561E4CD3F200171170 /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F7531E4CD3F200171170 /* SocketIOManager.swift */; };
 		44C7F7581E4CD43A00171170 /* PasswordRecoveryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F7571E4CD43A00171170 /* PasswordRecoveryPresenter.swift */; };
+		44D5FE921EE6E9560049232F /* DataManagerPetSafeZonesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D5FE911EE6E9560049232F /* DataManagerPetSafeZonesTests.swift */; };
 		44D73CF11E929FB000D8DF97 /* AddEditPetDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D73CF01E929FB000D8DF97 /* AddEditPetDetailsTableViewController.swift */; };
 		44F8202B1E604C1C00704F75 /* ScanQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F8202A1E604C1C00704F75 /* ScanQRViewController.swift */; };
 		44FE723D1E4A2EF0007C7E24 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FE723C1E4A2EF0007C7E24 /* DataManager.swift */; };
@@ -242,10 +243,10 @@
 		4452EEF31ED5CF03004E13DC /* APIPetSafeZonesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIPetSafeZonesTests.swift; sourceTree = "<group>"; };
 		4452EEF51ED5DD41004E13DC /* APIAuthenticationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIAuthenticationTests.swift; sourceTree = "<group>"; };
 		445A6DC81E896B6F0042736E /* EmailVerificationPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailVerificationPresenter.swift; sourceTree = "<group>"; };
+		4462313F1EE6BE4200B53C1D /* DataManagerPetSharingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerPetSharingTests.swift; sourceTree = "<group>"; };
 		446548151E5C5CC900458CB7 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserManager.swift; path = Model/UserManager.swift; sourceTree = "<group>"; };
 		4465481D1E5C642000458CB7 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Model/Extensions.swift; sourceTree = "<group>"; };
 		4467CDE61EAF40560092DA56 /* BreedManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BreedManager.swift; path = Model/BreedManager.swift; sourceTree = "<group>"; };
-		4467CDE81EAF48D40092DA56 /* BreedManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BreedManagerTests.swift; sourceTree = "<group>"; };
 		446CBF081EAA458D007C4659 /* PetProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetProfileTableViewController.swift; path = View/PetProfileTableViewController.swift; sourceTree = "<group>"; };
 		447440E51E8400CF0069EA85 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsTableViewController.swift; path = View/SettingsTableViewController.swift; sourceTree = "<group>"; };
 		447440E71E8400EF0069EA85 /* SettingsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsPresenter.swift; path = Presenter/SettingsPresenter.swift; sourceTree = "<group>"; };
@@ -306,6 +307,7 @@
 		44C7F7521E4CD3F200171170 /* AuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = AuthManager.swift; path = Model/AuthManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		44C7F7531E4CD3F200171170 /* SocketIOManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketIOManager.swift; path = Model/SocketIOManager.swift; sourceTree = "<group>"; };
 		44C7F7571E4CD43A00171170 /* PasswordRecoveryPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PasswordRecoveryPresenter.swift; path = Presenter/PasswordRecoveryPresenter.swift; sourceTree = "<group>"; };
+		44D5FE911EE6E9560049232F /* DataManagerPetSafeZonesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerPetSafeZonesTests.swift; sourceTree = "<group>"; };
 		44D73CF01E929FB000D8DF97 /* AddEditPetDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddEditPetDetailsTableViewController.swift; path = View/AddEditPetDetailsTableViewController.swift; sourceTree = "<group>"; };
 		44F8202A1E604C1C00704F75 /* ScanQRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScanQRViewController.swift; path = View/ScanQRViewController.swift; sourceTree = "<group>"; };
 		44FE723C1E4A2EF0007C7E24 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = DataManager.swift; path = Model/DataManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -437,7 +439,6 @@
 				4452CD781EE06A89007AFD27 /* Managers */,
 				4414AE751EA0DD8C004A5134 /* SocketIOTest.swift */,
 				4414AE6C1EA0DD5B004A5134 /* Info.plist */,
-				4467CDE81EAF48D40092DA56 /* BreedManagerTests.swift */,
 			);
 			path = PawTrailsTests;
 			sourceTree = "<group>";
@@ -533,6 +534,8 @@
 				4414AE731EA0DD8C004A5134 /* AuthManagerTests.swift */,
 				4414AE761EA0DD8C004A5134 /* DataManagerUserTests.swift */,
 				441CEBEC1EE16F8F00A37877 /* DataManagerPetTests.swift */,
+				4462313F1EE6BE4200B53C1D /* DataManagerPetSharingTests.swift */,
+				44D5FE911EE6E9560049232F /* DataManagerPetSafeZonesTests.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -968,13 +971,14 @@
 				441CEBED1EE16F8F00A37877 /* DataManagerPetTests.swift in Sources */,
 				4414AE7B1EA0DD8C004A5134 /* DataManagerUserTests.swift in Sources */,
 				4452EEF41ED5CF03004E13DC /* APIPetSafeZonesTests.swift in Sources */,
-				4467CDE91EAF48D40092DA56 /* BreedManagerTests.swift in Sources */,
 				44340F3D1EB22B4900EB4312 /* APIPetProfileTests.swift in Sources */,
 				4414AE7A1EA0DD8C004A5134 /* SocketIOTest.swift in Sources */,
 				4452EEF21ED59A93004E13DC /* APIPetShareUsersTests.swift in Sources */,
 				4414AE781EA0DD8C004A5134 /* AuthManagerTests.swift in Sources */,
 				4414AE6B1EA0DD5B004A5134 /* PawTrailsTests.swift in Sources */,
+				446231401EE6BE4200B53C1D /* DataManagerPetSharingTests.swift in Sources */,
 				4452EEF61ED5DD41004E13DC /* APIAuthenticationTests.swift in Sources */,
+				44D5FE921EE6E9560049232F /* DataManagerPetSafeZonesTests.swift in Sources */,
 				448BE9681ED47F5C00665608 /* APIUserTest.swift in Sources */,
 				4452EEF01ED5824D004E13DC /* APIPetRegistrationTests.swift in Sources */,
 				4452EEEE1ED58063004E13DC /* APITablesTests.swift in Sources */,

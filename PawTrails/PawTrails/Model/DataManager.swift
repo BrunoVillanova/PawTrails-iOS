@@ -61,8 +61,7 @@ class DataManager {
         }else if let error = error {
             callback(DataManagerError(APIError: error), nil)
         }else{
-            print(error ?? "")
-            print(data ?? "")
+            debugPrint(error ?? "nil error", data ?? "nil data")
             callback(nil, nil)
         }
     }
@@ -79,6 +78,9 @@ class DataManager {
                 }
             }else if let error = error {
                 callback(DataManagerError(APIError: error), nil)
+            }else{
+                debugPrint(error ?? "nil error", data ?? "nil data")
+                callback(nil, nil)
             }
         }
     }
@@ -101,7 +103,7 @@ class DataManager {
         }
     }
     
-    func change(_ deviceCode: String, of petId:Int16, callback: @escaping petErrorCallback){
+    func change(_ deviceCode: String, of petId:Int16, callback: @escaping errorCallback){
         var data = [String:Any]()
         data["device_code"] = deviceCode
         APIManager.Instance.perform(call: .changeDevice, withKey: petId, with: data)  { (error, data) in
@@ -120,8 +122,7 @@ class DataManager {
             }else if let error = error {
                 callback(DataManagerError(APIError: error), nil)
             }else{
-                print(error ?? "")
-                print(data ?? "")
+                debugPrint(error ?? "nil error", data ?? "nil data")
                 callback(nil, nil)
             }
         }
@@ -137,11 +138,16 @@ class DataManager {
         APIManager.Instance.perform(call: .getPet, withKey: petId) { (error, data) in
             if error == nil, let data = data {
                 self.setPet(data, callback: callback)
+            }else if let error = error {
+                callback(DataManagerError(APIError: error), nil)
+            }else{
+                debugPrint(error ?? "nil error", data ?? "nil data")
+                callback(nil, nil)
             }
         }
     }
     
-    func removePet(_ petId: Int16, callback: @escaping petErrorCallback) {
+    func removePet(_ petId: Int16, callback: @escaping errorCallback) {
         
         APIManager.Instance.perform(call: .unregisterPet, withKey: petId)  { (error, data) in
             if error == nil {
@@ -154,6 +160,9 @@ class DataManager {
                 }
             }else if let error = error {
                 callback(DataManagerError(APIError: error))
+            }else{
+                debugPrint(error ?? "nil error", data ?? "nil data")
+                callback(nil)
             }
         }
     }
@@ -164,12 +173,15 @@ class DataManager {
     
     func getPetsSplitted(callback: @escaping petsSplittedCallback) {
         PetManager.get { (error, pets) in
-            if let pets = pets {
+            if error == nil, let pets = pets {
                 let owned = pets.filter({ $0.isOwner == true })
                 let shared = pets.filter({ $0.isOwner == false })
                 callback(error, owned, shared)
-            }else{
+            }else if let error = error {
                 callback(error, nil, nil)
+            }else{
+                debugPrint(error ?? "nil error", pets ?? "nil pets")
+                callback(nil, nil, nil)
             }
         }
     }
@@ -182,14 +194,13 @@ class DataManager {
             }else if let error = error {
                 callback(DataManagerError(APIError: error), nil)
             }else{
-                print(error ?? "")
-                print(data ?? "")
+                debugPrint(error ?? "nil error", data ?? "nil data")
                 callback(nil, nil)
             }
         }
     }
     
-    func setPet(_ petId: Int16, _ data: [String:Any], callback: @escaping petErrorCallback){
+    func setPet(_ petId: Int16, _ data: [String:Any], callback: @escaping errorCallback){
         
         APIManager.Instance.perform(call: .setPet, withKey: petId, with: data)  { (error, data) in
             if error == nil, let data = data {
@@ -212,12 +223,11 @@ class DataManager {
         
         for type in [Type.cat, Type.dog] {
             
-            BreedManager.retrieve(for: type) { (error, breeds) in
+            getBreeds(for: type) { (error, breeds) in
                 if breeds == nil { self.loadBreeds(for: type, callback: { (_, _) in })}
             }
         }
     }
-    
     
     func getBreeds(for type: Type, callback: @escaping breedsCallback) {
         BreedManager.retrieve(for: type, callback: callback)
@@ -235,11 +245,12 @@ class DataManager {
                 }else if let error = error {
                     callback(DataManagerError(APIError: error), nil)
                 }else{
-                    print(error ?? "")
-                    print(data ?? "")
+                    debugPrint(error ?? "", data ?? "")
                     callback(nil, nil)
                 }
             })
+        }else {
+            callback(DataManagerError(DBError: DatabaseError.NotFound), nil)
         }
     }
     
@@ -250,9 +261,13 @@ class DataManager {
         APIManager.Instance.perform(call: .friends) { (error, data) in
             if error == nil, let data = data {
                 DispatchQueue.main.async {
-                    PetUserManager.upsertFriends(data)
-                    PetUserManager.getFriends(callback: callback)
+                    PetUserManager.upsertFriends(data, callback: callback)
                 }
+            }else if let error = error {
+                callback(DataManagerError(APIError: error), nil)
+            }else {
+                debugPrint(error ?? "nil error", data ?? "nil data")
+                callback(nil, nil)
             }
         }
     }
@@ -265,32 +280,33 @@ class DataManager {
         APIManager.Instance.perform(call: .getSharedPetUsers, withKey: petId, with: nil) { (error, data) in
             if error == nil, let data = data, let callback = callback {
                 DispatchQueue.main.async {
-                    PetUserManager.upsert(data, into: petId)
-                    PetUserManager.get(for: petId, callback: callback)
+                    PetUserManager.upsertList(data, into: petId, callback: callback)
                 }
             }else if let error = error, let callback = callback {
                 callback(DataManagerError(APIError: error), nil)
             }else if let callback = callback {
-                print(error ?? "")
-                print(data ?? "")
+                debugPrint(error ?? "nil error", data ?? "nil data")
                 callback(nil, nil)
             }
         }
     }
     
-    func addSharedUser(by data: [String:Any], to petId: Int16, callback: @escaping petErrorCallback) {
+    func addSharedUser(by data: [String:Any], to petId: Int16, callback: @escaping petUsersCallback) {
         APIManager.Instance.perform(call: .sharePet, withKey: petId, with: data) { (error, data) in
-            if error == nil {
-                self.loadSharedPetUsers(for: petId, callback: { (error, pet) in
-                    callback(error)
-                })
+            if error == nil, let data = data {
+                DispatchQueue.main.async {
+                    PetUserManager.upsert(data, into: petId, callback: callback)
+                }
             }else if let error = error {
-                callback(DataManagerError(APIError: error))
+                callback(DataManagerError(APIError: error), nil)
+            }else{
+                debugPrint(error ?? "nil error", data ?? "nil data")
+                callback(nil, nil)
             }
         }
     }
     
-    func removeSharedUser(by data: [String:Any], to petId: Int16, callback: @escaping petErrorCallback) {
+    func removeSharedUser(by data: [String:Any], to petId: Int16, callback: @escaping errorCallback) {
         APIManager.Instance.perform(call: .removeSharedPet, withKey: petId, with: data) { (error, data) in
             if error == nil {
                 self.loadSharedPetUsers(for: petId, callback: { (error, pet) in
@@ -302,7 +318,7 @@ class DataManager {
         }
     }
     
-    func leaveSharedPet(by petId: Int16, callback: @escaping petErrorCallback) {
+    func leaveSharedPet(by petId: Int16, callback: @escaping errorCallback) {
         APIManager.Instance.perform(call: .leaveSharedPet, withKey: petId) { (error, data) in
             if error == nil {
                 callback(nil)
@@ -314,7 +330,7 @@ class DataManager {
     
     // MARK: - Pet Safe Zones
     
-    func loadSafeZones(of petId:Int16, callback: @escaping petErrorCallback) {
+    func loadSafeZones(of petId:Int16, callback: @escaping errorCallback) {
         
         APIManager.Instance.perform(call: .listSafeZones, withKey: petId) { (error, data) in
             if error == nil, let data = data {
@@ -325,26 +341,25 @@ class DataManager {
             }else if let error = error {
                 callback(DataManagerError(APIError: error))
             }else {
-                print(error ?? "")
-                print(data ?? "")
+                debugPrint(error ?? "nil error", data ?? "nil data")
                 callback(nil)
             }
         }
     }
     
-    func addSafeZone(by data: [String:Any], to petId: Int16, callback: @escaping petErrorCallback) {
+    func addSafeZone(by data: [String:Any], to petId: Int16, callback: @escaping safezoneCallback) {
         APIManager.Instance.perform(call: .addSafeZone, with: data) { (error, data) in
-            if error == nil {
-                self.loadSafeZones(of: petId, callback: { (error) in
-                    callback(error)
-                })
+            if error == nil, let data = data {
+                DispatchQueue.main.async {
+                    SafeZoneManager.upsert(data, callback: callback)
+                }
             }else if let error = error {
-                callback(DataManagerError(APIError: error))
+                callback(DataManagerError(APIError: error), nil)
             }
         }
     }
     
-    func setSafeZone(by data: [String:Any], to petId: Int16, callback: @escaping petErrorCallback) {
+    func setSafeZone(by data: [String:Any], to petId: Int16, callback: @escaping errorCallback) {
         APIManager.Instance.perform(call: .setSafeZone, with: data) { (error, data) in
             if error == nil {
                 self.loadSafeZones(of: petId, callback: { (error) in
@@ -356,7 +371,7 @@ class DataManager {
         }
     }
     
-    func setSafeZoneStatus(enabled: Bool,for id: Int16, into petId: Int16, callback: @escaping petErrorCallback) {
+    func setSafeZoneStatus(enabled: Bool,for id: Int16, into petId: Int16, callback: @escaping errorCallback) {
         let data: [String:Any] = ["id":id, "active":enabled]
         APIManager.Instance.perform(call: .setSafeZone, with: data) { (error, data) in
             if error == nil {
@@ -369,7 +384,7 @@ class DataManager {
         }
     }
     
-    func removeSafeZone(by safezoneId: Int16, to petId: Int16, callback: @escaping petErrorCallback) {
+    func removeSafeZone(by safezoneId: Int16, to petId: Int16, callback: @escaping errorCallback) {
         APIManager.Instance.perform(call: .removeSafeZone, withKey: safezoneId) { (error, data) in
             if error == nil {
                 self.loadSafeZones(of: petId, callback: { (error) in

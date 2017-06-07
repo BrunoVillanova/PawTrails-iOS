@@ -42,9 +42,7 @@ class BreedManager {
 
     static func retrieve(for type:Type, callback: breedsCallback? = nil) {
         if let breeds =  CoreDataManager.Instance.retrieve("Breed", with: NSPredicate("type", .equal, type.rawValue), sortedBy: [NSSortDescriptor.init(key: "name", ascending: true)]) as? [Breed] {
-            if let callback = callback {
-                callback(nil, breeds)
-            }
+            if let callback = callback { callback(nil, breeds) }
         }else if let callback = callback {
             callback(DataManagerError(DBError: DatabaseError.NotFound), nil)
         }
