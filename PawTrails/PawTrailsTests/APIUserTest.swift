@@ -19,7 +19,7 @@ class APIUserTest: XCTestCase {
             SharedPreferences.set(.token, with: token)
             expect.fulfill()
         }
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -104,7 +104,7 @@ class APIUserTest: XCTestCase {
 
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -126,7 +126,7 @@ class APIUserTest: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -148,7 +148,7 @@ class APIUserTest: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -175,7 +175,7 @@ class APIUserTest: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -203,7 +203,7 @@ class APIUserTest: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -221,7 +221,7 @@ class APIUserTest: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -240,7 +240,7 @@ class APIUserTest: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }

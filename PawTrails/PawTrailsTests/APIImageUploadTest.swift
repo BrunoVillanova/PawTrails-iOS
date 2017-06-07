@@ -19,7 +19,7 @@ class APIImageUploadTest: XCTestCase {
             SharedPreferences.set(.token, with: token)
             expect.fulfill()
         }
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -47,7 +47,7 @@ class APIImageUploadTest: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -68,7 +68,7 @@ class APIImageUploadTest: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -88,7 +88,7 @@ class APIImageUploadTest: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -123,7 +123,7 @@ class APIImageUploadTest: XCTestCase {
             }
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -144,7 +144,7 @@ class APIImageUploadTest: XCTestCase {
         }
         
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -164,7 +164,7 @@ class APIImageUploadTest: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -185,7 +185,7 @@ class APIImageUploadTest: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -206,7 +206,7 @@ class APIImageUploadTest: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }

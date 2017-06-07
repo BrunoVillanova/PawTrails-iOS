@@ -9,12 +9,12 @@
 import Foundation
 
 typealias safezonesCallback = ((_ error:DataManagerError?, _ safezones:[SafeZone]?) -> Void)
-typealias safezoneCallback = (_ error:DataManagerError?, _ safezone:SafeZone?) -> Void
+typealias safezoneCallback = ((_ error:DataManagerError?, _ safezone:SafeZone?) -> Void)
 
 class SafeZoneManager {
     
     
-    static func upsert(_ data: [String:Any]) -> SafeZone? {
+    static func upsert(_ data: [String:Any], callback: safezoneCallback) {
         
         if let id = data.tryCastInteger(for: "id") {
             
@@ -51,13 +51,58 @@ class SafeZoneManager {
                     
                     
                     try CoreDataManager.Instance.save()
-                    return safezone
+                    callback(nil, safezone)
+                }else{
+                    callback(DataManagerError(DBError: DatabaseError.Unknown), nil)
                 }
             } catch {
                 debugPrint(error)
+                callback(DataManagerError(error: error), nil)
+            }
+        }else{
+            callback(DataManagerError(responseError: ResponseError.IdNotFound), nil)
+        }
+    }
+    
+    static func upsert(_ data: [String:Any], into petId: Int16, callback: safezonesCallback? = nil) {
+        
+        
+        PetManager.get(petId) { (error, pet) in
+            if error == nil, let pet = pet {
+                
+                upsert(data, callback: { (error, safezone) in
+                    
+                    if error == nil, let safezone = safezone {
+                        do {
+                            let safezonesMutable = pet.mutableSetValue(forKeyPath: "safezones")
+                            
+                            if (safezonesMutable.allObjects as? [SafeZone])?.first(where: { $0.id == safezone.id }) == nil {
+                                safezonesMutable.add(safezone)
+                            }
+                            
+                            pet.setValue(safezonesMutable, forKey: "safezones")
+                            try CoreDataManager.Instance.save()
+                            if let callback = callback {
+                                callback(nil, safezonesMutable.allObjects as? [SafeZone])
+                            }
+                        }catch{
+                            debugPrint(error)
+                            if let callback = callback {
+                                callback(DataManagerError.init(error: error), nil)
+                            }
+                        }
+                    }else if let error = error, let callback = callback {
+                        callback(error, nil)
+                    }
+                })
+                
+            }else if let error = error, let callback = callback {
+                callback(error, nil)
+            }else if let callback = callback {
+                debugPrint(error ?? "nil error", pet ?? "nil pet")
+                callback(nil, nil)
             }
         }
-        return nil
     }
     
     static func upsertList(_ data: [String:Any], into petId: Int16) {
@@ -73,9 +118,11 @@ class SafeZoneManager {
                         safezones.removeAllObjects()
                         
                         for safezoneData in safezonesData {
-                            if let safezone = upsert(safezoneData) {
-                                safezones.add(safezone)
-                            }
+                            upsert(safezoneData, callback: { (error, safezone) in
+                                if error == nil, let safezone = safezone {
+                                    safezones.add(safezone)
+                                }
+                            })
                         }
                         
                         pet.setValue(safezones, forKey: "safezones")

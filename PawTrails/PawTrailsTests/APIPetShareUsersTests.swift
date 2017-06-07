@@ -21,7 +21,7 @@ class APIPetShareUsersTests: XCTestCase {
             SharedPreferences.set(.token, with: token)
             expect.fulfill()
         }
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -137,7 +137,7 @@ class APIPetShareUsersTests: XCTestCase {
             }
         }
         
-        waitForExpectations(timeout: 1000) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
+        waitForExpectations(timeout: 10) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
         
     }
     
@@ -180,7 +180,7 @@ class APIPetShareUsersTests: XCTestCase {
             }
         }
         
-        waitForExpectations(timeout: 1000) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
+        waitForExpectations(timeout: 10) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
         
     }
     
@@ -208,7 +208,7 @@ class APIPetShareUsersTests: XCTestCase {
             }
         }
         
-        waitForExpectations(timeout: 1000) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
+        waitForExpectations(timeout: 10) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
     }
     
     func testAddSharedUserEmailFormat() {
@@ -235,7 +235,7 @@ class APIPetShareUsersTests: XCTestCase {
             }
         }
         
-        waitForExpectations(timeout: 1000) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
+        waitForExpectations(timeout: 10) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
     }
     
     func testAddSharedUserNotFound() {
@@ -262,7 +262,7 @@ class APIPetShareUsersTests: XCTestCase {
             }
         }
         
-        waitForExpectations(timeout: 1000) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
+        waitForExpectations(timeout: 10) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
     }
     
     func testAddSharedNotEnoughRights() {
@@ -278,7 +278,7 @@ class APIPetShareUsersTests: XCTestCase {
             expect.fulfill()
         }
     
-        waitForExpectations(timeout: 1000) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
+        waitForExpectations(timeout: 10) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
     }
     
     //MARK:- Remove User Shared
@@ -315,7 +315,7 @@ class APIPetShareUsersTests: XCTestCase {
             }
         }
         
-        waitForExpectations(timeout: 1000) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
+        waitForExpectations(timeout: 10) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
     }
     
     func testRemoveUserUserNotFound() {
@@ -352,7 +352,7 @@ class APIPetShareUsersTests: XCTestCase {
             }
         }
         
-        waitForExpectations(timeout: 1000) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
+        waitForExpectations(timeout: 10) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
     }
     
     func testRemoveUserNotEnoughRights() {
@@ -393,7 +393,7 @@ class APIPetShareUsersTests: XCTestCase {
             }
         }
         
-        waitForExpectations(timeout: 1000) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
+        waitForExpectations(timeout: 10) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
     }
     
     func testRemoveUserMissingRelationUserPet() {
@@ -432,7 +432,7 @@ class APIPetShareUsersTests: XCTestCase {
             }
         }
         
-        waitForExpectations(timeout: 1000) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
+        waitForExpectations(timeout: 10) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
     }
     
     //MARK:- Leave Pet
@@ -473,7 +473,7 @@ class APIPetShareUsersTests: XCTestCase {
             
         }
         
-        waitForExpectations(timeout: 1000) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
+        waitForExpectations(timeout: 10) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
     }
     
     func testLeavePetNotEnoughRights() {
@@ -506,7 +506,7 @@ class APIPetShareUsersTests: XCTestCase {
             
         }
         
-        waitForExpectations(timeout: 1000) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
+        waitForExpectations(timeout: 10) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
     }
         
 }

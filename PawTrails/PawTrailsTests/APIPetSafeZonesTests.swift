@@ -19,7 +19,7 @@ class APIPetSafeZonesTests: XCTestCase {
             SharedPreferences.set(.token, with: token)
             expect.fulfill()
         }
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -150,7 +150,7 @@ class APIPetSafeZonesTests: XCTestCase {
                 }
             }
         }
-        waitForExpectations(timeout: 1000) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
+        waitForExpectations(timeout: 10) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
         
     }
     
@@ -178,7 +178,7 @@ class APIPetSafeZonesTests: XCTestCase {
                 }
             }
         }
-        waitForExpectations(timeout: 1000) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
+        waitForExpectations(timeout: 10) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
         
     }
     
@@ -207,7 +207,7 @@ class APIPetSafeZonesTests: XCTestCase {
                 }
             }
         }
-        waitForExpectations(timeout: 1000) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
+        waitForExpectations(timeout: 10) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
         
     }
     
@@ -236,7 +236,7 @@ class APIPetSafeZonesTests: XCTestCase {
                 }
             }
         }
-        waitForExpectations(timeout: 1000) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
+        waitForExpectations(timeout: 10) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
         
     }
     
@@ -292,7 +292,7 @@ class APIPetSafeZonesTests: XCTestCase {
             }
         }
         
-        waitForExpectations(timeout: 1000) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
+        waitForExpectations(timeout: 10) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
     }
     
     func testEditSafeZoneWrongShapeFormat() {
@@ -323,7 +323,7 @@ class APIPetSafeZonesTests: XCTestCase {
             }
         }
         
-        waitForExpectations(timeout: 1000) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
+        waitForExpectations(timeout: 10) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
         
     }
     
@@ -355,7 +355,7 @@ class APIPetSafeZonesTests: XCTestCase {
             }
         }
         
-        waitForExpectations(timeout: 1000) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
+        waitForExpectations(timeout: 10) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
         
     }
     
@@ -387,7 +387,7 @@ class APIPetSafeZonesTests: XCTestCase {
             }
         }
         
-        waitForExpectations(timeout: 1000) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
+        waitForExpectations(timeout: 10) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
         
     }
 
@@ -424,7 +424,7 @@ class APIPetSafeZonesTests: XCTestCase {
                 }
             }
         }
-        waitForExpectations(timeout: 1000) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
+        waitForExpectations(timeout: 10) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
         
     }
     
@@ -461,7 +461,7 @@ class APIPetSafeZonesTests: XCTestCase {
                 }
             }
         }
-        waitForExpectations(timeout: 1000) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
+        waitForExpectations(timeout: 10) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }
         
     }
     

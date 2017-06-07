@@ -13,6 +13,7 @@ import XCTest
 class APIPetRegistrationTests: XCTestCase {
     
     let deviceCode = "VhfOoZhZg3Jc"
+    let deviceCode2 = "EZT7JlkOZfql"
     let takenDeviceCode = "niAy82KhGRdy"
     
     override func setUp() {
@@ -22,7 +23,7 @@ class APIPetRegistrationTests: XCTestCase {
             SharedPreferences.set(.token, with: token)
             expect.fulfill()
         }
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -41,7 +42,7 @@ class APIPetRegistrationTests: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -57,7 +58,7 @@ class APIPetRegistrationTests: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -74,10 +75,90 @@ class APIPetRegistrationTests: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
+    
+    //MARK:- Change
+    
+    func testChangeDeviceOk() {
+        
+        let expect = expectation(description: "ChangeDevice")
+        
+        APIManager.Instance.perform(call: .registerPet, with: ["device_code":deviceCode2, "name":"hey"]) { (error, data) in
+            
+            XCTAssertNil(error, "Error \(String(describing: error))")
+            XCTAssertNotNil(data, "No data :(")
+            
+            if let petId = data?.tryCastInteger(for: "id") {
+                
+                APIManager.Instance.perform(call: .changeDevice, withKey: petId, with: ["device_code": self.deviceCode], completition: { (error, data) in
+                    
+                    XCTAssertNil(error, "Error \(String(describing: error))")
+                    XCTAssertNotNil(data, "No data :(")
+                    
+                    self.remove(petId, { (done) in
+                        if done {
+                            expect.fulfill()
+                        }
+                    })
+                })
+            }
+        }
+        
+        waitForExpectations(timeout: 10) { error in
+            XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
+        }
+    }
+    
+    func testChangeDeviceNotEnoughRights() {
+        
+        let expect = expectation(description: "ChangeDevice")
+        
+        APIManager.Instance.perform(call: .changeDevice, withKey: -1, with: ["device_code": self.deviceCode], completition: { (error, data) in
+            
+            XCTAssertNil(data)
+            XCTAssertNotNil(error)
+            XCTAssert(error?.errorCode == ErrorCode.NotEnoughRights,"Error \(String(describing: error))")
+            expect.fulfill()
+            
+        })
+        waitForExpectations(timeout: 10) { error in
+            XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
+        }
+    }
+    
+    func testChangeDeviceDeviceNotAvailable() {
+        
+        let expect = expectation(description: "ChangeDevice")
+        
+        APIManager.Instance.perform(call: .registerPet, with: ["device_code":deviceCode2, "name":"hey"]) { (error, data) in
+            
+            XCTAssertNil(error, "Error \(String(describing: error))")
+            XCTAssertNotNil(data, "No data :(")
+            
+            if let petId = data?.tryCastInteger(for: "id") {
+                APIManager.Instance.perform(call: .changeDevice, withKey: petId, with: ["device_code": self.takenDeviceCode], completition: { (error, data) in
+                    
+                    XCTAssertNil(data)
+                    XCTAssertNotNil(error)
+                    XCTAssert(error?.errorCode == ErrorCode.DeviceNotAvailable)
+                    
+                    self.remove(petId, { (done) in
+                        if done {
+                            expect.fulfill()
+                        }
+                    })
+                })
+            }
+        }
+        waitForExpectations(timeout: 10) { error in
+            XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
+        }
+        
+    }
+    
     
     //MARK:- RegisterPet
     
@@ -122,7 +203,7 @@ class APIPetRegistrationTests: XCTestCase {
             }
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -172,7 +253,7 @@ class APIPetRegistrationTests: XCTestCase {
             }
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -200,7 +281,7 @@ class APIPetRegistrationTests: XCTestCase {
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(data, "No data :(")
-
+            
             if let data = data {
                 XCTAssert(data["name"] as? String == _data["name"] as? String, "name")
                 XCTAssert(data["type"] as? String == _data["type"] as? String, "type")
@@ -225,7 +306,7 @@ class APIPetRegistrationTests: XCTestCase {
             }
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -262,7 +343,7 @@ class APIPetRegistrationTests: XCTestCase {
             }else{
                 XCTFail()
             }
-
+            
             if let id = data?.tryCastInteger(for: "id") {
                 
                 self.remove(id, { (success) in
@@ -272,7 +353,7 @@ class APIPetRegistrationTests: XCTestCase {
             }
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -299,7 +380,7 @@ class APIPetRegistrationTests: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -326,7 +407,7 @@ class APIPetRegistrationTests: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -354,7 +435,7 @@ class APIPetRegistrationTests: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -382,7 +463,7 @@ class APIPetRegistrationTests: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -411,29 +492,29 @@ class APIPetRegistrationTests: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
     
     //MARK:- UnRegisterPet
-
-//    func testUnRegisterPetOk() {
-//        
-//        let expect = expectation(description: "UnregisterPet")
-//        
-//        
-//        APIManager.Instance.perform(call: .unregisterPet, withKey: 54)  { (error, data) in
-//            
-//            XCTAssertNil(error, "Error \(String(describing: error))")
-//            XCTAssertNotNil(data, "No data :(")
-//            expect.fulfill()
-//        }
-//        
-//        waitForExpectations(timeout: 100) { error in
-//            XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
-//        }
-//    }
+    
+    //    func testUnRegisterPetOk() {
+    //
+    //        let expect = expectation(description: "UnregisterPet")
+    //
+    //
+    //        APIManager.Instance.perform(call: .unregisterPet, withKey: 54)  { (error, data) in
+    //
+    //            XCTAssertNil(error, "Error \(String(describing: error))")
+    //            XCTAssertNotNil(data, "No data :(")
+    //            expect.fulfill()
+    //        }
+    //
+    //        waitForExpectations(timeout: 10) { error in
+    //            XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
+    //        }
+    //    }
     
     func testUnRegisterPetNotEnoughRights() {
         
@@ -447,7 +528,7 @@ class APIPetRegistrationTests: XCTestCase {
             expect.fulfill()
         }
         
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -458,7 +539,7 @@ class APIPetRegistrationTests: XCTestCase {
             callback(error == nil)
         }
     }
-
+    
     
     
     
