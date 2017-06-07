@@ -18,7 +18,7 @@ class AuthManagerTests: XCTestCase {
             SharedPreferences.set(.token, with: token)
             expect.fulfill()
         }
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -53,7 +53,7 @@ class AuthManagerTests: XCTestCase {
             })
             
         }
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -71,7 +71,7 @@ class AuthManagerTests: XCTestCase {
             
             expect.fulfill()
         }
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -89,7 +89,7 @@ class AuthManagerTests: XCTestCase {
             
             expect.fulfill()
         }
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -107,7 +107,7 @@ class AuthManagerTests: XCTestCase {
             
             expect.fulfill()
         }
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -125,7 +125,7 @@ class AuthManagerTests: XCTestCase {
             
             expect.fulfill()
         }
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -143,7 +143,7 @@ class AuthManagerTests: XCTestCase {
             
             expect.fulfill()
         }
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -164,7 +164,7 @@ class AuthManagerTests: XCTestCase {
             
             expect.fulfill()
         }
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -182,7 +182,7 @@ class AuthManagerTests: XCTestCase {
             
             expect.fulfill()
         }
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -200,7 +200,7 @@ class AuthManagerTests: XCTestCase {
             
             expect.fulfill()
         }
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -218,7 +218,7 @@ class AuthManagerTests: XCTestCase {
             
             expect.fulfill()
         }
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -236,7 +236,7 @@ class AuthManagerTests: XCTestCase {
             
             expect.fulfill()
         }
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -256,7 +256,7 @@ class AuthManagerTests: XCTestCase {
 //            
 //            expect.fulfill()
 //        }
-//        waitForExpectations(timeout: 100) { error in
+//        waitForExpectations(timeout: 10) { error in
 //            XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
 //        }
         
@@ -276,7 +276,7 @@ class AuthManagerTests: XCTestCase {
             
             expect.fulfill()
         }
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -293,7 +293,7 @@ class AuthManagerTests: XCTestCase {
             
             expect.fulfill()
         }
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -310,7 +310,7 @@ class AuthManagerTests: XCTestCase {
             
             expect.fulfill()
         }
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -327,7 +327,7 @@ class AuthManagerTests: XCTestCase {
             
             expect.fulfill()
         }
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -351,7 +351,7 @@ class AuthManagerTests: XCTestCase {
                 expect.fulfill()
             }
         }
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -370,7 +370,7 @@ class AuthManagerTests: XCTestCase {
             expect.fulfill()
             
         }
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -389,7 +389,7 @@ class AuthManagerTests: XCTestCase {
             expect.fulfill()
             
         }
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -408,7 +408,7 @@ class AuthManagerTests: XCTestCase {
             expect.fulfill()
             
         }
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -427,7 +427,7 @@ class AuthManagerTests: XCTestCase {
             expect.fulfill()
             
         }
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -446,7 +446,7 @@ class AuthManagerTests: XCTestCase {
             expect.fulfill()
             
         }
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
@@ -465,7 +465,20 @@ class AuthManagerTests: XCTestCase {
             expect.fulfill()
             
         }
-        waitForExpectations(timeout: 100) { error in
+        waitForExpectations(timeout: 10) { error in
+            XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
+        }
+    }
+    
+    //MARK:- SignOut
+    
+    func testSignOutOk() {
+        let expect = expectation(description: "SignOut")
+        
+        XCTAssert(AuthManager.Instance.signOut())
+        expect.fulfill()
+        
+        waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
