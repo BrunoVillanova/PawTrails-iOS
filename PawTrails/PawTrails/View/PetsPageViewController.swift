@@ -17,6 +17,7 @@ class PetsPageViewController: UIViewController {
     
     var pet: Pet!
     var fromMap: Bool = false
+    var activityEnabled: Bool = false
 
     var pages = [UIView]()
 
@@ -30,7 +31,12 @@ class PetsPageViewController: UIViewController {
         
         pages = [profile,activity]
         
-        enableView(at: 0)
+        if activityEnabled {
+            segmentControl.selectedSegmentIndex = 1
+            enableView(at: 1)
+        }else{
+            enableView(at: 0)
+        }
         
         if fromMap {
             navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(dismissAction(sender: )))

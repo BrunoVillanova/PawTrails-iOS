@@ -224,6 +224,7 @@ public class GPSData: NSObject {
     var satellites: Int
     var battery: Int
     var serverDate: Date
+    var locationAndTime: String = ""
     
     override init() {
         point = Point()
@@ -232,12 +233,6 @@ public class GPSData: NSObject {
         battery = 0
         serverDate = Date()
     }
-    
-//    init(_ point: Point, _ signal: Int, _ battery: Int) {
-//        self.point = point
-//        self.signal = signal
-//        self.battery = battery
-//    }
     
     init(_ data:[String:Any]) {
         
@@ -265,18 +260,47 @@ public class GPSData: NSObject {
         }
     }
     
-//    required public init?(coder aDecoder: NSCoder) {
-//        latitude = aDecoder.decodeDouble(forKey: "latitude")
-//        longitude = aDecoder.decodeDouble(forKey: "longitude")
-//    }
-//    
-//    public func encode(with aCoder: NSCoder) {
-//        aCoder.encode(latitude, forKey: "latitude")
-//        aCoder.encode(longitude, forKey: "longitude")
-//    }
+    func update(_ data:[String:Any]) {
+        
+        if let pointData = data["location"] as? [String:Any] {
+            let newPoint = Point(pointData)
+            if point.coordinates.location.coordinateString != newPoint.coordinates.location.coordinateString {
+                locationAndTime = ""
+                point = newPoint
+                debugPrint("Requested for Update \(data["id"] ?? "")")
+            }
+        }else{
+            point = Point()
+        }
+        signal = data.tryCastInteger(for: "networkLvl") ?? -1
+        satellites = -1
+        if let satellites = data["gpsAccuracy"] as? String {
+            let components = satellites.components(separatedBy: "-")
+            if components.count == 2 {
+                let min = Double(components[0]) ?? 0
+                let max = Double(components[1]) ?? 0
+                let sum = min + max
+                if sum > 0 { self.satellites = Int(sum/2.0) }
+            }
+        }
+        battery = data.tryCastInteger(for: "batteryLvl") ?? -1
+        if let serverTime = data.tryCastDouble(for: "time") {
+            serverDate = Date.init(timeIntervalSince1970: TimeInterval(serverTime))
+        }else{
+            serverDate = Date()
+        }
+    }
     
     var distanceTime: String {
         return Date().offset(from: serverDate)
+    }
+    
+    var batteryString: String {
+        return battery != -1 ? "\(battery)%" : ""
+    }
+    
+    var signalString: String {
+        return signal != -1 ? "\(signal)" : ""
     }
     
     static func == (lhs: GPSData, rhs: GPSData) -> Bool {

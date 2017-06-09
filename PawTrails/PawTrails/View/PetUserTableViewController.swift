@@ -44,7 +44,7 @@ class PetUserTableViewController: UITableViewController, PetUserView {
             
             let imageData = petUser.image ?? Data()
             imageView.image = UIImage(data: imageData)
-            imageView.setupLayout(isPetOwner: pet.isOwner(petUser))
+            imageView.setupLayout(isPetOwner: petUser.isOwner)
             
             let name = pet.name ?? ""
             emailLabel.text = petUser.email
@@ -63,6 +63,7 @@ class PetUserTableViewController: UITableViewController, PetUserView {
                 actionLabel.text = "Remove \(petUser.name ?? "this user") from '\(name)'"
             }else if appUserId == currentUserId && appUserId != petOwnerId {
                 // That user leaves pet
+                emailCell.isHidden = true
                 actionLabel.text = "Leave '\(name)'"
             }else{
                 emailCell.isHidden = true

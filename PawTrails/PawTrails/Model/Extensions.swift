@@ -111,7 +111,7 @@ extension Date {
         if hours(from: date)   > 0 { return "\(hours(from: date)) hours ago"   }
         if minutes(from: date) > 0 { return "\(minutes(from: date)) minutes ago" }
         if seconds(from: date) > 0 { return "\(seconds(from: date)) seconds ago" }
-        return ""
+        return "recently"
     }
     
 }

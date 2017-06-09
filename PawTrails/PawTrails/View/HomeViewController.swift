@@ -24,22 +24,23 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var topConstraintBlurView: NSLayoutConstraint!
     
-    @IBOutlet weak var petDetailView: UIView!
+    @IBOutlet weak var slideIndicator: UILabel!
+    @IBOutlet weak var blurViewCloseButton: UIButton!
     @IBOutlet weak var petImageView: UIImageView!
     @IBOutlet weak var batteryImageView: UIImageView!
+    @IBOutlet weak var batteryLabel: UILabel!
     @IBOutlet weak var signalImageView: UIImageView!
+    @IBOutlet weak var signalLabel: UILabel!
     @IBOutlet weak var petTitleLabel: UILabel!
     @IBOutlet weak var petSubtitleLabel: UILabel!
     @IBOutlet weak var startTripButton: UIButton!
-    
-    @IBOutlet weak var safeZoneDetailView: UIView!
-    @IBOutlet weak var safeZoneTitleLabel: UILabel!
-    @IBOutlet weak var showSafeZoneButton: UIButton!
+    @IBOutlet weak var petProfileButton: UIButton!
+    @IBOutlet weak var petActivityButton: UIButton!
     
     
     fileprivate let presenter = HomePresenter()
     
-    fileprivate var opened:CGFloat = 415.0, closed:CGFloat = 600
+    fileprivate var openedHalf:CGFloat = 405.0, openedFull:CGFloat = 155.0, closed:CGFloat = 600
     
     fileprivate let closedSearch:CGFloat = 299, openedSearch:CGFloat = 0
     
@@ -48,7 +49,6 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     var data = [searchElement]()
     
     var selectedPet: Pet?
-    var selectedSafeZone: SafeZone?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,15 +63,20 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
         topConstraintBlurView.constant = closed
         blurView.round(radius: 18)
 
-        petDetailView.isHidden = true
+        blurView.isHidden = true
+        slideIndicator.round()
+        blurViewCloseButton.circle()
         petImageView.circle()
         batteryImageView.circle()
         signalImageView.circle()
         startTripButton.round()
+        petProfileButton.tintColor = UIColor.orange()
+        petActivityButton.tintColor = UIColor.orange()
+        petProfileButton.round()
+        petActivityButton.round()
+        petProfileButton.border(color: UIColor.orange(), width: 2.0)
+        petActivityButton.border(color: UIColor.orange(), width: 2.0)
         
-        safeZoneDetailView.isHidden = true
-        showSafeZoneButton.round()
-
         searchView.round()
         searchBar.backgroundColor = UIColor.orange().withAlphaComponent(0.8)
         if let textFieldInsideSearchBar = self.searchBar.value(forKey: "searchField") as? UITextField, let glassIconView = textFieldInsideSearchBar.leftView as? UIImageView {
@@ -91,6 +96,18 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
         self.presenter.deteachView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        presenter.startPetsListUpdates()
+        presenter.startPetsGPSUpdates { (id, point) in
+            self.load(id: id, point: point)
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        presenter.stopPetListUpdates()
+        presenter.stopPetGPSUpdates()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         presenter.getPets()
     }
@@ -101,88 +118,71 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
         
         let isOpening = sender.translation(in: self.view).y < 0
         
-        if isOpening && y < opened {
-            let distance = abs(y - opened)
+        if isOpening && y < openedFull {
+            let distance = abs(y - openedFull)
             y += distance * 0.5
         }
         
         topConstraintBlurView.constant = y
         
-        if sender.state == .ended { perform(action: isOpening ? .open : .close, speed: 0.5)  }
+        if sender.state == .ended {
+            if isOpening && y < openedHalf {perform(action: .openFull, speed: 0.5)}
+            else if isOpening && y > openedHalf || (!isOpening && y < openedHalf) {perform(action: .openHalf, speed: 0.5)}
+            else {perform(action: .close, speed: 0.5)}            
+        }
+    }
+    
+    @IBAction func closeBlurViewAction(_ sender: UIButton) {
+        perform(action: .close)
     }
     
     @IBAction func startTripAction(sender: UIButton?){
-        
+        alert(title: "", msg: "Under Construction", type: .blue)
+    }
+
+    @IBAction func showPetProfileAction(_ sender: UIButton) {
         if let selected = selectedPet {
             presentPet(selected)
         }
     }
-    
-    @IBAction func showSafeZoneAction(sender: UIButton?){
-        
-        if let selected = selectedSafeZone {
-            presentSafeZone(selected)
+
+    @IBAction func showPetActivityAction(_ sender: UIButton) {
+        if let selected = selectedPet {
+            presentPet(selected, activityEnabled: true)
         }
     }
-
+    
     // MARK: - HomeView
     
     func errorMessage(_ error: ErrorMsg) {
         self.alert(title: error.title, msg: error.msg)
     }
     
-    func loadMapElements(){
-        // Pets
+    func loadPets(){
+
         for pet in presenter.pets {
-            let location = CLLocationCoordinate2D.CorkRandom
-            let id = MKLocationId(id: pet.id, type: .pet)
-            let color = pet.isOwner ? UIColor.orange() : UIColor.darkGray
-            
-            if annotations[id] == nil {
-                startTracking(id, coordinate: location, color: color)
-                print(id)
-                launchSocketIO(for: id)
-            }else{
-                updateTracking(id, coordinate: location)
-            }
-        }
-        
-        // SafeZones
-        for safezone in presenter.safeZones {
-            
-            if let location = safezone.point1?.coordinates {
-                
-                let id = MKLocationId(id: safezone.id, type: .safezone)
-                let color = UIColor.green
-                
-                if annotations[id] == nil {
-                    startTracking(id, coordinate: location, color: color)
-                }else{
-                    updateTracking(id, coordinate: location)
-                }
+            if let point = SocketIOManager.Instance.getPetGPSData(id: pet.id)?.point {
+                load(id: MKLocationId(id: pet.id, type: .pet), point: point)
             }
         }
         focusOnPets()
     }
-    
-    func launchSocketIO(for key:MKLocationId){
 
-        SocketIOManager.Instance.getPetGPSData(id: 25, withUpdates: true, callback: { (error, data) in
-                if let data = data {
-                    print("Update Position \(data.point.toDict) \(key.id)")
-                    self.updateTracking(key, coordinate: data.point.coordinates)
-                    if !(!self.petDetailView.isHidden || !self.safeZoneDetailView.isHidden) {
-                        DispatchQueue.main.async {
-                            self.focusOnPets()
-                        }
-                    }
-                }
-            })
-    }
     
     func reload() {
         self.petTitleLabel.text = self.presenter.user.name
         self.petSubtitleLabel.text = self.presenter.user.surname
+    }
+    
+    func load(id: MKLocationId, point: Point){
+        DispatchQueue.main.async {
+            if self.annotations[id] == nil {
+                self.startTracking(id, coordinate: point.coordinates, color: UIColor.orange())
+            }else{
+                self.updateTracking(id, coordinate: point.coordinates)
+            }
+            self.focusOnPets()
+        }
     }
     
     func startTracking(_ id: MKLocationId, coordinate:CLLocationCoordinate2D, color: UIColor) {
@@ -192,15 +192,6 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     
     func updateTracking(_ id: MKLocationId, coordinate:CLLocationCoordinate2D) {
         self.annotations[id]?.move(coordinate:coordinate)
-    }
-    
-    func stopTracking(_ id: MKLocationId) {
-        guard let a = self.annotations[id] else {
-//            self.errorMessage(ErrorMsg(title:"", msg:""))
-            return
-        }
-        self.mapView.removeAnnotation(a)
-        self.annotations.removeValue(forKey: id)
     }
     
     func userNotSigned() {
@@ -240,10 +231,6 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
                 if let pet = presenter.pets.first(where: { $0.id == annotation.id.id }) {
                     showPetDetails(pet)
                 }
-            case .safezone:
-                if let safezone = presenter.safeZones.first(where: { $0.id == annotation.id.id }) {
-                    showSafeZoneDetails(safezone)
-                }
             default:
                 break
             }
@@ -256,32 +243,32 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     }
     
     func focusOnPets(){
-        let coordinates = Array(self.annotations.values).filter({ $0.id.type == .pet }).map({ $0.coordinate })
-        mapView.setVisibleMapFor(coordinates)
+        if !isShowingDetails() {
+            let coordinates = Array(self.annotations.values).filter({ $0.id.type == .pet && !$0.coordinate.isDefaultZero }).map({ $0.coordinate })
+            mapView.setVisibleMapFor(coordinates)
+        }
     }
     
     func showPetDetails(_ pet: Pet) {
         
-        safeZoneDetailView.isHidden = true
-        petDetailView.isHidden = false
+        blurView.isHidden = false
         
         if let data = pet.image {
             petImageView.image = UIImage(data: data)
+        }else{
+            petImageView.image = nil
         }
         petTitleLabel.text = pet.name
-        petSubtitleLabel.text = pet.breeds
+        let data = SocketIOManager.Instance.getPetGPSData(id: pet.id)
+        petSubtitleLabel.text = data?.locationAndTime
+        signalLabel.text = data?.signalString
+        batteryLabel.text = data?.batteryString
         selectedPet = pet
-        perform(action: .open)
+        perform(action: .openHalf)
     }
     
-    func showSafeZoneDetails(_ safezone: SafeZone) {
-        
-        safeZoneDetailView.isHidden = false
-        petDetailView.isHidden = true
-
-        safeZoneTitleLabel.text = safezone.name
-        selectedSafeZone = safezone
-        perform(action: .open)
+    func isShowingDetails() -> Bool {
+        return self.topConstraintBlurView.constant != self.closed
     }
     
     func getNavigationController() -> UINavigationController {
@@ -292,27 +279,14 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
         return nc
     }
     
-    func presentPet(_ pet: Pet) {
+    func presentPet(_ pet: Pet, activityEnabled:Bool = false) {
         
         let nc = getNavigationController()
         
         if let vc = storyboard?.instantiateViewController(withIdentifier: "PetsPageViewController") as? PetsPageViewController {
             vc.pet = pet
             vc.fromMap = true
-            nc.pushViewController(vc, animated: true)
-            present(nc, animated: true, completion: nil)
-        }
-    }
-    
-    func presentSafeZone(_ safezone: SafeZone) {
-        
-        let nc = getNavigationController()
-        
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "AddEditSafeZoneViewController") as? AddEditSafeZoneViewController {
-            vc.safezone = safezone
-            vc.petId = safezone.pet?.id
-            vc.isOwner = safezone.pet?.isOwner ?? false
-            vc.fromMap = true
+            vc.activityEnabled = activityEnabled
             nc.pushViewController(vc, animated: true)
             present(nc, animated: true, completion: nil)
         }
@@ -350,16 +324,16 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     
-        if topConstraintBlurView.constant == opened && touches.count == 1, let touch = touches.first {
+        if topConstraintBlurView.constant == openedHalf && touches.count == 1, let touch = touches.first {
             let touchPoint = touch.location(in: view)
-            if touchPoint.y < opened {
+            if touchPoint.y < openedHalf {
                 perform(action: .close)
             }
         }
     }
     
     func showSearchBar(){
-        performSearch(action: .open)
+        performSearch(action: .openHalf)
     }
     
     func hideSearchBar(){
@@ -403,11 +377,6 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
                 name = pet.name
                 image = pet.image
                 
-            }else if element.id.type == .safezone, let safezone = element.object as? SafeZone {
-                
-                name = safezone.name
-                image = Data()
-                
             }else{
                 
                 name = nil
@@ -437,10 +406,6 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
                 
                 hideSearchBar()
                 showPetDetails(pet)
-            }else if element.id.type == .safezone, let safezone = element.object as? SafeZone {
-                
-                hideSearchBar()
-                showSafeZoneDetails(safezone)
             }
         }
     }
@@ -449,12 +414,15 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     // MARK: - AnimationHelpers
     
     enum Action {
-        case open, close
+        case openHalf, openFull, close
     }
     
     func perform(action:Action, speed:Double = 1, animated:Bool = true){
+
+        self.topConstraintBlurView.constant = self.openedHalf
+        if action == .openFull { self.topConstraintBlurView.constant = self.openedFull }
+        if action == .close { self.topConstraintBlurView.constant = self.closed }
         
-        self.topConstraintBlurView.constant = action == .open ? self.opened : self.closed
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.8, options: UIViewAnimationOptions.curveEaseInOut, animations: {
             self.view.layoutIfNeeded()
         }) { (_) in
@@ -467,14 +435,14 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     func performSearch(action:Action) {
         
         UIView.animate(withDuration: 0.5, animations: { 
-            self.searchRightConstraint.constant = action == .open ? self.openedSearch : self.closedSearch
-            self.searchBar.showsCancelButton = action == .open
+            self.searchRightConstraint.constant = action == .openHalf ? self.openedSearch : self.closedSearch
+            self.searchBar.showsCancelButton = action == .openHalf
             self.view.layoutIfNeeded()
             if action == .close {
                 self.searchResultsView.isHidden = true
             }
         }) { (success) in
-            if action == .open {
+            if action == .openHalf {
                 self.searchTableView.reloadData()
                 self.searchResultsView.isHidden = false
             }
@@ -525,7 +493,6 @@ class MKLocation: MKPointAnnotation {
     func move(coordinate:CLLocationCoordinate2D){
         self.coordinate = coordinate
     }
-    
 }
 
 

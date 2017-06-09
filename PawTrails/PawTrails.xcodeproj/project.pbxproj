@@ -52,6 +52,7 @@
 		442FB06D1EBA00B9004486F8 /* PetUserPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442FB06C1EBA00B9004486F8 /* PetUserPresenter.swift */; };
 		44329CB41EA1129400325A13 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44329CB31EA1129400325A13 /* Constants.swift */; };
 		44340F3D1EB22B4900EB4312 /* APIPetProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44340F3C1EB22B4900EB4312 /* APIPetProfileTests.swift */; };
+		44370BB61EE9904B00BB6CCD /* GeocoderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44370BB51EE9904B00BB6CCD /* GeocoderManager.swift */; };
 		443937011EA771590044831E /* PetUsersPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443937001EA771590044831E /* PetUsersPresenter.swift */; };
 		443937031EA78A7B0044831E /* PetBreedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443937021EA78A7B0044831E /* PetBreedPresenter.swift */; };
 		443937071EA795300044831E /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443937061EA795300044831E /* Helpers.swift */; };
@@ -69,6 +70,8 @@
 		4441ACB61EB8CC8D00FBE27F /* GoogleSignIn.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4441ACAD1EB8CC7A00FBE27F /* GoogleSignIn.bundle */; };
 		44421A2C1E4CB8E7009755BD /* EditUserProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44421A2B1E4CB8E7009755BD /* EditUserProfilePresenter.swift */; };
 		44457A2E1E5AF31400B43748 /* AddressTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44457A2D1E5AF31400B43748 /* AddressTableViewController.swift */; };
+		4447C4F71EE9429500AA6D1D /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4447C4F61EE9429500AA6D1D /* NotificationManager.swift */; };
+		4447C4F91EE948C300AA6D1D /* UpdateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4447C4F81EE948C300AA6D1D /* UpdateManager.swift */; };
 		44485F951E51B12800A3C47D /* PawTrails.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 44485F931E51B12800A3C47D /* PawTrails.xcdatamodeld */; };
 		44485F971E51B16500A3C47D /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44485F961E51B16500A3C47D /* CoreDataManager.swift */; };
 		44485FBD1E52076C00A3C47D /* countrycodes.csv in Resources */ = {isa = PBXBuildFile; fileRef = 44485FBC1E52076C00A3C47D /* countrycodes.csv */; };
@@ -213,6 +216,7 @@
 		44329CB21EA0F75600325A13 /* Test.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Test.playground; sourceTree = "<group>"; };
 		44329CB31EA1129400325A13 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		44340F3C1EB22B4900EB4312 /* APIPetProfileTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIPetProfileTests.swift; sourceTree = "<group>"; };
+		44370BB51EE9904B00BB6CCD /* GeocoderManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeocoderManager.swift; sourceTree = "<group>"; };
 		443937001EA771590044831E /* PetUsersPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetUsersPresenter.swift; path = Presenter/PetUsersPresenter.swift; sourceTree = "<group>"; };
 		443937021EA78A7B0044831E /* PetBreedPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetBreedPresenter.swift; path = Presenter/PetBreedPresenter.swift; sourceTree = "<group>"; };
 		443937061EA795300044831E /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Helpers.swift; path = Model/Helpers.swift; sourceTree = "<group>"; };
@@ -230,6 +234,8 @@
 		4441ACB01EB8CC7A00FBE27F /* GoogleSymbolUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSymbolUtilities.framework; sourceTree = "<group>"; };
 		44421A2B1E4CB8E7009755BD /* EditUserProfilePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditUserProfilePresenter.swift; path = Presenter/EditUserProfilePresenter.swift; sourceTree = "<group>"; };
 		44457A2D1E5AF31400B43748 /* AddressTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddressTableViewController.swift; path = View/AddressTableViewController.swift; sourceTree = "<group>"; };
+		4447C4F61EE9429500AA6D1D /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationManager.swift; path = Model/NotificationManager.swift; sourceTree = "<group>"; };
+		4447C4F81EE948C300AA6D1D /* UpdateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UpdateManager.swift; path = Model/UpdateManager.swift; sourceTree = "<group>"; };
 		44485F941E51B12800A3C47D /* PawTrails.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PawTrails.xcdatamodel; sourceTree = "<group>"; };
 		44485F961E51B16500A3C47D /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		44485FBC1E52076C00A3C47D /* countrycodes.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = countrycodes.csv; sourceTree = "<group>"; };
@@ -408,6 +414,7 @@
 			children = (
 				44B179611E4B62690070A18B /* Presenter.swift */,
 				44C7F74F1E4CD3DA00171170 /* HomePresenter.swift */,
+				44A1AC4F1E92923A003EF6CA /* PetsPresenter.swift */,
 				447440E71E8400EF0069EA85 /* SettingsPresenter.swift */,
 				447905141E57307E00A49AB3 /* Authentication */,
 				4475FB271EB0F68700E9990D /* User */,
@@ -556,6 +563,9 @@
 				44485F961E51B16500A3C47D /* CoreDataManager.swift */,
 				44C7F7531E4CD3F200171170 /* SocketIOManager.swift */,
 				447D4C151E44BF69008F82F4 /* SocketIO */,
+				4447C4F61EE9429500AA6D1D /* NotificationManager.swift */,
+				4447C4F81EE948C300AA6D1D /* UpdateManager.swift */,
+				44370BB51EE9904B00BB6CCD /* GeocoderManager.swift */,
 			);
 			name = Communication;
 			sourceTree = "<group>";
@@ -592,7 +602,6 @@
 		4475FB281EB0F69500E9990D /* Pet */ = {
 			isa = PBXGroup;
 			children = (
-				44A1AC4F1E92923A003EF6CA /* PetsPresenter.swift */,
 				4424E9751EB3430C004CC5FA /* PetPresenter.swift */,
 				441D72F21E9E37490031BB1E /* AddEditPetPresenter.swift */,
 				443937021EA78A7B0044831E /* PetBreedPresenter.swift */,
@@ -1021,6 +1030,7 @@
 				44C7F73F1E4CD3AE00171170 /* SocketEngineSpec.swift in Sources */,
 				44C7F7541E4CD3F200171170 /* APIManager.swift in Sources */,
 				44C7F7371E4CD3AE00171170 /* SocketAckEmitter.swift in Sources */,
+				4447C4F71EE9429500AA6D1D /* NotificationManager.swift in Sources */,
 				44C7F73A1E4CD3AE00171170 /* SocketClientManager.swift in Sources */,
 				4465481E1E5C642000458CB7 /* Extensions.swift in Sources */,
 				4400E83F1ECB3227005846F0 /* PetUser+CoreDataProperties.swift in Sources */,
@@ -1030,6 +1040,7 @@
 				447440E81E8400EF0069EA85 /* SettingsPresenter.swift in Sources */,
 				443D2C6A1E6D721000F7ACFA /* PetManager.swift in Sources */,
 				4400E8471ECB3227005846F0 /* Phone+CoreDataProperties.swift in Sources */,
+				44370BB61EE9904B00BB6CCD /* GeocoderManager.swift in Sources */,
 				441A0D4D1E55AF5200D02CE4 /* SharedPreferences.swift in Sources */,
 				441D72F51E9E57ED0031BB1E /* AddPetDeviceTableViewController.swift in Sources */,
 				443937071EA795300044831E /* Helpers.swift in Sources */,
@@ -1056,6 +1067,7 @@
 				44A1AC501E92923A003EF6CA /* PetsPresenter.swift in Sources */,
 				4415FF431E3B822900A81B13 /* AppDelegate.swift in Sources */,
 				44C7F7561E4CD3F200171170 /* SocketIOManager.swift in Sources */,
+				4447C4F91EE948C300AA6D1D /* UpdateManager.swift in Sources */,
 				44329CB41EA1129400325A13 /* Constants.swift in Sources */,
 				4475FB261EB0D73700E9990D /* DeviceCodePresenter.swift in Sources */,
 				44485FBF1E52079D00A3C47D /* CVSParser.swift in Sources */,

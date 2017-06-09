@@ -7,53 +7,40 @@
 //
 
 import Foundation
-
-//
-//  SocketIOManager.swift
-//  SocketChat
-//
-//  Created by Gabriel Theodoropoulos on 1/31/16.
-//  Copyright © 2016 AppCoda. All rights reserved.
-//
-
 import UIKit
-
-enum Listener: String {
-    case gpsUpdates = "GPS"
-    case unknown = "-"
-    
-    var notificationName: NSNotification.Name {
-        return Notification.Name(rawValue: self.rawValue)
-    }
-}
 
 class SocketIOManager: NSObject {
     
     static let Instance = SocketIOManager()
     
-//    private let urlString = "http://eu.pawtrails.pet:4654"
     private let urlString = "http://eu.pawtrails.pet:2004"
     private var socket: SocketIOClient!
     
-    private var openGPSUpdates = [Int16:Bool]()
+    private var onUpdates = [Int16:Bool]()
+    private var PetsGPSData = [Int16:GPSData]()
     
     override init() {
-//        if let token = SharedPreferences.get(.token) {
-//            socket = SocketIOClient(socketURL: URL(string: urlString)!, config: [.connectParams(["token":token, "user":"94"]), .log(true)])
-//            socket = SocketIOClient(socketURL: URL(string: urlString)!, config: [.connectParams(["token":token, "user":"94"])])
-//        }else {
-            socket = SocketIOClient(socketURL: URL(string: urlString)!)
-//        }
+        
+//        socket = SocketIOClient(socketURL: URL(string: urlString)!, config: [.log(true)])
+        socket = SocketIOClient(socketURL: URL(string: urlString)!)
+        for key in onUpdates.keys {
+            onUpdates[key] = false
+        }
         super.init()
     }
     
     
     func establishConnection(_ callback: (()->())? = nil) {
+        socket.on("authCheck") { (data, ack) in
+            if self.isSuccessfullyConected(data), let callback = callback {
+                callback()
+            }
+        }
         socket.on("connect") { (data, ack) in
             if let token = SharedPreferences.get(.token) {
                 self.socket.emit("authCheck", with: [token])
             }
-            if let callback = callback { callback() }
+            
         }
         socket.connect()
     }
@@ -80,52 +67,79 @@ class SocketIOManager: NSObject {
     
     typealias socketIOCallback = (SocketIOError?,GPSData?) -> Void
     
-    func getPetGPSData(id: Int16, withUpdates: Bool = false, callback: @escaping socketIOCallback){
-        
-        if withUpdates {
-            socket.on("gpsData", callback: { (data, ack) in
-                debugPrint("gpsData Update response", data, ack)
-                self.handleGPSUpdates(data, callback: callback)
-            })
-        }else{
-            socket.once("gpsData", callback: { (data, ack) in
-                debugPrint("gpsData response", data, ack)
-                self.handleGPSUpdates(data, callback: callback)
-            })
-        }
-        
-        if isConnected() {
-            self.startPetUpdates(for: id)
-        }else{
-            establishConnection({ 
-                self.startPetUpdates(for: id)
-            })
+    func getPetGPSData(id: Int16) -> GPSData? {
+        return PetsGPSData[id]
+    }
+    
+    func setPetGPSlocationName(id: Int16, _ locationName: String){
+        if let data = PetsGPSData[id] {
+            PetsGPSData[id]?.locationAndTime = "\(locationName) - \(data.distanceTime)"
         }
     }
     
+    func startPetGPSUpdates(for id: Int16){
+        if onUpdates[id] != nil && onUpdates[id]! {
+           debugPrint("Already receiving updates!")
+        }else{
+            socket.on("gpsData", callback: { (data, ack) in
+//                debugPrint("gpsData Update response", data)
+                self.handleGPSUpdates(data)
+            })
+            if isConnected() {
+                self.startPetUpdates(for: id)
+            }else{
+                establishConnection({
+                    self.startPetUpdates(for: id)
+                })
+            }
+        }
+    }
     
-    func startPetUpdates(for id: Int16) {
+    private func startPetUpdates(for id: Int16) {
         
         if socket.status == .connected {
-            debugPrint("emit", id)
+            onUpdates[id] = true
             socket.emit("room", "\(Int(id))")
         }
     }
     
-    private func handleGPSUpdates(_ data: [Any], callback: @escaping socketIOCallback) {
+    private func stopPetUpdates(for id: Int16) {
+        
+        if socket.status == .connected {
+            onUpdates[id] = false
+            socket.emit("roomleave", "\(Int(id))")
+        }
+    }
+    
+    private func handleGPSUpdates(_ data: [Any]) {
     
         if let json = data.first as? [String:Any] {
             
-            if json["unauthorized"] != nil { callback(SocketIOError.unauthorized, nil) }
-            else if json["waiting ..."] != nil { callback(SocketIOError.unauthorized, nil) }
-            else if let error = json["errors"] as? Int, error != 0 {
-                debugPrint(error)
+            if let error = json["errors"] as? Int, error != 0 {
+//                debugPrint("Error :", error)
+            }else if let id = json.tryCastInteger(for: "petId")?.toInt16 {
+                debugPrint("GPS Updates \(id)")
+                if let data = PetsGPSData[id] {
+                    data.update(json)
+                }else{
+                    PetsGPSData[id] = GPSData(json)
+                }
+                NotificationManager.Instance.postPetGPSUpdates(with: id)
             }else {
-                callback(nil,GPSData(json))
-                //                NotificationCenter.default.post(Notification.init(name: Listeners.gpsUpdates.notificationName, object: info, userInfo: nil))
+                debugPrint(json)
             }
+        }else{
+            debugPrint(data)
         }
-        callback(nil, nil)
+    }
+    
+    // helpers
+    
+    private func isSuccessfullyConected(_ data: [Any]) -> Bool {
+        if let json = data.first as? [String:Any] {
+            return (json["errors"] as? Int) == 0
+        }
+        return false
     }
 
 }
