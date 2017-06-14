@@ -22,61 +22,24 @@ class PawTrailsTests: XCTestCase {
     }
     
     func testExample() {
-        let headers = [
-            "content-type": "application/json",
-            "cache-control": "no-cache",
-            "postman-token": "cc8b46c7-1b28-f9a0-048a-7225b5c1be97"
-        ]
-        let parameters = [
-            "email": "iosV2@test.com",
-            "is4test": "marc@attitudetech.ie"
-            ] as [String : Any]
         
-        let postData = try? JSONSerialization.data(withJSONObject: parameters, options: [])
-        
-        let request = NSMutableURLRequest(url: NSURL(string: "http://eu.pawtrails.pet/api/users/resetpsw")! as URL,
-                                          cachePolicy: .useProtocolCachePolicy,
-                                          timeoutInterval: 10.0)
-        request.httpMethod = "POST"
-        request.allHTTPHeaderFields = headers
-        request.httpBody = postData! as Data
-        
-        
-        let task = URLSession.shared.dataTask(with: request as URLRequest) { data, response, error in
-            guard error == nil else {
-                print(error!)
-                return
-            }
-            guard let data = data else {
-                print("Data is empty")
-                return
-            }
+
+        let expect = expectation(description: "Test example")
+        if let id = SharedPreferences.get(.id) {
+            _ = SharedPreferences.remove(.id)
             
-            let json = try! JSONSerialization.jsonObject(with: data, options: [])
-            print(json)
-        }
-        
-        task.resume()
-    }
-    
-    func testExample2() {
-
-//        PetManager.upsertTest()
-        
-    }
-    
-
-    func testUsers() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        
-        if let users = CoreDataManager.Instance.retrieve("User") as? [User]{
-            for i in users {
-                print(i.id ?? "nil id")
-                NSLog("%@", i)
+            DataManager.Instance.loadUserFriends { (error, friends) in
+                
+                XCTAssertNil(friends)
+                XCTAssertNotNil(error)
+                XCTAssert(error?.DBError == DatabaseError.IdNotFound, "Error \(String(describing: error))")
+                SharedPreferences.set(.id, with: id)
+                
+                expect.fulfill()
             }
         }
+        waitForExpectations(timeout: 10) { error in
+            XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
+        }
     }
-    
-    
 }

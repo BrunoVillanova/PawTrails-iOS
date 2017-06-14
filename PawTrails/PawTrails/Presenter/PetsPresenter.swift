@@ -81,4 +81,83 @@ class PetsPresenter {
             }
         }
     }
+    
+    //MARK:- Socket IO
+    
+    func startPetsGPSUpdates(_ callback: @escaping ((_ id: Int16, _ update: Bool)->())){
+        NotificationManager.Instance.getPetGPSUpdates { (id, data) in
+            if data.locationAndTime == "" {  GeocoderManager.Intance.reverse(data.point, for: id) }
+        }
+    }
+    
+    func stopPetGPSUpdates(){
+        NotificationManager.Instance.removePetGPSUpdates()
+    }
+    
+    //MARK:- Geocode
+    
+    func startPetsGeocodeUpdates(_ callback: @escaping ((Geocode?)->())){
+        NotificationManager.Instance.getPetGeoCodeUpdates(callback)
+    }
+    
+    func stopPetsGeocodeUpdates(){
+        NotificationManager.Instance.removePetGeoCodeUpdates()
+    }
+    
+    //LoadPets
+    
+    func startPetsListUpdates(){
+        NotificationManager.Instance.getPetListUpdates { (pets) in
+            debugPrint("Update PETS!!")
+            DispatchQueue.main.async {
+                if let pets = pets {
+                    self.ownedPets = pets.filter({ $0.isOwner })
+                    self.sharedPets = pets.filter({ !$0.isOwner })
+                    self.view?.loadPets()
+                }else {
+                    self.view?.petsNotFound()
+                }
+            }
+        }
+    }
+    
+    func stopPetListUpdates(){
+        NotificationManager.Instance.removePetListUpdates()
+    }
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
 }

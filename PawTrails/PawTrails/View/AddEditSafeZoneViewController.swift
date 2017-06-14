@@ -46,6 +46,7 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     fileprivate let presenter = AddEditSafeZonePresenter()
     
     fileprivate var petLocation:MKLocation? = nil
+    fileprivate var updatingPetLocation = false
     
     var safezone: SafeZone?
     var petId: Int16!
@@ -70,6 +71,10 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
         
         loadingFocus.isHidden = true
         loadingFocus.hidesWhenStopped = true
+        
+        //set view position for screen size
+        opened = view.frame.height - blurView.frame.height - 7.0
+        closed = view.frame.height - 70.0
         
         if let safezone = safezone {
             navigationItem.title = "Edit Safe Zone"
@@ -127,6 +132,13 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
         presenter.deteachView()
         NotificationCenter.default.removeObserver(self)
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        if updatingPetLocation {
+            presenter.stopPetGPSUpdates()
+        }
+    }
+
     
     func geoCodeFence() -> (Point,Point) {
         
@@ -192,29 +204,29 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     }
     
     func loadPetLocation(){
-        
-        
-        SocketIOManager.Instance.getPetGPSData(id: 25, withUpdates: true) { (error,GPSData) in
-            DispatchQueue.main.async {
-                
-                if let GPSData = GPSData {
-                    
-                    self.focused = true
-                    if let petLocation = self.petLocation {
-                        petLocation.move(coordinate: GPSData.point.coordinates)
-                    }else{
-                        self.petLocation = MKLocation(id: MKLocationId.init(id: 0, type: .pet), coordinate: GPSData.point.coordinates)
-                        self.mapView.addAnnotation(self.petLocation!)
-                    }
-                    self.mapView.centerOn(GPSData.point.coordinates, with: 51, animated: true)
-                }else if let error = error {
-                    if error == SocketIOError.unauthorized {
-                        self.endLoadingLocation()
-                        self.alert(title: "", msg: "Couldn't locate pet", type: .red)
-                    }
-                }
+
+        if !updatingPetLocation {
+            updatingPetLocation = true
+            presenter.startPetsGPSUpdates { (data) in
+                if !self.focused { self.loadPet(coordinates: data.point.coordinates) }
             }
         }
+
+        if let data = SocketIOManager.Instance.getPetGPSData(id: petId) {
+            loadPet(coordinates: data.point.coordinates)
+        }
+    }
+    
+    func loadPet(coordinates:CLLocationCoordinate2D){
+        self.focused = true
+        if let petLocation = self.petLocation {
+            petLocation.move(coordinate: coordinates)
+        }else{
+            self.petLocation = MKLocation(id: MKLocationId.init(id: 0, type: .pet), coordinate: coordinates)
+            self.mapView.addAnnotation(self.petLocation!)
+        }
+        endLoadingLocation()
+        self.mapView.centerOn(coordinates, with: 51, animated: true)
     }
     
     @IBAction func handlePanGesture(_ sender: UIPanGestureRecognizer) {

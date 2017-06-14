@@ -66,7 +66,7 @@ class AddPetUserPresenter {
             view?.beginLoadingContent()
             var data = [String:Any]()
             data["email"] = email
-            DataManager.Instance.addSharedUser(by: data, to: petId, callback: { (error) in
+            DataManager.Instance.addSharedUser(by: data, to: petId, callback: { (error, users) in
                 DispatchQueue.main.async {
                     self.view?.endLoadingContent()
                     if let error = error {

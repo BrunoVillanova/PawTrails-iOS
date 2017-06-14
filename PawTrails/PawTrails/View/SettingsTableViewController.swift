@@ -29,7 +29,6 @@ class SettingsTableViewController: UITableViewController, SettingsView {
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             appDelegate.loadAuthenticationScreen()
         }
-        
     }
     
     func errorMessage(_ error: ErrorMsg) {

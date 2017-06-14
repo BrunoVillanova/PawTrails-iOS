@@ -60,7 +60,7 @@ extension UIViewController {
             }))
             self.present(alert, animated: true, completion: nil)
         })
-
+        
     }
     
     func setTopBar(color: UIColor = UIColor.orange()) {
@@ -86,40 +86,40 @@ extension UIViewController {
             imagePicker.allowsEditing = true
             imagePicker.sourceType = .camera
             DispatchQueue.main.async {
-            self.present(imagePicker, animated: true, completion: nil)
+                self.present(imagePicker, animated: true, completion: nil)
             }
         }))
         alert.addAction(UIAlertAction(title: "Choose from Gallery", style: .default, handler: { (galery) in
             imagePicker.allowsEditing = true
             imagePicker.sourceType = .photoLibrary
             DispatchQueue.main.async {
-            self.present(imagePicker, animated: true, completion: nil)
+                self.present(imagePicker, animated: true, completion: nil)
             }
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         DispatchQueue.main.async {
-        self.present(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
     @IBAction func dismissAction(sender: UIButton?){
         DispatchQueue.main.async {
-        self.view.endEditing(true)
-        self.dismiss(animated: true, completion: nil)
+            self.view.endEditing(true)
+            self.dismiss(animated: true, completion: nil)
         }
     }
     
     @IBAction func dismissBarAction(sender: UIBarButtonItem?){
         DispatchQueue.main.async {
-        self.view.endEditing(true)
-        self.navigationController?.dismiss(animated: true, completion: nil)
+            self.view.endEditing(true)
+            self.navigationController?.dismiss(animated: true, completion: nil)
         }
     }
     
     @IBAction func popAction(sender: UIBarButtonItem?){
         DispatchQueue.main.async {
-        self.view.endEditing(true)
-        _ = self.navigationController?.popViewController(animated: true)
+            self.view.endEditing(true)
+            _ = self.navigationController?.popViewController(animated: true)
         }
     }
     
@@ -128,7 +128,7 @@ extension UIViewController {
     func hideNotification() {
         if let notificationView = view.subviews.first(where: { $0.tag == 2 }) {
             DispatchQueue.main.async {
-            notificationView.removeFromSuperview()
+                notificationView.removeFromSuperview()
             }
         }
     }
@@ -174,24 +174,26 @@ extension UIViewController {
         
         loadingView.addSubview(activity)
         
-        loadingView.alpha = 0.0
-        
-        view.addSubview(loadingView)
-        
-        UIView.animate(withDuration: 0.6) {
-            loadingView.alpha = 1.0
+        loadingView.contentView.alpha = 0.0
+        DispatchQueue.main.async {
+            self.view.addSubview(loadingView)
+            UIView.animate(withDuration: 0.6) {
+                loadingView.contentView.alpha = 1.0
+            }
         }
     }
     
     func hideLoadingView() {
         if let loadingView = view.subviews.first(where: { $0.tag == 1 }) as? UIVisualEffectView {
-            UIView.animate(withDuration: 0.4, animations: {
-                loadingView.alpha = 0
-            }, completion: { (success) in
-                if success {
-                    loadingView.removeFromSuperview()
-                }
-            })
+            DispatchQueue.main.async {
+                UIView.animate(withDuration: 0.4, animations: {
+                    loadingView.contentView.alpha = 0.0
+                }, completion: { (success) in
+                    if success {
+                        loadingView.removeFromSuperview()
+                    }
+                })
+            }
         }
     }
     
@@ -334,7 +336,7 @@ extension UIView {
         layer.shadowOffset = CGSize(width: 0.0, height: 5.0)
         layer.shadowOpacity = 0.5
         layer.shadowPath = shadowPath.cgPath
-
+        
     }
 }
 
@@ -346,7 +348,7 @@ extension UIImageView {
         let color: UIColor = isPetOwner ? .orange() : .darkGray
         self.border(color: color, width: 2.0)
     }
-
+    
 }
 
 extension CGRect {
@@ -364,7 +366,7 @@ extension UITableView {
         let indexSet = IndexSet(integer: section)
         self.reloadSections(indexSet, with: animation)
     }
-
+    
 }
 
 extension UICollectionView {
@@ -374,5 +376,5 @@ extension UICollectionView {
         let indexSet = IndexSet(integersIn: range)
         self.reloadSections(indexSet)
     }
-
+    
 }

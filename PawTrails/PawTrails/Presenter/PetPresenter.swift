@@ -146,7 +146,27 @@ class PetPresenter {
         
     }
     
+    //MARK:- Socket IO
     
+    func startPetsGPSUpdates(_ callback: @escaping ((_ id: Int16)->())){
+        NotificationManager.Instance.getPetGPSUpdates { (id, data) in
+            GeocoderManager.Intance.reverse(data.point, for: id)
+        }
+    }
+    
+    func stopPetGPSUpdates(){
+        NotificationManager.Instance.removePetGPSUpdates()
+    }
+
+    //MARK:- Geocode
+    
+    func startPetsGeocodeUpdates(_ callback: @escaping ((Geocode?)->())){
+        NotificationManager.Instance.getPetGeoCodeUpdates(callback)
+    }
+    
+    func stopPetsGeocodeUpdates(){
+        NotificationManager.Instance.removePetGeoCodeUpdates()
+    }
     
     
     

@@ -12,7 +12,6 @@ import FacebookLogin
 
 typealias errorCallback = (_ error:DataManagerError?) -> Void
 
-
 class AuthManager {
     
     static let Instance = AuthManager()
@@ -134,21 +133,21 @@ class AuthManager {
         //wipe out DB
 
         CoreDataManager.Instance.deleteAll()
-        if let socialMedia = AuthManager.Instance.socialMedia() {
-            if let sm = SocialMedia(rawValue: socialMedia) {
-                switch sm {
-                case .facebook:
-                    let loginManager = LoginManager()
-                    loginManager.logOut()
-//                case .twitter:
-//                    Fabric.with([Twitter.self])
-                case .google:
-                    GIDSignIn.sharedInstance().signOut()
-                default:
-                    break
-                }
-            }
-        }
+//        if let socialMedia = AuthManager.Instance.socialMedia() {
+//            if let sm = SocialMedia(rawValue: socialMedia) {
+//                switch sm {
+//                case .facebook:
+//                    let loginManager = LoginManager()
+//                    loginManager.logOut()
+////                case .twitter:
+////                    Fabric.with([Twitter.self])
+//                case .google:
+//                    GIDSignIn.sharedInstance().signOut()
+//                default:
+//                    break
+//                }
+//            }
+//        }
 
 //        GIDSignIn.sharedInstance().signOut()
         return SharedPreferences.remove(.id) && SharedPreferences.remove(.token)

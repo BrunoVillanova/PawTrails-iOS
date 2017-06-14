@@ -14,6 +14,8 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
     @IBOutlet weak var petImageView: UIImageView!
     @IBOutlet weak var signalImageView: UIImageView!
     @IBOutlet weak var batteryImageView: UIImageView!
+    @IBOutlet weak var signalLabel: UILabel!
+    @IBOutlet weak var batteryLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var breedLabel: UILabel!
     @IBOutlet weak var weightLabel: UILabel!
@@ -38,43 +40,49 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
 //        tableView.backgroundColor = UIColor.clear
         presenter.attachView(self, pet:pet)
 
-//        usersCollectionView.register(petProfileUserCollectionCell.self, forCellWithReuseIdentifier: "cell")
-//        safeZonesCollectionView.register(petProfileSafeZoneCollectionCell.self, forCellWithReuseIdentifier: "cell")
-        
         petImageView.circle()
         signalImageView.circle()
         batteryImageView.circle()
         
         if let pet = pet {
             load(pet)
+            loadGPSData()
             reloadPetInfo()
             reloadUsers()
             reloadSafeZones()
             removeLeaveLabel.text = pet.isOwner ? "Remove Pet" : "Leave Pet"
-            
-            SocketIOManager.Instance.getPetGPSData(id: 25) { (error, data) in
-                if let data = data {
-                    DispatchQueue.main.async {
-                        self.signalImageView.backgroundColor = UIColor.orange()
-                        self.batteryImageView.backgroundColor = UIColor.orange()
-                    }
-                    data.point.coordinates.getStreetFullName(handler: { (name) in
-                        DispatchQueue.main.async {
-                            if let name = name {
-                                self.locationLabel.text = "\(name)\n\(data.distanceTime)"
-                            }
-                        }
-                    })
-                }
-            }
-        }
-        
+         }
         
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 20.0))
     }
     
     deinit {
         presenter.deteachView()
+    }
+        
+    override func viewWillAppear(_ animated: Bool) {
+
+        presenter.startPetsGPSUpdates { (id) in
+            self.updateRow(by: id)
+        }
+        presenter.startPetsGeocodeUpdates { (geocode) in
+            if let geocode = geocode {
+                self.updateRow(by: geocode.petId)
+            }
+        }
+    }
+    
+    private func updateRow(by id: Int16){
+        DispatchQueue.main.async {
+            if id == self.pet.id {
+                self.loadGPSData()
+            }
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        presenter.stopPetGPSUpdates()
+        presenter.stopPetsGeocodeUpdates()
     }
 
     func reloadPetInfo() {
@@ -148,6 +156,19 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
         tableView.reloadData()
     }
     
+    func loadGPSData(){
+        if let data = SocketIOManager.Instance.getPetGPSData(id: pet.id) {
+            self.signalImageView.backgroundColor = UIColor.orange()
+            self.signalLabel.text = data.signalString
+            self.batteryImageView.backgroundColor = UIColor.orange()
+            self.batteryLabel.text = data.batteryString
+            self.locationLabel.text = data.locationAndTime
+        }else{
+            self.signalImageView.backgroundColor = UIColor.gray
+            self.batteryImageView.backgroundColor = UIColor.gray
+        }
+    }
+    
     func petNotFound() {
         alert(title: "", msg: "couldn't load pet")
     }
@@ -157,40 +178,6 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
     }
     
     // MARK: - UITableViewDataSource
-    
-//    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        
-//        let headerView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: tableView.frame.width, height: 35.0))
-//        
-//        let titleWidth = headerView.frame.width * 0.7
-//        let margin:CGFloat = 10.0
-//        
-//        let title = UILabel(frame: CGRect(x: margin, y: 0.0, width: titleWidth, height: headerView.frame.height - margin))
-//        title.text = sectionNames[section].uppercased()
-//        title.font = UIFont.init(name: "HelveticaNeue-Bold", size: 28.0)
-//        title.textColor = UIColor.black
-//        headerView.addSubview(title)
-//        
-//        if pet.isOwner && section != 3 {
-//            
-//            let editButtonWidth = headerView.frame.width - titleWidth - margin
-//            
-//            let editButton = UIButton(frame: CGRect(x: titleWidth, y: 0.0, width: editButtonWidth, height: headerView.frame.height - margin))
-//            let title = section == 0 ? "Edit" : "Add"
-//            editButton.setTitle(title, for: .normal)
-//            editButton.contentHorizontalAlignment = .right
-//            editButton.setTitleColor(UIColor.orange(), for: .normal)
-//            editButton.isEnabled = true
-//            editButton.tag = section
-//            editButton.addTarget(self, action: #selector(editPressed(sender:)), for: .touchDown)
-//            headerView.addSubview(editButton)
-//        }
-//        return headerView
-//    }
-//    
-//    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 35.0
-//    }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
@@ -341,13 +328,19 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
     
     func buildMap(for safezone: SafeZone, handler: @escaping (()->())) {
         if safezone.preview == nil, let center = safezone.point1?.coordinates, let topCenter = safezone.point2?.coordinates, let shape = Shape(rawValue: safezone.shape) {
+            if CLLocationCoordinate2DIsValid(center) && CLLocationCoordinate2DIsValid(topCenter) {
+                MKMapView.getSnapShot(with: center, topCenter: topCenter, shape: shape, into: view, handler: { (image) in
+                    if let image = image, let data = UIImagePNGRepresentation(image) {
+                        self.presenter.set(safezone: safezone, imageData: data)
+                        handler()
+                    }
+                })
+            }else{
+                errorMessage(ErrorMsg.init(title: "", msg: "wrong coordinates"))
+            }
             
-            MKMapView.getSnapShot(with: center, topCenter: topCenter, shape: shape, into: view, handler: { (image) in
-                if let image = image, let data = UIImagePNGRepresentation(image) {
-                    self.presenter.set(safezone: safezone, imageData: data)
-                    handler()
-                }
-            })
+        }else{
+            handler()
         }
     }
     

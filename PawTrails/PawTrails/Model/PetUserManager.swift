@@ -8,12 +8,12 @@
 
 import Foundation
 
-typealias petUsersCallback = (_ error:DataManagerError?, _ users:[PetUser]?) -> Void
+typealias petUsersCallback = ((_ error:DataManagerError?, _ users:[PetUser]?) -> Void)
 
 class PetUserManager {
     
 
-    static func upsert(_ data: [String:Any]) -> PetUser? {
+    private static func upsert(_ data: [String:Any]) -> PetUser? {
         do {
             
             if let id = data.tryCastInteger(for: "id") {
@@ -42,7 +42,41 @@ class PetUserManager {
         return nil
     }
     
-    static func upsert(_ data: [String:Any], into petId: Int16){
+    static func upsert(_ data: [String:Any], into petId: Int16, callback: petUsersCallback? = nil){
+        
+        PetManager.get(petId) { (error, pet) in
+            if error == nil, let pet = pet {
+                do {
+                    let users = pet.mutableSetValue(forKey: "users")
+
+                    if let petUser = upsert(data) {
+
+                        if (users.allObjects as? [PetUser])?.first(where: { $0.id == petUser.id }) == nil {
+                            users.add(petUser)
+                        }
+                        
+                    }else{
+                        if let callback = callback { callback(DataManagerError.init(responseError: ResponseError.Unknown), nil)}
+                        return
+                    }
+
+                    pet.setValue(users, forKey: "users")
+                    try CoreDataManager.Instance.save()
+                    if let callback = callback { callback(nil, users.allObjects as? [PetUser]) }
+                }catch{
+                    debugPrint(error)
+                    if let callback = callback { callback(DataManagerError(error: error), nil) }
+                }
+            }else if let error = error, let callback = callback {
+                callback(error, nil)
+            }else if let callback = callback {
+                debugPrint(error ?? "error nil", pet ?? "pet nil")
+                callback(nil, nil)
+            }
+        }
+    }
+    
+    static func upsertList(_ data: [String:Any], into petId: Int16, callback: petUsersCallback? = nil){
         
         if let petUsersData = data["users"] as? [[String:Any]] {
             PetManager.get(petId) { (error, pet) in
@@ -52,15 +86,20 @@ class PetUserManager {
                         users.removeAllObjects()
                         
                         for petUserData in petUsersData {
-                            if let petUser = upsert(petUserData) {
-                                users.add(petUser)
-                            }
+                            if let petUser = upsert(petUserData) { users.add(petUser) }
                         }
                         pet.setValue(users, forKey: "users")
                         try CoreDataManager.Instance.save()
+                        if let callback = callback { callback(nil, users.allObjects as? [PetUser]) }
                     }catch{
                         debugPrint(error)
+                        if let callback = callback { callback(DataManagerError(error: error), nil) }
                     }
+                }else if let error = error, let callback = callback {
+                    callback(error, nil)
+                }else if let callback = callback {
+                    debugPrint(error ?? "error nil", pet ?? "pet nil")
+                    callback(nil, nil)
                 }
             }
         }

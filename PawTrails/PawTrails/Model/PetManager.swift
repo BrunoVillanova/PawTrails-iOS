@@ -8,7 +8,6 @@
 
 
 typealias petCheckDeviceCallback = (_ isIdle:Bool) -> Void
-typealias petErrorCallback = (_ error:DataManagerError?) -> Void
 typealias petCallback = (_ error:DataManagerError?, _ pet:Pet?) -> Void
 typealias petsCallback = (_ error:DataManagerError?, _ pets:[Pet]?) -> Void
 typealias petsSplittedCallback = (_ error:DataManagerError?, _ owned:[Pet]?, _ shared:[Pet]?) -> Void
@@ -167,7 +166,7 @@ class PetManager {
         }
     }
     
-    static func set(_ deviceCode: String, _ id: Int16, _ callback:petErrorCallback){
+    static func set(_ deviceCode: String, _ id: Int16, _ callback:errorCallback){
         get(id) { (error, pet) in
             if error == nil, let pet = pet {
                 do {

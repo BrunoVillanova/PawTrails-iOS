@@ -29,7 +29,14 @@ extension MKMapView {
     
     func centerOn(_ location: CLLocationCoordinate2D, with regionRadius: CLLocationDistance = 100.0, animated: Bool = false){
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location, regionRadius * 2.0,regionRadius * 2.0)
-        self.setRegion(coordinateRegion, animated: animated)
+        self.setRegion(check(region: coordinateRegion), animated: animated)
+    }
+    
+    func check(region: MKCoordinateRegion) -> MKCoordinateRegion {
+        var region = region
+        if region.span.latitudeDelta > 180 { region.span.latitudeDelta = 180 }
+        if region.span.longitudeDelta > 360 { region.span.longitudeDelta = 360 }
+        return region
     }
     
     func setVisibleMapFor(_ coordinates: [CLLocationCoordinate2D ]) {
@@ -68,7 +75,7 @@ extension MKMapView {
 //        self.addAnnotation(center, color: UIColor.yellow)
 //        self.addAnnotation(topCenter)
         
-        let radius = center.location.distance(from: topCenter.location) * 2
+        let radius = center.location.distance(from: topCenter.location) * 2.0
         
         self.centerOn(center, with: radius, animated: false)
         setOrientation(with: center, topCenter: topCenter, into: view)
@@ -235,12 +242,14 @@ extension CLLocationCoordinate2D {
             handler(placemarks?.first?.name)
         }
     }
+}
+
+extension CLLocation {
     
-    func getStreetFullName(handler: @escaping ((String?)->())) {
-        CLGeocoder().reverseGeocodeLocation(self.location) { (placemarks, error) in
-            handler(placemarks?.first?.thoroughfare)
-        }
+    public var coordinateString: String {
+        return "\(self.coordinate.latitude)-\(self.coordinate.longitude)"
     }
+    
 }
 
 extension Point {
