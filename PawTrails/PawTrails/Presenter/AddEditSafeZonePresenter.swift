@@ -81,7 +81,19 @@ class AddEditSafeZonePresenter {
         
     }
     
+    //MARK:- Socket IO
     
+    func startPetsGPSUpdates(_ callback: @escaping ((_ data: GPSData)->())){
+        NotificationManager.Instance.getPetGPSUpdates { (id, data) in
+            callback(data)
+        }
+    }
+    
+    func stopPetGPSUpdates(){
+        NotificationManager.Instance.removePetGPSUpdates()
+    }
+    
+
     
     
     

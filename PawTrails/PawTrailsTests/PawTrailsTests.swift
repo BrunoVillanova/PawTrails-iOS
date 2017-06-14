@@ -22,22 +22,24 @@ class PawTrailsTests: XCTestCase {
     }
     
     func testExample() {
-//        let expect = expectation(description: "Test example")
-//        if let id = SharedPreferences.get(.id) {
-//            _ = SharedPreferences.remove(.id)
-//            
-//            DataManager.Instance.loadUserFriends { (error, friends) in
-//                
-//                XCTAssertNil(friends)
-//                XCTAssertNotNil(error)
-//                XCTAssert(error?.DBError == DatabaseError.IdNotFound, "Error \(String(describing: error))")
-//                SharedPreferences.set(.id, with: id)
-//                
-//                expect.fulfill()
-//            }
-//        }
-//        waitForExpectations(timeout: 10) { error in
-//            XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
-//        }
+        
+
+        let expect = expectation(description: "Test example")
+        if let id = SharedPreferences.get(.id) {
+            _ = SharedPreferences.remove(.id)
+            
+            DataManager.Instance.loadUserFriends { (error, friends) in
+                
+                XCTAssertNil(friends)
+                XCTAssertNotNil(error)
+                XCTAssert(error?.DBError == DatabaseError.IdNotFound, "Error \(String(describing: error))")
+                SharedPreferences.set(.id, with: id)
+                
+                expect.fulfill()
+            }
+        }
+        waitForExpectations(timeout: 10) { error in
+            XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
+        }
     }
 }

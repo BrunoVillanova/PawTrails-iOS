@@ -21,6 +21,7 @@ class AddPetDeviceTableViewController: UITableViewController, UITextFieldDelegat
         presenter.attachView(self)
         if petId != -1 {
             navigationItem.rightBarButtonItem?.title = "Change"
+            navigationItem.title = "Device"
         }
     }
     

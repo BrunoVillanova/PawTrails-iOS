@@ -9,12 +9,9 @@
 import Foundation
 
 protocol HomeView: NSObjectProtocol, View, ConnectionView {
-    func loadMapElements()
+    func loadPets()
     func reload()
     func noPetsFound()
-//    func startTracking(_ id: Int16, _ name: String, lat:Double, long:Double)
-//    func updateTracking(_ id: Int16, lat:Double, long:Double)
-//    func stopTracking(_ id: Int16)
     func userNotSigned()
 }
 
@@ -62,8 +59,8 @@ class HomePresenter {
                 
                 if error == nil, let pets = pets {
                     self.pets = pets
-                    self.view?.loadMapElements()
-                    self.getSafeZones()
+                    self.view?.loadPets()
+
                 }else if let error = error {
                     if error.DBError == DatabaseError.NotFound {
                         self.view?.noPetsFound()
@@ -75,73 +72,38 @@ class HomePresenter {
         }
     }
     
-    func getSafeZones(){
-        
-        safeZones.removeAll()
-        
-        for pet in pets {
-            if let safezones = pet.sortedSafeZones {
-                safeZones.append(contentsOf: safezones)
+    //LoadPets
+    
+    func startPetsListUpdates(){
+        NotificationManager.Instance.getPetListUpdates { (pets) in
+            debugPrint("Update PETS!!")
+            DispatchQueue.main.async {
+                if let pets = pets {
+                    self.pets = pets
+                    self.view?.loadPets()
+                }else {
+                    self.view?.noPetsFound()
+                }
             }
         }
-        
-        DispatchQueue.main.async {
-            self.view?.loadMapElements()
+    }
+    
+    func stopPetListUpdates(){
+        NotificationManager.Instance.removePetListUpdates()
+    }
+
+    
+    //Socket IO
+
+    func startPetsGPSUpdates(_ callback: @escaping ((_ id: MKLocationId, _ point: Point)->())){
+        NotificationManager.Instance.getPetGPSUpdates { (id, data) in
+            callback(MKLocationId(id: id, type: .pet), data.point)
         }
     }
     
-
-    
-    
-    //Socket IO
-    
-    func startTracking(_ i: Int){
-        
-//        if !self.pets.indices.contains(i) || !DataManager.Instance.trackingIsIdle() {
-//            self.view?.errorMessage(ErrorMsg(title:"Error", msg: "Tracking is not available for this pet: \(SocketIOManager.Instance.connectionStatus())"))
-//        }
-//        let pet = self.pets[i]
-//        DataManager.Instance.startTracking(pet: pet, callback: { (lat,long) in
-//            if pet.tracking {
-//                DispatchQueue.main.async {
-//                    self.view?.updateTracking(pet.name, lat: lat, long: long)
-//                }
-//            }else{
-//                pet.tracking = true
-//                DispatchQueue.main.async {
-//                    self.view?.startTracking(pet.name, lat: lat, long: long)
-//                }
-//            }
-//        })
+    func stopPetGPSUpdates(){
+        NotificationManager.Instance.removePetGPSUpdates()
     }
-    
-    func stopTracking(_ i: Int){
-//        if !self.pets.indices.contains(i) {
-//            self.view?.errorMessage(ErrorMsg(title:"Error", msg: "Couldn't find the pet"))
-//        }
-//        let pet = self.pets[i]
-//        pet.tracking = false
-//        DataManager.Instance.stopTracking(pet: pet)
-//        DispatchQueue.main.async {
-//            self.view?.stopTracking(pet.name)
-//        }
-    }
-    
-    func testTrackingAllPets(){
-//        for i in 0...self.pets.count - 1 {
-//            if self.pets[i].tracking  {
-//                self.stopTracking(i)
-//            }else{
-//                self.startTracking(i)
-//            }
-//        }
-    }
-    
-    
-    
-    
-    
-    
     
     
     
