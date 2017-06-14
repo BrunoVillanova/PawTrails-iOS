@@ -63,6 +63,13 @@ extension Double {
 
 extension Date {
     
+    public func toString(dateStyle: DateFormatter.Style = .medium, timeStyle: DateFormatter.Style = .medium) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = dateStyle
+        dateFormatter.timeStyle = timeStyle
+        return dateFormatter.string(from: self)
+     }
+    
     public var toStringShow: String? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium

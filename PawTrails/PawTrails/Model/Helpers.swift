@@ -121,6 +121,10 @@ public class Point: NSObject, NSCoding {
     var toDict: [String:Any] {
         return ["lat":latitude, "lon":longitude] as [String:Any]
     }
+    
+    var toString: String {
+        return "\(latitude) - \(longitude)"
+    }
         
     override init() {
         latitude = 0.0
@@ -225,6 +229,8 @@ public class GPSData: NSObject {
     var battery: Int
     var serverDate: Date
     var locationAndTime: String = ""
+    var source: String = ""
+    var movementAlarm: Bool = false
     
     override init() {
         point = Point()
@@ -234,30 +240,9 @@ public class GPSData: NSObject {
         serverDate = Date()
     }
     
-    init(_ data:[String:Any]) {
-        
-        if let pointData = data["location"] as? [String:Any] {
-            point = Point(pointData)
-        }else{
-            point = Point()
-        }
-        signal = data.tryCastInteger(for: "networkLvl") ?? -1
-        satellites = -1
-        if let satellites = data["gpsAccuracy"] as? String {
-            let components = satellites.components(separatedBy: "-")
-            if components.count == 2 {
-                let min = Double(components[0]) ?? 0
-                let max = Double(components[1]) ?? 0
-                let sum = min + max
-                if sum > 0 { self.satellites = Int(sum/2.0) }
-            }
-        }
-        battery = data.tryCastInteger(for: "batteryLvl") ?? -1
-        if let serverTime = data.tryCastDouble(for: "time") {
-            serverDate = Date.init(timeIntervalSince1970: TimeInterval(serverTime))
-        }else{
-            serverDate = Date()
-        }
+    convenience init(_ data:[String:Any]) {
+        self.init()
+        update(data)
     }
     
     func update(_ data:[String:Any]) {
@@ -289,18 +274,25 @@ public class GPSData: NSObject {
         }else{
             serverDate = Date()
         }
+        source = data.debugDescription
+        
+        if let att = data["attributes"] as? [String:Any] {
+            if let movementAlarm = att["movementAlarm"] as? Int {
+                self.movementAlarm = movementAlarm == 1
+            }
+        }
     }
     
     var distanceTime: String {
         return Date().offset(from: serverDate)
     }
     
-    var batteryString: String {
-        return battery != -1 ? "\(battery)%" : ""
+    var batteryString: String? {
+        return battery != -1 ? "\(battery)%" : nil
     }
     
-    var signalString: String {
-        return signal != -1 ? "\(signal)" : ""
+    var signalString: String? {
+        return signal != -1 ? "\(signal)" : nil
     }
     
     static func == (lhs: GPSData, rhs: GPSData) -> Bool {

@@ -21,8 +21,8 @@ class SocketIOManager: NSObject {
     
     override init() {
         
-//        socket = SocketIOClient(socketURL: URL(string: urlString)!, config: [.log(true)])
-        socket = SocketIOClient(socketURL: URL(string: urlString)!)
+        socket = SocketIOClient(socketURL: URL(string: urlString)!, config: [.log(true)])
+//        socket = SocketIOClient(socketURL: URL(string: urlString)!)
         for key in onUpdates.keys {
             onUpdates[key] = false
         }
@@ -82,7 +82,7 @@ class SocketIOManager: NSObject {
            debugPrint("Already receiving updates!")
         }else{
             socket.on("gpsData", callback: { (data, ack) in
-//                debugPrint("gpsData Update response", data)
+                debugPrint("gpsData Update response", data)
                 self.handleGPSUpdates(data)
             })
             if isConnected() {

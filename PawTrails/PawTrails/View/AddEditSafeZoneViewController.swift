@@ -72,6 +72,10 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
         loadingFocus.isHidden = true
         loadingFocus.hidesWhenStopped = true
         
+        //set view position for screen size
+        opened = view.frame.height - blurView.frame.height - 7.0
+        closed = view.frame.height - 70.0
+        
         if let safezone = safezone {
             navigationItem.title = "Edit Safe Zone"
             navigationItem.prompt = safezone.pet?.name

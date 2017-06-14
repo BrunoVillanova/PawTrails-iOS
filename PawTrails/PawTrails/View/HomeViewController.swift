@@ -18,6 +18,7 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     @IBOutlet weak var searchRightConstraint: NSLayoutConstraint!
 
     @IBOutlet weak var searchResultsView: UIVisualEffectView!
+    @IBOutlet weak var searchResultsHeight: NSLayoutConstraint!
     @IBOutlet weak var searchTableView: UITableView!
     
     
@@ -42,7 +43,7 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     
     fileprivate var openedHalf:CGFloat = 405.0, openedFull:CGFloat = 155.0, closed:CGFloat = 600
     
-    fileprivate let closedSearch:CGFloat = 299, openedSearch:CGFloat = 0
+    fileprivate var closedSearch:CGFloat = 299, openedSearch:CGFloat = 0
     
     fileprivate var annotations = [MKLocationId:MKLocation]()
     
@@ -90,6 +91,17 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
         searchResultsView.round()
         searchResultsView.isHidden = true
         searchTableView.tableFooterView = UIView()
+        
+        //update card position for view size
+        let bar:CGFloat = 60.0
+        openedFull = view.frame.height - bar - 450.0
+        openedHalf = view.frame.height - bar - 200.0
+        closed = view.frame.height - bar
+        
+        closedSearch = view.frame.width - searchView.frame.width - 32.0
+        searchRightConstraint.constant = closedSearch
+        
+        searchResultsHeight.constant = view.frame.height - 226.0 - searchResultsView.frame.origin.y
      }
     
     deinit {
@@ -260,9 +272,11 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
         }
         petTitleLabel.text = pet.name
         let data = SocketIOManager.Instance.getPetGPSData(id: pet.id)
-        petSubtitleLabel.text = data?.locationAndTime
+        petSubtitleLabel.text = data?.locationAndTime ?? data?.point.toString ?? "Unknown"
         signalLabel.text = data?.signalString
         batteryLabel.text = data?.batteryString
+        signalImageView.isHidden = data?.signalString == nil
+        batteryImageView.isHidden = data?.batteryString == nil
         selectedPet = pet
         perform(action: .openHalf)
     }
