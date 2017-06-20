@@ -31,10 +31,14 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
         emailTextField.underline()
         passwordTextField.underline()
         loginButton.round()
+        loginButton.backgroundColor = UIColor.primaryColor()
+        loginButton.tintColor = UIColor.secondaryColor()
         signUpButton.round()
-        signUpButton.border(color: UIColor.orange(), width: 1.0)
-        
+        signUpButton.tintColor = UIColor.primaryColor()
+        signUpButton.border(color: UIColor.primaryColor(), width: 1.0)
+        cancelButton.tintColor = UIColor.primaryColor()
         cancelButton.isHidden = true
+        forgotPasswordButton.tintColor = UIColor.primaryColor()
         
         if #available(iOS 10.0, *) {
             self.emailTextField.textContentType = UITextContentType.emailAddress
@@ -49,6 +53,8 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
 
         GIDSignIn.sharedInstance().uiDelegate = self
     }
+    
+    
     
     @IBAction func loginAction(_ sender: UIButton?) {
         presenter.signIn(email: emailTextField.text, password:passwordTextField.text)
@@ -66,13 +72,12 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
         presenter.loginTW(vc: self)
     }
     
-    
     @IBAction func signUpAction(_ sender: UIButton?) {
-        if cancelButton.isHidden {
-            changeView(isSignUp:true)
-        }else{
-            presenter.signUp(email: emailTextField.text, password: passwordTextField.text)
-        }
+            if cancelButton.isHidden {
+                changeView(isSignUp:true)
+            }else{
+                presenter.signUp(email: emailTextField.text, password: passwordTextField.text)
+            }
     }
     
     @IBAction func cancelSignUpAction(_ sender: UIButton) {
@@ -80,7 +85,6 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
     }
     
     func changeView(isSignUp:Bool){
-        
         
         UIView.animate(withDuration: 1.0, animations: {
             
@@ -90,13 +94,12 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
                 self.socialSeparator.isHidden = true
                 let dy = self.loginButton.frame.origin.y - self.signUpButton.frame.origin.y
                 self.signUpButton.transform = CGAffineTransform(translationX: 0, y: dy)
-                self.signUpButton.backgroundColor = UIColor.orange()
+                self.signUpButton.backgroundColor = UIColor.primaryColor()
                 self.signUpButton.setTitleColor(UIColor.white, for: .normal)
             }else{
                 self.signUpButton.transform = CGAffineTransform.identity
                 self.signUpButton.backgroundColor = UIColor.white
-                self.signUpButton.setTitleColor(UIColor.orange(), for: .normal)
-                
+                self.signUpButton.setTitleColor(UIColor.primaryColor(), for: .normal)
             }
             
             self.cancelButton.isHidden = !isSignUp
@@ -162,15 +165,6 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
         hideLoadingView()
     }
     
-    // MARK: - Connection Notifications
-    
-    func connectedToNetwork() {
-        hideNotification()
-    }
-    
-    func notConnectedToNetwork() {
-        showNotification(title: Message.Instance.connectionError(type: .NoConnection), type: .red)
-    }
     
     // MARK: - UITextFieldDelegate
     
@@ -191,7 +185,7 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.underline(color: UIColor.orange())
+        textField.underline(color: UIColor.primaryColor())
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {

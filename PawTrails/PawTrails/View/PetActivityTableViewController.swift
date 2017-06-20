@@ -10,16 +10,23 @@ import UIKit
 
 class PetActivityViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    @IBOutlet weak var tableView: UITableView!
+//    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noElementsLabel: UILabel!
 
     var pet:Pet!
+    var fromMap: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.tableFooterView = UIView()
-//        noElementsLabel.isHidden = 
+//        tableView.tableFooterView = UIView()
+        
+        navigationItem.title = "\(pet.name!) Activity"
+        navigationItem.rightBarButtonItem = nil
+        
+        if fromMap {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(dismissAction(sender: )))
+        }
     }
 
     // MARK: - UITableViewDataSource

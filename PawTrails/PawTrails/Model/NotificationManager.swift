@@ -12,6 +12,7 @@ enum Listener: String {
     case gpsUpdates = "GPS"
     case petList = "PETLIST"
     case geoCode = "GEOCODE"
+    case events = "EVENTS"
     case unknown = "-"
     
     var notificationName: NSNotification.Name {
@@ -80,7 +81,6 @@ class NotificationManager {
         self.removeObserver(.petList)
     }
     
-    
     //PetGeoCodeUpdates
     
     func postPetGeoCodeUpdates(with code: Geocode){
@@ -97,6 +97,44 @@ class NotificationManager {
     func removePetGeoCodeUpdates() {
         self.removeObserver(.geoCode)
     }
+    
+    //Event
+    
+    func post(_ event: Event){
+        self.post(.events, userInfo: ["event": event])
+    }
+    
+    func getEventsUpdates(_ callback: @escaping ((_ event: Event?)->())){
+        
+        self.addObserver(.events) { (notification) in
+            callback(notification.userInfo?["event"] as? Event)
+        }
+    }
+    
+    func removeEventsUpdates() {
+        self.removeObserver(.events)
+    }
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     

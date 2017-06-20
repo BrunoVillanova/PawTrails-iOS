@@ -39,6 +39,8 @@ class ScanQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         presenter.deteachView()
     }
     
+    
+    
     override func viewDidDisappear(_ animated: Bool) {
         stopSession()
     }
@@ -82,16 +84,6 @@ class ScanQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         }
     }
     
-    // MARK: - Connection Notifications
-    
-    func connectedToNetwork() {
-        hideNotification()
-    }
-    
-    func notConnectedToNetwork() {
-        showNotification(title: Message.Instance.connectionError(type: .NoConnection), type: .red)
-    }
-
 
     // MARK: - Camera
 

@@ -1,4 +1,4 @@
-//
+                //
 //  PasswordRecoveryPresenter.swift
 //  PawTrails
 //
@@ -18,15 +18,20 @@ class PasswordRecoveryPresenter {
     
     weak fileprivate var view: PasswordRecoveryView?
     
+    
     func attachView(_ view: PasswordRecoveryView){
         self.view = view
+        
     }
     
     func deteachView() {
         self.view = nil
     }
     
+    
+    
     func sendRecoveryEmail(email:String, checked: Bool) {
+
         if email.isValidEmail {
             if checked {
                 self.view?.beginLoadingContent()

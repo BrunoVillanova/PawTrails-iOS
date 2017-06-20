@@ -21,12 +21,9 @@ class ChangePasswordTableViewController: UITableViewController, ChangePasswordVi
         self.presenter.attachView(self)
 
         self.passwordTextField.becomeFirstResponder()
-        /*if isDebug {
-            self.passwordTextField.text = ezdebug.email
-            self.newPasswordTextField.text = ezdebug.password + "2"
-            self.newPassword2TextField.text = ezdebug.password + "2"
-        }*/
     }
+    
+    
     
     deinit {
         self.presenter.deteachView()
@@ -57,37 +54,49 @@ class ChangePasswordTableViewController: UITableViewController, ChangePasswordVi
         }
     }
     
-    func wrongOldPassword() {
-//        self.oldPasswordLabel.isHidden = false
-    }
-    
     func weakNewPassword() {
 //        self.newPasswordLabel.isHidden = false
     }
     
     func noMatch() {
-//        self.noMatchLabel.isHidden = false
+        newPassword2TextField.shake()
     }
     
     func passwordChanged() {
         self.view.endEditing(true)
         _ = self.navigationController?.popViewController(animated: true)
     }
+    
 
     // MARK: - UITextFieldDelegate
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         if textField == passwordTextField {
+            checkmark(textField, condition: (textField.text != nil && textField.text!.isValidPassword))
             newPasswordTextField.becomeFirstResponder()
         }else if textField == newPasswordTextField {
+            checkmark(textField, condition: (textField.text != nil && textField.text!.isValidPassword))
             newPassword2TextField.becomeFirstResponder()
         }else if textField == newPassword2TextField {
-            change()
+            checkmark(textField, condition: (newPasswordTextField.text != nil && newPassword2TextField.text != nil && newPasswordTextField.text == newPassword2TextField.text))
+            if newPasswordTextField.text != nil && newPassword2TextField.text != nil && newPasswordTextField.text == newPassword2TextField.text {
+                change()
+            }else{
+                newPassword2TextField.shake()
+            }
+            
         }else{
             textField.resignFirstResponder()
         }
         return true
+    }
+    
+    func checkmark(_ textField: UITextField, condition: Bool){
+        
+//        if condition, let cell = textField.superview?.superview as? UITableViewCell {
+//            cell.accessoryType = UITableViewCellAccessoryType.checkmark
+//        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

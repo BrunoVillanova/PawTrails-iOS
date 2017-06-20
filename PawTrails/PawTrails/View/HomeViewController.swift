@@ -71,15 +71,17 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
         batteryImageView.circle()
         signalImageView.circle()
         startTripButton.round()
-        petProfileButton.tintColor = UIColor.orange()
-        petActivityButton.tintColor = UIColor.orange()
+        startTripButton.backgroundColor = UIColor.primaryColor()
+        startTripButton.tintColor = UIColor.secondaryColor()
         petProfileButton.round()
         petActivityButton.round()
-        petProfileButton.border(color: UIColor.orange(), width: 2.0)
-        petActivityButton.border(color: UIColor.orange(), width: 2.0)
+        petProfileButton.border(color: UIColor.primaryColor(), width: 2.0)
+        petActivityButton.border(color: UIColor.primaryColor(), width: 2.0)
+        petProfileButton.tintColor = UIColor.primaryColor()
+        petActivityButton.tintColor = UIColor.primaryColor()
         
         searchView.round()
-        searchBar.backgroundColor = UIColor.orange().withAlphaComponent(0.8)
+        searchBar.backgroundColor = UIColor.primaryColor().withAlphaComponent(0.8)
         if let textFieldInsideSearchBar = self.searchBar.value(forKey: "searchField") as? UITextField, let glassIconView = textFieldInsideSearchBar.leftView as? UIImageView {
             
             glassIconView.image = glassIconView.image?.withRenderingMode(.alwaysTemplate)
@@ -102,6 +104,8 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
         searchRightConstraint.constant = closedSearch
         
         searchResultsHeight.constant = view.frame.height - 226.0 - searchResultsView.frame.origin.y
+        
+        presenter.getPets()
      }
     
     deinit {
@@ -113,16 +117,14 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
         presenter.startPetsGPSUpdates { (id, point) in
             self.load(id: id, point: point)
         }
+       
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         presenter.stopPetListUpdates()
         presenter.stopPetGPSUpdates()
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        presenter.getPets()
-    }
+
     
     @IBAction func handlePanGesture(_ sender: UIPanGestureRecognizer) {
         
@@ -187,14 +189,12 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     }
     
     func load(id: MKLocationId, point: Point){
-        DispatchQueue.main.async {
-            if self.annotations[id] == nil {
-                self.startTracking(id, coordinate: point.coordinates, color: UIColor.orange())
-            }else{
-                self.updateTracking(id, coordinate: point.coordinates)
-            }
-            self.focusOnPets()
+        if self.annotations[id] == nil {
+            self.startTracking(id, coordinate: point.coordinates, color: UIColor.primaryColor())
+        }else{
+            self.updateTracking(id, coordinate: point.coordinates)
         }
+        self.focusOnPets()
     }
     
     func startTracking(_ id: MKLocationId, coordinate:CLLocationCoordinate2D, color: UIColor) {
@@ -216,15 +216,6 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
         alert(title: "", msg: "No pets found", type: .blue)
     }
     
-    // MARK: - Connection Notifications
-    
-    func connectedToNetwork() {
-        hideNotification()
-    }
-    
-    func notConnectedToNetwork() {
-        showNotification(title: Message.Instance.connectionError(type: .NoConnection), type: .red)
-    }
     
     // MARK: - MKMapViewDelegate
     
@@ -285,24 +276,24 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
         return self.topConstraintBlurView.constant != self.closed
     }
     
-    func getNavigationController() -> UINavigationController {
-        let nc = UINavigationController()
-        nc.navigationBar.barTintColor = UIColor.orange()
-        nc.navigationBar.tintColor = UIColor.white
-        nc.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
-        return nc
-    }
-    
     func presentPet(_ pet: Pet, activityEnabled:Bool = false) {
         
-        let nc = getNavigationController()
+        let nc = UINavigationController()
         
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "PetsPageViewController") as? PetsPageViewController {
-            vc.pet = pet
-            vc.fromMap = true
-            vc.activityEnabled = activityEnabled
-            nc.pushViewController(vc, animated: true)
-            present(nc, animated: true, completion: nil)
+        if activityEnabled {
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "PetActivityViewController") as? PetActivityViewController {
+                vc.pet = pet
+                vc.fromMap = true
+                nc.pushViewController(vc, animated: true)
+                present(nc, animated: true, completion: nil)
+            }
+        }else{
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "PetProfileTableViewController") as? PetProfileTableViewController {
+                vc.pet = pet
+                vc.fromMap = true
+                nc.pushViewController(vc, animated: true)
+                present(nc, animated: true, completion: nil)
+            }
         }
     }
     
@@ -371,7 +362,7 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! searchCell
         
         cell.searchImageView.circle()
-        cell.searchImageView.backgroundColor = UIColor.orange()
+        cell.searchImageView.backgroundColor = UIColor.primaryColor()
         
         var name: String?
         var image: Data?

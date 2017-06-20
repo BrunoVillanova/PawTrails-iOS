@@ -24,7 +24,6 @@ extension MKMapView {
             let coordinates = self.annotations.map({ $0.coordinate })
             setVisibleMapFor(coordinates)
         }
-        
     }
     
     func centerOn(_ location: CLLocationCoordinate2D, with regionRadius: CLLocationDistance = 100.0, animated: Bool = false){
@@ -110,53 +109,52 @@ extension MKMapView {
     
     // Create SnapShot
     
-    static func getSnapShot(with center: CLLocationCoordinate2D, topCenter: CLLocationCoordinate2D, shape: Shape, into view: UIView, handler: @escaping ((UIImage?)->())){
-        
-        let mapView = MKMapView(frame: view.frame)
-        let camera = mapView.camera
-        camera.pitch = 0.0
-        mapView.setCamera(camera, animated: false)
-        
-        _ = mapView.load(with: center, topCenter: topCenter, shape: shape, into: view, paintShapes: true)
-        
-        let options = MKMapSnapshotOptions()
-        options.region = mapView.region
-        options.scale = UIScreen.main.scale
-//        options.size = mapView.frame.size
-        options.size = CGSize(width: 375, height: 200)
-        options.mapType = .satellite
-        options.showsBuildings = true
-        options.showsPointsOfInterest = true
-        options.camera = mapView.camera
-        
-        let shotter = MKMapSnapshotter(options: options)
-        shotter.start(/*with: DispatchQueue.global(), */completionHandler: { (snapshot, error) in
-            if error == nil, let snapshot = snapshot {
-
-                let center = snapshot.point(for: center)
-                let topCenter = snapshot.point(for: topCenter)
-
-                let frame = CGRect(center: center, topCenter: topCenter)
-                
-                let image = snapshot.image
-
-                UIGraphicsBeginImageContextWithOptions(image.size, true, image.scale)
-                image.draw(at: CGPoint.zero)
-                
-                let path = shape == .circle ? UIBezierPath(ovalIn: frame) : UIBezierPath(rect: frame)
-                Fence.idleColor.set()
-                path.fill()
-                
-                let imageWithSafeZone = UIGraphicsGetImageFromCurrentImageContext()
-                UIGraphicsEndImageContext()
-                
-                handler(imageWithSafeZone)
-            }else{
-                handler(nil)
-            }
-        })
-
-    }
+//    static func getSnapShot(with center: CLLocationCoordinate2D, topCenter: CLLocationCoordinate2D, shape: Shape, into view: UIView, handler: @escaping ((UIImage?)->())){
+//        
+//        let mapView = MKMapView(frame: view.frame)
+//        let camera = mapView.camera
+//        camera.pitch = 0.0
+//        mapView.setCamera(camera, animated: false)
+//        
+//        _ = mapView.load(with: center, topCenter: topCenter, shape: shape, into: view, paintShapes: true)
+//        
+//        let options = MKMapSnapshotOptions()
+//        options.region = mapView.region
+//        options.scale = UIScreen.main.scale
+//        //        options.size = mapView.frame.size
+//        options.size = CGSize(width: 375, height: 200)
+//        options.mapType = .satellite
+//        options.showsBuildings = true
+//        options.showsPointsOfInterest = true
+//        options.camera = mapView.camera
+//        
+//        let shotter = MKMapSnapshotter(options: options)
+//        shotter.start(with: DispatchQueue.global(), completionHandler: { (snapshot, error) in
+//            if error == nil, let snapshot = snapshot {
+//                
+//                let center = snapshot.point(for: center)
+//                let topCenter = snapshot.point(for: topCenter)
+//                
+//                let frame = CGRect(center: center, topCenter: topCenter)
+//                
+//                let image = snapshot.image
+//                
+//                UIGraphicsBeginImageContextWithOptions(image.size, true, image.scale)
+//                image.draw(at: CGPoint.zero)
+//                
+//                let path = shape == .circle ? UIBezierPath(ovalIn: frame) : UIBezierPath(rect: frame)
+//                Fence.idleColor.set()
+//                path.fill()
+//                
+//                let imageWithSafeZone = UIGraphicsGetImageFromCurrentImageContext()
+//                UIGraphicsEndImageContext()
+//                
+//                handler(imageWithSafeZone)
+//            }else{
+//                handler(nil)
+//            }
+//        })
+//    }
     
     func getRenderer(overlay: MKOverlay) -> MKOverlayRenderer {
         if let overlay = overlay as? MKCircle {
