@@ -18,11 +18,13 @@ class PetsPresenter {
     
     weak private var view: PetsView?
     
+    
     var ownedPets = [Pet]()
     var sharedPets = [Pet]()
     
     func attachView(_ view: PetsView){
         self.view = view
+        
         getPets()
     }
     
@@ -30,6 +32,8 @@ class PetsPresenter {
         self.view = nil
     }
     
+    
+
     func getPet(with id: Int) -> Pet? {
         let id = Int16(id)
         var pets = ownedPets
@@ -86,7 +90,7 @@ class PetsPresenter {
     
     func startPetsGPSUpdates(_ callback: @escaping ((_ id: Int16, _ update: Bool)->())){
         NotificationManager.Instance.getPetGPSUpdates { (id, data) in
-            if data.locationAndTime == "" {  GeocoderManager.Intance.reverse(data.point, for: id) }
+            if data.locationAndTime == "" {  GeocoderManager.Intance.reverse(type: .pet, with: data.point, for: id) }
         }
     }
     

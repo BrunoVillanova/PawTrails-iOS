@@ -33,7 +33,6 @@ class PetUserTableViewController: UITableViewController, PetUserView {
         presenter.attachView(self)
         
         navigationItem.title = "User Profile"
-        navigationItem.prompt = pet.name
         
         if petUser == nil {
             popAction(sender: nil)
@@ -78,6 +77,7 @@ class PetUserTableViewController: UITableViewController, PetUserView {
     }
 
     
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if indexPath.section == 1 {
@@ -101,11 +101,9 @@ class PetUserTableViewController: UITableViewController, PetUserView {
     func removed() {
         
         if appUserId == petOwnerId && appUserId != currentUserId {
-            if let parent = navigationController?.viewControllers.first(where: { $0 is PetsPageViewController}) as? PetsPageViewController {
-                if let profile = parent.profileTableViewController {
-                    profile.reloadSafeZones()
-                }
-                navigationController?.popToViewController(parent, animated: true)
+            if let profile = navigationController?.viewControllers.first(where: { $0 is PetProfileTableViewController}) as? PetProfileTableViewController {
+                profile.reloadUsers()
+                navigationController?.popToViewController(profile, animated: true)
             }
         }else{
             navigationController?.navigationBar.topItem?.prompt = nil
@@ -125,6 +123,7 @@ class PetUserTableViewController: UITableViewController, PetUserView {
     func endLoadingContent() {
         hideLoadingView()
     }
+    
     
     // MARK: - UITableViewDataSource
     

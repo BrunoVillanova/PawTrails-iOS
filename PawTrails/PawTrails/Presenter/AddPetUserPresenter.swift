@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol AddPetUserView: NSObjectProtocol, View, ConnectionView, LoadingView {
+protocol AddPetUserView: NSObjectProtocol, View, LoadingView {
     func loadFriends()
     func successfullyAdded()
     func emailFormat()
@@ -17,14 +17,14 @@ protocol AddPetUserView: NSObjectProtocol, View, ConnectionView, LoadingView {
 class AddPetUserPresenter {
     
     weak fileprivate var view: AddPetUserView?
-    private var reachability: Reachbility!
+    
     
     var friends = [PetUser]()
     
-    func attachView(_ view: AddPetUserView){
+    func attachView(_ view: AddPetUserView, pet: Pet){
         self.view = view
-        self.reachability = Reachbility(view)
-        getFriends()
+        
+        getFriends(for: pet)
         loadFriends()
     }
     
@@ -32,8 +32,10 @@ class AddPetUserPresenter {
         self.view = nil
     }
     
-    func getFriends(){
-        DataManager.Instance.getPetFriends { (error, friends) in
+    
+    
+    func getFriends(for pet:Pet){
+        DataManager.Instance.getPetFriends(for: pet) { (error, friends) in
             DispatchQueue.main.async {
                 if error == nil, let friends = friends {
                     self.friends = friends
@@ -46,21 +48,23 @@ class AddPetUserPresenter {
     }
     
     func loadFriends(){
+
         DataManager.Instance.loadPetFriends { (error, friends) in
-            DispatchQueue.main.async {
-                if error == nil, let friends = friends {
-                    self.friends = friends
-                    self.view?.loadFriends()
-                }else if let error = error {
-                    self.view?.errorMessage(error.msg)
+                DispatchQueue.main.async {
+                    if error == nil, let friends = friends {
+                        self.friends = friends
+                        self.view?.loadFriends()
+                    }else if let error = error {
+                        self.view?.errorMessage(error.msg)
+                    }
                 }
-            }
+
         }
     }
     
     func addPetUser(by email: String?, to petId: Int16?) {
         
-        if email == nil || (email != nil && !email!.isValidEmail) {
+if email == nil || (email != nil && !email!.isValidEmail) {
             view?.emailFormat()
         }else if let petId = petId {
             view?.beginLoadingContent()

@@ -11,7 +11,7 @@ import FacebookCore
 import FacebookLogin
 import TwitterKit
 
-protocol InitialView: NSObjectProtocol, View, ConnectionView, LoadingView {
+protocol InitialView: NSObjectProtocol, View, LoadingView {
     func loggedSocialMedia()
     func emailFieldError(msg:String)
     func passwordFieldError(msg:String)
@@ -22,20 +22,22 @@ protocol InitialView: NSObjectProtocol, View, ConnectionView, LoadingView {
 class InitialPresenter {
     
     weak fileprivate var view: InitialView?
-    private var reachability: Reachbility!
+    
     
     func attachView(_ view: InitialView){
         self.view = view
-        self.reachability = Reachbility(view)
+        
     }
     
     func deteachView() {
         self.view = nil
     }
     
+    
+    
     func signIn(email:String?, password:String?) {
         
-        if validInput(email, password) && reachability.isConnected() {
+        if validInput(email, password) {
             view?.beginLoadingContent()
             AuthManager.Instance.signIn(email!, password!) { (error) in
                 DispatchQueue.main.async {
@@ -56,7 +58,7 @@ class InitialPresenter {
     
     func signUp(email:String?, password:String?) {
         
-        if validInput(email, password) && reachability.isConnected() {
+        if validInput(email, password) {
             view?.beginLoadingContent()
             AuthManager.Instance.signUp(email!, password!) { (error) in
                 DispatchQueue.main.async {
@@ -88,10 +90,10 @@ class InitialPresenter {
             return false
         }
         
-//        if !password!.isValidPassword {
-//            self.view?.passwordFieldError(msg: Message.Instance.authError(type: .WeakPassword).msg)
-//            return false
-//        }
+        //        if !password!.isValidPassword {
+        //            self.view?.passwordFieldError(msg: Message.Instance.authError(type: .WeakPassword).msg)
+        //            return false
+        //        }
         return true
     }
     
@@ -100,6 +102,7 @@ class InitialPresenter {
     //Facebook
     
     func loginFB(vc: InitialViewController) {
+        
         let loginManager = LoginManager()
         loginManager.logIn([ .publicProfile, .email ], viewController: vc) { loginResult in
             switch loginResult {
@@ -120,15 +123,18 @@ class InitialPresenter {
                 break
             }
         }
+        
     }
     
     //Google
     
     func loginG() {
+        
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             appDelegate.configureGoogleLogin()
             GIDSignIn.sharedInstance().signIn()
         }
+        
     }
     
     func successGLogin(token:String) {
@@ -147,7 +153,7 @@ class InitialPresenter {
     //Twitter
     
     func loginTW(vc: InitialViewController) {
-
+        
         Twitter.sharedInstance().start(withConsumerKey: "FM1jiu1Iceq2IwDS6aT41X046", consumerSecret: "QGLiyOInRuZ3DlRXk0mxjWSi1hVUPEhAWl1b92wHp2B5C1Qys9")
         Twitter.sharedInstance().logIn(with: vc, methods: .webBased) { (session, error) in
             if let error = error {
@@ -166,6 +172,7 @@ class InitialPresenter {
                     }
                 })
             }
+            
         }
     }
 }

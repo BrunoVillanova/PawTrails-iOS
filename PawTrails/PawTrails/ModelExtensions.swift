@@ -49,13 +49,6 @@ extension Pet {
         return nil
     }
     
-    func isOwner(_ user: PetUser) -> Bool {
-//        guard let userId = user.id else { return false }
-//        guard let petId = owner?.id else { return false }
-//        return userId == petId
-        return true
-    }
-    
     var sharedUsers: [PetUser]? {
         if let petUsers = users?.allObjects as? [PetUser] {
             return petUsers.sorted(by: { (pu1, pu2) -> Bool in

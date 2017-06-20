@@ -25,6 +25,7 @@ class AddEditPetPresenter {
     
     weak private var view: AddEditPetView?
     
+    
     private var data = [String:Any]()
     private var firstBreed: Breed?
     private var secondBreed: Breed?
@@ -34,6 +35,7 @@ class AddEditPetPresenter {
     
     func attachView(_ view: AddEditPetView, _ pet: Pet?, _ deviceCode: String?){
         self.view = view
+        
         if let pet = pet {
             data = pet.toDict
             set(first: pet.firstBreed)
@@ -51,8 +53,9 @@ class AddEditPetPresenter {
     }
     
     
+    
     //MARK:- Getters
-
+    
     func getImageData() -> Data? {
         return data["image"] as? Data
     }
@@ -111,10 +114,6 @@ class AddEditPetPresenter {
         return data["birthday"] as? Date
     }
     
-//    func getWeight() -> Weight? {
-//        return data["weight"] as? Weight
-//    }
-    
     func getWeight() -> Double? {
         return data["weight"] as? Double
     }
@@ -144,7 +143,7 @@ class AddEditPetPresenter {
     func set(gender:Gender?){
         data["gender"] = gender?.rawValue ?? ""
     }
-
+    
     func set(first: Breed?) {
         firstBreed = first
         data["breed"] = first?.id
@@ -163,10 +162,6 @@ class AddEditPetPresenter {
         data["birthday"] = birthday ?? ""
     }
     
-//    func set(weight:Weight?){
-//        data["weight"] = weight ?? ""
-//    }
-    
     func set(weight:Double?){
         data["weight"] = weight ?? ""
     }
@@ -184,7 +179,7 @@ class AddEditPetPresenter {
     }
     
     func done(){
-
+        
         if editMode, let id = data["id"] as? Int16, imageData != nil {
             saveImatge(petId: id)
         }else{
@@ -228,9 +223,6 @@ class AddEditPetPresenter {
         if let birthdate = data["birthday"] as? Date? {
             data["date_of_birth"] = birthdate?.toStringServer ?? ""
         }
-//        if let weight = data["weight"] as? Weight {
-//            data["weight"] = weight.amount
-//        }
         
         data["type"] = getType()?.code ?? ""
         data["gender"] = getGender()?.code ?? ""
@@ -253,7 +245,7 @@ class AddEditPetPresenter {
         }else{
             
             DataManager.Instance.register(pet: data, callback: { (error, pet) in
-
+                
                 if let error = error {
                     DispatchQueue.main.async {
                         self.view?.endLoadingContent()
@@ -268,6 +260,7 @@ class AddEditPetPresenter {
                     }
                 }
             })
+            
         }
     }
 }

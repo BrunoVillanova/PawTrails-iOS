@@ -30,15 +30,17 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if pet != nil {
-            navigationItem.title = "Edit"
-            navigationItem.prompt = pet.name
+        if let name = pet.name {
+            navigationItem.title = "Edit \(name)"
         }
                 
         imagePicker.delegate = self
         petImageView.circle()
         presenter.attachView(self, pet, deviceCode)
+        NotificationManager.Instance.post(Event())
     }
+    
+    
 
     deinit {
         presenter.deteachView()
@@ -83,10 +85,8 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
             dismiss(animated: true, completion: nil)
         }else{
             
-            if let parent = navigationController?.viewControllers.first(where: { $0 is PetsPageViewController }) as? PetsPageViewController {
-                if let profile = parent.profileTableViewController {
-                    profile.reloadPetInfo()
-                }
+            if let profile = navigationController?.viewControllers.first(where: { $0 is PetProfileTableViewController }) as? PetProfileTableViewController {
+                profile.reloadPetInfo()
             }
             _ = navigationController?.popViewController(animated: true)
         }
@@ -103,7 +103,7 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
     func endLoadingContent() {
         hideLoadingView()
     }
-
+    
 
     //MARK: - UIImagePickerControllerDelegate
     

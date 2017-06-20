@@ -39,6 +39,8 @@ class EditUserProfileTableViewController: UITableViewController, EditUserProfile
         imagePicker.delegate = self
     }
     
+    
+    
     deinit {
         self.presenter.deteachView()
     }
@@ -90,6 +92,7 @@ class EditUserProfileTableViewController: UITableViewController, EditUserProfile
     func endLoadingContent() {
         hideLoadingView()
     }
+    
     
     //MARK: - UIImagePickerControllerDelegate
     
