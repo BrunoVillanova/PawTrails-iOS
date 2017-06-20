@@ -41,7 +41,7 @@ class GeocoderManager {
     private var geocoder: CLGeocoder
     private var cache: NSCache<NSString, CLPlacemark>
     private var sem: DispatchSemaphore
-    private let maxConcurrent = 5
+    private let maxConcurrent = 1
     
     init() {
         queue = DispatchQueue(label: "GeoCode", qos: .userInitiated)
@@ -61,27 +61,26 @@ class GeocoderManager {
         if let placemark = cache.object(forKey: key as NSString) {
             deliver(Geocode(type: type, id: id, location: location, placemark: placemark))
         }else {
-            
-            
+            debugPrint("Geocode requested: ", id)
             queue.async {
                 self.sem.wait()
                 self.geocoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) in
 
                     if let placemark = placemarks?.first {
-
                         self.cache.setObject(placemark, forKey: location.coordinateString as NSString)
                         self.deliver(Geocode(type: type, id: id, location: location, placemark: placemark))
+                    }else{
+                        self.sem.signal()
                     }
-                    self.sem.signal()
                 })
             }
         }
     }
+    
     private func deliver(_ geocode: Geocode){
         DispatchQueue.main.async {
-            
             if let name = geocode.name {
-                
+                debugPrint("Geocode released: ", geocode.id)
                 if geocode.type == .pet {
                     SocketIOManager.Instance.setPetGPSlocationName(id: geocode.id, name)
                 }else if geocode.type == .safezone {
@@ -90,6 +89,7 @@ class GeocoderManager {
                 NotificationManager.Instance.postPetGeoCodeUpdates(with: geocode)
             }
         }
+        self.sem.signal()
     }
     
 }

@@ -118,6 +118,7 @@
 		44B179621E4B62690070A18B /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B179611E4B62690070A18B /* Presenter.swift */; };
 		44B179641E4B787A0070A18B /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B179631E4B787A0070A18B /* Errors.swift */; };
 		44B179661E4B78EF0070A18B /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B179651E4B78EF0070A18B /* Messages.swift */; };
+		44BEA82C1EF9794F00BEC789 /* attitudetechie.der in Resources */ = {isa = PBXBuildFile; fileRef = 44BEA82B1EF978C000BEC789 /* attitudetechie.der */; };
 		44C7F71E1E4CD35700171170 /* PasswordRecoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F71D1E4CD35700171170 /* PasswordRecoveryViewController.swift */; };
 		44C7F7371E4CD3AE00171170 /* SocketAckEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F71F1E4CD3AE00171170 /* SocketAckEmitter.swift */; };
 		44C7F7381E4CD3AE00171170 /* SocketAckManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F7201E4CD3AE00171170 /* SocketAckManager.swift */; };
@@ -284,6 +285,7 @@
 		44B179611E4B62690070A18B /* Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Presenter.swift; path = Presenter/Presenter.swift; sourceTree = "<group>"; };
 		44B179631E4B787A0070A18B /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Errors.swift; path = Model/Errors.swift; sourceTree = "<group>"; };
 		44B179651E4B78EF0070A18B /* Messages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Messages.swift; path = Model/Messages.swift; sourceTree = "<group>"; };
+		44BEA82B1EF978C000BEC789 /* attitudetechie.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = attitudetechie.der; sourceTree = "<group>"; };
 		44C7F71D1E4CD35700171170 /* PasswordRecoveryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PasswordRecoveryViewController.swift; path = View/PasswordRecoveryViewController.swift; sourceTree = "<group>"; };
 		44C7F71F1E4CD3AE00171170 /* SocketAckEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketAckEmitter.swift; path = SocketIO/SocketAckEmitter.swift; sourceTree = "<group>"; };
 		44C7F7201E4CD3AE00171170 /* SocketAckManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketAckManager.swift; path = SocketIO/SocketAckManager.swift; sourceTree = "<group>"; };
@@ -386,6 +388,7 @@
 		440CEE491E3B8D0700F58A09 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				44BEA82B1EF978C000BEC789 /* attitudetechie.der */,
 				4441ACAB1EB8CC6F00FBE27F /* Google */,
 				449747B91E8BCB6600C3431F /* PawTrails-Bridging-Header.h */,
 				4415FF491E3B822900A81B13 /* Assets.xcassets */,
@@ -857,6 +860,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44BEA82C1EF9794F00BEC789 /* attitudetechie.der in Resources */,
 				4441ACB61EB8CC8D00FBE27F /* GoogleSignIn.bundle in Resources */,
 				4415FF4A1E3B822900A81B13 /* Assets.xcassets in Resources */,
 				44277A0C1E7A987C00B336BD /* LaunchScreen.storyboard in Resources */,

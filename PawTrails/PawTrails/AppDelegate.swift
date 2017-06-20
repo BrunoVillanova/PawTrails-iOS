@@ -109,10 +109,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         SocketIOManager.Instance.establishConnection()
         UpdateManager.Instance.loadPetList { (pets) in
+            
             if let pets = pets {
-                for pet in pets {
-                    SocketIOManager.Instance.startPetGPSUpdates(for: pet.id)
-                }
+                SocketIOManager.Instance.startGPSUpdates(for: pets.map({ $0.id}))
             }
         }
         NotificationManager.Instance.getEventsUpdates { (event) in
