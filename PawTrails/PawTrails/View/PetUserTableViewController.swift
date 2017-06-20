@@ -33,7 +33,6 @@ class PetUserTableViewController: UITableViewController, PetUserView {
         presenter.attachView(self)
         
         navigationItem.title = "User Profile"
-        navigationItem.prompt = pet.name
         
         if petUser == nil {
             popAction(sender: nil)
@@ -44,7 +43,7 @@ class PetUserTableViewController: UITableViewController, PetUserView {
             
             let imageData = petUser.image ?? Data()
             imageView.image = UIImage(data: imageData)
-            imageView.setupLayout(isPetOwner: pet.isOwner(petUser))
+            imageView.setupLayout(isPetOwner: petUser.isOwner)
             
             let name = pet.name ?? ""
             emailLabel.text = petUser.email
@@ -63,6 +62,7 @@ class PetUserTableViewController: UITableViewController, PetUserView {
                 actionLabel.text = "Remove \(petUser.name ?? "this user") from '\(name)'"
             }else if appUserId == currentUserId && appUserId != petOwnerId {
                 // That user leaves pet
+                emailCell.isHidden = true
                 actionLabel.text = "Leave '\(name)'"
             }else{
                 emailCell.isHidden = true
@@ -76,6 +76,7 @@ class PetUserTableViewController: UITableViewController, PetUserView {
         presenter.deteachView()
     }
 
+    
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -100,11 +101,9 @@ class PetUserTableViewController: UITableViewController, PetUserView {
     func removed() {
         
         if appUserId == petOwnerId && appUserId != currentUserId {
-            if let parent = navigationController?.viewControllers.first(where: { $0 is PetsPageViewController}) as? PetsPageViewController {
-                if let profile = parent.profileTableViewController {
-                    profile.reloadSafeZones()
-                }
-                navigationController?.popToViewController(parent, animated: true)
+            if let profile = navigationController?.viewControllers.first(where: { $0 is PetProfileTableViewController}) as? PetProfileTableViewController {
+                profile.reloadUsers()
+                navigationController?.popToViewController(profile, animated: true)
             }
         }else{
             navigationController?.navigationBar.topItem?.prompt = nil
@@ -124,6 +123,7 @@ class PetUserTableViewController: UITableViewController, PetUserView {
     func endLoadingContent() {
         hideLoadingView()
     }
+    
     
     // MARK: - UITableViewDataSource
     

@@ -21,6 +21,7 @@ class SettingsTableViewController: UITableViewController, SettingsView {
     deinit {
         presenter.deteachView()
     }
+
     
     // MARK: - SettingsView
     
@@ -29,12 +30,12 @@ class SettingsTableViewController: UITableViewController, SettingsView {
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             appDelegate.loadAuthenticationScreen()
         }
-        
     }
     
     func errorMessage(_ error: ErrorMsg) {
         self.alert(title: error.title, msg: error.msg)
     }
+    
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         

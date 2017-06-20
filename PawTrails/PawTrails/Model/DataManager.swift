@@ -151,18 +151,22 @@ class DataManager {
         
         APIManager.Instance.perform(call: .unregisterPet, withKey: petId)  { (error, data) in
             if error == nil {
-                DispatchQueue.main.async {
-                    if PetManager.remove(id: petId) {
-                        callback(nil)
-                    }else{
-                        callback(DataManagerError.init(DBError: DatabaseError.NotFound))
-                    }
-                }
+                self.removePetDB(petId, callback: callback)
             }else if let error = error {
                 callback(DataManagerError(APIError: error))
             }else{
                 debugPrint(error ?? "nil error", data ?? "nil data")
                 callback(nil)
+            }
+        }
+    }
+    
+    func removePetDB(_ petId: Int16, callback: @escaping errorCallback) {
+        DispatchQueue.main.async {
+            if PetManager.remove(id: petId) {
+                callback(nil)
+            }else{
+                callback(DataManagerError.init(DBError: DatabaseError.NotFound))
             }
         }
     }
@@ -272,8 +276,14 @@ class DataManager {
         }
     }
     
-    func getPetFriends(callback: @escaping petUsersCallback){
-        PetUserManager.getFriends(callback: callback)
+    func getPetFriends(for pet: Pet, callback: @escaping petUsersCallback){
+        PetUserManager.getFriends { (error, friends) in
+            if let error = error {
+                callback(error, nil)
+            }else if let friends = friends, let users = pet.users?.allObjects as? [PetUser]{
+                callback(nil, friends.filter({ !users.contains($0) }))
+            }
+        }
     }
     
     func loadSharedPetUsers(for petId: Int16, callback: petUsersCallback?) {
@@ -294,9 +304,7 @@ class DataManager {
     func addSharedUser(by data: [String:Any], to petId: Int16, callback: @escaping petUsersCallback) {
         APIManager.Instance.perform(call: .sharePet, withKey: petId, with: data) { (error, data) in
             if error == nil, let data = data {
-                DispatchQueue.main.async {
-                    PetUserManager.upsert(data, into: petId, callback: callback)
-                }
+                self.addSharedUserDB(with: data, to: petId, callback: callback)
             }else if let error = error {
                 callback(DataManagerError(APIError: error), nil)
             }else{
@@ -306,15 +314,25 @@ class DataManager {
         }
     }
     
+    func addSharedUserDB(with data: [String:Any], to petId: Int16, callback: @escaping petUsersCallback){
+        DispatchQueue.main.async {
+            PetUserManager.upsert(data, into: petId, callback: callback)
+        }
+    }
+    
     func removeSharedUser(by data: [String:Any], to petId: Int16, callback: @escaping errorCallback) {
         APIManager.Instance.perform(call: .removeSharedPet, withKey: petId, with: data) { (error, data) in
             if error == nil {
-                self.loadSharedPetUsers(for: petId, callback: { (error, pet) in
-                    callback(error)
-                })
+                callback(nil)
             }else if let error = error {
                 callback(DataManagerError(APIError: error))
             }
+        }
+    }
+    
+    func removeSharedUserDB(id: Int16, from petId:Int16, callback: @escaping errorCallback){
+        DispatchQueue.main.async {
+            PetUserManager.removeSharedUser(with: id, from: petId, callback: callback)
         }
     }
     
@@ -402,6 +420,10 @@ class DataManager {
     
     func setSafeZone(_ safezone: SafeZone, address:String){
         SafeZoneManager.set(safezone: safezone, address: address)
+    }
+    
+    func setSafeZone(address:String, for id: Int16){
+        SafeZoneManager.set(address: address, for: id)
     }
     
     // MARK: - Tracking

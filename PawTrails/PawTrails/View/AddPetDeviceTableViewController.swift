@@ -21,12 +21,15 @@ class AddPetDeviceTableViewController: UITableViewController, UITextFieldDelegat
         presenter.attachView(self)
         if petId != -1 {
             navigationItem.rightBarButtonItem?.title = "Change"
+            navigationItem.title = "Device"
         }
     }
     
     deinit {
         presenter.deteachView()
     }
+    
+    
     
     override func viewDidAppear(_ animated: Bool) {
         if deviceCodeTextField.text != nil {
@@ -63,15 +66,6 @@ class AddPetDeviceTableViewController: UITableViewController, UITextFieldDelegat
         }
     }
     
-    // MARK: - Connection Notifications
-    
-    func connectedToNetwork() {
-        hideNotification()
-    }
-    
-    func notConnectedToNetwork() {
-        showNotification(title: Message.Instance.connectionError(type: .NoConnection), type: .red)
-    }
     
     // MARK: - UITextFieldDelegate
     

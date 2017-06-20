@@ -23,11 +23,18 @@ class EmailVerificationViewController: UIViewController, EmailVerificationView {
         super.viewDidLoad()
         presenter.attachView(self)
         resendEmailButton.round()
+        resendEmailButton.tintColor = UIColor.secondaryColor()
+        resendEmailButton.backgroundColor = UIColor.primaryColor()
         checkButton.round()
+        checkButton.tintColor = UIColor.secondaryColor()
+        checkButton.backgroundColor = UIColor.primaryColor()
         signOutButton.round()
-        signOutButton.border(color: UIColor.orange(), width: 1.0)
+        signOutButton.tintColor = UIColor.primaryColor()
+        signOutButton.border(color: UIColor.primaryColor(), width: 1.0)
         emailLabel.text = email
     }
+    
+    
     
     deinit {
         presenter.deteachView()
@@ -75,4 +82,5 @@ class EmailVerificationViewController: UIViewController, EmailVerificationView {
             self.presentingViewController?.dismiss(animated: true, completion: nil)
         }
     }
+    
 }

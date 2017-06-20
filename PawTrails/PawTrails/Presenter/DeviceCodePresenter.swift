@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol DeviceCodeView: NSObjectProtocol, View, ConnectionView {
+protocol DeviceCodeView: NSObjectProtocol, View {
     func idle(_ code: String)
     func wrongCode()
     func codeFormat()
@@ -18,21 +18,23 @@ protocol DeviceCodeView: NSObjectProtocol, View, ConnectionView {
 class DeviceCodePresenter {
     
     weak fileprivate var view: DeviceCodeView?
-    private var reachability: Reachbility!
+    
     
     
     func attachView(_ view: DeviceCodeView){
         self.view = view
-        self.reachability = Reachbility(view)
+        
     }
     
     func deteachView() {
         self.view = nil
     }
+    
+    
 
     func check(_ code: String?){
         
-        if code == nil || (code != nil && (code == "" || !code!.isValidCode)) {
+if code == nil || (code != nil && (code == "" || !code!.isValidCode)) {
             view?.codeFormat()
         }else if let code = code {
             DataManager.Instance.check(code, callback: { (idle) in
@@ -48,14 +50,16 @@ class DeviceCodePresenter {
     }
     
     func change(_ code:String, to petId: Int16){
+
         DataManager.Instance.change(code, of: petId) { (error) in
-            DispatchQueue.main.async {
-                if let error = error {
-                    self.view?.errorMessage(error.msg)
-                }else{
-                    self.view?.codeChanged()
+                DispatchQueue.main.async {
+                    if let error = error {
+                        self.view?.errorMessage(error.msg)
+                    }else{
+                        self.view?.codeChanged()
+                    }
                 }
-            }
-        }
+            } 
+
     }
 }

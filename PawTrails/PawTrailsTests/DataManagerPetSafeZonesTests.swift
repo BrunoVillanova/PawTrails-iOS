@@ -31,7 +31,6 @@ class DataManagerPetSafeZonesTests: XCTestCase {
     
     let point1 = Point(5, 5).toDict
     let point2 = Point(5, 5.1).toDict
-
     
     //MARK:- LoadSafeZones
     
@@ -46,7 +45,6 @@ class DataManagerPetSafeZonesTests: XCTestCase {
                     XCTAssertNil(error, String(describing: error))
                     expect.fulfill()
                 })
-                
             }
         }
         waitForExpectations(timeout: 10) { error in if error != nil { XCTFail("waitForExpectationsWithTimeout errored: \(String(describing: error))") } }

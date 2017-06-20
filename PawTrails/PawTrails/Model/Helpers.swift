@@ -121,6 +121,10 @@ public class Point: NSObject, NSCoding {
     var toDict: [String:Any] {
         return ["lat":latitude, "lon":longitude] as [String:Any]
     }
+    
+    var toString: String {
+        return "\(latitude) - \(longitude)"
+    }
         
     override init() {
         latitude = 0.0
@@ -147,8 +151,11 @@ public class Point: NSObject, NSCoding {
         aCoder.encode(longitude, forKey: "longitude")
     }
     
-    static func == (lhs: Point, rhs: Point) -> Bool {
-        return lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
+    public override func isEqual(_ object: Any?) -> Bool {
+        if let point = object as? Point {
+            return self.latitude == point.latitude && self.longitude == point.longitude
+        }
+        return false
     }
 }
 
@@ -167,7 +174,7 @@ public class Fence: NSObject {
         }
     }
     
-    static var idleColor = UIColor.orange().withAlphaComponent(0.5)
+    static var idleColor = UIColor.primaryColor().withAlphaComponent(0.5)
     static var noIdleColor = UIColor.red.withAlphaComponent(0.5)
     
     convenience init(_ center: CGPoint, _ topCenter: CGPoint, shape: Shape) {
@@ -185,7 +192,7 @@ public class Fence: NSObject {
         
         line = CALayer()
         line.frame = CGRect(x: layer.frame.origin.x + layer.frame.width / 2.0, y: layer.frame.origin.y, width: 1.0, height: layer.frame.height/2.0)
-        line.backgroundColor = UIColor.orange().cgColor
+        line.backgroundColor = UIColor.primaryColor().cgColor
     }
     
     
@@ -224,6 +231,9 @@ public class GPSData: NSObject {
     var satellites: Int
     var battery: Int
     var serverDate: Date
+    var locationAndTime: String = ""
+    var source: String = ""
+    var movementAlarm: Bool = false
     
     override init() {
         point = Point()
@@ -233,16 +243,20 @@ public class GPSData: NSObject {
         serverDate = Date()
     }
     
-//    init(_ point: Point, _ signal: Int, _ battery: Int) {
-//        self.point = point
-//        self.signal = signal
-//        self.battery = battery
-//    }
+    convenience init(_ data:[String:Any]) {
+        self.init()
+        update(data)
+    }
     
-    init(_ data:[String:Any]) {
+    func update(_ data:[String:Any]) {
         
         if let pointData = data["location"] as? [String:Any] {
-            point = Point(pointData)
+            let newPoint = Point(pointData)
+            if point.coordinates.location.coordinateString != newPoint.coordinates.location.coordinateString {
+                locationAndTime = ""
+                point = newPoint
+                debugPrint("Requested for Update \(data["id"] ?? "")")
+            }
         }else{
             point = Point()
         }
@@ -263,20 +277,25 @@ public class GPSData: NSObject {
         }else{
             serverDate = Date()
         }
+        source = data.debugDescription
+        
+        if let att = data["attributes"] as? [String:Any] {
+            if let movementAlarm = att["movementAlarm"] as? Int {
+                self.movementAlarm = movementAlarm == 1
+            }
+        }
     }
-    
-//    required public init?(coder aDecoder: NSCoder) {
-//        latitude = aDecoder.decodeDouble(forKey: "latitude")
-//        longitude = aDecoder.decodeDouble(forKey: "longitude")
-//    }
-//    
-//    public func encode(with aCoder: NSCoder) {
-//        aCoder.encode(latitude, forKey: "latitude")
-//        aCoder.encode(longitude, forKey: "longitude")
-//    }
     
     var distanceTime: String {
         return Date().offset(from: serverDate)
+    }
+    
+    var batteryString: String? {
+        return battery != -1 ? "\(battery)%" : nil
+    }
+    
+    var signalString: String? {
+        return signal != -1 ? "\(signal)" : nil
     }
     
     static func == (lhs: GPSData, rhs: GPSData) -> Bool {
@@ -298,3 +317,29 @@ public class GPSData: NSObject {
     
 }
 
+public enum EventType: Int {
+    case unknown = 0, petRemoved, guestAdded, guestRemoved, guestLeft
+    
+    static func build(rawValue: Int) -> EventType {
+        return EventType(rawValue: rawValue) ?? .unknown
+    }
+}
+
+public class Event{
+    var type: EventType
+    var info: [String:Any]
+    
+    init() {
+        type = .unknown
+        info = [String:Any]()
+    }
+ 
+    convenience init(data:[String:Any]) {
+        self.init()
+        if let id = data.tryCastInteger(for: "eventId") {
+            type = EventType.build(rawValue: id)
+        }
+        info = data
+    }
+    
+}

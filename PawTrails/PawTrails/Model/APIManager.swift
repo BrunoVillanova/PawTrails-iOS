@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SystemConfiguration
 
 public enum SocialMedia: String {
     case facebook = "FB"
@@ -132,7 +133,7 @@ class APIManager {
         
         var request = URLRequest(url: URL(call, with: key))
         
-        debugPrint(request)
+//        debugPrint(request)
         
         request.httpMethod = call.httpMethod
         request.cachePolicy = .useProtocolCachePolicy
@@ -154,23 +155,31 @@ class APIManager {
     ///   - data: The data returned or `nil` if error.
     func perform(call:APICallType, withKey key:Any = "", with data:[String:Any]? = nil, completition: @escaping (_ error:APIManagerError?,_ data:[String:Any]?) -> Void) {
         
-        if let request = createRequest(for: call, with: key, and: data) {
-            
-            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        if isConnectedToNetwork() {
+        
+            if let request = createRequest(for: call, with: key, and: data) {
                 
-                if let error = error {
-                    debugPrint("Error -> \( error)")
-                    completition(APIManagerError(call: call, kind: .requestError, httpCode:nil, error: error, errorCode:nil), nil)
-                }else{
-                    guard let httpResponse = response as? HTTPURLResponse else {
-                        completition(APIManagerError(call: call, kind: .httpResponseParse, httpCode: nil, error:nil, errorCode:nil), nil)
-                        return
+                let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                    
+                    if let error = error {
+                        debugPrint("Error -> \( error)")
+                        completition(APIManagerError(call: call, kind: .requestError, httpCode:nil, error: error, errorCode:nil), nil)
+                    }else{
+                        guard let httpResponse = response as? HTTPURLResponse else {
+                            completition(APIManagerError(call: call, kind: .httpResponseParse, httpCode: nil, error:nil, errorCode:nil), nil)
+                            return
+                        }
+                        self.handleResponse(for: call, httpResponse.statusCode, data, completition)
                     }
-                    self.handleResponse(for: call, httpResponse.statusCode, data, completition)
                 }
+                
+                task.resume()
+                
+            }else {
+                completition(APIManagerError(call: call, kind: .requestError, httpCode: nil, error: nil, errorCode: ErrorCode.WrongRequest), nil)
             }
-            
-            task.resume()
+        }else{
+            completition(APIManagerError(call: call, kind: .requestError, httpCode: nil, error: nil, errorCode: ErrorCode.NoConection), nil)
         }
         
     }
@@ -180,16 +189,14 @@ class APIManager {
     /// - Parameter data: input of information.
     /// - Returns: json answer as a `dictionary`
     private func parseResponse(_ data:Data?) -> [String:Any]? {
-        print("RESPONSE")
-        
         if data == nil { return nil }
         
         do {
             if let out = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as? [String:Any] {
-                debugPrint(out)
+//                debugPrint("JSON RS", out)
                 return out
             }else if let rs = String(data: data!, encoding: String.Encoding.utf8) {
-                debugPrint(rs)
+                debugPrint("STRING RS", rs)
                 return nil
             }else{
                 debugPrint("couldn't parse to string")
@@ -197,8 +204,7 @@ class APIManager {
             }
             
         } catch {
-            debugPrint("Error parsing to json -> \(error)")
-            debugPrint("Output -> \(String(describing: String(data: data!, encoding: String.Encoding.utf8)))")
+            debugPrint("Error parsing to json -> \(error)","Output -> \(String(describing: String(data: data!, encoding: String.Encoding.utf8)))")
             return nil
         }
     }
@@ -213,7 +219,7 @@ class APIManager {
     
     private func handleError(_ call: APICallType, _ httpCode: Int, _ data: Data?) -> APIManagerError? {
         
-        
+        debugPrint(call, httpCode, data ?? "no data")
         if httpCode.isUnauthorized {
             return APIManagerError(call: call, kind: .clientError, httpCode: httpCode, error: nil, errorCode: ErrorCode.Unauthorized)
         
@@ -228,7 +234,7 @@ class APIManager {
                 }
                 
                 let code = dict.tryCastInteger(for: "errors") ?? -1
-                return APIManagerError(call: call, kind: .clientError, httpCode: httpCode, error: nil, errorCode: ErrorCode(rawValue: code))
+                return APIManagerError(call: call, kind: .clientError, httpCode: httpCode, error: nil, errorCode: ErrorCode(code: code))
                 
             }else if let data = data {
                 debugPrint("No client error", call, httpCode, String(data: data, encoding: String.Encoding.utf8) ?? "couldn't cast response to string")
@@ -257,13 +263,12 @@ class APIManager {
             else { debugPrint("missing token for \(call)") }
         }
         
-        print(headers)
+//        debugPrint(headers)
         return headers
     }
     
     private func setBody(of call:APICallType, with data:[String:Any]?) -> Data? {
-        print("REQUEST BODY")
-        print(data ?? "No data provided to build the request body")
+//        debugPrint("REQUEST BODY", data ?? "No data provided to build the request body")
         if call == .imageUpload {
 
             let boundaryStart = "--\(boundary)\r\n"
@@ -290,13 +295,37 @@ class APIManager {
             }
             body.append(boundaryEnd)
             
-            print(String(data: body, encoding: .utf8) ?? "Mec")
+//            debugPrint(String(data: body, encoding: .utf8) ?? "Mec")
             
             return body
         }else{
             return data != nil ? try? JSONSerialization.data(withJSONObject: data!, options: []) : nil
         }
     }
+    
+    private func isConnectedToNetwork() -> Bool {
+        
+        var zeroAddress = sockaddr_in(sin_len: 0, sin_family: 0, sin_port: 0, sin_addr: in_addr(s_addr: 0), sin_zero: (0, 0, 0, 0, 0, 0, 0, 0))
+        zeroAddress.sin_len = UInt8(MemoryLayout.size(ofValue: zeroAddress))
+        zeroAddress.sin_family = sa_family_t(AF_INET)
+        let defaultRouteReachability = withUnsafePointer(to: &zeroAddress) {
+            $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {zeroSockAddress in
+                SCNetworkReachabilityCreateWithAddress(nil, zeroSockAddress)
+            }
+        }
+        
+        var flags: SCNetworkReachabilityFlags = SCNetworkReachabilityFlags(rawValue: 0)
+        if SCNetworkReachabilityGetFlags(defaultRouteReachability!, &flags) == false {
+            return false
+        }
+        
+        let isReachable = flags == .reachable
+        let needsConnection = flags == .connectionRequired
+        
+        return isReachable && !needsConnection
+        
+    }
+
 }
 
 fileprivate extension Int {

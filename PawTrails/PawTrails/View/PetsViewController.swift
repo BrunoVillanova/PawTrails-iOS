@@ -15,8 +15,6 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     fileprivate let presenter = PetsPresenter()
     
-    var locationTime: String = ""
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,8 +22,6 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         presenter.attachView(self)
         noPetsFound.isHidden = true
         UIApplication.shared.statusBarStyle = .lightContent
-        
-
     }
     
     deinit {
@@ -33,29 +29,40 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if let index = tableView.indexPathForSelectedRow {
-            tableView.deselectRow(at: index, animated: true)
-        }
-        presenter.loadPets()
-        //DispatchQueue in the future
-        
-        
-        SocketIOManager.Instance.getPetGPSData(id: 25) { (error,data) in
-            if let data = data {
-                data.point.coordinates.getStreetFullName(handler: { (name) in
-                    DispatchQueue.main.async {
-                        if let name = name {
-                            self.locationTime = "\(name)\n\(data.distanceTime)"
-                            self.tableView.reloadData()
-                        }
-                    }
-                })
-            }else{
-                self.alert(title: "", msg: "couldn't get realtime updates", type: .red)
+//        presenter.loadPets()
+        presenter.startPetsListUpdates()
+        presenter.startPetsGPSUpdates { (id, update) in
+            if update {
+                self.updateRow(by: id)
             }
         }
- 
+        presenter.startPetsGeocodeUpdates { (geocode) in
+            if let geocode = geocode {
+                self.updateRow(by: geocode.id)
+            }
+        }
+       
     }
+    
+    private func updateRow(by id: Int16){
+        DispatchQueue.main.async {
+            debugPrint("Update Pet \(id)")
+            if let index = self.presenter.ownedPets.index(where: { $0.id == id }) {
+                self.tableView.reloadRows(at: [IndexPath.init(item: index, section: 0)], with: .automatic)
+            }else if let index = self.presenter.sharedPets.index(where: { $0.id == id }) {
+                self.tableView.reloadRows(at: [IndexPath.init(item: index, section: 1)], with: .automatic)
+            }else{
+                self.errorMessage(ErrorMsg.init(title: "", msg: "WTF"))
+            }
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        presenter.stopPetListUpdates()
+        presenter.stopPetGPSUpdates()
+        presenter.stopPetsGeocodeUpdates()
+    }
+
 
     // MARK: - PetsView
     
@@ -72,6 +79,7 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.reloadData()
         noPetsFound.isHidden = false
     }
+    
         
     // MARK: - UITableViewDataSource
 
@@ -90,21 +98,45 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! petListCell
         let pet = indexPath.section == 0 ? presenter.ownedPets[indexPath.row] : presenter.sharedPets[indexPath.row]
         cell.batteryImageView.circle()
-        cell.batteryImageView.backgroundColor = UIColor.orange()
         cell.signalImageView.circle()
-        cell.signalImageView.backgroundColor = UIColor.orange()
+        
+        if let data = SocketIOManager.Instance.getPetGPSData(id: pet.id) {
+            cell.batteryImageView.backgroundColor = UIColor.primaryColor()
+            cell.signalImageView.backgroundColor = UIColor.primaryColor()
+            cell.batteryLabel.text = data.batteryString
+            cell.batteryLabel.textColor = UIColor.darkText
+            cell.signalLabel.text = data.signalString
+            cell.signalLabel.textColor = UIColor.darkText
+            if data.locationAndTime != "" {
+                cell.subtitleLabel.text = data.locationAndTime
+                cell.subtitleLabel.textColor = UIColor.darkText
+            }else{
+                cell.subtitleLabel.text = cell.subtitleLabel.text
+                cell.subtitleLabel.textColor = UIColor.lightText
+            }
+        }else{
+            cell.batteryImageView.backgroundColor = UIColor.clear
+            cell.signalImageView.backgroundColor = UIColor.clear
+            cell.batteryLabel.text = cell.batteryLabel.text
+            cell.batteryLabel.textColor = UIColor.lightText
+            cell.signalLabel.text = cell.signalLabel.text
+            cell.signalLabel.textColor = UIColor.lightText
+            cell.subtitleLabel.text = cell.subtitleLabel.text
+            cell.subtitleLabel.textColor = UIColor.lightText
+        }
+        
         cell.titleLabel.text = pet.name
         if let imageData = pet.image as Data? {
             cell.petImageView.image = UIImage(data: imageData)
         }else{
             cell.petImageView.image = nil
         }
-        cell.subtitleLabel.text = self.locationTime
         cell.petImageView.circle()
-        cell.trackButton.circle()
-        cell.trackButton.addTarget(self, action: #selector(PetsViewController.trackButtonAction(sender:)), for: .touchUpInside)
-        cell.trackButton.tag = Int(pet.id)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -130,10 +162,10 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.destination is PetsPageViewController {
+        if segue.destination is PetProfileTableViewController {
             
             if let index = tableView.indexPathForSelectedRow {
-                (segue.destination as! PetsPageViewController).pet = index.section == 0 ? presenter.ownedPets[index.row] : presenter.sharedPets[index.row]
+                (segue.destination as! PetProfileTableViewController).pet = index.section == 0 ? presenter.ownedPets[index.row] : presenter.sharedPets[index.row]
             }
         }
     }
@@ -144,6 +176,7 @@ class petListCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var signalImageView: UIImageView!
     @IBOutlet weak var batteryImageView: UIImageView!
+    @IBOutlet weak var signalLabel: UILabel!
+    @IBOutlet weak var batteryLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
-    @IBOutlet weak var trackButton: UIButton!
 }

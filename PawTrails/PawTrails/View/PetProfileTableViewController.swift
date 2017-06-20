@@ -14,6 +14,8 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
     @IBOutlet weak var petImageView: UIImageView!
     @IBOutlet weak var signalImageView: UIImageView!
     @IBOutlet weak var batteryImageView: UIImageView!
+    @IBOutlet weak var signalLabel: UILabel!
+    @IBOutlet weak var batteryLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var breedLabel: UILabel!
     @IBOutlet weak var weightLabel: UILabel!
@@ -28,19 +30,17 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
     @IBOutlet weak var removeLeaveLabel: UILabel!
     
     var pet:Pet!
+    var fromMap: Bool = false
     
-    fileprivate let sectionNames = ["info", "users", "safe zones", "actions"]
+    fileprivate let sectionNames = ["info", "activity", "users", "safe zones", "actions"]
     
     fileprivate let presenter = PetPresenter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        tableView.backgroundColor = UIColor.clear
+
         presenter.attachView(self, pet:pet)
 
-//        usersCollectionView.register(petProfileUserCollectionCell.self, forCellWithReuseIdentifier: "cell")
-//        safeZonesCollectionView.register(petProfileSafeZoneCollectionCell.self, forCellWithReuseIdentifier: "cell")
-        
         petImageView.circle()
         signalImageView.circle()
         batteryImageView.circle()
@@ -51,24 +51,11 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
             reloadUsers()
             reloadSafeZones()
             removeLeaveLabel.text = pet.isOwner ? "Remove Pet" : "Leave Pet"
-            
-            SocketIOManager.Instance.getPetGPSData(id: 25) { (error, data) in
-                if let data = data {
-                    DispatchQueue.main.async {
-                        self.signalImageView.backgroundColor = UIColor.orange()
-                        self.batteryImageView.backgroundColor = UIColor.orange()
-                    }
-                    data.point.coordinates.getStreetFullName(handler: { (name) in
-                        DispatchQueue.main.async {
-                            if let name = name {
-                                self.locationLabel.text = "\(name)\n\(data.distanceTime)"
-                            }
-                        }
-                    })
-                }
-            }
-        }
+         }
         
+        if fromMap {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(dismissAction(sender: )))
+        }
         
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 20.0))
     }
@@ -76,13 +63,34 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
     deinit {
         presenter.deteachView()
     }
+        
+    override func viewWillAppear(_ animated: Bool) {
+
+        presenter.startPetsGPSUpdates(for: pet.id) { (data) in
+            self.load(data: data)
+        }
+        presenter.startPetsGeocodeUpdates(for: pet.id, { (type,name) in
+            if type == .pet {
+                self.load(locationAndTime: name)
+            }else if type == .safezone {
+                self.safeZonesCollectionView.reloadData()
+            }
+        })
+       
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        presenter.stopPetGPSUpdates()
+        presenter.stopPetsGeocodeUpdates()
+        self.tabBarController?.tabBar.isHidden = false
+    }
 
     func reloadPetInfo() {
         presenter.loadPet(with: pet.id)
     }
     
     func reloadSafeZones() {
-        presenter.loadSafeZone(for: pet.id)
+        presenter.loadSafeZones(for: pet.id)
     }
     
     func reloadUsers() {
@@ -96,7 +104,7 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
     }
     
     func load(_ pet: Pet) {
-        
+        navigationItem.title = pet.name
         if let imageData = pet.image {
             petImageView.image = UIImage(data: imageData as Data)
         }
@@ -107,45 +115,80 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
         weightLabel.text = pet.weight.toWeightString
         birthdayLabel.text = pet.birthday?.toStringShow
         neuteredLabel.text = pet.neutered ? "Yes" : "No"
-        
-        usersCollectionView.reloadAnimated()
-        
-        if presenter.safezones.count > 0 {
-            safezonesTableViewCell.isHidden = false
 
-            let safezonesGroup = DispatchGroup()
-            
-            for safezone in self.presenter.safezones {
+        removeLeaveLabel.text = pet.isOwner ? "Remove Pet" : "Leave Pet"
+        
+        if let data = SocketIOManager.Instance.getPetGPSData(id: pet.id) {
+            DispatchQueue.main.async {
+                self.load(data: data)
+                self.load(locationAndTime: data.locationAndTime)
+            }
+        }
+        
+        tableView.reloadData()
+    }
+    
+    func loadUsers() {
+        usersCollectionView.reloadAnimated()
+        tableView.reloadData()
+    }
+    
+    func loadSafeZones() {
+        safezonesTableViewCell.isHidden = presenter.safezones.count == 0
+        
+        let safezonesGroup = DispatchGroup()
+        
+        for safezone in self.presenter.safezones {
+            // Address
+            if safezone.address == nil {
+                debugPrint("address", safezone.id)
+                
+                guard let center = safezone.point1 else {
+                    debugPrint("No center point found!")
+                    break
+                }
+                GeocoderManager.Intance.reverse(type: .safezone, with: center, for: safezone.id)
+            }
+            // Map
+            if safezone.preview == nil {
+                guard let center = safezone.point1?.coordinates else {
+                    debugPrint("No center point found!")
+                    continue
+                }
+                guard let topCenter = safezone.point2?.coordinates else {
+                    debugPrint("No topcenter point found!")
+                    continue
+                }
+                guard let shape = Shape(rawValue: safezone.shape) else {
+                    debugPrint("No shape found!")
+                    continue
+                }
                 safezonesGroup.enter()
-                self.buildMap(for: safezone, handler: {
+                debugPrint("map", safezone.id)
+                self.buildMap(center: center, topCenter: topCenter, shape: shape, handler: { (image) in
+                    if let image = image, let data = UIImagePNGRepresentation(image) {
+                        self.presenter.set(safezone: safezone, imageData: data)
+                    }
                     safezonesGroup.leave()
                 })
             }
-            
-            safezonesGroup.notify(queue: .main, execute: {
-                self.safeZonesCollectionView.reloadData()
-            })
-            
-            let safezonesGroup2 = DispatchGroup()
-            
-            for safezone in self.presenter.safezones {
-                safezonesGroup2.enter()
-                self.buildAddress(for: safezone, handler: {
-                    safezonesGroup2.leave()
-                })
-            }
-            
-            safezonesGroup2.notify(queue: .main, execute: {
-                self.safeZonesCollectionView.reloadData()
-            })
-            
-        }else if pet.isOwner {
-            safezonesTableViewCell.isHidden = true
-        }else {
-            safezonesTableViewCell.isHidden = true
         }
-        removeLeaveLabel.text = pet.isOwner ? "Remove Pet" : "Leave Pet"
-        tableView.reloadData()
+        
+        safezonesGroup.notify(queue: .main, execute: {
+            self.safeZonesCollectionView.reloadData()
+            self.tableView.reloadData()
+        })
+    }
+    
+    func load(data: GPSData){
+        self.signalImageView.backgroundColor = UIColor.primaryColor()
+        self.signalLabel.text = data.signalString
+        self.batteryImageView.backgroundColor = UIColor.primaryColor()
+        self.batteryLabel.text = data.batteryString
+    }
+    
+    func load(locationAndTime: String){
+        self.locationLabel.text = locationAndTime
     }
     
     func petNotFound() {
@@ -156,64 +199,33 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
         popAction(sender: nil)
     }
     
-    // MARK: - UITableViewDataSource
     
-//    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        
-//        let headerView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: tableView.frame.width, height: 35.0))
-//        
-//        let titleWidth = headerView.frame.width * 0.7
-//        let margin:CGFloat = 10.0
-//        
-//        let title = UILabel(frame: CGRect(x: margin, y: 0.0, width: titleWidth, height: headerView.frame.height - margin))
-//        title.text = sectionNames[section].uppercased()
-//        title.font = UIFont.init(name: "HelveticaNeue-Bold", size: 28.0)
-//        title.textColor = UIColor.black
-//        headerView.addSubview(title)
-//        
-//        if pet.isOwner && section != 3 {
-//            
-//            let editButtonWidth = headerView.frame.width - titleWidth - margin
-//            
-//            let editButton = UIButton(frame: CGRect(x: titleWidth, y: 0.0, width: editButtonWidth, height: headerView.frame.height - margin))
-//            let title = section == 0 ? "Edit" : "Add"
-//            editButton.setTitle(title, for: .normal)
-//            editButton.contentHorizontalAlignment = .right
-//            editButton.setTitleColor(UIColor.orange(), for: .normal)
-//            editButton.isEnabled = true
-//            editButton.tag = section
-//            editButton.addTarget(self, action: #selector(editPressed(sender:)), for: .touchDown)
-//            headerView.addSubview(editButton)
-//        }
-//        return headerView
-//    }
-//    
-//    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 35.0
-//    }
+    // MARK: - UITableViewDataSource
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let headerView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: tableView.frame.width, height: 23))
+        let headerView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: tableView.frame.width, height: 30.0))
         
         let titleWidth = headerView.frame.width * 0.6
         let margin:CGFloat = 5.0
         
         let title = UILabel(frame: CGRect(x: margin, y: 0.0, width: titleWidth, height: headerView.frame.height - margin))
-        title.text = sectionNames[section].uppercased()
-        title.font = UIFont.preferredFont(forTextStyle: .body)
+        title.text = sectionNames[section].localizedUppercase
+        title.font = UIFont.preferredFont(forTextStyle: .headline)
         title.textColor = UIColor.darkGray
         headerView.addSubview(title)
         
-        if pet.isOwner && section != 3 {
+        if pet.isOwner && section != 4 {
             
             let editButtonWidth = headerView.frame.width - titleWidth - margin
             
             let editButton = UIButton(frame: CGRect(x: titleWidth, y: 0.0, width: editButtonWidth, height: headerView.frame.height - margin))
-            let title = section == 0 ? "Edit" : "Add"
+            var title = "Add"
+            if section == 0 { title = "Edit" }
+            else if section == 1 { title = "View" }
             editButton.setTitle(title, for: .normal)
+            editButton.setTitleColor(UIColor.primaryColor(), for: .normal)
             editButton.contentHorizontalAlignment = .right
-            editButton.setTitleColor(UIColor.orange(), for: .normal)
             editButton.isEnabled = true
             editButton.tag = section
             editButton.addTarget(self, action: #selector(editPressed(sender:)), for: .touchDown)
@@ -223,7 +235,7 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 20.0
+        return 30.0
     }
 
     func editPressed(sender: UIButton){
@@ -235,12 +247,16 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
                 navigationController?.pushViewController(vc, animated: true)
             }
         case 1:
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "AddPetUserViewController") as? AddPetUserViewController {
-                vc.petName = pet.name ?? ""
-                vc.petId = pet.id
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "PetActivityViewController") as? PetActivityViewController {
+                vc.pet = pet
                 navigationController?.pushViewController(vc, animated: true)
             }
         case 2:
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "AddPetUserViewController") as? AddPetUserViewController {
+                vc.pet = pet
+                navigationController?.pushViewController(vc, animated: true)
+            }
+        case 3:
             if let vc = storyboard?.instantiateViewController(withIdentifier: "AddEditSafeZoneViewController") as? AddEditSafeZoneViewController {
                 vc.petId = pet.id
                 vc.isOwner = pet.isOwner
@@ -273,8 +289,8 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
     // MARK: - UITableViewDelegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if indexPath.section == 3 && indexPath.row == 1 {
+
+        if indexPath.section == 4 && indexPath.row == 1 {
             // Leave/Remove Pet
             if pet.isOwner {
                 popUpDestructive(title: "Remove \(pet.name ?? "this pet")", msg: "If you proceed you will loose all the information of this pet.", cancelHandler: nil, proceedHandler: { (remove) in
@@ -319,7 +335,7 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
             if let preview = safezone.preview {
                 cell.elementImageView.image = UIImage(data: preview as Data)
             }else{
-                cell.elementImageView.backgroundColor = UIColor.orange().withAlphaComponent(0.8)
+                cell.elementImageView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.6)
             }
             return cell
         }else if collectionView == usersCollectionView {
@@ -339,27 +355,15 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
         }
     }
     
-    func buildMap(for safezone: SafeZone, handler: @escaping (()->())) {
-        if safezone.preview == nil, let center = safezone.point1?.coordinates, let topCenter = safezone.point2?.coordinates, let shape = Shape(rawValue: safezone.shape) {
-            
-            MKMapView.getSnapShot(with: center, topCenter: topCenter, shape: shape, into: view, handler: { (image) in
-                if let image = image, let data = UIImagePNGRepresentation(image) {
-                    self.presenter.set(safezone: safezone, imageData: data)
-                    handler()
-                }
-            })
-        }
-    }
     
-    func buildAddress(for safezone: SafeZone, handler: @escaping (()->())) {
-        if safezone.address == nil, let center = safezone.point1?.coordinates {
-            
-            center.getStreetName(handler: { (address) in
-                if let address = address {
-                    self.presenter.set(safezone: safezone, address: address)
-                    handler()
-                }
+    func buildMap(center: CLLocationCoordinate2D, topCenter: CLLocationCoordinate2D, shape: Shape, handler: @escaping ((UIImage?)->())){
+        if CLLocationCoordinate2DIsValid(center) && CLLocationCoordinate2DIsValid(topCenter) {
+            SnapshotMapManager.Intance.performSnapShot(with: center, topCenter: topCenter, shape: shape, handler: { (image) in
+                handler(image)
             })
+        }else{
+            self.errorMessage(ErrorMsg.init(title: "", msg: "wrong coordinates"))
+            handler(nil)
         }
     }
     
@@ -370,7 +374,7 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
             
         }else if collectionView == usersCollectionView {
             let user = presenter.users[indexPath.row]
-            present(user, isOwner: pet.isOwner(user))
+            present(user, isOwner: user.isOwner)
         }
     }
     
@@ -407,6 +411,7 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
     }
     
     // MARK: - Navigation
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "changeDevice" {
@@ -418,6 +423,16 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
         }
     }
     
+    
+    
+    var lastContentOffsetAtY : CGFloat = 0.0
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.lastContentOffsetAtY = scrollView.contentOffset.y
+    }
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.tabBarController?.tabBar.isHidden = lastContentOffsetAtY < scrollView.contentOffset.y
+    }
 }
 
 class petProfileSafeZoneCollectionCell: UICollectionViewCell {

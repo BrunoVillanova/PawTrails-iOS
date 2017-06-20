@@ -63,6 +63,13 @@ extension Double {
 
 extension Date {
     
+    public func toString(dateStyle: DateFormatter.Style = .medium, timeStyle: DateFormatter.Style = .medium) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = dateStyle
+        dateFormatter.timeStyle = timeStyle
+        return dateFormatter.string(from: self)
+     }
+    
     public var toStringShow: String? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
@@ -111,7 +118,7 @@ extension Date {
         if hours(from: date)   > 0 { return "\(hours(from: date)) hours ago"   }
         if minutes(from: date) > 0 { return "\(minutes(from: date)) minutes ago" }
         if seconds(from: date) > 0 { return "\(seconds(from: date)) seconds ago" }
-        return ""
+        return "recently"
     }
     
 }
@@ -179,8 +186,9 @@ extension Dictionary where Key == String, Value == Any {
     
     func tryCastDouble(for key:String) -> Double? {
         if let value = self[key] {
+            if value is NSNumber { return (value as? NSNumber)?.doubleValue }
             if value is Double { return value as? Double }
-            if value is String, let doubleValue = Double(value as! String) { return doubleValue }
+            if value is String { return NumberFormatter().number(from: value as! String)?.doubleValue }
         }
         return nil
     }
@@ -222,7 +230,6 @@ extension CGPoint {
     }
     
 }
-
 
 //public extension XCTest {
 //    

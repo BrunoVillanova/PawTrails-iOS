@@ -23,6 +23,10 @@ enum notificationType {
     }
 }
 
+enum subviewId: Int {
+    case notification = 1, loading, activity
+}
+
 extension UIViewController {
     
     func popUp(title:String, msg:String, actionTitle: String = "Ok", handler: ((UIAlertAction)->Void)? = nil){
@@ -60,18 +64,24 @@ extension UIViewController {
             }))
             self.present(alert, animated: true, completion: nil)
         })
-
+        
     }
     
-    func setTopBar(color: UIColor = UIColor.orange()) {
+    func setTopBar(color: UIColor = UIColor.primaryColor()) {
         let topBar = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 20))
+        topBar.tag = 102
         topBar.backgroundColor = color.withAlphaComponent(0.8)
         view.addSubview(topBar)
     }
     
+    func removeTopBar(){
+        if let topBar = view.subviews.first(where: { $0.tag == 102}) {
+            topBar.removeFromSuperview()
+        }
+    }
+    
     func alert(title:String, msg:String, type: notificationType = .red, disableTime: Int = 3, handler: (()->())? = nil){
         self.showNotification(title: msg, type: type)
-        debugPrint(msg)
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(disableTime)) {
             self.hideNotification()
             if let handler = handler { handler() }
@@ -86,65 +96,67 @@ extension UIViewController {
             imagePicker.allowsEditing = true
             imagePicker.sourceType = .camera
             DispatchQueue.main.async {
-            self.present(imagePicker, animated: true, completion: nil)
+                self.present(imagePicker, animated: true, completion: nil)
             }
         }))
         alert.addAction(UIAlertAction(title: "Choose from Gallery", style: .default, handler: { (galery) in
             imagePicker.allowsEditing = true
             imagePicker.sourceType = .photoLibrary
             DispatchQueue.main.async {
-            self.present(imagePicker, animated: true, completion: nil)
+                self.present(imagePicker, animated: true, completion: nil)
             }
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         DispatchQueue.main.async {
-        self.present(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
     @IBAction func dismissAction(sender: UIButton?){
         DispatchQueue.main.async {
-        self.view.endEditing(true)
-        self.dismiss(animated: true, completion: nil)
+            self.view.endEditing(true)
+            self.dismiss(animated: true, completion: nil)
         }
     }
     
     @IBAction func dismissBarAction(sender: UIBarButtonItem?){
         DispatchQueue.main.async {
-        self.view.endEditing(true)
-        self.navigationController?.dismiss(animated: true, completion: nil)
+            self.view.endEditing(true)
+            self.navigationController?.dismiss(animated: true, completion: nil)
         }
     }
     
     @IBAction func popAction(sender: UIBarButtonItem?){
         DispatchQueue.main.async {
-        self.view.endEditing(true)
-        _ = self.navigationController?.popViewController(animated: true)
+            self.view.endEditing(true)
+            _ = self.navigationController?.popViewController(animated: true)
         }
     }
     
     // Connection Notifier
     
     func hideNotification() {
-        if let notificationView = view.subviews.first(where: { $0.tag == 2 }) {
-            DispatchQueue.main.async {
-            notificationView.removeFromSuperview()
+
+        if let notificationViews = UIApplication.shared.keyWindow?.subviews.filter({ $0.tag == subviewId.notification.rawValue }) {
+            for notificationView in notificationViews {
+                DispatchQueue.main.async {
+                    notificationView.removeFromSuperview()
+                }
             }
         }
     }
     
     func showNotification(title:String, type:notificationType = .blue) {
         
-        let yOffset:CGFloat = navigationController?.navigationBar.frame.height ?? 0.0
-        debugPrint(yOffset)
+        let viewHeight:CGFloat = 30
+        let yOffset:CGFloat = UIApplication.shared.statusBarFrame.size.height + (navigationController?.navigationBar.frame.height ?? 0.0)
+        let viewFrame = CGRect(x: 0.0, y: yOffset, width: self.view.bounds.width, height: viewHeight)
         
-        let viewHeight:CGFloat = 64, labelYOffset: CGFloat = 24
-        
-        let notificationView = UIView(frame: CGRect(x: 0.0, y: yOffset, width: self.view.bounds.width, height: viewHeight))
+        let notificationView = UIView(frame: viewFrame)
         notificationView.backgroundColor = type.color
-        notificationView.tag = 2
+        notificationView.tag = subviewId.notification.rawValue
         
-        let label = UILabel(frame: CGRect(x: 0, y: labelYOffset, width: self.view.bounds.width, height: 40))
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: viewHeight))
         label.text = title
         label.textColor = UIColor.white
         label.font = UIFont.preferredFont(forTextStyle: .headline)
@@ -154,8 +166,10 @@ extension UIViewController {
         
         notificationView.addSubview(label)
         DispatchQueue.main.async {
-            self.view.addSubview(notificationView)
+            UIApplication.shared.keyWindow?.addSubview(notificationView)
         }
+        
+        
     }
     
     
@@ -164,34 +178,35 @@ extension UIViewController {
     func showLoadingView() {
         let loadingView = UIVisualEffectView(frame: view.bounds)
         loadingView.effect = UIBlurEffect.init(style: .extraLight)
-        loadingView.tag = 1
+        loadingView.tag = subviewId.loading.rawValue
         
         let activity = UIActivityIndicatorView(frame: view.bounds)
         activity.activityIndicatorViewStyle = .whiteLarge
-        activity.color = UIColor.orange()
         activity.startAnimating()
-        activity.tag = 1
+        activity.tag = subviewId.activity.rawValue
         
         loadingView.addSubview(activity)
         
-        loadingView.alpha = 0.0
-        
-        view.addSubview(loadingView)
-        
-        UIView.animate(withDuration: 0.6) {
-            loadingView.alpha = 1.0
+        loadingView.contentView.alpha = 0.0
+        DispatchQueue.main.async {
+            self.view.addSubview(loadingView)
+            UIView.animate(withDuration: 0.6) {
+                loadingView.contentView.alpha = 1.0
+            }
         }
     }
     
     func hideLoadingView() {
-        if let loadingView = view.subviews.first(where: { $0.tag == 1 }) as? UIVisualEffectView {
-            UIView.animate(withDuration: 0.4, animations: {
-                loadingView.alpha = 0
-            }, completion: { (success) in
-                if success {
-                    loadingView.removeFromSuperview()
-                }
-            })
+        if let loadingView = view.subviews.first(where: { $0.tag == subviewId.loading.rawValue }) as? UIVisualEffectView {
+            DispatchQueue.main.async {
+                UIView.animate(withDuration: 0.4, animations: {
+                    loadingView.contentView.alpha = 0.0
+                }, completion: { (success) in
+                    if success {
+                        loadingView.removeFromSuperview()
+                    }
+                })
+            }
         }
     }
     
@@ -201,12 +216,12 @@ extension UIViewController {
         label.text = "✓"
         label.font = UIFont.systemFont(ofSize: 70)
         label.textAlignment = .center
-        label.textColor = UIColor.orange()
+        label.textColor = UIColor.primaryColor()
         
         
-        if let loadingView = view.subviews.first(where: { $0.tag == 1 }) as? UIVisualEffectView {
+        if let loadingView = view.subviews.first(where: { $0.tag == subviewId.loading.rawValue }) as? UIVisualEffectView {
             
-            if let activity = loadingView.subviews.first(where: { $0.tag == 1 }) as? UIActivityIndicatorView {
+            if let activity = loadingView.subviews.first(where: { $0.tag == subviewId.activity.rawValue }) as? UIActivityIndicatorView {
                 activity.removeFromSuperview()
                 loadingView.addSubview(label)
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(1), execute: {
@@ -266,8 +281,13 @@ extension UIColor {
         return UIColor(red: r/255.0, green: g/255.0, blue: b/255.0, alpha: 1.0)
     }
     
-    public static func orange() -> UIColor {
+    public static func primaryColor() -> UIColor {
         return UIColor(red: 251.0/255.0, green: 141.0/255.0, blue: 43.0/255.0, alpha: 1.0)
+//        return UIColor.red
+    }
+    
+    public static func secondaryColor() -> UIColor {
+        return UIColor.white
     }
     
     public static func blueSystem() -> UIColor {
@@ -334,7 +354,7 @@ extension UIView {
         layer.shadowOffset = CGSize(width: 0.0, height: 5.0)
         layer.shadowOpacity = 0.5
         layer.shadowPath = shadowPath.cgPath
-
+        
     }
 }
 
@@ -343,10 +363,10 @@ extension UIImageView {
     func setupLayout(isPetOwner: Bool){
         self.circle()
         self.backgroundColor = UIColor.white
-        let color: UIColor = isPetOwner ? .orange() : .darkGray
+        let color: UIColor = isPetOwner ? .primaryColor() : .darkGray
         self.border(color: color, width: 2.0)
     }
-
+    
 }
 
 extension CGRect {
@@ -364,7 +384,7 @@ extension UITableView {
         let indexSet = IndexSet(integer: section)
         self.reloadSections(indexSet, with: animation)
     }
-
+    
 }
 
 extension UICollectionView {
@@ -374,5 +394,5 @@ extension UICollectionView {
         let indexSet = IndexSet(integersIn: range)
         self.reloadSections(indexSet)
     }
-
+    
 }

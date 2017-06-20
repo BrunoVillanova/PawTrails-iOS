@@ -14,7 +14,6 @@ enum changePwdField {
 
 protocol ChangePasswordView: NSObjectProtocol, View {
     func emptyField(_ kind:changePwdField)
-    func wrongOldPassword()
     func weakNewPassword()
     func noMatch()
     func passwordChanged()
@@ -22,12 +21,13 @@ protocol ChangePasswordView: NSObjectProtocol, View {
 
 class ChangePasswordPresenter {
     
-    
     weak fileprivate var view: ChangePasswordView?
-    fileprivate var userEmail:String!
+    
+    private var userEmail:String!
     
     func attachView(_ view: ChangePasswordView){
         self.view = view
+        
         DataManager.Instance.getUser(callback: { (error, user) in
             if error == nil && user != nil {
                 self.userEmail = user!.email!
@@ -39,8 +39,10 @@ class ChangePasswordPresenter {
         self.view = nil
     }
     
+    
+
     func changePassword(password:String, newPassword:String, newPassword2:String) {
-        
+
         if password == "" {
             self.view?.emptyField(.password)
         }else if newPassword == "" {

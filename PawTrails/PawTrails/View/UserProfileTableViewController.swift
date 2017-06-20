@@ -29,11 +29,7 @@ class UserProfileTableViewController: UITableViewController, UserProfileView, UI
     
     override func viewWillAppear(_ animated: Bool) {
         presenter.loadUser()
-        if let selectedIndexes = tableView.indexPathsForSelectedRows {
-            for selectedIndex in selectedIndexes {
-                tableView.deselectRow(at: selectedIndex, animated: true)
-            }
-        }
+       
     }
     
     //MARC:- UserProfileView
@@ -70,11 +66,17 @@ class UserProfileTableViewController: UITableViewController, UserProfileView, UI
         }
     }
     
+    
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         view.backgroundColor = UIColor.white
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     // MARK: - Navigation
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         

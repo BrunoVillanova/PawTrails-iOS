@@ -46,6 +46,7 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     fileprivate let presenter = AddEditSafeZonePresenter()
     
     fileprivate var petLocation:MKLocation? = nil
+    fileprivate var updatingPetLocation = false
     
     var safezone: SafeZone?
     var petId: Int16!
@@ -71,9 +72,12 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
         loadingFocus.isHidden = true
         loadingFocus.hidesWhenStopped = true
         
+        //set view position for screen size
+        opened = view.frame.height - blurView.frame.height - 7.0
+        closed = view.frame.height - 70.0
+        
         if let safezone = safezone {
-            navigationItem.title = "Edit Safe Zone"
-            navigationItem.prompt = safezone.pet?.name
+            navigationItem.title = "Edit \(safezone.name!)"
             
             nameTextField.text = safezone.name
             if let shape = Shape(rawValue: safezone.shape) {
@@ -90,11 +94,10 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
                 squareButton.isEnabled = false
                 activeSwitch.isEnabled = false
                 removeButton.isHidden = true
-                navigationItem.rightBarButtonItem = nil
             }
         }else{
-            navigationItem.title = "New Safe Zone"
-            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(popAction(sender:)))
+            navigationItem.title = "Add Safe Zone"
+//            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(popAction(sender:)))
             removeButton.isHidden = true
         }
         
@@ -102,9 +105,11 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
             navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(dismissAction(sender: )))
         }
         
-        self.circleButton.tintColor = shape == .circle ? UIColor.orange() : UIColor.darkGray
-        self.squareButton.tintColor = shape == .circle ?  UIColor.darkGray : UIColor.orange()
+        self.circleButton.tintColor = shape == .circle ? UIColor.primaryColor() : UIColor.darkGray
+        self.squareButton.tintColor = shape == .circle ?  UIColor.darkGray : UIColor.primaryColor()
     }
+    
+    
     
     override func viewDidAppear(_ animated: Bool) {
         if let safezone = safezone {
@@ -128,6 +133,14 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
         NotificationCenter.default.removeObserver(self)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        if updatingPetLocation {
+            presenter.stopPetGPSUpdates()
+        }
+       
+    }
+
+    
     func geoCodeFence() -> (Point,Point) {
         
         let point1 = Point(coordinates: mapView.convert(fence.center, toCoordinateFrom: view))
@@ -137,13 +150,13 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     
     @IBAction func squareAction(_ sender: UIButton) {
         circleButton.tintColor = UIColor.darkGray
-        squareButton.tintColor = UIColor.orange()
+        squareButton.tintColor = UIColor.primaryColor()
         fence.shape = .square
         shape = .square
     }
     
     @IBAction func circleAction(_ sender: UIButton) {
-        circleButton.tintColor = UIColor.orange()
+        circleButton.tintColor = UIColor.primaryColor()
         squareButton.tintColor = UIColor.darkGray
         fence.shape = .circle
         shape = .circle
@@ -192,29 +205,29 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     }
     
     func loadPetLocation(){
-        
-        
-        SocketIOManager.Instance.getPetGPSData(id: 25, withUpdates: true) { (error,GPSData) in
-            DispatchQueue.main.async {
-                
-                if let GPSData = GPSData {
-                    
-                    self.focused = true
-                    if let petLocation = self.petLocation {
-                        petLocation.move(coordinate: GPSData.point.coordinates)
-                    }else{
-                        self.petLocation = MKLocation(id: MKLocationId.init(id: 0, type: .pet), coordinate: GPSData.point.coordinates)
-                        self.mapView.addAnnotation(self.petLocation!)
-                    }
-                    self.mapView.centerOn(GPSData.point.coordinates, with: 51, animated: true)
-                }else if let error = error {
-                    if error == SocketIOError.unauthorized {
-                        self.endLoadingLocation()
-                        self.alert(title: "", msg: "Couldn't locate pet", type: .red)
-                    }
-                }
+
+        if !updatingPetLocation {
+            updatingPetLocation = true
+            presenter.startPetsGPSUpdates { (data) in
+                if !self.focused { self.loadPet(coordinates: data.point.coordinates) }
             }
         }
+
+        if let data = SocketIOManager.Instance.getPetGPSData(id: petId) {
+            loadPet(coordinates: data.point.coordinates)
+        }
+    }
+    
+    func loadPet(coordinates:CLLocationCoordinate2D){
+        self.focused = true
+        if let petLocation = self.petLocation {
+            petLocation.move(coordinate: coordinates)
+        }else{
+            self.petLocation = MKLocation(id: MKLocationId.init(id: 0, type: .pet), coordinate: coordinates)
+            self.mapView.addAnnotation(self.petLocation!)
+        }
+        endLoadingLocation()
+        self.mapView.centerOn(coordinates, with: 51, animated: true)
     }
     
     @IBAction func handlePanGesture(_ sender: UIPanGestureRecognizer) {
@@ -240,11 +253,9 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     }
     
     func success() {
-        if let parent = navigationController?.viewControllers.first(where: { $0 is PetsPageViewController}) as? PetsPageViewController {
-            if let profile = parent.profileTableViewController {
-                profile.reloadSafeZones()
-            }
-            navigationController?.popToViewController(parent, animated: true)
+        if let profile = navigationController?.viewControllers.first(where: { $0 is PetProfileTableViewController}) as? PetProfileTableViewController {
+            profile.reloadSafeZones()
+            navigationController?.popToViewController(profile, animated: true)
         }
     }
     
@@ -261,15 +272,6 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
         hideLoadingView()
     }
     
-    // MARK: - Connection Notifications
-    
-    func connectedToNetwork() {
-        hideNotification()
-    }
-    
-    func notConnectedToNetwork() {
-        showNotification(title: Message.Instance.connectionError(type: .NoConnection), type: .red)
-    }
     
     //MARK:- User Location Manager
     

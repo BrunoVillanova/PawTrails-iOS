@@ -117,7 +117,7 @@ class PetUserManager {
                         
                         for petUserData in petUsersData {
                             if let petUser = upsert(petUserData) {
-                                friends.add(petUser)
+                                if petUser.email != nil { friends.add(petUser) }
                             }
                         }
                         user.setValue(friends, forKey: "friends")
@@ -154,17 +154,44 @@ class PetUserManager {
         
         UserManager.get({ (error, user) in
             if let user = user {
-                callback(nil,user.friends?.allObjects as? [PetUser])
+                callback(nil, (user.friends?.allObjects as? [PetUser]))
             }else{
                 callback(DataManagerError(DBError: DatabaseError.NotFound), nil)
             }
         })
     }
 
-
-
-
-
+    static func removeSharedUser(with id: Int16, from petId: Int16, callback: errorCallback){
+        
+        PetManager.get(petId) { (error, pet) in
+            if error == nil, let pet = pet {
+                if let user = (pet.users?.allObjects as? [PetUser])?.first(where: { $0.id == id}) {
+                    do {
+                        
+                        user.removeFromPetUsers(pet)
+                        try CoreDataManager.Instance.save()
+                        callback(nil)
+                    }catch{
+                        debugPrint(error)
+                        callback(DataManagerError(error: error))
+                    }
+                    
+                }else{
+                    callback(DataManagerError.init(DBError: DatabaseError.NotFound))
+                }
+                
+            }else if let error = error {
+                callback(error)
+            }else {
+                debugPrint(error ?? "error nil", pet ?? "pet nil")
+                callback(nil)
+            }
+        }
+        
+    }
+    
+    
+    
 
 
 
