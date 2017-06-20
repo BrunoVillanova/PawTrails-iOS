@@ -25,7 +25,7 @@ struct APIManagerError: Error {
     let errorCode: ErrorCode?
     
     func info() -> ErrorMsg? {
-        return errorCode != nil ? Message.Instance.getMessage(from: errorCode!) : nil
+        return errorCode != nil ? Message.Instance.getMessage(from: errorCode!) : ErrorMsg(title: "", msg: "\(kind)")
     }
     
     var localizedDescription: String {
@@ -43,6 +43,8 @@ enum ErrorCode: Int {
     
     case Unknown = -1
     case NotFound = -2
+    case NoConection = -3
+    case WrongRequest = -4
 
     case Unauthorized = 0
     case MissingEmail = 10
@@ -89,6 +91,9 @@ enum ErrorCode: Int {
     case WrongShapeFormat = 54
     case CoordinatesOutOfBounds = 55
     case SafeZoneNotFound = 56
+    case WrongRadius = 57
+
+    case SharedConnectionAlreadyExists = 60
     
     init(code:Int) {
         self = ErrorCode(rawValue: code) ?? ErrorCode.Unknown

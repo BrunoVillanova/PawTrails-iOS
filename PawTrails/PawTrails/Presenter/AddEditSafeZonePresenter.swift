@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol AddEditSafeZoneView: NSObjectProtocol, View, ConnectionView, LoadingView {
+protocol AddEditSafeZoneView: NSObjectProtocol, View, LoadingView {
     func success()
     func missingName()
 }
@@ -16,21 +16,22 @@ protocol AddEditSafeZoneView: NSObjectProtocol, View, ConnectionView, LoadingVie
 class AddEditSafeZonePresenter {
     
     weak fileprivate var view: AddEditSafeZoneView?
-    private var reachability: Reachbility!
-
+    
+    
     func attachView(_ view: AddEditSafeZoneView){
         self.view = view
-        self.reachability = Reachbility(view)
+        
     }
     
     func deteachView() {
         self.view = nil
     }
-
+    
+    
     
     func addEditSafeZone(safezoneId: Int16, name: String?, shape: Shape, active: Bool, points: (Point,Point), into petId: Int16){
         
-        if name == nil || (name != nil && name == "") {
+if name == nil || (name != nil && name == "") {
             view?.missingName()
         }else{
             
@@ -68,17 +69,15 @@ class AddEditSafeZonePresenter {
     }
     
     func removeSafeZone(_ id: Int16, into petId: Int16) {
-        
-        DataManager.Instance.removeSafeZone(by: id, to: petId) { (error) in
-            DispatchQueue.main.async {
-                if let error = error {
-                    self.view?.errorMessage(error.msg)
-                }else{
-                    self.view?.success()
+            DataManager.Instance.removeSafeZone(by: id, to: petId) { (error) in
+                DispatchQueue.main.async {
+                    if let error = error {
+                        self.view?.errorMessage(error.msg)
+                    }else{
+                        self.view?.success()
+                    }
                 }
             }
-        }
-        
     }
     
     //MARK:- Socket IO
@@ -93,7 +92,7 @@ class AddEditSafeZonePresenter {
         NotificationManager.Instance.removePetGPSUpdates()
     }
     
-
+    
     
     
     

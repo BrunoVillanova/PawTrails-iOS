@@ -17,6 +17,7 @@ class EditUserProfilePresenter {
     
     weak private var view: EditUserProfileView?
     
+    
     private var address:_Address? = nil
     private var phone:_Phone? = nil
     private var imageData: Data? = nil
@@ -27,6 +28,7 @@ class EditUserProfilePresenter {
     
     func attachView(_ view: EditUserProfileView, _ user:User?){
         self.view = view
+        
         load(user)
         getCountryCodes()
     }
@@ -34,6 +36,8 @@ class EditUserProfilePresenter {
     func deteachView() {
         self.view = nil
     }
+    
+    
     
     fileprivate func load(_ user: User?) {
         
@@ -137,42 +141,44 @@ class EditUserProfilePresenter {
     
     
     func save() {
-        view?.beginLoadingContent()
-        if let imageData = imageData {
-            var data = [String:Any]()
-            data["path"] = "user"
-            data["userid"] = SharedPreferences.get(.id)
-            data["picture"] = imageData
-            
-            DataManager.Instance.set(image: data, callback: { (error) in
-                if let error = error {
+
+        
+            view?.beginLoadingContent()
+            if let imageData = imageData {
+                var data = [String:Any]()
+                data["path"] = "user"
+                data["userid"] = SharedPreferences.get(.id)
+                data["picture"] = imageData
+                
+                DataManager.Instance.set(image: data, callback: { (error) in
+                    if let error = error {
+                        DispatchQueue.main.async {
+                            self.view?.endLoadingContent()
+                            self.view?.errorMessage(error.msg)
+                        }
+                    }else{
+                        self.imageData = nil
+                        self.save()
+                    }
+                })
+            }else{
+                data["date_of_birth"] = (data["birthday"] as! Date?)?.toStringServer ?? ""
+                data.filter(by: ["image", "imageURL", "birthday"])
+                data["mobile"] = phone?.getJson()
+                data["address"] = address?.getJson()
+                data["gender"] = getGender()?.code ?? ""
+                
+                DataManager.Instance.save(user: data) { (error, user) in
                     DispatchQueue.main.async {
                         self.view?.endLoadingContent()
-                        self.view?.errorMessage(error.msg)
-                    }
-                }else{
-                    self.imageData = nil
-                    self.save()
-                }
-            })
-        }else{
-            data["date_of_birth"] = (data["birthday"] as! Date?)?.toStringServer ?? ""
-            data.filter(by: ["image", "imageURL", "birthday"])
-            data["mobile"] = phone?.getJson()
-            data["address"] = address?.getJson()
-            data["gender"] = getGender()?.code ?? ""
-            
-            DataManager.Instance.save(user: data) { (error, user) in
-                DispatchQueue.main.async {
-                    self.view?.endLoadingContent()
-                    if let error = error {
-                        self.view?.errorMessage(error.msg)
-                    }else{
-                        self.view?.saved()
+                        if let error = error {
+                            self.view?.errorMessage(error.msg)
+                        }else{
+                            self.view?.saved()
+                        }
                     }
                 }
             }
-        }
     }
 
     // Helpers

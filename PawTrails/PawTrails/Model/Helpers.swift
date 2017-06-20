@@ -151,8 +151,11 @@ public class Point: NSObject, NSCoding {
         aCoder.encode(longitude, forKey: "longitude")
     }
     
-    static func == (lhs: Point, rhs: Point) -> Bool {
-        return lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
+    public override func isEqual(_ object: Any?) -> Bool {
+        if let point = object as? Point {
+            return self.latitude == point.latitude && self.longitude == point.longitude
+        }
+        return false
     }
 }
 
@@ -171,7 +174,7 @@ public class Fence: NSObject {
         }
     }
     
-    static var idleColor = UIColor.orange().withAlphaComponent(0.5)
+    static var idleColor = UIColor.primaryColor().withAlphaComponent(0.5)
     static var noIdleColor = UIColor.red.withAlphaComponent(0.5)
     
     convenience init(_ center: CGPoint, _ topCenter: CGPoint, shape: Shape) {
@@ -189,7 +192,7 @@ public class Fence: NSObject {
         
         line = CALayer()
         line.frame = CGRect(x: layer.frame.origin.x + layer.frame.width / 2.0, y: layer.frame.origin.y, width: 1.0, height: layer.frame.height/2.0)
-        line.backgroundColor = UIColor.orange().cgColor
+        line.backgroundColor = UIColor.primaryColor().cgColor
     }
     
     
@@ -314,3 +317,29 @@ public class GPSData: NSObject {
     
 }
 
+public enum EventType: Int {
+    case unknown = 0, petRemoved, guestAdded, guestRemoved, guestLeft
+    
+    static func build(rawValue: Int) -> EventType {
+        return EventType(rawValue: rawValue) ?? .unknown
+    }
+}
+
+public class Event{
+    var type: EventType
+    var info: [String:Any]
+    
+    init() {
+        type = .unknown
+        info = [String:Any]()
+    }
+ 
+    convenience init(data:[String:Any]) {
+        self.init()
+        if let id = data.tryCastInteger(for: "eventId") {
+            type = EventType.build(rawValue: id)
+        }
+        info = data
+    }
+    
+}

@@ -39,17 +39,12 @@ class SafeZoneManager {
                     if let point2Data = data["point2"] as? [String:Any] {
                         safezone.point2 = Point(point2Data)
                     }
-                    debugPrint(p1?.toDict ?? "")
-                    debugPrint(safezone.point1?.toDict ?? "")
-                    debugPrint(p1?.toDict ?? "")
-                    debugPrint(safezone.point2?.toDict ?? "")
-                    if p1 == nil || p2 == nil || (p1 != nil && p2 != nil && (p1 != safezone.point1 || p2 != safezone.point2)) {
+                    if p1 == nil || p2 == nil || (p1 != nil && p2 != nil && (!p1!.isEqual(safezone.point1) || !p2!.isEqual(safezone.point2))) {
                         safezone.preview = nil
                         safezone.address = nil
-                        debugPrint("update safezone screen")
+                        debugPrint("had to reload ", safezone.id)
                     }
-                    
-                    
+
                     try CoreDataManager.Instance.save()
                     callback(nil, safezone)
                 }else{
@@ -124,7 +119,6 @@ class SafeZoneManager {
                                 }
                             })
                         }
-                        
                         pet.setValue(safezones, forKey: "safezones")
                         try CoreDataManager.Instance.save()
                     }catch{
@@ -146,6 +140,24 @@ class SafeZoneManager {
         }
     }
     
+    static func set(address: String, for id: Int16){
+        DispatchQueue.main.async {
+            
+            self.get(id, { (error, safezone) in
+                if error == nil, let safezone = safezone {
+                    do {
+                        safezone.address = address
+                        try CoreDataManager.Instance.save()
+                    }catch{
+                        debugPrint(error)
+                    }
+                }else if let error = error {
+                    debugPrint(error)
+                }
+            })
+        }
+    }
+    
     static func set(safezone: SafeZone, address: String){
         DispatchQueue.main.async {
             do {
@@ -156,6 +168,20 @@ class SafeZoneManager {
             }
         }
     }
+    
+    static func get(_ id:Int16, _ callback:safezoneCallback) {
+        
+        if let results = CoreDataManager.Instance.retrieve("SafeZone", with: NSPredicate("id", .equal, id)) as? [SafeZone] {
+            if results.count > 1 {
+                callback(DataManagerError.init(DBError: DatabaseError.DuplicatedEntry), nil)
+            }else{
+                callback(nil, results.first!)
+            }
+        }else{
+            callback(DataManagerError.init(DBError: DatabaseError.NotFound), nil)
+        }
+    }
+
     
     
 }

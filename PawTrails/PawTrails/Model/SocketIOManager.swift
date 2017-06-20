@@ -9,39 +9,48 @@
 import Foundation
 import UIKit
 
-class SocketIOManager: NSObject {
+class SocketIOManager: NSObject, URLSessionDelegate {
     
     static let Instance = SocketIOManager()
     
-    private let urlString = "http://eu.pawtrails.pet:2004"
+    private let urlString = "wss://eu.pawtrails.pet:2004"
     private var socket: SocketIOClient!
     
     private var onUpdates = [Int16:Bool]()
-    private var PetsGPSData = [Int16:GPSData]()
+    private var PetsGPSData = NSCache<NSNumber,GPSData>()
+    private var queue = DispatchQueue(label: "SOCKET.IO", qos: .background)
     
     override init() {
-        
-        socket = SocketIOClient(socketURL: URL(string: urlString)!, config: [.log(true)])
+        super.init()
+        //        socket = SocketIOClient(socketURL: URL(string: urlString)!, config: [.log(true)])
+        socket = SocketIOClient(socketURL: URL(string: urlString)!, config: [.log(false), .selfSigned(true), .secure(true), .sessionDelegate(self)])
 //        socket = SocketIOClient(socketURL: URL(string: urlString)!)
         for key in onUpdates.keys {
             onUpdates[key] = false
         }
-        super.init()
     }
     
     
     func establishConnection(_ callback: (()->())? = nil) {
         socket.on("authCheck") { (data, ack) in
             if self.isSuccessfullyConected(data), let callback = callback {
+                debugPrint("Connected")
                 callback()
+            }else{
+                debugPrint("Failed \(data)")
             }
         }
         socket.on("connect") { (data, ack) in
             if let token = SharedPreferences.get(.token) {
+                debugPrint("Connecting")
                 self.socket.emit("authCheck", with: [token])
             }
             
         }
+        socket.on("events", callback: { (data, ack) in
+            debugPrint("Event RS", data)
+            self.handleEventUpdated(data)
+        })
         socket.connect()
     }
     
@@ -68,12 +77,12 @@ class SocketIOManager: NSObject {
     typealias socketIOCallback = (SocketIOError?,GPSData?) -> Void
     
     func getPetGPSData(id: Int16) -> GPSData? {
-        return PetsGPSData[id]
+        return PetsGPSData.object(forKey: NSNumber(integerLiteral: Int(id)))
     }
     
     func setPetGPSlocationName(id: Int16, _ locationName: String){
-        if let data = PetsGPSData[id] {
-            PetsGPSData[id]?.locationAndTime = "\(locationName) - \(data.distanceTime)"
+        if let data = getPetGPSData(id:id) {
+            data.locationAndTime = "\(locationName) - \(data.distanceTime)"
         }
     }
     
@@ -82,7 +91,7 @@ class SocketIOManager: NSObject {
            debugPrint("Already receiving updates!")
         }else{
             socket.on("gpsData", callback: { (data, ack) in
-                debugPrint("gpsData Update response", data)
+//                debugPrint("gpsData Update response", data)
                 self.handleGPSUpdates(data)
             })
             if isConnected() {
@@ -119,10 +128,10 @@ class SocketIOManager: NSObject {
 //                debugPrint("Error :", error)
             }else if let id = json.tryCastInteger(for: "petId")?.toInt16 {
                 debugPrint("GPS Updates \(id)")
-                if let data = PetsGPSData[id] {
+                if let data = getPetGPSData(id: id) {
                     data.update(json)
                 }else{
-                    PetsGPSData[id] = GPSData(json)
+                    PetsGPSData.setObject(GPSData(json), forKey: NSNumber(integerLiteral: Int(id)))
                 }
                 NotificationManager.Instance.postPetGPSUpdates(with: id)
             }else {
@@ -133,6 +142,22 @@ class SocketIOManager: NSObject {
         }
     }
     
+    //Events
+    
+    private func handleEventUpdated(_ data:[Any]){
+        if let json = data.first as? [String:Any] {
+            
+            if let error = json["errors"] as? Int, error != 0 {
+                debugPrint("Error :", error)
+            }else {
+                NotificationManager.Instance.post(Event(data: json))
+            }
+        }else{
+            debugPrint(data)
+        }
+    }
+    
+    
     // helpers
     
     private func isSuccessfullyConected(_ data: [Any]) -> Bool {
@@ -142,6 +167,16 @@ class SocketIOManager: NSObject {
         return false
     }
 
+    
+    // URLSessionDelegate
+    
+    func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
+            let serverTrust = challenge.protectionSpace.serverTrust
+            completionHandler(Foundation.URLSession.AuthChallengeDisposition.useCredential, URLCredential(trust: serverTrust!))
+        }
+    }
+    
 }
 
 //class SocketIOManager: NSObject {

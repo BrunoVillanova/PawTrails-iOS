@@ -9,7 +9,8 @@
 import UIKit
 
 class PasswordRecoveryViewController: UIViewController, PasswordRecoveryView, UITextFieldDelegate {
-
+    
+    @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var checkButton: UIButton!
     @IBOutlet weak var sendButton: UIButton!
@@ -25,8 +26,13 @@ class PasswordRecoveryViewController: UIViewController, PasswordRecoveryView, UI
         super.viewDidLoad()
         presenter.attachView(self)
         checkButton.setTitle(unchecked, for: .normal)
+        checkButton.tintColor = UIColor.primaryColor()
         emailTextField.underline()
         sendButton.round()
+        sendButton.tintColor = UIColor.secondaryColor()
+        sendButton.backgroundColor = UIColor.primaryColor()
+        cancelButton.tintColor = UIColor.primaryColor()
+
         
         if email != nil {
             emailTextField.text = email
@@ -38,6 +44,8 @@ class PasswordRecoveryViewController: UIViewController, PasswordRecoveryView, UI
             self.emailTextField.textContentType = UITextContentType.emailAddress
         }
     }
+    
+    
     
     @IBAction func checkAction(_ sender: UIButton) {
         if sender.titleLabel?.text == unchecked {
@@ -81,6 +89,7 @@ class PasswordRecoveryViewController: UIViewController, PasswordRecoveryView, UI
     func endLoadingContent() {
         hideLoadingView()
     }
+    
 
     // MARK: - UITextFieldDelegate
     
@@ -94,7 +103,7 @@ class PasswordRecoveryViewController: UIViewController, PasswordRecoveryView, UI
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.underline(color: UIColor.orange())
+        textField.underline(color: UIColor.primaryColor())
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {

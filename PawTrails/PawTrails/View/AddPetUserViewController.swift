@@ -12,27 +12,26 @@ class AddPetUserViewController: UIViewController, UITableViewDataSource, UITable
 
     @IBOutlet weak var tableView: UITableView!
     
-    var petName: String!
-    var petId: Int16!
+    var pet: Pet!
     
     fileprivate let presenter = AddPetUserPresenter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.attachView(self)
+        presenter.attachView(self, pet: pet)
         
         navigationItem.title = "Add User"
-        navigationItem.prompt = petName
-
     }
+
     
+
     deinit {
         presenter.deteachView()
     }
     
     @IBAction func doneAction(_ sender: UIBarButtonItem?) {
         view.endEditing(true)
-        presenter.addPetUser(by: emailTextField()?.text, to: petId)
+        presenter.addPetUser(by: emailTextField()?.text, to: pet.id)
     }
     // MARK: - AddPetUserView
     
@@ -45,11 +44,9 @@ class AddPetUserViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func successfullyAdded() {
-        if let parent = navigationController?.viewControllers.first(where: { $0 is PetsPageViewController}) as? PetsPageViewController {
-            if let profile = parent.profileTableViewController {
-                profile.reloadUsers()
-            }
-            navigationController?.popToViewController(parent, animated: true)
+        if let profile = navigationController?.viewControllers.first(where: { $0 is PetProfileTableViewController}) as? PetProfileTableViewController {
+            profile.reloadUsers()
+            navigationController?.popToViewController(profile, animated: true)
         }
     }
     
@@ -73,15 +70,6 @@ class AddPetUserViewController: UIViewController, UITableViewDataSource, UITable
         hideLoadingView()
     }
         
-    // MARK: - Connection Notifications
-    
-    func connectedToNetwork() {
-        hideNotification()
-    }
-    
-    func notConnectedToNetwork() {
-        showNotification(title: Message.Instance.connectionError(type: .NoConnection), type: .red)
-    }
     
     // MARK: - UITableViewDataSource
     
@@ -120,7 +108,7 @@ class AddPetUserViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         view.endEditing(true)
         let user = presenter.friends[indexPath.row]
-        presenter.addPetUser(by: user.email, to: petId)
+        presenter.addPetUser(by: user.email, to: pet.id)
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

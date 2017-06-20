@@ -29,6 +29,8 @@ class AddPetDeviceTableViewController: UITableViewController, UITextFieldDelegat
         presenter.deteachView()
     }
     
+    
+    
     override func viewDidAppear(_ animated: Bool) {
         if deviceCodeTextField.text != nil {
             deviceCodeTextField.becomeFirstResponder()
@@ -64,15 +66,6 @@ class AddPetDeviceTableViewController: UITableViewController, UITextFieldDelegat
         }
     }
     
-    // MARK: - Connection Notifications
-    
-    func connectedToNetwork() {
-        hideNotification()
-    }
-    
-    func notConnectedToNetwork() {
-        showNotification(title: Message.Instance.connectionError(type: .NoConnection), type: .red)
-    }
     
     // MARK: - UITextFieldDelegate
     

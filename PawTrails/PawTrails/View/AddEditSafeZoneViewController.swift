@@ -77,8 +77,7 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
         closed = view.frame.height - 70.0
         
         if let safezone = safezone {
-            navigationItem.title = "Edit Safe Zone"
-            navigationItem.prompt = safezone.pet?.name
+            navigationItem.title = "Edit \(safezone.name!)"
             
             nameTextField.text = safezone.name
             if let shape = Shape(rawValue: safezone.shape) {
@@ -95,11 +94,10 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
                 squareButton.isEnabled = false
                 activeSwitch.isEnabled = false
                 removeButton.isHidden = true
-                navigationItem.rightBarButtonItem = nil
             }
         }else{
-            navigationItem.title = "New Safe Zone"
-            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(popAction(sender:)))
+            navigationItem.title = "Add Safe Zone"
+//            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(popAction(sender:)))
             removeButton.isHidden = true
         }
         
@@ -107,9 +105,11 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
             navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(dismissAction(sender: )))
         }
         
-        self.circleButton.tintColor = shape == .circle ? UIColor.orange() : UIColor.darkGray
-        self.squareButton.tintColor = shape == .circle ?  UIColor.darkGray : UIColor.orange()
+        self.circleButton.tintColor = shape == .circle ? UIColor.primaryColor() : UIColor.darkGray
+        self.squareButton.tintColor = shape == .circle ?  UIColor.darkGray : UIColor.primaryColor()
     }
+    
+    
     
     override func viewDidAppear(_ animated: Bool) {
         if let safezone = safezone {
@@ -137,6 +137,7 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
         if updatingPetLocation {
             presenter.stopPetGPSUpdates()
         }
+       
     }
 
     
@@ -149,13 +150,13 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     
     @IBAction func squareAction(_ sender: UIButton) {
         circleButton.tintColor = UIColor.darkGray
-        squareButton.tintColor = UIColor.orange()
+        squareButton.tintColor = UIColor.primaryColor()
         fence.shape = .square
         shape = .square
     }
     
     @IBAction func circleAction(_ sender: UIButton) {
-        circleButton.tintColor = UIColor.orange()
+        circleButton.tintColor = UIColor.primaryColor()
         squareButton.tintColor = UIColor.darkGray
         fence.shape = .circle
         shape = .circle
@@ -252,11 +253,9 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     }
     
     func success() {
-        if let parent = navigationController?.viewControllers.first(where: { $0 is PetsPageViewController}) as? PetsPageViewController {
-            if let profile = parent.profileTableViewController {
-                profile.reloadSafeZones()
-            }
-            navigationController?.popToViewController(parent, animated: true)
+        if let profile = navigationController?.viewControllers.first(where: { $0 is PetProfileTableViewController}) as? PetProfileTableViewController {
+            profile.reloadSafeZones()
+            navigationController?.popToViewController(profile, animated: true)
         }
     }
     
@@ -273,15 +272,6 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
         hideLoadingView()
     }
     
-    // MARK: - Connection Notifications
-    
-    func connectedToNetwork() {
-        hideNotification()
-    }
-    
-    func notConnectedToNetwork() {
-        showNotification(title: Message.Instance.connectionError(type: .NoConnection), type: .red)
-    }
     
     //MARK:- User Location Manager
     

@@ -17,21 +17,25 @@ class SettingsPresenter {
     
     weak private var view: SettingsView?
     
+
     var CountryCodes = [CountryCode]()
     
     func attachView(_ view: SettingsView){
         self.view = view
+        
     }
     
     func deteachView() {
         self.view = nil
     }
     
+    
+    
     func logout() {
         if AuthManager.Instance.signOut() {
             self.view?.userNotSigned()
         }else{
-            self.view?.errorMessage(ErrorMsg(title:"Couldn't Logout 😱", msg:""))
+            self.view?.errorMessage(ErrorMsg(title:"", msg:"Couldn't Logout"))
         }
     }
 

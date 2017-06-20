@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol HomeView: NSObjectProtocol, View, ConnectionView {
+protocol HomeView: NSObjectProtocol, View {
     func loadPets()
     func reload()
     func noPetsFound()
@@ -18,7 +18,7 @@ protocol HomeView: NSObjectProtocol, View, ConnectionView {
 class HomePresenter {
     
     weak fileprivate var view: HomeView?
-    private var reachability: Reachbility!
+    
 
     var pets = [Pet]()
     var safeZones = [SafeZone]()
@@ -27,12 +27,14 @@ class HomePresenter {
     
     func attachView(_ view: HomeView){
         self.view = view
-        self.reachability = Reachbility(view)
+        
     }
     
     func deteachView() {
         self.view = nil
     }
+    
+    
     
     func getUser(){
         
@@ -52,20 +54,21 @@ class HomePresenter {
     }
     
     func getPets(){
-        
-        DataManager.Instance.getPets { (error, pets) in
-            
-            DispatchQueue.main.async {
+        DispatchQueue.global(qos: .background).async {
+            DataManager.Instance.getPets { (error, pets) in
                 
-                if error == nil, let pets = pets {
-                    self.pets = pets
-                    self.view?.loadPets()
-
-                }else if let error = error {
-                    if error.DBError == DatabaseError.NotFound {
-                        self.view?.noPetsFound()
-                    }else{
-                        self.view?.errorMessage(error.msg)
+                DispatchQueue.main.async {
+                    
+                    if error == nil, let pets = pets {
+                        self.pets = pets
+                        self.view?.loadPets()
+                        
+                    }else if let error = error {
+                        if error.DBError == DatabaseError.NotFound {
+                            self.view?.noPetsFound()
+                        }else{
+                            self.view?.errorMessage(error.msg)
+                        }
                     }
                 }
             }

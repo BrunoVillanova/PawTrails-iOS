@@ -186,8 +186,9 @@ extension Dictionary where Key == String, Value == Any {
     
     func tryCastDouble(for key:String) -> Double? {
         if let value = self[key] {
+            if value is NSNumber { return (value as? NSNumber)?.doubleValue }
             if value is Double { return value as? Double }
-            if value is String, let doubleValue = Double(value as! String) { return doubleValue }
+            if value is String { return NumberFormatter().number(from: value as! String)?.doubleValue }
         }
         return nil
     }
@@ -229,7 +230,6 @@ extension CGPoint {
     }
     
 }
-
 
 //public extension XCTest {
 //    
