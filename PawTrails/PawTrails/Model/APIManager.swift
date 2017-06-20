@@ -193,7 +193,7 @@ class APIManager {
         
         do {
             if let out = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as? [String:Any] {
-                debugPrint("JSON RS", out)
+//                debugPrint("JSON RS", out)
                 return out
             }else if let rs = String(data: data!, encoding: String.Encoding.utf8) {
                 debugPrint("STRING RS", rs)

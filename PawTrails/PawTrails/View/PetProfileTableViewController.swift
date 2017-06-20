@@ -117,6 +117,14 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
         neuteredLabel.text = pet.neutered ? "Yes" : "No"
 
         removeLeaveLabel.text = pet.isOwner ? "Remove Pet" : "Leave Pet"
+        
+        if let data = SocketIOManager.Instance.getPetGPSData(id: pet.id) {
+            DispatchQueue.main.async {
+                self.load(data: data)
+                self.load(locationAndTime: data.locationAndTime)
+            }
+        }
+        
         tableView.reloadData()
     }
     
