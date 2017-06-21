@@ -82,7 +82,7 @@ class GeocoderManager {
             if let name = geocode.name {
                 debugPrint("Geocode released: ", geocode.id)
                 if geocode.type == .pet {
-                    SocketIOManager.Instance.setPetGPSlocationName(id: geocode.id, name)
+                    SocketIOManager.Instance.set(name, for: geocode.id)
                 }else if geocode.type == .safezone {
                     DataManager.Instance.setSafeZone(address: name, for: geocode.id)
                 }

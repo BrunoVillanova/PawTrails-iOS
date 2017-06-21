@@ -8,23 +8,66 @@
 
 import Foundation
 import UIKit
+import SocketIO
+
+fileprivate enum channel {
+    
+    case connect, auth, events, gpsUpdates, startGPSUpdates, stopGPSUpdates
+    
+    func getName(with key: Any? = nil) -> String {
+        let key = key != nil ? "\(key!)" : ""
+        switch self {
+        case .connect: return "connect"
+        case .auth: return "authCheck"
+        case .events: return "events"
+        case .gpsUpdates: return "gpsUpdate\(key)"
+        case .startGPSUpdates: return "roomjoin"
+        case .stopGPSUpdates: return "roomleave"
+        }
+    }
+}
+
+fileprivate extension SocketIOClient {
+    
+    var isConnected: Bool {
+        return self.status == SocketIOClientStatus.connected
+    }
+    
+    func once(channel: channel, key: Any? = nil, callback: @escaping NormalCallback) {
+        self.once(channel.getName(with: key), callback: callback)
+    }
+    
+    func on(channel: channel, key: Any? = nil, callback: @escaping NormalCallback) {
+        self.on(channel.getName(with: key), callback: callback)
+    }
+    
+    func off(channel: channel, key: Any? = nil) {
+        
+        self.off(channel.getName(with: key))
+    }
+    
+    func emit(channel: channel, key: Any? = nil, items: SocketData...){
+        self.emit(channel.getName(with: key), items)
+    }
+}
+
 
 class SocketIOManager: NSObject, URLSessionDelegate {
     
-    static let Instance = SocketIOManager(SSLEnabled: true)
+    static let Instance = SocketIOManager(SSLEnabled: false)
     
     private let urlString = "http://eu.pawtrails.pet:2003"
     private let urlStringSSL = "https://eu.pawtrails.pet:2004"
+    
     private var socket: SocketIOClient!
     
     private var onUpdates = [Int16:Bool]()
     private var PetsGPSData = NSCache<NSNumber,GPSData>()
-    //    private var queue = DispatchQueue(label: "SOCKET.IO", qos: .background)
+    
     
     init(SSLEnabled: Bool = true) {
         super.init()
         
-        //        queue.async {
         let urlString = SSLEnabled ? self.urlStringSSL : self.urlString
         
         if let url = URL(string: urlString) {
@@ -32,121 +75,86 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         }
         
         for key in self.onUpdates.keys {  self.onUpdates[key] = false }
-        //        }
     }
     
-    
-    func establishConnection(_ callback: (()->())? = nil) {
-        //        queue.async {
-        self.socket.on("authCheck") { (data, ack) in
-            if self.isSuccessfullyConected(data), let callback = callback {
-                debugPrint("Connected")
-                callback()
-            }else{
-                debugPrint("Failed \(data)")
+    func connect(_ callback: ((SocketIOStatus)->())? = nil) {
+
+        self.socket.on(channel: .auth) { (data, ack) in
+
+            let status = self.getStatus(data)
+            debugPrint(status)
+            if status != .waiting {
+                if let callback = callback { callback(status) }
+                self.socket.off(channel: .auth)
             }
         }
-        self.socket.on("connect") { (data, ack) in
+        self.socket.once(channel: .connect) { (data, ack) in
             if let token = SharedPreferences.get(.token) {
-                debugPrint("Connecting")
-                self.socket.emit("authCheck", with: [token])
+                debugPrint("Connecting with token: ", token)
+                self.socket.emit(channel: .auth, items: [token])
             }
             
         }
-        self.socket.on("events", callback: { (data, ack) in
+        self.socket.on(channel: .events, callback: { (data, ack) in
             debugPrint("Event RS", data)
             self.handleEventUpdated(data)
         })
         self.socket.connect()
-        //        }
+
     }
     
-    
-    func closeConnection() {
-        //        queue.async {
+    func disconnect() {
         self.socket.disconnect()
-        //        }
-    }
-    
-    func isConnected() -> Bool {
-        return socket.status == SocketIOClientStatus.connected
-    }
-    
-    func connectionStatus() -> String {
-        switch socket.status {
-        case .notConnected: return "not connected"
-        case .disconnected: return "disconnected"
-        case .connecting: return "connecting"
-        case .connected: return "connected"
-        }
     }
     
     //Pet
     
-    typealias socketIOCallback = (SocketIOError?,GPSData?) -> Void
-    
-    func getPetGPSData(id: Int16) -> GPSData? {
+    func getGPSData(for id: Int16) -> GPSData? {
         return PetsGPSData.object(forKey: NSNumber(integerLiteral: Int(id)))
     }
     
-    func setPetGPSlocationName(id: Int16, _ locationName: String){
-        if let data = getPetGPSData(id:id) {
+    func set(_ locationName: String, for petId: Int16){
+        if let data = getGPSData(for: petId) {
             data.locationAndTime = "\(locationName) - \(data.distanceTime)"
         }
     }
     
-    func startGPSUpdates(for ids: [Int16]){
+    func startGPSUpdates(for petIds: [Int16]){
         
-        if self.isConnected() {
-            for id in ids {
-                self.startPetGPSUpdates(for: id)
+        if socket.isConnected {
+            for petId in petIds {
+                self.startGPSUpdatesEffective(for: petId)
             }
         }else{
-            self.establishConnection({
-                self.startGPSUpdates(for: ids)
+            connect({ (error) in
+                if error == .connected {
+                    self.startGPSUpdates(for: petIds)
+                }
             })
         }
     }
     
-    func startPetGPSUpdates(for id: Int16){
-        //        queue.sync {
-        if onUpdates[id] == nil || (onUpdates[id] != nil && onUpdates[id] == false) {
-            //                queue.async {
-            self.socket.on("gpsUpdate\(id)", callback: { (data, ack) in
-//                debugPrint("gpsData Update response", data)
+    private func startGPSUpdatesEffective(for petId: Int16) {
+        
+        if onUpdates[petId] == nil || (onUpdates[petId] != nil && onUpdates[petId] == false) {
+            debugPrint("Start Updates for pet: ", petId)
+            
+            self.socket.on(channel: .gpsUpdates, key: petId, callback: { (data, ack) in
                 self.handleGPSUpdates(data)
             })
-            if self.isConnected() {
-                self.startPetUpdates(for: id)
-            }else{
-                self.establishConnection({
-                    self.startPetUpdates(for: id)
-                })
-            }
-            //                }
-        }
-        //        }
-    }
-    
-    private func startPetUpdates(for id: Int16) {
-        
-        if socket.status == .connected {
-            //            queue.async {
-            self.onUpdates[id] = true
-            //            }
-            debugPrint("Start Updates for pet: ", id)
-            socket.emit("roomjoin", "\(Int(id))")
+            self.onUpdates[petId] = true
+            self.socket.emit(channel: .startGPSUpdates, items: Int(petId))
         }
     }
     
-    private func stopPetUpdates(for id: Int16) {
+    private func stopGPSUpdates(for petId: Int16) {
         
-        if socket.status == .connected {
-            //            queue.async {
-            self.onUpdates[id] = false
-            //            }
-            debugPrint("Stop Updates for pet: ", id)
-            socket.emit("roomleave", "\(Int(id))")
+        if self.socket.status == .connected {
+            debugPrint("Stop Updates for pet: ", petId)
+            
+            self.socket.off(channel: .gpsUpdates, key: petId)
+            self.onUpdates[petId] = false
+            self.socket.emit(channel: .stopGPSUpdates, items: Int(petId))
         }
     }
     
@@ -155,10 +163,10 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         if let json = data.first as? [String:Any] {
             
             if let error = json["errors"] as? Int, error != 0 {
-                //                debugPrint("Error :", error)
+
             }else if let id = json.tryCastInteger(for: "petId")?.toInt16 {
-                debugPrint("GPS Updates \(id)")
-                if let data = getPetGPSData(id: id) {
+
+                if let data = getGPSData(for: id) {
                     data.update(json)
                 }else{
                     PetsGPSData.setObject(GPSData(json), forKey: NSNumber(integerLiteral: Int(id)))
@@ -189,11 +197,20 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     
     // helpers
     
-    private func isSuccessfullyConected(_ data: [Any]) -> Bool {
+    private func getStatus(_ data: [Any]) -> SocketIOStatus {
+        debugPrint(data, data.first as? [String:Any] ?? "", data as? [String] ?? "")
         if let json = data.first as? [String:Any] {
-            return (json["errors"] as? Int) == 0
+            if let code = json["error"] as? Int {
+                return SocketIOStatus(rawValue: code) ?? SocketIOStatus.unknown
+            }
+            if let code = json["result"] as? Int {
+                return SocketIOStatus(rawValue: code) ?? SocketIOStatus.unknown
+            }
         }
-        return false
+        if let element = ((data as NSArray)[0] as? NSArray)?[0] as? String {
+            return element == "unauthorized" ? SocketIOStatus.unauthorized : SocketIOStatus.unknown
+        }
+        return SocketIOStatus.unknown
     }
     
     // URLSessionDelegate
@@ -264,3 +281,68 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

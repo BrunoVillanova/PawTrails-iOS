@@ -118,7 +118,7 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
 
         removeLeaveLabel.text = pet.isOwner ? "Remove Pet" : "Leave Pet"
         
-        if let data = SocketIOManager.Instance.getPetGPSData(id: pet.id) {
+        if let data = SocketIOManager.Instance.getGPSData(for: pet.id) {
             DispatchQueue.main.async {
                 self.load(data: data)
                 self.load(locationAndTime: data.locationAndTime)

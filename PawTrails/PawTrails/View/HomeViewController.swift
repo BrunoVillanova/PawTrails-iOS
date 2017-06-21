@@ -175,7 +175,7 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     func loadPets(){
 
         for pet in presenter.pets {
-            if let point = SocketIOManager.Instance.getPetGPSData(id: pet.id)?.point {
+            if let point = SocketIOManager.Instance.getGPSData(for: pet.id)?.point {
                 load(id: MKLocationId(id: pet.id, type: .pet), point: point)
             }
         }
@@ -262,7 +262,7 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
             petImageView.image = nil
         }
         petTitleLabel.text = pet.name
-        let data = SocketIOManager.Instance.getPetGPSData(id: pet.id)
+        let data = SocketIOManager.Instance.getGPSData(for: pet.id)
         petSubtitleLabel.text = data?.locationAndTime ?? data?.point.toString ?? "Unknown"
         signalLabel.text = data?.signalString
         batteryLabel.text = data?.batteryString

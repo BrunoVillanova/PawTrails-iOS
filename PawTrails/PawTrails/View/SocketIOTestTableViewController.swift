@@ -33,7 +33,7 @@ class SocketIOTestTableViewController: UITableViewController {
                 }
             }
         }
-        SocketIOManager.Instance.startPetGPSUpdates(for: _id)
+        SocketIOManager.Instance.startGPSUpdates(for: [_id])
     }
     
     override func viewWillDisappear(_ animated: Bool) {
