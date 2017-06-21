@@ -425,41 +425,7 @@ class DataManager {
     func setSafeZone(address:String, for id: Int16){
         SafeZoneManager.set(address: address, for: id)
     }
-    
-    // MARK: - Tracking
-    
-    func trackingIsIdle() -> Bool {
-        return SocketIOManager.Instance.isConnected()
-    }
-    
-    func startTracking(pet:Pet, callback: @escaping petTrackingCallback){
-        // Send RQ to API which provides channel and verification?
-        
-        //        guard let name = pet.name else {
-        //            fatalError()
-        //        }
-        
-        if !trackingIsIdle() {return}
-        
-        //        let name = pet.name
-        //        SocketIOManager.Instance.launch(name: name)
-        //        SocketIOManager.Instance.listen(name: name, { (lat, long) in
-        //            //set last location
-        //            callback((lat, long))
-        //        })
-    }
-    
-    func stopTracking(pet:Pet){
-        // Stop live tracking
-        
-        if !trackingIsIdle() {return}
-        
-        //        let name = pet.name
-        
-        //        SocketIOManager.Instance.stop(name: name)
-    }
-    
-    
+
     // MARK: - Country Codes
     
     func getCountryCodes() -> [CountryCode]? {

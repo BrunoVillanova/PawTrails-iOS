@@ -53,7 +53,7 @@ class NotificationManager {
         self.addObserver(.gpsUpdates) { (notification) in
             
             if let petID = notification.userInfo?["id"] as? Int16 {
-                if let updates = SocketIOManager.Instance.getPetGPSData(id: petID) {
+                if let updates = SocketIOManager.Instance.getGPSData(for: petID) {
                     callback(petID, updates)
                 }
             }

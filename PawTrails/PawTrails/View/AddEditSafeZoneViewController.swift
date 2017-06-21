@@ -213,7 +213,7 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
             }
         }
 
-        if let data = SocketIOManager.Instance.getPetGPSData(id: petId) {
+        if let data = SocketIOManager.Instance.getGPSData(for: petId) {
             loadPet(coordinates: data.point.coordinates)
         }
     }

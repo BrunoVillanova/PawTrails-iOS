@@ -100,7 +100,7 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         cell.batteryImageView.circle()
         cell.signalImageView.circle()
         
-        if let data = SocketIOManager.Instance.getPetGPSData(id: pet.id) {
+        if let data = SocketIOManager.Instance.getGPSData(for: pet.id) {
             cell.batteryImageView.backgroundColor = UIColor.primaryColor()
             cell.signalImageView.backgroundColor = UIColor.primaryColor()
             cell.batteryLabel.text = data.batteryString

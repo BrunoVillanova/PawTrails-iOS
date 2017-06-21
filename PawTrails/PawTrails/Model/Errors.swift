@@ -189,8 +189,11 @@ enum CoreDataManagerError: Int {
 }
 
 
-enum SocketIOError: Int {
+enum SocketIOStatus: Int {
+    case unknown = -1
     case waiting = 0
+    case connected = 1
     case unauthorized = 30
-    case noDevice = 31
+    case nodevice = 31
+    case timeout = 61
 }
