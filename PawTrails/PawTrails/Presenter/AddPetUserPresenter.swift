@@ -18,7 +18,6 @@ class AddPetUserPresenter {
     
     weak fileprivate var view: AddPetUserView?
     
-    
     var friends = [PetUser]()
     
     func attachView(_ view: AddPetUserView, pet: Pet){
@@ -31,8 +30,6 @@ class AddPetUserPresenter {
     func deteachView() {
         self.view = nil
     }
-    
-    
     
     func getFriends(for pet:Pet){
         DataManager.Instance.getPetFriends(for: pet) { (error, friends) in
@@ -48,23 +45,22 @@ class AddPetUserPresenter {
     }
     
     func loadFriends(){
-
+        
         DataManager.Instance.loadPetFriends { (error, friends) in
-                DispatchQueue.main.async {
-                    if error == nil, let friends = friends {
-                        self.friends = friends
-                        self.view?.loadFriends()
-                    }else if let error = error {
-                        self.view?.errorMessage(error.msg)
-                    }
+            DispatchQueue.main.async {
+                if error == nil, let friends = friends {
+                    self.friends = friends
+                    self.view?.loadFriends()
+                }else if let error = error {
+                    self.view?.errorMessage(error.msg)
                 }
-
+            }
         }
     }
     
     func addPetUser(by email: String?, to petId: Int16?) {
         
-if email == nil || (email != nil && !email!.isValidEmail) {
+        if email == nil || (email != nil && !email!.isValidEmail) {
             view?.emailFormat()
         }else if let petId = petId {
             view?.beginLoadingContent()

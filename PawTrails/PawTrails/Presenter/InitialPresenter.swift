@@ -16,7 +16,7 @@ protocol InitialView: NSObjectProtocol, View, LoadingView {
     func emailFieldError(msg:String)
     func passwordFieldError(msg:String)
     func userAuthenticated()
-    func verifyAccount(_ email:String)
+    func verifyAccount(_ email:String, _ password:String)
 }
 
 class InitialPresenter {
@@ -44,7 +44,7 @@ class InitialPresenter {
                     self.view?.endLoadingContent()
                     if let error = error {
                         if error.APIError?.errorCode == ErrorCode.AccountNotVerified {
-                            self.view?.verifyAccount(email!)
+                            self.view?.verifyAccount(email!, password!)
                         }else{
                             self.view?.errorMessage(error.msg)
                         }
@@ -66,7 +66,7 @@ class InitialPresenter {
                     if let error = error {
                         self.view?.errorMessage(error.msg)
                     }else{
-                        self.view?.verifyAccount(email!)
+                        self.view?.verifyAccount(email!, password!)
                     }
                 }
             }

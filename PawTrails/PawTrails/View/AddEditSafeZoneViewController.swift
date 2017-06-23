@@ -94,6 +94,7 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
                 squareButton.isEnabled = false
                 activeSwitch.isEnabled = false
                 removeButton.isHidden = true
+                navigationItem.rightBarButtonItem = nil
             }
         }else{
             navigationItem.title = "Add Safe Zone"
@@ -135,12 +136,11 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     
     override func viewWillDisappear(_ animated: Bool) {
         if updatingPetLocation {
-            presenter.stopPetGPSUpdates()
+            presenter.stopPetGPSUpdates(of: petId)
         }
        
     }
 
-    
     func geoCodeFence() -> (Point,Point) {
         
         let point1 = Point(coordinates: mapView.convert(fence.center, toCoordinateFrom: view))
@@ -208,7 +208,7 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
 
         if !updatingPetLocation {
             updatingPetLocation = true
-            presenter.startPetsGPSUpdates { (data) in
+            presenter.startPetsGPSUpdates(for: petId) { (data) in
                 if !self.focused { self.loadPet(coordinates: data.point.coordinates) }
             }
         }
@@ -272,6 +272,11 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
         hideLoadingView()
     }
     
+    func petLocationFailed(){
+        updatingPetLocation = false
+        endLoadingLocation()
+        alert(title: "", msg: "Couldn't locate the pet", type: .red)
+    }
     
     //MARK:- User Location Manager
     

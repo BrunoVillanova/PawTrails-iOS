@@ -23,10 +23,12 @@ public class SharedPreferences {
     
     static func set(_ p:key, with:String) {
         UserDefaults.standard.set(with, forKey: p.rawValue)
+        UserDefaults.standard.synchronize()
     }
     
     static func remove(_ p:key) -> Bool {
         UserDefaults.standard.removeObject(forKey: p.rawValue)
+        UserDefaults.standard.synchronize()
         return get(p) == nil
     }
     

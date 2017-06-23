@@ -79,7 +79,7 @@ class HomePresenter {
     
     func startPetsListUpdates(){
         NotificationManager.Instance.getPetListUpdates { (pets) in
-            debugPrint("Update PETS!!")
+            debugPrint("Time to update pets on Map")
             DispatchQueue.main.async {
                 if let pets = pets {
                     self.pets = pets
@@ -94,21 +94,20 @@ class HomePresenter {
     func stopPetListUpdates(){
         NotificationManager.Instance.removePetListUpdates()
     }
-
     
     //Socket IO
-
+    
     func startPetsGPSUpdates(_ callback: @escaping ((_ id: MKLocationId, _ point: Point)->())){
-        NotificationManager.Instance.getPetGPSUpdates { (id, data) in
+        
+        NotificationManager.Instance.getPetGPSUpdates({ (id, data) in
             callback(MKLocationId(id: id, type: .pet), data.point)
-        }
+        })
     }
     
     func stopPetGPSUpdates(){
         NotificationManager.Instance.removePetGPSUpdates()
     }
-    
-    
+
     
     
     

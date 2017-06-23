@@ -42,7 +42,6 @@ class SafeZoneManager {
                     if p1 == nil || p2 == nil || (p1 != nil && p2 != nil && (!p1!.isEqual(safezone.point1) || !p2!.isEqual(safezone.point2))) {
                         safezone.preview = nil
                         safezone.address = nil
-                        debugPrint("had to reload ", safezone.id)
                     }
 
                     try CoreDataManager.Instance.save()
@@ -129,17 +128,6 @@ class SafeZoneManager {
         }
     }
     
-    static func set(safezone: SafeZone, imageData: Data){
-        DispatchQueue.main.async {
-            do {
-                safezone.preview = imageData
-                try CoreDataManager.Instance.save()
-            }catch{
-                debugPrint(error)
-            }
-        }
-    }
-    
     static func set(address: String, for id: Int16){
         DispatchQueue.main.async {
             
@@ -158,14 +146,21 @@ class SafeZoneManager {
         }
     }
     
-    static func set(safezone: SafeZone, address: String){
+    static func set(imageData: Data, for id: Int16){
         DispatchQueue.main.async {
-            do {
-                safezone.address = address
-                try CoreDataManager.Instance.save()
-            }catch{
-                debugPrint(error)
-            }
+            
+            self.get(id, { (error, safezone) in
+                if error == nil, let safezone = safezone {
+                    do {
+                        safezone.preview = imageData
+                        try CoreDataManager.Instance.save()
+                    }catch{
+                        debugPrint(error)
+                    }
+                }else if let error = error {
+                    debugPrint(error)
+                }
+            })
         }
     }
     

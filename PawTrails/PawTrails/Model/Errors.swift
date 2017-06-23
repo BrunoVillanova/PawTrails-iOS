@@ -134,6 +134,7 @@ struct DataManagerError: Error {
     
     var localizedDescription: String {
         var out = ""
+        if let call = APIError?.call { out = out.appending("\(call) ")}
         if let errorCode = APIError?.errorCode { out = out.appending("APIError: \(errorCode)")}
         if let responseError = responseError { out = out.appending(", ResponseError: \(responseError)") }
         if let DBError = DBError { out = out.appending(", DBError: \(DBError)") }
@@ -191,7 +192,7 @@ enum CoreDataManagerError: Int {
 
 enum SocketIOStatus: Int {
     case unknown = -1
-    case waiting = 0
+    case waiting = 2
     case connected = 1
     case unauthorized = 30
     case nodevice = 31

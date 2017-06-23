@@ -10,13 +10,13 @@ import UIKit
 import MapKit
 
 class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegate, MKMapViewDelegate, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
-
+    
     @IBOutlet weak var mapView: MKMapView!
     
     @IBOutlet weak var searchView: UIView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var searchRightConstraint: NSLayoutConstraint!
-
+    
     @IBOutlet weak var searchResultsView: UIVisualEffectView!
     @IBOutlet weak var searchResultsHeight: NSLayoutConstraint!
     @IBOutlet weak var searchTableView: UITableView!
@@ -50,20 +50,20 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     var data = [searchElement]()
     
     var selectedPet: Pet?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         presenter.attachView(self)
         
         setTopBar()
-
+        
         mapView.showsScale = false
         mapView.showsUserLocation = false
-
+        
         topConstraintBlurView.constant = closed
         blurView.round(radius: 18)
-
+        
         blurView.isHidden = true
         slideIndicator.round()
         blurViewCloseButton.circle()
@@ -105,8 +105,12 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
         
         searchResultsHeight.constant = view.frame.height - 226.0 - searchResultsView.frame.origin.y
         
+        reloadPets()
+    }
+    
+    func reloadPets(){
         presenter.getPets()
-     }
+    }
     
     deinit {
         self.presenter.deteachView()
@@ -117,14 +121,14 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
         presenter.startPetsGPSUpdates { (id, point) in
             self.load(id: id, point: point)
         }
-       
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         presenter.stopPetListUpdates()
         presenter.stopPetGPSUpdates()
     }
-
+    
     
     @IBAction func handlePanGesture(_ sender: UIPanGestureRecognizer) {
         
@@ -142,7 +146,7 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
         if sender.state == .ended {
             if isOpening && y < openedHalf {perform(action: .openFull, speed: 0.5)}
             else if isOpening && y > openedHalf || (!isOpening && y < openedHalf) {perform(action: .openHalf, speed: 0.5)}
-            else {perform(action: .close, speed: 0.5)}            
+            else {perform(action: .close, speed: 0.5)}
         }
     }
     
@@ -153,13 +157,13 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     @IBAction func startTripAction(sender: UIButton?){
         alert(title: "", msg: "Under Construction", type: .blue)
     }
-
+    
     @IBAction func showPetProfileAction(_ sender: UIButton) {
         if let selected = selectedPet {
             presentPet(selected)
         }
     }
-
+    
     @IBAction func showPetActivityAction(_ sender: UIButton) {
         if let selected = selectedPet {
             presentPet(selected, activityEnabled: true)
@@ -173,7 +177,7 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     }
     
     func loadPets(){
-
+        
         for pet in presenter.pets {
             if let point = SocketIOManager.Instance.getGPSData(for: pet.id)?.point {
                 load(id: MKLocationId(id: pet.id, type: .pet), point: point)
@@ -181,7 +185,7 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
         }
         focusOnPets()
     }
-
+    
     
     func reload() {
         self.petTitleLabel.text = self.presenter.user.name
@@ -300,10 +304,10 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     // MARK: - UISearchBarDelegate
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-
+        
         data.removeAll()
         if searchText != "" {
-
+            
             for pet in presenter.pets.filter({ $0.name!.lowercased().contains(searchText.lowercased()) }) {
                 data.append(searchElement(id: MKLocationId(id: pet.id, type: .pet), object: pet))
             }
@@ -328,7 +332,7 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
-    
+        
         if topConstraintBlurView.constant == openedHalf && touches.count == 1, let touch = touches.first {
             let touchPoint = touch.location(in: view)
             if touchPoint.y < openedHalf {
@@ -345,7 +349,7 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
         searchBar.text = ""
         performSearch(action: .close)
         searchBar.resignFirstResponder()
-
+        
     }
     
     // MARK: - UITableViewDataSource
@@ -414,7 +418,7 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
             }
         }
     }
-
+    
     
     // MARK: - AnimationHelpers
     
@@ -423,7 +427,7 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     }
     
     func perform(action:Action, speed:Double = 1, animated:Bool = true){
-
+        
         self.topConstraintBlurView.constant = self.openedHalf
         if action == .openFull { self.topConstraintBlurView.constant = self.openedFull }
         if action == .close { self.topConstraintBlurView.constant = self.closed }
@@ -436,10 +440,10 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
             }
         }
     }
-
+    
     func performSearch(action:Action) {
         
-        UIView.animate(withDuration: 0.5, animations: { 
+        UIView.animate(withDuration: 0.5, animations: {
             self.searchRightConstraint.constant = action == .openHalf ? self.openedSearch : self.closedSearch
             self.searchBar.showsCancelButton = action == .openHalf
             self.view.layoutIfNeeded()
@@ -480,7 +484,7 @@ class MKLocationId: Hashable {
     static func == (lhs: MKLocationId, rhs: MKLocationId) -> Bool {
         return lhs.id == rhs.id && lhs.type == rhs.type
     }
-
+    
 }
 
 

@@ -61,7 +61,7 @@ class GeocoderManager {
         if let placemark = cache.object(forKey: key as NSString) {
             deliver(Geocode(type: type, id: id, location: location, placemark: placemark))
         }else {
-            debugPrint("Geocode requested: ", id)
+//            debugPrint("Geocode requested: ", id)
             queue.async {
                 self.sem.wait()
                 self.geocoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) in
@@ -80,7 +80,7 @@ class GeocoderManager {
     private func deliver(_ geocode: Geocode){
         DispatchQueue.main.async {
             if let name = geocode.name {
-                debugPrint("Geocode released: ", geocode.id)
+//                debugPrint("Geocode released: ", geocode.id)
                 if geocode.type == .pet {
                     SocketIOManager.Instance.set(name, for: geocode.id)
                 }else if geocode.type == .safezone {

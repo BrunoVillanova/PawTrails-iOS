@@ -21,7 +21,6 @@ class EditUserProfilePresenter {
     private var address:_Address? = nil
     private var phone:_Phone? = nil
     private var imageData: Data? = nil
-    
     private var data = [String:Any]()
     
     var CountryCodes = [CountryCode]()
@@ -36,9 +35,7 @@ class EditUserProfilePresenter {
     func deteachView() {
         self.view = nil
     }
-    
-    
-    
+
     fileprivate func load(_ user: User?) {
         
         if let user = user {
@@ -48,9 +45,7 @@ class EditUserProfilePresenter {
             if let phone = user.phone { self.set(phone: phone.number, phone.country_code) }
             if let address = user.address { self.set(address: _Address(from: address)) }
             
-            DispatchQueue.main.async {
-                self.view?.loadData()
-            }
+            self.view?.loadData()
             
         }else{
             self.view?.errorMessage(ErrorMsg(title:"",msg:"couldn't load user"))
@@ -115,7 +110,7 @@ class EditUserProfilePresenter {
     }
     
     func set(gender:Gender?){
-        data["gender"] = gender?.code ?? ""
+        data["gender"] = gender?.rawValue ?? ""
     }
     
     func set(birthday:Date?){
@@ -142,43 +137,52 @@ class EditUserProfilePresenter {
     
     func save() {
 
+        if let imageData = imageData {
+            save(imatge: imageData)
+        }else{
+            saveProfile()
+        }
+    }
+    
+    func save(imatge: Data){
         
-            view?.beginLoadingContent()
-            if let imageData = imageData {
-                var data = [String:Any]()
-                data["path"] = "user"
-                data["userid"] = SharedPreferences.get(.id)
-                data["picture"] = imageData
-                
-                DataManager.Instance.set(image: data, callback: { (error) in
-                    if let error = error {
-                        DispatchQueue.main.async {
-                            self.view?.endLoadingContent()
-                            self.view?.errorMessage(error.msg)
-                        }
-                    }else{
-                        self.imageData = nil
-                        self.save()
-                    }
-                })
+        view?.beginLoadingContent()
+        
+        var data = [String:Any]()
+        data["path"] = "user"
+        data["userid"] = SharedPreferences.get(.id)
+        data["picture"] = imatge
+        
+        DataManager.Instance.set(image: data, callback: { (error) in
+            if let error = error {
+                DispatchQueue.main.async {
+                    self.view?.endLoadingContent()
+                    self.view?.errorMessage(error.msg)
+                }
             }else{
-                data["date_of_birth"] = (data["birthday"] as! Date?)?.toStringServer ?? ""
-                data.filter(by: ["image", "imageURL", "birthday"])
-                data["mobile"] = phone?.getJson()
-                data["address"] = address?.getJson()
-                data["gender"] = getGender()?.code ?? ""
-                
-                DataManager.Instance.save(user: data) { (error, user) in
-                    DispatchQueue.main.async {
-                        self.view?.endLoadingContent()
-                        if let error = error {
-                            self.view?.errorMessage(error.msg)
-                        }else{
-                            self.view?.saved()
-                        }
-                    }
+                self.imageData = nil
+                self.saveProfile()
+            }
+        })
+    }
+    
+    func saveProfile(){
+        data["date_of_birth"] = (data["birthday"] as! Date?)?.toStringServer ?? ""
+        data.filter(by: ["image", "imageURL", "birthday"])
+        data["mobile"] = phone?.getJson()
+        data["address"] = address?.getJson()
+        data["gender"] = getGender()?.code ?? ""
+        
+        DataManager.Instance.save(user: data) { (error, user) in
+            DispatchQueue.main.async {
+                self.view?.endLoadingContent()
+                if let error = error {
+                    self.view?.errorMessage(error.msg)
+                }else{
+                    self.view?.saved()
                 }
             }
+        }
     }
 
     // Helpers

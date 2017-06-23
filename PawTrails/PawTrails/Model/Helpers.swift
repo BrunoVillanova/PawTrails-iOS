@@ -322,7 +322,7 @@ public class Event{
  
     convenience init(data:[String:Any]) {
         self.init()
-        if let id = data.tryCastInteger(for: "eventId") {
+        if let id = data.tryCastInteger(for: "ope") {
             type = EventType.build(rawValue: id)
         }
         info = data

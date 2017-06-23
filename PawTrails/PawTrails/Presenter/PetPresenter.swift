@@ -16,19 +16,16 @@ protocol PetView: NSObjectProtocol, View {
     func petRemoved()
 }
 
-
 class PetPresenter {
     
     weak private var view: PetView?
-    
-    
+
     var users = [PetUser]()
     var safezones = [SafeZone]()
     
     func attachView(_ view: PetView, pet:Pet?){
         self.view = view
-        
-        
+
         if let users = pet?.sharedUsers { self.users = users }
         if let safezones = pet?.sortedSafeZones {
             self.safezones = safezones
@@ -38,10 +35,7 @@ class PetPresenter {
     func deteachView() {
         self.view = nil
     }
-    
-    
-    
-    
+
     //MARK:- Pet
     
     func getPet(with id: Int16) {
@@ -189,21 +183,12 @@ class PetPresenter {
         }
     }
     
-    func set(safezone: SafeZone, imageData:Data){
-        DataManager.Instance.setSafeZone(safezone, imageData: imageData)
+    func set(address:String, for id: Int16){
+        DataManager.Instance.setSafeZone(address: address, for: id)
     }
     
-    func set(safezone: SafeZone, address:String){
-        DataManager.Instance.setSafeZone(safezone, address: address)
-    }
-    
-    func set(safezoneId: Int16, address:String){
-        
-        if let safezone = safezones.first(where: { $0.id == safezoneId }) {
-            DataManager.Instance.setSafeZone(safezone, address: address)
-        }else{
-            debugPrint("AHHHHHHHHH", safezoneId, address)
-        }
+    func set(imageData:Data, for id: Int16){
+        DataManager.Instance.setSafeZone(imageData: imageData, for: id)
     }
     
     func setSafeZoneStatus(id: Int16, petId: Int16, status: Bool, callback: @escaping (Bool)->() ){
@@ -219,7 +204,6 @@ class PetPresenter {
                         callback(true)
                     }
                 }
-                
             }
         }
     }
@@ -228,20 +212,17 @@ class PetPresenter {
     
     func startPetsGPSUpdates(for id: Int16, _ callback: @escaping ((GPSData)->())){
         DispatchQueue.global(qos: .background).async {
-            NotificationManager.Instance.getPetGPSUpdates { (id, data) in
-                if id == id {
-                    DispatchQueue.main.async {
-                        callback(data)
-                    }
-                    GeocoderManager.Intance.reverse(type: .pet, with: data.point, for: id)
+            NotificationManager.Instance.getPetGPSUpdates(for: id, { (id, data) in
+                DispatchQueue.main.async {
+                    callback(data)
                 }
-            }
+            })
         }
     }
     
-    func stopPetGPSUpdates(){
+    func stopPetGPSUpdates(of id: Int16){
         DispatchQueue.global(qos: .background).async {
-            NotificationManager.Instance.removePetGPSUpdates()
+            NotificationManager.Instance.removePetGPSUpdates(of: id)
         }
     }
     
@@ -255,7 +236,7 @@ class PetPresenter {
                     
                     if (code.type == .pet && code.id == id) || code.type == .safezone {
                         if code.type == .safezone, let name = code.placemark?.name {
-                            self.set(safezoneId: code.id, address: name)
+                            self.set(address: name, for: code.id)
                         }
                         if let name = code.name {
                             DispatchQueue.main.async {

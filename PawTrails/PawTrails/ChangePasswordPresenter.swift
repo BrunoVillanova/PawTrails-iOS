@@ -27,20 +27,25 @@ class ChangePasswordPresenter {
     
     func attachView(_ view: ChangePasswordView){
         self.view = view
-        
-        DataManager.Instance.getUser(callback: { (error, user) in
-            if error == nil && user != nil {
-                self.userEmail = user!.email!
-            }
-        })
+        self.getUserEmail()
     }
     
     func deteachView() {
         self.view = nil
     }
-    
-    
 
+    func getUserEmail(){
+        DataManager.Instance.getUser(callback: { (error, user) in
+            if error == nil && user != nil {
+                self.userEmail = user!.email!
+            }else{
+                DispatchQueue.main.async {
+                    self.view?.errorMessage(ErrorMsg.init(title: "", msg: ""))
+                }
+            }
+        })
+    }
+    
     func changePassword(password:String, newPassword:String, newPassword2:String) {
 
         if password == "" {

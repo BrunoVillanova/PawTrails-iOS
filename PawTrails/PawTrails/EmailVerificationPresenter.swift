@@ -16,51 +16,44 @@ protocol EmailVerificationView: NSObjectProtocol, View, LoadingView {
 class EmailVerificationPresenter {
     
     weak fileprivate var view: EmailVerificationView?
-    
 
     func attachView(_ view: EmailVerificationView){
         self.view = view
-        
     }
     
     func deteachView() {
         self.view = nil
     }
     
-    
-    
     func sendVerificationEmail(email:String) {
-            self.view?.beginLoadingContent()
-            AuthManager.Instance.sendPasswordReset(email, completition: { (error) in
+        
+        self.view?.beginLoadingContent()
+        AuthManager.Instance.sendPasswordReset(email, completition: { (error) in
+            DispatchQueue.main.async {
+                self.view?.endLoadingContent()
                 if let error = error {
-                    DispatchQueue.main.async {
-                        self.view?.endLoadingContent()
-                        self.view?.errorMessage(error.msg)
-                    }
+                    self.view?.errorMessage(error.msg)
                 }else{
-                    DispatchQueue.main.async {
-                        self.view?.emailSent()
-                    }
-                }
-            })
-    }
-    
-    func checkVerification(email:String) {
-            let password = ezdebug.password
-            
-            self.view?.beginLoadingContent()
-            AuthManager.Instance.signIn(email, password) { (error) in
-                if let error = error {
-                    DispatchQueue.main.async {
-                        self.view?.endLoadingContent()
-                        self.view?.errorMessage(error.msg)
-                    }
-                }else{
-                    DispatchQueue.main.async {
-                        self.view?.verified()
-                    }
+                    self.view?.emailSent()
                 }
             }
+        })
+    }
+    
+    func checkVerification(email:String, password: String) {
+        
+        self.view?.beginLoadingContent()
+        AuthManager.Instance.signIn(email, password) { (error) in
+            DispatchQueue.main.async {
+                self.view?.endLoadingContent()
+                if let error = error {
+                    
+                    self.view?.errorMessage(error.msg)
+                }else{
+                    self.view?.verified()
+                }
+            }
+        }
     }
     
 }

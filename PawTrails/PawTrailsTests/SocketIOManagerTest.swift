@@ -15,12 +15,14 @@ class SocketIOManagerTest: XCTestCase {
         SocketIOManager.Instance.disconnect()
     }
     
+    //MARK:- Connection
+    
     func testConnectionTimer() {
-        SocketIOManager.Instance.disconnect()
+
         let expect = expectation(description: "Connection")
         let clock = Clock()
-        SocketIOManager.Instance.connect({ (error) in
-            XCTAssertNil(error, String(describing: error))
+        SocketIOManager.Instance.connect({ (status) in
+            XCTAssert(status == SocketIOStatus.connected, String(describing: status))
             expect.fulfill()
             clock.stop()
             debugPrint(clock.elapsedSeconds)
@@ -34,8 +36,8 @@ class SocketIOManagerTest: XCTestCase {
         
         let expect = expectation(description: "Connection")
         
-        SocketIOManager.Instance.connect({ (error) in
-            XCTAssertNil(error, String(describing: error))
+        SocketIOManager.Instance.connect({ (status) in
+            XCTAssert(status == SocketIOStatus.connected, String(describing: status))
             expect.fulfill()
         })
         waitForExpectations(timeout: 10) { error in
@@ -54,7 +56,7 @@ class SocketIOManagerTest: XCTestCase {
             SocketIOManager.Instance.connect({ (error) in
                 
                 XCTAssertNotNil(error, String(describing: error))
-                XCTAssert(error == .timeout, String(describing: error))
+                XCTAssert(error == .unauthorized, String(describing: error))
                 SharedPreferences.set(.token, with: token)
                 expect.fulfill()
             })
@@ -64,6 +66,30 @@ class SocketIOManagerTest: XCTestCase {
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
     }
+    
+    //MARK:- GPSUpdates
+    
+    func testGPSUpdates(){
+        
+        let expect = expectation(description: "GPSUpdates")
+        
+
+        NotificationManager.Instance.getPetGPSUpdates(for: 25) { (id, data) in
+            XCTAssertNotNil(id, String(describing: id))
+            XCTAssertNotNil(data, String(describing: data))
+
+            debugPrint(id, data.debugDescription)
+            SocketIOManager.Instance.stopGPSUpdates(for: id)
+            NotificationManager.Instance.removePetGPSUpdates(of: 25)
+            expect.fulfill()
+        }
+        SocketIOManager.Instance.startGPSUpdates(for: [24,25])
+        
+        waitForExpectations(timeout: 100) { error in
+            XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
+        }
+    }
+
     
 }
 

@@ -133,7 +133,7 @@ class APIManager {
         
         var request = URLRequest(url: URL(call, with: key))
         
-//        debugPrint(request)
+        debugPrint(request)
         
         request.httpMethod = call.httpMethod
         request.cachePolicy = .useProtocolCachePolicy
@@ -193,7 +193,7 @@ class APIManager {
         
         do {
             if let out = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as? [String:Any] {
-//                debugPrint("JSON RS", out)
+                debugPrint("JSON RS", out)
                 return out
             }else if let rs = String(data: data!, encoding: String.Encoding.utf8) {
                 debugPrint("STRING RS", rs)
@@ -268,7 +268,7 @@ class APIManager {
     }
     
     private func setBody(of call:APICallType, with data:[String:Any]?) -> Data? {
-//        debugPrint("REQUEST BODY", data ?? "No data provided to build the request body")
+        debugPrint("REQUEST BODY", data ?? "No data provided to build the request body")
         if call == .imageUpload {
 
             let boundaryStart = "--\(boundary)\r\n"

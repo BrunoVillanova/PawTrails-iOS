@@ -247,7 +247,7 @@ fileprivate struct Storage {
     private lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "PawTrails")
         container.loadPersistentStores { (storeDescription, error) in
-            print("CoreData: Inited \(storeDescription)")
+
             guard error == nil else {
                 print("CoreData: Unresolved error \(String(describing: error))")
                 return

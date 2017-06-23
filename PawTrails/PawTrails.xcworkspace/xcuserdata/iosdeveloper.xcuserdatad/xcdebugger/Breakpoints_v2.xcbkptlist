@@ -73,93 +73,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PawTrails/Presenter/HomePresenter.swift"
-            timestampString = "519655570.097706"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
-            landmarkName = "startPetsListUpdates()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PawTrails/View/PetsViewController.swift"
-            timestampString = "519639985.878773"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
-            landmarkName = "viewWillAppear(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "PawTrails.PetsViewController.(viewWillAppear (Swift.Bool) -&gt; ()).(closure #2)"
-                  moduleName = "PawTrails"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/iosdeveloper/Documents/Xcode%20Projects/PawTrails/PawTrails/PawTrails/View/PetsViewController.swift"
-                  timestampString = "518695417.779242"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "43"
-                  endingLineNumber = "43"
-                  offsetFromSymbolStart = "53">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "PawTrails.PetsViewController.(viewWillAppear (Swift.Bool) -&gt; ()).(closure #2)"
-                  moduleName = "PawTrails"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/iosdeveloper/Documents/Xcode%20Projects/PawTrails/PawTrails/PawTrails/View/PetsViewController.swift"
-                  timestampString = "518695417.781689"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "43"
-                  endingLineNumber = "43"
-                  offsetFromSymbolStart = "130">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "PawTrails/Presenter/AddEditPetPresenter.swift"
-            timestampString = "519655570.097706"
+            timestampString = "519917805.49976"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "240"
-            endingLineNumber = "240"
+            startingLineNumber = "226"
+            endingLineNumber = "226"
             landmarkName = "save()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PawTrails/AppDelegate.swift"
-            timestampString = "519734329.693332"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
-            landmarkName = "applicationDidBecomeActive(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -170,61 +90,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PawTrails/Model/SafeZoneManager.swift"
-            timestampString = "519299663.124009"
+            timestampString = "519820962.903917"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
             landmarkName = "upsert(_:into:callback:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PawTrails/Model/PetUserManager.swift"
-            timestampString = "519313099.741393"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
-            landmarkName = "removeSharedUser(with:from:callback:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static PawTrails.PetUserManager.removeSharedUser (with : Swift.Int16, from : Swift.Int16, callback : (Swift.Optional&lt;PawTrails.DataManagerError&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "PawTrails"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/iosdeveloper/Documents/Xcode%20Projects/PawTrails/PawTrails/PawTrails/Model/PetUserManager.swift"
-                  timestampString = "519740983.733907"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "166"
-                  endingLineNumber = "166"
-                  offsetFromSymbolStart = "36">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static PawTrails.PetUserManager.(removeSharedUser (with : Swift.Int16, from : Swift.Int16, callback : (Swift.Optional&lt;PawTrails.DataManagerError&gt;) -&gt; ()) -&gt; ()).(closure #1)"
-                  moduleName = "PawTrails"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/iosdeveloper/Documents/Xcode%20Projects/PawTrails/PawTrails/PawTrails/Model/PetUserManager.swift"
-                  timestampString = "519740983.736579"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "167"
-                  endingLineNumber = "167"
-                  offsetFromSymbolStart = "93">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -265,13 +137,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PawTrails/AppDelegate.swift"
-            timestampString = "519654102.152866"
+            filePath = "PawTrails/Presenter/PetPresenter.swift"
+            timestampString = "519917805.49976"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "110"
-            endingLineNumber = "110"
-            landmarkName = "applicationDidBecomeActive(_:)"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "loadPet(with:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -281,14 +153,174 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PawTrails/Presenter/PetPresenter.swift"
-            timestampString = "519655570.097706"
+            filePath = "PawTrails/Model/PetUserManager.swift"
+            timestampString = "519832501.890581"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
-            landmarkName = "loadPet(with:)"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "upsert(_:into:callback:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static PawTrails.PetUserManager.upsert (Swift.Dictionary&lt;Swift.String, Any&gt;, into : Swift.Int16, callback : Swift.Optional&lt;(Swift.Optional&lt;PawTrails.DataManagerError&gt;, Swift.Optional&lt;Swift.Array&lt;PawTrails.PetUser&gt;&gt;) -&gt; ()&gt;) -&gt; ()"
+                  moduleName = "PawTrails"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iosdeveloper/Documents/Xcode%20Projects/PawTrails/PawTrails/PawTrails/Model/PetUserManager.swift"
+                  timestampString = "519834171.661292"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "47"
+                  endingLineNumber = "47"
+                  offsetFromSymbolStart = "31">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static PawTrails.PetUserManager.(upsert (Swift.Dictionary&lt;Swift.String, Any&gt;, into : Swift.Int16, callback : Swift.Optional&lt;(Swift.Optional&lt;PawTrails.DataManagerError&gt;, Swift.Optional&lt;Swift.Array&lt;PawTrails.PetUser&gt;&gt;) -&gt; ()&gt;) -&gt; ()).(closure #1)"
+                  moduleName = "PawTrails"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iosdeveloper/Documents/Xcode%20Projects/PawTrails/PawTrails/PawTrails/Model/PetUserManager.swift"
+                  timestampString = "519834171.663417"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "48"
+                  endingLineNumber = "48"
+                  offsetFromSymbolStart = "96">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PawTrails/Model/EventManager.swift"
+            timestampString = "519833524.012067"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "handlePetRemoved(with:for:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PawTrails/Model/EventManager.swift"
+            timestampString = "519903487.882456"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
+            landmarkName = "handleGuestRemoved(with:for:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PawTrails/View/PetsViewController.swift"
+            timestampString = "519838475.265056"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "reloadPetsAPI()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PawTrails/Model/EventManager.swift"
+            timestampString = "519903487.882456"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
+            landmarkName = "handleGuestRemoved(with:for:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PawTrails/Model/EventManager.swift"
+            timestampString = "519913362.485177"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "handleGuestAdded(with:for:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PawTrails/AppDelegate.swift"
+            timestampString = "519913495.903947"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
+            landmarkName = "applicationDidBecomeActive(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PawTrails.AppDelegate.(applicationDidBecomeActive (__ObjC.UIApplication) -&gt; ()).(closure #2)"
+                  moduleName = "PawTrails"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iosdeveloper/Documents/Xcode%20Projects/PawTrails/PawTrails/PawTrails/AppDelegate.swift"
+                  timestampString = "519918732.760507"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "108"
+                  endingLineNumber = "108"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PawTrails.AppDelegate.(applicationDidBecomeActive (__ObjC.UIApplication) -&gt; ()).(closure #2)"
+                  moduleName = "PawTrails"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iosdeveloper/Documents/Xcode%20Projects/PawTrails/PawTrails/PawTrails/AppDelegate.swift"
+                  timestampString = "519918732.762615"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "108"
+                  endingLineNumber = "108"
+                  offsetFromSymbolStart = "49">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

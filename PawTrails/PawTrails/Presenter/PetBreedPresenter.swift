@@ -41,7 +41,6 @@ class PetBreedsPresenter {
                 }
             }
         })
-        
     }
     
     func loadBreeds(for type: Type) {
@@ -57,7 +56,6 @@ class PetBreedsPresenter {
                 }
             }
         })
-        
     }
     
 }

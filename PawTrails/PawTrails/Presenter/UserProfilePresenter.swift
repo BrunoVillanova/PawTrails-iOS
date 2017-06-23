@@ -20,19 +20,15 @@ class UserProfilePresenter {
     
     
     var user:User!
-    var CountryCodes = [CountryCode]()
     
     func attachView(_ view: UserProfileView){
         self.view = view
-        
         getUser()
     }
     
     func deteachView() {
         self.view = nil
     }
-    
-    
     
     func getUser() {
         DataManager.Instance.getUser { (error, user) in
@@ -48,16 +44,15 @@ class UserProfilePresenter {
     }
     
     func loadUser() {
-            DataManager.Instance.loadUser { (error, user) in
-                DispatchQueue.main.async {
-                    if let error = error {
-                        self.view?.errorMessage(error.msg)
-                    }else if let user = user {
-                        self.user = user
-                        self.view?.load(user:user)
-                    }
+        DataManager.Instance.loadUser { (error, user) in
+            DispatchQueue.main.async {
+                if let error = error {
+                    self.view?.errorMessage(error.msg)
+                }else if let user = user {
+                    self.user = user
+                    self.view?.load(user:user)
                 }
             }
+        }
     }
-    
 }

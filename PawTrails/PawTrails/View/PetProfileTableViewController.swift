@@ -28,6 +28,7 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
     @IBOutlet weak var usersTableViewCell: UITableViewCell!
     @IBOutlet weak var safezonesTableViewCell: UITableViewCell!
     @IBOutlet weak var removeLeaveLabel: UILabel!
+    @IBOutlet weak var changeTableViewCell: UITableViewCell!
     
     var pet:Pet!
     var fromMap: Bool = false
@@ -80,7 +81,7 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        presenter.stopPetGPSUpdates()
+        presenter.stopPetGPSUpdates(of: pet.id)
         presenter.stopPetsGeocodeUpdates()
         self.tabBarController?.tabBar.isHidden = false
     }
@@ -93,8 +94,13 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
         presenter.loadSafeZones(for: pet.id)
     }
     
-    func reloadUsers() {
-        presenter.loadPetUsers(for: pet.id)
+    func reloadUsers(onlyDB: Bool = false) {
+        if onlyDB {
+            presenter.getPet(with: pet.id)
+            //reload users?
+        }else{
+            presenter.loadPetUsers(for: pet.id)
+        }
     }
     
     //MARK: - PetView
@@ -117,6 +123,7 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
         neuteredLabel.text = pet.neutered ? "Yes" : "No"
 
         removeLeaveLabel.text = pet.isOwner ? "Remove Pet" : "Leave Pet"
+        changeTableViewCell.isHidden = !pet.isOwner
         
         if let data = SocketIOManager.Instance.getGPSData(for: pet.id) {
             DispatchQueue.main.async {
@@ -141,7 +148,7 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
         for safezone in self.presenter.safezones {
             // Address
             if safezone.address == nil {
-                debugPrint("address", safezone.id)
+//                debugPrint("address", safezone.id)
                 
                 guard let center = safezone.point1 else {
                     debugPrint("No center point found!")
@@ -164,10 +171,11 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
                     continue
                 }
                 safezonesGroup.enter()
-                debugPrint("map", safezone.id)
+//                debugPrint("map", safezone.id)
                 self.buildMap(center: center, topCenter: topCenter, shape: shape, handler: { (image) in
                     if let image = image, let data = UIImagePNGRepresentation(image) {
-                        self.presenter.set(safezone: safezone, imageData: data)
+//                        safezone.preview = data
+                        self.presenter.set(imageData: data, for: safezone.id)
                     }
                     safezonesGroup.leave()
                 })

@@ -84,10 +84,10 @@ class DataManager {
             }
         }
     }
-    
+
     // MARK: - Pet
     
-    private func setPet(_ data:[String:Any], callback: petCallback? = nil) {
+    func addPetDB(_ data:[String:Any], callback: petCallback? = nil) {
         DispatchQueue.main.async {
             PetManager.upsert(data, callback: callback)
         }
@@ -118,7 +118,7 @@ class DataManager {
     func register(pet data: [String:Any], callback: @escaping petCallback) {
         APIManager.Instance.perform(call: .registerPet, with: data) { (error, data) in
             if error == nil, let data = data {
-                self.setPet(data, callback: callback)
+                self.addPetDB(data, callback: callback)
             }else if let error = error {
                 callback(DataManagerError(APIError: error), nil)
             }else{
@@ -137,7 +137,7 @@ class DataManager {
     func loadPet(_ petId:Int16, callback: @escaping petCallback) {
         APIManager.Instance.perform(call: .getPet, withKey: petId) { (error, data) in
             if error == nil, let data = data {
-                self.setPet(data, callback: callback)
+                self.addPetDB(data, callback: callback)
             }else if let error = error {
                 callback(DataManagerError(APIError: error), nil)
             }else{
@@ -208,7 +208,7 @@ class DataManager {
         
         APIManager.Instance.perform(call: .setPet, withKey: petId, with: data)  { (error, data) in
             if error == nil, let data = data {
-                self.setPet(data)
+                self.addPetDB(data)
                 callback(nil)
             }else if let error = error {
                 callback(DataManagerError(APIError: error))
@@ -414,18 +414,22 @@ class DataManager {
         }
     }
     
-    func setSafeZone(_ safezone: SafeZone, imageData:Data){
-        SafeZoneManager.set(safezone: safezone, imageData: imageData)
-    }
+//    func setSafeZone(_ safezone: SafeZone, imageData:Data){
+//        SafeZoneManager.set(safezone: safezone, imageData: imageData)
+//    }
+//    
+//    func setSafeZone(_ safezone: SafeZone, address:String){
+//        SafeZoneManager.set(safezone: safezone, address: address)
+//    }
     
-    func setSafeZone(_ safezone: SafeZone, address:String){
-        SafeZoneManager.set(safezone: safezone, address: address)
+    func setSafeZone(imageData:Data, for id: Int16){
+        SafeZoneManager.set(imageData: imageData, for: id)
     }
     
     func setSafeZone(address:String, for id: Int16){
         SafeZoneManager.set(address: address, for: id)
     }
-
+    
     // MARK: - Country Codes
     
     func getCountryCodes() -> [CountryCode]? {

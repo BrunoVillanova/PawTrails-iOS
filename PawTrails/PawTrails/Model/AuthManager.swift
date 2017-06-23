@@ -103,53 +103,34 @@ class AuthManager {
                 queue.async {
                     errors.append(error)
                 }
+            }else if let pets = pets {
+                SocketIOManager.Instance.startGPSUpdates(for: pets.map({ $0.id}))
             }
             tasks.leave()
         })
         
         _ = DataManager.Instance.getCountryCodes()
         
-        tasks.notify(queue: .main) { 
+        tasks.notify(queue: .main) {
             
             queue.sync {
-                if errors.count == 0 {
-                    DispatchQueue.main.async {
-                        completition(nil)
-                    }
-                }else{
-                    DispatchQueue.main.async {
-                        for error in errors {
-                            debugPrint(error.localizedDescription)
-                        }
-                        completition(errors.first)
-                    }
+                
+                for error in errors {
+                    debugPrint(error.localizedDescription)
                 }
             }
             
+            DispatchQueue.main.async {
+                completition(nil)
+            }
         }
     }
     
     func signOut() -> Bool {
-        //wipe out DB
-
-        CoreDataManager.Instance.deleteAll()
-//        if let socialMedia = AuthManager.Instance.socialMedia() {
-//            if let sm = SocialMedia(rawValue: socialMedia) {
-//                switch sm {
-//                case .facebook:
-//                    let loginManager = LoginManager()
-//                    loginManager.logOut()
-////                case .twitter:
-////                    Fabric.with([Twitter.self])
-//                case .google:
-//                    GIDSignIn.sharedInstance().signOut()
-//                default:
-//                    break
-//                }
-//            }
-//        }
-
-//        GIDSignIn.sharedInstance().signOut()
+        DispatchQueue.main.async {
+            CoreDataManager.Instance.deleteAll()
+        }
+        SocketIOManager.Instance.disconnect()
         return SharedPreferences.remove(.id) && SharedPreferences.remove(.token)
     }
     

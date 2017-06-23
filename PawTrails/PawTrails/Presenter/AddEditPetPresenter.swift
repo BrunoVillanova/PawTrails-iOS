@@ -8,24 +8,15 @@
 
 import Foundation
 
-struct _petUser {
-    var name: String?
-    var surname: String?
-    var isOwner: Bool?
-    var imageData: Data?
-}
-
 protocol AddEditPetView: NSObjectProtocol, View, LoadingView {
     func loadPet()
     func doneSuccessfully()
 }
 
-
 class AddEditPetPresenter {
     
     weak private var view: AddEditPetView?
-    
-    
+
     private var data = [String:Any]()
     private var firstBreed: Breed?
     private var secondBreed: Breed?
@@ -51,9 +42,7 @@ class AddEditPetPresenter {
     func deteachView() {
         self.view = nil
     }
-    
-    
-    
+
     //MARK:- Getters
     
     func getImageData() -> Data? {
@@ -179,7 +168,6 @@ class AddEditPetPresenter {
     }
     
     func done(){
-        
         if editMode, let id = data["id"] as? Int16, imageData != nil {
             saveImatge(petId: id)
         }else{
@@ -197,17 +185,16 @@ class AddEditPetPresenter {
             print(imageData.count/1024)
             
             DataManager.Instance.set(image: data, callback: { (error) in
-                if let error = error {
-                    DispatchQueue.main.async {
+                DispatchQueue.main.async {
+                    
+                    if let error = error {
                         self.view?.endLoadingContent()
                         self.view?.errorMessage(error.msg)
-                    }
-                }else{
-                    self.imageData = nil
-                    if self.editMode {
-                        self.save()
                     }else{
-                        DispatchQueue.main.async {
+                        self.imageData = nil
+                        if self.editMode {
+                            self.save()
+                        }else{
                             self.view?.endLoadingContent()
                             self.view?.doneSuccessfully()
                         }
@@ -220,10 +207,9 @@ class AddEditPetPresenter {
     private func save(){
         
         view?.beginLoadingContent()
-        if let birthdate = data["birthday"] as? Date? {
-            data["date_of_birth"] = birthdate?.toStringServer ?? ""
-        }
         
+        
+        data["date_of_birth"] = (data["birthday"] as? Date)?.toStringServer ?? ""
         data["type"] = getType()?.code ?? ""
         data["gender"] = getGender()?.code ?? ""
         

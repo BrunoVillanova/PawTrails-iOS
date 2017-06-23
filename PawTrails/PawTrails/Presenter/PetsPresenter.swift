@@ -22,23 +22,21 @@ class PetsPresenter {
     var ownedPets = [Pet]()
     var sharedPets = [Pet]()
     
+    var pets: [Pet] {
+        return ownedPets + sharedPets
+    }
+    
     func attachView(_ view: PetsView){
         self.view = view
-        
-        getPets()
+        self.getPets()
     }
     
     func deteachView() {
         self.view = nil
     }
-    
-    
 
     func getPet(with id: Int) -> Pet? {
-        let id = Int16(id)
-        var pets = ownedPets
-        pets.append(contentsOf: sharedPets)
-        return pets.first(where: { $0.id == id })
+        return pets.first(where: { $0.id == Int16(id) })
     }
     
     func getPets() {
@@ -63,9 +61,6 @@ class PetsPresenter {
                 }
             }
         }
-        
-        DataManager.Instance.getPets { (error, pets) in
-        }
     }
     
     func loadPets() {
@@ -88,20 +83,24 @@ class PetsPresenter {
     
     //MARK:- Socket IO
     
-    func startPetsGPSUpdates(_ callback: @escaping ((_ id: Int16, _ update: Bool)->())){
-        NotificationManager.Instance.getPetGPSUpdates { (id, data) in
-            if data.locationAndTime == "" {  GeocoderManager.Intance.reverse(type: .pet, with: data.point, for: id) }
-        }
+    func startPetsGPSUpdates(_ callback: @escaping ((_ id: Int16)->())){
+        
+        NotificationManager.Instance.getPetGPSUpdates({ (id, data) in
+            callback(id)
+        })
     }
     
     func stopPetGPSUpdates(){
+
         NotificationManager.Instance.removePetGPSUpdates()
     }
     
     //MARK:- Geocode
     
-    func startPetsGeocodeUpdates(_ callback: @escaping ((Geocode?)->())){
-        NotificationManager.Instance.getPetGeoCodeUpdates(callback)
+    func startPetsGeocodeUpdates(_ callback: @escaping ((Geocode)->())){
+        NotificationManager.Instance.getPetGeoCodeUpdates { (code) in
+            if let code = code { callback(code) }
+        }
     }
     
     func stopPetsGeocodeUpdates(){
@@ -112,7 +111,7 @@ class PetsPresenter {
     
     func startPetsListUpdates(){
         NotificationManager.Instance.getPetListUpdates { (pets) in
-            debugPrint("Update PETS!!")
+            debugPrint("Time to update pets on list")
             DispatchQueue.main.async {
                 if let pets = pets {
                     self.ownedPets = pets.filter({ $0.isOwner })

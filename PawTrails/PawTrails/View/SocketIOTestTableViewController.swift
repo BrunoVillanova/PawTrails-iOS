@@ -11,33 +11,32 @@ import UIKit
 class SocketIOTestTableViewController: UITableViewController {
     
     var data = [(Date,String)]()
-
+    let id:Int16 = 25
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
-        let _id:Int16 = 25
-        NotificationManager.Instance.getPetGPSUpdates { (id, data) in
-            if id == _id {
-                
-                if data.movementAlarm {
-                    self.alert(title: "HEY", msg: "MOVEMENT!!", type: .red)
-                }else{
-                    self.data.append((data.serverDate,data.source))
-                    self.data.sort(by: { (element1, element2) -> Bool in
-                        return element1.0 > element2.0
-                    })
-                    self.tableView.reloadData()
-                }
+        
+        NotificationManager.Instance.getPetGPSUpdates(for: id) { (id, data) in
+            
+            if data.movementAlarm {
+                self.alert(title: "HEY", msg: "MOVEMENT!!", type: .red)
+            }else{
+                self.data.append((data.serverDate,data.source))
+                self.data.sort(by: { (element1, element2) -> Bool in
+                    return element1.0 > element2.0
+                })
+                self.tableView.reloadData()
             }
         }
-        SocketIOManager.Instance.startGPSUpdates(for: [_id])
+        SocketIOManager.Instance.startGPSUpdates(for: [id])
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        NotificationManager.Instance.removePetGPSUpdates()
+        NotificationManager.Instance.removePetGPSUpdates(of: id)
     }
     
     // MARK: - Table view data source

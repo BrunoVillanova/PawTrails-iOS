@@ -11,27 +11,24 @@ import Foundation
 protocol AddEditSafeZoneView: NSObjectProtocol, View, LoadingView {
     func success()
     func missingName()
+    func petLocationFailed()
 }
 
 class AddEditSafeZonePresenter {
     
     weak fileprivate var view: AddEditSafeZoneView?
-    
-    
+
     func attachView(_ view: AddEditSafeZoneView){
         self.view = view
-        
     }
     
     func deteachView() {
         self.view = nil
     }
-    
-    
-    
+
     func addEditSafeZone(safezoneId: Int16, name: String?, shape: Shape, active: Bool, points: (Point,Point), into petId: Int16){
         
-if name == nil || (name != nil && name == "") {
+        if name == nil || (name != nil && name == "") {
             view?.missingName()
         }else{
             
@@ -69,27 +66,35 @@ if name == nil || (name != nil && name == "") {
     }
     
     func removeSafeZone(_ id: Int16, into petId: Int16) {
-            DataManager.Instance.removeSafeZone(by: id, to: petId) { (error) in
-                DispatchQueue.main.async {
-                    if let error = error {
-                        self.view?.errorMessage(error.msg)
-                    }else{
-                        self.view?.success()
-                    }
+        DataManager.Instance.removeSafeZone(by: id, to: petId) { (error) in
+            DispatchQueue.main.async {
+                if let error = error {
+                    self.view?.errorMessage(error.msg)
+                }else{
+                    self.view?.success()
                 }
             }
+        }
     }
     
     //MARK:- Socket IO
     
-    func startPetsGPSUpdates(_ callback: @escaping ((_ data: GPSData)->())){
-        NotificationManager.Instance.getPetGPSUpdates { (id, data) in
-            callback(data)
+    @objc private func petLocationFailed(){
+        DispatchQueue.main.async {
+            self.view?.petLocationFailed()
         }
     }
     
-    func stopPetGPSUpdates(){
-        NotificationManager.Instance.removePetGPSUpdates()
+    func startPetsGPSUpdates(for id: Int16, _ callback: @escaping ((_ data: GPSData)->())){
+        let timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.petLocationFailed), userInfo: nil, repeats: false)
+        NotificationManager.Instance.getPetGPSUpdates(for: id, { (id, data) in
+            timer.invalidate()
+            callback(data)
+        })
+    }
+    
+    func stopPetGPSUpdates(of id: Int16){
+        NotificationManager.Instance.removePetGPSUpdates(of: id)
     }
     
     

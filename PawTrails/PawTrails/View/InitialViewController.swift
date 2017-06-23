@@ -145,10 +145,11 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
         userAuthenticated()
     }
     
-    func verifyAccount(_ email:String) {
+    func verifyAccount(_ email:String, _ password:String) {
 
         if let vc = storyboard?.instantiateViewController(withIdentifier: "EmailVerificationViewController") as? EmailVerificationViewController {
             vc.email = email
+            vc.password = password
             self.present(vc, animated: true, completion: nil)
         }
     }

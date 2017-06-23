@@ -53,7 +53,6 @@
 		44329CB41EA1129400325A13 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44329CB31EA1129400325A13 /* Constants.swift */; };
 		44340F3D1EB22B4900EB4312 /* APIPetProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44340F3C1EB22B4900EB4312 /* APIPetProfileTests.swift */; };
 		44370BB61EE9904B00BB6CCD /* MapUtilsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44370BB51EE9904B00BB6CCD /* MapUtilsManager.swift */; };
-		443937011EA771590044831E /* PetUsersPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443937001EA771590044831E /* PetUsersPresenter.swift */; };
 		443937031EA78A7B0044831E /* PetBreedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443937021EA78A7B0044831E /* PetBreedPresenter.swift */; };
 		443937071EA795300044831E /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443937061EA795300044831E /* Helpers.swift */; };
 		443D2C6A1E6D721000F7ACFA /* PetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443D2C691E6D721000F7ACFA /* PetManager.swift */; };
@@ -127,6 +126,7 @@
 		44C7F7581E4CD43A00171170 /* PasswordRecoveryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F7571E4CD43A00171170 /* PasswordRecoveryPresenter.swift */; };
 		44D5FE921EE6E9560049232F /* DataManagerPetSafeZonesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D5FE911EE6E9560049232F /* DataManagerPetSafeZonesTests.swift */; };
 		44D73CF11E929FB000D8DF97 /* AddEditPetDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D73CF01E929FB000D8DF97 /* AddEditPetDetailsTableViewController.swift */; };
+		44F0BF361EFBF6C7008C26B3 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F0BF351EFBF6C7008C26B3 /* EventManager.swift */; };
 		44F239511EEEC1E70082FA36 /* SocketIOTestTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F239501EEEC1E70082FA36 /* SocketIOTestTableViewController.swift */; };
 		44F8202B1E604C1C00704F75 /* ScanQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F8202A1E604C1C00704F75 /* ScanQRViewController.swift */; };
 		44FE723D1E4A2EF0007C7E24 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FE723C1E4A2EF0007C7E24 /* DataManager.swift */; };
@@ -195,7 +195,6 @@
 		44329CB31EA1129400325A13 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		44340F3C1EB22B4900EB4312 /* APIPetProfileTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIPetProfileTests.swift; sourceTree = "<group>"; };
 		44370BB51EE9904B00BB6CCD /* MapUtilsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapUtilsManager.swift; sourceTree = "<group>"; };
-		443937001EA771590044831E /* PetUsersPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetUsersPresenter.swift; path = Presenter/PetUsersPresenter.swift; sourceTree = "<group>"; };
 		443937021EA78A7B0044831E /* PetBreedPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetBreedPresenter.swift; path = Presenter/PetBreedPresenter.swift; sourceTree = "<group>"; };
 		443937061EA795300044831E /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Helpers.swift; path = Model/Helpers.swift; sourceTree = "<group>"; };
 		443D2C691E6D721000F7ACFA /* PetManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetManager.swift; path = Model/PetManager.swift; sourceTree = "<group>"; };
@@ -270,6 +269,7 @@
 		44C7F7571E4CD43A00171170 /* PasswordRecoveryPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PasswordRecoveryPresenter.swift; path = Presenter/PasswordRecoveryPresenter.swift; sourceTree = "<group>"; };
 		44D5FE911EE6E9560049232F /* DataManagerPetSafeZonesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerPetSafeZonesTests.swift; sourceTree = "<group>"; };
 		44D73CF01E929FB000D8DF97 /* AddEditPetDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddEditPetDetailsTableViewController.swift; path = View/AddEditPetDetailsTableViewController.swift; sourceTree = "<group>"; };
+		44F0BF351EFBF6C7008C26B3 /* EventManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventManager.swift; path = Model/EventManager.swift; sourceTree = "<group>"; };
 		44F239501EEEC1E70082FA36 /* SocketIOTestTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketIOTestTableViewController.swift; path = View/SocketIOTestTableViewController.swift; sourceTree = "<group>"; };
 		44F8202A1E604C1C00704F75 /* ScanQRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScanQRViewController.swift; path = View/ScanQRViewController.swift; sourceTree = "<group>"; };
 		44FE723C1E4A2EF0007C7E24 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = DataManager.swift; path = Model/DataManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -535,6 +535,7 @@
 				4447C4F61EE9429500AA6D1D /* NotificationManager.swift */,
 				4447C4F81EE948C300AA6D1D /* UpdateManager.swift */,
 				44370BB51EE9904B00BB6CCD /* MapUtilsManager.swift */,
+				44F0BF351EFBF6C7008C26B3 /* EventManager.swift */,
 			);
 			name = Communication;
 			sourceTree = "<group>";
@@ -567,7 +568,6 @@
 				443937021EA78A7B0044831E /* PetBreedPresenter.swift */,
 				4475FB251EB0D73700E9990D /* DeviceCodePresenter.swift */,
 				442FB06C1EBA00B9004486F8 /* PetUserPresenter.swift */,
-				443937001EA771590044831E /* PetUsersPresenter.swift */,
 				440821A91EB0A08D0000751B /* AddPetUserPresenter.swift */,
 				449DE9281ECC811E00449E65 /* AddEditSafeZonePresenter.swift */,
 			);
@@ -949,6 +949,7 @@
 				44C7F7541E4CD3F200171170 /* APIManager.swift in Sources */,
 				4447C4F71EE9429500AA6D1D /* NotificationManager.swift in Sources */,
 				4465481E1E5C642000458CB7 /* Extensions.swift in Sources */,
+				44F0BF361EFBF6C7008C26B3 /* EventManager.swift in Sources */,
 				4400E83F1ECB3227005846F0 /* PetUser+CoreDataProperties.swift in Sources */,
 				440CEE5A1E3B9AA300F58A09 /* InitialPresenter.swift in Sources */,
 				4400E8441ECB3227005846F0 /* CountryCode+CoreDataClass.swift in Sources */,
@@ -1002,7 +1003,6 @@
 				44485F951E51B12800A3C47D /* PawTrails.xcdatamodeld in Sources */,
 				44C7F7551E4CD3F200171170 /* AuthManager.swift in Sources */,
 				44FE723D1E4A2EF0007C7E24 /* DataManager.swift in Sources */,
-				443937011EA771590044831E /* PetUsersPresenter.swift in Sources */,
 				442FB06D1EBA00B9004486F8 /* PetUserPresenter.swift in Sources */,
 				446548161E5C5CC900458CB7 /* UserManager.swift in Sources */,
 				447AC7E21E9CDAF700D2D2B2 /* PetNameTableViewController.swift in Sources */,

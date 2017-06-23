@@ -176,8 +176,9 @@ extension UIViewController {
     // Loading View
     
     func showLoadingView() {
-        let loadingView = UIVisualEffectView(frame: view.bounds)
-        loadingView.effect = UIBlurEffect.init(style: .extraLight)
+        
+        let loadingView = UIVisualEffectView(frame: UIScreen.main.bounds)
+        loadingView.effect = UIBlurEffect(style: .extraLight)
         loadingView.tag = subviewId.loading.rawValue
         
         let activity = UIActivityIndicatorView(frame: view.bounds)
@@ -187,25 +188,32 @@ extension UIViewController {
         
         loadingView.addSubview(activity)
         
-        loadingView.contentView.alpha = 0.0
+        loadingView.effect = nil
+        activity.alpha = 0.0
+        
         DispatchQueue.main.async {
-            self.view.addSubview(loadingView)
+            UIApplication.shared.keyWindow?.addSubview(loadingView)
             UIView.animate(withDuration: 0.6) {
-                loadingView.contentView.alpha = 1.0
+                loadingView.effect = UIBlurEffect(style: .extraLight)
+                activity.alpha = 1.0
             }
         }
     }
     
     func hideLoadingView() {
-        if let loadingView = view.subviews.first(where: { $0.tag == subviewId.loading.rawValue }) as? UIVisualEffectView {
-            DispatchQueue.main.async {
-                UIView.animate(withDuration: 0.4, animations: {
-                    loadingView.contentView.alpha = 0.0
-                }, completion: { (success) in
-                    if success {
-                        loadingView.removeFromSuperview()
-                    }
-                })
+        if let loadingView = UIApplication.shared.keyWindow?.subviews.first(where: { $0.tag == subviewId.loading.rawValue }) as? UIVisualEffectView {
+            
+            if let activity = loadingView.subviews.first(where: { $0.tag == subviewId.activity.rawValue }) as? UIActivityIndicatorView {
+                DispatchQueue.main.async {
+                    UIView.animate(withDuration: 0.4, animations: {
+                        loadingView.effect = nil
+                        activity.alpha = 0.0
+                    }, completion: { (success) in
+                        if success {
+                            loadingView.removeFromSuperview()
+                        }
+                    })
+                }
             }
         }
     }

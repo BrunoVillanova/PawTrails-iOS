@@ -32,10 +32,23 @@ class SettingsTableViewController: UITableViewController, SettingsView {
         }
     }
     
+    func notificationValueChangeFailed() {
+        //
+    }
+    
     func errorMessage(_ error: ErrorMsg) {
         self.alert(title: error.title, msg: error.msg)
     }
     
+    func beginLoadingContent() {
+        showLoadingView()
+    }
+    
+    func endLoadingContent() {
+        hideLoadingView()
+    }
+    
+
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         

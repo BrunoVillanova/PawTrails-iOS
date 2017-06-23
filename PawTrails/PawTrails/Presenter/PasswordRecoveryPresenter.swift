@@ -1,4 +1,4 @@
-                //
+//
 //  PasswordRecoveryPresenter.swift
 //  PawTrails
 //
@@ -18,42 +18,32 @@ class PasswordRecoveryPresenter {
     
     weak fileprivate var view: PasswordRecoveryView?
     
-    
     func attachView(_ view: PasswordRecoveryView){
         self.view = view
-        
     }
     
     func deteachView() {
         self.view = nil
     }
     
-    
-    
     func sendRecoveryEmail(email:String, checked: Bool) {
-
-        if email.isValidEmail {
-            if checked {
-                self.view?.beginLoadingContent()
-                AuthManager.Instance.sendPasswordReset(email, completition: { (error) in
-                    if let error = error {
-                        DispatchQueue.main.async {
-                            self.view?.endLoadingContent()
-                            self.view?.errorMessage(error.msg)
-                        }
-                    }else{
-                        DispatchQueue.main.async {
-                            self.view?.endLoadingContent()
-                            self.view?.emailSent()
-                        }
-                    }
-                })
-            }else{
-                self.view?.emailNotChecked()
-            }
-        }else{
+        
+        if !email.isValidEmail {
             self.view?.emailFieldError()
+        }else if !checked {
+            self.view?.emailNotChecked()
+        }else{
+            self.view?.beginLoadingContent()
+            AuthManager.Instance.sendPasswordReset(email, completition: { (error) in
+                DispatchQueue.main.async {
+                    self.view?.endLoadingContent()
+                    if let error = error {
+                        self.view?.errorMessage(error.msg)
+                    }else{
+                        self.view?.emailSent()
+                    }
+                }
+            })
         }
     }
-
 }
