@@ -21,13 +21,8 @@ class EventManager {
             
         case .guestAdded: handleGuestAdded(with: event.info, for: viewController)
 
-        case .guestRemoved, .guestLeft: handleGuestRemoved(with: event.info, for: viewController)
-//
-//        case .unknown:
-//            
-//            debugPrint("Unknown Event Type!", event.info)
-//            
-//            break
+        case .guestRemoved, .guestLeft: handleGuestRemoved(didLeft: event.type == .guestLeft  ,with: event.info, for: viewController)
+
         default: break
         }
 
@@ -83,7 +78,7 @@ class EventManager {
         }
     }
     
-    private func handleGuestRemoved(with data: [String:Any], for viewController: UIViewController?){
+    private func handleGuestRemoved(didLeft: Bool, with data: [String:Any], for viewController: UIViewController?){
         
         guard let petData = data["pet"] as? [String:Any] else { return }
         guard let petId = petData["id"] as? Int else { return }
@@ -105,7 +100,8 @@ class EventManager {
                 var vc: UIViewController? {
                     return viewController?.navigationController?.visibleViewController ?? viewController
                 }
-                vc?.alert(title: "", msg: "\(guestName) has been removed from \(petName)!", type: .blue)
+                let msg = didLeft ? "\(guestName) has been removed from \(petName)!" : "\(guestName) left from \(petName)!"
+                vc?.alert(title: "", msg: msg, type: .blue)
             }
         }
     }

@@ -174,6 +174,7 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
         if textField == self.emailTextField {
             self.passwordTextField.becomeFirstResponder()
         }else if textField == self.passwordTextField {
+            textField.resignFirstResponder()
             if cancelButton.isHidden {
                 self.loginAction(nil)
             }else{

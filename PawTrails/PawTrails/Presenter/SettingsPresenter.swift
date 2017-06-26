@@ -11,13 +11,13 @@ import Foundation
 protocol SettingsView: NSObjectProtocol, View, LoadingView {
     func userNotSigned()
     func notificationValueChangeFailed()
+    func notificationValueChanged()
 }
-
 
 class SettingsPresenter {
     
     weak private var view: SettingsView?
-
+    
     func attachView(_ view: SettingsView){
         self.view = view
     }
@@ -25,7 +25,7 @@ class SettingsPresenter {
     func deteachView() {
         self.view = nil
     }
-
+    
     func logout() {
         if AuthManager.Instance.signOut() {
             self.view?.userNotSigned()
@@ -35,18 +35,19 @@ class SettingsPresenter {
     }
     
     func changeNotification(value: Bool) {
-        self.view?.beginLoadingContent()
         
         var data = [String:Any]()
         data["id"] = SharedPreferences.get(.id)
         data["notification"] = value
         
-        DataManager.Instance.setUser(data) { (error, user) in
+        DataManager.Instance.save(user: data) { (error, user) in
             DispatchQueue.main.async {
-                self.view?.endLoadingContent()
+                
                 if let error = error {
                     self.view?.errorMessage(error.msg)
                     self.view?.notificationValueChangeFailed()
+                }else{
+                    self.view?.notificationValueChanged()
                 }
             }
         }

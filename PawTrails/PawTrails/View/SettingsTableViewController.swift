@@ -10,18 +10,29 @@ import UIKit
 
 class SettingsTableViewController: UITableViewController, SettingsView {
     
+    @IBOutlet weak var allNotificationsSwitch: UISwitch!
     
     fileprivate let presenter = SettingsPresenter()
-
+    
+    var user:User!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.attachView(self)
+        loadUser()
     }
     
     deinit {
         presenter.deteachView()
     }
 
+    @IBAction func allNotificationsValueChanged(_ sender: UISwitch) {
+        self.presenter.changeNotification(value: sender.isOn)
+    }
+    
+    func loadUser(){
+        allNotificationsSwitch.isOn = user.notification
+    }
     
     // MARK: - SettingsView
     
@@ -33,7 +44,12 @@ class SettingsTableViewController: UITableViewController, SettingsView {
     }
     
     func notificationValueChangeFailed() {
-        //
+        allNotificationsSwitch.isOn = !allNotificationsSwitch.isOn
+    }
+    
+    func notificationValueChanged() {
+        let value = allNotificationsSwitch.isOn ? "On" : "Off"
+        self.alert(title: "", msg: "All Notifications turned \(value) successfully", type: .green)
     }
     
     func errorMessage(_ error: ErrorMsg) {
