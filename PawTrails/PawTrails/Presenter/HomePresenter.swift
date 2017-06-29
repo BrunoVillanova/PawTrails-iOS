@@ -18,58 +18,46 @@ protocol HomeView: NSObjectProtocol, View {
 class HomePresenter {
     
     weak fileprivate var view: HomeView?
-    
 
     var pets = [Pet]()
     var safeZones = [SafeZone]()
     var user:User!
-    
-    
+
     func attachView(_ view: HomeView){
         self.view = view
-        
     }
     
     func deteachView() {
         self.view = nil
     }
     
-    
-    
     func getUser(){
         
         DataManager.Instance.getUser { (error, user) in
-            DispatchQueue.main.async {
-                
-                if error == nil && user != nil {
-                    self.user = user
-                    self.view?.reload()
-                }else if error?.APIError?.errorCode == ErrorCode.Unauthorized {
-                    self.view?.userNotSigned()
-                }else if let error = error {
-                    self.view?.errorMessage(error.msg)
-                }
+            if error == nil && user != nil {
+                self.user = user
+                self.view?.reload()
+            }else if error?.APIError?.errorCode == ErrorCode.Unauthorized {
+                self.view?.userNotSigned()
+            }else if let error = error {
+                self.view?.errorMessage(error.msg)
             }
         }
     }
     
     func getPets(){
-        DispatchQueue.global(qos: .background).async {
-            DataManager.Instance.getPets { (error, pets) in
+        
+        DataManager.Instance.getPets { (error, pets) in
+            
+            if error == nil, let pets = pets {
+                self.pets = pets
+                self.view?.loadPets()
                 
-                DispatchQueue.main.async {
-                    
-                    if error == nil, let pets = pets {
-                        self.pets = pets
-                        self.view?.loadPets()
-                        
-                    }else if let error = error {
-                        if error.DBError == DatabaseError.NotFound {
-                            self.view?.noPetsFound()
-                        }else{
-                            self.view?.errorMessage(error.msg)
-                        }
-                    }
+            }else if let error = error {
+                if error.DBError == DatabaseError.NotFound {
+                    self.view?.noPetsFound()
+                }else{
+                    self.view?.errorMessage(error.msg)
                 }
             }
         }
@@ -80,13 +68,12 @@ class HomePresenter {
     func startPetsListUpdates(){
         NotificationManager.Instance.getPetListUpdates { (pets) in
             debugPrint("Time to update pets on Map")
-            DispatchQueue.main.async {
-                if let pets = pets {
-                    self.pets = pets
-                    self.view?.loadPets()
-                }else {
-                    self.view?.noPetsFound()
-                }
+            
+            if let pets = pets {
+                self.pets = pets
+                self.view?.loadPets()
+            }else {
+                self.view?.noPetsFound()
             }
         }
     }

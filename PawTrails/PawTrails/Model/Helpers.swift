@@ -136,9 +136,9 @@ public class Point: NSObject, NSCoding {
         self.longitude = longitude
     }
     
-    init(_ data:[String:Any]) {
-        latitude = data.tryCastDouble(for: "lat") ?? 0.0
-        longitude = data.tryCastDouble(for: "lon") ?? 0.0
+    init(_ data:[String:Any]?) {
+        latitude = data?.tryCastDouble(for: "lat") ?? 0.0
+        longitude = data?.tryCastDouble(for: "lon") ?? 0.0
     }
     
     required public init?(coder aDecoder: NSCoder) {

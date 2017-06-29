@@ -19,7 +19,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     
     private var socket: SocketIOClient!
     
-    private var onUpdates = [Int16:Bool]()
+    private var onUpdates = [Int:Bool]()
     private var PetsGPSData = NSCache<NSNumber,GPSData>()
     
     init(SSLEnabled: Bool = true) {
@@ -36,25 +36,26 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     
     func connect(_ callback: ((SocketIOStatus)->())? = nil) {
 
-        self.socket.on(channel.auth.name) { (data, ack) in
-            let status = self.getStatus(data)
-            debugPrint(status)
-            if status != .waiting, let callback = callback {
-                callback(status)
-            }
-        }
-        self.socket.on(channel.connect.name) { (data, ack) in
-            if let token = SharedPreferences.get(.token) {
-                debugPrint("Connecting")
-                self.socket.emit(channel.auth.name, with: [token])
-            }
-            
-        }
-        self.socket.on(channel.events.name, callback: { (data, ack) in
-            debugPrint("Event RS", data)
-            self.handleEventUpdated(data)
-        })
-        self.socket.connect()
+//        self.socket.on(channel.auth.name) { (data, ack) in
+//            let status = self.getStatus(data)
+//            debugPrint(status)
+//            if status != .waiting, let callback = callback {
+//                callback(status)
+//            }
+//        }
+//        self.socket.on(channel.connect.name) { (data, ack) in
+//            let token = SharedPreferences.get(.token)
+//            if token != "" {
+//                debugPrint("Connecting")
+//                self.socket.emit(channel.auth.name, with: [token])
+//            }
+//            
+//        }
+//        self.socket.on(channel.events.name, callback: { (data, ack) in
+//            debugPrint("Event RS", data)
+//            self.handleEventUpdated(data)
+//        })
+//        self.socket.connect()
 
     }
     
@@ -69,17 +70,17 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     
     //Pet
     
-    func getGPSData(for id: Int16) -> GPSData? {
+    func getGPSData(for id: Int) -> GPSData? {
         return PetsGPSData.object(forKey: NSNumber(integerLiteral: Int(id)))
     }
     
-    func set(_ locationName: String, for petId: Int16){
+    func set(_ locationName: String, for petId: Int){
         if let data = getGPSData(for: petId) {
             data.locationAndTime = "\(locationName) - \(data.distanceTime)"
         }
     }
     
-    func startGPSUpdates(for petIds: [Int16]){
+    func startGPSUpdates(for petIds: [Int]){
         
         if socket.isConnected {
             for petId in petIds {
@@ -94,7 +95,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         }
     }
     
-    private func startGPSUpdatesEffective(for petId: Int16) {
+    private func startGPSUpdatesEffective(for petId: Int) {
         
         if onUpdates[petId] == nil || (onUpdates[petId] != nil && onUpdates[petId] == false) {
             debugPrint("Start Updates for pet: ", petId)
@@ -109,7 +110,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     }
 
     
-    func stopGPSUpdates(for id: Int16) {
+    func stopGPSUpdates(for id: Int) {
         
         if socket.status == .connected {
 
@@ -126,7 +127,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
             
             if let error = json["error"] {
                 debugPrint("SIO-Error :", error)
-            }else if let id = json.tryCastInteger(for: "petId")?.toInt16 {
+            }else if let id = json.tryCastInteger(for: "petId") {
                 debugPrint("GPS Updates \(id)")
                 if let data = getGPSData(for: id) {
                     data.update(json)
@@ -258,7 +259,7 @@ fileprivate enum channel {
         }
     }
     
-    static func gpsUpdatesName(for petId: Int16) -> String {
+    static func gpsUpdatesName(for petId: Int) -> String {
         return "gpsUpdate\(petId)"
     }
 }

@@ -33,6 +33,7 @@ class EmailVerificationViewController: UIViewController, EmailVerificationView {
         signOutButton.tintColor = UIColor.primaryColor()
         signOutButton.border(color: UIColor.primaryColor(), width: 1.0)
         emailLabel.text = email
+        setTopBar()
     }
 
     deinit {

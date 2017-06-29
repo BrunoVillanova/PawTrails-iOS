@@ -18,8 +18,8 @@ class NameTableViewController: UITableViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
-        nameTextField.text = parentEditor.getName()
-        surnameTextField.text = parentEditor.getSurName()
+        nameTextField.text = parentEditor.user.name
+        surnameTextField.text = parentEditor.user.surname
         
         if #available(iOS 10.0, *) {
             nameTextField.textContentType = UITextContentType.name
@@ -29,8 +29,8 @@ class NameTableViewController: UITableViewController, UITextFieldDelegate {
     }
     
     @IBAction func saveAction(_ sender: UIBarButtonItem?) {
-        parentEditor.set(name: nameTextField.text)
-        parentEditor.set(surname: surnameTextField.text)
+        parentEditor.user.name = nameTextField.text
+        parentEditor.user.surname = surnameTextField.text
         parentEditor.refresh()
         view.endEditing(true)
         _ = self.navigationController?.popViewController(animated: true)

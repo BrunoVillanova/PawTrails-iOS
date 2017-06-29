@@ -14,9 +14,7 @@ class APIImageUploadTest: XCTestCase {
     override func setUp() {
         super.setUp()
         let expect = expectation(description: "Example")
-        APIAuthenticationTests().signIn { (id, token) in
-            SharedPreferences.set(.id, with: id)
-            SharedPreferences.set(.token, with: token)
+        APIAuthenticationTests().signIn { () in
             expect.fulfill()
         }
         waitForExpectations(timeout: 10) { error in
@@ -33,7 +31,7 @@ class APIImageUploadTest: XCTestCase {
         var data = [String:Any]()
         data["path"] = "user"
         data["userid"] = SharedPreferences.get(.id)
-        data["picture"] = UIImageJPEGRepresentation(UIImage(named: "logo")!, 0.9)
+        data["picture"] = UIImageJPEGRepresentation(UIImage(named: "logo")!, 0.9) ?? Data()
         
         APIManager.Instance.perform(call: .imageUpload, with: data) { (error, data) in
             
@@ -41,7 +39,7 @@ class APIImageUploadTest: XCTestCase {
             XCTAssertNotNil(data, "No data :(")
             XCTAssertNotNil(data?["img_url"], "No image url")
             
-            if let urlString = data?["img_url"] as? String, URL(string: urlString) == nil {
+            if let urlString = data?["img_url"].string, URL(string: urlString) == nil {
                     fatalError("No proper url \(urlString)")
             }
             expect.fulfill()
@@ -99,7 +97,7 @@ class APIImageUploadTest: XCTestCase {
         
         let expect = expectation(description: "UploadImage")
         
-        PetManager.get { (error, pets) in
+        DataManager.Instance.getPets { (error, pets) in
             
             if error == nil, let pets = pets {
                 
@@ -115,7 +113,7 @@ class APIImageUploadTest: XCTestCase {
                     XCTAssertNotNil(data?["path"], "No path")
                     XCTAssertNotNil(data?["img_url"], "No image url")
                     
-                    if let urlString = data?["img_url"] as? String, URL(string: urlString) == nil {
+                    if let urlString = data?["img_url"].string, URL(string: urlString) == nil {
                         fatalError("No proper url \(urlString)")
                     }
                     expect.fulfill()

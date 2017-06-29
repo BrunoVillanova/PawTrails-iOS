@@ -25,10 +25,11 @@ class PawTrailsTests: XCTestCase {
         
 
         let expect = expectation(description: "Test example")
-        if let id = SharedPreferences.get(.id) {
+        let id = SharedPreferences.get(.id)
+        if id != "" {
             _ = SharedPreferences.remove(.id)
             
-            DataManager.Instance.loadUserFriends { (error, friends) in
+            DataManager.Instance.loadPetFriends { (error, friends) in
                 
                 XCTAssertNil(friends)
                 XCTAssertNotNil(error)

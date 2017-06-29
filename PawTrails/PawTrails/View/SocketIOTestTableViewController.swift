@@ -11,7 +11,7 @@ import UIKit
 class SocketIOTestTableViewController: UITableViewController {
     
     var data = [(Date,String)]()
-    let id:Int16 = 25
+    let id:Int = 25
     
     override func viewDidLoad() {
         super.viewDidLoad()

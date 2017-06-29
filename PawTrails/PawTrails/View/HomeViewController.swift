@@ -469,10 +469,10 @@ enum pinType: Int {
 }
 
 class MKLocationId: Hashable {
-    var id: Int16
+    var id: Int
     var type: pinType
     
-    init(id : Int16, type: pinType) {
+    init(id : Int, type: pinType) {
         self.id = id
         self.type = type
     }

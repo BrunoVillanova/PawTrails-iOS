@@ -35,9 +35,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         configureUIPreferences()
         
-        if AuthManager.Instance.isAuthenticated() {
+        if DataManager.Instance.isAuthenticated() {
             
-            if let socialMedia = AuthManager.Instance.socialMedia() {
+            if let socialMedia = DataManager.Instance.socialMedia() {
                 
                 if let sm = SocialMedia(rawValue: socialMedia) {
                     switch sm {
@@ -72,7 +72,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     func loadHomeScreen() {
         let root = storyboard.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
-        root.selectedIndex = 0
+        root.selectedIndex = 1
         window?.rootViewController = root
     }
     
@@ -96,7 +96,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        if AuthManager.Instance.isAuthenticated() {
+        if DataManager.Instance.isAuthenticated() {
             SocketIOManager.Instance.connect()
             UpdateManager.Instance.loadPetList { (pets) in
                 if let pets = pets {
@@ -126,7 +126,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
 
         SocketIOManager.Instance.disconnect()
-        try? CoreDataManager.Instance.save()
+//        try? CoreDataManager.Instance.save(callback: (NSError?) -> Void)
     }
     
     private func configureUIPreferences() {
@@ -149,11 +149,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         UISegmentedControl.appearance().tintColor = primaryColor
         
-//        UIButton.appearance().tintColor = primaryColor
-
         UIActivityIndicatorView.appearance().color = primaryColor
         
-        UILabel.appearance().backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
+//        UILabel.appearance().backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
     }
     
     //    MARK:- GIDSignInDelegate

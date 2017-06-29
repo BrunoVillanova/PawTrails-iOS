@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddressTableViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class AddressTableViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
     @IBOutlet weak var firstLineTextField: UITextField!
     @IBOutlet weak var secondLineTextField: UITextField!
@@ -20,6 +20,9 @@ class AddressTableViewController: UITableViewController, UIPickerViewDelegate, U
     
    
     fileprivate var selectedCC:CountryCode?
+    
+    fileprivate var index: Int = 0
+    fileprivate let picker = UIPickerView()
     
     var parentEditor:EditUserProfilePresenter!
 
@@ -38,44 +41,43 @@ class AddressTableViewController: UITableViewController, UIPickerViewDelegate, U
             stateTextField.textContentType = UITextContentType.addressState
         }
         
-        let picker = UIPickerView()
         picker.delegate = self
         picker.dataSource = self
         self.countryTextField.inputView = picker
+        self.countryTextField.delegate = self
         
-        if let address = parentEditor.getAddress() {
+        if let address = parentEditor.user.address {
             firstLineTextField.text = address.line0
             secondLineTextField.text = address.line1
             thirdLineTextField.text = address.line2
             cityTextField.text = address.city
-            postalCodeTextField.text = address.postal_code
+            postalCodeTextField.text = address.postalCode
             stateTextField.text = address.state
             countryTextField.text = address.country
             
             if address.country != nil && address.country != "" {
-                
-                let index = parentEditor.getCountryCodeIndex(countryShortName: address.country!)
-                picker.selectRow(index, inComponent: 0, animated: true)
-                self.countryTextField.text = parentEditor.CountryCodes[index].name! + ", " + parentEditor.CountryCodes[index].shortname!
-                self.selectedCC = parentEditor.CountryCodes[index]
-                
+                index = parentEditor.getCountryCodeIndex(countryShortName: address.country!)
+            }else {
+                index = parentEditor.getCurrentCountryCodeIndex()
             }
+            self.countryTextField.text = parentEditor.CountryCodes[index].name! + ", " + parentEditor.CountryCodes[index].shortName!
+            self.selectedCC = parentEditor.CountryCodes[index]
         }
 
     }
     
     @IBAction func saveAction(_ sender: UIBarButtonItem?) {
         
-        var address = _Address()
+        var address = Address()
         address.line0 = firstLineTextField.text
         address.line1 = secondLineTextField.text
         address.line2 = thirdLineTextField.text
         address.city = cityTextField.text
-        address.postal_code = postalCodeTextField.text
+        address.postalCode = postalCodeTextField.text
         address.state = stateTextField.text
-        address.country = (selectedCC?.shortname != nil && self.countryTextField.text != nil && countryTextField.text != "") ? selectedCC?.shortname : nil
+        address.country = (selectedCC?.shortName != nil && self.countryTextField.text != nil && countryTextField.text != "") ? selectedCC?.shortName : nil
         
-        self.parentEditor.set(address: address)
+        self.parentEditor.user.address = address
         parentEditor.refresh()
         view.endEditing(true)
         _ = self.navigationController?.popViewController(animated: true)
@@ -85,7 +87,7 @@ class AddressTableViewController: UITableViewController, UIPickerViewDelegate, U
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
-        self.countryTextField.text = parentEditor.CountryCodes[row].name! + ", " + parentEditor.CountryCodes[row].shortname!
+        self.countryTextField.text = parentEditor.CountryCodes[row].name! + ", " + parentEditor.CountryCodes[row].shortName!
         self.selectedCC = parentEditor.CountryCodes[row]
     }
     
@@ -104,6 +106,12 @@ class AddressTableViewController: UITableViewController, UIPickerViewDelegate, U
     }
 
     // MARK: - UITextFieldDelegate
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == self.countryTextField {
+            picker.selectRow(index, inComponent: 0, animated: true)
+        }
+    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         

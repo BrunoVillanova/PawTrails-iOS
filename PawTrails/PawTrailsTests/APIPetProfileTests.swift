@@ -14,9 +14,7 @@ class APIPetProfileTests: XCTestCase {
     override func setUp() {
         super.setUp()
         let expect = expectation(description: "Example")
-        APIAuthenticationTests().signIn { (id, token) in
-            SharedPreferences.set(.id, with: id)
-            SharedPreferences.set(.token, with: token)
+        APIAuthenticationTests().signIn { () in
             expect.fulfill()
         }
         waitForExpectations(timeout: 10) { error in
@@ -26,7 +24,7 @@ class APIPetProfileTests: XCTestCase {
     
     func getPets(_ callback: @escaping ((_ error: APIManagerError?, _ data:[String:Any]?)->())){
         APIManager.Instance.perform(call: .getPets) { (error, data) in
-            callback(error, data)
+            callback(error, data?.dictionaryObject)
         }
     }
     
@@ -61,7 +59,7 @@ class APIPetProfileTests: XCTestCase {
                         XCTAssertNil(error, "Error \(String(describing: error))")
                         XCTAssertNotNil(data, "No data :(")
                         
-                        if let data = data {
+                        if let data = data?.dictionaryObject {
                             self.check(in: data, out: data)
                             expect.fulfill()
                         }
@@ -105,7 +103,7 @@ class APIPetProfileTests: XCTestCase {
                         XCTAssertNil(error, "Error \(String(describing: error))")
                         XCTAssertNotNil(data, "No data :(")
                         
-                        if let data = data {
+                        if let data = data?.dictionaryObject {
                             self.check(in: data, out: data)
                             expect.fulfill()
                         }
@@ -149,7 +147,7 @@ class APIPetProfileTests: XCTestCase {
                         XCTAssertNil(error, "Error \(String(describing: error))")
                         XCTAssertNotNil(data, "No data :(")
                         
-                        if let data = data {
+                        if let data = data?.dictionaryObject {
                             self.check(in: data, out: data)
                             expect.fulfill()
                         }
@@ -191,7 +189,7 @@ class APIPetProfileTests: XCTestCase {
                         XCTAssertNil(error, "Error \(String(describing: error))")
                         XCTAssertNotNil(data, "No data :(")
                         
-                        if let data = data {
+                        if let data = data?.dictionaryObject {
                             self.check(in: data, out: data)
                             expect.fulfill()
                         }

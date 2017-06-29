@@ -49,13 +49,13 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     fileprivate var updatingPetLocation = false
     
     var safezone: SafeZone?
-    var petId: Int16!
+    var petId: Int!
     var isOwner: Bool!
     var fromMap: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.attachView(self)
+        presenter.attachView(self, safezone: safezone)
         blurView.round(radius: 18)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
@@ -80,9 +80,7 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
             navigationItem.title = "Edit \(safezone.name!)"
             
             nameTextField.text = safezone.name
-            if let shape = Shape(rawValue: safezone.shape) {
-                self.shape = shape
-            }
+            shape = safezone.shape
             activeSwitch.isOn = safezone.active
             
             if !isOwner {
@@ -113,17 +111,24 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     
     
     override func viewDidAppear(_ animated: Bool) {
+        
+        let _view = UIView(frame: mapView.bounds)
+        
         if let safezone = safezone {
             
             guard let center = safezone.point1?.coordinates else { return }
             guard let topCenter = safezone.point2?.coordinates else { return }
-            
-            fence = mapView.load(with: center, topCenter: topCenter, shape: shape, into: view)
+            self.mapView.load(with: center, topCenter: topCenter, shape: shape, into: view, callback: { (fence) in
+                self.fence = fence
+            })
             
         }else{
             let sonhugoCoordinate = CLLocationCoordinate2D(latitude: 39.592217, longitude: 2.662322)
-            mapView.centerOn(sonhugoCoordinate, with: 50, animated: false)
-            fence = mapView.load(with: sonhugoCoordinate, shape: shape, into: view)
+            self.mapView.centerOn(sonhugoCoordinate, with: 50, animated: false)
+            self.mapView.load(with: sonhugoCoordinate, shape: shape, into: _view, callback: { (fence) in
+                self.fence = fence
+            })
+
         }
         updateFenceDistance()
         self.blurView(.close)
@@ -165,7 +170,8 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     @IBAction func doneAction(_ sender: UIBarButtonItem?) {
         if let petId = petId {
             if fence.isIdle {
-                presenter.addEditSafeZone(safezoneId: safezone?.id ?? -1, name: nameTextField.text, shape: shape, active: activeSwitch.isOn, points: geoCodeFence(), into: petId)
+                let id = safezone?.id ?? 0
+                presenter.addEditSafeZone(safezoneId: id, name: nameTextField.text, shape: shape, active: activeSwitch.isOn, points: geoCodeFence(), into: petId)
             }else{
                 alert(title: "", msg: "The area is too small. Please, zoom out.", type: .red)
             }
@@ -199,6 +205,24 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     }
     
     @IBAction func petFocusAction(_ sender: UIButton) {
+       
+        if let center = safezone?.point1?.coordinates, let topCenter = safezone?.point2?.coordinates {
+//            let centerPoint: CGPoint = mapView.convert(center, toPointTo: view)
+//            let centerLayer = CALayer()
+//            centerLayer.frame = CGRect.init(origin: centerPoint, size: CGSize.init(width: 5, height: 5))
+//            centerLayer.backgroundColor = UIColor.white.cgColor
+//            self.mapView.layer.addSublayer(centerLayer)
+            
+            let centerPoint = mapView.convert(center, toPointTo: view)
+            let topCenterPoint = mapView.convert(topCenter, toPointTo: view)
+            
+            let fence = Fence(centerPoint, topCenterPoint, shape: shape)
+            
+            //        add(fence)
+            self.mapView.layer.addSublayer(fence.layer)
+
+        }
+        
         focused = false
         beginLoadingLocation()
         loadPetLocation()

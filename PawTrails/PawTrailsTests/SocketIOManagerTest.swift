@@ -49,7 +49,8 @@ class SocketIOManagerTest: XCTestCase {
         
         let expect = expectation(description: "Connection")
         
-        if let token = SharedPreferences.get(.token) {
+        let token = SharedPreferences.get(.token)
+        if token != "" {
             
             SharedPreferences.set(.token, with: "")
             

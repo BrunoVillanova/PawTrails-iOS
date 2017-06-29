@@ -48,10 +48,10 @@ class PetUserTableViewController: UITableViewController, PetUserView {
             let name = pet.name ?? ""
             emailLabel.text = petUser.email
            
-            if let owner = pet.owner, let id = SharedPreferences.get(.id) {
+            if let owner = pet.owner  {
                 currentUserId = Int(petUser.id)
                 petOwnerId = Int(owner.id)
-                appUserId = Int(id) ?? -3
+                appUserId = Int(SharedPreferences.get(.id)) ?? -3
             }
 
             if currentUserId == petOwnerId && petOwnerId == appUserId {

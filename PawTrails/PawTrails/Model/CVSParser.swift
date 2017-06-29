@@ -15,7 +15,7 @@ class CSVParser {
     
     fileprivate let ext = "csv"
     fileprivate let lineSplit = "\r\n"
-    fileprivate let rowSplit = ","
+    fileprivate let rowSplit = ";"
     
     func loadCountryCodes() {
         
@@ -36,7 +36,13 @@ class CSVParser {
                         element["name"] = row[0]
                         element["shortname"] = row[1]
                         element["code"] = row[2]
-                        _ = try CoreDataManager.Instance.upsert("CountryCode", with: element, withId: "code")
+                        debugPrint(row[2])
+                        let cc = try CoreDataManager.Instance.store("CDCountryCode", with: element)
+                        if !(cc is CDCountryCode) {
+                            debugPrint("Error \(row)")
+                        }
+                    }else{
+                        debugPrint("Error \(row)")
                     }
                 }
                 

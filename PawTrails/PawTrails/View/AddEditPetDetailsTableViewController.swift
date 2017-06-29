@@ -25,12 +25,12 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
     fileprivate let presenter = AddEditPetPresenter()
     
     var deviceCode: String!
-    var pet: Pet!
+    var pet: Pet?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let name = pet.name {
+        if let name = pet?.name {
             navigationItem.title = "Edit \(name)"
         }
                 
@@ -51,7 +51,7 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
     }
     
     @IBAction func neuteredValueChanged(_ sender: UISwitch) {
-        presenter.set(neutered: sender.isOn)
+        presenter.pet.neutered = sender.isOn
     }
     
     //MARK: - UITableViewDelegate
@@ -67,16 +67,18 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
     //MARK: - AddEditPetView
     
     func loadPet() {
-        if let imageData = presenter.getImageData() as Data? {
+        if let imageData = presenter.imageData {
+            petImageView.image = UIImage(data: imageData)
+        }else if let imageData = presenter.pet.image {
             petImageView.image = UIImage(data: imageData)
         }
-        nameLabel.text = presenter.getName()
-        typeLabel.text = presenter.getTypeText()
-        genderLabel.text = presenter.getGender()?.name
-        breedLabel.text = presenter.getBreedsText()
-        birthdayLabel.text = presenter.getBirthday()?.toStringShow
-        weightLabel.text = presenter.getWeight()?.toWeightString
-        neuteredSwitch.setOn(presenter.getNeutered() ?? false, animated: true)
+        nameLabel.text = presenter.pet.name
+        typeLabel.text = presenter.pet.typeString
+        genderLabel.text = presenter.pet.gender?.name
+        breedLabel.text = presenter.pet.breedsString
+        birthdayLabel.text = presenter.pet.birthday?.toStringShow
+        weightLabel.text = presenter.pet.weightWithUnitString
+        neuteredSwitch.setOn(presenter.pet.neutered , animated: true)
         tableView.reloadData()
     }
     

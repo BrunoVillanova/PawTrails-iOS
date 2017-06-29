@@ -33,21 +33,19 @@ class ChangePasswordPresenter {
     func deteachView() {
         self.view = nil
     }
-
+    
     func getUserEmail(){
         DataManager.Instance.getUser(callback: { (error, user) in
             if error == nil && user != nil {
                 self.userEmail = user!.email!
             }else{
-                DispatchQueue.main.async {
-                    self.view?.errorMessage(ErrorMsg.init(title: "", msg: ""))
-                }
+                self.view?.errorMessage(ErrorMsg.init(title: "", msg: ""))
             }
         })
     }
     
     func changePassword(password:String, newPassword:String, newPassword2:String) {
-
+        
         if password == "" {
             self.view?.emptyField(.password)
         }else if newPassword == "" {
@@ -59,13 +57,12 @@ class ChangePasswordPresenter {
         }else if newPassword != newPassword2 {
             self.view?.noMatch()
         }else{
-            AuthManager.Instance.changeUsersPassword(userEmail, password, newPassword, completition: { (error) in
-                DispatchQueue.main.async {
-                    if let error = error {
-                        self.view?.errorMessage(error.msg)
-                    }else{
-                        self.view?.passwordChanged()
-                    }
+            DataManager.Instance.changeUsersPassword(userEmail, password, newPassword, callback: { (error) in
+                
+                if let error = error {
+                    self.view?.errorMessage(error.msg)
+                }else{
+                    self.view?.passwordChanged()
                 }
             })
         }

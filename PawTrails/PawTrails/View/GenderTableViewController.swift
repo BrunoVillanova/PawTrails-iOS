@@ -17,11 +17,11 @@ class GenderTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
-        selected = parentEditor.getGender()
+        selected = parentEditor.user.gender
     }
     
     @IBAction func saveAction(_ sender: UIBarButtonItem) {
-        parentEditor.set(gender: selected)
+        parentEditor.user.gender = selected
         parentEditor.refresh()
         _ = self.navigationController?.popViewController(animated: true)
     }

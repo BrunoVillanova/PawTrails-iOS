@@ -14,9 +14,7 @@ class APIUserTest: XCTestCase {
     override func setUp() {
         super.setUp()
         let expect = expectation(description: "Example")
-        APIAuthenticationTests().signIn { (id, token) in
-            SharedPreferences.set(.id, with: id)
-            SharedPreferences.set(.token, with: token)
+        APIAuthenticationTests().signIn { () in
             expect.fulfill()
         }
         waitForExpectations(timeout: 10) { error in
@@ -56,7 +54,7 @@ class APIUserTest: XCTestCase {
         
         
         var userData = [String:Any]()
-        userData["id"] = SharedPreferences.get(.id) ?? -1
+        userData["id"] = SharedPreferences.get(.id)
         userData["name"] = name
         userData["surname"] = surname
         userData["gender"] = gender.code
@@ -73,30 +71,24 @@ class APIUserTest: XCTestCase {
 
             
             if let data = data {
-                XCTAssert(data["name"] as? String == name, "Name")
-                XCTAssert(data["surname"] as? String == surname, "Surname")
-                XCTAssert(data["gender"] as? String == gender.code, "Gender")
-                XCTAssert(data["date_of_birth"]  as? String == birthday.toStringServer, "Birthday")
-                XCTAssert(data["notification"]  as? Bool == notification, "Notification")
+                XCTAssert(data["name"].stringValue == name, "Name")
+                XCTAssert(data["surname"].stringValue == surname, "Surname")
+                XCTAssert(data["gender"].stringValue == gender.code, "Gender")
+                XCTAssert(data["date_of_birth"].stringValue == birthday.toStringServer, "Birthday")
+                XCTAssert(data["notification"].boolValue == notification, "Notification")
                 
-                if let phone = data["mobile"] as? [String:Any] {
-                    XCTAssert(phone["number"] as? String == phone["number"] as? String, "Phone number")
-                    XCTAssert(phone["country_code"] as? String == phone["country_code"] as? String, "Phone cc")
-                }else{
-                    XCTFail()
-                }
+
+                XCTAssert(data["mobile"]["number"].stringValue == phone["number"], "Phone number")
+                XCTAssert(data["mobile"]["country_code"].stringValue == phone["country_code"], "Phone cc")
+
                 
-                if let address = data["address"] as? [String:Any] {
-                    XCTAssert(address["line0"] as? String == address["line0"] as? String, "Address line0")
-                    XCTAssert(address["line1"] as? String == address["line1"] as? String, "Address line1")
-                    XCTAssert(address["line2"] as? String == address["line2"] as? String, "Address line2")
-                    XCTAssert(address["city"] as? String == address["city"] as? String, "Address city")
-                    XCTAssert(address["postal_code"] as? String == address["postal_code"] as? String, "Address postal_code")
-                    XCTAssert(address["state"] as? String == address["state"] as? String, "Address state")
-                    XCTAssert(address["country"] as? String == address["country"] as? String, "Address country")
-                }else{
-                    XCTFail()
-                }
+                XCTAssert(data["address"]["line0"].stringValue == address["line0"], "Address line0")
+                XCTAssert(data["address"]["line1"].stringValue == address["line1"], "Address line1")
+                XCTAssert(data["address"]["line2"].stringValue == address["line2"], "Address line2")
+                XCTAssert(data["address"]["city"].stringValue == address["city"], "Address city")
+                XCTAssert(data["address"]["postal_code"].stringValue == address["postal_code"], "Address postal_code")
+                XCTAssert(data["address"]["state"].stringValue == address["state"], "Address state")
+                XCTAssert(data["address"]["country"].stringValue == address["country"], "Address country")
             }else{
                 XCTFail()
             }
@@ -187,11 +179,7 @@ class APIUserTest: XCTestCase {
         
         let expect = expectation(description: "readUserProfile")
         
-        guard let id = SharedPreferences.get(.id) else {
-            XCTFail()
-            expect.fulfill()
-            return
-        }
+        let id = SharedPreferences.get(.id)
         
         APIManager.Instance.perform(call: .getUser, withKey: id) { (error, data) in
             

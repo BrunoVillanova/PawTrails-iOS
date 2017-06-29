@@ -32,27 +32,21 @@ extension UIViewController {
     func popUp(title:String, msg:String, actionTitle: String = "Ok", handler: ((UIAlertAction)->Void)? = nil){
         let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: actionTitle, style: .default, handler: handler))
-        DispatchQueue.main.async {
-            self.present(alert, animated: true, completion: nil)
-        }
+        self.present(alert, animated: true, completion: nil)
     }
     
     func popUpDestructive(title:String, msg:String, cancelHandler: ((UIAlertAction)->Void)?, proceedHandler: ((UIAlertAction)->Void)?){
         let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: cancelHandler))
         alert.addAction(UIAlertAction(title: "Proceed", style: .destructive, handler: proceedHandler))
-        DispatchQueue.main.async {
-            self.present(alert, animated: true, completion: nil)
-        }
+        self.present(alert, animated: true, completion: nil)
     }
     
     func popUp(title:String, msg:String, cancelHandler: ((UIAlertAction)->Void)?, proceedHandler: ((UIAlertAction)->Void)?){
         let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: cancelHandler))
         alert.addAction(UIAlertAction(title: "Proceed", style: .default, handler: proceedHandler))
-        DispatchQueue.main.async {
-            self.present(alert, animated: true, completion: nil)
-        }
+        self.present(alert, animated: true, completion: nil)
     }
     
     func popUpUserLocationDenied(){
@@ -95,21 +89,15 @@ extension UIViewController {
         alert.addAction(UIAlertAction(title: "Take a Photo", style: .default, handler: { (photo) in
             imagePicker.allowsEditing = true
             imagePicker.sourceType = .camera
-            DispatchQueue.main.async {
-                self.present(imagePicker, animated: true, completion: nil)
-            }
+            self.present(imagePicker, animated: true, completion: nil)
         }))
         alert.addAction(UIAlertAction(title: "Choose from Gallery", style: .default, handler: { (galery) in
             imagePicker.allowsEditing = true
             imagePicker.sourceType = .photoLibrary
-            DispatchQueue.main.async {
-                self.present(imagePicker, animated: true, completion: nil)
-            }
+            self.present(imagePicker, animated: true, completion: nil)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        DispatchQueue.main.async {
-            self.present(alert, animated: true, completion: nil)
-        }
+        self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func dismissAction(sender: UIButton?){

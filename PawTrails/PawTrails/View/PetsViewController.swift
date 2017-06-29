@@ -13,26 +13,26 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noPetsFound: UILabel!
     
-    var refreshControl: UIRefreshControl!
+    var refreshControl = UIRefreshControl()
     
     fileprivate let presenter = PetsPresenter()
     
-    fileprivate var pets = [Int16:IndexPath]()
+    fileprivate var pets = [Int:IndexPath]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.attachView(self)
         
+        noPetsFound.isHidden = true
+
         tableView.tableFooterView = UIView()
         
-        refreshControl = UIRefreshControl()
         refreshControl.backgroundColor = UIColor.secondaryColor()
         refreshControl.tintColor = UIColor.primaryColor()
         refreshControl.addTarget(self, action: #selector(reloadPetsAPI), for: .valueChanged)
         tableView.addSubview(refreshControl)
         
-        noPetsFound.isHidden = true
         UIApplication.shared.statusBarStyle = .lightContent
+        presenter.attachView(self)
     }
     
     @objc func reloadPetsAPI(){
@@ -44,6 +44,7 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        reloadPets()
         presenter.startPetsListUpdates()
         presenter.startPetsGPSUpdates { (id) in
             self.updateRow(by: id)
@@ -53,13 +54,11 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
-    private func updateRow(by id: Int16){
+    private func updateRow(by id: Int){
         
         debugPrint("Update Pet \(id)")
         if let index = self.pets[id] {
-            DispatchQueue.main.async {
-                self.tableView.reloadRows(at: [index], with: .automatic)
-            }
+            self.tableView.reloadRows(at: [index], with: .automatic)
         }else{
             self.errorMessage(ErrorMsg.init(title: "", msg: "WTF"))
         }
@@ -89,8 +88,9 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func petsNotFound() {
+        refreshControl.endRefreshing()
+        noPetsFound.isHidden = presenter.sharedPets.count != 0 || presenter.ownedPets.count != 0
         tableView.reloadData()
-        noPetsFound.isHidden = false
     }
     
         

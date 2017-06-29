@@ -18,14 +18,9 @@ class PetWeightTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if let weight = parentEditor.getWeight() {
-            
-//            weightAmountTextField.text = "\(weight.amount)"
-            weightAmountTextField.text = "\(weight)"
-        }
-        weightAmountTextField.becomeFirstResponder()
 
+        weightAmountTextField.text = parentEditor.pet.weightString
+        weightAmountTextField.becomeFirstResponder()
     }
 
     @IBAction func doneAction(_ sender: UIBarButtonItem?) {
@@ -36,7 +31,6 @@ class PetWeightTableViewController: UITableViewController {
                 if amount > Constants.maxWeight {
                     alert(title: "", msg: "This weight is too high")
                 }else{
-//                    set(Weight(amount))
                     set(amount)
                 }
             }else{
@@ -47,39 +41,13 @@ class PetWeightTableViewController: UITableViewController {
         }
     }
     
-//    private func set(_ weight: Weight?){
-//        parentEditor.set(weight: weight)
-//        parentEditor.refresh()
-//        _ = self.navigationController?.popViewController(animated: true)
-//    }
-    
-    private func set(_ weight: Double?){
-        parentEditor.set(weight: weight)
+    func set(_ weight: Double?){
+        parentEditor.pet.weight = weight
         parentEditor.refresh()
         _ = self.navigationController?.popViewController(animated: true)
+
     }
-    
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if indexPath.section == 0 {
-//            if indexPath.row == 0 {
-//                selectKg()
-//            }else if indexPath.row == 1 {
-//                selectLbs()
-//            }
-//        }
-    }
-    
-//    func selectKg(){
-//        kgCell.accessoryType = .checkmark
-//        lbsCell.accessoryType = .none
-//    }
-//    
-//    func selectLbs(){
-//        kgCell.accessoryType = .none
-//        lbsCell.accessoryType = .checkmark
-//    }
-    
+
     // MARK: - UITextFieldDelegate
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

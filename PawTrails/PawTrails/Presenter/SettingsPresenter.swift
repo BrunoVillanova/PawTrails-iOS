@@ -27,7 +27,7 @@ class SettingsPresenter {
     }
     
     func logout() {
-        if AuthManager.Instance.signOut() {
+        if DataManager.Instance.signOut() {
             self.view?.userNotSigned()
         }else{
             self.view?.errorMessage(ErrorMsg(title:"", msg:"Couldn't Logout"))
@@ -36,19 +36,13 @@ class SettingsPresenter {
     
     func changeNotification(value: Bool) {
         
-        var data = [String:Any]()
-        data["id"] = SharedPreferences.get(.id)
-        data["notification"] = value
-        
-        DataManager.Instance.save(user: data) { (error, user) in
-            DispatchQueue.main.async {
-                
-                if let error = error {
-                    self.view?.errorMessage(error.msg)
-                    self.view?.notificationValueChangeFailed()
-                }else{
-                    self.view?.notificationValueChanged()
-                }
+        DataManager.Instance.saveUserNotification(value) { (error) in
+            
+            if let error = error {
+                self.view?.errorMessage(error.msg)
+                self.view?.notificationValueChangeFailed()
+            }else{
+                self.view?.notificationValueChanged()
             }
         }
     }

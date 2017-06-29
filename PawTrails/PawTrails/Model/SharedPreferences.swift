@@ -17,8 +17,15 @@ public class SharedPreferences {
         case socialnetworkId = "socialnetworkId"
     }
     
-    static func get(_ p:key) -> String? {
-        return UserDefaults.standard.string(forKey: p.rawValue)
+    static func get(_ p:key) -> String {
+        if let value = UserDefaults.standard.string(forKey: p.rawValue) {
+            return value
+        }else if p == .id || p == .token {
+            (UIApplication.shared.delegate as? AppDelegate)?.loadAuthenticationScreen()
+            return ""
+        }else{
+            return ""
+        }
     }
     
     static func set(_ p:key, with:String) {
@@ -29,10 +36,10 @@ public class SharedPreferences {
     static func remove(_ p:key) -> Bool {
         UserDefaults.standard.removeObject(forKey: p.rawValue)
         UserDefaults.standard.synchronize()
-        return get(p) == nil
+        return get(p) == ""
     }
     
     static func has(_ p:key) -> Bool {
-        return get(p) != nil
+        return get(p) != ""
     }
 }

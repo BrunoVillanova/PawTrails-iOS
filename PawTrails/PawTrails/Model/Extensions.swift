@@ -144,6 +144,13 @@ extension Int {
     }
 }
 
+extension Int16 {
+    
+    public var toInt: Int{
+        return Int(self)
+    }
+}
+
 extension Dictionary {
     
     /// Returns a new dictionary filtering the specified keys
@@ -161,6 +168,7 @@ extension Dictionary {
     mutating func filter(by keys:[String]) {
         self = filtered(by: keys)
     }
+    
 }
 
 
@@ -202,6 +210,15 @@ extension Dictionary where Key == String, Value == Any {
         }
         
         return out
+    }
+    
+    init(object: Any) {
+        self.init()
+        for child in Mirror(reflecting: object).children {
+            if let key = child.label {
+                self[key] = child.value
+            }
+        }
     }
 }
 

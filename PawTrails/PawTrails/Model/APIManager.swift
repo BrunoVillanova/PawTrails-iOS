@@ -8,13 +8,7 @@
 
 import Foundation
 import SystemConfiguration
-
-public enum SocialMedia: String {
-    case facebook = "FB"
-    case google = "GL"
-    case twitter = "TW"
-    case weibo = "WB"
-}
+import SwiftyJSON
 
 /// The APICallType enum defines constants that can be used to specify the type of interactions that take place with the APIManager requests.
 public enum APICallType {
@@ -49,7 +43,7 @@ public enum APICallType {
         case .weiboLogin: return "/users/login/weibo"
         case .passwordChange: return "/users/changepsw"
         case .passwordReset: return "/users/resetpsw"
-        case .deleteUser: return "/test/deleteUser/\(key)"
+        case .deleteUser: return "/deleteUser/\(key)"
             
         case .getUser: return "/users/\(key)"
         case .setUser: return "/users/edit"
@@ -109,13 +103,13 @@ public enum APICallType {
 }
 
 
-
 /// The `APIManager` provides an infrastructure to communicate with the `RESTAPI`.
 class APIManager {
     
     static let Instance = APIManager()
     
     fileprivate static let mainURL = "http://eu.pawtrails.pet/api"
+    fileprivate static let mainURLTest = "http://eu.pawtrails.pet/test"
     
     fileprivate let boundary = "%%%PawTrails%%%"
     
@@ -150,36 +144,36 @@ class APIManager {
     /// - Parameters:
     ///   - call: The [APICallType](APIManager) defines the request.
     ///   - data: *Optional* includes the data sent as part of the request.
-    ///   - completition: Handles callback
+    ///   - callback: Handles callback
     ///   - error: An error object that indicates why the request failed, or `nil` if the request was successful.
     ///   - data: The data returned or `nil` if error.
-    func perform(call:APICallType, withKey key:Any = "", with data:[String:Any]? = nil, completition: @escaping (_ error:APIManagerError?,_ data:[String:Any]?) -> Void) {
+    func perform(call:APICallType, withKey key:Any = "", with data:[String:Any]? = nil, callback: @escaping (_ error:APIManagerError?,_ data:JSON?) -> Void) {
         
         if isConnectedToNetwork() {
         
             if let request = createRequest(for: call, with: key, and: data) {
                 
                 let task = URLSession.shared.dataTask(with: request) { data, response, error in
-                    
-                    if let error = error {
-                        debugPrint("Error -> \( error)")
-                        completition(APIManagerError(call: call, kind: .requestError, httpCode:nil, error: error, errorCode:nil), nil)
-                    }else{
-                        guard let httpResponse = response as? HTTPURLResponse else {
-                            completition(APIManagerError(call: call, kind: .httpResponseParse, httpCode: nil, error:nil, errorCode:nil), nil)
-                            return
+                    DispatchQueue.main.async {
+                        if let error = error {
+                            debugPrint("Error -> \( error)")
+                            callback(APIManagerError(call: call, kind: .requestError, httpCode:nil, error: error, errorCode:nil), nil)
+                        }else{
+                            guard let httpResponse = response as? HTTPURLResponse else {
+                                callback(APIManagerError(call: call, kind: .httpResponseParse, httpCode: nil, error:nil, errorCode:nil), nil)
+                                return
+                            }
+                            self.handleResponse(for: call, httpResponse.statusCode, data, callback)
                         }
-                        self.handleResponse(for: call, httpResponse.statusCode, data, completition)
                     }
                 }
-                
                 task.resume()
                 
             }else {
-                completition(APIManagerError(call: call, kind: .requestError, httpCode: nil, error: nil, errorCode: ErrorCode.WrongRequest), nil)
+                callback(APIManagerError(call: call, kind: .requestError, httpCode: nil, error: nil, errorCode: ErrorCode.WrongRequest), nil)
             }
         }else{
-            completition(APIManagerError(call: call, kind: .requestError, httpCode: nil, error: nil, errorCode: ErrorCode.NoConection), nil)
+            callback(APIManagerError(call: call, kind: .requestError, httpCode: nil, error: nil, errorCode: ErrorCode.NoConection), nil)
         }
         
     }
@@ -188,32 +182,20 @@ class APIManager {
     ///
     /// - Parameter data: input of information.
     /// - Returns: json answer as a `dictionary`
-    private func parseResponse(_ data:Data?) -> [String:Any]? {
-        if data == nil { return nil }
-        
-        do {
-            if let out = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as? [String:Any] {
-                debugPrint("JSON RS", out)
-                return out
-            }else if let rs = String(data: data!, encoding: String.Encoding.utf8) {
-                debugPrint("STRING RS", rs)
-                return nil
-            }else{
-                debugPrint("couldn't parse to string")
-                return nil
-            }
-            
-        } catch {
-            debugPrint("Error parsing to json -> \(error)","Output -> \(String(describing: String(data: data!, encoding: String.Encoding.utf8)))")
-            return nil
+    private func parseResponse(_ data:Data?) -> JSON? {
+        if let data = data {
+            let json =  JSON(data: data)
+            debugPrint(json.rawString() ?? "")
+            return json
         }
+        return nil
     }
     
-    private func handleResponse(for call: APICallType, _ code: Int, _ data: Data?, _ completition: @escaping (_ error:APIManagerError?, _ data:[String:Any]?) -> Void ) {
+    private func handleResponse(for call: APICallType, _ code: Int, _ data: Data?, _ callback: @escaping (_ error:APIManagerError?, _ data:JSON?) -> Void ) {
         if code.isSuccess {
-            completition(nil, parseResponse(data))
+            callback(nil, parseResponse(data))
         }else{
-            completition(handleError(call, code, data), nil)
+            callback(handleError(call, code, data), nil)
         }
     }
     
@@ -229,11 +211,11 @@ class APIManager {
             
             if httpCode.isClientError {
                 
-                guard let dict = parseResponse(data) else {
+                guard let jsonObject = parseResponse(data) else {
                     return APIManagerError(call: call, kind: .jsonParse, httpCode:nil, error:nil, errorCode:nil)
                 }
-                
-                let code = dict.tryCastInteger(for: "errors") ?? -1
+                debugPrint(jsonObject.rawString() ?? "")
+                let code = jsonObject.dictionaryObject?.tryCastInteger(for: "errors") ?? -1
                 return APIManagerError(call: call, kind: .clientError, httpCode: httpCode, error: nil, errorCode: ErrorCode(code: code))
                 
             }else if let data = data {
@@ -259,7 +241,8 @@ class APIManager {
         headers["cache-control"] = "no-cache"
         
         if call.requiresToken  {
-            if let token = SharedPreferences.get(.token) { headers["token"] = token }
+            let token = SharedPreferences.get(.token)
+            if token != "" { headers["token"] = token }
             else { debugPrint("missing token for \(call)") }
         }
         
@@ -350,10 +333,17 @@ fileprivate extension Int {
 fileprivate extension URL {
     
     init(_ call: APICallType, with key: Any) {
-        guard let url = URL(string: APIManager.mainURL + call.path(with: key)) else{
-            fatalError("Couldn't build URL \(call) \(APIManager.mainURL)")
+        if call == .deleteUser {
+            guard let url = URL(string: APIManager.mainURLTest + call.path(with: key)) else{
+                fatalError("Couldn't build URL \(call) \(APIManager.mainURL)")
+            }
+            self = url
+        }else{
+            guard let url = URL(string: APIManager.mainURL + call.path(with: key)) else{
+                fatalError("Couldn't build URL \(call) \(APIManager.mainURL)")
+            }
+            self = url
         }
-        self = url
     }
 }
 

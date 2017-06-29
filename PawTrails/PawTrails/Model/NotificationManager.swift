@@ -61,18 +61,20 @@ class NotificationManager {
     
     //GPSUpdates ALL
     
-    func postPetGPSUpdates(with id: Int16){
+    func postPetGPSUpdates(with id: Int){
         self.post(Listener(.gpsUpdates), userInfo: ["id":id])
         self.post(Listener(.gpsUpdates, id), userInfo: ["id":id])
     }
     
-    func getPetGPSUpdates(_ callback: @escaping ((_ id: Int16, _ data: GPSData)->())){
+    func getPetGPSUpdates(_ callback: @escaping ((_ id: Int, _ data: GPSData)->())){
         
         self.addObserver(Listener(.gpsUpdates)) { (notification) in
-            if let petId = notification.userInfo?["id"] as? Int16 {
+            if let petId = notification.userInfo?["id"] as? Int {
                 if let updates = SocketIOManager.Instance.getGPSData(for: petId) {
                     if updates.locationAndTime == "" && !updates.point.coordinates.isDefaultZero {  GeocoderManager.Intance.reverse(type: .pet, with: updates.point, for: petId) }
-                    callback(petId, updates)
+                    DispatchQueue.main.async {
+                        callback(petId, updates)
+                    }
                 }
             }
         }
@@ -84,19 +86,21 @@ class NotificationManager {
     
     //GPSUpdates ONE
     
-    func getPetGPSUpdates(for id: Int16, _ callback: @escaping ((_ id: Int16, _ data: GPSData)->())){
+    func getPetGPSUpdates(for id: Int, _ callback: @escaping ((_ id: Int, _ data: GPSData)->())){
         
         self.addObserver(Listener(.gpsUpdates, id)) { (notification) in
-            if let petId = notification.userInfo?["id"] as? Int16 {
+            if let petId = notification.userInfo?["id"] as? Int {
                 if let updates = SocketIOManager.Instance.getGPSData(for: petId) {
                     if updates.locationAndTime == "" && !updates.point.coordinates.isDefaultZero {  GeocoderManager.Intance.reverse(type: .pet, with: updates.point, for: petId) }
-                    callback(petId, updates)
+                    DispatchQueue.main.async {
+                        callback(petId, updates)
+                    }
                 }
             }
         }
     }
     
-    func removePetGPSUpdates(of id: Int16) {
+    func removePetGPSUpdates(of id: Int) {
         self.removeObserver(Listener(.gpsUpdates, id))
     }
     
@@ -109,7 +113,9 @@ class NotificationManager {
     func getPetListUpdates(_ callback: @escaping ((_ pets: [Pet]?)->())){
         
         self.addObserver(Listener(.petList)) { (notification) in
-            callback(notification.userInfo?["pets"] as? [Pet])
+            DispatchQueue.main.async {
+                callback(notification.userInfo?["pets"] as? [Pet])
+            }
         }
     }
     
@@ -126,7 +132,9 @@ class NotificationManager {
     func getPetGeoCodeUpdates(_ callback: @escaping ((_ code: Geocode?)->())){
         
         self.addObserver(Listener(.geoCode)) { (notification) in
-            callback(notification.userInfo?["code"] as? Geocode)
+            DispatchQueue.main.async {
+                callback(notification.userInfo?["code"] as? Geocode)
+            }
         }
     }
     
@@ -143,7 +151,9 @@ class NotificationManager {
     func getEventsUpdates(_ callback: @escaping ((_ event: Event?)->())){
         
         self.addObserver(Listener(.events)) { (notification) in
-            callback(notification.userInfo?["event"] as? Event)
+            DispatchQueue.main.async {
+                callback(notification.userInfo?["event"] as? Event)
+            }
         }
     }
     

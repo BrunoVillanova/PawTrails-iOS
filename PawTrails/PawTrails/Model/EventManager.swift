@@ -107,7 +107,7 @@ class EventManager {
     }
     
     private func updateSharedUsersUI(for petId: Int, in viewController: UIViewController?){
-        if let petProfile = viewController?.navigationController?.viewControllers.first(where: { $0 is PetProfileTableViewController }) as? PetProfileTableViewController, petProfile.pet.id == Int16(petId) {
+        if let petProfile = viewController?.navigationController?.viewControllers.first(where: { $0 is PetProfileTableViewController }) as? PetProfileTableViewController, petProfile.pet.id == petId {
             DispatchQueue.main.async {
                 petProfile.reloadUsers()
             }
@@ -120,7 +120,7 @@ class EventManager {
                 
                 if let petList = navigationController.viewControllers.first(where: { $0 is PetsViewController }) as? PetsViewController {
                     
-                    if isRemove, let petProfile = navigationController.viewControllers.first(where: { $0 is PetProfileTableViewController }) as? PetProfileTableViewController, petProfile.pet.id == Int16(petId) {
+                    if isRemove, let petProfile = navigationController.viewControllers.first(where: { $0 is PetProfileTableViewController }) as? PetProfileTableViewController, petProfile.pet.id == petId {
                         navigationController.popToRootViewController(animated: true)
                     }
                     petList.reloadPets()

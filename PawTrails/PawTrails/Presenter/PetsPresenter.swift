@@ -28,62 +28,61 @@ class PetsPresenter {
     
     func attachView(_ view: PetsView){
         self.view = view
-        self.getPets()
     }
     
     func deteachView() {
         self.view = nil
     }
-
+    
     func getPet(with id: Int) -> Pet? {
-        return pets.first(where: { $0.id == Int16(id) })
+        return pets.first(where: { $0.id == id })
     }
     
     func getPets() {
         
         DataManager.Instance.getPetsSplitted { (error, owned, shared) in
-            DispatchQueue.main.async {
-                if let error = error {
-                    if error.DBError == DatabaseError.NotFound {
-                        self.ownedPets.removeAll()
-                        self.sharedPets.removeAll()
-                        self.view?.petsNotFound()
-                    }else{
-                        self.view?.errorMessage(error.msg)
-                    }
-                }else if let owned = owned, let shared = shared {
-                    self.ownedPets = owned
-                    self.sharedPets = shared
-                    self.view?.loadPets()
-                }else{
+            
+            if let error = error {
+                if error.DBError == DatabaseError.NotFound {
                     self.ownedPets.removeAll()
                     self.sharedPets.removeAll()
+                    self.view?.petsNotFound()
+                }else{
+                    self.view?.errorMessage(error.msg)
                 }
+            }else if let owned = owned, let shared = shared {
+                self.ownedPets = owned
+                self.sharedPets = shared
+                self.view?.loadPets()
+            }else{
+                self.ownedPets.removeAll()
+                self.sharedPets.removeAll()
             }
+            
         }
     }
     
     func loadPets() {
+        
         DataManager.Instance.loadPets { (error, pets) in
-            DispatchQueue.main.async {
-                if let error = error {
-                    if error.DBError == DatabaseError.NotFound {
-                        self.ownedPets.removeAll()
-                        self.sharedPets.removeAll()
-                        self.view?.petsNotFound()
-                    }else{
-                        self.view?.errorMessage(error.msg)
-                    }
-                }else {
-                    self.getPets()
+            
+            if let error = error {
+                if error.DBError == DatabaseError.NotFound {
+                    self.ownedPets.removeAll()
+                    self.sharedPets.removeAll()
+                    self.view?.petsNotFound()
+                }else{
+                    self.view?.errorMessage(error.msg)
                 }
+            }else {
+                self.getPets()
             }
         }
     }
     
     //MARK:- Socket IO
     
-    func startPetsGPSUpdates(_ callback: @escaping ((_ id: Int16)->())){
+    func startPetsGPSUpdates(_ callback: @escaping ((_ id: Int)->())){
         
         NotificationManager.Instance.getPetGPSUpdates({ (id, data) in
             callback(id)
@@ -91,7 +90,6 @@ class PetsPresenter {
     }
     
     func stopPetGPSUpdates(){
-
         NotificationManager.Instance.removePetGPSUpdates()
     }
     
@@ -112,14 +110,12 @@ class PetsPresenter {
     func startPetsListUpdates(){
         NotificationManager.Instance.getPetListUpdates { (pets) in
             debugPrint("Time to update pets on list")
-            DispatchQueue.main.async {
-                if let pets = pets {
-                    self.ownedPets = pets.filter({ $0.isOwner })
-                    self.sharedPets = pets.filter({ !$0.isOwner })
-                    self.view?.loadPets()
-                }else {
-                    self.view?.petsNotFound()
-                }
+            if let pets = pets {
+                self.ownedPets = pets.filter({ $0.isOwner })
+                self.sharedPets = pets.filter({ !$0.isOwner })
+                self.view?.loadPets()
+            }else {
+                self.view?.petsNotFound()
             }
         }
     }
@@ -128,7 +124,6 @@ class PetsPresenter {
         NotificationManager.Instance.removePetListUpdates()
     }
     
-
     
     
     
@@ -162,5 +157,6 @@ class PetsPresenter {
     
     
     
-
+    
+    
 }

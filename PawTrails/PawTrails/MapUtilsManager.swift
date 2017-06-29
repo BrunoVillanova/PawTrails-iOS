@@ -17,11 +17,11 @@ public enum GeocodeType {
 public class Geocode{
     
     var type: GeocodeType
-    var id: Int16
+    var id: Int
     var location: CLLocation
     var placemark: CLPlacemark?
     
-    init(type: GeocodeType, id: Int16, location: CLLocation, placemark: CLPlacemark? = nil) {
+    init(type: GeocodeType, id: Int, location: CLLocation, placemark: CLPlacemark? = nil) {
         self.type = type
         self.id = id
         self.location = location
@@ -50,18 +50,18 @@ class GeocoderManager {
         sem = DispatchSemaphore(value: maxConcurrent)
     }
     
-    func reverse(type: GeocodeType, with point: Point, for id: Int16){
+    func reverse(type: GeocodeType, with point: Point, for id: Int){
         reverse(type: type, with: point.coordinates.location, for: id)
     }
     
-    func reverse(type: GeocodeType, with location: CLLocation, for id: Int16){
+    func reverse(type: GeocodeType, with location: CLLocation, for id: Int){
         
         let key = location.coordinateString
         
         if let placemark = cache.object(forKey: key as NSString) {
             deliver(Geocode(type: type, id: id, location: location, placemark: placemark))
         }else {
-//            debugPrint("Geocode requested: ", id)
+            debugPrint("Geocode requested: ", id)
             queue.async {
                 self.sem.wait()
                 self.geocoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) in
@@ -80,7 +80,7 @@ class GeocoderManager {
     private func deliver(_ geocode: Geocode){
         DispatchQueue.main.async {
             if let name = geocode.name {
-//                debugPrint("Geocode released: ", geocode.id)
+                debugPrint("Geocode released: ", geocode.id)
                 if geocode.type == .pet {
                     SocketIOManager.Instance.set(name, for: geocode.id)
                 }else if geocode.type == .safezone {
@@ -117,8 +117,8 @@ class SnapshotMapManager {
     
     func performSnapShot(with center: CLLocationCoordinate2D, topCenter: CLLocationCoordinate2D, shape: Shape, handler: @escaping ((UIImage?)->())){
         
-        _ = mapView.load(with: center, topCenter: topCenter, shape: shape, into: view, paintShapes: true)
-        
+        mapView.load(with: center, topCenter: topCenter, shape: shape, into: view, paintShapes: true)
+                
         let options = MKMapSnapshotOptions()
         options.region = self.mapView.region
         options.scale = UIScreen.main.scale

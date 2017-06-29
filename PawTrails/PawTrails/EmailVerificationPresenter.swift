@@ -16,7 +16,7 @@ protocol EmailVerificationView: NSObjectProtocol, View, LoadingView {
 class EmailVerificationPresenter {
     
     weak fileprivate var view: EmailVerificationView?
-
+    
     func attachView(_ view: EmailVerificationView){
         self.view = view
     }
@@ -28,31 +28,31 @@ class EmailVerificationPresenter {
     func sendVerificationEmail(email:String) {
         
         self.view?.beginLoadingContent()
-        AuthManager.Instance.sendPasswordReset(email, completition: { (error) in
-            DispatchQueue.main.async {
-                self.view?.endLoadingContent()
-                if let error = error {
-                    self.view?.errorMessage(error.msg)
-                }else{
-                    self.view?.emailSent()
-                }
+        DataManager.Instance.sendPasswordReset(email, callback: { (error) in
+            
+            self.view?.endLoadingContent()
+            if let error = error {
+                self.view?.errorMessage(error.msg)
+            }else{
+                self.view?.emailSent()
             }
+            
         })
     }
     
     func checkVerification(email:String, password: String) {
         
         self.view?.beginLoadingContent()
-        AuthManager.Instance.signIn(email, password) { (error) in
-            DispatchQueue.main.async {
-                self.view?.endLoadingContent()
-                if let error = error {
-                    
-                    self.view?.errorMessage(error.msg)
-                }else{
-                    self.view?.verified()
-                }
+        DataManager.Instance.signIn(email, password) { (error) in
+            
+            self.view?.endLoadingContent()
+            if let error = error {
+                
+                self.view?.errorMessage(error.msg)
+            }else{
+                self.view?.verified()
             }
+            
         }
     }
     

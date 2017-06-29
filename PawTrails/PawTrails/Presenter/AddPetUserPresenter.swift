@@ -33,50 +33,54 @@ class AddPetUserPresenter {
     
     func getFriends(for pet:Pet){
         DataManager.Instance.getPetFriends(for: pet) { (error, friends) in
-            DispatchQueue.main.async {
-                if error == nil, let friends = friends {
+
+            if error == nil, let friends = friends {
                     self.friends = friends
                     self.view?.loadFriends()
                 }else if let error = error {
                     self.view?.errorMessage(error.msg)
                 }
-            }
+
         }
     }
     
     func loadFriends(){
         
         DataManager.Instance.loadPetFriends { (error, friends) in
-            DispatchQueue.main.async {
-                if error == nil, let friends = friends {
+
+            if error == nil, let friends = friends {
                     self.friends = friends
                     self.view?.loadFriends()
                 }else if let error = error {
                     self.view?.errorMessage(error.msg)
                 }
-            }
+
         }
     }
     
-    func addPetUser(by email: String?, to petId: Int16?) {
+    func addPetUser(by email: String?, to petId: Int?) {
         
         if email == nil || (email != nil && !email!.isValidEmail) {
             view?.emailFormat()
-        }else if let petId = petId {
+        }else if let petId = petId, let email = email {
+            
             view?.beginLoadingContent()
-            var data = [String:Any]()
-            data["email"] = email
-            DataManager.Instance.addSharedUser(by: data, to: petId, callback: { (error, users) in
-                DispatchQueue.main.async {
-                    self.view?.endLoadingContent()
-                    if let error = error {
-                        self.view?.errorMessage(error.msg)
-                    }else{
-                        self.view?.successfullyAdded()
-                    }
+            DataManager.Instance.addSharedUser(by: email, to: petId, callback: { (error, users) in
+                
+                self.view?.endLoadingContent()
+                if let error = error {
+                    self.view?.errorMessage(error.msg)
+                }else{
+                    self.view?.successfullyAdded()
                 }
             })
         }
-        
     }
+    
+    
+    
+    
+    
+    
+    
 }

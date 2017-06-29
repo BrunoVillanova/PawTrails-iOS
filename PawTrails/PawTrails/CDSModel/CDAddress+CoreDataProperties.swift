@@ -1,19 +1,19 @@
 //
-//  Address+CoreDataProperties.swift
-//  PawTrails
+//  CDAddress+CoreDataProperties.swift
+//  
 //
-//  Created by Marc Perello on 16/05/2017.
-//  Copyright © 2017 AttitudeTech. All rights reserved.
+//  Created by Marc Perello on 26/06/2017.
+//
 //
 
 import Foundation
 import CoreData
 
 
-extension Address {
+extension CDAddress {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Address> {
-        return NSFetchRequest<Address>(entityName: "Address")
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<CDAddress> {
+        return NSFetchRequest<CDAddress>(entityName: "CDAddress")
     }
 
     @NSManaged public var city: String?
@@ -23,6 +23,6 @@ extension Address {
     @NSManaged public var line2: String?
     @NSManaged public var postal_code: String?
     @NSManaged public var state: String?
-    @NSManaged public var user: User?
+    @NSManaged public var user: CDUser?
 
 }

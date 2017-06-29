@@ -24,46 +24,40 @@ class PetUserPresenter {
         self.view = nil
     }
     
-    func removePet(with id: Int16) {
+    func removePet(with id: Int) {
+        
         view?.beginLoadingContent()
         DataManager.Instance.removePet(id) { (error) in
-            DispatchQueue.main.async {
-                self.view?.endLoadingContent()
-                if let error = error {
-                    self.view?.errorMessage(error.msg)
-                }else{
-                    self.view?.removed()
-                }
+            self.view?.endLoadingContent()
+            if let error = error {
+                self.view?.errorMessage(error.msg)
+            }else{
+                self.view?.removed()
             }
         }
     }
     
-    func leavePet(with id: Int16) {
+    func leavePet(with id: Int) {
+        
         view?.beginLoadingContent()
         DataManager.Instance.leaveSharedPet(by: id) { (error) in
-            DispatchQueue.main.async {
-                self.view?.endLoadingContent()
-                if let error = error {
-                    self.view?.errorMessage(error.msg)
-                }else{
-                    self.view?.removed()
-                }
+            self.view?.endLoadingContent()
+            if let error = error {
+                self.view?.errorMessage(error.msg)
+            }else{
+                self.view?.removed()
             }
         }
     }
     
-    func removePetUser(with id: Int16, from petId: Int16) {
+    func removePetUser(with id: Int, from petId: Int) {
         view?.beginLoadingContent()
-        var data = [String:Any]()
-        data["user_id"] = id
-        DataManager.Instance.removeSharedUser(by: data, to: petId) { (error) in
-            DispatchQueue.main.async {
-                self.view?.endLoadingContent()
-                if let error = error {
-                    self.view?.errorMessage(error.msg)
-                }else{
-                    self.view?.removed()
-                }
+        DataManager.Instance.removeSharedUser(by: id, from: petId) { (error) in
+            self.view?.endLoadingContent()
+            if let error = error {
+                self.view?.errorMessage(error.msg)
+            }else{
+                self.view?.removed()
             }
         }
     }

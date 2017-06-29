@@ -28,38 +28,38 @@ class UpdateManager {
     }
     
     func addPet(_ data: [String:Any], callback: @escaping (()->())){
-        DataManager.Instance.addPetDB(data) { (error, pet) in
-            if (error != nil) || pet == nil {
-                debugPrint(error ?? "no error")
-            }else{
-                callback()
-            }
-        }
+//        DataManager.Instance.addPetDB(data) { (error, pet) in
+//            if (error != nil) || pet == nil {
+//                debugPrint(error ?? "no error")
+//            }else{
+//                callback()
+//            }
+//        }
     }
     
     func removePet(by id:Int, _ callback: @escaping (()->())) {
-        DataManager.Instance.removePetDB(Int16(id)) { (error) in
-            if let error = error {
-                debugPrint(error)
-            }else{
-                callback()
-            }
-        }
+//        DataManager.Instance.removePetDB(Int(id)) { (error) in
+//            if let error = error {
+//                debugPrint(error)
+//            }else{
+//                callback()
+//            }
+//        }
     }
     
     func addSharedUser(with data: [String:Any], for id: Int, _ callback: @escaping (()->())) {
-        DataManager.Instance.addSharedUserDB(with: data, to: Int16(id)) { (error, users) in
-            if error != nil || users == nil {
-                debugPrint(error ?? "no error", users ?? "no pet users")
-            }else{
-                callback()
-            }
-        }
+//        DataManager.Instance.addSharedUserDB(with: data, to: Int(id)) { (error, users) in
+//            if error != nil || users == nil {
+//                debugPrint(error ?? "no error", users ?? "no pet users")
+//            }else{
+//                callback()
+//            }
+//        }
     }
     
     func removeSharedUser(with id: Int, from petId: Int, _ callback: @escaping (()->())) {
         
-        DataManager.Instance.removeSharedUserDB(id: Int16(id), from: Int16(petId)) { (error) in
+        DataManager.Instance.removeSharedUserDB(id: Int(id), from: Int(petId)) { (error) in
             if let error = error {
                 debugPrint(error)
             }else{

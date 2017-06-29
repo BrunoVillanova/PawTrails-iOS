@@ -34,14 +34,13 @@ class PasswordRecoveryPresenter {
             self.view?.emailNotChecked()
         }else{
             self.view?.beginLoadingContent()
-            AuthManager.Instance.sendPasswordReset(email, completition: { (error) in
-                DispatchQueue.main.async {
-                    self.view?.endLoadingContent()
-                    if let error = error {
-                        self.view?.errorMessage(error.msg)
-                    }else{
-                        self.view?.emailSent()
-                    }
+            DataManager.Instance.sendPasswordReset(email, callback: { (error) in
+                
+                self.view?.endLoadingContent()
+                if let error = error {
+                    self.view?.errorMessage(error.msg)
+                }else{
+                    self.view?.emailSent()
                 }
             })
         }

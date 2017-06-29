@@ -74,7 +74,8 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
             if type == .pet {
                 self.load(locationAndTime: name)
             }else if type == .safezone {
-                self.safeZonesCollectionView.reloadData()
+                self.presenter.loadPet(with: self.pet.id)
+//                self.safeZonesCollectionView.reloadData()
             }
         })
        
@@ -110,15 +111,16 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
     }
     
     func load(_ pet: Pet) {
+        self.pet = pet
         navigationItem.title = pet.name
         if let imageData = pet.image {
             petImageView.image = UIImage(data: imageData as Data)
         }
         
-        breedLabel.text = pet.breeds
-        genderLabel.text = Gender(rawValue: pet.gender)?.name
+        breedLabel.text = pet.breedsString
+        genderLabel.text = pet.gender?.name
         typeLabel.text = pet.typeString
-        weightLabel.text = pet.weight.toWeightString
+        weightLabel.text = pet.weightString
         birthdayLabel.text = pet.birthday?.toStringShow
         neuteredLabel.text = pet.neutered ? "Yes" : "No"
 
@@ -126,10 +128,8 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
         changeTableViewCell.isHidden = !pet.isOwner
         
         if let data = SocketIOManager.Instance.getGPSData(for: pet.id) {
-            DispatchQueue.main.async {
-                self.load(data: data)
-                self.load(locationAndTime: data.locationAndTime)
-            }
+            self.load(data: data)
+            self.load(locationAndTime: data.locationAndTime)
         }
         
         tableView.reloadData()
@@ -141,7 +141,8 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
     }
     
     func loadSafeZones() {
-        safezonesTableViewCell.isHidden = presenter.safezones.count == 0
+        
+        if self.presenter.safezones.count == 0 { return }
         
         let safezonesGroup = DispatchGroup()
         
@@ -157,29 +158,26 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
                 GeocoderManager.Intance.reverse(type: .safezone, with: center, for: safezone.id)
             }
             // Map
-            if safezone.preview == nil {
-                guard let center = safezone.point1?.coordinates else {
-                    debugPrint("No center point found!")
-                    continue
-                }
-                guard let topCenter = safezone.point2?.coordinates else {
-                    debugPrint("No topcenter point found!")
-                    continue
-                }
-                guard let shape = Shape(rawValue: safezone.shape) else {
-                    debugPrint("No shape found!")
-                    continue
-                }
-                safezonesGroup.enter()
-//                debugPrint("map", safezone.id)
-                self.buildMap(center: center, topCenter: topCenter, shape: shape, handler: { (image) in
-                    if let image = image, let data = UIImagePNGRepresentation(image) {
-//                        safezone.preview = data
-                        self.presenter.set(imageData: data, for: safezone.id)
-                    }
-                    safezonesGroup.leave()
-                })
-            }
+//            if safezone.preview == nil {
+//                guard let center = safezone.point1?.coordinates else {
+//                    debugPrint("No center point found!")
+//                    continue
+//                }
+//                guard let topCenter = safezone.point2?.coordinates else {
+//                    debugPrint("No topcenter point found!")
+//                    continue
+//                }
+//
+//                safezonesGroup.enter()
+////                debugPrint("map", safezone.id)
+//                self.buildMap(center: center, topCenter: topCenter, shape: safezone.shape, handler: { (image) in
+//                    if let image = image, let data = UIImagePNGRepresentation(image) {
+////                        safezone.preview = data
+//                        self.presenter.set(imageData: data, for: safezone.id)
+//                    }
+//                    safezonesGroup.leave()
+//                })
+//            }
         }
         
         safezonesGroup.notify(queue: .main, execute: {
@@ -277,7 +275,7 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if indexPath.section == 2 && ((indexPath.row == 0 && safezonesTableViewCell.isHidden) || (indexPath.row == 1 && safezonesTableViewCell.isHidden)){
+        if (indexPath.section == 2 && self.presenter.users.count == 0) || (indexPath.section == 3 && self.presenter.safezones.count == 0) {
             return 0
         }else if indexPath.section == 0 && indexPath.row == 1 && breedLabel.text != nil && breedLabel.text != "" {
 
@@ -291,7 +289,6 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
         }else{
             return super.tableView(tableView, heightForRowAt: indexPath)
         }
-        
     }
     
     // MARK: - UITableViewDelegate
@@ -390,9 +387,7 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
         let safezone = presenter.safezones[sender.tag]
         presenter.setSafeZoneStatus(id: safezone.id, petId: pet.id, status: sender.isOn) { (success) in
             if !success {
-                DispatchQueue.main.async {
-                    sender.isOn = !sender.isOn
-                }
+                sender.isOn = !sender.isOn
             }else if success && sender.isOn {
                 self.popUp(title: "Hey", msg: "Turned On")
             }else if success && !sender.isOn {
@@ -430,8 +425,6 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
             }
         }
     }
-    
-    
     
     var lastContentOffsetAtY : CGFloat = 0.0
     override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {

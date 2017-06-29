@@ -32,13 +32,11 @@ class PetBreedsPresenter {
         
         DataManager.Instance.getBreeds(for: type, callback: { (error, breeds) in
             
-            DispatchQueue.main.async {
-                if error == nil, let breeds = breeds {
-                    self.breeds = breeds
-                    self.view?.loadBreeds()
-                }else{
-                    self.view?.breedsNotFound()
-                }
+            if error == nil, let breeds = breeds {
+                self.breeds = breeds
+                self.view?.loadBreeds()
+            }else{
+                self.view?.breedsNotFound()
             }
         })
     }
@@ -46,14 +44,11 @@ class PetBreedsPresenter {
     func loadBreeds(for type: Type) {
         
         DataManager.Instance.loadBreeds(for: type, callback: { (error, breeds) in
-            
-            DispatchQueue.main.async {
-                if error == nil, let breeds = breeds {
-                    self.breeds = breeds
-                    self.view?.loadBreeds()
-                }else{
-                    self.view?.breedsNotFound()
-                }
+            if error == nil, let breeds = breeds {
+                self.breeds = breeds
+                self.view?.loadBreeds()
+            }else{
+                self.view?.breedsNotFound()
             }
         })
     }
