@@ -18,6 +18,7 @@ class EmailVerificationViewController: UIViewController, EmailVerificationView {
     fileprivate let presenter = EmailVerificationPresenter()
     
     var email:String!
+    var password: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,16 +33,15 @@ class EmailVerificationViewController: UIViewController, EmailVerificationView {
         signOutButton.tintColor = UIColor.primaryColor()
         signOutButton.border(color: UIColor.primaryColor(), width: 1.0)
         emailLabel.text = email
+        setTopBar()
     }
-    
-    
-    
+
     deinit {
         presenter.deteachView()
     }
     
     @IBAction func checkAction(_ sender: UIButton) {
-        presenter.checkVerification(email: email)
+        presenter.checkVerification(email: email, password: password)
     }
 
     @IBAction func sendEmailAgainAction(_ sender: UIButton) {

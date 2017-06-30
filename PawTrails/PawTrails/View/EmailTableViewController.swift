@@ -17,7 +17,7 @@ class EmailTableViewController: UITableViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
-        emailTextField.text = parentEditor.getEmail()
+        emailTextField.text = parentEditor.user.email
         if #available(iOS 10.0, *) {
             emailTextField.textContentType = UITextContentType.emailAddress
         }
@@ -28,7 +28,7 @@ class EmailTableViewController: UITableViewController, UITextFieldDelegate {
         if emailTextField.text != nil && emailTextField.text != "" && !emailTextField.text!.isValidEmail {
             emailTextField.shake()
         }else{
-            parentEditor.set(email: emailTextField.text)
+            parentEditor.user.email = emailTextField.text
             parentEditor.refresh()
             view.endEditing(true)
             _ = self.navigationController?.popViewController(animated: true)

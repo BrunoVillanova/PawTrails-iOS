@@ -32,27 +32,21 @@ extension UIViewController {
     func popUp(title:String, msg:String, actionTitle: String = "Ok", handler: ((UIAlertAction)->Void)? = nil){
         let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: actionTitle, style: .default, handler: handler))
-        DispatchQueue.main.async {
-            self.present(alert, animated: true, completion: nil)
-        }
+        self.present(alert, animated: true, completion: nil)
     }
     
     func popUpDestructive(title:String, msg:String, cancelHandler: ((UIAlertAction)->Void)?, proceedHandler: ((UIAlertAction)->Void)?){
         let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: cancelHandler))
         alert.addAction(UIAlertAction(title: "Proceed", style: .destructive, handler: proceedHandler))
-        DispatchQueue.main.async {
-            self.present(alert, animated: true, completion: nil)
-        }
+        self.present(alert, animated: true, completion: nil)
     }
     
     func popUp(title:String, msg:String, cancelHandler: ((UIAlertAction)->Void)?, proceedHandler: ((UIAlertAction)->Void)?){
         let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: cancelHandler))
         alert.addAction(UIAlertAction(title: "Proceed", style: .default, handler: proceedHandler))
-        DispatchQueue.main.async {
-            self.present(alert, animated: true, completion: nil)
-        }
+        self.present(alert, animated: true, completion: nil)
     }
     
     func popUpUserLocationDenied(){
@@ -95,21 +89,15 @@ extension UIViewController {
         alert.addAction(UIAlertAction(title: "Take a Photo", style: .default, handler: { (photo) in
             imagePicker.allowsEditing = true
             imagePicker.sourceType = .camera
-            DispatchQueue.main.async {
-                self.present(imagePicker, animated: true, completion: nil)
-            }
+            self.present(imagePicker, animated: true, completion: nil)
         }))
         alert.addAction(UIAlertAction(title: "Choose from Gallery", style: .default, handler: { (galery) in
             imagePicker.allowsEditing = true
             imagePicker.sourceType = .photoLibrary
-            DispatchQueue.main.async {
-                self.present(imagePicker, animated: true, completion: nil)
-            }
+            self.present(imagePicker, animated: true, completion: nil)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        DispatchQueue.main.async {
-            self.present(alert, animated: true, completion: nil)
-        }
+        self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func dismissAction(sender: UIButton?){
@@ -176,8 +164,9 @@ extension UIViewController {
     // Loading View
     
     func showLoadingView() {
-        let loadingView = UIVisualEffectView(frame: view.bounds)
-        loadingView.effect = UIBlurEffect.init(style: .extraLight)
+        
+        let loadingView = UIVisualEffectView(frame: UIScreen.main.bounds)
+        loadingView.effect = UIBlurEffect(style: .extraLight)
         loadingView.tag = subviewId.loading.rawValue
         
         let activity = UIActivityIndicatorView(frame: view.bounds)
@@ -187,25 +176,32 @@ extension UIViewController {
         
         loadingView.addSubview(activity)
         
-        loadingView.contentView.alpha = 0.0
+        loadingView.effect = nil
+        activity.alpha = 0.0
+        
         DispatchQueue.main.async {
-            self.view.addSubview(loadingView)
+            UIApplication.shared.keyWindow?.addSubview(loadingView)
             UIView.animate(withDuration: 0.6) {
-                loadingView.contentView.alpha = 1.0
+                loadingView.effect = UIBlurEffect(style: .extraLight)
+                activity.alpha = 1.0
             }
         }
     }
     
     func hideLoadingView() {
-        if let loadingView = view.subviews.first(where: { $0.tag == subviewId.loading.rawValue }) as? UIVisualEffectView {
-            DispatchQueue.main.async {
-                UIView.animate(withDuration: 0.4, animations: {
-                    loadingView.contentView.alpha = 0.0
-                }, completion: { (success) in
-                    if success {
-                        loadingView.removeFromSuperview()
-                    }
-                })
+        if let loadingView = UIApplication.shared.keyWindow?.subviews.first(where: { $0.tag == subviewId.loading.rawValue }) as? UIVisualEffectView {
+            
+            if let activity = loadingView.subviews.first(where: { $0.tag == subviewId.activity.rawValue }) as? UIActivityIndicatorView {
+                DispatchQueue.main.async {
+                    UIView.animate(withDuration: 0.4, animations: {
+                        loadingView.effect = nil
+                        activity.alpha = 0.0
+                    }, completion: { (success) in
+                        if success {
+                            loadingView.removeFromSuperview()
+                        }
+                    })
+                }
             }
         }
     }

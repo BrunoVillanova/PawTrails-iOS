@@ -16,11 +16,9 @@ protocol PetView: NSObjectProtocol, View {
     func petRemoved()
 }
 
-
 class PetPresenter {
     
     weak private var view: PetView?
-    
     
     var users = [PetUser]()
     var safezones = [SafeZone]()
@@ -28,240 +26,184 @@ class PetPresenter {
     func attachView(_ view: PetView, pet:Pet?){
         self.view = view
         
-        
-        if let users = pet?.sharedUsers { self.users = users }
-        if let safezones = pet?.sortedSafeZones {
-            self.safezones = safezones
-        }
+        if let users = pet?.users { self.users = users }
+        if let safezones = pet?.safezones { self.safezones = safezones }
     }
     
     func deteachView() {
         self.view = nil
     }
     
-    
-    
-    
     //MARK:- Pet
     
-    func getPet(with id: Int16) {
+    func getPet(with id: Int) {
         
-        DataManager.Instance.getPet(id) { (error, pet) in
-            DispatchQueue.main.async {
-                if let error = error {
-                    if error.DBError == DatabaseError.NotFound {
-                        self.view?.petNotFound()
-                    }else{
-                        self.view?.errorMessage(error.msg)
-                    }
-                }else if let pet = pet {
-                    if let petUsers = pet.sharedUsers {
-                        self.users = petUsers
-                    }
-                    if let safezones = pet.sortedSafeZones {
-                        self.safezones = safezones
-                    }
-                    self.view?.load(pet)
+        DataManager.Instance.getPet(by: id) { (error, pet) in
+            
+            if let error = error {
+                if error.DBError?.type == DatabaseErrorType.NotFound {
+                    self.view?.petNotFound()
+                }else{
+                    self.view?.errorMessage(error.msg)
                 }
+            }else if let pet = pet {
+                if let users = pet.users { self.users = users }
+                if let safezones = pet.safezones { self.safezones = safezones }
+                self.view?.load(pet)
             }
         }
     }
     
-    func loadPet(with id: Int16) {
+    func loadPet(with id: Int) {
         
-        DispatchQueue.global(qos: .background).async {
-            DataManager.Instance.loadPet(id) { (error, pet) in
-                DispatchQueue.main.async {
-                    if let error = error {
-                        if error.DBError == DatabaseError.NotFound {
-                            self.view?.petNotFound()
-                        }else{
-                            self.view?.errorMessage(error.msg)
-                        }
-                    }else if let pet = pet {
-                        self.view?.load(pet)
-                    }
-                }
-            }
+        DataManager.Instance.loadPet(id) { (error, pet) in
             
+            if let error = error {
+                if error.DBError?.type == DatabaseErrorType.NotFound {
+                    self.view?.petNotFound()
+                }else{
+                    self.view?.errorMessage(error.msg)
+                }
+            }else if let pet = pet {
+                self.view?.load(pet)
+            }
         }
     }
     
-    func removePet(with id: Int16) {
+    func removePet(with id: Int) {
         
-        DispatchQueue.global(qos: .background).async {
-            DataManager.Instance.removePet(id) { (error) in
-                DispatchQueue.main.async {
-                    if let error = error {
-                        self.view?.errorMessage(error.msg)
-                    }else{
-                        self.view?.petRemoved()
-                    }
-                }
+        DataManager.Instance.removePet(id) { (error) in
+            if let error = error {
+                self.view?.errorMessage(error.msg)
+            }else{
+                self.view?.petRemoved()
             }
-            
         }
     }
     
     //MARK:- Users
     
-    func leavePet(with id: Int16) {
+    func leavePet(with id: Int) {
         
-        DispatchQueue.global(qos: .background).async {
-            DataManager.Instance.leaveSharedPet(by: id) { (error) in
-                DispatchQueue.main.async {
-                    if let error = error {
-                        self.view?.errorMessage(error.msg)
-                    }else{
-                        self.view?.petRemoved()
-                    }
-                }
-                
+        DataManager.Instance.leaveSharedPet(by: id) { (error) in
+            
+            if let error = error {
+                self.view?.errorMessage(error.msg)
+            }else{
+                self.view?.petRemoved()
             }
         }
     }
     
-    func loadPetUsers(for id: Int16){
+    func loadPetUsers(for id: Int){
         
-        DispatchQueue.global(qos: .background).async {
-            DataManager.Instance.loadSharedPetUsers(for: id) { (error, users) in
-                if error == nil && users != nil {
-                    DataManager.Instance.getPet(id) { (error, pet) in
-                        DispatchQueue.main.async {
-                            if let error = error {
-                                if error.DBError == DatabaseError.NotFound {
-                                    self.view?.petNotFound()
-                                }else{
-                                    self.view?.errorMessage(error.msg)
-                                }
-                            }else if let pet = pet {
-                                if let petUsers = pet.sharedUsers {
-                                    self.users = petUsers
-                                }
-                                self.view?.loadUsers()
-                            }
+        DataManager.Instance.loadSharedPetUsers(for: id) { (error, users) in
+            if error == nil && users != nil {
+                DataManager.Instance.getPet(by: id) { (error, pet) in
+                    if let error = error {
+                        if error.DBError?.type == DatabaseErrorType.NotFound {
+                            self.view?.petNotFound()
+                        }else{
+                            self.view?.errorMessage(error.msg)
                         }
-                    }
-                }else if let error = error {
-                    DispatchQueue.main.async {
-                        self.view?.errorMessage(error.msg)
-                    }
-                }else{
-                    DispatchQueue.main.async {
-                        self.view?.errorMessage(DataManagerError.init(DBError: DatabaseError.NotFound).msg)
+                    }else if let pet = pet {
+                        if let petUsers = pet.users {
+                            self.users = petUsers
+                        }
+                        self.view?.loadUsers()
                     }
                 }
-                
+            }else if let error = error {
+                self.view?.errorMessage(error.msg)
+            }else{
+                self.view?.errorMessage(ErrorMsg.init(title: "", msg: "Unknown Error"))
             }
         }
     }
     
     //MARK:- Safe Zones
     
-    func loadSafeZones(for id: Int16){
+    func loadSafeZones(for id: Int){
         
-        DispatchQueue.global(qos: .background).async {
-            DataManager.Instance.loadSafeZones(of: id) { (error) in
-                if let error = error {
-                    DispatchQueue.main.async {
-                        self.view?.errorMessage(error.msg)
-                    }
-                }else {
-                    DataManager.Instance.getPet(id) { (error, pet) in
-                        DispatchQueue.main.async {
-                            if let error = error {
-                                if error.DBError == DatabaseError.NotFound {
-                                    self.view?.petNotFound()
-                                }else{
-                                    self.view?.errorMessage(error.msg)
-                                }
-                            }else if let pet = pet {
-                                if let safezones = pet.sortedSafeZones {
-                                    self.safezones = safezones
-                                }
-                                self.view?.loadSafeZones()
-                            }
+        DataManager.Instance.loadSafeZones(of: id) { (error) in
+            if let error = error {
+                self.view?.errorMessage(error.msg)
+            }else {
+                DataManager.Instance.getPet(by: id) { (error, pet) in
+                    if let error = error {
+                        if error.DBError?.type == DatabaseErrorType.NotFound {
+                            self.view?.petNotFound()
+                        }else{
+                            self.view?.errorMessage(error.msg)
                         }
+                    }else if let pet = pet {
+                        if let safezones = pet.safezones {
+                            self.safezones = safezones
+                        }
+                        self.view?.loadSafeZones()
                     }
                 }
             }
-            
         }
     }
     
-    func set(safezone: SafeZone, imageData:Data){
-        DataManager.Instance.setSafeZone(safezone, imageData: imageData)
-    }
-    
-    func set(safezone: SafeZone, address:String){
-        DataManager.Instance.setSafeZone(safezone, address: address)
-    }
-    
-    func set(safezoneId: Int16, address:String){
-        
-        if let safezone = safezones.first(where: { $0.id == safezoneId }) {
-            DataManager.Instance.setSafeZone(safezone, address: address)
-        }else{
-            debugPrint("AHHHHHHHHH", safezoneId, address)
+    func set(address:String, for id: Int, callback: @escaping (ErrorMsg?)->()){
+        DataManager.Instance.setSafeZone(address: address, for: id) { (error) in
+            callback(error?.msg)
         }
     }
     
-    func setSafeZoneStatus(id: Int16, petId: Int16, status: Bool, callback: @escaping (Bool)->() ){
+    func set(imageData:Data, for id: Int, callback: @escaping (ErrorMsg?)->()){
+        DataManager.Instance.setSafeZone(imageData: imageData, for: id) { (error) in
+            callback(error?.msg)
+        }
+    }
+    
+    func setSafeZoneStatus(id: Int, petId: Int, status: Bool, callback: @escaping (Bool)->() ){
         
-        DispatchQueue.global(qos: .background).async {
-            DataManager.Instance.setSafeZoneStatus(enabled: status, for: id, into: petId) { (error) in
-                DispatchQueue.main.async {
-                    if let error = error {
-                        self.view?.errorMessage(error.msg)
-                        callback(false)
-                    }else{
-                        self.loadSafeZones(for: petId)
-                        callback(true)
-                    }
-                }
-                
+        DataManager.Instance.setSafeZoneStatus(status: status, for: id, into: petId) { (error) in
+            if let error = error {
+                self.view?.errorMessage(error.msg)
+                callback(false)
+            }else{
+                self.loadSafeZones(for: petId)
+                callback(true)
             }
         }
     }
     
     //MARK:- Socket IO
     
-    func startPetsGPSUpdates(for id: Int16, _ callback: @escaping ((GPSData)->())){
-        DispatchQueue.global(qos: .background).async {
-            NotificationManager.Instance.getPetGPSUpdates { (id, data) in
-                if id == id {
-                    DispatchQueue.main.async {
-                        callback(data)
-                    }
-                    GeocoderManager.Intance.reverse(type: .pet, with: data.point, for: id)
-                }
-            }
-        }
+    func startPetsGPSUpdates(for id: Int, _ callback: @escaping ((GPSData)->())){
+        
+        NotificationManager.Instance.getPetGPSUpdates(for: id, { (id, data) in
+            callback(data)
+        })
     }
     
-    func stopPetGPSUpdates(){
-        DispatchQueue.global(qos: .background).async {
-            NotificationManager.Instance.removePetGPSUpdates()
-        }
+    func stopPetGPSUpdates(of id: Int){
+        NotificationManager.Instance.removePetGPSUpdates(of: id)
     }
     
     //MARK:- Geocode
     
-    func startPetsGeocodeUpdates(for id: Int16, _ callback: @escaping ((GeocodeType, String)->())){
-        DispatchQueue.global(qos: .background).async {
-            NotificationManager.Instance.getPetGeoCodeUpdates { (code) in
+    func startPetsGeocodeUpdates(for id: Int, _ callback: @escaping ((GeocodeType, String)->())){
+        NotificationManager.Instance.getPetGeoCodeUpdates { (code) in
+            
+            if let code = code {
                 
-                if let code = code {
-                    
-                    if (code.type == .pet && code.id == id) || code.type == .safezone {
-                        if code.type == .safezone, let name = code.placemark?.name {
-                            self.set(safezoneId: code.id, address: name)
-                        }
-                        if let name = code.name {
-                            DispatchQueue.main.async {
-                                callback(code.type, name)
+                if (code.type == .pet && code.id == id) || code.type == .safezone {
+                    if code.type == .safezone, let name = code.placemark?.name {
+                        self.set(address: name, for: code.id) { (msg) in
+                            if let msg = msg {
+                                self.view?.errorMessage(msg)
+                            }else{
+                                callback(code.type, code.name)
                             }
                         }
+                        
+                    }else{
+                        callback(code.type, code.name)
                     }
                 }
             }
@@ -269,8 +211,6 @@ class PetPresenter {
     }
     
     func stopPetsGeocodeUpdates(){
-        DispatchQueue.global(qos: .background).async {
-            NotificationManager.Instance.removePetGeoCodeUpdates()
-        }
+        NotificationManager.Instance.removePetGeoCodeUpdates()
     }
 }

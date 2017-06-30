@@ -20,7 +20,7 @@ class PetBirthdayTableViewController: UITableViewController {
         
         birthdayPicker.maximumDate = Date()
         
-        if let birthday = parentEditor.getBirthday() {
+        if let birthday = parentEditor.pet.birthday {
             birthdayPicker.setDate(birthday, animated: false)
         }
         
@@ -28,7 +28,7 @@ class PetBirthdayTableViewController: UITableViewController {
     }
     
     @IBAction func doneAction(_ sender: UIBarButtonItem) {
-        parentEditor.set(birthday: birthdayPicker.date)
+        parentEditor.pet.birthday = birthdayPicker.date
         parentEditor.refresh()
         _ = self.navigationController?.popViewController(animated: true)
     }

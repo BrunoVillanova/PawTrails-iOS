@@ -25,7 +25,7 @@ class ScanQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
     fileprivate var isCheckingCode: Bool = false
     fileprivate var attempts: Int = 0
 
-    var petId:Int16 = -1
+    var petId:Int = -1
 
     override func viewDidLoad() {
         super.viewDidLoad()

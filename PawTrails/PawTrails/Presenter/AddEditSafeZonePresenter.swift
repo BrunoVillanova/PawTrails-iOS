@@ -11,85 +11,82 @@ import Foundation
 protocol AddEditSafeZoneView: NSObjectProtocol, View, LoadingView {
     func success()
     func missingName()
+    func petLocationFailed()
 }
 
 class AddEditSafeZonePresenter {
     
     weak fileprivate var view: AddEditSafeZoneView?
     
-    
-    func attachView(_ view: AddEditSafeZoneView){
+    func attachView(_ view: AddEditSafeZoneView, safezone: SafeZone?){
         self.view = view
-        
     }
     
     func deteachView() {
         self.view = nil
     }
     
-    
-    
-    func addEditSafeZone(safezoneId: Int16, name: String?, shape: Shape, active: Bool, points: (Point,Point), into petId: Int16){
+    func addEditSafeZone(safezoneId: Int, name: String?, shape: Shape, active: Bool, points: (Point,Point), into petId: Int){
         
-if name == nil || (name != nil && name == "") {
+        if name == nil || (name != nil && name == "") {
             view?.missingName()
         }else{
             
-            var data = [String:Any]()
-            data["name"] = name
-            data["shape"] = shape.code
-            data["point1"] = points.0.toDict
-            data["point2"] = points.1.toDict
-            data["active"] = active
+            let safezone = SafeZone(id: safezoneId, name: name, point1: points.0, point2: points.1, shape: shape, active: active, address: nil, preview: nil)
             
-            if safezoneId != -1 {
-                data["id"] = safezoneId
-                DataManager.Instance.setSafeZone(by: data, to: petId, callback: { (error) in
-                    DispatchQueue.main.async {
-                        if let error = error {
-                            self.view?.errorMessage(error.msg)
-                        }else{
-                            self.view?.success()
-                        }
-                    }
-                })
-            }else{
-                data["petid"] = petId
-                DataManager.Instance.addSafeZone(by: data, to: petId, callback: { (error, _) in
-                    DispatchQueue.main.async {
-                        if let error = error {
-                            self.view?.errorMessage(error.msg)
-                        }else{
-                            self.view?.success()
-                        }
-                    }
-                })
-            }
-        }
-    }
-    
-    func removeSafeZone(_ id: Int16, into petId: Int16) {
-            DataManager.Instance.removeSafeZone(by: id, to: petId) { (error) in
-                DispatchQueue.main.async {
+            if safezoneId != 0 {
+                
+                DataManager.Instance.save(safezone, into: petId, callback: { (error) in
                     if let error = error {
                         self.view?.errorMessage(error.msg)
                     }else{
                         self.view?.success()
                     }
-                }
+                })
+                
+            }else{
+                
+                DataManager.Instance.add(safezone, to: petId, callback: { (error, _) in
+                    if let error = error {
+                        self.view?.errorMessage(error.msg)
+                    }else{
+                        self.view?.success()
+                    }
+                })
             }
+        }
+    }
+    
+    func removeSafeZone(_ id: Int, into petId: Int) {
+        
+        DataManager.Instance.removeSafeZone(by: id, to: petId) { (error) in
+            
+            if let error = error {
+                self.view?.errorMessage(error.msg)
+            }else{
+                self.view?.success()
+            }
+        }
     }
     
     //MARK:- Socket IO
     
-    func startPetsGPSUpdates(_ callback: @escaping ((_ data: GPSData)->())){
-        NotificationManager.Instance.getPetGPSUpdates { (id, data) in
-            callback(data)
+    @objc private func petLocationFailed(){
+        DispatchQueue.main.async {
+            self.view?.petLocationFailed()
         }
     }
     
-    func stopPetGPSUpdates(){
-        NotificationManager.Instance.removePetGPSUpdates()
+    func startPetsGPSUpdates(for id: Int, _ callback: @escaping ((_ data: GPSData)->())){
+        let timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.petLocationFailed), userInfo: nil, repeats: false)
+        NotificationManager.Instance.getPetGPSUpdates(for: id, { (id, data) in
+            timer.invalidate()
+            callback(data)
+        })
+    }
+    
+    func stopPetGPSUpdates(of id: Int){
+        NotificationManager.Instance.removePetGPSUpdates(of: id)
     }
     
     

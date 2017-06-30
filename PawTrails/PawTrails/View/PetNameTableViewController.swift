@@ -16,13 +16,13 @@ class PetNameTableViewController: UITableViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        nameTextField.text = parentEditor.getName()
+        nameTextField.text = parentEditor.pet.name
         nameTextField.becomeFirstResponder()
         nameTextField.delegate = self
     }
     
     @IBAction func doneAction(_ sender: UIBarButtonItem?) {
-        parentEditor.set(name: nameTextField.text)
+        parentEditor.pet.name = nameTextField.text
         parentEditor.refresh()
         view.endEditing(true)
         _ = navigationController?.popViewController(animated: true)

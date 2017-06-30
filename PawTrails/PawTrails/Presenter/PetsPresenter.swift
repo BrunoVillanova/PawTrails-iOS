@@ -22,76 +22,71 @@ class PetsPresenter {
     var ownedPets = [Pet]()
     var sharedPets = [Pet]()
     
+    var pets: [Pet] {
+        return ownedPets + sharedPets
+    }
+    
     func attachView(_ view: PetsView){
         self.view = view
-        
-        getPets()
     }
     
     func deteachView() {
         self.view = nil
     }
     
-    
-
     func getPet(with id: Int) -> Pet? {
-        let id = Int16(id)
-        var pets = ownedPets
-        pets.append(contentsOf: sharedPets)
         return pets.first(where: { $0.id == id })
     }
     
     func getPets() {
         
         DataManager.Instance.getPetsSplitted { (error, owned, shared) in
-            DispatchQueue.main.async {
-                if let error = error {
-                    if error.DBError == DatabaseError.NotFound {
-                        self.ownedPets.removeAll()
-                        self.sharedPets.removeAll()
-                        self.view?.petsNotFound()
-                    }else{
-                        self.view?.errorMessage(error.msg)
-                    }
-                }else if let owned = owned, let shared = shared {
-                    self.ownedPets = owned
-                    self.sharedPets = shared
-                    self.view?.loadPets()
-                }else{
+            
+            if let error = error {
+                if error.DBError?.type == DatabaseErrorType.NotFound {
                     self.ownedPets.removeAll()
                     self.sharedPets.removeAll()
+                    self.view?.petsNotFound()
+                }else{
+                    self.view?.errorMessage(error.msg)
                 }
+            }else if let owned = owned, let shared = shared {
+                self.ownedPets = owned
+                self.sharedPets = shared
+                self.view?.loadPets()
+            }else{
+                self.ownedPets.removeAll()
+                self.sharedPets.removeAll()
             }
-        }
-        
-        DataManager.Instance.getPets { (error, pets) in
+            
         }
     }
     
     func loadPets() {
+        
         DataManager.Instance.loadPets { (error, pets) in
-            DispatchQueue.main.async {
-                if let error = error {
-                    if error.DBError == DatabaseError.NotFound {
-                        self.ownedPets.removeAll()
-                        self.sharedPets.removeAll()
-                        self.view?.petsNotFound()
-                    }else{
-                        self.view?.errorMessage(error.msg)
-                    }
-                }else {
-                    self.getPets()
+            
+            if let error = error {
+                if error.DBError?.type == DatabaseErrorType.NotFound {
+                    self.ownedPets.removeAll()
+                    self.sharedPets.removeAll()
+                    self.view?.petsNotFound()
+                }else{
+                    self.view?.errorMessage(error.msg)
                 }
+            }else {
+                self.getPets()
             }
         }
     }
     
     //MARK:- Socket IO
     
-    func startPetsGPSUpdates(_ callback: @escaping ((_ id: Int16, _ update: Bool)->())){
-        NotificationManager.Instance.getPetGPSUpdates { (id, data) in
-            if data.locationAndTime == "" {  GeocoderManager.Intance.reverse(type: .pet, with: data.point, for: id) }
-        }
+    func startPetsGPSUpdates(_ callback: @escaping ((_ id: Int)->())){
+        
+        NotificationManager.Instance.getPetGPSUpdates({ (id, data) in
+            callback(id)
+        })
     }
     
     func stopPetGPSUpdates(){
@@ -100,8 +95,10 @@ class PetsPresenter {
     
     //MARK:- Geocode
     
-    func startPetsGeocodeUpdates(_ callback: @escaping ((Geocode?)->())){
-        NotificationManager.Instance.getPetGeoCodeUpdates(callback)
+    func startPetsGeocodeUpdates(_ callback: @escaping ((Geocode)->())){
+        NotificationManager.Instance.getPetGeoCodeUpdates { (code) in
+            if let code = code { callback(code) }
+        }
     }
     
     func stopPetsGeocodeUpdates(){
@@ -112,15 +109,13 @@ class PetsPresenter {
     
     func startPetsListUpdates(){
         NotificationManager.Instance.getPetListUpdates { (pets) in
-            debugPrint("Update PETS!!")
-            DispatchQueue.main.async {
-                if let pets = pets {
-                    self.ownedPets = pets.filter({ $0.isOwner })
-                    self.sharedPets = pets.filter({ !$0.isOwner })
-                    self.view?.loadPets()
-                }else {
-                    self.view?.petsNotFound()
-                }
+            debugPrint("Time to update pets on list")
+            if let pets = pets {
+                self.ownedPets = pets.filter({ $0.isOwner })
+                self.sharedPets = pets.filter({ !$0.isOwner })
+                self.view?.loadPets()
+            }else {
+                self.view?.petsNotFound()
             }
         }
     }
@@ -129,7 +124,6 @@ class PetsPresenter {
         NotificationManager.Instance.removePetListUpdates()
     }
     
-
     
     
     
@@ -163,5 +157,6 @@ class PetsPresenter {
     
     
     
-
+    
+    
 }

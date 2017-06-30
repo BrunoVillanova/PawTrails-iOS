@@ -12,37 +12,16 @@ import XCTest
 class APIAuthenticationTests: XCTestCase {
     
     
-    public func signIn(email: String = ezdebug.email, password: String = ezdebug.password, callback: @escaping ((_ id: String, _ token: String)->())){
-        let data = ["email":email, "password":password]
-        APIManager.Instance.perform(call: .signIn, with: data) { (error, data) in
-            
-            
-            guard let token = data?["token"] as? String else {
-                fatalError("token missing")
-            }
-            guard let userData = data?["user"] as? [String:Any] else {
-                fatalError("user missing")
-            }
-            
-            guard let id = userData.tryCastInteger(for: "id") else {
-                fatalError("id missing")
-            }
-            UserManager.upsert(userData, callback: { (error, user) in
-                if error != nil || user == nil {
-                    fatalError("couldn't load user")
-                }
-                callback("\(id)",token)
-            })
-            
+    public func signIn(email: String = ezdebug.email, password: String = ezdebug.password, callback: @escaping ()->Void){
+        DataManager.Instance.signIn(email, password) { (_) in
+            callback()
         }
     }
     
     override func setUp() {
         super.setUp()
         let expect = expectation(description: "Example")
-        signIn { (id, token) in
-            SharedPreferences.set(.id, with: id)
-            SharedPreferences.set(.token, with: token)
+        signIn { () in
             expect.fulfill()
         }
         waitForExpectations(timeout: 10) { error in
@@ -55,33 +34,34 @@ class APIAuthenticationTests: XCTestCase {
     func testSignUpOk() {
         let expect = expectation(description: "SignUp")
         
-        let email = "register00@test.com"
+        let email = "register03@test.com"
         let password = ezdebug.password
         
         let data = isDebug ? ["email":email, "password":password, "is4test":ezdebug.is4test] : ["email":email, "password":password]
-        APIManager.Instance.perform(call: .signUp, with: data) { (error, data) in
+        
+        APIRepository.instance.signUp(email, password) { (error, authentication) in
+
             
             XCTAssertNil(error, "Error setting profile \(String(describing: error))")
             XCTAssertNotNil(data, "No data :(")
             
-            XCTAssertNotNil(data?["token"], "token not found")
-            XCTAssertNotNil(data?["user"], "token not found")
+            XCTAssertNotNil(authentication?.token, "token not found")
+            XCTAssertNotNil(authentication?.user, "user not found")
+            XCTAssertNotNil(authentication?.user?.id, "id not found")
+           
+            SharedPreferences.set(.token, with: authentication!.token!)
+            SharedPreferences.set(.id, with: "\(authentication!.user!.id)")
             
-            guard let userData = data?["user"] as? [String:Any] else {
+            guard let id = authentication?.user?.id else {
                 XCTFail()
                 return
             }
             
-            guard let id = userData.tryCastInteger(for: "id") else {
-                XCTFail()
-                return
-            }
-            
-            XCTAssert(userData["email"] is String, "Failed to login email wrong format")
-            XCTAssert(userData["email"] as! String == email, "Failed to login with proper email")
+            XCTAssert(authentication?.user?.email != nil, "Failed to login email wrong format")
+            XCTAssert(authentication?.user?.email == email, "Failed to login with proper email")
 
             
-            APIManager.Instance.perform(call: .deleteUser, withKey: id, completition: { (error, data) in
+            APIManager.Instance.perform(call: .deleteUser, withKey: id, callback: { (error, data) in
                 XCTAssertNil(error, "Error setting profile \(String(describing: error))")
                 expect.fulfill()
             })
@@ -90,6 +70,22 @@ class APIAuthenticationTests: XCTestCase {
         waitForExpectations(timeout: 10) { error in
             XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
         }
+    }
+    
+    func testRemoveUser(){
+        
+//        let expect = expectation(description: "RemoveUser")
+//        let email = "register03@test.com"
+//        self.signIn(email: email, password: ezdebug.password) {
+//            
+//            APIManager.Instance.perform(call: .deleteUser, withKey: SharedPreferences.get(.id), callback: { (error, data) in
+//                XCTAssertNil(error, "Error setting profile \(String(describing: error))")
+//                expect.fulfill()
+//            })
+//        }
+//        waitForExpectations(timeout: 10) { error in
+//            XCTAssertNil(error, "waitForExpectationsWithTimeout errored: \(String(describing: error))")
+//        }
     }
     
     func testSignUpMissingEmail() {
@@ -202,21 +198,12 @@ class APIAuthenticationTests: XCTestCase {
             XCTAssertNil(error, "Error setting profile \(String(describing: error))")
             XCTAssertNotNil(data, "No data :(")
             
-            XCTAssertNotNil(data?["token"], "token not found")
-            XCTAssertNotNil(data?["user"], "token not found")
+            XCTAssertNotNil(data?["token"].string, "token not found")
+            XCTAssertNotNil(data?["user"].dictionary, "user not found")
+            XCTAssert(data?["user"]["id"].exists() ?? false, "id not found")
             
-            guard let userData = data?["user"] as? [String:Any] else {
-                XCTFail()
-                return
-            }
-            
-            guard userData.tryCastInteger(for: "id") != nil else {
-                XCTFail()
-                return
-            }
-            
-            XCTAssert(userData["email"] is String, "Failed to login email wrong format")
-            XCTAssert(userData["email"] as! String == email, "Failed to login with proper email")
+            XCTAssert(data?["user"]["email"].string != nil, "Failed to login email wrong format")
+            XCTAssert(data?["user"]["email"].stringValue == email, "Failed to login with proper email")
 
             expect.fulfill()
         }
@@ -410,12 +397,12 @@ class APIAuthenticationTests: XCTestCase {
         let password = ezdebug.password
         let newPassword = ezdebug.password + ";"
         
-        let data = ["id": SharedPreferences.get(.id) ?? "", "email":email, "password":password, "new_password":newPassword]
+        let data = ["id": SharedPreferences.get(.id), "email":email, "password":password, "new_password":newPassword]
         APIManager.Instance.perform(call: .passwordChange, with: data) { (error, data) in
             
             XCTAssertNil(error, "Error found \(String(describing: error))")
             
-            let data = ["id": SharedPreferences.get(.id) ?? "", "email":email, "password":newPassword, "new_password":password]
+            let data = ["id": SharedPreferences.get(.id), "email":email, "password":newPassword, "new_password":password]
             APIManager.Instance.perform(call: .passwordChange, with: data) { (error, data) in
                 
                 XCTAssertNil(error, "Error found \(String(describing: error))")
@@ -435,7 +422,7 @@ class APIAuthenticationTests: XCTestCase {
         let password = ezdebug.password
         let newPassword = ezdebug.password + ";"
         
-        let data = ["id": SharedPreferences.get(.id) ?? "", "email":email, "password":password, "new_password":newPassword]
+        let data = ["id": SharedPreferences.get(.id), "email":email, "password":password, "new_password":newPassword]
         APIManager.Instance.perform(call: .passwordChange, with: data) { (error, data) in
             
             XCTAssertNotNil(error)
@@ -455,7 +442,7 @@ class APIAuthenticationTests: XCTestCase {
         let password = ezdebug.password
         let newPassword = ezdebug.password + ";"
         
-        let data = ["id": SharedPreferences.get(.id) ?? "", "email":email, "password":password, "new_password":newPassword]
+        let data = ["id": SharedPreferences.get(.id), "email":email, "password":password, "new_password":newPassword]
         APIManager.Instance.perform(call: .passwordChange, with: data) { (error, data) in
             
             XCTAssertNotNil(error)
@@ -475,7 +462,7 @@ class APIAuthenticationTests: XCTestCase {
         let password = ""
         let newPassword = ezdebug.password + ";"
         
-        let data = ["id": SharedPreferences.get(.id) ?? "", "email":email, "password":password, "new_password":newPassword]
+        let data = ["id": SharedPreferences.get(.id), "email":email, "password":password, "new_password":newPassword]
         APIManager.Instance.perform(call: .passwordChange, with: data) { (error, data) in
             
             XCTAssertNotNil(error)
@@ -495,7 +482,7 @@ class APIAuthenticationTests: XCTestCase {
         let password = ezdebug.password
         let newPassword = ""
         
-        let data = ["id": SharedPreferences.get(.id) ?? "", "email":email, "password":password, "new_password":newPassword]
+        let data = ["id": SharedPreferences.get(.id), "email":email, "password":password, "new_password":newPassword]
         APIManager.Instance.perform(call: .passwordChange, with: data) { (error, data) in
             
             XCTAssertNotNil(error)
@@ -515,7 +502,7 @@ class APIAuthenticationTests: XCTestCase {
         let password = ezdebug.password
         let newPassword = "hey"
         
-        let data = ["id": SharedPreferences.get(.id) ?? "", "email":email, "password":password, "new_password":newPassword]
+        let data = ["id": SharedPreferences.get(.id), "email":email, "password":password, "new_password":newPassword]
         APIManager.Instance.perform(call: .passwordChange, with: data) { (error, data) in
             
             XCTAssertNotNil(error)
@@ -535,7 +522,7 @@ class APIAuthenticationTests: XCTestCase {
         let password = ezdebug.password + "hello"
         let newPassword = ezdebug.password + ";;"
         
-        let data = ["id": SharedPreferences.get(.id) ?? "", "email":email, "password":password, "new_password":newPassword]
+        let data = ["id": SharedPreferences.get(.id), "email":email, "password":password, "new_password":newPassword]
         APIManager.Instance.perform(call: .passwordChange, with: data) { (error, data) in
             
             XCTAssertNotNil(error)

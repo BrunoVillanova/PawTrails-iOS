@@ -19,16 +19,13 @@ class AddPetUserViewController: UIViewController, UITableViewDataSource, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.attachView(self, pet: pet)
-        
         navigationItem.title = "Add User"
     }
-
-    
 
     deinit {
         presenter.deteachView()
     }
-    
+
     @IBAction func doneAction(_ sender: UIBarButtonItem?) {
         view.endEditing(true)
         presenter.addPetUser(by: emailTextField()?.text, to: pet.id)

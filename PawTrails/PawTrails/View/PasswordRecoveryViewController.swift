@@ -43,6 +43,7 @@ class PasswordRecoveryViewController: UIViewController, PasswordRecoveryView, UI
         if #available(iOS 10.0, *) {
             self.emailTextField.textContentType = UITextContentType.emailAddress
         }
+        setTopBar()
     }
     
     

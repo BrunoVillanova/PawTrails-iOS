@@ -28,8 +28,6 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
         super.viewDidLoad()
         presenter.attachView(self)
         
-        emailTextField.underline()
-        passwordTextField.underline()
         loginButton.round()
         loginButton.backgroundColor = UIColor.primaryColor()
         loginButton.tintColor = UIColor.secondaryColor()
@@ -52,6 +50,10 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
         setTopBar()
 
         GIDSignIn.sharedInstance().uiDelegate = self
+        DispatchQueue.main.async {
+            self.emailTextField.underline()
+            self.passwordTextField.underline()
+        }
     }
     
     
@@ -145,10 +147,11 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
         userAuthenticated()
     }
     
-    func verifyAccount(_ email:String) {
+    func verifyAccount(_ email:String, _ password:String) {
 
         if let vc = storyboard?.instantiateViewController(withIdentifier: "EmailVerificationViewController") as? EmailVerificationViewController {
             vc.email = email
+            vc.password = password
             self.present(vc, animated: true, completion: nil)
         }
     }
@@ -173,6 +176,7 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
         if textField == self.emailTextField {
             self.passwordTextField.becomeFirstResponder()
         }else if textField == self.passwordTextField {
+            textField.resignFirstResponder()
             if cancelButton.isHidden {
                 self.loginAction(nil)
             }else{

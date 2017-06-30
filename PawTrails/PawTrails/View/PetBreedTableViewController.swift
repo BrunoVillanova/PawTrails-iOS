@@ -33,7 +33,7 @@ class PetBreedViewController: UIViewController,  UITableViewDataSource, UITableV
     
         tableView.tableFooterView = UIView()
         
-        if let type = parentEditor.getType() {
+        if let type = parentEditor.pet.type?.type {
 
             noTypeSelected.isHidden = true
             
@@ -61,17 +61,20 @@ class PetBreedViewController: UIViewController,  UITableViewDataSource, UITableV
     }
     
     @IBAction func doneAction(_ sender: UIBarButtonItem?) {
-        parentEditor.set(first: nil)
-        parentEditor.set(second: nil)
-        parentEditor.set(otherBreed: nil)
+        
+        parentEditor.pet.breeds = PetBreeds(nil, nil, nil)
+        
         if let indexA = selectedA {
-            parentEditor.set(first: filteredBreeds[indexA.row])
-            if let indexB = selectedB {
-                parentEditor.set(second: filteredBreeds[indexB.row])
+            let first = filteredBreeds[indexA.row]
+            var second: Breed?
+            if segmentControl.selectedSegmentIndex == 1, let indexB = selectedB {
+                second = filteredBreeds[indexB.row]
             }
+            parentEditor.pet.breeds = PetBreeds(first: first, second: second, nil)
         }else if (type != nil) && type == .other {
             if let row = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? otherBreedCell {
-                parentEditor.set(otherBreed: row.breedTextField?.text)
+                parentEditor.pet.breeds = PetBreeds(first:nil, second:nil, row.breedTextField?.text)
+
             }
         }
         parentEditor.refresh()
@@ -99,15 +102,15 @@ class PetBreedViewController: UIViewController,  UITableViewDataSource, UITableV
     func loadBreeds() {
         filteredBreeds = presenter.breeds
         
-        if let breeds = parentEditor.getBreeds() {
+        if let breeds = parentEditor.pet.breeds?.breeds {
             
             if 1...2 ~= breeds.count {
                 
-                if let index = filteredBreeds.index(where: { $0.id == breeds[0].id }) {
+                if let index = filteredBreeds.index(where: { $0.id == breeds[0] }) {
                     selectedA = IndexPath(row: index, section: 0)
                 }
                 
-                if breeds.count == 2, let index = filteredBreeds.index(where: { $0.id == breeds[1].id }) {
+                if breeds.count == 2, let index = filteredBreeds.index(where: { $0.id == breeds[1] }) {
                     selectedB = IndexPath(row: index, section: 0)
                     segmentControl.selectedSegmentIndex = 1
                 }
@@ -141,7 +144,7 @@ class PetBreedViewController: UIViewController,  UITableViewDataSource, UITableV
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellOther", for: indexPath) as! otherBreedCell
             cell.breedTextField.delegate = self
             cell.breedTextField.becomeFirstResponder()
-            cell.breedTextField.text = parentEditor.getOtherBreed()
+            cell.breedTextField.text = parentEditor.pet.breeds?.description
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
@@ -212,7 +215,7 @@ class PetBreedViewController: UIViewController,  UITableViewDataSource, UITableV
         filteredBreeds.removeAll(keepingCapacity: true)
         if searchText != "" {
             for b in presenter.breeds {
-                if let name = b.name, name.lowercased().contains(searchText.lowercased()) {
+                if b.name.lowercased().contains(searchText.lowercased()) {
                     filteredBreeds.append(b)
                 }
             }

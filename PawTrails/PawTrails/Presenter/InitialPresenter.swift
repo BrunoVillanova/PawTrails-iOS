@@ -16,13 +16,12 @@ protocol InitialView: NSObjectProtocol, View, LoadingView {
     func emailFieldError(msg:String)
     func passwordFieldError(msg:String)
     func userAuthenticated()
-    func verifyAccount(_ email:String)
+    func verifyAccount(_ email:String, _ password:String)
 }
 
 class InitialPresenter {
     
     weak fileprivate var view: InitialView?
-    
     
     func attachView(_ view: InitialView){
         self.view = view
@@ -33,24 +32,20 @@ class InitialPresenter {
         self.view = nil
     }
     
-    
-    
     func signIn(email:String?, password:String?) {
         
         if validInput(email, password) {
             view?.beginLoadingContent()
-            AuthManager.Instance.signIn(email!, password!) { (error) in
-                DispatchQueue.main.async {
-                    self.view?.endLoadingContent()
-                    if let error = error {
-                        if error.APIError?.errorCode == ErrorCode.AccountNotVerified {
-                            self.view?.verifyAccount(email!)
-                        }else{
-                            self.view?.errorMessage(error.msg)
-                        }
+            DataManager.Instance.signIn(email!, password!) { (error) in
+                self.view?.endLoadingContent()
+                if let error = error {
+                    if error.APIError?.errorCode == ErrorCode.AccountNotVerified {
+                        self.view?.verifyAccount(email!, password!)
                     }else{
-                        self.view?.userAuthenticated()
+                        self.view?.errorMessage(error.msg)
                     }
+                }else{
+                    self.view?.userAuthenticated()
                 }
             }
         }
@@ -60,14 +55,12 @@ class InitialPresenter {
         
         if validInput(email, password) {
             view?.beginLoadingContent()
-            AuthManager.Instance.signUp(email!, password!) { (error) in
-                DispatchQueue.main.async {
-                    self.view?.endLoadingContent()
-                    if let error = error {
-                        self.view?.errorMessage(error.msg)
-                    }else{
-                        self.view?.verifyAccount(email!)
-                    }
+            DataManager.Instance.signUp(email!, password!) { (error) in
+                self.view?.endLoadingContent()
+                if let error = error {
+                    self.view?.errorMessage(error.msg)
+                }else{
+                    self.view?.verifyAccount(email!, password!)
                 }
             }
         }
@@ -89,11 +82,7 @@ class InitialPresenter {
             self.view?.emailFieldError(msg: Message.Instance.authError(type: .EmailFormat).msg)
             return false
         }
-        
-        //        if !password!.isValidPassword {
-        //            self.view?.passwordFieldError(msg: Message.Instance.authError(type: .WeakPassword).msg)
-        //            return false
-        //        }
+
         return true
     }
     
@@ -110,13 +99,11 @@ class InitialPresenter {
                 self.view?.errorMessage(DataManagerError(error: error).msg)
                 break
             case .success(_, _, let accessToken):
-                AuthManager.Instance.login(socialMedia: .facebook, accessToken.authenticationToken, completition: { (error) in
-                    DispatchQueue.main.async {
+                DataManager.Instance.login(socialMedia: .facebook, accessToken.authenticationToken, callback: { (error) in
                         if let error = error {
                             self.view?.errorMessage(error.msg)
                         }else{
                             self.view?.loggedSocialMedia()
-                        }
                     }
                 })
             default:
@@ -138,15 +125,15 @@ class InitialPresenter {
     }
     
     func successGLogin(token:String) {
-        print(token)
-        AuthManager.Instance.login(socialMedia: .google, token, completition: { (error) in
-            DispatchQueue.main.async {
-                if let error = error {
+
+        DataManager.Instance.login(socialMedia: .google, token, callback: { (error) in
+
+            if let error = error {
                     self.view?.errorMessage(error.msg)
                 }else{
                     self.view?.loggedSocialMedia()
                 }
-            }
+
         })
     }
     
@@ -161,14 +148,11 @@ class InitialPresenter {
                     self.view?.errorMessage(DataManagerError(error: error).msg)
                 }
             }else if let session = session {
-                print(session.authToken)
-                AuthManager.Instance.login(socialMedia: .twitter, session.authToken, completition: { (error) in
-                    DispatchQueue.main.async {
-                        if let error = error {
-                            self.view?.errorMessage(error.msg)
-                        }else{
-                            self.view?.loggedSocialMedia()
-                        }
+                DataManager.Instance.login(socialMedia: .twitter, session.authToken, callback: { (error) in
+                    if let error = error {
+                        self.view?.errorMessage(error.msg)
+                    }else{
+                        self.view?.loggedSocialMedia()
                     }
                 })
             }

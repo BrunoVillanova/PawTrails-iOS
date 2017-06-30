@@ -19,47 +19,37 @@ class DeviceCodePresenter {
     
     weak fileprivate var view: DeviceCodeView?
     
-    
-    
     func attachView(_ view: DeviceCodeView){
         self.view = view
-        
     }
     
     func deteachView() {
         self.view = nil
     }
     
-    
-
     func check(_ code: String?){
         
-if code == nil || (code != nil && (code == "" || !code!.isValidCode)) {
+        if code == nil || (code != nil && (code == "" || !code!.isValidCode)) {
             view?.codeFormat()
         }else if let code = code {
             DataManager.Instance.check(code, callback: { (idle) in
-                DispatchQueue.main.async {
-                    if idle {
-                        self.view?.idle(code)
-                    }else{
-                        self.view?.wrongCode()
-                    }
+                if idle {
+                    self.view?.idle(code)
+                }else{
+                    self.view?.wrongCode()
                 }
             })
         }
     }
     
-    func change(_ code:String, to petId: Int16){
-
+    func change(_ code:String, to petId: Int){
+        
         DataManager.Instance.change(code, of: petId) { (error) in
-                DispatchQueue.main.async {
-                    if let error = error {
-                        self.view?.errorMessage(error.msg)
-                    }else{
-                        self.view?.codeChanged()
-                    }
-                }
-            } 
-
+            if let error = error {
+                self.view?.errorMessage(error.msg)
+            }else{
+                self.view?.codeChanged()
+            }
+        }
     }
 }

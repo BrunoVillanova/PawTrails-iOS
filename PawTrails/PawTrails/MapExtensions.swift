@@ -61,37 +61,43 @@ extension MKMapView {
         return self.camera.altitude
     }
     
-    func load(with coordinate: CLLocationCoordinate2D, shape: Shape, into view: UIView, fenceSide: Double = 50) -> Fence {
-        let region = MKCoordinateRegionMakeWithDistance(self.centerCoordinate, fenceSide, fenceSide)
-        let frame = self.convertRegion(region, toRectTo: view)
-        let fence = Fence(frame: frame, shape: shape)
-        add(fence)
-        return fence
-    }
-    
-    func load(with center: CLLocationCoordinate2D, topCenter:CLLocationCoordinate2D, shape: Shape, into view: UIView, paintShapes: Bool = false) -> Fence {
+    func load(with coordinate: CLLocationCoordinate2D, shape: Shape, into view: UIView, fenceSide: Double = 50, callback: ((Fence)-> Void)? = nil) {
+        DispatchQueue.main.async {
+//            self.addAnnotation(coordinate, color: UIColor.yellow)
 
-//        self.addAnnotation(center, color: UIColor.yellow)
-//        self.addAnnotation(topCenter)
-        
-        let radius = center.location.distance(from: topCenter.location) * 2.0
-        
-        self.centerOn(center, with: radius, animated: false)
-        setOrientation(with: center, topCenter: topCenter, into: view)
-        
-        let centerPoint = self.convert(center, toPointTo: view)
-        let topCenterPoint = self.convert(topCenter, toPointTo: view)
-        
-        let fence = Fence(centerPoint, topCenterPoint, shape: shape)
-        
-        add(fence)
-        
-        return fence
+            let region = MKCoordinateRegionMakeWithDistance(self.centerCoordinate, fenceSide, fenceSide)
+            let frame = self.convertRegion(region, toRectTo: view)
+            let fence = Fence(frame: frame, shape: shape)
+            self.add(fence)
+            if let callback = callback { callback(fence) }
+        }
     }
     
-    private func add(_ fence: Fence){
-        self.layer.addSublayer(fence.layer)
-        self.layer.addSublayer(fence.line)
+    func load(with center: CLLocationCoordinate2D, topCenter:CLLocationCoordinate2D, shape: Shape, into view: UIView, paintShapes: Bool = false, callback: ((Fence)-> Void)? = nil) {
+
+        DispatchQueue.main.async {
+//            self.addAnnotation(center, color: UIColor.yellow)
+//            self.addAnnotation(topCenter)
+            
+            let radius = center.location.distance(from: topCenter.location) * 2.0
+            
+            self.centerOn(center, with: radius, animated: false)
+            self.setOrientation(with: center, topCenter: topCenter, into: view)
+
+            let centerPoint = self.convert(center, toPointTo: view)
+            let topCenterPoint = self.convert(topCenter, toPointTo: view)
+            
+            let fence = Fence(centerPoint, topCenterPoint, shape: shape)
+            
+            self.add(fence)
+            
+            if let callback = callback { callback(fence) }
+        }
+    }
+    
+    private func add(_ fence: Fence, delayed seconds: Int = 1){
+            self.layer.addSublayer(fence.layer)
+            self.layer.addSublayer(fence.line)
     }
     
     private func setOrientation(with center: CLLocationCoordinate2D, topCenter:CLLocationCoordinate2D, into view: UIView) {

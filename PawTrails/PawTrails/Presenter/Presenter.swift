@@ -12,11 +12,6 @@ protocol View {
     func errorMessage(_ error:ErrorMsg)
 }
 
-//protocol ConnectionView {
-//    func connectedToNetwork()
-//    func notConnectedToNetwork()
-//}
-
 protocol LoadingView {
     func beginLoadingContent()
     func endLoadingContent()

@@ -13,36 +13,51 @@ import CoreData
 
 extension Pet {
         
-    var breeds: String? {
+    var breedsString: String? {
         
-        var breeds: String?
+        var outBreeds: String?
         
-        if let first = firstBreed {
-            breeds = first.name
+        if let breeds = breeds {
             
-            if let second = secondBreed {
-                breeds = breeds?.appending(" - \(second.name ?? "")")
+            if let first = breeds.first {
+                outBreeds = first.name
+                
+                if let second = breeds.second {
+                    outBreeds = outBreeds?.appending(" - \(second.name )")
+                }
+            }else if let other = breeds.description {
+                outBreeds = other
             }
-        }else if let other = breed_descr {
-            breeds = other
         }
-        return breeds
+        return outBreeds
     }
     
     var typeString: String? {
         
-        if let type = Type(rawValue: type) {
-            if let typeDescription = type_descr {
-                return type.name + " - " + typeDescription
+        if let pettype = type {
+            if let type = pettype.type{
+                if let typeDescription = pettype.description {
+                    return type.name + " - " + typeDescription
+                }
+                return type.name
             }
-            return type.name
         }
+        return nil
+    }
+    
+    var weightString: String? {
+        if let weight = weight, weight != 0.0 { return "\(weight)" }
+        return nil
+    }
+    
+    var weightWithUnitString: String? {
+        if let weight = weight, weight != 0.0 { return "\(weight)Kg" }
         return nil
     }
     
     var owner: PetUser? {
         
-        if let users = users?.allObjects as? [PetUser] {
+        if let users = users {
             let owners = users.filter({ $0.isOwner })
             if owners.count == 1 {return owners[0]}
         }
@@ -50,7 +65,7 @@ extension Pet {
     }
     
     var sharedUsers: [PetUser]? {
-        if let petUsers = users?.allObjects as? [PetUser] {
+        if let petUsers = users {
             return petUsers.sorted(by: { (pu1, pu2) -> Bool in
                 return pu1.isOwner
             })
@@ -59,7 +74,7 @@ extension Pet {
     }
     
     var sortedSafeZones: [SafeZone]? {
-        if let safezones = safezones?.allObjects as? [SafeZone] {
+        if let safezones = safezones {
             return safezones.sorted(by: { (sz1, sz2) -> Bool in
                 return sz1.id > sz2.id
             })
@@ -76,57 +91,36 @@ extension Phone {
             return nil
         }
         
-        guard let country_code = self.country_code else {
+        guard let country_code = self.countryCode else {
             return nil
         }
         return "\(country_code) \(number)"
     }
-    
-    var toServerDict: [String:Any]? {
-        
-        guard let number = self.number else {
-            return nil
-        }
-        
-        guard let code = self.country_code else {
-            return nil
-        }
-        
-        var phoneData = [String:Any]()
-        phoneData["number"] = number
-        phoneData["country_code"] = code
-        return phoneData
-    }
-    
 }
 
 extension Address {
     
     var toString: String? {
         
-        let address = self.toStringDict
-        
-        if address.count == 0 { return nil }
-        
         var desc = [String]()
-        if address["line0"] != nil && address["line0"] != "" { desc.append(address["line0"]!)}
-        if address["line1"] != nil && address["line1"] != "" { desc.append(address["line1"]!)}
-        if address["line2"] != nil && address["line2"] != "" { desc.append(address["line2"]!)}
-        if address["city"] != nil && address["city"] != "" { desc.append(address["city"]!)}
-        if address["postal_code"] != nil && address["postal_code"] != "" { desc.append(address["postal_code"]!)}
-        if address["state"] != nil && address["state"] != "" { desc.append(address["state"]!)}
-        if address["country"] != nil && address["country"] != "" { desc.append(address["country"]!)}
+        if line0 != nil && line0 != "" { desc.append(line0!)}
+        if line1 != nil && line1 != "" { desc.append(line1!)}
+        if line2 != nil && line2 != "" { desc.append(line2!)}
+        if city != nil && city != "" { desc.append(city!)}
+        if postalCode != nil && postalCode != "" { desc.append(postalCode!)}
+        if state != nil && state != "" { desc.append(state!)}
+        if country != nil && country != "" { desc.append(country!)}
         return desc.joined(separator: ", ")
         
     }
     
-    func update(with data:[String:String]) {
-        for (k,v) in data {
-            if self.keys.contains(k) {
-                self.setValue(v, forKey: k)
-            }
-        }
-    }
+//    func update(with data:[String:String]) {
+//        for (k,v) in data {
+//            if self.keys.contains(k) {
+//                self.setValue(v, forKey: k)
+//            }
+//        }
+//    }
     
 }
 
@@ -174,7 +168,8 @@ extension NSPredicate {
     }
     
     convenience init(_ left:String, _ operation:NSPredicateOperation, _ right:Any) {
-        self.init(format: "\(left) \(operation.rawValue) '\(right)'")
+//        self.init(format: "\(left) \(operation.rawValue) \"\(right)\"")
+        self.init(format: "\(left) \(operation.rawValue) %@", argumentArray: [right])
     }
     
     func and(_ left:String, _ op:NSPredicateOperation, _ right:Any) -> NSPredicate {
@@ -189,3 +184,27 @@ extension NSPredicate {
         return NSPredicate(format: "\(self.predicateFormat) \(concatOp.rawValue) \(left) \(op.rawValue) %@", argumentArray: [right])
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -19,7 +19,7 @@ class PetTypeTableViewController: UITableViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let type = parentEditor.getType() {
+        if let type = parentEditor.pet.type?.type {
             
             switch type {
             case .cat: catCell.accessoryType = .checkmark
@@ -31,7 +31,7 @@ class PetTypeTableViewController: UITableViewController, UITextFieldDelegate {
             }
         }
         
-        if let other = parentEditor.getTypeDescription() {
+        if let other = parentEditor.pet.type?.description {
             otherTextField.text = other
         }
         
@@ -39,22 +39,22 @@ class PetTypeTableViewController: UITableViewController, UITextFieldDelegate {
     
     @IBAction func doneAction(_ sender: UIBarButtonItem) {
         
+        if parentEditor.pet.type == nil { parentEditor.pet.type = PetType(type: nil, description: nil) }
+        
         var type: Type? = nil
-        parentEditor.set(typeDescription: nil)
+        parentEditor.pet.type?.description = nil
         if catCell.accessoryType == .checkmark {
             type = Type.cat
         }else if dogCell.accessoryType == .checkmark {
             type = Type.dog
         }else if otherTextField.text != nil {
             type = Type.other
-            parentEditor.set(typeDescription: otherTextField.text)
+            parentEditor.pet.type?.description = otherTextField.text
         }
-        if type != parentEditor.getType() {
-            parentEditor.set(first: nil)
-            parentEditor.set(second: nil)
-            parentEditor.set(otherBreed: nil)
+        if type != parentEditor.pet.type?.type {
+            parentEditor.pet.breeds = nil
         }
-        parentEditor.set(type: type)
+        parentEditor.pet.type?.type = type
         parentEditor.refresh()
         _ = self.navigationController?.popViewController(animated: true)
     }

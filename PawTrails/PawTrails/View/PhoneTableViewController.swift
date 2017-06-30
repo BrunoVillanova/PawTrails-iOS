@@ -15,6 +15,9 @@ class PhoneTableViewController: UITableViewController, UIPickerViewDataSource, U
     
     fileprivate var selectedCC:CountryCode!
     
+    fileprivate var index: Int = 0
+    fileprivate let picker = UIPickerView()
+    
     var parentEditor:EditUserProfilePresenter!
     
     override func viewDidLoad() {
@@ -26,20 +29,19 @@ class PhoneTableViewController: UITableViewController, UIPickerViewDataSource, U
 
         tableView.tableFooterView = UIView()
 
-        let picker = UIPickerView()
         picker.delegate = self
         picker.dataSource = self
         self.codeTextField.inputView = picker
+        self.codeTextField.delegate = self
         
-        var index = parentEditor.getCountryCodeIndex()
-        if let phone = parentEditor.getPhone() {
-            codeTextField.text = phone.code
-            numberTextField.text = phone.number
-            index = parentEditor.getCountryCodeIndex(countryCode: phone.code)
+        index = parentEditor.getCurrentCountryCodeIndex()
+        if let number = parentEditor.user.phone?.number, let code = parentEditor.user.phone?.countryCode {
+            codeTextField.text = code
+            numberTextField.text = number
+            index = parentEditor.getCountryCodeIndex(countryCode: code)
         }else{
-            
+            codeTextField.text = parentEditor.CountryCodes[index].code
         }
-        picker.selectRow(index, inComponent: 0, animated: true)
         selectedCC = parentEditor.CountryCodes[index]
 
         numberTextField.becomeFirstResponder()
@@ -54,6 +56,7 @@ class PhoneTableViewController: UITableViewController, UIPickerViewDataSource, U
     
     // MARK: - UIPickerViewDelegate
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        self.index = row
         self.codeTextField.text = parentEditor.CountryCodes[row].code
         self.selectedCC = parentEditor.CountryCodes[row]
     }
@@ -74,11 +77,17 @@ class PhoneTableViewController: UITableViewController, UIPickerViewDataSource, U
     
     // MARK: - UITextFieldDelegate
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == self.codeTextField {
+            picker.selectRow(index, inComponent: 0, animated: true)
+        }
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         if textField == self.numberTextField {
             saveAction(nil)
-        }else{
+        }else {
             textField.resignFirstResponder()
         }
         return true

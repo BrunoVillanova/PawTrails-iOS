@@ -16,9 +16,7 @@ class APIPetShareUsersTests: XCTestCase {
     override func setUp() {
         super.setUp()
         let expect = expectation(description: "Example")
-        APIAuthenticationTests().signIn { (id, token) in
-            SharedPreferences.set(.id, with: id)
-            SharedPreferences.set(.token, with: token)
+        APIAuthenticationTests().signIn { () in
             expect.fulfill()
         }
         waitForExpectations(timeout: 10) { error in
@@ -28,23 +26,23 @@ class APIPetShareUsersTests: XCTestCase {
     
     func getPets(_ callback: @escaping ((_ error: APIManagerError?, _ data:[String:Any]?)->())){
         APIManager.Instance.perform(call: .getPets) { (error, data) in
-            callback(error, data)
+            callback(error, data?.dictionaryObject)
         }
     }
     
     func getSharedUsers(_ petId: Int, callback:@escaping (([[String:Any]]?)->())){
         
-        APIManager.Instance.perform(call: .getSharedPetUsers, withKey: petId, with: nil, completition: { (error, data) in
+        APIManager.Instance.perform(call: .getSharedPetUsers, withKey: petId, with: nil, callback: { (error, data) in
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(data, "No data :(")
             
-            if let users = data?["users"] as? [[String:Any]] {
+            if let users = data?["users"].array {
                 
                 let shared = users.filter({ (user) -> Bool in
-                    return (user["is_owner"] as? Bool) == false
-                })
-                callback(shared)
+                    return (user["is_owner"].bool) == false
+                }).map({ $0.dictionaryObject })
+                callback(shared as? [[String : Any]])
             }else{
                 callback(nil)
             }
@@ -53,16 +51,16 @@ class APIPetShareUsersTests: XCTestCase {
     
     func getSharedUser(userEmail: String, _ petId: Int, callback:@escaping (([String:Any]?)->())){
         
-        APIManager.Instance.perform(call: .getSharedPetUsers, withKey: petId, with: nil, completition: { (error, data) in
+        APIManager.Instance.perform(call: .getSharedPetUsers, withKey: petId, with: nil, callback: { (error, data) in
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(data, "No data :(")
             
-            if let users = data?["users"] as? [[String:Any]] {
+            if let users = data?["users"].array {
                 
                 let shared = users.first(where: { (user) -> Bool in
-                    return (user["email"] as? String) == userEmail
-                })
+                    return (user["email"].string) == userEmail
+                })?.dictionaryObject
                 callback(shared)
             }else{
                 callback(nil)
@@ -91,7 +89,7 @@ class APIPetShareUsersTests: XCTestCase {
     
     func remove(sharedUser id: Int, from petId: Int, callback: @escaping ((Bool)->())) {
         
-        APIManager.Instance.perform(call: .removeSharedPet, withKey: petId, with: ["user_id":id], completition: { (error, data) in
+        APIManager.Instance.perform(call: .removeSharedPet, withKey: petId, with: ["user_id":id], callback: { (error, data) in
             callback(error == nil)
         })
     }
@@ -118,17 +116,16 @@ class APIPetShareUsersTests: XCTestCase {
                         XCTAssertNotNil(data, "No data :(")
                         
                         if let data = data {
-                            XCTAssertNotNil(data["id"] as? String, "id")
-                            XCTAssertNotNil(data["email"] as? String, "email")
-                            XCTAssertNotNil(data["is_owner"] as? Bool, "is_owner")
+                            XCTAssertNotNil(data["id"].string, "id")
+                            XCTAssertNotNil(data["email"].string, "email")
+                            XCTAssertNotNil(data["is_owner"].bool, "is_owner")
                         }else{
                             XCTFail()
                         }
                         
-                        if let id = data?.tryCastInteger(for: "id") {
+                        if let id = data?["id"].int {
                             self.remove(sharedUser: id, from: petId, callback: { (success) in
                                 XCTAssert(success, "Not Removed")
-                                
                                 expect.fulfill()
                             })
                         }
@@ -160,9 +157,9 @@ class APIPetShareUsersTests: XCTestCase {
                         assert(error == nil, "Error \(String(describing: error))")
                         assert(data != nil, "No Data returned")
                         
-                        if let id = data?.tryCastInteger(for: "id") {
+                        if let id = data?["id"].int {
                             
-                            APIManager.Instance.perform(call: .sharePet, withKey: petId, with: data) { (error, data) in
+                            APIManager.Instance.perform(call: .sharePet, withKey: petId, with: data?.dictionaryObject) { (error, data) in
                                 XCTAssertNotNil(error)
                                 XCTAssert(error?.errorCode == ErrorCode.AlreadyShared, "Wrong Error \(String(describing: error?.errorCode))")
                                 self.remove(sharedUser: id, from: petId, callback: { (success) in
@@ -302,8 +299,8 @@ class APIPetShareUsersTests: XCTestCase {
                         assert(error == nil, "Error \(String(describing: error))")
                         assert(data != nil, "No Data returned")
                         
-                        if let id = data?.tryCastInteger(for: "id") {
-                            APIManager.Instance.perform(call: .removeSharedPet, withKey: petId, with: ["user_id":id], completition: { (error, data) in
+                        if let id = data?["id"].int {
+                            APIManager.Instance.perform(call: .removeSharedPet, withKey: petId, with: ["user_id":id], callback: { (error, data) in
                                 assert(error == nil, "Error \(String(describing: error))")
                                 assert(data != nil, "No Data returned")
                                 expect.fulfill()
@@ -336,8 +333,8 @@ class APIPetShareUsersTests: XCTestCase {
                     APIManager.Instance.perform(call: .sharePet, withKey: petId, with: data) { (error, data) in
                         assert(error == nil, "Error \(String(describing: error))")
                         assert(data != nil, "No Data returned")
-                        if let id = data?.tryCastInteger(for: "id") {
-                            APIManager.Instance.perform(call: .removeSharedPet, withKey: petId, with: ["user_id":0], completition: { (error, data) in
+                        if let id = data?["id"].int {
+                            APIManager.Instance.perform(call: .removeSharedPet, withKey: petId, with: ["user_id":0], callback: { (error, data) in
                                 XCTAssertNotNil(error)
                                 XCTAssert(error?.errorCode == ErrorCode.UserNotFound, "Wrong Error \(String(describing: error?.errorCode))")
                                 self.remove(sharedUser: id, from: petId, callback: { (success) in
@@ -374,8 +371,8 @@ class APIPetShareUsersTests: XCTestCase {
                         assert(error == nil, "Error \(String(describing: error))")
                         assert(data != nil, "No Data returned")
                         
-                        if let id = data?.tryCastInteger(for: "id") {
-                            APIManager.Instance.perform(call: .removeSharedPet, withKey: 0, with: ["user_id":id], completition: { (error, data) in
+                        if let id = data?["id"].int {
+                            APIManager.Instance.perform(call: .removeSharedPet, withKey: 0, with: ["user_id":id], callback: { (error, data) in
                                 XCTAssertNotNil(error)
                                 XCTAssert(error?.errorCode == ErrorCode.NotEnoughRights, "Wrong Error \(String(describing: error?.errorCode))")
                                 
@@ -415,12 +412,12 @@ class APIPetShareUsersTests: XCTestCase {
                         assert(error == nil, "Error \(String(describing: error))")
                         assert(data != nil, "No Data returned")
                         
-                        if let id = data?.tryCastInteger(for: "id") {
-                            APIManager.Instance.perform(call: .removeSharedPet, withKey: petId, with: ["user_id":id], completition: { (error, data) in
+                        if let id = data?["id"].int {
+                            APIManager.Instance.perform(call: .removeSharedPet, withKey: petId, with: ["user_id":id], callback: { (error, data) in
                                 assert(error == nil, "Error \(String(describing: error))")
                                 assert(data != nil, "No Data returned")
                                 
-                                APIManager.Instance.perform(call: .removeSharedPet, withKey: petId, with: ["user_id":id], completition: { (error, data) in
+                                APIManager.Instance.perform(call: .removeSharedPet, withKey: petId, with: ["user_id":id], callback: { (error, data) in
                                     XCTAssertNotNil(error)
                                     XCTAssert(error?.errorCode == ErrorCode.MissingRelationUserPet, "Wrong Error \(String(describing: error?.errorCode))")
                                     expect.fulfill()
@@ -455,12 +452,9 @@ class APIPetShareUsersTests: XCTestCase {
                         XCTAssertNil(error, "Error \(String(describing: error))")
                         XCTAssertNotNil(data, "No data :(")
                         
-                        APIAuthenticationTests().signIn(email: self.email, password: ezdebug.password) { (id, token) in
+                        APIAuthenticationTests().signIn(email: self.email, password: ezdebug.password) { () in
                             
-                            SharedPreferences.set(.id, with: id)
-                            SharedPreferences.set(.token, with: token)
-                            
-                            APIManager.Instance.perform(call: .leaveSharedPet, withKey: petId, completition: { (error, data) in
+                            APIManager.Instance.perform(call: .leaveSharedPet, withKey: petId, callback: { (error, data) in
                                 
                                 XCTAssertNil(error, "Error \(String(describing: error))")
                                 XCTAssertNotNil(data, "No data :(")
@@ -489,12 +483,9 @@ class APIPetShareUsersTests: XCTestCase {
                 
                 if pets.count > 0, let petId = pets[0].tryCastInteger(for: "id") {
                     
-                    APIAuthenticationTests().signIn(email: self.email, password: ezdebug.password) { (id, token) in
+                    APIAuthenticationTests().signIn(email: self.email, password: ezdebug.password) { () in
                         
-                        SharedPreferences.set(.id, with: id)
-                        SharedPreferences.set(.token, with: token)
-                        
-                        APIManager.Instance.perform(call: .leaveSharedPet, withKey: petId, with: nil, completition: { (error, data) in
+                        APIManager.Instance.perform(call: .leaveSharedPet, withKey: petId, with: nil, callback: { (error, data) in
                             
                             XCTAssertNotNil(error)
                             XCTAssert(error?.errorCode == ErrorCode.NotEnoughRights, "Wrong Error \(String(describing: error?.errorCode))")

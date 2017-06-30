@@ -18,69 +18,67 @@ class AddPetUserPresenter {
     
     weak fileprivate var view: AddPetUserView?
     
-    
     var friends = [PetUser]()
     
     func attachView(_ view: AddPetUserView, pet: Pet){
         self.view = view
-        
         getFriends(for: pet)
-        loadFriends()
+        loadFriends(for: pet)
     }
     
     func deteachView() {
         self.view = nil
     }
     
-    
-    
     func getFriends(for pet:Pet){
         DataManager.Instance.getPetFriends(for: pet) { (error, friends) in
-            DispatchQueue.main.async {
-                if error == nil, let friends = friends {
+
+            if error == nil, let friends = friends {
                     self.friends = friends
                     self.view?.loadFriends()
                 }else if let error = error {
                     self.view?.errorMessage(error.msg)
                 }
-            }
+
         }
     }
     
-    func loadFriends(){
-
+    func loadFriends(for pet:Pet){
+        
         DataManager.Instance.loadPetFriends { (error, friends) in
-                DispatchQueue.main.async {
-                    if error == nil, let friends = friends {
-                        self.friends = friends
-                        self.view?.loadFriends()
-                    }else if let error = error {
-                        self.view?.errorMessage(error.msg)
-                    }
+
+            if error == nil, friends != nil {
+                    self.getFriends(for: pet)
+                }else if let error = error {
+                    self.view?.errorMessage(error.msg)
                 }
 
         }
     }
     
-    func addPetUser(by email: String?, to petId: Int16?) {
+    func addPetUser(by email: String?, to petId: Int?) {
         
-if email == nil || (email != nil && !email!.isValidEmail) {
+        if email == nil || (email != nil && !email!.isValidEmail) {
             view?.emailFormat()
-        }else if let petId = petId {
+        }else if let petId = petId, let email = email {
+            
             view?.beginLoadingContent()
-            var data = [String:Any]()
-            data["email"] = email
-            DataManager.Instance.addSharedUser(by: data, to: petId, callback: { (error, users) in
-                DispatchQueue.main.async {
-                    self.view?.endLoadingContent()
-                    if let error = error {
-                        self.view?.errorMessage(error.msg)
-                    }else{
-                        self.view?.successfullyAdded()
-                    }
+            DataManager.Instance.addSharedUser(by: email, to: petId, callback: { (error, users) in
+                
+                self.view?.endLoadingContent()
+                if let error = error {
+                    self.view?.errorMessage(error.msg)
+                }else{
+                    self.view?.successfullyAdded()
                 }
             })
         }
-        
     }
+    
+    
+    
+    
+    
+    
+    
 }

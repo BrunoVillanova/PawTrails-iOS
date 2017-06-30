@@ -14,7 +14,7 @@ class AddPetDeviceTableViewController: UITableViewController, UITextFieldDelegat
     
     fileprivate let presenter = DeviceCodePresenter()
     fileprivate var isDeviceIdle = false
-    var petId: Int16 = -1
+    var petId: Int = -1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,9 +29,8 @@ class AddPetDeviceTableViewController: UITableViewController, UITextFieldDelegat
         presenter.deteachView()
     }
     
-    
-    
     override func viewDidAppear(_ animated: Bool) {
+        isDeviceIdle = false
         if deviceCodeTextField.text != nil {
             deviceCodeTextField.becomeFirstResponder()
         }

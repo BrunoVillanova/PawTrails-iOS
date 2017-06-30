@@ -13,9 +13,7 @@ class APITablesTests: XCTestCase {
     
     override func setUp() {
         let expect = expectation(description: "Example")
-        APIAuthenticationTests().signIn { (id, token) in
-            SharedPreferences.set(.id, with: id)
-            SharedPreferences.set(.token, with: token)
+        APIAuthenticationTests().signIn { () in
             expect.fulfill()
         }
         waitForExpectations(timeout: 10) { error in

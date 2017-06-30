@@ -13,15 +13,30 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noPetsFound: UILabel!
     
+    var refreshControl = UIRefreshControl()
+    
     fileprivate let presenter = PetsPresenter()
+    
+    fileprivate var pets = [Int:IndexPath]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.tableFooterView = UIView()
-        presenter.attachView(self)
         noPetsFound.isHidden = true
+
+        tableView.tableFooterView = UIView()
+        
+        refreshControl.backgroundColor = UIColor.secondaryColor()
+        refreshControl.tintColor = UIColor.primaryColor()
+        refreshControl.addTarget(self, action: #selector(reloadPetsAPI), for: .valueChanged)
+        tableView.addSubview(refreshControl)
+        
         UIApplication.shared.statusBarStyle = .lightContent
+        presenter.attachView(self)
+    }
+    
+    @objc func reloadPetsAPI(){
+        presenter.loadPets()
     }
     
     deinit {
@@ -29,31 +44,23 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        presenter.loadPets()
+        reloadPets()
         presenter.startPetsListUpdates()
-        presenter.startPetsGPSUpdates { (id, update) in
-            if update {
-                self.updateRow(by: id)
-            }
+        presenter.startPetsGPSUpdates { (id) in
+            self.updateRow(by: id)
         }
         presenter.startPetsGeocodeUpdates { (geocode) in
-            if let geocode = geocode {
-                self.updateRow(by: geocode.id)
-            }
+            self.updateRow(by: geocode.id)
         }
-       
     }
     
-    private func updateRow(by id: Int16){
-        DispatchQueue.main.async {
-            debugPrint("Update Pet \(id)")
-            if let index = self.presenter.ownedPets.index(where: { $0.id == id }) {
-                self.tableView.reloadRows(at: [IndexPath.init(item: index, section: 0)], with: .automatic)
-            }else if let index = self.presenter.sharedPets.index(where: { $0.id == id }) {
-                self.tableView.reloadRows(at: [IndexPath.init(item: index, section: 1)], with: .automatic)
-            }else{
-                self.errorMessage(ErrorMsg.init(title: "", msg: "WTF"))
-            }
+    private func updateRow(by id: Int){
+        
+        debugPrint("Update Pet \(id)")
+        if let index = self.pets[id] {
+            self.tableView.reloadRows(at: [index], with: .automatic)
+        }else{
+            self.errorMessage(ErrorMsg.init(title: "", msg: "WTF"))
         }
     }
     
@@ -63,21 +70,27 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         presenter.stopPetsGeocodeUpdates()
     }
 
+    func reloadPets(){
+        presenter.getPets()
+    }
 
     // MARK: - PetsView
     
     func errorMessage(_ error: ErrorMsg) {
+        refreshControl.endRefreshing()
         alert(title: error.title, msg: error.msg)
     }
     
     func loadPets() {
+        refreshControl.endRefreshing()
         noPetsFound.isHidden = presenter.sharedPets.count != 0 || presenter.ownedPets.count != 0
         tableView.reloadData()
     }
     
     func petsNotFound() {
+        refreshControl.endRefreshing()
+        noPetsFound.isHidden = presenter.sharedPets.count != 0 || presenter.ownedPets.count != 0
         tableView.reloadData()
-        noPetsFound.isHidden = false
     }
     
         
@@ -91,12 +104,29 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? presenter.ownedPets.count : presenter.sharedPets.count
+        if presenter.ownedPets.count > 0 && presenter.sharedPets.count > 0 {
+            return section == 0 ? presenter.ownedPets.count : presenter.sharedPets.count
+        }else{
+            return presenter.ownedPets.count + presenter.sharedPets.count
+        }
     }
-
+    
+    func getPet(at indexPath: IndexPath) -> Pet {
+        
+        if presenter.ownedPets.count > 0 && presenter.sharedPets.count > 0 {
+            return indexPath.section == 0 ? presenter.ownedPets[indexPath.row] : presenter.sharedPets[indexPath.row]
+        }else if presenter.ownedPets.count > 0 {
+            return presenter.ownedPets[indexPath.row]
+        }else{
+            return presenter.sharedPets[indexPath.row]
+        }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! petListCell
-        let pet = indexPath.section == 0 ? presenter.ownedPets[indexPath.row] : presenter.sharedPets[indexPath.row]
+        
+        let pet = getPet(at: indexPath)
+        pets[pet.id] = indexPath
         cell.batteryImageView.circle()
         cell.signalImageView.circle()
         
@@ -164,8 +194,8 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         if segue.destination is PetProfileTableViewController {
             
-            if let index = tableView.indexPathForSelectedRow {
-                (segue.destination as! PetProfileTableViewController).pet = index.section == 0 ? presenter.ownedPets[index.row] : presenter.sharedPets[index.row]
+            if let indexPath = tableView.indexPathForSelectedRow {
+                (segue.destination as! PetProfileTableViewController).pet = getPet(at: indexPath)
             }
         }
     }

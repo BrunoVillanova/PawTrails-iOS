@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import SwiftyJSON
 @testable import PawTrails
 
 class APIPetSafeZonesTests: XCTestCase {
@@ -14,9 +15,7 @@ class APIPetSafeZonesTests: XCTestCase {
     override func setUp() {
         super.setUp()
         let expect = expectation(description: "Example")
-        APIAuthenticationTests().signIn { (id, token) in
-            SharedPreferences.set(.id, with: id)
-            SharedPreferences.set(.token, with: token)
+        APIAuthenticationTests().signIn { () in
             expect.fulfill()
         }
         waitForExpectations(timeout: 10) { error in
@@ -27,8 +26,8 @@ class APIPetSafeZonesTests: XCTestCase {
     func getPet(_ callback: @escaping ((_ data:[String:Any]?)->())){
         APIManager.Instance.perform(call: .getPets) { (error, data) in
             
-            if let data = data?["pets"] as? [[String:Any]] {
-                callback(data.first)
+            if let data = data?["pets"].array {
+                callback(data.first?.dictionaryObject)
             }else{
                 callback(nil)
             }
@@ -55,35 +54,32 @@ class APIPetSafeZonesTests: XCTestCase {
                     XCTAssertNil(error, "Error \(String(describing: error))")
                     XCTAssertNotNil(data, "No data :(")
                     
-                    if let data = data {
-                        XCTAssert(data["name"] as? String == _data["name"] as? String, "name")
-                        XCTAssert(data["shape"] as? Int == _data["shape"] as? Int, "shape")
-                        
-                        if let p1 = data["point1"] as? [String:Any] {
-                            XCTAssert(p1["lat"] as? Double == self.point1["lat"] as? Double, "lat")
-                            XCTAssert(p1["lon"] as? Double == self.point1["lon"] as? Double, "lat")
-                        }else{
-                            XCTFail()
-                        }
-                        
-                        if let p2 = data["point2"] as? [String:Any] {
-                            XCTAssert(p2["lat"] as? Double == self.point2["lat"] as? Double, "lat")
-                            XCTAssert(p2["lon"] as? Double == self.point2["lon"] as? Double, "lon")
-                        }else{
-                            XCTFail()
-                        }
-                        XCTAssert(data["active"] as? Bool == _data["active"] as? Bool, "active")
-                    }else{
-                        XCTFail()
-                    }
-
-                    if let id = data?.tryCastInteger(for: "id") {
+                    self.checkSafeZone(data, _data)
+                    
+                    if let id = data?["id"].int {
                         callback(petid, id)
                     }else{
                         callback(nil, nil)
                     }
                 }
             }
+        }
+    }
+    
+    func checkSafeZone(_ data: JSON?, _ _data: [String:Any]){
+        if let data = data {
+            XCTAssert(data["name"].string == _data["name"] as? String, "name")
+            XCTAssert(data["shape"].int == _data["shape"] as? Int, "shape")
+            
+            XCTAssert(data["point1"]["lat"].double == self.point1["lat"] as? Double, "lat")
+            XCTAssert(data["point1"]["lon"].double == self.point1["lon"] as? Double, "lat")
+            
+            XCTAssert(data["point2"]["lat"].double == self.point2["lat"] as? Double, "lat")
+            XCTAssert(data["point2"]["lon"].double == self.point2["lon"] as? Double, "lon")
+            
+            XCTAssert(data["active"].bool == _data["active"] as? Bool, "active")
+        }else{
+            XCTFail()
         }
     }
     
@@ -117,29 +113,9 @@ class APIPetSafeZonesTests: XCTestCase {
                     XCTAssertNil(error, "Error \(String(describing: error))")
                     XCTAssertNotNil(data, "No data :(")
                     
-                    if let data = data {
-                        XCTAssert(data["name"] as? String == _data["name"] as? String, "name")
-                        XCTAssert(data["shape"] as? Int == _data["shape"] as? Int, "shape")
-                        
-                        if let p1 = data["point1"] as? [String:Any] {
-                            XCTAssert(p1["lat"] as? Double == self.point1["lat"] as? Double, "lat")
-                            XCTAssert(p1["lon"] as? Double == self.point1["lon"] as? Double, "lat")
-                        }else{
-                            XCTFail()
-                        }
-                        
-                        if let p2 = data["point2"] as? [String:Any] {
-                            XCTAssert(p2["lat"] as? Double == self.point2["lat"] as? Double, "lat")
-                            XCTAssert(p2["lon"] as? Double == self.point2["lon"] as? Double, "lon")
-                        }else{
-                            XCTFail()
-                        }
-                        XCTAssert(data["active"] as? Bool == _data["active"] as? Bool, "active")
-                    }else{
-                        XCTFail()
-                    }
+                    self.checkSafeZone(data, _data)
                     
-                    if let id = data?.tryCastInteger(for: "id") {
+                    if let id = data?["id"].int {
                         self.remove(safezone: id, callback: { (success) in
                             XCTAssert(success, "Not removes properly")
                             expect.fulfill()
@@ -262,27 +238,7 @@ class APIPetSafeZonesTests: XCTestCase {
                     XCTAssertNil(error, "Error \(String(describing: error))")
                     XCTAssertNotNil(data, "No data :(")
                     
-                    if let data = data {
-                        XCTAssert(data["name"] as? String == _data["name"] as? String, "name")
-                        XCTAssert(data["shape"] as? Int == _data["shape"] as? Int, "shape")
-                        
-                        if let p1 = data["point1"] as? [String:Any] {
-                            XCTAssert(p1["lat"] as? Double == self.point1["lat"] as? Double, "lat")
-                            XCTAssert(p1["lon"] as? Double == self.point1["lon"] as? Double, "lat")
-                        }else{
-                            XCTFail()
-                        }
-                        
-                        if let p2 = data["point2"] as? [String:Any] {
-                            XCTAssert(p2["lat"] as? Double == self.point2["lat"] as? Double, "lat")
-                            XCTAssert(p2["lon"] as? Double == self.point2["lon"] as? Double, "lon")
-                        }else{
-                            XCTFail()
-                        }
-                        XCTAssert(data["active"] as? Bool == _data["active"] as? Bool, "active")
-                    }else{
-                        XCTFail()
-                    }
+                    self.checkSafeZone(data, _data)
                     
                     self.remove(safezone: id, callback: { (success) in
                         XCTAssert(success, "Not removes properly")
@@ -414,7 +370,7 @@ class APIPetSafeZonesTests: XCTestCase {
                     XCTAssertNil(error, "Error \(String(describing: error))")
                     XCTAssertNotNil(data, "No data :(")
                     
-                    if let id = data?.tryCastInteger(for: "id") {
+                    if let id = data?["id"].int {
                         APIManager.Instance.perform(call: .removeSafeZone, withKey: id) { (error, data) in
                             XCTAssertNil(error, "Error \(String(describing: error))")
                             XCTAssertNotNil(data, "No data :(")
@@ -447,7 +403,7 @@ class APIPetSafeZonesTests: XCTestCase {
                     XCTAssertNil(error, "Error \(String(describing: error))")
                     XCTAssertNotNil(data, "No data :(")
                     
-                    if let id = data?.tryCastInteger(for: "id") {
+                    if let id = data?["id"].int {
                         APIManager.Instance.perform(call: .removeSafeZone, withKey: 0) { (error, data) in
                             XCTAssertNotNil(error)
                             XCTAssert(error?.errorCode == ErrorCode.SafeZoneNotFound, "Wrong Error \(String(describing: error?.errorCode))")

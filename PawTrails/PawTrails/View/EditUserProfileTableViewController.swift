@@ -54,18 +54,18 @@ class EditUserProfileTableViewController: UITableViewController, EditUserProfile
 
     func loadData() {
         
-        let name = presenter.getName() ?? ""
-        let surname = presenter.getSurName() ?? ""
+        let name = presenter.user.name ?? ""
+        let surname = presenter.user.surname ?? ""
         
         nameLabel.text = "\(name) \(surname)"
-        emailLabel.text = presenter.getEmail()
-        genderLabel.text = presenter.getGender()?.name
-        birthdayLabel.text = presenter.getBirthday()?.toStringShow
+        emailLabel.text = presenter.user.email
+        genderLabel.text = presenter.user.gender?.name
+        birthdayLabel.text = presenter.user.birthday?.toStringShow
         
-        phoneLabel.text = presenter.getPhone()?.toString
-        addressLabel.text = presenter.getAddress()?.toString
+        phoneLabel.text = presenter.user.phone?.toString
+        addressLabel.text = presenter.user.address?.toString
         
-        if let imageData = presenter.getImage()  {
+        if let imageData = presenter.user.image  {
             profileImage.image = UIImage(data: imageData as Data)
         }
         

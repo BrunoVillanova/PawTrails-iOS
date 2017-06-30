@@ -16,14 +16,14 @@ class BirthdayViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let birthday = parentEditor.getBirthday() {
+        if let birthday = parentEditor.user.birthday {
             datePicker.setDate(birthday, animated: true)
         }
         
     }
     
     @IBAction func saveAction(_ sender: UIBarButtonItem) {
-        parentEditor.set(birthday: datePicker.date)
+        parentEditor.user.birthday = datePicker.date
         parentEditor.refresh()
         view.endEditing(true)
         _ = self.navigationController?.popViewController(animated: true)

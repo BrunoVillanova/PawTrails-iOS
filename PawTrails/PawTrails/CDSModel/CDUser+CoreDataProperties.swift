@@ -1,19 +1,19 @@
 //
-//  User+CoreDataProperties.swift
-//  PawTrails
+//  CDUser+CoreDataProperties.swift
+//  
 //
-//  Created by Marc Perello on 16/05/2017.
-//  Copyright © 2017 AttitudeTech. All rights reserved.
+//  Created by Marc Perello on 26/06/2017.
+//
 //
 
 import Foundation
 import CoreData
 
 
-extension User {
+extension CDUser {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<User> {
-        return NSFetchRequest<User>(entityName: "User")
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<CDUser> {
+        return NSFetchRequest<CDUser>(entityName: "CDUser")
     }
 
     @NSManaged public var birthday: Date?
@@ -25,20 +25,20 @@ extension User {
     @NSManaged public var name: String?
     @NSManaged public var notification: Bool
     @NSManaged public var surname: String?
-    @NSManaged public var address: Address?
+    @NSManaged public var address: CDAddress?
     @NSManaged public var friends: NSSet?
-    @NSManaged public var phone: Phone?
+    @NSManaged public var phone: CDPhone?
 
 }
 
 // MARK: Generated accessors for friends
-extension User {
+extension CDUser {
 
     @objc(addFriendsObject:)
-    @NSManaged public func addToFriends(_ value: PetUser)
+    @NSManaged public func addToFriends(_ value: CDPetUser)
 
     @objc(removeFriendsObject:)
-    @NSManaged public func removeFromFriends(_ value: PetUser)
+    @NSManaged public func removeFromFriends(_ value: CDPetUser)
 
     @objc(addFriends:)
     @NSManaged public func addToFriends(_ values: NSSet)

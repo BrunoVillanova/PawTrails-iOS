@@ -18,12 +18,12 @@ class PetGenderTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
-        selected = parentEditor.getGender()
+        selected = parentEditor.pet.gender
 
     }
 
     @IBAction func doneAction(_ sender: UIBarButtonItem) {
-        parentEditor.set(gender: selected)
+        parentEditor.pet.gender = selected
         parentEditor.refresh()
         _ = self.navigationController?.popViewController(animated: true)
     }

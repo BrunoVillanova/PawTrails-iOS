@@ -15,4 +15,8 @@ class Constants {
     static let maxImageSize = 2 * 1024 * 1024 // In Bytes 2MB
     static let maxWeight = 9999.999
     
+    // Safe Zone
+    
+    static let minimumDistance = 50.0
+    
 }

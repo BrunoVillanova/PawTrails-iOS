@@ -8,35 +8,42 @@
 
 import Foundation
 
-protocol SettingsView: NSObjectProtocol, View {
+protocol SettingsView: NSObjectProtocol, View, LoadingView {
     func userNotSigned()
+    func notificationValueChangeFailed()
+    func notificationValueChanged()
 }
-
 
 class SettingsPresenter {
     
     weak private var view: SettingsView?
     
-
-    var CountryCodes = [CountryCode]()
-    
     func attachView(_ view: SettingsView){
         self.view = view
-        
     }
     
     func deteachView() {
         self.view = nil
     }
     
-    
-    
     func logout() {
-        if AuthManager.Instance.signOut() {
+        if DataManager.Instance.signOut() {
             self.view?.userNotSigned()
         }else{
             self.view?.errorMessage(ErrorMsg(title:"", msg:"Couldn't Logout"))
         }
     }
-
+    
+    func changeNotification(value: Bool) {
+        
+        DataManager.Instance.saveUserNotification(value) { (error) in
+            
+            if let error = error {
+                self.view?.errorMessage(error.msg)
+                self.view?.notificationValueChangeFailed()
+            }else{
+                self.view?.notificationValueChanged()
+            }
+        }
+    }
 }
