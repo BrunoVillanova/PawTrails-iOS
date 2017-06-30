@@ -43,7 +43,7 @@ class PetsPresenter {
         DataManager.Instance.getPetsSplitted { (error, owned, shared) in
             
             if let error = error {
-                if error.DBError == DatabaseError.NotFound {
+                if error.DBError?.type == DatabaseErrorType.NotFound {
                     self.ownedPets.removeAll()
                     self.sharedPets.removeAll()
                     self.view?.petsNotFound()
@@ -67,7 +67,7 @@ class PetsPresenter {
         DataManager.Instance.loadPets { (error, pets) in
             
             if let error = error {
-                if error.DBError == DatabaseError.NotFound {
+                if error.DBError?.type == DatabaseErrorType.NotFound {
                     self.ownedPets.removeAll()
                     self.sharedPets.removeAll()
                     self.view?.petsNotFound()

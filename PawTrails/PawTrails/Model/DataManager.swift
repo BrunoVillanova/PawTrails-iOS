@@ -118,27 +118,19 @@ class DataManager {
             tasks.leave()
         })
         
-        _ = DataManager.Instance.getCountryCodes()
+        DataManager.Instance.getCountryCodes { (_) in }
         
         tasks.notify(queue: .main) {
             
             queue.sync {
-                
-                for error in errors {
-                    debugPrint(error.localizedDescription)
-                }
+                for error in errors { debugPrint(error.localizedDescription) }
             }
-            
-//            DispatchQueue.main.async {
-                callback(nil)
-//            }
+            callback(nil)
         }
     }
     
     func signOut() -> Bool {
-        DispatchQueue.main.async {
-            CoreDataManager.Instance.deleteAll()
-        }
+        CoreDataManager.instance.deleteAll()
         SocketIOManager.Instance.disconnect()
         return SharedPreferences.remove(.id) && SharedPreferences.remove(.token)
     }
@@ -186,12 +178,14 @@ class DataManager {
     
     // MARK: - User
     
-    func set(_ user: User, callback: userCallback? = nil){
+    func set(_ user: User, callback: @escaping userCallback){
         
-        if let user = CDRepository.instance.upsert(user), let callback = callback {
-            callback(nil, user)
-        }else if let callback = callback {
-            callback(DataManagerError(DBError: .Unknown), nil)
+        CDRepository.instance.upsert(user) { (error, user) in
+            if error == nil, let user = user {
+                callback(nil, user)
+            }else if let error = error {
+                callback(DataManagerError(DBError: error), nil)
+            }
         }
     }
     
@@ -248,9 +242,13 @@ class DataManager {
         }
     }
     
-    func removeUser() -> Bool {
+    func removeUser(callback: @escaping (Bool)->Void) {
         let id = Int(SharedPreferences.get(.id)) ?? 0
-        return isAuthenticated() && CDRepository.instance.removeUser(by: id)
+        if isAuthenticated() {
+            CDRepository.instance.removeUser(by: id, callback: callback)
+        }else{
+            callback(false)
+        }
     }
     
 //    func loadUserFriends(callback: @escaping petUsersCallback){
@@ -272,10 +270,12 @@ class DataManager {
     
     func set(_ pet: Pet, callback: petCallback? = nil) {
         
-        if let pet = CDRepository.instance.upsert(pet), let callback = callback {
-            callback(nil, pet)
-        }else if let callback = callback {
-            callback(DataManagerError(DBError: .Unknown), nil)
+        CDRepository.instance.upsert(pet) { (error, pet) in
+            if error == nil, let pet = pet, let callback = callback {
+                callback(nil, pet)
+            }else if let error = error, let callback = callback{
+                callback(DataManagerError(DBError: error), nil)
+            }
         }
     }
     
@@ -291,10 +291,8 @@ class DataManager {
     
     private func removePetDB(by petId: Int, callback: @escaping errorCallback) {
         
-        if CDRepository.instance.removePet(by: petId) {
-            callback(nil)
-        }else{
-            callback(DataManagerError.init(DBError: DatabaseError.NotFound))
+        CDRepository.instance.removePet(by: petId) { (success) in
+            callback(success ? nil : DataManagerError(DBError: DatabaseError(type: .Unknown, entity: Entity.pet, action: .remove, error: nil)))
         }
     }
     
@@ -364,10 +362,13 @@ class DataManager {
     }
     
     func getPets(callback: @escaping petsCallback) {
-        if let pets = CDRepository.instance.getPets() {
-            callback(nil, pets)
-        }else{
-            callback(DataManagerError.init(DBError: .NotFound), nil)
+        
+        CDRepository.instance.getPets { (error, pets) in
+            if error == nil, let pets = pets {
+                callback(nil, pets)
+            }else if let error = error {
+                callback(DataManagerError.init(DBError: error), nil)
+            }
         }
     }
     
@@ -389,23 +390,33 @@ class DataManager {
     
     func loadPets(callback: @escaping petsCallback) {
         
-        checkBreeds()
-        
-        APIRepository.instance.loadPets { (error, pets) in
-
-            if error == nil, let pets = pets {
-                if let pets = CDRepository.instance.upsert(pets) {
-                    callback(nil, pets)
+        checkBreeds { (errors) in
+            
+            if errors.count > 0 {
+                debugPrint("Problems with breeds", String(describing: errors))
+            }
+            
+            APIRepository.instance.loadPets { (error, pets) in
+                
+                if error == nil, let pets = pets {
+                    
+                    CDRepository.instance.upsert(pets, callback: { (error, pets) in
+                        if error == nil, let pets = pets {
+                            callback(nil, pets)
+                        }else if let error = error {
+                            callback(DataManagerError(DBError: error), nil)
+                        }
+                    })
+                    
+                }else if let error = error {
+                    callback(DataManagerError(APIError: error), nil)
                 }else{
-                    callback(DataManagerError(DBError: .Unknown), nil)
+                    debugPrint(error ?? "nil error", pets ?? "nil pets")
+                    callback(nil, nil)
                 }
-            }else if let error = error {
-                callback(DataManagerError(APIError: error), nil)
-            }else{
-                debugPrint(error ?? "nil error", pets ?? "nil pets")
-                callback(nil, nil)
             }
         }
+        
     }
     
     func save(_ pet: Pet, callback: @escaping errorCallback){
@@ -419,7 +430,7 @@ class DataManager {
                     }else if let error = error {
                         callback(error)
                     }else{
-                        callback(DataManagerError(DBError: DatabaseError.Unknown))
+                        callback(DataManagerError(DBError: DatabaseError(type: .Unknown, entity: Entity.pet, action: .save, error: nil)))
                     }
                 })
             }else if let error = error {
@@ -445,14 +456,34 @@ class DataManager {
     
     // MARK: - Pet Breeds
     
-    func checkBreeds() {
+    func checkBreeds(callback: @escaping ([DataManagerError])->Void) {
+        
+        var errors = [DataManagerError]()
+        let queue = DispatchQueue(label: "ErrorQueueBreeds", qos: .default, attributes: .concurrent, autoreleaseFrequency: .inherit, target: nil)
+
+        let group = DispatchGroup()
         
         for type in [Type.cat, Type.dog] {
             
             getBreeds(for: type) { (error, breeds) in
-                if breeds == nil { self.loadBreeds(for: type, callback: { (_, _) in })}
+                if breeds == nil {
+                    group.enter()
+                    self.loadBreeds(for: type, callback: { (error, breeds) in
+                        if let error = error {
+                            queue.sync {
+                                errors.append(error)
+                            }
+                        }
+                        group.leave()
+                    })
+                }
             }
         }
+        
+        group.notify(queue: .main) { 
+            callback(errors)
+        }
+        
     }
     
     func getBreeds(for type: Type, callback: @escaping breedsCallback) {
@@ -473,11 +504,15 @@ class DataManager {
             APIRepository.instance.loadBreeds(for: type, callback: { (error, breeds) in
 
                 if error == nil, let breeds = breeds {
-                    if CDRepository.instance.upsert(breeds, for: type) {
-                        callback(nil, breeds)
-                    }else{
-                        callback(DataManagerError(DBError: .Unknown), nil)
-                    }
+                    
+                    CDRepository.instance.upsert(breeds, for: type, callback: { (success) in
+                        if success {
+                            callback(nil, breeds)
+                        }else{
+                            callback(DataManagerError(DBError: DatabaseError(type: .Unknown, entity: Entity.breed, action: .upsert, error: nil)), nil)
+                        }
+                    })
+
                 }else if let error = error {
                     callback(DataManagerError(APIError: error), nil)
                 }else{
@@ -486,7 +521,7 @@ class DataManager {
                 }
             })
         }else {
-            callback(DataManagerError(DBError: DatabaseError.NotFound), nil)
+            callback(DataManagerError.init(responseError: ResponseError.NotFound), nil)
         }
     }
     
@@ -529,7 +564,7 @@ class DataManager {
             if let error = error {
                 callback(DataManagerError(DBError: error), nil)
             }else if let friends = friends, let petUsers = pet.users {
-                
+
                 let feaseableNewUsers = friends.filter({ !petUsers.contains($0) })
                 callback(nil, feaseableNewUsers)
             }
@@ -708,18 +743,34 @@ class DataManager {
         }
     }
     
-    func setSafeZone(imageData:Data, for id: Int){
-        CDRepository.instance.setSafeZone(imageData: imageData, for: id)
+    func setSafeZone(imageData:Data, for id: Int, callback: @escaping errorCallback){
+      
+        CDRepository.instance.setSafeZone(imageData: imageData, for: id) { (error) in
+            if let error = error {
+                callback(DataManagerError(DBError: error))
+            }else{
+                callback(nil)
+            }
+        }
     }
     
-    func setSafeZone(address:String, for id: Int){
-        CDRepository.instance.setSafeZone(address: address, for: id)
+    func setSafeZone(address:String, for id: Int, callback: @escaping errorCallback){
+
+        CDRepository.instance.setSafeZone(address: address, for: id) { (error) in
+            if let error = error {
+                callback(DataManagerError(DBError: error))
+            }else{
+                callback(nil)
+            }
+        }
     }
     
     // MARK: - Country Codes
     
-    func getCountryCodes() -> [CountryCode]? {
-        return CDRepository.instance.getAllCountryCodes()
+    func getCountryCodes(callback: @escaping ([CountryCode]?)->Void) {
+        
+        CDRepository.instance.getAllCountryCodes(callback: callback)
+
     }
     
     func getCurrentCountryShortName() -> String {

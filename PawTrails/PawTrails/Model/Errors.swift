@@ -117,8 +117,26 @@ enum AuthenticationError: Int {
     case Unknown = -1
 }
 
-enum DatabaseError: Int {
-    case NotFound = 0, IdNotFound, DuplicatedEntry, AlreadyExists, Unknown
+struct DatabaseError {
+    var type: DatabaseErrorType
+    var entity: Entity?
+    var action: DatabaseErrorAction
+    var error: NSError?
+}
+
+extension DatabaseError {
+    var localizedDescription: String {
+        return "\(action) \(String(describing: entity)) \(type)"
+    }
+}
+
+enum DatabaseErrorAction {
+    case upsert, get, remove, save
+}
+
+enum DatabaseErrorType: Int {
+    case NotFound = 0, IdNotFound, DuplicatedEntry, AlreadyExists, Unknown, NotSavedProperly, ObjectNotFound, InternalInconsistencyException
+
 }
 
 enum ResponseError: Int {
@@ -137,7 +155,7 @@ struct DataManagerError: Error {
         if let call = APIError?.call { out = out.appending("\(call) ")}
         if let errorCode = APIError?.errorCode { out = out.appending("APIError: \(errorCode)")}
         if let responseError = responseError { out = out.appending(", ResponseError: \(responseError)") }
-        if let DBError = DBError { out = out.appending(", DBError: \(DBError)") }
+        if let DBError = DBError { out = out.appending(", DBError: \(DBError.localizedDescription)") }
         if let error = error { out = out.appending(", DBError: \(error.localizedDescription)") }
         return out
     }
@@ -180,13 +198,6 @@ struct DataManagerError: Error {
     var msg: ErrorMsg {
         return ErrorMsg(title: "", msg: self.localizedDescription)
     }
-}
-
-enum CoreDataManagerError: Int {
-    case IdNotFoundInInput = 0
-    case NotSavedProperly = 1
-    case ObjectNotFound  = 2
-    case InternalInconsistencyException  = 3
 }
 
 

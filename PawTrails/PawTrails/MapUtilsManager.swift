@@ -28,8 +28,12 @@ public class Geocode{
         self.placemark = placemark
     }
     
-    var name: String? {
-        return placemark?.thoroughfare ?? placemark?.name
+    var name: String {
+        if let name = placemark?.name { return name }
+        if let th = placemark?.thoroughfare { return th }
+        if let subLocality = placemark?.subLocality { return subLocality }
+        if let locality = placemark?.locality { return locality }
+        return "-"
     }
 }
 
@@ -79,17 +83,20 @@ class GeocoderManager {
     
     private func deliver(_ geocode: Geocode){
         DispatchQueue.main.async {
-            if let name = geocode.name {
-                debugPrint("Geocode released: ", geocode.id)
-                if geocode.type == .pet {
-                    SocketIOManager.Instance.set(name, for: geocode.id)
-                }else if geocode.type == .safezone {
-                    DataManager.Instance.setSafeZone(address: name, for: geocode.id)
-                }
+            let name = geocode.name
+            debugPrint("Geocode released: ", geocode.id, name)
+            if geocode.type == .pet {
+                SocketIOManager.Instance.set(name, for: geocode.id)
                 NotificationManager.Instance.postPetGeoCodeUpdates(with: geocode)
+                self.sem.signal()
+            }else if geocode.type == .safezone {
+                DataManager.Instance.setSafeZone(address: name, for: geocode.id, callback: { (error) in
+                    debugPrint("Geocode posted: ", geocode.id, name)
+                    NotificationManager.Instance.postPetGeoCodeUpdates(with: geocode)
+                    self.sem.signal()
+                })
             }
         }
-        self.sem.signal()
     }
     
 }
@@ -117,47 +124,46 @@ class SnapshotMapManager {
     
     func performSnapShot(with center: CLLocationCoordinate2D, topCenter: CLLocationCoordinate2D, shape: Shape, handler: @escaping ((UIImage?)->())){
         
-        mapView.load(with: center, topCenter: topCenter, shape: shape, into: view, paintShapes: true)
-                
-        let options = MKMapSnapshotOptions()
-        options.region = self.mapView.region
-        options.scale = UIScreen.main.scale
-        options.size = CGSize(width: 375, height: 200)
-        options.mapType = .satellite
-        options.showsBuildings = true
-        options.showsPointsOfInterest = true
-        options.camera = self.mapView.camera
-        
-        let shooter = MKMapSnapshotter(options: options)
-        
-        shooter.start(with: self.snapshotQueue, completionHandler: { (snapshot, error) in
-            if error == nil, let snapshot = snapshot {
-                
-                let center = snapshot.point(for: center)
-                let topCenter = snapshot.point(for: topCenter)
-                
-                let frame = CGRect(center: center, topCenter: topCenter)
-                
-                let image = snapshot.image
-                
-                UIGraphicsBeginImageContextWithOptions(image.size, true, image.scale)
-                image.draw(at: CGPoint.zero)
-                
-                let path = shape == .circle ? UIBezierPath(ovalIn: frame) : UIBezierPath(rect: frame)
-                Fence.idleColor.set()
-                path.fill()
-                
-                let imageWithSafeZone = UIGraphicsGetImageFromCurrentImageContext()
-                UIGraphicsEndImageContext()
-                handler(imageWithSafeZone)
-            }else {
-                handler(nil)
-            }
-        })
-        
-        
-}
-
+        mapView.load(with: center, topCenter: topCenter, shape: shape, into: view, paintShapes: true) { (fence) in
+            
+            let options = MKMapSnapshotOptions()
+            options.region = self.mapView.region
+            options.scale = UIScreen.main.scale
+            options.size = CGSize(width: 375, height: 200)
+            options.mapType = .satellite
+            options.showsBuildings = true
+            options.showsPointsOfInterest = true
+            options.camera = self.mapView.camera
+            
+            let shooter = MKMapSnapshotter(options: options)
+            
+            shooter.start(with: self.snapshotQueue, completionHandler: { (snapshot, error) in
+                if error == nil, let snapshot = snapshot {
+                    
+                    let center = snapshot.point(for: center)
+                    let topCenter = snapshot.point(for: topCenter)
+                    
+                    let frame = CGRect(center: center, topCenter: topCenter)
+                    
+                    let image = snapshot.image
+                    
+                    UIGraphicsBeginImageContextWithOptions(image.size, true, image.scale)
+                    image.draw(at: CGPoint.zero)
+                    
+                    let path = shape == .circle ? UIBezierPath(ovalIn: frame) : UIBezierPath(rect: frame)
+                    Fence.idleColor.set()
+                    path.fill()
+                    
+                    let imageWithSafeZone = UIGraphicsGetImageFromCurrentImageContext()
+                    UIGraphicsEndImageContext()
+                    handler(imageWithSafeZone)
+                }else {
+                    handler(nil)
+                }
+            })
+        }
+    }
+    
 }
 
 

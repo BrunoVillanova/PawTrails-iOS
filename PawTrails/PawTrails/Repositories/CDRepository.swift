@@ -22,14 +22,13 @@ class CDRepository {
     typealias CDRepSafeZonesCallback = (DatabaseError?, [SafeZone]?) -> Void
     typealias CDRepBreedCallback = (DatabaseError?, Breed?) -> Void
     typealias CDRepBreedsCallback = (DatabaseError?, [Breed]?) -> Void
-
-    
+        
     //MARK:- User
     
     func upsert(_ user: User, callback: @escaping CDRepUserCallback) {
         
-        CoreDataManager.Instance.upsert("CDUser", with: ["id":user.id]) { (object) in
-
+        CoreDataManager.instance.upsert(.user, with: ["id":user.id]) { (object) in
+            
             if let cdUser = object as? CDUser {
                 
                 cdUser.name = user.name
@@ -39,21 +38,37 @@ class CDRepository {
                 cdUser.birthday = user.birthday
                 cdUser.gender = user.gender?.rawValue ?? Int16(-1.0)
                 
+                let group = DispatchGroup()
+                
                 // Address
                 
                 if let address = user.address {
                     
                     if cdUser.address == nil { // Create
-                        cdUser.address = try CoreDataManager.Instance.store("CDAddress", with: ["city":""]) as? CDAddress
+                        group.enter()
+                        CoreDataManager.instance.store(.address, with: ["city":""], callback: { (object) in
+                            if let cdAddress = object as? CDAddress {
+                                cdUser.address = cdAddress
+                                cdUser.address?.city = address.city
+                                cdUser.address?.country = address.country
+                                cdUser.address?.line0 = address.line0
+                                cdUser.address?.line1 = address.line1
+                                cdUser.address?.line2 = address.line2
+                                cdUser.address?.postal_code = address.postalCode
+                                cdUser.address?.state = address.state
+                            }
+                            group.leave()
+                        })
+                    } else{
+                        cdUser.address?.city = address.city
+                        cdUser.address?.country = address.country
+                        cdUser.address?.line0 = address.line0
+                        cdUser.address?.line1 = address.line1
+                        cdUser.address?.line2 = address.line2
+                        cdUser.address?.postal_code = address.postalCode
+                        cdUser.address?.state = address.state
                     }
-                    cdUser.address?.city = address.city
-                    cdUser.address?.country = address.country
-                    cdUser.address?.line0 = address.line0
-                    cdUser.address?.line1 = address.line1
-                    cdUser.address?.line2 = address.line2
-                    cdUser.address?.postal_code = address.postalCode
-                    cdUser.address?.state = address.state
-
+                    
                 }else{ //Remove
                     cdUser.setValue(nil, forKey: "address")
                 }
@@ -61,12 +76,20 @@ class CDRepository {
                 // Phone
                 
                 if let phone = user.phone {
-                    
                     if cdUser.phone == nil { // Create
-                        cdUser.phone = try CoreDataManager.Instance.store("CDPhone", with: ["number":""]) as? CDPhone
+                        group.enter()
+                        CoreDataManager.instance.store(.phone, with: ["number":""], callback: { (object) in
+                            if let cdPhone = object as? CDPhone {
+                                cdUser.phone = cdPhone
+                                cdUser.phone?.number = phone.number
+                                cdUser.phone?.country_code = phone.countryCode
+                            }
+                            group.leave()
+                        })
+                    } else{
+                        cdUser.phone?.number = phone.number
+                        cdUser.phone?.country_code = phone.countryCode
                     }
-                    cdUser.phone?.number = phone.number
-                    cdUser.phone?.country_code = phone.countryCode
                     
                 }else{ //Remove
                     cdUser.setValue(nil, forKey: "phone")
@@ -82,27 +105,32 @@ class CDRepository {
                     }
                 }
                 
-                CoreDataManager.Instance.save(callback: { (error) in
-                    if let error = error {
-                        callback(DatabaseError.Unknown, nil)
-                    } else {
-                        callback(nil, User(cdUser))
-                    }
+                group.notify(queue: .main, execute: { 
+                    CoreDataManager.instance.save(callback: { (error) in
+                        if let error = error {
+                            callback(error, nil)
+                        } else {
+                            callback(nil, User(cdUser))
+                        }
+                    })
                 })
             }
         }
     }
     
-    private func getUserCD(by id: Int, _ callback:(DatabaseError?, CDUser?)->Void) {
+    private func getUserCD(by id: Int, _ callback: @escaping (DatabaseError?, CDUser?)->Void ) {
         
-        if let results = CoreDataManager.Instance.retrieve("CDUser", with: NSPredicate("id", .equal, id)) as? [CDUser] {
-            if results.count > 1 {
-                callback(DatabaseError.DuplicatedEntry, nil)
+        CoreDataManager.instance.retrieve(.user, with: NSPredicate("id", .equal, id)) { (objects) in
+            if let results = objects as? [CDUser] {
+                if results.count > 1 {
+                    
+                    callback(DatabaseError(type: .DuplicatedEntry, entity: Entity.user, action: .get, error: nil), nil)
+                }else{
+                    callback(nil, results.first!)
+                }
             }else{
-                callback(nil, results.first!)
+                callback(DatabaseError(type: .NotFound, entity: Entity.user, action: .get, error: nil), nil)
             }
-        }else{
-            callback(DatabaseError.NotFound, nil)
         }
     }
     
@@ -117,20 +145,21 @@ class CDRepository {
         }
     }
     
-    func removeUser(by id: Int) -> Bool {
-        do {
-            try CoreDataManager.Instance.delete(entity: "CDUser", withPredicate: NSPredicate("id", .equal, id))
-            return true
-        } catch {}
-        return false
+    func removeUser(by id: Int, callback: @escaping (Bool)->Void) {
+        let predicate = NSPredicate("id", .equal, id)
+        CoreDataManager.instance.delete(entity: .user, withPredicate: predicate)
+        CoreDataManager.instance.retrieve(.user, with: predicate) { (objects) in
+            callback(objects == nil)
+        }
     }
-
+    
     //MARK:- Pet
     
-    func upsert(_ pet: Pet) -> Pet? {
+    func upsert(_ pet: Pet, callback: @escaping CDRepPetCallback) {
         
-        do {
-            if let cdPet = try CoreDataManager.Instance.upsert("CDPet", with: ["id":pet.id]) as? CDPet {
+        CoreDataManager.instance.upsert(.pet, with: ["id":pet.id]) { (object) in
+            
+            if let cdPet = object as? CDPet {
                 
                 cdPet.name = pet.name
                 cdPet.weight = pet.weight ?? 0.0
@@ -139,14 +168,18 @@ class CDRepository {
                 cdPet.isOwner =  pet.isOwner
                 cdPet.type = pet.type?.type?.rawValue ?? Int16(-1.0)
                 cdPet.gender = pet.gender?.rawValue ?? Int16(-1.0)
+               
+                let group = DispatchGroup()
                 
                 // Breeds
                 if let type = Type(rawValue: cdPet.type) {
                     
                     // First Breed
                     if let firstBreedId = pet.breeds?.breeds[0] {
-                        getBreedDB(for: type, breedId: firstBreedId, callback: { (error, breed) in
+                        group.enter()
+                        self.getBreedDB(for: type, breedId: firstBreedId, callback: { (error, breed) in
                             if error == nil { cdPet.firstBreed = breed }
+                            group.leave()
                         })
                     }else{
                         cdPet.setValue(nil, forKey: "firstBreed")
@@ -154,8 +187,10 @@ class CDRepository {
                     
                     // Second Breed
                     if let secondBreedId = pet.breeds?.breeds[1] {
-                        getBreedDB(for: type, breedId: secondBreedId, callback: { (error, breed) in
+                        group.enter()
+                        self.getBreedDB(for: type, breedId: secondBreedId, callback: { (error, breed) in
                             if error == nil { cdPet.secondBreed = breed }
+                            group.leave()
                         })
                     }else{
                         cdPet.setValue(nil, forKey: "secondBreed")
@@ -173,41 +208,79 @@ class CDRepository {
                         cdPet.image = Data.build(with: imageURL)
                     }
                 }
-                try CoreDataManager.Instance.save()
-
-                return Pet(cdPet)
+                group.notify(queue: .main, execute: { 
+                    CoreDataManager.instance.save(callback: { (error) in
+                        if let error = error {
+                            callback(error, nil)
+                        } else {
+                            callback(nil, Pet(cdPet))
+                        }
+                    })
+                })
             }
-            
-        } catch {
-            debugPrint(error)
         }
-        return nil
     }
     
-    func upsert(_ pets: [Pet]) -> [Pet]? {
+    func upsert(_ pets: [Pet], callback: @escaping CDRepPetsCallback) {
+       
         var updatedPets = [Pet]()
-        if let localpets = getPets() {
+        var errors = [DatabaseError]()
+        let group = DispatchGroup()
+        
+        self.getPets { (error, localpets) in
             
-            var localpetIDs = localpets.map({ $0.id })
-            //Update
-            for pet in pets {
-                if let index = localpetIDs.index(of: pet.id) {
-                    localpetIDs.remove(at: index)
+            if error == nil, let localpets = localpets {
+                var localpetIDs = localpets.map({ $0.id })
+
+                //Update
+                for pet in pets {
+                    if let index = localpetIDs.index(of: pet.id) {
+                        localpetIDs.remove(at: index)
+                    }
+                    group.enter()
+                    self.upsert(pet, callback: { (error, pet) in
+                        if error == nil, let pet = pet {
+                            updatedPets.append(pet)
+                        }else if let error = error {
+                            errors.append(error)
+                        }
+                        group.leave()
+                    })
                 }
-                if let pet = upsert(pet) { updatedPets.append(pet) }
-                else { return nil }
+                //Remove
+                for id in localpetIDs {
+                    group.enter()
+                    self.removePet(by: id, callback: { (success) in
+                        if !success {
+                            errors.append(DatabaseError(type: .Unknown, entity: Entity.pet, action: .remove, error: nil))
+                        }
+                        group.leave()
+                    })
+                }
+                
+                return
+            }else{
+                for pet in pets {
+                    group.enter()
+                    self.upsert(pet, callback: { (error, pet) in
+                        if error == nil, let pet = pet {
+                            updatedPets.append(pet)
+                        }else if let error = error {
+                            errors.append(error)
+                        }
+                        group.leave()
+                    })
+                }
             }
-            //Remove
-            for id in localpetIDs {
-                if !removePet(by: id) { return nil }
-            }
-            return updatedPets
-        }else{
-            for pet in pets {
-                if let pet = upsert(pet) { updatedPets.append(pet) }
-                else { return nil }
-            }
-            return updatedPets
+            
+            group.notify(queue: .main, execute: { 
+                if errors.count == 0 {
+                    callback(nil,updatedPets)
+                }else{
+                    debugPrint("Upsert Pet List Errors", errors)
+                    callback(errors.first, nil)
+                }
+            })
         }
     }
     
@@ -215,15 +288,14 @@ class CDRepository {
         
         getPetCD(by: id) { (error, pet) in
             if let pet = pet {
-                do {
-                    pet.deviceCode = deviceCode
-                    try CoreDataManager.Instance.save()
-                    callback(nil)
-                }catch {
-                    debugPrint(error)
-                    callback(DatabaseError.Unknown)
-                }
-
+                pet.deviceCode = deviceCode
+                CoreDataManager.instance.save(callback: { (error) in
+                    if let error = error {
+                        callback(error)
+                    }else{
+                        callback(nil)
+                    }
+                })
             }else if let error = error {
                 callback(error)
             }
@@ -232,51 +304,53 @@ class CDRepository {
     
     private func getPetCD(by id:Int, _ callback: @escaping (DatabaseError?, CDPet?)-> Void) {
         
-        if let results = CoreDataManager.Instance.retrieve("CDPet", with: NSPredicate("id", .equal, id)) as? [CDPet] {
-            if results.count > 1 {
-                callback(DatabaseError.DuplicatedEntry, nil)
+        CoreDataManager.instance.retrieve(.pet, with: NSPredicate("id", .equal, id)) { (objects) in
+            if let results = objects as? [CDPet] {
+                if results.count > 1 {
+                    
+                    callback(DatabaseError(type: .DuplicatedEntry, entity: Entity.pet, action: .get, error: nil), nil)
+                }else{
+                    callback(nil, results.first!)
+                }
             }else{
-                callback(nil, results.first!)
+                callback(DatabaseError(type: .NotFound, entity: Entity.pet, action: .get, error: nil), nil)
             }
-        }else{
-            callback(DatabaseError.NotFound, nil)
         }
     }
     
-    func getPet(by id:Int, _ callback:CDRepPetCallback) {
+    func getPet(by id:Int, _ callback: @escaping CDRepPetCallback) {
         
-        if let results = CoreDataManager.Instance.retrieve("CDPet", with: NSPredicate("id", .equal, id)) as? [CDPet] {
-            if results.count > 1 {
-                callback(DatabaseError.DuplicatedEntry, nil)
+        self.getPetCD(by: id) { (error, cdPet) in
+            if error == nil, let cdPet = cdPet {
+                callback(nil, Pet(cdPet))
             }else{
-                callback(nil, Pet(results.first!))
+                callback(error, nil)
             }
-        }else{
-            callback(DatabaseError.NotFound, nil)
         }
     }
     
-    func getPets() -> [Pet]? {
-        return (CoreDataManager.Instance.retrieve("CDPet", sortedBy: [NSSortDescriptor(key: "name", ascending: true)]) as? [CDPet])?.map({ Pet($0) })
+    func getPets(callback: @escaping CDRepPetsCallback) {
+        
+        CoreDataManager.instance.retrieve(.pet, sortedBy: [NSSortDescriptor(key: "name", ascending: true)]) { (objects) in
+            callback(nil, (objects as? [CDPet])?.map({ Pet($0) }))
+        }
     }
     
-    func removePet(by id: Int) -> Bool {
-        do {
-            try CoreDataManager.Instance.delete(entity: "CDPet", withPredicate: NSPredicate("id", .equal, id))
-            return true
-        } catch {
-            debugPrint(error)
+    func removePet(by id: Int, callback: @escaping (Bool)->Void) {
+        let predicate = NSPredicate("id", .equal, id)
+        CoreDataManager.instance.delete(entity: .pet, withPredicate: predicate)
+        CoreDataManager.instance.retrieve(.pet, with: predicate) { (object) in
+            callback(object == nil)
         }
-        return false
     }
-
+    
     //MARK:- PetUser
     
-    private func upsert(_ petUser: PetUser) -> CDPetUser? {
+    private func upsert(_ petUser: PetUser, callback: @escaping (CDPetUser?)->Void) {
         
-        do {
-
-            if let user = try CoreDataManager.Instance.upsert("CDPetUser", with: ["id":petUser.id]) as? CDPetUser {
+        CoreDataManager.instance.upsert(.petUser, with: ["id":petUser.id]) { (object) in
+            
+            if let user = object as? CDPetUser {
                 
                 user.name = petUser.name
                 user.surname = petUser.surname
@@ -290,25 +364,25 @@ class CDRepository {
                         user.image = Data.build(with: imageURL)
                     }
                 }
-                return user
+                callback(user)
+            }else{
+                callback(nil)
             }
-            
-        } catch {
-            debugPrint(error)
         }
-        return nil
     }
-
+    
     func upsert(_ petUser: PetUser, into petId: Int, callback: CDRepPetUserCallback? = nil){
         
         
         getPetCD(by: petId) { (error, cdPet) in
-
+            
             if error == nil, let cdPet = cdPet {
-                do {
-                    let users = cdPet.mutableSetValue(forKey: "users")
+                
+                let users = cdPet.mutableSetValue(forKey: "users")
+                
+                self.upsert(petUser, callback: { (cdPetUser) in
                     
-                    if let cdPetUser = self.upsert(petUser) {
+                    if let cdPetUser = cdPetUser {
                         
                         if (users.allObjects as? [CDPetUser])?.first(where: { $0.id == cdPetUser.id }) == nil {
                             users.add(cdPetUser)
@@ -316,19 +390,19 @@ class CDRepository {
                         
                         cdPet.setValue(users, forKey: "users")
                         
-                        try CoreDataManager.Instance.save()
+                        CoreDataManager.instance.save(callback: { (error) in
+                            if let error = error, let callback = callback {
+                                callback(error, nil)
+                            } else if let callback = callback{
+                                callback(nil, PetUser(cdPetUser))
+                            }
+                        })
                         
-                        if let callback = callback { callback(nil, PetUser(cdPetUser)) }
-
-                    }else{
-                        if let callback = callback { callback(DatabaseError.Unknown, nil)}
+                    }else if let callback = callback {
+                        callback(DatabaseError(type: .NotFound, entity: Entity.pet, action: .upsert, error: nil), nil)
                         return
                     }
-                    
-                }catch{
-                    debugPrint(error)
-                    if let callback = callback { callback(DatabaseError.Unknown, nil) }
-                }
+                })
             }else if let error = error, let callback = callback {
                 callback(error, nil)
             }else if let callback = callback {
@@ -342,21 +416,27 @@ class CDRepository {
         
         getPetCD(by: petId) { (error, cdPet) in
             if error == nil, let cdPet = cdPet {
-                do {
-                    let users = cdPet.mutableSetValue(forKey: "users")
-                    users.removeAllObjects()
-                    
-                    for petUser in petUsers {
-                        if let cdPetUser = self.upsert(petUser) { users.add(cdPetUser) }
-                    }
-                    cdPet.setValue(users, forKey: "users")
-                    try CoreDataManager.Instance.save()
-                    
-                    if let callback = callback { callback(nil, (users.allObjects as? [CDPetUser])?.map({ PetUser($0) })) }
-                }catch{
-                    debugPrint(error)
-                    if let callback = callback { callback(DatabaseError.Unknown, nil) }
+                let users = cdPet.mutableSetValue(forKey: "users")
+                users.removeAllObjects()
+                let group = DispatchGroup()
+                for petUser in petUsers {
+                    group.enter()
+                    self.upsert(petUser, callback: { (cdPetUser) in
+                        if let cdPetUser = cdPetUser { users.add(cdPetUser) }
+                        group.leave()
+                    })
                 }
+                group.notify(queue: .main, execute: { 
+                    cdPet.setValue(users, forKey: "users")
+                    CoreDataManager.instance.save(callback: { (error) in
+                        if let error = error, let callback = callback {
+                            callback(error, nil)
+                        } else if let callback = callback{
+                            callback(nil, (users.allObjects as? [CDPetUser])?.map({ PetUser($0) }))
+                        }
+                    })
+
+                })
             }else if let error = error, let callback = callback {
                 callback(error, nil)
             }else if let callback = callback {
@@ -375,35 +455,36 @@ class CDRepository {
                 callback(error, nil)
             }else{
                 debugPrint(error ?? "error nil", cdPet ?? "pet nil")
-                callback(DatabaseError.Unknown, nil)
+                callback(nil, nil)
             }
         }
     }
-
+    
     func removeSharedPetUser(with id: Int, from petId: Int, callback: @escaping CDRepErrorCallback){
         
         getPetCD(by: petId) { (error, cdPet) in
             if error == nil, let cdPet = cdPet {
                 if let user = (cdPet.users?.allObjects as? [CDPetUser])?.first(where: { $0.id == id.toInt16 }) {
-                    do {
-                        
-                        user.removeFromPetUsers(cdPet)
-                        try CoreDataManager.Instance.save()
-                        callback(nil)
-                    }catch{
-                        debugPrint(error)
-                        callback(DatabaseError.Unknown)
-                    }
+                    
+                    user.removeFromPetUsers(cdPet)
+                    CoreDataManager.instance.save(callback: { (error) in
+                        if let error = error {
+                            callback(error)
+                        } else {
+                            callback(nil)
+                        }
+                    })
+                    callback(nil)
                     
                 }else{
-                    callback(DatabaseError.NotFound)
+                    callback(DatabaseError(type: .NotFound, entity: Entity.petUser, action: .get, error: nil))
                 }
                 
             }else if let error = error {
                 callback(error)
             }else {
                 debugPrint(error ?? "error nil", cdPet ?? "pet nil")
-                callback(DatabaseError.Unknown)
+                callback(DatabaseError(type: .Unknown, entity: Entity.pet, action: .get, error: nil))
             }
         }
         
@@ -414,27 +495,36 @@ class CDRepository {
         getUserCD(by: id) { (error, cdUser) in
             
             if let cdUser = cdUser {
-                do {
-                    let cdFriends = cdUser.mutableSetValue(forKey: "friends")
-                    cdFriends.removeAllObjects()
-                    
-                    for friend in friends {
-                        if let petUser = upsert(friend) {
-                            if petUser.email != nil { cdFriends.add(petUser) }
+                let cdFriends = cdUser.mutableSetValue(forKey: "friends")
+                cdFriends.removeAllObjects()
+                
+                let group = DispatchGroup()
+                
+                for friend in friends {
+                    group.enter()
+                    self.upsert(friend, callback: { (cdPetUser) in
+                        if let petUser = cdPetUser {
+                            if petUser.email != nil {
+                                cdFriends.add(petUser)
+                            }
                         }
-                    }
-                    cdUser.setValue(cdFriends, forKey: "friends")
-                    try CoreDataManager.Instance.save()
-                    if let callback = callback {
-                        if let cdFriends = cdFriends.allObjects as? [CDPetUser] {
-                            callback(nil, cdFriends.map({ PetUser($0) }))
-                        }
-                        callback(nil, nil)
-                    }
-                }catch{
-                    debugPrint(error)
-                    if let callback = callback { callback(DatabaseError.Unknown, nil) }
+                        group.leave()
+                    })
                 }
+                group.notify(queue: .main, execute: { 
+                    cdUser.setValue(cdFriends, forKey: "friends")
+                    CoreDataManager.instance.save(callback: { (error) in
+                        if let error = error, let callback = callback {
+                            callback(error, nil)
+                        } else if let callback = callback {
+                            if let cdFriends = cdFriends.allObjects as? [CDPetUser] {
+                                callback(nil, cdFriends.map({ PetUser($0) }))
+                            }
+                            callback(nil, nil)
+                        }
+                    })
+
+                })
             }else{
                 if let callback = callback { callback(error, nil) }
             }
@@ -449,19 +539,18 @@ class CDRepository {
             }else if let error = error {
                 callback(error, nil)
             }else{
-                callback(DatabaseError.NotFound, nil)
+                callback(DatabaseError(type: .Unknown, entity: Entity.user, action: .get, error: nil), nil)
             }
         }
     }
-
-    
     
     //MARK:- SafeZones
     
     private func upsert(_ safezone: SafeZone, callback: @escaping (DatabaseError?, CDSafeZone?)->Void) {
         
-        do {
-            if let cdSafezone = try CoreDataManager.Instance.upsert("CDSafeZone", with: ["id":safezone.id]) as? CDSafeZone {
+        CoreDataManager.instance.upsert(.safeZone,with: ["id":safezone.id]) { (object) in
+            
+            if let cdSafezone = object as? CDSafeZone {
                 
                 cdSafezone.name = safezone.name
                 cdSafezone.active = safezone.active
@@ -482,17 +571,19 @@ class CDRepository {
                     cdSafezone.address = nil
                 }
                 
-                try CoreDataManager.Instance.save()
-                callback(nil, cdSafezone)
+                CoreDataManager.instance.save(callback: { (error) in
+                    if let error = error {
+                        callback(error, nil)
+                    } else {
+                        callback(nil, cdSafezone)
+                    }
+                })
             }else{
-                callback(DatabaseError.Unknown, nil)
+                callback(DatabaseError(type: .Unknown, entity: .safeZone, action: .upsert, error: nil), nil)
             }
-        } catch {
-            debugPrint(error)
-            callback(DatabaseError.Unknown, nil)
         }
     }
-
+    
     func upsert(_ safezone: SafeZone, into petId: Int, callback: CDRepSafeZonesCallback? = nil) {
         
         getPetCD(by: petId) { (error, cdPet) in
@@ -501,22 +592,22 @@ class CDRepository {
                 self.upsert(safezone, callback: { (error, cdSafezone) in
                     
                     if error == nil, let cdSafezone = cdSafezone {
-                        do {
-                            let safezonesMutable = cdPet.mutableSetValue(forKeyPath: "safezones")
-
-                            
-                            if ((safezonesMutable.allObjects as? [CDSafeZone])?.first(where: { $0.id == cdSafezone.id })) == nil {
-                                safezonesMutable.add(cdSafezone)
-                            }
-                            cdPet.setValue(safezonesMutable, forKey: "safezones")
-                            
-                            try CoreDataManager.Instance.save()
-
-                            if let callback = callback { callback(nil, (safezonesMutable.allObjects as? [CDSafeZone])?.map({ SafeZone($0) })) }
-                        }catch{
-                            debugPrint(error)
-                            if let callback = callback { callback(DatabaseError.Unknown, nil) }
+                        let safezonesMutable = cdPet.mutableSetValue(forKeyPath: "safezones")
+                        
+                        
+                        if ((safezonesMutable.allObjects as? [CDSafeZone])?.first(where: { $0.id == cdSafezone.id })) == nil {
+                            safezonesMutable.add(cdSafezone)
                         }
+                        cdPet.setValue(safezonesMutable, forKey: "safezones")
+                        
+                        CoreDataManager.instance.save(callback: { (error) in
+                            if let error = error, let callback = callback {
+                                callback(error, nil)
+                            } else if let callback = callback {
+                                callback(nil, (safezonesMutable.allObjects as? [CDSafeZone])?.map({ SafeZone($0) }))
+                            }
+                        })
+                        
                     }else if let error = error, let callback = callback {
                         callback(error, nil)
                     }
@@ -526,154 +617,168 @@ class CDRepository {
                 callback(error, nil)
             }else if let callback = callback {
                 debugPrint(error ?? "nil error", cdPet ?? "nil pet")
-                callback(DatabaseError.Unknown, nil)
+                callback(DatabaseError(type: .Unknown, entity: .safeZone, action: .upsert, error: nil), nil)
             }
         }
     }
     
     func upsert(_ safezones: [SafeZone], into petId: Int) {
-        DispatchQueue.main.async {
         self.getPetCD(by: petId) { (error, cdPet) in
             if error == nil, let cdPet = cdPet {
-                do {
-                    
-                    let safezonesMutable = cdPet.mutableSetValue(forKeyPath: "safezones")
-                    safezonesMutable.removeAllObjects()
-                    
-                    for safezone in safezones {
-                        self.upsert(safezone, callback: { (error, cdSafezone) in
-                            if error == nil, let cdSafezone = cdSafezone {
-                                safezonesMutable.add(cdSafezone)
-                            }
-                        })
-                    }
-                    cdPet.setValue(safezonesMutable, forKey: "safezones")
-                    try CoreDataManager.Instance.save()
-                }catch{
-                    debugPrint(error)
+                
+                let safezonesMutable = cdPet.mutableSetValue(forKeyPath: "safezones")
+                safezonesMutable.removeAllObjects()
+                let group = DispatchGroup()
+                for safezone in safezones {
+                    group.enter()
+                    self.upsert(safezone, callback: { (error, cdSafezone) in
+                        if error == nil, let cdSafezone = cdSafezone {
+                            safezonesMutable.add(cdSafezone)
+                        }
+                        group.leave()
+                    })
                 }
+                group.notify(queue: .main, execute: { 
+                    cdPet.setValue(safezonesMutable, forKey: "safezones")
+                    CoreDataManager.instance.save(callback: { (error) in
+                        if error != nil {
+                            //                            callback(DatabaseError.Unknown, nil)
+                        } else {
+                            //                            callback(nil, Pet(cdPet))
+                        }
+                    })
+                })
             }
-        }
         }
     }
     
     private func getSafeZoneCD(by id:Int, _ callback:@escaping (DatabaseError?, CDSafeZone?)->Void) {
         
-        if let results = CoreDataManager.Instance.retrieve("CDSafeZone", with: NSPredicate("id", .equal, id)) as? [CDSafeZone] {
-            if results.count > 1 {
-                callback(DatabaseError.DuplicatedEntry, nil)
+        CoreDataManager.instance.retrieve(.safeZone, with: NSPredicate("id", .equal, id)) { (objects) in
+            if let results = objects as? [CDSafeZone] {
+                if results.count > 1 {
+                    
+                    callback(DatabaseError(type: .DuplicatedEntry, entity: .safeZone, action: .get, error: nil), nil)
+                }else{
+                    callback(nil, results.first!)
+                }
             }else{
-                callback(nil, results.first!)
-            }
-        }else{
-            callback(DatabaseError.NotFound, nil)
-        }
+                callback(DatabaseError(type: .NotFound, entity: .safeZone, action: .get, error: nil), nil)
+            }}
     }
-
-    func setSafeZone(address: String, for id: Int){
-        DispatchQueue.main.async {
+    
+    func setSafeZone(address: String, for id: Int, callback: @escaping CDRepErrorCallback){
+        
         self.getSafeZoneCD(by: id) { (error, cdSafezone) in
             if error == nil, let cdSafezone = cdSafezone {
-                do {
-                    cdSafezone.address = address
-                    try CoreDataManager.Instance.save()
-                }catch{
-                    debugPrint(error)
-                }
+                
+                cdSafezone.address = address
+                CoreDataManager.instance.save(callback: callback)
             }else if let error = error {
                 debugPrint(error)
+                callback(nil)
             }
-        }
         }
     }
     
-    func setSafeZone(imageData: Data, for id: Int){
-        DispatchQueue.main.async {
+    func setSafeZone(imageData: Data, for id: Int, callback: @escaping CDRepErrorCallback){
+        
         self.getSafeZoneCD(by: id) { (error, cdSafezone) in
             if error == nil, let cdSafezone = cdSafezone {
-                do {
-                    cdSafezone.preview = imageData
-                    try CoreDataManager.Instance.save()
-                }catch{
-                    debugPrint(error)
-                }
+                cdSafezone.preview = imageData
+                CoreDataManager.instance.save(callback: callback)
             }else if let error = error {
                 debugPrint(error)
+                callback(nil)
             }
+            
+            
         }
-        }
+        
     }
     
     //MARK:- Breeds
     
-    func upsert(_ breeds: [Breed], for type:Type) -> Bool {
+    func upsert(_ breeds: [Breed], for type:Type, callback: @escaping (Bool)->Void) {
         
-        do {
-            for breed in breeds {
-                
-                if let cdBreed = try CoreDataManager.Instance.upsert("CDBreed", with: ["id":breed.id, "type":type.rawValue], withRestriction: ["id","type"]) as? CDBreed {
+        let group = DispatchGroup()
+        
+        for breed in breeds {
+            group.enter()
+            CoreDataManager.instance.upsert(.breed, with: ["id":breed.id, "type":type.rawValue], withRestriction: ["id","type"], callback: { (object) in
+                if let cdBreed = object as? CDBreed {
                     cdBreed.type = type.rawValue
                     cdBreed.name = breed.name
-                    try CoreDataManager.Instance.save()
+                    CoreDataManager.instance.save(callback: { (error) in
+                        if error != nil {
+                            //                            callback(DatabaseError.Unknown, nil)
+                        } else {
+                            //                            callback(nil, Pet(cdPet))
+                        }
+                    })
                 }
-            }
-            return true
-        } catch {
-            debugPrint(error)
+                group.leave()
+            })
         }
-        return false
+        group.notify(queue: .main) { 
+            callback(true)
+        }
     }
     
     func getBreeds(for type:Type, callback: CDRepBreedsCallback? = nil) {
-        if let breeds =  CoreDataManager.Instance.retrieve("CDBreed", with: NSPredicate("type", .equal, type.rawValue), sortedBy: [NSSortDescriptor.init(key: "name", ascending: true)]) as? [CDBreed] {
-            if let callback = callback { callback(nil, breeds.map({ Breed($0) })) }
-        }else if let callback = callback {
-            callback(DatabaseError.NotFound, nil)
+        
+        CoreDataManager.instance.retrieve(.breed, with: NSPredicate("type", .equal, type.rawValue), sortedBy: [NSSortDescriptor.init(key: "name", ascending: true)]) { (objects) in
+            if let breeds =  objects as? [CDBreed] {
+                if let callback = callback { callback(nil, breeds.map({ Breed($0) })) }
+            }else if let callback = callback {
+                
+                callback(DatabaseError(type: .NotFound, entity: Entity.breed, action: .get, error: nil), nil)
+            }
         }
+        
     }
     
     private func getBreedDB(for type:Type, breedId: Int, callback: @escaping (DatabaseError?, CDBreed?)-> Void) {
-        if let breeds =  CoreDataManager.Instance.retrieve("CDBreed", with: NSPredicate("type", .equal, type.rawValue).and("id", .equal, breedId), sortedBy: [NSSortDescriptor.init(key: "name", ascending: true)]) as? [CDBreed] {
-            if breeds.count == 1 {
+
+        CoreDataManager.instance.retrieve(.breed, with: NSPredicate("type", .equal, type.rawValue).and("id", .equal, breedId), sortedBy: [NSSortDescriptor.init(key: "name", ascending: true)]) { (objects) in
+            if let breeds =  objects as? [CDBreed], breeds.count == 1 {
                 callback(nil, breeds.first!)
             }else{
-                callback(DatabaseError.DuplicatedEntry, nil)
+                callback(DatabaseError(type: .NotFound, entity: Entity.breed, action: .get, error: nil), nil)
             }
-        }else{
-//            DataManager.Instance.loadBreeds(for: type, callback: { (error, breeds) in
-//                if error == nil, let breeds = breeds {
-//                    callback(nil, breeds.first(where: { $0.id == Int(breedId) && $0.type == type.rawValue}))
-//                }else{
-//                    callback(DataManagerError(DBError: DatabaseError.NotFound), nil)
-//                }
-//            })
+            
         }
+        
     }
     
     func removeBreeds(for type:Type) {
-        do {
-            try CoreDataManager.Instance.delete(entity: "CDBreed", withPredicate: NSPredicate("type", .equal, type.rawValue))
-        } catch {
-            debugPrint(error)
-        }
+
+        CoreDataManager.instance.delete(entity: .breed, withPredicate: NSPredicate("type", .equal, type.rawValue))
     }
-
-
+    
     //MARK:- Country Codes
+    
+    func upsert(_ countryCode: CountryCode){
+
+        CoreDataManager.instance.upsert(.countryCode, with: countryCode.toDict, withRestriction: ["name", "shortName"]) { (_) in }
+    }
     
     func getCurrentCountryCode() -> String? {
         return Locale.current.regionCode
     }
     
-    func getAllCountryCodes() -> [CountryCode]? {
-        let results = CoreDataManager.Instance.retrieve("CDCountryCode") as? [CDCountryCode]
-        if results == nil || results?.count == 0 {
-            CSVParser.Instance.loadCountryCodes()
-            return (CoreDataManager.Instance.retrieve("CDCountryCode") as? [CDCountryCode])?.map({ CountryCode($0) })
+    func getAllCountryCodes(callback: @escaping ([CountryCode]?)->Void) {
+        
+        CoreDataManager.instance.retrieve(.countryCode) { (objects) in
+            if objects == nil || objects?.count == 0 {
+                CSVParser.Instance.loadCountryCodes()
+                CoreDataManager.instance.retrieve(.countryCode) { (objects) in
+                    callback((objects as? [CDCountryCode])?.map({ CountryCode($0) }))
+                }
+            }
         }
-        return results?.map({ CountryCode($0) })
     }
-
+    
     
     
     

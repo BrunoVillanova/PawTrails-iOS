@@ -35,6 +35,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         configureUIPreferences()
         
+//        _ = DataManager.Instance.signOut()
+        
         if DataManager.Instance.isAuthenticated() {
             
             if let socialMedia = DataManager.Instance.socialMedia() {
@@ -126,7 +128,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
 
         SocketIOManager.Instance.disconnect()
-//        try? CoreDataManager.Instance.save(callback: (NSError?) -> Void)
+        CoreDataManager.instance.save { (error) in
+            if let error = error {
+                debugPrint("AppDelegate - WillTerminate - SaveAction ",error)
+            }
+        }
     }
     
     private func configureUIPreferences() {

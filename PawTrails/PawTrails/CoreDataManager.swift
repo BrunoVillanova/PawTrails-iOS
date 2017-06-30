@@ -9,11 +9,24 @@
 import UIKit
 import CoreData
 
+enum Entity: String {
+    case address = "CDAddress"
+    case breed = "CDBreed"
+    case countryCode = "CDCountryCode"
+    case pet = "CDPet"
+    case petUser = "CDPetUser"
+    case phone = "CDPhone"
+    case safeZone = "CDSafeZone"
+    case user = "CDUser"
+    
+    static let allValues:[Entity] = [address, breed, countryCode, pet, petUser, phone, safeZone, user]
+}
+
 
 /// The `CoreDataManager` simplifies the use of **CoreData**
 class CoreDataManager {
     
-    static let Instance = CoreDataManager()
+    static let instance = CoreDataManager()
     
     
     /// Retrieves the entities requested following the criteria defined by the *optional* predicate.
@@ -23,15 +36,18 @@ class CoreDataManager {
     ///   - predicate: *Optional* predicate to filter fetch.
     ///   - sortedBy: *Optional* sorts the results of the fetch.
     ///   - callback: An array with **more than one element** or *nil*.
-    func retrieve(_ entity:String, with predicate: NSPredicate? = nil, sortedBy: [NSSortDescriptor]? = nil, callback: @escaping ([NSManagedObject]?)-> Void) {
+    func retrieve(_ entity:Entity, with predicate: NSPredicate? = nil, sortedBy: [NSSortDescriptor]? = nil, callback: @escaping ([NSManagedObject]?)-> Void) {
         
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity.rawValue)
         fetchRequest.predicate = predicate
         fetchRequest.sortDescriptors = sortedBy
-
+        
         do {
             let data = try Storage.Instance.context.fetch(fetchRequest)
+            
             callback(data.count > 0 ? data as? [NSManagedObject] : nil)
+            return
+            
             
         } catch {
             debugPrint("CDM retrieve entity: \(entity) withPredicate: \(String(describing: predicate)) error: \(error)")
@@ -44,18 +60,17 @@ class CoreDataManager {
     /// - Parameters:
     ///   - entity: Name of the entity to save.
     ///   - data: Dictionary with information to store.
-
-    /// - Returns: The saved object.
-    func store(_ entity:String, with data:[String:Any], callback: @escaping (NSManagedObject?)-> Void) {
+    ///   - callback: The saved object.
+    func store(_ entity:Entity, with data:[String:Any], callback: @escaping (NSManagedObject?)-> Void) {
         
         
-        guard let entityDescription = NSEntityDescription.entity(forEntityName: entity, in: Storage.Instance.context) else {
-            let error =  NSError(domain: "CDM store entity \(entity)", code: CoreDataManagerError.InternalInconsistencyException.rawValue, userInfo: data)
+        guard let entityDescription = NSEntityDescription.entity(forEntityName: entity.rawValue, in: Storage.Instance.context) else {
+            let error =  NSError(domain: "CDM store entity \(entity)", code: DatabaseErrorType.InternalInconsistencyException.rawValue, userInfo: data)
             debugPrint(error)
             callback(nil)
             return
         }
-        
+        //        Storage.Instance.context.perform {
         let object = NSManagedObject(entity: entityDescription, insertInto: Storage.Instance.context)
         
         for (key,value) in data {
@@ -70,6 +85,7 @@ class CoreDataManager {
                 callback(object)
             }
         })
+        //        }
     }
     
     /// Updates the current element or insert it as a new one if that one does not exists.
@@ -78,17 +94,17 @@ class CoreDataManager {
     ///   - entity: Name of the entity to upsert.
     ///   - data: Dictionary with information to upsert.
     ///   - idKey: Identify the element, it **must** be the same in the `Local Storage` and in the `Dictionary` provided.
-    /// - Returns: The upserted object.
-    func upsert(_ entity:String, with data:[String:Any], withId idKey:String = "id", callback: @escaping (NSManagedObject?)-> Void) {
+    ///   - callback: The upserted object.
+    func upsert(_ entity:Entity, with data:[String:Any], withId idKey:String = "id", callback: @escaping (NSManagedObject?)-> Void) {
         
         //Check input id
         guard let id = data[idKey] else {
-            let error = NSError(domain: "CDM upsert entity \(entity) failed reading input data \(idKey)", code: CoreDataManagerError.IdNotFoundInInput.rawValue, userInfo: ["data":data])
+            let error = NSError(domain: "CDM upsert entity \(entity) failed reading input data \(idKey)", code: DatabaseErrorType.IdNotFound.rawValue, userInfo: ["data":data])
             debugPrint(error)
             callback(nil)
             return
         }
-
+        
         let predicate = NSPredicate(idKey, NSPredicateOperation.equal, id)
         
         upsert(entity, withPredicate: predicate, withData: data, callback: callback)
@@ -100,8 +116,8 @@ class CoreDataManager {
     ///   - entity: Name of the entity to upsert.
     ///   - data: Dictionary with information to upsert.
     ///   - restrictions: Identify the element, it **must** be the same in the `Local Storage` and in the `Dictionary` provided.
-    /// - Returns: The upserted object.
-    func upsert(_ entity:String, with data:[String:Any], withRestriction restrictions:[String], callback: @escaping (NSManagedObject?)-> Void) {
+    ///   - callback: The upserted object.
+    func upsert(_ entity:Entity, with data:[String:Any], withRestriction restrictions:[String], callback: @escaping (NSManagedObject?)-> Void) {
         
         if restrictions.count == 0 {
             upsert(entity, with: data, callback: callback)
@@ -131,7 +147,7 @@ class CoreDataManager {
                 }
                 
             }else{
-                let error = NSError(domain: "CDM buildPredicate failed reading input data \(restriction)", code: CoreDataManagerError.IdNotFoundInInput.rawValue, userInfo: ["data":data])
+                let error = NSError(domain: "CDM buildPredicate failed reading input data \(restriction)", code: DatabaseErrorType.IdNotFound.rawValue, userInfo: ["data":data])
                 debugPrint(error)
                 return nil
             }
@@ -140,19 +156,19 @@ class CoreDataManager {
         return predicate
     }
     
-    private func upsert(_ entity: String, withPredicate predicate: NSPredicate?, withData data: [String:Any], callback: @escaping (NSManagedObject?)-> Void) {
+    private func upsert(_ entity:Entity, withPredicate predicate: NSPredicate?, withData data: [String:Any], callback: @escaping (NSManagedObject?)-> Void) {
         
         
         retrieve(entity, with: predicate) { (objects) in
             //Update
             if let object = objects?.first {
-//                
-//                for key in object.keys {
-//                    if !(object.value(forKey: key)  is NSManagedObject) && !(object.value(forKey: key)  is NSData)  {
-//                        object.setValue(data[key], forKey: key)
-//                    }
-//                }
-//                try save(entity, userInfo: data)
+                //
+                //                for key in object.keys {
+                //                    if !(object.value(forKey: key)  is NSManagedObject) && !(object.value(forKey: key)  is NSData)  {
+                //                        object.setValue(data[key], forKey: key)
+                //                    }
+                //                }
+                //                try save(entity, userInfo: data)
                 callback(object)
                 //Create
             }else{
@@ -166,12 +182,12 @@ class CoreDataManager {
     /// - Parameters:
     ///   - entity: Name of the entity to delete.
     ///   - predicate: *Optional* predicate to filter fetch.
-    func delete(entity: String, withPredicate predicate: NSPredicate? = nil) {
+    func delete(entity:Entity, withPredicate predicate: NSPredicate? = nil) {
         
         retrieve(entity, with: predicate) { (results) in
             
             if let results = results {
-                
+                //                Storage.Instance.context.perform {
                 for i in results {
                     Storage.Instance.context.delete(i)
                 }
@@ -180,9 +196,9 @@ class CoreDataManager {
                         debugPrint(error)
                     }
                 })
-
+                //                }
             }else{
-                let error = NSError(domain: "Object to delete not found", code: CoreDataManagerError.ObjectNotFound.rawValue, userInfo: ["entity":entity, "predicate":predicate.debugDescription])
+                let error = NSError(domain: "Object to delete not found", code: DatabaseErrorType.ObjectNotFound.rawValue, userInfo: ["entity":entity, "predicate":predicate.debugDescription])
                 debugPrint(error)
             }
         }
@@ -190,12 +206,10 @@ class CoreDataManager {
     
     func deleteAll() {
         
-        let entities = ["CDUser", "CDPhone", "CDAddress", "CDPet", "CDPetUser", "CDSafeZone", "CDBreed"]
-        
-        for i in entities {
+        for i in Entity.allValues.map({ $0.rawValue }) {
             let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: i)
             let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
-            
+            //            Storage.Instance.context.perform {
             do {
                 try Storage.Instance.context.execute(deleteRequest)
                 self.save(callback: { (error) in
@@ -206,20 +220,20 @@ class CoreDataManager {
             } catch {
                 debugPrint(error)
             }
+            //            }
         }
-        
-        
     }
     
     /// Attempts to commit unsaved changes to registered objects.
     ///
-    func save(_ entity: String = "", userInfo: [AnyHashable : Any]? = nil, callback: @escaping (NSError?)->Void) {
+    func save(_ entity:Entity? = nil, userInfo: [AnyHashable : Any]? = nil, callback: @escaping (DatabaseError?)->Void) {
+
         let status = Storage.Instance.save()
         if status == .rolledBack {
-            let error = NSError(domain: "\(entity) Not Saved Properly", code: CoreDataManagerError.NotSavedProperly.rawValue, userInfo:userInfo)
-            callback(error)
+            callback(DatabaseError(type: .NotSavedProperly, entity: entity, action: .save, error: nil))
+        }else{
+            callback(nil)
         }
-        callback(nil)
     }
     
 }
@@ -281,7 +295,6 @@ fileprivate struct Storage {
                 return
             }
         }
-//        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         return container
     }()
     
@@ -298,7 +311,6 @@ fileprivate struct Storage {
         let coordinator = self.persistentStoreCoordinator
         var managedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = coordinator
-//        managedObjectContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         return managedObjectContext
     }()
     

@@ -185,7 +185,7 @@ class APIManager {
     private func parseResponse(_ data:Data?) -> JSON? {
         if let data = data {
             let json =  JSON(data: data)
-            debugPrint(json.rawString() ?? "")
+            debugPrint(json.dictionaryObject ?? "")
             return json
         }
         return nil
@@ -201,7 +201,7 @@ class APIManager {
     
     private func handleError(_ call: APICallType, _ httpCode: Int, _ data: Data?) -> APIManagerError? {
         
-        debugPrint(call, httpCode, data ?? "no data")
+//        debugPrint(call, httpCode, data ?? "no data")
         if httpCode.isUnauthorized {
             return APIManagerError(call: call, kind: .clientError, httpCode: httpCode, error: nil, errorCode: ErrorCode.Unauthorized)
         
@@ -214,7 +214,7 @@ class APIManager {
                 guard let jsonObject = parseResponse(data) else {
                     return APIManagerError(call: call, kind: .jsonParse, httpCode:nil, error:nil, errorCode:nil)
                 }
-                debugPrint(jsonObject.rawString() ?? "")
+//                debugPrint(jsonObject.rawString() ?? "")
                 let code = jsonObject.dictionaryObject?.tryCastInteger(for: "errors") ?? -1
                 return APIManagerError(call: call, kind: .clientError, httpCode: httpCode, error: nil, errorCode: ErrorCode(code: code))
                 
@@ -246,7 +246,6 @@ class APIManager {
             else { debugPrint("missing token for \(call)") }
         }
         
-//        debugPrint(headers)
         return headers
     }
     

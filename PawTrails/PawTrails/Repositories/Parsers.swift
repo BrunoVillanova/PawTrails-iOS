@@ -342,9 +342,32 @@ extension CountryCode {
     init(_ cdCountryCode: CDCountryCode) {
         code = cdCountryCode.code
         name = cdCountryCode.name
-        shortName = cdCountryCode.shortname
+        shortName = cdCountryCode.shortName
     }
     
+    init?(_ stringRow: [String]) {
+        if stringRow.count == 3 {
+            name = stringRow[0]
+            shortName = stringRow[1]
+            code = stringRow[2]
+        }else{
+            name = nil
+            shortName = nil
+            code = nil
+        }
+    }
+    
+    var toDict: [String:Any] {
+        var dict = [String:Any](object:self)
+        dict["name"] = name
+        dict["shortName"] = shortName
+        dict["code"] = code
+        return dict
+    }
+    
+    var isNotNil: Bool {
+        return name != nil && code != nil && shortName != nil
+    }
 }
 
 

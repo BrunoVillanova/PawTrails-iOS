@@ -75,7 +75,6 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
                 self.load(locationAndTime: name)
             }else if type == .safezone {
                 self.presenter.loadPet(with: self.pet.id)
-//                self.safeZonesCollectionView.reloadData()
             }
         })
        
@@ -131,16 +130,19 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
             self.load(data: data)
             self.load(locationAndTime: data.locationAndTime)
         }
-        
+        self.usersCollectionView.reloadData()
+        self.safeZonesCollectionView.reloadData()
         tableView.reloadData()
     }
     
     func loadUsers() {
+        pet.users = presenter.users
         usersCollectionView.reloadAnimated()
         tableView.reloadData()
     }
     
     func loadSafeZones() {
+        pet.safezones = presenter.safezones
         
         if self.presenter.safezones.count == 0 { return }
         
@@ -158,31 +160,36 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
                 GeocoderManager.Intance.reverse(type: .safezone, with: center, for: safezone.id)
             }
             // Map
-//            if safezone.preview == nil {
-//                guard let center = safezone.point1?.coordinates else {
-//                    debugPrint("No center point found!")
-//                    continue
-//                }
-//                guard let topCenter = safezone.point2?.coordinates else {
-//                    debugPrint("No topcenter point found!")
-//                    continue
-//                }
-//
-//                safezonesGroup.enter()
-////                debugPrint("map", safezone.id)
-//                self.buildMap(center: center, topCenter: topCenter, shape: safezone.shape, handler: { (image) in
-//                    if let image = image, let data = UIImagePNGRepresentation(image) {
-////                        safezone.preview = data
-//                        self.presenter.set(imageData: data, for: safezone.id)
-//                    }
-//                    safezonesGroup.leave()
-//                })
-//            }
+            if safezone.preview == nil {
+                guard let center = safezone.point1?.coordinates else {
+                    debugPrint("No center point found!")
+                    continue
+                }
+                guard let topCenter = safezone.point2?.coordinates else {
+                    debugPrint("No topcenter point found!")
+                    continue
+                }
+
+                safezonesGroup.enter()
+                debugPrint("map", safezone.id)
+                self.buildMap(center: center, topCenter: topCenter, shape: safezone.shape, handler: { (image) in
+                    if let image = image, let data = UIImagePNGRepresentation(image) {
+                        debugPrint("released", safezone.id)
+                        self.presenter.set(imageData: data, for: safezone.id) { (errorMsg) in
+                            if let errorMsg = errorMsg {
+                                self.errorMessage(errorMsg)
+                            }
+                            safezonesGroup.leave()
+                        }
+                    }
+                    
+                })
+            }
         }
         
         safezonesGroup.notify(queue: .main, execute: {
-            self.safeZonesCollectionView.reloadData()
-            self.tableView.reloadData()
+            self.presenter.getPet(with: self.pet.id)
+
         })
     }
     

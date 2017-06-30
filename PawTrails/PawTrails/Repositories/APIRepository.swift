@@ -266,7 +266,7 @@ class APIRepository {
     func loadPetFriends(callback: @escaping APIRepPetUsersCallback){
         
         APIManager.Instance.perform(call: .friends) { (error, json) in
-            if error == nil, let friendsJson = json?["friends"].array {
+            if error == nil, let friendsJson = json?["friendlist"].array {
                 var friends = [PetUser]()
                 for friendJson in friendsJson {
                     friends.append(PetUser(friendJson))

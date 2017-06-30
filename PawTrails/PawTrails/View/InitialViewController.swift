@@ -28,8 +28,6 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
         super.viewDidLoad()
         presenter.attachView(self)
         
-        emailTextField.underline()
-        passwordTextField.underline()
         loginButton.round()
         loginButton.backgroundColor = UIColor.primaryColor()
         loginButton.tintColor = UIColor.secondaryColor()
@@ -52,6 +50,10 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
         setTopBar()
 
         GIDSignIn.sharedInstance().uiDelegate = self
+        DispatchQueue.main.async {
+            self.emailTextField.underline()
+            self.passwordTextField.underline()
+        }
     }
     
     

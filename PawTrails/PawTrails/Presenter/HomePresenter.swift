@@ -54,7 +54,7 @@ class HomePresenter {
                 self.view?.loadPets()
                 
             }else if let error = error {
-                if error.DBError == DatabaseError.NotFound {
+                if error.DBError?.type == DatabaseErrorType.NotFound {
                     self.view?.noPetsFound()
                 }else{
                     self.view?.errorMessage(error.msg)

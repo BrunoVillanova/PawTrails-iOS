@@ -22,9 +22,8 @@ class AddPetUserPresenter {
     
     func attachView(_ view: AddPetUserView, pet: Pet){
         self.view = view
-        
         getFriends(for: pet)
-        loadFriends()
+        loadFriends(for: pet)
     }
     
     func deteachView() {
@@ -44,13 +43,12 @@ class AddPetUserPresenter {
         }
     }
     
-    func loadFriends(){
+    func loadFriends(for pet:Pet){
         
         DataManager.Instance.loadPetFriends { (error, friends) in
 
-            if error == nil, let friends = friends {
-                    self.friends = friends
-                    self.view?.loadFriends()
+            if error == nil, friends != nil {
+                    self.getFriends(for: pet)
                 }else if let error = error {
                     self.view?.errorMessage(error.msg)
                 }

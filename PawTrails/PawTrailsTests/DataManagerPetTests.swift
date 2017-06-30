@@ -650,7 +650,7 @@ class DataManagerPetTests: XCTestCase {
         let expect = expectation(description: "GetPets")
         
         do {
-            try CoreDataManager.Instance.delete(entity: "Pet")
+            try CoreDataManager.instance.delete(entity: "Pet")
             
             DataManager.Instance.getPets { (error, pets) in
                 XCTAssertNil(pets)
@@ -698,7 +698,7 @@ class DataManagerPetTests: XCTestCase {
         let expect = expectation(description: "GetPetsSplitted")
         
         do {
-            try CoreDataManager.Instance.delete(entity: "Pet")
+            try CoreDataManager.instance.delete(entity: "Pet")
             
             DataManager.Instance.getPetsSplitted { (error, owned, shared) in
                 XCTAssertNil(owned)

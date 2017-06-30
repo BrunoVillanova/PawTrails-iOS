@@ -98,10 +98,13 @@ class EditUserProfilePresenter {
     // Helpers
     
     func getCountryCodes(){
-        if let cc = DataManager.Instance.getCountryCodes() {
-            CountryCodes = cc
-        }else{
-            debugPrint("No CC")
+        DataManager.Instance.getCountryCodes { (cc) in
+            if let cc = cc {
+                self.CountryCodes = cc
+            }else{
+                debugPrint("No CC")
+            }
+
         }
     }
 

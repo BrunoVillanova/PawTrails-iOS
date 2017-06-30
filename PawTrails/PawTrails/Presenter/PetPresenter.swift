@@ -19,13 +19,13 @@ protocol PetView: NSObjectProtocol, View {
 class PetPresenter {
     
     weak private var view: PetView?
-
+    
     var users = [PetUser]()
     var safezones = [SafeZone]()
     
     func attachView(_ view: PetView, pet:Pet?){
         self.view = view
-
+        
         if let users = pet?.users { self.users = users }
         if let safezones = pet?.safezones { self.safezones = safezones }
     }
@@ -33,7 +33,7 @@ class PetPresenter {
     func deteachView() {
         self.view = nil
     }
-
+    
     //MARK:- Pet
     
     func getPet(with id: Int) {
@@ -41,7 +41,7 @@ class PetPresenter {
         DataManager.Instance.getPet(by: id) { (error, pet) in
             
             if let error = error {
-                if error.DBError == DatabaseError.NotFound {
+                if error.DBError?.type == DatabaseErrorType.NotFound {
                     self.view?.petNotFound()
                 }else{
                     self.view?.errorMessage(error.msg)
@@ -55,11 +55,11 @@ class PetPresenter {
     }
     
     func loadPet(with id: Int) {
-
+        
         DataManager.Instance.loadPet(id) { (error, pet) in
             
             if let error = error {
-                if error.DBError == DatabaseError.NotFound {
+                if error.DBError?.type == DatabaseErrorType.NotFound {
                     self.view?.petNotFound()
                 }else{
                     self.view?.errorMessage(error.msg)
@@ -69,7 +69,7 @@ class PetPresenter {
             }
         }
     }
-
+    
     func removePet(with id: Int) {
         
         DataManager.Instance.removePet(id) { (error) in
@@ -101,7 +101,7 @@ class PetPresenter {
             if error == nil && users != nil {
                 DataManager.Instance.getPet(by: id) { (error, pet) in
                     if let error = error {
-                        if error.DBError == DatabaseError.NotFound {
+                        if error.DBError?.type == DatabaseErrorType.NotFound {
                             self.view?.petNotFound()
                         }else{
                             self.view?.errorMessage(error.msg)
@@ -116,7 +116,7 @@ class PetPresenter {
             }else if let error = error {
                 self.view?.errorMessage(error.msg)
             }else{
-                self.view?.errorMessage(DataManagerError.init(DBError: DatabaseError.NotFound).msg)
+                self.view?.errorMessage(ErrorMsg.init(title: "", msg: "Unknown Error"))
             }
         }
     }
@@ -131,7 +131,7 @@ class PetPresenter {
             }else {
                 DataManager.Instance.getPet(by: id) { (error, pet) in
                     if let error = error {
-                        if error.DBError == DatabaseError.NotFound {
+                        if error.DBError?.type == DatabaseErrorType.NotFound {
                             self.view?.petNotFound()
                         }else{
                             self.view?.errorMessage(error.msg)
@@ -147,12 +147,16 @@ class PetPresenter {
         }
     }
     
-    func set(address:String, for id: Int){
-        DataManager.Instance.setSafeZone(address: address, for: id)
+    func set(address:String, for id: Int, callback: @escaping (ErrorMsg?)->()){
+        DataManager.Instance.setSafeZone(address: address, for: id) { (error) in
+            callback(error?.msg)
+        }
     }
     
-    func set(imageData:Data, for id: Int){
-        DataManager.Instance.setSafeZone(imageData: imageData, for: id)
+    func set(imageData:Data, for id: Int, callback: @escaping (ErrorMsg?)->()){
+        DataManager.Instance.setSafeZone(imageData: imageData, for: id) { (error) in
+            callback(error?.msg)
+        }
     }
     
     func setSafeZoneStatus(id: Int, petId: Int, status: Bool, callback: @escaping (Bool)->() ){
@@ -171,7 +175,7 @@ class PetPresenter {
     //MARK:- Socket IO
     
     func startPetsGPSUpdates(for id: Int, _ callback: @escaping ((GPSData)->())){
-
+        
         NotificationManager.Instance.getPetGPSUpdates(for: id, { (id, data) in
             callback(data)
         })
@@ -184,17 +188,23 @@ class PetPresenter {
     //MARK:- Geocode
     
     func startPetsGeocodeUpdates(for id: Int, _ callback: @escaping ((GeocodeType, String)->())){
-            NotificationManager.Instance.getPetGeoCodeUpdates { (code) in
+        NotificationManager.Instance.getPetGeoCodeUpdates { (code) in
+            
+            if let code = code {
                 
-                if let code = code {
-                    
-                    if (code.type == .pet && code.id == id) || code.type == .safezone {
-                        if code.type == .safezone, let name = code.placemark?.name {
-                            self.set(address: name, for: code.id)
+                if (code.type == .pet && code.id == id) || code.type == .safezone {
+                    if code.type == .safezone, let name = code.placemark?.name {
+                        self.set(address: name, for: code.id) { (msg) in
+                            if let msg = msg {
+                                self.view?.errorMessage(msg)
+                            }else{
+                                callback(code.type, code.name)
+                            }
                         }
-                        if let name = code.name {
-                            callback(code.type, name)
-                        }
+                        
+                    }else{
+                        callback(code.type, code.name)
+                    }
                 }
             }
         }

@@ -18,6 +18,6 @@ extension CDCountryCode {
 
     @NSManaged public var code: String?
     @NSManaged public var name: String?
-    @NSManaged public var shortname: String?
+    @NSManaged public var shortName: String?
 
 }

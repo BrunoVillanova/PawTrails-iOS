@@ -168,7 +168,8 @@ extension NSPredicate {
     }
     
     convenience init(_ left:String, _ operation:NSPredicateOperation, _ right:Any) {
-        self.init(format: "\(left) \(operation.rawValue) '\(right)'")
+//        self.init(format: "\(left) \(operation.rawValue) \"\(right)\"")
+        self.init(format: "\(left) \(operation.rawValue) %@", argumentArray: [right])
     }
     
     func and(_ left:String, _ op:NSPredicateOperation, _ right:Any) -> NSPredicate {
@@ -183,3 +184,27 @@ extension NSPredicate {
         return NSPredicate(format: "\(self.predicateFormat) \(concatOp.rawValue) \(left) \(op.rawValue) %@", argumentArray: [right])
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
