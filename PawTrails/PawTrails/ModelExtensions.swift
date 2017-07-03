@@ -64,10 +64,10 @@ extension Pet {
         return nil
     }
     
-    var sharedUsers: [PetUser]? {
+    var sortedUsers: [PetUser]? {
         if let petUsers = users {
             return petUsers.sorted(by: { (pu1, pu2) -> Bool in
-                return pu1.isOwner
+                return pu2.isOwner
             })
         }
         return nil

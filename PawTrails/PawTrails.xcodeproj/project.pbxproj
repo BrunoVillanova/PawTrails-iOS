@@ -70,7 +70,6 @@
 		44457A2E1E5AF31400B43748 /* AddressTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44457A2D1E5AF31400B43748 /* AddressTableViewController.swift */; };
 		4447217D1F03F12A001DCDE1 /* PawTrailsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4447217C1F03F12A001DCDE1 /* PawTrailsUITests.swift */; };
 		4447C4F71EE9429500AA6D1D /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4447C4F61EE9429500AA6D1D /* NotificationManager.swift */; };
-		4447C4F91EE948C300AA6D1D /* UpdateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4447C4F81EE948C300AA6D1D /* UpdateManager.swift */; };
 		44485F951E51B12800A3C47D /* PawTrails.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 44485F931E51B12800A3C47D /* PawTrails.xcdatamodeld */; };
 		44485F971E51B16500A3C47D /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44485F961E51B16500A3C47D /* CoreDataManager.swift */; };
 		44485FBD1E52076C00A3C47D /* countrycodes.csv in Resources */ = {isa = PBXBuildFile; fileRef = 44485FBC1E52076C00A3C47D /* countrycodes.csv */; };
@@ -219,7 +218,6 @@
 		4447217C1F03F12A001DCDE1 /* PawTrailsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PawTrailsUITests.swift; sourceTree = "<group>"; };
 		4447217E1F03F12A001DCDE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4447C4F61EE9429500AA6D1D /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationManager.swift; path = Model/NotificationManager.swift; sourceTree = "<group>"; };
-		4447C4F81EE948C300AA6D1D /* UpdateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UpdateManager.swift; path = Model/UpdateManager.swift; sourceTree = "<group>"; };
 		44485F941E51B12800A3C47D /* PawTrails.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PawTrails.xcdatamodel; sourceTree = "<group>"; };
 		44485F961E51B16500A3C47D /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		44485FBC1E52076C00A3C47D /* countrycodes.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = countrycodes.csv; sourceTree = "<group>"; };
@@ -368,7 +366,6 @@
 				441D9BB31F01089100D64482 /* Model.swift */,
 				447400961F0114C6002C7931 /* Parsers.swift */,
 				44FE723C1E4A2EF0007C7E24 /* DataManager.swift */,
-				4447C4F81EE948C300AA6D1D /* UpdateManager.swift */,
 				44F0BF351EFBF6C7008C26B3 /* EventManager.swift */,
 				44973D541F06811B00B8CC8C /* CommunicationCore */,
 				441D9BB01F01021200D64482 /* Repositories */,
@@ -1024,7 +1021,6 @@
 				44A1AC501E92923A003EF6CA /* PetsPresenter.swift in Sources */,
 				4415FF431E3B822900A81B13 /* AppDelegate.swift in Sources */,
 				44C7F7561E4CD3F200171170 /* SocketIOManager.swift in Sources */,
-				4447C4F91EE948C300AA6D1D /* UpdateManager.swift in Sources */,
 				44329CB41EA1129400325A13 /* Constants.swift in Sources */,
 				4475FB261EB0D73700E9990D /* DeviceCodePresenter.swift in Sources */,
 				441D9BCE1F01096B00D64482 /* CDPetUser+CoreDataProperties.swift in Sources */,

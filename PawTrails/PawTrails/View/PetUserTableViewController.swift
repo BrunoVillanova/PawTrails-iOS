@@ -105,8 +105,10 @@ class PetUserTableViewController: UITableViewController, PetUserView {
                 profile.reloadUsers()
                 navigationController?.popToViewController(profile, animated: true)
             }
+        }else if let petList = navigationController?.viewControllers.first(where: { $0 is PetsViewController}) as? PetsViewController {
+            petList.reloadPets()
+            navigationController?.popToViewController(petList, animated: true)
         }else{
-            navigationController?.navigationBar.topItem?.prompt = nil
             navigationController?.popToRootViewController(animated: true)
         }
     }

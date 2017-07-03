@@ -371,7 +371,26 @@ extension CountryCode {
 }
 
 
+//MARK:- Helpers
 
+extension Event {
+    
+    convenience init(_ json: JSON) {
+        self.init()
+        if let id = json["ope"].int {
+            type = EventType.build(rawValue: id)
+        }
+        
+        if json["pet"].exists() {
+            pet = Pet(json["pet"])
+        }
+        
+        if json["guest"].exists() {
+            guest = PetUser(json["guest"])
+        }
+    }
+    
+}
 
 
 

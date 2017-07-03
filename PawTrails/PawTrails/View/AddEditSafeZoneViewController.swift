@@ -120,6 +120,7 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
             guard let topCenter = safezone.point2?.coordinates else { return }
             self.mapView.load(with: center, topCenter: topCenter, shape: shape, into: view, callback: { (fence) in
                 self.fence = fence
+                self.updateFenceDistance()
             })
             
         }else{
@@ -127,10 +128,9 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
             self.mapView.centerOn(sonhugoCoordinate, with: 50, animated: false)
             self.mapView.load(with: sonhugoCoordinate, shape: shape, into: _view, callback: { (fence) in
                 self.fence = fence
+                self.updateFenceDistance()
             })
-
         }
-        updateFenceDistance()
         self.blurView(.close)
     }
     
@@ -143,7 +143,6 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
         if updatingPetLocation {
             presenter.stopPetGPSUpdates(of: petId)
         }
-       
     }
 
     func geoCodeFence() -> (Point,Point) {
@@ -378,6 +377,7 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
+        self.blurView(.close)
     }
     
     // MARK: - Helpers

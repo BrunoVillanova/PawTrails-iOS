@@ -177,10 +177,22 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     }
     
     func loadPets(){
+       
+        var petsIdsToRemove = annotations.map({ $0.key.id })
         
         for pet in presenter.pets {
+            
+            if let index = petsIdsToRemove.index(of: pet.id) {
+                petsIdsToRemove.remove(at: index)
+            }
+            
             if let point = SocketIOManager.Instance.getGPSData(for: pet.id)?.point {
                 load(id: MKLocationId(id: pet.id, type: .pet), point: point)
+            }
+        }
+        for id in petsIdsToRemove {
+            if let annotationToRemove = annotations.removeValue(forKey: MKLocationId(id: id, type: .pet)) {
+                mapView.removeAnnotation(annotationToRemove)
             }
         }
         focusOnPets()
@@ -208,6 +220,10 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     
     func updateTracking(_ id: MKLocationId, coordinate:CLLocationCoordinate2D) {
         self.annotations[id]?.move(coordinate:coordinate)
+    }
+    
+    func stopPetTracking(_ id: Int){
+        self.annotations.removeValue(forKey: MKLocationId(id:id, type: .pet))
     }
     
     func userNotSigned() {

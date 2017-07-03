@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import SocketIO
+import SwiftyJSON
 
 class SocketIOManager: NSObject, URLSessionDelegate {
     
@@ -36,26 +37,26 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     
     func connect(_ callback: ((SocketIOStatus)->())? = nil) {
 
-//        self.socket.on(channel.auth.name) { (data, ack) in
-//            let status = self.getStatus(data)
-//            debugPrint(status)
-//            if status != .waiting, let callback = callback {
-//                callback(status)
-//            }
-//        }
-//        self.socket.on(channel.connect.name) { (data, ack) in
-//            let token = SharedPreferences.get(.token)
-//            if token != "" {
-//                debugPrint("Connecting")
-//                self.socket.emit(channel.auth.name, with: [token])
-//            }
-//            
-//        }
-//        self.socket.on(channel.events.name, callback: { (data, ack) in
-//            debugPrint("Event RS", data)
-//            self.handleEventUpdated(data)
-//        })
-//        self.socket.connect()
+        self.socket.on(channel.auth.name) { (data, ack) in
+            let status = self.getStatus(data)
+            debugPrint(status)
+            if status != .waiting, let callback = callback {
+                callback(status)
+            }
+        }
+        self.socket.on(channel.connect.name) { (data, ack) in
+            let token = SharedPreferences.get(.token)
+            if token != "" {
+                debugPrint("Connecting")
+                self.socket.emit(channel.auth.name, with: [token])
+            }
+            
+        }
+        self.socket.on(channel.events.name, callback: { (data, ack) in
+            debugPrint("Event RS", data)
+            self.handleEventUpdated(data)
+        })
+        self.socket.connect()
 
     }
     
@@ -146,12 +147,15 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     //Events
     
     private func handleEventUpdated(_ data:[Any]){
-        if let json = data.first as? [String:Any] {
+        if let dict = data.first as? [String:Any] {
             
-            if let error = json["errors"] as? Int, error != 0 {
+            let json = JSON(dict)
+            let error = json["errors"].intValue
+            
+            if error != 0 {
                 debugPrint("Error :", error)
             }else {
-                NotificationManager.Instance.post(Event(data: json))
+                NotificationManager.Instance.post(Event(json))
             }
         }else{
             debugPrint(data)
