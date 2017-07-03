@@ -70,11 +70,13 @@ class GeocoderManager {
                 self.sem.wait()
                 self.geocoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) in
 
-                    if let placemark = placemarks?.first {
+                    if let error = error {
+                        self.placemark(error)
+                    }else if let placemark = placemarks?.first {
                         self.cache.setObject(placemark, forKey: location.coordinateString as NSString)
                         self.deliver(Geocode(type: type, id: id, location: location, placemark: placemark))
                     }else{
-                        self.sem.signal()
+                        self.placemarkNotFound(Geocode(type: type, id: id, location: location))
                     }
                 })
             }
@@ -91,13 +93,32 @@ class GeocoderManager {
                 self.sem.signal()
             }else if geocode.type == .safezone {
                 DataManager.Instance.setSafeZone(address: name, for: geocode.id, callback: { (error) in
-                    debugPrint("Geocode posted: ", geocode.id, name)
-                    NotificationManager.Instance.postPetGeoCodeUpdates(with: geocode)
+                    if let error = error {
+                        debugPrint("Geocode NOT posted for: ", geocode.id, name, error)
+                    }else{
+                        debugPrint("Geocode posted: ", geocode.id, name)
+                        NotificationManager.Instance.postPetGeoCodeUpdates(with: geocode)
+                    }
                     self.sem.signal()
                 })
             }
         }
     }
+    
+    private func placemarkNotFound(_ geocode: Geocode){
+        DispatchQueue.main.async {
+            debugPrint("Placemark not found for: ", geocode.id, geocode.type)
+            self.sem.signal()
+        }
+    }
+    
+    private func placemark(_ error: Error){
+        DispatchQueue.main.async {
+            debugPrint("Placemark error: ", error)
+            self.sem.signal()
+        }
+    }
+
     
 }
 

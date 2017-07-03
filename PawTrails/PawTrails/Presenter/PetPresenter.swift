@@ -47,8 +47,8 @@ class PetPresenter {
                     self.view?.errorMessage(error.msg)
                 }
             }else if let pet = pet {
-                if let users = pet.users { self.users = users }
-                if let safezones = pet.safezones { self.safezones = safezones }
+                if let users = pet.sortedUsers { self.users = users }
+                if let safezones = pet.sortedSafeZones { self.safezones = safezones }
                 self.view?.load(pet)
             }
         }

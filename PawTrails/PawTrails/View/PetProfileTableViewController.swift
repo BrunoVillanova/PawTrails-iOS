@@ -71,10 +71,11 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
             self.load(data: data)
         }
         presenter.startPetsGeocodeUpdates(for: pet.id, { (type,name) in
+            debugPrint("Released Geocode \(type) - \(name)")
             if type == .pet {
                 self.load(locationAndTime: name)
             }else if type == .safezone {
-                self.presenter.loadPet(with: self.pet.id)
+                self.presenter.getPet(with: self.pet.id)
             }
         })
        
@@ -130,9 +131,10 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
             self.load(data: data)
             self.load(locationAndTime: data.locationAndTime)
         }
+        tableView.reloadData()
         self.usersCollectionView.reloadData()
         self.safeZonesCollectionView.reloadData()
-        tableView.reloadData()
+
     }
     
     func loadUsers() {
@@ -209,7 +211,12 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
     }
     
     func petRemoved() {
-        popAction(sender: nil)
+        if let petList = navigationController?.viewControllers.first(where: { $0 is PetsViewController}) as? PetsViewController {
+            petList.reloadPets()
+            navigationController?.popToViewController(petList, animated: true)
+        }else{
+            popAction(sender: nil)
+        }
     }
     
     
@@ -282,7 +289,7 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if (indexPath.section == 2 && self.presenter.users.count == 0) || (indexPath.section == 3 && self.presenter.safezones.count == 0) {
+        if (indexPath.section == 2 && self.presenter.users.count == 0) || (indexPath.section == 3 && self.presenter.safezones.count == 0) || (indexPath.section == 4 && indexPath.row == 0 && self.pet.isOwner == false) {
             return 0
         }else if indexPath.section == 0 && indexPath.row == 1 && breedLabel.text != nil && breedLabel.text != "" {
 

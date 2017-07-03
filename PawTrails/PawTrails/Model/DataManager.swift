@@ -272,6 +272,7 @@ class DataManager {
         
         CDRepository.instance.upsert(pet) { (error, pet) in
             if error == nil, let pet = pet, let callback = callback {
+                SocketIOManager.Instance.startGPSUpdates(for: [pet.id])
                 callback(nil, pet)
             }else if let error = error, let callback = callback{
                 callback(DataManagerError(DBError: error), nil)
@@ -289,9 +290,10 @@ class DataManager {
         }
     }
     
-    private func removePetDB(by petId: Int, callback: @escaping errorCallback) {
+    func removePetDB(by petId: Int, callback: @escaping errorCallback) {
         
         CDRepository.instance.removePet(by: petId) { (success) in
+            SocketIOManager.Instance.stopGPSUpdates(for: petId)
             callback(success ? nil : DataManagerError(DBError: DatabaseError(type: .Unknown, entity: Entity.pet, action: .remove, error: nil)))
         }
     }
@@ -654,8 +656,7 @@ class DataManager {
         
         APIRepository.instance.leaveSharedPet(by: petId) { (error) in
             if error == nil {
-                let id = Int(SharedPreferences.get(.id)) ?? 0
-                self.removeSharedUserDB(id: id, from: petId, callback: callback)
+                self.removePetDB(by: petId, callback: callback)
             }else if let error = error {
                 callback(DataManagerError(APIError: error))
             }

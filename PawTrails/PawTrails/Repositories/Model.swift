@@ -125,7 +125,10 @@ extension PetUser: Equatable {
     }
 }
 
-public enum Gender: Int16 {
+
+//MARK:- Helpers
+
+enum Gender: Int16 {
     case female = 0,male, undefined
     
     static func count() -> Int {
@@ -162,7 +165,7 @@ public enum Gender: Int16 {
     }
 }
 
-public enum Type: Int16 {
+enum Type: Int16 {
     
     case other = 1
     case dog = 2
@@ -201,7 +204,7 @@ public enum Type: Int16 {
     }
 }
 
-public enum Shape: Int16 {
+enum Shape: Int16 {
     case circle = 2
     case square = 4
     
@@ -275,7 +278,7 @@ public class Point: NSObject, NSCoding {
     }
 }
 
-public class Fence: NSObject {
+class Fence: NSObject {
     
     let layer: CALayer
     let line: CALayer
@@ -339,8 +342,7 @@ public class Fence: NSObject {
     
 }
 
-//public class GPSData: NSObject, NSCoding {
-public class GPSData: NSObject {
+class GPSData: NSObject {
     
     var point: Point
     var signal: Int
@@ -427,23 +429,16 @@ public enum EventType: Int {
     }
 }
 
-public class Event{
+class Event{
     var type: EventType
-    var info: [String:Any]
+    var pet: Pet?
+    var guest: PetUser?
     
     init() {
         type = .unknown
-        info = [String:Any]()
-    }
-    
-    convenience init(data:[String:Any]) {
-        self.init()
-        if let id = data.tryCastInteger(for: "ope") {
-            type = EventType.build(rawValue: id)
-        }
-        info = data
-    }
-    
+        pet = nil
+        guest = nil
+    }    
 }
 
 

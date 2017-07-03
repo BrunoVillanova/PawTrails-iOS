@@ -200,7 +200,6 @@ class CDRepository {
                 cdPet.breed_descr = pet.breeds?.description
                 
                 // Image
-                
                 if let imageURL = pet.imageURL {
                     
                     if cdPet.imageURL == nil || (cdPet.imageURL != nil && cdPet.imageURL != imageURL) {
@@ -217,6 +216,7 @@ class CDRepository {
                         }
                     })
                 })
+                
             }
         }
     }
@@ -257,8 +257,6 @@ class CDRepository {
                         group.leave()
                     })
                 }
-                
-                return
             }else{
                 for pet in pets {
                     group.enter()
@@ -668,30 +666,32 @@ class CDRepository {
     }
     
     func setSafeZone(address: String, for id: Int, callback: @escaping CDRepErrorCallback){
-        
-        self.getSafeZoneCD(by: id) { (error, cdSafezone) in
-            if error == nil, let cdSafezone = cdSafezone {
-                
-                cdSafezone.address = address
-                CoreDataManager.instance.save(callback: callback)
-            }else if let error = error {
-                debugPrint(error)
-                callback(nil)
+        DispatchQueue.main.async {
+            self.getSafeZoneCD(by: id) { (error, cdSafezone) in
+                if error == nil, let cdSafezone = cdSafezone {
+                    
+                    cdSafezone.address = address
+                    CoreDataManager.instance.save(callback: callback)
+                }else if let error = error {
+                    debugPrint(error)
+                    callback(nil)
+                }
             }
         }
+        
     }
     
     func setSafeZone(imageData: Data, for id: Int, callback: @escaping CDRepErrorCallback){
-        
-        self.getSafeZoneCD(by: id) { (error, cdSafezone) in
-            if error == nil, let cdSafezone = cdSafezone {
-                cdSafezone.preview = imageData
-                CoreDataManager.instance.save(callback: callback)
-            }else if let error = error {
-                debugPrint(error)
-                callback(nil)
+        DispatchQueue.main.async {
+            self.getSafeZoneCD(by: id) { (error, cdSafezone) in
+                if error == nil, let cdSafezone = cdSafezone {
+                    cdSafezone.preview = imageData
+                    CoreDataManager.instance.save(callback: callback)
+                }else if let error = error {
+                    debugPrint(error)
+                    callback(nil)
+                }
             }
-            
             
         }
         

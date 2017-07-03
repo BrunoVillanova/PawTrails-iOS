@@ -51,8 +51,12 @@ class PetsPresenter {
                     self.view?.errorMessage(error.msg)
                 }
             }else if let owned = owned, let shared = shared {
-                self.ownedPets = owned
-                self.sharedPets = shared
+                self.ownedPets = owned.sorted(by: { (p1, p2) -> Bool in
+                    return p1.id < p2.id
+                })
+                self.sharedPets = shared.sorted(by: { (p1, p2) -> Bool in
+                    return p1.id < p2.id
+                })
                 self.view?.loadPets()
             }else{
                 self.ownedPets.removeAll()

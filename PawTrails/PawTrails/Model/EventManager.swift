@@ -17,92 +17,102 @@ class EventManager {
         
         switch(event.type){
             
-        case .petRemoved: handlePetRemoved(with: event.info, for: viewController)
+        case .petRemoved: handlePetRemoved(with: event, for: viewController)
             
-        case .guestAdded: handleGuestAdded(with: event.info, for: viewController)
+        case .guestAdded: handleGuestAdded(with: event, for: viewController)
 
-        case .guestRemoved, .guestLeft: handleGuestRemoved(didLeft: event.type == .guestLeft  ,with: event.info, for: viewController)
+        case .guestRemoved, .guestLeft: handleGuestRemoved(with: event, for: viewController)
 
         default: break
         }
 
     }
     
-    private func handlePetRemoved(with data: [String:Any], for viewController: UIViewController?){
-        
-        
-        guard let petData = data["pet"] as? [String:Any] else { return }
-        guard let petId = petData["id"] as? Int else { return }
-        guard let petName = petData["name"] as? String else { return }
-        
-        UpdateManager.Instance.removePet(by: petId, {
+    private func handlePetRemoved(with event: Event, for viewController: UIViewController?){
 
-            self.updatePetListUI(for: petId, isRemove: true, in: viewController)
-            var vc: UIViewController? {
-                return viewController?.navigationController?.visibleViewController ?? viewController
-            }
-            vc?.alert(title: "", msg: "\(petName) has been removed!", type: .blue)
-        })
-    }
-    
-    private func handleGuestAdded(with data: [String:Any], for viewController: UIViewController?){
+        guard let pet = event.pet else { return }
+        guard let petName = pet.name else { return }
         
-        guard let petData = data["pet"] as? [String:Any] else { return }
-        guard let petId = petData["id"] as? Int else { return }
-        guard let petName = petData["name"] as? String else { return }
-        
-        guard let guestData = data["guest"] as? [String:Any] else { return }
-        guard let guestId = guestData["id"] as? Int else { return }
-        guard let guestName = guestData["name"] as? String else { return }
-        
-        if SharedPreferences.get(.id) == "\(guestId)" {
-            
-            UpdateManager.Instance.addPet(petData, callback: { 
-                self.updatePetListUI(for: petId, in: viewController)
+        DataManager.Instance.removePetDB(by: pet.id) { (error) in
+            if let error = error {
+                debugPrint(error)
+            }else{
+                self.updatePetListUI(for: pet.id, isRemove: true, in: viewController)
                 var vc: UIViewController? {
                     return viewController?.navigationController?.visibleViewController ?? viewController
                 }
-                vc?.alert(title: "", msg: "\(petName) has been added!", type: .blue)
-
-            })
-            
-        }else{
-            UpdateManager.Instance.addSharedUser(with: guestData, for: petId) {
-                
-                self.updateSharedUsersUI(for: petId, in: viewController)
-                var vc: UIViewController? {
-                    return viewController?.navigationController?.visibleViewController ?? viewController
-                }
-                vc?.alert(title: "", msg: "\(guestName) has been added to \(petName)!", type: .blue)
+                vc?.alert(title: "", msg: "\(petName) has been removed!", type: .blue)
             }
         }
     }
     
-    private func handleGuestRemoved(didLeft: Bool, with data: [String:Any], for viewController: UIViewController?){
+    private func handleGuestAdded(with event: Event, for viewController: UIViewController?){
         
-        guard let petData = data["pet"] as? [String:Any] else { return }
-        guard let petId = petData["id"] as? Int else { return }
-        guard let petName = petData["name"] as? String else { return }
+        guard let pet = event.pet else { return }
+        guard let petName = pet.name else { return }
         
-        guard let guestData = data["guest"] as? [String:Any] else { return }
-        guard let guestId = guestData["id"] as? Int else { return }
-        guard let guestName = guestData["name"] as? String else { return }
+        guard let guest = event.guest else { return }
+        guard let guestName = guest.name else { return }
         
-        
-        if SharedPreferences.get(.id) == "\(guestId)" {
+        if SharedPreferences.get(.id) == "\(guest.id)" {
             
-            handlePetRemoved(with: data, for: viewController)
+            DataManager.Instance.set(pet, callback: { (error, _) in
+                if let error = error {
+                    debugPrint(error)
+                }else{
+                    self.updatePetListUI(for: pet.id, in: viewController)
+                    var vc: UIViewController? {
+                        return viewController?.navigationController?.visibleViewController ?? viewController
+                    }
+                    vc?.alert(title: "", msg: "\(petName) has been added!", type: .blue)
+                }
+            })
             
         }else{
-            UpdateManager.Instance.removeSharedUser(with: guestId, from: petId) {
-
-                self.updateSharedUsersUI(for: petId, in: viewController)
-                var vc: UIViewController? {
-                    return viewController?.navigationController?.visibleViewController ?? viewController
+            
+            DataManager.Instance.addDB(guest, to: pet.id, callback: { (error, _) in
+                if let error = error {
+                    debugPrint(error)
+                }else{
+                    self.updateSharedUsersUI(for: pet.id, in: viewController)
+                    var vc: UIViewController? {
+                        return viewController?.navigationController?.visibleViewController ?? viewController
+                    }
+                    vc?.alert(title: "", msg: "\(guestName) has been added to \(petName)!", type: .blue)
                 }
-                let msg = didLeft ? "\(guestName) has been removed from \(petName)!" : "\(guestName) left from \(petName)!"
-                vc?.alert(title: "", msg: msg, type: .blue)
-            }
+            })
+        }
+    }
+    
+    private func handleGuestRemoved(with event: Event, for viewController: UIViewController?){
+        
+        let didLeft = event.type == .guestLeft
+        
+        guard let pet = event.pet else { return }
+        guard let petName = pet.name else { return }
+        
+        guard let guest = event.guest else { return }
+        guard let guestName = guest.name else { return }
+        
+        
+        if SharedPreferences.get(.id) == "\(guest.id)" {
+            
+            handlePetRemoved(with: event, for: viewController)
+            
+        }else{
+            
+            DataManager.Instance.removeSharedUserDB(id: guest.id, from: pet.id, callback: { (error) in
+                if let error = error {
+                    debugPrint(error)
+                }else{
+                    self.updateSharedUsersUI(for: pet.id, in: viewController)
+                    var vc: UIViewController? {
+                        return viewController?.navigationController?.visibleViewController ?? viewController
+                    }
+                    let msg = didLeft ? "\(guestName) left from \(petName)!" : "\(guestName) has been removed from \(petName)!"
+                    vc?.alert(title: "", msg: msg, type: .blue)
+                }
+            })
         }
     }
     

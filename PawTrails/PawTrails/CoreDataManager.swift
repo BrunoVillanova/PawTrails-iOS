@@ -227,13 +227,14 @@ class CoreDataManager {
     /// Attempts to commit unsaved changes to registered objects.
     ///
     func save(_ entity:Entity? = nil, userInfo: [AnyHashable : Any]? = nil, callback: @escaping (DatabaseError?)->Void) {
-
+        
         let status = Storage.Instance.save()
         if status == .rolledBack {
             callback(DatabaseError(type: .NotSavedProperly, entity: entity, action: .save, error: nil))
         }else{
             callback(nil)
         }
+        
     }
     
 }
@@ -295,6 +296,7 @@ fileprivate struct Storage {
                 return
             }
         }
+        container.viewContext.mergePolicy = NSMergePolicy(merge: NSMergePolicyType.mergeByPropertyStoreTrumpMergePolicyType)
         return container
     }()
     
@@ -311,6 +313,7 @@ fileprivate struct Storage {
         let coordinator = self.persistentStoreCoordinator
         var managedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = coordinator
+        managedObjectContext.mergePolicy = NSMergePolicy(merge: NSMergePolicyType.mergeByPropertyStoreTrumpMergePolicyType)
         return managedObjectContext
     }()
     

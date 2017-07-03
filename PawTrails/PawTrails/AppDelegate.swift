@@ -74,7 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     func loadHomeScreen() {
         let root = storyboard.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
-        root.selectedIndex = 1
+        root.selectedIndex = 0
         window?.rootViewController = root
     }
     
@@ -100,11 +100,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         if DataManager.Instance.isAuthenticated() {
             SocketIOManager.Instance.connect()
-            UpdateManager.Instance.loadPetList { (pets) in
-                if let pets = pets {
+            DataManager.Instance.loadPets { (error, pets) in
+                if error == nil, let pets = pets {
                     SocketIOManager.Instance.startGPSUpdates(for: pets.map({ $0.id}))
+                    NotificationManager.Instance.postPetListUpdates(with: pets)
+                }else{
+                    debugPrint("Error loading Pets")
                 }
             }
+
         }
         NotificationManager.Instance.getEventsUpdates { (event) in
             if let event = event {
