@@ -19,6 +19,7 @@ import FacebookCore
 
 import Fabric
 import TwitterKit
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
@@ -30,16 +31,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         var out = true
         
-        // Set Status Bar Style
-        UIApplication.shared.statusBarStyle = .lightContent
-        
         configureUIPreferences()
+
+        Fabric.with([Crashlytics.self])
         
-//        _ = DataManager.Instance.signOut()
-        
-        if DataManager.Instance.isAuthenticated() {
+        if DataManager.instance.isAuthenticated() {
             
-            if let socialMedia = DataManager.Instance.socialMedia() {
+            if let socialMedia = DataManager.instance.isSocialMedia() {
                 
                 if let sm = SocialMedia(rawValue: socialMedia) {
                     switch sm {
@@ -94,26 +92,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     func applicationDidEnterBackground(_ application: UIApplication) {
 
-        SocketIOManager.Instance.disconnect()
+        SocketIOManager.instance.disconnect()
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        if DataManager.Instance.isAuthenticated() {
-            SocketIOManager.Instance.connect()
-            DataManager.Instance.loadPets { (error, pets) in
+        if DataManager.instance.isAuthenticated() {
+            SocketIOManager.instance.connect()
+            DataManager.instance.loadPets { (error, pets) in
                 if error == nil, let pets = pets {
-                    SocketIOManager.Instance.startGPSUpdates(for: pets.map({ $0.id}))
-                    NotificationManager.Instance.postPetListUpdates(with: pets)
-                }else{
-                    debugPrint("Error loading Pets")
+                    SocketIOManager.instance.startGPSUpdates(for: pets.map({ $0.id}))
+                    NotificationManager.instance.postPetListUpdates(with: pets)
                 }
             }
 
         }
-        NotificationManager.Instance.getEventsUpdates { (event) in
-            if let event = event {
-                EventManager.Instance.handle(event: event, for: self.visibleViewController)
-            }
+        NotificationManager.instance.getEventsUpdates { (event) in
+            EventManager.instance.handle(event: event, for: self.visibleViewController)
         }
     }
     
@@ -131,15 +125,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     func applicationWillTerminate(_ application: UIApplication) {
 
-        SocketIOManager.Instance.disconnect()
-        CoreDataManager.instance.save { (error) in
-            if let error = error {
-                debugPrint("AppDelegate - WillTerminate - SaveAction ",error)
-            }
-        }
+        SocketIOManager.instance.disconnect()
+        CoreDataManager.instance.save { (_) in }
     }
     
     private func configureUIPreferences() {
+        
+        UIApplication.shared.statusBarStyle = .lightContent
         
         let primaryColor = UIColor.primaryColor()
         let secondaryColor = UIColor.secondaryColor()
@@ -188,7 +180,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user:GIDGoogleUser!, withError error: Error!) {
         if let error = error {
-            debugPrint(error)
+            Reporter.send(file: "#file", function: "#function", error)
         }
     }
     

@@ -10,7 +10,7 @@ import Foundation
 
 class EventManager {
     
-    static let Instance = EventManager()
+    static let instance = EventManager()
     
     
     func handle(event: Event, for viewController: UIViewController?) {
@@ -33,10 +33,8 @@ class EventManager {
         guard let pet = event.pet else { return }
         guard let petName = pet.name else { return }
         
-        DataManager.Instance.removePetDB(by: pet.id) { (error) in
-            if let error = error {
-                debugPrint(error)
-            }else{
+        DataManager.instance.removePetDB(by: pet.id) { (error) in
+            if error == nil {
                 self.updatePetListUI(for: pet.id, isRemove: true, in: viewController)
                 var vc: UIViewController? {
                     return viewController?.navigationController?.visibleViewController ?? viewController
@@ -56,10 +54,8 @@ class EventManager {
         
         if SharedPreferences.get(.id) == "\(guest.id)" {
             
-            DataManager.Instance.set(pet, callback: { (error, _) in
-                if let error = error {
-                    debugPrint(error)
-                }else{
+            DataManager.instance.set(pet, callback: { (error, _) in
+                if error == nil {
                     self.updatePetListUI(for: pet.id, in: viewController)
                     var vc: UIViewController? {
                         return viewController?.navigationController?.visibleViewController ?? viewController
@@ -70,10 +66,8 @@ class EventManager {
             
         }else{
             
-            DataManager.Instance.addDB(guest, to: pet.id, callback: { (error, _) in
-                if let error = error {
-                    debugPrint(error)
-                }else{
+            DataManager.instance.addDB(guest, to: pet.id, callback: { (error, _) in
+                if error == nil {
                     self.updateSharedUsersUI(for: pet.id, in: viewController)
                     var vc: UIViewController? {
                         return viewController?.navigationController?.visibleViewController ?? viewController
@@ -101,10 +95,8 @@ class EventManager {
             
         }else{
             
-            DataManager.Instance.removeSharedUserDB(id: guest.id, from: pet.id, callback: { (error) in
-                if let error = error {
-                    debugPrint(error)
-                }else{
+            DataManager.instance.removeSharedUserDB(id: guest.id, from: pet.id, callback: { (error) in
+                if error == nil {
                     self.updateSharedUsersUI(for: pet.id, in: viewController)
                     var vc: UIViewController? {
                         return viewController?.navigationController?.visibleViewController ?? viewController

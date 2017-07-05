@@ -56,7 +56,7 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     private func updateRow(by id: Int){
         
-        debugPrint("Update Pet \(id)")
+        Reporter.debugPrint(file: "#file", function: "#function", "Update Pet \(id)")
         if let index = self.pets[id] {
             self.tableView.reloadRows(at: [index], with: .automatic)
         }else{
@@ -130,7 +130,7 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         cell.batteryImageView.circle()
         cell.signalImageView.circle()
         
-        if let data = SocketIOManager.Instance.getGPSData(for: pet.id) {
+        if let data = SocketIOManager.instance.getGPSData(for: pet.id) {
             cell.batteryImageView.backgroundColor = UIColor.primaryColor()
             cell.signalImageView.backgroundColor = UIColor.primaryColor()
             cell.batteryLabel.text = data.batteryString

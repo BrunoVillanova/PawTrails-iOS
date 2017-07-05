@@ -22,7 +22,7 @@ class DataManagerPetSafeZonesTests: XCTestCase {
     }
     
     func getPet(_ callback: @escaping ((Pet?)->())){
-        DataManager.Instance.getPets { (error, pets) in
+        DataManager.instance.getPets { (error, pets) in
             callback(pets?.first(where: { $0.isOwner }))
         }
     }
@@ -38,7 +38,7 @@ class DataManagerPetSafeZonesTests: XCTestCase {
         getPet { (pet) in
             if let pet = pet {
                 
-                DataManager.Instance.loadSafeZones(of: pet.id, callback: { (error) in
+                DataManager.instance.loadSafeZones(of: pet.id, callback: { (error) in
                     
                     XCTAssertNil(error, String(describing: error))
                     expect.fulfill()
@@ -51,7 +51,7 @@ class DataManagerPetSafeZonesTests: XCTestCase {
     func testLoadSafeZonesNotEnoughRights() {
         let expect = expectation(description: "LoadSafeZones")
         
-        DataManager.Instance.loadSafeZones(of: 0, callback: { (error) in
+        DataManager.instance.loadSafeZones(of: 0, callback: { (error) in
             
             XCTAssertNotNil(error, String(describing: error))
             XCTAssert(error?.APIError?.errorCode == ErrorCode.NotEnoughRights, String(describing: error))
@@ -64,7 +64,7 @@ class DataManagerPetSafeZonesTests: XCTestCase {
     //MARK:- AddSafeZones
     
     private func remove(safezone id: Int, callback: @escaping ((Bool)->())){
-        APIManager.Instance.perform(call: .removeSafeZone, withKey: id) { (error, data) in
+        APIManager.instance.perform(call: .removeSafeZone, withKey: id) { (error, data) in
             callback(error==nil)
         }
     }
@@ -78,7 +78,7 @@ class DataManagerPetSafeZonesTests: XCTestCase {
                 
                 let safezone = SafeZone(id: 0, name: "SZ", point1: Point(self.point1), point2: Point(self.point2), shape: Shape.circle, active: true, address: nil, preview: nil)
                 
-                DataManager.Instance.add(safezone, to: id, callback: { (error, safezone) in
+                DataManager.instance.add(safezone, to: id, callback: { (error, safezone) in
 
                     XCTAssertNil(error, "Error \(String(describing: error))")
                     
@@ -106,7 +106,7 @@ class DataManagerPetSafeZonesTests: XCTestCase {
 
                 let safezone = SafeZone(id: 0, name: nil, point1: Point(self.point1), point2: Point(self.point2), shape: Shape.circle, active: true, address: nil, preview: nil)
                 
-                DataManager.Instance.add(safezone, to: id, callback: { (error, _) in
+                DataManager.instance.add(safezone, to: id, callback: { (error, _) in
                     
                     XCTAssertNotNil(error)
                     XCTAssert(error?.APIError?.errorCode == ErrorCode.MissingSafeZoneName, "Wrong Error \(String(describing: error))")
@@ -134,7 +134,7 @@ class DataManagerPetSafeZonesTests: XCTestCase {
 //                data["active"] = true
 //                data["petid"] = id
 //                
-//                DataManager.Instance.addSafeZone(by: data, to: id, callback: { (error, _) in
+//                DataManager.instance.addSafeZone(by: data, to: id, callback: { (error, _) in
 //                    
 //                    
 //                    XCTAssertNotNil(error)
@@ -156,7 +156,7 @@ class DataManagerPetSafeZonesTests: XCTestCase {
                 
                 let safezone = SafeZone(id: 0, name: "SZ", point1: Point(-500, 500), point2: Point(-500, 500), shape: Shape.circle, active: true, address: nil, preview: nil)
                 
-                DataManager.Instance.add(safezone, to: id, callback: { (error, _) in
+                DataManager.instance.add(safezone, to: id, callback: { (error, _) in
                     
                     
                     XCTAssertNotNil(error)
@@ -178,11 +178,11 @@ class DataManagerPetSafeZonesTests: XCTestCase {
                 
                 let safezone = SafeZone(id: 0, name: "SZ", point1: Point(self.point1), point2: Point(self.point2), shape: Shape.circle, active: true, address: nil, preview: nil)
                 
-                DataManager.Instance.add(safezone, to: pet.id, callback: { (error, safezone) in
+                DataManager.instance.add(safezone, to: pet.id, callback: { (error, safezone) in
                     if error == nil, let safezone = safezone {
                         callback(pet.id, safezone)
                     }else{
-                        debugPrint(error ?? "nil error")
+                        Reporter.debug(error ?? "nil error")
                         callback(pet.id, nil)
                     }
                 })
@@ -203,7 +203,7 @@ class DataManagerPetSafeZonesTests: XCTestCase {
                 safezone.point2 = Point(self.point2)
                 safezone.active = true
                 
-                DataManager.Instance.save(safezone, into: petId, callback: { (error) in
+                DataManager.instance.save(safezone, into: petId, callback: { (error) in
                     
                     XCTAssertNil(error, "Error \(String(describing: error))")
 
@@ -236,7 +236,7 @@ class DataManagerPetSafeZonesTests: XCTestCase {
 //                data["active"] = true
 //                data["petid"] = petid
 //                
-//                DataManager.Instance.setSafeZone(by: data, to: petid, callback: { (error) in
+//                DataManager.instance.setSafeZone(by: data, to: petid, callback: { (error) in
 //                    
 //                    XCTAssertNotNil(error)
 //                    XCTAssert(error?.APIError?.errorCode == ErrorCode.WrongShapeFormat, "Wrong Error \(String(describing: error))")
@@ -264,7 +264,7 @@ class DataManagerPetSafeZonesTests: XCTestCase {
                 safezone.point2 = Point(-5, 5)
                 safezone.active = true
                 
-                DataManager.Instance.save(safezone, into: petId, callback: { (error) in
+                DataManager.instance.save(safezone, into: petId, callback: { (error) in
                     
                     XCTAssertNotNil(error)
                     XCTAssert(error?.APIError?.errorCode == ErrorCode.CoordinatesOutOfBounds, "Wrong Error \(String(describing: error))")
@@ -289,7 +289,7 @@ class DataManagerPetSafeZonesTests: XCTestCase {
         
         let safezone = SafeZone()
         
-        DataManager.Instance.save(safezone, into: 0, callback: { (error) in
+        DataManager.instance.save(safezone, into: 0, callback: { (error) in
             
             XCTAssertNotNil(error)
             XCTAssert(error?.APIError?.errorCode == ErrorCode.SafeZoneNotFound, "Wrong Error \(String(describing: error))")
@@ -309,7 +309,7 @@ class DataManagerPetSafeZonesTests: XCTestCase {
             
             if let id = safezone?.id {
 
-                DataManager.Instance.setSafeZoneStatus(status: false, for: id, into: petid, callback: { (error) in
+                DataManager.instance.setSafeZoneStatus(status: false, for: id, into: petid, callback: { (error) in
                     
                     XCTAssertNil(error, "Error \(String(describing: error))")
                     
@@ -331,7 +331,7 @@ class DataManagerPetSafeZonesTests: XCTestCase {
             
             if let id = safezone?.id {
 
-                DataManager.Instance.setSafeZoneStatus(status: false, for: 0, into: petid, callback: { (error) in
+                DataManager.instance.setSafeZoneStatus(status: false, for: 0, into: petid, callback: { (error) in
                     
                     XCTAssertNotNil(error)
                     XCTAssert(error?.APIError?.errorCode == ErrorCode.SafeZoneNotFound, "Wrong Error \(String(describing: error))")
@@ -354,7 +354,7 @@ class DataManagerPetSafeZonesTests: XCTestCase {
             
             if let id = safezone?.id {
 
-                DataManager.Instance.setSafeZoneStatus(status: false, for: id, into: 0, callback: { (error) in
+                DataManager.instance.setSafeZoneStatus(status: false, for: id, into: 0, callback: { (error) in
                     
                     XCTAssertNotNil(error)
                     XCTAssert(error?.APIError?.errorCode == ErrorCode.NotEnoughRights, "Wrong Error \(String(describing: error))")
@@ -379,7 +379,7 @@ class DataManagerPetSafeZonesTests: XCTestCase {
             
             if let id = safezone?.id {
 
-                DataManager.Instance.removeSafeZone(by: id, to: petid, callback: { (error) in
+                DataManager.instance.removeSafeZone(by: id, to: petid, callback: { (error) in
                     
                     XCTAssertNil(error, "Error \(String(describing: error))")
                     expect.fulfill()
@@ -397,7 +397,7 @@ class DataManagerPetSafeZonesTests: XCTestCase {
             
             if let id = safezone?.id {
                 
-                DataManager.Instance.removeSafeZone(by: 0, to: petid, callback: { (error) in
+                DataManager.instance.removeSafeZone(by: 0, to: petid, callback: { (error) in
                     
                     XCTAssertNotNil(error)
                     XCTAssert(error?.APIError?.errorCode == ErrorCode.SafeZoneNotFound, "Wrong Error \(String(describing: error))")
@@ -420,7 +420,7 @@ class DataManagerPetSafeZonesTests: XCTestCase {
             
             if let id = safezone?.id {
                 
-                DataManager.Instance.removeSafeZone(by: id, to: 0, callback: { (error) in
+                DataManager.instance.removeSafeZone(by: id, to: 0, callback: { (error) in
                     
                     XCTAssertNotNil(error)
                     XCTAssert(error?.APIError?.errorCode == ErrorCode.NotEnoughRights, "Wrong Error \(String(describing: error))")

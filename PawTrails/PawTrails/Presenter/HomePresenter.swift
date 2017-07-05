@@ -33,7 +33,7 @@ class HomePresenter {
     
     func getUser(){
         
-        DataManager.Instance.getUser { (error, user) in
+        DataManager.instance.getUser { (error, user) in
             if error == nil && user != nil {
                 self.user = user
                 self.view?.reload()
@@ -47,7 +47,7 @@ class HomePresenter {
     
     func getPets(){
         
-        DataManager.Instance.getPets { (error, pets) in
+        DataManager.instance.getPets { (error, pets) in
             
             if error == nil, let pets = pets {
                 self.pets = pets
@@ -66,33 +66,29 @@ class HomePresenter {
     //LoadPets
     
     func startPetsListUpdates(){
-        NotificationManager.Instance.getPetListUpdates { (pets) in
-            debugPrint("Time to update pets on Map")
-            
-            if let pets = pets {
-                self.pets = pets
-                self.view?.loadPets()
-            }else {
-                self.view?.noPetsFound()
-            }
+        NotificationManager.instance.getPetListUpdates { (pets) in
+            Reporter.debugPrint(file: "#file", function: "#function", "Time to update pets on Map")
+            self.pets = pets
+            self.view?.loadPets()
+
         }
     }
     
     func stopPetListUpdates(){
-        NotificationManager.Instance.removePetListUpdates()
+        NotificationManager.instance.removePetListUpdates()
     }
     
     //Socket IO
     
     func startPetsGPSUpdates(_ callback: @escaping ((_ id: MKLocationId, _ point: Point)->())){
         
-        NotificationManager.Instance.getPetGPSUpdates({ (id, data) in
+        NotificationManager.instance.getPetGPSUpdates({ (id, data) in
             callback(MKLocationId(id: id, type: .pet), data.point)
         })
     }
     
     func stopPetGPSUpdates(){
-        NotificationManager.Instance.removePetGPSUpdates()
+        NotificationManager.instance.removePetGPSUpdates()
     }
 
     

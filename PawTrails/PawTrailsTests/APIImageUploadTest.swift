@@ -33,7 +33,7 @@ class APIImageUploadTest: XCTestCase {
         data["userid"] = SharedPreferences.get(.id)
         data["picture"] = UIImageJPEGRepresentation(UIImage(named: "logo")!, 0.9) ?? Data()
         
-        APIManager.Instance.perform(call: .imageUpload, with: data) { (error, data) in
+        APIManager.instance.perform(call: .imageUpload, with: data) { (error, data) in
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(data, "No data :(")
@@ -59,7 +59,7 @@ class APIImageUploadTest: XCTestCase {
         data["userid"] = SharedPreferences.get(.id)
         data["picture"] = UIImageJPEGRepresentation(UIImage(named: "logo")!, 0.9)
         
-        APIManager.Instance.perform(call: .imageUpload, with: data) { (error, data) in
+        APIManager.instance.perform(call: .imageUpload, with: data) { (error, data) in
             
             XCTAssertNotNil(error)
             XCTAssert(error?.errorCode == ErrorCode.PathFormat, "Wrong Error \(String(describing: error?.errorCode))")
@@ -79,7 +79,7 @@ class APIImageUploadTest: XCTestCase {
         data["path"] = "user"
         data["picture"] = UIImageJPEGRepresentation(UIImage(named: "logo")!, 0.9)
         
-        APIManager.Instance.perform(call: .imageUpload, with: data) { (error, data) in
+        APIManager.instance.perform(call: .imageUpload, with: data) { (error, data) in
             
             XCTAssertNotNil(error)
             XCTAssert(error?.errorCode == ErrorCode.MissingUserId, "Wrong Error \(String(describing: error?.errorCode))")
@@ -97,7 +97,7 @@ class APIImageUploadTest: XCTestCase {
         
         let expect = expectation(description: "UploadImage")
         
-        DataManager.Instance.getPets { (error, pets) in
+        DataManager.instance.getPets { (error, pets) in
             
             if error == nil, let pets = pets {
                 
@@ -106,7 +106,7 @@ class APIImageUploadTest: XCTestCase {
                 data["petid"] = pets.first(where: {$0.isOwner == true})?.id ?? -1
                 data["picture"] = UIImageJPEGRepresentation(UIImage(named: "logo")!, 0.9)
                 
-                APIManager.Instance.perform(call: .imageUpload, with: data) { (error, data) in
+                APIManager.instance.perform(call: .imageUpload, with: data) { (error, data) in
                     
                     XCTAssertNil(error, "Error \(String(describing: error))")
                     XCTAssertNotNil(data, "No data :(")
@@ -134,7 +134,7 @@ class APIImageUploadTest: XCTestCase {
         data["path"] = "pet"
         data["picture"] = UIImageJPEGRepresentation(UIImage(named: "logo")!, 0.9)
         
-        APIManager.Instance.perform(call: .imageUpload, with: data) { (error, data) in
+        APIManager.instance.perform(call: .imageUpload, with: data) { (error, data) in
             
             XCTAssertNotNil(error)
             XCTAssert(error?.errorCode == ErrorCode.MissingPetId, "Wrong Error \(String(describing: error?.errorCode))")
@@ -155,7 +155,7 @@ class APIImageUploadTest: XCTestCase {
         data["path"] = "user"
         data["userid"] = SharedPreferences.get(.id)
         
-        APIManager.Instance.perform(call: .imageUpload, with: data) { (error, data) in
+        APIManager.instance.perform(call: .imageUpload, with: data) { (error, data) in
             
             XCTAssertNotNil(error)
             XCTAssert(error?.errorCode == ErrorCode.MissingImageFile, "Wrong Error \(String(describing: error?.errorCode))")
@@ -176,7 +176,7 @@ class APIImageUploadTest: XCTestCase {
         data["userid"] = SharedPreferences.get(.id)
         data["picture"] = UIImagePNGRepresentation(UIImage(named: "logo")!)
         
-        APIManager.Instance.perform(call: .imageUpload, with: data) { (error, data) in
+        APIManager.instance.perform(call: .imageUpload, with: data) { (error, data) in
             
             XCTAssertNotNil(error)
             XCTAssert(error?.errorCode == ErrorCode.IncorrectImageMime, "Wrong Error \(String(describing: error?.errorCode))")
@@ -197,7 +197,7 @@ class APIImageUploadTest: XCTestCase {
         data["userid"] = SharedPreferences.get(.id)
         data["picture"] = UIImageJPEGRepresentation(UIImage(named: "bigImage")!, 1.0)
         
-        APIManager.Instance.perform(call: .imageUpload, with: data) { (error, data) in
+        APIManager.instance.perform(call: .imageUpload, with: data) { (error, data) in
             
             XCTAssertNotNil(error)
             XCTAssert(error?.errorCode == ErrorCode.ImageFileSize, "Wrong Error \(String(describing: error?.errorCode))")

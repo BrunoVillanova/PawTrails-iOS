@@ -64,7 +64,7 @@ class APIUserTest: XCTestCase {
         userData["address"] = address
         
         
-        APIManager.Instance.perform(call: .setUser, with: userData) { (error, data) in
+        APIManager.instance.perform(call: .setUser, with: userData) { (error, data) in
             
             XCTAssertNil(error, "Error setting profile \(String(describing: error))")
             XCTAssertNotNil(data, "No data :(")
@@ -110,7 +110,7 @@ class APIUserTest: XCTestCase {
         userData["date_of_birth"] = "1992/15/25"
         
         
-        APIManager.Instance.perform(call: .setUser, with: userData) { (error, data) in
+        APIManager.instance.perform(call: .setUser, with: userData) { (error, data) in
             
             XCTAssertNotNil(error)
             XCTAssert(error?.errorCode == ErrorCode.DateOfBirth, "Wrong Error \(String(describing: error?.errorCode))")
@@ -132,7 +132,7 @@ class APIUserTest: XCTestCase {
         userData["gender"] = "HOLA"
         
         
-        APIManager.Instance.perform(call: .setUser, with: userData) { (error, data) in
+        APIManager.instance.perform(call: .setUser, with: userData) { (error, data) in
             
             XCTAssertNotNil(error)
             XCTAssert(error?.errorCode == ErrorCode.GenderFormat, "Wrong Error \(String(describing: error?.errorCode))")
@@ -159,7 +159,7 @@ class APIUserTest: XCTestCase {
         userData["mobile"] = phone
         
         
-        APIManager.Instance.perform(call: .setUser, with: userData) { (error, data) in
+        APIManager.instance.perform(call: .setUser, with: userData) { (error, data) in
             
             XCTAssertNotNil(error)
             XCTAssert(error?.errorCode == ErrorCode.PhoneFormat, "Wrong Error \(String(describing: error?.errorCode))")
@@ -181,7 +181,7 @@ class APIUserTest: XCTestCase {
         
         let id = SharedPreferences.get(.id)
         
-        APIManager.Instance.perform(call: .getUser, withKey: id) { (error, data) in
+        APIManager.instance.perform(call: .getUser, withKey: id) { (error, data) in
             
             XCTAssertNil(error, "Error setting profile \(String(describing: error))")
             XCTAssertNotNil(data, "No data :(")
@@ -202,7 +202,7 @@ class APIUserTest: XCTestCase {
         
         let id = -1
         
-        APIManager.Instance.perform(call: .getUser, withKey: id) { (error, data) in
+        APIManager.instance.perform(call: .getUser, withKey: id) { (error, data) in
             
             XCTAssertNotNil(error)
             XCTAssert(error?.errorCode == ErrorCode.Unauthorized, "Wrong Error \(String(describing: error?.errorCode))")
@@ -220,7 +220,7 @@ class APIUserTest: XCTestCase {
         
         let expect = expectation(description: "FriendList")
         
-        APIManager.Instance.perform(call: .friends) { (error, data) in
+        APIManager.instance.perform(call: .friends) { (error, data) in
             
             XCTAssertNil(error, "Error FriendList \(String(describing: error))")
             XCTAssertNotNil(data, "No data :(")

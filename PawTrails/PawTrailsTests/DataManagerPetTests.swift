@@ -28,7 +28,7 @@ class DataManagerPetTests: XCTestCase {
     let takenDeviceCode = APIPetRegistrationTests().takenDeviceCode
     
     func getPet(_ callback: @escaping ((Pet?)->())){
-        DataManager.Instance.getPets { (error, pets) in
+        DataManager.instance.getPets { (error, pets) in
             callback(pets?.first(where: { $0.isOwner }))
         }
     }
@@ -39,7 +39,7 @@ class DataManagerPetTests: XCTestCase {
         
         let expect = expectation(description: "CheckDevice")
         
-        DataManager.Instance.check(deviceCode) { (success) in
+        DataManager.instance.check(deviceCode) { (success) in
             XCTAssertTrue(success)
             expect.fulfill()
         }
@@ -53,7 +53,7 @@ class DataManagerPetTests: XCTestCase {
         
         let expect = expectation(description: "CheckDevice")
         
-        DataManager.Instance.check("code") { (success) in
+        DataManager.instance.check("code") { (success) in
             XCTAssertFalse(success)
             expect.fulfill()
         }
@@ -67,7 +67,7 @@ class DataManagerPetTests: XCTestCase {
         
         let expect = expectation(description: "CheckDevice")
         
-        DataManager.Instance.check(takenDeviceCode) { (success) in
+        DataManager.instance.check(takenDeviceCode) { (success) in
             XCTAssertFalse(success)
             expect.fulfill()
         }
@@ -83,14 +83,14 @@ class DataManagerPetTests: XCTestCase {
         
         let expect = expectation(description: "ChangeDevice")
         
-        APIManager.Instance.perform(call: .registerPet, with: ["device_code":deviceCode2, "name":"hey"]) { (error, data) in
+        APIManager.instance.perform(call: .registerPet, with: ["device_code":deviceCode2, "name":"hey"]) { (error, data) in
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(data, "No data :(")
             
             if let petId = data?["id"].int {
                 
-                DataManager.Instance.change(self.deviceCode, of: Int(petId), callback: { (error) in
+                DataManager.instance.change(self.deviceCode, of: Int(petId), callback: { (error) in
                     XCTAssertNil(error, "Error \(String(describing: error))")
                     self.remove(petId, { (done) in
                         if done {
@@ -110,7 +110,7 @@ class DataManagerPetTests: XCTestCase {
         
         let expect = expectation(description: "ChangeDevice")
         
-        DataManager.Instance.change(deviceCode2, of: -1, callback: { (error) in
+        DataManager.instance.change(deviceCode2, of: -1, callback: { (error) in
             
             XCTAssertNotNil(error)
             XCTAssert(error?.APIError?.errorCode == ErrorCode.NotEnoughRights,"Error \(String(describing: error))")
@@ -126,13 +126,13 @@ class DataManagerPetTests: XCTestCase {
         
         let expect = expectation(description: "ChangeDevice")
         
-        APIManager.Instance.perform(call: .registerPet, with: ["device_code":deviceCode2, "name":"hey"]) { (error, data) in
+        APIManager.instance.perform(call: .registerPet, with: ["device_code":deviceCode2, "name":"hey"]) { (error, data) in
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(data, "No data :(")
             
             if let petId = data?["id"].int {
-                DataManager.Instance.change(self.takenDeviceCode, of: -1, callback: { (error) in
+                DataManager.instance.change(self.takenDeviceCode, of: -1, callback: { (error) in
                     
                     XCTAssertNotNil(error)
                     XCTAssert(error?.APIError?.errorCode == ErrorCode.NotEnoughRights,"Error \(String(describing: error))")
@@ -170,7 +170,7 @@ class DataManagerPetTests: XCTestCase {
         
         let pet = Pet(JSON(_data))
         
-        DataManager.Instance.register(pet) { (error, pet) in
+        DataManager.instance.register(pet) { (error, pet) in
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(pet, "No data :(")
@@ -218,7 +218,7 @@ class DataManagerPetTests: XCTestCase {
         
         let pet = Pet(JSON(_data))
         
-        DataManager.Instance.register(pet) { (error, pet) in
+        DataManager.instance.register(pet) { (error, pet) in
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(pet, "No data :(")
@@ -268,7 +268,7 @@ class DataManagerPetTests: XCTestCase {
         
         let pet = Pet(JSON(_data))
         
-        DataManager.Instance.register(pet) { (error, pet) in
+        DataManager.instance.register(pet) { (error, pet) in
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(pet, "No data :(")
@@ -317,7 +317,7 @@ class DataManagerPetTests: XCTestCase {
         
         let pet = Pet(JSON(_data))
         
-        DataManager.Instance.register(pet) { (error, pet) in
+        DataManager.instance.register(pet) { (error, pet) in
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(pet, "No data :(")
@@ -363,7 +363,7 @@ class DataManagerPetTests: XCTestCase {
         
         let pet = Pet(JSON(data))
         
-        DataManager.Instance.register(pet) { (error, pet) in
+        DataManager.instance.register(pet) { (error, pet) in
             
             XCTAssertNotNil(error)
             XCTAssert(error?.APIError?.errorCode == ErrorCode.DateOfBirth, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
@@ -392,7 +392,7 @@ class DataManagerPetTests: XCTestCase {
         
         let pet = Pet(JSON(data))
         
-        DataManager.Instance.register(pet) { (error, pet) in
+        DataManager.instance.register(pet) { (error, pet) in
             
             XCTAssertNotNil(error)
             XCTAssert(error?.APIError?.errorCode == ErrorCode.GenderFormat, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
@@ -422,7 +422,7 @@ class DataManagerPetTests: XCTestCase {
         
         let pet = Pet(JSON(data))
         
-        DataManager.Instance.register(pet) { (error, pet) in
+        DataManager.instance.register(pet) { (error, pet) in
             
             XCTAssertNotNil(error)
             XCTAssert(error?.APIError?.errorCode == ErrorCode.WrongBreed, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
@@ -452,7 +452,7 @@ class DataManagerPetTests: XCTestCase {
         
         let pet = Pet(JSON(data))
         
-        DataManager.Instance.register(pet) { (error, pet) in
+        DataManager.instance.register(pet) { (error, pet) in
             
             XCTAssertNotNil(error)
             XCTAssert(error?.APIError?.errorCode == ErrorCode.MissingPetName, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
@@ -483,7 +483,7 @@ class DataManagerPetTests: XCTestCase {
         
         let pet = Pet(JSON(data))
         
-        DataManager.Instance.register(pet) { (error, pet) in
+        DataManager.instance.register(pet) { (error, pet) in
             
             XCTAssertNotNil(error)
             XCTAssert(error?.APIError?.errorCode == ErrorCode.WeightOutOfRange, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
@@ -501,14 +501,14 @@ class DataManagerPetTests: XCTestCase {
         
         let expect = expectation(description: "GetPet")
         
-        DataManager.Instance.getPets { (error, pets) in
+        DataManager.instance.getPets { (error, pets) in
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(pets)
             
             if let petId = pets?.first?.id {
                 
-                DataManager.Instance.getPet(by: petId, callback: { (error, pet) in
+                DataManager.instance.getPet(by: petId, callback: { (error, pet) in
                     
                     XCTAssertNil(error, "Error \(String(describing: error))")
                     XCTAssertNotNil(pet)
@@ -527,7 +527,7 @@ class DataManagerPetTests: XCTestCase {
         let expect = expectation(description: "GetPet")
         
         
-        DataManager.Instance.getPet(by: -1, callback: { (error, pet) in
+        DataManager.instance.getPet(by: -1, callback: { (error, pet) in
             
             XCTAssertNil(pet)
             XCTAssertNotNil(error)
@@ -547,14 +547,14 @@ class DataManagerPetTests: XCTestCase {
         
         let expect = expectation(description: "LoadPet")
         
-        DataManager.Instance.getPets { (error, pets) in
+        DataManager.instance.getPets { (error, pets) in
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(pets)
             
             if let petId = pets?.first?.id {
                 
-                DataManager.Instance.loadPet(petId, callback: { (error, pet) in
+                DataManager.instance.loadPet(petId, callback: { (error, pet) in
                     
                     XCTAssertNil(error, "Error \(String(describing: error))")
                     XCTAssertNotNil(pet)
@@ -573,7 +573,7 @@ class DataManagerPetTests: XCTestCase {
         let expect = expectation(description: "LoadPet")
         
         
-        DataManager.Instance.loadPet(-1, callback: { (error, pet) in
+        DataManager.instance.loadPet(-1, callback: { (error, pet) in
             
             XCTAssertNil(pet)
             XCTAssertNotNil(error)
@@ -600,7 +600,7 @@ class DataManagerPetTests: XCTestCase {
         //
         //            if let petId = pets?.first?.id {
         //
-        //                DataManager.Instance.removePet(petId, callback: { (error) in
+        //                DataManager.instance.removePet(petId, callback: { (error) in
         //
         //                    XCTAssertNil(error, "Error \(String(describing: error))")
         //                    expect.fulfill()
@@ -616,7 +616,7 @@ class DataManagerPetTests: XCTestCase {
         
         let expect = expectation(description: "RemovePet")
         
-        DataManager.Instance.removePet(-1, callback: { (error) in
+        DataManager.instance.removePet(-1, callback: { (error) in
             
             XCTAssertNotNil(error, "Error \(String(describing: error))")
             XCTAssert(error?.APIError?.errorCode == ErrorCode.NotEnoughRights, "Error \(String(describing: error))")
@@ -634,7 +634,7 @@ class DataManagerPetTests: XCTestCase {
         
         let expect = expectation(description: "GetPets")
         
-        DataManager.Instance.getPets { (error, pets) in
+        DataManager.instance.getPets { (error, pets) in
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(pets)
             expect.fulfill()
@@ -652,12 +652,12 @@ class DataManagerPetTests: XCTestCase {
         do {
             try CoreDataManager.instance.delete(entity: "Pet")
             
-            DataManager.Instance.getPets { (error, pets) in
+            DataManager.instance.getPets { (error, pets) in
                 XCTAssertNil(pets)
                 XCTAssertNotNil(error, "Error \(String(describing: error))")
                 XCTAssert(error?.DBError == DatabaseError.NotFound)
                 
-                DataManager.Instance.loadPets(callback: { (error, pets) in
+                DataManager.instance.loadPets(callback: { (error, pets) in
                     XCTAssertNil(error, "Error \(String(describing: error))")
                     XCTAssertNotNil(pets)
                     expect.fulfill()
@@ -681,7 +681,7 @@ class DataManagerPetTests: XCTestCase {
         
         let expect = expectation(description: "GetPetsSplitted")
         
-        DataManager.Instance.getPetsSplitted { (error, owned, shared) in
+        DataManager.instance.getPetsSplitted { (error, owned, shared) in
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(owned)
             XCTAssertNotNil(shared)
@@ -700,13 +700,13 @@ class DataManagerPetTests: XCTestCase {
         do {
             try CoreDataManager.instance.delete(entity: "Pet")
             
-            DataManager.Instance.getPetsSplitted { (error, owned, shared) in
+            DataManager.instance.getPetsSplitted { (error, owned, shared) in
                 XCTAssertNil(owned)
                 XCTAssertNil(shared)
                 XCTAssertNotNil(error, "Error \(String(describing: error))")
                 XCTAssert(error?.DBError == DatabaseError.NotFound)
                 
-                DataManager.Instance.loadPets(callback: { (error, pets) in
+                DataManager.instance.loadPets(callback: { (error, pets) in
                     XCTAssertNil(error, "Error \(String(describing: error))")
                     XCTAssertNotNil(pets)
                     expect.fulfill()
@@ -728,7 +728,7 @@ class DataManagerPetTests: XCTestCase {
     func testLoadPetsOk() {
         let expect = expectation(description: "LoadPets")
         
-        DataManager.Instance.loadPets { (error, pets) in
+        DataManager.instance.loadPets { (error, pets) in
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(pets)
             expect.fulfill()
@@ -747,7 +747,7 @@ class DataManagerPetTests: XCTestCase {
             
             _ = SharedPreferences.remove(.token)
             
-            DataManager.Instance.loadPets { (error, pets) in
+            DataManager.instance.loadPets { (error, pets) in
                 XCTAssertNil(pets)
                 XCTAssertNotNil(error)
                 XCTAssert(error?.APIError?.errorCode == ErrorCode.Unauthorized, "Error \(String(describing: error))")
@@ -778,7 +778,7 @@ class DataManagerPetTests: XCTestCase {
                 pet.weight  = 2.3
                 pet.neutered  = false
                 
-                DataManager.Instance.set(pet, callback: { (error) in
+                DataManager.instance.set(pet, callback: { (error) in
                     XCTAssertNil(error, "Error \(String(describing: error))")
                     expect.fulfill()
                 })
@@ -803,7 +803,7 @@ class DataManagerPetTests: XCTestCase {
                 pet.weight  = 2.3
                 pet.neutered  = false
                 
-                DataManager.Instance.set(pet, callback: { (error) in
+                DataManager.instance.set(pet, callback: { (error) in
                     XCTAssertNil(error, "Error \(String(describing: error))")
                     expect.fulfill()
                 })
@@ -828,7 +828,7 @@ class DataManagerPetTests: XCTestCase {
                 pet.weight  = 2.3
                 pet.neutered  = false
                 
-                DataManager.Instance.set(pet, callback: { (error) in
+                DataManager.instance.set(pet, callback: { (error) in
                     XCTAssertNil(error, "Error \(String(describing: error))")
                     expect.fulfill()
                 })
@@ -853,7 +853,7 @@ class DataManagerPetTests: XCTestCase {
                 pet.weight  = 2.3
                 pet.neutered  = false
                 
-                DataManager.Instance.set(pet, callback: { (error, _) in
+                DataManager.instance.set(pet, callback: { (error, _) in
                     XCTAssertNil(error, "Error \(String(describing: error))")
                     expect.fulfill()
                 })
@@ -878,7 +878,7 @@ class DataManagerPetTests: XCTestCase {
                 pet.weight  = 2.3
                 pet.neutered  = false
                 
-                DataManager.Instance.set(pet, callback: { (error, _) in
+                DataManager.instance.set(pet, callback: { (error, _) in
                     XCTAssertNotNil(error, "Error \(String(describing: error))")
                     XCTAssert(error?.APIError?.errorCode == ErrorCode.DateOfBirth, "Wrong Error \(String(describing: error))")
                     expect.fulfill()
@@ -905,7 +905,7 @@ class DataManagerPetTests: XCTestCase {
                 pet.weight  = 2.3
                 pet.neutered  = false
                 
-                DataManager.Instance.set(pet, callback: { (error, _) in
+                DataManager.instance.set(pet, callback: { (error, _) in
                     XCTAssertNotNil(error, "Error \(String(describing: error))")
                     XCTAssert(error?.APIError?.errorCode == ErrorCode.DateOfBirth, "Wrong Error \(String(describing: error))")
                     expect.fulfill()
@@ -931,7 +931,7 @@ class DataManagerPetTests: XCTestCase {
                 pet.weight  = 2.3
                 pet.neutered  = false
                 
-                DataManager.Instance.set(pet, callback: { (error, _) in
+                DataManager.instance.set(pet, callback: { (error, _) in
                     XCTAssertNotNil(error, "Error \(String(describing: error))")
                     XCTAssert(error?.APIError?.errorCode == ErrorCode.DateOfBirth, "Wrong Error \(String(describing: error))")
                     expect.fulfill()
@@ -957,7 +957,7 @@ class DataManagerPetTests: XCTestCase {
                 pet.weight  = Constants.maxWeight + 1
                 pet.neutered  = false
                 
-                DataManager.Instance.set(pet, callback: { (error, _) in
+                DataManager.instance.set(pet, callback: { (error, _) in
                     XCTAssertNotNil(error, "Error \(String(describing: error))")
                     XCTAssert(error?.APIError?.errorCode == ErrorCode.DateOfBirth, "Wrong Error \(String(describing: error))")
                     expect.fulfill()
@@ -973,7 +973,7 @@ class DataManagerPetTests: XCTestCase {
 
         let pet = Pet()
         
-        DataManager.Instance.set(pet, callback: { (error, _) in
+        DataManager.instance.set(pet, callback: { (error, _) in
             XCTAssertNotNil(error, "Error \(String(describing: error))")
             XCTAssert(error?.APIError?.errorCode == ErrorCode.DateOfBirth, "Wrong Error \(String(describing: error))")
             expect.fulfill()
@@ -987,7 +987,7 @@ class DataManagerPetTests: XCTestCase {
     func testGetBreedsCatOk(){
         let expect = expectation(description: "GetBreeds")
         
-        DataManager.Instance.getBreeds(for: .cat) { (error, breeds) in
+        DataManager.instance.getBreeds(for: .cat) { (error, breeds) in
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(breeds)
@@ -1000,7 +1000,7 @@ class DataManagerPetTests: XCTestCase {
     func testGetBreedsDogOk(){
         let expect = expectation(description: "GetBreeds")
         
-        DataManager.Instance.getBreeds(for: .dog) { (error, breeds) in
+        DataManager.instance.getBreeds(for: .dog) { (error, breeds) in
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(breeds)
@@ -1013,7 +1013,7 @@ class DataManagerPetTests: XCTestCase {
     func testGetBreedsNotFound(){
         let expect = expectation(description: "GetBreeds")
         
-        DataManager.Instance.getBreeds(for: .other) { (error, breeds) in
+        DataManager.instance.getBreeds(for: .other) { (error, breeds) in
             
             XCTAssertNotNil(error, "Error \(String(describing: error))")
             XCTAssert(error?.DBError == DatabaseError.NotFound, "Error \(String(describing: error))")
@@ -1030,7 +1030,7 @@ class DataManagerPetTests: XCTestCase {
         
         let type = Type.cat
         
-        DataManager.Instance.loadBreeds(for: type) { (error, breeds) in
+        DataManager.instance.loadBreeds(for: type) { (error, breeds) in
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(breeds)
@@ -1047,7 +1047,7 @@ class DataManagerPetTests: XCTestCase {
         
         let type = Type.dog
         
-        DataManager.Instance.loadBreeds(for: type) { (error, breeds) in
+        DataManager.instance.loadBreeds(for: type) { (error, breeds) in
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(breeds)
@@ -1064,7 +1064,7 @@ class DataManagerPetTests: XCTestCase {
         
         let type = Type.other
         
-        DataManager.Instance.loadBreeds(for: type) { (error, breeds) in
+        DataManager.instance.loadBreeds(for: type) { (error, breeds) in
             
             XCTAssertNotNil(error, "Error \(String(describing: error))")
             XCTAssert(error?.DBError == DatabaseError.NotFound, "Error \(String(describing: error))")
@@ -1078,7 +1078,7 @@ class DataManagerPetTests: XCTestCase {
     
     func remove(_ petId: Int, _ callback: @escaping ((Bool)->())) {
         
-        APIManager.Instance.perform(call: .unregisterPet, withKey: petId)  { (error, data) in
+        APIManager.instance.perform(call: .unregisterPet, withKey: petId)  { (error, data) in
             callback(error == nil)
         }
     }

@@ -29,7 +29,7 @@ class DataManagerPetSharingTests: XCTestCase {
         
         let expect = expectation(description: "LoadPetFriends")
         
-        DataManager.Instance.loadPetFriends { (error, petusers) in
+        DataManager.instance.loadPetFriends { (error, petusers) in
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(petusers)
@@ -46,7 +46,7 @@ class DataManagerPetSharingTests: XCTestCase {
         if token != "" {
             
             _ = SharedPreferences.remove(.token)
-            DataManager.Instance.loadPetFriends { (error, petusers) in
+            DataManager.instance.loadPetFriends { (error, petusers) in
                 
                 XCTAssertNil(petusers)
                 XCTAssertNotNil(error, "Error \(String(describing: error))")
@@ -66,7 +66,7 @@ class DataManagerPetSharingTests: XCTestCase {
         
         let expect = expectation(description: "GetPetFriends")
         
-//        DataManager.Instance.getPetFriends(for: <#Pet#>, callback: { (error, petusers) in
+//        DataManager.instance.getPetFriends(for: <#Pet#>, callback: { (error, petusers) in
 //            
 //            XCTAssertNil(error, "Error \(String(describing: error))")
 //            XCTAssertNotNil(petusers)
@@ -80,7 +80,7 @@ class DataManagerPetSharingTests: XCTestCase {
         
 //        let expect = expectation(description: "GetPetFriends")
 //        
-//        DataManager.Instance.getUser { (error, user) in
+//        DataManager.instance.getUser { (error, user) in
 //
 //            if let user = user {
 //                
@@ -88,7 +88,7 @@ class DataManagerPetSharingTests: XCTestCase {
 ////                friends.removeAllObjects()
 ////                user.setValue(friends, forKey: "friends")
 //                
-////                DataManager.Instance.getPetFriends(for: <#Pet#>, callback: { (error, petusers) in
+////                DataManager.instance.getPetFriends(for: <#Pet#>, callback: { (error, petusers) in
 ////                    
 ////                    XCTAssertNil(petusers)
 ////                    XCTAssertNotNil(error, "Error \(String(describing: error))")
@@ -106,14 +106,14 @@ class DataManagerPetSharingTests: XCTestCase {
     func testLoadSharedPetUsersOk() {
         let expect = expectation(description: "LoadSharedPetUsers")
         
-        DataManager.Instance.getPets { (error, pets) in
+        DataManager.instance.getPets { (error, pets) in
             
             XCTAssertNotNil(pets)
             XCTAssertNil(error)
             
             if let petId = pets?.first(where: {$0.isOwner})?.id {
                 
-                DataManager.Instance.loadSharedPetUsers(for: petId, callback: { (error, petusers) in
+                DataManager.instance.loadSharedPetUsers(for: petId, callback: { (error, petusers) in
                     XCTAssertNil(error)
                     XCTAssertNotNil(petusers)
                     expect.fulfill()
@@ -129,7 +129,7 @@ class DataManagerPetSharingTests: XCTestCase {
     func testLoadSharedNotEnoughRights() {
         let expect = expectation(description: "LoadSharedPetUsers")
         
-        DataManager.Instance.loadSharedPetUsers(for: 0, callback: { (error, petusers) in
+        DataManager.instance.loadSharedPetUsers(for: 0, callback: { (error, petusers) in
             XCTAssertNil(petusers)
             XCTAssertNotNil(error)
             XCTAssert(error?.APIError?.errorCode == ErrorCode.NotEnoughRights, String(describing: error))
@@ -145,7 +145,7 @@ class DataManagerPetSharingTests: XCTestCase {
     
     func remove(sharedUser id: Int, from petId: Int, callback: @escaping ((Bool)->())) {
         
-        APIManager.Instance.perform(call: .removeSharedPet, withKey: petId, with: ["user_id":id], callback: { (error, data) in
+        APIManager.instance.perform(call: .removeSharedPet, withKey: petId, with: ["user_id":id], callback: { (error, data) in
             callback(error == nil)
         })
     }
@@ -153,14 +153,14 @@ class DataManagerPetSharingTests: XCTestCase {
     func testAddSharedUserOk() {
         let expect = expectation(description: "AddSharedUser")
         
-        DataManager.Instance.getPets { (error, pets) in
+        DataManager.instance.getPets { (error, pets) in
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(pets)
             
             if let petId = pets?.first(where: { $0.isOwner })?.id {
                 
-                DataManager.Instance.addSharedUser(by: self.email, to: petId, callback: { (error, user) in
+                DataManager.instance.addSharedUser(by: self.email, to: petId, callback: { (error, user) in
                     XCTAssertNil(error, "Error \(String(describing: error))")
                     XCTAssertNotNil(user)
                     
@@ -181,19 +181,19 @@ class DataManagerPetSharingTests: XCTestCase {
     func testAddSharedUserAlreadyShared() {
         let expect = expectation(description: "AddSharedUser")
         
-        DataManager.Instance.getPets { (error, pets) in
+        DataManager.instance.getPets { (error, pets) in
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(pets)
             
             if let petId = pets?.first(where: { $0.isOwner })?.id {
                 
-                DataManager.Instance.addSharedUser(by: self.email, to: petId, callback: { (error, user) in
+                DataManager.instance.addSharedUser(by: self.email, to: petId, callback: { (error, user) in
                     XCTAssertNil(error, "Error \(String(describing: error))")
                     XCTAssertNotNil(user)
                     
                     if let id = user?.id {
-                        DataManager.Instance.addSharedUser(by: self.email, to: petId, callback: { (error, user) in
+                        DataManager.instance.addSharedUser(by: self.email, to: petId, callback: { (error, user) in
                             XCTAssertNotNil(error)
                             XCTAssert(error?.APIError?.errorCode == ErrorCode.AlreadyShared, "Wrong Error \(String(describing: error))")
                             XCTAssertNil(user)
@@ -215,14 +215,14 @@ class DataManagerPetSharingTests: XCTestCase {
     func testAddSharedUserMissingEmail() {
         let expect = expectation(description: "AddSharedUser")
         
-        DataManager.Instance.getPets { (error, pets) in
+        DataManager.instance.getPets { (error, pets) in
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(pets)
             
             if let petId = pets?.first(where: { $0.isOwner })?.id {
 
-                DataManager.Instance.addSharedUser(by: "", to: petId, callback: { (error, users) in
+                DataManager.instance.addSharedUser(by: "", to: petId, callback: { (error, users) in
                     
                     XCTAssertNotNil(error)
                     XCTAssert(error?.APIError?.errorCode == ErrorCode.MissingEmail, "Wrong Error \(String(describing: error))")
@@ -237,14 +237,14 @@ class DataManagerPetSharingTests: XCTestCase {
     func testAddSharedUserEmailFormat() {
         let expect = expectation(description: "AddSharedUser")
         
-        DataManager.Instance.getPets { (error, pets) in
+        DataManager.instance.getPets { (error, pets) in
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(pets)
             
             if let petId = pets?.first(where: { $0.isOwner })?.id {
 
-                DataManager.Instance.addSharedUser(by: "hello", to: petId, callback: { (error, users) in
+                DataManager.instance.addSharedUser(by: "hello", to: petId, callback: { (error, users) in
                     
                     XCTAssertNotNil(error)
                     XCTAssert(error?.APIError?.errorCode == ErrorCode.EmailFormat, "Wrong Error \(String(describing: error))")
@@ -260,14 +260,14 @@ class DataManagerPetSharingTests: XCTestCase {
     func testAddSharedUserNotFound() {
         let expect = expectation(description: "AddSharedUser")
         
-        DataManager.Instance.getPets { (error, pets) in
+        DataManager.instance.getPets { (error, pets) in
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(pets)
             
             if let petId = pets?.first(where: { $0.isOwner })?.id {
 
-                DataManager.Instance.addSharedUser(by: "hello@try.com", to: petId, callback: { (error, users) in
+                DataManager.instance.addSharedUser(by: "hello@try.com", to: petId, callback: { (error, users) in
                     
                     XCTAssertNotNil(error)
                     XCTAssert(error?.APIError?.errorCode == ErrorCode.UserNotFound, "Wrong Error \(String(describing: error))")
@@ -283,7 +283,7 @@ class DataManagerPetSharingTests: XCTestCase {
     func testAddSharedNotEnoughRights() {
         let expect = expectation(description: "AddSharedUser")
 
-        DataManager.Instance.addSharedUser(by: self.email, to: 0, callback: { (error, users) in
+        DataManager.instance.addSharedUser(by: self.email, to: 0, callback: { (error, users) in
             XCTAssertNotNil(error)
             XCTAssert(error?.APIError?.errorCode == ErrorCode.NotEnoughRights, "Wrong Error \(String(describing: error))")
             XCTAssertNil(users)
@@ -297,21 +297,21 @@ class DataManagerPetSharingTests: XCTestCase {
     func testRemoveUserOk() {
         let expect = expectation(description: "RemoveUser")
         
-        DataManager.Instance.getPets { (error, pets) in
+        DataManager.instance.getPets { (error, pets) in
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(pets)
             
             if let petId = pets?.first(where: { $0.isOwner })?.id {
 
-                DataManager.Instance.addSharedUser(by: self.email, to: petId, callback: { (error, user) in
+                DataManager.instance.addSharedUser(by: self.email, to: petId, callback: { (error, user) in
 
                     XCTAssertNil(error, "Error \(String(describing: error))")
                     XCTAssertNotNil(user)
                     
                     if let id = user?.id {
 
-                        DataManager.Instance.removeSharedUser(by: id, from: petId, callback: { (error) in
+                        DataManager.instance.removeSharedUser(by: id, from: petId, callback: { (error) in
                             XCTAssertNil(error, "Error \(String(describing: error))")
                             expect.fulfill()
                         })
@@ -326,25 +326,25 @@ class DataManagerPetSharingTests: XCTestCase {
     func testRemoveUserUserNotFound() {
         let expect = expectation(description: "RemoveUser")
         
-        DataManager.Instance.getPets { (error, pets) in
+        DataManager.instance.getPets { (error, pets) in
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(pets)
             
             if let petId = pets?.first(where: { $0.isOwner })?.id {
 
-                DataManager.Instance.addSharedUser(by: self.email, to: petId, callback: { (error, user) in
+                DataManager.instance.addSharedUser(by: self.email, to: petId, callback: { (error, user) in
                     
                     XCTAssertNil(error, "Error \(String(describing: error))")
                     XCTAssertNotNil(user)
                     
                     if let id = user?.id {
 
-                        DataManager.Instance.removeSharedUser(by: 0, from: petId, callback: { (error) in
+                        DataManager.instance.removeSharedUser(by: 0, from: petId, callback: { (error) in
                             XCTAssertNotNil(error, "Error \(String(describing: error))")
                             XCTAssert(error?.APIError?.errorCode == ErrorCode.UserNotFound, "Error \(String(describing: error))")
                             
-                            DataManager.Instance.removeSharedUser(by: id, from: petId, callback: { (error) in
+                            DataManager.instance.removeSharedUser(by: id, from: petId, callback: { (error) in
                                 XCTAssertNil(error, "Error \(String(describing: error))")
                                 expect.fulfill()
                             })
@@ -359,7 +359,7 @@ class DataManagerPetSharingTests: XCTestCase {
     func testRemoveUserNotEnoughRights() {
         let expect = expectation(description: "RemoveUser")
         
-        DataManager.Instance.getPets { (error, pets) in
+        DataManager.instance.getPets { (error, pets) in
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(pets)
@@ -368,18 +368,18 @@ class DataManagerPetSharingTests: XCTestCase {
                 var data = [String:Any]()
                 data["email"] = self.email
                 
-                DataManager.Instance.addSharedUser(by: self.email, to: petId, callback: { (error, user) in
+                DataManager.instance.addSharedUser(by: self.email, to: petId, callback: { (error, user) in
                     
                     XCTAssertNil(error, "Error \(String(describing: error))")
                     XCTAssertNotNil(user)
                     
                     if let id = user?.id {
 
-                        DataManager.Instance.removeSharedUser(by: id, from: 0, callback: { (error) in
+                        DataManager.instance.removeSharedUser(by: id, from: 0, callback: { (error) in
                             XCTAssertNotNil(error, "Error \(String(describing: error))")
                             XCTAssert(error?.APIError?.errorCode == ErrorCode.NotEnoughRights, "Error \(String(describing: error))")
 
-                            DataManager.Instance.removeSharedUser(by: id, from: petId, callback: { (error) in
+                            DataManager.instance.removeSharedUser(by: id, from: petId, callback: { (error) in
                                 XCTAssertNil(error, "Error \(String(describing: error))")
                                 expect.fulfill()
                             })
@@ -394,24 +394,24 @@ class DataManagerPetSharingTests: XCTestCase {
     func testRemoveUserMissingRelationUserPet() {
         let expect = expectation(description: "RemoveUser")
         
-        DataManager.Instance.getPets { (error, pets) in
+        DataManager.instance.getPets { (error, pets) in
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(pets)
             
             if let petId = pets?.first(where: { $0.isOwner })?.id {
                 
-                DataManager.Instance.addSharedUser(by: self.email, to: petId, callback: { (error, user) in
+                DataManager.instance.addSharedUser(by: self.email, to: petId, callback: { (error, user) in
                     
                     XCTAssertNil(error, "Error \(String(describing: error))")
                     XCTAssertNotNil(user)
                     
                     if let id = user?.id {
                         
-                        DataManager.Instance.removeSharedUser(by: id, from: petId, callback: { (error) in
+                        DataManager.instance.removeSharedUser(by: id, from: petId, callback: { (error) in
                             XCTAssertNil(error, "Error \(String(describing: error))")
 
-                            DataManager.Instance.removeSharedUser(by: id, from: petId, callback: { (error) in
+                            DataManager.instance.removeSharedUser(by: id, from: petId, callback: { (error) in
                                 XCTAssertNotNil(error, "Error \(String(describing: error))")
                                 XCTAssert(error?.APIError?.errorCode == ErrorCode.MissingRelationUserPet, "Error \(String(describing: error))")
                                 expect.fulfill()
@@ -431,21 +431,21 @@ class DataManagerPetSharingTests: XCTestCase {
         
         let expect = expectation(description: "LeavePet")
         
-        DataManager.Instance.getPets { (error, pets) in
+        DataManager.instance.getPets { (error, pets) in
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(pets)
             
             if let petId = pets?.first(where: { $0.isOwner })?.id {
 
-                DataManager.Instance.addSharedUser(by: self.email, to: petId, callback: { (error, users) in
+                DataManager.instance.addSharedUser(by: self.email, to: petId, callback: { (error, users) in
                     
                     XCTAssertNil(error, "Error \(String(describing: error))")
                     XCTAssertNotNil(users)
                     
                     APIAuthenticationTests().signIn(email: self.email, password: ezdebug.password) { () in
                         
-                        DataManager.Instance.leaveSharedPet(by: petId, callback: { (error) in
+                        DataManager.instance.leaveSharedPet(by: petId, callback: { (error) in
                             
                             XCTAssertNil(error, "Error \(String(describing: error))")
                             expect.fulfill()
@@ -462,7 +462,7 @@ class DataManagerPetSharingTests: XCTestCase {
         
         let expect = expectation(description: "LeavePet")
         
-        DataManager.Instance.getPets { (error, pets) in
+        DataManager.instance.getPets { (error, pets) in
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(pets)
@@ -471,7 +471,7 @@ class DataManagerPetSharingTests: XCTestCase {
                 
                 APIAuthenticationTests().signIn(email: self.email, password: ezdebug.password) { () in
                     
-                    DataManager.Instance.leaveSharedPet(by: petId, callback: { (error) in
+                    DataManager.instance.leaveSharedPet(by: petId, callback: { (error) in
                         
                         XCTAssertNotNil(error)
                         XCTAssert(error?.APIError?.errorCode == ErrorCode.NotEnoughRights, "Wrong Error \(String(describing: error))")

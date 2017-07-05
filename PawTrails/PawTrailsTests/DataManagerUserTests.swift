@@ -28,7 +28,7 @@ class DataManagerUserTests: XCTestCase {
         let expect = expectation(description: "Set User")
         
         let data = ["email":ezdebug.email, "password":ezdebug.password, "is4test":ezdebug.is4test]
-        APIManager.Instance.perform(call: .signIn, with: data) { (error, data) in
+        APIManager.instance.perform(call: .signIn, with: data) { (error, data) in
             
             XCTAssertNil(error, "Error while getting User \(String(describing: error))")
             XCTAssertNotNil(data, "Data")
@@ -36,7 +36,7 @@ class DataManagerUserTests: XCTestCase {
             
             let _user = User((data?["user"])!)
                 
-                DataManager.Instance.set(_user, callback: { (error, user) in
+                DataManager.instance.set(_user, callback: { (error, user) in
                     XCTAssertNil(error, "Error while setting User \(String(describing: error.debugDescription))")
                     XCTAssertNotNil(user, "User")
                     if let user = user {
@@ -58,7 +58,7 @@ class DataManagerUserTests: XCTestCase {
         
         let user = User()
         
-        DataManager.Instance.set(user, callback: { (error, user) in
+        DataManager.instance.set(user, callback: { (error, user) in
             XCTAssertNotNil(error, "Error while setting User \(String(describing: error.debugDescription))")
             XCTAssertNil(user, "User")
             if let error = error {
@@ -79,7 +79,7 @@ class DataManagerUserTests: XCTestCase {
     func testGetUserOk() {
         let expect = expectation(description: "GetUser")
         
-        DataManager.Instance.getUser { (error, user) in
+        DataManager.instance.getUser { (error, user) in
             XCTAssertNil(error)
             XCTAssertNotNil(user)
             expect.fulfill()
@@ -94,7 +94,7 @@ class DataManagerUserTests: XCTestCase {
         let id = SharedPreferences.get(.id)
         if id != "" {
             _ = SharedPreferences.remove(.id)
-            DataManager.Instance.getUser { (error, user) in
+            DataManager.instance.getUser { (error, user) in
                 
                 XCTAssertNil(user)
                 XCTAssertNotNil(error)
@@ -114,7 +114,7 @@ class DataManagerUserTests: XCTestCase {
         let id = SharedPreferences.get(.id)
         if id != "" {
             SharedPreferences.set(.id, with: "-1")
-            DataManager.Instance.getUser { (error, user) in
+            DataManager.instance.getUser { (error, user) in
                 
                 XCTAssertNil(user)
                 XCTAssertNotNil(error)
@@ -133,7 +133,7 @@ class DataManagerUserTests: XCTestCase {
     func testLoadUserOk() {
         let expect = expectation(description: "LoadUser")
         
-        DataManager.Instance.loadUser { (error, user) in
+        DataManager.instance.loadUser { (error, user) in
             XCTAssertNil(error)
             XCTAssertNotNil(user)
             expect.fulfill()
@@ -148,7 +148,7 @@ class DataManagerUserTests: XCTestCase {
         let id = SharedPreferences.get(.id)
         if id != "" {
             _ = SharedPreferences.remove(.id)
-            DataManager.Instance.loadUser { (error, user) in
+            DataManager.instance.loadUser { (error, user) in
                 
                 XCTAssertNil(user)
                 XCTAssertNotNil(error)
@@ -169,7 +169,7 @@ class DataManagerUserTests: XCTestCase {
         let id = SharedPreferences.get(.id)
         if id != "" {
             SharedPreferences.set(.id, with: "0")
-            DataManager.Instance.loadUser { (error, user) in
+            DataManager.instance.loadUser { (error, user) in
                 
                 XCTAssertNil(user)
                 XCTAssertNotNil(error)
@@ -192,7 +192,7 @@ class DataManagerUserTests: XCTestCase {
         
         let data = UIImageJPEGRepresentation(UIImage(named: "logo")!, 0.9) ?? Data()
 
-        DataManager.Instance.saveUser(image: data) { (error) in
+        DataManager.instance.saveUser(image: data) { (error) in
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             expect.fulfill()
@@ -209,7 +209,7 @@ class DataManagerUserTests: XCTestCase {
 //        
 //        var data =  UIImageJPEGRepresentation(UIImage(named: "logo")!, 0.9)
 //        
-//        DataManager.Instance.saveUser(image: data) { (error) in
+//        DataManager.instance.saveUser(image: data) { (error) in
 //            
 //            XCTAssertNotNil(error)
 //            XCTAssert(error?.APIError?.errorCode == ErrorCode.PathFormat, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
@@ -229,7 +229,7 @@ class DataManagerUserTests: XCTestCase {
 //        data["path"] = "user"
 //        data["picture"] = UIImageJPEGRepresentation(UIImage(named: "logo")!, 0.9)
 //        
-//        DataManager.Instance.saveUser(image: data) { (error) in
+//        DataManager.instance.saveUser(image: data) { (error) in
 //            
 //            XCTAssertNotNil(error)
 //            XCTAssert(error?.APIError?.errorCode == ErrorCode.MissingUserId, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
@@ -245,13 +245,13 @@ class DataManagerUserTests: XCTestCase {
         
         let expect = expectation(description: "SetImage")
         
-        DataManager.Instance.getPets { (error, pets) in
+        DataManager.instance.getPets { (error, pets) in
             
             if error == nil, let id = pets?.first?.id {
                 
                 let data =  UIImageJPEGRepresentation(UIImage(named: "logo")!, 0.9) ?? Data()
                 
-                DataManager.Instance.savePet(image: data, into: id, callback: { (error) in
+                DataManager.instance.savePet(image: data, into: id, callback: { (error) in
                     
                     XCTAssertNil(error, "Error \(String(describing: error))")
                     expect.fulfill()
@@ -272,7 +272,7 @@ class DataManagerUserTests: XCTestCase {
 //        data["path"] = "pet"
 //        data["picture"] = UIImageJPEGRepresentation(UIImage(named: "logo")!, 0.9)
 //        
-//        DataManager.Instance.set(image: data) { (error) in
+//        DataManager.instance.set(image: data) { (error) in
 //            
 //            XCTAssertNotNil(error)
 //            XCTAssert(error?.APIError?.errorCode == ErrorCode.MissingPetId, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
@@ -293,7 +293,7 @@ class DataManagerUserTests: XCTestCase {
 //        data["path"] = "user"
 //        data["userid"] = SharedPreferences.get(.id)
 //        
-//        DataManager.Instance.set(image: data) { (error) in
+//        DataManager.instance.set(image: data) { (error) in
 //            
 //            XCTAssertNotNil(error)
 //            XCTAssert(error?.APIError?.errorCode == ErrorCode.MissingImageFile, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
@@ -314,7 +314,7 @@ class DataManagerUserTests: XCTestCase {
 //        data["userid"] = SharedPreferences.get(.id)
 //        data["picture"] = UIImagePNGRepresentation(UIImage(named: "logo")!)
 //        
-//        DataManager.Instance.set(image: data) { (error) in
+//        DataManager.instance.set(image: data) { (error) in
 //            
 //            XCTAssertNotNil(error)
 //            XCTAssert(error?.APIError?.errorCode == ErrorCode.IncorrectImageMime, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
@@ -335,7 +335,7 @@ class DataManagerUserTests: XCTestCase {
 //        data["userid"] = SharedPreferences.get(.id)
 //        data["picture"] = UIImageJPEGRepresentation(UIImage(named: "bigImage")!, 1.0)
 //        
-//        DataManager.Instance.set(image: data) { (error) in
+//        DataManager.instance.set(image: data) { (error) in
 //            
 //            XCTAssertNotNil(error)
 //            XCTAssert(error?.APIError?.errorCode == ErrorCode.ImageFileSize, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
@@ -363,7 +363,7 @@ class DataManagerUserTests: XCTestCase {
         
         let user = User.init(id: 0, email: nil, name: name, surname: surname, birthday: birthday, gender: gender, image: nil, imageURL: nil, notification: notification, address: address, phone: phone, friends: nil)
         
-        DataManager.Instance.save(user) { (error, user) in
+        DataManager.instance.save(user) { (error, user) in
 
             XCTAssertNil(error, "Error setting profile \(String(describing: error))")
             XCTAssertNotNil(user)
@@ -413,7 +413,7 @@ class DataManagerUserTests: XCTestCase {
 //        var userData = [String:Any]()
 //        userData["date_of_birth"] = "1992/15/25"
 //        
-//        DataManager.Instance.save(user: userData) { (error, user) in
+//        DataManager.instance.save(user: userData) { (error, user) in
 //            
 //            XCTAssertNil(user)
 //            XCTAssertNotNil(error)
@@ -436,7 +436,7 @@ class DataManagerUserTests: XCTestCase {
 //        userData["gender"] = "HOLA"
 //        
 //        
-//        DataManager.Instance.save(user: userData) { (error, user) in
+//        DataManager.instance.save(user: userData) { (error, user) in
 //            
 //            XCTAssertNil(user)
 //            XCTAssertNotNil(error)
@@ -463,7 +463,7 @@ class DataManagerUserTests: XCTestCase {
 //        var userData = [String:Any]()
 //        userData["mobile"] = phone
 //        
-//        DataManager.Instance.save(user: userData) { (error, user) in
+//        DataManager.instance.save(user: userData) { (error, user) in
 //            
 //            XCTAssertNil(user)
 //            XCTAssertNotNil(error)
@@ -483,8 +483,8 @@ class DataManagerUserTests: XCTestCase {
         
         let expect = expectation(description: "RemoveUser")
         
-        if DataManager.Instance.removeUser() {
-            DataManager.Instance.getUser(callback: { (error, user) in
+        if DataManager.instance.removeUser() {
+            DataManager.instance.getUser(callback: { (error, user) in
                 XCTAssertNil(user)
                 XCTAssertNotNil(error)
                 XCTAssert(error?.DBError == DatabaseError.NotFound)
@@ -504,7 +504,7 @@ class DataManagerUserTests: XCTestCase {
         if id != "" {
             _ = SharedPreferences.remove(.id)
             
-            if !DataManager.Instance.removeUser() {
+            if !DataManager.instance.removeUser() {
                 SharedPreferences.set(.id, with: id)
                 expect.fulfill()
             }
@@ -522,7 +522,7 @@ class DataManagerUserTests: XCTestCase {
         if id != "" {
             SharedPreferences.set(.id, with: "-1")
             
-            if !DataManager.Instance.removeUser() {
+            if !DataManager.instance.removeUser() {
                 SharedPreferences.set(.id, with: id)
                 expect.fulfill()
             }
@@ -538,7 +538,7 @@ class DataManagerUserTests: XCTestCase {
         
         let expect = expectation(description: "LoadUserFriends")
         
-        DataManager.Instance.loadPetFriends { (error, friends) in
+        DataManager.instance.loadPetFriends { (error, friends) in
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(friends)
@@ -558,7 +558,7 @@ class DataManagerUserTests: XCTestCase {
         if token != "" {
             _ = SharedPreferences.remove(.token)
             
-            DataManager.Instance.loadPetFriends { (error, friends) in
+            DataManager.instance.loadPetFriends { (error, friends) in
                 
                 XCTAssertNil(friends)
                 XCTAssertNotNil(error)
@@ -581,7 +581,7 @@ class DataManagerUserTests: XCTestCase {
         if id != "" {
             _ = SharedPreferences.remove(.id)
             
-            DataManager.Instance.loadPetFriends { (error, friends) in
+            DataManager.instance.loadPetFriends { (error, friends) in
                 
                 XCTAssertNil(friends)
                 XCTAssertNotNil(error)
@@ -604,7 +604,7 @@ class DataManagerUserTests: XCTestCase {
         if id != "" {
             SharedPreferences.set(.id, with: "-1")
             
-            DataManager.Instance.loadPetFriends { (error, friends) in
+            DataManager.instance.loadPetFriends { (error, friends) in
                 
                 XCTAssertNil(friends)
                 XCTAssertNotNil(error)

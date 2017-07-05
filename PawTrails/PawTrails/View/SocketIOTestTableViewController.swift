@@ -20,7 +20,7 @@ class SocketIOTestTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
-        NotificationManager.Instance.getPetGPSUpdates(for: id) { (id, data) in
+        NotificationManager.instance.getPetGPSUpdates(for: id) { (id, data) in
             
             if data.movementAlarm {
                 self.alert(title: "HEY", msg: "MOVEMENT!!", type: .red)
@@ -32,11 +32,11 @@ class SocketIOTestTableViewController: UITableViewController {
                 self.tableView.reloadData()
             }
         }
-        SocketIOManager.Instance.startGPSUpdates(for: [id])
+        SocketIOManager.instance.startGPSUpdates(for: [id])
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        NotificationManager.Instance.removePetGPSUpdates(of: id)
+        NotificationManager.instance.removePetGPSUpdates(of: id)
     }
     
     // MARK: - Table view data source
