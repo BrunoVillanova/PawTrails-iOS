@@ -61,10 +61,10 @@ extension UIViewController {
         
     }
     
-    func setTopBar(color: UIColor = UIColor.primaryColor()) {
+    func setTopBar(color: UIColor = UIColor.primary, alpha: CGFloat = 0.8) {
         let topBar = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 20))
         topBar.tag = 102
-        topBar.backgroundColor = color.withAlphaComponent(0.8)
+        topBar.backgroundColor = color.withAlphaComponent(alpha)
         view.addSubview(topBar)
     }
     
@@ -212,7 +212,7 @@ extension UIViewController {
         label.text = "✓"
         label.font = UIFont.systemFont(ofSize: 70)
         label.textAlignment = .center
-        label.textColor = UIColor.primaryColor()
+        label.textColor = UIColor.primary
         
         
         if let loadingView = view.subviews.first(where: { $0.tag == subviewId.loading.rawValue }) as? UIVisualEffectView {
@@ -277,15 +277,14 @@ extension UIColor {
         return UIColor(red: r/255.0, green: g/255.0, blue: b/255.0, alpha: 1.0)
     }
     
-    public static func primaryColor() -> UIColor {
-        return UIColor(red: 251.0/255.0, green: 141.0/255.0, blue: 43.0/255.0, alpha: 1.0)
-//        return UIColor.red
+    public static var primary: UIColor {
+        return UIColor(red: 206.0/255.0, green: 19.0/255.0, blue: 54.0/255.0, alpha: 1.0)
     }
     
-    public static func secondaryColor() -> UIColor {
+    public static var secondary: UIColor {
         return UIColor.white
     }
-    
+
     public static func blueSystem() -> UIColor {
         return UIColor(red: 0, green: 0.478431, blue: 1, alpha: 1)
     }
@@ -359,7 +358,7 @@ extension UIImageView {
     func setupLayout(isPetOwner: Bool){
         self.circle()
         self.backgroundColor = UIColor.white
-        let color: UIColor = isPetOwner ? .primaryColor() : .darkGray
+        let color: UIColor = isPetOwner ? .primary : .darkGray
         self.border(color: color, width: 2.0)
     }
     

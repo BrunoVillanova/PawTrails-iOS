@@ -40,70 +40,52 @@ class Message {
         self.language = language
     }
     
-    enum ConnectionError: Int {
-        case NoConnection = 0
-        case Timeout = 1
-        case ConnnectionRefused = 2
-        case Unknown = 3
+    
+    // System messages
+    
+    enum systemMessage {
+        case passwordRequirements, forgotPassword, unknown
     }
-
-    func connectionError(type:ConnectionError) -> String {
-        switch type {
-        case .ConnnectionRefused: return lm("Connection Refused")
-        case .Timeout: return lm("Connection Timeout")
-        case .NoConnection: return lm("No Connection")
-        case .Unknown: return lm("Unknown Connection Error")
+    
+    func get(_ sm: systemMessage) -> String {
+        switch sm {
+        case .passwordRequirements: return lm("The password must have at least 8 characters including uppercase letters, lowercase letters and numbers.")
+        case .forgotPassword: return lm("Forgot Password?")
+        default: return lm("")
         }
-    }
-    
-    func getMessage(from code:ErrorCode) -> ErrorMsg {
-        let title = lm("Error")
-//        switch code {
-//            
-//        case .Unauthorized: return ErrorMsg(code, title, lm("User Not Authorized"))
-//        case .MissingEmail: return ErrorMsg(code, title, lm("Missing email"))
-//        case .EmailFormat: return ErrorMsg(code, title, lm("Incorrect email format"))
-//        case .MissingPassword: return ErrorMsg(code, title, lm("Missing password"))
-//        case .WeakPassword: return ErrorMsg(code, title, lm("Weak password"))
-//        case .UserAlreadyExists: return ErrorMsg(code, title, lm("The user already exists"))
-//        case .UserDisabled: return ErrorMsg(code, title, lm("Disabled User"))
-//
-//            
-//        case .AccountNotVerified: return ErrorMsg(code, title, lm("Account not verified"))
-//        case .UserNotFound: return ErrorMsg(code, title, lm("User not found"))
-//        case .WrongCredentials: return ErrorMsg(code, title, lm("Wrong password"))
-//        case .WrongPassword: return ErrorMsg(code, title, lm("Wrong password"))
-//            
-//        default: return ErrorMsg(ErrorCode.Unknown, title, lm("Unknown error"))
-//        }
-        
-        return ErrorMsg(code, title, "\(code)")
-    }
-    
-    func authError(type:AuthenticationError) -> ErrorMsg {
-        let title = lm("Authentication Error")
-        switch type {
-            
-        case .EmptyUserResponse: return ErrorMsg(ErrorCode.Unknown, title, lm("Empty User Response"))
-        case .EmptyUserTokenResponse: return ErrorMsg(ErrorCode.Unknown, title, lm("Empty UserToken Response"))
-        case .EmptyUserAppIdResponse: return ErrorMsg(ErrorCode.Unknown, title, lm("Empty AppId Response"))
-        case .EmptyUserIdResponse: return ErrorMsg(ErrorCode.Unknown, title, lm("Empty UserId Response"))
-            
-        case .UserNotFound: return ErrorMsg(ErrorCode.Unknown, title, lm("User not found"))
-        case .WrongCredentials: return ErrorMsg(ErrorCode.Unknown, title, lm("The credentials provided are incorrect."))
-        case .Unknown: return ErrorMsg(ErrorCode.Unknown, title, lm("Unknown Error"))
-        default: return ErrorMsg(ErrorCode.Unknown, "", "")
-        }
-    }
-    
-    func softwareDevelopmentError(_ whatever:[String:Any]?) -> ErrorMsg {
-        return ErrorMsg(ErrorCode.Unknown, "Development Error", "\(String(describing: whatever))")
     }
     
    
     private func lm(_ input:String) -> String {
         return input
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     

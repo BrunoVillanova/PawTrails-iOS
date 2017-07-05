@@ -24,14 +24,14 @@ class EmailVerificationViewController: UIViewController, EmailVerificationView {
         super.viewDidLoad()
         presenter.attachView(self)
         resendEmailButton.round()
-        resendEmailButton.tintColor = UIColor.secondaryColor()
-        resendEmailButton.backgroundColor = UIColor.primaryColor()
+        resendEmailButton.tintColor = UIColor.secondary
+        resendEmailButton.backgroundColor = UIColor.primary
         checkButton.round()
-        checkButton.tintColor = UIColor.secondaryColor()
-        checkButton.backgroundColor = UIColor.primaryColor()
+        checkButton.tintColor = UIColor.secondary
+        checkButton.backgroundColor = UIColor.primary
         signOutButton.round()
-        signOutButton.tintColor = UIColor.primaryColor()
-        signOutButton.border(color: UIColor.primaryColor(), width: 1.0)
+        signOutButton.tintColor = UIColor.primary
+        signOutButton.border(color: UIColor.primary, width: 1.0)
         emailLabel.text = email
         setTopBar()
     }

@@ -27,13 +27,34 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
     @IBOutlet weak var usersCollectionView: UICollectionView!
     @IBOutlet weak var usersTableViewCell: UITableViewCell!
     @IBOutlet weak var safezonesTableViewCell: UITableViewCell!
-    @IBOutlet weak var removeLeaveLabel: UILabel!
+    @IBOutlet weak var removeLeaveButton: UIButton!
     @IBOutlet weak var changeTableViewCell: UITableViewCell!
     
     var pet:Pet!
     var fromMap: Bool = false
     
-    fileprivate let sectionNames = ["info", "activity", "users", "safe zones", "actions"]
+    enum petProfileSection: Int {
+        case info = 0, activity, users, safezones, actions
+        
+        var name: String {
+            switch self {
+            case .info: return "info"
+            case .activity: return "activity"
+            case .users: return "users"
+            case .safezones: return "safe zones"
+            case .actions: return "actions"
+            }
+        }
+        
+        var actionName: String? {
+            switch self {
+            case .info: return "Edit"
+            case .activity: return "View"
+            case .users, .safezones: return "Add"
+            default: return nil
+            }
+        }
+    }
     
     fileprivate let presenter = PetPresenter()
     
@@ -43,15 +64,13 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
         presenter.attachView(self, pet:pet)
 
         petImageView.circle()
-        signalImageView.circle()
-        batteryImageView.circle()
         
         if let pet = pet {
             load(pet)
             reloadPetInfo()
             reloadUsers()
             reloadSafeZones()
-            removeLeaveLabel.text = pet.isOwner ? "Remove Pet" : "Leave Pet"
+            removeLeaveButton.setTitle(pet.isOwner ? "Remove Pet" : "Leave Pet", for: .normal)
          }
         
         if fromMap {
@@ -124,7 +143,7 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
         birthdayLabel.text = pet.birthday?.toStringShow
         neuteredLabel.text = pet.neutered ? "Yes" : "No"
 
-        removeLeaveLabel.text = pet.isOwner ? "Remove Pet" : "Leave Pet"
+        removeLeaveButton.setTitle(pet.isOwner ? "Remove Pet" : "Leave Pet", for: .normal)
         changeTableViewCell.isHidden = !pet.isOwner
         
         if let data = SocketIOManager.instance.getGPSData(for: pet.id) {
@@ -184,7 +203,6 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
                             safezonesGroup.leave()
                         }
                     }
-                    
                 })
             }
         }
@@ -196,9 +214,9 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
     }
     
     func load(data: GPSData){
-        self.signalImageView.backgroundColor = UIColor.primaryColor()
+        self.signalImageView.tintColor = UIColor.primary
         self.signalLabel.text = data.signalString
-        self.batteryImageView.backgroundColor = UIColor.primaryColor()
+        self.batteryImageView.tintColor = UIColor.primary
         self.batteryLabel.text = data.batteryString
     }
     
@@ -224,34 +242,38 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let headerView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: tableView.frame.width, height: 30.0))
-        
-        let titleWidth = headerView.frame.width * 0.6
-        let margin:CGFloat = 5.0
-        
-        let title = UILabel(frame: CGRect(x: margin, y: 0.0, width: titleWidth, height: headerView.frame.height - margin))
-        title.text = sectionNames[section].localizedUppercase
-        title.font = UIFont.preferredFont(forTextStyle: .headline)
-        title.textColor = UIColor.darkGray
-        headerView.addSubview(title)
-        
-        if pet.isOwner && section != 4 {
+        if let petProfileSection = petProfileSection(rawValue: section) {
             
-            let editButtonWidth = headerView.frame.width - titleWidth - margin
+            if petProfileSection == .activity { return nil }
             
-            let editButton = UIButton(frame: CGRect(x: titleWidth, y: 0.0, width: editButtonWidth, height: headerView.frame.height - margin))
-            var title = "Add"
-            if section == 0 { title = "Edit" }
-            else if section == 1 { title = "View" }
-            editButton.setTitle(title, for: .normal)
-            editButton.setTitleColor(UIColor.primaryColor(), for: .normal)
-            editButton.contentHorizontalAlignment = .right
-            editButton.isEnabled = true
-            editButton.tag = section
-            editButton.addTarget(self, action: #selector(editPressed(sender:)), for: .touchDown)
-            headerView.addSubview(editButton)
+            let headerView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: tableView.frame.width, height: 30.0))
+            
+            let titleWidth = headerView.frame.width * 0.6
+            let margin:CGFloat = 5.0
+            
+            let title = UILabel(frame: CGRect(x: margin, y: 0.0, width: titleWidth, height: headerView.frame.height - margin))
+            title.text = petProfileSection.name.uppercased()
+            title.font = UIFont.preferredFont(forTextStyle: .headline)
+            title.textColor = UIColor.darkGray
+            headerView.addSubview(title)
+            
+            if pet.isOwner, let actionName = petProfileSection.actionName {
+                
+                let editButtonWidth = headerView.frame.width - titleWidth - margin
+                
+                let editButton = UIButton(frame: CGRect(x: titleWidth, y: 0.0, width: editButtonWidth, height: headerView.frame.height - margin))
+                editButton.setTitle(actionName, for: .normal)
+                editButton.setTitleColor(UIColor.primary, for: .normal)
+//                editButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
+                editButton.contentHorizontalAlignment = .right
+                editButton.isEnabled = true
+                editButton.tag = section
+                editButton.addTarget(self, action: #selector(editPressed(sender:)), for: .touchDown)
+                headerView.addSubview(editButton)
+            }
+            return headerView
         }
-        return headerView
+        return nil
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -260,36 +282,39 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
 
     func editPressed(sender: UIButton){
         
-        switch sender.tag {
-        case 0:
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "AddEditPetDetailsTableViewController") as? AddEditPetDetailsTableViewController {
-                vc.pet = pet
-                navigationController?.pushViewController(vc, animated: true)
+        if let petProfileSection = petProfileSection(rawValue: sender.tag) {
+            switch petProfileSection {
+            case .info:
+                if let vc = storyboard?.instantiateViewController(withIdentifier: "AddEditPetDetailsTableViewController") as? AddEditPetDetailsTableViewController {
+                    vc.pet = pet
+                    navigationController?.pushViewController(vc, animated: true)
+                }
+            case .activity:
+                if let vc = storyboard?.instantiateViewController(withIdentifier: "PetActivityViewController") as? PetActivityViewController {
+                    vc.pet = pet
+                    navigationController?.pushViewController(vc, animated: true)
+                }
+            case .users:
+                if let vc = storyboard?.instantiateViewController(withIdentifier: "AddPetUserViewController") as? AddPetUserViewController {
+                    vc.pet = pet
+                    navigationController?.pushViewController(vc, animated: true)
+                }
+            case .safezones:
+                if let vc = storyboard?.instantiateViewController(withIdentifier: "AddEditSafeZoneViewController") as? AddEditSafeZoneViewController {
+                    vc.petId = pet.id
+                    vc.isOwner = pet.isOwner
+                    navigationController?.pushViewController(vc, animated: true)
+                }
+            default:
+                break
             }
-        case 1:
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "PetActivityViewController") as? PetActivityViewController {
-                vc.pet = pet
-                navigationController?.pushViewController(vc, animated: true)
-            }
-        case 2:
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "AddPetUserViewController") as? AddPetUserViewController {
-                vc.pet = pet
-                navigationController?.pushViewController(vc, animated: true)
-            }
-        case 3:
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "AddEditSafeZoneViewController") as? AddEditSafeZoneViewController {
-                vc.petId = pet.id
-                vc.isOwner = pet.isOwner
-                navigationController?.pushViewController(vc, animated: true)
-            }
-        default:
-            break
         }
+        
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if (indexPath.section == 2 && self.presenter.users.count == 0) || (indexPath.section == 3 && self.presenter.safezones.count == 0) || (indexPath.section == 4 && indexPath.row == 0 && self.pet.isOwner == false) {
+        if (indexPath.section == 1) || (indexPath.section == 2 && self.presenter.users.count == 0) || (indexPath.section == 3 && self.presenter.safezones.count == 0) || (indexPath.section == 4 && indexPath.row == 0 && self.pet.isOwner == false) {
             return 0
         }else if indexPath.section == 0 && indexPath.row == 1 && breedLabel.text != nil && breedLabel.text != "" {
 
@@ -308,19 +333,21 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
     // MARK: - UITableViewDelegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        
         if indexPath.section == 4 && indexPath.row == 1 {
-            // Leave/Remove Pet
-            if pet.isOwner {
-                popUpDestructive(title: "Remove \(pet.name ?? "this pet")", msg: "If you proceed you will loose all the information of this pet.", cancelHandler: nil, proceedHandler: { (remove) in
-                    self.presenter.removePet(with: self.pet.id)
-                })
-            }else{
-                popUpDestructive(title: "Leave \(pet.name ?? "this pet")", msg: "If you proceed you will leave this pet sharing list.", cancelHandler: nil, proceedHandler: { (remove) in
-                    self.presenter.leavePet(with: self.pet.id)
-                })
+            DispatchQueue.main.async {
+                // Leave/Remove Pet
+                if self.pet.isOwner {
+                    self.popUpDestructive(title: "Remove \(self.pet.name ?? "this pet")", msg: "If you proceed you will loose all the information of this pet.", cancelHandler: nil, proceedHandler: { (remove) in
+                        self.presenter.removePet(with: self.pet.id)
+                    })
+                }else{
+                    self.popUpDestructive(title: "Leave \(self.pet.name ?? "this pet")", msg: "If you proceed you will leave this pet sharing list.", cancelHandler: nil, proceedHandler: { (remove) in
+                        self.presenter.leavePet(with: self.pet.id)
+                    })
+                }
+                self.tableView.deselectRow(at: indexPath, animated: true)
             }
-            self.tableView.deselectRow(at: indexPath, animated: true)
         }
     }
     

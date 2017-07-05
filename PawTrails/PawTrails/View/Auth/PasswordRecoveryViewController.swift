@@ -26,12 +26,12 @@ class PasswordRecoveryViewController: UIViewController, PasswordRecoveryView, UI
         super.viewDidLoad()
         presenter.attachView(self)
         checkButton.setTitle(unchecked, for: .normal)
-        checkButton.tintColor = UIColor.primaryColor()
+        checkButton.tintColor = UIColor.primary
         emailTextField.underline()
         sendButton.round()
-        sendButton.tintColor = UIColor.secondaryColor()
-        sendButton.backgroundColor = UIColor.primaryColor()
-        cancelButton.tintColor = UIColor.primaryColor()
+        sendButton.tintColor = UIColor.secondary
+        sendButton.backgroundColor = UIColor.primary
+        cancelButton.tintColor = UIColor.primary
 
         
         if email != nil {
@@ -43,7 +43,7 @@ class PasswordRecoveryViewController: UIViewController, PasswordRecoveryView, UI
         if #available(iOS 10.0, *) {
             self.emailTextField.textContentType = UITextContentType.emailAddress
         }
-        setTopBar()
+        setTopBar(alpha: 1.0)
     }
     
     
@@ -104,7 +104,7 @@ class PasswordRecoveryViewController: UIViewController, PasswordRecoveryView, UI
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.underline(color: UIColor.primaryColor())
+        textField.underline(color: UIColor.primary)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {

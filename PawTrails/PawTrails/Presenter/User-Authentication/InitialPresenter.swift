@@ -13,8 +13,8 @@ import TwitterKit
 
 protocol InitialView: NSObjectProtocol, View, LoadingView {
     func loggedSocialMedia()
-    func emailFieldError(msg:String)
-    func passwordFieldError(msg:String)
+    func emailFieldError()
+    func passwordFieldError()
     func userAuthenticated()
     func verifyAccount(_ email:String, _ password:String)
 }
@@ -25,7 +25,6 @@ class InitialPresenter {
     
     func attachView(_ view: InitialView){
         self.view = view
-        
     }
     
     func deteachView() {
@@ -69,17 +68,17 @@ class InitialPresenter {
     private func validInput(_ email:String?, _ password:String?) -> Bool {
         
         if email == nil || (email != nil && email == "") {
-            self.view?.emailFieldError(msg: "")
+            self.view?.emailFieldError()
             return false
         }
         
         if password == nil || (password != nil && password == "") {
-            self.view?.passwordFieldError(msg: "")
+            self.view?.passwordFieldError()
             return false
         }
         
         if !email!.isValidEmail {
-            self.view?.emailFieldError(msg: Message.instance.authError(type: .EmailFormat).msg)
+            self.view?.emailFieldError()
             return false
         }
 
@@ -144,8 +143,9 @@ class InitialPresenter {
         Twitter.sharedInstance().start(withConsumerKey: "FM1jiu1Iceq2IwDS6aT41X046", consumerSecret: "QGLiyOInRuZ3DlRXk0mxjWSi1hVUPEhAWl1b92wHp2B5C1Qys9")
         Twitter.sharedInstance().logIn(with: vc, methods: .webBased) { (session, error) in
             if let error = error {
+                Reporter.send(file: "#file", function: "#function", error)
                 DispatchQueue.main.async {
-                    self.view?.errorMessage(DataManagerError(error: error).msg)
+                    self.view?.errorMessage(ErrorMsg(title: "", msg: "Twitter Login Failed"))
                 }
             }else if let session = session {
                 DataManager.instance.login(socialMedia: .twitter, session.authToken, callback: { (error) in

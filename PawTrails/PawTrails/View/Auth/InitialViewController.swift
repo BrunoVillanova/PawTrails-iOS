@@ -9,7 +9,6 @@
 import UIKit
 
 class InitialViewController: UIViewController, InitialView, UITextFieldDelegate, GIDSignInUIDelegate {
-//    class InitialViewController: UIViewController, InitialView, UITextFieldDelegate {
 
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
@@ -19,8 +18,11 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var socialMediaBar: UIStackView!
     @IBOutlet weak var socialSeparator: UIImageView!
-    
-    
+    @IBOutlet weak var logoImageView: UIImageView!
+    @IBOutlet weak var facebookButton: UIButton!
+    @IBOutlet weak var googleButton: UIButton!
+    @IBOutlet weak var twitterButton: UIButton!
+    @IBOutlet weak var passwordRequirementsLabel: UILabel!
     
     fileprivate let presenter = InitialPresenter()
     
@@ -29,14 +31,21 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
         presenter.attachView(self)
         
         loginButton.round()
-        loginButton.backgroundColor = UIColor.primaryColor()
-        loginButton.tintColor = UIColor.secondaryColor()
+        loginButton.backgroundColor = UIColor.primary
+        loginButton.tintColor = UIColor.secondary
         signUpButton.round()
-        signUpButton.tintColor = UIColor.primaryColor()
-        signUpButton.border(color: UIColor.primaryColor(), width: 1.0)
-        cancelButton.tintColor = UIColor.primaryColor()
+        signUpButton.tintColor = UIColor.primary
+        signUpButton.border(color: UIColor.primary, width: 1.0)
+        cancelButton.tintColor = UIColor.primary
         cancelButton.isHidden = true
-        forgotPasswordButton.tintColor = UIColor.primaryColor()
+        forgotPasswordButton.tintColor = UIColor.primary
+        logoImageView.tintColor = UIColor.primary
+        facebookButton.imageView?.tintColor = UIColor.primary
+        googleButton.imageView?.tintColor = UIColor.primary
+        twitterButton.imageView?.tintColor = UIColor.primary
+        
+        passwordRequirementsLabel.text = Message.instance.get(.passwordRequirements)
+        passwordRequirementsLabel.isHidden = true
         
         if #available(iOS 10.0, *) {
             self.emailTextField.textContentType = UITextContentType.emailAddress
@@ -47,7 +56,7 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
             self.passwordTextField.text = ezdebug.password
         }
         
-        setTopBar()
+        setTopBar(alpha: 1.0)
 
         GIDSignIn.sharedInstance().uiDelegate = self
         DispatchQueue.main.async {
@@ -56,17 +65,21 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
         }
     }
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        UIApplication.shared.statusBarStyle = .lightContent
+    }
     
     @IBAction func loginAction(_ sender: UIButton?) {
         presenter.signIn(email: emailTextField.text, password:passwordTextField.text)
     }
     
     @IBAction func facebookLogin(_ sender: UIButton) {
+        UIApplication.shared.statusBarStyle = .default
         presenter.loginFB(vc: self)
     }
     
     @IBAction func googleLogin(_ sender: UIButton) {
+        UIApplication.shared.statusBarStyle = .default
         presenter.loginG()
     }
     
@@ -75,11 +88,11 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
     }
     
     @IBAction func signUpAction(_ sender: UIButton?) {
-            if cancelButton.isHidden {
-                changeView(isSignUp:true)
-            }else{
-                presenter.signUp(email: emailTextField.text, password: passwordTextField.text)
-            }
+        if cancelButton.isHidden {
+            changeView(isSignUp:true)
+        }else{
+            presenter.signUp(email: emailTextField.text, password: passwordTextField.text)
+        }
     }
     
     @IBAction func cancelSignUpAction(_ sender: UIButton) {
@@ -94,20 +107,19 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
                 self.loginButton.isHidden = true
                 self.socialMediaBar.isHidden = true
                 self.socialSeparator.isHidden = true
-                let dy = self.loginButton.frame.origin.y - self.signUpButton.frame.origin.y
+                let dy = (self.passwordRequirementsLabel.frame.origin.y + self.passwordRequirementsLabel.frame.size.height) - self.signUpButton.frame.origin.y
                 self.signUpButton.transform = CGAffineTransform(translationX: 0, y: dy)
-                self.signUpButton.backgroundColor = UIColor.primaryColor()
+                self.signUpButton.backgroundColor = UIColor.primary
                 self.signUpButton.setTitleColor(UIColor.white, for: .normal)
+                self.forgotPasswordButton.transform = CGAffineTransform(scaleX: 0, y: 0)
             }else{
                 self.signUpButton.transform = CGAffineTransform.identity
                 self.signUpButton.backgroundColor = UIColor.white
-                self.signUpButton.setTitleColor(UIColor.primaryColor(), for: .normal)
+                self.signUpButton.setTitleColor(UIColor.primary, for: .normal)
+                self.passwordRequirementsLabel.transform = CGAffineTransform(scaleX: 0, y: 0)
             }
             
             self.cancelButton.isHidden = !isSignUp
-            self.forgotPasswordButton.isHidden = isSignUp
-            //            self.socialMediaToolBar.isHidden = isSignUp
-            
         }) { (error) in
             
             if !isSignUp {
@@ -115,6 +127,10 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
                 self.socialMediaBar.isHidden = false
                 self.socialSeparator.isHidden = false
             }
+            self.forgotPasswordButton.isHidden = isSignUp
+            self.passwordRequirementsLabel.isHidden = !isSignUp
+            self.forgotPasswordButton.transform = CGAffineTransform.identity
+            self.passwordRequirementsLabel.transform = CGAffineTransform.identity
         }
         
     }
@@ -135,11 +151,11 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
         self.dismiss(animated: true, completion: nil)
     }
     
-    func emailFieldError(msg: String) {
+    func emailFieldError() {
         self.emailTextField.shake()
     }
     
-    func passwordFieldError(msg: String) {
+    func passwordFieldError() {
         self.passwordTextField.shake()
     }
     
@@ -189,7 +205,7 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.underline(color: UIColor.primaryColor())
+        textField.underline(color: UIColor.primary)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {

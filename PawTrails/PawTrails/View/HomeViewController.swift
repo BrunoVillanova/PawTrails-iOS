@@ -67,21 +67,22 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
         blurView.isHidden = true
         slideIndicator.round()
         blurViewCloseButton.circle()
+        blurViewCloseButton.tintColor = UIColor.primary
         petImageView.circle()
-        batteryImageView.circle()
-        signalImageView.circle()
+        batteryImageView.tintColor = UIColor.primary
+        signalImageView.tintColor = UIColor.primary
         startTripButton.round()
-        startTripButton.backgroundColor = UIColor.primaryColor()
-        startTripButton.tintColor = UIColor.secondaryColor()
+        startTripButton.backgroundColor = UIColor.primary
+        startTripButton.tintColor = UIColor.secondary
         petProfileButton.round()
         petActivityButton.round()
-        petProfileButton.border(color: UIColor.primaryColor(), width: 2.0)
-        petActivityButton.border(color: UIColor.primaryColor(), width: 2.0)
-        petProfileButton.tintColor = UIColor.primaryColor()
-        petActivityButton.tintColor = UIColor.primaryColor()
+        petProfileButton.border(color: UIColor.primary, width: 2.0)
+        petActivityButton.border(color: UIColor.primary, width: 2.0)
+        petProfileButton.tintColor = UIColor.primary
+        petActivityButton.tintColor = UIColor.primary
         
         searchView.round()
-        searchBar.backgroundColor = UIColor.primaryColor().withAlphaComponent(0.8)
+        searchBar.backgroundColor = UIColor.primary.withAlphaComponent(0.8)
         if let textFieldInsideSearchBar = self.searchBar.value(forKey: "searchField") as? UITextField, let glassIconView = textFieldInsideSearchBar.leftView as? UIImageView {
             
             glassIconView.image = glassIconView.image?.withRenderingMode(.alwaysTemplate)
@@ -215,7 +216,7 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     
     func load(id: MKLocationId, point: Point){
         if self.annotations[id] == nil {
-            self.startTracking(id, coordinate: point.coordinates, color: UIColor.primaryColor())
+            self.startTracking(id, coordinate: point.coordinates, color: UIColor.primary)
         }else{
             self.updateTracking(id, coordinate: point.coordinates)
         }
@@ -395,7 +396,7 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! searchCell
         
         cell.searchImageView.circle()
-        cell.searchImageView.backgroundColor = UIColor.primaryColor()
+        cell.searchImageView.backgroundColor = UIColor.primary
         
         var name: String?
         var image: Data?

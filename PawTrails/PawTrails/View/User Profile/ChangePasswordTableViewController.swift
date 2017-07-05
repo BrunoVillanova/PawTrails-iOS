@@ -67,6 +67,12 @@ class ChangePasswordTableViewController: UITableViewController, ChangePasswordVi
         _ = self.navigationController?.popViewController(animated: true)
     }
     
+    //MARK: - UITableViewDataSource
+    
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return section == 1 ? Message.instance.get(.passwordRequirements) : nil
+    }
+    
 
     // MARK: - UITextFieldDelegate
 

@@ -292,7 +292,7 @@ class Fence: NSObject {
         }
     }
     
-    static var idleColor = UIColor.primaryColor().withAlphaComponent(0.5)
+    static var idleColor = UIColor.primary.withAlphaComponent(0.5)
     static var noIdleColor = UIColor.red.withAlphaComponent(0.5)
     
     convenience init(_ center: CGPoint, _ topCenter: CGPoint, shape: Shape) {
@@ -310,7 +310,7 @@ class Fence: NSObject {
         
         line = CALayer()
         line.frame = CGRect(x: layer.frame.origin.x + layer.frame.width / 2.0, y: layer.frame.origin.y, width: 1.0, height: layer.frame.height/2.0)
-        line.backgroundColor = UIColor.primaryColor().cgColor
+        line.backgroundColor = UIColor.primary.cgColor
     }
     
     

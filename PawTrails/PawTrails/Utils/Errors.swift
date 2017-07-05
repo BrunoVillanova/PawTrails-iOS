@@ -23,11 +23,7 @@ struct APIManagerError: Error {
     let httpCode: Int?
     let error:Error?
     let errorCode: ErrorCode?
-    
-    func info() -> ErrorMsg? {
-        return errorCode != nil ? Message.instance.getMessage(from: errorCode!) : ErrorMsg(title: "", msg: "\(kind)")
-    }
-    
+        
     var localizedDescription: String {
         var out = ""
         out = out.appending("Call: \(call)")

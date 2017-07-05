@@ -133,25 +133,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         UIApplication.shared.statusBarStyle = .lightContent
         
-        let primaryColor = UIColor.primaryColor()
-        let secondaryColor = UIColor.secondaryColor()
-        
-        UINavigationBar.appearance().barTintColor = primaryColor
-        UINavigationBar.appearance().tintColor = secondaryColor
+        UINavigationBar.appearance().backgroundColor = UIColor.primary
+        UINavigationBar.appearance().barTintColor = UIColor.primary
+        UINavigationBar.appearance().tintColor = UIColor.secondary
         UINavigationBar.appearance().titleTextAttributes = [
             NSFontAttributeName: UIFont.preferredFont(forTextStyle: .title2),
-            NSForegroundColorAttributeName: secondaryColor
+            NSForegroundColorAttributeName: UIColor.secondary
         ]
         
-        UITabBar.appearance().tintColor = primaryColor
+        UITabBar.appearance().tintColor = UIColor.primary
         
-        UITableViewCell.appearance().tintColor = primaryColor
+        UITableViewCell.appearance().tintColor = UIColor.primary
         
-        UISwitch.appearance().onTintColor = primaryColor
+        UISwitch.appearance().onTintColor = UIColor.primary
         
-        UISegmentedControl.appearance().tintColor = primaryColor
+        UISegmentedControl.appearance().tintColor = UIColor.primary
         
-        UIActivityIndicatorView.appearance().color = primaryColor
+        UIActivityIndicatorView.appearance().color = UIColor.primary
         
 //        UILabel.appearance().backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
     }
@@ -159,23 +157,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     //    MARK:- GIDSignInDelegate
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        if let root = window?.rootViewController as? InitialViewController {
-            
-            if (error == nil) {
-                print(user.authentication.idToken)
-                print("\n")
-                print(user.authentication.idTokenExpirationDate)
-                print("\n")
-                root.successGoogleLogin(token: user.authentication.idToken)
-            } else {
-                root.alert(title: "", msg: error.localizedDescription)
-            }
-            
+        if let error = error {
+            Reporter.send(file: "#file", function: "#function", error)
         }else{
-            //Mec
-            print("Shit")
+            if let root = window?.rootViewController as? InitialViewController {
+                root.successGoogleLogin(token: user.authentication.idToken)
+            }
         }
-        
     }
     
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user:GIDGoogleUser!, withError error: Error!) {

@@ -104,8 +104,8 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
             navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(dismissAction(sender: )))
         }
         
-        self.circleButton.tintColor = shape == .circle ? UIColor.primaryColor() : UIColor.darkGray
-        self.squareButton.tintColor = shape == .circle ?  UIColor.darkGray : UIColor.primaryColor()
+        self.circleButton.tintColor = shape == .circle ? UIColor.primary : UIColor.darkGray
+        self.squareButton.tintColor = shape == .circle ?  UIColor.darkGray : UIColor.primary
     }
     
     
@@ -154,13 +154,13 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     
     @IBAction func squareAction(_ sender: UIButton) {
         circleButton.tintColor = UIColor.darkGray
-        squareButton.tintColor = UIColor.primaryColor()
+        squareButton.tintColor = UIColor.primary
         fence.shape = .square
         shape = .square
     }
     
     @IBAction func circleAction(_ sender: UIButton) {
-        circleButton.tintColor = UIColor.primaryColor()
+        circleButton.tintColor = UIColor.primary
         squareButton.tintColor = UIColor.darkGray
         fence.shape = .circle
         shape = .circle
@@ -205,23 +205,6 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     
     @IBAction func petFocusAction(_ sender: UIButton) {
        
-        if let center = safezone?.point1?.coordinates, let topCenter = safezone?.point2?.coordinates {
-//            let centerPoint: CGPoint = mapView.convert(center, toPointTo: view)
-//            let centerLayer = CALayer()
-//            centerLayer.frame = CGRect.init(origin: centerPoint, size: CGSize.init(width: 5, height: 5))
-//            centerLayer.backgroundColor = UIColor.white.cgColor
-//            self.mapView.layer.addSublayer(centerLayer)
-            
-            let centerPoint = mapView.convert(center, toPointTo: view)
-            let topCenterPoint = mapView.convert(topCenter, toPointTo: view)
-            
-            let fence = Fence(centerPoint, topCenterPoint, shape: shape)
-            
-            //        add(fence)
-            self.mapView.layer.addSublayer(fence.layer)
-
-        }
-        
         focused = false
         beginLoadingLocation()
         loadPetLocation()

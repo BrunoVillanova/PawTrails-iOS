@@ -26,8 +26,8 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
         tableView.tableFooterView = UIView()
         
-        refreshControl.backgroundColor = UIColor.secondaryColor()
-        refreshControl.tintColor = UIColor.primaryColor()
+        refreshControl.backgroundColor = UIColor.secondary
+        refreshControl.tintColor = UIColor.primary
         refreshControl.addTarget(self, action: #selector(reloadPetsAPI), for: .valueChanged)
         tableView.addSubview(refreshControl)
         
@@ -59,8 +59,6 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         Reporter.debugPrint(file: "#file", function: "#function", "Update Pet \(id)")
         if let index = self.pets[id] {
             self.tableView.reloadRows(at: [index], with: .automatic)
-        }else{
-            self.errorMessage(ErrorMsg.init(title: "", msg: "WTF"))
         }
     }
     
@@ -127,12 +125,8 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         let pet = getPet(at: indexPath)
         pets[pet.id] = indexPath
-        cell.batteryImageView.circle()
-        cell.signalImageView.circle()
         
         if let data = SocketIOManager.instance.getGPSData(for: pet.id) {
-            cell.batteryImageView.backgroundColor = UIColor.primaryColor()
-            cell.signalImageView.backgroundColor = UIColor.primaryColor()
             cell.batteryLabel.text = data.batteryString
             cell.batteryLabel.textColor = UIColor.darkText
             cell.signalLabel.text = data.signalString
@@ -145,8 +139,6 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 cell.subtitleLabel.textColor = UIColor.lightText
             }
         }else{
-            cell.batteryImageView.backgroundColor = UIColor.clear
-            cell.signalImageView.backgroundColor = UIColor.clear
             cell.batteryLabel.text = cell.batteryLabel.text
             cell.batteryLabel.textColor = UIColor.lightText
             cell.signalLabel.text = cell.signalLabel.text

@@ -893,6 +893,8 @@ class CDRepository {
                         callback((objects as? [CDCountryCode])?.map({ CountryCode($0) }))
                     }
                 })
+            }else {
+                callback((objects as? [CDCountryCode])?.map({ CountryCode($0) }))
             }
         }
     }

@@ -4,8 +4,6 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
-	<key>LSApplicationCategoryType</key>
-	<string></string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
@@ -87,6 +85,8 @@
 	<string>1210286185753813</string>
 	<key>FacebookDisplayName</key>
 	<string>PawTrails</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
@@ -107,12 +107,12 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Change pet and user profile photo or scan tracking device</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Contacts usage</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Locate user on the screen and define safe zones</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Change user and pet profile photo</string>
-	<key>NSContactsUsageDescription</key>
-	<string>Contacts usage</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

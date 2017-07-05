@@ -55,14 +55,17 @@ class AddressTableViewController: UITableViewController, UIPickerViewDelegate, U
             stateTextField.text = address.state
             countryTextField.text = address.country
             
-            if address.country != nil && address.country != "" {
-                index = parentEditor.getCountryCodeIndex(countryShortName: address.country!)
-            }else {
-                index = parentEditor.getCurrentCountryCodeIndex()
+            if parentEditor.CountryCodes.count > 0 {
+                if address.country != nil && address.country != "" {
+                    index = parentEditor.getCountryCodeIndex(countryShortName: address.country!)
+                }
             }
-            self.countryTextField.text = parentEditor.CountryCodes[index].name! + ", " + parentEditor.CountryCodes[index].shortName!
-            self.selectedCC = parentEditor.CountryCodes[index]
+        }else{
+            index = parentEditor.getCurrentCountryCodeIndex()
         }
+        
+        self.countryTextField.text = parentEditor.CountryCodes[index].name! + ", " + parentEditor.CountryCodes[index].shortName!
+        self.selectedCC = parentEditor.CountryCodes[index]
 
     }
     
