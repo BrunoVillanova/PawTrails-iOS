@@ -29,7 +29,7 @@ class PawTrailsTests: XCTestCase {
         if id != "" {
             _ = SharedPreferences.remove(.id)
             
-            DataManager.Instance.loadPetFriends { (error, friends) in
+            DataManager.instance.loadPetFriends { (error, friends) in
                 
                 XCTAssertNil(friends)
                 XCTAssertNotNil(error)

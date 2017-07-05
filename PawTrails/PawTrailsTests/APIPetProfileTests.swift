@@ -23,7 +23,7 @@ class APIPetProfileTests: XCTestCase {
     }
     
     func getPets(_ callback: @escaping ((_ error: APIManagerError?, _ data:[String:Any]?)->())){
-        APIManager.Instance.perform(call: .getPets) { (error, data) in
+        APIManager.instance.perform(call: .getPets) { (error, data) in
             callback(error, data?.dictionaryObject)
         }
     }
@@ -55,7 +55,7 @@ class APIPetProfileTests: XCTestCase {
                     data["weight"] = 2.3
                     data["neutered"] = false
                     
-                    APIManager.Instance.perform(call: .setPet, withKey: petId, with: data) { (error, data) in
+                    APIManager.instance.perform(call: .setPet, withKey: petId, with: data) { (error, data) in
                         XCTAssertNil(error, "Error \(String(describing: error))")
                         XCTAssertNotNil(data, "No data :(")
                         
@@ -99,7 +99,7 @@ class APIPetProfileTests: XCTestCase {
                     data["weight"] = 2.3
                     data["neutered"] = true
                     
-                    APIManager.Instance.perform(call: .setPet, withKey: petId, with: data) { (error, data) in
+                    APIManager.instance.perform(call: .setPet, withKey: petId, with: data) { (error, data) in
                         XCTAssertNil(error, "Error \(String(describing: error))")
                         XCTAssertNotNil(data, "No data :(")
                         
@@ -143,7 +143,7 @@ class APIPetProfileTests: XCTestCase {
                     data["weight"] = 2.3
                     data["neutered"] = true
                     
-                    APIManager.Instance.perform(call: .setPet, withKey: petId, with: data) { (error, data) in
+                    APIManager.instance.perform(call: .setPet, withKey: petId, with: data) { (error, data) in
                         XCTAssertNil(error, "Error \(String(describing: error))")
                         XCTAssertNotNil(data, "No data :(")
                         
@@ -185,7 +185,7 @@ class APIPetProfileTests: XCTestCase {
                     data["weight"] = 5000.95
                     data["neutered"] = true
                     
-                    APIManager.Instance.perform(call: .setPet, withKey: petId, with: data) { (error, data) in
+                    APIManager.instance.perform(call: .setPet, withKey: petId, with: data) { (error, data) in
                         XCTAssertNil(error, "Error \(String(describing: error))")
                         XCTAssertNotNil(data, "No data :(")
                         
@@ -249,7 +249,7 @@ class APIPetProfileTests: XCTestCase {
                     data["weight"] = 2.3
                     data["neutered"] = false
                     
-                    APIManager.Instance.perform(call: .setPet, withKey: petId, with: data) { (error, data) in
+                    APIManager.instance.perform(call: .setPet, withKey: petId, with: data) { (error, data) in
                         XCTAssertNotNil(error)
                         XCTAssert(error?.errorCode == ErrorCode.DateOfBirth, "Wrong Error \(String(describing: error?.errorCode))")
                         expect.fulfill()
@@ -287,7 +287,7 @@ class APIPetProfileTests: XCTestCase {
                     data["weight"] = 2.3
                     data["neutered"] = false
                     
-                    APIManager.Instance.perform(call: .setPet, withKey: petId, with: data) { (error, data) in
+                    APIManager.instance.perform(call: .setPet, withKey: petId, with: data) { (error, data) in
                         XCTAssertNotNil(error)
                         XCTAssert(error?.errorCode == ErrorCode.GenderFormat, "Wrong Error \(String(describing: error?.errorCode))")
                         expect.fulfill()
@@ -325,7 +325,7 @@ class APIPetProfileTests: XCTestCase {
                     data["weight"] = 2.3
                     data["neutered"] = false
                     
-                    APIManager.Instance.perform(call: .setPet, withKey: petId, with: data) { (error, data) in
+                    APIManager.instance.perform(call: .setPet, withKey: petId, with: data) { (error, data) in
                         XCTAssertNotNil(error)
                         XCTAssert(error?.errorCode == ErrorCode.WrongBreed, "Wrong Error \(String(describing: error?.errorCode))")
                         expect.fulfill()
@@ -363,7 +363,7 @@ class APIPetProfileTests: XCTestCase {
                     data["weight"] = 2.3
                     data["neutered"] = false
                     
-                    APIManager.Instance.perform(call: .setPet, withKey: petId, with: data) { (error, data) in
+                    APIManager.instance.perform(call: .setPet, withKey: petId, with: data) { (error, data) in
                         XCTAssertNotNil(error)
                         XCTAssert(error?.errorCode == ErrorCode.MissingPetName, "Wrong Error \(String(describing: error?.errorCode))")
                         expect.fulfill()
@@ -401,7 +401,7 @@ class APIPetProfileTests: XCTestCase {
                     data["weight"] = Constants.maxWeight + 1
                     data["neutered"] = false
                     
-                    APIManager.Instance.perform(call: .setPet, withKey: petId, with: data) { (error, data) in
+                    APIManager.instance.perform(call: .setPet, withKey: petId, with: data) { (error, data) in
                         XCTAssertNotNil(error)
                         XCTAssert(error?.errorCode == ErrorCode.WeightOutOfRange, "Wrong Error \(String(describing: error?.errorCode))")
                         expect.fulfill()
@@ -421,7 +421,7 @@ class APIPetProfileTests: XCTestCase {
         
         data["name"] = "Paw"
 
-        APIManager.Instance.perform(call: .setPet, withKey: 0, with: data) { (error, data) in
+        APIManager.instance.perform(call: .setPet, withKey: 0, with: data) { (error, data) in
             XCTAssertNotNil(error)
             XCTAssert(error?.errorCode == ErrorCode.NotFound, "Wrong Error \(String(describing: error?.errorCode))")
             expect.fulfill()
@@ -447,7 +447,7 @@ class APIPetProfileTests: XCTestCase {
                 if pets.count > 0, let petId = pets[0].tryCastInteger(for: "id") {
                     
                     
-                    APIManager.Instance.perform(call: .getPet, withKey: petId) { (error, data) in
+                    APIManager.instance.perform(call: .getPet, withKey: petId) { (error, data) in
                         XCTAssertNil(error, "Error \(String(describing: error))")
                         XCTAssertNotNil(data, "No data :(")
                         expect.fulfill()

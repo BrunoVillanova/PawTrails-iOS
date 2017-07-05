@@ -26,12 +26,12 @@ class AuthManagerTests: XCTestCase {
     func testSignUpOk() {
         let expect = expectation(description: "SignUp")
         let email = "register00@test.com"
-        DataManager.Instance.signUp(email, ezdebug.password) { (error) in
+        DataManager.instance.signUp(email, ezdebug.password) { (error) in
             
             XCTAssertNil(error, "Error while registration \(String(describing: error))")
-            XCTAssert(DataManager.Instance.isAuthenticated(), "Not authenticated properly")
+            XCTAssert(DataManager.instance.isAuthenticated(), "Not authenticated properly")
             
-            DataManager.Instance.getUser(callback: { (error, user) in
+            DataManager.instance.getUser(callback: { (error, user) in
                 
                 XCTAssertNil(error, "Error while getting User \(String(describing: error))")
                 XCTAssertNotNil(user, "User is nil :(\(String(describing: error))")
@@ -44,7 +44,7 @@ class AuthManagerTests: XCTestCase {
                 }
 
                 
-                APIManager.Instance.perform(call: .deleteUser, withKey: id, callback: { (error, data) in
+                APIManager.instance.perform(call: .deleteUser, withKey: id, callback: { (error, data) in
                     XCTAssertNil(error, "Error setting profile \(String(describing: error))")
                     expect.fulfill()
                 })
@@ -62,7 +62,7 @@ class AuthManagerTests: XCTestCase {
         let email = ""
         let password = ezdebug.password
         
-        DataManager.Instance.signUp(email, password) { (error) in
+        DataManager.instance.signUp(email, password) { (error) in
             
             XCTAssertNotNil(error)
             XCTAssert(error?.APIError?.errorCode == ErrorCode.MissingEmail, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
@@ -80,7 +80,7 @@ class AuthManagerTests: XCTestCase {
         let email = "hello"
         let password = ezdebug.password
         
-        DataManager.Instance.signUp(email, password) { (error) in
+        DataManager.instance.signUp(email, password) { (error) in
             
             XCTAssertNotNil(error)
             XCTAssert(error?.APIError?.errorCode == ErrorCode.EmailFormat, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
@@ -98,7 +98,7 @@ class AuthManagerTests: XCTestCase {
         let email = "register1@test.com"
         let password = ""
         
-        DataManager.Instance.signUp(email, password) { (error) in
+        DataManager.instance.signUp(email, password) { (error) in
             
             XCTAssertNotNil(error)
             XCTAssert(error?.APIError?.errorCode == ErrorCode.MissingPassword, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
@@ -116,7 +116,7 @@ class AuthManagerTests: XCTestCase {
         let email = "register1@test.com"
         let password = "hello"
         
-        DataManager.Instance.signUp(email, password) { (error) in
+        DataManager.instance.signUp(email, password) { (error) in
             
             XCTAssertNotNil(error)
             XCTAssert(error?.APIError?.errorCode == ErrorCode.WeakPassword, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
@@ -134,7 +134,7 @@ class AuthManagerTests: XCTestCase {
         let email = ezdebug.email
         let password = ezdebug.password
         
-        DataManager.Instance.signUp(email, password) { (error) in
+        DataManager.instance.signUp(email, password) { (error) in
             
             XCTAssertNotNil(error)
             XCTAssert(error?.APIError?.errorCode == ErrorCode.UserAlreadyExists, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
@@ -155,10 +155,10 @@ class AuthManagerTests: XCTestCase {
         let email = ezdebug.email
         let  password = ezdebug.password
         
-        DataManager.Instance.signIn(email, password) { (error) in
+        DataManager.instance.signIn(email, password) { (error) in
             
             XCTAssertNil(error, "Error found \(String(describing: error))")
-            XCTAssert(DataManager.Instance.isAuthenticated(), "Not authenticated properly")
+            XCTAssert(DataManager.instance.isAuthenticated(), "Not authenticated properly")
             
             expect.fulfill()
         }
@@ -173,7 +173,7 @@ class AuthManagerTests: XCTestCase {
         let email = ""
         let  password = ezdebug.password
         
-        DataManager.Instance.signIn(email, password) { (error) in
+        DataManager.instance.signIn(email, password) { (error) in
             
             XCTAssertNotNil(error)
             XCTAssert(error?.APIError?.errorCode == ErrorCode.MissingEmail, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
@@ -191,7 +191,7 @@ class AuthManagerTests: XCTestCase {
         let email = "hello"
         let  password = ezdebug.password
         
-        DataManager.Instance.signIn(email, password) { (error) in
+        DataManager.instance.signIn(email, password) { (error) in
             
             XCTAssertNotNil(error)
             XCTAssert(error?.APIError?.errorCode == ErrorCode.EmailFormat, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
@@ -209,7 +209,7 @@ class AuthManagerTests: XCTestCase {
         let email = ezdebug.email
         let  password = ""
         
-        DataManager.Instance.signIn(email, password) { (error) in
+        DataManager.instance.signIn(email, password) { (error) in
             
             XCTAssertNotNil(error)
             XCTAssert(error?.APIError?.errorCode == ErrorCode.MissingPassword, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
@@ -227,7 +227,7 @@ class AuthManagerTests: XCTestCase {
         let email = ezdebug.email
         let  password = "hello"
         
-        DataManager.Instance.signIn(email, password) { (error) in
+        DataManager.instance.signIn(email, password) { (error) in
             
             XCTAssertNotNil(error)
             XCTAssert(error?.APIError?.errorCode == ErrorCode.WrongCredentials, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
@@ -247,7 +247,7 @@ class AuthManagerTests: XCTestCase {
 //        let email = ezdebug.email
 //        let  password = "??"
 //        
-//        DataManager.Instance.signIn(email, password) { (error) in
+//        DataManager.instance.signIn(email, password) { (error) in
 //            
 //            XCTAssertNotNil(error)
 //            XCTAssert(error?.APIError?.errorCode == ErrorCode.MissingPassword, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
@@ -268,7 +268,7 @@ class AuthManagerTests: XCTestCase {
         
         let email = ezdebug.email
         
-        DataManager.Instance.sendPasswordReset(email) { (error) in
+        DataManager.instance.sendPasswordReset(email) { (error) in
             
             XCTAssertNil(error, "Error found \(String(describing: error))")
             
@@ -284,7 +284,7 @@ class AuthManagerTests: XCTestCase {
         
         let email = ""
         
-        DataManager.Instance.sendPasswordReset(email) { (error) in
+        DataManager.instance.sendPasswordReset(email) { (error) in
             
             XCTAssertNotNil(error)
             XCTAssert(error?.APIError?.errorCode == ErrorCode.MissingEmail, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
@@ -301,7 +301,7 @@ class AuthManagerTests: XCTestCase {
         
         let email = "hello"
         
-        DataManager.Instance.sendPasswordReset(email) { (error) in
+        DataManager.instance.sendPasswordReset(email) { (error) in
             
             XCTAssertNotNil(error)
             XCTAssert(error?.APIError?.errorCode == ErrorCode.EmailFormat, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
@@ -318,7 +318,7 @@ class AuthManagerTests: XCTestCase {
         
         let email = "hello@test.com"
         
-        DataManager.Instance.sendPasswordReset(email) { (error) in
+        DataManager.instance.sendPasswordReset(email) { (error) in
             
             XCTAssertNotNil(error)
             XCTAssert(error?.APIError?.errorCode == ErrorCode.UserNotFound, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
@@ -339,11 +339,11 @@ class AuthManagerTests: XCTestCase {
         let password = ezdebug.password
         let newPassword = ezdebug.password + ";"
         
-        DataManager.Instance.changeUsersPassword(email, password, newPassword) { (error) in
+        DataManager.instance.changeUsersPassword(email, password, newPassword) { (error) in
             
             XCTAssertNil(error, "Error found \(String(describing: error))")
             
-            DataManager.Instance.changeUsersPassword(email, newPassword, password) { (error) in
+            DataManager.instance.changeUsersPassword(email, newPassword, password) { (error) in
                 
                 XCTAssertNil(error, "Error found \(String(describing: error))")
                 expect.fulfill()
@@ -361,7 +361,7 @@ class AuthManagerTests: XCTestCase {
         let password = ezdebug.password
         let newPassword = ezdebug.password + ";"
         
-        DataManager.Instance.changeUsersPassword(email, password, newPassword) { (error) in
+        DataManager.instance.changeUsersPassword(email, password, newPassword) { (error) in
             
             XCTAssertNotNil(error)
             XCTAssert(error?.APIError?.errorCode == ErrorCode.MissingEmail, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
@@ -380,7 +380,7 @@ class AuthManagerTests: XCTestCase {
         let password = ezdebug.password
         let newPassword = ezdebug.password + ";"
         
-        DataManager.Instance.changeUsersPassword(email, password, newPassword) { (error) in
+        DataManager.instance.changeUsersPassword(email, password, newPassword) { (error) in
             
             XCTAssertNotNil(error)
             XCTAssert(error?.APIError?.errorCode == ErrorCode.EmailFormat, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
@@ -399,7 +399,7 @@ class AuthManagerTests: XCTestCase {
         let password = ""
         let newPassword = ezdebug.password + ";"
         
-        DataManager.Instance.changeUsersPassword(email, password, newPassword) { (error) in
+        DataManager.instance.changeUsersPassword(email, password, newPassword) { (error) in
             
             XCTAssertNotNil(error)
             XCTAssert(error?.APIError?.errorCode == ErrorCode.MissingPassword, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
@@ -418,7 +418,7 @@ class AuthManagerTests: XCTestCase {
         let password = ezdebug.password
         let newPassword = ""
         
-        DataManager.Instance.changeUsersPassword(email, password, newPassword) { (error) in
+        DataManager.instance.changeUsersPassword(email, password, newPassword) { (error) in
             
             XCTAssertNotNil(error)
             XCTAssert(error?.APIError?.errorCode == ErrorCode.MissingPassword, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
@@ -437,7 +437,7 @@ class AuthManagerTests: XCTestCase {
         let password = ezdebug.password
         let newPassword = "hey"
         
-        DataManager.Instance.changeUsersPassword(email, password, newPassword) { (error) in
+        DataManager.instance.changeUsersPassword(email, password, newPassword) { (error) in
             
             XCTAssertNotNil(error)
             XCTAssert(error?.APIError?.errorCode == ErrorCode.WeakPassword, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
@@ -456,7 +456,7 @@ class AuthManagerTests: XCTestCase {
         let password = ezdebug.password + "hello"
         let newPassword = ezdebug.password + ";;"
         
-        DataManager.Instance.changeUsersPassword(email, password, newPassword) { (error) in
+        DataManager.instance.changeUsersPassword(email, password, newPassword) { (error) in
             
             XCTAssertNotNil(error)
             XCTAssert(error?.APIError?.errorCode == ErrorCode.WrongPassword, "Wrong Error \(String(describing: error?.APIError?.errorCode))")
@@ -473,7 +473,7 @@ class AuthManagerTests: XCTestCase {
     func testSignOutOk() {
         let expect = expectation(description: "SignOut")
         
-        XCTAssert(DataManager.Instance.signOut())
+        XCTAssert(DataManager.instance.signOut())
         expect.fulfill()
         
         waitForExpectations(timeout: 10) { error in

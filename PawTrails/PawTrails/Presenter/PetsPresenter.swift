@@ -40,7 +40,7 @@ class PetsPresenter {
     
     func getPets() {
         
-        DataManager.Instance.getPetsSplitted { (error, owned, shared) in
+        DataManager.instance.getPetsSplitted { (error, owned, shared) in
             
             if let error = error {
                 if error.DBError?.type == DatabaseErrorType.NotFound {
@@ -68,7 +68,7 @@ class PetsPresenter {
     
     func loadPets() {
         
-        DataManager.Instance.loadPets { (error, pets) in
+        DataManager.instance.loadPets { (error, pets) in
             
             if let error = error {
                 if error.DBError?.type == DatabaseErrorType.NotFound {
@@ -88,44 +88,40 @@ class PetsPresenter {
     
     func startPetsGPSUpdates(_ callback: @escaping ((_ id: Int)->())){
         
-        NotificationManager.Instance.getPetGPSUpdates({ (id, data) in
+        NotificationManager.instance.getPetGPSUpdates({ (id, data) in
             callback(id)
         })
     }
     
     func stopPetGPSUpdates(){
-        NotificationManager.Instance.removePetGPSUpdates()
+        NotificationManager.instance.removePetGPSUpdates()
     }
     
     //MARK:- Geocode
     
     func startPetsGeocodeUpdates(_ callback: @escaping ((Geocode)->())){
-        NotificationManager.Instance.getPetGeoCodeUpdates { (code) in
-            if let code = code { callback(code) }
+        NotificationManager.instance.getPetGeoCodeUpdates { (code) in
+            callback(code)
         }
     }
     
     func stopPetsGeocodeUpdates(){
-        NotificationManager.Instance.removePetGeoCodeUpdates()
+        NotificationManager.instance.removePetGeoCodeUpdates()
     }
     
     //LoadPets
     
     func startPetsListUpdates(){
-        NotificationManager.Instance.getPetListUpdates { (pets) in
-            debugPrint("Time to update pets on list")
-            if let pets = pets {
-                self.ownedPets = pets.filter({ $0.isOwner })
-                self.sharedPets = pets.filter({ !$0.isOwner })
-                self.view?.loadPets()
-            }else {
-                self.view?.petsNotFound()
-            }
+        NotificationManager.instance.getPetListUpdates { (pets) in
+            Reporter.debugPrint(file: "#file", function: "#function", "Time to update pets on list")
+            self.ownedPets = pets.filter({ $0.isOwner })
+            self.sharedPets = pets.filter({ !$0.isOwner })
+            self.view?.loadPets()
         }
     }
     
     func stopPetListUpdates(){
-        NotificationManager.Instance.removePetListUpdates()
+        NotificationManager.instance.removePetListUpdates()
     }
     
     

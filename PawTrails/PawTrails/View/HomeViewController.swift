@@ -102,9 +102,7 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
         
         closedSearch = view.frame.width - searchView.frame.width - 32.0
         searchRightConstraint.constant = closedSearch
-        
-        searchResultsHeight.constant = view.frame.height - 226.0 - searchResultsView.frame.origin.y
-        
+        perform(action: .close, speed: 1.0, animated: false)
         reloadPets()
     }
     
@@ -121,7 +119,8 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
         presenter.startPetsGPSUpdates { (id, point) in
             self.load(id: id, point: point)
         }
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(notification:)), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector:  #selector(self.keyboardWillHide(notification:)), name: .UIKeyboardWillHide, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -129,6 +128,16 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
         presenter.stopPetGPSUpdates()
     }
     
+    @objc fileprivate func keyboardWillShow(notification:NSNotification) {
+        if let keyboardRectValue = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            let keyboardHeight = keyboardRectValue.height
+            searchResultsHeight.constant = view.frame.height - keyboardHeight - searchResultsView.frame.origin.y - CGFloat(5.0)
+        }
+    }
+    
+    @objc fileprivate func keyboardWillHide(notification:NSNotification) {
+        searchResultsHeight.constant = view.frame.height - searchResultsView.frame.origin.y - CGFloat(tabBarController?.tabBar.frame.height ?? 0.0) - CGFloat(5.0)
+    }
     
     @IBAction func handlePanGesture(_ sender: UIPanGestureRecognizer) {
         
@@ -186,7 +195,7 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
                 petsIdsToRemove.remove(at: index)
             }
             
-            if let point = SocketIOManager.Instance.getGPSData(for: pet.id)?.point {
+            if let point = SocketIOManager.instance.getGPSData(for: pet.id)?.point {
                 load(id: MKLocationId(id: pet.id, type: .pet), point: point)
             }
         }
@@ -247,7 +256,7 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
         
         if let annotation = view.annotation as? MKLocation {
             
-            mapView.centerOn(annotation.coordinate, animated: true)
+//            mapView.centerOn(annotation.coordinate, animated: true)
             
             switch annotation.id.type {
             case .pet:
@@ -266,8 +275,11 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     }
     
     func focusOnPets(){
-        if !isShowingDetails() {
-            let coordinates = Array(self.annotations.values).filter({ $0.id.type == .pet && !$0.coordinate.isDefaultZero }).map({ $0.coordinate })
+        let coordinates = Array(self.annotations.values).filter({ $0.id.type == .pet && !$0.coordinate.isDefaultZero }).map({ $0.coordinate })
+        if isShowingDetails() {
+            let padding = UIEdgeInsetsMake(UIScreen.main.bounds.height/10, UIScreen.main.bounds.width/10, UIScreen.main.bounds.height/5 + (UIScreen.main.bounds.height - openedHalf), UIScreen.main.bounds.width/10)
+            mapView.setVisibleMapFor(coordinates, padding: padding)
+        }else{
             mapView.setVisibleMapFor(coordinates)
         }
     }
@@ -282,7 +294,7 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
             petImageView.image = nil
         }
         petTitleLabel.text = pet.name
-        let data = SocketIOManager.Instance.getGPSData(for: pet.id)
+        let data = SocketIOManager.instance.getGPSData(for: pet.id)
         petSubtitleLabel.text = data?.locationAndTime ?? data?.point.toString ?? "Unknown"
         signalLabel.text = data?.signalString
         batteryLabel.text = data?.batteryString
@@ -290,6 +302,7 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
         batteryImageView.isHidden = data?.batteryString == nil
         selectedPet = pet
         perform(action: .openHalf)
+//        focusOnPets()
     }
     
     func isShowingDetails() -> Bool {
@@ -349,12 +362,12 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
         
-        if topConstraintBlurView.constant == openedHalf && touches.count == 1, let touch = touches.first {
-            let touchPoint = touch.location(in: view)
-            if touchPoint.y < openedHalf {
-                perform(action: .close)
-            }
-        }
+//        if topConstraintBlurView.constant == openedHalf && touches.count == 1, let touch = touches.first {
+//            let touchPoint = touch.location(in: view)
+//            if touchPoint.y < openedHalf {
+//                perform(action: .close)
+//            }
+//        }
     }
     
     func showSearchBar(){
@@ -447,12 +460,13 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
         self.topConstraintBlurView.constant = self.openedHalf
         if action == .openFull { self.topConstraintBlurView.constant = self.openedFull }
         if action == .close { self.topConstraintBlurView.constant = self.closed }
-        
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.8, options: UIViewAnimationOptions.curveEaseInOut, animations: {
-            self.view.layoutIfNeeded()
-        }) { (_) in
-            if action == .close {
-                self.focusOnPets()
+        if animated {
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.8, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+                self.view.layoutIfNeeded()
+            }) { (_) in
+                if action == .close {
+                    self.focusOnPets()
+                }
             }
         }
     }

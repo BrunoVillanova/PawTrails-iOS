@@ -25,7 +25,7 @@ class APITablesTests: XCTestCase {
         
         let expect = expectation(description: "PetClasses")
         
-        APIManager.Instance.perform(call: .getPetClasses) { (error, data) in
+        APIManager.instance.perform(call: .getPetClasses) { (error, data) in
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(data, "No data :(")
@@ -43,7 +43,7 @@ class APITablesTests: XCTestCase {
         
         let type = Type.cat
         
-        APIManager.Instance.perform(call: .getBreeds, withKey: type.code) { (error, data) in
+        APIManager.instance.perform(call: .getBreeds, withKey: type.code) { (error, data) in
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(data, "No data :(")
@@ -61,7 +61,7 @@ class APITablesTests: XCTestCase {
         
         let type = Type.dog
         
-        APIManager.Instance.perform(call: .getBreeds, withKey: type.code) { (error, data) in
+        APIManager.instance.perform(call: .getBreeds, withKey: type.code) { (error, data) in
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(data, "No data :(")
@@ -77,7 +77,7 @@ class APITablesTests: XCTestCase {
     func testPetBreedsError() {
         let expect = expectation(description: "Breeds")
         
-        APIManager.Instance.perform(call: .getBreeds, withKey: "") { (error, data) in
+        APIManager.instance.perform(call: .getBreeds, withKey: "") { (error, data) in
             
             XCTAssertNotNil(error)
             XCTAssert(error?.errorCode == ErrorCode.NotFound, "Wrong Error \(String(describing: error?.errorCode))")
@@ -93,7 +93,7 @@ class APITablesTests: XCTestCase {
         
         let expect = expectation(description: "Countries")
         
-        APIManager.Instance.perform(call: .getCountries) { (error, data) in
+        APIManager.instance.perform(call: .getCountries) { (error, data) in
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(data, "No data :(")
@@ -110,7 +110,7 @@ class APITablesTests: XCTestCase {
         
         let expect = expectation(description: "Continents")
         
-        APIManager.Instance.perform(call: .getContinents) { (error, data) in
+        APIManager.instance.perform(call: .getContinents) { (error, data) in
             
             XCTAssertNil(error, "Error \(String(describing: error))")
             XCTAssertNotNil(data, "No data :(")

@@ -31,7 +31,7 @@ class UserProfilePresenter {
     }
     
     func getUser() {
-        DataManager.Instance.getUser { (error, user) in
+        DataManager.instance.getUser { (error, user) in
             if let error = error {
                 self.view?.errorMessage(error.msg)
             }else if let user = user {
@@ -42,7 +42,7 @@ class UserProfilePresenter {
     }
     
     func loadUser() {
-        DataManager.Instance.loadUser { (error, user) in
+        DataManager.instance.loadUser { (error, user) in
             if let error = error {
                 self.view?.errorMessage(error.msg)
             }else if let user = user {

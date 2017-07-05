@@ -9,123 +9,124 @@
 /* Begin PBXBuildFile section */
 		35B268DF2DC9C7D7C0CBF782 /* Pods_PawTrailsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C09631478A96AC78EA751AA /* Pods_PawTrailsTests.framework */; };
 		3808F92C4AE1F8421B70B99A /* Pods_PawTrails.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D38C295A9EECD1391940C8D3 /* Pods_PawTrails.framework */; };
-		440821A81EB09E900000751B /* AddPetUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440821A71EB09E900000751B /* AddPetUserViewController.swift */; };
-		440821AA1EB0A08D0000751B /* AddPetUserPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440821A91EB0A08D0000751B /* AddPetUserPresenter.swift */; };
-		440BB7601E5DE63B00D2D68B /* AddEditSafeZoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440BB75F1E5DE63B00D2D68B /* AddEditSafeZoneViewController.swift */; };
-		440CEE581E3B983700F58A09 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440CEE571E3B983700F58A09 /* InitialViewController.swift */; };
-		440CEE5A1E3B9AA300F58A09 /* InitialPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440CEE591E3B9AA300F58A09 /* InitialPresenter.swift */; };
 		440CEE5C1E3B9B1900F58A09 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440CEE5B1E3B9B1900F58A09 /* HomeViewController.swift */; };
 		4414AE6B1EA0DD5B004A5134 /* PawTrailsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4414AE6A1EA0DD5B004A5134 /* PawTrailsTests.swift */; };
 		4414AE781EA0DD8C004A5134 /* AuthManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4414AE731EA0DD8C004A5134 /* AuthManagerTests.swift */; };
 		4414AE7A1EA0DD8C004A5134 /* SocketIOManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4414AE751EA0DD8C004A5134 /* SocketIOManagerTest.swift */; };
 		4414AE7B1EA0DD8C004A5134 /* DataManagerUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4414AE761EA0DD8C004A5134 /* DataManagerUserTests.swift */; };
 		4415FF431E3B822900A81B13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4415FF421E3B822900A81B13 /* AppDelegate.swift */; };
-		4415FF481E3B822900A81B13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4415FF461E3B822900A81B13 /* Main.storyboard */; };
-		4415FF4A1E3B822900A81B13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4415FF491E3B822900A81B13 /* Assets.xcassets */; };
-		441A0D4D1E55AF5200D02CE4 /* SharedPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441A0D4C1E55AF5200D02CE4 /* SharedPreferences.swift */; };
 		441CEBED1EE16F8F00A37877 /* DataManagerPetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441CEBEC1EE16F8F00A37877 /* DataManagerPetTests.swift */; };
-		441D72F31E9E37490031BB1E /* AddEditPetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441D72F21E9E37490031BB1E /* AddEditPetPresenter.swift */; };
-		441D72F51E9E57ED0031BB1E /* AddPetDeviceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441D72F41E9E57ED0031BB1E /* AddPetDeviceTableViewController.swift */; };
-		441D9BB21F01028600D64482 /* RepositoryDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441D9BB11F01028600D64482 /* RepositoryDefinitions.swift */; };
-		441D9BB41F01089100D64482 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441D9BB31F01089100D64482 /* Model.swift */; };
-		441D9BBD1F01095100D64482 /* CDBreed+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441D9BB51F01095100D64482 /* CDBreed+CoreDataClass.swift */; };
-		441D9BBE1F01095100D64482 /* CDPetUser+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441D9BB61F01095100D64482 /* CDPetUser+CoreDataClass.swift */; };
-		441D9BBF1F01095100D64482 /* CDSafeZone+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441D9BB71F01095100D64482 /* CDSafeZone+CoreDataClass.swift */; };
-		441D9BC01F01095100D64482 /* CDUser+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441D9BB81F01095100D64482 /* CDUser+CoreDataClass.swift */; };
-		441D9BC11F01095100D64482 /* CDPhone+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441D9BB91F01095100D64482 /* CDPhone+CoreDataClass.swift */; };
-		441D9BC21F01095100D64482 /* CDAddress+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441D9BBA1F01095100D64482 /* CDAddress+CoreDataClass.swift */; };
-		441D9BC31F01095100D64482 /* CDPet+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441D9BBB1F01095100D64482 /* CDPet+CoreDataClass.swift */; };
-		441D9BC41F01095100D64482 /* CDCountryCode+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441D9BBC1F01095100D64482 /* CDCountryCode+CoreDataClass.swift */; };
-		441D9BCD1F01096B00D64482 /* CDBreed+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441D9BC51F01096B00D64482 /* CDBreed+CoreDataProperties.swift */; };
-		441D9BCE1F01096B00D64482 /* CDPetUser+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441D9BC61F01096B00D64482 /* CDPetUser+CoreDataProperties.swift */; };
-		441D9BCF1F01096B00D64482 /* CDSafeZone+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441D9BC71F01096B00D64482 /* CDSafeZone+CoreDataProperties.swift */; };
-		441D9BD01F01096B00D64482 /* CDUser+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441D9BC81F01096B00D64482 /* CDUser+CoreDataProperties.swift */; };
-		441D9BD11F01096B00D64482 /* CDPhone+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441D9BC91F01096B00D64482 /* CDPhone+CoreDataProperties.swift */; };
-		441D9BD21F01096B00D64482 /* CDAddress+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441D9BCA1F01096B00D64482 /* CDAddress+CoreDataProperties.swift */; };
-		441D9BD31F01096B00D64482 /* CDPet+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441D9BCB1F01096B00D64482 /* CDPet+CoreDataProperties.swift */; };
-		441D9BD41F01096B00D64482 /* CDCountryCode+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441D9BCC1F01096B00D64482 /* CDCountryCode+CoreDataProperties.swift */; };
 		4424DCF91E8E9F2300ACDF07 /* UserProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4424DCF81E8E9F2300ACDF07 /* UserProfileTableViewController.swift */; };
 		4424DCFD1E8E9F9400ACDF07 /* PetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4424DCFC1E8E9F9400ACDF07 /* PetsViewController.swift */; };
 		4424DCFF1E8EA1D900ACDF07 /* UserProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4424DCFE1E8EA1D900ACDF07 /* UserProfilePresenter.swift */; };
-		4424E9761EB3430C004CC5FA /* PetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4424E9751EB3430C004CC5FA /* PetPresenter.swift */; };
-		442690D81EADEE3100E2B63F /* PetActivityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442690D71EADEE3100E2B63F /* PetActivityTableViewController.swift */; };
-		44277A0C1E7A987C00B336BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44277A0A1E7A987C00B336BD /* LaunchScreen.storyboard */; };
-		442FB06D1EBA00B9004486F8 /* PetUserPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442FB06C1EBA00B9004486F8 /* PetUserPresenter.swift */; };
-		44329CB41EA1129400325A13 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44329CB31EA1129400325A13 /* Constants.swift */; };
+		44251AD11F0CD5170067F401 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44251ACB1F0CD5170067F401 /* GoogleService-Info.plist */; };
+		44251AD21F0CD5170067F401 /* GoogleSignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44251ACC1F0CD5170067F401 /* GoogleSignIn.framework */; };
+		44251AD31F0CD5170067F401 /* GoogleSignIn.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 44251ACD1F0CD5170067F401 /* GoogleSignIn.bundle */; };
+		44251AD41F0CD5170067F401 /* GoogleAppUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44251ACE1F0CD5170067F401 /* GoogleAppUtilities.framework */; };
+		44251AD51F0CD5170067F401 /* GoogleSignInDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44251ACF1F0CD5170067F401 /* GoogleSignInDependencies.framework */; };
+		44251AD61F0CD5170067F401 /* GoogleSymbolUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44251AD01F0CD5170067F401 /* GoogleSymbolUtilities.framework */; };
+		44251ADC1F0CD5260067F401 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44251AD71F0CD5260067F401 /* Assets.xcassets */; };
+		44251ADD1F0CD5260067F401 /* countrycodes.csv in Resources */ = {isa = PBXBuildFile; fileRef = 44251AD81F0CD5260067F401 /* countrycodes.csv */; };
+		44251ADE1F0CD5260067F401 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44251AD91F0CD5260067F401 /* Info.plist */; };
+		44251ADF1F0CD5260067F401 /* attitudetechie.der in Resources */ = {isa = PBXBuildFile; fileRef = 44251ADA1F0CD5260067F401 /* attitudetechie.der */; };
+		44251AE41F0CD54D0067F401 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251AE01F0CD54D0067F401 /* Extensions.swift */; };
+		44251AE51F0CD54D0067F401 /* ModelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251AE11F0CD54D0067F401 /* ModelExtensions.swift */; };
+		44251AE61F0CD54D0067F401 /* MapExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251AE21F0CD54D0067F401 /* MapExtensions.swift */; };
+		44251AE71F0CD54D0067F401 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251AE31F0CD54D0067F401 /* ViewExtensions.swift */; };
+		44251AEF1F0CD55F0067F401 /* MapUtilsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251AE81F0CD55F0067F401 /* MapUtilsManager.swift */; };
+		44251AF01F0CD55F0067F401 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251AE91F0CD55F0067F401 /* Messages.swift */; };
+		44251AF11F0CD55F0067F401 /* Reporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251AEA1F0CD55F0067F401 /* Reporter.swift */; };
+		44251AF21F0CD55F0067F401 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251AEB1F0CD55F0067F401 /* Errors.swift */; };
+		44251AF31F0CD55F0067F401 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251AEC1F0CD55F0067F401 /* Constants.swift */; };
+		44251AF41F0CD55F0067F401 /* Clock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251AED1F0CD55F0067F401 /* Clock.swift */; };
+		44251AF51F0CD55F0067F401 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251AEE1F0CD55F0067F401 /* Reachability.swift */; };
+		44251AFC1F0CD5740067F401 /* EditUserProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251AF61F0CD5740067F401 /* EditUserProfilePresenter.swift */; };
+		44251AFD1F0CD5740067F401 /* ChangePasswordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251AF71F0CD5740067F401 /* ChangePasswordPresenter.swift */; };
+		44251AFE1F0CD5740067F401 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251AF81F0CD5740067F401 /* SettingsPresenter.swift */; };
+		44251AFF1F0CD5740067F401 /* EmailVerificationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251AF91F0CD5740067F401 /* EmailVerificationPresenter.swift */; };
+		44251B001F0CD5740067F401 /* InitialPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251AFA1F0CD5740067F401 /* InitialPresenter.swift */; };
+		44251B011F0CD5740067F401 /* PasswordRecoveryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251AFB1F0CD5740067F401 /* PasswordRecoveryPresenter.swift */; };
+		44251B091F0CD5870067F401 /* PetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B021F0CD5870067F401 /* PetPresenter.swift */; };
+		44251B0A1F0CD5870067F401 /* AddEditPetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B031F0CD5870067F401 /* AddEditPetPresenter.swift */; };
+		44251B0B1F0CD5870067F401 /* DeviceCodePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B041F0CD5870067F401 /* DeviceCodePresenter.swift */; };
+		44251B0C1F0CD5870067F401 /* AddEditSafeZonePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B051F0CD5870067F401 /* AddEditSafeZonePresenter.swift */; };
+		44251B0D1F0CD5870067F401 /* AddPetUserPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B061F0CD5870067F401 /* AddPetUserPresenter.swift */; };
+		44251B0E1F0CD5870067F401 /* PetBreedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B071F0CD5870067F401 /* PetBreedPresenter.swift */; };
+		44251B0F1F0CD5870067F401 /* PetUserPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B081F0CD5870067F401 /* PetUserPresenter.swift */; };
+		44251B151F0CD5A90067F401 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44251B111F0CD5A90067F401 /* LaunchScreen.storyboard */; };
+		44251B161F0CD5A90067F401 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44251B131F0CD5A90067F401 /* Main.storyboard */; };
+		44251B1B1F0CD5BD0067F401 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B171F0CD5BD0067F401 /* SettingsTableViewController.swift */; };
+		44251B1C1F0CD5BD0067F401 /* EmailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B181F0CD5BD0067F401 /* EmailVerificationViewController.swift */; };
+		44251B1D1F0CD5BD0067F401 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B191F0CD5BD0067F401 /* InitialViewController.swift */; };
+		44251B1E1F0CD5BD0067F401 /* PasswordRecoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B1A1F0CD5BD0067F401 /* PasswordRecoveryViewController.swift */; };
+		44251B3C1F0CD5DF0067F401 /* ChangePasswordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B201F0CD5DF0067F401 /* ChangePasswordTableViewController.swift */; };
+		44251B3D1F0CD5DF0067F401 /* EditUserProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B211F0CD5DF0067F401 /* EditUserProfileTableViewController.swift */; };
+		44251B3E1F0CD5DF0067F401 /* AddressTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B231F0CD5DF0067F401 /* AddressTableViewController.swift */; };
+		44251B3F1F0CD5DF0067F401 /* BirthdayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B241F0CD5DF0067F401 /* BirthdayViewController.swift */; };
+		44251B401F0CD5DF0067F401 /* EmailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B251F0CD5DF0067F401 /* EmailTableViewController.swift */; };
+		44251B411F0CD5DF0067F401 /* GenderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B261F0CD5DF0067F401 /* GenderTableViewController.swift */; };
+		44251B421F0CD5DF0067F401 /* NameTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B271F0CD5DF0067F401 /* NameTableViewController.swift */; };
+		44251B431F0CD5DF0067F401 /* PhoneTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B281F0CD5DF0067F401 /* PhoneTableViewController.swift */; };
+		44251B441F0CD5DF0067F401 /* AddEditSafeZoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B2B1F0CD5DF0067F401 /* AddEditSafeZoneViewController.swift */; };
+		44251B451F0CD5DF0067F401 /* AddPetUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B2D1F0CD5DF0067F401 /* AddPetUserViewController.swift */; };
+		44251B461F0CD5DF0067F401 /* PetUserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B2E1F0CD5DF0067F401 /* PetUserTableViewController.swift */; };
+		44251B471F0CD5DF0067F401 /* PetActivityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B2F1F0CD5DF0067F401 /* PetActivityTableViewController.swift */; };
+		44251B481F0CD5DF0067F401 /* PetProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B301F0CD5DF0067F401 /* PetProfileTableViewController.swift */; };
+		44251B491F0CD5DF0067F401 /* AddEditPetDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B321F0CD5DF0067F401 /* AddEditPetDetailsTableViewController.swift */; };
+		44251B4A1F0CD5DF0067F401 /* AddPetDeviceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B331F0CD5DF0067F401 /* AddPetDeviceTableViewController.swift */; };
+		44251B4B1F0CD5DF0067F401 /* PetBirthdayTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B351F0CD5DF0067F401 /* PetBirthdayTableViewController.swift */; };
+		44251B4C1F0CD5DF0067F401 /* PetBreedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B361F0CD5DF0067F401 /* PetBreedTableViewController.swift */; };
+		44251B4D1F0CD5DF0067F401 /* PetGenderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B371F0CD5DF0067F401 /* PetGenderTableViewController.swift */; };
+		44251B4E1F0CD5DF0067F401 /* PetNameTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B381F0CD5DF0067F401 /* PetNameTableViewController.swift */; };
+		44251B4F1F0CD5DF0067F401 /* PetTypeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B391F0CD5DF0067F401 /* PetTypeTableViewController.swift */; };
+		44251B501F0CD5DF0067F401 /* PetWeightTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B3A1F0CD5DF0067F401 /* PetWeightTableViewController.swift */; };
+		44251B511F0CD5DF0067F401 /* ScanQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B3B1F0CD5DF0067F401 /* ScanQRViewController.swift */; };
+		44251B541F0CD5FE0067F401 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B521F0CD5FE0067F401 /* Model.swift */; };
+		44251B551F0CD5FE0067F401 /* Parsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B531F0CD5FE0067F401 /* Parsers.swift */; };
+		44251B6E1F0CD6130067F401 /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B561F0CD6130067F401 /* SocketIOManager.swift */; };
+		44251B6F1F0CD6130067F401 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B571F0CD6130067F401 /* NotificationManager.swift */; };
+		44251B701F0CD6130067F401 /* SharedPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B581F0CD6130067F401 /* SharedPreferences.swift */; };
+		44251B711F0CD6130067F401 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B591F0CD6130067F401 /* CoreDataManager.swift */; };
+		44251B721F0CD6130067F401 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B5A1F0CD6130067F401 /* APIManager.swift */; };
+		44251B731F0CD6130067F401 /* CDAddress+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B5C1F0CD6130067F401 /* CDAddress+CoreDataClass.swift */; };
+		44251B741F0CD6130067F401 /* CDAddress+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B5D1F0CD6130067F401 /* CDAddress+CoreDataProperties.swift */; };
+		44251B751F0CD6130067F401 /* CDBreed+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B5E1F0CD6130067F401 /* CDBreed+CoreDataClass.swift */; };
+		44251B761F0CD6130067F401 /* CDBreed+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B5F1F0CD6130067F401 /* CDBreed+CoreDataProperties.swift */; };
+		44251B771F0CD6130067F401 /* CDCountryCode+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B601F0CD6130067F401 /* CDCountryCode+CoreDataClass.swift */; };
+		44251B781F0CD6130067F401 /* CDCountryCode+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B611F0CD6130067F401 /* CDCountryCode+CoreDataProperties.swift */; };
+		44251B791F0CD6130067F401 /* CDPet+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B621F0CD6130067F401 /* CDPet+CoreDataClass.swift */; };
+		44251B7A1F0CD6130067F401 /* CDPet+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B631F0CD6130067F401 /* CDPet+CoreDataProperties.swift */; };
+		44251B7B1F0CD6130067F401 /* CDPetUser+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B641F0CD6130067F401 /* CDPetUser+CoreDataClass.swift */; };
+		44251B7C1F0CD6130067F401 /* CDPetUser+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B651F0CD6130067F401 /* CDPetUser+CoreDataProperties.swift */; };
+		44251B7D1F0CD6130067F401 /* CDPhone+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B661F0CD6130067F401 /* CDPhone+CoreDataClass.swift */; };
+		44251B7E1F0CD6130067F401 /* CDPhone+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B671F0CD6130067F401 /* CDPhone+CoreDataProperties.swift */; };
+		44251B7F1F0CD6130067F401 /* CDSafeZone+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B681F0CD6130067F401 /* CDSafeZone+CoreDataClass.swift */; };
+		44251B801F0CD6130067F401 /* CDSafeZone+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B691F0CD6130067F401 /* CDSafeZone+CoreDataProperties.swift */; };
+		44251B811F0CD6130067F401 /* CDUser+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B6A1F0CD6130067F401 /* CDUser+CoreDataClass.swift */; };
+		44251B821F0CD6130067F401 /* CDUser+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B6B1F0CD6130067F401 /* CDUser+CoreDataProperties.swift */; };
+		44251B881F0CD6210067F401 /* CDRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B851F0CD6210067F401 /* CDRepository.swift */; };
+		44251B891F0CD6210067F401 /* CSVRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B861F0CD6210067F401 /* CSVRepository.swift */; };
+		44251B8A1F0CD6210067F401 /* APIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B871F0CD6210067F401 /* APIRepository.swift */; };
 		44340F3D1EB22B4900EB4312 /* APIPetProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44340F3C1EB22B4900EB4312 /* APIPetProfileTests.swift */; };
-		44370BB61EE9904B00BB6CCD /* MapUtilsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44370BB51EE9904B00BB6CCD /* MapUtilsManager.swift */; };
-		443937031EA78A7B0044831E /* PetBreedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443937021EA78A7B0044831E /* PetBreedPresenter.swift */; };
-		4440C5CB1E8BA568007A13B1 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4440C5CA1E8BA568007A13B1 /* ViewExtensions.swift */; };
-		4440C5CD1E8BA5D0007A13B1 /* ModelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4440C5CC1E8BA5D0007A13B1 /* ModelExtensions.swift */; };
-		4440C5CF1E8BA64E007A13B1 /* MapExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4440C5CE1E8BA64E007A13B1 /* MapExtensions.swift */; };
 		4441ACA61EB8C72500FBE27F /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4441ACA51EB8C72500FBE27F /* SafariServices.framework */; };
 		4441ACA81EB8C72E00FBE27F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4441ACA71EB8C72E00FBE27F /* SystemConfiguration.framework */; };
-		4441ACAA1EB8C7CF00FBE27F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4441ACA91EB8C7CF00FBE27F /* GoogleService-Info.plist */; };
-		4441ACB11EB8CC7A00FBE27F /* GoogleAppUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4441ACAC1EB8CC7A00FBE27F /* GoogleAppUtilities.framework */; };
-		4441ACB31EB8CC7A00FBE27F /* GoogleSignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4441ACAE1EB8CC7A00FBE27F /* GoogleSignIn.framework */; };
-		4441ACB41EB8CC7A00FBE27F /* GoogleSignInDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4441ACAF1EB8CC7A00FBE27F /* GoogleSignInDependencies.framework */; };
-		4441ACB51EB8CC7A00FBE27F /* GoogleSymbolUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4441ACB01EB8CC7A00FBE27F /* GoogleSymbolUtilities.framework */; };
-		4441ACB61EB8CC8D00FBE27F /* GoogleSignIn.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4441ACAD1EB8CC7A00FBE27F /* GoogleSignIn.bundle */; };
-		44421A2C1E4CB8E7009755BD /* EditUserProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44421A2B1E4CB8E7009755BD /* EditUserProfilePresenter.swift */; };
-		44457A2E1E5AF31400B43748 /* AddressTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44457A2D1E5AF31400B43748 /* AddressTableViewController.swift */; };
 		4447217D1F03F12A001DCDE1 /* PawTrailsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4447217C1F03F12A001DCDE1 /* PawTrailsUITests.swift */; };
-		4447C4F71EE9429500AA6D1D /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4447C4F61EE9429500AA6D1D /* NotificationManager.swift */; };
-		44485F951E51B12800A3C47D /* PawTrails.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 44485F931E51B12800A3C47D /* PawTrails.xcdatamodeld */; };
-		44485F971E51B16500A3C47D /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44485F961E51B16500A3C47D /* CoreDataManager.swift */; };
-		44485FBD1E52076C00A3C47D /* countrycodes.csv in Resources */ = {isa = PBXBuildFile; fileRef = 44485FBC1E52076C00A3C47D /* countrycodes.csv */; };
-		44485FBF1E52079D00A3C47D /* CVSParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44485FBE1E52079D00A3C47D /* CVSParser.swift */; };
-		44498DFD1E4DBE6700F6D761 /* ChangePasswordPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44498DFC1E4DBE6700F6D761 /* ChangePasswordPresenter.swift */; };
-		44498DFF1E4DC03100F6D761 /* ChangePasswordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44498DFE1E4DC03100F6D761 /* ChangePasswordTableViewController.swift */; };
-		444ACEFC1E894AF500A9A086 /* EmailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444ACEFB1E894AF500A9A086 /* EmailVerificationViewController.swift */; };
 		4452EEEE1ED58063004E13DC /* APITablesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4452EEED1ED58063004E13DC /* APITablesTests.swift */; };
 		4452EEF01ED5824D004E13DC /* APIPetRegistrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4452EEEF1ED5824D004E13DC /* APIPetRegistrationTests.swift */; };
 		4452EEF21ED59A93004E13DC /* APIPetShareUsersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4452EEF11ED59A93004E13DC /* APIPetShareUsersTests.swift */; };
 		4452EEF41ED5CF03004E13DC /* APIPetSafeZonesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4452EEF31ED5CF03004E13DC /* APIPetSafeZonesTests.swift */; };
 		4452EEF61ED5DD41004E13DC /* APIAuthenticationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4452EEF51ED5DD41004E13DC /* APIAuthenticationTests.swift */; };
-		445A6DC91E896B6F0042736E /* EmailVerificationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445A6DC81E896B6F0042736E /* EmailVerificationPresenter.swift */; };
 		446231401EE6BE4200B53C1D /* DataManagerPetSharingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4462313F1EE6BE4200B53C1D /* DataManagerPetSharingTests.swift */; };
-		4465481E1E5C642000458CB7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4465481D1E5C642000458CB7 /* Extensions.swift */; };
-		446CBF091EAA458D007C4659 /* PetProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446CBF081EAA458D007C4659 /* PetProfileTableViewController.swift */; };
-		447400951F0110AA002C7931 /* APIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447400941F0110AA002C7931 /* APIRepository.swift */; };
-		447400971F0114C6002C7931 /* Parsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447400961F0114C6002C7931 /* Parsers.swift */; };
-		447400991F014B80002C7931 /* CDRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447400981F014B80002C7931 /* CDRepository.swift */; };
-		447440E61E8400CF0069EA85 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447440E51E8400CF0069EA85 /* SettingsTableViewController.swift */; };
-		447440E81E8400EF0069EA85 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447440E71E8400EF0069EA85 /* SettingsPresenter.swift */; };
-		4475D42D1EAF7C4F007E8304 /* PetUserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475D42C1EAF7C4F007E8304 /* PetUserTableViewController.swift */; };
-		4475FB261EB0D73700E9990D /* DeviceCodePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475FB251EB0D73700E9990D /* DeviceCodePresenter.swift */; };
-		447905161E5731F100A49AB3 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447905151E5731F100A49AB3 /* Reachability.swift */; };
-		447905181E573A4D00A49AB3 /* EditUserProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447905171E573A4D00A49AB3 /* EditUserProfileTableViewController.swift */; };
-		4479051C1E5744A800A49AB3 /* PhoneTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4479051B1E5744A800A49AB3 /* PhoneTableViewController.swift */; };
-		4479051E1E575A2100A49AB3 /* BirthdayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4479051D1E575A2100A49AB3 /* BirthdayViewController.swift */; };
-		447AC7E21E9CDAF700D2D2B2 /* PetNameTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447AC7E11E9CDAF700D2D2B2 /* PetNameTableViewController.swift */; };
-		447AC7E41E9CDB1C00D2D2B2 /* PetTypeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447AC7E31E9CDB1C00D2D2B2 /* PetTypeTableViewController.swift */; };
-		447AC7E61E9CDB4600D2D2B2 /* PetGenderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447AC7E51E9CDB4600D2D2B2 /* PetGenderTableViewController.swift */; };
-		447AC7E81E9CDB8500D2D2B2 /* PetBreedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447AC7E71E9CDB8500D2D2B2 /* PetBreedTableViewController.swift */; };
-		447AC7EA1E9CDB9700D2D2B2 /* PetBirthdayTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447AC7E91E9CDB9700D2D2B2 /* PetBirthdayTableViewController.swift */; };
-		447AC7EC1E9CDBB200D2D2B2 /* PetWeightTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447AC7EB1E9CDBB200D2D2B2 /* PetWeightTableViewController.swift */; };
 		447D4C171E44C4F5008F82F4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 447D4C161E44C4F5008F82F4 /* MapKit.framework */; };
-		447EB0781EEE8D5700361270 /* Clock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447EB0771EEE8D5700361270 /* Clock.swift */; };
 		448BE9681ED47F5C00665608 /* APIUserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448BE9671ED47F5C00665608 /* APIUserTest.swift */; };
 		448BE96A1ED490D900665608 /* APIImageUploadTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448BE9691ED490D900665608 /* APIImageUploadTest.swift */; };
-		449A978D1E82DA940032DCE5 /* NameTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A978C1E82DA940032DCE5 /* NameTableViewController.swift */; };
-		449A978F1E82DAC00032DCE5 /* EmailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A978E1E82DAC00032DCE5 /* EmailTableViewController.swift */; };
-		449A97911E82DADD0032DCE5 /* GenderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449A97901E82DADD0032DCE5 /* GenderTableViewController.swift */; };
-		449DE9291ECC811E00449E65 /* AddEditSafeZonePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449DE9281ECC811E00449E65 /* AddEditSafeZonePresenter.swift */; };
 		44A1AC501E92923A003EF6CA /* PetsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A1AC4F1E92923A003EF6CA /* PetsPresenter.swift */; };
 		44B179621E4B62690070A18B /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B179611E4B62690070A18B /* Presenter.swift */; };
-		44B179641E4B787A0070A18B /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B179631E4B787A0070A18B /* Errors.swift */; };
-		44B179661E4B78EF0070A18B /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B179651E4B78EF0070A18B /* Messages.swift */; };
-		44BEA82C1EF9794F00BEC789 /* attitudetechie.der in Resources */ = {isa = PBXBuildFile; fileRef = 44BEA82B1EF978C000BEC789 /* attitudetechie.der */; };
-		44C7F71E1E4CD35700171170 /* PasswordRecoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F71D1E4CD35700171170 /* PasswordRecoveryViewController.swift */; };
 		44C7F7501E4CD3DA00171170 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F74F1E4CD3DA00171170 /* HomePresenter.swift */; };
-		44C7F7541E4CD3F200171170 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F7511E4CD3F200171170 /* APIManager.swift */; };
-		44C7F7561E4CD3F200171170 /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F7531E4CD3F200171170 /* SocketIOManager.swift */; };
-		44C7F7581E4CD43A00171170 /* PasswordRecoveryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F7571E4CD43A00171170 /* PasswordRecoveryPresenter.swift */; };
 		44D5FE921EE6E9560049232F /* DataManagerPetSafeZonesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D5FE911EE6E9560049232F /* DataManagerPetSafeZonesTests.swift */; };
-		44D73CF11E929FB000D8DF97 /* AddEditPetDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D73CF01E929FB000D8DF97 /* AddEditPetDetailsTableViewController.swift */; };
 		44F0BF361EFBF6C7008C26B3 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F0BF351EFBF6C7008C26B3 /* EventManager.swift */; };
 		44F239511EEEC1E70082FA36 /* SocketIOTestTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F239501EEEC1E70082FA36 /* SocketIOTestTableViewController.swift */; };
-		44F8202B1E604C1C00704F75 /* ScanQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F8202A1E604C1C00704F75 /* ScanQRViewController.swift */; };
+		44F27DBE1F0CE23300DAB441 /* PawTrails.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 44F27DBC1F0CE23300DAB441 /* PawTrails.xcdatamodeld */; };
 		44FE723D1E4A2EF0007C7E24 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FE723C1E4A2EF0007C7E24 /* DataManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -150,11 +151,6 @@
 		199033D371CC47C9192C6703 /* Pods_Snout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Snout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C09631478A96AC78EA751AA /* Pods_PawTrailsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PawTrailsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		20B5DA5019D7976016EA8DF9 /* Pods-PawTrailsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PawTrailsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PawTrailsTests/Pods-PawTrailsTests.release.xcconfig"; sourceTree = "<group>"; };
-		440821A71EB09E900000751B /* AddPetUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddPetUserViewController.swift; path = View/AddPetUserViewController.swift; sourceTree = "<group>"; };
-		440821A91EB0A08D0000751B /* AddPetUserPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddPetUserPresenter.swift; path = Presenter/AddPetUserPresenter.swift; sourceTree = "<group>"; };
-		440BB75F1E5DE63B00D2D68B /* AddEditSafeZoneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddEditSafeZoneViewController.swift; path = View/AddEditSafeZoneViewController.swift; sourceTree = "<group>"; };
-		440CEE571E3B983700F58A09 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InitialViewController.swift; path = View/InitialViewController.swift; sourceTree = "<group>"; };
-		440CEE591E3B9AA300F58A09 /* InitialPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InitialPresenter.swift; path = Presenter/InitialPresenter.swift; sourceTree = "<group>"; };
 		440CEE5B1E3B9B1900F58A09 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = View/HomeViewController.swift; sourceTree = "<group>"; };
 		4414AE681EA0DD5B004A5134 /* PawTrailsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PawTrailsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4414AE6A1EA0DD5B004A5134 /* PawTrailsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PawTrailsTests.swift; sourceTree = "<group>"; };
@@ -164,117 +160,121 @@
 		4414AE761EA0DD8C004A5134 /* DataManagerUserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerUserTests.swift; sourceTree = "<group>"; };
 		4415FF3F1E3B822900A81B13 /* PawTrails.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PawTrails.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4415FF421E3B822900A81B13 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4415FF471E3B822900A81B13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		4415FF491E3B822900A81B13 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		4415FF4E1E3B822900A81B13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		441A0D4C1E55AF5200D02CE4 /* SharedPreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SharedPreferences.swift; path = Model/SharedPreferences.swift; sourceTree = "<group>"; };
 		441CEBEC1EE16F8F00A37877 /* DataManagerPetTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerPetTests.swift; sourceTree = "<group>"; };
-		441D72F21E9E37490031BB1E /* AddEditPetPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddEditPetPresenter.swift; path = Presenter/AddEditPetPresenter.swift; sourceTree = "<group>"; };
-		441D72F41E9E57ED0031BB1E /* AddPetDeviceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddPetDeviceTableViewController.swift; path = View/AddPetDeviceTableViewController.swift; sourceTree = "<group>"; };
-		441D9BB11F01028600D64482 /* RepositoryDefinitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RepositoryDefinitions.swift; path = Repositories/RepositoryDefinitions.swift; sourceTree = "<group>"; };
-		441D9BB31F01089100D64482 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Model.swift; path = Repositories/Model.swift; sourceTree = "<group>"; };
-		441D9BB51F01095100D64482 /* CDBreed+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDBreed+CoreDataClass.swift"; path = "CDSModel/CDBreed+CoreDataClass.swift"; sourceTree = "<group>"; };
-		441D9BB61F01095100D64482 /* CDPetUser+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDPetUser+CoreDataClass.swift"; path = "CDSModel/CDPetUser+CoreDataClass.swift"; sourceTree = "<group>"; };
-		441D9BB71F01095100D64482 /* CDSafeZone+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDSafeZone+CoreDataClass.swift"; path = "CDSModel/CDSafeZone+CoreDataClass.swift"; sourceTree = "<group>"; };
-		441D9BB81F01095100D64482 /* CDUser+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDUser+CoreDataClass.swift"; path = "CDSModel/CDUser+CoreDataClass.swift"; sourceTree = "<group>"; };
-		441D9BB91F01095100D64482 /* CDPhone+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDPhone+CoreDataClass.swift"; path = "CDSModel/CDPhone+CoreDataClass.swift"; sourceTree = "<group>"; };
-		441D9BBA1F01095100D64482 /* CDAddress+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDAddress+CoreDataClass.swift"; path = "CDSModel/CDAddress+CoreDataClass.swift"; sourceTree = "<group>"; };
-		441D9BBB1F01095100D64482 /* CDPet+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDPet+CoreDataClass.swift"; path = "CDSModel/CDPet+CoreDataClass.swift"; sourceTree = "<group>"; };
-		441D9BBC1F01095100D64482 /* CDCountryCode+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDCountryCode+CoreDataClass.swift"; path = "CDSModel/CDCountryCode+CoreDataClass.swift"; sourceTree = "<group>"; };
-		441D9BC51F01096B00D64482 /* CDBreed+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDBreed+CoreDataProperties.swift"; path = "CDSModel/CDBreed+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		441D9BC61F01096B00D64482 /* CDPetUser+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDPetUser+CoreDataProperties.swift"; path = "CDSModel/CDPetUser+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		441D9BC71F01096B00D64482 /* CDSafeZone+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDSafeZone+CoreDataProperties.swift"; path = "CDSModel/CDSafeZone+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		441D9BC81F01096B00D64482 /* CDUser+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDUser+CoreDataProperties.swift"; path = "CDSModel/CDUser+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		441D9BC91F01096B00D64482 /* CDPhone+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDPhone+CoreDataProperties.swift"; path = "CDSModel/CDPhone+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		441D9BCA1F01096B00D64482 /* CDAddress+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDAddress+CoreDataProperties.swift"; path = "CDSModel/CDAddress+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		441D9BCB1F01096B00D64482 /* CDPet+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDPet+CoreDataProperties.swift"; path = "CDSModel/CDPet+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		441D9BCC1F01096B00D64482 /* CDCountryCode+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDCountryCode+CoreDataProperties.swift"; path = "CDSModel/CDCountryCode+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		4424DCF81E8E9F2300ACDF07 /* UserProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserProfileTableViewController.swift; path = View/UserProfileTableViewController.swift; sourceTree = "<group>"; };
 		4424DCFC1E8E9F9400ACDF07 /* PetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetsViewController.swift; path = View/PetsViewController.swift; sourceTree = "<group>"; };
 		4424DCFE1E8EA1D900ACDF07 /* UserProfilePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserProfilePresenter.swift; path = Presenter/UserProfilePresenter.swift; sourceTree = "<group>"; };
-		4424E9751EB3430C004CC5FA /* PetPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetPresenter.swift; path = Presenter/PetPresenter.swift; sourceTree = "<group>"; };
-		442690D71EADEE3100E2B63F /* PetActivityTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetActivityTableViewController.swift; path = View/PetActivityTableViewController.swift; sourceTree = "<group>"; };
-		44277A0B1E7A987C00B336BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		442FB06C1EBA00B9004486F8 /* PetUserPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetUserPresenter.swift; sourceTree = "<group>"; };
-		44329CB21EA0F75600325A13 /* Test.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Test.playground; sourceTree = "<group>"; };
-		44329CB31EA1129400325A13 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		44251ACB1F0CD5170067F401 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Assets/Google/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		44251ACC1F0CD5170067F401 /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleSignIn.framework; path = Assets/Google/GoogleSignIn.framework; sourceTree = "<group>"; };
+		44251ACD1F0CD5170067F401 /* GoogleSignIn.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleSignIn.bundle; path = Assets/Google/GoogleSignIn.bundle; sourceTree = "<group>"; };
+		44251ACE1F0CD5170067F401 /* GoogleAppUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleAppUtilities.framework; path = Assets/Google/GoogleAppUtilities.framework; sourceTree = "<group>"; };
+		44251ACF1F0CD5170067F401 /* GoogleSignInDependencies.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleSignInDependencies.framework; path = Assets/Google/GoogleSignInDependencies.framework; sourceTree = "<group>"; };
+		44251AD01F0CD5170067F401 /* GoogleSymbolUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleSymbolUtilities.framework; path = Assets/Google/GoogleSymbolUtilities.framework; sourceTree = "<group>"; };
+		44251AD71F0CD5260067F401 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Assets/Assets.xcassets; sourceTree = "<group>"; };
+		44251AD81F0CD5260067F401 /* countrycodes.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = countrycodes.csv; path = Assets/countrycodes.csv; sourceTree = "<group>"; };
+		44251AD91F0CD5260067F401 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Assets/Info.plist; sourceTree = "<group>"; };
+		44251ADA1F0CD5260067F401 /* attitudetechie.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = attitudetechie.der; path = Assets/attitudetechie.der; sourceTree = "<group>"; };
+		44251ADB1F0CD5260067F401 /* PawTrails-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PawTrails-Bridging-Header.h"; path = "Assets/PawTrails-Bridging-Header.h"; sourceTree = "<group>"; };
+		44251AE01F0CD54D0067F401 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Extensions/Extensions.swift; sourceTree = "<group>"; };
+		44251AE11F0CD54D0067F401 /* ModelExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ModelExtensions.swift; path = Extensions/ModelExtensions.swift; sourceTree = "<group>"; };
+		44251AE21F0CD54D0067F401 /* MapExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapExtensions.swift; path = Extensions/MapExtensions.swift; sourceTree = "<group>"; };
+		44251AE31F0CD54D0067F401 /* ViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewExtensions.swift; path = Extensions/ViewExtensions.swift; sourceTree = "<group>"; };
+		44251AE81F0CD55F0067F401 /* MapUtilsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapUtilsManager.swift; path = Utils/MapUtilsManager.swift; sourceTree = "<group>"; };
+		44251AE91F0CD55F0067F401 /* Messages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Messages.swift; path = Utils/Messages.swift; sourceTree = "<group>"; };
+		44251AEA1F0CD55F0067F401 /* Reporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Reporter.swift; path = Utils/Reporter.swift; sourceTree = "<group>"; };
+		44251AEB1F0CD55F0067F401 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Errors.swift; path = Utils/Errors.swift; sourceTree = "<group>"; };
+		44251AEC1F0CD55F0067F401 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Utils/Constants.swift; sourceTree = "<group>"; };
+		44251AED1F0CD55F0067F401 /* Clock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Clock.swift; path = Utils/Clock.swift; sourceTree = "<group>"; };
+		44251AEE1F0CD55F0067F401 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Reachability.swift; path = Utils/Reachability.swift; sourceTree = "<group>"; };
+		44251AF61F0CD5740067F401 /* EditUserProfilePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditUserProfilePresenter.swift; path = "Presenter/User-Authentication/EditUserProfilePresenter.swift"; sourceTree = "<group>"; };
+		44251AF71F0CD5740067F401 /* ChangePasswordPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChangePasswordPresenter.swift; path = "Presenter/User-Authentication/ChangePasswordPresenter.swift"; sourceTree = "<group>"; };
+		44251AF81F0CD5740067F401 /* SettingsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsPresenter.swift; path = "Presenter/User-Authentication/SettingsPresenter.swift"; sourceTree = "<group>"; };
+		44251AF91F0CD5740067F401 /* EmailVerificationPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmailVerificationPresenter.swift; path = "Presenter/User-Authentication/EmailVerificationPresenter.swift"; sourceTree = "<group>"; };
+		44251AFA1F0CD5740067F401 /* InitialPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InitialPresenter.swift; path = "Presenter/User-Authentication/InitialPresenter.swift"; sourceTree = "<group>"; };
+		44251AFB1F0CD5740067F401 /* PasswordRecoveryPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PasswordRecoveryPresenter.swift; path = "Presenter/User-Authentication/PasswordRecoveryPresenter.swift"; sourceTree = "<group>"; };
+		44251B021F0CD5870067F401 /* PetPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetPresenter.swift; path = Presenter/Pet/PetPresenter.swift; sourceTree = "<group>"; };
+		44251B031F0CD5870067F401 /* AddEditPetPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddEditPetPresenter.swift; path = Presenter/Pet/AddEditPetPresenter.swift; sourceTree = "<group>"; };
+		44251B041F0CD5870067F401 /* DeviceCodePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeviceCodePresenter.swift; path = Presenter/Pet/DeviceCodePresenter.swift; sourceTree = "<group>"; };
+		44251B051F0CD5870067F401 /* AddEditSafeZonePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddEditSafeZonePresenter.swift; path = Presenter/Pet/AddEditSafeZonePresenter.swift; sourceTree = "<group>"; };
+		44251B061F0CD5870067F401 /* AddPetUserPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddPetUserPresenter.swift; path = Presenter/Pet/AddPetUserPresenter.swift; sourceTree = "<group>"; };
+		44251B071F0CD5870067F401 /* PetBreedPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetBreedPresenter.swift; path = Presenter/Pet/PetBreedPresenter.swift; sourceTree = "<group>"; };
+		44251B081F0CD5870067F401 /* PetUserPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetUserPresenter.swift; path = Presenter/Pet/PetUserPresenter.swift; sourceTree = "<group>"; };
+		44251B121F0CD5A90067F401 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		44251B141F0CD5A90067F401 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
+		44251B171F0CD5BD0067F401 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsTableViewController.swift; path = View/Auth/SettingsTableViewController.swift; sourceTree = "<group>"; };
+		44251B181F0CD5BD0067F401 /* EmailVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmailVerificationViewController.swift; path = View/Auth/EmailVerificationViewController.swift; sourceTree = "<group>"; };
+		44251B191F0CD5BD0067F401 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InitialViewController.swift; path = View/Auth/InitialViewController.swift; sourceTree = "<group>"; };
+		44251B1A1F0CD5BD0067F401 /* PasswordRecoveryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PasswordRecoveryViewController.swift; path = View/Auth/PasswordRecoveryViewController.swift; sourceTree = "<group>"; };
+		44251B201F0CD5DF0067F401 /* ChangePasswordTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordTableViewController.swift; sourceTree = "<group>"; };
+		44251B211F0CD5DF0067F401 /* EditUserProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditUserProfileTableViewController.swift; sourceTree = "<group>"; };
+		44251B231F0CD5DF0067F401 /* AddressTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressTableViewController.swift; sourceTree = "<group>"; };
+		44251B241F0CD5DF0067F401 /* BirthdayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BirthdayViewController.swift; sourceTree = "<group>"; };
+		44251B251F0CD5DF0067F401 /* EmailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailTableViewController.swift; sourceTree = "<group>"; };
+		44251B261F0CD5DF0067F401 /* GenderTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenderTableViewController.swift; sourceTree = "<group>"; };
+		44251B271F0CD5DF0067F401 /* NameTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameTableViewController.swift; sourceTree = "<group>"; };
+		44251B281F0CD5DF0067F401 /* PhoneTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneTableViewController.swift; sourceTree = "<group>"; };
+		44251B2B1F0CD5DF0067F401 /* AddEditSafeZoneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditSafeZoneViewController.swift; sourceTree = "<group>"; };
+		44251B2D1F0CD5DF0067F401 /* AddPetUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPetUserViewController.swift; sourceTree = "<group>"; };
+		44251B2E1F0CD5DF0067F401 /* PetUserTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetUserTableViewController.swift; sourceTree = "<group>"; };
+		44251B2F1F0CD5DF0067F401 /* PetActivityTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetActivityTableViewController.swift; sourceTree = "<group>"; };
+		44251B301F0CD5DF0067F401 /* PetProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetProfileTableViewController.swift; sourceTree = "<group>"; };
+		44251B321F0CD5DF0067F401 /* AddEditPetDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditPetDetailsTableViewController.swift; sourceTree = "<group>"; };
+		44251B331F0CD5DF0067F401 /* AddPetDeviceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPetDeviceTableViewController.swift; sourceTree = "<group>"; };
+		44251B351F0CD5DF0067F401 /* PetBirthdayTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetBirthdayTableViewController.swift; sourceTree = "<group>"; };
+		44251B361F0CD5DF0067F401 /* PetBreedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetBreedTableViewController.swift; sourceTree = "<group>"; };
+		44251B371F0CD5DF0067F401 /* PetGenderTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetGenderTableViewController.swift; sourceTree = "<group>"; };
+		44251B381F0CD5DF0067F401 /* PetNameTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetNameTableViewController.swift; sourceTree = "<group>"; };
+		44251B391F0CD5DF0067F401 /* PetTypeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetTypeTableViewController.swift; sourceTree = "<group>"; };
+		44251B3A1F0CD5DF0067F401 /* PetWeightTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetWeightTableViewController.swift; sourceTree = "<group>"; };
+		44251B3B1F0CD5DF0067F401 /* ScanQRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanQRViewController.swift; sourceTree = "<group>"; };
+		44251B521F0CD5FE0067F401 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Model.swift; path = Model/Model.swift; sourceTree = "<group>"; };
+		44251B531F0CD5FE0067F401 /* Parsers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Parsers.swift; path = Model/Parsers.swift; sourceTree = "<group>"; };
+		44251B561F0CD6130067F401 /* SocketIOManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketIOManager.swift; path = "Model/Comunication Core/SocketIOManager.swift"; sourceTree = "<group>"; };
+		44251B571F0CD6130067F401 /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationManager.swift; path = "Model/Comunication Core/NotificationManager.swift"; sourceTree = "<group>"; };
+		44251B581F0CD6130067F401 /* SharedPreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SharedPreferences.swift; path = "Model/Comunication Core/SharedPreferences.swift"; sourceTree = "<group>"; };
+		44251B591F0CD6130067F401 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDataManager.swift; path = "Model/Comunication Core/CoreDataManager.swift"; sourceTree = "<group>"; };
+		44251B5A1F0CD6130067F401 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIManager.swift; path = "Model/Comunication Core/APIManager.swift"; sourceTree = "<group>"; };
+		44251B5C1F0CD6130067F401 /* CDAddress+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CDAddress+CoreDataClass.swift"; sourceTree = "<group>"; };
+		44251B5D1F0CD6130067F401 /* CDAddress+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CDAddress+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		44251B5E1F0CD6130067F401 /* CDBreed+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CDBreed+CoreDataClass.swift"; sourceTree = "<group>"; };
+		44251B5F1F0CD6130067F401 /* CDBreed+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CDBreed+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		44251B601F0CD6130067F401 /* CDCountryCode+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CDCountryCode+CoreDataClass.swift"; sourceTree = "<group>"; };
+		44251B611F0CD6130067F401 /* CDCountryCode+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CDCountryCode+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		44251B621F0CD6130067F401 /* CDPet+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CDPet+CoreDataClass.swift"; sourceTree = "<group>"; };
+		44251B631F0CD6130067F401 /* CDPet+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CDPet+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		44251B641F0CD6130067F401 /* CDPetUser+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CDPetUser+CoreDataClass.swift"; sourceTree = "<group>"; };
+		44251B651F0CD6130067F401 /* CDPetUser+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CDPetUser+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		44251B661F0CD6130067F401 /* CDPhone+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CDPhone+CoreDataClass.swift"; sourceTree = "<group>"; };
+		44251B671F0CD6130067F401 /* CDPhone+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CDPhone+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		44251B681F0CD6130067F401 /* CDSafeZone+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CDSafeZone+CoreDataClass.swift"; sourceTree = "<group>"; };
+		44251B691F0CD6130067F401 /* CDSafeZone+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CDSafeZone+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		44251B6A1F0CD6130067F401 /* CDUser+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CDUser+CoreDataClass.swift"; sourceTree = "<group>"; };
+		44251B6B1F0CD6130067F401 /* CDUser+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CDUser+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		44251B851F0CD6210067F401 /* CDRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CDRepository.swift; path = Model/Repositories/CDRepository.swift; sourceTree = "<group>"; };
+		44251B861F0CD6210067F401 /* CSVRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CSVRepository.swift; path = Model/Repositories/CSVRepository.swift; sourceTree = "<group>"; };
+		44251B871F0CD6210067F401 /* APIRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIRepository.swift; path = Model/Repositories/APIRepository.swift; sourceTree = "<group>"; };
 		44340F3C1EB22B4900EB4312 /* APIPetProfileTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIPetProfileTests.swift; sourceTree = "<group>"; };
-		44370BB51EE9904B00BB6CCD /* MapUtilsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapUtilsManager.swift; sourceTree = "<group>"; };
-		443937021EA78A7B0044831E /* PetBreedPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetBreedPresenter.swift; path = Presenter/PetBreedPresenter.swift; sourceTree = "<group>"; };
-		4440C5CA1E8BA568007A13B1 /* ViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
-		4440C5CC1E8BA5D0007A13B1 /* ModelExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelExtensions.swift; sourceTree = "<group>"; };
-		4440C5CE1E8BA64E007A13B1 /* MapExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapExtensions.swift; sourceTree = "<group>"; };
 		4441ACA51EB8C72500FBE27F /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		4441ACA71EB8C72E00FBE27F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		4441ACA91EB8C7CF00FBE27F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		4441ACAC1EB8CC7A00FBE27F /* GoogleAppUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleAppUtilities.framework; sourceTree = "<group>"; };
-		4441ACAD1EB8CC7A00FBE27F /* GoogleSignIn.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleSignIn.bundle; sourceTree = "<group>"; };
-		4441ACAE1EB8CC7A00FBE27F /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSignIn.framework; sourceTree = "<group>"; };
-		4441ACAF1EB8CC7A00FBE27F /* GoogleSignInDependencies.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSignInDependencies.framework; sourceTree = "<group>"; };
-		4441ACB01EB8CC7A00FBE27F /* GoogleSymbolUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSymbolUtilities.framework; sourceTree = "<group>"; };
-		44421A2B1E4CB8E7009755BD /* EditUserProfilePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditUserProfilePresenter.swift; path = Presenter/EditUserProfilePresenter.swift; sourceTree = "<group>"; };
-		44457A2D1E5AF31400B43748 /* AddressTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddressTableViewController.swift; path = View/AddressTableViewController.swift; sourceTree = "<group>"; };
 		4447217A1F03F12A001DCDE1 /* PawTrailsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PawTrailsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4447217C1F03F12A001DCDE1 /* PawTrailsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PawTrailsUITests.swift; sourceTree = "<group>"; };
 		4447217E1F03F12A001DCDE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4447C4F61EE9429500AA6D1D /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationManager.swift; path = Model/NotificationManager.swift; sourceTree = "<group>"; };
-		44485F941E51B12800A3C47D /* PawTrails.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PawTrails.xcdatamodel; sourceTree = "<group>"; };
-		44485F961E51B16500A3C47D /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		44485FBC1E52076C00A3C47D /* countrycodes.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = countrycodes.csv; sourceTree = "<group>"; };
-		44485FBE1E52079D00A3C47D /* CVSParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CVSParser.swift; path = Model/CVSParser.swift; sourceTree = "<group>"; };
-		44498DFC1E4DBE6700F6D761 /* ChangePasswordPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordPresenter.swift; sourceTree = "<group>"; };
-		44498DFE1E4DC03100F6D761 /* ChangePasswordTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChangePasswordTableViewController.swift; path = View/ChangePasswordTableViewController.swift; sourceTree = "<group>"; };
-		444ACEFB1E894AF500A9A086 /* EmailVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmailVerificationViewController.swift; path = View/EmailVerificationViewController.swift; sourceTree = "<group>"; };
 		4452EEED1ED58063004E13DC /* APITablesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APITablesTests.swift; sourceTree = "<group>"; };
 		4452EEEF1ED5824D004E13DC /* APIPetRegistrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIPetRegistrationTests.swift; sourceTree = "<group>"; };
 		4452EEF11ED59A93004E13DC /* APIPetShareUsersTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIPetShareUsersTests.swift; sourceTree = "<group>"; };
 		4452EEF31ED5CF03004E13DC /* APIPetSafeZonesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIPetSafeZonesTests.swift; sourceTree = "<group>"; };
 		4452EEF51ED5DD41004E13DC /* APIAuthenticationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIAuthenticationTests.swift; sourceTree = "<group>"; };
-		445A6DC81E896B6F0042736E /* EmailVerificationPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailVerificationPresenter.swift; sourceTree = "<group>"; };
 		4462313F1EE6BE4200B53C1D /* DataManagerPetSharingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerPetSharingTests.swift; sourceTree = "<group>"; };
-		4465481D1E5C642000458CB7 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Model/Extensions.swift; sourceTree = "<group>"; };
-		446CBF081EAA458D007C4659 /* PetProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetProfileTableViewController.swift; path = View/PetProfileTableViewController.swift; sourceTree = "<group>"; };
-		447400941F0110AA002C7931 /* APIRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIRepository.swift; path = Repositories/APIRepository.swift; sourceTree = "<group>"; };
-		447400961F0114C6002C7931 /* Parsers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Parsers.swift; path = Repositories/Parsers.swift; sourceTree = "<group>"; };
-		447400981F014B80002C7931 /* CDRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CDRepository.swift; path = Repositories/CDRepository.swift; sourceTree = "<group>"; };
-		447440E51E8400CF0069EA85 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsTableViewController.swift; path = View/SettingsTableViewController.swift; sourceTree = "<group>"; };
-		447440E71E8400EF0069EA85 /* SettingsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsPresenter.swift; path = Presenter/SettingsPresenter.swift; sourceTree = "<group>"; };
-		4475D42C1EAF7C4F007E8304 /* PetUserTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetUserTableViewController.swift; path = View/PetUserTableViewController.swift; sourceTree = "<group>"; };
-		4475FB251EB0D73700E9990D /* DeviceCodePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeviceCodePresenter.swift; path = Presenter/DeviceCodePresenter.swift; sourceTree = "<group>"; };
-		447905151E5731F100A49AB3 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
-		447905171E573A4D00A49AB3 /* EditUserProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditUserProfileTableViewController.swift; path = View/EditUserProfileTableViewController.swift; sourceTree = "<group>"; };
-		4479051B1E5744A800A49AB3 /* PhoneTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhoneTableViewController.swift; path = View/PhoneTableViewController.swift; sourceTree = "<group>"; };
-		4479051D1E575A2100A49AB3 /* BirthdayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BirthdayViewController.swift; path = View/BirthdayViewController.swift; sourceTree = "<group>"; };
-		447AC7E11E9CDAF700D2D2B2 /* PetNameTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetNameTableViewController.swift; path = View/PetNameTableViewController.swift; sourceTree = "<group>"; };
-		447AC7E31E9CDB1C00D2D2B2 /* PetTypeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetTypeTableViewController.swift; sourceTree = "<group>"; };
-		447AC7E51E9CDB4600D2D2B2 /* PetGenderTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetGenderTableViewController.swift; path = View/PetGenderTableViewController.swift; sourceTree = "<group>"; };
-		447AC7E71E9CDB8500D2D2B2 /* PetBreedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetBreedTableViewController.swift; path = View/PetBreedTableViewController.swift; sourceTree = "<group>"; };
-		447AC7E91E9CDB9700D2D2B2 /* PetBirthdayTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetBirthdayTableViewController.swift; path = View/PetBirthdayTableViewController.swift; sourceTree = "<group>"; };
-		447AC7EB1E9CDBB200D2D2B2 /* PetWeightTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetWeightTableViewController.swift; path = View/PetWeightTableViewController.swift; sourceTree = "<group>"; };
 		447D4C161E44C4F5008F82F4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		447EB0771EEE8D5700361270 /* Clock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clock.swift; sourceTree = "<group>"; };
 		448BE9671ED47F5C00665608 /* APIUserTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIUserTest.swift; sourceTree = "<group>"; };
 		448BE9691ED490D900665608 /* APIImageUploadTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIImageUploadTest.swift; sourceTree = "<group>"; };
-		449747B91E8BCB6600C3431F /* PawTrails-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PawTrails-Bridging-Header.h"; sourceTree = "<group>"; };
-		449A978C1E82DA940032DCE5 /* NameTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NameTableViewController.swift; path = View/NameTableViewController.swift; sourceTree = "<group>"; };
-		449A978E1E82DAC00032DCE5 /* EmailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmailTableViewController.swift; path = View/EmailTableViewController.swift; sourceTree = "<group>"; };
-		449A97901E82DADD0032DCE5 /* GenderTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GenderTableViewController.swift; path = View/GenderTableViewController.swift; sourceTree = "<group>"; };
-		449DE9281ECC811E00449E65 /* AddEditSafeZonePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddEditSafeZonePresenter.swift; path = Presenter/AddEditSafeZonePresenter.swift; sourceTree = "<group>"; };
 		44A1AC4F1E92923A003EF6CA /* PetsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetsPresenter.swift; path = Presenter/PetsPresenter.swift; sourceTree = "<group>"; };
 		44B179611E4B62690070A18B /* Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Presenter.swift; path = Presenter/Presenter.swift; sourceTree = "<group>"; };
-		44B179631E4B787A0070A18B /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Errors.swift; path = Model/Errors.swift; sourceTree = "<group>"; };
-		44B179651E4B78EF0070A18B /* Messages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Messages.swift; path = Model/Messages.swift; sourceTree = "<group>"; };
-		44BEA82B1EF978C000BEC789 /* attitudetechie.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = attitudetechie.der; sourceTree = "<group>"; };
-		44C7F71D1E4CD35700171170 /* PasswordRecoveryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PasswordRecoveryViewController.swift; path = View/PasswordRecoveryViewController.swift; sourceTree = "<group>"; };
 		44C7F74F1E4CD3DA00171170 /* HomePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomePresenter.swift; path = Presenter/HomePresenter.swift; sourceTree = "<group>"; };
-		44C7F7511E4CD3F200171170 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIManager.swift; path = Model/APIManager.swift; sourceTree = "<group>"; };
-		44C7F7531E4CD3F200171170 /* SocketIOManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketIOManager.swift; path = Model/SocketIOManager.swift; sourceTree = "<group>"; };
-		44C7F7571E4CD43A00171170 /* PasswordRecoveryPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PasswordRecoveryPresenter.swift; path = Presenter/PasswordRecoveryPresenter.swift; sourceTree = "<group>"; };
 		44D5FE911EE6E9560049232F /* DataManagerPetSafeZonesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerPetSafeZonesTests.swift; sourceTree = "<group>"; };
-		44D73CF01E929FB000D8DF97 /* AddEditPetDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddEditPetDetailsTableViewController.swift; path = View/AddEditPetDetailsTableViewController.swift; sourceTree = "<group>"; };
 		44F0BF351EFBF6C7008C26B3 /* EventManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventManager.swift; path = Model/EventManager.swift; sourceTree = "<group>"; };
 		44F239501EEEC1E70082FA36 /* SocketIOTestTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketIOTestTableViewController.swift; path = View/SocketIOTestTableViewController.swift; sourceTree = "<group>"; };
-		44F8202A1E604C1C00704F75 /* ScanQRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScanQRViewController.swift; path = View/ScanQRViewController.swift; sourceTree = "<group>"; };
+		44F27DBD1F0CE23300DAB441 /* PawTrails.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PawTrails.xcdatamodel; sourceTree = "<group>"; };
 		44FE723C1E4A2EF0007C7E24 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = DataManager.swift; path = Model/DataManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		4D52BC7BE2AEDBF19B3D09AB /* Pods-PawTrailsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PawTrailsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PawTrailsTests/Pods-PawTrailsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		754A776083E072AC16A405DB /* Pods_SnoutTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnoutTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -298,12 +298,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4441ACB51EB8CC7A00FBE27F /* GoogleSymbolUtilities.framework in Frameworks */,
-				4441ACB11EB8CC7A00FBE27F /* GoogleAppUtilities.framework in Frameworks */,
+				44251AD61F0CD5170067F401 /* GoogleSymbolUtilities.framework in Frameworks */,
 				447D4C171E44C4F5008F82F4 /* MapKit.framework in Frameworks */,
+				44251AD21F0CD5170067F401 /* GoogleSignIn.framework in Frameworks */,
+				44251AD41F0CD5170067F401 /* GoogleAppUtilities.framework in Frameworks */,
+				44251AD51F0CD5170067F401 /* GoogleSignInDependencies.framework in Frameworks */,
 				3808F92C4AE1F8421B70B99A /* Pods_PawTrails.framework in Frameworks */,
-				4441ACB41EB8CC7A00FBE27F /* GoogleSignInDependencies.framework in Frameworks */,
-				4441ACB31EB8CC7A00FBE27F /* GoogleSignIn.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,12 +320,12 @@
 		440CEE491E3B8D0700F58A09 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				44BEA82B1EF978C000BEC789 /* attitudetechie.der */,
+				44251AD71F0CD5260067F401 /* Assets.xcassets */,
+				44251AD81F0CD5260067F401 /* countrycodes.csv */,
+				44251AD91F0CD5260067F401 /* Info.plist */,
+				44251ADA1F0CD5260067F401 /* attitudetechie.der */,
+				44251ADB1F0CD5260067F401 /* PawTrails-Bridging-Header.h */,
 				4441ACAB1EB8CC6F00FBE27F /* Google */,
-				449747B91E8BCB6600C3431F /* PawTrails-Bridging-Header.h */,
-				4415FF491E3B822900A81B13 /* Assets.xcassets */,
-				4415FF4E1E3B822900A81B13 /* Info.plist */,
-				44485FBC1E52076C00A3C47D /* countrycodes.csv */,
 			);
 			name = Assets;
 			sourceTree = "<group>";
@@ -333,15 +333,14 @@
 		440CEE4A1E3B8D2500F58A09 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				44277A0A1E7A987C00B336BD /* LaunchScreen.storyboard */,
-				4415FF461E3B822900A81B13 /* Main.storyboard */,
+				44251B101F0CD5A90067F401 /* Base.lproj */,
 				440CEE5B1E3B9B1900F58A09 /* HomeViewController.swift */,
 				4424DCFC1E8E9F9400ACDF07 /* PetsViewController.swift */,
 				4424DCF81E8E9F2300ACDF07 /* UserProfileTableViewController.swift */,
+				44251B1F1F0CD5DF0067F401 /* User Profile */,
+				44251B291F0CD5DF0067F401 /* Pet Profile */,
+				44251B311F0CD5DF0067F401 /* Add:Edit Pet */,
 				441A0D4B1E55A5A500D02CE4 /* Auth */,
-				447AC7DF1E9CD9BB00D2D2B2 /* Add/Edit Pet */,
-				44A1AC4C1E924044003EF6CA /* Pet Profile */,
-				44F820281E604BC700704F75 /* User Profile */,
 				44F239501EEEC1E70082FA36 /* SocketIOTestTableViewController.swift */,
 			);
 			name = View;
@@ -363,11 +362,11 @@
 		440CEE4C1E3B8D3D00F58A09 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				441D9BB31F01089100D64482 /* Model.swift */,
-				447400961F0114C6002C7931 /* Parsers.swift */,
+				44251B521F0CD5FE0067F401 /* Model.swift */,
+				44251B531F0CD5FE0067F401 /* Parsers.swift */,
 				44FE723C1E4A2EF0007C7E24 /* DataManager.swift */,
 				44F0BF351EFBF6C7008C26B3 /* EventManager.swift */,
-				44973D541F06811B00B8CC8C /* CommunicationCore */,
+				44973D541F06811B00B8CC8C /* Communication Core */,
 				441D9BB01F01021200D64482 /* Repositories */,
 			);
 			name = Model;
@@ -410,7 +409,6 @@
 		4415FF411E3B822900A81B13 /* PawTrails */ = {
 			isa = PBXGroup;
 			children = (
-				44329CB21EA0F75600325A13 /* Test.playground */,
 				4415FF421E3B822900A81B13 /* AppDelegate.swift */,
 				440CEE4C1E3B8D3D00F58A09 /* Model */,
 				440CEE4A1E3B8D2500F58A09 /* View */,
@@ -422,26 +420,13 @@
 			path = PawTrails;
 			sourceTree = "<group>";
 		};
-		4416317A1EF92A8800AD2AA4 /* User Details */ = {
-			isa = PBXGroup;
-			children = (
-				449A978C1E82DA940032DCE5 /* NameTableViewController.swift */,
-				449A978E1E82DAC00032DCE5 /* EmailTableViewController.swift */,
-				449A97901E82DADD0032DCE5 /* GenderTableViewController.swift */,
-				4479051D1E575A2100A49AB3 /* BirthdayViewController.swift */,
-				4479051B1E5744A800A49AB3 /* PhoneTableViewController.swift */,
-				44457A2D1E5AF31400B43748 /* AddressTableViewController.swift */,
-			);
-			name = "User Details";
-			sourceTree = "<group>";
-		};
 		441A0D4B1E55A5A500D02CE4 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				447440E51E8400CF0069EA85 /* SettingsTableViewController.swift */,
-				440CEE571E3B983700F58A09 /* InitialViewController.swift */,
-				44C7F71D1E4CD35700171170 /* PasswordRecoveryViewController.swift */,
-				444ACEFB1E894AF500A9A086 /* EmailVerificationViewController.swift */,
+				44251B171F0CD5BD0067F401 /* SettingsTableViewController.swift */,
+				44251B181F0CD5BD0067F401 /* EmailVerificationViewController.swift */,
+				44251B191F0CD5BD0067F401 /* InitialViewController.swift */,
+				44251B1A1F0CD5BD0067F401 /* PasswordRecoveryViewController.swift */,
 			);
 			name = Auth;
 			sourceTree = "<group>";
@@ -449,11 +434,123 @@
 		441D9BB01F01021200D64482 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				441D9BB11F01028600D64482 /* RepositoryDefinitions.swift */,
-				447400941F0110AA002C7931 /* APIRepository.swift */,
-				447400981F014B80002C7931 /* CDRepository.swift */,
+				44251B851F0CD6210067F401 /* CDRepository.swift */,
+				44251B861F0CD6210067F401 /* CSVRepository.swift */,
+				44251B871F0CD6210067F401 /* APIRepository.swift */,
 			);
 			name = Repositories;
+			sourceTree = "<group>";
+		};
+		44251B101F0CD5A90067F401 /* Base.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				44251B111F0CD5A90067F401 /* LaunchScreen.storyboard */,
+				44251B131F0CD5A90067F401 /* Main.storyboard */,
+			);
+			name = Base.lproj;
+			path = View/Base.lproj;
+			sourceTree = "<group>";
+		};
+		44251B1F1F0CD5DF0067F401 /* User Profile */ = {
+			isa = PBXGroup;
+			children = (
+				44251B201F0CD5DF0067F401 /* ChangePasswordTableViewController.swift */,
+				44251B211F0CD5DF0067F401 /* EditUserProfileTableViewController.swift */,
+				44251B221F0CD5DF0067F401 /* User Details */,
+			);
+			name = "User Profile";
+			path = "View/User Profile";
+			sourceTree = "<group>";
+		};
+		44251B221F0CD5DF0067F401 /* User Details */ = {
+			isa = PBXGroup;
+			children = (
+				44251B231F0CD5DF0067F401 /* AddressTableViewController.swift */,
+				44251B241F0CD5DF0067F401 /* BirthdayViewController.swift */,
+				44251B251F0CD5DF0067F401 /* EmailTableViewController.swift */,
+				44251B261F0CD5DF0067F401 /* GenderTableViewController.swift */,
+				44251B271F0CD5DF0067F401 /* NameTableViewController.swift */,
+				44251B281F0CD5DF0067F401 /* PhoneTableViewController.swift */,
+			);
+			path = "User Details";
+			sourceTree = "<group>";
+		};
+		44251B291F0CD5DF0067F401 /* Pet Profile */ = {
+			isa = PBXGroup;
+			children = (
+				44251B2A1F0CD5DF0067F401 /* Pet SafeZones */,
+				44251B2C1F0CD5DF0067F401 /* Pet Shared Users */,
+				44251B2F1F0CD5DF0067F401 /* PetActivityTableViewController.swift */,
+				44251B301F0CD5DF0067F401 /* PetProfileTableViewController.swift */,
+			);
+			name = "Pet Profile";
+			path = "View/Pet Profile";
+			sourceTree = "<group>";
+		};
+		44251B2A1F0CD5DF0067F401 /* Pet SafeZones */ = {
+			isa = PBXGroup;
+			children = (
+				44251B2B1F0CD5DF0067F401 /* AddEditSafeZoneViewController.swift */,
+			);
+			path = "Pet SafeZones";
+			sourceTree = "<group>";
+		};
+		44251B2C1F0CD5DF0067F401 /* Pet Shared Users */ = {
+			isa = PBXGroup;
+			children = (
+				44251B2D1F0CD5DF0067F401 /* AddPetUserViewController.swift */,
+				44251B2E1F0CD5DF0067F401 /* PetUserTableViewController.swift */,
+			);
+			path = "Pet Shared Users";
+			sourceTree = "<group>";
+		};
+		44251B311F0CD5DF0067F401 /* Add:Edit Pet */ = {
+			isa = PBXGroup;
+			children = (
+				44251B321F0CD5DF0067F401 /* AddEditPetDetailsTableViewController.swift */,
+				44251B331F0CD5DF0067F401 /* AddPetDeviceTableViewController.swift */,
+				44251B341F0CD5DF0067F401 /* Pet Details */,
+				44251B3B1F0CD5DF0067F401 /* ScanQRViewController.swift */,
+			);
+			name = "Add:Edit Pet";
+			path = "View/Add:Edit Pet";
+			sourceTree = "<group>";
+		};
+		44251B341F0CD5DF0067F401 /* Pet Details */ = {
+			isa = PBXGroup;
+			children = (
+				44251B351F0CD5DF0067F401 /* PetBirthdayTableViewController.swift */,
+				44251B361F0CD5DF0067F401 /* PetBreedTableViewController.swift */,
+				44251B371F0CD5DF0067F401 /* PetGenderTableViewController.swift */,
+				44251B381F0CD5DF0067F401 /* PetNameTableViewController.swift */,
+				44251B391F0CD5DF0067F401 /* PetTypeTableViewController.swift */,
+				44251B3A1F0CD5DF0067F401 /* PetWeightTableViewController.swift */,
+			);
+			path = "Pet Details";
+			sourceTree = "<group>";
+		};
+		44251B5B1F0CD6130067F401 /* CoreData Properties */ = {
+			isa = PBXGroup;
+			children = (
+				44251B5C1F0CD6130067F401 /* CDAddress+CoreDataClass.swift */,
+				44251B5D1F0CD6130067F401 /* CDAddress+CoreDataProperties.swift */,
+				44251B5E1F0CD6130067F401 /* CDBreed+CoreDataClass.swift */,
+				44251B5F1F0CD6130067F401 /* CDBreed+CoreDataProperties.swift */,
+				44251B601F0CD6130067F401 /* CDCountryCode+CoreDataClass.swift */,
+				44251B611F0CD6130067F401 /* CDCountryCode+CoreDataProperties.swift */,
+				44251B621F0CD6130067F401 /* CDPet+CoreDataClass.swift */,
+				44251B631F0CD6130067F401 /* CDPet+CoreDataProperties.swift */,
+				44251B641F0CD6130067F401 /* CDPetUser+CoreDataClass.swift */,
+				44251B651F0CD6130067F401 /* CDPetUser+CoreDataProperties.swift */,
+				44251B661F0CD6130067F401 /* CDPhone+CoreDataClass.swift */,
+				44251B671F0CD6130067F401 /* CDPhone+CoreDataProperties.swift */,
+				44251B681F0CD6130067F401 /* CDSafeZone+CoreDataClass.swift */,
+				44251B691F0CD6130067F401 /* CDSafeZone+CoreDataProperties.swift */,
+				44251B6A1F0CD6130067F401 /* CDUser+CoreDataClass.swift */,
+				44251B6B1F0CD6130067F401 /* CDUser+CoreDataProperties.swift */,
+			);
+			name = "CoreData Properties";
+			path = "Model/Comunication Core/CoreData Properties";
 			sourceTree = "<group>";
 		};
 		442F8A531ED6C9BC002626F7 /* API */ = {
@@ -474,10 +571,10 @@
 		4440C5D01E8BA6B0007A13B1 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				4440C5CE1E8BA64E007A13B1 /* MapExtensions.swift */,
-				4440C5CC1E8BA5D0007A13B1 /* ModelExtensions.swift */,
-				4440C5CA1E8BA568007A13B1 /* ViewExtensions.swift */,
-				4465481D1E5C642000458CB7 /* Extensions.swift */,
+				44251AE01F0CD54D0067F401 /* Extensions.swift */,
+				44251AE11F0CD54D0067F401 /* ModelExtensions.swift */,
+				44251AE21F0CD54D0067F401 /* MapExtensions.swift */,
+				44251AE31F0CD54D0067F401 /* ViewExtensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -485,12 +582,12 @@
 		4441ACAB1EB8CC6F00FBE27F /* Google */ = {
 			isa = PBXGroup;
 			children = (
-				4441ACAC1EB8CC7A00FBE27F /* GoogleAppUtilities.framework */,
-				4441ACAD1EB8CC7A00FBE27F /* GoogleSignIn.bundle */,
-				4441ACAE1EB8CC7A00FBE27F /* GoogleSignIn.framework */,
-				4441ACAF1EB8CC7A00FBE27F /* GoogleSignInDependencies.framework */,
-				4441ACB01EB8CC7A00FBE27F /* GoogleSymbolUtilities.framework */,
-				4441ACA91EB8C7CF00FBE27F /* GoogleService-Info.plist */,
+				44251ACB1F0CD5170067F401 /* GoogleService-Info.plist */,
+				44251ACC1F0CD5170067F401 /* GoogleSignIn.framework */,
+				44251ACD1F0CD5170067F401 /* GoogleSignIn.bundle */,
+				44251ACE1F0CD5170067F401 /* GoogleAppUtilities.framework */,
+				44251ACF1F0CD5170067F401 /* GoogleSignInDependencies.framework */,
+				44251AD01F0CD5170067F401 /* GoogleSymbolUtilities.framework */,
 			);
 			name = Google;
 			sourceTree = "<group>";
@@ -516,33 +613,16 @@
 			name = Managers;
 			sourceTree = "<group>";
 		};
-		445459FC1ED6ED2400F12BE7 /* Pet Shared Users */ = {
-			isa = PBXGroup;
-			children = (
-				440821A71EB09E900000751B /* AddPetUserViewController.swift */,
-				4475D42C1EAF7C4F007E8304 /* PetUserTableViewController.swift */,
-			);
-			name = "Pet Shared Users";
-			sourceTree = "<group>";
-		};
-		4475D42B1EAF7324007E8304 /* Pet SafeZone */ = {
-			isa = PBXGroup;
-			children = (
-				440BB75F1E5DE63B00D2D68B /* AddEditSafeZoneViewController.swift */,
-			);
-			name = "Pet SafeZone";
-			sourceTree = "<group>";
-		};
 		4475FB281EB0F69500E9990D /* Pet */ = {
 			isa = PBXGroup;
 			children = (
-				4424E9751EB3430C004CC5FA /* PetPresenter.swift */,
-				441D72F21E9E37490031BB1E /* AddEditPetPresenter.swift */,
-				443937021EA78A7B0044831E /* PetBreedPresenter.swift */,
-				4475FB251EB0D73700E9990D /* DeviceCodePresenter.swift */,
-				442FB06C1EBA00B9004486F8 /* PetUserPresenter.swift */,
-				440821A91EB0A08D0000751B /* AddPetUserPresenter.swift */,
-				449DE9281ECC811E00449E65 /* AddEditSafeZonePresenter.swift */,
+				44251B021F0CD5870067F401 /* PetPresenter.swift */,
+				44251B031F0CD5870067F401 /* AddEditPetPresenter.swift */,
+				44251B041F0CD5870067F401 /* DeviceCodePresenter.swift */,
+				44251B051F0CD5870067F401 /* AddEditSafeZonePresenter.swift */,
+				44251B061F0CD5870067F401 /* AddPetUserPresenter.swift */,
+				44251B071F0CD5870067F401 /* PetBreedPresenter.swift */,
+				44251B081F0CD5870067F401 /* PetUserPresenter.swift */,
 			);
 			name = Pet;
 			sourceTree = "<group>";
@@ -550,110 +630,42 @@
 		447905141E57307E00A49AB3 /* User-Authentication */ = {
 			isa = PBXGroup;
 			children = (
-				440CEE591E3B9AA300F58A09 /* InitialPresenter.swift */,
-				44C7F7571E4CD43A00171170 /* PasswordRecoveryPresenter.swift */,
-				44498DFC1E4DBE6700F6D761 /* ChangePasswordPresenter.swift */,
-				445A6DC81E896B6F0042736E /* EmailVerificationPresenter.swift */,
-				44421A2B1E4CB8E7009755BD /* EditUserProfilePresenter.swift */,
-				447440E71E8400EF0069EA85 /* SettingsPresenter.swift */,
+				44251AF61F0CD5740067F401 /* EditUserProfilePresenter.swift */,
+				44251AF71F0CD5740067F401 /* ChangePasswordPresenter.swift */,
+				44251AF81F0CD5740067F401 /* SettingsPresenter.swift */,
+				44251AF91F0CD5740067F401 /* EmailVerificationPresenter.swift */,
+				44251AFA1F0CD5740067F401 /* InitialPresenter.swift */,
+				44251AFB1F0CD5740067F401 /* PasswordRecoveryPresenter.swift */,
 			);
 			name = "User-Authentication";
 			sourceTree = "<group>";
 		};
-		447AC7DF1E9CD9BB00D2D2B2 /* Add/Edit Pet */ = {
+		44973D541F06811B00B8CC8C /* Communication Core */ = {
 			isa = PBXGroup;
 			children = (
-				441D72F41E9E57ED0031BB1E /* AddPetDeviceTableViewController.swift */,
-				44F8202A1E604C1C00704F75 /* ScanQRViewController.swift */,
-				44D73CF01E929FB000D8DF97 /* AddEditPetDetailsTableViewController.swift */,
-				447AC7E01E9CDADD00D2D2B2 /* PetDetails */,
+				44F27DBC1F0CE23300DAB441 /* PawTrails.xcdatamodeld */,
+				44251B5B1F0CD6130067F401 /* CoreData Properties */,
+				44251B561F0CD6130067F401 /* SocketIOManager.swift */,
+				44251B571F0CD6130067F401 /* NotificationManager.swift */,
+				44251B581F0CD6130067F401 /* SharedPreferences.swift */,
+				44251B591F0CD6130067F401 /* CoreDataManager.swift */,
+				44251B5A1F0CD6130067F401 /* APIManager.swift */,
 			);
-			name = "Add/Edit Pet";
-			sourceTree = "<group>";
-		};
-		447AC7E01E9CDADD00D2D2B2 /* PetDetails */ = {
-			isa = PBXGroup;
-			children = (
-				447AC7E11E9CDAF700D2D2B2 /* PetNameTableViewController.swift */,
-				447AC7E31E9CDB1C00D2D2B2 /* PetTypeTableViewController.swift */,
-				447AC7E51E9CDB4600D2D2B2 /* PetGenderTableViewController.swift */,
-				447AC7E71E9CDB8500D2D2B2 /* PetBreedTableViewController.swift */,
-				447AC7E91E9CDB9700D2D2B2 /* PetBirthdayTableViewController.swift */,
-				447AC7EB1E9CDBB200D2D2B2 /* PetWeightTableViewController.swift */,
-			);
-			name = PetDetails;
-			sourceTree = "<group>";
-		};
-		44973D531F06805E00B8CC8C /* CoreData */ = {
-			isa = PBXGroup;
-			children = (
-				441D9BC51F01096B00D64482 /* CDBreed+CoreDataProperties.swift */,
-				441D9BC61F01096B00D64482 /* CDPetUser+CoreDataProperties.swift */,
-				441D9BC71F01096B00D64482 /* CDSafeZone+CoreDataProperties.swift */,
-				441D9BC81F01096B00D64482 /* CDUser+CoreDataProperties.swift */,
-				441D9BC91F01096B00D64482 /* CDPhone+CoreDataProperties.swift */,
-				441D9BCA1F01096B00D64482 /* CDAddress+CoreDataProperties.swift */,
-				441D9BCB1F01096B00D64482 /* CDPet+CoreDataProperties.swift */,
-				441D9BCC1F01096B00D64482 /* CDCountryCode+CoreDataProperties.swift */,
-				441D9BB51F01095100D64482 /* CDBreed+CoreDataClass.swift */,
-				441D9BB61F01095100D64482 /* CDPetUser+CoreDataClass.swift */,
-				441D9BB71F01095100D64482 /* CDSafeZone+CoreDataClass.swift */,
-				441D9BB81F01095100D64482 /* CDUser+CoreDataClass.swift */,
-				441D9BB91F01095100D64482 /* CDPhone+CoreDataClass.swift */,
-				441D9BBA1F01095100D64482 /* CDAddress+CoreDataClass.swift */,
-				441D9BBB1F01095100D64482 /* CDPet+CoreDataClass.swift */,
-				441D9BBC1F01095100D64482 /* CDCountryCode+CoreDataClass.swift */,
-			);
-			name = CoreData;
-			sourceTree = "<group>";
-		};
-		44973D541F06811B00B8CC8C /* CommunicationCore */ = {
-			isa = PBXGroup;
-			children = (
-				44485F931E51B12800A3C47D /* PawTrails.xcdatamodeld */,
-				44973D531F06805E00B8CC8C /* CoreData */,
-				44485F961E51B16500A3C47D /* CoreDataManager.swift */,
-				44C7F7511E4CD3F200171170 /* APIManager.swift */,
-				44C7F7531E4CD3F200171170 /* SocketIOManager.swift */,
-				44485FBE1E52079D00A3C47D /* CVSParser.swift */,
-				441A0D4C1E55AF5200D02CE4 /* SharedPreferences.swift */,
-				4447C4F61EE9429500AA6D1D /* NotificationManager.swift */,
-			);
-			name = CommunicationCore;
-			sourceTree = "<group>";
-		};
-		44A1AC4C1E924044003EF6CA /* Pet Profile */ = {
-			isa = PBXGroup;
-			children = (
-				446CBF081EAA458D007C4659 /* PetProfileTableViewController.swift */,
-				442690D71EADEE3100E2B63F /* PetActivityTableViewController.swift */,
-				445459FC1ED6ED2400F12BE7 /* Pet Shared Users */,
-				4475D42B1EAF7324007E8304 /* Pet SafeZone */,
-			);
-			name = "Pet Profile";
+			name = "Communication Core";
 			sourceTree = "<group>";
 		};
 		44B179671E4B78FB0070A18B /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				44329CB31EA1129400325A13 /* Constants.swift */,
-				44B179631E4B787A0070A18B /* Errors.swift */,
-				447905151E5731F100A49AB3 /* Reachability.swift */,
-				44B179651E4B78EF0070A18B /* Messages.swift */,
-				447EB0771EEE8D5700361270 /* Clock.swift */,
-				44370BB51EE9904B00BB6CCD /* MapUtilsManager.swift */,
+				44251AE81F0CD55F0067F401 /* MapUtilsManager.swift */,
+				44251AE91F0CD55F0067F401 /* Messages.swift */,
+				44251AEA1F0CD55F0067F401 /* Reporter.swift */,
+				44251AEB1F0CD55F0067F401 /* Errors.swift */,
+				44251AEC1F0CD55F0067F401 /* Constants.swift */,
+				44251AED1F0CD55F0067F401 /* Clock.swift */,
+				44251AEE1F0CD55F0067F401 /* Reachability.swift */,
 			);
 			name = Utils;
-			sourceTree = "<group>";
-		};
-		44F820281E604BC700704F75 /* User Profile */ = {
-			isa = PBXGroup;
-			children = (
-				447905171E573A4D00A49AB3 /* EditUserProfileTableViewController.swift */,
-				4416317A1EF92A8800AD2AA4 /* User Details */,
-				44498DFE1E4DC03100F6D761 /* ChangePasswordTableViewController.swift */,
-			);
-			name = "User Profile";
 			sourceTree = "<group>";
 		};
 		5795D868A9539C4E257F965D /* Pods */ = {
@@ -814,13 +826,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				44BEA82C1EF9794F00BEC789 /* attitudetechie.der in Resources */,
-				4441ACB61EB8CC8D00FBE27F /* GoogleSignIn.bundle in Resources */,
-				4415FF4A1E3B822900A81B13 /* Assets.xcassets in Resources */,
-				44277A0C1E7A987C00B336BD /* LaunchScreen.storyboard in Resources */,
-				4415FF481E3B822900A81B13 /* Main.storyboard in Resources */,
-				44485FBD1E52076C00A3C47D /* countrycodes.csv in Resources */,
-				4441ACAA1EB8C7CF00FBE27F /* GoogleService-Info.plist in Resources */,
+				44251ADD1F0CD5260067F401 /* countrycodes.csv in Resources */,
+				44251ADF1F0CD5260067F401 /* attitudetechie.der in Resources */,
+				44251AD31F0CD5170067F401 /* GoogleSignIn.bundle in Resources */,
+				44251B161F0CD5A90067F401 /* Main.storyboard in Resources */,
+				44251AD11F0CD5170067F401 /* GoogleService-Info.plist in Resources */,
+				44251B151F0CD5A90067F401 /* LaunchScreen.storyboard in Resources */,
+				44251ADC1F0CD5260067F401 /* Assets.xcassets in Resources */,
+				44251ADE1F0CD5260067F401 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -875,7 +888,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" e76cedb9a39947937435de66d038998aa19bd740 d8c0f054e2259863ecb27f88ba96c68c04ea392f7493f39457b4532c5e6a7a42";
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" e76cedb9a39947937435de66d038998aa19bd740 d8c0f054e2259863ecb27f88ba96c68c04ea392f7493f39457b4532c5e6a7a42\n";
 		};
 		4AECD43553A045030C32D93B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -966,94 +979,94 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				442690D81EADEE3100E2B63F /* PetActivityTableViewController.swift in Sources */,
-				4440C5CD1E8BA5D0007A13B1 /* ModelExtensions.swift in Sources */,
-				447440E61E8400CF0069EA85 /* SettingsTableViewController.swift in Sources */,
-				447EB0781EEE8D5700361270 /* Clock.swift in Sources */,
-				4479051C1E5744A800A49AB3 /* PhoneTableViewController.swift in Sources */,
-				444ACEFC1E894AF500A9A086 /* EmailVerificationViewController.swift in Sources */,
-				44C7F7581E4CD43A00171170 /* PasswordRecoveryPresenter.swift in Sources */,
-				44498DFD1E4DBE6700F6D761 /* ChangePasswordPresenter.swift in Sources */,
-				441D9BBD1F01095100D64482 /* CDBreed+CoreDataClass.swift in Sources */,
-				44F8202B1E604C1C00704F75 /* ScanQRViewController.swift in Sources */,
+				44251B091F0CD5870067F401 /* PetPresenter.swift in Sources */,
+				44251B701F0CD6130067F401 /* SharedPreferences.swift in Sources */,
+				44251B0A1F0CD5870067F401 /* AddEditPetPresenter.swift in Sources */,
+				44251AF11F0CD55F0067F401 /* Reporter.swift in Sources */,
+				44251AF41F0CD55F0067F401 /* Clock.swift in Sources */,
+				44251B1B1F0CD5BD0067F401 /* SettingsTableViewController.swift in Sources */,
+				44251B4A1F0CD5DF0067F401 /* AddPetDeviceTableViewController.swift in Sources */,
+				44251AFF1F0CD5740067F401 /* EmailVerificationPresenter.swift in Sources */,
+				44251B8A1F0CD6210067F401 /* APIRepository.swift in Sources */,
+				44251B421F0CD5DF0067F401 /* NameTableViewController.swift in Sources */,
+				44251B6E1F0CD6130067F401 /* SocketIOManager.swift in Sources */,
 				44C7F7501E4CD3DA00171170 /* HomePresenter.swift in Sources */,
 				440CEE5C1E3B9B1900F58A09 /* HomeViewController.swift in Sources */,
-				44C7F71E1E4CD35700171170 /* PasswordRecoveryViewController.swift in Sources */,
-				449A978F1E82DAC00032DCE5 /* EmailTableViewController.swift in Sources */,
-				4475D42D1EAF7C4F007E8304 /* PetUserTableViewController.swift in Sources */,
-				447905161E5731F100A49AB3 /* Reachability.swift in Sources */,
-				4440C5CF1E8BA64E007A13B1 /* MapExtensions.swift in Sources */,
-				441D9BD11F01096B00D64482 /* CDPhone+CoreDataProperties.swift in Sources */,
-				441D9BC41F01095100D64482 /* CDCountryCode+CoreDataClass.swift in Sources */,
-				44421A2C1E4CB8E7009755BD /* EditUserProfilePresenter.swift in Sources */,
-				441D9BBE1F01095100D64482 /* CDPetUser+CoreDataClass.swift in Sources */,
-				44D73CF11E929FB000D8DF97 /* AddEditPetDetailsTableViewController.swift in Sources */,
-				441D9BC21F01095100D64482 /* CDAddress+CoreDataClass.swift in Sources */,
-				44C7F7541E4CD3F200171170 /* APIManager.swift in Sources */,
-				4447C4F71EE9429500AA6D1D /* NotificationManager.swift in Sources */,
-				4465481E1E5C642000458CB7 /* Extensions.swift in Sources */,
+				44251B881F0CD6210067F401 /* CDRepository.swift in Sources */,
+				44251B0B1F0CD5870067F401 /* DeviceCodePresenter.swift in Sources */,
+				44251B471F0CD5DF0067F401 /* PetActivityTableViewController.swift in Sources */,
+				44251B0D1F0CD5870067F401 /* AddPetUserPresenter.swift in Sources */,
+				44251B511F0CD5DF0067F401 /* ScanQRViewController.swift in Sources */,
 				44F0BF361EFBF6C7008C26B3 /* EventManager.swift in Sources */,
-				441D9BB21F01028600D64482 /* RepositoryDefinitions.swift in Sources */,
-				440CEE5A1E3B9AA300F58A09 /* InitialPresenter.swift in Sources */,
-				447440E81E8400EF0069EA85 /* SettingsPresenter.swift in Sources */,
-				441D9BBF1F01095100D64482 /* CDSafeZone+CoreDataClass.swift in Sources */,
-				44370BB61EE9904B00BB6CCD /* MapUtilsManager.swift in Sources */,
-				441A0D4D1E55AF5200D02CE4 /* SharedPreferences.swift in Sources */,
-				441D72F51E9E57ED0031BB1E /* AddPetDeviceTableViewController.swift in Sources */,
-				44485F971E51B16500A3C47D /* CoreDataManager.swift in Sources */,
-				447AC7EC1E9CDBB200D2D2B2 /* PetWeightTableViewController.swift in Sources */,
-				440BB7601E5DE63B00D2D68B /* AddEditSafeZoneViewController.swift in Sources */,
-				449A978D1E82DA940032DCE5 /* NameTableViewController.swift in Sources */,
-				447400971F0114C6002C7931 /* Parsers.swift in Sources */,
-				447905181E573A4D00A49AB3 /* EditUserProfileTableViewController.swift in Sources */,
-				44457A2E1E5AF31400B43748 /* AddressTableViewController.swift in Sources */,
-				446CBF091EAA458D007C4659 /* PetProfileTableViewController.swift in Sources */,
-				441D9BC11F01095100D64482 /* CDPhone+CoreDataClass.swift in Sources */,
-				441D9BD21F01096B00D64482 /* CDAddress+CoreDataProperties.swift in Sources */,
-				441D9BC31F01095100D64482 /* CDPet+CoreDataClass.swift in Sources */,
-				4424E9761EB3430C004CC5FA /* PetPresenter.swift in Sources */,
-				447AC7E41E9CDB1C00D2D2B2 /* PetTypeTableViewController.swift in Sources */,
-				441D9BC01F01095100D64482 /* CDUser+CoreDataClass.swift in Sources */,
-				441D9BB41F01089100D64482 /* Model.swift in Sources */,
-				447AC7EA1E9CDB9700D2D2B2 /* PetBirthdayTableViewController.swift in Sources */,
-				441D72F31E9E37490031BB1E /* AddEditPetPresenter.swift in Sources */,
-				440821AA1EB0A08D0000751B /* AddPetUserPresenter.swift in Sources */,
+				44251B741F0CD6130067F401 /* CDAddress+CoreDataProperties.swift in Sources */,
+				44251B551F0CD5FE0067F401 /* Parsers.swift in Sources */,
+				44251B711F0CD6130067F401 /* CoreDataManager.swift in Sources */,
+				44251B0C1F0CD5870067F401 /* AddEditSafeZonePresenter.swift in Sources */,
+				44251B3E1F0CD5DF0067F401 /* AddressTableViewController.swift in Sources */,
+				44251B761F0CD6130067F401 /* CDBreed+CoreDataProperties.swift in Sources */,
+				44251B7D1F0CD6130067F401 /* CDPhone+CoreDataClass.swift in Sources */,
+				44251B1C1F0CD5BD0067F401 /* EmailVerificationViewController.swift in Sources */,
+				44251AFC1F0CD5740067F401 /* EditUserProfilePresenter.swift in Sources */,
+				44F27DBE1F0CE23300DAB441 /* PawTrails.xcdatamodeld in Sources */,
+				44251B431F0CD5DF0067F401 /* PhoneTableViewController.swift in Sources */,
+				44251B461F0CD5DF0067F401 /* PetUserTableViewController.swift in Sources */,
+				44251B451F0CD5DF0067F401 /* AddPetUserViewController.swift in Sources */,
+				44251B1E1F0CD5BD0067F401 /* PasswordRecoveryViewController.swift in Sources */,
+				44251B3D1F0CD5DF0067F401 /* EditUserProfileTableViewController.swift in Sources */,
+				44251B011F0CD5740067F401 /* PasswordRecoveryPresenter.swift in Sources */,
+				44251B481F0CD5DF0067F401 /* PetProfileTableViewController.swift in Sources */,
+				44251AE51F0CD54D0067F401 /* ModelExtensions.swift in Sources */,
+				44251B4E1F0CD5DF0067F401 /* PetNameTableViewController.swift in Sources */,
+				44251B811F0CD6130067F401 /* CDUser+CoreDataClass.swift in Sources */,
 				44A1AC501E92923A003EF6CA /* PetsPresenter.swift in Sources */,
+				44251B401F0CD5DF0067F401 /* EmailTableViewController.swift in Sources */,
+				44251B771F0CD6130067F401 /* CDCountryCode+CoreDataClass.swift in Sources */,
+				44251B7E1F0CD6130067F401 /* CDPhone+CoreDataProperties.swift in Sources */,
+				44251B4B1F0CD5DF0067F401 /* PetBirthdayTableViewController.swift in Sources */,
+				44251B1D1F0CD5BD0067F401 /* InitialViewController.swift in Sources */,
+				44251B4D1F0CD5DF0067F401 /* PetGenderTableViewController.swift in Sources */,
+				44251B411F0CD5DF0067F401 /* GenderTableViewController.swift in Sources */,
 				4415FF431E3B822900A81B13 /* AppDelegate.swift in Sources */,
-				44C7F7561E4CD3F200171170 /* SocketIOManager.swift in Sources */,
-				44329CB41EA1129400325A13 /* Constants.swift in Sources */,
-				4475FB261EB0D73700E9990D /* DeviceCodePresenter.swift in Sources */,
-				441D9BCE1F01096B00D64482 /* CDPetUser+CoreDataProperties.swift in Sources */,
-				44485FBF1E52079D00A3C47D /* CVSParser.swift in Sources */,
-				447400951F0110AA002C7931 /* APIRepository.swift in Sources */,
-				441D9BD31F01096B00D64482 /* CDPet+CoreDataProperties.swift in Sources */,
-				44B179641E4B787A0070A18B /* Errors.swift in Sources */,
-				4440C5CB1E8BA568007A13B1 /* ViewExtensions.swift in Sources */,
-				449DE9291ECC811E00449E65 /* AddEditSafeZonePresenter.swift in Sources */,
-				441D9BCF1F01096B00D64482 /* CDSafeZone+CoreDataProperties.swift in Sources */,
+				44251AF31F0CD55F0067F401 /* Constants.swift in Sources */,
+				44251B7C1F0CD6130067F401 /* CDPetUser+CoreDataProperties.swift in Sources */,
+				44251B891F0CD6210067F401 /* CSVRepository.swift in Sources */,
+				44251B751F0CD6130067F401 /* CDBreed+CoreDataClass.swift in Sources */,
+				44251B541F0CD5FE0067F401 /* Model.swift in Sources */,
+				44251B821F0CD6130067F401 /* CDUser+CoreDataProperties.swift in Sources */,
+				44251B3C1F0CD5DF0067F401 /* ChangePasswordTableViewController.swift in Sources */,
+				44251AFE1F0CD5740067F401 /* SettingsPresenter.swift in Sources */,
 				44B179621E4B62690070A18B /* Presenter.swift in Sources */,
+				44251B441F0CD5DF0067F401 /* AddEditSafeZoneViewController.swift in Sources */,
+				44251B7F1F0CD6130067F401 /* CDSafeZone+CoreDataClass.swift in Sources */,
+				44251B6F1F0CD6130067F401 /* NotificationManager.swift in Sources */,
+				44251B721F0CD6130067F401 /* APIManager.swift in Sources */,
 				4424DCF91E8E9F2300ACDF07 /* UserProfileTableViewController.swift in Sources */,
-				447AC7E61E9CDB4600D2D2B2 /* PetGenderTableViewController.swift in Sources */,
-				440821A81EB09E900000751B /* AddPetUserViewController.swift in Sources */,
-				4479051E1E575A2100A49AB3 /* BirthdayViewController.swift in Sources */,
-				440CEE581E3B983700F58A09 /* InitialViewController.swift in Sources */,
-				441D9BCD1F01096B00D64482 /* CDBreed+CoreDataProperties.swift in Sources */,
+				44251B491F0CD5DF0067F401 /* AddEditPetDetailsTableViewController.swift in Sources */,
+				44251B791F0CD6130067F401 /* CDPet+CoreDataClass.swift in Sources */,
+				44251B7B1F0CD6130067F401 /* CDPetUser+CoreDataClass.swift in Sources */,
+				44251AEF1F0CD55F0067F401 /* MapUtilsManager.swift in Sources */,
+				44251B4C1F0CD5DF0067F401 /* PetBreedTableViewController.swift in Sources */,
+				44251AF51F0CD55F0067F401 /* Reachability.swift in Sources */,
+				44251AE71F0CD54D0067F401 /* ViewExtensions.swift in Sources */,
+				44251B0F1F0CD5870067F401 /* PetUserPresenter.swift in Sources */,
+				44251AE41F0CD54D0067F401 /* Extensions.swift in Sources */,
+				44251AF01F0CD55F0067F401 /* Messages.swift in Sources */,
+				44251B3F1F0CD5DF0067F401 /* BirthdayViewController.swift in Sources */,
+				44251B801F0CD6130067F401 /* CDSafeZone+CoreDataProperties.swift in Sources */,
 				4424DCFF1E8EA1D900ACDF07 /* UserProfilePresenter.swift in Sources */,
-				449A97911E82DADD0032DCE5 /* GenderTableViewController.swift in Sources */,
-				447400991F014B80002C7931 /* CDRepository.swift in Sources */,
-				44485F951E51B12800A3C47D /* PawTrails.xcdatamodeld in Sources */,
-				441D9BD41F01096B00D64482 /* CDCountryCode+CoreDataProperties.swift in Sources */,
+				44251B781F0CD6130067F401 /* CDCountryCode+CoreDataProperties.swift in Sources */,
+				44251B001F0CD5740067F401 /* InitialPresenter.swift in Sources */,
+				44251AFD1F0CD5740067F401 /* ChangePasswordPresenter.swift in Sources */,
+				44251B7A1F0CD6130067F401 /* CDPet+CoreDataProperties.swift in Sources */,
+				44251AE61F0CD54D0067F401 /* MapExtensions.swift in Sources */,
+				44251B731F0CD6130067F401 /* CDAddress+CoreDataClass.swift in Sources */,
 				44FE723D1E4A2EF0007C7E24 /* DataManager.swift in Sources */,
-				442FB06D1EBA00B9004486F8 /* PetUserPresenter.swift in Sources */,
-				441D9BD01F01096B00D64482 /* CDUser+CoreDataProperties.swift in Sources */,
-				447AC7E21E9CDAF700D2D2B2 /* PetNameTableViewController.swift in Sources */,
-				445A6DC91E896B6F0042736E /* EmailVerificationPresenter.swift in Sources */,
-				447AC7E81E9CDB8500D2D2B2 /* PetBreedTableViewController.swift in Sources */,
 				44F239511EEEC1E70082FA36 /* SocketIOTestTableViewController.swift in Sources */,
+				44251B0E1F0CD5870067F401 /* PetBreedPresenter.swift in Sources */,
+				44251B501F0CD5DF0067F401 /* PetWeightTableViewController.swift in Sources */,
+				44251AF21F0CD55F0067F401 /* Errors.swift in Sources */,
+				44251B4F1F0CD5DF0067F401 /* PetTypeTableViewController.swift in Sources */,
 				4424DCFD1E8E9F9400ACDF07 /* PetsViewController.swift in Sources */,
-				44B179661E4B78EF0070A18B /* Messages.swift in Sources */,
-				44498DFF1E4DC03100F6D761 /* ChangePasswordTableViewController.swift in Sources */,
-				443937031EA78A7B0044831E /* PetBreedPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1081,20 +1094,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		4415FF461E3B822900A81B13 /* Main.storyboard */ = {
+		44251B111F0CD5A90067F401 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				4415FF471E3B822900A81B13 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		44277A0A1E7A987C00B336BD /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				44277A0B1E7A987C00B336BD /* Base */,
+				44251B121F0CD5A90067F401 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		44251B131F0CD5A90067F401 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				44251B141F0CD5A90067F401 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1293,20 +1306,22 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7E2855LEH4;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/PawTrails",
+					"$(PROJECT_DIR)/PawTrails/Assets/Google",
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/PawTrails/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/PawTrails/Assets/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = attitudetech.PawTrails;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "PawTrails/PawTrails-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "PawTrails/Assets/PawTrails-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 3.0;
@@ -1328,14 +1343,15 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/PawTrails",
+					"$(PROJECT_DIR)/PawTrails/Assets/Google",
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/PawTrails/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/PawTrails/Assets/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = attitudetech.PawTrails;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "PawTrails/PawTrails-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "PawTrails/Assets/PawTrails-Bridging-Header.h";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1414,14 +1430,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		44485F931E51B12800A3C47D /* PawTrails.xcdatamodeld */ = {
+		44F27DBC1F0CE23300DAB441 /* PawTrails.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				44485F941E51B12800A3C47D /* PawTrails.xcdatamodel */,
+				44F27DBD1F0CE23300DAB441 /* PawTrails.xcdatamodel */,
 			);
-			currentVersion = 44485F941E51B12800A3C47D /* PawTrails.xcdatamodel */;
+			currentVersion = 44F27DBD1F0CE23300DAB441 /* PawTrails.xcdatamodel */;
 			name = PawTrails.xcdatamodeld;
-			path = Model/PawTrails.xcdatamodeld;
+			path = "Model/Comunication Core/PawTrails.xcdatamodeld";
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

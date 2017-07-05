@@ -24,7 +24,7 @@ class APIPetSafeZonesTests: XCTestCase {
     }
     
     func getPet(_ callback: @escaping ((_ data:[String:Any]?)->())){
-        APIManager.Instance.perform(call: .getPets) { (error, data) in
+        APIManager.instance.perform(call: .getPets) { (error, data) in
             
             if let data = data?["pets"].array {
                 callback(data.first?.dictionaryObject)
@@ -50,7 +50,7 @@ class APIPetSafeZonesTests: XCTestCase {
                 _data["active"] = true
                 _data["petid"] = petid
                 
-                APIManager.Instance.perform(call: .addSafeZone, with: _data) { (error, data) in
+                APIManager.instance.perform(call: .addSafeZone, with: _data) { (error, data) in
                     XCTAssertNil(error, "Error \(String(describing: error))")
                     XCTAssertNotNil(data, "No data :(")
                     
@@ -85,7 +85,7 @@ class APIPetSafeZonesTests: XCTestCase {
     
     
     func remove(safezone id: Int, callback: @escaping ((Bool)->())){
-        APIManager.Instance.perform(call: .removeSafeZone, withKey: id) { (error, data) in
+        APIManager.instance.perform(call: .removeSafeZone, withKey: id) { (error, data) in
             callback(error==nil)
         }
     }
@@ -109,7 +109,7 @@ class APIPetSafeZonesTests: XCTestCase {
                 _data["active"] = true
                 _data["petid"] = id
                 
-                APIManager.Instance.perform(call: .addSafeZone, with: _data) { (error, data) in
+                APIManager.instance.perform(call: .addSafeZone, with: _data) { (error, data) in
                     XCTAssertNil(error, "Error \(String(describing: error))")
                     XCTAssertNotNil(data, "No data :(")
                     
@@ -146,7 +146,7 @@ class APIPetSafeZonesTests: XCTestCase {
                 data["active"] = true
                 data["petid"] = id
                 
-                APIManager.Instance.perform(call: .addSafeZone, with: data) { (error, data) in
+                APIManager.instance.perform(call: .addSafeZone, with: data) { (error, data) in
                     XCTAssertNotNil(error)
                     XCTAssert(error?.errorCode == ErrorCode.MissingSafeZoneName, "Wrong Error \(String(describing: error?.errorCode))")
                     expect.fulfill()
@@ -175,7 +175,7 @@ class APIPetSafeZonesTests: XCTestCase {
                 data["active"] = true
                 data["petid"] = id
                 
-                APIManager.Instance.perform(call: .addSafeZone, with: data) { (error, data) in
+                APIManager.instance.perform(call: .addSafeZone, with: data) { (error, data) in
                     XCTAssertNotNil(error)
                     XCTAssert(error?.errorCode == ErrorCode.WrongShapeFormat, "Wrong Error \(String(describing: error?.errorCode))")
                     expect.fulfill()
@@ -204,7 +204,7 @@ class APIPetSafeZonesTests: XCTestCase {
                 data["active"] = true
                 data["petid"] = id
                 
-                APIManager.Instance.perform(call: .addSafeZone, with: data) { (error, data) in
+                APIManager.instance.perform(call: .addSafeZone, with: data) { (error, data) in
                     XCTAssertNotNil(error)
                     XCTAssert(error?.errorCode == ErrorCode.CoordinatesOutOfBounds, "Wrong Error \(String(describing: error?.errorCode))")
                     expect.fulfill()
@@ -234,7 +234,7 @@ class APIPetSafeZonesTests: XCTestCase {
                 _data["active"] = true
                 _data["petid"] = petid
                 
-                APIManager.Instance.perform(call: .setSafeZone, with: _data) { (error, data) in
+                APIManager.instance.perform(call: .setSafeZone, with: _data) { (error, data) in
                     XCTAssertNil(error, "Error \(String(describing: error))")
                     XCTAssertNotNil(data, "No data :(")
                     
@@ -267,7 +267,7 @@ class APIPetSafeZonesTests: XCTestCase {
                 data["active"] = true
                 data["petid"] = petid
                 
-                APIManager.Instance.perform(call: .setSafeZone, with: data) { (error, data) in
+                APIManager.instance.perform(call: .setSafeZone, with: data) { (error, data) in
                     XCTAssertNotNil(error)
                     XCTAssert(error?.errorCode == ErrorCode.WrongShapeFormat, "Wrong Error \(String(describing: error?.errorCode))")
                     
@@ -299,7 +299,7 @@ class APIPetSafeZonesTests: XCTestCase {
                 data["active"] = true
                 data["petid"] = petid
                 
-                APIManager.Instance.perform(call: .setSafeZone, with: data) { (error, data) in
+                APIManager.instance.perform(call: .setSafeZone, with: data) { (error, data) in
                     XCTAssertNotNil(error)
                     XCTAssert(error?.errorCode == ErrorCode.CoordinatesOutOfBounds, "Wrong Error \(String(describing: error?.errorCode))")
                     
@@ -331,7 +331,7 @@ class APIPetSafeZonesTests: XCTestCase {
                 data["active"] = true
                 data["petid"] = petid
                 
-                APIManager.Instance.perform(call: .setSafeZone, with: data) { (error, data) in
+                APIManager.instance.perform(call: .setSafeZone, with: data) { (error, data) in
                     XCTAssertNotNil(error)
                     XCTAssert(error?.errorCode == ErrorCode.SafeZoneNotFound, "Wrong Error \(String(describing: error?.errorCode))")
                     
@@ -366,12 +366,12 @@ class APIPetSafeZonesTests: XCTestCase {
                 data["active"] = true
                 data["petid"] = id
                 
-                APIManager.Instance.perform(call: .addSafeZone, with: data) { (error, data) in
+                APIManager.instance.perform(call: .addSafeZone, with: data) { (error, data) in
                     XCTAssertNil(error, "Error \(String(describing: error))")
                     XCTAssertNotNil(data, "No data :(")
                     
                     if let id = data?["id"].int {
-                        APIManager.Instance.perform(call: .removeSafeZone, withKey: id) { (error, data) in
+                        APIManager.instance.perform(call: .removeSafeZone, withKey: id) { (error, data) in
                             XCTAssertNil(error, "Error \(String(describing: error))")
                             XCTAssertNotNil(data, "No data :(")
                             expect.fulfill()
@@ -399,12 +399,12 @@ class APIPetSafeZonesTests: XCTestCase {
                 data["active"] = true
                 data["petid"] = id
                 
-                APIManager.Instance.perform(call: .addSafeZone, with: data) { (error, data) in
+                APIManager.instance.perform(call: .addSafeZone, with: data) { (error, data) in
                     XCTAssertNil(error, "Error \(String(describing: error))")
                     XCTAssertNotNil(data, "No data :(")
                     
                     if let id = data?["id"].int {
-                        APIManager.Instance.perform(call: .removeSafeZone, withKey: 0) { (error, data) in
+                        APIManager.instance.perform(call: .removeSafeZone, withKey: 0) { (error, data) in
                             XCTAssertNotNil(error)
                             XCTAssert(error?.errorCode == ErrorCode.SafeZoneNotFound, "Wrong Error \(String(describing: error?.errorCode))")
 
