@@ -70,6 +70,7 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
     }
     
     @IBAction func loginAction(_ sender: UIButton?) {
+        self.view.endEditing(true)
         presenter.signIn(email: emailTextField.text, password:passwordTextField.text)
     }
     

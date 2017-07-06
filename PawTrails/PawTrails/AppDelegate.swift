@@ -158,7 +158,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if let error = error {
-            Reporter.send(file: "#file", function: "#function", error)
+            Reporter.send(file: "\(#file)", function: "\(#function)", error)
         }else{
             if let root = window?.rootViewController as? InitialViewController {
                 root.successGoogleLogin(token: user.authentication.idToken)
@@ -168,7 +168,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user:GIDGoogleUser!, withError error: Error!) {
         if let error = error {
-            Reporter.send(file: "#file", function: "#function", error)
+            Reporter.send(file: "\(#file)", function: "\(#function)", error)
         }
     }
     

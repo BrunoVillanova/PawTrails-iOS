@@ -14,7 +14,7 @@ class Reporter {
     
     static func debugPrint(file: String, function: String, _ items: Any...){
         let itemsDescription = items.map({ String(describing: $0) }).joined(separator: ",")
-        NSLog("\(file) - \(function): \(itemsDescription)")
+        NSLog("\(file.components(separatedBy: "/").last ?? "") - \(function): \(itemsDescription)")
     }
     
     static func log(_ string: String){

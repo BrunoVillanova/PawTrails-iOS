@@ -40,10 +40,10 @@ class CSVRepository {
                                 group.leave()
                             })
                         }else{
-                            Reporter.send(file: "#file", function: "#function", NSError(domain: "CSVParser", code: 0, userInfo: ["row" : row]))
+                            Reporter.send(file: "\(#file)", function: "\(#function)", NSError(domain: "CSVParser", code: 0, userInfo: ["row" : row]))
                         }
                     }else{
-                        Reporter.send(file: "#file", function: "#function", NSError(domain: "CSVParser", code: 1, userInfo: ["row" : row]))
+                        Reporter.send(file: "\(#file)", function: "\(#function)", NSError(domain: "CSVParser", code: 1, userInfo: ["row" : row]))
                     }
                 }
                 
@@ -52,10 +52,10 @@ class CSVRepository {
                 })
                 
             } catch {
-                Reporter.send(file: "#file", function: "#function", error, ["url": url, "row": row])
+                Reporter.send(file: "\(#file)", function: "\(#function)", error, ["url": url, "row": row])
             }
         }else{
-            Reporter.send(file: "#file", function: "#function", NSError(domain: "CSVRepository - load country codes", code: -1, userInfo: ["reason": "Url of country codes could not been created"]))
+            Reporter.send(file: "\(#file)", function: "\(#function)", NSError(domain: "CSVRepository - load country codes", code: -1, userInfo: ["reason": "Url of country codes could not been created"]))
         }
     }
 }

@@ -118,12 +118,12 @@ class APIManager {
     private func createRequest(for call:APICallType, with key:Any, and data:[String:Any]?) -> URLRequest? {
         
         if call.requiresBody && data == nil {
-            Reporter.send(file: "#file", function: "#function", APIManagerError(call: call, kind: APIManagerError.errorKind.requestError, httpCode: nil, error: nil, errorCode: ErrorCode.WrongRequest), ["Description":"The call requires body but it does not have it!"])
+            Reporter.send(file: "\(#file)", function: "\(#function)", APIManagerError(call: call, kind: APIManagerError.errorKind.requestError, httpCode: nil, error: nil, errorCode: ErrorCode.WrongRequest), ["Description":"The call requires body but it does not have it!"])
         }
         
         var request = URLRequest(url: URL(call, with: key))
         
-        Reporter.debugPrint(file: "#file", function: "#function", request)
+        Reporter.debugPrint(file: "\(#file)", function: "\(#function)", request)
         
         request.httpMethod = call.httpMethod
         request.cachePolicy = .useProtocolCachePolicy
@@ -154,7 +154,7 @@ class APIManager {
                     DispatchQueue.main.async {
                         if let error = error {
                             let error = APIManagerError(call: call, kind: .requestError, httpCode:nil, error: error, errorCode:nil)
-                            Reporter.send(file: "#file", function: "#function", error)
+                            Reporter.send(file: "\(#file)", function: "\(#function)", error)
                             callback(error, nil)
                         }else{
                             guard let httpResponse = response as? HTTPURLResponse else {
@@ -183,7 +183,7 @@ class APIManager {
     private func parseResponse(_ data:Data?) -> JSON {
         if let data = data {
             let json =  JSON(data: data)
-            Reporter.debugPrint(file: "#file", function: "#function", json.dictionaryObject ?? "")
+            Reporter.debugPrint(file: "\(#file)", function: "\(#function)", json.dictionaryObject ?? "")
             return json
         }else{
             return JSON(parseJSON: "")
@@ -195,7 +195,7 @@ class APIManager {
             callback(nil, parseResponse(data))
         }else{
             let error = handleError(call, code, data)
-            Reporter.send(file: "#file", function: "#function", error)
+            Reporter.send(file: "\(#file)", function: "\(#function)", error)
             callback(error, nil)
         }
     }
@@ -241,7 +241,7 @@ class APIManager {
             let token = SharedPreferences.get(.token)
             if token != "" { headers["token"] = token }
             else {
-                Reporter.send(file: "#file", function: "#function", APIManagerError(call: call, kind: APIManagerError.errorKind.requestError, httpCode: nil, error: nil, errorCode: ErrorCode.MissingToken))
+                Reporter.send(file: "\(#file)", function: "\(#function)", APIManagerError(call: call, kind: APIManagerError.errorKind.requestError, httpCode: nil, error: nil, errorCode: ErrorCode.MissingToken))
             }
         }
         
@@ -249,7 +249,7 @@ class APIManager {
     }
     
     private func setBody(of call:APICallType, with data:[String:Any]?) -> Data? {
-        Reporter.debugPrint(file: "#file", function: "#function", "REQUEST BODY", data ?? "No data provided to build the request body")
+        Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "REQUEST BODY", data ?? "No data provided to build the request body")
         if call == .imageUpload {
 
             let boundaryStart = "--\(boundary)\r\n"

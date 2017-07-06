@@ -75,6 +75,7 @@ extension UIViewController {
     }
     
     func alert(title:String, msg:String, type: notificationType = .red, disableTime: Int = 3, handler: (()->())? = nil){
+        self.hideLoadingView(animated:false)
         self.showNotification(title: msg, type: type)
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(disableTime)) {
             self.hideNotification()
@@ -179,8 +180,10 @@ extension UIViewController {
         loadingView.effect = nil
         activity.alpha = 0.0
         
+        UIApplication.shared.keyWindow?.addSubview(loadingView)
+        
         DispatchQueue.main.async {
-            UIApplication.shared.keyWindow?.addSubview(loadingView)
+            
             UIView.animate(withDuration: 0.6) {
                 loadingView.effect = UIBlurEffect(style: .extraLight)
                 activity.alpha = 1.0
@@ -188,11 +191,13 @@ extension UIViewController {
         }
     }
     
-    func hideLoadingView() {
+    func hideLoadingView(animated: Bool = true) {
+        
         if let loadingView = UIApplication.shared.keyWindow?.subviews.first(where: { $0.tag == subviewId.loading.rawValue }) as? UIVisualEffectView {
             
             if let activity = loadingView.subviews.first(where: { $0.tag == subviewId.activity.rawValue }) as? UIActivityIndicatorView {
                 DispatchQueue.main.async {
+                    if animated {
                     UIView.animate(withDuration: 0.4, animations: {
                         loadingView.effect = nil
                         activity.alpha = 0.0
@@ -201,6 +206,11 @@ extension UIViewController {
                             loadingView.removeFromSuperview()
                         }
                     })
+                    }else{
+                        loadingView.effect = nil
+                        activity.alpha = 0.0
+                        loadingView.removeFromSuperview()
+                    }
                 }
             }
         }

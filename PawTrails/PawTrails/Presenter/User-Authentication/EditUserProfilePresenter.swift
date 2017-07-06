@@ -102,7 +102,7 @@ class EditUserProfilePresenter {
             if let cc = cc {
                 self.CountryCodes = cc
             }else{
-                Reporter.debugPrint(file: "#file", function: "#function", "No CC")
+                Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "No CC")
             }
 
         }

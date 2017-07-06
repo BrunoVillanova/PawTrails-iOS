@@ -65,7 +65,7 @@ class GeocoderManager {
         if let placemark = cache.object(forKey: key as NSString) {
             deliver(Geocode(type: type, id: id, location: location, placemark: placemark))
         }else {
-            Reporter.debugPrint(file: "#file", function: "#function", "Geocode requested: ", id)
+            Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Geocode requested: ", id)
             queue.async {
                 self.sem.wait()
                 self.geocoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) in
@@ -86,7 +86,7 @@ class GeocoderManager {
     private func deliver(_ geocode: Geocode){
         DispatchQueue.main.async {
             let name = geocode.name
-            Reporter.debugPrint(file: "#file", function: "#function", "Geocode released: ", geocode.id, name)
+            Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Geocode released: ", geocode.id, name)
             if geocode.type == .pet {
                 SocketIOManager.instance.set(name, for: geocode.id)
                 NotificationManager.instance.postPetGeoCodeUpdates(with: geocode)
@@ -94,9 +94,9 @@ class GeocoderManager {
             }else if geocode.type == .safezone {
                 DataManager.instance.setSafeZone(address: name, for: geocode.id, callback: { (error) in
                     if let error = error {
-                        Reporter.send(file: "#file", function: "#function", error, ["Geocode id ": geocode.id, "Geocode name ": name])
+                        Reporter.send(file: "\(#file)", function: "\(#function)", error, ["Geocode id ": geocode.id, "Geocode name ": name])
                     }else{
-                        Reporter.debugPrint(file: "#file", function: "#function", "Geocode posted: ", geocode.id, name)
+                        Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Geocode posted: ", geocode.id, name)
                         NotificationManager.instance.postPetGeoCodeUpdates(with: geocode)
                     }
                     self.sem.signal()
@@ -107,14 +107,14 @@ class GeocoderManager {
     
     private func placemarkNotFound(_ geocode: Geocode){
         DispatchQueue.main.async {
-            Reporter.debugPrint(file: "#file", function: "#function", "Placemark not found for: ", geocode.id, geocode.type)
+            Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Placemark not found for: ", geocode.id, geocode.type)
             self.sem.signal()
         }
     }
     
     private func placemark(_ error: Error){
         DispatchQueue.main.async {
-            Reporter.debugPrint(file: "#file", function: "#function", "Placemark error: ", error)
+            Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Placemark error: ", error)
             self.sem.signal()
         }
     }
@@ -145,7 +145,7 @@ class SnapshotMapManager {
     
     func performSnapShot(with center: CLLocationCoordinate2D, topCenter: CLLocationCoordinate2D, shape: Shape, handler: @escaping ((UIImage?)->())){
         
-        mapView.load(with: center, topCenter: topCenter, shape: shape, into: view, paintShapes: true) { (fence) in
+        mapView.load(with: center, topCenter: topCenter, shape: shape, into: view, isBackground: true) { (fence) in
             
             let options = MKMapSnapshotOptions()
             options.region = self.mapView.region

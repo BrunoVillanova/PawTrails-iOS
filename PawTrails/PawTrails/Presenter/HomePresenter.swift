@@ -67,7 +67,7 @@ class HomePresenter {
     
     func startPetsListUpdates(){
         NotificationManager.instance.getPetListUpdates { (pets) in
-            Reporter.debugPrint(file: "#file", function: "#function", "Time to update pets on Map")
+            Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Time to update pets on Map")
             self.pets = pets
             self.view?.loadPets()
 
@@ -83,7 +83,7 @@ class HomePresenter {
     func startPetsGPSUpdates(_ callback: @escaping ((_ id: MKLocationId, _ point: Point)->())){
         
         NotificationManager.instance.getPetGPSUpdates({ (id, data) in
-            callback(MKLocationId(id: id, type: .pet), data.point)
+            if data.status == .idle { callback(MKLocationId(id: id, type: .pet), data.point) }            
         })
     }
     

@@ -303,7 +303,7 @@ class CDRepository {
                     callback(nil,updatedPets)
                 }else{
                     for error in errors {
-                        Reporter.send(file: "#file", function: "#function", error)
+                        Reporter.send(file: "\(#file)", function: "\(#function)", error)
                     }
                     callback(errors.first, nil)
                 }
@@ -458,7 +458,7 @@ class CDRepository {
             }else if let error = error, let callback = callback {
                 callback(error, nil)
             }else {
-                Reporter.debugPrint(file: "#file", function: "#function", "CDRepo - Upsert PetUser", error ?? "error nil", cdPet ?? "pet nil")
+                Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "CDRepo - Upsert PetUser", error ?? "error nil", cdPet ?? "pet nil")
                 if let callback = callback { callback(nil, nil) }
             }
         }
@@ -498,7 +498,7 @@ class CDRepository {
             }else if let error = error, let callback = callback {
                 callback(error, nil)
             }else {
-                Reporter.debugPrint(file: "#file", function: "#function", "CDRepo - Upsert PetUsers", error ?? "error nil", cdPet ?? "pet nil")
+                Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "CDRepo - Upsert PetUsers", error ?? "error nil", cdPet ?? "pet nil")
                 if let callback = callback { callback(nil, nil) }
             }
         }
@@ -517,7 +517,7 @@ class CDRepository {
             }else if let error = error {
                 callback(error, nil)
             }else{
-                Reporter.debugPrint(file: "#file", function: "#function", "CDRepo - Get PetUsers", error ?? "error nil", cdPet ?? "pet nil")
+                Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "CDRepo - Get PetUsers", error ?? "error nil", cdPet ?? "pet nil")
                 callback(nil, nil)
             }
         }
@@ -552,7 +552,7 @@ class CDRepository {
             }else if let error = error {
                 callback(error)
             }else {
-                Reporter.debugPrint(file: "#file", function: "#function", "CDRepo - Remove Shared PetUser", error ?? "error nil", cdPet ?? "pet nil")
+                Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "CDRepo - Remove Shared PetUser", error ?? "error nil", cdPet ?? "pet nil")
                 callback(DatabaseError(type: .Unknown, entity: Entity.pet, action: .get, error: nil))
             }
         }
@@ -702,7 +702,7 @@ class CDRepository {
             }else if let error = error, let callback = callback {
                 callback(error, nil)
             }else {
-                Reporter.debugPrint(file: "#file", function: "#function", "CDRepo - Upsert SafeZone", error ?? "nil error", cdPet ?? "nil pet")
+                Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "CDRepo - Upsert SafeZone", error ?? "nil error", cdPet ?? "nil pet")
                 if let callback = callback { callback(DatabaseError(type: .Unknown, entity: .safeZone, action: .upsert, error: nil), nil) }
             }
         }
@@ -771,7 +771,7 @@ class CDRepository {
                     cdSafezone.address = address
                     CoreDataManager.instance.save(callback: callback)
                 }else if let error = error {
-                    Reporter.send(file: "#file", function: "#function", error)
+                    Reporter.send(file: "\(#file)", function: "\(#function)", error)
                     callback(nil)
                 }
             }
@@ -792,7 +792,7 @@ class CDRepository {
                     cdSafezone.preview = imageData
                     CoreDataManager.instance.save(callback: callback)
                 }else if let error = error {
-                    Reporter.send(file: "#file", function: "#function", error)
+                    Reporter.send(file: "\(#file)", function: "\(#function)", error)
                     callback(nil)
                 }
             }

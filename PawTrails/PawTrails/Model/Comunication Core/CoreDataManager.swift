@@ -50,7 +50,7 @@ class CoreDataManager {
             
             
         } catch {
-            Reporter.send(file: "#file", function: "#function", DatabaseError(type: DatabaseErrorType.Unknown, entity: entity, action: DatabaseErrorAction.get, error: error as NSError))
+            Reporter.send(file: "\(#file)", function: "\(#function)", DatabaseError(type: DatabaseErrorType.Unknown, entity: entity, action: DatabaseErrorAction.get, error: error as NSError))
         }
         callback(nil)
     }
@@ -66,7 +66,7 @@ class CoreDataManager {
         
         guard let entityDescription = NSEntityDescription.entity(forEntityName: entity.rawValue, in: Storage.instance.context) else {
             let error =  NSError(domain: "CDM store entity \(entity)", code: DatabaseErrorType.InternalInconsistencyException.rawValue, userInfo: data)
-            Reporter.send(file: "#file", function: "#function", DatabaseError(type: DatabaseErrorType.Unknown, entity: entity, action: DatabaseErrorAction.store, error: error as NSError))
+            Reporter.send(file: "\(#file)", function: "\(#function)", DatabaseError(type: DatabaseErrorType.Unknown, entity: entity, action: DatabaseErrorAction.store, error: error as NSError))
             callback(nil)
             return
         }
@@ -79,7 +79,7 @@ class CoreDataManager {
         
         self.save(callback: { (error) in
             if let error = error {
-                Reporter.send(file: "#file", function: "#function", error)
+                Reporter.send(file: "\(#file)", function: "\(#function)", error)
                 callback(nil)
             }else{
                 callback(object)
@@ -99,7 +99,7 @@ class CoreDataManager {
         //Check input id
         guard let id = data[idKey] else {
             let error = NSError(domain: "CDM upsert entity \(entity) failed reading input data \(idKey)", code: DatabaseErrorType.IdNotFound.rawValue, userInfo: ["data":data])
-            Reporter.send(file: "#file", function: "#function", error)
+            Reporter.send(file: "\(#file)", function: "\(#function)", error)
             callback(nil)
             return
         }
@@ -145,7 +145,7 @@ class CoreDataManager {
                 
             }else{
                 let error = NSError(domain: "CDM buildPredicate failed reading input data \(restriction)", code: DatabaseErrorType.IdNotFound.rawValue, userInfo: ["data":data])
-                Reporter.send(file: "#file", function: "#function", error)
+                Reporter.send(file: "\(#file)", function: "\(#function)", error)
                 return nil
             }
         }
@@ -183,13 +183,13 @@ class CoreDataManager {
                 }
                 self.save(callback: { (error) in
                     if let error = error {
-                        Reporter.send(file: "#file", function: "#function", error)
+                        Reporter.send(file: "\(#file)", function: "\(#function)", error)
                     }
                 })
 
             }else{
                 let error = NSError(domain: "Object to delete not found", code: DatabaseErrorType.ObjectNotFound.rawValue, userInfo: ["entity":entity, "predicate":predicate.debugDescription])
-                Reporter.send(file: "#file", function: "#function", error)
+                Reporter.send(file: "\(#file)", function: "\(#function)", error)
             }
         }
     }
@@ -205,11 +205,11 @@ class CoreDataManager {
                 try Storage.instance.context.execute(deleteRequest)
                 self.save(callback: { (error) in
                     if let error = error {
-                        Reporter.send(file: "#file", function: "#function", error)
+                        Reporter.send(file: "\(#file)", function: "\(#function)", error)
                     }
                 })
             } catch {
-                Reporter.send(file: "#file", function: "#function", error)
+                Reporter.send(file: "\(#file)", function: "\(#function)", error)
             }
         }
     }
@@ -329,7 +329,7 @@ fileprivate struct Storage {
                 try context.save()
                 return .saved
             } catch {
-                Reporter.send(file: "#file", function: "#function", error)
+                Reporter.send(file: "\(#file)", function: "\(#function)", error)
                 context.rollback()
                 return .rolledBack
             }

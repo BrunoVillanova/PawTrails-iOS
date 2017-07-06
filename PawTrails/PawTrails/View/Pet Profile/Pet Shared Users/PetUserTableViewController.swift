@@ -81,16 +81,24 @@ class PetUserTableViewController: UITableViewController, PetUserView {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if indexPath.section == 1 {
-            
-            if currentUserId == petOwnerId && petOwnerId == appUserId {
-                // Remove Pet
-                presenter.removePet(with: pet.id)
-            }else if appUserId == petOwnerId && appUserId != currentUserId {
-                // Owner Remove that user
-                presenter.removePetUser(with: petUser.id, from: pet.id)
-            }else if appUserId == currentUserId && appUserId != petOwnerId {
-                // That user leaves pet
-                presenter.leavePet(with: pet.id)
+            DispatchQueue.main.async {
+                if self.currentUserId == self.petOwnerId && self.petOwnerId == self.appUserId {
+                    // Remove Pet
+                    self.popUpDestructive(title: "Remove \(self.pet.name ?? "this pet")", msg: "If you proceed you will loose all the information of this pet.", cancelHandler: nil, proceedHandler: { (remove) in
+                        self.presenter.removePet(with: self.pet.id)
+                    })
+                }else if self.appUserId == self.petOwnerId && self.appUserId != self.currentUserId {
+                    // Owner Remove that user
+                    self.popUpDestructive(title: "Remove \(self.petUser.name ?? "this user") from \(self.pet.name ?? "this pet")", msg: "If you proceed you will remove this user from the pet sharing list.", cancelHandler: nil, proceedHandler: { (remove) in
+                        self.presenter.removePetUser(with: self.petUser.id, from: self.pet.id)
+                    })
+                }else if self.appUserId == self.currentUserId && self.appUserId != self.petOwnerId {
+                    // That user leaves pet
+                    self.popUpDestructive(title: "Leave \(self.pet.name ?? "this pet")", msg: "If you proceed you will leave this pet sharing list.", cancelHandler: nil, proceedHandler: { (remove) in
+                        self.presenter.leavePet(with: self.pet.id)
+                    })
+                }
+                self.tableView.deselectRow(at: indexPath, animated: true)
             }
         }
         

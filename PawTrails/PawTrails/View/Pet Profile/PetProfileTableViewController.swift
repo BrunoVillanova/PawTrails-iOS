@@ -90,7 +90,7 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
             self.load(data: data)
         }
         presenter.startPetsGeocodeUpdates(for: pet.id, { (type,name) in
-            Reporter.debugPrint(file: "#file", function: "#function", "Released Geocode \(type) - \(name)")
+            Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Released Geocode \(type) - \(name)")
             if type == .pet {
                 self.load(locationAndTime: name)
             }else if type == .safezone {
@@ -148,7 +148,6 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
         
         if let data = SocketIOManager.instance.getGPSData(for: pet.id) {
             self.load(data: data)
-            self.load(locationAndTime: data.locationAndTime)
         }
         tableView.reloadData()
         self.usersCollectionView.reloadData()
@@ -175,7 +174,7 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
 //                Reporter.debug("address", safezone.id)
                 
                 guard let center = safezone.point1 else {
-                    Reporter.debugPrint(file: "#file", function: "#function", "No center point found!")
+                    Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "No center point found!")
                     break
                 }
                 GeocoderManager.Intance.reverse(type: .safezone, with: center, for: safezone.id)
@@ -183,19 +182,19 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
             // Map
             if safezone.preview == nil {
                 guard let center = safezone.point1?.coordinates else {
-                    Reporter.debugPrint(file: "#file", function: "#function", "No center point found!")
+                    Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "No center point found!")
                     continue
                 }
                 guard let topCenter = safezone.point2?.coordinates else {
-                    Reporter.debugPrint(file: "#file", function: "#function", "No topcenter point found!")
+                    Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "No topcenter point found!")
                     continue
                 }
 
                 safezonesGroup.enter()
-                Reporter.debugPrint(file: "#file", function: "#function", "map", safezone.id)
+                Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "map", safezone.id)
                 self.buildMap(center: center, topCenter: topCenter, shape: safezone.shape, handler: { (image) in
                     if let image = image, let data = UIImagePNGRepresentation(image) {
-                        Reporter.debugPrint(file: "#file", function: "#function", "released", safezone.id)
+                        Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "released", safezone.id)
                         self.presenter.set(imageData: data, for: safezone.id) { (errorMsg) in
                             if let errorMsg = errorMsg {
                                 self.errorMessage(errorMsg)
@@ -218,11 +217,26 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
         self.signalLabel.text = data.signalString
         self.batteryImageView.tintColor = UIColor.primary
         self.batteryLabel.text = data.batteryString
+        if data.status != .idle {
+            self.signalLabel.alpha = 0.5
+            self.signalImageView.alpha = 0.5
+            self.batteryLabel.alpha = 0.5
+            self.batteryImageView.alpha = 0.5
+            self.locationLabel.textColor = UIColor.darkGray
+        }else{
+            self.locationLabel.textColor = UIColor.lightGray
+        }
+        if data.locationAndTime != "" {
+            load(locationAndTime: data.locationAndTime)
+        }else{
+            load(locationAndTime: Message.instance.get(data.status))
+        }
     }
     
     func load(locationAndTime: String){
         self.locationLabel.text = locationAndTime
     }
+
     
     func petNotFound() {
         alert(title: "", msg: "couldn't load pet")
@@ -264,7 +278,6 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
                 let editButton = UIButton(frame: CGRect(x: titleWidth, y: 0.0, width: editButtonWidth, height: headerView.frame.height - margin))
                 editButton.setTitle(actionName, for: .normal)
                 editButton.setTitleColor(UIColor.primary, for: .normal)
-//                editButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
                 editButton.contentHorizontalAlignment = .right
                 editButton.isEnabled = true
                 editButton.tag = section

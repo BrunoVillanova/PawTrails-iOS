@@ -44,14 +44,24 @@ class Message {
     // System messages
     
     enum systemMessage {
-        case passwordRequirements, forgotPassword, unknown
+        case passwordRequirements, forgotPassword, newSharedUserEmailRequirements, unknown
     }
     
     func get(_ sm: systemMessage) -> String {
         switch sm {
         case .passwordRequirements: return lm("The password must have at least 8 characters including uppercase letters, lowercase letters and numbers.")
         case .forgotPassword: return lm("Forgot Password?")
+        case .newSharedUserEmailRequirements: return lm("The email must belong to a registered user in the Pawtrails System")
         default: return lm("")
+        }
+    }
+    
+    func get(_ st: GPSStatus) -> String {
+        switch st {
+        case .idle: return "Perfect"
+        case .noDeviceFound: return "No device found"
+        case .disconected: return "Device Disconnected"
+        case .unknown: return "-"
         }
     }
     

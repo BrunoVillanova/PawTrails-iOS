@@ -148,7 +148,7 @@ class DataManager {
         tasks.notify(queue: .main) {
             
             queue.sync {
-                for error in errors { Reporter.send(file: "#file", function: "#function", error) }
+                for error in errors { Reporter.send(file: "\(#file)", function: "\(#function)", error) }
             }
             callback(nil)
         }
@@ -373,7 +373,7 @@ class DataManager {
     func check(_ deviceCode: String, callback: @escaping petCheckDeviceCallback) {
         APIRepository.instance.check(deviceCode) { (error, isCodeValid) in
             if let error = error {
-                Reporter.send(file: "#file", function: "#function", error)
+                Reporter.send(file: "\(#file)", function: "\(#function)", error)
             }
             callback(error == nil && isCodeValid)
         }
@@ -578,7 +578,7 @@ class DataManager {
         
         group.notify(queue: .main) {
             for error in errors {
-                Reporter.send(file: "#file", function: "#function", error)
+                Reporter.send(file: "\(#file)", function: "\(#function)", error)
             }
             callback(errors)
         }
@@ -655,7 +655,7 @@ class DataManager {
             }else if let error = error {
                 callback(DataManagerError(APIError: error), nil)
             }else {
-                Reporter.debugPrint(file: "#file", function: "#function", "DataManager - Load Pet Friends", error ?? "nil error", friends ?? "nil friends")
+                Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "DataManager - Load Pet Friends", error ?? "nil error", friends ?? "nil friends")
                 callback(nil, nil)
             }
         }
@@ -703,7 +703,7 @@ class DataManager {
             }else if let error = error, let callback = callback {
                 callback(DataManagerError(APIError: error), nil)
             }else {
-                Reporter.debugPrint(file: "#file", function: "#function", "DataManager - Load Share Pet Users", error ?? "nil error", users ?? "nil users")
+                Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "DataManager - Load Share Pet Users", error ?? "nil error", users ?? "nil users")
                 if let callback = callback { callback(nil, nil) }
             }
         }

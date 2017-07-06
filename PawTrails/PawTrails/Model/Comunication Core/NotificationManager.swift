@@ -75,15 +75,20 @@ class NotificationManager {
     func getPetGPSUpdates(_ callback: @escaping ((_ id: Int, _ data: GPSData)->())){
         
         self.addObserver(Listener(.gpsUpdates)) { (notification) in
-            if let petId = notification.userInfo?["id"] as? Int {
-                if let updates = SocketIOManager.instance.getGPSData(for: petId) {
-                    if updates.locationAndTime == "" && !updates.point.coordinates.isDefaultZero {  GeocoderManager.Intance.reverse(type: .pet, with: updates.point, for: petId) }
-                    DispatchQueue.main.async {
-                        callback(petId, updates)
-                    }
+            self.handlePetGPSUpdates(notification, callback)
+        }
+    }
+    
+    private func handlePetGPSUpdates(_ notification: Notification, _ callback: @escaping ((_ id: Int, _ data: GPSData)->())){
+        if let petId = notification.userInfo?["id"] as? Int {
+            if let updates = SocketIOManager.instance.getGPSData(for: petId) {
+                if updates.locationAndTime == "" && !updates.point.coordinates.isDefaultZero {  GeocoderManager.Intance.reverse(type: .pet, with: updates.point, for: petId) }
+                DispatchQueue.main.async {
+                    callback(petId, updates)
                 }
             }
         }
+
     }
     
     /// Removes All Pets GPS updates observer
@@ -101,14 +106,7 @@ class NotificationManager {
     func getPetGPSUpdates(for id: Int, _ callback: @escaping ((_ id: Int, _ data: GPSData)->())){
         
         self.addObserver(Listener(.gpsUpdates, id)) { (notification) in
-            if let petId = notification.userInfo?["id"] as? Int {
-                if let updates = SocketIOManager.instance.getGPSData(for: petId) {
-                    if updates.locationAndTime == "" && !updates.point.coordinates.isDefaultZero {  GeocoderManager.Intance.reverse(type: .pet, with: updates.point, for: petId) }
-                    DispatchQueue.main.async {
-                        callback(petId, updates)
-                    }
-                }
-            }
+            self.handlePetGPSUpdates(notification, callback)
         }
     }
 
@@ -137,7 +135,7 @@ class NotificationManager {
                     callback(pets)
                 }
             }else{
-                Reporter.send(file: "#file", function: "#function", NSError(domain: "Notification Manager", code: 0, userInfo: ["reason": "couldn't cast pets", "data": notification.userInfo ?? "no data"]))
+                Reporter.send(file: "\(#file)", function: "\(#function)", NSError(domain: "Notification Manager", code: 0, userInfo: ["reason": "couldn't cast pets", "data": notification.userInfo ?? "no data"]))
             }
         }
     }
@@ -167,7 +165,7 @@ class NotificationManager {
                 callback(geocode)
             }
             }else{
-                Reporter.send(file: "#file", function: "#function", NSError(domain: "Notification Manager", code: 1, userInfo: ["reason": "couldn't cast geocode", "data": notification.userInfo ?? "no data"]))
+                Reporter.send(file: "\(#file)", function: "\(#function)", NSError(domain: "Notification Manager", code: 1, userInfo: ["reason": "couldn't cast geocode", "data": notification.userInfo ?? "no data"]))
             }
         }
     }
@@ -197,7 +195,7 @@ class NotificationManager {
                 callback(event)
             }
             }else{
-                Reporter.send(file: "#file", function: "#function", NSError(domain: "Notification Manager", code: 1, userInfo: ["reason": "couldn't cast event", "data": notification.userInfo ?? "no data"]))
+                Reporter.send(file: "\(#file)", function: "\(#function)", NSError(domain: "Notification Manager", code: 1, userInfo: ["reason": "couldn't cast event", "data": notification.userInfo ?? "no data"]))
             }
         }
     }

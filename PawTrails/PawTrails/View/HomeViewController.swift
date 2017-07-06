@@ -50,6 +50,7 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     var data = [searchElement]()
     
     var selectedPet: Pet?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,7 +66,7 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
         blurView.round(radius: 18)
         
         blurView.isHidden = true
-        slideIndicator.round()
+        slideIndicator.round(radius: 3.0)
         blurViewCloseButton.circle()
         blurViewCloseButton.tintColor = UIColor.primary
         petImageView.circle()
@@ -458,12 +459,19 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
     
     func perform(action:Action, speed:Double = 1, animated:Bool = true){
         
-        self.topConstraintBlurView.constant = self.openedHalf
         if action == .openFull { self.topConstraintBlurView.constant = self.openedFull }
+        if action == .openHalf { self.topConstraintBlurView.constant = self.openedHalf }
         if action == .close { self.topConstraintBlurView.constant = self.closed }
         if animated {
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.8, options: UIViewAnimationOptions.curveEaseInOut, animations: {
                 self.view.layoutIfNeeded()
+                
+                if action == .openFull {
+                    self.blurView.effect = UIBlurEffect(style: UIBlurEffectStyle.extraLight)
+                }else{
+                    self.blurView.effect = UIBlurEffect(style: UIBlurEffectStyle.light)
+                }
+                
             }) { (_) in
                 if action == .close {
                     self.focusOnPets()

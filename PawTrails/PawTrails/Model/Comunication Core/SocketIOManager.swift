@@ -25,6 +25,8 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     private var onUpdates = [Int:Bool]()
     private var PetsGPSData = NSCache<NSNumber,GPSData>()
     
+    public var isConnected = false
+    
     init(SSLEnabled: Bool = true) {
         super.init()
         
@@ -42,25 +44,30 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     /// - Parameter callback: returns socket IO connection status
     func connect(_ callback: ((SocketIOStatus)->())? = nil) {
 
+        self.socket.on(channel.diconnect.name) { (_, _) in
+            self.isConnected = false
+        }
+        
         self.socket.on(channel.auth.name) { (data, ack) in
             let status = self.getStatus(data)
-            Reporter.debugPrint(file: "#file", function: "#function", status)
+            Reporter.debugPrint(file: "\(#file)", function: "\(#function)", status)
             if status != .waiting, let callback = callback {
+                self.isConnected = true
                 callback(status)
             }
         }
         self.socket.on(channel.connect.name) { (data, ack) in
             let token = SharedPreferences.get(.token)
             if token != "" {
-                Reporter.debugPrint(file: "#file", function: "#function", "Connecting")
+                Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Connecting")
                 self.socket.emit(channel.auth.name, with: [token])
             }else{
-                Reporter.send(file: "#file", function: "#function", NSError(domain: "Socket IO", code: -1, userInfo: ["reason": "missing token"]))
+                Reporter.send(file: "\(#file)", function: "\(#function)", NSError(domain: "Socket IO", code: -1, userInfo: ["reason": "missing token"]))
             }
             
         }
         self.socket.on(channel.events.name, callback: { (data, ack) in
-            Reporter.debugPrint(file: "#file", function: "#function", "Event RS", data)
+            Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Event RS", data)
             self.handleEventUpdated(data)
         })
         self.socket.connect()
@@ -69,16 +76,9 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     
     /// Disconnects from Socket I.O.
     func disconnect() {
+        self.isConnected = false
         self.socket.disconnect()
     }
-    
-    /// isConnected
-    ///
-    /// - Returns: return *true* if the status is .connected
-    func isConnected() -> Bool {
-        return socket.isConnected
-    }
-
     
     //MARK:- Pet
     
@@ -106,13 +106,14 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     /// - Parameter petIds: pet ids
     func startGPSUpdates(for petIds: [Int]){
         
-        if socket.isConnected {
+        if isConnected {
             for petId in petIds {
                 self.startGPSUpdatesEffective(for: petId)
             }
         }else{
-            connect({ (error) in
-                if error == .connected {
+            connect({ (status) in
+                Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "connect answer: ", status)
+                if status == .connected {
                     self.startGPSUpdates(for: petIds)
                 }
             })
@@ -122,10 +123,16 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     private func startGPSUpdatesEffective(for petId: Int) {
         
         if onUpdates[petId] == nil || (onUpdates[petId] != nil && onUpdates[petId] == false) {
-            Reporter.debugPrint(file: "#file", function: "#function", "Start Updates for pet: ", petId)
+            Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Start Updates for pet: ", petId)
+            
+            if PetsGPSData.object(forKey: NSNumber(value: petId)) == nil {
+                let data = GPSData()
+                data.status = .disconected
+                PetsGPSData.setObject(data, forKey: NSNumber(value: petId))
+            }
             
             self.socket.on(channel.gpsUpdatesName(for: petId), callback: { (data, ack) in
-                Reporter.debugPrint(file: "#file", function: "#function", "gpsData Update response", data)
+                Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "gpsData Update response", data)
                 self.handleGPSUpdates(data)
             })
             self.onUpdates[petId] = true
@@ -142,7 +149,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
 
             self.onUpdates[id] = false
 
-            Reporter.debugPrint(file: "#file", function: "#function", "Stop Updates for pet: ", id)
+            Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Stop Updates for pet: ", id)
             socket.emit(channel.startGPSUpdates.name, Int(id))
         }
     }
@@ -151,10 +158,9 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         
         if let json = data.first as? [String:Any] {
             
-            if let error = json["error"] {
-                Reporter.debugPrint(file: "#file", function: "#function", "SIO-Error :", error)
-            }else if let id = json.tryCastInteger(for: "petId") {
-                Reporter.debugPrint(file: "#file", function: "#function", "GPS Updates \(id)")
+            
+            if let id = json.tryCastInteger(for: "petId") {
+                Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "GPS Updates \(id)")
                 if let data = getGPSData(for: id) {
                     data.update(json)
                 }else{
@@ -162,10 +168,11 @@ class SocketIOManager: NSObject, URLSessionDelegate {
                 }
                 NotificationManager.instance.postPetGPSUpdates(with: id)
             }else {
-                Reporter.debugPrint(file: "#file", function: "#function", json)
+                Reporter.debugPrint(file: "\(#file)", function: "\(#function)", json)
             }
+
         }else{
-            Reporter.debugPrint(file: "#file", function: "#function", data)
+            Reporter.debugPrint(file: "\(#file)", function: "\(#function)", data)
         }
     }
     
@@ -178,12 +185,12 @@ class SocketIOManager: NSObject, URLSessionDelegate {
             let error = json["errors"].intValue
             
             if error != 0 {
-                Reporter.send(file: "#file", function: "#function", NSError(domain: "Socket IO Handle Events", code: error, userInfo: dict))
+                Reporter.send(file: "\(#file)", function: "\(#function)", NSError(domain: "Socket IO Handle Events", code: error, userInfo: dict))
             }else {
                 NotificationManager.instance.post(Event(json))
             }
         }else{
-            Reporter.send(file: "#file", function: "#function", NSError(domain: "Socket IO Handle Events", code: -1, userInfo: ["data":data]))
+            Reporter.send(file: "\(#file)", function: "\(#function)", NSError(domain: "Socket IO Handle Events", code: -1, userInfo: ["data":data]))
         }
     }
     
@@ -201,7 +208,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         if let element = ((data as NSArray)[0] as? NSArray)?[0] as? String {
             return element == "unauthorized" ? SocketIOStatus.unauthorized : SocketIOStatus.unknown
         }
-        Reporter.debugPrint(file: "#file", function: "#function", data, data.first as? [String:Any] ?? "", data as? [String] ?? "")
+        Reporter.debugPrint(file: "\(#file)", function: "\(#function)", data, data.first as? [String:Any] ?? "", data as? [String] ?? "")
         return SocketIOStatus.unknown
     }
     
@@ -241,11 +248,12 @@ class SocketIOManager: NSObject, URLSessionDelegate {
 
 fileprivate enum channel {
     
-    case connect, auth, events, startGPSUpdates, stopGPSUpdates
+    case connect, diconnect, auth, events, startGPSUpdates, stopGPSUpdates
     
     var name: String {
         switch self {
         case .connect: return "connect"
+        case .diconnect: return "diconnect"
         case .auth: return "authCheck"
         case .events: return "events"
         case .startGPSUpdates: return "roomjoin"

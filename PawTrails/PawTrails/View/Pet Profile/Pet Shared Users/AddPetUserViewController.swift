@@ -100,6 +100,10 @@ class AddPetUserViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
     
+    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return section == 0 ? Message.instance.get(.newSharedUserEmailRequirements) : nil
+    }
+    
     // MARK: - UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

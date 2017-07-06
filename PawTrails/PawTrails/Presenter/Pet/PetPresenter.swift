@@ -200,8 +200,8 @@ class PetPresenter {
                         }
                     }
                     
-                }else{
-                    callback(code.type, code.name)
+                }else if code.type == .pet, let data = SocketIOManager.instance.getGPSData(for: code.id){
+                    callback(code.type, data.locationAndTime)
                 }
             }
             

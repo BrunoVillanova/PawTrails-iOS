@@ -341,8 +341,13 @@ class Fence: NSObject {
     
 }
 
+public enum GPSStatus{
+    case noDeviceFound, idle, disconected, unknown
+}
+
 class GPSData: NSObject {
     
+    var status: GPSStatus
     var point: Point
     var signal: Int
     var satellites: Int
@@ -353,6 +358,7 @@ class GPSData: NSObject {
     var movementAlarm: Bool = false
     
     override init() {
+        status = .unknown
         point = Point()
         signal = 0
         satellites = 0
@@ -367,12 +373,21 @@ class GPSData: NSObject {
     
     func update(_ data:[String:Any]) {
         
+        if let statusValue = data["error"] as? Int {
+            switch statusValue {
+            case 31: status = .noDeviceFound
+            default: break
+            }
+        }else{
+            status = .idle
+        }
+        
         if let pointData = data["location"] as? [String:Any] {
             let newPoint = Point(pointData)
             if point.coordinates.location.coordinateString != newPoint.coordinates.location.coordinateString {
                 locationAndTime = ""
                 point = newPoint
-                Reporter.debugPrint(file: "#file", function: "#function", "Requested for Update \(data["id"] ?? "")")
+                Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Requested for Update \(data["id"] ?? "")")
             }
         }else{
             point = Point()

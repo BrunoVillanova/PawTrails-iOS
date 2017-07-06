@@ -56,7 +56,7 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     private func updateRow(by id: Int){
         
-        Reporter.debugPrint(file: "#file", function: "#function", "Update Pet \(id)")
+        Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Update Pet \(id)")
         if let index = self.pets[id] {
             self.tableView.reloadRows(at: [index], with: .automatic)
         }
@@ -127,24 +127,32 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         pets[pet.id] = indexPath
         
         if let data = SocketIOManager.instance.getGPSData(for: pet.id) {
-            cell.batteryLabel.text = data.batteryString
-            cell.batteryLabel.textColor = UIColor.darkText
-            cell.signalLabel.text = data.signalString
-            cell.signalLabel.textColor = UIColor.darkText
-            if data.locationAndTime != "" {
-                cell.subtitleLabel.text = data.locationAndTime
-                cell.subtitleLabel.textColor = UIColor.darkText
+            
+            if data.status == .idle {
+                cell.batteryLabel.text = data.batteryString
+                cell.batteryLabel.textColor = UIColor.darkGray
+                cell.signalLabel.text = data.signalString
+                cell.signalLabel.textColor = UIColor.darkGray
+                if data.locationAndTime != "" {
+                    cell.subtitleLabel.text = data.locationAndTime
+                    cell.subtitleLabel.textColor = UIColor.darkGray
+                }else{
+                    cell.subtitleLabel.text = cell.subtitleLabel.text
+                    cell.subtitleLabel.textColor = UIColor.lightGray
+                }
             }else{
-                cell.subtitleLabel.text = cell.subtitleLabel.text
-                cell.subtitleLabel.textColor = UIColor.lightText
+                cell.batteryLabel.text = "-"
+                cell.batteryLabel.textColor = UIColor.lightGray
+                cell.batteryImageView.alpha = 0.5
+                cell.signalLabel.text = "-"
+                cell.signalLabel.textColor = UIColor.lightGray
+                cell.signalImageView.alpha = 0.5
+                cell.subtitleLabel.text = Message.instance.get(data.status)
+                cell.subtitleLabel.textColor = UIColor.lightGray
             }
+            
         }else{
-            cell.batteryLabel.text = cell.batteryLabel.text
-            cell.batteryLabel.textColor = UIColor.lightText
-            cell.signalLabel.text = cell.signalLabel.text
-            cell.signalLabel.textColor = UIColor.lightText
-            cell.subtitleLabel.text = cell.subtitleLabel.text
-            cell.subtitleLabel.textColor = UIColor.lightText
+            cell.alpha = 0.5
         }
         
         cell.titleLabel.text = pet.name

@@ -113,7 +113,7 @@ class PetsPresenter {
     
     func startPetsListUpdates(){
         NotificationManager.instance.getPetListUpdates { (pets) in
-            Reporter.debugPrint(file: "#file", function: "#function", "Time to update pets on list")
+            Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Time to update pets on list")
             self.ownedPets = pets.filter({ $0.isOwner })
             self.sharedPets = pets.filter({ !$0.isOwner })
             self.view?.loadPets()

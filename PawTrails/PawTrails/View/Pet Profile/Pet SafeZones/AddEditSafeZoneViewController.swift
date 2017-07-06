@@ -17,6 +17,7 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     @IBOutlet weak var iconTextField: UITextField!
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var slideIndicator: UILabel!
     
     @IBOutlet weak var userFocusButton: UIButton!
     @IBOutlet weak var petFocusButton: UIButton!
@@ -65,6 +66,8 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
         mapView.mapType = .hybrid
         mapView.delegate = self
         
+        slideIndicator.round(radius: 3.0)
+        
         manager.delegate = self
         let status = CLLocationManager.authorizationStatus()
         if status == .notDetermined { manager.requestWhenInUseAuthorization() }
@@ -112,15 +115,18 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     
     override func viewDidAppear(_ animated: Bool) {
         
-        let _view = UIView(frame: mapView.bounds)
+        let _view = UIView(frame: UIScreen.main.bounds)
         
         if let safezone = safezone {
             
             guard let center = safezone.point1?.coordinates else { return }
             guard let topCenter = safezone.point2?.coordinates else { return }
-            self.mapView.load(with: center, topCenter: topCenter, shape: shape, into: view, callback: { (fence) in
-                self.fence = fence
-                self.updateFenceDistance()
+            
+            self.mapView.load(with: center, topCenter: topCenter, shape: self.shape, into: _view, callback: { (fence) in
+                if let fence = fence {
+                    self.fence = fence
+                    self.updateFenceDistance()
+                }
             })
             
         }else{
@@ -410,6 +416,11 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
         self.topConstraint.constant = action == .open ? self.opened : self.closed
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.8, options: UIViewAnimationOptions.curveEaseInOut, animations: {
             self.view.layoutIfNeeded()
+//            if action == .open {
+//                self.blurView.effect = UIBlurEffect(style: UIBlurEffectStyle.extraLight)
+//            }else{
+//                self.blurView.effect = UIBlurEffect(style: UIBlurEffectStyle.light)
+//            }
         }, completion: nil)
         
     }
