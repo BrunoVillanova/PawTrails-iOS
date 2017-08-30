@@ -33,7 +33,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         let urlString = SSLEnabled ? self.urlStringSSL : self.urlString
         
         if let url = URL(string: urlString) {
-            self.socket = SocketIOClient(socketURL: url, config: [.log(false), .selfSigned(SSLEnabled), .secure(SSLEnabled), .sessionDelegate(self), .forceNew(true)])
+            self.socket = SocketIOClient(socketURL: url, config: [.log(false), .selfSigned(SSLEnabled), .secure(SSLEnabled), .forceNew(true)])
         }
         
         for key in self.onUpdates.keys {  self.onUpdates[key] = false }
@@ -213,37 +213,37 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     }
     
     // URLSessionDelegate
-    
-    internal func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
-        
-        if (challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust) {
-            if let serverTrust = challenge.protectionSpace.serverTrust {
-                var secresult = SecTrustResultType.invalid
-                let status = SecTrustEvaluate(serverTrust, &secresult)
-                
-                if(errSecSuccess == status) {
-                    if let serverCertificate = SecTrustGetCertificateAtIndex(serverTrust, 0) {
-                        let serverCertificateData = SecCertificateCopyData(serverCertificate)
-                        let data = CFDataGetBytePtr(serverCertificateData)
-                        let size = CFDataGetLength(serverCertificateData)
-                        let cert1 = NSData(bytes: data, length: size)
-                        let file_der = Bundle.main.path(forResource: "attitudetechie", ofType: "der")
-                        
-                        if let file = file_der {
-
-                            if let cert2 = NSData(contentsOfFile: file) {
-                                if cert1.isEqual(to: cert2 as Data) {
-                                    completionHandler(URLSession.AuthChallengeDisposition.useCredential, URLCredential(trust:serverTrust))
-                                    return
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        completionHandler(URLSession.AuthChallengeDisposition.cancelAuthenticationChallenge, nil)
-    }
+//    
+//    internal func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+//        
+//        if (challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust) {
+//            if let serverTrust = challenge.protectionSpace.serverTrust {
+//                var secresult = SecTrustResultType.invalid
+//                let status = SecTrustEvaluate(serverTrust, &secresult)
+//                
+//                if(errSecSuccess == status) {
+//                    if let serverCertificate = SecTrustGetCertificateAtIndex(serverTrust, 0) {
+//                        let serverCertificateData = SecCertificateCopyData(serverCertificate)
+//                        let data = CFDataGetBytePtr(serverCertificateData)
+//                        let size = CFDataGetLength(serverCertificateData)
+//                        let cert1 = NSData(bytes: data, length: size)
+//                        let file_der = Bundle.main.path(forResource: "attitudetechie", ofType: "der")
+//                        
+//                        if let file = file_der {
+//
+//                            if let cert2 = NSData(contentsOfFile: file) {
+//                                if cert1.isEqual(to: cert2 as Data) {
+//                                    completionHandler(URLSession.AuthChallengeDisposition.useCredential, URLCredential(trust:serverTrust))
+//                                    return
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        completionHandler(URLSession.AuthChallengeDisposition.cancelAuthenticationChallenge, nil)
+//    }
 }
 
 fileprivate enum channel {

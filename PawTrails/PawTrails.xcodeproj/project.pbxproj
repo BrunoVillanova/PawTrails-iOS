@@ -27,7 +27,6 @@
 		44251AD61F0CD5170067F401 /* GoogleSymbolUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44251AD01F0CD5170067F401 /* GoogleSymbolUtilities.framework */; };
 		44251ADC1F0CD5260067F401 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44251AD71F0CD5260067F401 /* Assets.xcassets */; };
 		44251ADD1F0CD5260067F401 /* countrycodes.csv in Resources */ = {isa = PBXBuildFile; fileRef = 44251AD81F0CD5260067F401 /* countrycodes.csv */; };
-		44251ADE1F0CD5260067F401 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44251AD91F0CD5260067F401 /* Info.plist */; };
 		44251ADF1F0CD5260067F401 /* attitudetechie.der in Resources */ = {isa = PBXBuildFile; fileRef = 44251ADA1F0CD5260067F401 /* attitudetechie.der */; };
 		44251AE41F0CD54D0067F401 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251AE01F0CD54D0067F401 /* Extensions.swift */; };
 		44251AE51F0CD54D0067F401 /* ModelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251AE11F0CD54D0067F401 /* ModelExtensions.swift */; };
@@ -763,7 +762,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = AttitudeTech;
 				TargetAttributes = {
 					4414AE671EA0DD5B004A5134 = {
@@ -774,7 +773,7 @@
 					};
 					4415FF3E1E3B822900A81B13 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 7E2855LEH4;
+						DevelopmentTeam = V7JRLX587L;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -833,7 +832,6 @@
 				44251AD11F0CD5170067F401 /* GoogleService-Info.plist in Resources */,
 				44251B151F0CD5A90067F401 /* LaunchScreen.storyboard in Resources */,
 				44251ADC1F0CD5260067F401 /* Assets.xcassets in Resources */,
-				44251ADE1F0CD5260067F401 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1307,7 +1305,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 7E2855LEH4;
+				DEVELOPMENT_TEAM = V7JRLX587L;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1337,7 +1335,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 7E2855LEH4;
+				DEVELOPMENT_TEAM = V7JRLX587L;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
