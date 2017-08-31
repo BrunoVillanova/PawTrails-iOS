@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 class DataManager {
     
     static let instance = DataManager()

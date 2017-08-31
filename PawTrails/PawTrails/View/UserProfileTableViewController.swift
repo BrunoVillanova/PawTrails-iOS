@@ -22,6 +22,7 @@ class UserProfileTableViewController: UITableViewController, UserProfileView, UI
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         profileImageView.circle()
         presenter.attachView(self)
         UIApplication.shared.statusBarStyle = .lightContent
