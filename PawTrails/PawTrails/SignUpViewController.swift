@@ -1,25 +1,25 @@
 //
-//  InitialViewController.swift
+//  SignUpViewController.swift
 //  PawTrails
 //
-//  Created by Marc Perello on 27/01/2017.
+//  Created by Mohamed Ali on 01/09/2017.
 //  Copyright © 2017 AttitudeTech. All rights reserved.
 //
 
 import UIKit
 
-class InitialViewController: UIViewController, InitialView, UITextFieldDelegate, GIDSignInUIDelegate {
+class SignUpViewController: UIViewController, InitialView {
 
     @IBOutlet weak var emailTextField: UITextField!
+    
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var forgotPasswordButton: UIButton!
-    @IBOutlet weak var loginButton: UIButton!
+    
+    @IBOutlet weak var confirmPasswordTextField: UITextField!
+    
     @IBOutlet weak var signUpButton: UIButton!
-    @IBOutlet weak var socialMediaBar: UIStackView!
-    @IBOutlet weak var logoImageView: UIImageView!
-    @IBOutlet weak var facebookButton: UIButton!
-    @IBOutlet weak var googleButton: UIButton!
-    @IBOutlet weak var twitterButton: UIButton!
+    
+    @IBOutlet weak var termsAndCondButton: UIButton!
+    
     
     fileprivate let presenter = InitialPresenter()
     
@@ -27,69 +27,46 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
         super.viewDidLoad()
         presenter.attachView(self)
         
-       
+        emailTextField.layer.borderWidth = 0.5
+        passwordTextField.layer.borderWidth = 0.5
+        confirmPasswordTextField.layer.borderWidth = 0.5
+//
+      
         
-        loginButton.fullyroundedCorner()
+        let myColor = UIColor.groupTableViewBackground
+        emailTextField.layer.borderColor = myColor.cgColor
+        passwordTextField.layer.borderColor = myColor.cgColor
+        confirmPasswordTextField.layer.borderColor = myColor.cgColor
         
-        loginButton.backgroundColor = UIColor.primary
-        loginButton.tintColor = UIColor.secondary
         
-        facebookButton.fullyroundedCorner()
-        facebookButton.tintColor = UIColor.primary
-        facebookButton.border(color: UIColor.primary, width: 1.0)
+        signUpButton.fullyroundedCorner()
 
+
+    }
+    
+    
+    override func viewDidLayoutSubviews() {
         
-        forgotPasswordButton.tintColor = UIColor.primary
-        logoImageView.tintColor = UIColor.primary
-        facebookButton.imageView?.tintColor = UIColor.primary
-        googleButton.imageView?.tintColor = UIColor.primary
-        twitterButton.imageView?.tintColor = UIColor.primary
+        emailTextField.roundCorners(corners: [.topRight, .topLeft], radius: 10)
+        confirmPasswordTextField.roundCorners(corners: [.bottomRight, .bottomLeft], radius: 10)
+    
+    }
+
+    @IBAction func signUpBtnPressed(_ sender: Any) {
         
-       
-        
-        if #available(iOS 10.0, *) {
-            self.emailTextField.textContentType = UITextContentType.emailAddress
+        if passwordTextField.text == confirmPasswordTextField.text  {
+            
+            self.view.endEditing(true)
+            presenter.signUp(email: emailTextField.text, password: confirmPasswordTextField.text)
+            
+        } else {
+            alert(title: "", msg: "Passwords don't match Please reenter passwords")
         }
-        
-        if isDebug {
-            self.emailTextField.text = ezdebug.email
-            self.passwordTextField.text = ezdebug.password
-        }
-        
-        setTopBar(alpha: 1.0)
+    }
 
-        GIDSignIn.sharedInstance().uiDelegate = self
-        DispatchQueue.main.async {
-
-        }
+    @IBAction func cancelBtnPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
-    
-    
-
-    
-    override func viewWillAppear(_ animated: Bool) {
-        UIApplication.shared.statusBarStyle = .lightContent
-    }
-    
-    @IBAction func loginAction(_ sender: UIButton?) {
-        self.view.endEditing(true)
-        presenter.signIn(email: emailTextField.text, password:passwordTextField.text)
-    }
-    
-    @IBAction func facebookLogin(_ sender: UIButton) {
-        UIApplication.shared.statusBarStyle = .default
-        presenter.loginFB(vc: self)
-    }
-    
-    @IBAction func googleLogin(_ sender: UIButton) {
-        UIApplication.shared.statusBarStyle = .default
-        presenter.loginG()
-    }
-    
-    @IBAction func twitterLogin(_ sender: UIButton) {
-        presenter.loginTW(vc: self)
-    }
-    
     
     // MARK: - Initial View
     
@@ -113,6 +90,7 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
     
     func passwordFieldError() {
         self.passwordTextField.shake()
+        self.confirmPasswordTextField.shake()
     }
     
     func loggedSocialMedia() {
@@ -120,7 +98,7 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
     }
     
     func verifyAccount(_ email:String, _ password:String) {
-
+        
         if let vc = storyboard?.instantiateViewController(withIdentifier: "EmailVerificationViewController") as? EmailVerificationViewController {
             vc.email = email
             vc.password = password
@@ -141,27 +119,25 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
     }
     
     
-    // MARK: - UITextFieldDelegate
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         if textField == self.emailTextField {
             self.passwordTextField.becomeFirstResponder()
         }else if textField == self.passwordTextField {
             textField.resignFirstResponder()
-                    }else{
+        }else{
             textField.resignFirstResponder()
         }
         return true
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-//        textField.underline(color: UIColor.primary)
+        //        textField.underline(color: UIColor.primary)
         
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-//        textField.underline()
+        //        textField.underline()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -176,7 +152,11 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
             vc.email = self.emailTextField.text
         }
     }
+
     
-    // MARK:- GIDSignInUIDelegate   
 
 }
+
+
+
+

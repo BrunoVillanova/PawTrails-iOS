@@ -15,4 +15,5 @@ protocol View {
 protocol LoadingView {
     func beginLoadingContent()
     func endLoadingContent()
+
 }

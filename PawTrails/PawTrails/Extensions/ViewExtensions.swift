@@ -301,6 +301,22 @@ extension UIColor {
     
 }
 
+
+  // Mohamed - Set a placeholder color for textviews.
+
+
+extension UITextField{
+    @IBInspectable var placeHolderColor: UIColor? {
+        get {
+            return self.placeHolderColor
+        }
+        set {
+            self.attributedPlaceholder = NSAttributedString(string:self.placeholder != nil ? self.placeholder! : "", attributes:[NSForegroundColorAttributeName: newValue!])
+        }
+    }
+}
+
+
 extension UIView {
     
     func shake() {
@@ -314,6 +330,21 @@ extension UIView {
     func round(radius:CGFloat = 5) {
         self.layer.cornerRadius = radius
         self.clipsToBounds = true
+    }
+    
+    func fullyroundedCorner(radius: CGFloat = 22) {
+        self.layer.cornerRadius = radius
+        self.clipsToBounds = true
+    }
+    
+    // choose which corner do you want to make round.
+    func roundCorners(corners:UIRectCorner, radius: CGFloat) {
+        let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let mask = CAShapeLayer()
+        let rect = self.bounds
+        mask.frame = rect
+        mask.path = path.cgPath
+        self.layer.mask = mask
     }
     
     func circle() {

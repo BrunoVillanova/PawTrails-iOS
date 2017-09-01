@@ -110,6 +110,7 @@
 		4441ACA61EB8C72500FBE27F /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4441ACA51EB8C72500FBE27F /* SafariServices.framework */; };
 		4441ACA81EB8C72E00FBE27F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4441ACA71EB8C72E00FBE27F /* SystemConfiguration.framework */; };
 		4447217D1F03F12A001DCDE1 /* PawTrailsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4447217C1F03F12A001DCDE1 /* PawTrailsUITests.swift */; };
+		44475ADB1F5960B800D41AAA /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44475ADA1F5960B800D41AAA /* SignUpViewController.swift */; };
 		4452EEEE1ED58063004E13DC /* APITablesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4452EEED1ED58063004E13DC /* APITablesTests.swift */; };
 		4452EEF01ED5824D004E13DC /* APIPetRegistrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4452EEEF1ED5824D004E13DC /* APIPetRegistrationTests.swift */; };
 		4452EEF21ED59A93004E13DC /* APIPetShareUsersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4452EEF11ED59A93004E13DC /* APIPetShareUsersTests.swift */; };
@@ -258,6 +259,7 @@
 		4447217A1F03F12A001DCDE1 /* PawTrailsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PawTrailsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4447217C1F03F12A001DCDE1 /* PawTrailsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PawTrailsUITests.swift; sourceTree = "<group>"; };
 		4447217E1F03F12A001DCDE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		44475ADA1F5960B800D41AAA /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		4452EEED1ED58063004E13DC /* APITablesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APITablesTests.swift; sourceTree = "<group>"; };
 		4452EEEF1ED5824D004E13DC /* APIPetRegistrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIPetRegistrationTests.swift; sourceTree = "<group>"; };
 		4452EEF11ED59A93004E13DC /* APIPetShareUsersTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIPetShareUsersTests.swift; sourceTree = "<group>"; };
@@ -426,6 +428,7 @@
 				44251B181F0CD5BD0067F401 /* EmailVerificationViewController.swift */,
 				44251B191F0CD5BD0067F401 /* InitialViewController.swift */,
 				44251B1A1F0CD5BD0067F401 /* PasswordRecoveryViewController.swift */,
+				44475ADA1F5960B800D41AAA /* SignUpViewController.swift */,
 			);
 			name = Auth;
 			sourceTree = "<group>";
@@ -999,6 +1002,7 @@
 				44251B741F0CD6130067F401 /* CDAddress+CoreDataProperties.swift in Sources */,
 				44251B551F0CD5FE0067F401 /* Parsers.swift in Sources */,
 				44251B711F0CD6130067F401 /* CoreDataManager.swift in Sources */,
+				44475ADB1F5960B800D41AAA /* SignUpViewController.swift in Sources */,
 				44251B0C1F0CD5870067F401 /* AddEditSafeZonePresenter.swift in Sources */,
 				44251B3E1F0CD5DF0067F401 /* AddressTableViewController.swift in Sources */,
 				44251B761F0CD6130067F401 /* CDBreed+CoreDataProperties.swift in Sources */,
