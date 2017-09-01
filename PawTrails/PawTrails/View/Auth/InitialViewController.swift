@@ -41,7 +41,6 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
         
         forgotPasswordButton.tintColor = UIColor.primary
         logoImageView.tintColor = UIColor.primary
-        facebookButton.imageView?.tintColor = UIColor.primary
         googleButton.imageView?.tintColor = UIColor.primary
         twitterButton.imageView?.tintColor = UIColor.primary
         

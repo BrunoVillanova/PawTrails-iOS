@@ -41,6 +41,17 @@ class UserProfilePresenter {
         }
     }
     
+    // Mohamed -- Added logout Function to the protocol.
+    
+    
+    func logout() {
+        if DataManager.instance.signOut() {
+            self.view?.userNotSigned()
+        }else{
+            self.view?.errorMessage(ErrorMsg(title:"", msg:"Couldn't Logout"))
+        }
+    }
+    
     func loadUser() {
         DataManager.instance.loadUser { (error, user) in
             if let error = error {

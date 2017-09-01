@@ -18,14 +18,26 @@ class UserProfileTableViewController: UITableViewController, UserProfileView, UI
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     
+    @IBOutlet weak var logOutBtn: UIButton!
+    
     let presenter = UserProfilePresenter()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         profileImageView.circle()
+        profileImageView.border()
+        
+
+        
         presenter.attachView(self)
         UIApplication.shared.statusBarStyle = .lightContent
+        
+        
+        logOutBtn.fullyroundedCorner()
+        logOutBtn.tintColor = UIColor.primary
+        logOutBtn.border(color: UIColor.primary, width: 1.0)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -105,6 +117,12 @@ class UserProfileTableViewController: UITableViewController, UserProfileView, UI
         }
         
     }
+    
+    
+    
+    
+    // Mohamed - Required Delegate for SettingsView
+    
 
     
     
@@ -112,18 +130,16 @@ class UserProfileTableViewController: UITableViewController, UserProfileView, UI
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    @IBAction func logOutBtnPressed(_ sender: Any) {
+        
+        let alert = UIAlertController(title: "Warning", message: "Are you sure you want to log out?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+            self.presenter.logout()
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+
+
     
 }

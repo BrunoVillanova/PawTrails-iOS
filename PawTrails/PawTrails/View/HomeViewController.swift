@@ -263,6 +263,8 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
             switch annotation.id.type {
             case .pet:
                 if let pet = presenter.pets.first(where: { $0.id == annotation.id.id }) {
+                    
+                    
                     showPetDetails(pet)
                 }
             default:
@@ -528,6 +530,9 @@ class MKLocationId: Hashable {
 
 
 class MKLocation: MKPointAnnotation {
+    
+    let pet = Pet()
+    
     var color:UIColor
     var id: MKLocationId
     
@@ -536,6 +541,8 @@ class MKLocation: MKPointAnnotation {
         self.color = color
         super.init()
         self.coordinate = coordinate
+        
+        
     }
     
     func move(coordinate:CLLocationCoordinate2D){

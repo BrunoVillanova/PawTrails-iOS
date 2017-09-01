@@ -332,6 +332,8 @@ extension UIView {
         self.clipsToBounds = true
     }
     
+    
+  
     func fullyroundedCorner(radius: CGFloat = 22) {
         self.layer.cornerRadius = radius
         self.clipsToBounds = true
@@ -362,6 +364,16 @@ extension UIView {
         self.layer.borderColor = color.cgColor
         self.layer.masksToBounds = true
     }
+    
+    
+    func biggerBorder(color: UIColor = UIColor.blue, width: CGFloat = 1.0) {
+        self.layer.borderWidth = width
+        self.layer.borderColor = color.cgColor
+        self.layer.masksToBounds = true
+    }
+    
+    
+    
     
     func underline(color: UIColor = UIColor.lightGray, width: CGFloat = 1.0) {
         
@@ -402,7 +414,6 @@ extension UIImageView {
         let color: UIColor = isPetOwner ? .primary : .darkGray
         self.border(color: color, width: 2.0)
     }
-    
 }
 
 extension CGRect {
