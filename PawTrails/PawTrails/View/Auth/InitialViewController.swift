@@ -25,6 +25,12 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        self.view.isUserInteractionEnabled = true
+
+        
+        
         presenter.attachView(self)
         
        

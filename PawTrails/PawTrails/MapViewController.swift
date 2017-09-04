@@ -41,11 +41,6 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
         
         
         
-        firstButtonfromthebottom.circle()
-        secButtonFromTheBottom.circle()
-        thirdButtonFromTheBottom.circle()
-        thirdButtonFromTheBottom.backgroundColor = UIColor.white
-        
         
         petsCollectionView.delegate = self
         petsCollectionView.dataSource = self
@@ -211,14 +206,11 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
         if (doubleTap) {
             
             self.petsCollectionView.isHidden = true
-            self.secButtonFromTheBottom.backgroundColor  = UIColor.blue
             doubleTap = false
-            
             
         } else {
             //First Tap
             self.petsCollectionView.isHidden = false
-            self.secButtonFromTheBottom.backgroundColor  = UIColor.red
             doubleTap = true
         }
         
@@ -278,13 +270,7 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = petsCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! PetsCollectionViewCell
-        
-        
-        cell.petImageCell.shadow()
-        cell.petImageCell.circle()
-        cell.petImageCell.biggerBorder()
-        
-        
+
         let pet = presenter.pets[indexPath.row]
         
         let image = pet.image

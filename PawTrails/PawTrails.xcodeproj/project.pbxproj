@@ -110,6 +110,11 @@
 		443E80751F5D4F21008679FC /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443E80741F5D4F21008679FC /* MapViewController.swift */; };
 		443E80771F5D53D5008679FC /* PetsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443E80761F5D53D5008679FC /* PetsCollectionViewCell.swift */; };
 		443E807A1F5D87EC008679FC /* SelectPetsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443E80791F5D87EC008679FC /* SelectPetsVC.swift */; };
+		443E80841F5D8F34008679FC /* BEMAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 443E807D1F5D8F34008679FC /* BEMAnimationManager.m */; };
+		443E80851F5D8F34008679FC /* BEMCheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 443E807F1F5D8F34008679FC /* BEMCheckBox.m */; };
+		443E80861F5D8F34008679FC /* BEMCheckBoxGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 443E80811F5D8F34008679FC /* BEMCheckBoxGroup.m */; };
+		443E80871F5D8F34008679FC /* BEMPathManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 443E80831F5D8F34008679FC /* BEMPathManager.m */; };
+		443E808C1F5D9236008679FC /* SelectPetsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443E808B1F5D9236008679FC /* SelectPetsCell.swift */; };
 		4441ACA61EB8C72500FBE27F /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4441ACA51EB8C72500FBE27F /* SafariServices.framework */; };
 		4441ACA81EB8C72E00FBE27F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4441ACA71EB8C72E00FBE27F /* SystemConfiguration.framework */; };
 		4447217D1F03F12A001DCDE1 /* PawTrailsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4447217C1F03F12A001DCDE1 /* PawTrailsUITests.swift */; };
@@ -261,6 +266,15 @@
 		443E80741F5D4F21008679FC /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		443E80761F5D53D5008679FC /* PetsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetsCollectionViewCell.swift; sourceTree = "<group>"; };
 		443E80791F5D87EC008679FC /* SelectPetsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPetsVC.swift; sourceTree = "<group>"; };
+		443E807C1F5D8F34008679FC /* BEMAnimationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMAnimationManager.h; sourceTree = "<group>"; };
+		443E807D1F5D8F34008679FC /* BEMAnimationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMAnimationManager.m; sourceTree = "<group>"; };
+		443E807E1F5D8F34008679FC /* BEMCheckBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMCheckBox.h; sourceTree = "<group>"; };
+		443E807F1F5D8F34008679FC /* BEMCheckBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMCheckBox.m; sourceTree = "<group>"; };
+		443E80801F5D8F34008679FC /* BEMCheckBoxGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMCheckBoxGroup.h; sourceTree = "<group>"; };
+		443E80811F5D8F34008679FC /* BEMCheckBoxGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMCheckBoxGroup.m; sourceTree = "<group>"; };
+		443E80821F5D8F34008679FC /* BEMPathManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMPathManager.h; sourceTree = "<group>"; };
+		443E80831F5D8F34008679FC /* BEMPathManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMPathManager.m; sourceTree = "<group>"; };
+		443E808B1F5D9236008679FC /* SelectPetsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectPetsCell.swift; path = PawTrails/SelectPetsCell.swift; sourceTree = "<group>"; };
 		4441ACA51EB8C72500FBE27F /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		4441ACA71EB8C72E00FBE27F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		4447217A1F03F12A001DCDE1 /* PawTrailsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PawTrailsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -398,6 +412,7 @@
 		4415FF361E3B822900A81B13 = {
 			isa = PBXGroup;
 			children = (
+				443E807B1F5D8F34008679FC /* Classes */,
 				443E80781F5D87B1008679FC /* Adventures */,
 				4415FF411E3B822900A81B13 /* PawTrails */,
 				4414AE691EA0DD5B004A5134 /* PawTrailsTests */,
@@ -584,9 +599,25 @@
 		443E80781F5D87B1008679FC /* Adventures */ = {
 			isa = PBXGroup;
 			children = (
+				443E808B1F5D9236008679FC /* SelectPetsCell.swift */,
 				443E80791F5D87EC008679FC /* SelectPetsVC.swift */,
 			);
 			name = Adventures;
+			sourceTree = "<group>";
+		};
+		443E807B1F5D8F34008679FC /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				443E807C1F5D8F34008679FC /* BEMAnimationManager.h */,
+				443E807D1F5D8F34008679FC /* BEMAnimationManager.m */,
+				443E807E1F5D8F34008679FC /* BEMCheckBox.h */,
+				443E807F1F5D8F34008679FC /* BEMCheckBox.m */,
+				443E80801F5D8F34008679FC /* BEMCheckBoxGroup.h */,
+				443E80811F5D8F34008679FC /* BEMCheckBoxGroup.m */,
+				443E80821F5D8F34008679FC /* BEMPathManager.h */,
+				443E80831F5D8F34008679FC /* BEMPathManager.m */,
+			);
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		4440C5D01E8BA6B0007A13B1 /* Extensions */ = {
@@ -1021,9 +1052,11 @@
 				44251B0D1F0CD5870067F401 /* AddPetUserPresenter.swift in Sources */,
 				44251B511F0CD5DF0067F401 /* ScanQRViewController.swift in Sources */,
 				44F0BF361EFBF6C7008C26B3 /* EventManager.swift in Sources */,
+				443E80861F5D8F34008679FC /* BEMCheckBoxGroup.m in Sources */,
 				44251B741F0CD6130067F401 /* CDAddress+CoreDataProperties.swift in Sources */,
 				44251B551F0CD5FE0067F401 /* Parsers.swift in Sources */,
 				44251B711F0CD6130067F401 /* CoreDataManager.swift in Sources */,
+				443E80851F5D8F34008679FC /* BEMCheckBox.m in Sources */,
 				44475ADB1F5960B800D41AAA /* SignUpViewController.swift in Sources */,
 				44251B0C1F0CD5870067F401 /* AddEditSafeZonePresenter.swift in Sources */,
 				44251B3E1F0CD5DF0067F401 /* AddressTableViewController.swift in Sources */,
@@ -1053,6 +1086,7 @@
 				44251B411F0CD5DF0067F401 /* GenderTableViewController.swift in Sources */,
 				4415FF431E3B822900A81B13 /* AppDelegate.swift in Sources */,
 				44251AF31F0CD55F0067F401 /* Constants.swift in Sources */,
+				443E808C1F5D9236008679FC /* SelectPetsCell.swift in Sources */,
 				44251B7C1F0CD6130067F401 /* CDPetUser+CoreDataProperties.swift in Sources */,
 				44251B891F0CD6210067F401 /* CSVRepository.swift in Sources */,
 				44251B751F0CD6130067F401 /* CDBreed+CoreDataClass.swift in Sources */,
@@ -1063,6 +1097,7 @@
 				44B179621E4B62690070A18B /* Presenter.swift in Sources */,
 				44251B441F0CD5DF0067F401 /* AddEditSafeZoneViewController.swift in Sources */,
 				44251B7F1F0CD6130067F401 /* CDSafeZone+CoreDataClass.swift in Sources */,
+				443E80871F5D8F34008679FC /* BEMPathManager.m in Sources */,
 				44251B6F1F0CD6130067F401 /* NotificationManager.swift in Sources */,
 				44251B721F0CD6130067F401 /* APIManager.swift in Sources */,
 				4424DCF91E8E9F2300ACDF07 /* UserProfileTableViewController.swift in Sources */,
@@ -1089,6 +1124,7 @@
 				44FE723D1E4A2EF0007C7E24 /* DataManager.swift in Sources */,
 				44F239511EEEC1E70082FA36 /* SocketIOTestTableViewController.swift in Sources */,
 				44251B0E1F0CD5870067F401 /* PetBreedPresenter.swift in Sources */,
+				443E80841F5D8F34008679FC /* BEMAnimationManager.m in Sources */,
 				44251B501F0CD5DF0067F401 /* PetWeightTableViewController.swift in Sources */,
 				44251AF21F0CD55F0067F401 /* Errors.swift in Sources */,
 				44251B4F1F0CD5DF0067F401 /* PetTypeTableViewController.swift in Sources */,

@@ -17,8 +17,10 @@ class UiimageViewWithMask: UIImageView {
     
     var maskImageView = UIImageView()
     
+    @IBInspectable    
     var maskImage: UIImage? {
         didSet {
+            
             maskImageView.image = maskImage
             maskImageView.frame = bounds
             mask = maskImageView

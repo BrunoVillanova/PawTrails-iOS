@@ -8,26 +8,156 @@
 
 import UIKit
 
-class SelectPetsVC: UIViewController {
-
+class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, PetsView {
+    @IBOutlet weak var petsCollectionView: UICollectionView!
     @IBOutlet weak var startAdventureBtn: UIButton!
+    
+    var refreshControl = UIRefreshControl()
+    fileprivate let presenter = PetsPresenter()
+    fileprivate var pets = [Int:IndexPath]()
+
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         startAdventureBtn.fullyroundedCorner()
         startAdventureBtn.backgroundColor = UIColor.primary
         
+        
+        refreshControl.backgroundColor = UIColor.secondary
+        refreshControl.tintColor = UIColor.primary
+        refreshControl.addTarget(self, action: #selector(reloadPetsAPI), for: .valueChanged)
+        petsCollectionView.addSubview(refreshControl)
+        
+        
+        UIApplication.shared.statusBarStyle = .lightContent
+        presenter.attachView(self)
+        
+        petsCollectionView.delegate = self
+        petsCollectionView.dataSource = self
+}
+    
+    
+    @objc func reloadPetsAPI(){
+        presenter.loadPets()
     }
+    
+    deinit {
+        presenter.deteachView()
+    }
+
     
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
+        
+        reloadPets()
+        presenter.startPetsListUpdates()
+        presenter.startPetsGPSUpdates { (id) in
+            self.updateRow(by: id)
+        }
+        presenter.startPetsGeocodeUpdates { (geocode) in
+            self.updateRow(by: geocode.id)
+        }
 
+    }
+    
+    
+    
+    private func updateRow(by id: Int){
+        
+        Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Update Pet \(id)")
+        if let index = self.pets[id] {
+            self.petsCollectionView.reloadItems(at: [index])
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
-
+        presenter.stopPetListUpdates()
+        presenter.stopPetGPSUpdates()
+        presenter.stopPetsGeocodeUpdates()
     }
+    
+    
+    func reloadPets(){
+        presenter.getPets()
+    }
+    
+    
+    // Mohamed - PetsView
+    
+    func errorMessage(_ error: ErrorMsg) {
+        refreshControl.endRefreshing()
+        alert(title: error.title, msg: error.msg)
+    }
+
+    func loadPets() {
+        refreshControl.endRefreshing()
+        petsCollectionView.reloadData()
+    }
+
+    func petsNotFound() {
+        refreshControl.endRefreshing()
+        petsCollectionView.reloadData()
+    }
+
+    
+    // Mohamed: - UicollectionViewDataSource
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        var number = 0
+        if presenter.ownedPets.count != 0 { number += 1 }
+        if presenter.sharedPets.count != 0 { number += 1 }
+        return number
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if presenter.ownedPets.count > 0 && presenter.sharedPets.count > 0 {
+            return section == 0 ? presenter.ownedPets.count : presenter.sharedPets.count
+        }else{
+            return presenter.ownedPets.count + presenter.sharedPets.count
+        }
+    }
+    
+    func getPet(at indexPath: IndexPath) -> Pet {
+        
+        if presenter.ownedPets.count > 0 && presenter.sharedPets.count > 0 {
+            return indexPath.section == 0 ? presenter.ownedPets[indexPath.row] : presenter.sharedPets[indexPath.row]
+        }else if presenter.ownedPets.count > 0 {
+            return presenter.ownedPets[indexPath.row]
+        }else{
+            return presenter.sharedPets[indexPath.row]
+        }
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! SelectPetsCell
+        let pet = getPet(at: indexPath)
+        pets[pet.id] = indexPath
+        cell.petTitle.text = pet.name
+        if let imageData = pet.image as Data? {
+            cell.petImage.image = UIImage(data: imageData)
+        }else{
+            cell.petImage.image = nil
+        }
+        cell.petImage.circle()
+        
+        return cell
+        
+    }
+    
+
+    
+    @IBAction func selectAllPressed(_ sender: Any) {
+  
+        
+    }
+    
+ 
 
     @IBAction func closebtnPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
