@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var petsCollectionView: UICollectionView!
@@ -19,24 +19,45 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     
     @IBOutlet weak var thirdButtonFromTheBottom: UIButton!
     
-    
+    let locationManager = CLLocationManager()
     fileprivate let presenter = HomePresenter()
-    
-    
     fileprivate var annotations = [MKLocationId:MKLocation]()
-
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-   
+        
+        self.locationManager.requestAlwaysAuthorization()
+        self.locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.startUpdatingLocation()
+        }
+        
+        mapView.showsUserLocation = true
+        
+        
+        
+        firstButtonfromthebottom.circle()
+        secButtonFromTheBottom.circle()
+        thirdButtonFromTheBottom.circle()
+        thirdButtonFromTheBottom.backgroundColor = UIColor.white
+        
+        
         petsCollectionView.delegate = self
         petsCollectionView.dataSource = self
         presenter.attachView(self)
-
+        
+        
+        petsCollectionView.isHidden = true
         reloadPets()
         self.petsCollectionView.reloadData()
-       
     }
+    
+    
     
     
     func reloadPets(){
@@ -53,7 +74,7 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
         }
         
     }
-
+    
     
     override func viewWillDisappear(_ animated: Bool) {
         presenter.stopPetListUpdates()
@@ -67,7 +88,7 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     func errorMessage(_ error: ErrorMsg) {
         self.alert(title: error.title, msg: error.msg)
     }
-
+    
     func loadPets(){
         
         var petsIdsToRemove = annotations.map({ $0.key.id })
@@ -108,8 +129,8 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
         self.annotations[id] = MKLocation(id: id, coordinate: coordinate, color: color)
         self.mapView.addAnnotation(self.annotations[id]!)
     }
-
-
+    
+    
     func updateTracking(_ id: MKLocationId, coordinate:CLLocationCoordinate2D) {
         self.annotations[id]?.move(coordinate:coordinate)
     }
@@ -153,7 +174,7 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
                 if presenter.pets.first(where: { $0.id == annotation.id.id }) != nil {
                     
                     
-//                    showPetDetails(pet)
+                    //                    showPetDetails(pet)
                     
                     
                     // here accessories for annotation
@@ -168,18 +189,13 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
         focusOnPets()
     }
-
+    
     
     func focusOnPets(){
         let coordinates = Array(self.annotations.values).filter({ $0.id.type == .pet && !$0.coordinate.isDefaultZero }).map({ $0.coordinate })
-       
-            mapView.setVisibleMapFor(coordinates)
+        
+        mapView.setVisibleMapFor(coordinates)
     }
-    
-    
-
-
-    
     
     
     
@@ -189,18 +205,40 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     }
     
     
-
+    var doubleTap : Bool! = false
     @IBAction func secButtonPressed(_ sender: Any) {
-        print("secButtonPressed")
+        
+        if (doubleTap) {
+            
+            self.petsCollectionView.isHidden = true
+            self.secButtonFromTheBottom.backgroundColor  = UIColor.blue
+            doubleTap = false
+            
+            
+        } else {
+            //First Tap
+            self.petsCollectionView.isHidden = false
+            self.secButtonFromTheBottom.backgroundColor  = UIColor.red
+            doubleTap = true
+        }
+        
     }
+    
+    
+    
+    
     
     
     @IBAction func thirdButtonPressed(_ sender: Any) {
-        print("thirdButtonPressed")
+        
+        self.mapView.setVisibleMapFor([self.mapView.userLocation.coordinate])
+        
+        
+//        self.mapView.setCenter(self.mapView.userLocation.coordinate, animated: true)
     }
     
     /// Mohamed - CollectionViewDataSource
-   
+    
     
     func presentPet(_ pet: Pet, activityEnabled:Bool = false) {
         
@@ -224,18 +262,18 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     }
     
     // Mohamed - UicollectionViewDataSource..
-
+    
     
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-
+    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return  presenter.pets.count
-
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -246,20 +284,18 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
         cell.petImageCell.circle()
         cell.petImageCell.biggerBorder()
         
-
-            let pet = presenter.pets[indexPath.row]
-            
-            let image = pet.image
-            
-            if let image = image { cell.petImageCell?.image = UIImage(data: image) }
+        
+        let pet = presenter.pets[indexPath.row]
+        
+        let image = pet.image
+        
+        if let image = image { cell.petImageCell?.image = UIImage(data: image) }
         
         return cell
     }
     
     
+}
 
-    
-    
-    }
 
 
