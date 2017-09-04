@@ -109,6 +109,7 @@
 		44340F3D1EB22B4900EB4312 /* APIPetProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44340F3C1EB22B4900EB4312 /* APIPetProfileTests.swift */; };
 		443E80751F5D4F21008679FC /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443E80741F5D4F21008679FC /* MapViewController.swift */; };
 		443E80771F5D53D5008679FC /* PetsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443E80761F5D53D5008679FC /* PetsCollectionViewCell.swift */; };
+		443E807A1F5D87EC008679FC /* SelectPetsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443E80791F5D87EC008679FC /* SelectPetsVC.swift */; };
 		4441ACA61EB8C72500FBE27F /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4441ACA51EB8C72500FBE27F /* SafariServices.framework */; };
 		4441ACA81EB8C72E00FBE27F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4441ACA71EB8C72E00FBE27F /* SystemConfiguration.framework */; };
 		4447217D1F03F12A001DCDE1 /* PawTrailsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4447217C1F03F12A001DCDE1 /* PawTrailsUITests.swift */; };
@@ -259,6 +260,7 @@
 		44340F3C1EB22B4900EB4312 /* APIPetProfileTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIPetProfileTests.swift; sourceTree = "<group>"; };
 		443E80741F5D4F21008679FC /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		443E80761F5D53D5008679FC /* PetsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetsCollectionViewCell.swift; sourceTree = "<group>"; };
+		443E80791F5D87EC008679FC /* SelectPetsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPetsVC.swift; sourceTree = "<group>"; };
 		4441ACA51EB8C72500FBE27F /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		4441ACA71EB8C72E00FBE27F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		4447217A1F03F12A001DCDE1 /* PawTrailsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PawTrailsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -344,6 +346,8 @@
 				440CEE5B1E3B9B1900F58A09 /* HomeViewController.swift */,
 				4424DCFC1E8E9F9400ACDF07 /* PetsViewController.swift */,
 				4424DCF81E8E9F2300ACDF07 /* UserProfileTableViewController.swift */,
+				443E80741F5D4F21008679FC /* MapViewController.swift */,
+				443E80761F5D53D5008679FC /* PetsCollectionViewCell.swift */,
 				441A0D4B1E55A5A500D02CE4 /* Auth */,
 				44251B1F1F0CD5DF0067F401 /* User Profile */,
 				44251B291F0CD5DF0067F401 /* Pet Profile */,
@@ -394,6 +398,7 @@
 		4415FF361E3B822900A81B13 = {
 			isa = PBXGroup;
 			children = (
+				443E80781F5D87B1008679FC /* Adventures */,
 				4415FF411E3B822900A81B13 /* PawTrails */,
 				4414AE691EA0DD5B004A5134 /* PawTrailsTests */,
 				4447217B1F03F12A001DCDE1 /* PawTrailsUITests */,
@@ -435,8 +440,6 @@
 				44251B191F0CD5BD0067F401 /* InitialViewController.swift */,
 				44251B1A1F0CD5BD0067F401 /* PasswordRecoveryViewController.swift */,
 				44475ADA1F5960B800D41AAA /* SignUpViewController.swift */,
-				443E80741F5D4F21008679FC /* MapViewController.swift */,
-				443E80761F5D53D5008679FC /* PetsCollectionViewCell.swift */,
 			);
 			name = Auth;
 			sourceTree = "<group>";
@@ -576,6 +579,14 @@
 				4452EEF31ED5CF03004E13DC /* APIPetSafeZonesTests.swift */,
 			);
 			name = API;
+			sourceTree = "<group>";
+		};
+		443E80781F5D87B1008679FC /* Adventures */ = {
+			isa = PBXGroup;
+			children = (
+				443E80791F5D87EC008679FC /* SelectPetsVC.swift */,
+			);
+			name = Adventures;
 			sourceTree = "<group>";
 		};
 		4440C5D01E8BA6B0007A13B1 /* Extensions */ = {
@@ -1065,6 +1076,7 @@
 				44251B0F1F0CD5870067F401 /* PetUserPresenter.swift in Sources */,
 				44251AE41F0CD54D0067F401 /* Extensions.swift in Sources */,
 				44251AF01F0CD55F0067F401 /* Messages.swift in Sources */,
+				443E807A1F5D87EC008679FC /* SelectPetsVC.swift in Sources */,
 				44251B3F1F0CD5DF0067F401 /* BirthdayViewController.swift in Sources */,
 				44251B801F0CD6130067F401 /* CDSafeZone+CoreDataProperties.swift in Sources */,
 				4424DCFF1E8EA1D900ACDF07 /* UserProfilePresenter.swift in Sources */,

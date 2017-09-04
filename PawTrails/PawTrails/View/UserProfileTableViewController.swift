@@ -29,8 +29,6 @@ class UserProfileTableViewController: UITableViewController, UserProfileView, UI
         profileImageView.circle()
         profileImageView.border()
         
-
-        
         presenter.attachView(self)
         UIApplication.shared.statusBarStyle = .lightContent
         
@@ -124,10 +122,6 @@ class UserProfileTableViewController: UITableViewController, UserProfileView, UI
     // Mohamed - Required Delegate for SettingsView
     
 
-    
-    
-    
-    
     
     
     @IBAction func logOutBtnPressed(_ sender: Any) {
