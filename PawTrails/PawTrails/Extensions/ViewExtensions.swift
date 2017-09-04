@@ -366,7 +366,7 @@ extension UIView {
     }
     
     
-    func biggerBorder(color: UIColor = UIColor.blue, width: CGFloat = 1.0) {
+    func biggerBorder(color: UIColor = UIColor.primary, width: CGFloat = 3.0) {
         self.layer.borderWidth = width
         self.layer.borderColor = color.cgColor
         self.layer.masksToBounds = true
