@@ -130,15 +130,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     }
     
     private func configureUIPreferences() {
-        
-        UIApplication.shared.statusBarStyle = .lightContent
-        
-        UINavigationBar.appearance().backgroundColor = UIColor.primary
-        UINavigationBar.appearance().barTintColor = UIColor.primary
-        UINavigationBar.appearance().tintColor = UIColor.secondary
+//        
+//        UIApplication.shared.statusBarStyle = .default
+//        
+        UINavigationBar.appearance().backgroundColor = UIColor.secondary
+        UINavigationBar.appearance().barTintColor = UIColor.secondary
+        UINavigationBar.appearance().tintColor = UIColor.primary
         UINavigationBar.appearance().titleTextAttributes = [
             NSFontAttributeName: UIFont.preferredFont(forTextStyle: .title2),
-            NSForegroundColorAttributeName: UIColor.secondary
+            NSForegroundColorAttributeName: UIColor.black
         ]
         
         UITabBar.appearance().tintColor = UIColor.primary

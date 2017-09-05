@@ -125,6 +125,7 @@
 		445F5F401F5EA7900069B513 /* BEMCheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 445F5F3A1F5EA7900069B513 /* BEMCheckBox.m */; };
 		445F5F411F5EA7900069B513 /* BEMCheckBoxGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 445F5F3C1F5EA7900069B513 /* BEMCheckBoxGroup.m */; };
 		445F5F421F5EA7900069B513 /* BEMPathManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 445F5F3E1F5EA7900069B513 /* BEMPathManager.m */; };
+		445F5F481F5EFA610069B513 /* TripXib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 445F5F471F5EFA610069B513 /* TripXib.xib */; };
 		446231401EE6BE4200B53C1D /* DataManagerPetSharingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4462313F1EE6BE4200B53C1D /* DataManagerPetSharingTests.swift */; };
 		447D4C171E44C4F5008F82F4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 447D4C161E44C4F5008F82F4 /* MapKit.framework */; };
 		448BE9681ED47F5C00665608 /* APIUserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448BE9671ED47F5C00665608 /* APIUserTest.swift */; };
@@ -287,6 +288,7 @@
 		445F5F3C1F5EA7900069B513 /* BEMCheckBoxGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMCheckBoxGroup.m; sourceTree = "<group>"; };
 		445F5F3D1F5EA7900069B513 /* BEMPathManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMPathManager.h; sourceTree = "<group>"; };
 		445F5F3E1F5EA7900069B513 /* BEMPathManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMPathManager.m; sourceTree = "<group>"; };
+		445F5F471F5EFA610069B513 /* TripXib.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TripXib.xib; sourceTree = "<group>"; };
 		4462313F1EE6BE4200B53C1D /* DataManagerPetSharingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerPetSharingTests.swift; sourceTree = "<group>"; };
 		447D4C161E44C4F5008F82F4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		448BE9671ED47F5C00665608 /* APIUserTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIUserTest.swift; sourceTree = "<group>"; };
@@ -601,6 +603,7 @@
 			children = (
 				443E808B1F5D9236008679FC /* SelectPetsCell.swift */,
 				443E80791F5D87EC008679FC /* SelectPetsVC.swift */,
+				445F5F471F5EFA610069B513 /* TripXib.xib */,
 			);
 			name = Adventures;
 			sourceTree = "<group>";
@@ -885,6 +888,7 @@
 				44251B161F0CD5A90067F401 /* Main.storyboard in Resources */,
 				44251AD11F0CD5170067F401 /* GoogleService-Info.plist in Resources */,
 				44251B151F0CD5A90067F401 /* LaunchScreen.storyboard in Resources */,
+				445F5F481F5EFA610069B513 /* TripXib.xib in Resources */,
 				44251ADC1F0CD5260067F401 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

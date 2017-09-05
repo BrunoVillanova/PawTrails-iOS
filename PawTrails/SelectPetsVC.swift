@@ -22,6 +22,9 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
     override func viewDidLoad() {
         super.viewDidLoad()
         
+
+
+        
         startAdventureBtn.isEnabled = false
         
 

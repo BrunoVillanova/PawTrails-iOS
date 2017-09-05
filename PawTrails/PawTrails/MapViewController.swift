@@ -25,6 +25,7 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,9 +53,7 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
         self.petsCollectionView.reloadData()
     }
     
-    
-    
-    
+
     func reloadPets(){
         presenter.getPets()
     }
@@ -281,6 +280,16 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     }
     
     
+}
+
+
+private extension MKPolyline {
+    convenience init(coordinates coords: Array<CLLocationCoordinate2D>) {
+        let unsafeCoordinates = UnsafeMutablePointer<CLLocationCoordinate2D>.allocate(capacity: coords.count)
+        unsafeCoordinates.initialize(from: coords, count: coords.count)
+        self.init(coordinates: unsafeCoordinates, count: coords.count)
+        unsafeCoordinates.deallocate(capacity: coords.count)
+    }
 }
 
 
