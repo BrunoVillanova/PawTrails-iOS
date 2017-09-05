@@ -22,6 +22,8 @@ class PetsPresenter {
     var ownedPets = [Pet]()
     var sharedPets = [Pet]()
     
+    
+    
     var pets: [Pet] {
         return ownedPets + sharedPets
     }
@@ -65,6 +67,9 @@ class PetsPresenter {
             
         }
     }
+    
+    
+  
     
     func loadPets() {
         

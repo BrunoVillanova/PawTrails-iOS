@@ -34,6 +34,7 @@ class UserProfileTableViewController: UITableViewController, UserProfileView, UI
         logOutBtn.fullyroundedCorner()
         logOutBtn.tintColor = UIColor.primary
         logOutBtn.border(color: UIColor.primary, width: 1.0)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -135,3 +136,6 @@ class UserProfileTableViewController: UITableViewController, UserProfileView, UI
 
     
 }
+
+
+

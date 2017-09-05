@@ -8,13 +8,15 @@
 
 import UIKit
 
-class SelectPetsCell: UICollectionViewCell {
+class SelectPetsCell: UICollectionViewCell, BEMCheckBoxDelegate {
     @IBOutlet weak var petImage: UIImageView!
     
     @IBOutlet weak var petTitle: UILabel!
+ 
     @IBOutlet weak var checkMarkView: BEMCheckBox!
     
     
+
     
     
 }

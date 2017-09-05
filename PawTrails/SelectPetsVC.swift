@@ -8,20 +8,22 @@
 
 import UIKit
 
-class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, PetsView {
+
+
+class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, PetsView, BEMCheckBoxDelegate {
     @IBOutlet weak var petsCollectionView: UICollectionView!
     @IBOutlet weak var startAdventureBtn: UIButton!
     
     var refreshControl = UIRefreshControl()
     fileprivate let presenter = PetsPresenter()
     fileprivate var pets = [Int:IndexPath]()
+    
 
-    
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        startAdventureBtn.isEnabled = false
+        
 
         startAdventureBtn.fullyroundedCorner()
         startAdventureBtn.backgroundColor = UIColor.primary
@@ -108,24 +110,18 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
     // Mohamed: - UicollectionViewDataSource
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        var number = 0
-        if presenter.ownedPets.count != 0 { number += 1 }
-        if presenter.sharedPets.count != 0 { number += 1 }
-        return number
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if presenter.ownedPets.count > 0 && presenter.sharedPets.count > 0 {
-            return section == 0 ? presenter.ownedPets.count : presenter.sharedPets.count
-        }else{
-            return presenter.ownedPets.count + presenter.sharedPets.count
-        }
+        
+        return presenter.pets.count
     }
     
     func getPet(at indexPath: IndexPath) -> Pet {
         
-        if presenter.ownedPets.count > 0 && presenter.sharedPets.count > 0 {
-            return indexPath.section == 0 ? presenter.ownedPets[indexPath.row] : presenter.sharedPets[indexPath.row]
+        if presenter.pets.count > 0 {
+            return presenter.pets[indexPath.item]
         }else if presenter.ownedPets.count > 0 {
             return presenter.ownedPets[indexPath.row]
         }else{
@@ -134,7 +130,15 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
     }
     
     
+    
+    
+
+    
+    
+    // CollectionVIew Method
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! SelectPetsCell
         let pet = getPet(at: indexPath)
         pets[pet.id] = indexPath
@@ -145,21 +149,60 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
             cell.petImage.image = nil
         }
         cell.petImage.circle()
+
+        cell.checkMarkView.delegate = self
+        cell.checkMarkView.tag = indexPath.item
+        
+        
         
         return cell
         
     }
     
-
     
-    @IBAction func selectAllPressed(_ sender: Any) {
-  
+    /// Check Box Delegate.
+    
+    var indexpath = NSIndexPath()
+
+    func didTap(_ checkBox: BEMCheckBox) {
+         self.indexpath = NSIndexPath(item: checkBox.tag, section: 0)
+        startAdventureBtn.isEnabled = true
         
     }
     
+    // select all Function....
+    
+    
+    @IBAction func selectAllPressed(_ sender: Any) {
+        for i in 0..<petsCollectionView.numberOfSections {
+            for j in 0..<petsCollectionView.numberOfItems(inSection: i) {
+                petsCollectionView.selectItem(at: IndexPath(row: j, section: i), animated: false, scrollPosition: .bottom)
+
+            }
+        }
+
+        for i in 0..<petsCollectionView.numberOfSections {
+            for j in 0..<petsCollectionView.numberOfItems(inSection: i) {
+                let index = NSIndexPath(item: j, section: i)
+                let cell = petsCollectionView.cellForItem(at: index as IndexPath) as! SelectPetsCell
+                cell.checkMarkView.setOn(true, animated: true)
+            }
+        }
+
+    }
+    
  
+    @IBAction func StartAdventureBtnPressed(_ sender: Any) {
+        
+        print("StartAdventureBtnPressed")
+                
+        
+        
+    }
 
     @IBAction func closebtnPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
 }
+
+
