@@ -29,6 +29,13 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        firstButtonfromthebottom.contentHorizontalAlignment = .fill
+
+        
+        firstButtonfromthebottom.contentMode = .scaleToFill
+        firstButtonfromthebottom.imageView?.contentMode = .scaleToFill
+        
         self.locationManager.requestAlwaysAuthorization()
         self.locationManager.requestWhenInUseAuthorization()
         

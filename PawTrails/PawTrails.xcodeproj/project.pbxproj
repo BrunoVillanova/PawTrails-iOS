@@ -106,6 +106,7 @@
 		44251B881F0CD6210067F401 /* CDRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B851F0CD6210067F401 /* CDRepository.swift */; };
 		44251B891F0CD6210067F401 /* CSVRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B861F0CD6210067F401 /* CSVRepository.swift */; };
 		44251B8A1F0CD6210067F401 /* APIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B871F0CD6210067F401 /* APIRepository.swift */; };
+		442531311F5FE6FF0017D21A /* TripScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442531301F5FE6FF0017D21A /* TripScreenViewController.swift */; };
 		44340F3D1EB22B4900EB4312 /* APIPetProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44340F3C1EB22B4900EB4312 /* APIPetProfileTests.swift */; };
 		443E80751F5D4F21008679FC /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443E80741F5D4F21008679FC /* MapViewController.swift */; };
 		443E80771F5D53D5008679FC /* PetsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443E80761F5D53D5008679FC /* PetsCollectionViewCell.swift */; };
@@ -125,7 +126,6 @@
 		445F5F401F5EA7900069B513 /* BEMCheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 445F5F3A1F5EA7900069B513 /* BEMCheckBox.m */; };
 		445F5F411F5EA7900069B513 /* BEMCheckBoxGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 445F5F3C1F5EA7900069B513 /* BEMCheckBoxGroup.m */; };
 		445F5F421F5EA7900069B513 /* BEMPathManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 445F5F3E1F5EA7900069B513 /* BEMPathManager.m */; };
-		445F5F481F5EFA610069B513 /* TripXib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 445F5F471F5EFA610069B513 /* TripXib.xib */; };
 		446231401EE6BE4200B53C1D /* DataManagerPetSharingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4462313F1EE6BE4200B53C1D /* DataManagerPetSharingTests.swift */; };
 		447D4C171E44C4F5008F82F4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 447D4C161E44C4F5008F82F4 /* MapKit.framework */; };
 		448BE9681ED47F5C00665608 /* APIUserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448BE9671ED47F5C00665608 /* APIUserTest.swift */; };
@@ -263,6 +263,7 @@
 		44251B851F0CD6210067F401 /* CDRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CDRepository.swift; path = Model/Repositories/CDRepository.swift; sourceTree = "<group>"; };
 		44251B861F0CD6210067F401 /* CSVRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CSVRepository.swift; path = Model/Repositories/CSVRepository.swift; sourceTree = "<group>"; };
 		44251B871F0CD6210067F401 /* APIRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIRepository.swift; path = Model/Repositories/APIRepository.swift; sourceTree = "<group>"; };
+		442531301F5FE6FF0017D21A /* TripScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripScreenViewController.swift; sourceTree = "<group>"; };
 		44340F3C1EB22B4900EB4312 /* APIPetProfileTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIPetProfileTests.swift; sourceTree = "<group>"; };
 		443E80741F5D4F21008679FC /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		443E80761F5D53D5008679FC /* PetsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetsCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -288,7 +289,6 @@
 		445F5F3C1F5EA7900069B513 /* BEMCheckBoxGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMCheckBoxGroup.m; sourceTree = "<group>"; };
 		445F5F3D1F5EA7900069B513 /* BEMPathManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMPathManager.h; sourceTree = "<group>"; };
 		445F5F3E1F5EA7900069B513 /* BEMPathManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMPathManager.m; sourceTree = "<group>"; };
-		445F5F471F5EFA610069B513 /* TripXib.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TripXib.xib; sourceTree = "<group>"; };
 		4462313F1EE6BE4200B53C1D /* DataManagerPetSharingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerPetSharingTests.swift; sourceTree = "<group>"; };
 		447D4C161E44C4F5008F82F4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		448BE9671ED47F5C00665608 /* APIUserTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIUserTest.swift; sourceTree = "<group>"; };
@@ -603,7 +603,7 @@
 			children = (
 				443E808B1F5D9236008679FC /* SelectPetsCell.swift */,
 				443E80791F5D87EC008679FC /* SelectPetsVC.swift */,
-				445F5F471F5EFA610069B513 /* TripXib.xib */,
+				442531301F5FE6FF0017D21A /* TripScreenViewController.swift */,
 			);
 			name = Adventures;
 			sourceTree = "<group>";
@@ -888,7 +888,6 @@
 				44251B161F0CD5A90067F401 /* Main.storyboard in Resources */,
 				44251AD11F0CD5170067F401 /* GoogleService-Info.plist in Resources */,
 				44251B151F0CD5A90067F401 /* LaunchScreen.storyboard in Resources */,
-				445F5F481F5EFA610069B513 /* TripXib.xib in Resources */,
 				44251ADC1F0CD5260067F401 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1073,6 +1072,7 @@
 				44251B461F0CD5DF0067F401 /* PetUserTableViewController.swift in Sources */,
 				44251B451F0CD5DF0067F401 /* AddPetUserViewController.swift in Sources */,
 				44251B1E1F0CD5BD0067F401 /* PasswordRecoveryViewController.swift in Sources */,
+				442531311F5FE6FF0017D21A /* TripScreenViewController.swift in Sources */,
 				44251B3D1F0CD5DF0067F401 /* EditUserProfileTableViewController.swift in Sources */,
 				44251B011F0CD5740067F401 /* PasswordRecoveryPresenter.swift in Sources */,
 				443E80771F5D53D5008679FC /* PetsCollectionViewCell.swift in Sources */,
