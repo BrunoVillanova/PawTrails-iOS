@@ -107,6 +107,7 @@
 		44251B891F0CD6210067F401 /* CSVRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B861F0CD6210067F401 /* CSVRepository.swift */; };
 		44251B8A1F0CD6210067F401 /* APIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B871F0CD6210067F401 /* APIRepository.swift */; };
 		442531311F5FE6FF0017D21A /* TripScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442531301F5FE6FF0017D21A /* TripScreenViewController.swift */; };
+		442531371F6047290017D21A /* FinishAdventureVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442531361F6047290017D21A /* FinishAdventureVC.swift */; };
 		44340F3D1EB22B4900EB4312 /* APIPetProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44340F3C1EB22B4900EB4312 /* APIPetProfileTests.swift */; };
 		443E80751F5D4F21008679FC /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443E80741F5D4F21008679FC /* MapViewController.swift */; };
 		443E80771F5D53D5008679FC /* PetsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443E80761F5D53D5008679FC /* PetsCollectionViewCell.swift */; };
@@ -264,6 +265,7 @@
 		44251B861F0CD6210067F401 /* CSVRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CSVRepository.swift; path = Model/Repositories/CSVRepository.swift; sourceTree = "<group>"; };
 		44251B871F0CD6210067F401 /* APIRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIRepository.swift; path = Model/Repositories/APIRepository.swift; sourceTree = "<group>"; };
 		442531301F5FE6FF0017D21A /* TripScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripScreenViewController.swift; sourceTree = "<group>"; };
+		442531361F6047290017D21A /* FinishAdventureVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinishAdventureVC.swift; sourceTree = "<group>"; };
 		44340F3C1EB22B4900EB4312 /* APIPetProfileTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIPetProfileTests.swift; sourceTree = "<group>"; };
 		443E80741F5D4F21008679FC /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		443E80761F5D53D5008679FC /* PetsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetsCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -604,6 +606,7 @@
 				443E808B1F5D9236008679FC /* SelectPetsCell.swift */,
 				443E80791F5D87EC008679FC /* SelectPetsVC.swift */,
 				442531301F5FE6FF0017D21A /* TripScreenViewController.swift */,
+				442531361F6047290017D21A /* FinishAdventureVC.swift */,
 			);
 			name = Adventures;
 			sourceTree = "<group>";
@@ -1064,6 +1067,7 @@
 				44251B0C1F0CD5870067F401 /* AddEditSafeZonePresenter.swift in Sources */,
 				44251B3E1F0CD5DF0067F401 /* AddressTableViewController.swift in Sources */,
 				44251B761F0CD6130067F401 /* CDBreed+CoreDataProperties.swift in Sources */,
+				442531371F6047290017D21A /* FinishAdventureVC.swift in Sources */,
 				44251B7D1F0CD6130067F401 /* CDPhone+CoreDataClass.swift in Sources */,
 				44251B1C1F0CD5BD0067F401 /* EmailVerificationViewController.swift in Sources */,
 				44251AFC1F0CD5740067F401 /* EditUserProfilePresenter.swift in Sources */,
