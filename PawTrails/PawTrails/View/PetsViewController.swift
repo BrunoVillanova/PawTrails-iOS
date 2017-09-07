@@ -129,10 +129,10 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if let data = SocketIOManager.instance.getGPSData(for: pet.id) {
             
             if data.status == .idle {
-                cell.batteryLabel.text = data.batteryString
-                cell.batteryLabel.textColor = UIColor.darkGray
-                cell.signalLabel.text = data.signalString
-                cell.signalLabel.textColor = UIColor.darkGray
+//                cell.batteryLabel.text = data.batteryString
+//                cell.batteryLabel.textColor = UIColor.darkGray
+//                cell.signalLabel.text = data.signalString
+//                cell.signalLabel.textColor = UIColor.darkGray
                 if data.locationAndTime != "" {
                     cell.subtitleLabel.text = data.locationAndTime
                     cell.subtitleLabel.textColor = UIColor.darkGray
@@ -141,11 +141,11 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     cell.subtitleLabel.textColor = UIColor.lightGray
                 }
             }else{
-                cell.batteryLabel.text = "-"
-                cell.batteryLabel.textColor = UIColor.lightGray
+//                cell.batteryLabel.text = "-"
+//                cell.batteryLabel.textColor = UIColor.lightGray
                 cell.batteryImageView.alpha = 0.5
-                cell.signalLabel.text = "-"
-                cell.signalLabel.textColor = UIColor.lightGray
+//                cell.signalLabel.text = "-"
+//                cell.signalLabel.textColor = UIColor.lightGray
                 cell.signalImageView.alpha = 0.5
                 cell.subtitleLabel.text = Message.instance.get(data.status)
                 cell.subtitleLabel.textColor = UIColor.lightGray
@@ -208,7 +208,7 @@ class petListCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var signalImageView: UIImageView!
     @IBOutlet weak var batteryImageView: UIImageView!
-    @IBOutlet weak var signalLabel: UILabel!
-    @IBOutlet weak var batteryLabel: UILabel!
+//    @IBOutlet weak var signalLabel: UILabel!
+//    @IBOutlet weak var batteryLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
 }

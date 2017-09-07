@@ -89,6 +89,7 @@ class TripScreenViewController: UIViewController, UICollectionViewDelegate, UICo
     
     override func viewWillAppear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = true
+        self.navigationItem.setHidesBackButton(true, animated: true)
     }
 
 

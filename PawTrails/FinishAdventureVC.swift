@@ -28,6 +28,16 @@ class FinishAdventureVC: UIViewController, BEMCheckBoxDelegate {
 
         // Do any additional setup after loading the view.
     }
+    
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tabBarController?.tabBar.isHidden = true
+        self.navigationItem.setHidesBackButton(true, animated: false)
+    }
+
+    
+    
 
     @IBAction func finishAdventureBtnPressed(_ sender: Any) {
         
@@ -35,7 +45,6 @@ class FinishAdventureVC: UIViewController, BEMCheckBoxDelegate {
     }
     @IBAction func resumeAdventureBtnPressed(_ sender: Any) {
         
-        dismiss(animated: true, completion: nil)
         
     }
   
