@@ -21,6 +21,7 @@ public enum APICallType {
     addSafeZone, setSafeZone, getSafeZone, listSafeZones, removeSafeZone
     
     /// Defines APICallType need of token
+    
     fileprivate var requiresToken: Bool {
         switch self {
         case .signUp, .signIn, .facebookLogin, .googleLogin, .twitterLogin, .weiboLogin, .passwordReset: return false
