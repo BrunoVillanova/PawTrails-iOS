@@ -15,12 +15,15 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
     @IBOutlet weak var startAdventureBtn: UIButton!
     
     var refreshControl = UIRefreshControl()
+    
     fileprivate let presenter = PetsPresenter()
     fileprivate var pets = [Int:IndexPath]()
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
 
         startAdventureBtn.isEnabled = false
         
@@ -40,8 +43,18 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
         
         petsCollectionView.delegate = self
         petsCollectionView.dataSource = self
+        petsCollectionView.allowsMultipleSelection = true
+        
+        clearOnAppearance()
 }
     
+    
+    
+    func clearOnAppearance() {
+        for indexPath in petsCollectionView.indexPathsForSelectedItems ?? [] {
+            petsCollectionView.deselectItem(at: indexPath, animated: true)
+        }
+    }
     
     @objc func reloadPetsAPI(){
         presenter.loadPets()
@@ -160,17 +173,39 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
     }
     
     
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let cell = collectionView.cellForItem(at: indexPath) as! SelectPetsCell
+        cell.checkMarkView.setOn(true, animated: true)
+        
+        
+    }
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let cell = petsCollectionView.cellForItem(at: indexPath) as! SelectPetsCell
+        
+        cell.checkMarkView.setOn(false, animated: true)
+        
+    }
+    
+    
+    
     /// Check Box Delegate.
     
     var indexpath = NSIndexPath()
-
+    
     func didTap(_ checkBox: BEMCheckBox) {
-         self.indexpath = NSIndexPath(item: checkBox.tag, section: 0)
+        self.indexpath = NSIndexPath(item: checkBox.tag, section: 0)
+        print(checkBox.tag)
+        checkBox.isMultipleTouchEnabled = false
+        
+        
         startAdventureBtn.isEnabled = true
         
     }
     
-    // select all Function....
+    
+
     
     
     @IBAction func selectAllPressed(_ sender: Any) {

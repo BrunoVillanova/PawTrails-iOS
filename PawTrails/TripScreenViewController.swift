@@ -19,14 +19,10 @@ class TripScreenViewController: UIViewController, UICollectionViewDelegate, UICo
     
     let locationManager = CLLocationManager()
 
-    
-    
-
-    
-    
-    
-    
     let peetArray = ["Mohamed", "Mjkkkf", "kjfdkjdf"]
+    
+    let pets = [Pet]()
+    
     
     var petArray = [Dictionary<String,String>]()
 
