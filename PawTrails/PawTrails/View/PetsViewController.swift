@@ -190,14 +190,14 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     
     
-    // MARK: - Navigation
-
+//    // MARK: - Navigation
+////
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.destination is PetProfileTableViewController {
+        if segue.destination is PetProfileCollectionViewController {
             
             if let indexPath = tableView.indexPathForSelectedRow {
-                (segue.destination as! PetProfileTableViewController).pet = getPet(at: indexPath)
+                (segue.destination as! PetProfileCollectionViewController).pet = getPet(at: indexPath)
             }
         }
     }

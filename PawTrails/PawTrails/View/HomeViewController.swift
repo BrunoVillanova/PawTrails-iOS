@@ -325,7 +325,7 @@ class HomeViewController: UIViewController, HomeView, UIGestureRecognizerDelegat
                 present(nc, animated: true, completion: nil)
             }
         }else{
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "PetProfileTableViewController") as? PetProfileTableViewController {
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "PetProfileCollectionViewController") as? PetProfileCollectionViewController {
                 vc.pet = pet
                 vc.fromMap = true
                 nc.pushViewController(vc, animated: true)

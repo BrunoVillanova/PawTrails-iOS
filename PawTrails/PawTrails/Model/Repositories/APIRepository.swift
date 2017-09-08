@@ -508,5 +508,17 @@ class APIRepository {
             callback(error)
         }
     }
+    
+    
+    // Start Trip
+    /// Partmeters
+    ////   - PetId/s
+    /// call back: returns *nil* or "error"
+    
+  
+    
+    
+    
+    
 
 }

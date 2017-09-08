@@ -250,7 +250,7 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
                 present(nc, animated: true, completion: nil)
             }
         }else{
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "PetProfileTableViewController") as? PetProfileTableViewController {
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "PetProfileCollectionViewController") as? PetProfileCollectionViewController {
                 vc.pet = pet
                 vc.fromMap = true
                 nc.pushViewController(vc, animated: true)

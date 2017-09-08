@@ -265,8 +265,8 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     }
     
     func success() {
-        if let profile = navigationController?.viewControllers.first(where: { $0 is PetProfileTableViewController}) as? PetProfileTableViewController {
-            profile.reloadSafeZones()
+        if let profile = navigationController?.viewControllers.first(where: { $0 is PetProfileCollectionViewController}) as? PetProfileCollectionViewController {
+//            profile.reloadSafeZones()
             navigationController?.popToViewController(profile, animated: true)
         }
     }
