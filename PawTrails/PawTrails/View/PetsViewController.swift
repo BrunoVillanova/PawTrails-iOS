@@ -198,6 +198,7 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
             
             if let indexPath = tableView.indexPathForSelectedRow {
                 (segue.destination as! PetProfileCollectionViewController).pet = getPet(at: indexPath)
+                print(indexPath)
             }
         }
     }

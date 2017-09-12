@@ -18,7 +18,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     static let instance = SocketIOManager(SSLEnabled: true)
     
     private let urlString = "http://eu.pawtrails.pet:2003"
-    private let urlStringSSL = "https://eu.pawtrails.pet:2004"
+    private let urlStringSSL = "https://eu.pawtrails.pet:4654"
     
     private var socket: SocketIOClient!
     
@@ -33,7 +33,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         let urlString = SSLEnabled ? self.urlStringSSL : self.urlString
         
         if let url = URL(string: urlString) {
-            self.socket = SocketIOClient(socketURL: url, config: [.log(false), .forceNew(true)])
+            self.socket = SocketIOClient(socketURL: url, config: [.log(false), .secure(true)])
         }
         
         for key in self.onUpdates.keys {  self.onUpdates[key] = false }
@@ -225,13 +225,13 @@ fileprivate enum channel {
         case .diconnect: return "diconnect"
         case .auth: return "authCheck"
         case .events: return "events"
-        case .startGPSUpdates: return "roomjoin"
+        case .startGPSUpdates: return "≈"
         case .stopGPSUpdates: return "roomleave"
         }
     }
     
     static func gpsUpdatesName(for petId: Int) -> String {
-        return "gpsUpdate\(petId)"
+        return "gpsUpdate"
     }
 }
 

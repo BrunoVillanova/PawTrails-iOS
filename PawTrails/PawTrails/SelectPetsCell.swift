@@ -8,15 +8,17 @@
 
 import UIKit
 
-class SelectPetsCell: UICollectionViewCell, BEMCheckBoxDelegate {
+
+class SelectPetsCell: UICollectionViewCell {
     @IBOutlet weak var petImage: UIImageView!
     
     @IBOutlet weak var petTitle: UILabel!
  
     @IBOutlet weak var checkMarkView: BEMCheckBox!
     
-    
+    override func awakeFromNib() {
+//        self.checkMarkView.isUserInteractionEnabled = false
+//        self.checkMarkView.isEnabled = false
+    }
 
-    
-    
 }

@@ -29,7 +29,6 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         firstButtonfromthebottom.contentHorizontalAlignment = .fill
 
         

@@ -25,6 +25,7 @@ class PetsPresenter {
     
     
     var pets: [Pet] {
+        
         return ownedPets + sharedPets
     }
     

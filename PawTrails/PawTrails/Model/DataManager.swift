@@ -14,6 +14,7 @@ class DataManager {
     static let instance = DataManager()
     
     typealias errorCallback = (_ error:DataManagerError?) -> Void
+    typealias startTripCallBack = (_ error:DataManagerError?, _ user:Trip?) -> Void
     typealias userCallback = (_ error:DataManagerError?, _ user:User?) -> Void
     typealias petCheckDeviceCallback = (_ isIdle:Bool) -> Void
     typealias petCallback = (_ error:DataManagerError?, _ pet:Pet?) -> Void
@@ -268,6 +269,11 @@ class DataManager {
         }
     }
     
+    
+    
+    
+    
+    
     /// Upload user image to API and update it on the local storage
     ///
     /// - Parameters:
@@ -397,6 +403,10 @@ class DataManager {
         }
     }
     
+
+    
+    
+    
     /// Register pet in API and local storage
     ///
     /// - Parameters:
@@ -413,6 +423,11 @@ class DataManager {
             }
         }
     }
+    
+    
+    
+    
+    
     
     /// Get pet from API and update local storage
     ///
@@ -962,12 +977,16 @@ class DataManager {
     
     // Mohamed
     
-    
-    
-    
-    
-    
-    
+
+    func startMyAdventure(_ petIdss: [Int], callback: @escaping errorCallback) {
+        APIRepository.instance.startTrips(petIdss) { (error) in
+            if let error = error {
+                callback(DataManagerError(APIError: error))
+            } else {
+                callback(nil)
+            }
+        }
+    }
     
     
     

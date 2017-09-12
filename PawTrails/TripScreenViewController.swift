@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 
+
 class TripScreenViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate {
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -19,9 +20,8 @@ class TripScreenViewController: UIViewController, UICollectionViewDelegate, UICo
     
     let locationManager = CLLocationManager()
 
-    let peetArray = ["Mohamed", "Mjkkkf", "kjfdkjdf"]
     
-    let pets = [Pet]()
+    var pets = [Pet]()
     
     
     var petArray = [Dictionary<String,String>]()
@@ -48,6 +48,7 @@ class TripScreenViewController: UIViewController, UICollectionViewDelegate, UICo
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         collectionView.delegate = self
         collectionView.dataSource = self
         pageControl.hidesForSinglePage = true
@@ -110,13 +111,12 @@ class TripScreenViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return peetArray.count
+        return pets.count
     }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CsustomCell
-        cell.petNameLabel.text = peetArray[indexPath.item]
         
         return cell
     }

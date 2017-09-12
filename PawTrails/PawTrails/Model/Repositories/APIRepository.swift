@@ -26,6 +26,7 @@ class APIRepository {
     typealias APIRepPetUsersCallback = (APIManagerError?, [PetUser]?) -> Void
     typealias APIRepPetSafeZoneCallback = (APIManagerError?, SafeZone?) -> Void
     typealias APIRepPetSafeZonesCallback = (APIManagerError?, [SafeZone]?) -> Void
+     typealias ApiTrip = (APIManagerError?, [Trip]?) -> Void
     
     //MARK:- Authentication
     
@@ -212,6 +213,11 @@ class APIRepository {
             callback(error)
         }
     }
+    
+ 
+    
+    
+    
     
     /// Register a new pet
     ///
@@ -518,7 +524,15 @@ class APIRepository {
   
     
     
-    
-    
+    func startTrips( _ petIdss: [Int], callback: @escaping APIRepErrorCallback) {
+        
+        let data = ["pets" : petIdss]
 
+        APIManager.instance.perform(call: .startTrip, with: data) { (error, data) in
+            
+            callback(error)
+    }
+        
+
+}
 }

@@ -10,7 +10,12 @@ import UIKit
 
 
 
-class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, PetsView, BEMCheckBoxDelegate {
+struct petIds {
+    static var Ids = [Int]()
+}
+
+
+class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, PetsView {
     @IBOutlet weak var petsCollectionView: UICollectionView!
     @IBOutlet weak var startAdventureBtn: UIButton!
     
@@ -23,11 +28,8 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
-
         startAdventureBtn.isEnabled = false
         
-
         startAdventureBtn.fullyroundedCorner()
         startAdventureBtn.backgroundColor = UIColor.primary
         
@@ -45,7 +47,11 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
         petsCollectionView.dataSource = self
         petsCollectionView.allowsMultipleSelection = true
         
+ 
         clearOnAppearance()
+        
+        
+
 }
     
     
@@ -67,7 +73,8 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
     
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
-        
+        petIds.Ids.removeAll()
+
         reloadPets()
         presenter.startPetsListUpdates()
         presenter.startPetsGPSUpdates { (id) in
@@ -142,12 +149,16 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
         }
     }
     
+ 
+
+    
+    
     
     
     
 
     
-    
+
     // CollectionVIew Method
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
@@ -162,52 +173,34 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
             cell.petImage.image = nil
         }
         cell.petImage.circle()
+        
+        cell.checkMarkView.isEnabled = false
+        cell.checkMarkView.isUserInteractionEnabled = false
 
-        cell.checkMarkView.delegate = self
-        cell.checkMarkView.tag = indexPath.item
-        
-        
-        
         return cell
         
     }
-    
-    
+
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        
         
         let cell = collectionView.cellForItem(at: indexPath) as! SelectPetsCell
         cell.checkMarkView.setOn(true, animated: true)
         
+        self.startAdventureBtn.isEnabled = true
+        
         
     }
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        
         let cell = petsCollectionView.cellForItem(at: indexPath) as! SelectPetsCell
         
         cell.checkMarkView.setOn(false, animated: true)
         
     }
-    
-    
-    
-    /// Check Box Delegate.
-    
-    var indexpath = NSIndexPath()
-    
-    func didTap(_ checkBox: BEMCheckBox) {
-        self.indexpath = NSIndexPath(item: checkBox.tag, section: 0)
-        print(checkBox.tag)
-        checkBox.isMultipleTouchEnabled = false
-        
-        
-        startAdventureBtn.isEnabled = true
-        
-    }
-    
-    
 
-    
-    
     @IBAction func selectAllPressed(_ sender: Any) {
         for i in 0..<petsCollectionView.numberOfSections {
             for j in 0..<petsCollectionView.numberOfItems(inSection: i) {
@@ -228,12 +221,39 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
     
  
     @IBAction func StartAdventureBtnPressed(_ sender: Any) {
-        
-        print("StartAdventureBtnPressed")
+
+
+        petIds.Ids.removeAll()
+        if let indexpath = petsCollectionView.indexPathsForSelectedItems {
+            for index in indexpath {
+               let pets =  getPet(at: index)
                 
-        
-        
+                petIds.Ids.append(pets.id)
+                
+            }
+            startMyTripNow(petIds.Ids)
+            
+            
+         }
     }
+    
+    
+    
+    func startMyTripNow(_ petIds: [Int]){
+        
+        DataManager.instance.startMyAdventure(petIds) { (error) in
+            if let error = error {
+                self.alert(title: "", msg: error.localizedDescription)
+                
+                
+                
+                
+            } else {
+                self.alert(title: "Yup", msg: "jkfdlkjsdflkjdskfsdf")
+            }
+        }
+        
+}
 
     @IBAction func closebtnPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)

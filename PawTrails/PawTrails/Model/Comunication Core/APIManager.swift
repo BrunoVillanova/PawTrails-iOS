@@ -18,7 +18,7 @@ public enum APICallType {
     registerPet, getPets, getPet, setPet, checkDevice, changeDevice, unregisterPet,
     getPetClasses, getBreeds, getContinents, getCountries,
     sharePet, getSharedPetUsers, removeSharedPet,leaveSharedPet,
-    addSafeZone, setSafeZone, getSafeZone, listSafeZones, removeSafeZone
+    addSafeZone, setSafeZone, getSafeZone, listSafeZones, removeSafeZone, startTrip
     
     /// Defines APICallType need of token
     
@@ -74,6 +74,7 @@ public enum APICallType {
         case .getSafeZone: return "/pets/safezones/view/\(key)"
         case .removeSafeZone: return "/pets/safezones/del/\(key)"
         case .listSafeZones: return "/pets/safezones/list/\(key)"
+        case .startTrip: return "/trips/start"
         }
     }
     

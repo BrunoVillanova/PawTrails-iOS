@@ -335,6 +335,14 @@ class CDRepository {
         }
     }
     
+
+    
+    
+    
+    
+    
+    
+    
     private func getPetCD(by id:Int, _ callback: @escaping (DatabaseError?, CDPet?)-> Void) {
         
         CoreDataManager.instance.retrieve(.pet, with: NSPredicate("id", .equal, id)) { (objects) in

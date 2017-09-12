@@ -24,10 +24,7 @@ class FinishAdventureVC: UIViewController, BEMCheckBoxDelegate {
         resumeAdventureBtn.tintColor = UIColor.primary
         resumeAdventureBtn.border(color: UIColor.primary, width: 1.0)
         
-        
-
-        // Do any additional setup after loading the view.
-    }
+}
     
     
     

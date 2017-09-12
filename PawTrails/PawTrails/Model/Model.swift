@@ -80,6 +80,22 @@ struct Pet {
     var users: [PetUser]?
 }
 
+
+
+struct Trip {
+    var status: Int?
+    var name: Int?
+    var id: Int?
+    var petId: [Int]
+    var timeStart: Int?
+
+}
+
+
+
+
+
+
 struct PetType {
     var type: Type?
     var description: String?
