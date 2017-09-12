@@ -246,7 +246,7 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
                 print("This an array of data \(String(describing: data))")
             }
         }
-}
+    }
 
     @IBAction func closebtnPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)

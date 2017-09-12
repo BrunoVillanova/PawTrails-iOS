@@ -91,6 +91,9 @@ enum ErrorCode: Int {
     case WrongRadius = 57
 
     case SharedConnectionAlreadyExists = 60
+    case ThereIsApetWithAnActiveTrip = 71
+    case TheTripIsPaused = 72
+    case TheIdInTheInputArrayMustBeAnInteger = 76
     
     init(code:Int) {
         self = ErrorCode(rawValue: code) ?? ErrorCode.Unknown

@@ -527,15 +527,20 @@ class APIRepository {
     func startTrips( _ petIdss: [Int], callback: @escaping ApiTrip) {
         let data = ["pets" : petIdss]
         APIManager.instance.perform(call: .startTrip, with: data) { (error, json) in
-            if error == nil, let startTripJson = json?["trips"].arrayObject {
-                var tripsArray = [Trip]()
-                for trip in startTripJson {
-                    tripsArray.append(Trip(trip as! Data)! )
-                }
-                callback(nil, tripsArray)
-            } else if let error = error {
+            if let error = error {
                 callback(error, nil)
+            } else if let myData = json?["trips"].array {
+                var tripArray = [Trip]()
+                for trip in myData {
+                    tripArray.append(Trip(trip)!)
+                }
+                callback(nil, tripArray)
+                print(tripArray)
+                
             }
+            
+        }
+        
     }
     
     
@@ -545,11 +550,6 @@ class APIRepository {
 
 
 
-
-
-
-
-}
 
 
 

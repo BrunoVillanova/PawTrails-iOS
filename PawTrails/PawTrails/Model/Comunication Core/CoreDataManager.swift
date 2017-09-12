@@ -18,8 +18,9 @@ enum Entity: String {
     case phone = "CDPhone"
     case safeZone = "CDSafeZone"
     case user = "CDUser"
+    case startTrip = "CDStartTrip"
     
-    static let allValues:[Entity] = [address, breed, countryCode, pet, petUser, phone, safeZone, user]
+    static let allValues:[Entity] = [address, breed, countryCode, pet, petUser, phone, safeZone, user, startTrip]
 }
 
 

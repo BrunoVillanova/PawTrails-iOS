@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 //MARK:- User
 
@@ -82,15 +83,43 @@ struct Pet {
 
 
 
+//struct Trip {
+//    var id: Int?
+//    var petId: [Int]
+//    var status: status?
+//    var timeStart: Int?
+//    var name: Int?
+//    
+//    init(id: Int?,  petId: [Int], status: status?, timeStart: Int?, name: Int?) {
+//        self.status = status
+//        self.name = name
+//        self.id = id
+//        self.petId = petId
+//        self.timeStart = timeStart
+//    }
+//    
+//    init?(_ data: Data) {
+//        if let JSONObject = (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)) as? [String: Any], let petId = JSONObject["petId"] as? [Int] {
+//            self = Trip(id: JSONObject["id"] as? Int, petId: petId, status: JSONObject["status"] as? status, timeStart: JSONObject["timeStart"] as? Int, name: JSONObject["name"] as? Int)
+//        } else {
+//            return nil
+//        }
+//    }
+
+//}
+
+
+
+
+
 struct Trip {
-    
-    var status: Int?
-    var name: Int?
     var id: Int?
     var petId: [Int]
+    var status: Int?
     var timeStart: Int?
+    var name: Int?
     
-    init(status: Int?, name: Int?, id: Int?, petId: [Int], timeStart: Int?) {
+    init(id: Int?,  petId: [Int], status: Int?, timeStart: Int?, name: Int?) {
         self.status = status
         self.name = name
         self.id = id
@@ -98,13 +127,21 @@ struct Trip {
         self.timeStart = timeStart
     }
     
-    init?(_ data: Data) {
-        if let JSONObject = (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)) as? [String: Any], let petId = JSONObject["petId"] as? [Int] {
-            self = Trip(status: JSONObject["status"] as? Int, name: JSONObject["name"] as? Int, id: JSONObject["id"] as? Int, petId: petId, timeStart: JSONObject["timeStart"] as? Int)
+    init?(_ json: JSON) {
+        if let petId = json["petId"].number as? Int {
+            self = Trip(id: json["id"].number as? Int, petId: [petId], status: json["status"].number as? Int, timeStart: json["timeStart"].number as? Int, name: json["name"].number as? Int)
         } else {
             return nil
         }
     }
+}
+
+
+enum status: Int {
+    case Active = 0
+    case Paused = 1
+    case Stopped = 2
+    
 }
 
 

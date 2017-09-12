@@ -241,6 +241,7 @@ class DataManager {
         }
     }
     
+
     /// Get user from local storage
     ///
     /// - Parameter callback: return stored user or *error*
@@ -977,11 +978,12 @@ class DataManager {
     
     // Mohamed -- Start Trip and recieve data from api.
     
-
     func startMyAdventure(_ petIdss: [Int], callback: @escaping startTripCallBack) {
         APIRepository.instance.startTrips(petIdss) { (error, data) in
             if error == nil {
                 callback(nil, data)
+                
+                print(data!)
             } else if let error = error{
                 callback(DataManagerError(APIError: error), nil)
             }
@@ -992,29 +994,7 @@ class DataManager {
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+ 
     
     
     

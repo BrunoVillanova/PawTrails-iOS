@@ -809,6 +809,13 @@ class CDRepository {
         
     }
     
+    
+    
+    func saveStartAdventureData(_ petIds: [Int], callback: @escaping CDRepErrorCallback) {
+        
+    }
+    
+    
     //MARK:- Breeds
     
     /// Upsert Breeds
