@@ -225,7 +225,7 @@ fileprivate enum channel {
         case .diconnect: return "diconnect"
         case .auth: return "authCheck"
         case .events: return "events"
-        case .startGPSUpdates: return "≈"
+        case .startGPSUpdates: return "room"
         case .stopGPSUpdates: return "roomleave"
         }
     }
