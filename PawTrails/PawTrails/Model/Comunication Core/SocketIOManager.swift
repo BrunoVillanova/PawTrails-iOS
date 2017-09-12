@@ -231,7 +231,7 @@ fileprivate enum channel {
     }
     
     static func gpsUpdatesName(for petId: Int) -> String {
-        return "gpsUpdate"
+        return "gpsUpdates"
     }
 }
 

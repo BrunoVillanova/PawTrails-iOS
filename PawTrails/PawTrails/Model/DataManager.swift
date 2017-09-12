@@ -14,7 +14,6 @@ class DataManager {
     static let instance = DataManager()
     
     typealias errorCallback = (_ error:DataManagerError?) -> Void
-    typealias startTripCallBack = (_ error:DataManagerError?, _ user:Trip?) -> Void
     typealias userCallback = (_ error:DataManagerError?, _ user:User?) -> Void
     typealias petCheckDeviceCallback = (_ isIdle:Bool) -> Void
     typealias petCallback = (_ error:DataManagerError?, _ pet:Pet?) -> Void
@@ -26,6 +25,7 @@ class DataManager {
     typealias petUsersCallback = ((_ error:DataManagerError?, _ users:[PetUser]?) -> Void)
     typealias safezonesCallback = ((_ error:DataManagerError?, _ safezones:[SafeZone]?) -> Void)
     typealias safezoneCallback = ((_ error:DataManagerError?, _ safezone:SafeZone?) -> Void)
+    typealias startTripCallBack = ((_ error:DataManagerError?, _ safezone:[Trip]?) -> Void)
     
     //MARK:- Authentication
     
@@ -975,18 +975,19 @@ class DataManager {
     
     
     
-    // Mohamed
+    // Mohamed -- Start Trip and recieve data from api.
     
 
-    func startMyAdventure(_ petIdss: [Int], callback: @escaping errorCallback) {
-        APIRepository.instance.startTrips(petIdss) { (error) in
-            if let error = error {
-                callback(DataManagerError(APIError: error))
-            } else {
-                callback(nil)
+    func startMyAdventure(_ petIdss: [Int], callback: @escaping startTripCallBack) {
+        APIRepository.instance.startTrips(petIdss) { (error, data) in
+            if error == nil {
+                callback(nil, data)
+            } else if let error = error{
+                callback(DataManagerError(APIError: error), nil)
             }
         }
-    }
+        
+}
     
     
     

@@ -229,30 +229,23 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
                let pets =  getPet(at: index)
                 
                 petIds.Ids.append(pets.id)
-                
             }
+
             startMyTripNow(petIds.Ids)
-            
-            
+
          }
     }
     
     
     
     func startMyTripNow(_ petIds: [Int]){
-        
-        DataManager.instance.startMyAdventure(petIds) { (error) in
+        DataManager.instance.startMyAdventure(petIds) { (error, data) in
             if let error = error {
-                self.alert(title: "", msg: error.localizedDescription)
-                
-                
-                
-                
+                print(error.localizedDescription)
             } else {
-                self.alert(title: "Yup", msg: "jkfdlkjsdflkjdskfsdf")
+                print("This an array of data \(String(describing: data))")
             }
         }
-        
 }
 
     @IBAction func closebtnPressed(_ sender: Any) {

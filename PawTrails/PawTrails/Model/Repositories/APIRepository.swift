@@ -524,15 +524,36 @@ class APIRepository {
   
     
     
-    func startTrips( _ petIdss: [Int], callback: @escaping APIRepErrorCallback) {
-        
+    func startTrips( _ petIdss: [Int], callback: @escaping ApiTrip) {
         let data = ["pets" : petIdss]
-
-        APIManager.instance.perform(call: .startTrip, with: data) { (error, data) in
-            
-            callback(error)
+        APIManager.instance.perform(call: .startTrip, with: data) { (error, json) in
+            if error == nil, let startTripJson = json?["trips"].arrayObject {
+                var tripsArray = [Trip]()
+                for trip in startTripJson {
+                    tripsArray.append(Trip(trip as! Data)! )
+                }
+                callback(nil, tripsArray)
+            } else if let error = error {
+                callback(error, nil)
+            }
     }
-        
+    
+    
 
 }
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+

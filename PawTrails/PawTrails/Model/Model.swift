@@ -83,16 +83,29 @@ struct Pet {
 
 
 struct Trip {
+    
     var status: Int?
     var name: Int?
     var id: Int?
     var petId: [Int]
     var timeStart: Int?
-
+    
+    init(status: Int?, name: Int?, id: Int?, petId: [Int], timeStart: Int?) {
+        self.status = status
+        self.name = name
+        self.id = id
+        self.petId = petId
+        self.timeStart = timeStart
+    }
+    
+    init?(_ data: Data) {
+        if let JSONObject = (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)) as? [String: Any], let petId = JSONObject["petId"] as? [Int] {
+            self = Trip(status: JSONObject["status"] as? Int, name: JSONObject["name"] as? Int, id: JSONObject["id"] as? Int, petId: petId, timeStart: JSONObject["timeStart"] as? Int)
+        } else {
+            return nil
+        }
+    }
 }
-
-
-
 
 
 
