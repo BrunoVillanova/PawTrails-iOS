@@ -28,6 +28,13 @@ class SocketIOTestTableViewController: UITableViewController {
 //            print("GOT IT")
 //        }
         
+//        APIRepository.instance.finishTrip([390, 389, 388]) { (error) in
+//            print("Finished Trip")
+//        }
+        
+        SocketIOManager.instance.connectToPetChannel()
+        
+        
         
 //        NotificationManager.instance.getPetGPSUpdates(for: id) { (id, data) in
 //            

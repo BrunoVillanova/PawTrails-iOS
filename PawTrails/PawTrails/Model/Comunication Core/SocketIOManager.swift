@@ -84,15 +84,17 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     
     // Mohamed: establish connection with Pets channel. 
     
-    func connectToPetChannel(for petIds: [Int]) {
+    func connectToPetChannel() {
         if isConnected {
-            self.socket.emit(channel.pets.name, petIds)
+            self.socket.emit("getPetList", false)
 
+            print("Here are the prented Data")
+            
         } else {
             connect({ (status) in
                 Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "connect answer: ", status)
                 if status == .connected {
-                    self.connectToPetChannel(for: petIds)
+                    self.connectToPetChannel()
                 }
             })
         }
@@ -127,6 +129,8 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         if isConnected {
             for petId in petIds {
                 self.startGPSUpdatesEffective(for: petId)
+                
+                
             }
         }else{
             connect({ (status) in

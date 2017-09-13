@@ -25,16 +25,11 @@ class PetProfileCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var weightLabel: UILabel!
     
-    @IBOutlet weak var switchToAnotherDeviceBtn: UIButton!
   
     @IBOutlet weak var reportLostBtn: UIButton!
 
     override func awakeFromNib() {
-        switchToAnotherDeviceBtn.fullyroundedCorner()
-        switchToAnotherDeviceBtn.clipsToBounds = true
 
-        switchToAnotherDeviceBtn.border()
-        switchToAnotherDeviceBtn.layer.borderColor = UIColor.primary.cgColor
         reportLostBtn.fullyroundedCorner()
         reportLostBtn.backgroundColor = UIColor.primary
     }
@@ -42,10 +37,6 @@ class PetProfileCollectionViewCell: UICollectionViewCell {
     @IBAction func reportLostPressed(_ sender: Any) {
         
         }
-    
-    @IBAction func switchToAnotherDeviceBtnPressed(_ sender: Any) {
-        
-        
-    }
+
     
 }

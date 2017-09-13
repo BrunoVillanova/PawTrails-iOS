@@ -21,6 +21,9 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu-guides-1x-png"), style: .plain, target: self, action: #selector(addTapped))
 
         presenter.attachView(self, pet:pet)
  
@@ -41,6 +44,12 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
         setUpMenuBar()
         setupCollectionView()
     }
+    
+    
+    func addTapped() {
+        print("Right bar pressd")
+    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         presenter.loadPet(with: pet.id)
