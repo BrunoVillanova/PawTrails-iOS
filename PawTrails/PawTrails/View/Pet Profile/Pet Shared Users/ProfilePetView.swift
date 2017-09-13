@@ -11,8 +11,8 @@ import Foundation
 
 protocol ProfilePetView: NSObjectProtocol, View {
     func load(_ pet:Pet)
-
     func petNotFound()
+
     func petRemoved()
 }
 
@@ -34,9 +34,22 @@ class PetProfilePressenter {
     
     
     func loadPet(with id: Int) {
-        
         DataManager.instance.loadPet(id) { (error, pet) in
-            
+            if let error = error {
+                if error.DBError?.type == DatabaseErrorType.NotFound {
+                    self.view?.petNotFound()
+                }else{
+                    self.view?.errorMessage(error.msg)
+                }
+            }else if let pet = pet {
+                self.view?.load(pet)
+            }
+        }
+    }
+    
+
+    func getPet(with id: Int) {
+        DataManager.instance.getPet(by: id) { (error, pet) in
             if let error = error {
                 if error.DBError?.type == DatabaseErrorType.NotFound {
                     self.view?.petNotFound()

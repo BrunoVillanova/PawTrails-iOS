@@ -519,13 +519,11 @@ class APIRepository {
     // Start Trip
     /// Partmeters
     ////   - PetId/s
-    /// call back: returns *nil* or "error"
+    // callBack: returns nil or data
     
-  
-    
-    
-    func startTrips( _ petIdss: [Int], callback: @escaping ApiTrip) {
-        let data = ["pets" : petIdss]
+
+    func startTrips(_ petIdss: [Int], callback: @escaping ApiTrip) {
+        let data = ["pets":petIdss]
         APIManager.instance.perform(call: .startTrip, with: data) { (error, json) in
             if let error = error {
                 callback(error, nil)
@@ -542,6 +540,45 @@ class APIRepository {
         }
         
     }
+    
+    // Finish Trips
+    // callBack: returns nil or data
+    
+    func finishTrip(_ tripIds: [Int], callback: @escaping APIRepErrorCallback) {
+        let trips = ["trips":tripIds]
+        APIManager.instance.perform(call: .finishTrip, with: trips) { (error, json) in
+            callback(error)
+        }
+    }
+    
+    
+    // Pause Trips
+    // callBack: returns nil or data
+    func pauseTrip(callback: @escaping APIRepErrorCallback) {
+        APIManager.instance.perform(call: .pauseTrip) { (error, json) in
+            callback(error)
+        }
+    }
+    
+    
+    
+    // Resume trips
+    //callBack: returns nil or data
+    
+    func resumeTrip(callBack: @escaping APIRepErrorCallback) {
+        APIManager.instance.perform(call: .resumeTrip) { (error, json) in
+            callBack(error)
+        }
+    }
+    
+    
+    func getTripList(_ status: [Int], callback: @escaping APIRepErrorCallback) {
+        let data = ["status": status]
+        APIManager.instance.perform(call: .getTripList, with: data) { (error, json) in
+            callback(error)
+        }
+    }
+    
     
     
 

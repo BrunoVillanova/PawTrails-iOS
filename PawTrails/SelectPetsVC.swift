@@ -19,6 +19,8 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
     @IBOutlet weak var petsCollectionView: UICollectionView!
     @IBOutlet weak var startAdventureBtn: UIButton!
     
+    
+    
     var refreshControl = UIRefreshControl()
     
     fileprivate let presenter = PetsPresenter()
@@ -149,15 +151,6 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
         }
     }
     
- 
-
-    
-    
-    
-    
-    
-
-    
 
     // CollectionVIew Method
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -216,27 +209,21 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
                 cell.checkMarkView.setOn(true, animated: true)
             }
         }
-
     }
     
  
     @IBAction func StartAdventureBtnPressed(_ sender: Any) {
-
-
         petIds.Ids.removeAll()
         if let indexpath = petsCollectionView.indexPathsForSelectedItems {
             for index in indexpath {
                let pets =  getPet(at: index)
-                
                 petIds.Ids.append(pets.id)
             }
-
             startMyTripNow(petIds.Ids)
 
          }
     }
-    
-    
+
     
     func startMyTripNow(_ petIds: [Int]){
         DataManager.instance.startMyAdventure(petIds) { (error, data) in

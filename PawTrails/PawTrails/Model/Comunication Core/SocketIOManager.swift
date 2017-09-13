@@ -66,10 +66,10 @@ class SocketIOManager: NSObject, URLSessionDelegate {
             }
             
         }
-        self.socket.on(channel.events.name, callback: { (data, ack) in
-            Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Event RS", data)
-            self.handleEventUpdated(data)
-        })
+        //self.socket.on(channel.events.name, callback: { (data, ack) in
+            //Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Event RS", data)
+            //self.handleEventUpdated(data)
+        //})
         self.socket.connect()
 
     }
@@ -80,6 +80,24 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         self.socket.disconnect()
     }
     
+    
+    
+    // Mohamed: establish connection with Pets channel. 
+    
+    func connectToPetChannel(for petIds: [Int]) {
+        if isConnected {
+            self.socket.emit(channel.pets.name, petIds)
+
+        } else {
+            connect({ (status) in
+                Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "connect answer: ", status)
+                if status == .connected {
+                    self.connectToPetChannel(for: petIds)
+                }
+            })
+        }
+    }
+
     //MARK:- Pet
     
     /// Collect GPS Data for pet id
@@ -217,22 +235,32 @@ class SocketIOManager: NSObject, URLSessionDelegate {
 
 fileprivate enum channel {
     
-    case connect, diconnect, auth, events, startGPSUpdates, stopGPSUpdates
+    case connect, diconnect, auth, stopGPSUpdates, getPets, trips, pets, startGPSUpdates
     
     var name: String {
         switch self {
         case .connect: return "connect"
         case .diconnect: return "diconnect"
+        case .trips: return "trips"
         case .auth: return "authCheck"
-        case .events: return "events"
+        case .pets: return "pets"
+        //case .events: return "events"
         case .startGPSUpdates: return "room"
         case .stopGPSUpdates: return "roomleave"
+        case .getPets: return "room"
         }
     }
     
     static func gpsUpdatesName(for petId: Int) -> String {
         return "gpsUpdates"
     }
+    
+    
+    // to return pets.
+    static func joinRoom(for petIds: [Int]) -> String {
+        return "pets"
+    }
+    
 }
 
 fileprivate extension SocketIOClient {

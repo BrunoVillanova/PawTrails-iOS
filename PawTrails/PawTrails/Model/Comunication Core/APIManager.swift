@@ -18,7 +18,7 @@ public enum APICallType {
     registerPet, getPets, getPet, setPet, checkDevice, changeDevice, unregisterPet,
     getPetClasses, getBreeds, getContinents, getCountries,
     sharePet, getSharedPetUsers, removeSharedPet,leaveSharedPet,
-    addSafeZone, setSafeZone, getSafeZone, listSafeZones, removeSafeZone, startTrip
+    addSafeZone, setSafeZone, getSafeZone, listSafeZones, removeSafeZone, startTrip, finishTrip, pauseTrip, resumeTrip, getTripList
     
     /// Defines APICallType need of token
     
@@ -75,13 +75,17 @@ public enum APICallType {
         case .removeSafeZone: return "/pets/safezones/del/\(key)"
         case .listSafeZones: return "/pets/safezones/list/\(key)"
         case .startTrip: return "/trips/start"
+        case .finishTrip: return "/trips/stop"
+        case .pauseTrip: return "/trips/pause"
+        case .resumeTrip: return "/trips/resume"
+        case .getTripList: return "/trips/list"
         }
     }
     
     /// Defines the HTTP Method Protocol: GET, POST...
     fileprivate var httpMethod: String {
         switch self {
-        case .getUser, .deleteUser, .getPetClasses, .getBreeds, .getCountries, .getContinents, .checkDevice, .getPets, .getPet, .getSharedPetUsers, .unregisterPet, .leaveSharedPet, .friends, .getSafeZone, .listSafeZones, .removeSafeZone : return "GET"
+        case .getUser, .deleteUser, .getPetClasses, .getBreeds, .getCountries, .getContinents, .checkDevice, .getPets, .getPet, .getSharedPetUsers, .unregisterPet, .leaveSharedPet, .friends, .getSafeZone, .listSafeZones, .removeSafeZone, .pauseTrip, .resumeTrip : return "GET"
         default: return "POST"
         }
     }

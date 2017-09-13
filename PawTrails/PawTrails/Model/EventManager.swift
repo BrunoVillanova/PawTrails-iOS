@@ -134,7 +134,9 @@ class EventManager {
                     petList.reloadPets()
                 }
                 
-            }else if let homeVC = viewController as? HomeViewController {
+                
+                // changed this when deleted HomeVc
+            }else if let homeVC = viewController as? MapViewController {
                 homeVC.reloadPets()
             }
         }

@@ -22,7 +22,7 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     let locationManager = CLLocationManager()
     fileprivate let presenter = HomePresenter()
     fileprivate var annotations = [MKLocationId:MKLocation]()
-    
+     var selectedPet: Pet?
     
     
     
@@ -35,8 +35,8 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
         firstButtonfromthebottom.contentMode = .scaleToFill
         firstButtonfromthebottom.imageView?.contentMode = .scaleToFill
         
-        self.locationManager.requestAlwaysAuthorization()
-        self.locationManager.requestWhenInUseAuthorization()
+//        self.locationManager.requestAlwaysAuthorization()
+//       self.locationManager.requestWhenInUseAuthorization()
         
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
@@ -45,10 +45,7 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
         }
         
         mapView.showsUserLocation = true
-        
-        
-        
-        
+
         petsCollectionView.delegate = self
         petsCollectionView.dataSource = self
         presenter.attachView(self)
@@ -57,7 +54,9 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
         petsCollectionView.isHidden = true
         reloadPets()
         self.petsCollectionView.reloadData()
-    }
+        
+        petsCollectionView.allowsMultipleSelection = true
+}
     
 
     func reloadPets(){
@@ -265,13 +264,21 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-    
-    
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return  presenter.pets.count
-        
     }
+    
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("Selected")
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        print("Deselected")
+    }
+    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = petsCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! PetsCollectionViewCell
@@ -284,8 +291,7 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
         
         return cell
     }
-    
-    
+
 }
 
 
@@ -297,6 +303,56 @@ private extension MKPolyline {
         unsafeCoordinates.deallocate(capacity: coords.count)
     }
 }
+
+
+
+enum pinType: Int {
+    case pet = 0, safezone, pi
+}
+
+class MKLocationId: Hashable {
+    var id: Int
+    var type: pinType
+    
+    init(id : Int, type: pinType) {
+        self.id = id
+        self.type = type
+    }
+    
+    var hashValue: Int {
+        return id.hashValue ^ type.hashValue
+    }
+    
+    static func == (lhs: MKLocationId, rhs: MKLocationId) -> Bool {
+        return lhs.id == rhs.id && lhs.type == rhs.type
+    }
+    
+}
+
+
+
+class MKLocation: MKPointAnnotation {
+    
+    let pet = Pet()
+    
+    var color:UIColor
+    var id: MKLocationId
+    
+    init(id : MKLocationId, coordinate:CLLocationCoordinate2D, color: UIColor = UIColor.random()) {
+        self.id = id
+        self.color = color
+        super.init()
+        self.coordinate = coordinate
+        
+        
+    }
+    
+    func move(coordinate:CLLocationCoordinate2D){
+        self.coordinate = coordinate
+    }
+}
+
+
 
 
 

@@ -14,10 +14,8 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
     
     let cellId = "cellId"
     let titles = ["Profile", "Activity", "SafeZone", "Share"]
-    
     var pet:Pet!
     var fromMap: Bool = false
-    
     
     fileprivate let presenter = PetProfilePressenter()
 
@@ -28,6 +26,7 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
  
         if let pet = pet {
             load(pet)
+            presenter.getPet(with: pet.id)
         }
         
         if fromMap {
@@ -41,15 +40,12 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
         collectionView?.collectionViewLayout.invalidateLayout()
         setUpMenuBar()
         setupCollectionView()
-        
-
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         presenter.loadPet(with: pet.id)
+        presenter.getPet(with: pet.id)
     }
-    
 
     // PetView
     
@@ -196,11 +192,6 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
 
    
 }
-
-
-
-
-
 
 class ActivityCell: BaseCell {
     override func setupViews() {

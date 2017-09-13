@@ -182,19 +182,19 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     func trackButtonAction(sender: UIButton){
 
-        if let home = tabBarController?.viewControllers?.first as? HomeViewController {
+        
+        // changed this when deleted homevc
+        if let home = tabBarController?.viewControllers?.first as? MapViewController {
             home.selectedPet = presenter.getPet(with: sender.tag)
             tabBarController?.selectedIndex = 0
         }
     }
-    
-    
+
     
 //    // MARK: - Navigation
 ////
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.destination is PetProfileCollectionViewController {
+                if segue.destination is PetProfileCollectionViewController {
             
             if let indexPath = tableView.indexPathForSelectedRow {
                 (segue.destination as! PetProfileCollectionViewController).pet = getPet(at: indexPath)

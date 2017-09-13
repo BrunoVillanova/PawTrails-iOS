@@ -20,21 +20,15 @@ class UserProfileTableViewController: UITableViewController, UserProfileView, UI
     
     
     let presenter = UserProfilePresenter()
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
         presenter.attachView(self)
         UIApplication.shared.statusBarStyle = .lightContent
- 
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         presenter.loadUser()
-       
     }
     
     //MARC:- UserProfileView
@@ -109,13 +103,6 @@ class UserProfileTableViewController: UITableViewController, UserProfileView, UI
         }
         
     }
-    
-    
-    
-    
-
-
-
     
 }
 
