@@ -29,7 +29,7 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
         super.viewDidLoad()
         
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"menu-guides-1x-png"), style: .plain, target: self, action: #selector(addTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"switch-device-button-1x-png"), style: .plain, target: self, action: #selector(addTapped))
 
         presenter.attachView(self, pet:pet)
  

@@ -55,9 +55,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 
             }
             loadHomeScreen()
+            
         }else{
+            
             loadAuthenticationScreen()
         }
+        
+        
+        
+        
 //        let initial = storyboard.instantiateViewController(withIdentifier: "EmailVerificationViewController") as? EmailVerificationViewController
 //        initial?.email = ""
 //        window?.rootViewController = initial

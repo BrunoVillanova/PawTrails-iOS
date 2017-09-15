@@ -90,24 +90,7 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
 
 
     }
-    
-    func getRunningandPausedTrips() {
-       APIRepository.instance.getTripList([0,1]) { (error, trips) in
-        if let error = error {
-            print(error.localizedDescription)
-        } else {
-            if let trips = trips {
-                for trip in trips {
-                    self.tripListArray.append(trip.petId)
-                }
-            }
-        }
-        }
-}
-    
-    
-    
-    
+
     
     private func updateRow(by id: Int){
         
@@ -258,7 +241,7 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
                 petIds.append(pets.id)
             }
 
-            getRunningandPausedTrips()
+//            getRunningandPausedTrips()
             
             for items in petIds {
                 if tripListArray.contains(items) {

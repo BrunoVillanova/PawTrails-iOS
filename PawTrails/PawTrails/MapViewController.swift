@@ -25,6 +25,10 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
      var selectedPet: Pet?
     
     
+    var tripListArray = [TripList]()
+
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +62,22 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
         petsCollectionView.allowsMultipleSelection = true
 }
     
+    
+    
+    func getRunningandPausedTrips() {
+        APIRepository.instance.getTripList([0,1]) { (error, trips) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                if let trips = trips {
+                    for trip in trips {
+                        self.tripListArray.append(trip)
+                    }
+                }
+            }
+        }
+    }
+    
 
     func reloadPets(){
         presenter.getPets()
@@ -72,6 +92,19 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
             self.load(id: id, point: point)
         }
         
+        getRunningandPausedTrips()
+        
+        showAlert()
+
+    }
+    
+    
+    func showAlert() {
+        if tripListArray.count > 0 {
+            self.popUpDestructive(title: "Trip in progress", msg: "There is a trip already in progress, you can join it right now", cancelHandler: nil, proceedHandler: { (segue) in
+                
+            })
+        }
     }
     
     
