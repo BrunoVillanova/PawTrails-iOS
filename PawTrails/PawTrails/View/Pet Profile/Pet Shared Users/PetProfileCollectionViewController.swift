@@ -9,12 +9,18 @@
 import UIKit
 
 
+struct PetId {
+    static var petId = Pet()
+}
+
+
 class PetProfileCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, ProfilePetView {
-    
     
     let cellId = "cellId"
     let titles = ["Profile", "Activity", "SafeZone", "Share"]
+    
     var pet:Pet!
+    
     var fromMap: Bool = false
     
     fileprivate let presenter = PetProfilePressenter()
@@ -54,7 +60,16 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
     override func viewWillAppear(_ animated: Bool) {
         presenter.loadPet(with: pet.id)
         presenter.getPet(with: pet.id)
+        
+
+        PetId.petId = pet
     }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        print("View Disappeared")
+}
 
     // PetView
     

@@ -166,7 +166,11 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -198,7 +202,7 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
             
             if let indexPath = tableView.indexPathForSelectedRow {
                 (segue.destination as! PetProfileCollectionViewController).pet = getPet(at: indexPath)
-                print(indexPath)
+
             }
         }
     }

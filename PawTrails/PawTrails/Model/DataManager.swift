@@ -726,6 +726,8 @@ class DataManager {
         }
     }
     
+       
+    
     /// Add new shared user to pet to API and update local storage
     ///
     /// - Parameters:
