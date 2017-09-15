@@ -115,6 +115,7 @@
 		443E808C1F5D9236008679FC /* SelectPetsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443E808B1F5D9236008679FC /* SelectPetsCell.swift */; };
 		4441ACA61EB8C72500FBE27F /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4441ACA51EB8C72500FBE27F /* SafariServices.framework */; };
 		4441ACA81EB8C72E00FBE27F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4441ACA71EB8C72E00FBE27F /* SystemConfiguration.framework */; };
+		444698851F6BC75C006EE4CD /* SelectPetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444698841F6BC75C006EE4CD /* SelectPetView.swift */; };
 		4447217D1F03F12A001DCDE1 /* PawTrailsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4447217C1F03F12A001DCDE1 /* PawTrailsUITests.swift */; };
 		44475ADB1F5960B800D41AAA /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44475ADA1F5960B800D41AAA /* SignUpViewController.swift */; };
 		44477CB91F599EFC00083295 /* UiimageViewWithMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44477CB81F599EFC00083295 /* UiimageViewWithMask.swift */; };
@@ -281,6 +282,7 @@
 		443E808B1F5D9236008679FC /* SelectPetsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectPetsCell.swift; path = PawTrails/SelectPetsCell.swift; sourceTree = "<group>"; };
 		4441ACA51EB8C72500FBE27F /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		4441ACA71EB8C72E00FBE27F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		444698841F6BC75C006EE4CD /* SelectPetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPetView.swift; sourceTree = "<group>"; };
 		4447217A1F03F12A001DCDE1 /* PawTrailsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PawTrailsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4447217C1F03F12A001DCDE1 /* PawTrailsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PawTrailsUITests.swift; sourceTree = "<group>"; };
 		4447217E1F03F12A001DCDE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -619,6 +621,7 @@
 		443E80781F5D87B1008679FC /* Adventures */ = {
 			isa = PBXGroup;
 			children = (
+				444698861F6BCB5F006EE4CD /* AdventuresPressenters */,
 				443E808B1F5D9236008679FC /* SelectPetsCell.swift */,
 				443E80791F5D87EC008679FC /* SelectPetsVC.swift */,
 				442531301F5FE6FF0017D21A /* TripScreenViewController.swift */,
@@ -651,6 +654,14 @@
 				44251AD01F0CD5170067F401 /* GoogleSymbolUtilities.framework */,
 			);
 			name = Google;
+			sourceTree = "<group>";
+		};
+		444698861F6BCB5F006EE4CD /* AdventuresPressenters */ = {
+			isa = PBXGroup;
+			children = (
+				444698841F6BC75C006EE4CD /* SelectPetView.swift */,
+			);
+			name = AdventuresPressenters;
 			sourceTree = "<group>";
 		};
 		4447217B1F03F12A001DCDE1 /* PawTrailsUITests */ = {
@@ -1159,6 +1170,7 @@
 				44251AE41F0CD54D0067F401 /* Extensions.swift in Sources */,
 				44251AF01F0CD55F0067F401 /* Messages.swift in Sources */,
 				443E807A1F5D87EC008679FC /* SelectPetsVC.swift in Sources */,
+				444698851F6BC75C006EE4CD /* SelectPetView.swift in Sources */,
 				44251B3F1F0CD5DF0067F401 /* BirthdayViewController.swift in Sources */,
 				44251B801F0CD6130067F401 /* CDSafeZone+CoreDataProperties.swift in Sources */,
 				4424DCFF1E8EA1D900ACDF07 /* UserProfilePresenter.swift in Sources */,

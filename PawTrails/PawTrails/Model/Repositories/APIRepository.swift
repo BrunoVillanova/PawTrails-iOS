@@ -26,7 +26,10 @@ class APIRepository {
     typealias APIRepPetUsersCallback = (APIManagerError?, [PetUser]?) -> Void
     typealias APIRepPetSafeZoneCallback = (APIManagerError?, SafeZone?) -> Void
     typealias APIRepPetSafeZonesCallback = (APIManagerError?, [SafeZone]?) -> Void
-     typealias ApiTrip = (APIManagerError?, [Trip]?) -> Void
+    typealias ApiTrip = (APIManagerError?, [Trip]?) -> Void
+    typealias ApiTripListCallBack = (APIManagerError?, [TripList]?) -> Void
+
+    
     
     //MARK:- Authentication
     
@@ -530,17 +533,50 @@ class APIRepository {
             } else if let myData = json?["trips"].array {
                 var tripArray = [Trip]()
                 for trip in myData {
-                    tripArray.append(Trip(trip)!)
+                    tripArray.append(Trip(trip))
                 }
                 callback(nil, tripArray)
-                print(tripArray)
                 
             }
             
         }
         
     }
+
+    func getTripList(_ status: [Int], callback: @escaping ApiTripListCallBack) {
+        
+        let dataa = ["status":status]
+        APIManager.instance.perform(call: .getTripList, with: dataa) { (error, json) in
+            if error == nil, let tripListJson = json?["trips"].array {
+                var tripList = [TripList]()
+                for trip in tripListJson {
+                    tripList.append(TripList(trip))
+                }
+                 callback(nil, tripList)
+            } else if let error = error {
+                callback(error, nil)
+            }
+        }
+    }
     
+    
+    func dd(callback: @escaping APIRepPetUsersCallback){
+        
+        APIManager.instance.perform(call: .friends) { (error, json) in
+            if error == nil, let friendsJson = json?["friendlist"].array {
+                var friends = [PetUser]()
+                for friendJson in friendsJson {
+                    friends.append(PetUser(friendJson))
+                }
+                callback(nil, friends)
+            }else if let error = error {
+                callback(error, nil)
+            }
+        }
+    }
+    
+    
+
     // Finish Trips
     // callBack: returns nil or data
     
@@ -571,18 +607,9 @@ class APIRepository {
         }
     }
     
-    
-    func getTripList(_ status: [Int], callback: @escaping APIRepErrorCallback) {
-        let data = ["status": status]
-        APIManager.instance.perform(call: .getTripList, with: data) { (error, json) in
-            callback(error)
-        }
-    }
-    
-    
-    
-
 }
+
+
 
 
 

@@ -23,8 +23,8 @@ class UserView {
     var users = [PetUser]()
     
     
-    func attachView(_ view: ProfileView, pet: Pet?) {
-        if let users = pet?.users { self.users = users }
+    func attachView(_ view: ProfileView) {
+        self.view = view
     }
     
     

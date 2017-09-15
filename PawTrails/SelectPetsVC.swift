@@ -10,12 +10,8 @@ import UIKit
 
 
 
-struct petIds {
-    static var Ids = [Int]()
-}
 
-
-class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, PetsView {
+class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, PetsView, SelectPetView {
     @IBOutlet weak var petsCollectionView: UICollectionView!
     @IBOutlet weak var startAdventureBtn: UIButton!
     
@@ -24,7 +20,14 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
     var refreshControl = UIRefreshControl()
     
     fileprivate let presenter = PetsPresenter()
+    
+    fileprivate let presenter2 = SelectedPetView()
+
+    
     fileprivate var pets = [Int:IndexPath]()
+    
+    var tripListArray = [Int]()
+
     
 
     override func viewDidLoad() {
@@ -45,15 +48,15 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
         UIApplication.shared.statusBarStyle = .lightContent
         presenter.attachView(self)
         
+        presenter2.attatchView(self)
+        
         petsCollectionView.delegate = self
         petsCollectionView.dataSource = self
         petsCollectionView.allowsMultipleSelection = true
         
  
         clearOnAppearance()
-        
-        
-
+    
 }
     
     
@@ -75,8 +78,6 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
     
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
-        petIds.Ids.removeAll()
-
         reloadPets()
         presenter.startPetsListUpdates()
         presenter.startPetsGPSUpdates { (id) in
@@ -86,7 +87,25 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
             self.updateRow(by: geocode.id)
         }
 
+
+
     }
+    
+    func getRunningandPausedTrips() {
+       APIRepository.instance.getTripList([0,1]) { (error, trips) in
+        if let error = error {
+            print(error.localizedDescription)
+        } else {
+            if let trips = trips {
+                for trip in trips {
+                    self.tripListArray.append(trip.petId)
+                }
+            }
+        }
+        }
+}
+    
+    
     
     
     
@@ -112,7 +131,6 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
     
     
     // Mohamed - PetsView
-    
     func errorMessage(_ error: ErrorMsg) {
         refreshControl.endRefreshing()
         alert(title: error.title, msg: error.msg)
@@ -152,27 +170,40 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
     }
     
 
+
     // CollectionVIew Method
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
 
+  
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! SelectPetsCell
+        
+        
         let pet = getPet(at: indexPath)
         pets[pet.id] = indexPath
-        cell.petTitle.text = pet.name
-        if let imageData = pet.image as Data? {
-            cell.petImage.image = UIImage(data: imageData)
-        }else{
-            cell.petImage.image = nil
-        }
-        cell.petImage.circle()
         
-        cell.checkMarkView.isEnabled = false
-        cell.checkMarkView.isUserInteractionEnabled = false
+        
+     
+            if tripListArray.contains(indexPath.item) {
+                cell.backgroundColor = UIColor.brown
+ 
+        } else {
+            
+            cell.petTitle.text = pet.name
+            if let imageData = pet.image as Data? {
+                cell.petImage.image = UIImage(data: imageData)
+            }else{
+                cell.petImage.image = nil
+            }
+            cell.petImage.circle()
+            
+            cell.checkMarkView.isEnabled = false
+            cell.checkMarkView.isUserInteractionEnabled = false
 
+        }
+        
         return cell
         
-    }
+}
 
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -181,6 +212,9 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
         
         let cell = collectionView.cellForItem(at: indexPath) as! SelectPetsCell
         cell.checkMarkView.setOn(true, animated: true)
+        
+        print(indexPath.item)
+        
         
         self.startAdventureBtn.isEnabled = true
         
@@ -213,28 +247,35 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
     
  
     @IBAction func StartAdventureBtnPressed(_ sender: Any) {
-        petIds.Ids.removeAll()
+        
+        var petIds = [Int]()
+        
+        var petsInProgress = [Pet]()
+        petIds.removeAll()
         if let indexpath = petsCollectionView.indexPathsForSelectedItems {
             for index in indexpath {
                let pets =  getPet(at: index)
-                petIds.Ids.append(pets.id)
+                petIds.append(pets.id)
             }
-            startMyTripNow(petIds.Ids)
 
+            getRunningandPausedTrips()
+            
+            for items in petIds {
+                if tripListArray.contains(items) {
+    
+                   petsInProgress.append(presenter.getPet(with: items)!)
+                    if let index = petIds.index(of: items) {
+                        
+                        petIds.remove(at: index)
+                    }
+                    
+                    
+                }
+
+            }
          }
     }
-
     
-    func startMyTripNow(_ petIds: [Int]){
-        DataManager.instance.startMyAdventure(petIds) { (error, data) in
-            if let error = error {
-                print(error.localizedDescription)
-            } else {
-                print("This an array of data \(String(describing: data))")
-            }
-        }
-    }
-
     @IBAction func closebtnPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }

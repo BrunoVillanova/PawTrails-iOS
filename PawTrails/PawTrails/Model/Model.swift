@@ -83,58 +83,31 @@ struct Pet {
 
 
 
-//struct Trip {
-//    var id: Int?
-//    var petId: [Int]
-//    var status: status?
-//    var timeStart: Int?
-//    var name: Int?
-//    
-//    init(id: Int?,  petId: [Int], status: status?, timeStart: Int?, name: Int?) {
-//        self.status = status
-//        self.name = name
-//        self.id = id
-//        self.petId = petId
-//        self.timeStart = timeStart
-//    }
-//    
-//    init?(_ data: Data) {
-//        if let JSONObject = (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)) as? [String: Any], let petId = JSONObject["petId"] as? [Int] {
-//            self = Trip(id: JSONObject["id"] as? Int, petId: petId, status: JSONObject["status"] as? status, timeStart: JSONObject["timeStart"] as? Int, name: JSONObject["name"] as? Int)
-//        } else {
-//            return nil
-//        }
-//    }
-
-//}
-
-
 
 
 
 struct Trip {
-    var id: Int?
-    var petId: [Int]
-    var status: Int?
-    var timeStart: Int?
-    var name: Int?
-    
-    init(id: Int?,  petId: [Int], status: Int?, timeStart: Int?, name: Int?) {
-        self.status = status
-        self.name = name
-        self.id = id
-        self.petId = petId
-        self.timeStart = timeStart
-    }
-    
-    init?(_ json: JSON) {
-        if let petId = json["petId"].number as? Int {
-            self = Trip(id: json["id"].number as? Int, petId: [petId], status: json["status"].number as? Int, timeStart: json["timeStart"].number as? Int, name: json["name"].number as? Int)
-        } else {
-            return nil
-        }
-    }
+    var id: Int
+    var name: String?
+    var petId: Int
+    var status: Int
+    var timeStart: Int
 }
+
+
+
+
+struct TripList {
+    var id: Int
+    var name: String?
+    var petId: Int
+    var status: Int
+    var startTime: Int
+    var stoppedTime: Int?
+
+}
+
+
 
 
 enum status: Int {

@@ -40,7 +40,7 @@ class ProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDelegat
         collectionView.register(nib, forCellWithReuseIdentifier: "myCell")
  
         
-        presenter.attachView(self, pet: pet)
+        presenter.attachView(self)
         reloadPetInfo()
         reloadUsers()
     }

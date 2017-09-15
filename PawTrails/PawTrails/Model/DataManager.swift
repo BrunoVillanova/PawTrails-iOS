@@ -985,7 +985,6 @@ class DataManager {
             if error == nil {
                 callback(nil, data)
                 
-                print(data!)
             } else if let error = error{
                 callback(DataManagerError(APIError: error), nil)
             }

@@ -289,6 +289,35 @@ extension PetUser {
     }
 }
 
+
+
+extension TripList {
+    init(_ json: JSON) {
+        id = json["id"].intValue
+        name = json["name"].string
+        petId = json["petId"].intValue
+        status = json["status"].intValue
+        startTime = json["timeStart"].intValue
+        stoppedTime = json["timeStop"].intValue
+    }
+}
+
+
+
+
+
+extension Trip {
+    init(_ json: JSON) {
+        id = json["id"].intValue
+        name = json["name"].string
+        petId = json["petId"].intValue
+        status = json["status"].intValue
+        timeStart = json["timeStart"].intValue
+    }
+
+}
+
+
 extension SafeZone {
     
     init() {
