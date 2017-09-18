@@ -52,16 +52,31 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
     }
     
     
+    
+    
+    
+    // To change Device
     func addTapped() {
-        print("Right bar pressd")
+        self.performSegue(withIdentifier: "ChangeDevice", sender: self)
+    
     }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "changeDevice" {
+            if let navigationController = segue.destination as? UINavigationController {
+                if let childVC = navigationController.topViewController as? AddPetDeviceTableViewController {
+                    childVC.petId = pet.id
+                }
+            }
+        }
+    }
+
     
     
     override func viewWillAppear(_ animated: Bool) {
         presenter.loadPet(with: pet.id)
         presenter.getPet(with: pet.id)
-        
-
         PetId.petId = pet
     }
     
