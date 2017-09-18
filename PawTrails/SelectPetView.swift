@@ -24,8 +24,7 @@ class SelectedPetView {
 
     }
     
-    
-    
+
     func deteachView() {
         self.view = nil
     }

@@ -294,8 +294,8 @@ extension PetUser {
 extension TripList {
     init(_ json: JSON) {
         id = json["id"].intValue
-        name = json["name"].string
         petId = json["petId"].intValue
+        name = json["name"].string
         status = json["status"].intValue
         startTime = json["timeStart"].intValue
         stoppedTime = json["timeStop"].intValue

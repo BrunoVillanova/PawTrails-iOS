@@ -14,9 +14,7 @@ import UIKit
 class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, PetsView, SelectPetView {
     @IBOutlet weak var petsCollectionView: UICollectionView!
     @IBOutlet weak var startAdventureBtn: UIButton!
-    
-    
-    
+
     var refreshControl = UIRefreshControl()
     
     fileprivate let presenter = PetsPresenter()
@@ -26,8 +24,8 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
     
     fileprivate var pets = [Int:IndexPath]()
     
+    var tripArray = [TripList]()
     var tripListArray = [Int]()
-
     
 
     override func viewDidLoad() {
@@ -56,8 +54,27 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
         
  
         clearOnAppearance()
-    
+        getRunningandPausedTrips()
+
 }
+    
+    
+    func getRunningandPausedTrips() {
+        tripArray.removeAll()
+        tripListArray.removeAll()
+        APIRepository.instance.getTripList([0,1]) { (error, trips) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                if let trips = trips {
+                    for trip in trips {
+                        self.tripArray.append(trip)
+                        
+                    }
+                }
+            }
+        }
+    }
     
     
     
@@ -81,10 +98,10 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
         reloadPets()
         presenter.startPetsListUpdates()
         presenter.startPetsGPSUpdates { (id) in
-            self.updateRow(by: id)
+            self.updateItem(by: id)
         }
         presenter.startPetsGeocodeUpdates { (geocode) in
-            self.updateRow(by: geocode.id)
+            self.updateItem(by: geocode.id)
         }
 
 
@@ -92,8 +109,7 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
     }
 
     
-    private func updateRow(by id: Int){
-        
+    private func updateItem(by id: Int){
         Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Update Pet \(id)")
         if let index = self.pets[id] {
             self.petsCollectionView.reloadItems(at: [index])
@@ -128,6 +144,18 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
         refreshControl.endRefreshing()
         petsCollectionView.reloadData()
     }
+    
+    
+    func getPet(at indexPath: IndexPath) -> Pet {
+        
+        if presenter.pets.count > 0 {
+            return presenter.pets[indexPath.item]
+        }else if presenter.ownedPets.count > 0 {
+            return presenter.ownedPets[indexPath.row]
+        }else{
+            return presenter.sharedPets[indexPath.row]
+        }
+    }
 
     
     // Mohamed: - UicollectionViewDataSource
@@ -139,17 +167,6 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         return presenter.pets.count
-    }
-    
-    func getPet(at indexPath: IndexPath) -> Pet {
-        
-        if presenter.pets.count > 0 {
-            return presenter.pets[indexPath.item]
-        }else if presenter.ownedPets.count > 0 {
-            return presenter.ownedPets[indexPath.row]
-        }else{
-            return presenter.sharedPets[indexPath.row]
-        }
     }
     
 
@@ -185,28 +202,35 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
         }
         
         return cell
-        
 }
 
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        
-        
+
         let cell = collectionView.cellForItem(at: indexPath) as! SelectPetsCell
         cell.checkMarkView.setOn(true, animated: true)
+
+        let selectedPet = indexPath
+        let pet = getPet(at: selectedPet).id
         
-        print(indexPath.item)
+        for item in tripArray {
+            tripListArray.append(item.petId)
+        }
+        if tripListArray.contains(pet) {
+            cell.petImage.backgroundColor = UIColor.white
+            cell.isUserInteractionEnabled = false
+            self.alert(title: "Error", msg: "You cannot select this pet because it's already on trip", type: .red, disableTime: 4, handler: nil)
+            cell.isSelected = false
+            cell.checkMarkView.setOn(false, animated: true)
+        }
         
-        
+
         self.startAdventureBtn.isEnabled = true
-        
-        
-    }
+}
+    
+    
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        
         let cell = petsCollectionView.cellForItem(at: indexPath) as! SelectPetsCell
-        
         cell.checkMarkView.setOn(false, animated: true)
         
     }
@@ -215,7 +239,6 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
         for i in 0..<petsCollectionView.numberOfSections {
             for j in 0..<petsCollectionView.numberOfItems(inSection: i) {
                 petsCollectionView.selectItem(at: IndexPath(row: j, section: i), animated: false, scrollPosition: .bottom)
-
             }
         }
 
@@ -231,32 +254,32 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
  
     @IBAction func StartAdventureBtnPressed(_ sender: Any) {
         
-        var petIds = [Int]()
-        
-        var petsInProgress = [Pet]()
-        petIds.removeAll()
-        if let indexpath = petsCollectionView.indexPathsForSelectedItems {
-            for index in indexpath {
-               let pets =  getPet(at: index)
-                petIds.append(pets.id)
-            }
-
+//        var petIds = [Int]()
+//        
+//        var petsInProgress = [Pet]()
+//        petIds.removeAll()
+//        if let indexpath = petsCollectionView.indexPathsForSelectedItems {
+//            for index in indexpath {
+//               let pets =  getPet(at: index)
+//                petIds.append(pets.id)
+//            }
+//
 //            getRunningandPausedTrips()
-            
-            for items in petIds {
-                if tripListArray.contains(items) {
-    
-                   petsInProgress.append(presenter.getPet(with: items)!)
-                    if let index = petIds.index(of: items) {
-                        
-                        petIds.remove(at: index)
-                    }
-                    
-                    
-                }
+//            
+//            for items in petIds {
+//                if tripListArray.contains(items) {
+//    
+//                   petsInProgress.append(presenter.getPet(with: items)!)
+//                    if let index = petIds.index(of: items) {
+//                        petIds.remove(at: index)
+//                    }
+//                    
+//                    
+//                }
+//
+//            }
+//         }
 
-            }
-         }
     }
     
     @IBAction func closebtnPressed(_ sender: Any) {

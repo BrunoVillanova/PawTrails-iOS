@@ -25,6 +25,8 @@ class UserProfileTableViewController: UITableViewController, UserProfileView, UI
         super.viewDidLoad()
         presenter.attachView(self)
         UIApplication.shared.statusBarStyle = .lightContent
+        
+//        userNotSigned()
     }
     
     override func viewWillAppear(_ animated: Bool) {

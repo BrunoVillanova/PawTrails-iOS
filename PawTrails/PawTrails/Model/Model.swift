@@ -104,7 +104,6 @@ struct TripList {
     var status: Int
     var startTime: Int
     var stoppedTime: Int?
-
 }
 
 

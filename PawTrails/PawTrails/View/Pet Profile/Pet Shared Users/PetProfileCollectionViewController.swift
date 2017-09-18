@@ -106,19 +106,12 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
         }
         
         collectionView?.backgroundColor = UIColor.white
-        
-        
-        
-        
         collectionView?.register(ProfileCell.self, forCellWithReuseIdentifier: "cell")
 //        collectionView?.register(SubscriptionCell.self, forCellWithReuseIdentifier: subscriptionCellId)
-        
         let nib = UINib(nibName: "PetProfileCollectionViewCell", bundle: nil)
         collectionView?.register(nib, forCellWithReuseIdentifier: "myCell")
-        
         collectionView?.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
         collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(50, 0, 0, 0)
-        
         collectionView?.isPagingEnabled = true
     }
     
@@ -136,14 +129,12 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
         view.addConstraintsWithFormat("H:|[v0]|", views: menuBar)
         view.addConstraintsWithFormat("V:[v0(50)]", views: menuBar)
         menuBar.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
-
     }
     
     
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         menuBar.horizontalBarLeftAnchorConstraint?.constant = scrollView.contentOffset.x / 4
-        
     }
     
     
@@ -151,9 +142,7 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
     
     
     override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        
         let index = targetContentOffset.pointee.x / view.frame.width
-        
         let indexPath = IndexPath(item: Int(index), section: 0)
         menuBar.collectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition())
         
@@ -163,7 +152,6 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
     func scrollToMenuIndex(_ menuIndex: Int) {
         let indexPath = IndexPath(item: menuIndex, section: 0)
         collectionView?.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition(), animated: true)
-        
     }
     
     
@@ -178,8 +166,6 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
 //        let identifier: String
-        
-        
 
         if indexPath.item == 0 {
             
@@ -192,29 +178,22 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
             cell.genderLabel.text = self.pet.gender?.name
             cell.weightLabel.text = self.pet.weightString
             cell.backgroundColor = UIColor.white
-            
-            
             cell.petName.text = self.pet.name
             
             if let imageData = self.pet.image {
                 cell.petImage.image = UIImage(data: imageData as Data)
             }
-
             return cell
         }
-
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
         return cell
-  
    }
+    
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: view.frame.height - 120)
-
     }
-
-   
 }
 
 class ActivityCell: BaseCell {
@@ -224,6 +203,7 @@ class ActivityCell: BaseCell {
         
     }
 }
+
 
 class SafeZoneCell: BaseCell {
     override func setupViews() {
@@ -236,9 +216,5 @@ class ShareCell: BaseCell {
         self.backgroundColor = UIColor.black
     }
 }
-
-
-
-
 
 

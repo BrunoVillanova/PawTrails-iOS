@@ -752,7 +752,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Profile Photo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1MH-Z2-KXM">
-                                                    <rect key="frame" x="14" y="6" width="268" height="31"/>
+                                                    <rect key="frame" x="14" y="6" width="268" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -3089,14 +3089,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="startAdventure" translatesAutoresizingMaskIntoConstraints="NO" id="ifa-2R-jLC">
-                                <rect key="frame" x="147" y="102" width="80" height="80"/>
+                                <rect key="frame" x="147" y="58" width="80" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="luO-AW-sdd"/>
                                     <constraint firstAttribute="width" constant="80" id="sJ3-Dk-5oX"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dlm-xG-Zjg">
-                                <rect key="frame" x="0.0" y="198" width="375" height="30"/>
+                                <rect key="frame" x="0.0" y="154" width="375" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="4l6-XV-xae"/>
                                 </constraints>
@@ -3107,8 +3107,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" semanticContentAttribute="forceLeftToRight" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gL5-IH-8Ya">
-                                <rect key="frame" x="16" y="244" width="343" height="359"/>
+                                <rect key="frame" x="16" y="244" width="343" height="300"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="Rbf-lJ-FP4"/>
+                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="B3O-Gn-9LQ">
                                     <size key="itemSize" width="84" height="132"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -3150,7 +3153,7 @@
                                                             <real key="value" value="1"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="animationDuration">
-                                                            <real key="value" value="1"/>
+                                                            <real key="value" value="0.20000000000000001"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="onFillColor">
                                                             <color key="value" red="0.80784313730000001" green="0.074509803920000006" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -3201,9 +3204,9 @@
                                 </cells>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mac-bO-czy">
-                                <rect key="frame" x="60" y="619" width="255" height="40"/>
+                                <rect key="frame" x="60" y="560" width="255" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="dIA-mg-1LT"/>
+                                    <constraint firstAttribute="height" constant="40" id="J8D-m7-8Ra"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                 <state key="normal" title="START ADVENTURE">
@@ -3216,18 +3219,17 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="mac-bO-czy" secondAttribute="trailing" constant="60" id="4hG-sM-NjI"/>
+                            <constraint firstItem="mac-bO-czy" firstAttribute="top" secondItem="gL5-IH-8Ya" secondAttribute="bottom" constant="16" id="2WN-YS-cqX"/>
                             <constraint firstItem="dlm-xG-Zjg" firstAttribute="leading" secondItem="q5D-M2-2TW" secondAttribute="leading" id="6Aa-mi-cGf"/>
-                            <constraint firstItem="gL5-IH-8Ya" firstAttribute="leading" secondItem="q5D-M2-2TW" secondAttribute="leading" constant="16" id="BKZ-2w-vFQ"/>
+                            <constraint firstItem="mac-bO-czy" firstAttribute="leading" secondItem="q5D-M2-2TW" secondAttribute="leading" constant="60" id="6i2-U6-WzC"/>
+                            <constraint firstItem="gL5-IH-8Ya" firstAttribute="leading" secondItem="q5D-M2-2TW" secondAttribute="leading" constant="16" id="92V-9u-NiX"/>
                             <constraint firstItem="ifa-2R-jLC" firstAttribute="centerX" secondItem="q5D-M2-2TW" secondAttribute="centerX" id="H6M-tl-I4w"/>
-                            <constraint firstItem="gL5-IH-8Ya" firstAttribute="top" secondItem="dlm-xG-Zjg" secondAttribute="bottom" constant="16" id="JHF-1e-0eL"/>
-                            <constraint firstItem="mac-bO-czy" firstAttribute="top" secondItem="gL5-IH-8Ya" secondAttribute="bottom" constant="16" id="JXQ-lV-1up"/>
+                            <constraint firstAttribute="trailing" secondItem="mac-bO-czy" secondAttribute="trailing" constant="60" id="USZ-kD-MK5"/>
+                            <constraint firstItem="gL5-IH-8Ya" firstAttribute="top" secondItem="dlm-xG-Zjg" secondAttribute="bottom" constant="60" id="WaC-0F-ZTA"/>
                             <constraint firstItem="ifa-2R-jLC" firstAttribute="top" secondItem="phS-bc-gXZ" secondAttribute="bottom" constant="38" id="YYS-gU-eGg"/>
                             <constraint firstAttribute="trailing" secondItem="dlm-xG-Zjg" secondAttribute="trailing" id="e3p-ZH-D9F"/>
-                            <constraint firstItem="Pa1-qD-NW6" firstAttribute="top" secondItem="mac-bO-czy" secondAttribute="bottom" constant="8" id="fU2-Hx-Bul"/>
-                            <constraint firstAttribute="trailing" secondItem="gL5-IH-8Ya" secondAttribute="trailing" constant="16" id="nna-ty-KYh"/>
                             <constraint firstItem="dlm-xG-Zjg" firstAttribute="top" secondItem="ifa-2R-jLC" secondAttribute="bottom" constant="16" id="pxC-DZ-u7H"/>
-                            <constraint firstItem="mac-bO-czy" firstAttribute="leading" secondItem="q5D-M2-2TW" secondAttribute="leading" constant="60" id="xP4-GX-qB5"/>
+                            <constraint firstAttribute="trailing" secondItem="gL5-IH-8Ya" secondAttribute="trailing" constant="16" id="yQX-PR-Kof"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Start Adventure" id="5Q6-rz-Oly">
@@ -4785,8 +4787,8 @@ finish the Adventure?</string>
         <image name="userprofilemask-1x-png_360" width="140" height="141"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="YaK-at-8Iw"/>
-        <segue reference="U56-2i-Oh8"/>
         <segue reference="RBI-W6-z0r"/>
+        <segue reference="07a-sX-yoe"/>
+        <segue reference="U56-2i-Oh8"/>
     </inferredMetricsTieBreakers>
 </document>

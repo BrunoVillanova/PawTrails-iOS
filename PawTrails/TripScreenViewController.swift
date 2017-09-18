@@ -19,11 +19,7 @@ class TripScreenViewController: UIViewController, UICollectionViewDelegate, UICo
     @IBOutlet weak var pageControl: UIPageControl!
     
     let locationManager = CLLocationManager()
-
-    
     var pets = [Pet]()
-    
-    
     var petArray = [Dictionary<String,String>]()
 
     // Variables to hold the width and hights of the collectionview.
@@ -43,8 +39,6 @@ class TripScreenViewController: UIViewController, UICollectionViewDelegate, UICo
             }
         }
     }
-    
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,10 +55,7 @@ class TripScreenViewController: UIViewController, UICollectionViewDelegate, UICo
         }
         
         mapView.showsUserLocation = true
-        
-          requestLocationAccess()
-
-
+        requestLocationAccess()
     }
     
     func requestLocationAccess() {
@@ -81,9 +72,7 @@ class TripScreenViewController: UIViewController, UICollectionViewDelegate, UICo
             locationManager.requestWhenInUseAuthorization()
         }
     }
-    
 
-    
     override func viewWillAppear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = true
         self.navigationItem.setHidesBackButton(true, animated: true)
@@ -145,15 +134,11 @@ class TripScreenViewController: UIViewController, UICollectionViewDelegate, UICo
     
     
     @IBAction func focousOnUserBtnPressed(_ sender: Any) {
-        
         self.mapView.setVisibleMapFor([self.mapView.userLocation.coordinate])
 
-        
 }
     
 
-    
-    
     @IBAction func AddPetsToTripBtnPressed(_ sender: Any) {
     }
     
@@ -175,7 +160,6 @@ class TripScreenViewController: UIViewController, UICollectionViewDelegate, UICo
 
 class CsustomCell: UICollectionViewCell {
     @IBOutlet weak var totalTimeLabel: UILabel!
-    
     @IBOutlet weak var avarageSpeedLabel: UILabel!
     @IBOutlet weak var currentSpeedLabel: UILabel!
     @IBOutlet weak var totalDistanceLabel: UILabel!

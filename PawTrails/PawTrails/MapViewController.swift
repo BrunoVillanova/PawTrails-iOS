@@ -64,19 +64,7 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     
     
     
-    func getRunningandPausedTrips() {
-        APIRepository.instance.getTripList([0,1]) { (error, trips) in
-            if let error = error {
-                print(error.localizedDescription)
-            } else {
-                if let trips = trips {
-                    for trip in trips {
-                        self.tripListArray.append(trip)
-                    }
-                }
-            }
-        }
-    }
+
     
 
     func reloadPets(){
@@ -92,7 +80,7 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
             self.load(id: id, point: point)
         }
         
-        getRunningandPausedTrips()
+//        getRunningandPausedTrips()
         
         showAlert()
 
