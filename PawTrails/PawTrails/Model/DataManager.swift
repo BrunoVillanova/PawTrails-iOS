@@ -978,7 +978,7 @@ class DataManager {
     
     
     
-    // Mohamed -- Start Trip and recieve data from api.
+    // MARK -- Start Trip and recieve data from api.
     
     func startMyAdventure(_ petIdss: [Int], callback: @escaping startTripCallBack) {
         APIRepository.instance.startTrips(petIdss) { (error, data) in
@@ -991,19 +991,7 @@ class DataManager {
         }
         
 }
-    
-    
-    
-    
- 
-    
-    
-    
-    
-    
-    
-    
-    
+
 }
 
 

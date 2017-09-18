@@ -49,8 +49,48 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
         collectionView?.collectionViewLayout.invalidateLayout()
         setUpMenuBar()
         setupCollectionView()
+        
+        addButton()
+        
+        if !pet.isOwner {
+            button.isHidden = true
+        } else {
+            button.isHidden = false
+
+        }
+        
     }
     
+    
+    // Floating button.
+    let button = UIButton()
+
+    fileprivate func addButton(){
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(#imageLiteral(resourceName: "StopTripButton-1x-png"), for: .normal)
+        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        self.view.addSubview(button)
+        button.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -5).isActive = true
+        button.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -5).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        
+        
+    }
+    
+    func buttonAction(sender: UIButton!) {
+        if !pet.isOwner {
+            
+            self.alert(title: "", msg: "You cannot add user for this pet because you don't own it", type: .blue, disableTime: 5, handler: nil)
+        } else {
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "AddPetUserViewController") as? AddPetUserViewController {
+                vc.pet = pet
+                navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+        
+       
+    }
     
     
     
@@ -122,6 +162,7 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
         
         collectionView?.backgroundColor = UIColor.white
         collectionView?.register(ProfileCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell3")
 //        collectionView?.register(SubscriptionCell.self, forCellWithReuseIdentifier: subscriptionCellId)
         let nib = UINib(nibName: "PetProfileCollectionViewCell", bundle: nil)
         collectionView?.register(nib, forCellWithReuseIdentifier: "myCell")
@@ -167,27 +208,30 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
     func scrollToMenuIndex(_ menuIndex: Int) {
         let indexPath = IndexPath(item: menuIndex, section: 0)
         collectionView?.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition(), animated: true)
+        
+        
     }
     
     
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+     
         
         return 4
+        
+        
+        
     }
     
  
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-//        let identifier: String
 
         if indexPath.item == 0 {
-            
+ 
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myCell", for: indexPath) as! PetProfileCollectionViewCell
-            
             cell.petBirthdayLabel.text = pet.birthday?.toStringShow
-            
             cell.typeLabel.text = self.pet.typeString
             cell.breedLabel.text = self.pet.breedsString
             cell.genderLabel.text = self.pet.gender?.name
@@ -199,9 +243,18 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
                 cell.petImage.image = UIImage(data: imageData as Data)
             }
             return cell
+        } else if indexPath.item == 3 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+            return cell
         }
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell3", for: indexPath)
+        cell.backgroundColor = UIColor.blue
+
         return cell
+
+        
+        
    }
     
     
@@ -226,10 +279,5 @@ class SafeZoneCell: BaseCell {
     }
 }
 
-class ShareCell: BaseCell {
-    override func setupViews() {
-        self.backgroundColor = UIColor.black
-    }
-}
 
 

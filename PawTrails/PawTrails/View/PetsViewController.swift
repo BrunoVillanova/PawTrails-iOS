@@ -33,6 +33,28 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         UIApplication.shared.statusBarStyle = .lightContent
         presenter.attachView(self)
+        
+        addButton()
+    }
+    
+
+    fileprivate func addButton(){
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(#imageLiteral(resourceName: "StopTripButton-1x-png"), for: .normal)
+        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        self.view.addSubview(button)
+        button.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -2).isActive = true
+        if let tabbarhieght = self.tabBarController?.tabBar.frame.size.height {
+            button.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -(tabbarhieght + 5)).isActive = true
+        }
+        button.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 80).isActive = true
+    }
+    
+    
+    func buttonAction(sender: UIButton!) {
+        print("Button tapped")
     }
     
     @objc func reloadPetsAPI(){

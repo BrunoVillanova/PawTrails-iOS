@@ -10,11 +10,14 @@ import UIKit
 
 class ProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ProfileView {
 
-    let profileCollectionView = PetProfileCollectionViewController()
-    var users = [PetUser]()
 
+    var users = [PetUser]()
     let presenter = UserView()
     var pet = PetId.petId
+    
+   
+    
+
     
     fileprivate var currentUserId = -1
     fileprivate var petOwnerId = -2
@@ -33,6 +36,7 @@ class ProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDelegat
 
     
     override func setupViews() {
+
         addSubview(collectionView)
         addConstraintsWithFormat("H:|[v0]|", views: collectionView)
         addConstraintsWithFormat("V:|[v0]|", views: collectionView)
@@ -44,6 +48,12 @@ class ProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDelegat
         reloadPetInfo()
         reloadUsers()
     }
+    
+    
+    
+    
+  
+    
     
     func reloadUsers(onlyDB: Bool = false) {
         if onlyDB {

@@ -39,13 +39,12 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
         firstButtonfromthebottom.contentMode = .scaleToFill
         firstButtonfromthebottom.imageView?.contentMode = .scaleToFill
         
-//        self.locationManager.requestAlwaysAuthorization()
-//       self.locationManager.requestWhenInUseAuthorization()
-        
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()
+        } else {
+            locationManager.requestWhenInUseAuthorization()
         }
         
         mapView.showsUserLocation = true
@@ -61,10 +60,6 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
         
         petsCollectionView.allowsMultipleSelection = true
 }
-    
-    
-    
-
     
 
     func reloadPets(){
