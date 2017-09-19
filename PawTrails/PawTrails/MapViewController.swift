@@ -34,8 +34,6 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
         super.viewDidLoad()
         
         firstButtonfromthebottom.contentHorizontalAlignment = .fill
-
-        
         firstButtonfromthebottom.contentMode = .scaleToFill
         firstButtonfromthebottom.imageView?.contentMode = .scaleToFill
         
@@ -47,8 +45,8 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
             locationManager.requestWhenInUseAuthorization()
         }
         
+        
         mapView.showsUserLocation = true
-
         petsCollectionView.delegate = self
         petsCollectionView.dataSource = self
         presenter.attachView(self)
@@ -57,7 +55,6 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
         petsCollectionView.isHidden = true
         reloadPets()
         self.petsCollectionView.reloadData()
-        
         petsCollectionView.allowsMultipleSelection = true
 }
     
@@ -98,7 +95,7 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     
     
     
-    // HomeView -- Mohamed
+    // HomeView --
     
     func errorMessage(_ error: ErrorMsg) {
         self.alert(title: error.title, msg: error.msg)
@@ -168,7 +165,7 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     
     
     
-    // Mohamed: - MapViewDelegate
+    // MARK: - MapViewDelegate
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         return mapView.getAnnotationView(annotation: annotation)

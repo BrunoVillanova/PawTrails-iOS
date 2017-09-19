@@ -49,9 +49,7 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
         collectionView?.collectionViewLayout.invalidateLayout()
         setUpMenuBar()
         setupCollectionView()
-        
         addButton()
-        
         if !pet.isOwner {
             button.isHidden = true
         } else {
@@ -74,13 +72,11 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
         button.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -5).isActive = true
         button.widthAnchor.constraint(equalToConstant: 80).isActive = true
         button.heightAnchor.constraint(equalToConstant: 80).isActive = true
-        
-        
     }
+    
     
     func buttonAction(sender: UIButton!) {
         if !pet.isOwner {
-            
             self.alert(title: "", msg: "You cannot add user for this pet because you don't own it", type: .blue, disableTime: 5, handler: nil)
         } else {
             if let vc = storyboard?.instantiateViewController(withIdentifier: "AddPetUserViewController") as? AddPetUserViewController {
@@ -88,17 +84,12 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
                 navigationController?.pushViewController(vc, animated: true)
             }
         }
-        
-       
     }
     
-    
-    
-    
+
     // To change Device
     func addTapped() {
         self.performSegue(withIdentifier: "ChangeDevice", sender: self)
-    
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -208,26 +199,21 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
     func scrollToMenuIndex(_ menuIndex: Int) {
         let indexPath = IndexPath(item: menuIndex, section: 0)
         collectionView?.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition(), animated: true)
-        
-        
+ 
     }
     
     
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-     
-        
         return 4
-        
-        
-        
+
     }
     
  
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-
+        
         if indexPath.item == 0 {
  
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myCell", for: indexPath) as! PetProfileCollectionViewCell
@@ -238,15 +224,17 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
             cell.weightLabel.text = self.pet.weightString
             cell.backgroundColor = UIColor.white
             cell.petName.text = self.pet.name
-            
+
             if let imageData = self.pet.image {
                 cell.petImage.image = UIImage(data: imageData as Data)
             }
             return cell
         } else if indexPath.item == 3 {
+
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
             return cell
         }
+        
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell3", for: indexPath)
         cell.backgroundColor = UIColor.blue
@@ -264,11 +252,11 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
     }
 }
 
+
 class ActivityCell: BaseCell {
     override func setupViews() {
         self.backgroundColor = UIColor.green
-        
-        
+
     }
 }
 
