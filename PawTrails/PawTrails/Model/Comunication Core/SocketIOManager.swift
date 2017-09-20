@@ -5,7 +5,6 @@
 //  Created by Marc Perello on 03/02/2017.
 //  Copyright © 2017 AttitudeTech. All rights reserved.
 //
-
 import Foundation
 import UIKit
 import SocketIO
@@ -15,7 +14,7 @@ import SwiftyJSON
 class SocketIOManager: NSObject, URLSessionDelegate {
     
     /// Shared Instance
-    static let instance = SocketIOManager(SSLEnabled: true)
+    static let instance = SocketIOManager()
     
     private let urlString = "http://eu.pawtrails.pet:2003"
     private let urlStringSSL = "https://eu.pawtrails.pet:4654"
@@ -33,7 +32,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         let urlString = SSLEnabled ? self.urlStringSSL : self.urlString
         
         if let url = URL(string: urlString) {
-            self.socket = SocketIOClient(socketURL: url, config: [.log(false), .secure(true)])
+            self.socket = SocketIOClient(socketURL: url, config: [.log(true), .secure(true)])
         }
         
         for key in self.onUpdates.keys {  self.onUpdates[key] = false }
@@ -43,7 +42,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     ///
     /// - Parameter callback: returns socket IO connection status
     func connect(_ callback: ((SocketIOStatus)->())? = nil) {
-
+        
         self.socket.on(channel.diconnect.name) { (_, _) in
             self.isConnected = false
         }
@@ -60,18 +59,18 @@ class SocketIOManager: NSObject, URLSessionDelegate {
             let token = SharedPreferences.get(.token)
             if token != "" {
                 Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Connecting")
-                self.socket.emit(channel.auth.name, with: [token])
+                self.socket.emit(channel.auth.name, token)
             }else{
                 Reporter.send(file: "\(#file)", function: "\(#function)", NSError(domain: "Socket IO", code: -1, userInfo: ["reason": "missing token"]))
             }
             
         }
         //self.socket.on(channel.events.name, callback: { (data, ack) in
-            //Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Event RS", data)
-            //self.handleEventUpdated(data)
+        //Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Event RS", data)
+        //self.handleEventUpdated(data)
         //})
         self.socket.connect()
-
+        
     }
     
     /// Disconnects from Socket I.O.
@@ -81,24 +80,31 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     }
     
     
+    func getDataFromGpsUpdates() {
+        self.socket.on("pets") { (data, ack) in
+            print("This is my data \(data))")
+        }
     
-    // Mohamed: establish connection with Pets channel. 
+    }
+    
+    
+    
+    // MARK: establish connection with PetsList channel.
     
     func connectToPetChannel() {
-        if isConnected {
             self.socket.emit("getPetList", false)
 
-            print("Here are the prented Data")
-            
-        } else {
-            connect({ (status) in
-                Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "connect answer: ", status)
-                if status == .connected {
-                    self.connectToPetChannel()
-                }
+            self.socket.on("pets", callback: { (data, ack) in
+                print("Here is my data\(data)")
             })
-        }
+     
     }
+    
+    func startGettingGpsUpdates(for petId: [Int]) {
+            self.socket.emit("pets", ["ids": petId, "noLastPos": false])
+            print("here is your gps updates for pets")
+    }
+    
 
     //MARK:- Pet
     
@@ -123,27 +129,15 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     
     /// Start pets GPS Updates
     ///
-    /// - Parameter petIds: pet ids
+    //    /// - Parameter petIds: pet ids
     func startGPSUpdates(for petIds: [Int]){
-        
-        if isConnected {
             for petId in petIds {
                 self.startGPSUpdatesEffective(for: petId)
-                
-                
-            }
-        }else{
-            connect({ (status) in
-                Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "connect answer: ", status)
-                if status == .connected {
-                    self.startGPSUpdates(for: petIds)
-                }
-            })
         }
+
     }
     
     private func startGPSUpdatesEffective(for petId: Int) {
-        
         if onUpdates[petId] == nil || (onUpdates[petId] != nil && onUpdates[petId] == false) {
             Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Start Updates for pet: ", petId)
             
@@ -153,14 +147,19 @@ class SocketIOManager: NSObject, URLSessionDelegate {
                 PetsGPSData.setObject(data, forKey: NSNumber(value: petId))
             }
             
-            self.socket.on(channel.gpsUpdatesName(for: petId), callback: { (data, ack) in
-                Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "gpsData Update response", data)
+          self.socket.on("gpsUpdates", callback: { (data, ack) in
+              Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "gpsData Update response", data)
                 self.handleGPSUpdates(data)
-            })
-            self.onUpdates[petId] = true
-            socket.emit(channel.startGPSUpdates.name, Int(petId))
+          
+          })
+          self.onUpdates[petId] = true
+            self.socket.emit("pets", ["ids": [petId], "noLastPos": false])
         }
     }
+    
+    
+    
+    
     
     /// Stop pets GPS Updates
     ///
@@ -168,9 +167,9 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     func stopGPSUpdates(for id: Int) {
         
         if socket.status == .connected {
-
+            
             self.onUpdates[id] = false
-
+            
             Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Stop Updates for pet: ", id)
             socket.emit(channel.startGPSUpdates.name, Int(id))
         }
@@ -179,8 +178,6 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     private func handleGPSUpdates(_ data: [Any]) {
         
         if let json = data.first as? [String:Any] {
-            
-            
             if let id = json.tryCastInteger(for: "petId") {
                 Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "GPS Updates \(id)")
                 if let data = getGPSData(for: id) {
@@ -192,7 +189,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
             }else {
                 Reporter.debugPrint(file: "\(#file)", function: "\(#function)", json)
             }
-
+            
         }else{
             Reporter.debugPrint(file: "\(#file)", function: "\(#function)", data)
         }
@@ -234,7 +231,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         return SocketIOStatus.unknown
     }
     
-
+    
 }
 
 fileprivate enum channel {

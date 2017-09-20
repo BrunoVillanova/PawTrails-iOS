@@ -18,12 +18,29 @@ class SocketIOTestTableViewController: UITableViewController {
         tableView.tableFooterView = UIView()
         
         
+        
+        
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+//      SocketIOManager.instance.startGettingGpsUpdates(for: [132])
+//        SocketIOManager.instance.connectToPetChannel()
 
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        
         
+        
+        
+        SocketIOManager.instance.connectToPetChannel()
+        
+//        SocketIOManager.instance.startGettingGpsUpdates(for: [132])
+        
+
+//
+//        SocketIOManager.instance.disconnectFromPetChannel(for: 132)
+
 //        APIRepository.instance.getTripList([0]) { (error) in
 //            print("GOT IT")
 //        }
@@ -32,7 +49,7 @@ class SocketIOTestTableViewController: UITableViewController {
 //            print("Finished Trip")
 //        }
         
-        SocketIOManager.instance.connectToPetChannel()
+//        SocketIOManager.instance.connectToPetChannel()
         
         
         
@@ -49,6 +66,7 @@ class SocketIOTestTableViewController: UITableViewController {
 //            }
 //        }
 //        SocketIOManager.instance.startGPSUpdates(for: [id])
+        
         
         
         

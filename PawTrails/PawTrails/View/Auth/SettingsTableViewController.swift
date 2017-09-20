@@ -20,6 +20,7 @@ class SettingsTableViewController: UITableViewController, SettingsView {
         super.viewDidLoad()
         presenter.attachView(self)
         loadUser()
+        
     }
     
     deinit {
@@ -67,36 +68,33 @@ class SettingsTableViewController: UITableViewController, SettingsView {
     }
     
     
-    @IBAction func logoutBtnPressed(_ sender: Any) {
-  
-    let alert = UIAlertController(title: "Warning", message: "Are you sure you want to log out?", preferredStyle: .alert)
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
-
-            self.presenter.logout()
+        if indexPath.section == 2 && indexPath.row == 0 {
             
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-        self.present(alert, animated: true, completion: nil)
-        
+            let alert = UIAlertController(title: "Warning", message: "Are you sure you want to log out?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+                self.presenter.logout()
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
-    }
-    
-    
 
-//
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        
-//        if indexPath.section == 2 && indexPath.row == 0 {
-//            
-//            let alert = UIAlertController(title: "Warning", message: "Are you sure you want to log out?", preferredStyle: .alert)
-//            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
-//                self.presenter.logout()
-//            }))
-//            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-//            self.present(alert, animated: true, completion: nil)
-//        }
-//    }
+    
+    
+    @IBAction func logoutBtnPressed(_ sender: Any) {
+
+        let alert = UIAlertController(title: "Warning", message: "Are you sure you want to log out?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+            self.presenter.logout()
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+}
+
+
+
 

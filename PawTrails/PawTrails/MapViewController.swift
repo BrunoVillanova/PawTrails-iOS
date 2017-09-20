@@ -14,15 +14,13 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var petsCollectionView: UICollectionView!
     @IBOutlet weak var firstButtonfromthebottom: UIButton!
-    
     @IBOutlet weak var secButtonFromTheBottom: UIButton!
-    
     @IBOutlet weak var thirdButtonFromTheBottom: UIButton!
     
     let locationManager = CLLocationManager()
     fileprivate let presenter = HomePresenter()
     fileprivate var annotations = [MKLocationId:MKLocation]()
-     var selectedPet: Pet?
+    var selectedPet: Pet?
     
     
     var tripListArray = [TripList]()
@@ -50,8 +48,6 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
         petsCollectionView.delegate = self
         petsCollectionView.dataSource = self
         presenter.attachView(self)
-        
-        
         petsCollectionView.isHidden = true
         reloadPets()
         self.petsCollectionView.reloadData()
@@ -67,10 +63,13 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        presenter.startPetsListUpdates()
-        presenter.startPetsGPSUpdates { (id, point) in
-            self.load(id: id, point: point)
-        }
+//        presenter.startPetsListUpdates()
+//        presenter.startPetsGPSUpdates { (id, point) in
+//            self.load(id: id, point: point)
+//        }
+        
+        
+        
         
 //        getRunningandPausedTrips()
         
@@ -82,15 +81,14 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     func showAlert() {
         if tripListArray.count > 0 {
             self.popUpDestructive(title: "Trip in progress", msg: "There is a trip already in progress, you can join it right now", cancelHandler: nil, proceedHandler: { (segue) in
-                
             })
         }
     }
     
     
     override func viewWillDisappear(_ animated: Bool) {
-        presenter.stopPetListUpdates()
-        presenter.stopPetGPSUpdates()
+//        presenter.stopPetListUpdates()
+//        presenter.stopPetGPSUpdates()
     }
     
     
@@ -124,7 +122,10 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     }
     
     func reload() {
+        
     }
+    
+    
     
     
     func load(id: MKLocationId, point: Point){
@@ -174,8 +175,8 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         
         if let annotation = view.annotation as? MKLocation {
-            
-            //            mapView.centerOn(annotation.coordinate, animated: true)
+
+            SocketIOManager.instance.connectToPetChannel()
             
             switch annotation.id.type {
             case .pet:
@@ -205,48 +206,36 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     
     func focusOnPets(){
         let coordinates = Array(self.annotations.values).filter({ $0.id.type == .pet && !$0.coordinate.isDefaultZero }).map({ $0.coordinate })
-        
         mapView.setVisibleMapFor(coordinates)
     }
     
     
     
     @IBAction func firstButtonPressed(_ sender: Any) {
-        
         print("firstButtonPressed")
     }
     
     
     var doubleTap : Bool! = false
     @IBAction func secButtonPressed(_ sender: Any) {
-        
         if (doubleTap) {
-            
             self.petsCollectionView.isHidden = true
             doubleTap = false
-            
         } else {
             //First Tap
             self.petsCollectionView.isHidden = false
             doubleTap = true
         }
-        
     }
     
-    
-    
-    
-    
-    
+
     @IBAction func thirdButtonPressed(_ sender: Any) {
         
         self.mapView.setVisibleMapFor([self.mapView.userLocation.coordinate])
-        
-        
 //        self.mapView.setCenter(self.mapView.userLocation.coordinate, animated: true)
     }
     
-    /// Mohamed - CollectionViewDataSource
+    /// MARK - CollectionViewDataSource
     
     
     func presentPet(_ pet: Pet, activityEnabled:Bool = false) {
@@ -270,10 +259,8 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
         }
     }
     
-    // Mohamed - UicollectionViewDataSource..
-    
-    
-    
+    // MARK - UicollectionViewDataSource..
+
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -285,8 +272,13 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Selected")
-    }
+
+//    let cell = petsCollectionView.cellForItem(at: indexPath) as! PetsCollectionViewCell
+//        let pet = presenter.pets[indexPath.item]
+//      let petid = pet.id
+//        SocketIOManager.instance.startGettingGpsUpdates(for: [petid])
+        SocketIOManager.instance.connectToPetChannel()
+}
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         print("Deselected")
@@ -296,7 +288,7 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = petsCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! PetsCollectionViewCell
 
-        let pet = presenter.pets[indexPath.row]
+        let pet = presenter.pets[indexPath.item]
         
         let image = pet.image
         
@@ -345,9 +337,7 @@ class MKLocationId: Hashable {
 
 
 class MKLocation: MKPointAnnotation {
-    
     let pet = Pet()
-    
     var color:UIColor
     var id: MKLocationId
     
@@ -356,8 +346,6 @@ class MKLocation: MKPointAnnotation {
         self.color = color
         super.init()
         self.coordinate = coordinate
-        
-        
     }
     
     func move(coordinate:CLLocationCoordinate2D){

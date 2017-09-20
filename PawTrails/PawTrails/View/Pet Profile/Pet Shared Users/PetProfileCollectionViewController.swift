@@ -109,8 +109,27 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
         presenter.loadPet(with: pet.id)
         presenter.getPet(with: pet.id)
         PetId.petId = pet
+        
+        presenter.startPetsGPSUpdates(for: pet.id) { (data) in
+
+            print("I GOT THE DATA \(data)")
+        }
+        presenter.startPetsGeocodeUpdates(for: pet.id, { (type,name) in
+            Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Released Geocode \(type) - \(name)")
+            if type == .pet {
+                self.load(locationAndTime: name)
+            }else if type == .safezone {
+                self.presenter.getPet(with: self.pet.id)
+            }
+        })
+        
+
     }
     
+    
+    func load(locationAndTime: String){
+        print("Here is the location ANd Time\(locationAndTime)")
+    }
     
     override func viewWillDisappear(_ animated: Bool) {
         
