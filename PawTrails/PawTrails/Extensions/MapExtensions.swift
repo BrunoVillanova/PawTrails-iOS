@@ -139,11 +139,8 @@ extension MKMapView {
     }
     
     func getAnnotationView(annotation: MKAnnotation) -> MKAnnotationView? {
-        
-        if annotation is MKUserLocation {
-            return nil
-            
-        } else if annotation is MKLocation {
+ 
+        if annotation is MKLocation {
             // Better to make this class property
             let annotationIdentifier = "mkl"
             
@@ -161,7 +158,7 @@ extension MKMapView {
                 let mkl = annotation as! MKLocation
                 
                 // Annotation
-                annotationView.canShowCallout = false
+                annotationView.canShowCallout = true
                 annotationView.frame.size = CGSize(width: 20, height: 20)
                 
                 annotationView.circle()

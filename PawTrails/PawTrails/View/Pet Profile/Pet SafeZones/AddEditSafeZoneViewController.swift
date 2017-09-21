@@ -62,6 +62,7 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         mapView.showsUserLocation = true
+        mapView.showsScale = false
         mapView.showsCompass = false
         mapView.mapType = .hybrid
         mapView.delegate = self

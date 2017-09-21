@@ -137,7 +137,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     private func configureUIPreferences() {
 //        
-//        UIApplication.shared.statusBarStyle = .default
+        UIApplication.shared.statusBarStyle = .default
 //        
         UINavigationBar.appearance().backgroundColor = UIColor.secondary
         UINavigationBar.appearance().barTintColor = UIColor.secondary

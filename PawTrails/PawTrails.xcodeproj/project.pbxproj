@@ -120,6 +120,8 @@
 		44475ADB1F5960B800D41AAA /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44475ADA1F5960B800D41AAA /* SignUpViewController.swift */; };
 		44477CB91F599EFC00083295 /* UiimageViewWithMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44477CB81F599EFC00083295 /* UiimageViewWithMask.swift */; };
 		4448E7F91F6A7EED002EDBE2 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4448E7F81F6A7EED002EDBE2 /* UserProfileView.swift */; };
+		444D19C91F7413F7006964EC /* HomeMapCallOutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 444D19C81F7413F7006964EC /* HomeMapCallOutView.xib */; };
+		444D19CB1F74140C006964EC /* HomeMapCallOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444D19CA1F74140C006964EC /* HomeMapCallOutView.swift */; };
 		4452EEEE1ED58063004E13DC /* APITablesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4452EEED1ED58063004E13DC /* APITablesTests.swift */; };
 		4452EEF01ED5824D004E13DC /* APIPetRegistrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4452EEEF1ED5824D004E13DC /* APIPetRegistrationTests.swift */; };
 		4452EEF21ED59A93004E13DC /* APIPetShareUsersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4452EEF11ED59A93004E13DC /* APIPetShareUsersTests.swift */; };
@@ -289,6 +291,8 @@
 		44475ADA1F5960B800D41AAA /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		44477CB81F599EFC00083295 /* UiimageViewWithMask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UiimageViewWithMask.swift; sourceTree = "<group>"; };
 		4448E7F81F6A7EED002EDBE2 /* UserProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
+		444D19C81F7413F7006964EC /* HomeMapCallOutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeMapCallOutView.xib; sourceTree = "<group>"; };
+		444D19CA1F74140C006964EC /* HomeMapCallOutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeMapCallOutView.swift; sourceTree = "<group>"; };
 		4452EEED1ED58063004E13DC /* APITablesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APITablesTests.swift; sourceTree = "<group>"; };
 		4452EEEF1ED5824D004E13DC /* APIPetRegistrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIPetRegistrationTests.swift; sourceTree = "<group>"; };
 		4452EEF11ED59A93004E13DC /* APIPetShareUsersTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIPetShareUsersTests.swift; sourceTree = "<group>"; };
@@ -766,6 +770,8 @@
 				44EAB46D1F61935A006A64AE /* ProfileCell.swift */,
 				4448E7F81F6A7EED002EDBE2 /* UserProfileView.swift */,
 				44690B6C1F62963600719911 /* ProfilePetView.swift */,
+				444D19C81F7413F7006964EC /* HomeMapCallOutView.xib */,
+				444D19CA1F74140C006964EC /* HomeMapCallOutView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -935,6 +941,7 @@
 				44251B161F0CD5A90067F401 /* Main.storyboard in Resources */,
 				44690B6B1F62891C00719911 /* PetProfileCollectionViewCell.xib in Resources */,
 				44251AD11F0CD5170067F401 /* GoogleService-Info.plist in Resources */,
+				444D19C91F7413F7006964EC /* HomeMapCallOutView.xib in Resources */,
 				44251B151F0CD5A90067F401 /* LaunchScreen.storyboard in Resources */,
 				44251ADC1F0CD5260067F401 /* Assets.xcassets in Resources */,
 			);
@@ -1111,6 +1118,7 @@
 				44475ADB1F5960B800D41AAA /* SignUpViewController.swift in Sources */,
 				44251B0C1F0CD5870067F401 /* AddEditSafeZonePresenter.swift in Sources */,
 				44251B3E1F0CD5DF0067F401 /* AddressTableViewController.swift in Sources */,
+				444D19CB1F74140C006964EC /* HomeMapCallOutView.swift in Sources */,
 				44251B761F0CD6130067F401 /* CDBreed+CoreDataProperties.swift in Sources */,
 				442531371F6047290017D21A /* FinishAdventureVC.swift in Sources */,
 				44251B7D1F0CD6130067F401 /* CDPhone+CoreDataClass.swift in Sources */,

@@ -31,6 +31,8 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        mapView.delegate = self
+        
         firstButtonfromthebottom.contentHorizontalAlignment = .fill
         firstButtonfromthebottom.contentMode = .scaleToFill
         firstButtonfromthebottom.imageView?.contentMode = .scaleToFill
@@ -165,18 +167,20 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         return mapView.getAnnotationView(annotation: annotation)
+
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         
         if let annotation = view.annotation as? MKLocation {
-            
-            
+  
             switch annotation.id.type {
             case .pet:
                 if let pet = presenter.pets.first(where: { $0.id == annotation.id.id }) {
                     
+              
                     print(pet)
+                    
                 }
             default:
                 break
@@ -270,9 +274,7 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
         let cell = petsCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! PetsCollectionViewCell
 
         let pet = presenter.pets[indexPath.item]
-        
-        
-        
+ 
         let image = pet.image
         
         if let image = image { cell.petImageCell?.image = UIImage(data: image) }
@@ -324,7 +326,7 @@ class MKLocation: MKPointAnnotation {
     var color:UIColor
     var id: MKLocationId
     
-    init(id : MKLocationId, coordinate:CLLocationCoordinate2D, color: UIColor = UIColor.random()) {
+    init(id : MKLocationId, coordinate:CLLocationCoordinate2D, color: UIColor = UIColor.primary) {
         self.id = id
         self.color = color
         super.init()
