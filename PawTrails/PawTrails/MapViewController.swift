@@ -187,10 +187,7 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
         }
     }
     
-    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
-        focusOnPets()
-    }
-    
+  
     
     func focusOnPets(){
         let coordinates = Array(self.annotations.values).filter({ $0.id.type == .pet && !$0.coordinate.isDefaultZero }).map({ $0.coordinate })
