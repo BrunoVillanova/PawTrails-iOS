@@ -21,6 +21,46 @@ extension Authentication {
     
 }
 
+
+extension GPSUpdates {
+    init() {
+        petId = 0
+        speed = 0
+        sessod = 0
+        serverTime = 0
+        satSignal = 0
+        netSignal = 0
+        longtitude = 0
+        latitude = 0
+        lastStep = 0
+        idPos = 0
+        deviceTime = 0
+        crs = 0
+        barrery = 0
+        altDelta = 0
+        alt = 0
+    }
+    
+    init(_ json: JSON) {
+        petId = json["petId"].intValue
+        speed = json["deviceData"]["speed"].floatValue
+        sessod = json["deviceData"]["sessid"].floatValue
+        serverTime = json["deviceData"]["serverTime"].intValue
+        satSignal = json["deviceData"]["satSignal"].intValue
+        netSignal = json["deviceData"]["netSignal"].intValue
+        longtitude = json["deviceData"]["lon"].doubleValue
+        latitude = json["deviceData"]["lat"].doubleValue
+        lastStep = json["deviceData"]["lastStep"].intValue
+        idPos = json["deviceData"]["idpos"].intValue
+        deviceTime = json["deviceData"]["deviceTime"].intValue
+        crs = json["deviceData"]["crs"].floatValue
+        barrery = json["deviceData"]["battery"].intValue
+        altDelta = json["deviceData"]["altDelta"].intValue
+        alt = json["deviceData"]["alt"].floatValue
+        
+    }
+}
+
 extension User {
     
     init() {

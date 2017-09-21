@@ -100,10 +100,16 @@ class SocketIOManager: NSObject, URLSessionDelegate {
      
     }
     
-    func startGettingGpsUpdates(for petId: [Int]) {
-            self.socket.emit("pets", ["ids": petId, "noLastPos": false])
-            print("here is your gps updates for pets")
-    }
+//    func startGettingGpsUpdates(for petId: [Int]) {
+//            self.socket.emit("pets", ["ids": petId, "noLastPos": false])
+//        
+//        self.socket.on("gpsUpdates") { (data, Ack) in
+//            self.handleGPSUpdates(data)
+//        }
+//    }
+    
+    
+
     
 
     //MARK:- Pet
@@ -174,6 +180,11 @@ class SocketIOManager: NSObject, URLSessionDelegate {
             socket.emit(channel.startGPSUpdates.name, Int(id))
         }
     }
+    
+
+
+    
+    
     
     private func handleGPSUpdates(_ data: [Any]) {
         if let json = data.first as? [String:Any] {

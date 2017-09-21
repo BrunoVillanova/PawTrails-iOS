@@ -147,6 +147,26 @@ struct SafeZone {
     var preview: Data?
 }
 
+
+struct GPSUpdates {
+   let petId: Int
+    let speed: Float
+    let sessod: Float
+    let serverTime: Int
+    let satSignal: Int
+    let netSignal: Int
+    let latitude: Double
+    let longtitude: Double
+    let lastStep: Int
+    let idPos: Int
+    let deviceTime: Int
+    let crs: Float
+    let barrery: Int
+    let altDelta: Int
+    let alt: Float
+    
+}
+
 struct PetUser {
     var id: Int
     var email: String?
@@ -393,7 +413,6 @@ class GPSData: NSObject {
     var serverDate: Date
     var locationAndTime: String = ""
     var source: String = ""
-    var movementAlarm: Bool = false
     
     override init() {
         status = .unknown
@@ -420,19 +439,22 @@ class GPSData: NSObject {
             status = .idle
         }
         
-        if let pointData = data["location"] as? [String:Any] {
+        if let pointData = data["deviceData"] as? [String:Any] {
             let newPoint = Point(pointData)
             if point.coordinates.location.coordinateString != newPoint.coordinates.location.coordinateString {
                 locationAndTime = ""
                 point = newPoint
-                Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Requested for Update \(data["id"] ?? "")")
+                Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Requested for Update \(data["petId"] ?? "")")
+                print("Point printed \(newPoint)")
             }
         }else{
             point = Point()
         }
-        signal = data.tryCastInteger(for: "networkLvl") ?? -1
+        signal = data.tryCastInteger(for: "netSignal") ?? -1
         satellites = -1
-        if let satellites = data["gpsAccuracy"] as? String {
+        print(" Printed SIgnal   \(signal)")
+        
+        if let satellites = data["satSignal"] as? String {
             let components = satellites.components(separatedBy: "-")
             if components.count == 2 {
                 let min = Double(components[0]) ?? 0
@@ -441,19 +463,15 @@ class GPSData: NSObject {
                 if sum > 0 { self.satellites = Int(sum/2.0) }
             }
         }
-        battery = data.tryCastInteger(for: "batteryLvl") ?? -1
-        if let serverTime = data.tryCastDouble(for: "time") {
+        battery = data.tryCastInteger(for: "battery") ?? -1
+        if let serverTime = data.tryCastDouble(for: "serverTime") {
             serverDate = Date.init(timeIntervalSince1970: TimeInterval(serverTime))
         }else{
             serverDate = Date()
         }
         source = data.debugDescription
         
-        if let att = data["attributes"] as? [String:Any] {
-            if let movementAlarm = att["movementAlarm"] as? Int {
-                self.movementAlarm = movementAlarm == 1
-            }
-        }
+   
     }
     
     var distanceTime: String {
@@ -492,7 +510,6 @@ class Event{
         guest = nil
     }    
 }
-
 
 
 

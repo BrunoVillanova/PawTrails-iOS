@@ -22,12 +22,12 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     fileprivate var annotations = [MKLocationId:MKLocation]()
     var selectedPet: Pet?
     
-    
-    var tripListArray = [TripList]()
+    var data = [searchElement]()
 
     
     
-    
+    var tripListArray = [TripList]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,15 +43,21 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
             locationManager.requestWhenInUseAuthorization()
         }
         
-        
+//        mapView.showsScale = false
+
         mapView.showsUserLocation = true
         petsCollectionView.delegate = self
         petsCollectionView.dataSource = self
         presenter.attachView(self)
         petsCollectionView.isHidden = true
-        reloadPets()
         self.petsCollectionView.reloadData()
         petsCollectionView.allowsMultipleSelection = true
+        
+//        presenter.startPetsGPSUpdates { (id, point) in
+//            self.load(id: id, point: point)
+//        }
+   
+        reloadPets()
 }
     
 
@@ -63,19 +69,14 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        presenter.startPetsListUpdates()
-//        presenter.startPetsGPSUpdates { (id, point) in
-//            self.load(id: id, point: point)
-//        }
-        
-        
-        
-        
-//        getRunningandPausedTrips()
-        
-        showAlert()
+        presenter.startPetsListUpdates()
+        presenter.startPetsGPSUpdates { (id, point) in
+            self.load(id: id, point: point)
+        }
 
     }
+    
+    
     
     
     func showAlert() {
@@ -87,8 +88,8 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     
     
     override func viewWillDisappear(_ animated: Bool) {
-//        presenter.stopPetListUpdates()
-//        presenter.stopPetGPSUpdates()
+        presenter.stopPetListUpdates()
+        presenter.stopPetGPSUpdates()
     }
     
     
@@ -175,22 +176,13 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         
         if let annotation = view.annotation as? MKLocation {
-
-            SocketIOManager.instance.connectToPetChannel()
+            
             
             switch annotation.id.type {
             case .pet:
-                
-                
-                // need to be edited to be if let again
-                
-                if presenter.pets.first(where: { $0.id == annotation.id.id }) != nil {
+                if let pet = presenter.pets.first(where: { $0.id == annotation.id.id }) {
                     
-                    
-                    //                    showPetDetails(pet)
-                    
-                    
-                    // here accessories for annotation
+                    print(pet)
                 }
             default:
                 break
@@ -230,9 +222,9 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     
 
     @IBAction func thirdButtonPressed(_ sender: Any) {
-        
-        self.mapView.setVisibleMapFor([self.mapView.userLocation.coordinate])
-//        self.mapView.setCenter(self.mapView.userLocation.coordinate, animated: true)
+
+        mapView.centerOn(mapView.userLocation.coordinate, animated: true)
+
     }
     
     /// MARK - CollectionViewDataSource
@@ -271,17 +263,19 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     
     
     
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let pet = presenter.pets[indexPath.item]
+       let element = (id: MKLocationId(id: pet.id, type: .pet), object: pet)
+        if let coordinate = annotations[element.id]?.coordinate {
+            mapView.centerOn(coordinate, animated: true)
+        }
 
-//    let cell = petsCollectionView.cellForItem(at: indexPath) as! PetsCollectionViewCell
-//        let pet = presenter.pets[indexPath.item]
-//      let petid = pet.id
-//        SocketIOManager.instance.startGettingGpsUpdates(for: [petid])
-        SocketIOManager.instance.connectToPetChannel()
-}
+    }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        print("Deselected")
+        
     }
     
     
@@ -289,6 +283,8 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
         let cell = petsCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! PetsCollectionViewCell
 
         let pet = presenter.pets[indexPath.item]
+        
+        
         
         let image = pet.image
         
@@ -351,6 +347,12 @@ class MKLocation: MKPointAnnotation {
     func move(coordinate:CLLocationCoordinate2D){
         self.coordinate = coordinate
     }
+}
+
+
+struct searchElement {
+    var id: MKLocationId
+    var object: Any
 }
 
 
