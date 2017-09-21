@@ -34,14 +34,12 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
         firstButtonfromthebottom.contentHorizontalAlignment = .fill
         firstButtonfromthebottom.contentMode = .scaleToFill
         firstButtonfromthebottom.imageView?.contentMode = .scaleToFill
+
         
-        if CLLocationManager.locationServicesEnabled() {
+           locationManager.requestWhenInUseAuthorization()
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()
-        } else {
-            locationManager.requestWhenInUseAuthorization()
-        }
         
         mapView.showsScale = true
 

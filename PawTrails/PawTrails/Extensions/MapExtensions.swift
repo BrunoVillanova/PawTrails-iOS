@@ -140,7 +140,10 @@ extension MKMapView {
     
     func getAnnotationView(annotation: MKAnnotation) -> MKAnnotationView? {
         
-        if annotation is MKLocation {
+        if annotation is MKUserLocation {
+            return nil
+            
+        } else if annotation is MKLocation {
             // Better to make this class property
             let annotationIdentifier = "mkl"
             
