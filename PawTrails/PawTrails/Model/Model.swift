@@ -148,24 +148,6 @@ struct SafeZone {
 }
 
 
-struct GPSUpdates {
-   let petId: Int
-    let speed: Float
-    let sessod: Float
-    let serverTime: Int
-    let satSignal: Int
-    let netSignal: Int
-    let latitude: Double
-    let longtitude: Double
-    let lastStep: Int
-    let idPos: Int
-    let deviceTime: Int
-    let crs: Float
-    let barrery: Int
-    let altDelta: Int
-    let alt: Float
-    
-}
 
 struct PetUser {
     var id: Int

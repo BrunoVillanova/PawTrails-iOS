@@ -65,10 +65,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
             }
             
         }
-        //self.socket.on(channel.events.name, callback: { (data, ack) in
-        //Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Event RS", data)
-        //self.handleEventUpdated(data)
-        //})
+
         self.socket.connect()
         
     }
@@ -99,14 +96,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
             })
      
     }
-    
-//    func startGettingGpsUpdates(for petId: [Int]) {
-//            self.socket.emit("pets", ["ids": petId, "noLastPos": false])
-//        
-//        self.socket.on("gpsUpdates") { (data, Ack) in
-//            self.handleGPSUpdates(data)
-//        }
-//    }
+
     
     
 

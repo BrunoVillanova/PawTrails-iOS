@@ -43,7 +43,7 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
             locationManager.requestWhenInUseAuthorization()
         }
         
-//        mapView.showsScale = false
+        mapView.showsScale = true
 
         mapView.showsUserLocation = true
         petsCollectionView.delegate = self
@@ -51,11 +51,7 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
         presenter.attachView(self)
         petsCollectionView.isHidden = true
         self.petsCollectionView.reloadData()
-        petsCollectionView.allowsMultipleSelection = true
-        
-//        presenter.startPetsGPSUpdates { (id, point) in
-//            self.load(id: id, point: point)
-//        }
+
    
         reloadPets()
 }
@@ -273,11 +269,7 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
         }
 
     }
-    
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        
-    }
-    
+
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = petsCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! PetsCollectionViewCell
