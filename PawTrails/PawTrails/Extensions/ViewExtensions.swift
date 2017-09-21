@@ -175,7 +175,7 @@ extension UIViewController {
         activity.startAnimating()
         activity.tag = subviewId.activity.rawValue
         
-        loadingView.addSubview(activity)
+        loadingView.contentView.addSubview(activity)
         
         loadingView.effect = nil
         activity.alpha = 0.0
