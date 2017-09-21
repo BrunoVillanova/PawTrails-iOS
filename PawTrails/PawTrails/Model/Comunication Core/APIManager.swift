@@ -152,7 +152,7 @@ class APIManager {
     ///   - data: The data returned or `nil` if error.
     func perform(call:APICallType, withKey key:Any = "", with data:[String:Any]? = nil, callback: @escaping (_ error:APIManagerError?,_ data:JSON?) -> Void) {
         
-        if isConnectedToNetwork() {
+        if isConnectedToNetwork() == true {
         
             if let request = createRequest(for: call, with: key, and: data) {
                 
@@ -289,25 +289,26 @@ class APIManager {
     
     private func isConnectedToNetwork() -> Bool {
         
-        var zeroAddress = sockaddr_in(sin_len: 0, sin_family: 0, sin_port: 0, sin_addr: in_addr(s_addr: 0), sin_zero: (0, 0, 0, 0, 0, 0, 0, 0))
+        var zeroAddress = sockaddr_in()
         zeroAddress.sin_len = UInt8(MemoryLayout.size(ofValue: zeroAddress))
         zeroAddress.sin_family = sa_family_t(AF_INET)
-        let defaultRouteReachability = withUnsafePointer(to: &zeroAddress) {
+        
+        guard let defaultRouteReachability = withUnsafePointer(to: &zeroAddress , {
             $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {zeroSockAddress in
                 SCNetworkReachabilityCreateWithAddress(nil, zeroSockAddress)
             }
-        }
-        
-        var flags: SCNetworkReachabilityFlags = SCNetworkReachabilityFlags(rawValue: 0)
-        if SCNetworkReachabilityGetFlags(defaultRouteReachability!, &flags) == false {
+        }) else {
             return false
         }
         
-        let isReachable = flags == .reachable
-        let needsConnection = flags == .connectionRequired
+        var flags : SCNetworkReachabilityFlags = []
+        if !SCNetworkReachabilityGetFlags(defaultRouteReachability, &flags) {
+            return false
+        }
         
-        return isReachable && !needsConnection
-        
+        let isReachable = flags.contains(.reachable)
+        let needsConnection = flags.contains(.connectionRequired)
+        return (isReachable && !needsConnection)
     }
 
 }

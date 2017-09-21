@@ -176,7 +176,6 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     }
     
     private func handleGPSUpdates(_ data: [Any]) {
-        
         if let json = data.first as? [String:Any] {
             if let id = json.tryCastInteger(for: "petId") {
                 Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "GPS Updates \(id)")
