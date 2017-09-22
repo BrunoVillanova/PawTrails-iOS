@@ -9,6 +9,9 @@
 import UIKit
 import MapKit
 
+
+
+
 class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
@@ -23,6 +26,9 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     var selectedPet: Pet?
     
     var data = [searchElement]()
+    
+    
+    
 
     
     
@@ -169,6 +175,9 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
         return mapView.getAnnotationView(annotation: annotation)
 
     }
+ 
+    
+
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         
@@ -177,9 +186,8 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
             switch annotation.id.type {
             case .pet:
                 if let pet = presenter.pets.first(where: { $0.id == annotation.id.id }) {
-                    
-              
-                    print(pet)
+    
+                 print(pet)
                     
                 }
             default:
@@ -322,9 +330,12 @@ class MKLocationId: Hashable {
 
 
 class MKLocation: MKPointAnnotation {
+    
+    
     let pet = Pet()
     var color:UIColor
     var id: MKLocationId
+
     
     init(id : MKLocationId, coordinate:CLLocationCoordinate2D, color: UIColor = UIColor.primary) {
         self.id = id

@@ -158,7 +158,7 @@ extension MKMapView {
                 let mkl = annotation as! MKLocation
                 
                 // Annotation
-                annotationView.canShowCallout = true
+                annotationView.canShowCallout = false
                 annotationView.frame.size = CGSize(width: 20, height: 20)
                 
                 annotationView.circle()
