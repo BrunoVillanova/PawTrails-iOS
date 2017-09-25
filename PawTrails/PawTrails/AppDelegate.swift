@@ -92,7 +92,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     func applicationDidEnterBackground(_ application: UIApplication) {
 
-        SocketIOManager.instance.disconnect()
+//        SocketIOManager.instance.disconnect()
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {

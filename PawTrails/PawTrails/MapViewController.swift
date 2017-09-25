@@ -162,20 +162,16 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         return mapView.getAnnotationView(annotation: annotation)
-
     }
  
     
 
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        
-        if let annotation = view.annotation as? MKLocation {
-  
+            if let annotation = view.annotation as? MKLocation {
             switch annotation.id.type {
             case .pet:
                 if let pet = presenter.pets.first(where: { $0.id == annotation.id.id }) {
-    
                  print(pet)
                     
                 }
@@ -258,10 +254,10 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         let pet = presenter.pets[indexPath.item]
        let element = (id: MKLocationId(id: pet.id, type: .pet), object: pet)
         if let coordinate = annotations[element.id]?.coordinate {
+            
             mapView.centerOn(coordinate, animated: true)
             
         }
@@ -271,13 +267,9 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = petsCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! PetsCollectionViewCell
-
         let pet = presenter.pets[indexPath.item]
- 
         let image = pet.image
-        
         if let image = image { cell.petImageCell?.image = UIImage(data: image) }
-        
         return cell
     }
 
@@ -321,13 +313,9 @@ class MKLocationId: Hashable {
 
 
 class MKLocation: MKPointAnnotation {
-    
-    
     let pet = Pet()
     var color:UIColor
     var id: MKLocationId
-
-    
     init(id : MKLocationId, coordinate:CLLocationCoordinate2D, color: UIColor = UIColor.primary) {
         self.id = id
         self.color = color
@@ -354,7 +342,6 @@ extension UIView {
     func slideInAffect(duration: TimeInterval = 1.0, completionDelegate: AnyObject? = nil, direction: String) {
         // Create a CATransition animation
         let slideInFromLeftTransition = CATransition()
-        
         // Set its callback delegate to the completionDelegate that was provided (if any)
         if let delegate: AnyObject = completionDelegate {
             slideInFromLeftTransition.delegate = delegate as? CAAnimationDelegate

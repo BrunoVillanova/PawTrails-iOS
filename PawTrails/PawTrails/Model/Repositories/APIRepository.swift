@@ -539,7 +539,6 @@ class APIRepository {
             }
             
         }
-        
     }
 
     func getTripList(_ status: [Int], callback: @escaping ApiTripListCallBack) {

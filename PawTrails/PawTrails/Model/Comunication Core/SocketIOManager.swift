@@ -72,6 +72,16 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         self.socket.disconnect()
     }
     
+    
+    func startGettingGpsUpdates(for petId: [Int]) {
+        self.socket.emit("pets", ["ids": petId, "noLastPos": false])
+        
+        self.socket.on("gpsUpdates") { (data, Ack) in
+            print("Here is your data \(data)")
+        }
+    }
+    
+
 
     
     // MARK: establish connection with PetsList channel.

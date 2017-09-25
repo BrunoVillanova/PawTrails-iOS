@@ -93,12 +93,12 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
         self.tabBarController?.tabBar.isHidden = true
         reloadPets()
         presenter.startPetsListUpdates()
-        presenter.startPetsGPSUpdates { (id) in
-            self.updateItem(by: id)
-        }
-        presenter.startPetsGeocodeUpdates { (geocode) in
-            self.updateItem(by: geocode.id)
-        }
+//        presenter.startPetsGPSUpdates { (id) in
+//            self.updateItem(by: id)
+//        }
+//        presenter.startPetsGeocodeUpdates { (geocode) in
+//            self.updateItem(by: geocode.id)
+//        }
 
 
 
@@ -227,7 +227,6 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         let cell = petsCollectionView.cellForItem(at: indexPath) as! SelectPetsCell
-        
         cell.checkMarkView.setOn(false, animated: true)
         
     }

@@ -31,43 +31,8 @@ class SocketIOTestTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
-        
-        
-        SocketIOManager.instance.connectToPetChannel()
-        
-//        SocketIOManager.instance.startGettingGpsUpdates(for: [132])
-        
+        SocketIOManager.instance.startGettingGpsUpdates(for: [96])
 
-//
-//        SocketIOManager.instance.disconnectFromPetChannel(for: 132)
-
-//        APIRepository.instance.getTripList([0]) { (error) in
-//            print("GOT IT")
-//        }
-        
-//        APIRepository.instance.finishTrip([390, 389, 388]) { (error) in
-//            print("Finished Trip")
-//        }
-        
-//        SocketIOManager.instance.connectToPetChannel()
-        
-        
-        
-//        NotificationManager.instance.getPetGPSUpdates(for: id) { (id, data) in
-//            
-//            if data.movementAlarm {
-//                self.alert(title: "HEY", msg: "MOVEMENT!!", type: .red)
-//            }else{
-//                self.data.append((data.serverDate,data.source))
-//                self.data.sort(by: { (element1, element2) -> Bool in
-//                    return element1.0 > element2.0
-//                })
-//                self.tableView.reloadData()
-//            }
-//        }
-//        SocketIOManager.instance.startGPSUpdates(for: [id])
-        
-        
         
         
     }
