@@ -10,7 +10,7 @@ let isDebug = true
 public struct ezdebug {
     public static let email = "ios@test.com"
     public static let password = "iOStest12345"
-    public static let is4test = "marc@attitudetech.ie"
+    public static let is4test = "mohamed@attitudetech.ie"
 }
 
 import UIKit
@@ -60,13 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             
             loadAuthenticationScreen()
         }
-        
-        
-        
-        
-//        let initial = storyboard.instantiateViewController(withIdentifier: "EmailVerificationViewController") as? EmailVerificationViewController
-//        initial?.email = ""
-//        window?.rootViewController = initial
+
         
         return out
     }
@@ -102,6 +96,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
+
         if DataManager.instance.isAuthenticated() {
             SocketIOManager.instance.connect()
             DataManager.instance.loadPets { (error, pets) in

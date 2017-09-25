@@ -315,6 +315,7 @@ extension Trip {
         petId = json["petId"].intValue
         status = json["status"].intValue
         timeStart = json["timeStart"].intValue
+        timeStamp = json["timeStamp"].intValue
     }
 
 }

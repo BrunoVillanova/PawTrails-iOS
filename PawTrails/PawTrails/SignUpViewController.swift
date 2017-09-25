@@ -25,13 +25,12 @@ class SignUpViewController: UIViewController, InitialView {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.attachView(self)
         
+        presenter.attachView(self)
         emailTextField.layer.borderWidth = 0.5
         passwordTextField.layer.borderWidth = 0.5
         confirmPasswordTextField.layer.borderWidth = 0.5
-//
-      
+
         
         let myColor = UIColor.groupTableViewBackground
         emailTextField.layer.borderColor = myColor.cgColor
@@ -55,18 +54,14 @@ class SignUpViewController: UIViewController, InitialView {
     @IBAction func signUpBtnPressed(_ sender: Any) {
         
         if passwordTextField.text == confirmPasswordTextField.text  {
-            
             self.view.endEditing(true)
             presenter.signUp(email: emailTextField.text, password: confirmPasswordTextField.text)
-            
         } else {
             alert(title: "", msg: "Passwords don't match Please reenter passwords")
         }
     }
 
-    @IBAction func cancelBtnPressed(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
+
     
     // MARK: - Initial View
     
@@ -117,8 +112,7 @@ class SignUpViewController: UIViewController, InitialView {
     func endLoadingContent() {
         hideLoadingView()
     }
-    
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         if textField == self.emailTextField {
@@ -142,6 +136,9 @@ class SignUpViewController: UIViewController, InitialView {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
+    }
+    @IBAction func cancelBtnPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Navigation

@@ -37,6 +37,8 @@ class InitialPresenter {
             view?.beginLoadingContent()
             DataManager.instance.signIn(email!, password!) { (error) in
                 self.view?.endLoadingContent()
+                let window = UIApplication.shared.keyWindow?.subviews.last
+                window?.removeFromSuperview()
                 if let error = error {
                     if error.APIError?.errorCode == ErrorCode.AccountNotVerified {
                         self.view?.verifyAccount(email!, password!)
@@ -56,8 +58,11 @@ class InitialPresenter {
             view?.beginLoadingContent()
             DataManager.instance.signUp(email!, password!) { (error) in
                 self.view?.endLoadingContent()
+                let window = UIApplication.shared.keyWindow?.subviews.last
+                window?.removeFromSuperview()
                 if let error = error {
                     self.view?.errorMessage(error.msg)
+                    
                 }else{
                     self.view?.verifyAccount(email!, password!)
                 }

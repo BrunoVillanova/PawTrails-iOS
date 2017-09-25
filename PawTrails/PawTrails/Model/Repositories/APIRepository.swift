@@ -483,7 +483,6 @@ class APIRepository {
     ///   - petId: pet id
     ///   - callback: returns updated **safezone** or **error**
     func save(_ safezone: SafeZone, to petId: Int, callback: @escaping APIRepErrorCallback) {
-        
         APIManager.instance.perform(call: .setSafeZone, with: safezone.toDict) { (error, _) in
             callback(error)
         }
@@ -560,32 +559,26 @@ class APIRepository {
     }
     
     
-    func dd(callback: @escaping APIRepPetUsersCallback){
-        
-        APIManager.instance.perform(call: .friends) { (error, json) in
-            if error == nil, let friendsJson = json?["friendlist"].array {
-                var friends = [PetUser]()
-                for friendJson in friendsJson {
-                    friends.append(PetUser(friendJson))
-                }
-                callback(nil, friends)
-            }else if let error = error {
-                callback(error, nil)
-            }
-        }
-    }
-    
     
 
     // Finish Trips
     // callBack: returns nil or data
-    
-    func finishTrip(_ tripIds: [Int], callback: @escaping APIRepErrorCallback) {
-        let trips = ["trips":tripIds]
-        APIManager.instance.perform(call: .finishTrip, with: trips) { (error, json) in
-            callback(error)
-        }
-    }
+//    
+//    func finishTrip(_ tripIds: [Int], callback: @escaping ApiTripListCallBack) {
+//        let trips = ["trips":tripIds]
+//        APIManager.instance.perform(call: .finishTrip, with: trips) { (error, json) in
+//            if error == nil, let tripListJson = json?["trips"].array {
+//                var tripList = [TripList]()
+//                for trip in tripListJson {
+//                    tripList.append(TripList(trip))
+//                }
+//                callback(nil, tripList)
+//            } else if let error = error {
+//                callback(error, nil)
+//            }
+//        }
+//
+//    }
     
     
     // Pause Trips

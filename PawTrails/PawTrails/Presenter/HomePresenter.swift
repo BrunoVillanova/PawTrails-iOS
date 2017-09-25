@@ -93,17 +93,7 @@ class HomePresenter {
     }
 
     
-    
-    
 
-    
-    
-    
-    
-    
-    
-    
-    
     
 }
 

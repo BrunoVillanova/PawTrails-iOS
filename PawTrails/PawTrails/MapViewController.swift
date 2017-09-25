@@ -26,12 +26,7 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     var selectedPet: Pet?
     
     var data = [searchElement]()
-    
-    
-    
 
-    
-    
     var tripListArray = [TripList]()
 
     override func viewDidLoad() {
@@ -49,16 +44,13 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()
         
-        mapView.showsScale = true
-
+        mapView.showsScale = false
         mapView.showsUserLocation = true
         petsCollectionView.delegate = self
         petsCollectionView.dataSource = self
         presenter.attachView(self)
         petsCollectionView.isHidden = true
         self.petsCollectionView.reloadData()
-
-   
         reloadPets()
 }
     
@@ -127,10 +119,7 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     func reload() {
         
     }
-    
-    
-    
-    
+
     func load(id: MKLocationId, point: Point){
         if self.annotations[id] == nil {
             self.startTracking(id, coordinate: point.coordinates, color: UIColor.primary)
@@ -213,11 +202,14 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     
     var doubleTap : Bool! = false
     @IBAction func secButtonPressed(_ sender: Any) {
+
+        
         if (doubleTap) {
+            self.petsCollectionView.slideInAffect(direction: kCATransitionFromRight)
             self.petsCollectionView.isHidden = true
             doubleTap = false
         } else {
-            //First Tap
+            self.petsCollectionView.slideInAffect(direction: kCATransitionFromLeft)
             self.petsCollectionView.isHidden = false
             doubleTap = true
         }
@@ -225,9 +217,7 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     
 
     @IBAction func thirdButtonPressed(_ sender: Any) {
-
-        mapView.centerOn(mapView.userLocation.coordinate, animated: true)
-
+        self.mapView.setVisibleMapFor([self.mapView.userLocation.coordinate])
     }
     
     /// MARK - CollectionViewDataSource
@@ -273,6 +263,7 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
        let element = (id: MKLocationId(id: pet.id, type: .pet), object: pet)
         if let coordinate = annotations[element.id]?.coordinate {
             mapView.centerOn(coordinate, animated: true)
+            
         }
 
     }
@@ -357,5 +348,26 @@ struct searchElement {
 
 
 
+extension UIView {
+    // Name this function in a way that makes sense to you...
+    // slideFromLeft, slideRight, slideLeftToRight, etc. are great alternative names
+    func slideInAffect(duration: TimeInterval = 1.0, completionDelegate: AnyObject? = nil, direction: String) {
+        // Create a CATransition animation
+        let slideInFromLeftTransition = CATransition()
+        
+        // Set its callback delegate to the completionDelegate that was provided (if any)
+        if let delegate: AnyObject = completionDelegate {
+            slideInFromLeftTransition.delegate = delegate as? CAAnimationDelegate
+        }
+        // Customize the animation's properties
+        slideInFromLeftTransition.type = kCATransitionPush
+        slideInFromLeftTransition.subtype = direction
+        slideInFromLeftTransition.duration = duration
+        slideInFromLeftTransition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        slideInFromLeftTransition.fillMode = kCAFillModeRemoved
+        // Add the animation to the View's layer
+        self.layer.add(slideInFromLeftTransition, forKey: "slideInFromLeftTransition")
+    }
+}
 
 

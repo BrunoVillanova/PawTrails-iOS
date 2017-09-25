@@ -59,6 +59,7 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
 }
     
     
+    
     func getRunningandPausedTrips() {
         tripArray.removeAll()
         tripListArray.removeAll()

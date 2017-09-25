@@ -29,12 +29,8 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
         
         self.view.isUserInteractionEnabled = true
 
-        
-        
         presenter.attachView(self)
-        
-       
-        
+
         loginButton.fullyroundedCorner()
         
         loginButton.backgroundColor = UIColor.primary

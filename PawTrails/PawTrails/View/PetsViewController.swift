@@ -183,7 +183,6 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }else{
             cell.petImageView.image = nil
         }
-        cell.petImageView.circle()
         return cell
     }
     
@@ -238,4 +237,6 @@ class petListCell: UITableViewCell {
 //    @IBOutlet weak var signalLabel: UILabel!
 //    @IBOutlet weak var batteryLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
+    
+  
 }

@@ -193,6 +193,8 @@ extension UIViewController {
     
     func hideLoadingView(animated: Bool = true) {
         
+        
+        
         if let loadingView = UIApplication.shared.keyWindow?.subviews.first(where: { $0.tag == subviewId.loading.rawValue }) as? UIVisualEffectView {
             
             if let activity = loadingView.subviews.first(where: { $0.tag == subviewId.activity.rawValue }) as? UIActivityIndicatorView {

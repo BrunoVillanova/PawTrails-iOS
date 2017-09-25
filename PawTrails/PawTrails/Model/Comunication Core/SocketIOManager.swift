@@ -42,11 +42,9 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     ///
     /// - Parameter callback: returns socket IO connection status
     func connect(_ callback: ((SocketIOStatus)->())? = nil) {
-        
         self.socket.on(channel.diconnect.name) { (_, _) in
             self.isConnected = false
         }
-        
         self.socket.on(channel.auth.name) { (data, ack) in
             let status = self.getStatus(data)
             Reporter.debugPrint(file: "\(#file)", function: "\(#function)", status)
@@ -65,9 +63,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
             }
             
         }
-
         self.socket.connect()
-        
     }
     
     /// Disconnects from Socket I.O.
@@ -76,15 +72,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         self.socket.disconnect()
     }
     
-    
-    func getDataFromGpsUpdates() {
-        self.socket.on("pets") { (data, ack) in
-            print("This is my data \(data))")
-        }
-    
-    }
-    
-    
+
     
     // MARK: establish connection with PetsList channel.
     
@@ -96,11 +84,6 @@ class SocketIOManager: NSObject, URLSessionDelegate {
             })
      
     }
-
-    
-    
-
-    
 
     //MARK:- Pet
     

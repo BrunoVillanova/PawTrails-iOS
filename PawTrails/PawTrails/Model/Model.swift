@@ -92,6 +92,7 @@ struct Trip {
     var petId: Int
     var status: Int
     var timeStart: Int
+    var timeStamp : Int
 }
 
 
