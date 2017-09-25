@@ -8,9 +8,6 @@
 
 import UIKit
 
-
-
-
 class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, PetsView, SelectPetView {
     @IBOutlet weak var petsCollectionView: UICollectionView!
     @IBOutlet weak var startAdventureBtn: UIButton!
@@ -211,13 +208,13 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
 
         let selectedPet = indexPath
         let pet = getPet(at: selectedPet).id
-        
         for item in tripArray {
             tripListArray.append(item.petId)
         }
         if tripListArray.contains(pet) {
-            cell.petImage.backgroundColor = UIColor.white
             cell.isUserInteractionEnabled = false
+            cell.layer.borderWidth = 2.0
+            cell.layer.borderColor = UIColor.gray.cgColor
             self.alert(title: "Error", msg: "You cannot select this pet because it's already on trip", type: .red, disableTime: 4, handler: nil)
             cell.isSelected = false
             cell.checkMarkView.setOn(false, animated: true)
@@ -230,6 +227,7 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         let cell = petsCollectionView.cellForItem(at: indexPath) as! SelectPetsCell
+        
         cell.checkMarkView.setOn(false, animated: true)
         
     }
@@ -253,7 +251,6 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
  
     @IBAction func StartAdventureBtnPressed(_ sender: Any) {
         performSegue(withIdentifier: "Segue", sender: nil)
-        print("dsasdas")
         
 //        var petIds = [Int]()
 //        
