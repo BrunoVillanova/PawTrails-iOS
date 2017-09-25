@@ -56,10 +56,7 @@ class SelectedPetView {
             }
         }
     }
-    
-    
-    
-    
+
     
 }
 

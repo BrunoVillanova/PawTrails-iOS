@@ -45,14 +45,12 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
         
         UIApplication.shared.statusBarStyle = .lightContent
         presenter.attachView(self)
-        
         presenter2.attatchView(self)
         
         petsCollectionView.delegate = self
         petsCollectionView.dataSource = self
         petsCollectionView.allowsMultipleSelection = true
         
- 
         clearOnAppearance()
         getRunningandPausedTrips()
 
@@ -254,6 +252,8 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
     
  
     @IBAction func StartAdventureBtnPressed(_ sender: Any) {
+        performSegue(withIdentifier: "Segue", sender: nil)
+        print("dsasdas")
         
 //        var petIds = [Int]()
 //        
@@ -282,6 +282,20 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
 //         }
 
     }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "Segue"  {
+            if let navigationController = segue.destination as? UINavigationController {
+                _ = navigationController.topViewController as? TripScreenViewController
+                //            vc.pets = selectedpets
+
+            }
+        }
+    }
+
+    
+    
     
     @IBAction func closebtnPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)

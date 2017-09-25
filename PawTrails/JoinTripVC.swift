@@ -25,7 +25,14 @@ class JoinTripVC: UIViewController {
    
     @IBAction func joinAdventureBtnPressed(_ sender: Any) {
     }
+    
+    @IBOutlet weak var cancelBtn: UIBarButtonItem!
+    
 
+    @IBAction func cancelBtnPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+     
+    }
 }
 
 

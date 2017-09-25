@@ -22,7 +22,6 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
     @IBOutlet weak var twitterButton: UIButton!
     
     fileprivate let presenter = InitialPresenter()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         

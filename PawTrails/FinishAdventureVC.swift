@@ -37,12 +37,12 @@ class FinishAdventureVC: UIViewController, BEMCheckBoxDelegate {
     
 
     @IBAction func finishAdventureBtnPressed(_ sender: Any) {
-        
-        
     }
+    
+    
     @IBAction func resumeAdventureBtnPressed(_ sender: Any) {
-        
-        
+        dismiss(animated: true, completion: nil)
+
     }
   
 }
