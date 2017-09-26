@@ -87,7 +87,7 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
     }
     
     @IBAction func twitterLogin(_ sender: UIButton) {
-        presenter.loginTW(vc: self)
+//        presenter.loginTW(vc: self)
     }
     
     

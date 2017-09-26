@@ -7,16 +7,12 @@ target 'PawTrails' do
 
 
     pod 'SwiftyJSON'
-
-    pod 'Socket.IO-Client-Swift', '~> 10.0.1'
-
+    pod 'Socket.IO-Client-Swift', '~> 12.0.0'
     pod 'FacebookCore'
     pod 'FacebookLogin'
 
   	pod 'Fabric'
-  	pod 'TwitterKit'
   	pod 'Crashlytics'
-
   	#pod 'Google/SignIn'
 
   # Pods for PawTrails

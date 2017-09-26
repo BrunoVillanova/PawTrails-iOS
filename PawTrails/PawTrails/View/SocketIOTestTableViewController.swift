@@ -16,11 +16,7 @@ class SocketIOTestTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
-        
-        
-        
-        
-        
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -31,10 +27,9 @@ class SocketIOTestTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
-        SocketIOManager.instance.startGettingGpsUpdates(for: [96])
+//        SocketIOManager.instance.startGettingGpsUpdates(for: [96])
+        SocketIOManager.instance.startGPSUpdates(for: [96])
 
-        
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {

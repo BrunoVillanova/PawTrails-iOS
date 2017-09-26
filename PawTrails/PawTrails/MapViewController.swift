@@ -67,7 +67,6 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
         presenter.startPetsGPSUpdates { (id, point) in
             self.load(id: id, point: point)
         }
-
     }
     
     
@@ -82,6 +81,7 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     
     
     override func viewWillDisappear(_ animated: Bool) {
+        
         presenter.stopPetListUpdates()
         presenter.stopPetGPSUpdates()
     }

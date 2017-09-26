@@ -18,7 +18,6 @@ import UIKit
 import FacebookCore
 
 import Fabric
-import TwitterKit
 import Crashlytics
 
 @UIApplicationMain
@@ -28,6 +27,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        
+        if DataManager.instance.isAuthenticated() {
+            SocketIOManager.instance.connect()
+            DataManager.instance.loadPets { (error, pets) in
+                if error == nil, let pets = pets {
+                    SocketIOManager.instance.startGPSUpdates(for: pets.map({ $0.id}))
+                    NotificationManager.instance.postPetListUpdates(with: pets)
+                }
+            }
+        }
         
         var out = true
         
@@ -43,9 +53,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                     switch sm {
                     case .facebook:
                         out = SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
-                    case .twitter:
-                        Fabric.with([Twitter.self])
-                        break
                     case .google:
                         configureGoogleLogin()
                     default:
@@ -82,9 +89,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        
-        if Twitter.sharedInstance().application(app, open: url, options: options) { return true }
-        
         let google = GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
         
         return SDKApplicationDelegate.shared.application(app, open: url, options: options) || google

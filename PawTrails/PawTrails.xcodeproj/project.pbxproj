@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		35B268DF2DC9C7D7C0CBF782 /* Pods_PawTrailsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C09631478A96AC78EA751AA /* Pods_PawTrailsTests.framework */; };
-		3808F92C4AE1F8421B70B99A /* Pods_PawTrails.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D38C295A9EECD1391940C8D3 /* Pods_PawTrails.framework */; };
 		4411113A1F698B05008D1468 /* ShareCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441111381F698B05008D1468 /* ShareCollectionViewCell.swift */; };
 		4411113B1F698B05008D1468 /* ShareCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 441111391F698B05008D1468 /* ShareCollectionViewCell.xib */; };
 		4414AE6B1EA0DD5B004A5134 /* PawTrailsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4414AE6A1EA0DD5B004A5134 /* PawTrailsTests.swift */; };
@@ -148,6 +146,8 @@
 		44F239511EEEC1E70082FA36 /* SocketIOTestTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F239501EEEC1E70082FA36 /* SocketIOTestTableViewController.swift */; };
 		44F27DBE1F0CE23300DAB441 /* PawTrails.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 44F27DBC1F0CE23300DAB441 /* PawTrails.xcdatamodeld */; };
 		44FE723D1E4A2EF0007C7E24 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FE723C1E4A2EF0007C7E24 /* DataManager.swift */; };
+		8AD2F6B7B0A8110072345C01 /* Pods_PawTrailsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E2B813BA9CAE948174F2C71 /* Pods_PawTrailsTests.framework */; };
+		E710CBA5471FDC34DDA7BEB8 /* Pods_PawTrails.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3E63257CC5E13A67F31124B /* Pods_PawTrails.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -168,9 +168,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		199033D371CC47C9192C6703 /* Pods_Snout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Snout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1C09631478A96AC78EA751AA /* Pods_PawTrailsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PawTrailsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		20B5DA5019D7976016EA8DF9 /* Pods-PawTrailsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PawTrailsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PawTrailsTests/Pods-PawTrailsTests.release.xcconfig"; sourceTree = "<group>"; };
+		1E2B813BA9CAE948174F2C71 /* Pods_PawTrailsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PawTrailsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		441111381F698B05008D1468 /* ShareCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareCollectionViewCell.swift; sourceTree = "<group>"; };
 		441111391F698B05008D1468 /* ShareCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareCollectionViewCell.xib; sourceTree = "<group>"; };
 		4414AE681EA0DD5B004A5134 /* PawTrailsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PawTrailsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -321,11 +319,11 @@
 		44F239501EEEC1E70082FA36 /* SocketIOTestTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketIOTestTableViewController.swift; path = View/SocketIOTestTableViewController.swift; sourceTree = "<group>"; };
 		44F27DBD1F0CE23300DAB441 /* PawTrails.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PawTrails.xcdatamodel; sourceTree = "<group>"; };
 		44FE723C1E4A2EF0007C7E24 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = DataManager.swift; path = Model/DataManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		4D52BC7BE2AEDBF19B3D09AB /* Pods-PawTrailsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PawTrailsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PawTrailsTests/Pods-PawTrailsTests.debug.xcconfig"; sourceTree = "<group>"; };
-		754A776083E072AC16A405DB /* Pods_SnoutTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnoutTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9E19542014392915F71D4DE0 /* Pods-PawTrails.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PawTrails.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PawTrails/Pods-PawTrails.debug.xcconfig"; sourceTree = "<group>"; };
-		D38C295A9EECD1391940C8D3 /* Pods_PawTrails.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PawTrails.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F2EB8BB77801CDC1B657190E /* Pods-PawTrails.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PawTrails.release.xcconfig"; path = "Pods/Target Support Files/Pods-PawTrails/Pods-PawTrails.release.xcconfig"; sourceTree = "<group>"; };
+		734D05AA5E231C24EBC9332D /* Pods-PawTrails.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PawTrails.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PawTrails/Pods-PawTrails.debug.xcconfig"; sourceTree = "<group>"; };
+		A8782C798F51A66A5AFC788C /* Pods-PawTrailsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PawTrailsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PawTrailsTests/Pods-PawTrailsTests.release.xcconfig"; sourceTree = "<group>"; };
+		B4A45B026D67F7FA0B3729DF /* Pods-PawTrailsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PawTrailsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PawTrailsTests/Pods-PawTrailsTests.debug.xcconfig"; sourceTree = "<group>"; };
+		CDF43BC48AA97ADEA16BD58D /* Pods-PawTrails.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PawTrails.release.xcconfig"; path = "Pods/Target Support Files/Pods-PawTrails/Pods-PawTrails.release.xcconfig"; sourceTree = "<group>"; };
+		D3E63257CC5E13A67F31124B /* Pods_PawTrails.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PawTrails.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -335,7 +333,7 @@
 			files = (
 				4441ACA81EB8C72E00FBE27F /* SystemConfiguration.framework in Frameworks */,
 				4441ACA61EB8C72500FBE27F /* SafariServices.framework in Frameworks */,
-				35B268DF2DC9C7D7C0CBF782 /* Pods_PawTrailsTests.framework in Frameworks */,
+				8AD2F6B7B0A8110072345C01 /* Pods_PawTrailsTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,7 +346,7 @@
 				44251AD21F0CD5170067F401 /* GoogleSignIn.framework in Frameworks */,
 				44251AD41F0CD5170067F401 /* GoogleAppUtilities.framework in Frameworks */,
 				44251AD51F0CD5170067F401 /* GoogleSignInDependencies.framework in Frameworks */,
-				3808F92C4AE1F8421B70B99A /* Pods_PawTrails.framework in Frameworks */,
+				E710CBA5471FDC34DDA7BEB8 /* Pods_PawTrails.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,7 +438,7 @@
 				4447217B1F03F12A001DCDE1 /* PawTrailsUITests */,
 				4415FF401E3B822900A81B13 /* Products */,
 				91352D1B7E01CC1C0CF51D38 /* Frameworks */,
-				5795D868A9539C4E257F965D /* Pods */,
+				93341773EA1038EF2DA0117E /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -770,29 +768,27 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
-		5795D868A9539C4E257F965D /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				9E19542014392915F71D4DE0 /* Pods-PawTrails.debug.xcconfig */,
-				F2EB8BB77801CDC1B657190E /* Pods-PawTrails.release.xcconfig */,
-				4D52BC7BE2AEDBF19B3D09AB /* Pods-PawTrailsTests.debug.xcconfig */,
-				20B5DA5019D7976016EA8DF9 /* Pods-PawTrailsTests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		91352D1B7E01CC1C0CF51D38 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				4441ACA71EB8C72E00FBE27F /* SystemConfiguration.framework */,
 				4441ACA51EB8C72500FBE27F /* SafariServices.framework */,
 				447D4C161E44C4F5008F82F4 /* MapKit.framework */,
-				199033D371CC47C9192C6703 /* Pods_Snout.framework */,
-				754A776083E072AC16A405DB /* Pods_SnoutTests.framework */,
-				D38C295A9EECD1391940C8D3 /* Pods_PawTrails.framework */,
-				1C09631478A96AC78EA751AA /* Pods_PawTrailsTests.framework */,
+				D3E63257CC5E13A67F31124B /* Pods_PawTrails.framework */,
+				1E2B813BA9CAE948174F2C71 /* Pods_PawTrailsTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		93341773EA1038EF2DA0117E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				734D05AA5E231C24EBC9332D /* Pods-PawTrails.debug.xcconfig */,
+				CDF43BC48AA97ADEA16BD58D /* Pods-PawTrails.release.xcconfig */,
+				B4A45B026D67F7FA0B3729DF /* Pods-PawTrailsTests.debug.xcconfig */,
+				A8782C798F51A66A5AFC788C /* Pods-PawTrailsTests.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -802,12 +798,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4414AE6F1EA0DD5B004A5134 /* Build configuration list for PBXNativeTarget "PawTrailsTests" */;
 			buildPhases = (
-				4AECD43553A045030C32D93B /* [CP] Check Pods Manifest.lock */,
+				03CA5D410A66DB3F7863BA25 /* [CP] Check Pods Manifest.lock */,
 				4414AE641EA0DD5B004A5134 /* Sources */,
 				4414AE651EA0DD5B004A5134 /* Frameworks */,
 				4414AE661EA0DD5B004A5134 /* Resources */,
-				CDE2218C143AEA41C47BA4E9 /* [CP] Embed Pods Frameworks */,
-				2F9846E25BD5BCA39837FAEA /* [CP] Copy Pods Resources */,
+				7609F9F64AC9DAB2BAFDBC03 /* [CP] Embed Pods Frameworks */,
+				8AFF577FE8F15CFDA31941D5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -823,13 +819,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4415FF671E3B822A00A81B13 /* Build configuration list for PBXNativeTarget "PawTrails" */;
 			buildPhases = (
-				40EE3AB9E61FBE7E41A589E5 /* [CP] Check Pods Manifest.lock */,
+				61379AC374253DF712E5F31A /* [CP] Check Pods Manifest.lock */,
 				4415FF3B1E3B822900A81B13 /* Sources */,
 				4415FF3C1E3B822900A81B13 /* Frameworks */,
 				4415FF3D1E3B822900A81B13 /* Resources */,
-				7EBF939C6B838E47B68754AC /* [CP] Embed Pods Frameworks */,
-				ADF34283F246893F5EBA2FA0 /* [CP] Copy Pods Resources */,
 				44136F081E8429250003B531 /* ShellScript */,
+				93543C9FAEDDD0332AFDC816 /* [CP] Embed Pods Frameworks */,
+				39885238018EFB6CB9FCB2C6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -950,22 +946,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2F9846E25BD5BCA39837FAEA /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PawTrailsTests/Pods-PawTrailsTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		40EE3AB9E61FBE7E41A589E5 /* [CP] Check Pods Manifest.lock */ = {
+		03CA5D410A66DB3F7863BA25 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -978,6 +959,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		39885238018EFB6CB9FCB2C6 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PawTrails/Pods-PawTrails-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		44136F081E8429250003B531 /* ShellScript */ = {
@@ -993,7 +989,7 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" e76cedb9a39947937435de66d038998aa19bd740 d8c0f054e2259863ecb27f88ba96c68c04ea392f7493f39457b4532c5e6a7a42\n";
 		};
-		4AECD43553A045030C32D93B /* [CP] Check Pods Manifest.lock */ = {
+		61379AC374253DF712E5F31A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1008,37 +1004,7 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		7EBF939C6B838E47B68754AC /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PawTrails/Pods-PawTrails-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		ADF34283F246893F5EBA2FA0 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PawTrails/Pods-PawTrails-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CDE2218C143AEA41C47BA4E9 /* [CP] Embed Pods Frameworks */ = {
+		7609F9F64AC9DAB2BAFDBC03 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1051,6 +1017,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PawTrailsTests/Pods-PawTrailsTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8AFF577FE8F15CFDA31941D5 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PawTrailsTests/Pods-PawTrailsTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		93543C9FAEDDD0332AFDC816 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PawTrails/Pods-PawTrails-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1237,7 +1233,7 @@
 /* Begin XCBuildConfiguration section */
 		4414AE701EA0DD5B004A5134 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4D52BC7BE2AEDBF19B3D09AB /* Pods-PawTrailsTests.debug.xcconfig */;
+			baseConfigurationReference = B4A45B026D67F7FA0B3729DF /* Pods-PawTrailsTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -1284,7 +1280,7 @@
 		};
 		4414AE711EA0DD5B004A5134 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 20B5DA5019D7976016EA8DF9 /* Pods-PawTrailsTests.release.xcconfig */;
+			baseConfigurationReference = A8782C798F51A66A5AFC788C /* Pods-PawTrailsTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -1423,7 +1419,7 @@
 		};
 		4415FF681E3B822A00A81B13 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9E19542014392915F71D4DE0 /* Pods-PawTrails.debug.xcconfig */;
+			baseConfigurationReference = 734D05AA5E231C24EBC9332D /* Pods-PawTrails.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1453,7 +1449,7 @@
 		};
 		4415FF691E3B822A00A81B13 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F2EB8BB77801CDC1B657190E /* Pods-PawTrails.release.xcconfig */;
+			baseConfigurationReference = CDF43BC48AA97ADEA16BD58D /* Pods-PawTrails.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

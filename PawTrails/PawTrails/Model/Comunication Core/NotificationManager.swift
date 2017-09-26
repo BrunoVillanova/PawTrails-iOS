@@ -73,7 +73,6 @@ class NotificationManager {
     ///
     /// - Parameter callback: returns pet id and the GPS updates.
     func getPetGPSUpdates(_ callback: @escaping ((_ id: Int, _ data: GPSData)->())){
-        
         self.addObserver(Listener(.gpsUpdates)) { (notification) in
             self.handlePetGPSUpdates(notification, callback)
         }

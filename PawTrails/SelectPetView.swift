@@ -9,14 +9,14 @@
 import Foundation
 
 protocol SelectPetView: NSObjectProtocol, View {
+    
+    
 }
 
 
 class SelectedPetView {
     weak private var view: SelectPetView?
-    
     var trips = [Trip]()
-    
     var tripList = [TripList]()
     
     func attatchView(_ view: SelectPetView) {
@@ -32,7 +32,6 @@ class SelectedPetView {
     
     
     func getTripList(with status: [Int]) {
-        
     APIRepository.instance.getTripList(status) { (error, trips) in
         if let error = error {
             self.tripList.removeAll()
@@ -42,6 +41,11 @@ class SelectedPetView {
         }
     }
 }
+    
+    func recordPointsfromSocket(for petIds: [Int]) {
+        SocketIOManager.instance.startGettingGpsUpdates(for: petIds)
+        
+    }
     
     
     func startTrip(with ids: [Int]) {
