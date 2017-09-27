@@ -44,7 +44,7 @@ class SelectedPetView {
     
     func recordPointsfromSocket(for petIds: [Int]) {
         SocketIOManager.instance.startGettingGpsUpdates(for: petIds)
-        
+ 
     }
     
     

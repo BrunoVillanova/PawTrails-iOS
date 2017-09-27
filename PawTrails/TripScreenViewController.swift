@@ -19,7 +19,6 @@ class TripScreenViewController: UIViewController, UICollectionViewDelegate, UICo
     @IBOutlet weak var pageControl: UIPageControl!
     
     let locationManager = CLLocationManager()
-    
     var pets = [Pet]()
     var petArray = [Dictionary<String,String>]()
 
@@ -141,22 +140,25 @@ class TripScreenViewController: UIViewController, UICollectionViewDelegate, UICo
     
 
     @IBAction func AddPetsToTripBtnPressed(_ sender: Any) {
+        
     }
     
     @IBAction func pauseTripBtnPressed(_ sender: Any) {
+        performSegue(withIdentifier: "join", sender: self)
     }
     
     
     @IBAction func StopTripBtnPressed(_ sender: Any) {
+        performSegue(withIdentifier: "pause", sender: self)
     }
     
     
     @IBAction func BackBtnPressed(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
 
     
-}
+    
 
 
 
@@ -168,4 +170,4 @@ class CsustomCell: UICollectionViewCell {
     @IBOutlet weak var petImage: UIImageView!
     @IBOutlet weak var petNameLabel: UILabel!
 }
-
+}

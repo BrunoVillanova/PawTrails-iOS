@@ -19,6 +19,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     private let urlString = "http://eu.pawtrails.pet:2003"
     private let urlStringSSL = "https://eu.pawtrails.pet:4654"
     
+    
     private var socket: SocketIOClient!
     
     private var onUpdates = [Int:Bool]()
@@ -37,6 +38,9 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         
         for key in self.onUpdates.keys {  self.onUpdates[key] = false }
     }
+    
+    
+    
     
     /// Establishes Connection with Socket IO, peforms login driven by token.
     ///
@@ -63,7 +67,9 @@ class SocketIOManager: NSObject, URLSessionDelegate {
             }
             
         }
+        
         self.socket.connect()
+
     }
     
     /// Disconnects from Socket I.O.

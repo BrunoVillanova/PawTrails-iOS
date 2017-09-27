@@ -28,7 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        
         if DataManager.instance.isAuthenticated() {
             SocketIOManager.instance.connect()
             DataManager.instance.loadPets { (error, pets) in
@@ -37,10 +36,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                     NotificationManager.instance.postPetListUpdates(with: pets)
                 }
             }
+            
         }
-        
+        NotificationManager.instance.getEventsUpdates { (event) in
+            EventManager.instance.handle(event: event, for: self.visibleViewController)
+        }
         var out = true
-        
         configureUIPreferences()
 
         Fabric.with([Crashlytics.self])
@@ -96,24 +97,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     func applicationDidEnterBackground(_ application: UIApplication) {
 
-//        SocketIOManager.instance.disconnect()
+        SocketIOManager.instance.disconnect()
     }
-    
+//
     func applicationDidBecomeActive(_ application: UIApplication) {
 
-        if DataManager.instance.isAuthenticated() {
-            SocketIOManager.instance.connect()
-            DataManager.instance.loadPets { (error, pets) in
-                if error == nil, let pets = pets {
-                    SocketIOManager.instance.startGPSUpdates(for: pets.map({ $0.id}))
-                    NotificationManager.instance.postPetListUpdates(with: pets)
-                }
-            }
-
-        }
-        NotificationManager.instance.getEventsUpdates { (event) in
-            EventManager.instance.handle(event: event, for: self.visibleViewController)
-        }
+//        if DataManager.instance.isAuthenticated() {
+//            SocketIOManager.instance.connect()
+//            DataManager.instance.loadPets { (error, pets) in
+//                if error == nil, let pets = pets {
+//                    SocketIOManager.instance.startGPSUpdates(for: pets.map({ $0.id}))
+//                    NotificationManager.instance.postPetListUpdates(with: pets)
+//                }
+//            }
+//
+//        }
+//        NotificationManager.instance.getEventsUpdates { (event) in
+//            EventManager.instance.handle(event: event, for: self.visibleViewController)
+//        }
     }
     
     var visibleViewController: UIViewController? {
@@ -128,16 +129,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         return nil
     }
     
+    
     func applicationWillTerminate(_ application: UIApplication) {
-
         SocketIOManager.instance.disconnect()
         CoreDataManager.instance.save { (_) in }
     }
     
     private func configureUIPreferences() {
-//        
         UIApplication.shared.statusBarStyle = .default
-//        
         UINavigationBar.appearance().backgroundColor = UIColor.secondary
         UINavigationBar.appearance().barTintColor = UIColor.secondary
         UINavigationBar.appearance().tintColor = UIColor.primary
@@ -147,15 +146,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         ]
         
         UITabBar.appearance().tintColor = UIColor.primary
-        
         UITableViewCell.appearance().tintColor = UIColor.primary
-        
         UISwitch.appearance().onTintColor = UIColor.primary
-        
         UISegmentedControl.appearance().tintColor = UIColor.primary
-        
         UIActivityIndicatorView.appearance().color = UIColor.primary
-        
 //        UILabel.appearance().backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
     }
     

@@ -41,7 +41,7 @@ class FinishAdventureVC: UIViewController, BEMCheckBoxDelegate {
     
     
     @IBAction func resumeAdventureBtnPressed(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
 
     }
   

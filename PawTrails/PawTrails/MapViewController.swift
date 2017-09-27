@@ -13,7 +13,7 @@ import MapKit
 
 
 class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate {
-
+    
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var petsCollectionView: UICollectionView!
     @IBOutlet weak var firstButtonfromthebottom: UIButton!
@@ -81,7 +81,6 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     
     
     override func viewWillDisappear(_ animated: Bool) {
-        
         presenter.stopPetListUpdates()
         presenter.stopPetGPSUpdates()
     }
@@ -95,15 +94,11 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     }
     
     func loadPets(){
-        
         var petsIdsToRemove = annotations.map({ $0.key.id })
-        
         for pet in presenter.pets {
-            
             if let index = petsIdsToRemove.index(of: pet.id) {
                 petsIdsToRemove.remove(at: index)
             }
-            
             if let point = SocketIOManager.instance.getGPSData(for: pet.id)?.point {
                 load(id: MKLocationId(id: pet.id, type: .pet), point: point)
             }

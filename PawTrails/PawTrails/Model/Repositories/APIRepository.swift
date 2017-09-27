@@ -563,22 +563,21 @@ class APIRepository {
     // Finish Trips
     // callBack: returns nil or data
 //    
-//    func finishTrip(_ tripIds: [Int], callback: @escaping ApiTripListCallBack) {
-//        let trips = ["trips":tripIds]
-//        APIManager.instance.perform(call: .finishTrip, with: trips) { (error, json) in
-//            if error == nil, let tripListJson = json?["trips"].array {
-//                var tripList = [TripList]()
-//                for trip in tripListJson {
-//                    tripList.append(TripList(trip))
-//                }
-//                callback(nil, tripList)
-//            } else if let error = error {
-//                callback(error, nil)
-//            }
-//        }
-//
-//    }
-    
+    func finishTrip(_ tripIds: Int, timeStamp: Int, callback: @escaping ApiTripListCallBack) {
+        let trips = ["tripId":tripIds, "timeStamp": timeStamp]
+        APIManager.instance.perform(call: .finishTrip, withKey: "trips", with: trips) { (error, json) in
+            if error == nil, let tripListJson = json?["trips"].array {
+                var tripList = [TripList]()
+                for trip in tripListJson {
+                    tripList.append(TripList(trip))
+                }
+                callback(nil, tripList)
+            } else if let error = error {
+                callback(error, nil)
+            }
+        }
+        }
+
     
     // Pause Trips
     // callBack: returns nil or data

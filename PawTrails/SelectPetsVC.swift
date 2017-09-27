@@ -15,7 +15,6 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
     var refreshControl = UIRefreshControl()
     
     fileprivate let presenter = PetsPresenter()
-    
     fileprivate let presenter2 = SelectedPetView()
 
     
@@ -29,9 +28,14 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
         super.viewDidLoad()
         
         startAdventureBtn.isEnabled = false
-        
         startAdventureBtn.fullyroundedCorner()
         startAdventureBtn.backgroundColor = UIColor.primary
+        
+        
+        APIRepository.instance.finishTrip(539, timeStamp: 1506075288) { (error, trips) in
+            print("sucess")
+        }
+
         
         
         refreshControl.backgroundColor = UIColor.secondary
@@ -93,12 +97,12 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
         self.tabBarController?.tabBar.isHidden = true
         reloadPets()
         presenter.startPetsListUpdates()
-//        presenter.startPetsGPSUpdates { (id) in
+        presenter.startPetsGPSUpdates { (id) in
 //            self.updateItem(by: id)
-//        }
-//        presenter.startPetsGeocodeUpdates { (geocode) in
-//            self.updateItem(by: geocode.id)
-//        }
+        }
+        presenter.startPetsGeocodeUpdates { (geocode) in
+            self.updateItem(by: geocode.id)
+        }
 
 
 
@@ -161,7 +165,6 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
         return presenter.pets.count
     }
     
@@ -169,21 +172,15 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
 
     // CollectionVIew Method
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
-  
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! SelectPetsCell
-        
-        
+
         let pet = getPet(at: indexPath)
         pets[pet.id] = indexPath
-        
-        
-     
+
             if tripListArray.contains(indexPath.item) {
                 cell.backgroundColor = UIColor.brown
  
         } else {
-            
             cell.petTitle.text = pet.name
             if let imageData = pet.image as Data? {
                 cell.petImage.image = UIImage(data: imageData)
@@ -196,7 +193,7 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
             cell.checkMarkView.isUserInteractionEnabled = false
 
         }
-        
+
         return cell
 }
 
