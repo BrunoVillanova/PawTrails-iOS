@@ -18,8 +18,10 @@ class TripScreenViewController: UIViewController, UICollectionViewDelegate, UICo
 
     @IBOutlet weak var pageControl: UIPageControl!
     
+    
+    var tripList = [Trip]()
+    
     let locationManager = CLLocationManager()
-    var pets = [Pet]()
     var petArray = [Dictionary<String,String>]()
 
     // Variables to hold the width and hights of the collectionview.
@@ -100,7 +102,7 @@ class TripScreenViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return pets.count
+        return 1
     }
     
     
@@ -126,6 +128,8 @@ class TripScreenViewController: UIViewController, UICollectionViewDelegate, UICo
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
+    
+    
 
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -141,7 +145,7 @@ class TripScreenViewController: UIViewController, UICollectionViewDelegate, UICo
 
     @IBAction func AddPetsToTripBtnPressed(_ sender: Any) {
         performSegue(withIdentifier: "join", sender: self)
-
+        
         
     }
     

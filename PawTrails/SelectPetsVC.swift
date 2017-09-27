@@ -19,7 +19,6 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
 
     
     fileprivate var pets = [Int:IndexPath]()
-    
     var tripArray = [TripList]()
     var tripListArray = [Int]()
     
@@ -30,8 +29,6 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
         startAdventureBtn.isEnabled = false
         startAdventureBtn.fullyroundedCorner()
         startAdventureBtn.backgroundColor = UIColor.primary
-        
-        
         APIRepository.instance.finishTrip(539, timeStamp: 1506075288) { (error, trips) in
             print("sucess")
         }
@@ -71,6 +68,7 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
                         self.tripArray.append(trip)
                         
                     }
+                    print("Print \(self.tripListArray)")
                 }
             }
         }
@@ -118,9 +116,13 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
     
     override func viewWillDisappear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
-        presenter.stopPetListUpdates()
-        presenter.stopPetGPSUpdates()
-        presenter.stopPetsGeocodeUpdates()
+//        presenter.stopPetListUpdates()
+//        presenter.stopPetGPSUpdates()
+//        presenter.stopPetsGeocodeUpdates()
+//
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        presenter2.tripList.removeAll()
     }
     
     
@@ -246,43 +248,29 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
     
  
     @IBAction func StartAdventureBtnPressed(_ sender: Any) {
-        performSegue(withIdentifier: "Segue", sender: nil)
-        
-//        var petIds = [Int]()
-//        
-//        var petsInProgress = [Pet]()
-//        petIds.removeAll()
-//        if let indexpath = petsCollectionView.indexPathsForSelectedItems {
-//            for index in indexpath {
-//               let pets =  getPet(at: index)
-//                petIds.append(pets.id)
-//            }
-//
-//            getRunningandPausedTrips()
-//            
-//            for items in petIds {
-//                if tripListArray.contains(items) {
-//    
-//                   petsInProgress.append(presenter.getPet(with: items)!)
-//                    if let index = petIds.index(of: items) {
-//                        petIds.remove(at: index)
-//                    }
-//                    
-//                    
-//                }
-//
-//            }
-//         }
-
+        var petIds = [Int]()
+        if let indexpath = petsCollectionView.indexPathsForSelectedItems {
+            for index in indexpath {
+                let pets =  getPet(at: index)
+                petIds.append(pets.id)
+            }
+            
+            self.presenter2.startTrip(with: petIds)
+            performSegue(withIdentifier: "Segue", sender: nil)
+        } else {
+            alert(title: "Error", msg: "Internal error, please try again", type: .red, disableTime: 4, handler: nil)
+        }
+       
     }
+
+    
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Segue"  {
             if let navigationController = segue.destination as? UINavigationController {
-                _ = navigationController.topViewController as? TripScreenViewController
-                //            vc.pets = selectedpets
-
+                let vc = navigationController.topViewController as? TripScreenViewController
+                vc?.tripList = self.presenter2.trips
             }
         }
     }
@@ -293,6 +281,7 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
     @IBAction func closebtnPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-}
 
+
+}
 

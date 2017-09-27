@@ -16,6 +16,8 @@ protocol SelectPetView: NSObjectProtocol, View {
 
 class SelectedPetView {
     weak private var view: SelectPetView?
+    
+    
     var trips = [Trip]()
     var tripList = [TripList]()
     
@@ -42,10 +44,7 @@ class SelectedPetView {
     }
 }
     
-    func recordPointsfromSocket(for petIds: [Int]) {
-        SocketIOManager.instance.startGettingGpsUpdates(for: petIds)
- 
-    }
+
     
     
     func startTrip(with ids: [Int]) {
