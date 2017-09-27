@@ -140,16 +140,19 @@ class TripScreenViewController: UIViewController, UICollectionViewDelegate, UICo
     
 
     @IBAction func AddPetsToTripBtnPressed(_ sender: Any) {
+        performSegue(withIdentifier: "join", sender: self)
+
         
     }
     
     @IBAction func pauseTripBtnPressed(_ sender: Any) {
-        performSegue(withIdentifier: "join", sender: self)
+
     }
     
     
     @IBAction func StopTripBtnPressed(_ sender: Any) {
-        performSegue(withIdentifier: "pause", sender: self)
+        performSegue(withIdentifier: "finish", sender: self)
+
     }
     
     

@@ -37,6 +37,10 @@ class FinishAdventureVC: UIViewController, BEMCheckBoxDelegate {
     
 
     @IBAction func finishAdventureBtnPressed(_ sender: Any) {
+        
+        self.popUpDestructive(title: "", msg: "Are you sure you want to finish the trip", cancelHandler: nil) { (UIAlertAction) in
+            print("do something here")
+        }
     }
     
     
