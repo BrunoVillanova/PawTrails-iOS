@@ -164,10 +164,6 @@ class TripScreenViewController: UIViewController, UICollectionViewDelegate, UICo
         self.navigationController?.popViewController(animated: true)
     }
 
-    
-    
-
-
 
 class CsustomCell: UICollectionViewCell {
     @IBOutlet weak var totalTimeLabel: UILabel!
