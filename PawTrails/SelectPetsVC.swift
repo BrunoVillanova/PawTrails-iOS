@@ -19,7 +19,7 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
 
     
     fileprivate var pets = [Int:IndexPath]()
-    var tripArray = [TripList]()
+    var runningTripArray = [TripList]()
     var tripListArray = [Int]()
     
 
@@ -49,7 +49,6 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
         petsCollectionView.dataSource = self
         petsCollectionView.allowsMultipleSelection = true
         
-        clearOnAppearance()
         getRunningandPausedTrips()
 
 }
@@ -57,7 +56,7 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
     
     
     func getRunningandPausedTrips() {
-        tripArray.removeAll()
+        runningTripArray.removeAll()
         tripListArray.removeAll()
         APIRepository.instance.getTripList([0,1]) { (error, trips) in
             if let error = error {
@@ -65,7 +64,7 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
             } else {
                 if let trips = trips {
                     for trip in trips {
-                        self.tripArray.append(trip)
+                        self.runningTripArray.append(trip)
                         
                     }
                     print("Print \(self.tripListArray)")
@@ -92,6 +91,7 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
 
     
     override func viewWillAppear(_ animated: Bool) {
+        clearOnAppearance()
         self.tabBarController?.tabBar.isHidden = true
         reloadPets()
         presenter.startPetsListUpdates()
@@ -102,7 +102,11 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
             self.updateItem(by: geocode.id)
         }
 
-
+        if var selectedItem = petsCollectionView.indexPathsForSelectedItems {
+            selectedItem.removeAll()
+        } else {
+            print("No index were found")
+        }
 
     }
 
@@ -123,6 +127,13 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
     }
     override func viewDidDisappear(_ animated: Bool) {
         presenter2.tripList.removeAll()
+        
+        if var selectedItem = petsCollectionView.indexPathsForSelectedItems {
+            selectedItem.removeAll()
+        } else {
+            print("No index were found")
+        }
+
     }
     
     
@@ -190,8 +201,7 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
                 cell.petImage.image = nil
             }
             cell.petImage.circle()
-            
-            cell.checkMarkView.isEnabled = false
+                           cell.checkMarkView.isEnabled = false
             cell.checkMarkView.isUserInteractionEnabled = false
 
         }
@@ -207,20 +217,30 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
 
         let selectedPet = indexPath
         let pet = getPet(at: selectedPet).id
-        for item in tripArray {
+        for item in runningTripArray {
             tripListArray.append(item.petId)
         }
         if tripListArray.contains(pet) {
+            
             cell.isUserInteractionEnabled = false
             cell.layer.borderWidth = 2.0
             cell.layer.borderColor = UIColor.gray.cgColor
             self.alert(title: "Error", msg: "You cannot select this pet because it's already on trip", type: .red, disableTime: 4, handler: nil)
             cell.isSelected = false
+            
+            
+            if var selected = petsCollectionView.indexPathsForSelectedItems {
+                selected.remove(at: indexPath.item)
+            }
+            
             cell.checkMarkView.setOn(false, animated: true)
+            self.startAdventureBtn.isEnabled = true
+            
+
+        } else {
+            self.startAdventureBtn.isEnabled = true
         }
         
-
-        self.startAdventureBtn.isEnabled = true
 }
     
     
@@ -248,19 +268,21 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
     
  
     @IBAction func StartAdventureBtnPressed(_ sender: Any) {
-        var petIds = [Int]()
-        if let indexpath = petsCollectionView.indexPathsForSelectedItems {
-            for index in indexpath {
-                let pets =  getPet(at: index)
-                petIds.append(pets.id)
-            }
-            
-            self.presenter2.startTrip(with: petIds)
-            performSegue(withIdentifier: "Segue", sender: nil)
-        } else {
-            alert(title: "Error", msg: "Internal error, please try again", type: .red, disableTime: 4, handler: nil)
+                var petIds = [Int]()
+                petIds.removeAll()
+                if let indexpath = petsCollectionView.indexPathsForSelectedItems {
+                    for index in indexpath {
+                       let pets =  getPet(at: index)
+                        petIds.append(pets.id)
+         
+                    self.presenter2.startTrip(with: petIds)
+                    performSegue(withIdentifier: "Segue", sender: self)
+                    
+                    }
+                } else {
+                    alert(title: "", msg: "Selected pets are already on trip, please try selecting different pet", type: .red, disableTime: 4, handler: nil)
         }
-       
+  
     }
 
     

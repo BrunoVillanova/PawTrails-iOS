@@ -13,13 +13,13 @@ import MapKit
 class TripScreenViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate {
     
     @IBOutlet weak var collectionView: UICollectionView!
-
     @IBOutlet weak var mapView: MKMapView!
-
     @IBOutlet weak var pageControl: UIPageControl!
     
     
     var tripList = [Trip]()
+    
+    var pets = [Pet]()
     
     let locationManager = CLLocationManager()
     var petArray = [Dictionary<String,String>]()
@@ -60,6 +60,8 @@ class TripScreenViewController: UIViewController, UICollectionViewDelegate, UICo
         requestLocationAccess()
     }
     
+    
+    
     func requestLocationAccess() {
         let status = CLLocationManager.authorizationStatus()
         
@@ -76,6 +78,14 @@ class TripScreenViewController: UIViewController, UICollectionViewDelegate, UICo
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        
+        if pets.count == 0 {
+            self.pageControl.isHidden = true
+        } else {
+            self.pageControl.isHidden = false
+        }
+        
+        
         tabBarController?.tabBar.isHidden = true
         self.navigationItem.setHidesBackButton(true, animated: true)
     }
@@ -97,11 +107,9 @@ class TripScreenViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
 
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
         return 1
     }
     
@@ -109,12 +117,31 @@ class TripScreenViewController: UIViewController, UICollectionViewDelegate, UICo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CsustomCell
         
+//        cell.petName.text = ""
+        
+        
+  cell.maskImage.maskImage = UIImage(named: "userprofilemask-1x-png_360")
+ cell.totalDistanceImageVIew.image = UIImage(named: "TotalDistanceLabel-1x-png")
+cell.totalDistancesubLabel.text = "total distance"
+cell.totalTimeImageVIew.image = UIImage(named: "TotalTimeLabel-1x-png")
+cell.totalTimeSubLabel.text = "total time"
+cell.currentSpeedImageView.image = UIImage(named: "CurrentSpeedLabel-1x-png")
+cell.currentSpeedsubLabel.text = "current speed"
+cell.avarageSpeedImageView.image = UIImage(named: "AvgSpeedLabel-1x-png")
+ cell.avarageSpeedSubLabel.text = "avarge speed"
+        
+cell.petName.text = "My Pet"
+cell.totalDistance.text = "8.32 KM"
+cell.userProfileImg.image = UIImage(named: "")
+cell.avargeSpeed.text = "142 bpm"
+cell.currentSpeed.text = "6.2 km/h"
+        cell.totalTime.text = "00:43:27"
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
- 
-        return CGSize(width: myCollectionViewWidith, height: 250)
+        return CGSize(width: myCollectionViewWidith, height: myCollectionViewHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -161,16 +188,54 @@ class TripScreenViewController: UIViewController, UICollectionViewDelegate, UICo
     
     
     @IBAction func BackBtnPressed(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        if self.isModal {
+        self.dismiss(animated: true, completion: nil)
+        } else {
+            let testController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
+            testController.selectedIndex = 0
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.window?.rootViewController = testController
+        }
+        
     }
-
+}
 
 class CsustomCell: UICollectionViewCell {
-    @IBOutlet weak var totalTimeLabel: UILabel!
-    @IBOutlet weak var avarageSpeedLabel: UILabel!
-    @IBOutlet weak var currentSpeedLabel: UILabel!
-    @IBOutlet weak var totalDistanceLabel: UILabel!
-    @IBOutlet weak var petImage: UIImageView!
-    @IBOutlet weak var petNameLabel: UILabel!
+    
+    @IBOutlet weak var maskImage: UiimageViewWithMask!
+    @IBOutlet weak var totalDistanceImageVIew: UIImageView!
+    @IBOutlet weak var totalDistancesubLabel: UILabel!
+    
+    @IBOutlet weak var totalTimeImageVIew: UIImageView!
+    @IBOutlet weak var totalTimeSubLabel: UILabel!
+    
+    @IBOutlet weak var currentSpeedImageView: UIImageView!
+    @IBOutlet weak var currentSpeedsubLabel: UILabel!
+    
+    @IBOutlet weak var avarageSpeedImageView: UIImageView!
+    @IBOutlet weak var avarageSpeedSubLabel: UILabel!
+    
+    @IBOutlet weak var petName: UILabel!
+    @IBOutlet weak var totalDistance: UILabel!
+    @IBOutlet weak var userProfileImg: UIImageView!
+    @IBOutlet weak var avargeSpeed: UILabel!
+    @IBOutlet weak var currentSpeed: UILabel!
+    @IBOutlet weak var totalTime: UILabel!
 }
+
+extension UIViewController {
+    var isModal: Bool {
+        if let index = navigationController?.viewControllers.index(of: self), index > 0 {
+            return false
+        } else if presentingViewController != nil {
+            return true
+        } else if navigationController?.presentingViewController?.presentedViewController == navigationController  {
+            return true
+        } else if tabBarController?.presentingViewController is UITabBarController {
+            return true
+        } else {
+            return false
+        }
+    }
 }
+

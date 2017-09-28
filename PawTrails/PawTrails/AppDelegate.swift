@@ -26,6 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     var window: UIWindow?
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
     
+    var runningTripArray = [TripList]()
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         if DataManager.instance.isAuthenticated() {
@@ -41,12 +43,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         NotificationManager.instance.getEventsUpdates { (event) in
             EventManager.instance.handle(event: event, for: self.visibleViewController)
         }
+        
+        
         var out = true
         configureUIPreferences()
 
         Fabric.with([Crashlytics.self])
         
         if DataManager.instance.isAuthenticated() {
+            getRunningandPausedTrips()
             
             if let socialMedia = DataManager.instance.isSocialMedia() {
                 
@@ -79,15 +84,52 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     }
     
     func loadHomeScreen() {
-        let root = storyboard.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
-        root.selectedIndex = 0
-        window?.rootViewController = root
-    }
+        if runningTripArray.isEmpty == false {
+            let root = storyboard.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
+            root.selectedIndex = 0
+            window?.rootViewController = root
+
+        } else {
+            let initial = storyboard.instantiateViewController(withIdentifier: "TripScreenViewController") as? TripScreenViewController
+            let navigationController = UINavigationController(rootViewController: initial!)
+            window?.rootViewController = navigationController
+
+            
+        }
+}
     
     func loadAuthenticationScreen() {
-        let initial = storyboard.instantiateViewController(withIdentifier: "InitialViewController") as? InitialViewController
-        window?.rootViewController = initial
+            let initial = storyboard.instantiateViewController(withIdentifier: "InitialViewController") as? InitialViewController
+            window?.rootViewController = initial
+        
     }
+    
+    
+    
+    
+    func getRunningandPausedTrips() {
+        APIRepository.instance.getTripList([0]) { (error, trips) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                if let trips = trips {
+                    for trip in trips {
+                        self.runningTripArray.append(trip)
+                        print("Here is your truos \(self.runningTripArray)")
+                        
+                    }
+                }
+            }
+        }
+    }
+
+    
+    
+    
+    
+    
+    
+    
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         let google = GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
@@ -101,6 +143,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     }
 //
     func applicationDidBecomeActive(_ application: UIApplication) {
+        getRunningandPausedTrips()
+
 
 //        if DataManager.instance.isAuthenticated() {
 //            SocketIOManager.instance.connect()
