@@ -274,15 +274,24 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
                     for index in indexpath {
                        let pets =  getPet(at: index)
                         petIds.append(pets.id)
-         
-                    self.presenter2.startTrip(with: petIds)
-                    performSegue(withIdentifier: "Segue", sender: self)
-                    
+                        
+                        for trip in runningTripArray {
+                           petIds = petIds.filter() {$0 != trip.petId}
+                        }
+                        
+                        if petIds.count > 0 {
+                            self.presenter2.startTrip(with: petIds)
+                            performSegue(withIdentifier: "Segue", sender: self)
+                            
+                        } else {
+                            alert(title: "", msg: "Selected pets are already on trip, please try selecting different pet", type: .red, disableTime: 4, handler: nil)
                     }
-                } else {
-                    alert(title: "", msg: "Selected pets are already on trip, please try selecting different pet", type: .red, disableTime: 4, handler: nil)
+                }
+        
+                }else {
+                    alert(title: "", msg: "Internal error, Please try again later", type: .red, disableTime: 4, handler: nil)
+
         }
-  
     }
 
     

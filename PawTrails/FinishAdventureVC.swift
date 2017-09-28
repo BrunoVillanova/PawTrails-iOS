@@ -18,8 +18,6 @@ class FinishAdventureVC: UIViewController, BEMCheckBoxDelegate {
         
         finishAdventureBtn.fullyroundedCorner()
         finishAdventureBtn.backgroundColor = UIColor.primary
-        
-        
         resumeAdventureBtn.fullyroundedCorner()
         resumeAdventureBtn.tintColor = UIColor.primary
         resumeAdventureBtn.border(color: UIColor.primary, width: 1.0)
@@ -32,12 +30,9 @@ class FinishAdventureVC: UIViewController, BEMCheckBoxDelegate {
         tabBarController?.tabBar.isHidden = true
         self.navigationItem.setHidesBackButton(true, animated: false)
     }
-
-    
     
 
     @IBAction func finishAdventureBtnPressed(_ sender: Any) {
-        
         self.popUpDestructive(title: "", msg: "Are you sure you want to finish the trip", cancelHandler: nil) { (UIAlertAction) in
             print("do something here")
         }
@@ -46,15 +41,11 @@ class FinishAdventureVC: UIViewController, BEMCheckBoxDelegate {
     
     @IBAction func resumeAdventureBtnPressed(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
-
     }
-  
 }
 
 class FinishAdventureCell: UICollectionViewCell {
-    
     @IBOutlet weak var petImageView: UiimageViewWithMask!
     @IBOutlet weak var petNameLabel: UILabel!
-    
     @IBOutlet weak var checkBoxView: BEMCheckBox!
 }
