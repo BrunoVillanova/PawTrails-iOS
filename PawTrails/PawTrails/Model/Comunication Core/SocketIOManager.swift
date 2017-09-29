@@ -33,7 +33,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         let urlString = SSLEnabled ? self.urlStringSSL : self.urlString
         
         if let url = URL(string: urlString) {
-            self.socket = SocketIOClient(socketURL: url, config: [.log(true), .secure(true)])
+            self.socket = SocketIOClient(socketURL: url, config: [.log(false), .secure(true)])
         }
         
         for key in self.onUpdates.keys {  self.onUpdates[key] = false }

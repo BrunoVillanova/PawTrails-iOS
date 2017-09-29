@@ -91,8 +91,8 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
                     
                     let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(gestureRecognizer:)))
                     gestureRecognizer.delegate = self
-                    self.alertwithGeature(title: "", msg: "ADVENTURE IN PROGRESS, CLICK TO RESUME", type: .red, disableTime: 100, geatureReconginzer: gestureRecognizer, handler: {
-                        self.performSegue(withIdentifier: "adventrueInProgress", sender: nil)
+                    self.alertwithGeature(title: "", msg: "ADVENTURE IN PROGRESS, CLICK TO RESUME", type: .red, disableTime: 150, geatureReconginzer: gestureRecognizer, handler: {
+//                        self.performSegue(withIdentifier: "adventrueInProgress", sender: nil)
                         
                     })
 
@@ -226,6 +226,7 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     
     
     @IBAction func firstButtonPressed(_ sender: Any) {
+        hideNotification()
          if tripListArray.isEmpty == true   {
             performSegue(withIdentifier: "startAdventue", sender: nil)
         } else {
