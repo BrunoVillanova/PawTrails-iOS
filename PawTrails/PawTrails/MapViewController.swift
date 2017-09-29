@@ -54,7 +54,7 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
         reloadPets()
         
         
-        getRunningandPausedTrips()
+        
         
      
 }
@@ -76,7 +76,7 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
         
         
         
-        
+        getRunningandPausedTrips()
     }
     
     
@@ -91,8 +91,9 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
                     
                     let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(gestureRecognizer:)))
                     gestureRecognizer.delegate = self
-                    self.alertwithGeature(title: "", msg: "ADVENTURE IN PROGRESS, CLICK TO RESUME", type: .red, disableTime: 60, geatureReconginzer: gestureRecognizer, handler: {
+                    self.alertwithGeature(title: "", msg: "ADVENTURE IN PROGRESS, CLICK TO RESUME", type: .red, disableTime: 100, geatureReconginzer: gestureRecognizer, handler: {
                         self.performSegue(withIdentifier: "adventrueInProgress", sender: nil)
+                        
                     })
 
                     for trip in trips {
@@ -111,6 +112,7 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     
     func handleTap(gestureRecognizer: UIGestureRecognizer) {
         self.performSegue(withIdentifier: "adventrueInProgress", sender: nil)
+        self.hideNotification()
 }
 
     
