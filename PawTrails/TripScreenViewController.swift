@@ -57,9 +57,8 @@ class TripScreenViewController: UIViewController, UICollectionViewDelegate, UICo
         }
         
         mapView.showsUserLocation = true
-        requestLocationAccess()
-        
-        
+
+    
     }
     
     
@@ -148,7 +147,6 @@ class TripScreenViewController: UIViewController, UICollectionViewDelegate, UICo
 // CollectionViewDataSource and Delegate
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
         return tripIds.count
     }
     

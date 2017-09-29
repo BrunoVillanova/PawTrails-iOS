@@ -27,12 +27,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
     
     var runningTripArray = [TripList]()
-    var tripIds = [Int]()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         if DataManager.instance.isAuthenticated() {
-
             SocketIOManager.instance.connect()
             DataManager.instance.loadPets { (error, pets) in
                 if error == nil, let pets = pets {
@@ -53,6 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         Fabric.with([Crashlytics.self])
         
         if DataManager.instance.isAuthenticated() {
+            getRunningandPausedTrips()
             
             if let socialMedia = DataManager.instance.isSocialMedia() {
                 
@@ -68,9 +67,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 }
                 
             }
-            
-            getRunningandPausedTrips()
-
             loadHomeScreen()
             
         }else{
@@ -88,18 +84,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     }
     
     func loadHomeScreen() {
-        if runningTripArray.isEmpty == false {
+//        if runningTripArray.isEmpty == false {
             let root = storyboard.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
             root.selectedIndex = 0
             window?.rootViewController = root
 
-        } else {
-            let initial = storyboard.instantiateViewController(withIdentifier: "TripScreenViewController") as? TripScreenViewController
-            let navigationController = UINavigationController(rootViewController: initial!)
-            window?.rootViewController = navigationController
-            
-        }
-    }
+//        } else {
+////            let initial = storyboard.instantiateViewController(withIdentifier: "TripScreenViewController") as? TripScreenViewController
+////            let navigationController = UINavigationController(rootViewController: initial!)
+////            window?.rootViewController = navigationController
+////
+////            
+//        }
+}
     
     func loadAuthenticationScreen() {
             let initial = storyboard.instantiateViewController(withIdentifier: "InitialViewController") as? InitialViewController
@@ -111,7 +108,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     
     func getRunningandPausedTrips() {
-        APIRepository.instance.getTripList([0,1]) { (error, trips) in
+        APIRepository.instance.getTripList([0]) { (error, trips) in
             if let error = error {
                 print(error.localizedDescription)
             } else {
@@ -119,12 +116,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                     for trip in trips {
                         self.runningTripArray.append(trip)
                         print("Here is your truos \(self.runningTripArray)")
+                        
                     }
-                    
-                    for item in self.runningTripArray {
-                        self.tripIds.append(item.id)
-                    }
-                    
                 }
             }
         }
@@ -150,7 +143,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     }
 //
     func applicationDidBecomeActive(_ application: UIApplication) {
-//        getRunningandPausedTrips()
+        getRunningandPausedTrips()
 
 
 //        if DataManager.instance.isAuthenticated() {

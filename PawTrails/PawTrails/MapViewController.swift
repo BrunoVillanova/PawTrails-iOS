@@ -52,8 +52,14 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
         petsCollectionView.isHidden = true
         self.petsCollectionView.reloadData()
         reloadPets()
+        
+        
+        getRunningandPausedTrips()
+        
+     
 }
     
+ 
 
     func reloadPets(){
         presenter.getPets()
@@ -68,7 +74,7 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
             self.load(id: id, point: point)
         }
         
-        getRunningandPausedTrips()
+        
         
         
     }
@@ -76,22 +82,30 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     
     
     func getRunningandPausedTrips() {
+        var runningTrip = [TripList]()
         APIRepository.instance.getTripList([0,1]) { (error, trips) in
             if let error = error {
                 print(error.localizedDescription)
             } else {
                 if let trips = trips {
+                    
+                    self.alert(title: "", msg: "Adventure in progress, click to resume", type: .red, disableTime: 10, handler: {
+                        self.performSegue(withIdentifier: "adventrueInProgress", sender: nil)
+                    })
+
                     for trip in trips {
                         self.tripListArray.append(trip)
+                        runningTrip.append(trip)
                         print("Here is your truos \(self.tripListArray)")
                         
                     }
                 }
             }
         }
+
+ 
     }
 
-    
     
 
     
