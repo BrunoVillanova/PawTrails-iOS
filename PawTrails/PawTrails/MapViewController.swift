@@ -67,17 +67,33 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
         presenter.startPetsGPSUpdates { (id, point) in
             self.load(id: id, point: point)
         }
+        
+        getRunningandPausedTrips()
+        
+        
     }
     
     
     
-    
-    func showAlert() {
-        if tripListArray.count > 0 {
-            self.popUpDestructive(title: "Trip in progress", msg: "There is a trip already in progress, you can join it right now", cancelHandler: nil, proceedHandler: { (segue) in
-            })
+    func getRunningandPausedTrips() {
+        APIRepository.instance.getTripList([0,1]) { (error, trips) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                if let trips = trips {
+                    for trip in trips {
+                        self.tripListArray.append(trip)
+                        print("Here is your truos \(self.tripListArray)")
+                        
+                    }
+                }
+            }
         }
     }
+
+    
+    
+
     
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -187,14 +203,28 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     
     
     @IBAction func firstButtonPressed(_ sender: Any) {
-        print("firstButtonPressed")
+         if tripListArray.isEmpty == true   {
+            performSegue(withIdentifier: "startAdventue", sender: nil)
+        } else {
+            performSegue(withIdentifier: "adventrueInProgress", sender: nil)
+        }
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "adventrueInProgress" {
+            let destinationController = segue.destination as! UINavigationController
+            let targetController = destinationController.topViewController as! TripScreenViewController
+            for trip in tripListArray {
+                targetController.tripIds.append(trip.id)
+            }
+        
+        }
     }
     
     
     var doubleTap : Bool! = false
     @IBAction func secButtonPressed(_ sender: Any) {
-
-        
         if (doubleTap) {
             self.petsCollectionView.slideInAffect(direction: kCATransitionFromRight)
             self.petsCollectionView.isHidden = true

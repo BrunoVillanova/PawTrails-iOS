@@ -16,10 +16,14 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
     
     fileprivate let presenter = PetsPresenter()
     fileprivate let presenter2 = SelectedPetView()
+    
+    var runningTripArray = [TripList]()
+
 
     
     fileprivate var pets = [Int:IndexPath]()
-    var runningTripArray = [TripList]()
+    
+    
     var tripListArray = [Int]()
     
 
@@ -274,7 +278,6 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
                     for index in indexpath {
                        let pets =  getPet(at: index)
                         petIds.append(pets.id)
-                        
                         for trip in runningTripArray {
                            petIds = petIds.filter() {$0 != trip.petId}
                         }
@@ -300,8 +303,7 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Segue"  {
             if let navigationController = segue.destination as? UINavigationController {
-                let vc = navigationController.topViewController as? TripScreenViewController
-                vc?.tripList = self.presenter2.trips
+                _ = navigationController.topViewController as? TripScreenViewController
             }
         }
     }
@@ -312,7 +314,6 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
     @IBAction func closebtnPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-
 
 }
 

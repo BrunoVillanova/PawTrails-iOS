@@ -16,13 +16,13 @@ class TripScreenViewController: UIViewController, UICollectionViewDelegate, UICo
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var pageControl: UIPageControl!
     
-    
-    var tripList = [Trip]()
-    
-    var pets = [Pet]()
+
     
     let locationManager = CLLocationManager()
     var petArray = [Dictionary<String,String>]()
+    
+    var runningTripArray = [TripList]()
+    var tripIds = [Int]()
 
     // Variables to hold the width and hights of the collectionview.
     
@@ -58,6 +58,8 @@ class TripScreenViewController: UIViewController, UICollectionViewDelegate, UICo
         
         mapView.showsUserLocation = true
         requestLocationAccess()
+        
+        
     }
     
     
@@ -78,17 +80,19 @@ class TripScreenViewController: UIViewController, UICollectionViewDelegate, UICo
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        
-        if pets.count == 0 {
+
+        if tripIds.count == 0 {
             self.pageControl.isHidden = true
         } else {
             self.pageControl.isHidden = false
         }
-        
-        
         tabBarController?.tabBar.isHidden = true
         self.navigationItem.setHidesBackButton(true, animated: true)
+        
     }
+    
+    
+    
 
 
     override func viewDidLayoutSubviews() {
@@ -106,11 +110,46 @@ class TripScreenViewController: UIViewController, UICollectionViewDelegate, UICo
         myCollectionViewWidith = collectionView.frame.size.width
     }
     
+    
+    
+    
+    
+    func getRunningandPausedTrips() {
+        APIRepository.instance.getTripList([0]) { (error, trips) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                if let trips = trips {
+                    for trip in trips {
+                        self.runningTripArray.append(trip)
+                        print("Here is your truos \(self.runningTripArray)")
+                        for tripp in self.runningTripArray {
+                            self.tripIds.append(tripp.id)
+                        }
+                    }
+                }
+            }
+        }
+    }
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+// CollectionViewDataSource and Delegate
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 1
+        return tripIds.count
     }
     
     
