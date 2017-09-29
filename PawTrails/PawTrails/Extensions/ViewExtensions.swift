@@ -83,6 +83,16 @@ extension UIViewController {
         }
     }
     
+    func alertwithGeature(title:String, msg:String, type: notificationType = .red, disableTime: Int = 3, geatureReconginzer: UITapGestureRecognizer, handler: (()->())? = nil){
+        self.hideLoadingView(animated:false)
+        self.showNotificationWithGesture(title: msg, type: type, geaturseRecognizer: geatureReconginzer)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(disableTime)) {
+            self.hideNotification()
+            if let handler = handler { handler() }
+        }
+    }
+
+    
     // Alert for Image Picker
     
     func alert(_ imagePicker:UIImagePickerController) {
@@ -158,6 +168,37 @@ extension UIViewController {
             UIApplication.shared.keyWindow?.addSubview(notificationView)
         }
         
+        
+    }
+    
+    
+    func showNotificationWithGesture(title:String, type:notificationType = .blue, geaturseRecognizer: UITapGestureRecognizer) {
+        
+        
+        let viewHeight:CGFloat = 30
+        let yOffset:CGFloat = UIApplication.shared.statusBarFrame.size.height + (navigationController?.navigationBar.frame.height ?? 0.0)
+        let viewFrame = CGRect(x: 0.0, y: yOffset, width: self.view.bounds.width, height: viewHeight)
+        
+        let notificationView = UIView(frame: viewFrame)
+        notificationView.backgroundColor = type.color
+        notificationView.tag = subviewId.notification.rawValue
+        
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: viewHeight))
+        label.text = title
+        label.textColor = UIColor.white
+        label.font = UIFont.preferredFont(forTextStyle: .headline)
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.numberOfLines = 2
+        
+        notificationView.addSubview(label)
+        
+        notificationView.addGestureRecognizer(geaturseRecognizer)
+
+        DispatchQueue.main.async {
+            UIApplication.shared.keyWindow?.addSubview(notificationView)
+        }
+
         
     }
     

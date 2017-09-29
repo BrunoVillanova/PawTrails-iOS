@@ -12,7 +12,7 @@ import MapKit
 
 
 
-class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate {
+class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var petsCollectionView: UICollectionView!
@@ -89,7 +89,9 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
             } else {
                 if let trips = trips {
                     
-                    self.alert(title: "", msg: "Adventure in progress, click to resume", type: .red, disableTime: 10, handler: {
+                    let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(gestureRecognizer:)))
+                    gestureRecognizer.delegate = self
+                    self.alertwithGeature(title: "", msg: "ADVENTURE IN PROGRESS, CLICK TO RESUME", type: .red, disableTime: 60, geatureReconginzer: gestureRecognizer, handler: {
                         self.performSegue(withIdentifier: "adventrueInProgress", sender: nil)
                     })
 
@@ -105,6 +107,11 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
 
  
     }
+    
+    
+    func handleTap(gestureRecognizer: UIGestureRecognizer) {
+        self.performSegue(withIdentifier: "adventrueInProgress", sender: nil)
+}
 
     
 
@@ -394,6 +401,11 @@ extension UIView {
         // Add the animation to the View's layer
         self.layer.add(slideInFromLeftTransition, forKey: "slideInFromLeftTransition")
     }
+    
+    
+    
 }
+
+
 
 
