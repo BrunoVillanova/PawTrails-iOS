@@ -80,7 +80,7 @@ class TripScreenViewController: UIViewController, UICollectionViewDelegate, UICo
 
     override func viewWillAppear(_ animated: Bool) {
 
-        if tripIds.count == 0 {
+        if tripIds.count == 1 {
             self.pageControl.isHidden = true
         } else {
             self.pageControl.isHidden = false

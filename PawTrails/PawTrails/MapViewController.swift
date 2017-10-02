@@ -52,11 +52,6 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
         petsCollectionView.isHidden = true
         self.petsCollectionView.reloadData()
         reloadPets()
-        
-        
-        
-        
-     
 }
     
  
@@ -73,40 +68,30 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
         presenter.startPetsGPSUpdates { (id, point) in
             self.load(id: id, point: point)
         }
-        
-        
-        
         getRunningandPausedTrips()
     }
     
     
     
     func getRunningandPausedTrips() {
-        var runningTrip = [TripList]()
+        tripListArray.removeAll()
         APIRepository.instance.getTripList([0,1]) { (error, trips) in
             if let error = error {
                 print(error.localizedDescription)
             } else {
                 if let trips = trips {
-                    
                     let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(gestureRecognizer:)))
                     gestureRecognizer.delegate = self
                     self.alertwithGeature(title: "", msg: "ADVENTURE IN PROGRESS, CLICK TO RESUME", type: .red, disableTime: 150, geatureReconginzer: gestureRecognizer, handler: {
 //                        self.performSegue(withIdentifier: "adventrueInProgress", sender: nil)
-                        
                     })
 
                     for trip in trips {
                         self.tripListArray.append(trip)
-                        runningTrip.append(trip)
-                        print("Here is your truos \(self.tripListArray)")
-                        
                     }
                 }
             }
         }
-
- 
     }
     
     
