@@ -160,7 +160,7 @@ class DataManager {
     ///
     /// - Returns: bool value to verify the operation was complete successfully.
     func signOut() -> Bool {
-        CoreDataManager.instance.deleteAll()
+//        CoreDataManager.instance.deleteAll()
         SocketIOManager.instance.disconnect()
         return SharedPreferences.remove(.id) && SharedPreferences.remove(.token)
     }

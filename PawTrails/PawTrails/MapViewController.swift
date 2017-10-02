@@ -39,10 +39,11 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
         firstButtonfromthebottom.imageView?.contentMode = .scaleToFill
 
         
-           locationManager.requestWhenInUseAuthorization()
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.startUpdatingLocation()
+        
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.startUpdatingLocation()
         
         mapView.showsScale = false
         mapView.showsUserLocation = true
@@ -83,7 +84,6 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
                     let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(gestureRecognizer:)))
                     gestureRecognizer.delegate = self
                     self.alertwithGeature(title: "", msg: "ADVENTURE IN PROGRESS, CLICK TO RESUME", type: .red, disableTime: 150, geatureReconginzer: gestureRecognizer, handler: {
-//                        self.performSegue(withIdentifier: "adventrueInProgress", sender: nil)
                     })
 
                     for trip in trips {
@@ -389,9 +389,6 @@ extension UIView {
         // Add the animation to the View's layer
         self.layer.add(slideInFromLeftTransition, forKey: "slideInFromLeftTransition")
     }
-    
-    
-    
 }
 
 

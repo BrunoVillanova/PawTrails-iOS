@@ -31,8 +31,8 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         refreshControl.addTarget(self, action: #selector(reloadPetsAPI), for: .valueChanged)
         tableView.addSubview(refreshControl)
         
-        UIApplication.shared.statusBarStyle = .lightContent
         presenter.attachView(self)
+        
         
         addButton()
     }
@@ -66,6 +66,8 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.hideNotification()
+
         reloadPets()
         presenter.startPetsListUpdates()
         presenter.startPetsGPSUpdates { (id) in
@@ -202,8 +204,6 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
 
     func trackButtonAction(sender: UIButton){
-
-        
         // changed this when deleted homevc
         if let home = tabBarController?.viewControllers?.first as? MapViewController {
             home.selectedPet = presenter.getPet(with: sender.tag)
@@ -230,8 +230,6 @@ class petListCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var signalImageView: UIImageView!
     @IBOutlet weak var batteryImageView: UIImageView!
-//    @IBOutlet weak var signalLabel: UILabel!
-//    @IBOutlet weak var batteryLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
     
   

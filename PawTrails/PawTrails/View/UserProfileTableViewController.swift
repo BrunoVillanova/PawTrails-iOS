@@ -24,12 +24,16 @@ class UserProfileTableViewController: UITableViewController, UserProfileView, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.attachView(self)
+        
 //        userNotSigned()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         presenter.loadUser()
+        self.hideNotification()
     }
+    
     
     //MARC:- UserProfileView
     
