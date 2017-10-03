@@ -33,7 +33,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         let urlString = SSLEnabled ? self.urlStringSSL : self.urlString
         
         if let url = URL(string: urlString) {
-            self.socket = SocketIOClient(socketURL: url, config: [.log(false), .secure(true)])
+            self.socket = SocketIOClient(socketURL: url, config: [.log(true), .secure(true)])
         }
         
         for key in self.onUpdates.keys {  self.onUpdates[key] = false }
@@ -80,7 +80,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     
     
     func startGettingGpsUpdates(for petId: [Int]) {
-        self.socket.emit("pets", ["ids": petId, "noLastPos": false])
+        self.socket.emit("gpsPets", ["ids": petId, "noLastPos": false])
         self.socket.on("gpsUpdates") { (data, Ack) in
         }
     }
@@ -135,13 +135,13 @@ class SocketIOManager: NSObject, URLSessionDelegate {
                 PetsGPSData.setObject(data, forKey: NSNumber(value: petId))
             }
             
-          self.socket.on("gpsUpdates", callback: { (data, ack) in
+          self.socket.on("≈≈", callback: { (data, ack) in
               Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "gpsData Update response", data)
                 self.handleGPSUpdates(data)
           
           })
 //          self.onUpdates[petId] = true
-            self.socket.emit("pets", ["ids": [petId], "noLastPos": false])
+            self.socket.emit("gpsPets", ["ids": [petId], "noLastPos": false])
         }
     }
     
