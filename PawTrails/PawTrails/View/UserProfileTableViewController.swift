@@ -23,10 +23,7 @@ class UserProfileTableViewController: UITableViewController, UserProfileView, UI
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.attachView(self)
-        
-//        userNotSigned()
-        
+        presenter.attachView(self)        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -92,7 +89,6 @@ class UserProfileTableViewController: UITableViewController, UserProfileView, UI
         }else{
             return super.tableView(tableView, heightForRowAt: indexPath)
         }
-        
     }
     
     // MARK: - Navigation
