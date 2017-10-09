@@ -69,6 +69,10 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
         presenter.startPetsGPSUpdates { (id, point) in
             self.load(id: id, point: point)
         }
+        
+       
+        loadPets()
+        
         getRunningandPausedTrips()
     }
     
@@ -77,18 +81,22 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
     func getRunningandPausedTrips() {
         tripListArray.removeAll()
         APIRepository.instance.getTripList([0,1]) { (error, trips) in
-            if let error = error {
-                print(error.localizedDescription)
+            if error != nil {
+                print("error zf dsf sdf \(String(describing: error?.localizedDescription))")
             } else {
-                if let trips = trips {
+                if let trips = trips, trips.isEmpty == false {
+
+                    print("error zf dsf sdf \(trips)")
                     let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(gestureRecognizer:)))
                     gestureRecognizer.delegate = self
-                    self.alertwithGeature(title: "", msg: "ADVENTURE IN PROGRESS, CLICK TO RESUME", type: .red, disableTime: 150, geatureReconginzer: gestureRecognizer, handler: {
-                    })
-
+                    
+                    
                     for trip in trips {
                         self.tripListArray.append(trip)
                     }
+                    
+                    self.alertwithGeature(title: "", msg: "ADVENTURE IN PROGRESS, CLICK TO RESUME", type: .red, disableTime: 150, geatureReconginzer: gestureRecognizer, handler: {
+                    })
                 }
             }
         }

@@ -20,14 +20,14 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
     let titles = ["Profile", "Activity", "SafeZone", "Share"]
     
     var pet:Pet!
-    
+
     var fromMap: Bool = false
     
     fileprivate let presenter = PetProfilePressenter()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"switch-device-button-1x-png"), style: .plain, target: self, action: #selector(addTapped))
 
@@ -59,6 +59,8 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
         
     }
     
+    
+ 
     
     // Floating button.
     let button = UIButton()
@@ -172,8 +174,15 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
         
         collectionView?.backgroundColor = UIColor.white
         collectionView?.register(ProfileCell.self, forCellWithReuseIdentifier: "cell")
-        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell3")
-//        collectionView?.register(SubscriptionCell.self, forCellWithReuseIdentifier: subscriptionCellId)
+        
+        
+        
+        collectionView?.register(SafezZoneParentCell.self, forCellWithReuseIdentifier: "cell3")
+        
+        
+        
+        
+        
         let nib = UINib(nibName: "PetProfileCollectionViewCell", bundle: nil)
         collectionView?.register(nib, forCellWithReuseIdentifier: "myCell")
         collectionView?.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
@@ -204,7 +213,7 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
     }
     
     
-    // Mohamed - to highligh menu bar when selected
+    // Mark - to highligh menu bar when selected
     
     
     override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
@@ -249,13 +258,12 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
             }
             return cell
         } else if indexPath.item == 3 {
-
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ProfileCell
             return cell
         }
         
 
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell3", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell3", for: indexPath) as! SafezZoneParentCell
         cell.backgroundColor = UIColor.blue
 
         return cell
@@ -269,7 +277,19 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: view.frame.height - 120)
     }
+    
+    
+    func presentEditSafezoneViewController(petId: Int, isOwner: Bool, safeZone: SafeZone) {
+        let viewController = self.storyboard?.instantiateViewController(withIdentifier: "AddEditSafeZOneController") as! AddEditSafeZOneController
+        viewController.petId = petId
+        viewController.isOwner = isOwner
+        viewController.safezone = safeZone
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+
+
 }
+
 
 
 class ActivityCell: BaseCell {
@@ -280,11 +300,22 @@ class ActivityCell: BaseCell {
 }
 
 
-class SafeZoneCell: BaseCell {
-    override func setupViews() {
-        self.backgroundColor = UIColor.blue
+//class SafeZoneCell: BaseCell {
+//    override func setupViews() {
+//        self.backgroundColor = UIColor.blue
+//    }
+//}
+
+extension UIView {
+    var parentViewController: UIViewController? {
+        var parentResponder: UIResponder? = self
+        while parentResponder != nil {
+            parentResponder = parentResponder!.next
+            if let viewController = parentResponder as? UIViewController {
+                return viewController
+            }
+        }
+        return nil
     }
 }
-
-
 

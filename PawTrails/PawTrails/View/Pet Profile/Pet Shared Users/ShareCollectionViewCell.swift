@@ -16,7 +16,6 @@ class ShareCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var emailLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
  

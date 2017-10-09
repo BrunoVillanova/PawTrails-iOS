@@ -65,20 +65,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             let status = self.getStatus(data)
             if (status == .connected) {
                 self.socketClient.emit("gpsPets", ["ids": [96], "noLastPos": false])
-                DataManager.instance.loadPets { (error, pets) in
-                    if error == nil, let pets = pets {
+            DataManager.instance.loadPets { (error, pets) in
+                if error == nil, let pets = pets {
                         let petIDs = pets.map { $0.id }
                         self.socketClient.emit("gpsPets", ["ids": petIDs, "noLastPos": false])
-                        NotificationManager.instance.postPetListUpdates(with: pets)
-                    }
+                    NotificationManager.instance.postPetListUpdates(with: pets)
                 }
+            }
             } else if (status == .unauthorized) {
                 self.loadAuthenticationScreen()
             } else if (status != .waiting) {
                 self.socketAuth()
             }
         }){}.addDisposableTo(disposeBag)
-        
+            
         socket.on("gpsUpdates").subscribe(onNext: { (data) in
             print("gpsUpdates")
             
@@ -98,7 +98,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         if DataManager.instance.isAuthenticated() {
             socketClient.connect()
         }
-        
         NotificationManager.instance.getEventsUpdates { (event) in
             EventManager.instance.handle(event: event, for: self.visibleViewController)
         }
@@ -125,10 +124,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             }
             loadHomeScreen()
             
-        } else {
+        }else{
+            
             loadAuthenticationScreen()
         }
 
+        
         return out
     }
     
@@ -158,14 +159,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             let root = storyboard.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
             root.selectedIndex = 0
             window?.rootViewController = root
-
-//        } else {
-////            let initial = storyboard.instantiateViewController(withIdentifier: "TripScreenViewController") as? TripScreenViewController
-////            let navigationController = UINavigationController(rootViewController: initial!)
-////            window?.rootViewController = navigationController
-////
-////            
-//        }
 }
     
     func loadAuthenticationScreen() {
@@ -193,6 +186,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         }
     }
 
+    
+    
+    
+    
+    
+    
+    
+    
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         let google = GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
         
@@ -208,19 +209,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         getRunningandPausedTrips()
 
 
-//        if DataManager.instance.isAuthenticated() {
-//            SocketIOManager.instance.connect()
-//            DataManager.instance.loadPets { (error, pets) in
-//                if error == nil, let pets = pets {
-//                    SocketIOManager.instance.startGPSUpdates(for: pets.map({ $0.id}))
-//                    NotificationManager.instance.postPetListUpdates(with: pets)
-//                }
-//            }
-//
-//        }
-//        NotificationManager.instance.getEventsUpdates { (event) in
-//            EventManager.instance.handle(event: event, for: self.visibleViewController)
-//        }
+        if DataManager.instance.isAuthenticated() {
+            SocketIOManager.instance.connect()
+            DataManager.instance.loadPets { (error, pets) in
+                if error == nil, let pets = pets {
+                    SocketIOManager.instance.startGPSUpdates(for: pets.map({ $0.id}))
+                    NotificationManager.instance.postPetListUpdates(with: pets)
+                }
+            }
+
+        }
+        NotificationManager.instance.getEventsUpdates { (event) in
+            EventManager.instance.handle(event: event, for: self.visibleViewController)
+        }
     }
     
     var visibleViewController: UIViewController? {

@@ -12,6 +12,7 @@ import CoreLocation
 
 class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegate, CLLocationManagerDelegate, AddEditSafeZoneView {
     
+    @IBOutlet weak var petNameBarBtnItem: UIBarButtonItem!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var iconTextField: UITextField!
@@ -178,11 +179,19 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
             if fence.isIdle {
                 let id = safezone?.id ?? 0
                 presenter.addEditSafeZone(safezoneId: id, name: nameTextField.text, shape: shape, active: activeSwitch.isOn, points: geoCodeFence(), into: petId)
+                
             }else{
                 alert(title: "", msg: "The area is too small. Please, zoom out.", type: .red)
             }
         }
     }
+    
+    @IBAction func backAction(_ sender: Any) {
+    }
+    
+    
+    
+    
     
     @IBAction func removeAction(_ sender: UIButton) {
         if let petId = petId, let id = safezone?.id {
@@ -266,10 +275,15 @@ class AddEditSafeZoneViewController: UIViewController, UITextFieldDelegate, MKMa
     }
     
     func success() {
-        if let profile = navigationController?.viewControllers.first(where: { $0 is PetProfileCollectionViewController}) as? PetProfileCollectionViewController {
-//            profile.reloadSafeZones()
-            navigationController?.popToViewController(profile, animated: true)
-        }
+//        if let profile = navigationController?.viewControllers.first(where: { $0 is PetProfileCollectionViewController}) as? PetProfileCollectionViewController {
+////            profile.reloadSafeZones()
+//            navigationController?.popToViewController(profile, animated: true)
+//        }
+        
+        self.dismiss(animated: true, completion: nil)
+        self.petId = nil
+        self.safezone = nil
+        self.isOwner = nil
     }
     
     func missingName() {

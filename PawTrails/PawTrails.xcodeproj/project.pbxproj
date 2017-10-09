@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		15D4D5201F83A84D00B50828 /* SocketIO+RxSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D4D51F1F83A84D00B50828 /* SocketIO+RxSwift.swift */; };
+		440784491F8B85A1005E9E1B /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 440784481F8B85A1005E9E1B /* SettingsView.xib */; };
+		4407844B1F8B85E8005E9E1B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4407844A1F8B85E8005E9E1B /* SettingsView.swift */; };
 		4411113A1F698B05008D1468 /* ShareCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441111381F698B05008D1468 /* ShareCollectionViewCell.swift */; };
 		4411113B1F698B05008D1468 /* ShareCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 441111391F698B05008D1468 /* ShareCollectionViewCell.xib */; };
 		4414AE6B1EA0DD5B004A5134 /* PawTrailsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4414AE6A1EA0DD5B004A5134 /* PawTrailsTests.swift */; };
@@ -135,6 +137,11 @@
 		447D4C171E44C4F5008F82F4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 447D4C161E44C4F5008F82F4 /* MapKit.framework */; };
 		448BE9681ED47F5C00665608 /* APIUserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448BE9671ED47F5C00665608 /* APIUserTest.swift */; };
 		448BE96A1ED490D900665608 /* APIImageUploadTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448BE9691ED490D900665608 /* APIImageUploadTest.swift */; };
+		448C7CE31F87750100BF7106 /* SafeZoneCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C7CE11F87750100BF7106 /* SafeZoneCollectionViewCell.swift */; };
+		448C7CE41F87750100BF7106 /* SafeZoneCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 448C7CE21F87750100BF7106 /* SafeZoneCollectionViewCell.xib */; };
+		448C7CE61F877C9000BF7106 /* SafezZoneParentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C7CE51F877C9000BF7106 /* SafezZoneParentCell.swift */; };
+		448C7CE81F87842E00BF7106 /* SafeZonePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C7CE71F87842E00BF7106 /* SafeZonePresenter.swift */; };
+		448C7CEC1F87C8C700BF7106 /* AddEditSafeZOneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C7CEB1F87C8C700BF7106 /* AddEditSafeZOneController.swift */; };
 		44A1AC501E92923A003EF6CA /* PetsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A1AC4F1E92923A003EF6CA /* PetsPresenter.swift */; };
 		44B179621E4B62690070A18B /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B179611E4B62690070A18B /* Presenter.swift */; };
 		44C7F7501E4CD3DA00171170 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F74F1E4CD3DA00171170 /* HomePresenter.swift */; };
@@ -171,6 +178,8 @@
 /* Begin PBXFileReference section */
 		15D4D51F1F83A84D00B50828 /* SocketIO+RxSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SocketIO+RxSwift.swift"; sourceTree = "<group>"; };
 		1E2B813BA9CAE948174F2C71 /* Pods_PawTrailsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PawTrailsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		440784481F8B85A1005E9E1B /* SettingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsView.xib; sourceTree = "<group>"; };
+		4407844A1F8B85E8005E9E1B /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		441111381F698B05008D1468 /* ShareCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareCollectionViewCell.swift; sourceTree = "<group>"; };
 		441111391F698B05008D1468 /* ShareCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareCollectionViewCell.xib; sourceTree = "<group>"; };
 		4414AE681EA0DD5B004A5134 /* PawTrailsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PawTrailsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -309,6 +318,11 @@
 		447D4C161E44C4F5008F82F4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		448BE9671ED47F5C00665608 /* APIUserTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIUserTest.swift; sourceTree = "<group>"; };
 		448BE9691ED490D900665608 /* APIImageUploadTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIImageUploadTest.swift; sourceTree = "<group>"; };
+		448C7CE11F87750100BF7106 /* SafeZoneCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SafeZoneCollectionViewCell.swift; path = "../Pet Shared Users/SafeZoneCollectionViewCell.swift"; sourceTree = "<group>"; };
+		448C7CE21F87750100BF7106 /* SafeZoneCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SafeZoneCollectionViewCell.xib; path = "../Pet Shared Users/SafeZoneCollectionViewCell.xib"; sourceTree = "<group>"; };
+		448C7CE51F877C9000BF7106 /* SafezZoneParentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SafezZoneParentCell.swift; path = "../Pet Shared Users/SafezZoneParentCell.swift"; sourceTree = "<group>"; };
+		448C7CE71F87842E00BF7106 /* SafeZonePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SafeZonePresenter.swift; path = "../Pet Shared Users/SafeZonePresenter.swift"; sourceTree = "<group>"; };
+		448C7CEB1F87C8C700BF7106 /* AddEditSafeZOneController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditSafeZOneController.swift; sourceTree = "<group>"; };
 		44A1AC4F1E92923A003EF6CA /* PetsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetsPresenter.swift; path = Presenter/PetsPresenter.swift; sourceTree = "<group>"; };
 		44B179611E4B62690070A18B /* Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Presenter.swift; path = Presenter/Presenter.swift; sourceTree = "<group>"; };
 		44C7F74F1E4CD3DA00171170 /* HomePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomePresenter.swift; path = Presenter/HomePresenter.swift; sourceTree = "<group>"; };
@@ -540,6 +554,13 @@
 			isa = PBXGroup;
 			children = (
 				44251B2B1F0CD5DF0067F401 /* AddEditSafeZoneViewController.swift */,
+				448C7CEB1F87C8C700BF7106 /* AddEditSafeZOneController.swift */,
+				448C7CE51F877C9000BF7106 /* SafezZoneParentCell.swift */,
+				448C7CE71F87842E00BF7106 /* SafeZonePresenter.swift */,
+				448C7CE11F87750100BF7106 /* SafeZoneCollectionViewCell.swift */,
+				448C7CE21F87750100BF7106 /* SafeZoneCollectionViewCell.xib */,
+				440784481F8B85A1005E9E1B /* SettingsView.xib */,
+				4407844A1F8B85E8005E9E1B /* SettingsView.swift */,
 			);
 			path = "Pet SafeZones";
 			sourceTree = "<group>";
@@ -934,6 +955,8 @@
 				44251B161F0CD5A90067F401 /* Main.storyboard in Resources */,
 				44690B6B1F62891C00719911 /* PetProfileCollectionViewCell.xib in Resources */,
 				44251AD11F0CD5170067F401 /* GoogleService-Info.plist in Resources */,
+				440784491F8B85A1005E9E1B /* SettingsView.xib in Resources */,
+				448C7CE41F87750100BF7106 /* SafeZoneCollectionViewCell.xib in Resources */,
 				44251B151F0CD5A90067F401 /* LaunchScreen.storyboard in Resources */,
 				44251ADC1F0CD5260067F401 /* Assets.xcassets in Resources */,
 			);
@@ -1059,6 +1082,8 @@
 				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
 				"${BUILT_PRODUCTS_DIR}/StarscreamSocketIO/StarscreamSocketIO.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework",
+				"${BUILT_PRODUCTS_DIR}/YNDropDownMenu/YNDropDownMenu.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -1071,6 +1096,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketIO.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StarscreamSocketIO.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkyFloatingLabelTextField.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YNDropDownMenu.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1113,6 +1140,7 @@
 				44251AF11F0CD55F0067F401 /* Reporter.swift in Sources */,
 				44251AF41F0CD55F0067F401 /* Clock.swift in Sources */,
 				44251B1B1F0CD5BD0067F401 /* SettingsTableViewController.swift in Sources */,
+				448C7CEC1F87C8C700BF7106 /* AddEditSafeZOneController.swift in Sources */,
 				443E80751F5D4F21008679FC /* MapViewController.swift in Sources */,
 				44251B4A1F0CD5DF0067F401 /* AddPetDeviceTableViewController.swift in Sources */,
 				44251AFF1F0CD5740067F401 /* EmailVerificationPresenter.swift in Sources */,
@@ -1170,6 +1198,7 @@
 				44251B891F0CD6210067F401 /* CSVRepository.swift in Sources */,
 				44251B751F0CD6130067F401 /* CDBreed+CoreDataClass.swift in Sources */,
 				44EAB4611F615906006A64AE /* PetProfileCollectionViewController.swift in Sources */,
+				448C7CE81F87842E00BF7106 /* SafeZonePresenter.swift in Sources */,
 				4448E7F91F6A7EED002EDBE2 /* UserProfileView.swift in Sources */,
 				44251B541F0CD5FE0067F401 /* Model.swift in Sources */,
 				44251B821F0CD6130067F401 /* CDUser+CoreDataProperties.swift in Sources */,
@@ -1185,10 +1214,12 @@
 				44251B721F0CD6130067F401 /* APIManager.swift in Sources */,
 				4424DCF91E8E9F2300ACDF07 /* UserProfileTableViewController.swift in Sources */,
 				44251B491F0CD5DF0067F401 /* AddEditPetDetailsTableViewController.swift in Sources */,
+				448C7CE31F87750100BF7106 /* SafeZoneCollectionViewCell.swift in Sources */,
 				44251B791F0CD6130067F401 /* CDPet+CoreDataClass.swift in Sources */,
 				44251B7B1F0CD6130067F401 /* CDPetUser+CoreDataClass.swift in Sources */,
 				44251AEF1F0CD55F0067F401 /* MapUtilsManager.swift in Sources */,
 				44251B4C1F0CD5DF0067F401 /* PetBreedTableViewController.swift in Sources */,
+				448C7CE61F877C9000BF7106 /* SafezZoneParentCell.swift in Sources */,
 				44251AF51F0CD55F0067F401 /* Reachability.swift in Sources */,
 				44251AE71F0CD54D0067F401 /* ViewExtensions.swift in Sources */,
 				44251B0F1F0CD5870067F401 /* PetUserPresenter.swift in Sources */,
@@ -1208,6 +1239,7 @@
 				44251B731F0CD6130067F401 /* CDAddress+CoreDataClass.swift in Sources */,
 				44FE723D1E4A2EF0007C7E24 /* DataManager.swift in Sources */,
 				44F239511EEEC1E70082FA36 /* SocketIOTestTableViewController.swift in Sources */,
+				4407844B1F8B85E8005E9E1B /* SettingsView.swift in Sources */,
 				44251B0E1F0CD5870067F401 /* PetBreedPresenter.swift in Sources */,
 				44251B501F0CD5DF0067F401 /* PetWeightTableViewController.swift in Sources */,
 				44251AF21F0CD55F0067F401 /* Errors.swift in Sources */,

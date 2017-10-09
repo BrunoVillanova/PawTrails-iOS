@@ -763,7 +763,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Profile Photo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1MH-Z2-KXM">
-                                                    <rect key="frame" x="14" y="6" width="268" height="27"/>
+                                                    <rect key="frame" x="14" y="6" width="268" height="26"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -2016,7 +2016,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="New Password" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="I8D-bs-Ffh">
-                                                    <rect key="frame" x="12" y="4" width="344" height="20"/>
+                                                    <rect key="frame" x="12" y="4" width="344" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -2797,7 +2797,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wda-Bc-iZi">
-                                <rect key="frame" x="0.0" y="108" width="375" height="559"/>
+                                <rect key="frame" x="0.0" y="108" width="375" height="515"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" id="qiR-Lj-qfu">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -3547,7 +3547,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" Address Line 3" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3FM-N3-pfE">
-                                                    <rect key="frame" x="14" y="0.0" width="344" height="28"/>
+                                                    <rect key="frame" x="14" y="0.0" width="344" height="29"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -3671,7 +3671,7 @@
             </objects>
             <point key="canvasLocation" x="1340" y="3895.5022488755626"/>
         </scene>
-        <!--New Safe Zone-->
+        <!--SafeZone-->
         <scene sceneID="Qzc-0P-vEL">
             <objects>
                 <viewController storyboardIdentifier="AddEditSafeZoneViewController" hidesBottomBarWhenPushed="YES" id="8Zf-5y-qkK" customClass="AddEditSafeZoneViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
@@ -3901,7 +3901,12 @@
                             <constraint firstAttribute="trailing" secondItem="NOa-nh-yXq" secondAttribute="trailing" constant="7" id="vaS-cA-1yZ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="New Safe Zone" id="N6P-HT-Fkb">
+                    <navigationItem key="navigationItem" title="SafeZone" id="N6P-HT-Fkb">
+                        <barButtonItem key="leftBarButtonItem" id="xum-4a-caM">
+                            <connections>
+                                <action selector="backAction:" destination="8Zf-5y-qkK" id="Mu0-YZ-htB"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="vcO-1e-2Xy">
                             <connections>
                                 <action selector="doneAction:" destination="8Zf-5y-qkK" id="xd4-Od-m4N"/>
@@ -3918,6 +3923,7 @@
                         <outlet property="mapView" destination="Iqu-el-XS5" id="p7b-Y7-uaJ"/>
                         <outlet property="nameTextField" destination="3Zh-Kh-MB4" id="cmn-pW-8hY"/>
                         <outlet property="petFocusButton" destination="qfQ-EX-b0r" id="RsA-N0-zWS"/>
+                        <outlet property="petNameBarBtnItem" destination="xum-4a-caM" id="jGl-sa-Vyy"/>
                         <outlet property="removeButton" destination="nqs-VG-Fzb" id="Fmi-Ig-fPF"/>
                         <outlet property="slideIndicator" destination="H5U-tm-cck" id="ceh-bl-CbW"/>
                         <outlet property="squareButton" destination="ElE-zY-OPI" id="6Ks-IT-LHo"/>
@@ -3932,7 +3938,40 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="5327.1999999999998" y="1284.1079460269866"/>
+            <point key="canvasLocation" x="5518" y="1306"/>
+        </scene>
+        <!--Add Edit SafeZ One Controller-->
+        <scene sceneID="vYl-yT-6dt">
+            <objects>
+                <viewController storyboardIdentifier="AddEditSafeZOneController" id="LyA-p9-FnQ" customClass="AddEditSafeZOneController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="XMa-uo-GlA"/>
+                        <viewControllerLayoutGuide type="bottom" id="pxa-L4-EFD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Lvg-ba-hq5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="mGk-Mj-4GM">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="mGk-Mj-4GM" firstAttribute="top" secondItem="XMa-uo-GlA" secondAttribute="bottom" id="EeC-0W-DdS"/>
+                            <constraint firstAttribute="trailing" secondItem="mGk-Mj-4GM" secondAttribute="trailing" id="iNi-Tc-exD"/>
+                            <constraint firstItem="pxa-L4-EFD" firstAttribute="top" secondItem="mGk-Mj-4GM" secondAttribute="bottom" id="u3N-ji-eME"/>
+                            <constraint firstItem="mGk-Mj-4GM" firstAttribute="leading" secondItem="Lvg-ba-hq5" secondAttribute="leading" id="uL4-gL-Tde"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="5Tf-8E-XjB"/>
+                    <connections>
+                        <outlet property="map" destination="mGk-Mj-4GM" id="8mR-2f-J3D"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fja-6r-gKI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8743.2000000000007" y="1306.5967016491754"/>
         </scene>
         <!--Pet Profile Collection View Controller-->
         <scene sceneID="VEw-Rb-phA">
@@ -4184,7 +4223,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vzV-Xh-Won">
-                                                    <rect key="frame" x="10" y="-3" width="348" height="28"/>
+                                                    <rect key="frame" x="10" y="-3" width="348" height="25"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -4251,7 +4290,7 @@
                     <tabBarItem key="tabBarItem" title="My Pets" image="menu-mypets-1x-png" id="Tcz-oi-K7q"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="u5G-R1-d22">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="48"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -4270,7 +4309,7 @@
                     <tabBarItem key="tabBarItem" title="Me" image="menu-me-1x-png" id="Rva-bM-rbO"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="n70-kN-BJe">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="48"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -4288,7 +4327,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9OU-Qn-OVQ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="gdP-7h-jVW">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="48"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -4373,7 +4412,7 @@
                     <tabBarItem key="tabBarItem" title="Tracking" image="menu-tracking-1x-png" id="Omy-bL-4vv"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="zqP-Wi-dBa">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="48"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -4391,7 +4430,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nw8-QG-a4h" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="cIs-8x-udw">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="48"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -4409,7 +4448,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jFO-5u-YF9" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="TCL-UK-30W">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="48"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -4790,7 +4829,7 @@ finish the Adventure?</string>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tnl-0j-gBx" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="WO4-RM-1Vi">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="48"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -4801,6 +4840,24 @@ finish the Adventure?</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lcq-sA-iUy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-9774" y="1577"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="FGo-7c-iFl">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Bly-KD-ElT" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="g3g-AE-qS3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="LyA-p9-FnQ" kind="relationship" relationship="rootViewController" id="L2h-kB-fGu"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LOI-82-vgG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7804" y="1306.5967016491754"/>
         </scene>
     </scenes>
     <resources>
@@ -4841,6 +4898,6 @@ finish the Adventure?</string>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Nln-Sh-wxV"/>
-        <segue reference="ob8-Ot-1y8"/>
+        <segue reference="ZcB-OF-0kQ"/>
     </inferredMetricsTieBreakers>
 </document>

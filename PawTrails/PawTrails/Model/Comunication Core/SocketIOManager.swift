@@ -153,7 +153,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
           
           })
 //          self.onUpdates[petId] = true
-            self.socket.emit("pets", ["ids": [petId], "noLastPos": false])
+            self.socket.emit("gpsPets", ["ids": [petId], "noLastPos": false])
         }
     }
     

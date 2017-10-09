@@ -9,16 +9,11 @@
 import UIKit
 
 class ProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ProfileView {
-
-
+    
     var users = [PetUser]()
-    let presenter = UserView()
+    fileprivate let presenter = UserView()
     var pet = PetId.petId
-    
-   
-    
 
-    
     fileprivate var currentUserId = -1
     fileprivate var petOwnerId = -2
     fileprivate var appUserId = -3
@@ -42,8 +37,6 @@ class ProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDelegat
         addConstraintsWithFormat("V:|[v0]|", views: collectionView)
         let nib = UINib(nibName: "ShareCollectionViewCell", bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: "myCell")
- 
-        
         presenter.attachView(self)
         reloadPetInfo()
         reloadUsers()
