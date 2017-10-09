@@ -89,7 +89,10 @@ class SazeZonePresnter {
                         if let safezones = pet.safezones {
                             self.safeZones = safezones
                         }
-                        self.view?.loadSafeZones()
+                        DispatchQueue.main.async {
+                            self.view?.loadSafeZones()
+
+                        }
                     }
                 }
             }

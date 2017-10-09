@@ -13,12 +13,8 @@ import SkyFloatingLabelTextField
 class SettingsViews: YNDropDownView {
     
     @IBOutlet var nameTextField: SkyFloatingLabelTextField!
-    
     @IBOutlet weak var circleBtn: UIButton!
-    
     @IBOutlet weak var squareBtn: UIButton!
-    
-    
     @IBOutlet weak var slider: UISlider!
     
     @IBOutlet weak var collectionView: UICollectionView!
