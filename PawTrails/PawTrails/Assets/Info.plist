@@ -109,6 +109,10 @@
 	<string>Change pet and user profile photo or scan tracking device</string>
 	<key>NSContactsUsageDescription</key>
 	<string>Contacts usage</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Locate user on the screen and define safe zones</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Locate user on the screen and define safe zones</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Change user and pet profile photo</string>
 	<key>UILaunchStoryboardName</key>
@@ -134,9 +138,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Locate user on the screen and define safe zones</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Locate user on the screen and define safe zones</string>
 </dict>
 </plist>

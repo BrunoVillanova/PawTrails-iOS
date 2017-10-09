@@ -20,6 +20,7 @@ PODS:
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.26.0):
     - FBSDKCoreKit
+  - RxSwift (3.6.1)
   - Socket.IO-Client-Swift (11.1.3):
     - StarscreamSocketIO (~> 8.0.5)
   - StarscreamSocketIO (8.0.7)
@@ -30,6 +31,7 @@ DEPENDENCIES:
   - Fabric
   - FacebookCore
   - FacebookLogin
+  - RxSwift
   - Socket.IO-Client-Swift (~> 11.1.3)
   - SwiftyJSON
 
@@ -41,10 +43,11 @@ SPEC CHECKSUMS:
   FacebookLogin: c9d606504735780a9e3002465a615512e0a691a5
   FBSDKCoreKit: c8b8582311ec11b145451d8b9717dc6cc2ae5a76
   FBSDKLoginKit: f3f03b94c21eb834af243c0a881d48641f47ca60
+  RxSwift: f9de85ea20cd2f7716ee5409fc13523dc638e4e4
   Socket.IO-Client-Swift: b8e59ddc16bc3609ca2f49a4b50253f095d535c8
   StarscreamSocketIO: 00b54e4208481ca5cef089545353aaf126bae16d
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: d79f0fdb528adbfafce82119b682459b3e65afa8
+PODFILE CHECKSUM: 387e6acfe53b5812e5cd4896e115fd78c9ca758b
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.3.1

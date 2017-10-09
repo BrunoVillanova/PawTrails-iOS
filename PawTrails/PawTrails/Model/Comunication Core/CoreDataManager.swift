@@ -38,22 +38,21 @@ class CoreDataManager {
     ///   - sortedBy: *Optional* sorts the results of the fetch.
     ///   - callback: An array with **more than one element** or *nil*.
     func retrieve(_ entity:Entity, with predicate: NSPredicate? = nil, sortedBy: [NSSortDescriptor]? = nil, callback: @escaping ([NSManagedObject]?)-> Void) {
+        callback(retrieve(entity, with: predicate, sortedBy: sortedBy))
+    }
+    
+    func retrieve(_ entity:Entity, with predicate: NSPredicate? = nil, sortedBy: [NSSortDescriptor]? = nil) -> ([NSManagedObject]?) {
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity.rawValue)
         fetchRequest.predicate = predicate
         fetchRequest.sortDescriptors = sortedBy
-        
         do {
             let data = try Storage.instance.context.fetch(fetchRequest)
-            
-            callback(data.count > 0 ? data as? [NSManagedObject] : nil)
-            return
-            
-            
+            return data as? [NSManagedObject]
         } catch {
             Reporter.send(file: "\(#file)", function: "\(#function)", DatabaseError(type: DatabaseErrorType.Unknown, entity: entity, action: DatabaseErrorAction.get, error: error as NSError))
+            return nil
         }
-        callback(nil)
     }
     
     /// Store the given data into the entity.

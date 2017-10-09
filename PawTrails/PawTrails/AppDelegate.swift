@@ -5,6 +5,15 @@
 //  Created by Marc Perello on 27/01/2017.
 //  Copyright © 2017 AttitudeTech. All rights reserved.
 //
+
+import UIKit
+import FacebookCore
+import Fabric
+import Crashlytics
+import SocketIO
+import RxSwift
+import SwiftyJSON
+
 let isDebug = true
 
 public struct ezdebug {
@@ -12,13 +21,6 @@ public struct ezdebug {
     public static let password = "iOStest12345"
     public static let is4test = "mohamed@attitudetech.ie"
 }
-
-import UIKit
-
-import FacebookCore
-
-import Fabric
-import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
@@ -28,27 +30,81 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     var runningTripArray = [TripList]()
     
+    private let urlString = "http://eu.pawtrails.pet:2003"
+    private let urlStringSSL = "https://eu.pawtrails.pet:4654"
+    private let socketClient = SocketIOClient(socketURL: URL(string: "https://eu.pawtrails.pet:4654")!)
+    private let disposeBag = DisposeBag()
+    
+    func socketAuth() {
+        let token = SharedPreferences.get(.token)
+        if token != "" {
+            Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Connecting")
+            socketClient.emit("authCheck", token)
+        } else{
+            Reporter.send(file: "\(#file)", function: "\(#function)", NSError(domain: "Socket IO", code: -1, userInfo: ["reason": "missing token"]))
+        }
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        if DataManager.instance.isAuthenticated() {
-            SocketIOManager.instance.connect()
-            DataManager.instance.loadPets { (error, pets) in
-                if error == nil, let pets = pets {
-                    SocketIOManager.instance.startGPSUpdates(for: pets.map({ $0.id}))
-                    NotificationManager.instance.postPetListUpdates(with: pets)
+        // Configure UI
+        configureUIPreferences()
+        
+        // Configure services
+        Fabric.with([Crashlytics.self])
+        
+        // Init SocketIO
+        let socket = Reactive<SocketIOClient>(socketClient)
+        
+        // Define SocketIO event handlers
+        socket.on("connect").subscribe(onNext: { (data) in
+            self.socketAuth()
+        }){}.addDisposableTo(disposeBag)
+        
+        socket.on("authCheck").subscribe(onNext: { (data) in
+            let status = self.getStatus(data)
+            if (status == .connected) {
+                self.socketClient.emit("gpsPets", ["ids": [96], "noLastPos": false])
+                DataManager.instance.loadPets { (error, pets) in
+                    if error == nil, let pets = pets {
+                        let petIDs = pets.map { $0.id }
+                        self.socketClient.emit("gpsPets", ["ids": petIDs, "noLastPos": false])
+                        NotificationManager.instance.postPetListUpdates(with: pets)
+                    }
                 }
+            } else if (status == .unauthorized) {
+                self.loadAuthenticationScreen()
+            } else if (status != .waiting) {
+                self.socketAuth()
             }
+        }){}.addDisposableTo(disposeBag)
+        
+        socket.on("gpsUpdates").subscribe(onNext: { (data) in
+            print("gpsUpdates")
             
+            if let json = data.first as? [Any] {
+                for petDeviceDataObject in json {
+                    if let petDeviceDataJson = petDeviceDataObject as? [String:Any] {
+                        let petDeviceData = PetDeviceData(petDeviceDataJson)
+                        print(petDeviceData)
+                    }
+                }
+            } else{
+                Reporter.debugPrint(file: "\(#file)", function: "\(#function)", data)
+            }
+
+        }){}.addDisposableTo(disposeBag)
+        
+        if DataManager.instance.isAuthenticated() {
+            socketClient.connect()
         }
+        
         NotificationManager.instance.getEventsUpdates { (event) in
             EventManager.instance.handle(event: event, for: self.visibleViewController)
         }
         
         
         var out = true
-        configureUIPreferences()
-
-        Fabric.with([Crashlytics.self])
         
         if DataManager.instance.isAuthenticated() {
             getRunningandPausedTrips()
@@ -69,13 +125,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             }
             loadHomeScreen()
             
-        }else{
-            
+        } else {
             loadAuthenticationScreen()
         }
 
-        
         return out
+    }
+    
+    private func getStatus(_ data: [Any]) -> SocketIOStatus {
+        if let json = data.first as? [String:Any] {
+            if let code = json["errors"] as? Int {
+                return SocketIOStatus(rawValue: code) ?? SocketIOStatus.unknown
+            }
+            if let code = json["status"] as? Int {
+                return SocketIOStatus(rawValue: code) ?? SocketIOStatus.unknown
+            }
+        }
+        if let element = ((data as NSArray)[0] as? NSArray)?[0] as? String {
+            return element == "unauthorized" ? SocketIOStatus.unauthorized : SocketIOStatus.unknown
+        }
+        Reporter.debugPrint(file: "\(#file)", function: "\(#function)", data, data.first as? [String:Any] ?? "", data as? [String] ?? "")
+        return SocketIOStatus.unknown
     }
     
     func configureGoogleLogin() {
@@ -123,14 +193,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         }
     }
 
-    
-    
-    
-    
-    
-    
-    
-    
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         let google = GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
         

@@ -39,64 +39,76 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         for key in self.onUpdates.keys {  self.onUpdates[key] = false }
     }
     
-    
-    
-    
     /// Establishes Connection with Socket IO, peforms login driven by token.
     ///
     /// - Parameter callback: returns socket IO connection status
     func connect(_ callback: ((SocketIOStatus)->())? = nil) {
-//        self.socket.on(channel.diconnect.name) { (_, _) in
-//            self.isConnected = false
-//        }
-//        self.socket.on(channel.auth.name) { (data, ack) in
-//            let status = self.getStatus(data)
-//            Reporter.debugPrint(file: "\(#file)", function: "\(#function)", status)
-//            if status != .waiting, let callback = callback {
-//                self.isConnected = true
-//                callback(status)
-//            }
-//        }
+
         self.socket.on("connect") { (data, ack) in
             let token = SharedPreferences.get(.token)
             if token != "" {
                 Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Connecting")
                 self.socket.emit("authCheck", token)
-            }else{
+            } else{
                 Reporter.send(file: "\(#file)", function: "\(#function)", NSError(domain: "Socket IO", code: -1, userInfo: ["reason": "missing token"]))
             }
+        }
+        
+        self.socket.on("authCheck") { (data, ack) in
+            let status = self.getStatus(data)
+            self.isConnected = (status == .connected)
             
+            Reporter.debugPrint(file: "\(#file)", function: "\(#function)", status)
+            
+            guard callback != nil else {
+                return
+            }
+            callback!(status)
+        }
+        
+        self.socket.on("disconnect") { (_, _) in
+            self.isConnected = false
         }
         
         self.socket.connect()
-
     }
     
     /// Disconnects from Socket I.O.
     func disconnect() {
-        self.isConnected = false
         self.socket.disconnect()
+        self.isConnected = false
     }
     
     
     func startGettingGpsUpdates(for petId: [Int]) {
-        self.socket.emit("pets", ["ids": petId, "noLastPos": false])
-        self.socket.on("gpsUpdates") { (data, Ack) in
+        if (self.isConnected) {
+            self.socket.emit("gpsPets", ["ids": petId, "noLastPos": false])
+            self.socket.on("gpsUpdates") { (data, Ack) in
+                print("Received Pet GPS Updates")
+                for deviceData in data {
+                    print(deviceData)
+                }
+            }
+        } else {
+            self.connect({ (status) in
+                if (status == .connected) {
+                    self.startGettingGpsUpdates(for: petId)
+                }
+            })
         }
+
     }
 
     
     // MARK: establish connection with PetsList channel.
-    
     func connectToPetChannel() {
-            self.socket.emit("getPetList", false)
-            self.socket.on("pets", callback: { (data, ack) in
-                print("Here is my data\(data)")
-            })
+        self.socket.emit("getPetList", false)
+        self.socket.on("pets", callback: { (data, ack) in
+            print("Here is my data\(data)")
+        })
     }
 
     //MARK:- Pet
-    
     /// Collect GPS Data for pet id
     ///
     /// - Parameter id: pet id
@@ -120,10 +132,10 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     ///
     //    /// - Parameter petIds: pet ids
     func startGPSUpdates(for petIds: [Int]){
-            for petId in petIds {
-                self.startGPSUpdatesEffective(for: petId)
-        } 
+        for petId in petIds {
+            self.startGPSUpdatesEffective(for: petId)
         }
+    }
     
     private func startGPSUpdatesEffective(for petId: Int) {
         if onUpdates[petId] == nil || (onUpdates[petId] != nil && onUpdates[petId] == false) {
@@ -144,10 +156,6 @@ class SocketIOManager: NSObject, URLSessionDelegate {
             self.socket.emit("pets", ["ids": [petId], "noLastPos": false])
         }
     }
-    
-    
-    
-    
     
     /// Stop pets GPS Updates
     ///
@@ -173,11 +181,11 @@ class SocketIOManager: NSObject, URLSessionDelegate {
                     PetsGPSData.setObject(GPSData(json), forKey: NSNumber(integerLiteral: Int(id)))
                 }
                 NotificationManager.instance.postPetGPSUpdates(with: id)
-            }else {
+            } else {
                 Reporter.debugPrint(file: "\(#file)", function: "\(#function)", json)
             }
             
-        }else{
+        } else{
             Reporter.debugPrint(file: "\(#file)", function: "\(#function)", data)
         }
     }
@@ -195,7 +203,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
             }else {
                 NotificationManager.instance.post(Event(json))
             }
-        }else{
+        } else{
             Reporter.send(file: "\(#file)", function: "\(#function)", NSError(domain: "Socket IO Handle Events", code: -1, userInfo: ["data":data]))
         }
     }
@@ -204,10 +212,10 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     
     private func getStatus(_ data: [Any]) -> SocketIOStatus {
         if let json = data.first as? [String:Any] {
-            if let code = json["error"] as? Int {
+            if let code = json["errors"] as? Int {
                 return SocketIOStatus(rawValue: code) ?? SocketIOStatus.unknown
             }
-            if let code = json["result"] as? Int {
+            if let code = json["status"] as? Int {
                 return SocketIOStatus(rawValue: code) ?? SocketIOStatus.unknown
             }
         }
@@ -217,8 +225,6 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         Reporter.debugPrint(file: "\(#file)", function: "\(#function)", data, data.first as? [String:Any] ?? "", data as? [String] ?? "")
         return SocketIOStatus.unknown
     }
-    
-    
 }
 
 fileprivate enum channel {
@@ -243,16 +249,13 @@ fileprivate enum channel {
         return "gpsUpdates"
     }
     
-    
     // to return pets.
     static func joinRoom(for petIds: [Int]) -> String {
         return "pets"
     }
-    
 }
 
 fileprivate extension SocketIOClient {
-    
     var isConnected: Bool {
         return self.status == SocketIOClientStatus.connected
     }

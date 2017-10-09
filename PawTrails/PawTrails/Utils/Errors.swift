@@ -201,9 +201,10 @@ struct DataManagerError: Error {
 
 enum SocketIOStatus: Int {
     case unknown = -1
-    case waiting = 2
+    case waiting = 0
     case connected = 1
     case unauthorized = 30
+    case unauthorized2 = 419
     case nodevice = 31
     case timeout = 61
 }

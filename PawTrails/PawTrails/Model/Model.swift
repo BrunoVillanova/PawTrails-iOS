@@ -166,6 +166,29 @@ extension PetUser: Equatable {
     }
 }
 
+struct DeviceData {
+    var id: Int
+    var crs: Float
+    var coordinates: Point
+    var speed: Float
+    var battery: Int
+    var internetSignal: Bool
+    var satelliteSignal: Bool
+    var deviceDate: Date
+}
+
+struct PetDeviceData {
+    var id: Int
+    var deviceData: DeviceData
+    var pet: Pet
+}
+
+extension PetDeviceData: Equatable {
+    static func == (lhs: PetDeviceData, rhs: PetDeviceData) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
+
 //MARK:- Helpers
 
 enum Gender: Int16 {
