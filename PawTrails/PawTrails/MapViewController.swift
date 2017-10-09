@@ -70,6 +70,9 @@ class MapViewController: UIViewController, HomeView, MKMapViewDelegate, UICollec
             self.load(id: id, point: point)
         }
         
+       
+        loadPets()
+        
         getRunningandPausedTrips()
     }
     

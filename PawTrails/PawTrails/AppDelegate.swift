@@ -30,21 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        if DataManager.instance.isAuthenticated() {
-            SocketIOManager.instance.connect()
-            DataManager.instance.loadPets { (error, pets) in
-                if error == nil, let pets = pets {
-                    SocketIOManager.instance.startGPSUpdates(for: pets.map({ $0.id}))
-                    NotificationManager.instance.postPetListUpdates(with: pets)
-                }
-            }
-            
-        }
-        NotificationManager.instance.getEventsUpdates { (event) in
-            EventManager.instance.handle(event: event, for: self.visibleViewController)
-        }
-        
-        
         var out = true
         configureUIPreferences()
 
@@ -88,14 +73,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             let root = storyboard.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
             root.selectedIndex = 0
             window?.rootViewController = root
-
-//        } else {
-////            let initial = storyboard.instantiateViewController(withIdentifier: "TripScreenViewController") as? TripScreenViewController
-////            let navigationController = UINavigationController(rootViewController: initial!)
-////            window?.rootViewController = navigationController
-////
-////            
-//        }
 }
     
     func loadAuthenticationScreen() {
@@ -146,19 +123,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         getRunningandPausedTrips()
 
 
-//        if DataManager.instance.isAuthenticated() {
-//            SocketIOManager.instance.connect()
-//            DataManager.instance.loadPets { (error, pets) in
-//                if error == nil, let pets = pets {
-//                    SocketIOManager.instance.startGPSUpdates(for: pets.map({ $0.id}))
-//                    NotificationManager.instance.postPetListUpdates(with: pets)
-//                }
-//            }
-//
-//        }
-//        NotificationManager.instance.getEventsUpdates { (event) in
-//            EventManager.instance.handle(event: event, for: self.visibleViewController)
-//        }
+        if DataManager.instance.isAuthenticated() {
+            SocketIOManager.instance.connect()
+            DataManager.instance.loadPets { (error, pets) in
+                if error == nil, let pets = pets {
+                    SocketIOManager.instance.startGPSUpdates(for: pets.map({ $0.id}))
+                    NotificationManager.instance.postPetListUpdates(with: pets)
+                }
+            }
+
+        }
+        NotificationManager.instance.getEventsUpdates { (event) in
+            EventManager.instance.handle(event: event, for: self.visibleViewController)
+        }
     }
     
     var visibleViewController: UIViewController? {
@@ -179,6 +156,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         CoreDataManager.instance.save { (_) in }
     }
     
+    
+ 
     private func configureUIPreferences() {
         UIApplication.shared.statusBarStyle = .default
         UINavigationBar.appearance().backgroundColor = UIColor.secondary

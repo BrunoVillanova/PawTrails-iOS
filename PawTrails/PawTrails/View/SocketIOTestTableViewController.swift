@@ -20,7 +20,7 @@ class SocketIOTestTableViewController: UITableViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-      SocketIOManager.instance.startGettingGpsUpdates(for: [96])
+//      SocketIOManager.instance.startGettingGpsUpdates(for: [96])
 //        SocketIOManager.instance.connectToPetChannel()
         
 

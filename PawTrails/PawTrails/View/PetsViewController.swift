@@ -216,7 +216,6 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
 ////
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
                 if segue.destination is PetProfileCollectionViewController {
-            
             if let indexPath = tableView.indexPathForSelectedRow {
                 (segue.destination as! PetProfileCollectionViewController).pet = getPet(at: indexPath)
 
