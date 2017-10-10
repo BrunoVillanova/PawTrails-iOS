@@ -14,9 +14,13 @@ class SafeZoneCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var safeZoneNameLabel: UILabel!
     @IBOutlet weak var onSwitcher: UISwitch!
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+ 
+    
+    override func prepareForReuse() {
+        self.safeZoneImage.image = nil
+        self.iconeImage.image = nil
+        self.safeZoneNameLabel.text = nil
+        self.onSwitcher = nil
     }
 
 }

@@ -14,10 +14,11 @@ class SafezZoneParentCell: BaseCell, UICollectionViewDataSource, UICollectionVie
     
     
     let identifier = "safeZoneCell"
+    
+    
+    
     var pet = PetId.petId
     fileprivate let presenter = SazeZonePresnter()
-
-    
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -32,24 +33,27 @@ class SafezZoneParentCell: BaseCell, UICollectionViewDataSource, UICollectionVie
 
     
     override func setupViews() {
-        presenter.attacheView(self, pet: pet)
-        self.presenter.getPet(with: self.pet.id)
-            load(pet)
-            reloadPetInfo()
-            reloadSafeZones()
-            loadSafeZones()
+     
 
+        presenter.attacheView(self, pet: pet)
+//        self.presenter.getPet(with: self.pet.id)
+        
+        load(pet)
+        reloadPetInfo()
+        reloadSafeZones()
+
+        
         addSubview(collectionView)
         addConstraintsWithFormat("H:|[v0]|", views: collectionView)
         addConstraintsWithFormat("V:|[v0]|", views: collectionView)
         let nib = UINib(nibName: "SafeZoneCollectionViewCell", bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: identifier)
-//        presenter.attachView(self)
-//        reloadPetInfo()
-//        reloadUsers()
+
         
         collectionView.contentInset = UIEdgeInsetsMake(20, 0, 80, 0)
         collectionView.scrollIndicatorInsets = UIEdgeInsetsMake(20, 0, 80, 0)
+        
+        
     }
     
     deinit {
@@ -67,11 +71,8 @@ class SafezZoneParentCell: BaseCell, UICollectionViewDataSource, UICollectionVie
     
     
     func loadSafeZones() {
-        
         pet.safezones = presenter.safeZones
-        
         if self.presenter.safeZones.count == 0 { return }
-        
         let safezonesGroup = DispatchGroup()
         
         for safezone in self.presenter.safeZones {
@@ -143,7 +144,8 @@ class SafezZoneParentCell: BaseCell, UICollectionViewDataSource, UICollectionVie
     func load(_ pet: Pet) {
         self.pet = pet
 //        navigationItem.title = pet.name
-        self.collectionView.reloadData()
+        collectionView.reloadData()
+
         
     }
     
@@ -158,12 +160,6 @@ class SafezZoneParentCell: BaseCell, UICollectionViewDataSource, UICollectionVie
 
     }
     
-
-
-
-    
-
-
 
 
 //    
@@ -194,6 +190,7 @@ class SafezZoneParentCell: BaseCell, UICollectionViewDataSource, UICollectionVie
     }
     
     
+    
     func changeSwitchAction(sender: UISwitch){
         let safezone = presenter.safeZones[sender.tag]
         presenter.setSafeZoneStatus(id: safezone.id, petId: pet.id, status: sender.isOn) { (success) in
@@ -212,21 +209,15 @@ class SafezZoneParentCell: BaseCell, UICollectionViewDataSource, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let myViewController = parentViewController as? PetProfileCollectionViewController {
-            let safeZone = presenter.safeZones[indexPath.item]
-            myViewController.presentEditSafezoneViewController(petId: pet.id, isOwner: pet.isOwner, safeZone: safeZone)
+            DispatchQueue.main.async {
+                let safeZone = self.presenter.safeZones[indexPath.item]
+                print(" before \(safeZone.name!)")
+                myViewController.presentEditSafezoneViewController(petId: self.pet.id, isOwner: self.pet.isOwner, safeZone: safeZone)
 
+            }
+           
         }
     }
-        
-        
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let addEditViewConttoller = storyboard.instantiateViewController(withIdentifier: "AddEditSafeZoneViewController") as! AddEditSafeZoneViewController
-////        let navController = UINavigationController(rootViewController: addEditViewConttoller)
-//        addEditViewConttoller.petId = pet.id
-//        addEditViewConttoller.isOwner = pet.isOwner
-//        addEditViewConttoller.safezone = presenter.safeZones[indexPath.item]
-//        self.window?.rootViewController?.present(addEditViewConttoller, animated: true, completion: nil)
-//    }
 
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

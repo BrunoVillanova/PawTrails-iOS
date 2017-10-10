@@ -13,6 +13,7 @@ import Crashlytics
 import SocketIO
 import RxSwift
 import SwiftyJSON
+import IQKeyboardManagerSwift
 
 let isDebug = true
 
@@ -53,6 +54,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         // Configure services
         Fabric.with([Crashlytics.self])
+        
+        // KeyboardManager
+        IQKeyboardManager.sharedManager().enable = true
+
         
         // Init SocketIO
         socketReactive = Reactive<SocketIOClient>(socketClient)
