@@ -34,6 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     private let urlStringSSL = "https://eu.pawtrails.pet:4654"
     private let socketClient = SocketIOClient(socketURL: URL(string: "https://eu.pawtrails.pet:4654")!)
     private let disposeBag = DisposeBag()
+    public var socketReactive: Reactive<SocketIOClient>?
     
     func socketAuth() {
         let token = SharedPreferences.get(.token)
@@ -54,14 +55,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         Fabric.with([Crashlytics.self])
         
         // Init SocketIO
-        let socket = Reactive<SocketIOClient>(socketClient)
+        socketReactive = Reactive<SocketIOClient>(socketClient)
         
         // Define SocketIO event handlers
-        socket.on("connect").subscribe(onNext: { (data) in
+        socketReactive?.on("connect").subscribe(onNext: { (data) in
             self.socketAuth()
         }){}.addDisposableTo(disposeBag)
         
-        socket.on("authCheck").subscribe(onNext: { (data) in
+        socketReactive?.on("authCheck").subscribe(onNext: { (data) in
             let status = self.getStatus(data)
             if (status == .connected) {
                 self.socketClient.emit("gpsPets", ["ids": [96], "noLastPos": false])
@@ -78,30 +79,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 self.socketAuth()
             }
         }){}.addDisposableTo(disposeBag)
-            
-        socket.on("gpsUpdates").subscribe(onNext: { (data) in
-            print("gpsUpdates")
-            
-            if let json = data.first as? [Any] {
-                for petDeviceDataObject in json {
-                    if let petDeviceDataJson = petDeviceDataObject as? [String:Any] {
-                        let petDeviceData = PetDeviceData(petDeviceDataJson)
-                        print(petDeviceData)
-                    }
-                }
-            } else{
-                Reporter.debugPrint(file: "\(#file)", function: "\(#function)", data)
-            }
-
-        }){}.addDisposableTo(disposeBag)
+        
         
         if DataManager.instance.isAuthenticated() {
             socketClient.connect()
         }
+        
         NotificationManager.instance.getEventsUpdates { (event) in
             EventManager.instance.handle(event: event, for: self.visibleViewController)
         }
-        
         
         var out = true
         
@@ -122,13 +108,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 }
                 
             }
+            
             loadHomeScreen()
             
-        }else{
-            
+        } else {
             loadAuthenticationScreen()
         }
-
         
         return out
     }

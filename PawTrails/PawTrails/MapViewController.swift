@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import RxSwift
 
 class MapViewController: UIViewController {
     
@@ -21,13 +22,13 @@ class MapViewController: UIViewController {
     fileprivate let presenter = HomePresenter()
     fileprivate var annotations = [MKLocationId:MKLocation]()
     var selectedPet: Pet?
-    
     var data = [searchElement]()
-    
     var tripListArray = [TripList]()
     
-    //MARK: View lifecycle
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    private let disposeBag = DisposeBag()
     
+    //MARK: View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,9 +50,10 @@ class MapViewController: UIViewController {
         mapView.showsUserLocation = true
         petsCollectionView.delegate = self
         petsCollectionView.dataSource = self
-        presenter.attachView(self)
+        petsCollectionView.reloadData()
         petsCollectionView.isHidden = true
-        self.petsCollectionView.reloadData()
+        
+        presenter.attachView(self)
         reloadPets()
     }
     
@@ -63,6 +65,22 @@ class MapViewController: UIViewController {
         
         loadPets()
         getRunningandPausedTrips()
+        
+        appDelegate.socketReactive?.on("gpsUpdates").subscribe(onNext: { (data) in
+            print("gpsUpdates")
+            
+            if let json = data.first as? [Any] {
+                for petDeviceDataObject in json {
+                    if let petDeviceDataJson = petDeviceDataObject as? [String:Any] {
+                        let petDeviceData = PetDeviceData(petDeviceDataJson)
+                        self.load(id: MKLocationId(id: petDeviceData.pet.id, type: .pet), point: petDeviceData.deviceData.coordinates)
+                    }
+                }
+            } else{
+                Reporter.debugPrint(file: "\(#file)", function: "\(#function)", data)
+            }
+            
+        }){}.addDisposableTo(disposeBag)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -103,12 +121,9 @@ class MapViewController: UIViewController {
     }
     
     // HomeView --
-    
     func errorMessage(_ error: ErrorMsg) {
         self.alert(title: error.title, msg: error.msg)
     }
-    
-
     
     func load(id: MKLocationId, point: Point){
         if self.annotations[id] == nil {
