@@ -10,22 +10,19 @@ import UIKit
 import MapKit
 
 
-class TripScreenViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate {
+class TripScreenViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var pageControl: UIPageControl!
-    
 
-    
     let locationManager = CLLocationManager()
     var petArray = [Dictionary<String,String>]()
     
     var runningTripArray = [TripList]()
     var tripIds = [Int]()
-
-    // Variables to hold the width and hights of the collectionview.
     
+    // Variables to hold the width and hights of the collectionview.
     var myCollectionViewHeight: CGFloat = 0.0 {
         didSet {
             if myCollectionViewHeight != oldValue {
@@ -41,7 +38,9 @@ class TripScreenViewController: UIViewController, UICollectionViewDelegate, UICo
             }
         }
     }
-
+    
+    //MARK: -
+    //MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,18 +50,43 @@ class TripScreenViewController: UIViewController, UICollectionViewDelegate, UICo
         
         // Access user location
         if CLLocationManager.locationServicesEnabled() {
-            locationManager.delegate = self
+//            locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()
         }
         
         mapView.showsUserLocation = true
-
-    
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+        if tripIds.count == 1 {
+            self.pageControl.isHidden = true
+        } else {
+            self.pageControl.isHidden = false
+        }
+        tabBarController?.tabBar.isHidden = true
+        self.navigationItem.setHidesBackButton(true, animated: true)
+        
+    }
     
+    override func viewDidLayoutSubviews() {
+        
+        pageControl.hidesForSinglePage = true
+        
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.scrollDirection = .horizontal
+            
+            collectionView.isPagingEnabled = true
+            collectionView.showsHorizontalScrollIndicator = false
+        }
+        
+        myCollectionViewHeight = collectionView.frame.size.height
+        myCollectionViewWidith = collectionView.frame.size.width
+    }
     
+    //MARK: -
+    //MARK: Private Methods
     func requestLocationAccess() {
         let status = CLLocationManager.authorizationStatus()
         
@@ -78,41 +102,6 @@ class TripScreenViewController: UIViewController, UICollectionViewDelegate, UICo
         }
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-
-        if tripIds.count == 1 {
-            self.pageControl.isHidden = true
-        } else {
-            self.pageControl.isHidden = false
-        }
-        tabBarController?.tabBar.isHidden = true
-        self.navigationItem.setHidesBackButton(true, animated: true)
-        
-    }
-    
-    
-    
-
-
-    override func viewDidLayoutSubviews() {
-        
-        pageControl.hidesForSinglePage = true
-
-        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.scrollDirection = .horizontal
-        
-            collectionView.isPagingEnabled = true
-            collectionView.showsHorizontalScrollIndicator = false
-        }
-
-        myCollectionViewHeight = collectionView.frame.size.height
-        myCollectionViewWidith = collectionView.frame.size.width
-    }
-    
-    
-    
-    
-    
     func getRunningandPausedTrips() {
         APIRepository.instance.getTripList([0]) { (error, trips) in
             if let error = error {
@@ -130,22 +119,43 @@ class TripScreenViewController: UIViewController, UICollectionViewDelegate, UICo
             }
         }
     }
+    
+    //MARK: -
+    //MARK: IBActions
+    @IBAction func focousOnUserBtnPressed(_ sender: Any) {
+        self.mapView.setVisibleMapFor([self.mapView.userLocation.coordinate])
+        
+    }
+    
+    
+    @IBAction func AddPetsToTripBtnPressed(_ sender: Any) {
+        performSegue(withIdentifier: "join", sender: self)
+        
+        
+    }
+    
+    @IBAction func pauseTripBtnPressed(_ sender: Any) {
+        
+    }
+    
+    @IBAction func StopTripBtnPressed(_ sender: Any) {
+        performSegue(withIdentifier: "finish", sender: self)
+        
+    }
+    
+    @IBAction func BackBtnPressed(_ sender: Any) {
+        if self.isModal {
+            self.dismiss(animated: true, completion: nil)
+        } else {
+            let testController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
+            testController.selectedIndex = 0
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.window?.rootViewController = testController
+        }
+    }
+}
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-// CollectionViewDataSource and Delegate
-    
+extension TripScreenViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return tripIds.count
     }
@@ -153,30 +163,35 @@ class TripScreenViewController: UIViewController, UICollectionViewDelegate, UICo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CsustomCell
+
+        cell.maskImage.maskImage = UIImage(named: "userprofilemask-1x-png_360")
+        cell.totalDistanceImageVIew.image = UIImage(named: "TotalDistanceLabel-1x-png")
+        cell.totalDistancesubLabel.text = "total distance"
+        cell.totalTimeImageVIew.image = UIImage(named: "TotalTimeLabel-1x-png")
+        cell.totalTimeSubLabel.text = "total time"
+        cell.currentSpeedImageView.image = UIImage(named: "CurrentSpeedLabel-1x-png")
+        cell.currentSpeedsubLabel.text = "current speed"
+        cell.avarageSpeedImageView.image = UIImage(named: "AvgSpeedLabel-1x-png")
+        cell.avarageSpeedSubLabel.text = "avarge speed"
         
-//        cell.petName.text = ""
-        
-        
-  cell.maskImage.maskImage = UIImage(named: "userprofilemask-1x-png_360")
- cell.totalDistanceImageVIew.image = UIImage(named: "TotalDistanceLabel-1x-png")
-cell.totalDistancesubLabel.text = "total distance"
-cell.totalTimeImageVIew.image = UIImage(named: "TotalTimeLabel-1x-png")
-cell.totalTimeSubLabel.text = "total time"
-cell.currentSpeedImageView.image = UIImage(named: "CurrentSpeedLabel-1x-png")
-cell.currentSpeedsubLabel.text = "current speed"
-cell.avarageSpeedImageView.image = UIImage(named: "AvgSpeedLabel-1x-png")
- cell.avarageSpeedSubLabel.text = "avarge speed"
-        
-cell.petName.text = "My Pet"
-cell.totalDistance.text = "8.32 KM"
-cell.userProfileImg.image = UIImage(named: "")
-cell.avargeSpeed.text = "142 bpm"
-cell.currentSpeed.text = "6.2 km/h"
+        cell.petName.text = "My Pet"
+        cell.totalDistance.text = "8.32 KM"
+        cell.userProfileImg.image = UIImage(named: "")
+        cell.avargeSpeed.text = "142 bpm"
+        cell.currentSpeed.text = "6.2 km/h"
         cell.totalTime.text = "00:43:27"
         
         return cell
     }
-    
+}
+
+extension TripScreenViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        self.pageControl.currentPage = indexPath.item
+    }
+}
+
+extension TripScreenViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: myCollectionViewWidith, height: myCollectionViewHeight)
     }
@@ -191,49 +206,6 @@ cell.currentSpeed.text = "6.2 km/h"
         collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
-    }
-    
-    
-
-    
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        self.pageControl.currentPage = indexPath.item
-    }
-    
-    
-    @IBAction func focousOnUserBtnPressed(_ sender: Any) {
-        self.mapView.setVisibleMapFor([self.mapView.userLocation.coordinate])
-
-}
-    
-
-    @IBAction func AddPetsToTripBtnPressed(_ sender: Any) {
-        performSegue(withIdentifier: "join", sender: self)
-        
-        
-    }
-    
-    @IBAction func pauseTripBtnPressed(_ sender: Any) {
-
-    }
-    
-    
-    @IBAction func StopTripBtnPressed(_ sender: Any) {
-        performSegue(withIdentifier: "finish", sender: self)
-
-    }
-    
-    
-    @IBAction func BackBtnPressed(_ sender: Any) {
-        if self.isModal {
-        self.dismiss(animated: true, completion: nil)
-        } else {
-            let testController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
-            testController.selectedIndex = 0
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.window?.rootViewController = testController
-        }
-        
     }
 }
 
