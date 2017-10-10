@@ -65,14 +65,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         socketReactive?.on("authCheck").subscribe(onNext: { (data) in
             let status = self.getStatus(data)
             if (status == .connected) {
-                self.socketClient.emit("gpsPets", ["ids": [96], "noLastPos": false])
-            DataManager.instance.loadPets { (error, pets) in
-                if error == nil, let pets = pets {
-                        let petIDs = pets.map { $0.id }
-                        self.socketClient.emit("gpsPets", ["ids": petIDs, "noLastPos": false])
-                    NotificationManager.instance.postPetListUpdates(with: pets)
+                DataManager.instance.loadPets { (error, pets) in
+                    if error == nil, let pets = pets {
+                            let petIDs = pets.map { $0.id }
+                            self.socketClient.emit("gpsPets", ["ids": petIDs, "noLastPos": false])
+                        NotificationManager.instance.postPetListUpdates(with: pets)
+                    }
                 }
-            }
             } else if (status == .unauthorized) {
                 self.loadAuthenticationScreen()
             } else if (status != .waiting) {

@@ -24,6 +24,7 @@ class MapViewController: UIViewController {
     var selectedPet: Pet?
     var data = [searchElement]()
     var tripListArray = [TripList]()
+    var focusedOnPetsOnViewAppears = false
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     private let disposeBag = DisposeBag()
@@ -73,8 +74,14 @@ class MapViewController: UIViewController {
                 for petDeviceDataObject in json {
                     if let petDeviceDataJson = petDeviceDataObject as? [String:Any] {
                         let petDeviceData = PetDeviceData(petDeviceDataJson)
+                        print("Received position: \(petDeviceData)")
                         self.load(id: MKLocationId(id: petDeviceData.pet.id, type: .pet), point: petDeviceData.deviceData.coordinates)
                     }
+                }
+                
+                if (!self.focusedOnPetsOnViewAppears && json.count == self.annotations.count) {
+                    self.focusOnPets()
+                    self.focusedOnPetsOnViewAppears = true
                 }
             } else{
                 Reporter.debugPrint(file: "\(#file)", function: "\(#function)", data)
@@ -131,7 +138,6 @@ class MapViewController: UIViewController {
         }else{
             self.updateTracking(id, coordinate: point.coordinates)
         }
-        self.focusOnPets()
     }
     
     func startTracking(_ id: MKLocationId, coordinate:CLLocationCoordinate2D, color: UIColor) {
@@ -149,7 +155,9 @@ class MapViewController: UIViewController {
     
     func focusOnPets(){
         let coordinates = Array(self.annotations.values).filter({ $0.id.type == .pet && !$0.coordinate.isDefaultZero }).map({ $0.coordinate })
-        mapView.setVisibleMapFor(coordinates)
+        if coordinates.count > 0 {
+            mapView.setVisibleMapFor(coordinates)
+        }
     }
     
     @IBAction func firstButtonPressed(_ sender: Any) {
@@ -173,16 +181,13 @@ class MapViewController: UIViewController {
         }
     }
     
-    var doubleTap : Bool! = false
     @IBAction func secButtonPressed(_ sender: Any) {
-        if (doubleTap) {
-            self.petsCollectionView.slideInAffect(direction: kCATransitionFromRight)
-            self.petsCollectionView.isHidden = true
-            doubleTap = false
-        } else {
+        if (!self.petsCollectionView.isHidden) {
             self.petsCollectionView.slideInAffect(direction: kCATransitionFromLeft)
+            self.petsCollectionView.isHidden = true
+        } else {
+            self.petsCollectionView.slideInAffect(direction: kCATransitionFromRight)
             self.petsCollectionView.isHidden = false
-            doubleTap = true
         }
     }
     
