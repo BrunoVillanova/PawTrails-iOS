@@ -19,10 +19,6 @@ class SafezZoneParentCell: BaseCell, UICollectionViewDataSource, UICollectionVie
     
     var pet = PetId.petId
     fileprivate let presenter = SazeZonePresnter()
-
-    
-    let safeZones = [SafeZone]()
-    
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -37,22 +33,22 @@ class SafezZoneParentCell: BaseCell, UICollectionViewDataSource, UICollectionVie
 
     
     override func setupViews() {
+     
 
         presenter.attacheView(self, pet: pet)
-        self.presenter.getPet(with: self.pet.id)
-            load(pet)
-            reloadPetInfo()
-//            reloadSafeZones()
-            loadSafeZones()
+//        self.presenter.getPet(with: self.pet.id)
+        
+        load(pet)
+        reloadPetInfo()
+        reloadSafeZones()
 
+        
         addSubview(collectionView)
         addConstraintsWithFormat("H:|[v0]|", views: collectionView)
         addConstraintsWithFormat("V:|[v0]|", views: collectionView)
         let nib = UINib(nibName: "SafeZoneCollectionViewCell", bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: identifier)
-//        presenter.attachView(self)
-//        reloadPetInfo()
-//        reloadUsers()
+
         
         collectionView.contentInset = UIEdgeInsetsMake(20, 0, 80, 0)
         collectionView.scrollIndicatorInsets = UIEdgeInsetsMake(20, 0, 80, 0)
@@ -75,11 +71,8 @@ class SafezZoneParentCell: BaseCell, UICollectionViewDataSource, UICollectionVie
     
     
     func loadSafeZones() {
-        
         pet.safezones = presenter.safeZones
-        
         if self.presenter.safeZones.count == 0 { return }
-        
         let safezonesGroup = DispatchGroup()
         
         for safezone in self.presenter.safeZones {
@@ -151,8 +144,8 @@ class SafezZoneParentCell: BaseCell, UICollectionViewDataSource, UICollectionVie
     func load(_ pet: Pet) {
         self.pet = pet
 //        navigationItem.title = pet.name
-        
-   
+        collectionView.reloadData()
+
         
     }
     
@@ -167,16 +160,6 @@ class SafezZoneParentCell: BaseCell, UICollectionViewDataSource, UICollectionVie
 
     }
     
-
-    
-    
-
-    
-    
-
-    
-
-
 
 
 //    
@@ -205,6 +188,7 @@ class SafezZoneParentCell: BaseCell, UICollectionViewDataSource, UICollectionVie
         }
         return cell
     }
+    
     
     
     func changeSwitchAction(sender: UISwitch){

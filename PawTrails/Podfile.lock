@@ -5,9 +5,9 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
-  - Crashlytics (3.8.6):
-    - Fabric (~> 1.6.3)
-  - Fabric (1.6.13)
+  - Crashlytics (3.9.0):
+    - Fabric (~> 1.7.0)
+  - Fabric (1.7.0)
   - FacebookCore (0.2.0):
     - Bolts (~> 1.8)
     - FBSDKCoreKit (~> 4.15)
@@ -20,6 +20,7 @@ PODS:
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.27.0):
     - FBSDKCoreKit
+  - IQKeyboardManagerSwift (5.0.0)
   - SkyFloatingLabelTextField (3.2.0)
   - Socket.IO-Client-Swift (11.1.3):
     - StarscreamSocketIO (~> 8.0.5)
@@ -32,6 +33,7 @@ DEPENDENCIES:
   - Fabric
   - FacebookCore
   - FacebookLogin
+  - IQKeyboardManagerSwift (= 5.0.0)
   - SkyFloatingLabelTextField (~> 3.0)
   - Socket.IO-Client-Swift (~> 11.1.3)
   - SwiftyJSON
@@ -39,18 +41,19 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
-  Crashlytics: 95d05f4e4c19a771250c4bd9ce344d996de32bbf
-  Fabric: 2fb5676bc811af011a04513451f463dac6803206
+  Crashlytics: 64aad5dd97249dd3ff94b979fea140144590cdd3
+  Fabric: e6be012366472553807dada21243c5ab8d904151
   FacebookCore: 2cb3f0fbff218e9d3119cec84bae983b232412de
   FacebookLogin: c9d606504735780a9e3002465a615512e0a691a5
   FBSDKCoreKit: ebc6c5f5b3f0e72396041050e2266781a38ac587
   FBSDKLoginKit: 887be4b7452e1c5a3cc4485ce152529965a0c41e
+  IQKeyboardManagerSwift: 3f340202ebe1a7076279b9b9b3c817243ddb3aab
   SkyFloatingLabelTextField: 4e2d2f7160af660ed1da6bb9d0027b5c474b4b79
   Socket.IO-Client-Swift: b8e59ddc16bc3609ca2f49a4b50253f095d535c8
   StarscreamSocketIO: 00b54e4208481ca5cef089545353aaf126bae16d
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   YNDropDownMenu: 4f4b463ecbfd492dc886abaf18d73dead0e32133
 
-PODFILE CHECKSUM: c620bf20c5392f259d92df030af3c655860810e9
+PODFILE CHECKSUM: a7bf558a9583147e1778caf675e90041856486f7
 
 COCOAPODS: 1.3.1

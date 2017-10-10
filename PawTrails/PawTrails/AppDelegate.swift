@@ -14,7 +14,7 @@ public struct ezdebug {
 }
 
 import UIKit
-
+import IQKeyboardManagerSwift
 import FacebookCore
 
 import Fabric
@@ -29,7 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     var runningTripArray = [TripList]()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
+        IQKeyboardManager.sharedManager().enable = true
+
         var out = true
         configureUIPreferences()
 

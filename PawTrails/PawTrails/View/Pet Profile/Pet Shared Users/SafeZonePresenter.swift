@@ -22,16 +22,13 @@ class SazeZonePresnter {
     weak private var view: SazeZoneView?
     
     var safeZones = [SafeZone]()
-    
     func attacheView(_ view: SazeZoneView, pet: Pet?) {
         if let safezones = pet?.safezones { self.safeZones = safezones }
 
     }
     
     func getPet(with id: Int) {
-        
         DataManager.instance.getPet(by: id) { (error, pet) in
-            
             if let error = error {
                 if error.DBError?.type == DatabaseErrorType.NotFound {
                     self.view?.petNotFound()

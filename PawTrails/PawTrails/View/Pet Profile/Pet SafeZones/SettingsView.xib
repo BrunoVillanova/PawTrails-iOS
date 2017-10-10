@@ -28,7 +28,7 @@
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vRv-o2-0kQ">
                     <rect key="frame" x="386" y="30" width="50" height="50"/>
-                    <color key="backgroundColor" red="0.91320215950000005" green="0.91641201380000004" blue="0.92604157679999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.9137254901960784" green="0.91641201380000004" blue="0.92604157679999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="A5F-pE-Z8g"/>
                         <constraint firstAttribute="width" constant="50" id="lge-Sf-XjL"/>
@@ -69,11 +69,11 @@
                 </label>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Aal-hM-Auq">
                     <rect key="frame" x="20" y="264" width="486" height="80"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="80" id="6fz-kH-Pjd"/>
                     </constraints>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="LOj-Gf-Snh">
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="LOj-Gf-Snh">
                         <size key="itemSize" width="50" height="50"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -126,7 +126,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="circleBtn" destination="vRv-o2-0kQ" id="TD1-x0-4yh"/>
-                <outlet property="collectionView" destination="Aal-hM-Auq" id="wwj-9k-jch"/>
+                <outlet property="collectionView" destination="Aal-hM-Auq" id="uiA-94-YWv"/>
                 <outlet property="nameTextField" destination="XhP-2z-L64" id="NNc-bt-6Te"/>
                 <outlet property="slider" destination="0k6-tm-fzB" id="qv6-iB-miy"/>
                 <outlet property="squareBtn" destination="EN4-GH-Adp" id="Mga-rf-qdy"/>

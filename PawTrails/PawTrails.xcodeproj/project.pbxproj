@@ -67,7 +67,6 @@
 		44251B411F0CD5DF0067F401 /* GenderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B261F0CD5DF0067F401 /* GenderTableViewController.swift */; };
 		44251B421F0CD5DF0067F401 /* NameTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B271F0CD5DF0067F401 /* NameTableViewController.swift */; };
 		44251B431F0CD5DF0067F401 /* PhoneTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B281F0CD5DF0067F401 /* PhoneTableViewController.swift */; };
-		44251B441F0CD5DF0067F401 /* AddEditSafeZoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B2B1F0CD5DF0067F401 /* AddEditSafeZoneViewController.swift */; };
 		44251B451F0CD5DF0067F401 /* AddPetUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B2D1F0CD5DF0067F401 /* AddPetUserViewController.swift */; };
 		44251B461F0CD5DF0067F401 /* PetUserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B2E1F0CD5DF0067F401 /* PetUserTableViewController.swift */; };
 		44251B471F0CD5DF0067F401 /* PetActivityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B2F1F0CD5DF0067F401 /* PetActivityTableViewController.swift */; };
@@ -130,6 +129,8 @@
 		445F5F411F5EA7900069B513 /* BEMCheckBoxGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 445F5F3C1F5EA7900069B513 /* BEMCheckBoxGroup.m */; };
 		445F5F421F5EA7900069B513 /* BEMPathManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 445F5F3E1F5EA7900069B513 /* BEMPathManager.m */; };
 		446231401EE6BE4200B53C1D /* DataManagerPetSharingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4462313F1EE6BE4200B53C1D /* DataManagerPetSharingTests.swift */; };
+		4464F12D1F8CBC1A00E0BBD7 /* IconCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4464F12B1F8CBC1A00E0BBD7 /* IconCell.swift */; };
+		4464F12E1F8CBC1B00E0BBD7 /* IconCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4464F12C1F8CBC1A00E0BBD7 /* IconCell.xib */; };
 		44690B6A1F62891C00719911 /* PetProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44690B681F62891C00719911 /* PetProfileCollectionViewCell.swift */; };
 		44690B6B1F62891C00719911 /* PetProfileCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44690B691F62891C00719911 /* PetProfileCollectionViewCell.xib */; };
 		44690B6D1F62963600719911 /* ProfilePetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44690B6C1F62963600719911 /* ProfilePetView.swift */; };
@@ -241,7 +242,6 @@
 		44251B261F0CD5DF0067F401 /* GenderTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenderTableViewController.swift; sourceTree = "<group>"; };
 		44251B271F0CD5DF0067F401 /* NameTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameTableViewController.swift; sourceTree = "<group>"; };
 		44251B281F0CD5DF0067F401 /* PhoneTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneTableViewController.swift; sourceTree = "<group>"; };
-		44251B2B1F0CD5DF0067F401 /* AddEditSafeZoneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditSafeZoneViewController.swift; sourceTree = "<group>"; };
 		44251B2D1F0CD5DF0067F401 /* AddPetUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPetUserViewController.swift; sourceTree = "<group>"; };
 		44251B2E1F0CD5DF0067F401 /* PetUserTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetUserTableViewController.swift; sourceTree = "<group>"; };
 		44251B2F1F0CD5DF0067F401 /* PetActivityTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetActivityTableViewController.swift; sourceTree = "<group>"; };
@@ -310,6 +310,8 @@
 		445F5F3D1F5EA7900069B513 /* BEMPathManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMPathManager.h; sourceTree = "<group>"; };
 		445F5F3E1F5EA7900069B513 /* BEMPathManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMPathManager.m; sourceTree = "<group>"; };
 		4462313F1EE6BE4200B53C1D /* DataManagerPetSharingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerPetSharingTests.swift; sourceTree = "<group>"; };
+		4464F12B1F8CBC1A00E0BBD7 /* IconCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconCell.swift; sourceTree = "<group>"; };
+		4464F12C1F8CBC1A00E0BBD7 /* IconCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IconCell.xib; sourceTree = "<group>"; };
 		44690B681F62891C00719911 /* PetProfileCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetProfileCollectionViewCell.swift; path = ../../../PetProfileCollectionViewCell.swift; sourceTree = "<group>"; };
 		44690B691F62891C00719911 /* PetProfileCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PetProfileCollectionViewCell.xib; path = ../../../PetProfileCollectionViewCell.xib; sourceTree = "<group>"; };
 		44690B6C1F62963600719911 /* ProfilePetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePetView.swift; sourceTree = "<group>"; };
@@ -551,7 +553,6 @@
 		44251B2A1F0CD5DF0067F401 /* Pet SafeZones */ = {
 			isa = PBXGroup;
 			children = (
-				44251B2B1F0CD5DF0067F401 /* AddEditSafeZoneViewController.swift */,
 				448C7CEB1F87C8C700BF7106 /* AddEditSafeZOneController.swift */,
 				448C7CE51F877C9000BF7106 /* SafezZoneParentCell.swift */,
 				448C7CE71F87842E00BF7106 /* SafeZonePresenter.swift */,
@@ -559,6 +560,8 @@
 				448C7CE21F87750100BF7106 /* SafeZoneCollectionViewCell.xib */,
 				440784481F8B85A1005E9E1B /* SettingsView.xib */,
 				4407844A1F8B85E8005E9E1B /* SettingsView.swift */,
+				4464F12B1F8CBC1A00E0BBD7 /* IconCell.swift */,
+				4464F12C1F8CBC1A00E0BBD7 /* IconCell.xib */,
 			);
 			path = "Pet SafeZones";
 			sourceTree = "<group>";
@@ -951,6 +954,7 @@
 				4411113B1F698B05008D1468 /* ShareCollectionViewCell.xib in Resources */,
 				44251B161F0CD5A90067F401 /* Main.storyboard in Resources */,
 				44690B6B1F62891C00719911 /* PetProfileCollectionViewCell.xib in Resources */,
+				4464F12E1F8CBC1B00E0BBD7 /* IconCell.xib in Resources */,
 				44251AD11F0CD5170067F401 /* GoogleService-Info.plist in Resources */,
 				440784491F8B85A1005E9E1B /* SettingsView.xib in Resources */,
 				448C7CE41F87750100BF7106 /* SafeZoneCollectionViewCell.xib in Resources */,
@@ -1075,6 +1079,7 @@
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FacebookCore/FacebookCore.framework",
 				"${BUILT_PRODUCTS_DIR}/FacebookLogin/FacebookLogin.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework",
 				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
 				"${BUILT_PRODUCTS_DIR}/StarscreamSocketIO/StarscreamSocketIO.framework",
@@ -1088,6 +1093,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookLogin.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkyFloatingLabelTextField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketIO.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StarscreamSocketIO.framework",
@@ -1140,6 +1146,7 @@
 				44251B4A1F0CD5DF0067F401 /* AddPetDeviceTableViewController.swift in Sources */,
 				44251AFF1F0CD5740067F401 /* EmailVerificationPresenter.swift in Sources */,
 				44251B8A1F0CD6210067F401 /* APIRepository.swift in Sources */,
+				4464F12D1F8CBC1A00E0BBD7 /* IconCell.swift in Sources */,
 				44251B421F0CD5DF0067F401 /* NameTableViewController.swift in Sources */,
 				44477CB91F599EFC00083295 /* UiimageViewWithMask.swift in Sources */,
 				44EAB46E1F61935A006A64AE /* ProfileCell.swift in Sources */,
@@ -1202,7 +1209,6 @@
 				44B179621E4B62690070A18B /* Presenter.swift in Sources */,
 				44EAB4631F615C9F006A64AE /* MenuBar.swift in Sources */,
 				4411113A1F698B05008D1468 /* ShareCollectionViewCell.swift in Sources */,
-				44251B441F0CD5DF0067F401 /* AddEditSafeZoneViewController.swift in Sources */,
 				44251B7F1F0CD6130067F401 /* CDSafeZone+CoreDataClass.swift in Sources */,
 				44251B6F1F0CD6130067F401 /* NotificationManager.swift in Sources */,
 				44251B721F0CD6130067F401 /* APIManager.swift in Sources */,
