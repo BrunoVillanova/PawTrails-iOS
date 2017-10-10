@@ -229,18 +229,19 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
             cell.isUserInteractionEnabled = false
             cell.layer.borderWidth = 2.0
             cell.layer.borderColor = UIColor.gray.cgColor
-            self.alert(title: "Error", msg: "You cannot select this pet because it's already on trip", type: .red, disableTime: 4, handler: nil)
             cell.isSelected = false
             
-            
             if var selected = petsCollectionView.indexPathsForSelectedItems {
-                selected.remove(at: indexPath.item)
+                if indexPath.item < selected.count {
+                    selected.remove(at: indexPath.item)
+                }
             }
             
             cell.checkMarkView.setOn(false, animated: true)
             self.startAdventureBtn.isEnabled = true
-            
 
+            self.alert(title: "Error", msg: "You cannot select this pet because it's already on trip", type: .red, disableTime: 4, handler: nil)
+            
         } else {
             self.startAdventureBtn.isEnabled = true
         }
