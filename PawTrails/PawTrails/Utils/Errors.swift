@@ -91,6 +91,9 @@ enum ErrorCode: Int {
     case WrongRadius = 57
 
     case SharedConnectionAlreadyExists = 60
+    case ThereIsApetWithAnActiveTrip = 71
+    case TheTripIsPaused = 72
+    case TheIdInTheInputArrayMustBeAnInteger = 76
     
     init(code:Int) {
         self = ErrorCode(rawValue: code) ?? ErrorCode.Unknown
@@ -198,9 +201,10 @@ struct DataManagerError: Error {
 
 enum SocketIOStatus: Int {
     case unknown = -1
-    case waiting = 2
+    case waiting = 0
     case connected = 1
     case unauthorized = 30
+    case unauthorized2 = 419
     case nodevice = 31
     case timeout = 61
 }

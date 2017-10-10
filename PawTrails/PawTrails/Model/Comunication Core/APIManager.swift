@@ -18,9 +18,10 @@ public enum APICallType {
     registerPet, getPets, getPet, setPet, checkDevice, changeDevice, unregisterPet,
     getPetClasses, getBreeds, getContinents, getCountries,
     sharePet, getSharedPetUsers, removeSharedPet,leaveSharedPet,
-    addSafeZone, setSafeZone, getSafeZone, listSafeZones, removeSafeZone
+    addSafeZone, setSafeZone, getSafeZone, listSafeZones, removeSafeZone, startTrip, finishTrip, pauseTrip, resumeTrip, getTripList
     
     /// Defines APICallType need of token
+    
     fileprivate var requiresToken: Bool {
         switch self {
         case .signUp, .signIn, .facebookLogin, .googleLogin, .twitterLogin, .weiboLogin, .passwordReset: return false
@@ -73,13 +74,18 @@ public enum APICallType {
         case .getSafeZone: return "/pets/safezones/view/\(key)"
         case .removeSafeZone: return "/pets/safezones/del/\(key)"
         case .listSafeZones: return "/pets/safezones/list/\(key)"
+        case .startTrip: return "/trips/start"
+        case .finishTrip: return "/trips/stop"
+        case .pauseTrip: return "/trips/pause"
+        case .resumeTrip: return "/trips/resume"
+        case .getTripList: return "/trips/list"
         }
     }
     
     /// Defines the HTTP Method Protocol: GET, POST...
     fileprivate var httpMethod: String {
         switch self {
-        case .getUser, .deleteUser, .getPetClasses, .getBreeds, .getCountries, .getContinents, .checkDevice, .getPets, .getPet, .getSharedPetUsers, .unregisterPet, .leaveSharedPet, .friends, .getSafeZone, .listSafeZones, .removeSafeZone : return "GET"
+        case .getUser, .deleteUser, .getPetClasses, .getBreeds, .getCountries, .getContinents, .checkDevice, .getPets, .getPet, .getSharedPetUsers, .unregisterPet, .leaveSharedPet, .friends, .getSafeZone, .listSafeZones, .removeSafeZone, .pauseTrip, .resumeTrip : return "GET"
         default: return "POST"
         }
     }
@@ -104,8 +110,8 @@ class APIManager {
     
     static let instance = APIManager()
     
-    fileprivate static let mainURL = "http://eu.pawtrails.pet/api"
-    fileprivate static let mainURLTest = "http://eu.pawtrails.pet/test"
+    fileprivate static let mainURL = "https://eu.pawtrails.pet/api"
+    fileprivate static let mainURLTest = "https://eu.pawtrails.pet/test"
     
     fileprivate let boundary = "%%%PawTrails%%%"
     
@@ -146,7 +152,7 @@ class APIManager {
     ///   - data: The data returned or `nil` if error.
     func perform(call:APICallType, withKey key:Any = "", with data:[String:Any]? = nil, callback: @escaping (_ error:APIManagerError?,_ data:JSON?) -> Void) {
         
-        if isConnectedToNetwork() {
+        if isConnectedToNetwork() == true {
         
             if let request = createRequest(for: call, with: key, and: data) {
                 
@@ -283,25 +289,26 @@ class APIManager {
     
     private func isConnectedToNetwork() -> Bool {
         
-        var zeroAddress = sockaddr_in(sin_len: 0, sin_family: 0, sin_port: 0, sin_addr: in_addr(s_addr: 0), sin_zero: (0, 0, 0, 0, 0, 0, 0, 0))
+        var zeroAddress = sockaddr_in()
         zeroAddress.sin_len = UInt8(MemoryLayout.size(ofValue: zeroAddress))
         zeroAddress.sin_family = sa_family_t(AF_INET)
-        let defaultRouteReachability = withUnsafePointer(to: &zeroAddress) {
+        
+        guard let defaultRouteReachability = withUnsafePointer(to: &zeroAddress , {
             $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {zeroSockAddress in
                 SCNetworkReachabilityCreateWithAddress(nil, zeroSockAddress)
             }
-        }
-        
-        var flags: SCNetworkReachabilityFlags = SCNetworkReachabilityFlags(rawValue: 0)
-        if SCNetworkReachabilityGetFlags(defaultRouteReachability!, &flags) == false {
+        }) else {
             return false
         }
         
-        let isReachable = flags == .reachable
-        let needsConnection = flags == .connectionRequired
+        var flags : SCNetworkReachabilityFlags = []
+        if !SCNetworkReachabilityGetFlags(defaultRouteReachability, &flags) {
+            return false
+        }
         
-        return isReachable && !needsConnection
-        
+        let isReachable = flags.contains(.reachable)
+        let needsConnection = flags.contains(.connectionRequired)
+        return (isReachable && !needsConnection)
     }
 
 }

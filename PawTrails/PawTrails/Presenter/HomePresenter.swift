@@ -22,6 +22,7 @@ class HomePresenter {
     var pets = [Pet]()
     var safeZones = [SafeZone]()
     var user:User!
+    var tripList = [Trip]()
 
     func attachView(_ view: HomeView){
         self.view = view
@@ -81,7 +82,6 @@ class HomePresenter {
     //Socket IO
     
     func startPetsGPSUpdates(_ callback: @escaping ((_ id: MKLocationId, _ point: Point)->())){
-        
         NotificationManager.instance.getPetGPSUpdates({ (id, data) in
             if data.status == .idle { callback(MKLocationId(id: id, type: .pet), data.point) }            
         })
@@ -92,40 +92,7 @@ class HomePresenter {
     }
 
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
 }
 

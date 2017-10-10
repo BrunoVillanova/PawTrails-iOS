@@ -18,19 +18,19 @@ class UserProfileTableViewController: UITableViewController, UserProfileView, UI
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     
+    
     let presenter = UserProfilePresenter()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        profileImageView.circle()
-        presenter.attachView(self)
-        UIApplication.shared.statusBarStyle = .lightContent
+        presenter.attachView(self)        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         presenter.loadUser()
-       
+        self.hideNotification()
     }
+    
     
     //MARC:- UserProfileView
     
@@ -89,12 +89,10 @@ class UserProfileTableViewController: UITableViewController, UserProfileView, UI
         }else{
             return super.tableView(tableView, heightForRowAt: indexPath)
         }
-        
     }
     
     // MARK: - Navigation
 
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.destination is EditUserProfileTableViewController {
@@ -104,25 +102,8 @@ class UserProfileTableViewController: UITableViewController, UserProfileView, UI
         }
         
     }
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
 }
+
+
+

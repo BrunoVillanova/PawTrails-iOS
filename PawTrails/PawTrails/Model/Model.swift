@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 //MARK:- User
 
@@ -80,6 +81,44 @@ struct Pet {
     var users: [PetUser]?
 }
 
+
+
+
+
+
+struct Trip {
+    var id: Int
+    var name: String?
+    var petId: Int
+    var status: Int
+    var timeStart: Int
+    var timeStamp : Int
+}
+
+
+
+
+struct TripList {
+    var id: Int
+    var name: String?
+    var petId: Int
+    var status: Int
+    var startTime: Int
+    var stoppedTime: Int?
+}
+
+
+
+
+enum status: Int {
+    case Active = 0
+    case Paused = 1
+    case Stopped = 2
+    
+}
+
+
+
 struct PetType {
     var type: Type?
     var description: String?
@@ -109,6 +148,8 @@ struct SafeZone {
     var preview: Data?
 }
 
+
+
 struct PetUser {
     var id: Int
     var email: String?
@@ -121,6 +162,29 @@ struct PetUser {
 
 extension PetUser: Equatable {
     static func == (lhs: PetUser, rhs: PetUser) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
+
+struct DeviceData {
+    var id: Int
+    var crs: Float
+    var coordinates: Point
+    var speed: Float
+    var battery: Int
+    var internetSignal: Bool
+    var satelliteSignal: Bool
+    var deviceDate: Date
+}
+
+struct PetDeviceData {
+    var id: Int
+    var deviceData: DeviceData
+    var pet: Pet
+}
+
+extension PetDeviceData: Equatable {
+    static func == (lhs: PetDeviceData, rhs: PetDeviceData) -> Bool {
         return lhs.id == rhs.id
     }
 }
@@ -355,7 +419,6 @@ class GPSData: NSObject {
     var serverDate: Date
     var locationAndTime: String = ""
     var source: String = ""
-    var movementAlarm: Bool = false
     
     override init() {
         status = .unknown
@@ -382,19 +445,22 @@ class GPSData: NSObject {
             status = .idle
         }
         
-        if let pointData = data["location"] as? [String:Any] {
+        if let pointData = data["deviceData"] as? [String:Any] {
             let newPoint = Point(pointData)
             if point.coordinates.location.coordinateString != newPoint.coordinates.location.coordinateString {
                 locationAndTime = ""
                 point = newPoint
-                Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Requested for Update \(data["id"] ?? "")")
+                Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Requested for Update \(data["petId"] ?? "")")
+                print("Point printed \(newPoint)")
             }
         }else{
             point = Point()
         }
-        signal = data.tryCastInteger(for: "networkLvl") ?? -1
+        signal = data.tryCastInteger(for: "netSignal") ?? -1
         satellites = -1
-        if let satellites = data["gpsAccuracy"] as? String {
+        print(" Printed SIgnal   \(signal)")
+        
+        if let satellites = data["satSignal"] as? String {
             let components = satellites.components(separatedBy: "-")
             if components.count == 2 {
                 let min = Double(components[0]) ?? 0
@@ -403,19 +469,15 @@ class GPSData: NSObject {
                 if sum > 0 { self.satellites = Int(sum/2.0) }
             }
         }
-        battery = data.tryCastInteger(for: "batteryLvl") ?? -1
-        if let serverTime = data.tryCastDouble(for: "time") {
+        battery = data.tryCastInteger(for: "battery") ?? -1
+        if let serverTime = data.tryCastDouble(for: "serverTime") {
             serverDate = Date.init(timeIntervalSince1970: TimeInterval(serverTime))
         }else{
             serverDate = Date()
         }
         source = data.debugDescription
         
-        if let att = data["attributes"] as? [String:Any] {
-            if let movementAlarm = att["movementAlarm"] as? Int {
-                self.movementAlarm = movementAlarm == 1
-            }
-        }
+   
     }
     
     var distanceTime: String {
@@ -454,7 +516,6 @@ class Event{
         guest = nil
     }    
 }
-
 
 
 

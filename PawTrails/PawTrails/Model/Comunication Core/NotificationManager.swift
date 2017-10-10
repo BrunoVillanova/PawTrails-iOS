@@ -10,7 +10,7 @@ import Foundation
 
 enum listenerType: String {
 
-    case gpsUpdates = "GPS"
+    case gpsUpdates = "gpsUpdates"
     case petList = "PETLIST"
     case geoCode = "GEOCODE"
     case events = "EVENTS"
@@ -73,7 +73,6 @@ class NotificationManager {
     ///
     /// - Parameter callback: returns pet id and the GPS updates.
     func getPetGPSUpdates(_ callback: @escaping ((_ id: Int, _ data: GPSData)->())){
-        
         self.addObserver(Listener(.gpsUpdates)) { (notification) in
             self.handlePetGPSUpdates(notification, callback)
         }
@@ -121,7 +120,7 @@ class NotificationManager {
     ///
     /// - Parameter pets: pets to send
     func postPetListUpdates(with pets: [Pet]){
-        self.post(Listener(.petList), userInfo: ["pets": pets])
+        self.post(Listener(.petList), userInfo: ["gpsUpdates": pets])
     }
     
     /// Get PetList Updates

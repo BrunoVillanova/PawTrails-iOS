@@ -83,6 +83,16 @@ extension UIViewController {
         }
     }
     
+    func alertwithGeature(title:String, msg:String, type: notificationType = .red, disableTime: Int = 3, geatureReconginzer: UITapGestureRecognizer, handler: (()->())? = nil){
+        self.hideLoadingView(animated:false)
+        self.showNotificationWithGesture(title: msg, type: type, geaturseRecognizer: geatureReconginzer)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(disableTime)) {
+            self.hideNotification()
+            if let handler = handler { handler() }
+        }
+    }
+
+    
     // Alert for Image Picker
     
     func alert(_ imagePicker:UIImagePickerController) {
@@ -162,6 +172,37 @@ extension UIViewController {
     }
     
     
+    func showNotificationWithGesture(title:String, type:notificationType = .blue, geaturseRecognizer: UITapGestureRecognizer) {
+        
+        
+        let viewHeight:CGFloat = 30
+        let yOffset:CGFloat = UIApplication.shared.statusBarFrame.size.height + (navigationController?.navigationBar.frame.height ?? 0.0)
+        let viewFrame = CGRect(x: 0.0, y: yOffset, width: self.view.bounds.width, height: viewHeight)
+        
+        let notificationView = UIView(frame: viewFrame)
+        notificationView.backgroundColor = type.color
+        notificationView.tag = subviewId.notification.rawValue
+        
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: viewHeight))
+        label.text = title
+        label.textColor = UIColor.white
+        label.font = UIFont.preferredFont(forTextStyle: .callout)
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.numberOfLines = 2
+        
+        notificationView.addSubview(label)
+        
+        notificationView.addGestureRecognizer(geaturseRecognizer)
+
+        DispatchQueue.main.async {
+            UIApplication.shared.keyWindow?.addSubview(notificationView)
+        }
+
+        
+    }
+    
+    
     // Loading View
     
     func showLoadingView() {
@@ -175,7 +216,7 @@ extension UIViewController {
         activity.startAnimating()
         activity.tag = subviewId.activity.rawValue
         
-        loadingView.addSubview(activity)
+        loadingView.contentView.addSubview(activity)
         
         loadingView.effect = nil
         activity.alpha = 0.0
@@ -192,6 +233,8 @@ extension UIViewController {
     }
     
     func hideLoadingView(animated: Bool = true) {
+        
+        
         
         if let loadingView = UIApplication.shared.keyWindow?.subviews.first(where: { $0.tag == subviewId.loading.rawValue }) as? UIVisualEffectView {
             
@@ -301,6 +344,22 @@ extension UIColor {
     
 }
 
+
+  // Mohamed - Set a placeholder color for textviews.
+
+
+extension UITextField{
+    @IBInspectable var placeHolderColor: UIColor? {
+        get {
+            return self.placeHolderColor
+        }
+        set {
+            self.attributedPlaceholder = NSAttributedString(string:self.placeholder != nil ? self.placeholder! : "", attributes:[NSForegroundColorAttributeName: newValue!])
+        }
+    }
+}
+
+
 extension UIView {
     
     func shake() {
@@ -314,6 +373,23 @@ extension UIView {
     func round(radius:CGFloat = 5) {
         self.layer.cornerRadius = radius
         self.clipsToBounds = true
+    }
+    
+    
+  
+    func fullyroundedCorner(radius: CGFloat = 20) {
+        self.layer.cornerRadius = radius
+        self.clipsToBounds = true
+    }
+    
+    // choose which corner do you want to make round.
+    func roundCorners(corners:UIRectCorner, radius: CGFloat) {
+        let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let mask = CAShapeLayer()
+        let rect = self.bounds
+        mask.frame = rect
+        mask.path = path.cgPath
+        self.layer.mask = mask
     }
     
     func circle() {
@@ -331,6 +407,16 @@ extension UIView {
         self.layer.borderColor = color.cgColor
         self.layer.masksToBounds = true
     }
+    
+    
+    func biggerBorder(color: UIColor = UIColor.primary, width: CGFloat = 3.0) {
+        self.layer.borderWidth = width
+        self.layer.borderColor = color.cgColor
+        self.layer.masksToBounds = true
+    }
+    
+    
+    
     
     func underline(color: UIColor = UIColor.lightGray, width: CGFloat = 1.0) {
         
@@ -371,7 +457,6 @@ extension UIImageView {
         let color: UIColor = isPetOwner ? .primary : .darkGray
         self.border(color: color, width: 2.0)
     }
-    
 }
 
 extension CGRect {

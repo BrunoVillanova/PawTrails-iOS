@@ -21,6 +21,8 @@ extension Authentication {
     
 }
 
+
+
 extension User {
     
     init() {
@@ -251,6 +253,70 @@ extension PetBreeds {
 
 }
 
+extension PetDeviceData {
+    init() {
+        id = 0
+        deviceData = DeviceData()
+        pet = Pet()
+    }
+    
+    init(_ json: [String:Any]) {
+        deviceData = DeviceData(json["deviceData"] as! [String:Any])
+        id = deviceData.id
+        if let pets = CoreDataManager.instance.retrieve(.pet, with: NSPredicate("id", .equal, json["petId"]!)) {
+            pet = Pet(pets.first as! CDPet)
+        } else {
+            pet = Pet()
+        }
+    }
+    
+    init(_ cdPetDeviceData: CDPetDeviceData) {
+        deviceData = DeviceData(cdPetDeviceData)
+        id = deviceData.id
+        if let pets = CoreDataManager.instance.retrieve(.pet, with: NSPredicate("id", .equal, id)) {
+            pet = Pet(pets.first as! CDPet)
+        } else {
+            pet = Pet()
+        }
+    }
+}
+
+extension DeviceData {
+    
+    init() {
+        id = 0
+        crs = 0.0
+        coordinates = Point()
+        speed = 0.0
+        battery = 0
+        internetSignal = false
+        satelliteSignal = false
+        deviceDate = Date()
+    }
+    
+    init(_ json: [String:Any]) {
+        id = json["idpos"] != nil ? json["idpos"] as! Int : 0
+        crs = json["crs"] as! Float
+        coordinates = Point(json["lat"] as! Double, json["lon"] as! Double)
+        speed = json["speed"] as! Float
+        battery = json["battery"] as! Int
+        internetSignal = json["netSignal"] as! Bool
+        satelliteSignal = json["satSignal"] as! Bool
+        deviceDate = Date.init(timeIntervalSince1970: TimeInterval(json["deviceTime"] as! Int))
+    }
+    
+    init(_ cdPetDeviceData: CDPetDeviceData) {
+        id = Int(cdPetDeviceData.id)
+        crs = cdPetDeviceData.crs
+        coordinates = Point(cdPetDeviceData.latitude, cdPetDeviceData.longitude)
+        speed = cdPetDeviceData.speed
+        battery = Int(cdPetDeviceData.battery)
+        internetSignal = cdPetDeviceData.netSignal
+        satelliteSignal = cdPetDeviceData.satSignal
+        deviceDate = Date.init(timeIntervalSince1970: TimeInterval(cdPetDeviceData.deviceTime))
+    }
+}
+
 extension Breed {
     
     init(_ json: JSON, _ _type: Type) {
@@ -288,6 +354,36 @@ extension PetUser {
         image = cdPetUser.image
     }
 }
+
+
+
+extension TripList {
+    init(_ json: JSON) {
+        id = json["id"].intValue
+        petId = json["petId"].intValue
+        name = json["name"].string
+        status = json["status"].intValue
+        startTime = json["timeStart"].intValue
+        stoppedTime = json["timeStop"].intValue
+    }
+}
+
+
+
+
+
+extension Trip {
+    init(_ json: JSON) {
+        id = json["id"].intValue
+        name = json["name"].string
+        petId = json["petId"].intValue
+        status = json["status"].intValue
+        timeStart = json["timeStart"].intValue
+        timeStamp = json["timeStamp"].intValue
+    }
+
+}
+
 
 extension SafeZone {
     

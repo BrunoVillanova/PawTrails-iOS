@@ -16,27 +16,27 @@ class SocketIOTestTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
+
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+//      SocketIOManager.instance.startGettingGpsUpdates(for: [96])
+//        SocketIOManager.instance.connectToPetChannel()
+        
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
-        NotificationManager.instance.getPetGPSUpdates(for: id) { (id, data) in
-            
-            if data.movementAlarm {
-                self.alert(title: "HEY", msg: "MOVEMENT!!", type: .red)
-            }else{
-                self.data.append((data.serverDate,data.source))
-                self.data.sort(by: { (element1, element2) -> Bool in
-                    return element1.0 > element2.0
-                })
-                self.tableView.reloadData()
-            }
-        }
-        SocketIOManager.instance.startGPSUpdates(for: [id])
+//        SocketIOManager.instance.startGettingGpsUpdates(for: [96])
+        SocketIOManager.instance.startGPSUpdates(for: [96])
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        NotificationManager.instance.removePetGPSUpdates(of: id)
+//        NotificationManager.instance.removePetGPSUpdates(of: id)
+        
+   
     }
     
     // MARK: - Table view data source
@@ -58,17 +58,6 @@ class SocketIOTestTableViewController: UITableViewController {
     }
     
     
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 class testSocketCell: UITableViewCell {

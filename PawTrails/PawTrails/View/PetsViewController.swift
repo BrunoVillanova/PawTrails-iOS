@@ -31,8 +31,30 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         refreshControl.addTarget(self, action: #selector(reloadPetsAPI), for: .valueChanged)
         tableView.addSubview(refreshControl)
         
-        UIApplication.shared.statusBarStyle = .lightContent
         presenter.attachView(self)
+        
+        
+        addButton()
+    }
+    
+
+    fileprivate func addButton(){
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(#imageLiteral(resourceName: "StopTripButton-1x-png"), for: .normal)
+        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        self.view.addSubview(button)
+        button.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -2).isActive = true
+        if let tabbarhieght = self.tabBarController?.tabBar.frame.size.height {
+            button.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -(tabbarhieght + 5)).isActive = true
+        }
+        button.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 80).isActive = true
+    }
+    
+    
+    func buttonAction(sender: UIButton!) {
+        print("Button tapped")
     }
     
     @objc func reloadPetsAPI(){
@@ -44,6 +66,8 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.hideNotification()
+
         reloadPets()
         presenter.startPetsListUpdates()
         presenter.startPetsGPSUpdates { (id) in
@@ -129,10 +153,10 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if let data = SocketIOManager.instance.getGPSData(for: pet.id) {
             
             if data.status == .idle {
-                cell.batteryLabel.text = data.batteryString
-                cell.batteryLabel.textColor = UIColor.darkGray
-                cell.signalLabel.text = data.signalString
-                cell.signalLabel.textColor = UIColor.darkGray
+//                cell.batteryLabel.text = data.batteryString
+//                cell.batteryLabel.textColor = UIColor.darkGray
+//                cell.signalLabel.text = data.signalString
+//                cell.signalLabel.textColor = UIColor.darkGray
                 if data.locationAndTime != "" {
                     cell.subtitleLabel.text = data.locationAndTime
                     cell.subtitleLabel.textColor = UIColor.darkGray
@@ -141,11 +165,11 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     cell.subtitleLabel.textColor = UIColor.lightGray
                 }
             }else{
-                cell.batteryLabel.text = "-"
-                cell.batteryLabel.textColor = UIColor.lightGray
+//                cell.batteryLabel.text = "-"
+//                cell.batteryLabel.textColor = UIColor.lightGray
                 cell.batteryImageView.alpha = 0.5
-                cell.signalLabel.text = "-"
-                cell.signalLabel.textColor = UIColor.lightGray
+//                cell.signalLabel.text = "-"
+//                cell.signalLabel.textColor = UIColor.lightGray
                 cell.signalImageView.alpha = 0.5
                 cell.subtitleLabel.text = Message.instance.get(data.status)
                 cell.subtitleLabel.textColor = UIColor.lightGray
@@ -161,7 +185,6 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }else{
             cell.petImageView.image = nil
         }
-        cell.petImageView.circle()
         return cell
     }
     
@@ -181,21 +204,21 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
 
     func trackButtonAction(sender: UIButton){
-
-        if let home = tabBarController?.viewControllers?.first as? HomeViewController {
+        // changed this when deleted homevc
+        if let home = tabBarController?.viewControllers?.first as? MapViewController {
             home.selectedPet = presenter.getPet(with: sender.tag)
             tabBarController?.selectedIndex = 0
         }
     }
-    
-    // MARK: - Navigation
 
+    
+//    // MARK: - Navigation
+////
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.destination is PetProfileTableViewController {
-            
+                if segue.destination is PetProfileCollectionViewController {
             if let indexPath = tableView.indexPathForSelectedRow {
-                (segue.destination as! PetProfileTableViewController).pet = getPet(at: indexPath)
+                (segue.destination as! PetProfileCollectionViewController).pet = getPet(at: indexPath)
+
             }
         }
     }
@@ -206,7 +229,7 @@ class petListCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var signalImageView: UIImageView!
     @IBOutlet weak var batteryImageView: UIImageView!
-    @IBOutlet weak var signalLabel: UILabel!
-    @IBOutlet weak var batteryLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
+    
+  
 }
