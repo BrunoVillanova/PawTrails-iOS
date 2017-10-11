@@ -41,7 +41,7 @@ class SafezZoneParentCell: BaseCell, UICollectionViewDataSource, UICollectionVie
         collectionView.contentInset = UIEdgeInsetsMake(20, 0, 80, 0)
         collectionView.scrollIndicatorInsets = UIEdgeInsetsMake(20, 0, 80, 0)
         
-      
+        collectionView.reloadData()
     }
     
 

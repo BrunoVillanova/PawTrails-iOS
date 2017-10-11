@@ -14,6 +14,8 @@ protocol PetView: NSObjectProtocol, View {
     func loadSafeZones()
     func petNotFound()
     func petRemoved()
+    func removed()
+
 }
 
 class PetPresenter {
@@ -211,4 +213,16 @@ class PetPresenter {
     func stopPetsGeocodeUpdates(){
         NotificationManager.instance.removePetGeoCodeUpdates()
     }
+    
+    
+    func removePetUser(with id: Int, from petId: Int) {
+        DataManager.instance.removeSharedUser(by: id, from: petId) { (error) in
+            if let error = error {
+                self.view?.errorMessage(error.msg)
+            }else{
+                self.view?.removed()
+            }
+        }
+    }
+
 }

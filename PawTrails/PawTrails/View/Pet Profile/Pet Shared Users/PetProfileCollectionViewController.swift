@@ -11,12 +11,9 @@ import MapKit
 
 
 
-struct PetId {
-    static var petId = Pet()
-}
 
 
-class PetProfileCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, ProfilePetView {
+class PetProfileCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, PetView {
     
     let cellId = "cellId"
     let titles = ["Profile", "Activity", "SafeZone", "Share"]
@@ -25,7 +22,12 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
 
     var fromMap: Bool = false
     
-     let presenter = PetProfilePressenter()
+    
+    fileprivate var currentUserId = -1
+    fileprivate var petOwnerId = -2
+    fileprivate var appUserId = -3
+    
+     let presenter = PetPresenter()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,18 +35,22 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"switch-device-button-1x-png"), style: .plain, target: self, action: #selector(addTapped))
 
-        presenter.attachView(self, pet:pet)
  
+        presenter.attachView(self, pet:pet)
+        
         if let pet = pet {
             load(pet)
-            presenter.getPet(with: pet.id)
+            reloadPetInfo()
+            reloadUsers()
+            reloadSafeZones()
+
+//            removeLeaveButton.setTitle(pet.isOwner ? "Remove Pet" : "Leave Pet", for: .normal)
         }
         
         if fromMap {
             navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(dismissAction(sender: )))
         }
-
-
+        
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
         
@@ -59,6 +65,10 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
 
         }
         
+    }
+    
+    deinit {
+        presenter.deteachView()
     }
     
     
@@ -110,10 +120,8 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
     
     
     override func viewWillAppear(_ animated: Bool) {
-        reloadSafeZones()
         presenter.loadPet(with: pet.id)
         presenter.getPet(with: pet.id)
-        PetId.petId = pet
         presenter.startPetsGPSUpdates(for: pet.id) { (data) in
 
             print("I GOT THE DATA \(data)")
@@ -130,17 +138,44 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
 
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        presenter.stopPetGPSUpdates(of: pet.id)
+        presenter.stopPetsGeocodeUpdates()
+    }
+    
+    
+    
+    func reloadPetInfo() {
+        presenter.loadPet(with: pet.id)
+    }
+    
+    
+    func reloadSafeZones() {
+        presenter.loadSafeZones(for: pet.id)
+    }
+    
+    
+    func reloadUsers(onlyDB: Bool = false) {
+        if onlyDB {
+            presenter.getPet(with: pet.id)
+            //reload users?
+        }else{
+            presenter.loadPetUsers(for: pet.id)
+        }
+    }
+    
     
     func load(locationAndTime: String){
         print("Here is the location ANd Time\(locationAndTime)")
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        
-        print("View Disappeared")
-}
+
 
     // PetView
+    
+    func removed() {
+}
+
     
     func errorMessage(_ error: ErrorMsg) {
         alert(title: error.title, msg: error.msg)
@@ -150,8 +185,8 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
     func load(_ pet: Pet) {
         self.pet = pet
         navigationItem.title = pet.name
-       collectionView?.reloadData()
-      
+        
+        self.collectionView?.reloadData()
 }
     
     func petNotFound() {
@@ -168,9 +203,10 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
     }
     
     
-    func reloadSafeZones() {
-        presenter.loadSafeZones(for: pet.id)
-    }
+    func loadUsers() {
+        pet.users = presenter.users
+}
+    
 
     
     func loadSafeZones() {
