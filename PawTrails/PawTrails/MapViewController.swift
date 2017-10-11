@@ -198,15 +198,6 @@ class MapViewController: UIViewController {
     func presentPet(_ pet: Pet, activityEnabled:Bool = false) {
         
         let nc = UINavigationController()
-        
-        if activityEnabled {
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "PetActivityViewController") as? PetActivityViewController {
-                vc.pet = pet
-                vc.fromMap = true
-                nc.pushViewController(vc, animated: true)
-                present(nc, animated: true, completion: nil)
-            }
-        }else{
             if let vc = storyboard?.instantiateViewController(withIdentifier: "PetProfileCollectionViewController") as? PetProfileCollectionViewController {
                 vc.pet = pet
                 vc.fromMap = true
@@ -215,7 +206,6 @@ class MapViewController: UIViewController {
             }
         }
     }
-}
 
 //MARK: HomeView
 extension MapViewController: HomeView {
