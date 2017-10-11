@@ -108,10 +108,16 @@ class EventManager {
         }
     }
     
+    
+    
+    
+    
+    
+    
     private func updateSharedUsersUI(for petId: Int, in viewController: UIViewController?){
-        if let petProfile = viewController?.navigationController?.viewControllers.first(where: { $0 is PetProfileTableViewController }) as? PetProfileTableViewController, petProfile.pet.id == petId {
+        if let petProfile = viewController?.navigationController?.viewControllers.first(where: { $0 is PetProfileCollectionViewController }) as? PetProfileCollectionViewController, petProfile.pet.id == petId {
             DispatchQueue.main.async {
-                petProfile.reloadUsers()
+//                petProfile.reloadUsers()
             }
         }
     }
@@ -122,13 +128,15 @@ class EventManager {
                 
                 if let petList = navigationController.viewControllers.first(where: { $0 is PetsViewController }) as? PetsViewController {
                     
-                    if isRemove, let petProfile = navigationController.viewControllers.first(where: { $0 is PetProfileTableViewController }) as? PetProfileTableViewController, petProfile.pet.id == petId {
+                    if isRemove, let petProfile = navigationController.viewControllers.first(where: { $0 is PetProfileCollectionViewController }) as? PetProfileCollectionViewController, petProfile.pet.id == petId {
                         navigationController.popToRootViewController(animated: true)
                     }
                     petList.reloadPets()
                 }
                 
-            }else if let homeVC = viewController as? HomeViewController {
+                
+                // changed this when deleted HomeVc
+            }else if let homeVC = viewController as? MapViewController {
                 homeVC.reloadPets()
             }
         }

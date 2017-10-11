@@ -41,6 +41,8 @@ class UserProfilePresenter {
         }
     }
     
+    // Mohamed -- Added logout Function to the protocol.
+
     func loadUser() {
         DataManager.instance.loadUser { (error, user) in
             if let error = error {

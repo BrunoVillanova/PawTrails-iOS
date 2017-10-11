@@ -10,42 +10,42 @@ import UIKit
 
 class InitialViewController: UIViewController, InitialView, UITextFieldDelegate, GIDSignInUIDelegate {
 
-    @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var forgotPasswordButton: UIButton!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var socialMediaBar: UIStackView!
-    @IBOutlet weak var socialSeparator: UIImageView!
     @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var facebookButton: UIButton!
     @IBOutlet weak var googleButton: UIButton!
     @IBOutlet weak var twitterButton: UIButton!
-    @IBOutlet weak var passwordRequirementsLabel: UILabel!
     
     fileprivate let presenter = InitialPresenter()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.attachView(self)
         
-        loginButton.round()
+        
+        self.view.isUserInteractionEnabled = true
+
+        presenter.attachView(self)
+
+        loginButton.fullyroundedCorner()
+        
         loginButton.backgroundColor = UIColor.primary
         loginButton.tintColor = UIColor.secondary
-        signUpButton.round()
-        signUpButton.tintColor = UIColor.primary
-        signUpButton.border(color: UIColor.primary, width: 1.0)
-        cancelButton.tintColor = UIColor.primary
-        cancelButton.isHidden = true
+        
+        facebookButton.fullyroundedCorner()
+        facebookButton.tintColor = UIColor.primary
+        facebookButton.border(color: UIColor.primary, width: 1.0)
+
+        
         forgotPasswordButton.tintColor = UIColor.primary
         logoImageView.tintColor = UIColor.primary
-        facebookButton.imageView?.tintColor = UIColor.primary
         googleButton.imageView?.tintColor = UIColor.primary
         twitterButton.imageView?.tintColor = UIColor.primary
         
-        passwordRequirementsLabel.text = Message.instance.get(.passwordRequirements)
-        passwordRequirementsLabel.isHidden = true
+       
         
         if #available(iOS 10.0, *) {
             self.emailTextField.textContentType = UITextContentType.emailAddress
@@ -60,10 +60,12 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
 
         GIDSignIn.sharedInstance().uiDelegate = self
         DispatchQueue.main.async {
-            self.emailTextField.underline()
-            self.passwordTextField.underline()
+
         }
     }
+    
+    
+
     
     override func viewWillAppear(_ animated: Bool) {
         UIApplication.shared.statusBarStyle = .lightContent
@@ -85,57 +87,10 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
     }
     
     @IBAction func twitterLogin(_ sender: UIButton) {
-        presenter.loginTW(vc: self)
+//        presenter.loginTW(vc: self)
     }
     
-    @IBAction func signUpAction(_ sender: UIButton?) {
-        if cancelButton.isHidden {
-            changeView(isSignUp:true)
-        }else{
-            presenter.signUp(email: emailTextField.text, password: passwordTextField.text)
-        }
-    }
     
-    @IBAction func cancelSignUpAction(_ sender: UIButton) {
-        changeView(isSignUp: false)
-    }
-    
-    func changeView(isSignUp:Bool){
-        
-        UIView.animate(withDuration: 1.0, animations: {
-            
-            if isSignUp {
-                self.loginButton.isHidden = true
-                self.socialMediaBar.isHidden = true
-                self.socialSeparator.isHidden = true
-                let dy = (self.passwordRequirementsLabel.frame.origin.y + self.passwordRequirementsLabel.frame.size.height) - self.signUpButton.frame.origin.y
-                self.signUpButton.transform = CGAffineTransform(translationX: 0, y: dy)
-                self.signUpButton.backgroundColor = UIColor.primary
-                self.signUpButton.setTitleColor(UIColor.white, for: .normal)
-                self.forgotPasswordButton.transform = CGAffineTransform(scaleX: 0, y: 0)
-            }else{
-                self.signUpButton.transform = CGAffineTransform.identity
-                self.signUpButton.backgroundColor = UIColor.white
-                self.signUpButton.setTitleColor(UIColor.primary, for: .normal)
-                self.passwordRequirementsLabel.transform = CGAffineTransform(scaleX: 0, y: 0)
-            }
-            
-            self.cancelButton.isHidden = !isSignUp
-        }) { (error) in
-            
-            if !isSignUp {
-                self.loginButton.isHidden = false
-                self.socialMediaBar.isHidden = false
-                self.socialSeparator.isHidden = false
-            }
-            self.forgotPasswordButton.isHidden = isSignUp
-            self.passwordRequirementsLabel.isHidden = !isSignUp
-            self.forgotPasswordButton.transform = CGAffineTransform.identity
-            self.passwordRequirementsLabel.transform = CGAffineTransform.identity
-        }
-        
-    }
-        
     // MARK: - Initial View
     
     func errorMessage(_ error: ErrorMsg) {
@@ -194,23 +149,19 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
             self.passwordTextField.becomeFirstResponder()
         }else if textField == self.passwordTextField {
             textField.resignFirstResponder()
-            if cancelButton.isHidden {
-                self.loginAction(nil)
-            }else{
-                self.signUpAction(nil)
-            }
-        }else{
+                    }else{
             textField.resignFirstResponder()
         }
         return true
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.underline(color: UIColor.primary)
+//        textField.underline(color: UIColor.primary)
+        
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        textField.underline()
+//        textField.underline()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

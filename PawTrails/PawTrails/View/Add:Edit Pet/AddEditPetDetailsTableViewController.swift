@@ -87,8 +87,8 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
             dismiss(animated: true, completion: nil)
         }else{
             
-            if let profile = navigationController?.viewControllers.first(where: { $0 is PetProfileTableViewController }) as? PetProfileTableViewController {
-                profile.reloadPetInfo()
+            if (navigationController?.viewControllers.first(where: { $0 is PetProfileCollectionViewController }) as? PetProfileCollectionViewController) != nil {
+//                profile.reloadPetInfo()
             }
             _ = navigationController?.popViewController(animated: true)
         }

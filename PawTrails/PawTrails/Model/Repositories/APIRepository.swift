@@ -26,6 +26,10 @@ class APIRepository {
     typealias APIRepPetUsersCallback = (APIManagerError?, [PetUser]?) -> Void
     typealias APIRepPetSafeZoneCallback = (APIManagerError?, SafeZone?) -> Void
     typealias APIRepPetSafeZonesCallback = (APIManagerError?, [SafeZone]?) -> Void
+    typealias ApiTrip = (APIManagerError?, [Trip]?) -> Void
+    typealias ApiTripListCallBack = (APIManagerError?, [TripList]?) -> Void
+
+    
     
     //MARK:- Authentication
     
@@ -212,6 +216,11 @@ class APIRepository {
             callback(error)
         }
     }
+    
+ 
+    
+    
+    
     
     /// Register a new pet
     ///
@@ -474,7 +483,6 @@ class APIRepository {
     ///   - petId: pet id
     ///   - callback: returns updated **safezone** or **error**
     func save(_ safezone: SafeZone, to petId: Int, callback: @escaping APIRepErrorCallback) {
-        
         APIManager.instance.perform(call: .setSafeZone, with: safezone.toDict) { (error, _) in
             callback(error)
         }
@@ -508,5 +516,100 @@ class APIRepository {
             callback(error)
         }
     }
+    
+    
+    // Start Trip
+    /// Partmeters
+    ////   - PetId/s
+    // callBack: returns nil or data
+    
 
+    func startTrips(_ petIdss: [Int], callback: @escaping ApiTrip) {
+        let data = ["pets":petIdss]
+        APIManager.instance.perform(call: .startTrip, with: data) { (error, json) in
+            if let error = error {
+                callback(error, nil)
+            } else if let myData = json?["trips"].array {
+                var tripArray = [Trip]()
+                for trip in myData {
+                    tripArray.append(Trip(trip))
+                }
+                callback(nil, tripArray)
+                
+            }
+            
+        }
+    }
+
+    func getTripList(_ status: [Int], callback: @escaping ApiTripListCallBack) {
+        
+        let dataa = ["status":status]
+        APIManager.instance.perform(call: .getTripList, with: dataa) { (error, json) in
+            if error == nil, let tripListJson = json?["trips"].array {
+                var tripList = [TripList]()
+                for trip in tripListJson {
+                    tripList.append(TripList(trip))
+                }
+                 callback(nil, tripList)
+            } else if let error = error {
+                callback(error, nil)
+            }
+        }
+    }
+    
+    
+    
+
+    // Finish Trips
+    // callBack: returns nil or data
+//    
+    func finishTrip(_ tripIds: Int, timeStamp: Int, callback: @escaping ApiTripListCallBack) {
+        let trips = ["tripId":tripIds, "timeStamp": timeStamp]
+        APIManager.instance.perform(call: .finishTrip, withKey: "trips", with: trips) { (error, json) in
+            if error == nil, let tripListJson = json?["trips"].array {
+                var tripList = [TripList]()
+                for trip in tripListJson {
+                    tripList.append(TripList(trip))
+                }
+                callback(nil, tripList)
+            } else if let error = error {
+                callback(error, nil)
+            }
+        }
+        }
+
+    
+    // Pause Trips
+    // callBack: returns nil or data
+    func pauseTrip(callback: @escaping APIRepErrorCallback) {
+        APIManager.instance.perform(call: .pauseTrip) { (error, json) in
+            callback(error)
+        }
+    }
+    
+
+    
+    
+    // Resume trips
+    //callBack: returns nil or data
+    
+    func resumeTrip(callBack: @escaping APIRepErrorCallback) {
+        APIManager.instance.perform(call: .resumeTrip) { (error, json) in
+            callBack(error)
+        }
+    }
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

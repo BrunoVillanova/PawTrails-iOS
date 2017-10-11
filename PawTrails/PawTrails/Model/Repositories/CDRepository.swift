@@ -335,6 +335,14 @@ class CDRepository {
         }
     }
     
+
+    
+    
+    
+    
+    
+    
+    
     private func getPetCD(by id:Int, _ callback: @escaping (DatabaseError?, CDPet?)-> Void) {
         
         CoreDataManager.instance.retrieve(.pet, with: NSPredicate("id", .equal, id)) { (objects) in
@@ -801,6 +809,13 @@ class CDRepository {
         
     }
     
+    
+    
+    func saveStartAdventureData(_ petIds: [Int], callback: @escaping CDRepErrorCallback) {
+        
+    }
+    
+    
     //MARK:- Breeds
     
     /// Upsert Breeds
@@ -902,6 +917,8 @@ class CDRepository {
     
     
     
+    
+    // Save Trip on local represtory.. 
     
     
     

@@ -63,7 +63,6 @@ class PetProfileTableViewController: UITableViewController, UICollectionViewDele
 
         presenter.attachView(self, pet:pet)
 
-        petImageView.circle()
         
         if let pet = pet {
             load(pet)

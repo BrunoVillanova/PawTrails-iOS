@@ -31,6 +31,8 @@ class EmailVerificationPresenter {
         DataManager.instance.sendPasswordReset(email, callback: { (error) in
             
             self.view?.endLoadingContent()
+            let window = UIApplication.shared.keyWindow?.subviews.last
+            window?.removeFromSuperview()
             if let error = error {
                 self.view?.errorMessage(error.msg)
             }else{
@@ -46,6 +48,8 @@ class EmailVerificationPresenter {
         DataManager.instance.signIn(email, password) { (error) in
             
             self.view?.endLoadingContent()
+            let window = UIApplication.shared.keyWindow?.subviews.last
+            window?.removeFromSuperview()
             if let error = error {
                 
                 self.view?.errorMessage(error.msg)

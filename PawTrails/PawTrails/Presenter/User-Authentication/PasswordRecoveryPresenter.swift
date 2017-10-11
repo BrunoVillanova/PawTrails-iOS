@@ -34,9 +34,12 @@ class PasswordRecoveryPresenter {
             self.view?.emailNotChecked()
         }else{
             self.view?.beginLoadingContent()
+            
             DataManager.instance.sendPasswordReset(email, callback: { (error) in
                 
                 self.view?.endLoadingContent()
+                let window = UIApplication.shared.keyWindow?.subviews.last
+                window?.removeFromSuperview()
                 if let error = error {
                     self.view?.errorMessage(error.msg)
                 }else{

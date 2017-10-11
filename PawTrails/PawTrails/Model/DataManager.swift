@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 class DataManager {
     
     static let instance = DataManager()
@@ -24,6 +25,7 @@ class DataManager {
     typealias petUsersCallback = ((_ error:DataManagerError?, _ users:[PetUser]?) -> Void)
     typealias safezonesCallback = ((_ error:DataManagerError?, _ safezones:[SafeZone]?) -> Void)
     typealias safezoneCallback = ((_ error:DataManagerError?, _ safezone:SafeZone?) -> Void)
+    typealias startTripCallBack = ((_ error:DataManagerError?, _ safezone:[Trip]?) -> Void)
     
     //MARK:- Authentication
     
@@ -158,7 +160,7 @@ class DataManager {
     ///
     /// - Returns: bool value to verify the operation was complete successfully.
     func signOut() -> Bool {
-        CoreDataManager.instance.deleteAll()
+//        CoreDataManager.instance.deleteAll()
         SocketIOManager.instance.disconnect()
         return SharedPreferences.remove(.id) && SharedPreferences.remove(.token)
     }
@@ -239,6 +241,7 @@ class DataManager {
         }
     }
     
+
     /// Get user from local storage
     ///
     /// - Parameter callback: return stored user or *error*
@@ -266,6 +269,11 @@ class DataManager {
             self.handle(error, user, callback: callback)
         }
     }
+    
+    
+    
+    
+    
     
     /// Upload user image to API and update it on the local storage
     ///
@@ -396,6 +404,10 @@ class DataManager {
         }
     }
     
+
+    
+    
+    
     /// Register pet in API and local storage
     ///
     /// - Parameters:
@@ -412,6 +424,11 @@ class DataManager {
             }
         }
     }
+    
+    
+    
+    
+    
     
     /// Get pet from API and update local storage
     ///
@@ -709,6 +726,8 @@ class DataManager {
         }
     }
     
+       
+    
     /// Add new shared user to pet to API and update local storage
     ///
     /// - Parameters:
@@ -959,46 +978,20 @@ class DataManager {
     
     
     
+    // MARK -- Start Trip and recieve data from api.
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    func startMyAdventure(_ petIdss: [Int], callback: @escaping startTripCallBack) {
+        APIRepository.instance.startTrips(petIdss) { (error, data) in
+            if error == nil {
+                callback(nil, data)
+                
+            } else if let error = error{
+                callback(DataManagerError(APIError: error), nil)
+            }
+        }
+        
+}
+
 }
 
 
