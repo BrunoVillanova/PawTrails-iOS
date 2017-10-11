@@ -12,7 +12,7 @@ import Foundation
 protocol ProfilePetView: NSObjectProtocol, View {
     func load(_ pet:Pet)
     func petNotFound()
-
+    func loadSafeZones()
     func petRemoved()
 }
 
@@ -23,6 +23,9 @@ class PetProfilePressenter {
     weak private var view: ProfilePetView?
     
 //    var pet: Pet!
+    
+    var safezones = [SafeZone]()
+
 
     func attachView(_ view: ProfilePetView, pet:Pet?){
         self.view = view
@@ -120,6 +123,50 @@ class PetProfilePressenter {
         NotificationManager.instance.removePetGeoCodeUpdates()
     }
 
+    
+    func loadSafeZones(for id: Int){
+        
+        DataManager.instance.loadSafeZones(of: id) { (error) in
+            if let error = error {
+                self.view?.errorMessage(error.msg)
+            }else {
+                DataManager.instance.getPet(by: id) { (error, pet) in
+                    if let error = error {
+                        if error.DBError?.type == DatabaseErrorType.NotFound {
+                            self.view?.petNotFound()
+                        }else{
+                            self.view?.errorMessage(error.msg)
+                        }
+                    }else if let pet = pet {
+                        if let safezones = pet.safezones {
+                            self.safezones = safezones
+                        }
+                        self.view?.loadSafeZones()
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    
+    func setSafeZoneStatus(id: Int, petId: Int, status: Bool, callback: @escaping (Bool)->() ){
+        
+        DataManager.instance.setSafeZoneStatus(status: status, for: id, into: petId) { (error) in
+            if let error = error {
+                self.view?.errorMessage(error.msg)
+                callback(false)
+            }else{
+                self.loadSafeZones(for: petId)
+                callback(true)
+            }
+        }
+    }
 
+    func set(imageData:Data, for id: Int, callback: @escaping (ErrorMsg?)->()){
+        DataManager.instance.setSafeZone(imageData: imageData, for: id) { (error) in
+            callback(error?.msg)
+        }
+    }
 
 }

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import MapKit
+
 
 
 struct PetId {
@@ -23,7 +25,7 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
 
     var fromMap: Bool = false
     
-    fileprivate let presenter = PetProfilePressenter()
+     let presenter = PetProfilePressenter()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -108,10 +110,10 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
     
     
     override func viewWillAppear(_ animated: Bool) {
+        reloadSafeZones()
         presenter.loadPet(with: pet.id)
         presenter.getPet(with: pet.id)
         PetId.petId = pet
-        
         presenter.startPetsGPSUpdates(for: pet.id) { (data) in
 
             print("I GOT THE DATA \(data)")
@@ -162,6 +164,71 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
             navigationController?.popToViewController(petList, animated: true)
         }else{
             popAction(sender: nil)
+        }
+    }
+    
+    
+    func reloadSafeZones() {
+        presenter.loadSafeZones(for: pet.id)
+    }
+
+    
+    func loadSafeZones() {
+        pet.safezones = presenter.safezones
+        if self.presenter.safezones.count == 0 { return }
+        let safezonesGroup = DispatchGroup()
+        
+        for safezone in self.presenter.safezones {
+            // Address
+            if safezone.address == nil {
+                
+                guard let center = safezone.point1 else {
+                    Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "No center point found!")
+                    break
+                }
+                GeocoderManager.Intance.reverse(type: .safezone, with: center, for: safezone.id)
+            }
+            // Map
+            if safezone.preview == nil {
+                guard let center = safezone.point1?.coordinates else {
+                    Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "No center point found!")
+                    continue
+                }
+                guard let topCenter = safezone.point2?.coordinates else {
+                    Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "No topcenter point found!")
+                    continue
+                }
+                
+                safezonesGroup.enter()
+                Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "map", safezone.id)
+                self.buildMap(center: center, topCenter: topCenter, shape: safezone.shape, handler: { (image) in
+                    if let image = image, let data = UIImagePNGRepresentation(image) {
+                        Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "released", safezone.id)
+                        self.presenter.set(imageData: data, for: safezone.id) { (errorMsg) in
+                            if let errorMsg = errorMsg {
+                                self.errorMessage(errorMsg)
+                            }
+                            safezonesGroup.leave()
+                        }
+                    }
+                })
+            }
+        }
+        
+        safezonesGroup.notify(queue: .main, execute: {
+            self.presenter.getPet(with: self.pet.id)
+            
+        })
+    }
+
+    func buildMap(center: CLLocationCoordinate2D, topCenter: CLLocationCoordinate2D, shape: Shape, handler: @escaping ((UIImage?)->())){
+        if CLLocationCoordinate2DIsValid(center) && CLLocationCoordinate2DIsValid(topCenter) {
+            SnapshotMapManager.Intance.performSnapShot(with: center, topCenter: topCenter, shape: shape, handler: { (image) in
+                handler(image)
+            })
+        }else{
+            self.errorMessage(ErrorMsg.init(title: "", msg: "wrong coordinates"))
+            handler(nil)
         }
     }
 
@@ -243,7 +310,6 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
         
         
         if indexPath.item == 0 {
- 
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myCell", for: indexPath) as! PetProfileCollectionViewCell
             cell.petBirthdayLabel.text = pet.birthday?.toStringShow
             cell.typeLabel.text = self.pet.typeString
@@ -265,7 +331,6 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell3", for: indexPath) as! SafezZoneParentCell
         cell.backgroundColor = UIColor.blue
-
         return cell
 
         

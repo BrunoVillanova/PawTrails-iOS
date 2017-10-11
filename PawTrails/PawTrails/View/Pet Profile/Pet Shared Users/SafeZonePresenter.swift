@@ -27,34 +27,28 @@ class SazeZonePresnter {
 
     }
     
-    func getPet(with id: Int) {
-        DataManager.instance.getPet(by: id) { (error, pet) in
+    func set(imageData:Data, for id: Int, callback: @escaping (ErrorMsg?)->()){
+        DataManager.instance.setSafeZone(imageData: imageData, for: id) { (error) in
+            callback(error?.msg)
+        }
+    }
+    
+    func setSafeZoneStatus(id: Int, petId: Int, status: Bool, callback: @escaping (Bool)->() ){
+        
+        DataManager.instance.setSafeZoneStatus(status: status, for: id, into: petId) { (error) in
             if let error = error {
-                if error.DBError?.type == DatabaseErrorType.NotFound {
-                    self.view?.petNotFound()
-                }else{
-                    self.view?.errorMessage(error.msg)
-                }
-            }else if let pet = pet {
-                if let safezones = pet.sortedSafeZones { self.safeZones = safezones }
-                self.view?.load(pet)
+                self.view?.errorMessage(error.msg)
+                callback(false)
+            }else{
+                self.loadSafeZones(for: petId)
+                callback(true)
             }
         }
     }
     
-    
-    
-    func deteachView() {
-        self.view = nil
-    }
-
-    
-    //MARK:- Safe Zones
-    
-    
-    func loadPet(with id: Int) {
+    func getPet(with id: Int) {
         
-        DataManager.instance.loadPet(id) { (error, pet) in
+        DataManager.instance.getPet(by: id) { (error, pet) in
             
             if let error = error {
                 if error.DBError?.type == DatabaseErrorType.NotFound {
@@ -63,6 +57,7 @@ class SazeZonePresnter {
                     self.view?.errorMessage(error.msg)
                 }
             }else if let pet = pet {
+                if let safezones = pet.sortedSafeZones { self.safeZones = safezones }
                 self.view?.load(pet)
             }
         }
@@ -86,42 +81,15 @@ class SazeZonePresnter {
                         if let safezones = pet.safezones {
                             self.safeZones = safezones
                         }
-                        DispatchQueue.main.async {
-                            self.view?.loadSafeZones()
-
-                        }
+                        self.view?.loadSafeZones()
                     }
                 }
-            }
-        }
-    }
-    
-    func set(address:String, for id: Int, callback: @escaping (ErrorMsg?)->()){
-        DataManager.instance.setSafeZone(address: address, for: id) { (error) in
-            callback(error?.msg)
-        }
-    }
-    
-    func set(imageData:Data, for id: Int, callback: @escaping (ErrorMsg?)->()){
-        DataManager.instance.setSafeZone(imageData: imageData, for: id) { (error) in
-            callback(error?.msg)
-        }
-    }
-    
-    func setSafeZoneStatus(id: Int, petId: Int, status: Bool, callback: @escaping (Bool)->() ){
-        
-        DataManager.instance.setSafeZoneStatus(status: status, for: id, into: petId) { (error) in
-            if let error = error {
-                self.view?.errorMessage(error.msg)
-                callback(false)
-            }else{
-                self.loadSafeZones(for: petId)
-                callback(true)
             }
         }
     }
 
 
 }
+
 
 
