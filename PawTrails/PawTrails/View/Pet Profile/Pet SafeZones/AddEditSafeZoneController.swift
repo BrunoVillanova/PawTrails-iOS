@@ -121,7 +121,7 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
 
                  slider = settingsView.slider
                 if let slider = slider {
-                    slider.addTarget(self, action: #selector(handleSliderSlided), for: .valueChanged)
+                    slider.addTarget(self, action: #selector(handleSliderSlided(sender:)), for: .valueChanged)
 
                 }
                 
@@ -149,6 +149,21 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
  
 
     }
+    
+    
+    override func viewDidLayoutSubviews() {
+        
+        let image = UIImage(named: "SliderBtn")?.scaleToSize(newSize: CGSize(width: 70, height: 40))
+        self.slider?.setThumbImage(image, for: .normal)
+            if let handleView = slider?.subviews.last as? UIImageView {
+                let label = UILabel(frame: handleView.bounds)
+                label.backgroundColor = UIColor.clear
+                handleView.addSubview(label)
+                self.sliderLabel = label
+                sliderLabel?.textColor = UIColor.black
+        }
+    }
+    
     
     
     override func viewDidAppear(_ animated: Bool) {
@@ -206,16 +221,15 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
     
     
     
-    func handleSliderSlided() {
-        if let slider = slider {
-            let miles = Double(slider.value)
+    func handleSliderSlided(sender: UISlider) {
+            let miles = Double(sender.value)
             let delta = miles / 69.0
             var currentRegion = self.map.region
             currentRegion.span = MKCoordinateSpan(latitudeDelta: delta, longitudeDelta: delta)
             let (lat, long) = (currentRegion.center.latitude, currentRegion.center.longitude)
             let coordinate =  CLLocationCoordinate2D(latitude: lat, longitude: long)
             map.centerOn(coordinate, with: miles, animated: true)
-        }
+
 }
     
 
@@ -232,7 +246,8 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
             fenceDistance = Int(round(x0y0.location.distance(from: xfy0.location)))
             fence.isIdle = fenceDistanceIsIdle()
             self.distanceLabel.text = fenceDistance < 1000 ? "\(fenceDistance) m" : "\(Double(fenceDistance)/1000.0) km"
-            slider?.value = Float(fenceDistance)
+            self.sliderLabel?.text = fenceDistance < 1000 ? "\(fenceDistance)" : "\(Double(fenceDistance)/1000.0) km"
+
         }
     }
     

@@ -129,8 +129,9 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
         if !pet.isOwner {
             self.alert(title: "", msg: "You cannot add user for this pet because you don't own it", type: .blue, disableTime: 5, handler: nil)
         } else {
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "AddPetUserViewController") as? AddPetUserViewController {
-                vc.pet = pet
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "SetUpYourGoalController") as? SetUpYourGoalController {
+                vc.petId = pet.id
+                vc.isOwner = pet.isOwner
                 navigationController?.pushViewController(vc, animated: true)
             }
         }
@@ -139,14 +140,17 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
     
     
     func calnder(sender: UIButton!) {
-//        if !pet.isOwner {
-//            self.alert(title: "", msg: "You cannot add user for this pet because you don't own it", type: .blue, disableTime: 5, handler: nil)
-//        } else {
-//            if let vc = storyboard?.instantiateViewController(withIdentifier: "AddPetUserViewController") as? AddPetUserViewController {
-//                vc.pet = pet
+        if !pet.isOwner {
+            self.alert(title: "", msg: "You cannot add user for this pet because you don't own it", type: .blue, disableTime: 5, handler: nil)
+        } else {
+//            if let vc = storyboard?.instantiateViewController(withIdentifier: "SetUpYourGoalController") as? SetUpYourGoalController {
+//                vc.petId = pet.id
+//                vc.isOwner = pet.isOwner
 //                navigationController?.pushViewController(vc, animated: true)
 //            }
-//        }
+            
+        }
+        
     }
     
     
