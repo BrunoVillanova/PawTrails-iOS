@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -124,16 +125,6 @@
                         <color key="textColor" red="0.7843137255" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="65K-Hr-1hp">
-                        <rect key="frame" x="40" y="389" width="249" height="40"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="40" id="dor-Eq-rlC"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <state key="normal" title="REPORT LOST">
-                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                    </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weight" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rvX-lx-gJs">
                         <rect key="frame" x="139" y="315" width="50" height="16"/>
                         <constraints>
@@ -165,12 +156,10 @@
                 <constraint firstItem="9DX-R1-rAT" firstAttribute="top" secondItem="rvX-lx-gJs" secondAttribute="bottom" constant="8" id="6Ks-ue-YiV"/>
                 <constraint firstItem="dTG-t3-Cjy" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="8a4-Eq-1gb"/>
                 <constraint firstItem="zOI-hy-McD" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="9q0-nf-052"/>
-                <constraint firstItem="65K-Hr-1hp" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="40" id="AWn-ex-rKO"/>
                 <constraint firstAttribute="trailing" secondItem="P7s-bK-Zsd" secondAttribute="trailing" constant="20" id="G4p-Yo-lXh"/>
                 <constraint firstItem="gZ4-aP-FIh" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="GHp-xk-2EK"/>
                 <constraint firstAttribute="trailing" secondItem="TL5-ev-jNu" secondAttribute="trailing" constant="20" id="IHr-7s-ZvE"/>
                 <constraint firstItem="PdD-sh-Ar5" firstAttribute="top" secondItem="YXA-8m-UMe" secondAttribute="bottom" constant="8" id="Ich-mu-BNG"/>
-                <constraint firstItem="65K-Hr-1hp" firstAttribute="top" secondItem="9ql-x2-LK0" secondAttribute="bottom" constant="30" id="KqW-5c-tWk"/>
                 <constraint firstItem="9ql-x2-LK0" firstAttribute="top" secondItem="Bkz-VS-W0O" secondAttribute="bottom" constant="8" id="Ln0-pW-49s"/>
                 <constraint firstItem="zOI-hy-McD" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="OiF-gS-Ksd"/>
                 <constraint firstItem="Bkz-VS-W0O" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="P9L-ZW-BWj"/>
@@ -178,7 +167,6 @@
                 <constraint firstItem="9ql-x2-LK0" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="Rxt-5l-yLp"/>
                 <constraint firstItem="rvX-lx-gJs" firstAttribute="top" secondItem="arv-Fh-HB9" secondAttribute="bottom" constant="8" id="S6L-Q3-6aB"/>
                 <constraint firstItem="zOI-hy-McD" firstAttribute="top" secondItem="SzH-Hi-o0p" secondAttribute="bottom" constant="16" id="SgD-vC-J0g"/>
-                <constraint firstAttribute="trailing" secondItem="65K-Hr-1hp" secondAttribute="trailing" constant="40" id="Vzl-83-zaO"/>
                 <constraint firstAttribute="trailing" secondItem="zOI-hy-McD" secondAttribute="trailing" constant="20" id="WNC-eB-zRA"/>
                 <constraint firstItem="TL5-ev-jNu" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="YZD-y5-eSn"/>
                 <constraint firstItem="rvX-lx-gJs" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="cLr-xY-wLV"/>
@@ -206,7 +194,6 @@
                 <outlet property="petBirthdayLabel" destination="P7s-bK-Zsd" id="dm4-kx-ANn"/>
                 <outlet property="petImage" destination="dTG-t3-Cjy" id="soU-to-cJm"/>
                 <outlet property="petName" destination="zOI-hy-McD" id="xrk-rd-Xs6"/>
-                <outlet property="reportLostBtn" destination="65K-Hr-1hp" id="qWI-Ob-JV0"/>
                 <outlet property="typeLabel" destination="YXA-8m-UMe" id="Oat-ap-H7h"/>
                 <outlet property="weightLabel" destination="9DX-R1-rAT" id="TK9-jn-DhZ"/>
             </connections>

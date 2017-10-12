@@ -22,12 +22,7 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
     var sliderLabel: UILabel?
     
 
-    
-    
     let icons = ["house-icon-dark-1x", "park-icon-dark-1x", "dogPlay-icon-dark-1x", "veterinarian-icon-dark-1x" , "travel-icon-dark-1x", "paw-icon-dark-1x"]
-
-
-    
    
     
     fileprivate var opened:CGFloat = 360.0, closed:CGFloat = 600
@@ -93,9 +88,11 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
         if let _ZBdropDownViews = ZBdropDownViews {
             let view = YNDropDownMenu(frame: CGRect(x: 0, y: 64, width: UIScreen.main.bounds.size.width, height: 38),
                             dropDownViews: _ZBdropDownViews, dropDownViewTitles: ["Show SafeZone Settings"])
-            view.setImageWhen(normal: UIImage(named: "arrow"), selected: UIImage(named: "arrow_sel"), disabled: UIImage(named: "arrow"))
-            view.setLabelColorWhen(normal: .black, selected: .black, disabled: .black)
-            view.setImageWhen(normal: UIImage(named: "arrow"), selectedTintColor: .clear, disabledTintColor: .black)
+            view.setImageWhen(normal: UIImage(named: "arrow-show-1x"), selected: UIImage(named: "arrow-show-1x"), disabled: UIImage(named: "arrow-show-1x"))
+            
+            
+//            view.setLabelColorWhen(normal: .black, selected: .black, disabled: .black)
+//            view.setImageWhen(normal: UIImage(named: "arrow-show-1x"), selectedTintColor: .clear, disabledTintColor: .black)
             view.bottomLine.backgroundColor = UIColor.black
             view.bottomLine.isHidden = false
             
@@ -133,9 +130,6 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
                     navigationController?.title = "SafeZone"
                     settingsView.nameTextField.text = safezone.name
                     shape = safezone.shape
-                    
-                    
-                
                     
                     if !isOwner {
                         view.isHidden = true
@@ -379,6 +373,7 @@ extension AddEditSafeZOneController: UICollectionViewDelegate, UICollectionViewD
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myCell", for: indexPath) as! IconCell
         cell.imageView.image = UIImage(named: icons[indexPath.item])
+        
         cell.backgroundColor = UIColor.groupTableViewBackground
         cell.shadow()
         return cell

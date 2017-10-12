@@ -27,15 +27,19 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
     fileprivate var petOwnerId = -2
     fileprivate var appUserId = -3
     
+    
+    var button = UIButton()
+
+    
+    let barButtonItem = UIBarButtonItem(image: UIImage(named:"switch-device-button-1x-png"), style: .plain, target: self, action: #selector(addTapped))
+    
      let presenter = PetPresenter()
 
     override func viewDidLoad() {
-        super.viewDidLoad()
 
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"switch-device-button-1x-png"), style: .plain, target: self, action: #selector(addTapped))
+        navigationItem.rightBarButtonItem = barButtonItem
 
- 
+
         presenter.attachView(self, pet:pet)
         
         if let pet = pet {
@@ -57,13 +61,13 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
         collectionView?.collectionViewLayout.invalidateLayout()
         setUpMenuBar()
         setupCollectionView()
-        addButton()
-        if !pet.isOwner {
-            button.isHidden = true
-        } else {
-            button.isHidden = false
-
-        }
+//        addButton()
+//        if !pet.isOwner {
+//            button.isHidden = true
+//        } else {
+//            button.isHidden = false
+//
+//        }
         
     }
     
@@ -75,12 +79,11 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
  
     
     // Floating button.
-    let button = UIButton()
 
-    fileprivate func addButton(){
+    fileprivate func addButtonWithSelectorAndImageNamed(selector: Selector, string: String ){
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(#imageLiteral(resourceName: "StopTripButton-1x-png"), for: .normal)
-        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        button.setImage(UIImage(named: string), for: .normal)
+        button.addTarget(self, action: selector, for: .touchUpInside)
         self.view.addSubview(button)
         button.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -5).isActive = true
         button.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -5).isActive = true
@@ -89,7 +92,14 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
     }
     
     
-    func buttonAction(sender: UIButton!) {
+
+    
+    
+    
+    
+    
+    
+    func addUserbuttonAction(sender: UIButton!) {
         if !pet.isOwner {
             self.alert(title: "", msg: "You cannot add user for this pet because you don't own it", type: .blue, disableTime: 5, handler: nil)
         } else {
@@ -99,6 +109,47 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
             }
         }
     }
+    
+    
+    
+    func addsaveZonebuttonAction(sender: UIButton!) {
+        if !pet.isOwner {
+            self.alert(title: "", msg: "You cannot add user for this pet because you don't own it", type: .blue, disableTime: 5, handler: nil)
+        } else {
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "AddEditSafeZOneController") as? AddEditSafeZOneController {
+                vc.petId = pet.id
+                vc.isOwner = pet.isOwner
+                navigationController?.pushViewController(vc, animated: true)
+            }
+
+        }
+    }
+    
+    func setUpGoal(sender: UIButton!) {
+        if !pet.isOwner {
+            self.alert(title: "", msg: "You cannot add user for this pet because you don't own it", type: .blue, disableTime: 5, handler: nil)
+        } else {
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "AddPetUserViewController") as? AddPetUserViewController {
+                vc.pet = pet
+                navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+    }
+    
+    
+    
+    func calnder(sender: UIButton!) {
+//        if !pet.isOwner {
+//            self.alert(title: "", msg: "You cannot add user for this pet because you don't own it", type: .blue, disableTime: 5, handler: nil)
+//        } else {
+//            if let vc = storyboard?.instantiateViewController(withIdentifier: "AddPetUserViewController") as? AddPetUserViewController {
+//                vc.pet = pet
+//                navigationController?.pushViewController(vc, animated: true)
+//            }
+//        }
+    }
+    
+    
     
 
     // To change Device
@@ -285,6 +336,9 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
         
         
         
+        let activityNib = UINib(nibName: "PetActivitiesCell", bundle: nil)
+        collectionView?.register(activityNib, forCellWithReuseIdentifier: "nib")
+        
         
         let nib = UINib(nibName: "PetProfileCollectionViewCell", bundle: nil)
         collectionView?.register(nib, forCellWithReuseIdentifier: "myCell")
@@ -337,15 +391,57 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 4
-
     }
     
+    
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+        if indexPath.item == 3 {
+            
+            if !pet.isOwner {
+                button.isHidden = true
+            } else {
+                button.removeTarget(self, action: #selector(setUpGoal(sender:)), for: .touchUpInside)
+                button.removeTarget(self, action: #selector(addsaveZonebuttonAction(sender:)), for: .touchUpInside)
+
+                addButtonWithSelectorAndImageNamed(selector: #selector(addUserbuttonAction(sender:)), string: "PauseTripButton-1x-png")
+                button.isHidden = false
+        }
+        }else if indexPath.item == 0 {
+          button.isHidden = true
+            
+        } else if indexPath.item == 1 {
+            if !pet.isOwner {
+                button.isHidden = true
+            } else {
+                
+                button.removeTarget(self, action: #selector(addUserbuttonAction(sender:)), for: .touchUpInside)
+                button.removeTarget(self, action: #selector(addsaveZonebuttonAction(sender:)), for: .touchUpInside)
+                
+                addButtonWithSelectorAndImageNamed(selector: #selector(setUpGoal(sender:)), string: "PauseTripButton-1x-png")
+                button.isHidden = false
+            }
+        }else if indexPath.item == 2 {
+            if !pet.isOwner {
+                button.isHidden = true
+            } else {
+                
+                button.removeTarget(self, action: #selector(addUserbuttonAction(sender:)), for: .touchUpInside)
+                button.removeTarget(self, action: #selector(setUpGoal(sender:)), for: .touchUpInside)
+                
+                addButtonWithSelectorAndImageNamed(selector: #selector(addsaveZonebuttonAction(sender:)), string: "PetLocationpng")
+                button.isHidden = false
+            }
+
+        }
+    }
  
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         
         if indexPath.item == 0 {
+
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myCell", for: indexPath) as! PetProfileCollectionViewCell
             cell.petBirthdayLabel.text = pet.birthday?.toStringShow
             cell.typeLabel.text = self.pet.typeString
@@ -360,14 +456,36 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
             }
             return cell
         } else if indexPath.item == 3 {
+
+
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ProfileCell
+
+            return cell
+        } else if indexPath.item == 1 {
+
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "nib", for: indexPath) as! PetActivitiesCell
+            
+                        let restingColors = UIColor(red: 153/255, green: 202/255, blue: 186/255, alpha: 1)
+                        let normalColors = UIColor(red: 211/255, green: 100/255, blue: 59/255, alpha: 1)
+                        let playingColors = UIColor(red: 67/255, green: 62/255, blue: 54/255, alpha: 1)
+                        let adventureColor = UIColor(red: 108/255, green: 176/255, blue: 255/255, alpha: 1)
+            
+            
+                        cell.adventureView.setChart(at: 0.9, color: adventureColor)
+                        cell.normalView.setChart(at: 0.5, color: normalColors)
+                        cell.playingView.setChart(at: 0.7, color: playingColors)
+                        cell.restingView.setChart(at: 0.8, color: restingColors)
+
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell3", for: indexPath) as! SafezZoneParentCell
+            cell.backgroundColor = UIColor.blue
+            
+            
             return cell
         }
         
-
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell3", for: indexPath) as! SafezZoneParentCell
-        cell.backgroundColor = UIColor.blue
-        return cell
+     
 
         
         

@@ -26,17 +26,11 @@ class PetProfileCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var weightLabel: UILabel!
     
   
-    @IBOutlet weak var reportLostBtn: UIButton!
 
     override func awakeFromNib() {
 
-        reportLostBtn.fullyroundedCorner()
-        reportLostBtn.backgroundColor = UIColor.primary
+   
     }
-    
-    @IBAction func reportLostPressed(_ sender: Any) {
-        
-        }
 
     
 }
