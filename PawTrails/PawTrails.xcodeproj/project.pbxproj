@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1511292C1F8E534100CDCC2D /* PTBasicAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1511292B1F8E534100CDCC2D /* PTBasicAnnotationView.swift */; };
 		15226D901F8D18EA007EEFF2 /* SocketIO+RxSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15226D8F1F8D18EA007EEFF2 /* SocketIO+RxSwift.swift */; };
 		440784491F8B85A1005E9E1B /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 440784481F8B85A1005E9E1B /* SettingsView.xib */; };
 		4407844B1F8B85E8005E9E1B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4407844A1F8B85E8005E9E1B /* SettingsView.swift */; };
@@ -177,6 +178,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1511292B1F8E534100CDCC2D /* PTBasicAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTBasicAnnotationView.swift; sourceTree = "<group>"; };
 		15226D8F1F8D18EA007EEFF2 /* SocketIO+RxSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SocketIO+RxSwift.swift"; path = "Extensions/SocketIO+RxSwift.swift"; sourceTree = "<group>"; };
 		1E2B813BA9CAE948174F2C71 /* Pods_PawTrailsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PawTrailsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		440784481F8B85A1005E9E1B /* SettingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsView.xib; sourceTree = "<group>"; };
@@ -378,6 +380,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1511292A1F8E52D900CDCC2D /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				1511292B1F8E534100CDCC2D /* PTBasicAnnotationView.swift */,
+			);
+			path = "Custom Views";
+			sourceTree = "<group>";
+		};
 		440CEE491E3B8D0700F58A09 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -473,6 +483,7 @@
 		4415FF411E3B822900A81B13 /* PawTrails */ = {
 			isa = PBXGroup;
 			children = (
+				1511292A1F8E52D900CDCC2D /* Custom Views */,
 				4415FF421E3B822900A81B13 /* AppDelegate.swift */,
 				440CEE4C1E3B8D3D00F58A09 /* Model */,
 				440CEE4A1E3B8D2500F58A09 /* View */,
@@ -894,13 +905,14 @@
 					4414AE671EA0DD5B004A5134 = {
 						CreatedOnToolsVersion = 8.3;
 						DevelopmentTeam = 7E2855LEH4;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 4415FF3E1E3B822900A81B13;
 					};
 					4415FF3E1E3B822900A81B13 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = V7JRLX587L;
-						LastSwiftMigration = 0820;
+						DevelopmentTeam = CQ878R6EW5;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -914,6 +926,7 @@
 					444721791F03F12A001DCDE1 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = DJBJW6R236;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 4415FF3E1E3B822900A81B13;
 					};
@@ -1231,6 +1244,7 @@
 				44251B0F1F0CD5870067F401 /* PetUserPresenter.swift in Sources */,
 				44251AE41F0CD54D0067F401 /* Extensions.swift in Sources */,
 				44251AF01F0CD55F0067F401 /* Messages.swift in Sources */,
+				1511292C1F8E534100CDCC2D /* PTBasicAnnotationView.swift in Sources */,
 				443E807A1F5D87EC008679FC /* SelectPetsVC.swift in Sources */,
 				444698851F6BC75C006EE4CD /* SelectPetView.swift in Sources */,
 				44251B3F1F0CD5DF0067F401 /* BirthdayViewController.swift in Sources */,
@@ -1492,7 +1506,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = V7JRLX587L;
+				DEVELOPMENT_TEAM = CQ878R6EW5;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1522,7 +1536,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = V7JRLX587L;
+				DEVELOPMENT_TEAM = CQ878R6EW5;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
