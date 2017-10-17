@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		1511292C1F8E534100CDCC2D /* PTBasicAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1511292B1F8E534100CDCC2D /* PTBasicAnnotationView.swift */; };
 		15226D901F8D18EA007EEFF2 /* SocketIO+RxSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15226D8F1F8D18EA007EEFF2 /* SocketIO+RxSwift.swift */; };
+		15CFDA191F962D4C00AC6A63 /* PTPetCalloutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15CFDA181F962D4C00AC6A63 /* PTPetCalloutView.xib */; };
+		15CFDA1B1F962DB300AC6A63 /* PTPetCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CFDA1A1F962DB300AC6A63 /* PTPetCalloutView.swift */; };
+		15CFDA1D1F963B2B00AC6A63 /* PawTrailsStyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CFDA1C1F963B2B00AC6A63 /* PawTrailsStyleKit.swift */; };
+		15CFDA1F1F963B7A00AC6A63 /* PTBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CFDA1E1F963B7A00AC6A63 /* PTBubbleView.swift */; };
 		440784491F8B85A1005E9E1B /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 440784481F8B85A1005E9E1B /* SettingsView.xib */; };
 		4407844B1F8B85E8005E9E1B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4407844A1F8B85E8005E9E1B /* SettingsView.swift */; };
 		4411113A1F698B05008D1468 /* ShareCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441111381F698B05008D1468 /* ShareCollectionViewCell.swift */; };
@@ -180,6 +184,10 @@
 /* Begin PBXFileReference section */
 		1511292B1F8E534100CDCC2D /* PTBasicAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTBasicAnnotationView.swift; sourceTree = "<group>"; };
 		15226D8F1F8D18EA007EEFF2 /* SocketIO+RxSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SocketIO+RxSwift.swift"; path = "Extensions/SocketIO+RxSwift.swift"; sourceTree = "<group>"; };
+		15CFDA181F962D4C00AC6A63 /* PTPetCalloutView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PTPetCalloutView.xib; sourceTree = "<group>"; };
+		15CFDA1A1F962DB300AC6A63 /* PTPetCalloutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTPetCalloutView.swift; sourceTree = "<group>"; };
+		15CFDA1C1F963B2B00AC6A63 /* PawTrailsStyleKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PawTrailsStyleKit.swift; sourceTree = "<group>"; };
+		15CFDA1E1F963B7A00AC6A63 /* PTBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTBubbleView.swift; sourceTree = "<group>"; };
 		1E2B813BA9CAE948174F2C71 /* Pods_PawTrailsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PawTrailsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		440784481F8B85A1005E9E1B /* SettingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsView.xib; sourceTree = "<group>"; };
 		4407844A1F8B85E8005E9E1B /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -383,7 +391,11 @@
 		1511292A1F8E52D900CDCC2D /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				15CFDA1C1F963B2B00AC6A63 /* PawTrailsStyleKit.swift */,
 				1511292B1F8E534100CDCC2D /* PTBasicAnnotationView.swift */,
+				15CFDA181F962D4C00AC6A63 /* PTPetCalloutView.xib */,
+				15CFDA1A1F962DB300AC6A63 /* PTPetCalloutView.swift */,
+				15CFDA1E1F963B7A00AC6A63 /* PTBubbleView.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -969,6 +981,7 @@
 				44251AD31F0CD5170067F401 /* GoogleSignIn.bundle in Resources */,
 				4411113B1F698B05008D1468 /* ShareCollectionViewCell.xib in Resources */,
 				44251B161F0CD5A90067F401 /* Main.storyboard in Resources */,
+				15CFDA191F962D4C00AC6A63 /* PTPetCalloutView.xib in Resources */,
 				44690B6B1F62891C00719911 /* PetProfileCollectionViewCell.xib in Resources */,
 				4464F12E1F8CBC1B00E0BBD7 /* IconCell.xib in Resources */,
 				44251AD11F0CD5170067F401 /* GoogleService-Info.plist in Resources */,
@@ -1171,6 +1184,7 @@
 				44251B6E1F0CD6130067F401 /* SocketIOManager.swift in Sources */,
 				44C7F7501E4CD3DA00171170 /* HomePresenter.swift in Sources */,
 				44251B881F0CD6210067F401 /* CDRepository.swift in Sources */,
+				15CFDA1F1F963B7A00AC6A63 /* PTBubbleView.swift in Sources */,
 				44251B0B1F0CD5870067F401 /* DeviceCodePresenter.swift in Sources */,
 				44251B471F0CD5DF0067F401 /* PetActivityTableViewController.swift in Sources */,
 				44251B0D1F0CD5870067F401 /* AddPetUserPresenter.swift in Sources */,
@@ -1215,6 +1229,7 @@
 				44251B7C1F0CD6130067F401 /* CDPetUser+CoreDataProperties.swift in Sources */,
 				44690B6D1F62963600719911 /* ProfilePetView.swift in Sources */,
 				44251B891F0CD6210067F401 /* CSVRepository.swift in Sources */,
+				15CFDA1B1F962DB300AC6A63 /* PTPetCalloutView.swift in Sources */,
 				44251B751F0CD6130067F401 /* CDBreed+CoreDataClass.swift in Sources */,
 				44EAB4611F615906006A64AE /* PetProfileCollectionViewController.swift in Sources */,
 				448C7CE81F87842E00BF7106 /* SafeZonePresenter.swift in Sources */,
@@ -1257,6 +1272,7 @@
 				44251B7A1F0CD6130067F401 /* CDPet+CoreDataProperties.swift in Sources */,
 				44251AE61F0CD54D0067F401 /* MapExtensions.swift in Sources */,
 				44251B731F0CD6130067F401 /* CDAddress+CoreDataClass.swift in Sources */,
+				15CFDA1D1F963B2B00AC6A63 /* PawTrailsStyleKit.swift in Sources */,
 				44FE723D1E4A2EF0007C7E24 /* DataManager.swift in Sources */,
 				44F239511EEEC1E70082FA36 /* SocketIOTestTableViewController.swift in Sources */,
 				4407844B1F8B85E8005E9E1B /* SettingsView.swift in Sources */,
