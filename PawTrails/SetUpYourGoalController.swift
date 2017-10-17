@@ -151,8 +151,15 @@ class SetUpYourGoalController: UIViewController {
     
     @IBAction func restingAction(_ sender: UISlider) {
         sender.maximumValue = 24 - (nomralSliderValue + playingSliderValue)
-        restingSliderValue = sender.value
-        restingSliderLabel?.text = "\(Int(sender.value)) H"
+        
+        
+        if sender.maximumValue == 0 {
+            restingSliderValue = sender.value
+        } else {
+            restingSliderValue = sender.value
+            restingSliderLabel?.text = "\(Int(sender.value)) H"
+        }
+        
 
     }
     

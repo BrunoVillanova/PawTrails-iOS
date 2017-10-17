@@ -334,6 +334,11 @@ extension UIColor {
         return UIColor(red: 206.0/255.0, green: 19.0/255.0, blue: 54.0/255.0, alpha: 1.0)
     }
     
+    
+    public static var secondPrimary: UIColor {
+        return UIColor(red: 190/255.0, green: 19.0/255.0, blue: 54.0/255.0, alpha: 1.0)
+    }
+    
     public static var secondary: UIColor {
         return UIColor.white
     }

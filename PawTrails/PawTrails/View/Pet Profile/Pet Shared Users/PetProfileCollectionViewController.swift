@@ -9,17 +9,12 @@
 import UIKit
 import MapKit
 
-
-
-
-
 class PetProfileCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, PetView {
     
     let cellId = "cellId"
     let titles = ["Profile", "Activity", "SafeZone", "Share"]
     
     var pet:Pet!
-
     var fromMap: Bool = false
     
     
@@ -29,17 +24,26 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
     
     
     var button = UIButton()
+    var button2 = UIButton()
 
     
     let barButtonItem = UIBarButtonItem(image: UIImage(named:"switch-device-button-1x-png"), style: .plain, target: self, action: #selector(addTapped))
     
      let presenter = PetPresenter()
+    
+    
+    lazy var datePicker: AirbnbDatePicker = {
+        let btn = AirbnbDatePicker()
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.delegate = self
+        return btn
+    }()
+
 
     override func viewDidLoad() {
 
+        
         navigationItem.rightBarButtonItem = barButtonItem
-
-
         presenter.attachView(self, pet:pet)
         
         if let pet = pet {
@@ -93,13 +97,22 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
     
     
 
+    fileprivate func addAnotherButton(selector: Selector, string: String ){
+        button2.translatesAutoresizingMaskIntoConstraints = false
+        button2.setImage(UIImage(named: string), for: .normal)
+        button2.addTarget(self, action: selector, for: .touchUpInside)
+        self.view.addSubview(button2)
+        button2.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -5).isActive = true
+        button2.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -60).isActive = true
+        button2.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        button2.heightAnchor.constraint(equalToConstant: 80).isActive = true
+    }
     
     
+  
     
     
-    
-    
-    func addUserbuttonAction(sender: UIButton!) {
+    func addUserbuttonAction(sender: UIButton) {
         if !pet.isOwner {
             self.alert(title: "", msg: "You cannot add user for this pet because you don't own it", type: .blue, disableTime: 5, handler: nil)
         } else {
@@ -112,7 +125,7 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
     
     
     
-    func addsaveZonebuttonAction(sender: UIButton!) {
+    func addsaveZonebuttonAction(sender: UIButton) {
         if !pet.isOwner {
             self.alert(title: "", msg: "You cannot add user for this pet because you don't own it", type: .blue, disableTime: 5, handler: nil)
         } else {
@@ -125,7 +138,7 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
         }
     }
     
-    func setUpGoal(sender: UIButton!) {
+    func setUpGoal(sender: UIButton) {
         if !pet.isOwner {
             self.alert(title: "", msg: "You cannot add user for this pet because you don't own it", type: .blue, disableTime: 5, handler: nil)
         } else {
@@ -401,40 +414,50 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
         if indexPath.item == 3 {
-            
+            button2.isHidden = true
+
             if !pet.isOwner {
                 button.isHidden = true
             } else {
+                button.isHidden = false
+
                 button.removeTarget(self, action: #selector(setUpGoal(sender:)), for: .touchUpInside)
                 button.removeTarget(self, action: #selector(addsaveZonebuttonAction(sender:)), for: .touchUpInside)
 
                 addButtonWithSelectorAndImageNamed(selector: #selector(addUserbuttonAction(sender:)), string: "PauseTripButton-1x-png")
-                button.isHidden = false
         }
         }else if indexPath.item == 0 {
-          button.isHidden = true
+            button2.isHidden = true
             
         } else if indexPath.item == 1 {
+            
+        
+            
+            
+            button2.isHidden = false
+
             if !pet.isOwner {
                 button.isHidden = true
             } else {
-                
+                button.isHidden = false
+
                 button.removeTarget(self, action: #selector(addUserbuttonAction(sender:)), for: .touchUpInside)
                 button.removeTarget(self, action: #selector(addsaveZonebuttonAction(sender:)), for: .touchUpInside)
                 
                 addButtonWithSelectorAndImageNamed(selector: #selector(setUpGoal(sender:)), string: "PauseTripButton-1x-png")
-                button.isHidden = false
             }
         }else if indexPath.item == 2 {
+            button2.isHidden = true
+
             if !pet.isOwner {
                 button.isHidden = true
             } else {
-                
+                button.isHidden = false
+
                 button.removeTarget(self, action: #selector(addUserbuttonAction(sender:)), for: .touchUpInside)
                 button.removeTarget(self, action: #selector(setUpGoal(sender:)), for: .touchUpInside)
                 
                 addButtonWithSelectorAndImageNamed(selector: #selector(addsaveZonebuttonAction(sender:)), string: "PetLocationpng")
-                button.isHidden = false
             }
 
         }
@@ -468,6 +491,14 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
         } else if indexPath.item == 1 {
 
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "nib", for: indexPath) as! PetActivitiesCell
+            
+            
+            
+            cell.addSubview(datePicker)
+            datePicker.centerXAnchor.constraint(equalTo: cell.centerXAnchor).isActive = true
+            datePicker.widthAnchor.constraint(equalTo: cell.widthAnchor, constant: -40).isActive = true
+            datePicker.heightAnchor.constraint(equalToConstant: 50).isActive = true
+            
             
                         let restingColors = UIColor(red: 153/255, green: 202/255, blue: 186/255, alpha: 1)
                         let normalColors = UIColor(red: 211/255, green: 100/255, blue: 59/255, alpha: 1)
