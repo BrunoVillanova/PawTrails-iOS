@@ -411,10 +411,10 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
     }
     
     
+    
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
         if indexPath.item == 3 {
-            button2.isHidden = true
 
             if !pet.isOwner {
                 button.isHidden = true
@@ -427,14 +427,10 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
                 addButtonWithSelectorAndImageNamed(selector: #selector(addUserbuttonAction(sender:)), string: "PauseTripButton-1x-png")
         }
         }else if indexPath.item == 0 {
-            button2.isHidden = true
+            button.isHidden = true
             
         } else if indexPath.item == 1 {
-            
-        
-            
-            
-            button2.isHidden = false
+
 
             if !pet.isOwner {
                 button.isHidden = true
@@ -491,9 +487,6 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
         } else if indexPath.item == 1 {
 
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "nib", for: indexPath) as! PetActivitiesCell
-            
-            
-            
             cell.addSubview(datePicker)
             datePicker.centerXAnchor.constraint(equalTo: cell.centerXAnchor).isActive = true
             datePicker.widthAnchor.constraint(equalTo: cell.widthAnchor, constant: -40).isActive = true
