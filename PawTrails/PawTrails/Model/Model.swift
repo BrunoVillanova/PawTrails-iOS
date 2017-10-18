@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyJSON
+import CoreLocation
 
 //MARK:- User
 
@@ -338,6 +339,26 @@ public class Point: NSObject, NSCoding {
             return self.latitude == point.latitude && self.longitude == point.longitude
         }
         return false
+    }
+}
+
+extension Point {
+    func getFullFormatedAddress(handler: @escaping (String?) -> Void) {
+        var address : String?
+        let location = CLLocation(latitude: self.latitude, longitude: self.longitude)
+        let geocoder = CLGeocoder()
+        
+        geocoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) in
+            
+            if let placemark = placemarks?[0] as CLPlacemark! {
+                if let formattedAddressLines = placemark.addressDictionary?["FormattedAddressLines"] as? [String] {
+                    address = formattedAddressLines.joined(separator: ", ")
+                }
+            }
+            
+            handler(address)
+        })
+        
     }
 }
 

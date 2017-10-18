@@ -5,7 +5,8 @@
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,6 +22,48 @@
                     <subviews>
                         <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="440-Y8-cNk" userLabel="Bubble View" customClass="PTBubbleView" customModule="PawTrails" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="176" height="114"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Csl-Pg-N2l" userLabel="Info View">
+                                    <rect key="frame" x="16" y="16" width="144" height="66"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BILLY" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jR4-gw-Sik" userLabel="Pet Name Label">
+                                            <rect key="frame" x="0.0" y="0.0" width="30" height="14"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <color key="textColor" red="0.82352941176470584" green="0.078431372549019607" blue="0.23921568627450979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="110" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sourh Ring Business Park, Kinsale Road, Cork" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BcN-b6-pZl" userLabel="Location Label">
+                                            <rect key="frame" x="0.0" y="30" width="108" height="36"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                            <color key="textColor" red="0.2627450980392157" green="0.2627450980392157" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eHm-lI-E0F" userLabel="Arrow Image View">
+                                            <rect key="frame" x="124" y="23" width="20" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="eHm-lI-E0F" secondAttribute="height" multiplier="1:1" id="9b7-Tc-2nf"/>
+                                                <constraint firstAttribute="width" constant="20" id="HeW-J7-id3"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="jR4-gw-Sik" firstAttribute="leading" secondItem="Csl-Pg-N2l" secondAttribute="leading" id="60d-QJ-fBp"/>
+                                        <constraint firstItem="eHm-lI-E0F" firstAttribute="centerY" secondItem="Csl-Pg-N2l" secondAttribute="centerY" id="DCB-As-CkY"/>
+                                        <constraint firstAttribute="bottom" secondItem="BcN-b6-pZl" secondAttribute="bottom" id="HGL-HE-LVm"/>
+                                        <constraint firstItem="jR4-gw-Sik" firstAttribute="top" secondItem="Csl-Pg-N2l" secondAttribute="top" id="HOv-fw-LvT"/>
+                                        <constraint firstItem="eHm-lI-E0F" firstAttribute="leading" secondItem="BcN-b6-pZl" secondAttribute="trailing" constant="16" id="P2W-ie-rzO"/>
+                                        <constraint firstAttribute="trailing" secondItem="eHm-lI-E0F" secondAttribute="trailing" id="TFw-fF-aum"/>
+                                        <constraint firstItem="BcN-b6-pZl" firstAttribute="leading" secondItem="Csl-Pg-N2l" secondAttribute="leading" id="p5J-k3-Kd3"/>
+                                        <constraint firstItem="BcN-b6-pZl" firstAttribute="top" relation="greaterThanOrEqual" secondItem="jR4-gw-Sik" secondAttribute="bottom" constant="8" id="tcW-Je-6mm"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="Csl-Pg-N2l" secondAttribute="trailing" constant="16" id="5RN-fx-gTQ"/>
+                                <constraint firstItem="Csl-Pg-N2l" firstAttribute="leading" secondItem="440-Y8-cNk" secondAttribute="leading" constant="16" id="Dbi-F0-OJs"/>
+                                <constraint firstItem="Csl-Pg-N2l" firstAttribute="top" secondItem="440-Y8-cNk" secondAttribute="top" constant="16" id="Dmg-N6-SN8"/>
+                                <constraint firstAttribute="bottom" secondItem="Csl-Pg-N2l" secondAttribute="bottom" constant="32" id="E5r-Ll-AeL"/>
+                            </constraints>
                         </view>
                     </subviews>
                     <constraints>
