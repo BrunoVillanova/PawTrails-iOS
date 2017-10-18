@@ -18,6 +18,7 @@ class SelectPetsCell: UICollectionViewCell {
     
     override func awakeFromNib() {
 
+        checkMarkView.setOn(false, animated: false)
     }
 
 }

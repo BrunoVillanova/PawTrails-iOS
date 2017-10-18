@@ -249,11 +249,11 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" distribution="equalCentering" alignment="center" spacing="75" translatesAutoresizingMaskIntoConstraints="NO" id="xau-qD-fWf">
-                                <rect key="frame" x="68" y="613" width="0.0" height="0.0"/>
+                                <rect key="frame" x="68" y="613" width="39" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KrK-rF-iHo">
-                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="24"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="39" height="24"/>
                                         <state key="normal" image="login_Googleplus"/>
                                         <connections>
                                             <action selector="googleLogin:" destination="wPd-hI-X1n" eventType="touchUpInside" id="kez-OR-S3R"/>
@@ -3931,7 +3931,7 @@
         <scene sceneID="VEw-Rb-phA">
             <objects>
                 <collectionViewController storyboardIdentifier="PetProfileCollectionViewController" hidesBottomBarWhenPushed="YES" id="dC2-DY-Utu" customClass="PetProfileCollectionViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="hoL-v4-Lq7">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="hoL-v4-Lq7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -4243,7 +4243,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="N6p-zK-4h7" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="My Pets" image="menu-mypets-1x-png" id="Tcz-oi-K7q"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="u5G-R1-d22">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="u5G-R1-d22">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -4262,7 +4262,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5Ay-dc-tYw" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Me" image="menu-me-1x-png" id="Rva-bM-rbO"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="n70-kN-BJe">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="n70-kN-BJe">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -4280,7 +4280,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9OU-Qn-OVQ" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gdP-7h-jVW">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="gdP-7h-jVW">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -4479,7 +4479,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="EKY-qb-x8M" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Tracking" image="menu-tracking-1x-png" id="Omy-bL-4vv"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zqP-Wi-dBa">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="zqP-Wi-dBa">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -4497,7 +4497,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nw8-QG-a4h" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cIs-8x-udw">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="cIs-8x-udw">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -4515,7 +4515,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jFO-5u-YF9" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="TCL-UK-30W">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="TCL-UK-30W">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -4896,7 +4896,7 @@ finish the Adventure?</string>
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tnl-0j-gBx" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WO4-RM-1Vi">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="WO4-RM-1Vi">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -4914,7 +4914,7 @@ finish the Adventure?</string>
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Bly-KD-ElT" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="g3g-AE-qS3">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="g3g-AE-qS3">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -4932,7 +4932,7 @@ finish the Adventure?</string>
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5lk-Ng-6Eu" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tqJ-ri-IQh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="tqJ-ri-IQh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -4951,7 +4951,7 @@ finish the Adventure?</string>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Aeg-Rl-4VO" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Guides" image="menu-guides-1x-png" id="hGg-O5-vKk"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="J7c-B6-lkF">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="J7c-B6-lkF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -5127,12 +5127,12 @@ finish the Adventure?</string>
                     <connections>
                         <outlet property="collectionView" destination="dkV-CM-pBX" id="mPw-tB-AR8"/>
                         <outlet property="startbtn" destination="6wV-ft-2LA" id="nOX-e3-tuc"/>
-                        <segue destination="RTw-SS-YCG" kind="show" identifier="show" id="dfD-7t-lD6"/>
+                        <segue destination="poM-ls-eBD" kind="show" identifier="show" id="ZVk-ej-kKQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NAs-r2-eSG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4492" y="3806"/>
+            <point key="canvasLocation" x="-3788" y="3806"/>
         </scene>
         <!--Recommandation-->
         <scene sceneID="Kly-8F-YHf">
@@ -5148,9 +5148,9 @@ finish the Adventure?</string>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Recommandation" id="ywV-0k-emE">
-                        <barButtonItem key="leftBarButtonItem" title="Back" id="bqa-Xt-lFd">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="0hz-Ie-NgR">
                             <connections>
-                                <action selector="btnPressed:" destination="poM-ls-eBD" id="IdT-NN-F6G"/>
+                                <action selector="btnPressed:" destination="poM-ls-eBD" id="Urk-xR-PbI"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -5164,7 +5164,7 @@ finish the Adventure?</string>
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9xm-Fr-8aE" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ors-iA-44c">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ors-iA-44c">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -5176,24 +5176,6 @@ finish the Adventure?</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x2V-sy-zxv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-5431" y="3806"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="jZm-2a-91b">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RTw-SS-YCG" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cvU-Sj-UwD">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="poM-ls-eBD" kind="relationship" relationship="rootViewController" id="WLr-Na-M4y"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rJf-WH-YC9" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-3374" y="3784"/>
         </scene>
     </scenes>
     <resources>

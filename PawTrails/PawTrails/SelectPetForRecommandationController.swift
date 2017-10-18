@@ -24,7 +24,7 @@ class SelectPetForRecommandationController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+ 
         
         refreshControl.backgroundColor = UIColor.secondary
         refreshControl.tintColor = UIColor.primary
@@ -65,6 +65,8 @@ class SelectPetForRecommandationController: UIViewController {
         } else {
             print("No index were found")
         }
+        
+
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -85,14 +87,7 @@ class SelectPetForRecommandationController: UIViewController {
     }
     @IBAction func startBtnPressed(_ sender: UIButton) {
         performSegue(withIdentifier: "show", sender: self)
-        
         clearOnAppearance()
-        if var selectedItem = collectionView.indexPathsForSelectedItems {
-            selectedItem.removeAll()
-        } else {
-            print("No index were found")
-        }
-
     }
     
     
@@ -104,8 +99,7 @@ class SelectPetForRecommandationController: UIViewController {
                 if let index = self.collectionView.indexPathsForSelectedItems?.first {
                     let pet = presenter.pets[index.item]
                     destination.pet = pet
-                    let backItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backBtnPressed(_sender:)))
-                    navigationItem.backBarButtonItem = backItem
+                  
                     clearOnAppearance()
                     self.startbtn.isEnabled = false
                 }
@@ -113,10 +107,7 @@ class SelectPetForRecommandationController: UIViewController {
         }
     }
     
-    func backBtnPressed(_sender: UIBarButtonItem) {
-        
-        
-    }
+  
 }
 
 
