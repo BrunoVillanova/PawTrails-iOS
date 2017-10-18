@@ -229,15 +229,9 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
             let (lat, long) = (currentRegion.center.latitude, currentRegion.center.longitude)
             let coordinate =  CLLocationCoordinate2D(latitude: lat, longitude: long)
             map.centerOn(coordinate, with: miles, animated: true)
-
 }
-    
 
     
-    
-    
-    
-  
     
     func updateFenceDistance() {
         if let fence = fence {

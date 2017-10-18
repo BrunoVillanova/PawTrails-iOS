@@ -428,7 +428,7 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
         }
         }else if indexPath.item == 0 {
             button.isHidden = true
-            
+    
         } else if indexPath.item == 1 {
 
 
@@ -498,7 +498,6 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
                         let playingColors = UIColor(red: 67/255, green: 62/255, blue: 54/255, alpha: 1)
                         let adventureColor = UIColor(red: 108/255, green: 176/255, blue: 255/255, alpha: 1)
             
-            
                         cell.adventureView.setChart(at: 0.9, color: adventureColor)
                         cell.normalView.setChart(at: 0.5, color: normalColors)
                         cell.playingView.setChart(at: 0.7, color: playingColors)
@@ -508,15 +507,8 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell3", for: indexPath) as! SafezZoneParentCell
             cell.backgroundColor = UIColor.blue
-            
-            
             return cell
         }
-        
-     
-
-        
-        
    }
     
     

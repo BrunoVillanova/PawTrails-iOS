@@ -17,6 +17,8 @@ class EmailVerificationViewController: UIViewController, EmailVerificationView {
     
     fileprivate let presenter = EmailVerificationPresenter()
     
+    
+    
     var email:String!
     var password: String!
     

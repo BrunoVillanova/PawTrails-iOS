@@ -22,6 +22,9 @@
 		4414AE7B1EA0DD8C004A5134 /* DataManagerUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4414AE761EA0DD8C004A5134 /* DataManagerUserTests.swift */; };
 		4415FF431E3B822900A81B13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4415FF421E3B822900A81B13 /* AppDelegate.swift */; };
 		441CEBED1EE16F8F00A37877 /* DataManagerPetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441CEBEC1EE16F8F00A37877 /* DataManagerPetTests.swift */; };
+		44223B531F97483800D8CA1E /* RecommandationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44223B521F97483800D8CA1E /* RecommandationController.swift */; };
+		44223B551F97526500D8CA1E /* SelectPetForRecommandationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44223B541F97526500D8CA1E /* SelectPetForRecommandationController.swift */; };
+		44223B571F9760E500D8CA1E /* QuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44223B561F9760E500D8CA1E /* QuestionsViewController.swift */; };
 		4424DCF91E8E9F2300ACDF07 /* UserProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4424DCF81E8E9F2300ACDF07 /* UserProfileTableViewController.swift */; };
 		4424DCFD1E8E9F9400ACDF07 /* PetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4424DCFC1E8E9F9400ACDF07 /* PetsViewController.swift */; };
 		4424DCFF1E8EA1D900ACDF07 /* UserProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4424DCFE1E8EA1D900ACDF07 /* UserProfilePresenter.swift */; };
@@ -187,7 +190,7 @@
 /* Begin PBXFileReference section */
 		15226D8F1F8D18EA007EEFF2 /* SocketIO+RxSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SocketIO+RxSwift.swift"; path = "Extensions/SocketIO+RxSwift.swift"; sourceTree = "<group>"; };
 		1E2B813BA9CAE948174F2C71 /* Pods_PawTrailsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PawTrailsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		440067C81F8E485800D8B89E /* PieChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieChart.swift; sourceTree = "<group>"; };
+		440067C81F8E485800D8B89E /* PieChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PieChart.swift; path = ../PieChart.swift; sourceTree = "<group>"; };
 		440067D31F8E5E6600D8B89E /* PetActivitiesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetActivitiesCell.swift; sourceTree = "<group>"; };
 		440067D41F8E5E6600D8B89E /* PetActivitiesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PetActivitiesCell.xib; sourceTree = "<group>"; };
 		440784481F8B85A1005E9E1B /* SettingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsView.xib; sourceTree = "<group>"; };
@@ -204,6 +207,9 @@
 		4415FF3F1E3B822900A81B13 /* PawTrails.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PawTrails.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4415FF421E3B822900A81B13 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		441CEBEC1EE16F8F00A37877 /* DataManagerPetTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerPetTests.swift; sourceTree = "<group>"; };
+		44223B521F97483800D8CA1E /* RecommandationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommandationController.swift; sourceTree = "<group>"; };
+		44223B541F97526500D8CA1E /* SelectPetForRecommandationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPetForRecommandationController.swift; sourceTree = "<group>"; };
+		44223B561F9760E500D8CA1E /* QuestionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionsViewController.swift; sourceTree = "<group>"; };
 		4424DCF81E8E9F2300ACDF07 /* UserProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserProfileTableViewController.swift; path = View/UserProfileTableViewController.swift; sourceTree = "<group>"; };
 		4424DCFC1E8E9F9400ACDF07 /* PetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetsViewController.swift; path = View/PetsViewController.swift; sourceTree = "<group>"; };
 		4424DCFE1E8EA1D900ACDF07 /* UserProfilePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserProfilePresenter.swift; path = Presenter/UserProfilePresenter.swift; sourceTree = "<group>"; };
@@ -434,6 +440,7 @@
 				4424DCF81E8E9F2300ACDF07 /* UserProfileTableViewController.swift */,
 				443E80741F5D4F21008679FC /* MapViewController.swift */,
 				443E80761F5D53D5008679FC /* PetsCollectionViewCell.swift */,
+				44223B511F97480700D8CA1E /* Recommandation */,
 				441A0D4B1E55A5A500D02CE4 /* Auth */,
 				44251B1F1F0CD5DF0067F401 /* User Profile */,
 				44251B291F0CD5DF0067F401 /* Pet Profile */,
@@ -541,6 +548,16 @@
 			name = Repositories;
 			sourceTree = "<group>";
 		};
+		44223B511F97480700D8CA1E /* Recommandation */ = {
+			isa = PBXGroup;
+			children = (
+				44223B521F97483800D8CA1E /* RecommandationController.swift */,
+				44223B541F97526500D8CA1E /* SelectPetForRecommandationController.swift */,
+				44223B561F9760E500D8CA1E /* QuestionsViewController.swift */,
+			);
+			name = Recommandation;
+			sourceTree = "<group>";
+		};
 		44251B101F0CD5A90067F401 /* Base.lproj */ = {
 			isa = PBXGroup;
 			children = (
@@ -586,7 +603,6 @@
 				440067C71F8E2C7300D8B89E /* PetProfilePage */,
 				44251B2A1F0CD5DF0067F401 /* Pet SafeZones */,
 				44251B2C1F0CD5DF0067F401 /* Pet Shared Users */,
-				440067C81F8E485800D8B89E /* PieChart.swift */,
 			);
 			name = "Pet Profile";
 			path = "View/Pet Profile";
@@ -839,6 +855,7 @@
 		44EAB4661F61880C006A64AE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				440067C81F8E485800D8B89E /* PieChart.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1218,8 +1235,10 @@
 				44251B551F0CD5FE0067F401 /* Parsers.swift in Sources */,
 				44251B711F0CD6130067F401 /* CoreDataManager.swift in Sources */,
 				44475ADB1F5960B800D41AAA /* SignUpViewController.swift in Sources */,
+				44223B551F97526500D8CA1E /* SelectPetForRecommandationController.swift in Sources */,
 				44251B0C1F0CD5870067F401 /* AddEditSafeZonePresenter.swift in Sources */,
 				44251B3E1F0CD5DF0067F401 /* AddressTableViewController.swift in Sources */,
+				44223B531F97483800D8CA1E /* RecommandationController.swift in Sources */,
 				44251B761F0CD6130067F401 /* CDBreed+CoreDataProperties.swift in Sources */,
 				442531371F6047290017D21A /* FinishAdventureVC.swift in Sources */,
 				44251B7D1F0CD6130067F401 /* CDPhone+CoreDataClass.swift in Sources */,
@@ -1233,6 +1252,7 @@
 				442531311F5FE6FF0017D21A /* TripScreenViewController.swift in Sources */,
 				44251B3D1F0CD5DF0067F401 /* EditUserProfileTableViewController.swift in Sources */,
 				44251B011F0CD5740067F401 /* PasswordRecoveryPresenter.swift in Sources */,
+				44223B571F9760E500D8CA1E /* QuestionsViewController.swift in Sources */,
 				443E80771F5D53D5008679FC /* PetsCollectionViewCell.swift in Sources */,
 				44251AE51F0CD54D0067F401 /* ModelExtensions.swift in Sources */,
 				446607C01F95FF4C00833683 /* AirbnbDatePickerMonthHeader.swift in Sources */,

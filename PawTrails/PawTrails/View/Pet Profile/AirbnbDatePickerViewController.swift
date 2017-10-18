@@ -357,6 +357,8 @@ public class AirbnbDatePickerViewController: UICollectionViewController {
             startDateIndexPath = indexPath
             
         } else if selectedEndDate == nil {
+            
+            
             selectedEndDate = selectedDate
             endDateIndexPath = indexPath
             
