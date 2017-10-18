@@ -15,6 +15,7 @@ class PetActivitiesCell: UICollectionViewCell {
     @IBOutlet weak var playingView: CircleChart!
     @IBOutlet weak var adventureView: CircleChart!
     
+    @IBOutlet weak var livelyView: CircleChart!
     override func awakeFromNib() {
         super.awakeFromNib()
     }

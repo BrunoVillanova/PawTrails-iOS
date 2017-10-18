@@ -498,10 +498,14 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
                         let playingColors = UIColor(red: 67/255, green: 62/255, blue: 54/255, alpha: 1)
                         let adventureColor = UIColor(red: 108/255, green: 176/255, blue: 255/255, alpha: 1)
             
-                        cell.adventureView.setChart(at: 0.9, color: adventureColor)
-                        cell.normalView.setChart(at: 0.5, color: normalColors)
-                        cell.playingView.setChart(at: 0.7, color: playingColors)
-                        cell.restingView.setChart(at: 0.8, color: restingColors)
+            
+            
+                        cell.adventureView.setChart(at: 0.9, color: adventureColor, text: "min")
+                        cell.normalView.setChart(at: 0.5, color: normalColors, text: "min")
+                        cell.playingView.setChart(at: 0.7, color: playingColors, text: "km")
+                        cell.restingView.setChart(at: 0.8, color: restingColors, text: "min")
+                        cell.livelyView.setChart(at: 0.5, color: normalColors, text: "min")
+    
 
             return cell
         } else {

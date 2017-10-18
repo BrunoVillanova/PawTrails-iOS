@@ -31,11 +31,7 @@ class SelectPetForRecommandationController: UIViewController {
         refreshControl.addTarget(self, action: #selector(reloadPetsAPI), for: .valueChanged)
         collectionView.addSubview(refreshControl)
         
-
-        
-        startbtn.isEnabled = false
         startbtn.layer.cornerRadius = 20
-        startbtn.backgroundColor = UIColor.gray
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -57,7 +53,10 @@ class SelectPetForRecommandationController: UIViewController {
 
     
     override func viewWillAppear(_ animated: Bool) {
+        collectionView.allowsMultipleSelection = false
         startbtn.isEnabled = false
+        startbtn.backgroundColor = UIColor.gray
+
         clearOnAppearance()
         reloadPets()
         presenter.startPetsListUpdates()

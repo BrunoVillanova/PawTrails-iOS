@@ -34,7 +34,10 @@ class SetUpYourGoalController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
+        adventureSlider.maximumValue = 200
+        playngSlider.maximumValue = 24
+        
         restToDefult.backgroundColor = UIColor.primary
         restToDefult.fullyroundedCorner()
         
@@ -72,7 +75,6 @@ class SetUpYourGoalController: UIViewController {
 
             handleView.addSubview(label)
             self.adventureSlidelabel = label
-//            let value = self.adventureSlider.value
             self.adventureSlidelabel?.text = "\(adventureSliderValue)"
         }
         
@@ -105,7 +107,6 @@ class SetUpYourGoalController: UIViewController {
 
             
             self.restingSliderLabel = label
-//            let value = self.restingGoalSlider.value
             self.restingSliderLabel?.text = "\(restingSliderValue)"
         }
         
@@ -133,15 +134,13 @@ class SetUpYourGoalController: UIViewController {
     @IBAction func adventureAction(_ sender: UISlider) {
         
         adventureSliderValue = sender.value
-        adventureSlidelabel?.text = "\(Int(sender.value)) H"
+        adventureSlidelabel?.text = "\(Int(sender.value)) km"
         
       
     }
     
     @IBAction func playingAction(_ sender: UISlider) {
         
-        sender.maximumValue = 24 - (restingSliderValue + nomralSliderValue)
-
         playingSliderValue = sender.value
         playingSliderLabel?.text = "\(Int(sender.value)) H"
 

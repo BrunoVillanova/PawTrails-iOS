@@ -69,8 +69,7 @@ public class AirbnbDatePicker: UIView, AirbnbDatePickerDelegate {
         let datePickerViewController = AirbnbDatePickerViewController(dateFrom: selectedStartDate, dateTo: selectedEndDate)
         datePickerViewController.delegate = self
         let navigationController = UINavigationController(rootViewController: datePickerViewController)
-        
-        
+    
         delegate?.present(navigationController, animated: true, completion: nil)
         
         

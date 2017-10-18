@@ -182,7 +182,6 @@ class CDRepository {
         CoreDataManager.instance.upsert(.pet, with: ["id":pet.id]) { (object) in
             
             if let cdPet = object as? CDPet {
-                
                 cdPet.name = pet.name
                 cdPet.weight = pet.weight ?? 0.0
                 cdPet.neutered = pet.neutered

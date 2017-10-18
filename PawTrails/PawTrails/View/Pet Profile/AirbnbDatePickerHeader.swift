@@ -20,7 +20,6 @@ class AirbnbDatePickerHeader: UIView {
                 startDayLabel.text = "\(dateDayNameFormat.string(from: date)),"
                 startDateLabel.text = dateMonthYearFormat.string(from: date)
                 
-                
             } else {
                 startDayLabel.text = "Start"
                 startDateLabel.text = "Date"

@@ -65,14 +65,13 @@ class CircleChart: UIView {
         
     }
     
-    func setChart(at p: CGFloat, color: UIColor) {
+    func setChart(at p: CGFloat, color: UIColor, text: String) {
 
         percent = p
-        
         circlee.strokeColor = color.cgColor
         percentLabel.textColor = color
-
-        percentLabel.text = "\(percent * 100) mins"
+        let number: Float = Float(percent * 100)
+        percentLabel.text = "\(number.cleanValue) \(text)"
 
         if p == 0 {
             circlee.path = nil
@@ -93,4 +92,14 @@ class CircleChart: UIView {
         }
     }
     
+    
+     
+}
+
+extension Float
+{
+    var cleanValue: String
+    {
+        return self.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String(self)
+    }
 }
