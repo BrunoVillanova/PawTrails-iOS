@@ -24,7 +24,7 @@ class SelectPetForRecommandationController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
- 
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: nil)
         
         refreshControl.backgroundColor = UIColor.secondary
         refreshControl.tintColor = UIColor.primary
@@ -95,23 +95,16 @@ class SelectPetForRecommandationController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "show"{
             if let destination = segue.destination as? QuestionsViewController{
-                
                 if let index = self.collectionView.indexPathsForSelectedItems?.first {
                     let pet = presenter.pets[index.item]
                     destination.pet = pet
-                  
                     clearOnAppearance()
                     self.startbtn.isEnabled = false
                 }
             }
         }
     }
-    
-  
 }
-
-
-
 
 
 extension SelectPetForRecommandationController: PetsView {
@@ -182,6 +175,7 @@ extension SelectPetForRecommandationController:  UICollectionViewDataSource, UIC
             cell.petImage.circle()
             cell.checkMarkView.isEnabled = false
             cell.checkMarkView.isUserInteractionEnabled = false
+            cell.checkMarkView.setOn(false, animated: false)
         } else {
             cell.petTitle.text = ""
             cell.petImage.image = UIImage(named: "")
@@ -209,9 +203,5 @@ extension SelectPetForRecommandationController:  UICollectionViewDataSource, UIC
     }
  
 
-    
-    
-    
-    
     
 }

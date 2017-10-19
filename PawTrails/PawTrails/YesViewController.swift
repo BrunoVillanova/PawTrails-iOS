@@ -1,5 +1,5 @@
 //
-//  QuestionsViewController.swift
+//  YesViewController.swift
 //  PawTrails
 //
 //  Created by Marc Perello on 19/10/2017.
@@ -8,18 +8,19 @@
 
 import UIKit
 
-class QuestionsViewController: UIViewController {
+class YesViewController: UIViewController {
     var pet: Pet!
+    var bscScroe: String?
+    var weight: String?
     
     
-
     @IBOutlet weak var collectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         collectionView.delegate = self
         collectionView.dataSource = self
-//        collectionView.register(questionCells.self, forCellWithReuseIdentifier: "cell")
+        //        collectionView.register(questionCells.self, forCellWithReuseIdentifier: "cell")
         
         self.navigationItem.title = "Recommandation"
         collectionView.contentInset.left = 15
@@ -30,7 +31,7 @@ class QuestionsViewController: UIViewController {
 }
 
 
-extension QuestionsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension YesViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 2
@@ -43,7 +44,7 @@ extension QuestionsViewController: UICollectionViewDelegate, UICollectionViewDat
         cell.checkMark.isEnabled = false
         cell.checkMark.isUserInteractionEnabled = false
         cell.checkMark.setOn(false, animated: false)
-
+        
         return cell
         
     }
@@ -55,13 +56,18 @@ extension QuestionsViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.item == 0 {
             let cell = collectionView.cellForItem(at: indexPath) as! questionCells
+            self.bscScroe = "BCS 1"
+            self.weight = "Very thin"
             cell.checkMark.setOn(true, animated: false)
-            performSegue(withIdentifier: "yes", sender: self)
-
+            self.performSegue(withIdentifier: "result", sender: self)
+            
         } else {
+            
+            self.bscScroe = "BCS 2"
+            self.weight = "Underweight"
             let cell = collectionView.cellForItem(at: indexPath) as! questionCells
             cell.checkMark.setOn(true, animated: false)
-            performSegue(withIdentifier: "no", sender: self)
+            self.performSegue(withIdentifier: "result", sender: self)
 
         }
     }
@@ -74,22 +80,18 @@ extension QuestionsViewController: UICollectionViewDelegate, UICollectionViewDat
             let cell = collectionView.cellForItem(at: indexPath) as! questionCells
             cell.checkMark.setOn(false, animated: false)
         }
-
+        
     }
     
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "yes"{
-            if let destination = segue.destination as? YesViewController{
+        if segue.identifier == "result" {
+            if let destination = segue.destination as? ResultViewController {
                 destination.pet = self.pet
-            }
-        } else if segue.identifier == "no" {
-            if let destination = segue.destination as? NoViewController{
-                destination.pet = self.pet
+                destination.bscText = self.bscScroe
+                destination.weight = self.weight
             }
         }
     }
-    
     
 }
 

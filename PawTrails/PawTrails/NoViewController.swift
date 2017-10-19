@@ -1,5 +1,5 @@
 //
-//  QuestionsViewController.swift
+//  NoViewController.swift
 //  PawTrails
 //
 //  Created by Marc Perello on 19/10/2017.
@@ -8,29 +8,32 @@
 
 import UIKit
 
-class QuestionsViewController: UIViewController {
+class NoViewController: UIViewController {
     var pet: Pet!
     
     
-
+    
     @IBOutlet weak var collectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         collectionView.delegate = self
         collectionView.dataSource = self
-//        collectionView.register(questionCells.self, forCellWithReuseIdentifier: "cell")
+        //        collectionView.register(questionCells.self, forCellWithReuseIdentifier: "cell")
         
         self.navigationItem.title = "Recommandation"
         collectionView.contentInset.left = 15
         collectionView.contentInset.right = 15
         collectionView.allowsMultipleSelection = false
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: nil)
+
+        
+        
     }
 }
 
 
-extension QuestionsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension NoViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 2
@@ -43,7 +46,7 @@ extension QuestionsViewController: UICollectionViewDelegate, UICollectionViewDat
         cell.checkMark.isEnabled = false
         cell.checkMark.isUserInteractionEnabled = false
         cell.checkMark.setOn(false, animated: false)
-
+        
         return cell
         
     }
@@ -56,13 +59,9 @@ extension QuestionsViewController: UICollectionViewDelegate, UICollectionViewDat
         if indexPath.item == 0 {
             let cell = collectionView.cellForItem(at: indexPath) as! questionCells
             cell.checkMark.setOn(true, animated: false)
-            performSegue(withIdentifier: "yes", sender: self)
-
         } else {
             let cell = collectionView.cellForItem(at: indexPath) as! questionCells
             cell.checkMark.setOn(true, animated: false)
-            performSegue(withIdentifier: "no", sender: self)
-
         }
     }
     
@@ -74,22 +73,8 @@ extension QuestionsViewController: UICollectionViewDelegate, UICollectionViewDat
             let cell = collectionView.cellForItem(at: indexPath) as! questionCells
             cell.checkMark.setOn(false, animated: false)
         }
-
+        
     }
-    
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "yes"{
-            if let destination = segue.destination as? YesViewController{
-                destination.pet = self.pet
-            }
-        } else if segue.identifier == "no" {
-            if let destination = segue.destination as? NoViewController{
-                destination.pet = self.pet
-            }
-        }
-    }
-    
     
 }
 

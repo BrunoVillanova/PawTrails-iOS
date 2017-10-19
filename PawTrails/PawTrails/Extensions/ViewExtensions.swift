@@ -407,7 +407,7 @@ extension UIView {
         self.clipsToBounds = true
     }
     
-    func border(color: UIColor = UIColor.blue, width: CGFloat = 1.0) {
+    func border(color: UIColor, width: CGFloat) {
         self.layer.borderWidth = width
         self.layer.borderColor = color.cgColor
         self.layer.masksToBounds = true
