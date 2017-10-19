@@ -26,6 +26,8 @@
 		441858E51F98DDD8003710A8 /* YesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441858E41F98DDD8003710A8 /* YesViewController.swift */; };
 		441858E71F98DDE9003710A8 /* NoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441858E61F98DDE9003710A8 /* NoViewController.swift */; };
 		441858E91F98EC7E003710A8 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441858E81F98EC7E003710A8 /* ResultViewController.swift */; };
+		441858EB1F98FA85003710A8 /* BCS3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441858EA1F98FA85003710A8 /* BCS3ViewController.swift */; };
+		441858ED1F98FAA1003710A8 /* BSC4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441858EC1F98FAA1003710A8 /* BSC4ViewController.swift */; };
 		441CEBED1EE16F8F00A37877 /* DataManagerPetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441CEBEC1EE16F8F00A37877 /* DataManagerPetTests.swift */; };
 		44223B531F97483800D8CA1E /* RecommandationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44223B521F97483800D8CA1E /* RecommandationController.swift */; };
 		44223B551F97526500D8CA1E /* SelectPetForRecommandationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44223B541F97526500D8CA1E /* SelectPetForRecommandationController.swift */; };
@@ -215,6 +217,8 @@
 		441858E41F98DDD8003710A8 /* YesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YesViewController.swift; sourceTree = "<group>"; };
 		441858E61F98DDE9003710A8 /* NoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoViewController.swift; sourceTree = "<group>"; };
 		441858E81F98EC7E003710A8 /* ResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
+		441858EA1F98FA85003710A8 /* BCS3ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCS3ViewController.swift; sourceTree = "<group>"; };
+		441858EC1F98FAA1003710A8 /* BSC4ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BSC4ViewController.swift; sourceTree = "<group>"; };
 		441CEBEC1EE16F8F00A37877 /* DataManagerPetTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerPetTests.swift; sourceTree = "<group>"; };
 		44223B521F97483800D8CA1E /* RecommandationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommandationController.swift; sourceTree = "<group>"; };
 		44223B541F97526500D8CA1E /* SelectPetForRecommandationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPetForRecommandationController.swift; sourceTree = "<group>"; };
@@ -566,6 +570,8 @@
 				441858E41F98DDD8003710A8 /* YesViewController.swift */,
 				441858E61F98DDE9003710A8 /* NoViewController.swift */,
 				441858E81F98EC7E003710A8 /* ResultViewController.swift */,
+				441858EA1F98FA85003710A8 /* BCS3ViewController.swift */,
+				441858EC1F98FAA1003710A8 /* BSC4ViewController.swift */,
 			);
 			name = Recommandation;
 			sourceTree = "<group>";
@@ -1278,6 +1284,7 @@
 				44EAB45F1F614095006A64AE /* JoinTripVC.swift in Sources */,
 				44251B7E1F0CD6130067F401 /* CDPhone+CoreDataProperties.swift in Sources */,
 				44251B4B1F0CD5DF0067F401 /* PetBirthdayTableViewController.swift in Sources */,
+				441858EB1F98FA85003710A8 /* BCS3ViewController.swift in Sources */,
 				44251B1D1F0CD5BD0067F401 /* InitialViewController.swift in Sources */,
 				44251B4D1F0CD5DF0067F401 /* PetGenderTableViewController.swift in Sources */,
 				44251B411F0CD5DF0067F401 /* GenderTableViewController.swift in Sources */,
@@ -1324,6 +1331,7 @@
 				446607BE1F95FF4C00833683 /* AirbnbDatePickerFooter.swift in Sources */,
 				443E807A1F5D87EC008679FC /* SelectPetsVC.swift in Sources */,
 				444698851F6BC75C006EE4CD /* SelectPetView.swift in Sources */,
+				441858ED1F98FAA1003710A8 /* BSC4ViewController.swift in Sources */,
 				44251B3F1F0CD5DF0067F401 /* BirthdayViewController.swift in Sources */,
 				44251B801F0CD6130067F401 /* CDSafeZone+CoreDataProperties.swift in Sources */,
 				4424DCFF1E8EA1D900ACDF07 /* UserProfilePresenter.swift in Sources */,

@@ -780,7 +780,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Profile Photo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1MH-Z2-KXM">
-                                                    <rect key="frame" x="13" y="6" width="264" height="6"/>
+                                                    <rect key="frame" x="13" y="6" width="264" height="5"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -4994,7 +4994,7 @@ finish the Adventure?</string>
                                     <constraint firstAttribute="height" constant="40" id="bdp-dB-l5O"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
-                                <state key="normal" title="START ADVENTURE">
+                                <state key="normal" title="START">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -5634,7 +5634,7 @@ finish the Adventure?</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TTu-S1-Zkk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="127" y="3895"/>
+            <point key="canvasLocation" x="-190" y="4009"/>
         </scene>
         <!--No View Controller-->
         <scene sceneID="5a2-B1-r82">
@@ -5650,7 +5650,8 @@ finish the Adventure?</string>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" horizontalCompressionResistancePriority="748" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U9s-hv-cl3">
                                 <rect key="frame" x="16" y="114" width="343" height="46.5"/>
-                                <string key="text">Can you feel the ribs, spine and pelvis with light pressure?</string>
+                                <string key="text">Can you feel the ribs, spine and pelvis with light pressure?
+</string>
                                 <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -5765,11 +5766,283 @@ finish the Adventure?</string>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="tMc-Vl-pkC" id="XF4-Ns-NH9"/>
+                        <segue destination="inL-cb-6g1" kind="show" identifier="Yea" id="HYQ-cN-QEt"/>
+                        <segue destination="eKy-Jj-Qfv" kind="show" identifier="Nope" id="zkd-2N-CMA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cpc-L1-fiy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2815" y="4214"/>
+            <point key="canvasLocation" x="-2778" y="4252"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="rWk-qp-HMO">
+            <objects>
+                <viewController id="inL-cb-6g1" customClass="BCS3ViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dNb-8a-gz7"/>
+                        <viewControllerLayoutGuide type="bottom" id="5LC-lS-Vhk"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="VUE-1d-DNb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" horizontalCompressionResistancePriority="748" text="Has a waste line when felt from behind the ribs to in front of the pelvis" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z0d-J7-cxS">
+                                <rect key="frame" x="16" y="114" width="343" height="46.5"/>
+                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dEq-aY-lAy">
+                                <rect key="frame" x="16" y="209" width="343" height="171"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="171" id="afO-87-aZs"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="P5a-vt-CUz">
+                                    <size key="itemSize" width="145" height="175"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="vI2-UQ-nfF" customClass="questionCells" customModule="PawTrails" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="145" height="175"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="145" height="175"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QNk-j8-hVW">
+                                                    <rect key="frame" x="27" y="16" width="91" height="82"/>
+                                                </imageView>
+                                                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cpc-IL-ypN" customClass="BEMCheckBox">
+                                                    <rect key="frame" x="62" y="147" width="20" height="20"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="20" id="A9H-Yb-XnK"/>
+                                                        <constraint firstAttribute="height" constant="20" id="MBM-hk-W97"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="lineWidth">
+                                                            <real key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="animationDuration">
+                                                            <real key="value" value="0.20000000000000001"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="onFillColor">
+                                                            <color key="value" red="0.80784313730000001" green="0.074509803920000006" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="offFillColor">
+                                                            <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="onCheckColor">
+                                                            <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="-9"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="onTintColor">
+                                                            <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                                            <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="cpc-IL-ypN" firstAttribute="centerX" secondItem="vI2-UQ-nfF" secondAttribute="centerX" id="0Uk-aq-2uf"/>
+                                            <constraint firstAttribute="bottom" secondItem="cpc-IL-ypN" secondAttribute="bottom" constant="8" id="1nl-Lj-2ca"/>
+                                            <constraint firstItem="cpc-IL-ypN" firstAttribute="top" secondItem="QNk-j8-hVW" secondAttribute="bottom" constant="49" id="KJR-1A-ot1"/>
+                                            <constraint firstItem="QNk-j8-hVW" firstAttribute="leading" secondItem="vI2-UQ-nfF" secondAttribute="leading" constant="27" id="OPc-tY-ne8"/>
+                                            <constraint firstItem="QNk-j8-hVW" firstAttribute="top" secondItem="vI2-UQ-nfF" secondAttribute="top" constant="16" id="oh9-3n-jPT"/>
+                                            <constraint firstAttribute="trailing" secondItem="QNk-j8-hVW" secondAttribute="trailing" constant="27" id="rHR-rW-iL8"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="actionImage" destination="QNk-j8-hVW" id="4Zu-6X-YNy"/>
+                                            <outlet property="checkMark" destination="cpc-IL-ypN" id="wvQ-rc-mbK"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z2b-aW-JYE">
+                                <rect key="frame" x="16" y="550" width="343" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="q0A-za-oVR"/>
+                                </constraints>
+                                <string key="text">Exercise and play Helps dog feel sleepy rather than hyperactive
+</string>
+                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pawtrails-logo-1x-png" translatesAutoresizingMaskIntoConstraints="NO" id="z3Z-zd-D3x">
+                                <rect key="frame" x="137.5" y="492" width="100" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="FZf-0e-qdc"/>
+                                    <constraint firstAttribute="width" constant="100" id="Idj-tj-hbc"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="z2b-aW-JYE" secondAttribute="trailing" constant="16" id="0Ho-Tk-TsO"/>
+                            <constraint firstAttribute="trailing" secondItem="z0d-J7-cxS" secondAttribute="trailing" constant="16" id="4Co-N0-Y9w"/>
+                            <constraint firstItem="z0d-J7-cxS" firstAttribute="top" secondItem="dNb-8a-gz7" secondAttribute="bottom" constant="50" id="Ah2-Cc-djS"/>
+                            <constraint firstItem="5LC-lS-Vhk" firstAttribute="top" secondItem="z2b-aW-JYE" secondAttribute="bottom" constant="8" id="DQo-x4-LGI"/>
+                            <constraint firstItem="dEq-aY-lAy" firstAttribute="top" secondItem="z0d-J7-cxS" secondAttribute="bottom" priority="749" constant="48.5" id="Fz5-w3-DV8"/>
+                            <constraint firstItem="z2b-aW-JYE" firstAttribute="leading" secondItem="VUE-1d-DNb" secondAttribute="leading" constant="16" id="Loi-hM-KUM"/>
+                            <constraint firstItem="z3Z-zd-D3x" firstAttribute="centerX" secondItem="VUE-1d-DNb" secondAttribute="centerX" id="U31-n0-6uY"/>
+                            <constraint firstItem="z2b-aW-JYE" firstAttribute="top" secondItem="z3Z-zd-D3x" secondAttribute="bottom" constant="8" id="YcP-X3-8p1"/>
+                            <constraint firstItem="z0d-J7-cxS" firstAttribute="leading" secondItem="VUE-1d-DNb" secondAttribute="leading" constant="16" id="Z8g-MI-VOs"/>
+                            <constraint firstAttribute="trailing" secondItem="dEq-aY-lAy" secondAttribute="trailing" constant="16" id="vEB-Dk-ESv"/>
+                            <constraint firstItem="dEq-aY-lAy" firstAttribute="leading" secondItem="VUE-1d-DNb" secondAttribute="leading" constant="16" id="vZk-yf-swc"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="dEq-aY-lAy" id="eTF-7G-PPn"/>
+                        <segue destination="Krq-aV-jdf" kind="show" identifier="bsc" id="lHA-KO-G9F"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1KV-PW-LZN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1930" y="3845"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="S8N-RZ-Ugg">
+            <objects>
+                <viewController id="eKy-Jj-Qfv" customClass="BSC4ViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="GjE-u2-g7E"/>
+                        <viewControllerLayoutGuide type="bottom" id="Vx5-3J-j4J"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tuw-AB-Clw">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" horizontalCompressionResistancePriority="748" text="No waist line felt, saggy tummy, Lumps of fat felt" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pVu-6g-4SP">
+                                <rect key="frame" x="16" y="114" width="343" height="46.5"/>
+                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gQh-2e-xG8">
+                                <rect key="frame" x="16" y="209" width="343" height="171"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="171" id="Es4-xO-BWX"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fgQ-sg-kYu">
+                                    <size key="itemSize" width="145" height="175"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="u0X-cu-hkt" customClass="questionCells" customModule="PawTrails" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="145" height="175"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="145" height="175"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="U50-MI-dsl">
+                                                    <rect key="frame" x="27" y="16" width="91" height="82"/>
+                                                </imageView>
+                                                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SSQ-DX-Hcc" customClass="BEMCheckBox">
+                                                    <rect key="frame" x="62" y="147" width="20" height="20"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="Ozr-ZL-95x"/>
+                                                        <constraint firstAttribute="width" constant="20" id="cIG-Us-PKz"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="lineWidth">
+                                                            <real key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="animationDuration">
+                                                            <real key="value" value="0.20000000000000001"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="onFillColor">
+                                                            <color key="value" red="0.80784313730000001" green="0.074509803920000006" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="offFillColor">
+                                                            <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="onCheckColor">
+                                                            <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="-9"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="onTintColor">
+                                                            <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                                            <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="SSQ-DX-Hcc" firstAttribute="centerX" secondItem="u0X-cu-hkt" secondAttribute="centerX" id="TS8-lg-lA6"/>
+                                            <constraint firstItem="U50-MI-dsl" firstAttribute="top" secondItem="u0X-cu-hkt" secondAttribute="top" constant="16" id="fo3-nA-ig5"/>
+                                            <constraint firstItem="SSQ-DX-Hcc" firstAttribute="top" secondItem="U50-MI-dsl" secondAttribute="bottom" constant="49" id="n71-OV-Xg5"/>
+                                            <constraint firstItem="U50-MI-dsl" firstAttribute="leading" secondItem="u0X-cu-hkt" secondAttribute="leading" constant="27" id="pZl-eB-cAe"/>
+                                            <constraint firstAttribute="trailing" secondItem="U50-MI-dsl" secondAttribute="trailing" constant="27" id="saE-zw-ahD"/>
+                                            <constraint firstAttribute="bottom" secondItem="SSQ-DX-Hcc" secondAttribute="bottom" constant="8" id="u70-fJ-nKJ"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="actionImage" destination="U50-MI-dsl" id="XwB-7w-dLf"/>
+                                            <outlet property="checkMark" destination="SSQ-DX-Hcc" id="tKD-ro-6hi"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mw0-W3-IEG">
+                                <rect key="frame" x="16" y="550" width="343" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="2MM-8N-NJ1"/>
+                                </constraints>
+                                <string key="text">Exercise and play Helps dog feel sleepy rather than hyperactive
+</string>
+                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pawtrails-logo-1x-png" translatesAutoresizingMaskIntoConstraints="NO" id="8Qg-pX-05C">
+                                <rect key="frame" x="137.5" y="492" width="100" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="rE1-4m-8UL"/>
+                                    <constraint firstAttribute="width" constant="100" id="xMa-QX-vMT"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="pVu-6g-4SP" firstAttribute="top" secondItem="GjE-u2-g7E" secondAttribute="bottom" constant="50" id="CfQ-5q-Zks"/>
+                            <constraint firstAttribute="trailing" secondItem="pVu-6g-4SP" secondAttribute="trailing" constant="16" id="D08-8F-Oxv"/>
+                            <constraint firstAttribute="trailing" secondItem="gQh-2e-xG8" secondAttribute="trailing" constant="16" id="Fwz-7Z-DFn"/>
+                            <constraint firstItem="Vx5-3J-j4J" firstAttribute="top" secondItem="Mw0-W3-IEG" secondAttribute="bottom" constant="8" id="ZHn-hY-Vkq"/>
+                            <constraint firstAttribute="trailing" secondItem="Mw0-W3-IEG" secondAttribute="trailing" constant="16" id="aJd-Wn-t9e"/>
+                            <constraint firstItem="Mw0-W3-IEG" firstAttribute="top" secondItem="8Qg-pX-05C" secondAttribute="bottom" constant="8" id="gOE-rf-bsg"/>
+                            <constraint firstItem="gQh-2e-xG8" firstAttribute="leading" secondItem="tuw-AB-Clw" secondAttribute="leading" constant="16" id="iTH-Fq-X1K"/>
+                            <constraint firstItem="gQh-2e-xG8" firstAttribute="top" secondItem="pVu-6g-4SP" secondAttribute="bottom" priority="749" constant="48.5" id="jxs-gC-L4l"/>
+                            <constraint firstItem="Mw0-W3-IEG" firstAttribute="leading" secondItem="tuw-AB-Clw" secondAttribute="leading" constant="16" id="sJa-JU-wU4"/>
+                            <constraint firstItem="8Qg-pX-05C" firstAttribute="centerX" secondItem="tuw-AB-Clw" secondAttribute="centerX" id="v8a-Sz-FCU"/>
+                            <constraint firstItem="pVu-6g-4SP" firstAttribute="leading" secondItem="tuw-AB-Clw" secondAttribute="leading" constant="16" id="yPI-Di-N5f"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="gQh-2e-xG8" id="Tzq-nj-h8J"/>
+                        <segue destination="Krq-aV-jdf" kind="show" identifier="bsc5" id="yp5-bT-5uy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3mE-P7-aso" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1844" y="4554"/>
         </scene>
     </scenes>
     <resources>
@@ -5807,7 +6080,8 @@ finish the Adventure?</string>
         <image name="userprofilemask-1x-png_360" width="140" height="141"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ZcB-OF-0kQ"/>
         <segue reference="Nln-Sh-wxV"/>
+        <segue reference="ZcB-OF-0kQ"/>
+        <segue reference="yp5-bT-5uy"/>
     </inferredMetricsTieBreakers>
 </document>

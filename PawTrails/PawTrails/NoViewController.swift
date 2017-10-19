@@ -26,6 +26,8 @@ class NoViewController: UIViewController {
         collectionView.contentInset.right = 15
         collectionView.allowsMultipleSelection = false
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: nil)
+        collectionView.isScrollEnabled = false
+
 
         
         
@@ -59,9 +61,12 @@ extension NoViewController: UICollectionViewDelegate, UICollectionViewDataSource
         if indexPath.item == 0 {
             let cell = collectionView.cellForItem(at: indexPath) as! questionCells
             cell.checkMark.setOn(true, animated: false)
+            self.performSegue(withIdentifier: "Yea", sender: self)
         } else {
             let cell = collectionView.cellForItem(at: indexPath) as! questionCells
             cell.checkMark.setOn(true, animated: false)
+            self.performSegue(withIdentifier: "Nope", sender: self)
+
         }
     }
     
@@ -76,6 +81,20 @@ extension NoViewController: UICollectionViewDelegate, UICollectionViewDataSource
         
     }
     
+//    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "Yea" {
+            if let destination = segue.destination as? BCS3ViewController {
+                destination.pet = self.pet
+            }
+        } else if segue.identifier == "Nope" {
+            
+            if let destination = segue.destination as? BSC4ViewController {
+                destination.pet = self.pet
+            }
+        }
+    }
+
 }
 
 

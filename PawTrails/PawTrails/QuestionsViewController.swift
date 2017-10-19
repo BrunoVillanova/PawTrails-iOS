@@ -26,6 +26,7 @@ class QuestionsViewController: UIViewController {
         collectionView.contentInset.right = 15
         collectionView.allowsMultipleSelection = false
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: nil)
+        collectionView.isScrollEnabled = false
     }
 }
 

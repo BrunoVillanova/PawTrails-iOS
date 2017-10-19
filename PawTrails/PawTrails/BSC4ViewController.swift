@@ -1,5 +1,5 @@
 //
-//  YesViewController.swift
+//  BSC4ViewController.swift
 //  PawTrails
 //
 //  Created by Marc Perello on 19/10/2017.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class YesViewController: UIViewController {
+class BSC4ViewController:UIViewController {
     var pet: Pet!
     var bscScroe: String?
     var weight: String?
@@ -28,12 +28,11 @@ class YesViewController: UIViewController {
         collectionView.allowsMultipleSelection = false
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: nil)
         collectionView.isScrollEnabled = false
-
     }
 }
 
 
-extension YesViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension BSC4ViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 2
@@ -58,19 +57,18 @@ extension YesViewController: UICollectionViewDelegate, UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.item == 0 {
             let cell = collectionView.cellForItem(at: indexPath) as! questionCells
-            self.bscScroe = "BCS 1"
-            self.weight = "Very thin"
+            self.bscScroe = "BCS 4"
+            self.weight = "Overweight"
             cell.checkMark.setOn(true, animated: false)
-            self.performSegue(withIdentifier: "result", sender: self)
-            
+            self.performSegue(withIdentifier: "bsc5", sender: self)
         } else {
             
-            self.bscScroe = "BCS 2"
-            self.weight = "Underweight"
+            self.bscScroe = "BCS 5"
+            self.weight = "Obese"
             let cell = collectionView.cellForItem(at: indexPath) as! questionCells
             cell.checkMark.setOn(true, animated: false)
-            self.performSegue(withIdentifier: "result", sender: self)
-
+            self.performSegue(withIdentifier: "bsc5", sender: self)
+            
         }
     }
     
@@ -86,7 +84,7 @@ extension YesViewController: UICollectionViewDelegate, UICollectionViewDataSourc
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "result" {
+        if segue.identifier == "bsc5" {
             if let destination = segue.destination as? ResultViewController {
                 destination.pet = self.pet
                 destination.bscText = self.bscScroe
@@ -96,6 +94,4 @@ extension YesViewController: UICollectionViewDelegate, UICollectionViewDataSourc
     }
     
 }
-
-
 
