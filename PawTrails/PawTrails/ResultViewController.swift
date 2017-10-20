@@ -66,7 +66,10 @@ class ResultViewController: UIViewController {
     }
 
     @IBAction func restartBtnPressed(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
     }
+    
+    
     
     func closedPress(sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)

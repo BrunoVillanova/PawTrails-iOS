@@ -33,7 +33,6 @@ class BSC4ViewController:UIViewController {
 
 
 extension BSC4ViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 2
     }
@@ -41,11 +40,10 @@ extension BSC4ViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! questionCells
         cell.actionImage.backgroundColor = UIColor.primary
-        cell.actionImage.circle()
+        cell.actionImage.round()
         cell.checkMark.isEnabled = false
         cell.checkMark.isUserInteractionEnabled = false
         cell.checkMark.setOn(false, animated: false)
-        
         return cell
         
     }
