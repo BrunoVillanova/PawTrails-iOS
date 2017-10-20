@@ -7,7 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1506027C1F9A100400B477A4 /* BatteryLow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 150602761F9A100300B477A4 /* BatteryLow@3x.png */; };
+		1506027D1F9A100400B477A4 /* BatteryLow@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 150602771F9A100300B477A4 /* BatteryLow@1x.png */; };
+		1506027E1F9A100400B477A4 /* BatteryLow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 150602781F9A100400B477A4 /* BatteryLow@2x.png */; };
+		1506027F1F9A100400B477A4 /* Battery@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 150602791F9A100400B477A4 /* Battery@2x.png */; };
+		150602801F9A100400B477A4 /* Battery@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1506027A1F9A100400B477A4 /* Battery@3x.png */; };
+		150602811F9A100400B477A4 /* Battery@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1506027B1F9A100400B477A4 /* Battery@1x.png */; };
+		1511292C1F8E534100CDCC2D /* PTBasicAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1511292B1F8E534100CDCC2D /* PTBasicAnnotationView.swift */; };
+		151902CF1F97A4FF00915D0A /* PTBatteryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151902CE1F97A4FF00915D0A /* PTBatteryView.swift */; };
 		15226D901F8D18EA007EEFF2 /* SocketIO+RxSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15226D8F1F8D18EA007EEFF2 /* SocketIO+RxSwift.swift */; };
+		15CFDA191F962D4C00AC6A63 /* PTPetCalloutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15CFDA181F962D4C00AC6A63 /* PTPetCalloutView.xib */; };
+		15CFDA1B1F962DB300AC6A63 /* PTPetCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CFDA1A1F962DB300AC6A63 /* PTPetCalloutView.swift */; };
+		15CFDA1D1F963B2B00AC6A63 /* PawTrailsStyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CFDA1C1F963B2B00AC6A63 /* PawTrailsStyleKit.swift */; };
+		15CFDA1F1F963B7A00AC6A63 /* PTBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CFDA1E1F963B7A00AC6A63 /* PTBubbleView.swift */; };
 		440784491F8B85A1005E9E1B /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 440784481F8B85A1005E9E1B /* SettingsView.xib */; };
 		4407844B1F8B85E8005E9E1B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4407844A1F8B85E8005E9E1B /* SettingsView.swift */; };
 		4411113A1F698B05008D1468 /* ShareCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441111381F698B05008D1468 /* ShareCollectionViewCell.swift */; };
@@ -177,7 +189,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		150602761F9A100300B477A4 /* BatteryLow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BatteryLow@3x.png"; sourceTree = "<group>"; };
+		150602771F9A100300B477A4 /* BatteryLow@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BatteryLow@1x.png"; sourceTree = "<group>"; };
+		150602781F9A100400B477A4 /* BatteryLow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BatteryLow@2x.png"; sourceTree = "<group>"; };
+		150602791F9A100400B477A4 /* Battery@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Battery@2x.png"; sourceTree = "<group>"; };
+		1506027A1F9A100400B477A4 /* Battery@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Battery@3x.png"; sourceTree = "<group>"; };
+		1506027B1F9A100400B477A4 /* Battery@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Battery@1x.png"; sourceTree = "<group>"; };
+		1511292B1F8E534100CDCC2D /* PTBasicAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTBasicAnnotationView.swift; sourceTree = "<group>"; };
+		151902CE1F97A4FF00915D0A /* PTBatteryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTBatteryView.swift; sourceTree = "<group>"; };
 		15226D8F1F8D18EA007EEFF2 /* SocketIO+RxSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SocketIO+RxSwift.swift"; path = "Extensions/SocketIO+RxSwift.swift"; sourceTree = "<group>"; };
+		15CFDA181F962D4C00AC6A63 /* PTPetCalloutView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PTPetCalloutView.xib; sourceTree = "<group>"; };
+		15CFDA1A1F962DB300AC6A63 /* PTPetCalloutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTPetCalloutView.swift; sourceTree = "<group>"; };
+		15CFDA1C1F963B2B00AC6A63 /* PawTrailsStyleKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PawTrailsStyleKit.swift; sourceTree = "<group>"; };
+		15CFDA1E1F963B7A00AC6A63 /* PTBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTBubbleView.swift; sourceTree = "<group>"; };
 		1E2B813BA9CAE948174F2C71 /* Pods_PawTrailsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PawTrailsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		440784481F8B85A1005E9E1B /* SettingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsView.xib; sourceTree = "<group>"; };
 		4407844A1F8B85E8005E9E1B /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -378,6 +402,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1511292A1F8E52D900CDCC2D /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				151902D01F97A56D00915D0A /* PTBatteryView */,
+				15CFDA1C1F963B2B00AC6A63 /* PawTrailsStyleKit.swift */,
+				1511292B1F8E534100CDCC2D /* PTBasicAnnotationView.swift */,
+				15CFDA181F962D4C00AC6A63 /* PTPetCalloutView.xib */,
+				15CFDA1A1F962DB300AC6A63 /* PTPetCalloutView.swift */,
+				15CFDA1E1F963B7A00AC6A63 /* PTBubbleView.swift */,
+			);
+			path = "Custom Views";
+			sourceTree = "<group>";
+		};
+		151902D01F97A56D00915D0A /* PTBatteryView */ = {
+			isa = PBXGroup;
+			children = (
+				151902D11F97A58100915D0A /* Resources */,
+				151902CE1F97A4FF00915D0A /* PTBatteryView.swift */,
+			);
+			name = PTBatteryView;
+			sourceTree = "<group>";
+		};
+		151902D11F97A58100915D0A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1506027B1F9A100400B477A4 /* Battery@1x.png */,
+				150602791F9A100400B477A4 /* Battery@2x.png */,
+				1506027A1F9A100400B477A4 /* Battery@3x.png */,
+				150602771F9A100300B477A4 /* BatteryLow@1x.png */,
+				150602781F9A100400B477A4 /* BatteryLow@2x.png */,
+				150602761F9A100300B477A4 /* BatteryLow@3x.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		440CEE491E3B8D0700F58A09 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -473,6 +532,7 @@
 		4415FF411E3B822900A81B13 /* PawTrails */ = {
 			isa = PBXGroup;
 			children = (
+				1511292A1F8E52D900CDCC2D /* Custom Views */,
 				4415FF421E3B822900A81B13 /* AppDelegate.swift */,
 				440CEE4C1E3B8D3D00F58A09 /* Model */,
 				440CEE4A1E3B8D2500F58A09 /* View */,
@@ -894,13 +954,14 @@
 					4414AE671EA0DD5B004A5134 = {
 						CreatedOnToolsVersion = 8.3;
 						DevelopmentTeam = 7E2855LEH4;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 4415FF3E1E3B822900A81B13;
 					};
 					4415FF3E1E3B822900A81B13 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = V7JRLX587L;
-						LastSwiftMigration = 0820;
+						DevelopmentTeam = CQ878R6EW5;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -914,6 +975,7 @@
 					444721791F03F12A001DCDE1 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = DJBJW6R236;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 4415FF3E1E3B822900A81B13;
 					};
@@ -955,14 +1017,21 @@
 				44251ADF1F0CD5260067F401 /* attitudetechie.der in Resources */,
 				44251AD31F0CD5170067F401 /* GoogleSignIn.bundle in Resources */,
 				4411113B1F698B05008D1468 /* ShareCollectionViewCell.xib in Resources */,
+				1506027C1F9A100400B477A4 /* BatteryLow@3x.png in Resources */,
 				44251B161F0CD5A90067F401 /* Main.storyboard in Resources */,
+				15CFDA191F962D4C00AC6A63 /* PTPetCalloutView.xib in Resources */,
+				1506027D1F9A100400B477A4 /* BatteryLow@1x.png in Resources */,
+				1506027F1F9A100400B477A4 /* Battery@2x.png in Resources */,
 				44690B6B1F62891C00719911 /* PetProfileCollectionViewCell.xib in Resources */,
 				4464F12E1F8CBC1B00E0BBD7 /* IconCell.xib in Resources */,
 				44251AD11F0CD5170067F401 /* GoogleService-Info.plist in Resources */,
+				1506027E1F9A100400B477A4 /* BatteryLow@2x.png in Resources */,
 				440784491F8B85A1005E9E1B /* SettingsView.xib in Resources */,
+				150602811F9A100400B477A4 /* Battery@1x.png in Resources */,
 				448C7CE41F87750100BF7106 /* SafeZoneCollectionViewCell.xib in Resources */,
 				44251B151F0CD5A90067F401 /* LaunchScreen.storyboard in Resources */,
 				44251ADC1F0CD5260067F401 /* Assets.xcassets in Resources */,
+				150602801F9A100400B477A4 /* Battery@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1158,6 +1227,7 @@
 				44251B6E1F0CD6130067F401 /* SocketIOManager.swift in Sources */,
 				44C7F7501E4CD3DA00171170 /* HomePresenter.swift in Sources */,
 				44251B881F0CD6210067F401 /* CDRepository.swift in Sources */,
+				15CFDA1F1F963B7A00AC6A63 /* PTBubbleView.swift in Sources */,
 				44251B0B1F0CD5870067F401 /* DeviceCodePresenter.swift in Sources */,
 				44251B471F0CD5DF0067F401 /* PetActivityTableViewController.swift in Sources */,
 				44251B0D1F0CD5870067F401 /* AddPetUserPresenter.swift in Sources */,
@@ -1188,6 +1258,7 @@
 				44251B4E1F0CD5DF0067F401 /* PetNameTableViewController.swift in Sources */,
 				44251B811F0CD6130067F401 /* CDUser+CoreDataClass.swift in Sources */,
 				44A1AC501E92923A003EF6CA /* PetsPresenter.swift in Sources */,
+				151902CF1F97A4FF00915D0A /* PTBatteryView.swift in Sources */,
 				44251B401F0CD5DF0067F401 /* EmailTableViewController.swift in Sources */,
 				44251B771F0CD6130067F401 /* CDCountryCode+CoreDataClass.swift in Sources */,
 				44EAB45F1F614095006A64AE /* JoinTripVC.swift in Sources */,
@@ -1202,6 +1273,7 @@
 				44251B7C1F0CD6130067F401 /* CDPetUser+CoreDataProperties.swift in Sources */,
 				44690B6D1F62963600719911 /* ProfilePetView.swift in Sources */,
 				44251B891F0CD6210067F401 /* CSVRepository.swift in Sources */,
+				15CFDA1B1F962DB300AC6A63 /* PTPetCalloutView.swift in Sources */,
 				44251B751F0CD6130067F401 /* CDBreed+CoreDataClass.swift in Sources */,
 				44EAB4611F615906006A64AE /* PetProfileCollectionViewController.swift in Sources */,
 				448C7CE81F87842E00BF7106 /* SafeZonePresenter.swift in Sources */,
@@ -1231,6 +1303,7 @@
 				44251B0F1F0CD5870067F401 /* PetUserPresenter.swift in Sources */,
 				44251AE41F0CD54D0067F401 /* Extensions.swift in Sources */,
 				44251AF01F0CD55F0067F401 /* Messages.swift in Sources */,
+				1511292C1F8E534100CDCC2D /* PTBasicAnnotationView.swift in Sources */,
 				443E807A1F5D87EC008679FC /* SelectPetsVC.swift in Sources */,
 				444698851F6BC75C006EE4CD /* SelectPetView.swift in Sources */,
 				44251B3F1F0CD5DF0067F401 /* BirthdayViewController.swift in Sources */,
@@ -1243,6 +1316,7 @@
 				44251B7A1F0CD6130067F401 /* CDPet+CoreDataProperties.swift in Sources */,
 				44251AE61F0CD54D0067F401 /* MapExtensions.swift in Sources */,
 				44251B731F0CD6130067F401 /* CDAddress+CoreDataClass.swift in Sources */,
+				15CFDA1D1F963B2B00AC6A63 /* PawTrailsStyleKit.swift in Sources */,
 				44FE723D1E4A2EF0007C7E24 /* DataManager.swift in Sources */,
 				44F239511EEEC1E70082FA36 /* SocketIOTestTableViewController.swift in Sources */,
 				4407844B1F8B85E8005E9E1B /* SettingsView.swift in Sources */,
@@ -1492,7 +1566,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = V7JRLX587L;
+				DEVELOPMENT_TEAM = CQ878R6EW5;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1522,7 +1596,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = V7JRLX587L;
+				DEVELOPMENT_TEAM = CQ878R6EW5;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
