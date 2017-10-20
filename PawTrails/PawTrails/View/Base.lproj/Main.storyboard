@@ -252,11 +252,11 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" distribution="equalCentering" alignment="center" spacing="75" translatesAutoresizingMaskIntoConstraints="NO" id="xau-qD-fWf">
-                                <rect key="frame" x="68" y="613" width="39" height="24"/>
+                                <rect key="frame" x="68" y="613" width="0.0" height="0.0"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KrK-rF-iHo">
-                                        <rect key="frame" x="0.0" y="0.0" width="39" height="24"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="24"/>
                                         <state key="normal" image="login_Googleplus"/>
                                         <connections>
                                             <action selector="googleLogin:" destination="wPd-hI-X1n" eventType="touchUpInside" id="kez-OR-S3R"/>
@@ -506,7 +506,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fTt-m5-GrR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1039.2" y="914.392803598201"/>
+            <point key="canvasLocation" x="-1634" y="887"/>
         </scene>
         <!--Email Verification View Controller-->
         <scene sceneID="fvI-j4-lrR">
@@ -780,7 +780,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Profile Photo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1MH-Z2-KXM">
-                                                    <rect key="frame" x="13" y="6" width="264" height="5"/>
+                                                    <rect key="frame" x="13" y="6" width="264" height="6"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -1261,7 +1261,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xFP-gi-avD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="13284" y="3783.9580209895057"/>
+            <point key="canvasLocation" x="5831" y="1307"/>
         </scene>
         <!--Profile-->
         <scene sceneID="aa3-8W-466">
@@ -1270,7 +1270,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="vFq-C3-rfv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <sections>
                             <tableViewSection id="YdS-i0-Bfa">
                                 <cells>
@@ -1426,11 +1426,11 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="245" id="xXD-lC-hUB">
-                                        <rect key="frame" x="0.0" y="331" width="375" height="245"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="115" id="xXD-lC-hUB">
+                                        <rect key="frame" x="0.0" y="331" width="375" height="115"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xXD-lC-hUB" id="I2f-bs-O9n">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="245"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="115"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" verticalHuggingPriority="249" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hu6-qg-f9T">
@@ -3928,13 +3928,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fja-6r-gKI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6752.8000000000002" y="1305.697151424288"/>
+            <point key="canvasLocation" x="8743" y="1239"/>
         </scene>
         <!--Pet Profile Collection View Controller-->
         <scene sceneID="VEw-Rb-phA">
             <objects>
                 <collectionViewController storyboardIdentifier="PetProfileCollectionViewController" hidesBottomBarWhenPushed="YES" id="dC2-DY-Utu" customClass="PetProfileCollectionViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="hoL-v4-Lq7">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="hoL-v4-Lq7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -4001,7 +4001,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R6N-Aj-SEx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5189.6000000000004" y="1306.5967016491754"/>
+            <point key="canvasLocation" x="978" y="4009"/>
         </scene>
         <!--Pet User Table View Controller-->
         <scene sceneID="4L8-on-gfY">
@@ -4246,7 +4246,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="N6p-zK-4h7" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="My Pets" image="menu-mypets-1x-png" id="Tcz-oi-K7q"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="u5G-R1-d22">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="u5G-R1-d22">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -4265,7 +4265,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5Ay-dc-tYw" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Me" image="menu-me-1x-png" id="Rva-bM-rbO"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="n70-kN-BJe">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="n70-kN-BJe">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -4283,7 +4283,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9OU-Qn-OVQ" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="gdP-7h-jVW">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gdP-7h-jVW">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -4482,7 +4482,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="EKY-qb-x8M" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Tracking" image="menu-tracking-1x-png" id="Omy-bL-4vv"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="zqP-Wi-dBa">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zqP-Wi-dBa">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -4500,7 +4500,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nw8-QG-a4h" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="cIs-8x-udw">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cIs-8x-udw">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -4518,7 +4518,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jFO-5u-YF9" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="TCL-UK-30W">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="TCL-UK-30W">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -4716,7 +4716,7 @@ finish the Adventure?</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="458-KX-c52" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-7311" y="2360"/>
+            <point key="canvasLocation" x="-7770" y="2363"/>
         </scene>
         <!--Join Adventure-->
         <scene sceneID="vQf-mH-VAW">
@@ -4899,7 +4899,7 @@ finish the Adventure?</string>
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tnl-0j-gBx" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="WO4-RM-1Vi">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WO4-RM-1Vi">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -4917,7 +4917,7 @@ finish the Adventure?</string>
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Bly-KD-ElT" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="g3g-AE-qS3">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="g3g-AE-qS3">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -4928,14 +4928,14 @@ finish the Adventure?</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LOI-82-vgG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6040.8000000000002" y="1305.697151424288"/>
+            <point key="canvasLocation" x="8047" y="1238"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="DJp-Ti-fEh">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5lk-Ng-6Eu" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="tqJ-ri-IQh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tqJ-ri-IQh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -4946,7 +4946,7 @@ finish the Adventure?</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kRO-j2-l8M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="12344.799999999999" y="3783.9580209895057"/>
+            <point key="canvasLocation" x="5041" y="1306"/>
         </scene>
         <!--Guides-->
         <scene sceneID="jMF-R0-iDQ">
@@ -4954,7 +4954,7 @@ finish the Adventure?</string>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Aeg-Rl-4VO" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Guides" image="menu-guides-1x-png" id="hGg-O5-vKk"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="J7c-B6-lkF">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="J7c-B6-lkF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -5142,7 +5142,7 @@ finish the Adventure?</string>
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9xm-Fr-8aE" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ors-iA-44c">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ors-iA-44c">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -5194,7 +5194,11 @@ finish the Adventure?</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qED-uO-LqX">
-                                                    <rect key="frame" x="27" y="16" width="91" height="82"/>
+                                                    <rect key="frame" x="27.5" y="16" width="90" height="90"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="90" id="7SP-gX-T3S"/>
+                                                        <constraint firstAttribute="width" constant="90" id="yIf-VI-yCi"/>
+                                                    </constraints>
                                                 </imageView>
                                                 <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oLv-TD-tSb" customClass="BEMCheckBox">
                                                     <rect key="frame" x="62" y="147" width="20" height="20"/>
@@ -5233,11 +5237,9 @@ finish the Adventure?</string>
                                             </subviews>
                                         </view>
                                         <constraints>
+                                            <constraint firstItem="qED-uO-LqX" firstAttribute="top" secondItem="bcO-Rk-2LU" secondAttribute="top" constant="16" id="1AB-bQ-xWB"/>
                                             <constraint firstAttribute="bottom" secondItem="oLv-TD-tSb" secondAttribute="bottom" constant="8" id="8fl-qV-bj1"/>
-                                            <constraint firstAttribute="trailing" secondItem="qED-uO-LqX" secondAttribute="trailing" constant="27" id="RM9-Uq-Exn"/>
-                                            <constraint firstItem="qED-uO-LqX" firstAttribute="leading" secondItem="bcO-Rk-2LU" secondAttribute="leading" constant="27" id="UoP-Ui-yBC"/>
-                                            <constraint firstItem="oLv-TD-tSb" firstAttribute="top" secondItem="qED-uO-LqX" secondAttribute="bottom" constant="49" id="hoH-Y7-P5F"/>
-                                            <constraint firstItem="qED-uO-LqX" firstAttribute="top" secondItem="bcO-Rk-2LU" secondAttribute="top" constant="16" id="ix3-gz-awH"/>
+                                            <constraint firstItem="qED-uO-LqX" firstAttribute="centerX" secondItem="bcO-Rk-2LU" secondAttribute="centerX" id="iZX-7a-ggU"/>
                                             <constraint firstItem="oLv-TD-tSb" firstAttribute="centerX" secondItem="bcO-Rk-2LU" secondAttribute="centerX" id="jtO-kZ-vtx"/>
                                         </constraints>
                                         <connections>
@@ -5331,7 +5333,11 @@ finish the Adventure?</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="K75-EO-lae">
-                                                    <rect key="frame" x="27" y="16" width="91" height="82"/>
+                                                    <rect key="frame" x="27.5" y="16" width="90" height="90"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="90" id="AOm-eM-Vuz"/>
+                                                        <constraint firstAttribute="height" constant="90" id="N8t-6V-erT"/>
+                                                    </constraints>
                                                 </imageView>
                                                 <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HzN-IT-TqR" customClass="BEMCheckBox">
                                                     <rect key="frame" x="62" y="147" width="20" height="20"/>
@@ -5372,10 +5378,8 @@ finish the Adventure?</string>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="HzN-IT-TqR" secondAttribute="bottom" constant="8" id="Bca-c2-Cej"/>
                                             <constraint firstItem="HzN-IT-TqR" firstAttribute="centerX" secondItem="OZb-sI-lJa" secondAttribute="centerX" id="DEa-qF-eJg"/>
-                                            <constraint firstItem="K75-EO-lae" firstAttribute="leading" secondItem="OZb-sI-lJa" secondAttribute="leading" constant="27" id="QAc-sb-dxD"/>
-                                            <constraint firstItem="K75-EO-lae" firstAttribute="top" secondItem="OZb-sI-lJa" secondAttribute="top" constant="16" id="boo-pa-maD"/>
-                                            <constraint firstItem="HzN-IT-TqR" firstAttribute="top" secondItem="K75-EO-lae" secondAttribute="bottom" constant="49" id="qvL-gC-9Lv"/>
-                                            <constraint firstAttribute="trailing" secondItem="K75-EO-lae" secondAttribute="trailing" constant="27" id="yKe-0X-gqw"/>
+                                            <constraint firstItem="K75-EO-lae" firstAttribute="centerX" secondItem="OZb-sI-lJa" secondAttribute="centerX" id="RRo-u2-lj2"/>
+                                            <constraint firstItem="K75-EO-lae" firstAttribute="top" secondItem="OZb-sI-lJa" secondAttribute="top" constant="16" id="iqA-Ts-uSU"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="actionImage" destination="K75-EO-lae" id="IyD-cf-WOe"/>
@@ -5677,7 +5681,11 @@ finish the Adventure?</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MIj-Sf-8fR">
-                                                    <rect key="frame" x="27" y="16" width="91" height="82"/>
+                                                    <rect key="frame" x="27.5" y="16" width="90" height="90"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="90" id="Ai2-GQ-Pbf"/>
+                                                        <constraint firstAttribute="width" constant="90" id="UVa-6d-cS4"/>
+                                                    </constraints>
                                                 </imageView>
                                                 <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Yr-LZ-luP" customClass="BEMCheckBox">
                                                     <rect key="frame" x="62" y="147" width="20" height="20"/>
@@ -5716,12 +5724,10 @@ finish the Adventure?</string>
                                             </subviews>
                                         </view>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="MIj-Sf-8fR" secondAttribute="trailing" constant="27" id="MtR-te-R7A"/>
+                                            <constraint firstItem="MIj-Sf-8fR" firstAttribute="centerX" secondItem="QVf-Rv-SQm" secondAttribute="centerX" id="N9c-2g-oCT"/>
                                             <constraint firstItem="1Yr-LZ-luP" firstAttribute="centerX" secondItem="QVf-Rv-SQm" secondAttribute="centerX" id="SXn-3e-LcU"/>
                                             <constraint firstAttribute="bottom" secondItem="1Yr-LZ-luP" secondAttribute="bottom" constant="8" id="Yqz-6e-JvD"/>
-                                            <constraint firstItem="MIj-Sf-8fR" firstAttribute="leading" secondItem="QVf-Rv-SQm" secondAttribute="leading" constant="27" id="b7U-zz-hbn"/>
-                                            <constraint firstItem="MIj-Sf-8fR" firstAttribute="top" secondItem="QVf-Rv-SQm" secondAttribute="top" constant="16" id="eLU-KH-hER"/>
-                                            <constraint firstItem="1Yr-LZ-luP" firstAttribute="top" secondItem="MIj-Sf-8fR" secondAttribute="bottom" constant="49" id="mOL-rj-JBP"/>
+                                            <constraint firstItem="MIj-Sf-8fR" firstAttribute="top" secondItem="QVf-Rv-SQm" secondAttribute="top" constant="16" id="aVf-Sy-PPx"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="actionImage" destination="MIj-Sf-8fR" id="tSD-vt-Idb"/>
@@ -5813,7 +5819,11 @@ finish the Adventure?</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QNk-j8-hVW">
-                                                    <rect key="frame" x="27" y="16" width="91" height="82"/>
+                                                    <rect key="frame" x="27.5" y="16" width="90" height="90"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="90" id="aNB-c2-qdV"/>
+                                                        <constraint firstAttribute="height" constant="90" id="jCX-11-Har"/>
+                                                    </constraints>
                                                 </imageView>
                                                 <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cpc-IL-ypN" customClass="BEMCheckBox">
                                                     <rect key="frame" x="62" y="147" width="20" height="20"/>
@@ -5854,10 +5864,8 @@ finish the Adventure?</string>
                                         <constraints>
                                             <constraint firstItem="cpc-IL-ypN" firstAttribute="centerX" secondItem="vI2-UQ-nfF" secondAttribute="centerX" id="0Uk-aq-2uf"/>
                                             <constraint firstAttribute="bottom" secondItem="cpc-IL-ypN" secondAttribute="bottom" constant="8" id="1nl-Lj-2ca"/>
-                                            <constraint firstItem="cpc-IL-ypN" firstAttribute="top" secondItem="QNk-j8-hVW" secondAttribute="bottom" constant="49" id="KJR-1A-ot1"/>
-                                            <constraint firstItem="QNk-j8-hVW" firstAttribute="leading" secondItem="vI2-UQ-nfF" secondAttribute="leading" constant="27" id="OPc-tY-ne8"/>
-                                            <constraint firstItem="QNk-j8-hVW" firstAttribute="top" secondItem="vI2-UQ-nfF" secondAttribute="top" constant="16" id="oh9-3n-jPT"/>
-                                            <constraint firstAttribute="trailing" secondItem="QNk-j8-hVW" secondAttribute="trailing" constant="27" id="rHR-rW-iL8"/>
+                                            <constraint firstItem="QNk-j8-hVW" firstAttribute="centerX" secondItem="vI2-UQ-nfF" secondAttribute="centerX" id="dhS-pq-uc5"/>
+                                            <constraint firstItem="QNk-j8-hVW" firstAttribute="top" secondItem="vI2-UQ-nfF" secondAttribute="top" constant="16" id="ocd-yZ-3Ii"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="actionImage" destination="QNk-j8-hVW" id="4Zu-6X-YNy"/>
@@ -5907,7 +5915,7 @@ finish the Adventure?</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1KV-PW-LZN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1930" y="3845"/>
+            <point key="canvasLocation" x="-1930.4000000000001" y="3844.2278860569718"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="S8N-RZ-Ugg">
@@ -5948,7 +5956,11 @@ finish the Adventure?</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="U50-MI-dsl">
-                                                    <rect key="frame" x="27" y="16" width="91" height="82"/>
+                                                    <rect key="frame" x="27.5" y="16" width="90" height="90"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="90" id="NyF-tb-2Xl"/>
+                                                        <constraint firstAttribute="height" constant="90" id="reI-Lq-f2n"/>
+                                                    </constraints>
                                                 </imageView>
                                                 <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SSQ-DX-Hcc" customClass="BEMCheckBox">
                                                     <rect key="frame" x="62" y="147" width="20" height="20"/>
@@ -5987,12 +5999,10 @@ finish the Adventure?</string>
                                             </subviews>
                                         </view>
                                         <constraints>
+                                            <constraint firstItem="U50-MI-dsl" firstAttribute="centerX" secondItem="u0X-cu-hkt" secondAttribute="centerX" id="BUK-1Y-dkW"/>
                                             <constraint firstItem="SSQ-DX-Hcc" firstAttribute="centerX" secondItem="u0X-cu-hkt" secondAttribute="centerX" id="TS8-lg-lA6"/>
-                                            <constraint firstItem="U50-MI-dsl" firstAttribute="top" secondItem="u0X-cu-hkt" secondAttribute="top" constant="16" id="fo3-nA-ig5"/>
-                                            <constraint firstItem="SSQ-DX-Hcc" firstAttribute="top" secondItem="U50-MI-dsl" secondAttribute="bottom" constant="49" id="n71-OV-Xg5"/>
-                                            <constraint firstItem="U50-MI-dsl" firstAttribute="leading" secondItem="u0X-cu-hkt" secondAttribute="leading" constant="27" id="pZl-eB-cAe"/>
-                                            <constraint firstAttribute="trailing" secondItem="U50-MI-dsl" secondAttribute="trailing" constant="27" id="saE-zw-ahD"/>
                                             <constraint firstAttribute="bottom" secondItem="SSQ-DX-Hcc" secondAttribute="bottom" constant="8" id="u70-fJ-nKJ"/>
+                                            <constraint firstItem="U50-MI-dsl" firstAttribute="top" secondItem="u0X-cu-hkt" secondAttribute="top" constant="16" id="y06-uP-w6d"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="actionImage" destination="U50-MI-dsl" id="XwB-7w-dLf"/>
@@ -6082,6 +6092,6 @@ finish the Adventure?</string>
     <inferredMetricsTieBreakers>
         <segue reference="Nln-Sh-wxV"/>
         <segue reference="ZcB-OF-0kQ"/>
-        <segue reference="yp5-bT-5uy"/>
+        <segue reference="lHA-KO-G9F"/>
     </inferredMetricsTieBreakers>
 </document>
