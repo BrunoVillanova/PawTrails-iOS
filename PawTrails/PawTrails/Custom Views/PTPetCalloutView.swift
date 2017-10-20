@@ -12,32 +12,31 @@ class PTPetCalloutView: UIView {
 
     var petNameLabel : UILabel?
     var addressLabel : UILabel?
-    
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
+    var batteryView : PTBatteryView?
     
     override func awakeFromNib() {
         petNameLabel = self.viewWithTag(100) as? UILabel
         addressLabel = self.viewWithTag(110) as? UILabel
+        batteryView = self.viewWithTag(200) as? PTBatteryView
     }
 
     public func configureWithAnnotation(_ annotation: PTAnnotation) {
+        
         if let petName = annotation.petDeviceData?.pet.name {
             petNameLabel?.text = petName
         }
         
         self.addressLabel?.text = ""
         
-        if let petCoordinates = annotation.petDeviceData?.deviceData.coordinates {
+        if let deviceData = annotation.petDeviceData?.deviceData {
+            
+            batteryView?.setBatteryLevel(deviceData.battery)
+            
             self.addressLabel?.text = "Getting address..."
-            petCoordinates.getFullFormatedAddress(handler: {
+            deviceData.coordinates.getFullFormatedAddress(handler: {
                 (address) in
                 self.addressLabel?.text = address
+                self.addressLabel?.sizeToFit()
             })
         }
     }

@@ -7,7 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1506027C1F9A100400B477A4 /* BatteryLow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 150602761F9A100300B477A4 /* BatteryLow@3x.png */; };
+		1506027D1F9A100400B477A4 /* BatteryLow@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 150602771F9A100300B477A4 /* BatteryLow@1x.png */; };
+		1506027E1F9A100400B477A4 /* BatteryLow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 150602781F9A100400B477A4 /* BatteryLow@2x.png */; };
+		1506027F1F9A100400B477A4 /* Battery@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 150602791F9A100400B477A4 /* Battery@2x.png */; };
+		150602801F9A100400B477A4 /* Battery@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1506027A1F9A100400B477A4 /* Battery@3x.png */; };
+		150602811F9A100400B477A4 /* Battery@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1506027B1F9A100400B477A4 /* Battery@1x.png */; };
 		1511292C1F8E534100CDCC2D /* PTBasicAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1511292B1F8E534100CDCC2D /* PTBasicAnnotationView.swift */; };
+		151902CF1F97A4FF00915D0A /* PTBatteryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151902CE1F97A4FF00915D0A /* PTBatteryView.swift */; };
 		15226D901F8D18EA007EEFF2 /* SocketIO+RxSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15226D8F1F8D18EA007EEFF2 /* SocketIO+RxSwift.swift */; };
 		15CFDA191F962D4C00AC6A63 /* PTPetCalloutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15CFDA181F962D4C00AC6A63 /* PTPetCalloutView.xib */; };
 		15CFDA1B1F962DB300AC6A63 /* PTPetCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CFDA1A1F962DB300AC6A63 /* PTPetCalloutView.swift */; };
@@ -182,7 +189,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		150602761F9A100300B477A4 /* BatteryLow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BatteryLow@3x.png"; sourceTree = "<group>"; };
+		150602771F9A100300B477A4 /* BatteryLow@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BatteryLow@1x.png"; sourceTree = "<group>"; };
+		150602781F9A100400B477A4 /* BatteryLow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BatteryLow@2x.png"; sourceTree = "<group>"; };
+		150602791F9A100400B477A4 /* Battery@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Battery@2x.png"; sourceTree = "<group>"; };
+		1506027A1F9A100400B477A4 /* Battery@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Battery@3x.png"; sourceTree = "<group>"; };
+		1506027B1F9A100400B477A4 /* Battery@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Battery@1x.png"; sourceTree = "<group>"; };
 		1511292B1F8E534100CDCC2D /* PTBasicAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTBasicAnnotationView.swift; sourceTree = "<group>"; };
+		151902CE1F97A4FF00915D0A /* PTBatteryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTBatteryView.swift; sourceTree = "<group>"; };
 		15226D8F1F8D18EA007EEFF2 /* SocketIO+RxSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SocketIO+RxSwift.swift"; path = "Extensions/SocketIO+RxSwift.swift"; sourceTree = "<group>"; };
 		15CFDA181F962D4C00AC6A63 /* PTPetCalloutView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PTPetCalloutView.xib; sourceTree = "<group>"; };
 		15CFDA1A1F962DB300AC6A63 /* PTPetCalloutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTPetCalloutView.swift; sourceTree = "<group>"; };
@@ -391,6 +405,7 @@
 		1511292A1F8E52D900CDCC2D /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				151902D01F97A56D00915D0A /* PTBatteryView */,
 				15CFDA1C1F963B2B00AC6A63 /* PawTrailsStyleKit.swift */,
 				1511292B1F8E534100CDCC2D /* PTBasicAnnotationView.swift */,
 				15CFDA181F962D4C00AC6A63 /* PTPetCalloutView.xib */,
@@ -398,6 +413,28 @@
 				15CFDA1E1F963B7A00AC6A63 /* PTBubbleView.swift */,
 			);
 			path = "Custom Views";
+			sourceTree = "<group>";
+		};
+		151902D01F97A56D00915D0A /* PTBatteryView */ = {
+			isa = PBXGroup;
+			children = (
+				151902D11F97A58100915D0A /* Resources */,
+				151902CE1F97A4FF00915D0A /* PTBatteryView.swift */,
+			);
+			name = PTBatteryView;
+			sourceTree = "<group>";
+		};
+		151902D11F97A58100915D0A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1506027B1F9A100400B477A4 /* Battery@1x.png */,
+				150602791F9A100400B477A4 /* Battery@2x.png */,
+				1506027A1F9A100400B477A4 /* Battery@3x.png */,
+				150602771F9A100300B477A4 /* BatteryLow@1x.png */,
+				150602781F9A100400B477A4 /* BatteryLow@2x.png */,
+				150602761F9A100300B477A4 /* BatteryLow@3x.png */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		440CEE491E3B8D0700F58A09 /* Assets */ = {
@@ -980,15 +1017,21 @@
 				44251ADF1F0CD5260067F401 /* attitudetechie.der in Resources */,
 				44251AD31F0CD5170067F401 /* GoogleSignIn.bundle in Resources */,
 				4411113B1F698B05008D1468 /* ShareCollectionViewCell.xib in Resources */,
+				1506027C1F9A100400B477A4 /* BatteryLow@3x.png in Resources */,
 				44251B161F0CD5A90067F401 /* Main.storyboard in Resources */,
 				15CFDA191F962D4C00AC6A63 /* PTPetCalloutView.xib in Resources */,
+				1506027D1F9A100400B477A4 /* BatteryLow@1x.png in Resources */,
+				1506027F1F9A100400B477A4 /* Battery@2x.png in Resources */,
 				44690B6B1F62891C00719911 /* PetProfileCollectionViewCell.xib in Resources */,
 				4464F12E1F8CBC1B00E0BBD7 /* IconCell.xib in Resources */,
 				44251AD11F0CD5170067F401 /* GoogleService-Info.plist in Resources */,
+				1506027E1F9A100400B477A4 /* BatteryLow@2x.png in Resources */,
 				440784491F8B85A1005E9E1B /* SettingsView.xib in Resources */,
+				150602811F9A100400B477A4 /* Battery@1x.png in Resources */,
 				448C7CE41F87750100BF7106 /* SafeZoneCollectionViewCell.xib in Resources */,
 				44251B151F0CD5A90067F401 /* LaunchScreen.storyboard in Resources */,
 				44251ADC1F0CD5260067F401 /* Assets.xcassets in Resources */,
+				150602801F9A100400B477A4 /* Battery@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1215,6 +1258,7 @@
 				44251B4E1F0CD5DF0067F401 /* PetNameTableViewController.swift in Sources */,
 				44251B811F0CD6130067F401 /* CDUser+CoreDataClass.swift in Sources */,
 				44A1AC501E92923A003EF6CA /* PetsPresenter.swift in Sources */,
+				151902CF1F97A4FF00915D0A /* PTBatteryView.swift in Sources */,
 				44251B401F0CD5DF0067F401 /* EmailTableViewController.swift in Sources */,
 				44251B771F0CD6130067F401 /* CDCountryCode+CoreDataClass.swift in Sources */,
 				44EAB45F1F614095006A64AE /* JoinTripVC.swift in Sources */,
