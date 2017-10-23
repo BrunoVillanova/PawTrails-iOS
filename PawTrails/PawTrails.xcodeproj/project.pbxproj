@@ -176,6 +176,7 @@
 		448C7CE41F87750100BF7106 /* SafeZoneCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 448C7CE21F87750100BF7106 /* SafeZoneCollectionViewCell.xib */; };
 		448C7CE61F877C9000BF7106 /* SafezZoneParentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C7CE51F877C9000BF7106 /* SafezZoneParentCell.swift */; };
 		448C7CEC1F87C8C700BF7106 /* AddEditSafeZOneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C7CEB1F87C8C700BF7106 /* AddEditSafeZOneController.swift */; };
+		449751EE1F9DE7E7008C317C /* PetInfromationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449751ED1F9DE7E7008C317C /* PetInfromationCell.swift */; };
 		44A1AC501E92923A003EF6CA /* PetsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A1AC4F1E92923A003EF6CA /* PetsPresenter.swift */; };
 		44B179621E4B62690070A18B /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B179611E4B62690070A18B /* Presenter.swift */; };
 		44C7F7501E4CD3DA00171170 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F74F1E4CD3DA00171170 /* HomePresenter.swift */; };
@@ -391,6 +392,7 @@
 		448C7CE21F87750100BF7106 /* SafeZoneCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SafeZoneCollectionViewCell.xib; path = "../Pet Shared Users/SafeZoneCollectionViewCell.xib"; sourceTree = "<group>"; };
 		448C7CE51F877C9000BF7106 /* SafezZoneParentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SafezZoneParentCell.swift; path = "../Pet Shared Users/SafezZoneParentCell.swift"; sourceTree = "<group>"; };
 		448C7CEB1F87C8C700BF7106 /* AddEditSafeZOneController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditSafeZOneController.swift; sourceTree = "<group>"; };
+		449751ED1F9DE7E7008C317C /* PetInfromationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetInfromationCell.swift; sourceTree = "<group>"; };
 		44A1AC4F1E92923A003EF6CA /* PetsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetsPresenter.swift; path = Presenter/PetsPresenter.swift; sourceTree = "<group>"; };
 		44B179611E4B62690070A18B /* Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Presenter.swift; path = Presenter/Presenter.swift; sourceTree = "<group>"; };
 		44C7F74F1E4CD3DA00171170 /* HomePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomePresenter.swift; path = Presenter/HomePresenter.swift; sourceTree = "<group>"; };
@@ -728,6 +730,7 @@
 				441111381F698B05008D1468 /* ShareCollectionViewCell.swift */,
 				441111391F698B05008D1468 /* ShareCollectionViewCell.xib */,
 				44EAB4661F61880C006A64AE /* Views */,
+				449751ED1F9DE7E7008C317C /* PetInfromationCell.swift */,
 			);
 			path = "Pet Shared Users";
 			sourceTree = "<group>";
@@ -1428,6 +1431,7 @@
 				444698851F6BC75C006EE4CD /* SelectPetView.swift in Sources */,
 				441858ED1F98FAA1003710A8 /* BSC4ViewController.swift in Sources */,
 				44251B3F1F0CD5DF0067F401 /* BirthdayViewController.swift in Sources */,
+				449751EE1F9DE7E7008C317C /* PetInfromationCell.swift in Sources */,
 				44251B801F0CD6130067F401 /* CDSafeZone+CoreDataProperties.swift in Sources */,
 				4424DCFF1E8EA1D900ACDF07 /* UserProfilePresenter.swift in Sources */,
 				445F5F3F1F5EA7900069B513 /* BEMAnimationManager.m in Sources */,

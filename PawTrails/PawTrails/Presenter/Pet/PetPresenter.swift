@@ -29,6 +29,7 @@ class PetPresenter {
         self.view = view
         
         if let users = pet?.users { self.users = users }
+        
         if let safezones = pet?.safezones { self.safezones = safezones }
     }
     

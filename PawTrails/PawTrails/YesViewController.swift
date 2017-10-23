@@ -41,7 +41,13 @@ extension YesViewController: UICollectionViewDelegate, UICollectionViewDataSourc
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! questionCells
-        cell.actionImage.backgroundColor = UIColor.primary
+        
+        if indexPath.item == 0 {
+            cell.actionImage.image = UIImage(named: "tick")
+        } else {
+            cell.actionImage.image = UIImage(named: "untick")
+        }
+        
         cell.actionImage.circle()
         cell.checkMark.isEnabled = false
         cell.checkMark.isUserInteractionEnabled = false
@@ -62,9 +68,7 @@ extension YesViewController: UICollectionViewDelegate, UICollectionViewDataSourc
             self.weight = "Very thin"
             cell.checkMark.setOn(true, animated: false)
             self.performSegue(withIdentifier: "result", sender: self)
-            
         } else {
-            
             self.bscScroe = "BCS 2"
             self.weight = "Underweight"
             let cell = collectionView.cellForItem(at: indexPath) as! questionCells
