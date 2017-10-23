@@ -16,6 +16,10 @@
 		1511292C1F8E534100CDCC2D /* PTBasicAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1511292B1F8E534100CDCC2D /* PTBasicAnnotationView.swift */; };
 		151902CF1F97A4FF00915D0A /* PTBatteryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151902CE1F97A4FF00915D0A /* PTBatteryView.swift */; };
 		15226D901F8D18EA007EEFF2 /* SocketIO+RxSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15226D8F1F8D18EA007EEFF2 /* SocketIO+RxSwift.swift */; };
+		15B2C7E31F9E1C640019E477 /* PTSignalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B2C7E21F9E1C640019E477 /* PTSignalView.swift */; };
+		15B2C7E71F9E1CE20019E477 /* SignalFull@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15B2C7E41F9E1CE20019E477 /* SignalFull@1x.png */; };
+		15B2C7E81F9E1CE20019E477 /* SignalFull@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15B2C7E51F9E1CE20019E477 /* SignalFull@3x.png */; };
+		15B2C7E91F9E1CE20019E477 /* SignalFull@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15B2C7E61F9E1CE20019E477 /* SignalFull@2x.png */; };
 		15CFDA191F962D4C00AC6A63 /* PTPetCalloutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15CFDA181F962D4C00AC6A63 /* PTPetCalloutView.xib */; };
 		15CFDA1B1F962DB300AC6A63 /* PTPetCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CFDA1A1F962DB300AC6A63 /* PTPetCalloutView.swift */; };
 		15CFDA1D1F963B2B00AC6A63 /* PawTrailsStyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CFDA1C1F963B2B00AC6A63 /* PawTrailsStyleKit.swift */; };
@@ -198,6 +202,10 @@
 		1511292B1F8E534100CDCC2D /* PTBasicAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTBasicAnnotationView.swift; sourceTree = "<group>"; };
 		151902CE1F97A4FF00915D0A /* PTBatteryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTBatteryView.swift; sourceTree = "<group>"; };
 		15226D8F1F8D18EA007EEFF2 /* SocketIO+RxSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SocketIO+RxSwift.swift"; path = "Extensions/SocketIO+RxSwift.swift"; sourceTree = "<group>"; };
+		15B2C7E21F9E1C640019E477 /* PTSignalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTSignalView.swift; sourceTree = "<group>"; };
+		15B2C7E41F9E1CE20019E477 /* SignalFull@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SignalFull@1x.png"; sourceTree = "<group>"; };
+		15B2C7E51F9E1CE20019E477 /* SignalFull@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SignalFull@3x.png"; sourceTree = "<group>"; };
+		15B2C7E61F9E1CE20019E477 /* SignalFull@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SignalFull@2x.png"; sourceTree = "<group>"; };
 		15CFDA181F962D4C00AC6A63 /* PTPetCalloutView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PTPetCalloutView.xib; sourceTree = "<group>"; };
 		15CFDA1A1F962DB300AC6A63 /* PTPetCalloutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTPetCalloutView.swift; sourceTree = "<group>"; };
 		15CFDA1C1F963B2B00AC6A63 /* PawTrailsStyleKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PawTrailsStyleKit.swift; sourceTree = "<group>"; };
@@ -405,6 +413,7 @@
 		1511292A1F8E52D900CDCC2D /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				15B2C7DF1F9E1C2B0019E477 /* PTSignalView */,
 				151902D01F97A56D00915D0A /* PTBatteryView */,
 				15CFDA1C1F963B2B00AC6A63 /* PawTrailsStyleKit.swift */,
 				1511292B1F8E534100CDCC2D /* PTBasicAnnotationView.swift */,
@@ -433,6 +442,25 @@
 				150602771F9A100300B477A4 /* BatteryLow@1x.png */,
 				150602781F9A100400B477A4 /* BatteryLow@2x.png */,
 				150602761F9A100300B477A4 /* BatteryLow@3x.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		15B2C7DF1F9E1C2B0019E477 /* PTSignalView */ = {
+			isa = PBXGroup;
+			children = (
+				15B2C7E11F9E1C440019E477 /* Resources */,
+				15B2C7E21F9E1C640019E477 /* PTSignalView.swift */,
+			);
+			path = PTSignalView;
+			sourceTree = "<group>";
+		};
+		15B2C7E11F9E1C440019E477 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				15B2C7E41F9E1CE20019E477 /* SignalFull@1x.png */,
+				15B2C7E61F9E1CE20019E477 /* SignalFull@2x.png */,
+				15B2C7E51F9E1CE20019E477 /* SignalFull@3x.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1023,13 +1051,16 @@
 				1506027D1F9A100400B477A4 /* BatteryLow@1x.png in Resources */,
 				1506027F1F9A100400B477A4 /* Battery@2x.png in Resources */,
 				44690B6B1F62891C00719911 /* PetProfileCollectionViewCell.xib in Resources */,
+				15B2C7E71F9E1CE20019E477 /* SignalFull@1x.png in Resources */,
 				4464F12E1F8CBC1B00E0BBD7 /* IconCell.xib in Resources */,
 				44251AD11F0CD5170067F401 /* GoogleService-Info.plist in Resources */,
 				1506027E1F9A100400B477A4 /* BatteryLow@2x.png in Resources */,
 				440784491F8B85A1005E9E1B /* SettingsView.xib in Resources */,
 				150602811F9A100400B477A4 /* Battery@1x.png in Resources */,
 				448C7CE41F87750100BF7106 /* SafeZoneCollectionViewCell.xib in Resources */,
+				15B2C7E81F9E1CE20019E477 /* SignalFull@3x.png in Resources */,
 				44251B151F0CD5A90067F401 /* LaunchScreen.storyboard in Resources */,
+				15B2C7E91F9E1CE20019E477 /* SignalFull@2x.png in Resources */,
 				44251ADC1F0CD5260067F401 /* Assets.xcassets in Resources */,
 				150602801F9A100400B477A4 /* Battery@3x.png in Resources */,
 			);
@@ -1211,6 +1242,7 @@
 				44251B091F0CD5870067F401 /* PetPresenter.swift in Sources */,
 				44251B701F0CD6130067F401 /* SharedPreferences.swift in Sources */,
 				44251B0A1F0CD5870067F401 /* AddEditPetPresenter.swift in Sources */,
+				15B2C7E31F9E1C640019E477 /* PTSignalView.swift in Sources */,
 				445F5F401F5EA7900069B513 /* BEMCheckBox.m in Sources */,
 				44251AF11F0CD55F0067F401 /* Reporter.swift in Sources */,
 				44251AF41F0CD55F0067F401 /* Clock.swift in Sources */,

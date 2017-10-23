@@ -45,7 +45,7 @@
                                                 <constraint firstAttribute="height" constant="10" id="gw3-wf-342"/>
                                             </constraints>
                                         </view>
-                                        <view tag="210" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yKY-xA-2It" userLabel="Signal View">
+                                        <view tag="210" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yKY-xA-2It" userLabel="Signal View" customClass="PTSignalView" customModule="PawTrails" customModuleProvider="target">
                                             <rect key="frame" x="113" y="0.0" width="15" height="12"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
