@@ -39,8 +39,13 @@ extension QuestionsViewController: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! questionCells
-        cell.actionImage.backgroundColor = UIColor.primary
-        cell.actionImage.circle()
+        
+        if indexPath.item == 0 {
+            cell.actionImage.image = UIImage(named: "tick")
+        } else {
+            cell.actionImage.image = UIImage(named: "untick")
+        }
+        
         cell.checkMark.isEnabled = false
         cell.checkMark.isUserInteractionEnabled = false
         cell.checkMark.setOn(false, animated: false)

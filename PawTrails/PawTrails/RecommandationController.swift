@@ -17,6 +17,4 @@ class RecommandationController: UIViewController {
         startnowBtn.layer.cornerRadius = 25
         startnowBtn.clipsToBounds = true
     }
-
-   
 }

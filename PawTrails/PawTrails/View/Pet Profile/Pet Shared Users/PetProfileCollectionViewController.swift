@@ -62,16 +62,9 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
         
-        collectionView?.collectionViewLayout.invalidateLayout()
         setUpMenuBar()
         setupCollectionView()
-//        addButton()
-//        if !pet.isOwner {
-//            button.isHidden = true
-//        } else {
-//            button.isHidden = false
-//
-//        }
+
         
     }
     
@@ -188,8 +181,6 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
     
     
     override func viewWillAppear(_ animated: Bool) {
-        presenter.loadPet(with: pet.id)
-        presenter.getPet(with: pet.id)
         presenter.startPetsGPSUpdates(for: pet.id) { (data) in
 
             print("I GOT THE DATA \(data)")
@@ -209,6 +200,8 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
     override func viewWillDisappear(_ animated: Bool) {
         presenter.stopPetGPSUpdates(of: pet.id)
         presenter.stopPetsGeocodeUpdates()
+        
+        
     }
     
     
@@ -226,7 +219,6 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
     func reloadUsers(onlyDB: Bool = false) {
         if onlyDB {
             presenter.getPet(with: pet.id)
-            //reload users?
         }else{
             presenter.loadPetUsers(for: pet.id)
         }
@@ -350,15 +342,17 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
         
         collectionView?.register(SafezZoneParentCell.self, forCellWithReuseIdentifier: "cell3")
         
-        
-        
-        
+        collectionView?.register(PetInfromationCell.self, forCellWithReuseIdentifier: "myCell")
+
+
         let activityNib = UINib(nibName: "PetActivitiesCell", bundle: nil)
         collectionView?.register(activityNib, forCellWithReuseIdentifier: "nib")
         
         
-        let nib = UINib(nibName: "PetProfileCollectionViewCell", bundle: nil)
-        collectionView?.register(nib, forCellWithReuseIdentifier: "myCell")
+//        let nib = UINib(nibName: "PetProfileCollectionViewCell", bundle: nil)
+//        collectionView?.register(nib, forCellWithReuseIdentifier: "myCell")
+        
+        
         collectionView?.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
         collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(50, 0, 0, 0)
         collectionView?.isPagingEnabled = true
@@ -420,10 +414,8 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
                 button.isHidden = true
             } else {
                 button.isHidden = false
-
                 button.removeTarget(self, action: #selector(setUpGoal(sender:)), for: .touchUpInside)
                 button.removeTarget(self, action: #selector(addsaveZonebuttonAction(sender:)), for: .touchUpInside)
-
                 addButtonWithSelectorAndImageNamed(selector: #selector(addUserbuttonAction(sender:)), string: "PauseTripButton-1x-png")
         }
         }else if indexPath.item == 0 {
@@ -465,22 +457,20 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
         
         if indexPath.item == 0 {
 
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myCell", for: indexPath) as! PetProfileCollectionViewCell
-            cell.petBirthdayLabel.text = pet.birthday?.toStringShow
-            cell.typeLabel.text = self.pet.typeString
-            cell.breedLabel.text = self.pet.breedsString
-            cell.genderLabel.text = self.pet.gender?.name
-            cell.weightLabel.text = self.pet.weightString
-            cell.backgroundColor = UIColor.white
-            cell.petName.text = self.pet.name
-
-            if let imageData = self.pet.image {
-                cell.petImage.image = UIImage(data: imageData as Data)
-            }
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myCell", for: indexPath) as! PetInfromationCell
+//            cell.petBirthdayLabel.text = pet.birthday?.toStringShow
+//            cell.typeLabel.text = self.pet.typeString
+//            cell.breedLabel.text = self.pet.breedsString
+//            cell.genderLabel.text = self.pet.gender?.name
+//            cell.weightLabel.text = self.pet.weightString
+//            cell.backgroundColor = UIColor.white
+//            cell.petName.text = self.pet.name
+//
+//            if let imageData = self.pet.image {
+//                cell.petImage.image = UIImage(data: imageData as Data)
+//            }
             return cell
         } else if indexPath.item == 3 {
-
-
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ProfileCell
 
             return cell

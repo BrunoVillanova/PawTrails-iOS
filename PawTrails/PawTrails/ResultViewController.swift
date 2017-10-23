@@ -26,8 +26,6 @@ class ResultViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         if let pet = pet, let bscescroe = bscText, let weights = weight {
             self.bscLabel.text = bscescroe
             self.weightLbl.text = weights
