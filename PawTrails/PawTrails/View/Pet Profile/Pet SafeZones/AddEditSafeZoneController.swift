@@ -46,6 +46,8 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
 //
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         presenter.attachView(self, safezone: safezone)
         
     
@@ -122,7 +124,6 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
                  slider = settingsView.slider
                 if let slider = slider {
                     slider.addTarget(self, action: #selector(handleSliderSlided(sender:)), for: .valueChanged)
-
                 }
                 
                 
@@ -153,15 +154,17 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
     
     override func viewDidLayoutSubviews() {
         
-        let image = UIImage(named: "SliderBtn")?.scaleToSize(newSize: CGSize(width: 70, height: 40))
-        self.slider?.setThumbImage(image, for: .normal)
-            if let handleView = slider?.subviews.last as? UIImageView {
-                let label = UILabel(frame: handleView.bounds)
-                label.backgroundColor = UIColor.clear
-                handleView.addSubview(label)
-                self.sliderLabel = label
-                sliderLabel?.textColor = UIColor.black
-        }
+//        
+//        let image = UIImage(named: "SliderBtn")?.scaleToSize(newSize: CGSize(width: 70, height: 40))
+//        self.slider?.setThumbImage(image, for: .normal)
+//        if let handleView = slider?.subviews.last as? UIImageView {
+//            let label = UILabel(frame: handleView.bounds)
+//            label.backgroundColor = UIColor.clear
+//            handleView.addSubview(label)
+//            self.sliderLabel = label
+//            sliderLabel?.textColor = UIColor.black
+//        }
+
     }
     
     
@@ -240,7 +243,7 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
             fenceDistance = Int(round(x0y0.location.distance(from: xfy0.location)))
             fence.isIdle = fenceDistanceIsIdle()
             self.distanceLabel.text = fenceDistance < 1000 ? "\(fenceDistance) m" : "\(Double(fenceDistance)/1000.0) km"
-            self.sliderLabel?.text = fenceDistance < 1000 ? "\(fenceDistance)" : "\(Double(fenceDistance)/1000.0) km"
+            slider?.value = Float(fenceDistance)
 
         }
     }

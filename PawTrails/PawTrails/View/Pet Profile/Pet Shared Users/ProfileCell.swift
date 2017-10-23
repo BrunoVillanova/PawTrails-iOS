@@ -37,11 +37,11 @@ class ProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDelegat
     // Mohamed - ProfileView
     
     
-    func errorMessage(_ error: ErrorMsg) {
-        let alert = UIAlertController(title: error.title, message: error.msg, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
-        self.window?.rootViewController?.present(alert, animated: true, completion: nil)
-    }
+//    func errorMessage(_ error: ErrorMsg) {
+//        let alert = UIAlertController(title: error.title, message: error.msg, preferredStyle: UIAlertControllerStyle.alert)
+//        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+//        self.window?.rootViewController?.present(alert, animated: true, completion: nil)
+//    }
 
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

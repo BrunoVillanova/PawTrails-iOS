@@ -47,9 +47,7 @@ extension BCS3ViewController: UICollectionViewDelegate, UICollectionViewDataSour
         } else {
             cell.actionImage.image = UIImage(named: "untick")
         }
-        
-        
-//        cell.actionImage.circle()
+    
         cell.checkMark.isEnabled = false
         cell.checkMark.isUserInteractionEnabled = false
         cell.checkMark.setOn(false, animated: false)

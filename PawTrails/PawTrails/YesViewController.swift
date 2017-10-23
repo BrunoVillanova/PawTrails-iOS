@@ -68,9 +68,7 @@ extension YesViewController: UICollectionViewDelegate, UICollectionViewDataSourc
             self.weight = "Very thin"
             cell.checkMark.setOn(true, animated: false)
             self.performSegue(withIdentifier: "result", sender: self)
-            
         } else {
-            
             self.bscScroe = "BCS 2"
             self.weight = "Underweight"
             let cell = collectionView.cellForItem(at: indexPath) as! questionCells
