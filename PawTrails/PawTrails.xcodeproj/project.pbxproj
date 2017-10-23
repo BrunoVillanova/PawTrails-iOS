@@ -8,6 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		15226D901F8D18EA007EEFF2 /* SocketIO+RxSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15226D8F1F8D18EA007EEFF2 /* SocketIO+RxSwift.swift */; };
+		157401A41F9E268200A854C5 /* PTBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157401911F9E268200A854C5 /* PTBubbleView.swift */; };
+		157401A51F9E268200A854C5 /* Battery@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 157401931F9E268200A854C5 /* Battery@2x.png */; };
+		157401A61F9E268200A854C5 /* BatteryLow@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 157401941F9E268200A854C5 /* BatteryLow@1x.png */; };
+		157401A71F9E268200A854C5 /* Battery@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 157401951F9E268200A854C5 /* Battery@3x.png */; };
+		157401A81F9E268200A854C5 /* BatteryLow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 157401961F9E268200A854C5 /* BatteryLow@3x.png */; };
+		157401A91F9E268200A854C5 /* BatteryLow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 157401971F9E268200A854C5 /* BatteryLow@2x.png */; };
+		157401AA1F9E268200A854C5 /* Battery@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 157401981F9E268200A854C5 /* Battery@1x.png */; };
+		157401AB1F9E268200A854C5 /* SignalFull@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1574019B1F9E268200A854C5 /* SignalFull@2x.png */; };
+		157401AC1F9E268200A854C5 /* SignalFull@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1574019C1F9E268200A854C5 /* SignalFull@3x.png */; };
+		157401AD1F9E268200A854C5 /* SignalFull@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1574019D1F9E268200A854C5 /* SignalFull@1x.png */; };
+		157401AE1F9E268200A854C5 /* PTSignalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1574019E1F9E268200A854C5 /* PTSignalView.swift */; };
+		157401AF1F9E268200A854C5 /* PTPetCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1574019F1F9E268200A854C5 /* PTPetCalloutView.swift */; };
+		157401B01F9E268200A854C5 /* PawTrailsStyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157401A01F9E268200A854C5 /* PawTrailsStyleKit.swift */; };
+		157401B11F9E268200A854C5 /* PTBasicAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157401A11F9E268200A854C5 /* PTBasicAnnotationView.swift */; };
+		157401B21F9E268200A854C5 /* PTBatteryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157401A21F9E268200A854C5 /* PTBatteryView.swift */; };
+		157401B31F9E268200A854C5 /* PTPetCalloutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 157401A31F9E268200A854C5 /* PTPetCalloutView.xib */; };
 		440067C91F8E485800D8B89E /* PieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440067C81F8E485800D8B89E /* PieChart.swift */; };
 		440067D51F8E5E6600D8B89E /* PetActivitiesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440067D31F8E5E6600D8B89E /* PetActivitiesCell.swift */; };
 		440067D61F8E5E6600D8B89E /* PetActivitiesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 440067D41F8E5E6600D8B89E /* PetActivitiesCell.xib */; };
@@ -195,6 +211,22 @@
 
 /* Begin PBXFileReference section */
 		15226D8F1F8D18EA007EEFF2 /* SocketIO+RxSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SocketIO+RxSwift.swift"; path = "Extensions/SocketIO+RxSwift.swift"; sourceTree = "<group>"; };
+		157401911F9E268200A854C5 /* PTBubbleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTBubbleView.swift; sourceTree = "<group>"; };
+		157401931F9E268200A854C5 /* Battery@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Battery@2x.png"; sourceTree = "<group>"; };
+		157401941F9E268200A854C5 /* BatteryLow@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BatteryLow@1x.png"; sourceTree = "<group>"; };
+		157401951F9E268200A854C5 /* Battery@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Battery@3x.png"; sourceTree = "<group>"; };
+		157401961F9E268200A854C5 /* BatteryLow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BatteryLow@3x.png"; sourceTree = "<group>"; };
+		157401971F9E268200A854C5 /* BatteryLow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BatteryLow@2x.png"; sourceTree = "<group>"; };
+		157401981F9E268200A854C5 /* Battery@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Battery@1x.png"; sourceTree = "<group>"; };
+		1574019B1F9E268200A854C5 /* SignalFull@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SignalFull@2x.png"; sourceTree = "<group>"; };
+		1574019C1F9E268200A854C5 /* SignalFull@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SignalFull@3x.png"; sourceTree = "<group>"; };
+		1574019D1F9E268200A854C5 /* SignalFull@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SignalFull@1x.png"; sourceTree = "<group>"; };
+		1574019E1F9E268200A854C5 /* PTSignalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTSignalView.swift; sourceTree = "<group>"; };
+		1574019F1F9E268200A854C5 /* PTPetCalloutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTPetCalloutView.swift; sourceTree = "<group>"; };
+		157401A01F9E268200A854C5 /* PawTrailsStyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PawTrailsStyleKit.swift; sourceTree = "<group>"; };
+		157401A11F9E268200A854C5 /* PTBasicAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTBasicAnnotationView.swift; sourceTree = "<group>"; };
+		157401A21F9E268200A854C5 /* PTBatteryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTBatteryView.swift; sourceTree = "<group>"; };
+		157401A31F9E268200A854C5 /* PTPetCalloutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PTPetCalloutView.xib; sourceTree = "<group>"; };
 		1E2B813BA9CAE948174F2C71 /* Pods_PawTrailsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PawTrailsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		440067C81F8E485800D8B89E /* PieChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PieChart.swift; path = ../PieChart.swift; sourceTree = "<group>"; };
 		440067D31F8E5E6600D8B89E /* PetActivitiesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetActivitiesCell.swift; sourceTree = "<group>"; };
@@ -412,6 +444,53 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		157401901F9E268200A854C5 /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				157401911F9E268200A854C5 /* PTBubbleView.swift */,
+				157401921F9E268200A854C5 /* Resources */,
+				157401991F9E268200A854C5 /* PTSignalView */,
+				1574019F1F9E268200A854C5 /* PTPetCalloutView.swift */,
+				157401A01F9E268200A854C5 /* PawTrailsStyleKit.swift */,
+				157401A11F9E268200A854C5 /* PTBasicAnnotationView.swift */,
+				157401A21F9E268200A854C5 /* PTBatteryView.swift */,
+				157401A31F9E268200A854C5 /* PTPetCalloutView.xib */,
+			);
+			path = "Custom Views";
+			sourceTree = "<group>";
+		};
+		157401921F9E268200A854C5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				157401931F9E268200A854C5 /* Battery@2x.png */,
+				157401941F9E268200A854C5 /* BatteryLow@1x.png */,
+				157401951F9E268200A854C5 /* Battery@3x.png */,
+				157401961F9E268200A854C5 /* BatteryLow@3x.png */,
+				157401971F9E268200A854C5 /* BatteryLow@2x.png */,
+				157401981F9E268200A854C5 /* Battery@1x.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		157401991F9E268200A854C5 /* PTSignalView */ = {
+			isa = PBXGroup;
+			children = (
+				1574019A1F9E268200A854C5 /* Resources */,
+				1574019E1F9E268200A854C5 /* PTSignalView.swift */,
+			);
+			path = PTSignalView;
+			sourceTree = "<group>";
+		};
+		1574019A1F9E268200A854C5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1574019B1F9E268200A854C5 /* SignalFull@2x.png */,
+				1574019C1F9E268200A854C5 /* SignalFull@3x.png */,
+				1574019D1F9E268200A854C5 /* SignalFull@1x.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		440067C71F8E2C7300D8B89E /* PetProfilePage */ = {
 			isa = PBXGroup;
 			children = (
@@ -528,6 +607,7 @@
 			isa = PBXGroup;
 			children = (
 				4415FF421E3B822900A81B13 /* AppDelegate.swift */,
+				157401901F9E268200A854C5 /* Custom Views */,
 				440CEE4C1E3B8D3D00F58A09 /* Model */,
 				440CEE4A1E3B8D2500F58A09 /* View */,
 				440CEE4B1E3B8D2C00F58A09 /* Presenter */,
@@ -1041,9 +1121,19 @@
 				44251B161F0CD5A90067F401 /* Main.storyboard in Resources */,
 				44690B6B1F62891C00719911 /* PetProfileCollectionViewCell.xib in Resources */,
 				440067D61F8E5E6600D8B89E /* PetActivitiesCell.xib in Resources */,
+				157401A91F9E268200A854C5 /* BatteryLow@2x.png in Resources */,
+				157401A71F9E268200A854C5 /* Battery@3x.png in Resources */,
+				157401A61F9E268200A854C5 /* BatteryLow@1x.png in Resources */,
+				157401B31F9E268200A854C5 /* PTPetCalloutView.xib in Resources */,
 				4464F12E1F8CBC1B00E0BBD7 /* IconCell.xib in Resources */,
+				157401A51F9E268200A854C5 /* Battery@2x.png in Resources */,
 				44251AD11F0CD5170067F401 /* GoogleService-Info.plist in Resources */,
+				157401A81F9E268200A854C5 /* BatteryLow@3x.png in Resources */,
+				157401AA1F9E268200A854C5 /* Battery@1x.png in Resources */,
+				157401AB1F9E268200A854C5 /* SignalFull@2x.png in Resources */,
 				440784491F8B85A1005E9E1B /* SettingsView.xib in Resources */,
+				157401AC1F9E268200A854C5 /* SignalFull@3x.png in Resources */,
+				157401AD1F9E268200A854C5 /* SignalFull@1x.png in Resources */,
 				448C7CE41F87750100BF7106 /* SafeZoneCollectionViewCell.xib in Resources */,
 				44251B151F0CD5A90067F401 /* LaunchScreen.storyboard in Resources */,
 				44251ADC1F0CD5260067F401 /* Assets.xcassets in Resources */,
@@ -1254,6 +1344,7 @@
 				44251B551F0CD5FE0067F401 /* Parsers.swift in Sources */,
 				44251B711F0CD6130067F401 /* CoreDataManager.swift in Sources */,
 				44475ADB1F5960B800D41AAA /* SignUpViewController.swift in Sources */,
+				157401AE1F9E268200A854C5 /* PTSignalView.swift in Sources */,
 				44223B551F97526500D8CA1E /* SelectPetForRecommandationController.swift in Sources */,
 				44251B0C1F0CD5870067F401 /* AddEditSafeZonePresenter.swift in Sources */,
 				44251B3E1F0CD5DF0067F401 /* AddressTableViewController.swift in Sources */,
@@ -1272,6 +1363,7 @@
 				442531311F5FE6FF0017D21A /* TripScreenViewController.swift in Sources */,
 				44251B3D1F0CD5DF0067F401 /* EditUserProfileTableViewController.swift in Sources */,
 				44251B011F0CD5740067F401 /* PasswordRecoveryPresenter.swift in Sources */,
+				157401B11F9E268200A854C5 /* PTBasicAnnotationView.swift in Sources */,
 				441858E11F98B25B003710A8 /* QuestionsViewController.swift in Sources */,
 				443E80771F5D53D5008679FC /* PetsCollectionViewCell.swift in Sources */,
 				44251AE51F0CD54D0067F401 /* ModelExtensions.swift in Sources */,
@@ -1281,6 +1373,7 @@
 				44A1AC501E92923A003EF6CA /* PetsPresenter.swift in Sources */,
 				44251B401F0CD5DF0067F401 /* EmailTableViewController.swift in Sources */,
 				44251B771F0CD6130067F401 /* CDCountryCode+CoreDataClass.swift in Sources */,
+				157401A41F9E268200A854C5 /* PTBubbleView.swift in Sources */,
 				44EAB45F1F614095006A64AE /* JoinTripVC.swift in Sources */,
 				44251B7E1F0CD6130067F401 /* CDPhone+CoreDataProperties.swift in Sources */,
 				44251B4B1F0CD5DF0067F401 /* PetBirthdayTableViewController.swift in Sources */,
@@ -1296,6 +1389,7 @@
 				443E808C1F5D9236008679FC /* SelectPetsCell.swift in Sources */,
 				446607BB1F95FF4C00833683 /* AirbnbDatePicker.swift in Sources */,
 				44251B7C1F0CD6130067F401 /* CDPetUser+CoreDataProperties.swift in Sources */,
+				157401B21F9E268200A854C5 /* PTBatteryView.swift in Sources */,
 				44251B891F0CD6210067F401 /* CSVRepository.swift in Sources */,
 				44251B751F0CD6130067F401 /* CDBreed+CoreDataClass.swift in Sources */,
 				44EAB4611F615906006A64AE /* PetProfileCollectionViewController.swift in Sources */,
@@ -1314,6 +1408,7 @@
 				44251B7F1F0CD6130067F401 /* CDSafeZone+CoreDataClass.swift in Sources */,
 				44251B6F1F0CD6130067F401 /* NotificationManager.swift in Sources */,
 				44251B721F0CD6130067F401 /* APIManager.swift in Sources */,
+				157401AF1F9E268200A854C5 /* PTPetCalloutView.swift in Sources */,
 				4424DCF91E8E9F2300ACDF07 /* UserProfileTableViewController.swift in Sources */,
 				44251B491F0CD5DF0067F401 /* AddEditPetDetailsTableViewController.swift in Sources */,
 				441858E71F98DDE9003710A8 /* NoViewController.swift in Sources */,
@@ -1343,6 +1438,7 @@
 				446607BC1F95FF4C00833683 /* AirbnbDatePickerCell.swift in Sources */,
 				44251AE61F0CD54D0067F401 /* MapExtensions.swift in Sources */,
 				44251B731F0CD6130067F401 /* CDAddress+CoreDataClass.swift in Sources */,
+				157401B01F9E268200A854C5 /* PawTrailsStyleKit.swift in Sources */,
 				44FE723D1E4A2EF0007C7E24 /* DataManager.swift in Sources */,
 				44F239511EEEC1E70082FA36 /* SocketIOTestTableViewController.swift in Sources */,
 				4407844B1F8B85E8005E9E1B /* SettingsView.swift in Sources */,
