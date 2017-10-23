@@ -7,25 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1506027C1F9A100400B477A4 /* BatteryLow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 150602761F9A100300B477A4 /* BatteryLow@3x.png */; };
-		1506027D1F9A100400B477A4 /* BatteryLow@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 150602771F9A100300B477A4 /* BatteryLow@1x.png */; };
-		1506027E1F9A100400B477A4 /* BatteryLow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 150602781F9A100400B477A4 /* BatteryLow@2x.png */; };
-		1506027F1F9A100400B477A4 /* Battery@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 150602791F9A100400B477A4 /* Battery@2x.png */; };
-		150602801F9A100400B477A4 /* Battery@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1506027A1F9A100400B477A4 /* Battery@3x.png */; };
-		150602811F9A100400B477A4 /* Battery@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1506027B1F9A100400B477A4 /* Battery@1x.png */; };
-		1511292C1F8E534100CDCC2D /* PTBasicAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1511292B1F8E534100CDCC2D /* PTBasicAnnotationView.swift */; };
-		151902CF1F97A4FF00915D0A /* PTBatteryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151902CE1F97A4FF00915D0A /* PTBatteryView.swift */; };
 		15226D901F8D18EA007EEFF2 /* SocketIO+RxSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15226D8F1F8D18EA007EEFF2 /* SocketIO+RxSwift.swift */; };
-		15B2C7E31F9E1C640019E477 /* PTSignalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B2C7E21F9E1C640019E477 /* PTSignalView.swift */; };
-		15B2C7E71F9E1CE20019E477 /* SignalFull@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15B2C7E41F9E1CE20019E477 /* SignalFull@1x.png */; };
-		15B2C7E81F9E1CE20019E477 /* SignalFull@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15B2C7E51F9E1CE20019E477 /* SignalFull@3x.png */; };
-		15B2C7E91F9E1CE20019E477 /* SignalFull@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15B2C7E61F9E1CE20019E477 /* SignalFull@2x.png */; };
-		15CFDA191F962D4C00AC6A63 /* PTPetCalloutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15CFDA181F962D4C00AC6A63 /* PTPetCalloutView.xib */; };
-		15CFDA1B1F962DB300AC6A63 /* PTPetCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CFDA1A1F962DB300AC6A63 /* PTPetCalloutView.swift */; };
-		15CFDA1D1F963B2B00AC6A63 /* PawTrailsStyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CFDA1C1F963B2B00AC6A63 /* PawTrailsStyleKit.swift */; };
-		15CFDA1F1F963B7A00AC6A63 /* PTBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CFDA1E1F963B7A00AC6A63 /* PTBubbleView.swift */; };
+		440067C91F8E485800D8B89E /* PieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440067C81F8E485800D8B89E /* PieChart.swift */; };
+		440067D51F8E5E6600D8B89E /* PetActivitiesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440067D31F8E5E6600D8B89E /* PetActivitiesCell.swift */; };
+		440067D61F8E5E6600D8B89E /* PetActivitiesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 440067D41F8E5E6600D8B89E /* PetActivitiesCell.xib */; };
 		440784491F8B85A1005E9E1B /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 440784481F8B85A1005E9E1B /* SettingsView.xib */; };
 		4407844B1F8B85E8005E9E1B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4407844A1F8B85E8005E9E1B /* SettingsView.swift */; };
+		440823CA1F8F94900004B90F /* SetUpYourGoalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440823C91F8F94900004B90F /* SetUpYourGoalController.swift */; };
 		4411113A1F698B05008D1468 /* ShareCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441111381F698B05008D1468 /* ShareCollectionViewCell.swift */; };
 		4411113B1F698B05008D1468 /* ShareCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 441111391F698B05008D1468 /* ShareCollectionViewCell.xib */; };
 		4414AE6B1EA0DD5B004A5134 /* PawTrailsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4414AE6A1EA0DD5B004A5134 /* PawTrailsTests.swift */; };
@@ -33,7 +21,16 @@
 		4414AE7A1EA0DD8C004A5134 /* SocketIOManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4414AE751EA0DD8C004A5134 /* SocketIOManagerTest.swift */; };
 		4414AE7B1EA0DD8C004A5134 /* DataManagerUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4414AE761EA0DD8C004A5134 /* DataManagerUserTests.swift */; };
 		4415FF431E3B822900A81B13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4415FF421E3B822900A81B13 /* AppDelegate.swift */; };
+		441858E11F98B25B003710A8 /* QuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441858E01F98B25B003710A8 /* QuestionsViewController.swift */; };
+		441858E31F98BACE003710A8 /* questionCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441858E21F98BACE003710A8 /* questionCells.swift */; };
+		441858E51F98DDD8003710A8 /* YesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441858E41F98DDD8003710A8 /* YesViewController.swift */; };
+		441858E71F98DDE9003710A8 /* NoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441858E61F98DDE9003710A8 /* NoViewController.swift */; };
+		441858E91F98EC7E003710A8 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441858E81F98EC7E003710A8 /* ResultViewController.swift */; };
+		441858EB1F98FA85003710A8 /* BCS3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441858EA1F98FA85003710A8 /* BCS3ViewController.swift */; };
+		441858ED1F98FAA1003710A8 /* BSC4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441858EC1F98FAA1003710A8 /* BSC4ViewController.swift */; };
 		441CEBED1EE16F8F00A37877 /* DataManagerPetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441CEBEC1EE16F8F00A37877 /* DataManagerPetTests.swift */; };
+		44223B531F97483800D8CA1E /* RecommandationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44223B521F97483800D8CA1E /* RecommandationController.swift */; };
+		44223B551F97526500D8CA1E /* SelectPetForRecommandationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44223B541F97526500D8CA1E /* SelectPetForRecommandationController.swift */; };
 		4424DCF91E8E9F2300ACDF07 /* UserProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4424DCF81E8E9F2300ACDF07 /* UserProfileTableViewController.swift */; };
 		4424DCFD1E8E9F9400ACDF07 /* PetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4424DCFC1E8E9F9400ACDF07 /* PetsViewController.swift */; };
 		4424DCFF1E8EA1D900ACDF07 /* UserProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4424DCFE1E8EA1D900ACDF07 /* UserProfilePresenter.swift */; };
@@ -85,8 +82,6 @@
 		44251B421F0CD5DF0067F401 /* NameTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B271F0CD5DF0067F401 /* NameTableViewController.swift */; };
 		44251B431F0CD5DF0067F401 /* PhoneTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B281F0CD5DF0067F401 /* PhoneTableViewController.swift */; };
 		44251B451F0CD5DF0067F401 /* AddPetUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B2D1F0CD5DF0067F401 /* AddPetUserViewController.swift */; };
-		44251B461F0CD5DF0067F401 /* PetUserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B2E1F0CD5DF0067F401 /* PetUserTableViewController.swift */; };
-		44251B471F0CD5DF0067F401 /* PetActivityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B2F1F0CD5DF0067F401 /* PetActivityTableViewController.swift */; };
 		44251B491F0CD5DF0067F401 /* AddEditPetDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B321F0CD5DF0067F401 /* AddEditPetDetailsTableViewController.swift */; };
 		44251B4A1F0CD5DF0067F401 /* AddPetDeviceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B331F0CD5DF0067F401 /* AddPetDeviceTableViewController.swift */; };
 		44251B4B1F0CD5DF0067F401 /* PetBirthdayTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B351F0CD5DF0067F401 /* PetBirthdayTableViewController.swift */; };
@@ -135,7 +130,6 @@
 		4447217D1F03F12A001DCDE1 /* PawTrailsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4447217C1F03F12A001DCDE1 /* PawTrailsUITests.swift */; };
 		44475ADB1F5960B800D41AAA /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44475ADA1F5960B800D41AAA /* SignUpViewController.swift */; };
 		44477CB91F599EFC00083295 /* UiimageViewWithMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44477CB81F599EFC00083295 /* UiimageViewWithMask.swift */; };
-		4448E7F91F6A7EED002EDBE2 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4448E7F81F6A7EED002EDBE2 /* UserProfileView.swift */; };
 		4452EEEE1ED58063004E13DC /* APITablesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4452EEED1ED58063004E13DC /* APITablesTests.swift */; };
 		4452EEF01ED5824D004E13DC /* APIPetRegistrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4452EEEF1ED5824D004E13DC /* APIPetRegistrationTests.swift */; };
 		4452EEF21ED59A93004E13DC /* APIPetShareUsersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4452EEF11ED59A93004E13DC /* APIPetShareUsersTests.swift */; };
@@ -148,16 +142,23 @@
 		446231401EE6BE4200B53C1D /* DataManagerPetSharingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4462313F1EE6BE4200B53C1D /* DataManagerPetSharingTests.swift */; };
 		4464F12D1F8CBC1A00E0BBD7 /* IconCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4464F12B1F8CBC1A00E0BBD7 /* IconCell.swift */; };
 		4464F12E1F8CBC1B00E0BBD7 /* IconCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4464F12C1F8CBC1A00E0BBD7 /* IconCell.xib */; };
+		446607BB1F95FF4C00833683 /* AirbnbDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446607B41F95FF4C00833683 /* AirbnbDatePicker.swift */; };
+		446607BC1F95FF4C00833683 /* AirbnbDatePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446607B51F95FF4C00833683 /* AirbnbDatePickerCell.swift */; };
+		446607BD1F95FF4C00833683 /* AirbnbDatePickerFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446607B61F95FF4C00833683 /* AirbnbDatePickerFlowLayout.swift */; };
+		446607BE1F95FF4C00833683 /* AirbnbDatePickerFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446607B71F95FF4C00833683 /* AirbnbDatePickerFooter.swift */; };
+		446607BF1F95FF4C00833683 /* AirbnbDatePickerHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446607B81F95FF4C00833683 /* AirbnbDatePickerHeader.swift */; };
+		446607C01F95FF4C00833683 /* AirbnbDatePickerMonthHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446607B91F95FF4C00833683 /* AirbnbDatePickerMonthHeader.swift */; };
+		446607C31F95FFE900833683 /* AirbnbDatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446607C21F95FFE900833683 /* AirbnbDatePickerViewController.swift */; };
+		446607C51F96004000833683 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446607C41F96004000833683 /* Date.swift */; };
+		446607C71F96028F00833683 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446607C61F96028F00833683 /* Utility.swift */; };
 		44690B6A1F62891C00719911 /* PetProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44690B681F62891C00719911 /* PetProfileCollectionViewCell.swift */; };
 		44690B6B1F62891C00719911 /* PetProfileCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44690B691F62891C00719911 /* PetProfileCollectionViewCell.xib */; };
-		44690B6D1F62963600719911 /* ProfilePetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44690B6C1F62963600719911 /* ProfilePetView.swift */; };
 		447D4C171E44C4F5008F82F4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 447D4C161E44C4F5008F82F4 /* MapKit.framework */; };
 		448BE9681ED47F5C00665608 /* APIUserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448BE9671ED47F5C00665608 /* APIUserTest.swift */; };
 		448BE96A1ED490D900665608 /* APIImageUploadTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448BE9691ED490D900665608 /* APIImageUploadTest.swift */; };
 		448C7CE31F87750100BF7106 /* SafeZoneCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C7CE11F87750100BF7106 /* SafeZoneCollectionViewCell.swift */; };
 		448C7CE41F87750100BF7106 /* SafeZoneCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 448C7CE21F87750100BF7106 /* SafeZoneCollectionViewCell.xib */; };
 		448C7CE61F877C9000BF7106 /* SafezZoneParentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C7CE51F877C9000BF7106 /* SafezZoneParentCell.swift */; };
-		448C7CE81F87842E00BF7106 /* SafeZonePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C7CE71F87842E00BF7106 /* SafeZonePresenter.swift */; };
 		448C7CEC1F87C8C700BF7106 /* AddEditSafeZOneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C7CEB1F87C8C700BF7106 /* AddEditSafeZOneController.swift */; };
 		44A1AC501E92923A003EF6CA /* PetsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A1AC4F1E92923A003EF6CA /* PetsPresenter.swift */; };
 		44B179621E4B62690070A18B /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B179611E4B62690070A18B /* Presenter.swift */; };
@@ -193,26 +194,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		150602761F9A100300B477A4 /* BatteryLow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BatteryLow@3x.png"; sourceTree = "<group>"; };
-		150602771F9A100300B477A4 /* BatteryLow@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BatteryLow@1x.png"; sourceTree = "<group>"; };
-		150602781F9A100400B477A4 /* BatteryLow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BatteryLow@2x.png"; sourceTree = "<group>"; };
-		150602791F9A100400B477A4 /* Battery@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Battery@2x.png"; sourceTree = "<group>"; };
-		1506027A1F9A100400B477A4 /* Battery@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Battery@3x.png"; sourceTree = "<group>"; };
-		1506027B1F9A100400B477A4 /* Battery@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Battery@1x.png"; sourceTree = "<group>"; };
-		1511292B1F8E534100CDCC2D /* PTBasicAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTBasicAnnotationView.swift; sourceTree = "<group>"; };
-		151902CE1F97A4FF00915D0A /* PTBatteryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTBatteryView.swift; sourceTree = "<group>"; };
 		15226D8F1F8D18EA007EEFF2 /* SocketIO+RxSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SocketIO+RxSwift.swift"; path = "Extensions/SocketIO+RxSwift.swift"; sourceTree = "<group>"; };
-		15B2C7E21F9E1C640019E477 /* PTSignalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTSignalView.swift; sourceTree = "<group>"; };
-		15B2C7E41F9E1CE20019E477 /* SignalFull@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SignalFull@1x.png"; sourceTree = "<group>"; };
-		15B2C7E51F9E1CE20019E477 /* SignalFull@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SignalFull@3x.png"; sourceTree = "<group>"; };
-		15B2C7E61F9E1CE20019E477 /* SignalFull@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SignalFull@2x.png"; sourceTree = "<group>"; };
-		15CFDA181F962D4C00AC6A63 /* PTPetCalloutView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PTPetCalloutView.xib; sourceTree = "<group>"; };
-		15CFDA1A1F962DB300AC6A63 /* PTPetCalloutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTPetCalloutView.swift; sourceTree = "<group>"; };
-		15CFDA1C1F963B2B00AC6A63 /* PawTrailsStyleKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PawTrailsStyleKit.swift; sourceTree = "<group>"; };
-		15CFDA1E1F963B7A00AC6A63 /* PTBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTBubbleView.swift; sourceTree = "<group>"; };
 		1E2B813BA9CAE948174F2C71 /* Pods_PawTrailsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PawTrailsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		440067C81F8E485800D8B89E /* PieChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PieChart.swift; path = ../PieChart.swift; sourceTree = "<group>"; };
+		440067D31F8E5E6600D8B89E /* PetActivitiesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetActivitiesCell.swift; sourceTree = "<group>"; };
+		440067D41F8E5E6600D8B89E /* PetActivitiesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PetActivitiesCell.xib; sourceTree = "<group>"; };
 		440784481F8B85A1005E9E1B /* SettingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsView.xib; sourceTree = "<group>"; };
 		4407844A1F8B85E8005E9E1B /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		440823C91F8F94900004B90F /* SetUpYourGoalController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SetUpYourGoalController.swift; path = ../../../SetUpYourGoalController.swift; sourceTree = "<group>"; };
 		441111381F698B05008D1468 /* ShareCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareCollectionViewCell.swift; sourceTree = "<group>"; };
 		441111391F698B05008D1468 /* ShareCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareCollectionViewCell.xib; sourceTree = "<group>"; };
 		4414AE681EA0DD5B004A5134 /* PawTrailsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PawTrailsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -223,7 +212,16 @@
 		4414AE761EA0DD8C004A5134 /* DataManagerUserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerUserTests.swift; sourceTree = "<group>"; };
 		4415FF3F1E3B822900A81B13 /* PawTrails.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PawTrails.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4415FF421E3B822900A81B13 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		441858E01F98B25B003710A8 /* QuestionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionsViewController.swift; sourceTree = "<group>"; };
+		441858E21F98BACE003710A8 /* questionCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = questionCells.swift; sourceTree = "<group>"; };
+		441858E41F98DDD8003710A8 /* YesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YesViewController.swift; sourceTree = "<group>"; };
+		441858E61F98DDE9003710A8 /* NoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoViewController.swift; sourceTree = "<group>"; };
+		441858E81F98EC7E003710A8 /* ResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
+		441858EA1F98FA85003710A8 /* BCS3ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCS3ViewController.swift; sourceTree = "<group>"; };
+		441858EC1F98FAA1003710A8 /* BSC4ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BSC4ViewController.swift; sourceTree = "<group>"; };
 		441CEBEC1EE16F8F00A37877 /* DataManagerPetTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerPetTests.swift; sourceTree = "<group>"; };
+		44223B521F97483800D8CA1E /* RecommandationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommandationController.swift; sourceTree = "<group>"; };
+		44223B541F97526500D8CA1E /* SelectPetForRecommandationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPetForRecommandationController.swift; sourceTree = "<group>"; };
 		4424DCF81E8E9F2300ACDF07 /* UserProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserProfileTableViewController.swift; path = View/UserProfileTableViewController.swift; sourceTree = "<group>"; };
 		4424DCFC1E8E9F9400ACDF07 /* PetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetsViewController.swift; path = View/PetsViewController.swift; sourceTree = "<group>"; };
 		4424DCFE1E8EA1D900ACDF07 /* UserProfilePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserProfilePresenter.swift; path = Presenter/UserProfilePresenter.swift; sourceTree = "<group>"; };
@@ -276,9 +274,7 @@
 		44251B261F0CD5DF0067F401 /* GenderTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenderTableViewController.swift; sourceTree = "<group>"; };
 		44251B271F0CD5DF0067F401 /* NameTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameTableViewController.swift; sourceTree = "<group>"; };
 		44251B281F0CD5DF0067F401 /* PhoneTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneTableViewController.swift; sourceTree = "<group>"; };
-		44251B2D1F0CD5DF0067F401 /* AddPetUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPetUserViewController.swift; sourceTree = "<group>"; };
-		44251B2E1F0CD5DF0067F401 /* PetUserTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetUserTableViewController.swift; sourceTree = "<group>"; };
-		44251B2F1F0CD5DF0067F401 /* PetActivityTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetActivityTableViewController.swift; sourceTree = "<group>"; };
+		44251B2D1F0CD5DF0067F401 /* AddPetUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddPetUserViewController.swift; path = "Pet Shared Users/AddPetUserViewController.swift"; sourceTree = "<group>"; };
 		44251B321F0CD5DF0067F401 /* AddEditPetDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditPetDetailsTableViewController.swift; sourceTree = "<group>"; };
 		44251B331F0CD5DF0067F401 /* AddPetDeviceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPetDeviceTableViewController.swift; sourceTree = "<group>"; };
 		44251B351F0CD5DF0067F401 /* PetBirthdayTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetBirthdayTableViewController.swift; sourceTree = "<group>"; };
@@ -329,7 +325,6 @@
 		4447217E1F03F12A001DCDE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		44475ADA1F5960B800D41AAA /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		44477CB81F599EFC00083295 /* UiimageViewWithMask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UiimageViewWithMask.swift; sourceTree = "<group>"; };
-		4448E7F81F6A7EED002EDBE2 /* UserProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		4452EEED1ED58063004E13DC /* APITablesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APITablesTests.swift; sourceTree = "<group>"; };
 		4452EEEF1ED5824D004E13DC /* APIPetRegistrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIPetRegistrationTests.swift; sourceTree = "<group>"; };
 		4452EEF11ED59A93004E13DC /* APIPetShareUsersTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIPetShareUsersTests.swift; sourceTree = "<group>"; };
@@ -346,16 +341,23 @@
 		4462313F1EE6BE4200B53C1D /* DataManagerPetSharingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerPetSharingTests.swift; sourceTree = "<group>"; };
 		4464F12B1F8CBC1A00E0BBD7 /* IconCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconCell.swift; sourceTree = "<group>"; };
 		4464F12C1F8CBC1A00E0BBD7 /* IconCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IconCell.xib; sourceTree = "<group>"; };
-		44690B681F62891C00719911 /* PetProfileCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetProfileCollectionViewCell.swift; path = ../../../PetProfileCollectionViewCell.swift; sourceTree = "<group>"; };
-		44690B691F62891C00719911 /* PetProfileCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PetProfileCollectionViewCell.xib; path = ../../../PetProfileCollectionViewCell.xib; sourceTree = "<group>"; };
-		44690B6C1F62963600719911 /* ProfilePetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePetView.swift; sourceTree = "<group>"; };
+		446607B41F95FF4C00833683 /* AirbnbDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirbnbDatePicker.swift; sourceTree = "<group>"; };
+		446607B51F95FF4C00833683 /* AirbnbDatePickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirbnbDatePickerCell.swift; sourceTree = "<group>"; };
+		446607B61F95FF4C00833683 /* AirbnbDatePickerFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirbnbDatePickerFlowLayout.swift; sourceTree = "<group>"; };
+		446607B71F95FF4C00833683 /* AirbnbDatePickerFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirbnbDatePickerFooter.swift; sourceTree = "<group>"; };
+		446607B81F95FF4C00833683 /* AirbnbDatePickerHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirbnbDatePickerHeader.swift; sourceTree = "<group>"; };
+		446607B91F95FF4C00833683 /* AirbnbDatePickerMonthHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirbnbDatePickerMonthHeader.swift; sourceTree = "<group>"; };
+		446607C21F95FFE900833683 /* AirbnbDatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirbnbDatePickerViewController.swift; sourceTree = "<group>"; };
+		446607C41F96004000833683 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		446607C61F96028F00833683 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		44690B681F62891C00719911 /* PetProfileCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetProfileCollectionViewCell.swift; path = ../../PetProfileCollectionViewCell.swift; sourceTree = "<group>"; };
+		44690B691F62891C00719911 /* PetProfileCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PetProfileCollectionViewCell.xib; path = ../../PetProfileCollectionViewCell.xib; sourceTree = "<group>"; };
 		447D4C161E44C4F5008F82F4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		448BE9671ED47F5C00665608 /* APIUserTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIUserTest.swift; sourceTree = "<group>"; };
 		448BE9691ED490D900665608 /* APIImageUploadTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIImageUploadTest.swift; sourceTree = "<group>"; };
 		448C7CE11F87750100BF7106 /* SafeZoneCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SafeZoneCollectionViewCell.swift; path = "../Pet Shared Users/SafeZoneCollectionViewCell.swift"; sourceTree = "<group>"; };
 		448C7CE21F87750100BF7106 /* SafeZoneCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SafeZoneCollectionViewCell.xib; path = "../Pet Shared Users/SafeZoneCollectionViewCell.xib"; sourceTree = "<group>"; };
 		448C7CE51F877C9000BF7106 /* SafezZoneParentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SafezZoneParentCell.swift; path = "../Pet Shared Users/SafezZoneParentCell.swift"; sourceTree = "<group>"; };
-		448C7CE71F87842E00BF7106 /* SafeZonePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SafeZonePresenter.swift; path = "../Pet Shared Users/SafeZonePresenter.swift"; sourceTree = "<group>"; };
 		448C7CEB1F87C8C700BF7106 /* AddEditSafeZOneController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditSafeZOneController.swift; sourceTree = "<group>"; };
 		44A1AC4F1E92923A003EF6CA /* PetsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetsPresenter.swift; path = Presenter/PetsPresenter.swift; sourceTree = "<group>"; };
 		44B179611E4B62690070A18B /* Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Presenter.swift; path = Presenter/Presenter.swift; sourceTree = "<group>"; };
@@ -363,7 +365,7 @@
 		44D5FE911EE6E9560049232F /* DataManagerPetSafeZonesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerPetSafeZonesTests.swift; sourceTree = "<group>"; };
 		44EAB45E1F614095006A64AE /* JoinTripVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinTripVC.swift; sourceTree = "<group>"; };
 		44EAB4601F615906006A64AE /* PetProfileCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetProfileCollectionViewController.swift; path = "Pet Shared Users/PetProfileCollectionViewController.swift"; sourceTree = "<group>"; };
-		44EAB4621F615C9F006A64AE /* MenuBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuBar.swift; path = ../MenuBar.swift; sourceTree = "<group>"; };
+		44EAB4621F615C9F006A64AE /* MenuBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
 		44EAB46D1F61935A006A64AE /* ProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		44F0BF351EFBF6C7008C26B3 /* EventManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventManager.swift; path = Model/EventManager.swift; sourceTree = "<group>"; };
 		44F239501EEEC1E70082FA36 /* SocketIOTestTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketIOTestTableViewController.swift; path = View/SocketIOTestTableViewController.swift; sourceTree = "<group>"; };
@@ -410,59 +412,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1511292A1F8E52D900CDCC2D /* Custom Views */ = {
+		440067C71F8E2C7300D8B89E /* PetProfilePage */ = {
 			isa = PBXGroup;
 			children = (
-				15B2C7DF1F9E1C2B0019E477 /* PTSignalView */,
-				151902D01F97A56D00915D0A /* PTBatteryView */,
-				15CFDA1C1F963B2B00AC6A63 /* PawTrailsStyleKit.swift */,
-				1511292B1F8E534100CDCC2D /* PTBasicAnnotationView.swift */,
-				15CFDA181F962D4C00AC6A63 /* PTPetCalloutView.xib */,
-				15CFDA1A1F962DB300AC6A63 /* PTPetCalloutView.swift */,
-				15CFDA1E1F963B7A00AC6A63 /* PTBubbleView.swift */,
+				44690B681F62891C00719911 /* PetProfileCollectionViewCell.swift */,
+				44690B691F62891C00719911 /* PetProfileCollectionViewCell.xib */,
 			);
-			path = "Custom Views";
+			name = PetProfilePage;
 			sourceTree = "<group>";
 		};
-		151902D01F97A56D00915D0A /* PTBatteryView */ = {
+		440067D01F8E5DDB00D8B89E /* PetActivities */ = {
 			isa = PBXGroup;
 			children = (
-				151902D11F97A58100915D0A /* Resources */,
-				151902CE1F97A4FF00915D0A /* PTBatteryView.swift */,
+				440823C91F8F94900004B90F /* SetUpYourGoalController.swift */,
+				440067D31F8E5E6600D8B89E /* PetActivitiesCell.swift */,
+				440067D41F8E5E6600D8B89E /* PetActivitiesCell.xib */,
 			);
-			name = PTBatteryView;
-			sourceTree = "<group>";
-		};
-		151902D11F97A58100915D0A /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				1506027B1F9A100400B477A4 /* Battery@1x.png */,
-				150602791F9A100400B477A4 /* Battery@2x.png */,
-				1506027A1F9A100400B477A4 /* Battery@3x.png */,
-				150602771F9A100300B477A4 /* BatteryLow@1x.png */,
-				150602781F9A100400B477A4 /* BatteryLow@2x.png */,
-				150602761F9A100300B477A4 /* BatteryLow@3x.png */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		15B2C7DF1F9E1C2B0019E477 /* PTSignalView */ = {
-			isa = PBXGroup;
-			children = (
-				15B2C7E11F9E1C440019E477 /* Resources */,
-				15B2C7E21F9E1C640019E477 /* PTSignalView.swift */,
-			);
-			path = PTSignalView;
-			sourceTree = "<group>";
-		};
-		15B2C7E11F9E1C440019E477 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				15B2C7E41F9E1CE20019E477 /* SignalFull@1x.png */,
-				15B2C7E61F9E1CE20019E477 /* SignalFull@2x.png */,
-				15B2C7E51F9E1CE20019E477 /* SignalFull@3x.png */,
-			);
-			path = Resources;
+			name = PetActivities;
 			sourceTree = "<group>";
 		};
 		440CEE491E3B8D0700F58A09 /* Assets */ = {
@@ -486,6 +452,7 @@
 				4424DCF81E8E9F2300ACDF07 /* UserProfileTableViewController.swift */,
 				443E80741F5D4F21008679FC /* MapViewController.swift */,
 				443E80761F5D53D5008679FC /* PetsCollectionViewCell.swift */,
+				44223B511F97480700D8CA1E /* Recommandation */,
 				441A0D4B1E55A5A500D02CE4 /* Auth */,
 				44251B1F1F0CD5DF0067F401 /* User Profile */,
 				44251B291F0CD5DF0067F401 /* Pet Profile */,
@@ -560,7 +527,6 @@
 		4415FF411E3B822900A81B13 /* PawTrails */ = {
 			isa = PBXGroup;
 			children = (
-				1511292A1F8E52D900CDCC2D /* Custom Views */,
 				4415FF421E3B822900A81B13 /* AppDelegate.swift */,
 				440CEE4C1E3B8D3D00F58A09 /* Model */,
 				440CEE4A1E3B8D2500F58A09 /* View */,
@@ -592,6 +558,22 @@
 				44251B871F0CD6210067F401 /* APIRepository.swift */,
 			);
 			name = Repositories;
+			sourceTree = "<group>";
+		};
+		44223B511F97480700D8CA1E /* Recommandation */ = {
+			isa = PBXGroup;
+			children = (
+				44223B521F97483800D8CA1E /* RecommandationController.swift */,
+				44223B541F97526500D8CA1E /* SelectPetForRecommandationController.swift */,
+				441858E01F98B25B003710A8 /* QuestionsViewController.swift */,
+				441858E21F98BACE003710A8 /* questionCells.swift */,
+				441858E41F98DDD8003710A8 /* YesViewController.swift */,
+				441858E61F98DDE9003710A8 /* NoViewController.swift */,
+				441858E81F98EC7E003710A8 /* ResultViewController.swift */,
+				441858EA1F98FA85003710A8 /* BCS3ViewController.swift */,
+				441858EC1F98FAA1003710A8 /* BSC4ViewController.swift */,
+			);
+			name = Recommandation;
 			sourceTree = "<group>";
 		};
 		44251B101F0CD5A90067F401 /* Base.lproj */ = {
@@ -631,10 +613,14 @@
 		44251B291F0CD5DF0067F401 /* Pet Profile */ = {
 			isa = PBXGroup;
 			children = (
+				446607B31F95FF3000833683 /* Calender */,
+				440067D01F8E5DDB00D8B89E /* PetActivities */,
+				44EAB4601F615906006A64AE /* PetProfileCollectionViewController.swift */,
+				44EAB4621F615C9F006A64AE /* MenuBar.swift */,
+				44251B2D1F0CD5DF0067F401 /* AddPetUserViewController.swift */,
+				440067C71F8E2C7300D8B89E /* PetProfilePage */,
 				44251B2A1F0CD5DF0067F401 /* Pet SafeZones */,
 				44251B2C1F0CD5DF0067F401 /* Pet Shared Users */,
-				44251B2F1F0CD5DF0067F401 /* PetActivityTableViewController.swift */,
-				44EAB4601F615906006A64AE /* PetProfileCollectionViewController.swift */,
 			);
 			name = "Pet Profile";
 			path = "View/Pet Profile";
@@ -645,7 +631,6 @@
 			children = (
 				448C7CEB1F87C8C700BF7106 /* AddEditSafeZOneController.swift */,
 				448C7CE51F877C9000BF7106 /* SafezZoneParentCell.swift */,
-				448C7CE71F87842E00BF7106 /* SafeZonePresenter.swift */,
 				448C7CE11F87750100BF7106 /* SafeZoneCollectionViewCell.swift */,
 				448C7CE21F87750100BF7106 /* SafeZoneCollectionViewCell.xib */,
 				440784481F8B85A1005E9E1B /* SettingsView.xib */,
@@ -659,9 +644,10 @@
 		44251B2C1F0CD5DF0067F401 /* Pet Shared Users */ = {
 			isa = PBXGroup;
 			children = (
+				44EAB46D1F61935A006A64AE /* ProfileCell.swift */,
+				441111381F698B05008D1468 /* ShareCollectionViewCell.swift */,
+				441111391F698B05008D1468 /* ShareCollectionViewCell.xib */,
 				44EAB4661F61880C006A64AE /* Views */,
-				44251B2D1F0CD5DF0067F401 /* AddPetUserViewController.swift */,
-				44251B2E1F0CD5DF0067F401 /* PetUserTableViewController.swift */,
 			);
 			path = "Pet Shared Users";
 			sourceTree = "<group>";
@@ -813,6 +799,22 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
+		446607B31F95FF3000833683 /* Calender */ = {
+			isa = PBXGroup;
+			children = (
+				446607C61F96028F00833683 /* Utility.swift */,
+				446607C41F96004000833683 /* Date.swift */,
+				446607C21F95FFE900833683 /* AirbnbDatePickerViewController.swift */,
+				446607B41F95FF4C00833683 /* AirbnbDatePicker.swift */,
+				446607B51F95FF4C00833683 /* AirbnbDatePickerCell.swift */,
+				446607B61F95FF4C00833683 /* AirbnbDatePickerFlowLayout.swift */,
+				446607B71F95FF4C00833683 /* AirbnbDatePickerFooter.swift */,
+				446607B81F95FF4C00833683 /* AirbnbDatePickerHeader.swift */,
+				446607B91F95FF4C00833683 /* AirbnbDatePickerMonthHeader.swift */,
+			);
+			name = Calender;
+			sourceTree = "<group>";
+		};
 		4475FB281EB0F69500E9990D /* Pet */ = {
 			isa = PBXGroup;
 			children = (
@@ -871,14 +873,7 @@
 		44EAB4661F61880C006A64AE /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				441111381F698B05008D1468 /* ShareCollectionViewCell.swift */,
-				441111391F698B05008D1468 /* ShareCollectionViewCell.xib */,
-				44690B681F62891C00719911 /* PetProfileCollectionViewCell.swift */,
-				44690B691F62891C00719911 /* PetProfileCollectionViewCell.xib */,
-				44EAB4621F615C9F006A64AE /* MenuBar.swift */,
-				44EAB46D1F61935A006A64AE /* ProfileCell.swift */,
-				4448E7F81F6A7EED002EDBE2 /* UserProfileView.swift */,
-				44690B6C1F62963600719911 /* ProfilePetView.swift */,
+				440067C81F8E485800D8B89E /* PieChart.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -982,14 +977,13 @@
 					4414AE671EA0DD5B004A5134 = {
 						CreatedOnToolsVersion = 8.3;
 						DevelopmentTeam = 7E2855LEH4;
-						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 4415FF3E1E3B822900A81B13;
 					};
 					4415FF3E1E3B822900A81B13 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = CQ878R6EW5;
-						LastSwiftMigration = 0900;
+						DevelopmentTeam = 7E2855LEH4;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -1003,7 +997,6 @@
 					444721791F03F12A001DCDE1 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = DJBJW6R236;
-						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 4415FF3E1E3B822900A81B13;
 					};
@@ -1045,24 +1038,15 @@
 				44251ADF1F0CD5260067F401 /* attitudetechie.der in Resources */,
 				44251AD31F0CD5170067F401 /* GoogleSignIn.bundle in Resources */,
 				4411113B1F698B05008D1468 /* ShareCollectionViewCell.xib in Resources */,
-				1506027C1F9A100400B477A4 /* BatteryLow@3x.png in Resources */,
 				44251B161F0CD5A90067F401 /* Main.storyboard in Resources */,
-				15CFDA191F962D4C00AC6A63 /* PTPetCalloutView.xib in Resources */,
-				1506027D1F9A100400B477A4 /* BatteryLow@1x.png in Resources */,
-				1506027F1F9A100400B477A4 /* Battery@2x.png in Resources */,
 				44690B6B1F62891C00719911 /* PetProfileCollectionViewCell.xib in Resources */,
-				15B2C7E71F9E1CE20019E477 /* SignalFull@1x.png in Resources */,
+				440067D61F8E5E6600D8B89E /* PetActivitiesCell.xib in Resources */,
 				4464F12E1F8CBC1B00E0BBD7 /* IconCell.xib in Resources */,
 				44251AD11F0CD5170067F401 /* GoogleService-Info.plist in Resources */,
-				1506027E1F9A100400B477A4 /* BatteryLow@2x.png in Resources */,
 				440784491F8B85A1005E9E1B /* SettingsView.xib in Resources */,
-				150602811F9A100400B477A4 /* Battery@1x.png in Resources */,
 				448C7CE41F87750100BF7106 /* SafeZoneCollectionViewCell.xib in Resources */,
-				15B2C7E81F9E1CE20019E477 /* SignalFull@3x.png in Resources */,
 				44251B151F0CD5A90067F401 /* LaunchScreen.storyboard in Resources */,
-				15B2C7E91F9E1CE20019E477 /* SignalFull@2x.png in Resources */,
 				44251ADC1F0CD5260067F401 /* Assets.xcassets in Resources */,
-				150602801F9A100400B477A4 /* Battery@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1241,8 +1225,8 @@
 			files = (
 				44251B091F0CD5870067F401 /* PetPresenter.swift in Sources */,
 				44251B701F0CD6130067F401 /* SharedPreferences.swift in Sources */,
+				441858E51F98DDD8003710A8 /* YesViewController.swift in Sources */,
 				44251B0A1F0CD5870067F401 /* AddEditPetPresenter.swift in Sources */,
-				15B2C7E31F9E1C640019E477 /* PTSignalView.swift in Sources */,
 				445F5F401F5EA7900069B513 /* BEMCheckBox.m in Sources */,
 				44251AF11F0CD55F0067F401 /* Reporter.swift in Sources */,
 				44251AF41F0CD55F0067F401 /* Clock.swift in Sources */,
@@ -1259,71 +1243,80 @@
 				44251B6E1F0CD6130067F401 /* SocketIOManager.swift in Sources */,
 				44C7F7501E4CD3DA00171170 /* HomePresenter.swift in Sources */,
 				44251B881F0CD6210067F401 /* CDRepository.swift in Sources */,
-				15CFDA1F1F963B7A00AC6A63 /* PTBubbleView.swift in Sources */,
 				44251B0B1F0CD5870067F401 /* DeviceCodePresenter.swift in Sources */,
-				44251B471F0CD5DF0067F401 /* PetActivityTableViewController.swift in Sources */,
+				446607C71F96028F00833683 /* Utility.swift in Sources */,
 				44251B0D1F0CD5870067F401 /* AddPetUserPresenter.swift in Sources */,
 				445F5F411F5EA7900069B513 /* BEMCheckBoxGroup.m in Sources */,
 				44251B511F0CD5DF0067F401 /* ScanQRViewController.swift in Sources */,
+				446607C51F96004000833683 /* Date.swift in Sources */,
 				44F0BF361EFBF6C7008C26B3 /* EventManager.swift in Sources */,
 				44251B741F0CD6130067F401 /* CDAddress+CoreDataProperties.swift in Sources */,
 				44251B551F0CD5FE0067F401 /* Parsers.swift in Sources */,
 				44251B711F0CD6130067F401 /* CoreDataManager.swift in Sources */,
 				44475ADB1F5960B800D41AAA /* SignUpViewController.swift in Sources */,
+				44223B551F97526500D8CA1E /* SelectPetForRecommandationController.swift in Sources */,
 				44251B0C1F0CD5870067F401 /* AddEditSafeZonePresenter.swift in Sources */,
 				44251B3E1F0CD5DF0067F401 /* AddressTableViewController.swift in Sources */,
+				44223B531F97483800D8CA1E /* RecommandationController.swift in Sources */,
 				44251B761F0CD6130067F401 /* CDBreed+CoreDataProperties.swift in Sources */,
 				442531371F6047290017D21A /* FinishAdventureVC.swift in Sources */,
 				44251B7D1F0CD6130067F401 /* CDPhone+CoreDataClass.swift in Sources */,
+				441858E31F98BACE003710A8 /* questionCells.swift in Sources */,
 				44251B1C1F0CD5BD0067F401 /* EmailVerificationViewController.swift in Sources */,
 				44251AFC1F0CD5740067F401 /* EditUserProfilePresenter.swift in Sources */,
 				44F27DBE1F0CE23300DAB441 /* PawTrails.xcdatamodeld in Sources */,
 				44251B431F0CD5DF0067F401 /* PhoneTableViewController.swift in Sources */,
-				44251B461F0CD5DF0067F401 /* PetUserTableViewController.swift in Sources */,
 				44251B451F0CD5DF0067F401 /* AddPetUserViewController.swift in Sources */,
+				446607BD1F95FF4C00833683 /* AirbnbDatePickerFlowLayout.swift in Sources */,
 				44251B1E1F0CD5BD0067F401 /* PasswordRecoveryViewController.swift in Sources */,
 				442531311F5FE6FF0017D21A /* TripScreenViewController.swift in Sources */,
 				44251B3D1F0CD5DF0067F401 /* EditUserProfileTableViewController.swift in Sources */,
 				44251B011F0CD5740067F401 /* PasswordRecoveryPresenter.swift in Sources */,
+				441858E11F98B25B003710A8 /* QuestionsViewController.swift in Sources */,
 				443E80771F5D53D5008679FC /* PetsCollectionViewCell.swift in Sources */,
 				44251AE51F0CD54D0067F401 /* ModelExtensions.swift in Sources */,
+				446607C01F95FF4C00833683 /* AirbnbDatePickerMonthHeader.swift in Sources */,
 				44251B4E1F0CD5DF0067F401 /* PetNameTableViewController.swift in Sources */,
 				44251B811F0CD6130067F401 /* CDUser+CoreDataClass.swift in Sources */,
 				44A1AC501E92923A003EF6CA /* PetsPresenter.swift in Sources */,
-				151902CF1F97A4FF00915D0A /* PTBatteryView.swift in Sources */,
 				44251B401F0CD5DF0067F401 /* EmailTableViewController.swift in Sources */,
 				44251B771F0CD6130067F401 /* CDCountryCode+CoreDataClass.swift in Sources */,
 				44EAB45F1F614095006A64AE /* JoinTripVC.swift in Sources */,
 				44251B7E1F0CD6130067F401 /* CDPhone+CoreDataProperties.swift in Sources */,
 				44251B4B1F0CD5DF0067F401 /* PetBirthdayTableViewController.swift in Sources */,
+				441858EB1F98FA85003710A8 /* BCS3ViewController.swift in Sources */,
 				44251B1D1F0CD5BD0067F401 /* InitialViewController.swift in Sources */,
 				44251B4D1F0CD5DF0067F401 /* PetGenderTableViewController.swift in Sources */,
 				44251B411F0CD5DF0067F401 /* GenderTableViewController.swift in Sources */,
+				441858E91F98EC7E003710A8 /* ResultViewController.swift in Sources */,
 				4415FF431E3B822900A81B13 /* AppDelegate.swift in Sources */,
+				446607C31F95FFE900833683 /* AirbnbDatePickerViewController.swift in Sources */,
 				44251AF31F0CD55F0067F401 /* Constants.swift in Sources */,
+				440067C91F8E485800D8B89E /* PieChart.swift in Sources */,
 				443E808C1F5D9236008679FC /* SelectPetsCell.swift in Sources */,
+				446607BB1F95FF4C00833683 /* AirbnbDatePicker.swift in Sources */,
 				44251B7C1F0CD6130067F401 /* CDPetUser+CoreDataProperties.swift in Sources */,
-				44690B6D1F62963600719911 /* ProfilePetView.swift in Sources */,
 				44251B891F0CD6210067F401 /* CSVRepository.swift in Sources */,
-				15CFDA1B1F962DB300AC6A63 /* PTPetCalloutView.swift in Sources */,
 				44251B751F0CD6130067F401 /* CDBreed+CoreDataClass.swift in Sources */,
 				44EAB4611F615906006A64AE /* PetProfileCollectionViewController.swift in Sources */,
-				448C7CE81F87842E00BF7106 /* SafeZonePresenter.swift in Sources */,
-				4448E7F91F6A7EED002EDBE2 /* UserProfileView.swift in Sources */,
 				44251B541F0CD5FE0067F401 /* Model.swift in Sources */,
+				446607BF1F95FF4C00833683 /* AirbnbDatePickerHeader.swift in Sources */,
 				44251B821F0CD6130067F401 /* CDUser+CoreDataProperties.swift in Sources */,
 				44251B3C1F0CD5DF0067F401 /* ChangePasswordTableViewController.swift in Sources */,
 				44251AFE1F0CD5740067F401 /* SettingsPresenter.swift in Sources */,
 				445F5F421F5EA7900069B513 /* BEMPathManager.m in Sources */,
 				44B179621E4B62690070A18B /* Presenter.swift in Sources */,
+				440067D51F8E5E6600D8B89E /* PetActivitiesCell.swift in Sources */,
 				44EAB4631F615C9F006A64AE /* MenuBar.swift in Sources */,
 				15226D901F8D18EA007EEFF2 /* SocketIO+RxSwift.swift in Sources */,
 				4411113A1F698B05008D1468 /* ShareCollectionViewCell.swift in Sources */,
+				440823CA1F8F94900004B90F /* SetUpYourGoalController.swift in Sources */,
 				44251B7F1F0CD6130067F401 /* CDSafeZone+CoreDataClass.swift in Sources */,
 				44251B6F1F0CD6130067F401 /* NotificationManager.swift in Sources */,
 				44251B721F0CD6130067F401 /* APIManager.swift in Sources */,
 				4424DCF91E8E9F2300ACDF07 /* UserProfileTableViewController.swift in Sources */,
 				44251B491F0CD5DF0067F401 /* AddEditPetDetailsTableViewController.swift in Sources */,
+				441858E71F98DDE9003710A8 /* NoViewController.swift in Sources */,
 				448C7CE31F87750100BF7106 /* SafeZoneCollectionViewCell.swift in Sources */,
 				44251B791F0CD6130067F401 /* CDPet+CoreDataClass.swift in Sources */,
 				44251B7B1F0CD6130067F401 /* CDPetUser+CoreDataClass.swift in Sources */,
@@ -1335,9 +1328,10 @@
 				44251B0F1F0CD5870067F401 /* PetUserPresenter.swift in Sources */,
 				44251AE41F0CD54D0067F401 /* Extensions.swift in Sources */,
 				44251AF01F0CD55F0067F401 /* Messages.swift in Sources */,
-				1511292C1F8E534100CDCC2D /* PTBasicAnnotationView.swift in Sources */,
+				446607BE1F95FF4C00833683 /* AirbnbDatePickerFooter.swift in Sources */,
 				443E807A1F5D87EC008679FC /* SelectPetsVC.swift in Sources */,
 				444698851F6BC75C006EE4CD /* SelectPetView.swift in Sources */,
+				441858ED1F98FAA1003710A8 /* BSC4ViewController.swift in Sources */,
 				44251B3F1F0CD5DF0067F401 /* BirthdayViewController.swift in Sources */,
 				44251B801F0CD6130067F401 /* CDSafeZone+CoreDataProperties.swift in Sources */,
 				4424DCFF1E8EA1D900ACDF07 /* UserProfilePresenter.swift in Sources */,
@@ -1346,9 +1340,9 @@
 				44251B001F0CD5740067F401 /* InitialPresenter.swift in Sources */,
 				44251AFD1F0CD5740067F401 /* ChangePasswordPresenter.swift in Sources */,
 				44251B7A1F0CD6130067F401 /* CDPet+CoreDataProperties.swift in Sources */,
+				446607BC1F95FF4C00833683 /* AirbnbDatePickerCell.swift in Sources */,
 				44251AE61F0CD54D0067F401 /* MapExtensions.swift in Sources */,
 				44251B731F0CD6130067F401 /* CDAddress+CoreDataClass.swift in Sources */,
-				15CFDA1D1F963B2B00AC6A63 /* PawTrailsStyleKit.swift in Sources */,
 				44FE723D1E4A2EF0007C7E24 /* DataManager.swift in Sources */,
 				44F239511EEEC1E70082FA36 /* SocketIOTestTableViewController.swift in Sources */,
 				4407844B1F8B85E8005E9E1B /* SettingsView.swift in Sources */,
@@ -1598,7 +1592,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = CQ878R6EW5;
+				DEVELOPMENT_TEAM = 7E2855LEH4;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1628,7 +1622,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = CQ878R6EW5;
+				DEVELOPMENT_TEAM = 7E2855LEH4;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

@@ -334,6 +334,11 @@ extension UIColor {
         return UIColor(red: 206.0/255.0, green: 19.0/255.0, blue: 54.0/255.0, alpha: 1.0)
     }
     
+    
+    public static var secondPrimary: UIColor {
+        return UIColor(red: 190/255.0, green: 19.0/255.0, blue: 54.0/255.0, alpha: 1.0)
+    }
+    
     public static var secondary: UIColor {
         return UIColor.white
     }
@@ -402,7 +407,7 @@ extension UIView {
         self.clipsToBounds = true
     }
     
-    func border(color: UIColor = UIColor.blue, width: CGFloat = 1.0) {
+    func border(color: UIColor, width: CGFloat) {
         self.layer.borderWidth = width
         self.layer.borderColor = color.cgColor
         self.layer.masksToBounds = true

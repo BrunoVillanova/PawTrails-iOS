@@ -26,6 +26,9 @@ class SignUpViewController: UIViewController, InitialView {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        emailTextField.setLeftPaddingPoints(5)
+        passwordTextField.setLeftPaddingPoints(5)
+        confirmPasswordTextField.setLeftPaddingPoints(5)
         presenter.attachView(self)
         emailTextField.layer.borderWidth = 0.5
         passwordTextField.layer.borderWidth = 0.5

@@ -34,6 +34,7 @@ class PasswordRecoveryViewController: UIViewController, PasswordRecoveryView, UI
         cancelButton.tintColor = UIColor.primary
 
         
+        emailTextField.setLeftPaddingPoints(5)
         if email != nil {
             emailTextField.text = email
         }else{

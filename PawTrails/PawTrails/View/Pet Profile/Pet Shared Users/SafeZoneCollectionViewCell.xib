@@ -35,7 +35,7 @@
                                     <constraint firstAttribute="height" constant="30" id="r64-Qe-L3G"/>
                                 </constraints>
                             </switch>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="st0-Rk-wRj">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="house-icon-dark-1x" translatesAutoresizingMaskIntoConstraints="NO" id="st0-Rk-wRj">
                                 <rect key="frame" x="16" y="9" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="I8h-K9-XQC"/>
@@ -85,4 +85,7 @@
             <point key="canvasLocation" x="-8" y="-34"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="house-icon-dark-1x" width="22" height="18"/>
+    </resources>
 </document>

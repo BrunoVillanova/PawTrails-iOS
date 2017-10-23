@@ -19,7 +19,6 @@ class ChangePasswordTableViewController: UITableViewController, ChangePasswordVi
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter.attachView(self)
-
         self.passwordTextField.becomeFirstResponder()
     }
     

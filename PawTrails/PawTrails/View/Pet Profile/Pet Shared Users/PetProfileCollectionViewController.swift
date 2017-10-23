@@ -7,68 +7,87 @@
 //
 
 import UIKit
+import MapKit
 
-
-struct PetId {
-    static var petId = Pet()
-}
-
-
-class PetProfileCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, ProfilePetView {
+class PetProfileCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, PetView {
     
     let cellId = "cellId"
     let titles = ["Profile", "Activity", "SafeZone", "Share"]
     
     var pet:Pet!
-
     var fromMap: Bool = false
     
-    fileprivate let presenter = PetProfilePressenter()
+    
+    fileprivate var currentUserId = -1
+    fileprivate var petOwnerId = -2
+    fileprivate var appUserId = -3
+    
+    
+    var button = UIButton()
+    var button2 = UIButton()
+
+    
+    let barButtonItem = UIBarButtonItem(image: UIImage(named:"switch-device-button-1x-png"), style: .plain, target: self, action: #selector(addTapped))
+    
+     let presenter = PetPresenter()
+    
+    
+    lazy var datePicker: AirbnbDatePicker = {
+        let btn = AirbnbDatePicker()
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.delegate = self
+        return btn
+    }()
+
 
     override func viewDidLoad() {
-        super.viewDidLoad()
 
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named:"switch-device-button-1x-png"), style: .plain, target: self, action: #selector(addTapped))
-
+        navigationItem.rightBarButtonItem = barButtonItem
         presenter.attachView(self, pet:pet)
- 
+        
         if let pet = pet {
             load(pet)
-            presenter.getPet(with: pet.id)
+            reloadPetInfo()
+            reloadUsers()
+            reloadSafeZones()
+
+//            removeLeaveButton.setTitle(pet.isOwner ? "Remove Pet" : "Leave Pet", for: .normal)
         }
         
         if fromMap {
             navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(dismissAction(sender: )))
         }
-
-
+        
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
         
         collectionView?.collectionViewLayout.invalidateLayout()
         setUpMenuBar()
         setupCollectionView()
-        addButton()
-        if !pet.isOwner {
-            button.isHidden = true
-        } else {
-            button.isHidden = false
-
-        }
+//        addButton()
+//        if !pet.isOwner {
+//            button.isHidden = true
+//        } else {
+//            button.isHidden = false
+//
+//        }
         
+    }
+    
+    deinit {
+        presenter.deteachView()
     }
     
     
  
     
     // Floating button.
-    let button = UIButton()
 
-    fileprivate func addButton(){
+    fileprivate func addButtonWithSelectorAndImageNamed(selector: Selector, string: String ){
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(#imageLiteral(resourceName: "StopTripButton-1x-png"), for: .normal)
-        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        button.setImage(UIImage(named: string), for: .normal)
+        button.addTarget(self, action: selector, for: .touchUpInside)
         self.view.addSubview(button)
         button.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -5).isActive = true
         button.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -5).isActive = true
@@ -77,7 +96,23 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
     }
     
     
-    func buttonAction(sender: UIButton!) {
+
+    fileprivate func addAnotherButton(selector: Selector, string: String ){
+        button2.translatesAutoresizingMaskIntoConstraints = false
+        button2.setImage(UIImage(named: string), for: .normal)
+        button2.addTarget(self, action: selector, for: .touchUpInside)
+        self.view.addSubview(button2)
+        button2.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -5).isActive = true
+        button2.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -60).isActive = true
+        button2.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        button2.heightAnchor.constraint(equalToConstant: 80).isActive = true
+    }
+    
+    
+  
+    
+    
+    func addUserbuttonAction(sender: UIButton) {
         if !pet.isOwner {
             self.alert(title: "", msg: "You cannot add user for this pet because you don't own it", type: .blue, disableTime: 5, handler: nil)
         } else {
@@ -87,6 +122,51 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
             }
         }
     }
+    
+    
+    
+    func addsaveZonebuttonAction(sender: UIButton) {
+        if !pet.isOwner {
+            self.alert(title: "", msg: "You cannot add user for this pet because you don't own it", type: .blue, disableTime: 5, handler: nil)
+        } else {
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "AddEditSafeZOneController") as? AddEditSafeZOneController {
+                vc.petId = pet.id
+                vc.isOwner = pet.isOwner
+                navigationController?.pushViewController(vc, animated: true)
+            }
+
+        }
+    }
+    
+    func setUpGoal(sender: UIButton) {
+        if !pet.isOwner {
+            self.alert(title: "", msg: "You cannot add user for this pet because you don't own it", type: .blue, disableTime: 5, handler: nil)
+        } else {
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "SetUpYourGoalController") as? SetUpYourGoalController {
+                vc.petId = pet.id
+                vc.isOwner = pet.isOwner
+                navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+    }
+    
+    
+    
+    func calnder(sender: UIButton!) {
+        if !pet.isOwner {
+            self.alert(title: "", msg: "You cannot add user for this pet because you don't own it", type: .blue, disableTime: 5, handler: nil)
+        } else {
+//            if let vc = storyboard?.instantiateViewController(withIdentifier: "SetUpYourGoalController") as? SetUpYourGoalController {
+//                vc.petId = pet.id
+//                vc.isOwner = pet.isOwner
+//                navigationController?.pushViewController(vc, animated: true)
+//            }
+            
+        }
+        
+    }
+    
+    
     
 
     // To change Device
@@ -110,8 +190,6 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
     override func viewWillAppear(_ animated: Bool) {
         presenter.loadPet(with: pet.id)
         presenter.getPet(with: pet.id)
-        PetId.petId = pet
-        
         presenter.startPetsGPSUpdates(for: pet.id) { (data) in
 
             print("I GOT THE DATA \(data)")
@@ -128,17 +206,44 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
 
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        presenter.stopPetGPSUpdates(of: pet.id)
+        presenter.stopPetsGeocodeUpdates()
+    }
+    
+    
+    
+    func reloadPetInfo() {
+        presenter.loadPet(with: pet.id)
+    }
+    
+    
+    func reloadSafeZones() {
+        presenter.loadSafeZones(for: pet.id)
+    }
+    
+    
+    func reloadUsers(onlyDB: Bool = false) {
+        if onlyDB {
+            presenter.getPet(with: pet.id)
+            //reload users?
+        }else{
+            presenter.loadPetUsers(for: pet.id)
+        }
+    }
+    
     
     func load(locationAndTime: String){
         print("Here is the location ANd Time\(locationAndTime)")
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        
-        print("View Disappeared")
-}
+
 
     // PetView
+    
+    func removed() {
+}
+
     
     func errorMessage(_ error: ErrorMsg) {
         alert(title: error.title, msg: error.msg)
@@ -148,8 +253,8 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
     func load(_ pet: Pet) {
         self.pet = pet
         navigationItem.title = pet.name
-       collectionView?.reloadData()
-      
+        
+        self.collectionView?.reloadData()
 }
     
     func petNotFound() {
@@ -162,6 +267,72 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
             navigationController?.popToViewController(petList, animated: true)
         }else{
             popAction(sender: nil)
+        }
+    }
+    
+    
+    func loadUsers() {
+        pet.users = presenter.users
+}
+    
+
+    
+    func loadSafeZones() {
+        pet.safezones = presenter.safezones
+        if self.presenter.safezones.count == 0 { return }
+        let safezonesGroup = DispatchGroup()
+        
+        for safezone in self.presenter.safezones {
+            // Address
+            if safezone.address == nil {
+                
+                guard let center = safezone.point1 else {
+                    Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "No center point found!")
+                    break
+                }
+                GeocoderManager.Intance.reverse(type: .safezone, with: center, for: safezone.id)
+            }
+            // Map
+            if safezone.preview == nil {
+                guard let center = safezone.point1?.coordinates else {
+                    Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "No center point found!")
+                    continue
+                }
+                guard let topCenter = safezone.point2?.coordinates else {
+                    Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "No topcenter point found!")
+                    continue
+                }
+                
+                safezonesGroup.enter()
+                Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "map", safezone.id)
+                self.buildMap(center: center, topCenter: topCenter, shape: safezone.shape, handler: { (image) in
+                    if let image = image, let data = UIImagePNGRepresentation(image) {
+                        Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "released", safezone.id)
+                        self.presenter.set(imageData: data, for: safezone.id) { (errorMsg) in
+                            if let errorMsg = errorMsg {
+                                self.errorMessage(errorMsg)
+                            }
+                            safezonesGroup.leave()
+                        }
+                    }
+                })
+            }
+        }
+        
+        safezonesGroup.notify(queue: .main, execute: {
+            self.presenter.getPet(with: self.pet.id)
+            
+        })
+    }
+
+    func buildMap(center: CLLocationCoordinate2D, topCenter: CLLocationCoordinate2D, shape: Shape, handler: @escaping ((UIImage?)->())){
+        if CLLocationCoordinate2DIsValid(center) && CLLocationCoordinate2DIsValid(topCenter) {
+            SnapshotMapManager.Intance.performSnapShot(with: center, topCenter: topCenter, shape: shape, handler: { (image) in
+                handler(image)
+            })
+        }else{
+            self.errorMessage(ErrorMsg.init(title: "", msg: "wrong coordinates"))
+            handler(nil)
         }
     }
 
@@ -181,6 +352,9 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
         
         
         
+        
+        let activityNib = UINib(nibName: "PetActivitiesCell", bundle: nil)
+        collectionView?.register(activityNib, forCellWithReuseIdentifier: "nib")
         
         
         let nib = UINib(nibName: "PetProfileCollectionViewCell", bundle: nil)
@@ -234,16 +408,63 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 4
-
     }
     
+    
+    
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+        if indexPath.item == 3 {
+
+            if !pet.isOwner {
+                button.isHidden = true
+            } else {
+                button.isHidden = false
+
+                button.removeTarget(self, action: #selector(setUpGoal(sender:)), for: .touchUpInside)
+                button.removeTarget(self, action: #selector(addsaveZonebuttonAction(sender:)), for: .touchUpInside)
+
+                addButtonWithSelectorAndImageNamed(selector: #selector(addUserbuttonAction(sender:)), string: "PauseTripButton-1x-png")
+        }
+        }else if indexPath.item == 0 {
+            button.isHidden = true
+    
+        } else if indexPath.item == 1 {
+
+
+            if !pet.isOwner {
+                button.isHidden = true
+            } else {
+                button.isHidden = false
+
+                button.removeTarget(self, action: #selector(addUserbuttonAction(sender:)), for: .touchUpInside)
+                button.removeTarget(self, action: #selector(addsaveZonebuttonAction(sender:)), for: .touchUpInside)
+                
+                addButtonWithSelectorAndImageNamed(selector: #selector(setUpGoal(sender:)), string: "PauseTripButton-1x-png")
+            }
+        }else if indexPath.item == 2 {
+            button2.isHidden = true
+
+            if !pet.isOwner {
+                button.isHidden = true
+            } else {
+                button.isHidden = false
+
+                button.removeTarget(self, action: #selector(addUserbuttonAction(sender:)), for: .touchUpInside)
+                button.removeTarget(self, action: #selector(setUpGoal(sender:)), for: .touchUpInside)
+                
+                addButtonWithSelectorAndImageNamed(selector: #selector(addsaveZonebuttonAction(sender:)), string: "PetLocationpng")
+            }
+
+        }
+    }
  
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         
         if indexPath.item == 0 {
- 
+
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myCell", for: indexPath) as! PetProfileCollectionViewCell
             cell.petBirthdayLabel.text = pet.birthday?.toStringShow
             cell.typeLabel.text = self.pet.typeString
@@ -258,18 +479,40 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
             }
             return cell
         } else if indexPath.item == 3 {
+
+
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ProfileCell
+
+            return cell
+        } else if indexPath.item == 1 {
+
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "nib", for: indexPath) as! PetActivitiesCell
+            cell.addSubview(datePicker)
+            datePicker.centerXAnchor.constraint(equalTo: cell.centerXAnchor).isActive = true
+            datePicker.widthAnchor.constraint(equalTo: cell.widthAnchor, constant: -40).isActive = true
+            datePicker.heightAnchor.constraint(equalToConstant: 50).isActive = true
+            
+            
+                        let restingColors = UIColor(red: 153/255, green: 202/255, blue: 186/255, alpha: 1)
+                        let normalColors = UIColor(red: 211/255, green: 100/255, blue: 59/255, alpha: 1)
+                        let playingColors = UIColor(red: 67/255, green: 62/255, blue: 54/255, alpha: 1)
+                        let adventureColor = UIColor(red: 108/255, green: 176/255, blue: 255/255, alpha: 1)
+            
+            
+            
+                        cell.adventureView.setChart(at: 0.9, color: adventureColor, text: "min")
+                        cell.normalView.setChart(at: 0.5, color: normalColors, text: "min")
+                        cell.playingView.setChart(at: 0.7, color: playingColors, text: "km")
+                        cell.restingView.setChart(at: 0.8, color: restingColors, text: "min")
+                        cell.livelyView.setChart(at: 0.5, color: normalColors, text: "min")
+    
+
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell3", for: indexPath) as! SafezZoneParentCell
+            cell.backgroundColor = UIColor.blue
             return cell
         }
-        
-
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell3", for: indexPath) as! SafezZoneParentCell
-        cell.backgroundColor = UIColor.blue
-
-        return cell
-
-        
-        
    }
     
     

@@ -8,16 +8,7 @@
 
 import UIKit
 
-class ProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ProfileView {
-    
-    var users = [PetUser]()
-    fileprivate let presenter = UserView()
-    var pet = PetId.petId
-
-    fileprivate var currentUserId = -1
-    fileprivate var petOwnerId = -2
-    fileprivate var appUserId = -3
-    
+class ProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -37,37 +28,11 @@ class ProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDelegat
         addConstraintsWithFormat("V:|[v0]|", views: collectionView)
         let nib = UINib(nibName: "ShareCollectionViewCell", bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: "myCell")
-        presenter.attachView(self)
-        reloadPetInfo()
-        reloadUsers()
+   
     }
-    
-    
     
     
   
-    
-    
-    func reloadUsers(onlyDB: Bool = false) {
-        if onlyDB {
-            presenter.getPet(with: pet.id)
-            //reload users?
-        }else{
-            presenter.loadPetUsers(for: pet.id)
-        }
-    }
-    
-    func reloadPetInfo() {
-        presenter.loadPet(with: pet.id)
-
-    }
-
-    
-    
-    deinit {
-        presenter.deteachView()
-    }
-
     
     // Mohamed - ProfileView
     
@@ -77,31 +42,16 @@ class ProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDelegat
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
         self.window?.rootViewController?.present(alert, animated: true, completion: nil)
     }
-    
-    func loadUsers() {
-        
-        pet.users = presenter.users
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
 
-        }
-    }
-    
-    func petNotFound() {
-
-    }
-
-    func removed() {
-        if appUserId == petOwnerId && appUserId != currentUserId {
-            
-            
-        } else {
-            
-        }
-    }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return  presenter.users.count
+        
+        if let myCollectionView = parentViewController as? PetProfileCollectionViewController {
+            return  myCollectionView.presenter.users.count
+
+        } else {
+            return 0 
+        }
     }
     
     
@@ -109,36 +59,46 @@ class ProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDelegat
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myCell", for: indexPath) as! ShareCollectionViewCell
         
-        let user = presenter.users[indexPath.item]
-        cell.emailLabel.text = user.email
-        let fullName = "\(user.name ?? "") \(user.surname ?? "")"
-        cell.nameLabel.text = fullName
-        let imageData = user.image ?? Data()
-        cell.userProfileImage.image = UIImage(data: imageData)
+        if let myCollectionView = parentViewController as? PetProfileCollectionViewController, let _ =  myCollectionView.pet {
+            
+            let user = myCollectionView.presenter.users[indexPath.item]
+            cell.emailLabel.text = user.email
+            let fullName = "\(user.name ?? "") \(user.surname ?? "")"
+            cell.nameLabel.text = fullName
+            let imageData = user.image ?? Data()
+            cell.userProfileImage.image = UIImage(data: imageData)
+            
+            cell.deleteButton.tag = indexPath.row
+            cell.deleteButton.addTarget(self, action: #selector(removeBtnPressed), for: .touchUpInside)
+
         
-        
-        cell.deleteButton.tag = indexPath.row
-        cell.deleteButton.addTarget(self, action: #selector(removeBtnPressed), for: .touchUpInside)
-        return cell
+        }
+
+              return cell
     }
     
     
     func removeBtnPressed(sender: UIButton?) {
         
-        let selectedUser = presenter.users[(sender?.tag)!]
-        let owner = pet.owner
-        let appuser = Int(SharedPreferences.get(.id))
         
-        
-        if appuser == owner?.id && appuser != selectedUser.id {
-            // Owner Remove that user
-            self.popUpDestructive(title: "Remove \(selectedUser.name ?? "this user") from \(self.pet.name ?? "this pet")", msg: "If you proceed you will remove this user from the pet sharing list.", cancelHandler: nil, proceedHandler: { (remove) in
-                self.presenter.removePetUser(with: selectedUser.id, from: self.pet.id)
-            })
+        if let myCollectionView = parentViewController as? PetProfileCollectionViewController, let pet =  myCollectionView.pet {
+            let selectedUser = myCollectionView.presenter.users[(sender?.tag)!]
+            let owner = pet.owner
+            let appuser = Int(SharedPreferences.get(.id))
             
+            
+            if appuser == owner?.id && appuser != selectedUser.id {
+                // Owner Remove that user
+                self.popUpDestructive(title: "Remove \(selectedUser.name ?? "this user") from \(pet.name ?? "this pet")", msg: "If you proceed you will remove this user from the pet sharing list.", cancelHandler: nil, proceedHandler: { (remove) in
+                    myCollectionView.presenter.removePetUser(with: selectedUser.id, from: pet.id)
+                })
+                
+                
+            }
+
             
         }
-    }
+}
 
     
     func popUpDestructive(title:String, msg:String, cancelHandler: ((UIAlertAction)->Void)?, proceedHandler: ((UIAlertAction)->Void)?){

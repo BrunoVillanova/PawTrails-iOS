@@ -14,6 +14,8 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
 
     var refreshControl = UIRefreshControl()
     
+    
+    
     fileprivate let presenter = PetsPresenter()
     fileprivate let presenter2 = SelectedPetView()
     
@@ -33,9 +35,7 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
         startAdventureBtn.isEnabled = false
         startAdventureBtn.fullyroundedCorner()
         startAdventureBtn.backgroundColor = UIColor.primary
-        APIRepository.instance.finishTrip(539, timeStamp: 1506075288) { (error, trips) in
-            print("sucess")
-        }
+
 
         
         
@@ -143,6 +143,8 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
     
     func reloadPets(){
         presenter.getPets()
+        
+        
     }
     
     
@@ -172,6 +174,7 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
         }else{
             return presenter.sharedPets[indexPath.row]
         }
+        
     }
 
     
@@ -191,8 +194,8 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! SelectPetsCell
 
-        let pet = getPet(at: indexPath)
-        pets[pet.id] = indexPath
+          let pet = getPet(at: indexPath)
+           pets[pet.id] = indexPath
 
             if tripListArray.contains(indexPath.item) {
                 cell.backgroundColor = UIColor.brown

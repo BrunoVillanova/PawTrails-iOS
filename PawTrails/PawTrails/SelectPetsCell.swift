@@ -17,8 +17,8 @@ class SelectPetsCell: UICollectionViewCell {
     @IBOutlet weak var checkMarkView: BEMCheckBox!
     
     override func awakeFromNib() {
-//        self.checkMarkView.isUserInteractionEnabled = false
-//        self.checkMarkView.isEnabled = false
+
+        checkMarkView.setOn(false, animated: false)
     }
 
 }

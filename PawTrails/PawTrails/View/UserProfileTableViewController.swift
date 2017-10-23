@@ -26,6 +26,7 @@ class UserProfileTableViewController: UITableViewController, UserProfileView, UI
         presenter.attachView(self)        
     }
     
+    
     override func viewWillAppear(_ animated: Bool) {
         presenter.loadUser()
         self.hideNotification()
