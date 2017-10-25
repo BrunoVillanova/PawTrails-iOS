@@ -5,29 +5,29 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
-  - Crashlytics (3.8.6):
-    - Fabric (~> 1.6.3)
-  - Fabric (1.6.13)
-  - FacebookCore (0.2.0):
+  - Crashlytics (3.9.0):
+    - Fabric (~> 1.7.0)
+  - Fabric (1.7.0)
+  - FacebookCore (0.3.0):
     - Bolts (~> 1.8)
-    - FBSDKCoreKit (~> 4.15)
-  - FacebookLogin (0.2.0):
+    - FBSDKCoreKit (~> 4.27)
+  - FacebookLogin (0.3.0):
     - Bolts (~> 1.8)
-    - FacebookCore (~> 0.2)
-    - FBSDKCoreKit (~> 4.15)
-    - FBSDKLoginKit (~> 4.15)
-  - FBSDKCoreKit (4.26.0):
+    - FacebookCore (~> 0.3)
+    - FBSDKCoreKit (~> 4.27)
+    - FBSDKLoginKit (~> 4.27)
+  - FBSDKCoreKit (4.27.1):
     - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.26.0):
+  - FBSDKLoginKit (4.27.1):
     - FBSDKCoreKit
   - IQKeyboardManagerSwift (5.0.0)
-  - RxSwift (3.6.1)
-  - SkyFloatingLabelTextField (3.2.0)
+  - RxSwift (4.0.0)
+  - SkyFloatingLabelTextField (3.2.1)
   - Socket.IO-Client-Swift (11.1.3):
     - StarscreamSocketIO (~> 8.0.5)
   - StarscreamSocketIO (8.0.7)
   - SwiftyJSON (3.1.4)
-  - YNDropDownMenu (2.3.4)
+  - YNDropDownMenu (3.0.0)
 
 DEPENDENCIES:
   - Crashlytics
@@ -43,19 +43,19 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
-  Crashlytics: 95d05f4e4c19a771250c4bd9ce344d996de32bbf
-  Fabric: 2fb5676bc811af011a04513451f463dac6803206
-  FacebookCore: 2cb3f0fbff218e9d3119cec84bae983b232412de
-  FacebookLogin: c9d606504735780a9e3002465a615512e0a691a5
-  FBSDKCoreKit: c8b8582311ec11b145451d8b9717dc6cc2ae5a76
-  FBSDKLoginKit: f3f03b94c21eb834af243c0a881d48641f47ca60
+  Crashlytics: 64aad5dd97249dd3ff94b979fea140144590cdd3
+  Fabric: e6be012366472553807dada21243c5ab8d904151
+  FacebookCore: 3ffa190a3f1f96cec0e44d3fc221bc322c595ffa
+  FacebookLogin: 0af839ea858faef99550d16596b87b4a8e8906e6
+  FBSDKCoreKit: 03365dad5d790249196ffad8be4f6d8a2d98f932
+  FBSDKLoginKit: 66ff53b73cffd967ab773e32fac39e90a60e6d46
   IQKeyboardManagerSwift: 3f340202ebe1a7076279b9b9b3c817243ddb3aab
-  RxSwift: f9de85ea20cd2f7716ee5409fc13523dc638e4e4
-  SkyFloatingLabelTextField: 4e2d2f7160af660ed1da6bb9d0027b5c474b4b79
+  RxSwift: fd680d75283beb5e2559486f3c0ff852f0d35334
+  SkyFloatingLabelTextField: 71d28906024e7d7e4460099b342f3ca7036a2e24
   Socket.IO-Client-Swift: b8e59ddc16bc3609ca2f49a4b50253f095d535c8
   StarscreamSocketIO: 00b54e4208481ca5cef089545353aaf126bae16d
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
-  YNDropDownMenu: 4f4b463ecbfd492dc886abaf18d73dead0e32133
+  YNDropDownMenu: 31a3cb769b560d7f45aa13dd8946fd23683b3b36
 
 PODFILE CHECKSUM: 21f8ff4455ebab51aeb1cbe2ab5850c3db2bba1a
 

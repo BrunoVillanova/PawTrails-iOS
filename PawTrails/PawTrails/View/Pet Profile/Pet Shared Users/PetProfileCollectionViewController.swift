@@ -9,11 +9,14 @@
 import UIKit
 import MapKit
 
+struct MyPet {
+    static var pet = Pet()
+}
+
 class PetProfileCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, PetView {
     
     let cellId = "cellId"
     let titles = ["Profile", "Activity", "SafeZone", "Share"]
-    
     var pet:Pet!
     var fromMap: Bool = false
     
@@ -28,7 +31,6 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
 
     
     let barButtonItem = UIBarButtonItem(image: UIImage(named:"switch-device-button-1x-png"), style: .plain, target: self, action: #selector(addTapped))
-    
      let presenter = PetPresenter()
     
     
@@ -38,21 +40,19 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
         btn.delegate = self
         return btn
     }()
+    
 
 
     override func viewDidLoad() {
+//        MyPet.pet = pet.id
 
-        
         navigationItem.rightBarButtonItem = barButtonItem
         presenter.attachView(self, pet:pet)
-        
         if let pet = pet {
             load(pet)
             reloadPetInfo()
             reloadUsers()
             reloadSafeZones()
-
-//            removeLeaveButton.setTitle(pet.isOwner ? "Remove Pet" : "Leave Pet", for: .normal)
         }
         
         if fromMap {
@@ -64,17 +64,13 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
         
         setUpMenuBar()
         setupCollectionView()
-
-        
     }
     
     deinit {
         presenter.deteachView()
     }
     
-    
- 
-    
+
     // Floating button.
 
     fileprivate func addButtonWithSelectorAndImageNamed(selector: Selector, string: String ){
@@ -179,8 +175,10 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
     }
 
     
-    
     override func viewWillAppear(_ animated: Bool) {
+        MyPet.pet = pet
+
+        
         presenter.startPetsGPSUpdates(for: pet.id) { (data) in
 
             print("I GOT THE DATA \(data)")
@@ -195,6 +193,14 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
         })
         
 
+    }
+    
+//
+
+    
+    
+    func loadPetwithmypet(pet: Pet) {
+        self.pet = pet
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -241,12 +247,11 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
         alert(title: error.title, msg: error.msg)
     }
 
-    
+    var cell = PetInfromationCell()
     func load(_ pet: Pet) {
-        self.pet = pet
+//        self.pet = pet
         navigationItem.title = pet.name
-        
-        self.collectionView?.reloadData()
+        collectionView?.reloadData()
 }
     
     func petNotFound() {
@@ -458,6 +463,8 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
         if indexPath.item == 0 {
 
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myCell", for: indexPath) as! PetInfromationCell
+            
+//            let delay = 0.55 + Double(indexPath.item) * 0.5
 //            cell.petBirthdayLabel.text = pet.birthday?.toStringShow
 //            cell.typeLabel.text = self.pet.typeString
 //            cell.breedLabel.text = self.pet.breedsString
@@ -469,6 +476,7 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
 //            if let imageData = self.pet.image {
 //                cell.petImage.image = UIImage(data: imageData as Data)
 //            }
+            
             return cell
         } else if indexPath.item == 3 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ProfileCell
@@ -533,11 +541,6 @@ class ActivityCell: BaseCell {
 }
 
 
-//class SafeZoneCell: BaseCell {
-//    override func setupViews() {
-//        self.backgroundColor = UIColor.blue
-//    }
-//}
 
 extension UIView {
     var parentViewController: UIViewController? {

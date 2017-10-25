@@ -87,7 +87,7 @@ class MapViewController: UIViewController {
                 Reporter.debugPrint(file: "\(#file)", function: "\(#function)", data)
             }
             
-        }){}.addDisposableTo(disposeBag)
+        }){}.disposed(by: disposeBag)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

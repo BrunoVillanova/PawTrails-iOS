@@ -65,7 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         // Define SocketIO event handlers
         socketReactive?.on("connect").subscribe(onNext: { (data) in
             self.socketAuth()
-        }){}.addDisposableTo(disposeBag)
+        }){}.disposed(by: disposeBag)
         
         socketReactive?.on("authCheck").subscribe(onNext: { (data) in
             let status = self.getStatus(data)
@@ -82,7 +82,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             } else if (status != .waiting) {
                 self.socketAuth()
             }
-        }){}.addDisposableTo(disposeBag)
+        }){}.disposed(by: disposeBag)
         
         
         if DataManager.instance.isAuthenticated() {

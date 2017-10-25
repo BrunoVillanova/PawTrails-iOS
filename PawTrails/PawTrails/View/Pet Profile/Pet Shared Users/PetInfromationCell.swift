@@ -11,7 +11,6 @@ import UIKit
 class PetInfromationCell: BaseCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     
-    
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -24,12 +23,9 @@ class PetInfromationCell: BaseCell, UICollectionViewDataSource, UICollectionView
     
 
     
+
     override func setupViews() {
-        
-
-        
         addSubview(collectionView)
-
         addConstraintsWithFormat("H:|[v0]|", views: collectionView)
         addConstraintsWithFormat("V:|[v0]|", views: collectionView)
         let nib = UINib(nibName: "ShareCollectionViewCell", bundle: nil)
@@ -71,22 +67,31 @@ class PetInfromationCell: BaseCell, UICollectionViewDataSource, UICollectionView
         
         
         if section == 0 {
-            
             let secondCell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! PetProfileCollectionViewCell
-            if let myCollectionView = parentViewController as? PetProfileCollectionViewController, let pet =  myCollectionView.pet {
-            secondCell.petBirthdayLabel.text = pet.birthday?.toStringShow
-            secondCell.typeLabel.text = pet.typeString
-            secondCell.breedLabel.text = pet.breedsString
-            secondCell.genderLabel.text = pet.gender?.name
-            secondCell.weightLabel.text = pet.weightString
-            secondCell.backgroundColor = UIColor.white
-            secondCell.petName.text = pet.name
-            if let imageData = pet.image {
-                secondCell.petImage.image = UIImage(data: imageData as Data)
-                
+            if  MyPet.pet.id != 0 {
+                DataManager.instance.loadPet(MyPet.pet.id) { (error, pet) in
+                    
+                    if let error = error {
+                        if error.DBError?.type == DatabaseErrorType.NotFound {
+                            //                    self.view?.petNotFound()
+                        }else{
+                            //                    self.view?.errorMessage(error.msg)
+                        }
+                    }else if let pet = pet {
+                        secondCell.petBirthdayLabel.text = pet.birthday?.toStringShow
+                        secondCell.typeLabel.text = pet.typeString
+                        secondCell.breedLabel.text = pet.breedsString
+                        secondCell.genderLabel.text = pet.gender?.name
+                        secondCell.weightLabel.text = pet.weightString
+                        secondCell.backgroundColor = UIColor.white
+                        secondCell.petName.text = pet.name
+                        if let imageData = pet.image {
+                            secondCell.petImage.image = UIImage(data: imageData as Data)
+                            
+                        }
+                    }
+                }
             }
-            }
-            
             return secondCell
 
         } else {
@@ -104,7 +109,6 @@ class PetInfromationCell: BaseCell, UICollectionViewDataSource, UICollectionView
                 cell.backgroundColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1)
             }
             return cell
-
         }
  
 }
@@ -122,13 +126,9 @@ class PetInfromationCell: BaseCell, UICollectionViewDataSource, UICollectionView
                 self.popUpDestructive(title: "Remove \(selectedUser.name ?? "this user") from \(pet.name ?? "this pet")", msg: "If you proceed you will remove this user from the pet sharing list.", cancelHandler: nil, proceedHandler: { (remove) in
                     myCollectionView.presenter.removePetUser(with: selectedUser.id, from: pet.id)
                 })
-                
-                
             }
-            
-            
         }
-}
+    }
 
     
     func popUpDestructive(title:String, msg:String, cancelHandler: ((UIAlertAction)->Void)?, proceedHandler: ((UIAlertAction)->Void)?){

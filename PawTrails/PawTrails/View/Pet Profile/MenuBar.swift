@@ -21,7 +21,6 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
     
     let cellId = "cellId"
     let titlenames = ["Profile", "Activity", "SafeZone", "Share"]
-    
     var petProfileCollectionView: PetProfileCollectionViewController?
     
     override init(frame: CGRect) {
@@ -45,17 +44,8 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
         horizontalBarView.backgroundColor = UIColor.primary
         horizontalBarView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(horizontalBarView)
-        
-        //old school frame way of doing things
-//        horizontalBarView.frame = CGRectMake(<#T##x: CGFloat##CGFloat#>, <#T##y: CGFloat##CGFloat#>, <#T##width: CGFloat##CGFloat#>, <#T##height: CGFloat##CGFloat#>)
-        
-        //new school way of laying out our views
-        //in ios9
-        //need x, y, width, height constraints
-        
         horizontalBarLeftAnchorConstraint = horizontalBarView.leftAnchor.constraint(equalTo: self.leftAnchor)
         horizontalBarLeftAnchorConstraint?.isActive = true
-        
         horizontalBarView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         horizontalBarView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/4).isActive = true
         horizontalBarView.heightAnchor.constraint(equalToConstant: 2).isActive = true
@@ -100,13 +90,11 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
 }
 
 class MenuCell: BaseCell {
-    
     let title: UILabel = {
         let iv = UILabel()
         iv.textColor = UIColor.black
         iv.font = UIFont.systemFont(ofSize: 15)
         iv.textAlignment = .center
-  
         return iv
     }()
     
@@ -143,9 +131,7 @@ class BaseCell: UICollectionViewCell {
         setupViews()
     }
     func setupViews() {
-
     }
-
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
