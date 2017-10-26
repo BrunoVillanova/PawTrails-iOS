@@ -20,7 +20,6 @@ class UserProfileTableViewController: UITableViewController, UserProfileView, UI
     
     
     let presenter = UserProfilePresenter()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.attachView(self)        

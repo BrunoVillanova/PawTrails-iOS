@@ -26,7 +26,7 @@ class SafezZoneParentCell: BaseCell, UICollectionViewDataSource, UICollectionVie
     }()
     
 
-
+    var iphoneX = false
     override func setupViews() {
 
         
@@ -38,8 +38,20 @@ class SafezZoneParentCell: BaseCell, UICollectionViewDataSource, UICollectionVie
         collectionView.register(nib, forCellWithReuseIdentifier: identifier)
 
         
-        collectionView.contentInset = UIEdgeInsetsMake(20, 0, 80, 0)
-        collectionView.scrollIndicatorInsets = UIEdgeInsetsMake(20, 0, 80, 0)
+        if #available(iOS 11.0, *) {
+            if ((UIApplication.shared.keyWindow?.safeAreaInsets.top)! > CGFloat(0.0)) {
+                iphoneX = true
+                collectionView.contentInset = UIEdgeInsetsMake(0, 0, 80, 0)
+                collectionView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 80, 0)
+                
+            }
+        } else {
+            collectionView.contentInset = UIEdgeInsetsMake(0, 0, 80, 0)
+            collectionView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 80, 0)
+        }
+        
+        
+        
         
         collectionView.reloadData()
     }

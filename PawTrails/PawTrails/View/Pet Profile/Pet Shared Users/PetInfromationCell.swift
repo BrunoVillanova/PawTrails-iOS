@@ -21,10 +21,8 @@ class PetInfromationCell: BaseCell, UICollectionViewDataSource, UICollectionView
         return cv
     }()
     
-
-    
-
     override func setupViews() {
+        
         addSubview(collectionView)
         addConstraintsWithFormat("H:|[v0]|", views: collectionView)
         addConstraintsWithFormat("V:|[v0]|", views: collectionView)
@@ -114,7 +112,6 @@ class PetInfromationCell: BaseCell, UICollectionViewDataSource, UICollectionView
 }
 
     func removeBtnPressed(sender: UIButton?) {
-    
         if let myCollectionView = parentViewController as? PetProfileCollectionViewController, let pet =  myCollectionView.pet {
             let selectedUser = myCollectionView.presenter.users[(sender?.tag)!]
             let owner = pet.owner
@@ -138,10 +135,17 @@ class PetInfromationCell: BaseCell, UICollectionViewDataSource, UICollectionView
         self.window?.rootViewController?.present(alert, animated: true, completion: nil)
     }
     
-    
+    var iphoneX = false
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(20, 0, 0, 0)
+        
+        if #available(iOS 11.0, *) {
+            if ((UIApplication.shared.keyWindow?.safeAreaInsets.top)! > CGFloat(0.0)) {
+                iphoneX = true
+                return UIEdgeInsetsMake(0, 0, 0, 0)
+            }
+        }
+        return UIEdgeInsetsMake(0, 0, 0, 0)
     }
     
     

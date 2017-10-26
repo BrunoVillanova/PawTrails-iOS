@@ -333,6 +333,7 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
         }
     }
 
+    var iphoneX = false
 
     func setupCollectionView() {
         if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
@@ -357,9 +358,26 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
 //        let nib = UINib(nibName: "PetProfileCollectionViewCell", bundle: nil)
 //        collectionView?.register(nib, forCellWithReuseIdentifier: "myCell")
         
+        if #available(iOS 11.0, *) {
+            if ((UIApplication.shared.keyWindow?.safeAreaInsets.top)! > CGFloat(0.0)) {
+                iphoneX = true
+                
+//                view.safeAreaLayoutGuide.layoutFrame.height
+                
+                collectionView?.contentInset = UIEdgeInsetsMake(110, 0, 0, 0)
+                collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(100, 0, 0, 0)
+            
+            }
+        } else {
+            collectionView?.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
+            collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(50, 0, 0, 0)
+        }
         
-        collectionView?.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
-        collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(50, 0, 0, 0)
+        
+   
+        
+        
+        
         collectionView?.isPagingEnabled = true
     }
     
@@ -463,20 +481,6 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
         if indexPath.item == 0 {
 
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myCell", for: indexPath) as! PetInfromationCell
-            
-//            let delay = 0.55 + Double(indexPath.item) * 0.5
-//            cell.petBirthdayLabel.text = pet.birthday?.toStringShow
-//            cell.typeLabel.text = self.pet.typeString
-//            cell.breedLabel.text = self.pet.breedsString
-//            cell.genderLabel.text = self.pet.gender?.name
-//            cell.weightLabel.text = self.pet.weightString
-//            cell.backgroundColor = UIColor.white
-//            cell.petName.text = self.pet.name
-//
-//            if let imageData = self.pet.image {
-//                cell.petImage.image = UIImage(data: imageData as Data)
-//            }
-            
             return cell
         } else if indexPath.item == 3 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ProfileCell
