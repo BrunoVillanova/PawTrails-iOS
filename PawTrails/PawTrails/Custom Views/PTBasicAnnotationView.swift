@@ -75,6 +75,8 @@ class PTBasicAnnotationView: MKAnnotationView {
         pictureImageView?.backgroundColor = UIColor.clear
         self.addSubview(pictureImageView!)
         self.bringSubview(toFront: pictureImageView!)
+        
+        self.centerOffset = CGPoint(x: 0, y: -30)
     }
     
     func configureWithAnnotation(_ annotation: PTAnnotation) {

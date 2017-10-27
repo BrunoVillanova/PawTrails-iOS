@@ -11,9 +11,9 @@ import FacebookCore
 import Fabric
 import Crashlytics
 import SocketIO
-import RxSwift
 import SwiftyJSON
 import IQKeyboardManagerSwift
+import RxSwift
 
 let isDebug = true
 
@@ -28,24 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     var window: UIWindow?
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
+    private let disposeBag = DisposeBag()
     
     var runningTripArray = [TripList]()
-    
-    private let urlString = "http://eu.pawtrails.pet:2003"
-    private let urlStringSSL = "https://eu.pawtrails.pet:4654"
-    private let socketClient = SocketIOClient(socketURL: URL(string: "https://eu.pawtrails.pet:4654")!)
-    private let disposeBag = DisposeBag()
-    public var socketReactive: Reactive<SocketIOClient>?
-    
-    func socketAuth() {
-        let token = SharedPreferences.get(.token)
-        if token != "" {
-            Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Connecting")
-            socketClient.emit("authCheck", token)
-        } else{
-            Reporter.send(file: "\(#file)", function: "\(#function)", NSError(domain: "Socket IO", code: -1, userInfo: ["reason": "missing token"]))
-        }
-    }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -59,35 +44,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         IQKeyboardManager.sharedManager().enable = true
 
         
-        // Init SocketIO
-        socketReactive = Reactive<SocketIOClient>(socketClient)
-        
-        // Define SocketIO event handlers
-        socketReactive?.on("connect").subscribe(onNext: { (data) in
-            self.socketAuth()
-        }){}.disposed(by: disposeBag)
-        
-        socketReactive?.on("authCheck").subscribe(onNext: { (data) in
-            let status = self.getStatus(data)
-            if (status == .connected) {
-                DataManager.instance.loadPets { (error, pets) in
-                    if error == nil, let pets = pets {
-                            let petIDs = pets.map { $0.id }
-                            self.socketClient.emit("gpsPets", ["ids": petIDs, "noLastPos": false])
-                        NotificationManager.instance.postPetListUpdates(with: pets)
-                    }
-                }
-            } else if (status == .unauthorized) {
-                self.loadAuthenticationScreen()
-            } else if (status != .waiting) {
-                self.socketAuth()
-            }
-        }){}.disposed(by: disposeBag)
-        
-        
-        if DataManager.instance.isAuthenticated() {
-            socketClient.connect()
-        }
         
         NotificationManager.instance.getEventsUpdates { (event) in
             EventManager.instance.handle(event: event, for: self.visibleViewController)
@@ -118,6 +74,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         } else {
             loadAuthenticationScreen()
         }
+        
+        SocketIOManager.instance.gpsUpdates()?.subscribe(onNext: { (data) in
+            print("JUST A TEST! gpsUpdates from AppDelegate ")
+        }){}.disposed(by: disposeBag)
         
         return out
     }
@@ -175,14 +135,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         }
     }
 
-    
-    
-    
-    
-    
-    
-    
-    
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         let google = GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
         

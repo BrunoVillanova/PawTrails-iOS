@@ -95,7 +95,8 @@ class InitialPresenter {
     
     func loginFB(vc: InitialViewController) {
         let loginManager = LoginManager()
-        loginManager.logIn(readPermissions: [ .publicProfile, .email ], viewController: vc) { loginResult in
+        
+        loginManager.logIn([ .publicProfile, .email ], viewController: vc) { loginResult in
             switch loginResult {
             case .failed(let error):
                 self.view?.errorMessage(DataManagerError(error: error).msg)
