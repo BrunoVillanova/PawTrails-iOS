@@ -20,7 +20,9 @@ class MapViewController: UIViewController {
     
     var locationManager : CLLocationManager?
     fileprivate let presenter = HomePresenter()
-    fileprivate var annotations = [MKLocationId:PTAnnotation]()
+    fileprivate var annotations = [MKLocationId:[PTAnnotation]]()
+    fileprivate var overlays = [MKLocationId:MKOverlay]()
+    fileprivate var tripMode = true
     var selectedPet: Pet?
     var data = [searchElement]()
     var tripListArray = [TripList]()
@@ -59,18 +61,10 @@ class MapViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        presenter.startPetsListUpdates()
-//        presenter.startPetsGPSUpdates { (id, point) in
-////            self.load(id: id, point: point)
-////            self.load(p)
-//        }
-//
-//        loadPets()
         getRunningandPausedTrips()
         
-        appDelegate.socketReactive?.on("gpsUpdates").subscribe(onNext: { (data) in
-            print("gpsUpdates")
-            
+        SocketIOManager.instance.gpsUpdates()?.subscribe(onNext: { (data) in
+            print("gpsUpdates from MapViewController")
             if let json = data.first as? [Any] {
                 for petDeviceDataObject in json {
                     if let petDeviceDataJson = petDeviceDataObject as? [String:Any] {
@@ -86,7 +80,6 @@ class MapViewController: UIViewController {
             } else{
                 Reporter.debugPrint(file: "\(#file)", function: "\(#function)", data)
             }
-            
         }){}.disposed(by: disposeBag)
     }
     
@@ -133,49 +126,44 @@ class MapViewController: UIViewController {
     }
     
     func load(_ petDeviceData: PetDeviceData) {
+
         let id = MKLocationId(id: petDeviceData.pet.id, type: .pet)
-        if self.annotations[id] == nil {
-            self.startTracking(petDeviceData, color: UIColor.primary)
-        }else{
-            self.updateTracking(petDeviceData)
+        let newAnnotation = PTAnnotation(petDeviceData)
+        
+        if let existingPetAnnotation = mapView.annotations.first(where: { ($0 is PTAnnotation) && ($0 as! PTAnnotation).petDeviceData?.pet.id == petDeviceData.pet.id }) as! PTAnnotation!
+        {
+            existingPetAnnotation.move(coordinate: petDeviceData.deviceData.coordinates.coordinates)
+        } else {
+            mapView.addAnnotation(newAnnotation)
+        }
+        
+        if annotations[id] == nil || !tripMode {
+            annotations[id] = [PTAnnotation]()
+        }
+        
+        // Only add the annotation to array if different coordinates
+        if let currentPetAnnotations = annotations[id] as [PTAnnotation]!, let lastPetAnnotation = currentPetAnnotations.last {
+            if lastPetAnnotation.coordinate.latitude != newAnnotation.coordinate.latitude &&  lastPetAnnotation.coordinate.longitude != newAnnotation.coordinate.longitude {
+                annotations[id]?.append(newAnnotation)
+            }
+        }
+        
+        drawOverlayIfNeeded(id)
+    }
+    
+    func drawOverlayIfNeeded(_ locationId: MKLocationId) {
+        if tripMode, let petAnnotations = annotations[locationId] as [PTAnnotation]!, petAnnotations.count > 1 {
+            if petAnnotations.count != mapView.overlays.count {
+                var points = [CLLocationCoordinate2D]()
+                points = petAnnotations.map({ $0.coordinate })
+                let polyline = MKPolyline(coordinates: points, count: points.count)
+                mapView.add(polyline)
+            }
         }
     }
     
-    func startTracking(_ petDeviceData: PetDeviceData, color: UIColor) {
-        let id = MKLocationId(id: petDeviceData.pet.id, type: .pet)
-        self.annotations[id] = PTAnnotation(petDeviceData)
-        self.mapView.addAnnotation(self.annotations[id]!)
-    }
-    
-    func updateTracking(_ petDeviceData: PetDeviceData) {
-        let id = MKLocationId(id: petDeviceData.pet.id, type: .pet)
-        let coordinate = petDeviceData.deviceData.coordinates.coordinates
-        self.annotations[id]?.move(coordinate:coordinate)
-    }
-    
-//    func load(id: MKLocationId, point: Point){
-//        if self.annotations[id] == nil {
-//            self.startTracking(id, coordinate: point.coordinates, color: UIColor.primary)
-//        }else{
-//            self.updateTracking(id, coordinate: point.coordinates)
-//        }
-//    }
-    
-//    func startTracking(_ id: MKLocationId, coordinate:CLLocationCoordinate2D, color: UIColor) {
-//        self.annotations[id] = MKLocation(id: id, coordinate: coordinate, color: color)
-//        self.mapView.addAnnotation(self.annotations[id]!)
-//    }
-    
-    func updateTracking(_ id: MKLocationId, coordinate:CLLocationCoordinate2D) {
-        self.annotations[id]?.move(coordinate:coordinate)
-    }
-    
-    func stopPetTracking(_ id: Int){
-        self.annotations.removeValue(forKey: MKLocationId(id:id, type: .pet))
-    }
-    
-    func focusOnPets(){
-        let coordinates = Array(self.annotations.values).filter({ $0.petDeviceData != nil && !$0.coordinate.isDefaultZero }).map({ $0.coordinate })
+    func focusOnPets() {
+        let coordinates = self.mapView.annotations.map({ $0.coordinate })
         if coordinates.count > 0 {
             mapView.setVisibleMapFor(coordinates)
         }
@@ -242,7 +230,7 @@ extension MapViewController: HomeView {
         }
         for id in petsIdsToRemove {
             if let annotationToRemove = annotations.removeValue(forKey: MKLocationId(id: id, type: .pet)) {
-                mapView.removeAnnotation(annotationToRemove)
+                mapView.removeAnnotation(annotationToRemove.last as PTAnnotation!)
             }
         }
         focusOnPets()
@@ -285,15 +273,23 @@ extension MapViewController: UICollectionViewDataSource {
         }
         return cell
     }
+    
+    func petAnnotationOnMap(pet: Pet) -> PTAnnotation? {
+        if let existingPetAnnotation = mapView.annotations.first(where: { ($0 is PTAnnotation) && ($0 as! PTAnnotation).petDeviceData?.pet.id == pet.id }) as! PTAnnotation!
+        {
+            return existingPetAnnotation
+        }
+        return nil
+    }
 }
 
 //MARK: CollectionView Delegate
 extension MapViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let pet = presenter.pets[indexPath.item]
-        let element = (id: MKLocationId(id: pet.id, type: .pet), object: pet)
-        if let coordinate = annotations[element.id]?.coordinate {
-            mapView.centerOn(coordinate, animated: true)
+        
+        if let petAnnotationOnMap = petAnnotationOnMap(pet: pet) as PTAnnotation! {
+            mapView.centerOn(petAnnotationOnMap.coordinate, animated: true)
         }
     }
 }
@@ -311,45 +307,11 @@ extension MapViewController: MKMapViewDelegate {
             annotationView?.canShowCallout = false
         }
         
-        
         if !(annotation is MKUserLocation) {
             annotationView!.configureWithAnnotation(annotation as! PTAnnotation)
         }
         
         return annotationView
-//
-//
-//        if let dequeuedAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: PTBasicAnnotationView.identifier) {
-//            annotationView = dequeuedAnnotationView
-//            annotationView?.annotation = annotation
-//        }
-//
-//        // Don't want to show a custom image if the annotation is the user's location.
-//        guard !(annotation is MKUserLocation) else {
-//            return nil
-//        }
-//
-//        // Better to make this class property
-//        let annotationIdentifier = "AnnotationIdentifier"
-//
-//        var annotationView: MKAnnotationView?
-//        if let dequeuedAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier) {
-//            annotationView = dequeuedAnnotationView
-//            annotationView?.annotation = annotation
-//        }
-//        else {
-//            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
-//            annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-//        }
-//
-//        if let annotationView = annotationView {
-//            // Configure your annotation view here
-//            annotationView.canShowCallout = true
-//            annotationView.image = UIImage(named: "yourImage")
-//        }
-//
-////        return annotationView
-//        return mapView.getAnnotationView(annotation: annotation)
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
@@ -375,6 +337,16 @@ extension MapViewController: MKMapViewDelegate {
                 }
             }
         }
+    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if overlay is MKPolyline {
+            let polylineRenderer = MKPolylineRenderer(overlay: overlay)
+            polylineRenderer.strokeColor = UIColor.red
+            polylineRenderer.lineWidth = 5
+            return polylineRenderer
+        }
+        return MKPolylineRenderer()
     }
 }
 

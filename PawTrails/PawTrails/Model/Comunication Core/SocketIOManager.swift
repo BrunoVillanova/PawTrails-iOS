@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import SocketIO
 import SwiftyJSON
+import RxSwift
 
 /// Performs communication with Socket IO Platform
 class SocketIOManager: NSObject, URLSessionDelegate {
@@ -19,13 +20,17 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     private let urlString = "http://eu.pawtrails.pet:2003"
     private let urlStringSSL = "https://eu.pawtrails.pet:4654"
     
+
     
     private var socket: SocketIOClient!
+    private let disposeBag = DisposeBag()
+    public var socketReactive: Reactive<SocketIOClient>?
     
     private var onUpdates = [Int:Bool]()
     private var PetsGPSData = NSCache<NSNumber,GPSData>()
     
     public var isConnected = false
+    private var isAuthenticating = false
     
     init(SSLEnabled: Bool = true) {
         super.init()
@@ -36,7 +41,59 @@ class SocketIOManager: NSObject, URLSessionDelegate {
             self.socket = SocketIOClient(socketURL: url, config: [.log(false), .secure(true)])
         }
         
+        // Init SocketIO
+        socketReactive = Reactive<SocketIOClient>(socket)
+        
+        // Define SocketIO event handlers
+        socketReactive?.on("connect").subscribe(onNext: { (data) in
+            self.socketAuth()
+        }){}.disposed(by: disposeBag)
+        
+        socketReactive?.on("authCheck").subscribe(onNext: { (data) in
+            self.isAuthenticating = false
+            let status = self.getStatus(data)
+            if (status == .connected) {
+                self.isConnected = true
+                DataManager.instance.loadPets { (error, pets) in
+                    if error == nil, let pets = pets {
+                        let petIDs = pets.map { $0.id }
+                        self.socket.emit("gpsPets", ["ids": petIDs, "noLastPos": false])
+                        NotificationManager.instance.postPetListUpdates(with: pets)
+                    }
+                }
+            } else if (status == .unauthorized || status == .unauthorized2) {
+                //TODO: force user to login again
+            } else if (status != .waiting) {
+                self.socketAuth()
+            }
+        }){}.disposed(by: disposeBag)
+        
+        
+        if DataManager.instance.isAuthenticated() {
+            socket.connect()
+        }
+        
         for key in self.onUpdates.keys {  self.onUpdates[key] = false }
+    }
+    
+    func gpsUpdates() -> Observable<[Any]>? {
+        return socketReactive?.on("gpsUpdates");
+    }
+    
+    
+    func socketAuth() {
+        guard !isAuthenticating else {
+            return
+        }
+        
+        let token = SharedPreferences.get(.token)
+        if token != "" {
+            Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Connecting")
+            isAuthenticating = true
+            socket.emit("authCheck", token)
+        } else{
+            Reporter.send(file: "\(#file)", function: "\(#function)", NSError(domain: "Socket IO", code: -1, userInfo: ["reason": "missing token"]))
+        }
     }
     
     /// Establishes Connection with Socket IO, peforms login driven by token.
@@ -44,33 +101,33 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     /// - Parameter callback: returns socket IO connection status
     func connect(_ callback: ((SocketIOStatus)->())? = nil) {
 
-        self.socket.on("connect") { (data, ack) in
-            let token = SharedPreferences.get(.token)
-            if token != "" {
-                Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Connecting")
-                self.socket.emit("authCheck", token)
-            } else{
-                Reporter.send(file: "\(#file)", function: "\(#function)", NSError(domain: "Socket IO", code: -1, userInfo: ["reason": "missing token"]))
-            }
-        }
-        
-        self.socket.on("authCheck") { (data, ack) in
-            let status = self.getStatus(data)
-            self.isConnected = (status == .connected)
-            
-            Reporter.debugPrint(file: "\(#file)", function: "\(#function)", status)
-            
-            guard callback != nil else {
-                return
-            }
-            callback!(status)
-        }
-        
-        self.socket.on("disconnect") { (_, _) in
-            self.isConnected = false
-        }
-        
-        self.socket.connect()
+//        self.socket.on("connect") { (data, ack) in
+//            let token = SharedPreferences.get(.token)
+//            if token != "" {
+//                Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Connecting")
+//                self.socket.emit("authCheck", token)
+//            } else{
+//                Reporter.send(file: "\(#file)", function: "\(#function)", NSError(domain: "Socket IO", code: -1, userInfo: ["reason": "missing token"]))
+//            }
+//        }
+//
+//        self.socket.on("authCheck") { (data, ack) in
+//            let status = self.getStatus(data)
+//            self.isConnected = (status == .connected)
+//
+//            Reporter.debugPrint(file: "\(#file)", function: "\(#function)", status)
+//
+//            guard callback != nil else {
+//                return
+//            }
+//            callback!(status)
+//        }
+//
+//        self.socket.on("disconnect") { (_, _) in
+//            self.isConnected = false
+//        }
+//
+//        self.socket.connect()
     }
     
     /// Disconnects from Socket I.O.

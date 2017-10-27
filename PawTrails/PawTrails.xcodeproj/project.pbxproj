@@ -446,16 +446,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1525B31C1FA202850055E5CA /* PTBatteryView */ = {
+			isa = PBXGroup;
+			children = (
+				157401921F9E268200A854C5 /* Resources */,
+				157401A21F9E268200A854C5 /* PTBatteryView.swift */,
+			);
+			path = PTBatteryView;
+			sourceTree = "<group>";
+		};
 		157401901F9E268200A854C5 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
-				157401911F9E268200A854C5 /* PTBubbleView.swift */,
-				157401921F9E268200A854C5 /* Resources */,
+				1525B31C1FA202850055E5CA /* PTBatteryView */,
 				157401991F9E268200A854C5 /* PTSignalView */,
+				157401911F9E268200A854C5 /* PTBubbleView.swift */,
 				1574019F1F9E268200A854C5 /* PTPetCalloutView.swift */,
 				157401A01F9E268200A854C5 /* PawTrailsStyleKit.swift */,
 				157401A11F9E268200A854C5 /* PTBasicAnnotationView.swift */,
-				157401A21F9E268200A854C5 /* PTBatteryView.swift */,
 				157401A31F9E268200A854C5 /* PTPetCalloutView.xib */,
 			);
 			path = "Custom Views";
@@ -1065,7 +1073,7 @@
 					};
 					4415FF3E1E3B822900A81B13 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 7E2855LEH4;
+						DevelopmentTeam = CQ878R6EW5;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -1692,7 +1700,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 7E2855LEH4;
+				DEVELOPMENT_TEAM = CQ878R6EW5;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1722,7 +1730,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 7E2855LEH4;
+				DEVELOPMENT_TEAM = CQ878R6EW5;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
