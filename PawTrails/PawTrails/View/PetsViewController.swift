@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxSwift
+
 
 class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, PetsView {
 
@@ -18,10 +20,14 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     fileprivate let presenter = PetsPresenter()
     
     fileprivate var pets = [Int:IndexPath]()
+    var petIdss = [Int]()
+    private let disposeBag = DisposeBag()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+
         noPetsFound.isHidden = true
 
         tableView.tableFooterView = UIView()
@@ -32,12 +38,16 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.addSubview(refreshControl)
         
         presenter.attachView(self)
-        
+        reloadPets()
+
         
         addButton()
     }
     
-
+    
+    
+  
+   
     fileprivate func addButton(){
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -67,24 +77,10 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewWillAppear(_ animated: Bool) {
         self.hideNotification()
-
-        reloadPets()
-        presenter.startPetsListUpdates()
-        presenter.startPetsGPSUpdates { (id) in
-            self.updateRow(by: id)
-        }
-        presenter.startPetsGeocodeUpdates { (geocode) in
-            self.updateRow(by: geocode.id)
-        }
     }
     
-    private func updateRow(by id: Int){
-        
-        Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Update Pet \(id)")
-        if let index = self.pets[id] {
-            self.tableView.reloadRows(at: [index], with: .automatic)
-        }
-    }
+    
+
     
     override func viewWillDisappear(_ animated: Bool) {
         presenter.stopPetListUpdates()
@@ -115,6 +111,10 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.reloadData()
     }
     
+    
+    var petDeviceData: [PetDeviceData]?
+
+    
         
     // MARK: - UITableViewDataSource
 
@@ -134,7 +134,6 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func getPet(at indexPath: IndexPath) -> Pet {
-        
         if presenter.ownedPets.count > 0 && presenter.sharedPets.count > 0 {
             return indexPath.section == 0 ? presenter.ownedPets[indexPath.row] : presenter.sharedPets[indexPath.row]
         }else if presenter.ownedPets.count > 0 {
@@ -146,38 +145,28 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! petListCell
-        
         let pet = getPet(at: indexPath)
-        pets[pet.id] = indexPath
-        
-        if let data = SocketIOManager.instance.getGPSData(for: pet.id) {
-            
-            if data.status == .idle {
-//                cell.batteryLabel.text = data.batteryString
-//                cell.batteryLabel.textColor = UIColor.darkGray
-//                cell.signalLabel.text = data.signalString
-//                cell.signalLabel.textColor = UIColor.darkGray
-                if data.locationAndTime != "" {
-                    cell.subtitleLabel.text = data.locationAndTime
-                    cell.subtitleLabel.textColor = UIColor.darkGray
-                }else{
-                    cell.subtitleLabel.text = cell.subtitleLabel.text
-                    cell.subtitleLabel.textColor = UIColor.lightGray
+        cell.subtitleLabel.text = "Getting address..."
+
+        SocketIOManager.instance.gpsUpdates()?.subscribe(onNext: { (data) in
+            if let json = data.first as? [Any] {
+                for petDeviceDataObject in json {
+                    if let petDeviceDataJson = petDeviceDataObject as? [String:Any] {
+                        let petdata = PetDeviceData(petDeviceDataJson)
+                        if petdata.pet.id == pet.id {
+                            print(petdata.pet.id)
+                            petdata.deviceData.coordinates.getFullFormatedAddress(handler: { (address) in
+                                cell.subtitleLabel.text = address
+                            })
+                        }
+                    }
                 }
-            }else{
-//                cell.batteryLabel.text = "-"
-//                cell.batteryLabel.textColor = UIColor.lightGray
-                cell.batteryImageView.alpha = 0.5
-//                cell.signalLabel.text = "-"
-//                cell.signalLabel.textColor = UIColor.lightGray
-                cell.signalImageView.alpha = 0.5
-                cell.subtitleLabel.text = Message.instance.get(data.status)
-                cell.subtitleLabel.textColor = UIColor.lightGray
+            } else{
+                Reporter.debugPrint(file: "\(#file)", function: "\(#function)", data)
             }
-            
-        }else{
-            cell.alpha = 0.5
-        }
+        }){}.disposed(by: disposeBag)
+        
+        
         
         cell.titleLabel.text = pet.name
         if let imageData = pet.image as Data? {

@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 protocol PetsView: NSObjectProtocol, View {
     func loadPets()
     func petsNotFound()
@@ -15,7 +16,7 @@ protocol PetsView: NSObjectProtocol, View {
 
 
 class PetsPresenter {
-    
+
     weak private var view: PetsView?
     
     
@@ -25,7 +26,6 @@ class PetsPresenter {
     
     
     var pets: [Pet] {
-        
         return ownedPets + sharedPets
     }
     
@@ -68,6 +68,9 @@ class PetsPresenter {
             
         }
     }
+    
+    
+   
     
     
   

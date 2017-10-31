@@ -224,6 +224,7 @@ extension MapViewController: HomeView {
             if let index = petsIdsToRemove.index(of: pet.id) {
                 petsIdsToRemove.remove(at: index)
             }
+            
 //            if let point = SocketIOManager.instance.getGPSData(for: pet.id)?.point {
 //                load(id: MKLocationId(id: pet.id, type: .pet), point: point)
 //            }
