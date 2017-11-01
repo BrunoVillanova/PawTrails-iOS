@@ -74,6 +74,7 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
     }
     
     @IBAction func loginAction(_ sender: UIButton?) {
+        UIApplication.shared.statusBarStyle = .default
         self.view.endEditing(true)
         presenter.signIn(email: emailTextField.text, password:passwordTextField.text)
     }
@@ -89,7 +90,6 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
     }
     
     @IBAction func twitterLogin(_ sender: UIButton) {
-//        presenter.loginTW(vc: self)
     }
     
     
