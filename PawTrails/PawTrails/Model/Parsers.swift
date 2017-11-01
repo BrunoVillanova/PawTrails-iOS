@@ -150,7 +150,7 @@ extension Pet {
         breeds = nil
         gender = nil
         birthday = nil
-        image = nil
+        image = UIImagePNGRepresentation(#imageLiteral(resourceName: "PetPlaceholderImage"))
         imageURL = nil
         isOwner = false
         neutered =  false
@@ -167,7 +167,7 @@ extension Pet {
         breeds = PetBreeds(json)
         gender = Gender.build(code: json["gender"].string)
         birthday = (json["date_of_birth"].string)?.toDate
-        image = nil
+        image = UIImagePNGRepresentation(#imageLiteral(resourceName: "PetPlaceholderImage"))
         imageURL = json["img_url"].string
         isOwner = json["is_owner"].bool ?? false
         neutered = json["neutered"].bool ?? false
@@ -184,7 +184,7 @@ extension Pet {
         breeds = PetBreeds(cdPet.firstBreed, cdPet.secondBreed, cdPet.breed_descr)
         gender = Gender(rawValue: cdPet.gender)
         birthday = cdPet.birthday
-        image = cdPet.image
+        image = cdPet.image != nil ? cdPet.image : UIImagePNGRepresentation(#imageLiteral(resourceName: "PetPlaceholderImage"))
         imageURL = cdPet.imageURL
         isOwner =  cdPet.isOwner
         neutered = cdPet.neutered

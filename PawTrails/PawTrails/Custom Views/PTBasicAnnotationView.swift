@@ -68,6 +68,7 @@ class PTBasicAnnotationView: MKAnnotationView {
         pictureImageView = UIImageView()
         pictureImageView?.frame = pictureFrame
         pictureImageView?.center = self.center
+        pictureImageView?.image = #imageLiteral(resourceName: "PetPlaceholderImage")
         pictureFrame = pictureImageView!.frame
         pictureFrame.origin.y = pictureFrame.origin.y - 2
         pictureImageView?.frame = pictureFrame
