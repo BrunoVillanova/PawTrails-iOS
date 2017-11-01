@@ -30,6 +30,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     private var PetsGPSData = NSCache<NSNumber,GPSData>()
     
     public var isConnected = false
+    private var isConnecting = false
     private var isAuthenticating = false
     
     init(SSLEnabled: Bool = true) {
@@ -46,6 +47,8 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         
         // Define SocketIO event handlers
         socketReactive?.on("connect").subscribe(onNext: { (data) in
+            self.isConnected = true
+            self.isConnecting = false
             self.socketAuth()
         }){}.disposed(by: disposeBag)
         
@@ -68,21 +71,20 @@ class SocketIOManager: NSObject, URLSessionDelegate {
             }
         }){}.disposed(by: disposeBag)
         
-        
-        if DataManager.instance.isAuthenticated() {
-            socket.connect()
-        }
-        
         for key in self.onUpdates.keys {  self.onUpdates[key] = false }
     }
     
     func gpsUpdates() -> Observable<[Any]>? {
+        if !self.isConnected {
+            self.connect()
+        }
+        
         return socketReactive?.on("gpsUpdates");
     }
     
     
     func socketAuth() {
-        guard !isAuthenticating else {
+        guard !isAuthenticating && isConnected else {
             return
         }
         
@@ -100,6 +102,15 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     ///
     /// - Parameter callback: returns socket IO connection status
     func connect(_ callback: ((SocketIOStatus)->())? = nil) {
+        
+        guard !self.isConnecting else {
+            return
+        }
+        
+        if DataManager.instance.isAuthenticated() {
+            self.isConnecting = true
+            socket.connect()
+        }
 
 //        self.socket.on("connect") { (data, ack) in
 //            let token = SharedPreferences.get(.token)

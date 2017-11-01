@@ -43,8 +43,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         // KeyboardManager
         IQKeyboardManager.sharedManager().enable = true
 
-        
-        
         NotificationManager.instance.getEventsUpdates { (event) in
             EventManager.instance.handle(event: event, for: self.visibleViewController)
         }
@@ -53,6 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         if DataManager.instance.isAuthenticated() {
             getRunningandPausedTrips()
+            SocketIOManager.instance.connect()
             
             if let socialMedia = DataManager.instance.isSocialMedia() {
                 
@@ -74,10 +73,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         } else {
             loadAuthenticationScreen()
         }
-        
-        SocketIOManager.instance.gpsUpdates()?.subscribe(onNext: { (data) in
-            print("JUST A TEST! gpsUpdates from AppDelegate ")
-        }){}.disposed(by: disposeBag)
         
         return out
     }
@@ -147,10 +142,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     }
 //
     func applicationDidBecomeActive(_ application: UIApplication) {
-        getRunningandPausedTrips()
-
-
+        
         if DataManager.instance.isAuthenticated() {
+            getRunningandPausedTrips()
             SocketIOManager.instance.connect()
             DataManager.instance.loadPets { (error, pets) in
                 if error == nil, let pets = pets {
@@ -160,6 +154,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             }
 
         }
+        
         NotificationManager.instance.getEventsUpdates { (event) in
             EventManager.instance.handle(event: event, for: self.visibleViewController)
         }
