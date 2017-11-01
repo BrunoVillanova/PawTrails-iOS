@@ -290,7 +290,10 @@ extension MapViewController: UICollectionViewDelegate {
         let pet = presenter.pets[indexPath.item]
         
         if let petAnnotationOnMap = petAnnotationOnMap(pet: pet) as PTAnnotation! {
-            mapView.centerOn(petAnnotationOnMap.coordinate, animated: true)
+            self.mapView.selectAnnotation(petAnnotationOnMap, animated: true)
+            CATransaction.setCompletionBlock({
+                self.mapView.centerOn(petAnnotationOnMap.coordinate, animated: true)
+            })
         }
     }
 }
