@@ -261,8 +261,14 @@ extension PetDeviceData {
     }
     
     init(_ json: [String:Any]) {
-        deviceData = DeviceData(json["deviceData"] as! [String:Any])
-        id = deviceData.id
+        id = 0
+        deviceData = DeviceData()
+        
+        if json["deviceData"] != nil {
+            deviceData = DeviceData(json["deviceData"] as! [String:Any])
+            id = deviceData.id
+        }
+        
         if let pets = CoreDataManager.instance.retrieve(.pet, with: NSPredicate("id", .equal, json["petId"]!)) {
             pet = Pet(pets.first as! CDPet)
         } else {

@@ -56,7 +56,6 @@ class SocketIOManager: NSObject, URLSessionDelegate {
             self.isAuthenticating = false
             let status = self.getStatus(data)
             if (status == .connected) {
-                self.isConnected = true
                 DataManager.instance.loadPets { (error, pets) in
                     if error == nil, let pets = pets {
                         let petIDs = pets.map { $0.id }
