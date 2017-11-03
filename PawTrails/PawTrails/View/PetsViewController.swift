@@ -77,6 +77,7 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewWillAppear(_ animated: Bool) {
         self.hideNotification()
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     
@@ -154,7 +155,7 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     if let petDeviceDataJson = petDeviceDataObject as? [String:Any] {
                         let petdata = PetDeviceData(petDeviceDataJson)
                         if petdata.pet.id == pet.id {
-                            print(petdata.pet.id)
+                            cell.batterlyLevl.setBatteryLevel(petdata.deviceData.battery)
                             petdata.deviceData.coordinates.getFullFormatedAddress(handler: { (address) in
                                 cell.subtitleLabel.text = address
                             })
@@ -204,12 +205,9 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
 //    // MARK: - Navigation
 ////
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-                if segue.destination is PetProfileCollectionViewController {
+                if segue.destination is TabPageViewController {
             if let indexPath = tableView.indexPathForSelectedRow {
-//                let info = PetInfromationCell()
-//                info.pet = getPet(at: indexPath)
-                (segue.destination as! PetProfileCollectionViewController).pet = getPet(at: indexPath)
-
+                (segue.destination as! TabPageViewController).pet = getPet(at: indexPath)
             }
         }
     }
@@ -218,8 +216,9 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
 class petListCell: UITableViewCell {
     @IBOutlet weak var petImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var signalImageView: UIImageView!
-    @IBOutlet weak var batteryImageView: UIImageView!
+    @IBOutlet weak var signalLevels: NSLayoutConstraint!
+    
+    @IBOutlet weak var batterlyLevl: PTBatteryView!
     @IBOutlet weak var subtitleLabel: UILabel!
     
   

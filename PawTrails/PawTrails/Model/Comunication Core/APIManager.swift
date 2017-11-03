@@ -55,7 +55,7 @@ public enum APICallType {
         case .getPets: return "/pets/my/list"
         case .getPet: return "/pets/\(key)"
         case .setPet: return "/pets/\(key)/edit"
-        case .checkDevice: return "/pets/devices/\(key)/checkCode"
+        case .checkDevice: return "/pets/devices/checkCode"
         case .changeDevice: return "/pets/\(key)/devicechange"
         case .unregisterPet: return "/pets/\(key)/remove"
 
@@ -85,7 +85,7 @@ public enum APICallType {
     /// Defines the HTTP Method Protocol: GET, POST...
     fileprivate var httpMethod: String {
         switch self {
-        case .getUser, .deleteUser, .getPetClasses, .getBreeds, .getCountries, .getContinents, .checkDevice, .getPets, .getPet, .getSharedPetUsers, .unregisterPet, .leaveSharedPet, .friends, .getSafeZone, .listSafeZones, .removeSafeZone, .pauseTrip, .resumeTrip : return "GET"
+        case .getUser, .deleteUser, .getPetClasses, .getBreeds, .getCountries, .getContinents, .getPets, .getPet, .getSharedPetUsers, .unregisterPet, .leaveSharedPet, .friends, .getSafeZone, .listSafeZones, .removeSafeZone, .pauseTrip, .resumeTrip : return "GET"
         default: return "POST"
         }
     }

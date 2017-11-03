@@ -29,6 +29,8 @@ class PetBreedViewController: UIViewController,  UITableViewDataSource, UITableV
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadBreeds()
         presenter.attachView(self)
     
         tableView.tableFooterView = UIView()

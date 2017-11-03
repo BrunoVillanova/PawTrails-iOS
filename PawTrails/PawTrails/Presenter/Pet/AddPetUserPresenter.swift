@@ -61,14 +61,14 @@ class AddPetUserPresenter {
         if email == nil || (email != nil && !email!.isValidEmail) {
             view?.emailFormat()
         }else if let petId = petId, let email = email {
-            
-            view?.beginLoadingContent()
+            self.view?.beginLoadingContent()
             DataManager.instance.addSharedUser(by: email, to: petId, callback: { (error, users) in
-                
-                self.view?.endLoadingContent()
+
                 if let error = error {
                     self.view?.errorMessage(error.msg)
+
                 }else{
+                    self.view?.endLoadingContent()
                     self.view?.successfullyAdded()
                 }
             })
