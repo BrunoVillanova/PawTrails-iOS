@@ -17,7 +17,6 @@ class PetInfromationViewController: UIViewController, IndicatorInfoProvider, Pet
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -127,7 +126,6 @@ extension PetInfromationViewController: UITableViewDelegate, UITableViewDataSour
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         if indexPath.section == 1 {
             let user = presenter.users[indexPath.row]
             self.present(user, isOwner: user.isOwner)
