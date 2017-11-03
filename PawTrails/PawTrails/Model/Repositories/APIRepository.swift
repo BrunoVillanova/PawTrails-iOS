@@ -192,14 +192,15 @@ class APIRepository {
     ///   - deviceCode: code provided of the device
     ///   - callback: returns whether the device is idle or not
     func check(_ deviceCode: String, callback: @escaping APIRepCheckDeviceCallback){
-        
-        APIManager.instance.perform(call: .checkDevice, withKey: deviceCode) { (error, data) in
+        let data = ["code" : deviceCode]
+        APIManager.instance.perform(call: .checkDevice, with: data) { (error, data) in
             if error == nil {
                 callback(nil, data?["available"].bool ?? false)
-            }else if let error = error {
+            } else if let error = error {
                 callback(error, false)
             }
         }
+
     }
     
     /// Attempts to replace pet device
@@ -430,7 +431,6 @@ class APIRepository {
     ///   - petId: pet id
     ///   - callback: returns **nil** or **error**
     func leaveSharedPet(by petId: Int, callback: @escaping APIRepErrorCallback) {
-        
         APIManager.instance.perform(call: .leaveSharedPet, withKey: petId) { (error, _) in
             callback(error)
         }

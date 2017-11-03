@@ -87,9 +87,7 @@ class PetPresenter {
     //MARK:- Users
     
     func leavePet(with id: Int) {
-        
         DataManager.instance.leaveSharedPet(by: id) { (error) in
-            
             if let error = error {
                 self.view?.errorMessage(error.msg)
             }else{

@@ -79,8 +79,6 @@ class ProfileCell: BaseCell, UICollectionViewDataSource, UICollectionViewDelegat
     
     
     func removeBtnPressed(sender: UIButton?) {
-        
-        
         if let myCollectionView = parentViewController as? PetProfileCollectionViewController, let pet =  myCollectionView.pet {
             let selectedUser = myCollectionView.presenter.users[(sender?.tag)!]
             let owner = pet.owner

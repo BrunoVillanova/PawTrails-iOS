@@ -42,7 +42,8 @@ class AddPetUserViewController: UIViewController, UITableViewDataSource, UITable
     
     func successfullyAdded() {
         if let profile = navigationController?.viewControllers.first(where: { $0 is PetProfileCollectionViewController}) as? PetProfileCollectionViewController {
-//            profile.reloadUsers()
+            profile.reloadUsers()
+            profile.collectionView?.reloadData()
             navigationController?.popToViewController(profile, animated: true)
         }
     }
@@ -64,7 +65,9 @@ class AddPetUserViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func endLoadingContent() {
-        hideLoadingView()
+        let window = UIApplication.shared.keyWindow?.subviews.last
+        window?.removeFromSuperview()
+        
     }
         
     
