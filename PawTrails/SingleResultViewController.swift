@@ -1,0 +1,131 @@
+//
+//  SingleResultViewController.swift
+//  PawTrails
+//
+//  Created by Marc Perello on 06/11/2017.
+//  Copyright © 2017 AttitudeTech. All rights reserved.
+//
+
+import UIKit
+import MapKit
+
+class SingleResultViewController: UIViewController {
+    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var avargeSpeed: UILabel!
+    @IBOutlet weak var speed: UILabel!
+    @IBOutlet weak var totalTimeLbl: UILabel!
+    @IBOutlet weak var totalDistnceLbl: UILabel!
+    @IBOutlet weak var shareBtn: UIButton!
+    
+    
+    var polyine = MKPolyline()
+    
+    fileprivate var annotations = [MKLocationId:[PTAnnotation]]()
+    fileprivate var overlays = [MKLocationId:MKOverlay]()
+
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let point1 = MKPointAnnotation()
+        let point2 = MKPointAnnotation()
+        let point9 = MKPointAnnotation()
+        let point3 = MKPointAnnotation()
+        let point4 = MKPointAnnotation()
+        let point5 = MKPointAnnotation()
+        let point6 = MKPointAnnotation()
+        let point7 = MKPointAnnotation()
+        let point8 = MKPointAnnotation()
+
+        point1.coordinate = CLLocationCoordinate2DMake(51.891100, -8.757692)
+        point2.coordinate = CLLocationCoordinate2DMake(51.890815, -8.760530)
+        point3.coordinate = CLLocationCoordinate2DMake(51.890216, -8.764649)
+        point4.coordinate = CLLocationCoordinate2DMake(51.891715, -8.768538)
+        point5.coordinate = CLLocationCoordinate2DMake(51.891429, -8.772827)
+        point6.coordinate = CLLocationCoordinate2DMake(51.891687, -8.775744)
+        point7.coordinate = CLLocationCoordinate2DMake(51.892891, -8.783382)
+        point8.coordinate = CLLocationCoordinate2DMake(51.892843, -8.786255)
+        point9.coordinate = CLLocationCoordinate2DMake(51.892430, -8.791236)
+        
+        mapView.addAnnotation(point9)
+
+        let coords = [point1.coordinate, point2.coordinate, point3.coordinate, point4.coordinate, point5.coordinate,point6.coordinate,point7.coordinate, point8.coordinate,point9.coordinate]
+        self.polyine = MKPolyline(coordinates: coords, count: coords.count)
+        mapView.add(polyine)
+//        mapView.centerOn(point1)
+
+//        mapView.addAnnotation(point2)
+//        mapView.centerCoordinate = point2.coordinate
+        
+//        mapView.setRegion(MKCoordinateRegionMake(point2.coordinate, MKCoordinateSpanMake(0.7,0.7)), animated: true)
+//
+//        let directionsRequest = MKDirectionsRequest()
+//
+//        let markTaipei = MKPlacemark(coordinate: CLLocationCoordinate2DMake(point1.coordinate.latitude, point1.coordinate.longitude), addressDictionary: nil)
+//
+//        let markChungli = MKPlacemark(coordinate: CLLocationCoordinate2DMake(point2.coordinate.latitude, point2.coordinate.longitude), addressDictionary: nil)
+//
+//        directionsRequest.source = MKMapItem(placemark: markChungli)
+//        directionsRequest.destination = MKMapItem(placemark: markTaipei)
+//
+//        directionsRequest.transportType = MKDirectionsTransportType.automobile
+//
+//        let directions = MKDirections(request: directionsRequest)
+//
+//        directions.calculate(completionHandler: {
+//
+//            response, error in
+//
+//            if error == nil {
+//
+//                self.myRoute = response!.routes[0] as MKRoute
+//
+//                self.mapView.add(self.myRoute.polyline)
+//
+//            }
+//        })
+        
+        
+        mapView.delegate = self
+        
+        totalDistnceLbl.text = "8.23 km"
+        totalTimeLbl.text = "00:43:27"
+        speed.text = "6.2 km/h"
+        avargeSpeed.text = "142 bpm"
+        shareBtn.backgroundColor = UIColor.primary
+        shareBtn.layer.cornerRadius = 20
+        shareBtn.clipsToBounds = true
+        shareBtn.setTitle("Share to social media", for: .normal)
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if overlay is MKPolyline {
+            let polylineRenderer = MKPolylineRenderer(overlay:polyine)
+            polylineRenderer.strokeColor = UIColor.primary
+            polylineRenderer.lineWidth = 5
+            return polylineRenderer
+        }
+        return MKPolylineRenderer()
+    }
+    
+  
+}
+
+
+extension SingleResultViewController: MKMapViewDelegate {
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: PTBasicAnnotationView.identifier) as? PTBasicAnnotationView
+        if annotationView == nil {
+            annotationView = PTBasicAnnotationView(annotation: annotation, reuseIdentifier: PTBasicAnnotationView.identifier)
+            annotationView?.canShowCallout = false
+        }
+        
+        if !(annotation is MKUserLocation) {
+            annotationView!.pictureImageView?.image = UIImage(named: "cat")
+        }
+        
+        return annotationView
+}
+}

@@ -184,6 +184,7 @@
 		449751EE1F9DE7E7008C317C /* PetInfromationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449751ED1F9DE7E7008C317C /* PetInfromationCell.swift */; };
 		44A1AC501E92923A003EF6CA /* PetsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A1AC4F1E92923A003EF6CA /* PetsPresenter.swift */; };
 		44B179621E4B62690070A18B /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B179611E4B62690070A18B /* Presenter.swift */; };
+		44BC63CA1FB078FD006E38F4 /* SingleResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BC63C91FB078FD006E38F4 /* SingleResultViewController.swift */; };
 		44C0409D1FAB6D9A00CF6E88 /* SharedUsersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C0409B1FAB6D9A00CF6E88 /* SharedUsersTableViewCell.swift */; };
 		44C0409E1FAB6D9A00CF6E88 /* SharedUsersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44C0409C1FAB6D9A00CF6E88 /* SharedUsersTableViewCell.xib */; };
 		44C7F7501E4CD3DA00171170 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F74F1E4CD3DA00171170 /* HomePresenter.swift */; };
@@ -407,6 +408,7 @@
 		449751ED1F9DE7E7008C317C /* PetInfromationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetInfromationCell.swift; sourceTree = "<group>"; };
 		44A1AC4F1E92923A003EF6CA /* PetsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetsPresenter.swift; path = Presenter/PetsPresenter.swift; sourceTree = "<group>"; };
 		44B179611E4B62690070A18B /* Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Presenter.swift; path = Presenter/Presenter.swift; sourceTree = "<group>"; };
+		44BC63C91FB078FD006E38F4 /* SingleResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleResultViewController.swift; sourceTree = "<group>"; };
 		44C0409B1FAB6D9A00CF6E88 /* SharedUsersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedUsersTableViewCell.swift; sourceTree = "<group>"; };
 		44C0409C1FAB6D9A00CF6E88 /* SharedUsersTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SharedUsersTableViewCell.xib; sourceTree = "<group>"; };
 		44C7F74F1E4CD3DA00171170 /* HomePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomePresenter.swift; path = Presenter/HomePresenter.swift; sourceTree = "<group>"; };
@@ -833,6 +835,7 @@
 			children = (
 				444698861F6BCB5F006EE4CD /* AdventuresPressenters */,
 				443E808B1F5D9236008679FC /* SelectPetsCell.swift */,
+				44BC63C91FB078FD006E38F4 /* SingleResultViewController.swift */,
 				443E80791F5D87EC008679FC /* SelectPetsVC.swift */,
 				442531301F5FE6FF0017D21A /* TripScreenViewController.swift */,
 				442531361F6047290017D21A /* FinishAdventureVC.swift */,
@@ -1403,6 +1406,7 @@
 				157401B11F9E268200A854C5 /* PTBasicAnnotationView.swift in Sources */,
 				441858E11F98B25B003710A8 /* QuestionsViewController.swift in Sources */,
 				443E80771F5D53D5008679FC /* PetsCollectionViewCell.swift in Sources */,
+				44BC63CA1FB078FD006E38F4 /* SingleResultViewController.swift in Sources */,
 				44251AE51F0CD54D0067F401 /* ModelExtensions.swift in Sources */,
 				446607C01F95FF4C00833683 /* AirbnbDatePickerMonthHeader.swift in Sources */,
 				441292331FAB25F900745ED2 /* PetInfromationViewController.swift in Sources */,
