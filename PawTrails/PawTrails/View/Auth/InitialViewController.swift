@@ -59,7 +59,6 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
         }
         
         setTopBar(alpha: 1.0)
-
         GIDSignIn.sharedInstance().uiDelegate = self
         DispatchQueue.main.async {
 

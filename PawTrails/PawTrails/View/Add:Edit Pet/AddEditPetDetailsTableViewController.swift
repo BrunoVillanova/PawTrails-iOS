@@ -29,11 +29,9 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         if let name = pet?.name {
             navigationItem.title = "Edit \(name)"
         }
-                
         imagePicker.delegate = self
         petImageView.circle()
         presenter.attachView(self, pet, deviceCode)
@@ -86,10 +84,9 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
         if pet == nil {
             dismiss(animated: true, completion: nil)
         }else{
-            
-            if (navigationController?.viewControllers.first(where: { $0 is PetProfileCollectionViewController }) as? PetProfileCollectionViewController) != nil {
-//                profile.reloadPetInfo()
-            }
+            if let navigation = (navigationController?.viewControllers.first(where: { $0 is PetsViewController }) as? PetsViewController) {
+                    navigation.reloadPetsAPI()
+                }
             _ = navigationController?.popViewController(animated: true)
         }
     }
@@ -103,7 +100,9 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
     }
     
     func endLoadingContent() {
-        hideLoadingView()
+        let window = UIApplication.shared.keyWindow?.subviews.last
+        window?.removeFromSuperview()
+
     }
     
 
@@ -124,7 +123,6 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         switch segue.destination {
         case is PetNameTableViewController: (segue.destination as! PetNameTableViewController).parentEditor = presenter
             break

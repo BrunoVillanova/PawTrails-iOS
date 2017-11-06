@@ -453,9 +453,7 @@ class DataManager {
     ///   - petId: pet id
     ///   - callback: nil or *error*
     func removePet(_ petId: Int, callback: @escaping errorCallback) {
-        
         APIRepository.instance.removePet(petId) { (error) in
-
             if error == nil {
                 self.removePetDB(by: petId, callback: callback)
             }else if let error = error {

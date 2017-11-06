@@ -31,7 +31,6 @@ class InitialPresenter {
     }
     
     func signIn(email:String?, password:String?) {
-        
         if validInput(email, password) {
             view?.beginLoadingContent()
             DataManager.instance.signIn(email!, password!) { (error) in
@@ -95,7 +94,6 @@ class InitialPresenter {
     
     func loginFB(vc: InitialViewController) {
         let loginManager = LoginManager()
-        
         loginManager.logIn([ .publicProfile, .email ], viewController: vc) { loginResult in
             switch loginResult {
             case .failed(let error):
