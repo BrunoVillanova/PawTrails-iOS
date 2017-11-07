@@ -50,6 +50,17 @@ class SingleResultViewController: UIViewController {
 
         let coords = [point1.coordinate, point2.coordinate, point3.coordinate, point4.coordinate, point5.coordinate,point6.coordinate,point7.coordinate, point8.coordinate,point9.coordinate]
         self.polyine = MKPolyline(coordinates: coords, count: coords.count)
+        
+        let center = CLLocationCoordinate2D(latitude: 51.891100, longitude: -8.757692)
+        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.01))
+        
+        self.mapView.setRegion(region, animated: true)
+        mapView.showsPointsOfInterest = false
+        
+      
+        
+        
+        
         mapView.add(polyine)
 //        mapView.centerOn(point1)
 
@@ -123,7 +134,7 @@ extension SingleResultViewController: MKMapViewDelegate {
         }
         
         if !(annotation is MKUserLocation) {
-            annotationView!.pictureImageView?.image = UIImage(named: "cat")
+            annotationView!.pictureImageView?.image = UIImage(named: "max")
         }
         
         return annotationView

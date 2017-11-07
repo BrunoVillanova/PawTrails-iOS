@@ -145,7 +145,7 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! petListCell
         let pet = getPet(at: indexPath)
         
-        cell.subtitleLabel.text = "Getting address..."
+        cell.subtitleLabel.text = "Cork, Ireland"
 
         SocketIOManager.instance.gpsUpdates()?.subscribe(onNext: { (data) in
             if let json = data.first as? [Any] {
@@ -174,6 +174,13 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         } else {
             cell.petImageView.image = nil
         }
+        
+//        if pet.name == "Max" {
+//            cell.petImageView.image = UIImage(named: "max")
+//        } else {
+//            cell.petImageView.image = UIImage(named: "max2")
+//        }
+        
         return cell
     }
     
