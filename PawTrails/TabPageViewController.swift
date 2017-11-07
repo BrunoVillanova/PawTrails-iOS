@@ -71,6 +71,10 @@ class TabPageViewController: ButtonBarPagerTabStripViewController {
         let child_3 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SafeZoneViewController") as! SafeZoneViewController
         child_3.pet = self.pet
         
+        let child_4 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AdventuresListViewController") as! AdventuresListViewController
+        child_4.pet = self.pet
+
+        
         return [SafeZoneViewController, child_1, child_3]
     }
 

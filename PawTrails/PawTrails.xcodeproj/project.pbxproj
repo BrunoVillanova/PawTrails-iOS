@@ -150,6 +150,7 @@
 		444698851F6BC75C006EE4CD /* SelectPetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444698841F6BC75C006EE4CD /* SelectPetView.swift */; };
 		4446BAE11FB1C6AE00809805 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4446BADE1FB1C69A00809805 /* Charts.framework */; };
 		4446BAE21FB1C6AE00809805 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4446BADE1FB1C69A00809805 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4446BAE81FB1CA3600809805 /* AdventuresListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446BAE71FB1CA3600809805 /* AdventuresListViewController.swift */; };
 		4447217D1F03F12A001DCDE1 /* PawTrailsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4447217C1F03F12A001DCDE1 /* PawTrailsUITests.swift */; };
 		44475ADB1F5960B800D41AAA /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44475ADA1F5960B800D41AAA /* SignUpViewController.swift */; };
 		44477CB91F599EFC00083295 /* UiimageViewWithMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44477CB81F599EFC00083295 /* UiimageViewWithMask.swift */; };
@@ -404,6 +405,7 @@
 		4441ACA71EB8C72E00FBE27F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		444698841F6BC75C006EE4CD /* SelectPetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPetView.swift; sourceTree = "<group>"; };
 		4446BAD81FB1C69A00809805 /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = "../../../Downloads/Charts-master/Charts.xcodeproj"; sourceTree = "<group>"; };
+		4446BAE71FB1CA3600809805 /* AdventuresListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdventuresListViewController.swift; sourceTree = "<group>"; };
 		4447217A1F03F12A001DCDE1 /* PawTrailsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PawTrailsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4447217C1F03F12A001DCDE1 /* PawTrailsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PawTrailsUITests.swift; sourceTree = "<group>"; };
 		4447217E1F03F12A001DCDE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -651,6 +653,7 @@
 				442F2D991FAC735E0072D2B6 /* PetUserTableViewController.swift */,
 				44C0409B1FAB6D9A00CF6E88 /* SharedUsersTableViewCell.swift */,
 				44C0409C1FAB6D9A00CF6E88 /* SharedUsersTableViewCell.xib */,
+				4446BAE71FB1CA3600809805 /* AdventuresListViewController.swift */,
 				441292361FAB262300745ED2 /* SafeZoneViewController.swift */,
 				441292341FAB260500745ED2 /* GoalsViewController.swift */,
 				441292321FAB25F900745ED2 /* PetInfromationViewController.swift */,
@@ -1504,6 +1507,7 @@
 				44251AF31F0CD55F0067F401 /* Constants.swift in Sources */,
 				440067C91F8E485800D8B89E /* PieChart.swift in Sources */,
 				443E808C1F5D9236008679FC /* SelectPetsCell.swift in Sources */,
+				4446BAE81FB1CA3600809805 /* AdventuresListViewController.swift in Sources */,
 				446607BB1F95FF4C00833683 /* AirbnbDatePicker.swift in Sources */,
 				44251B7C1F0CD6130067F401 /* CDPetUser+CoreDataProperties.swift in Sources */,
 				157401B21F9E268200A854C5 /* PTBatteryView.swift in Sources */,
