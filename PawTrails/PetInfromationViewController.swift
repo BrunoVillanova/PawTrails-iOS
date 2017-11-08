@@ -19,7 +19,7 @@ class PetInfromationViewController: UIViewController, IndicatorInfoProvider, Pet
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        tableView.isScrollEnabled = false
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = UITableViewAutomaticDimension

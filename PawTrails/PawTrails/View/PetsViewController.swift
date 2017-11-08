@@ -145,7 +145,7 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! petListCell
         let pet = getPet(at: indexPath)
         
-        cell.subtitleLabel.text = "Cork, Ireland"
+        cell.subtitleLabel.text = "Getting address ..."
 
         SocketIOManager.instance.gpsUpdates()?.subscribe(onNext: { (data) in
             if let json = data.first as? [Any] {

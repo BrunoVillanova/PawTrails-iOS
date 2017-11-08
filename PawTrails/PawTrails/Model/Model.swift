@@ -147,6 +147,7 @@ struct SafeZone {
     var active: Bool
     var address: String?
     var preview: Data?
+    var image: Int16
 }
 
 

@@ -14,6 +14,8 @@ import MapKit
 class SafeZoneViewController: UIViewController, IndicatorInfoProvider, PetView {
     var pet: Pet!
     fileprivate let presenter = PetPresenter()
+    
+
 
     @IBAction func addButton(_ sender: Any) {
         if !pet.isOwner {
@@ -31,9 +33,11 @@ class SafeZoneViewController: UIViewController, IndicatorInfoProvider, PetView {
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadAllData()
+
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.reloadData()
         self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 80, 0)
         self.tableView.estimatedRowHeight = 450
         self.tableView.rowHeight = UITableViewAutomaticDimension
@@ -44,8 +48,6 @@ class SafeZoneViewController: UIViewController, IndicatorInfoProvider, PetView {
     func loadAllData() {
         if let pet = pet {
             load(pet)
-            reloadPetInfo()
-            reloadUsers()
             reloadSafeZones()
         }
     }
@@ -70,15 +72,11 @@ class SafeZoneViewController: UIViewController, IndicatorInfoProvider, PetView {
     
     func reloadSafeZones() {
         presenter.loadSafeZones(for: pet.id)
+//        self.tableView.reloadData()
     }
     
     func reloadUsers(onlyDB: Bool = false) {
-        if onlyDB {
-            presenter.getPet(with: pet.id)
-            //reload users?
-        }else{
-            presenter.loadPetUsers(for: pet.id)
-        }
+
     }
     
     //MARK: - PetView
@@ -89,32 +87,12 @@ class SafeZoneViewController: UIViewController, IndicatorInfoProvider, PetView {
     func load(_ pet: Pet) {
         self.pet = pet
         navigationItem.title = pet.name
-//        if let imageData = pet.image {
-//            petImageView.image = UIImage(data: imageData as Data)
-//        }
-        
-//        breedLabel.text = pet.breedsString
-//        genderLabel.text = pet.gender?.name
-//        typeLabel.text = pet.typeString
-//        weightLabel.text = pet.weightString
-//        birthdayLabel.text = pet.birthday?.toStringShow
-//        neuteredLabel.text = pet.neutered ? "Yes" : "No"
-        
-//        removeLeaveButton.setTitle(pet.isOwner ? "Remove Pet" : "Leave Pet", for: .normal)
-//        changeTableViewCell.isHidden = !pet.isOwner
-        
-//        if let data = SocketIOManager.instance.getGPSData(for: pet.id) {
-//            self.load(data: data)
-//        }
-//        tableView.reloadData()
-//        self.usersCollectionView.reloadData()
+        self.tableView.reloadData()
         
     }
     
     func loadUsers() {
-//        pet.users = presenter.users
-//        usersCollectionView.reloadAnimated()
-//        tableView.reloadData()
+
     }
     
     
@@ -123,16 +101,11 @@ class SafeZoneViewController: UIViewController, IndicatorInfoProvider, PetView {
     
     func loadSafeZones() {
         pet.safezones = presenter.safezones
-        
         if self.presenter.safezones.count == 0 { return }
-        
         let safezonesGroup = DispatchGroup()
-        
         for safezone in self.presenter.safezones {
             // Address
             if safezone.address == nil {
-                //                Reporter.debug("address", safezone.id)
-                
                 guard let center = safezone.point1 else {
                     Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "No center point found!")
                     break
@@ -229,6 +202,22 @@ extension SafeZoneViewController:UITableViewDelegate, UITableViewDataSource  {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SafeZoneCell
         let safezone = presenter.safezones[indexPath.row]
         cell.safeZoneName.text = safezone.name
+        if safezone.image == 0 {
+            cell.iconeImage.image = UIImage(named: Icons.zero.rawValue)
+        } else if safezone.image == 1{
+            cell.iconeImage.image = UIImage(named: Icons.one.rawValue)
+        }else if safezone.image == 2 {
+            cell.iconeImage.image = UIImage(named: Icons.two.rawValue)
+
+        }else if safezone.image == 3 {
+            cell.iconeImage.image = UIImage(named: Icons.three.rawValue)
+
+        }else if safezone.image == 4 {
+            cell.iconeImage.image = UIImage(named: Icons.four.rawValue)
+
+        }else if safezone.image == 5{
+            cell.iconeImage.image = UIImage(named: Icons.five.rawValue)
+        }
         cell.safeZoneImage.backgroundColor = UIColor.red.withAlphaComponent(0.5)
         cell.switcher.isOn = safezone.active
         cell.switcher.tag = indexPath.row
@@ -280,5 +269,14 @@ class SafeZoneCell: UITableViewCell {
     @IBOutlet weak var safeZoneName: UILabel!
     @IBOutlet weak var switcher: UISwitch!
     
+}
+
+enum Icons: String {
+    case zero = "buildings-dark-1x"
+    case one = "fountain-dark-1x"
+    case two = "girl-and-boy-dark-1x"
+    case three = "home-dark-1x"
+    case four = "palm-tree-shape-dark-1x"
+    case five = "park-dark-1x"
 }
 
