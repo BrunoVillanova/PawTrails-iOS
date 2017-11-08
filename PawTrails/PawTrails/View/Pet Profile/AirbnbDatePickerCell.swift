@@ -126,3 +126,6 @@ struct AirbnbDatePickerCellType: OptionSet {
     static let InBetweenDate = AirbnbDatePickerCellType(rawValue: 1 << 7)           // has filled square
     static let Highlighted = AirbnbDatePickerCellType(rawValue: 1 << 8)             // has 
 }
+
+
+

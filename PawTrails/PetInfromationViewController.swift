@@ -8,19 +8,30 @@
 
 import UIKit
 import XLPagerTabStrip
+import SDWebImage
 
 class PetInfromationViewController: UIViewController, IndicatorInfoProvider, PetView {
     var pet: Pet!
     fileprivate let presenter = PetPresenter()
 
+    @IBOutlet weak var usersCollectionView: UICollectionView!
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 1000
+        
+        usersCollectionView.backgroundColor = UIColor.white
+        self.tableView.backgroundColor = UIColor.groupTableViewBackground
+        self.view.backgroundColor = UIColor.groupTableViewBackground
+
+        
+        usersCollectionView.delegate = self
+        usersCollectionView.dataSource = self
 
         presenter.attachView(self, pet:pet)
         if let pet = pet {
@@ -50,7 +61,7 @@ class PetInfromationViewController: UIViewController, IndicatorInfoProvider, Pet
             //reload users?
         }else{
             presenter.loadPetUsers(for: pet.id)
-            self.tableView.reloadData()
+            self.usersCollectionView.reloadData()
 
         }
     }
@@ -101,15 +112,11 @@ class PetInfromationViewController: UIViewController, IndicatorInfoProvider, Pet
 extension PetInfromationViewController: UITableViewDelegate, UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
             return 1
-        } else {
-            return presenter.users.count
-        }
         
     }
     
@@ -124,19 +131,12 @@ extension PetInfromationViewController: UITableViewDelegate, UITableViewDataSour
 
     }
     
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 1 {
-            let user = presenter.users[indexPath.row]
-            self.present(user, isOwner: user.isOwner)
-        }
-        
-    }
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ProfileInfoCell
 
-        if indexPath.section == 0 {
+//        if indexPath.section == 0 {
             cell.isUserInteractionEnabled = false
 
             if let pet = self.pet{
@@ -146,23 +146,16 @@ extension PetInfromationViewController: UITableViewDelegate, UITableViewDataSour
                 cell.weightLbl.text = pet.weightString
                 cell.typeLbl.text = pet.typeString
                 cell.birthDayLbl.text = pet.birthday?.toStringShow
-                if let image = pet.image {
-                    cell.profileImage.image = UIImage(data: image)
+
+                if let imageUrl = pet.imageURL {
+                    cell.profileImage.sd_setImage(with: URL(string: imageUrl), placeholderImage: #imageLiteral(resourceName: "PetPlaceholderImage"), options: [.continueInBackground])
+                } else {
+                    cell.profileImage.image = nil
                 }
+                
             }
             return cell
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "nib", for: indexPath) as! SharedUsersTableViewCell
-            let user = presenter.users[indexPath.row]
-            let imageData = user.image ?? Data()
-            cell.userImage.image = UIImage(data: imageData)
-            let fullName = "\(user.name ?? "") \(user.surname ?? "")"
-            cell.nameLbl.text = fullName
-            cell.emailLbl.text = user.email
-//            cell.removebtn.addTarget(self, action: #selector(removeBtnPressed), for: .touchUpInside)
-            return cell
 
-        }
 
     }
     
@@ -198,6 +191,33 @@ extension PetInfromationViewController: UITableViewDelegate, UITableViewDataSour
 
 }
 
+extension PetInfromationViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return presenter.users.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = usersCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! UsersCell
+        let user = presenter.users[indexPath.row]
+        if let url = user.imageURL {
+            cell.usersCell.sd_setImage(with: URL(string: url), placeholderImage: UIImage(named: ""), options: [.progressiveDownload], completed: nil)
+        }
+        
+        cell.usersCell.circle()
+        
+        cell.userNameLbl.text = user.name
+
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let user = presenter.users[indexPath.row]
+         self.present(user, isOwner: user.isOwner)
+    }
+    
+    
+}
 
 class ProfileInfoCell: UITableViewCell {
     @IBOutlet weak var profileImage: UiimageViewWithMask!
@@ -209,3 +229,10 @@ class ProfileInfoCell: UITableViewCell {
     @IBOutlet weak var petName: UILabel!
     
 }
+
+class UsersCell: UICollectionViewCell {
+    @IBOutlet weak var usersCell: UIImageView!
+    @IBOutlet weak var userNameLbl: UILabel!
+    
+}
+

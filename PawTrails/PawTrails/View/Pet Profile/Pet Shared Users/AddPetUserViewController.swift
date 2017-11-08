@@ -41,9 +41,9 @@ class AddPetUserViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func successfullyAdded() {
-        if let profile = navigationController?.viewControllers.first(where: { $0 is PetProfileCollectionViewController}) as? PetProfileCollectionViewController {
+        if let profile = navigationController?.viewControllers.first(where: { $0 is PetInfromationViewController}) as? PetInfromationViewController {
             profile.reloadUsers()
-            profile.collectionView?.reloadData()
+            profile.usersCollectionView?.reloadData()
             navigationController?.popToViewController(profile, animated: true)
         }
     }

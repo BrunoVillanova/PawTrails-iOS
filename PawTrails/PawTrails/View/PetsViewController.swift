@@ -38,7 +38,7 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.addSubview(refreshControl)
         presenter.attachView(self)
         reloadPets()
-        addButton()
+//        addButton()
     }
     
     

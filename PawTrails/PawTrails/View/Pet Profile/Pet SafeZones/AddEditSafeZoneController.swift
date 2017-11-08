@@ -284,6 +284,7 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
                 if let settingsView = ZBdropDownViews?.first as? SettingsViews {
                     presenter.addEditSafeZone(safezoneId: id, name: settingsView.nameTextField.text, shape: shape, active: true, points: geoCodeFence(), into: petId)
                 }
+                
             }else{
                 alert(title: "", msg: "The area is too small. Please, zoom out.", type: .red)
             }
@@ -329,15 +330,11 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
     }
     
     func success() {
-        //        if let profile = navigationController?.viewControllers.first(where: { $0 is PetProfileCollectionViewController}) as? PetProfileCollectionViewController {
-        ////            profile.reloadSafeZones()
-        //            navigationController?.popToViewController(profile, animated: true)
-        //        }
-        
         self.navigationController?.popViewController(animated: true)
         self.petId = nil
         self.safezone = nil
         self.isOwner = nil
+        self.popUp(title: "Success", msg: "Safezone has been successfully added/Edited ")
     }
     
     func missingName() {

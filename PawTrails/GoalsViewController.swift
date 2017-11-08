@@ -19,18 +19,36 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider {
     @IBOutlet weak var barChart: BarChartView!
     @IBOutlet weak var pieChart: PieChartView!
     
+    @IBOutlet weak var datePicker: UIView!
     
-    
+    lazy var mydatePicker: AirbnbDatePicker = {
+        let btn = AirbnbDatePicker()
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.delegate = self
+        return btn
+    }()
     
     let secondColor = UIColor(red: 206/255, green: 19/255, blue: 54/255, alpha: 1)
     let thirdColor = UIColor(red: 255/255, green: 86/255, blue: 96/255, alpha: 1)
     let forthColor = UIColor(red: 149/255, green: 0/255, blue: 17/255, alpha: 1)
-    
-    
+
     var pet: Pet!
     override func viewDidLoad() {
         super.viewDidLoad()
 
+    
+        self.datePicker.addSubview(mydatePicker)
+
+        self.mydatePicker.bounds = datePicker.bounds
+        self.mydatePicker.center = datePicker.center
+        mydatePicker.centerXAnchor.constraint(equalTo: datePicker.centerXAnchor).isActive = true
+        mydatePicker.widthAnchor.constraint(equalTo: datePicker.widthAnchor).isActive = true
+        mydatePicker.heightAnchor.constraint(equalTo: datePicker.heightAnchor).isActive = true
+        mydatePicker.topAnchor.constraint(equalTo: datePicker.topAnchor).isActive = true
+        mydatePicker.bottomAnchor.constraint(equalTo: datePicker.bottomAnchor).isActive = true
+
+        
+        
         pieChartUpdate()
         barChartUpdate()
 //        updateThirdBar()
