@@ -23,7 +23,7 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
     
 
     let icons = ["buildings-dark-1x", "fountain-dark-1x", "girl-and-boy-dark-1x" , "home-dark-1x", "palm-tree-shape-dark-1x", "park-dark-1x"]
-   
+    var selectedIcon: Int!
     
     fileprivate var opened:CGFloat = 360.0, closed:CGFloat = 600
     fileprivate var shape:Shape = Shape.circle
@@ -49,8 +49,6 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
         
         
         presenter.attachView(self, safezone: safezone)
-        
-    
         map.showsUserLocation = true
         map.showsScale = false
         map.showsCompass = false
@@ -107,6 +105,7 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
                 
                 settingsView.collectionView.delegate = self
                 settingsView.collectionView.dataSource = self
+                settingsView.collectionView.allowsMultipleSelection = false
 
                 settingsView.collectionView.contentInset = UIEdgeInsetsMake(0, 2, 0, 16)
                 let nib = UINib(nibName: "IconCell", bundle: nil)
@@ -282,7 +281,14 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
             if fence.isIdle {
                 let id = safezone?.id ?? 0
                 if let settingsView = ZBdropDownViews?.first as? SettingsViews {
-                    presenter.addEditSafeZone(safezoneId: id, name: settingsView.nameTextField.text, shape: shape, active: true, points: geoCodeFence(), imageId: 2, into: petId)
+                    if selectedIcon != nil {
+                         presenter.addEditSafeZone(safezoneId: id, name: settingsView.nameTextField.text, shape: shape, active: true, points: geoCodeFence(), imageId: selectedIcon, into: petId)
+                    } else if let number = safezone?.image {
+                        presenter.addEditSafeZone(safezoneId: id, name: settingsView.nameTextField.text, shape: shape, active: true, points: geoCodeFence(), imageId:Int(number) , into: petId)
+                    } else {
+                         presenter.addEditSafeZone(safezoneId: id, name: settingsView.nameTextField.text, shape: shape, active: true, points: geoCodeFence(), imageId: 0 , into: petId)
+                    }
+                   
                 }
                 
             }else{
@@ -386,7 +392,22 @@ extension AddEditSafeZOneController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath)
+        self.selectedIcon = self.icons.index(of: self.icons[indexPath.item])
+        
+        print(selectedIcon)
+        if let cell = collectionView.cellForItem(at: indexPath) {
+            cell.backgroundColor = UIColor.groupTableViewBackground
+            
+        }
+    }
+    
+
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) {
+            cell.backgroundColor = UIColor.clear
+
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
