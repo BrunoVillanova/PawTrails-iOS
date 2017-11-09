@@ -19,8 +19,9 @@ class PetInfromationViewController: UIViewController, IndicatorInfoProvider, Pet
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.isScrollEnabled = false
+//        tableView.isScrollEnabled = false
         tableView.dataSource = self
+        tableView.allowsSelection = false
         tableView.delegate = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 1000
@@ -137,7 +138,7 @@ extension PetInfromationViewController: UITableViewDelegate, UITableViewDataSour
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ProfileInfoCell
 
 //        if indexPath.section == 0 {
-            cell.isUserInteractionEnabled = false
+//            cell.isUserInteractionEnabled = false
 
             if let pet = self.pet{
                 cell.petName.text = pet.name
@@ -203,7 +204,6 @@ extension PetInfromationViewController: UICollectionViewDelegate, UICollectionVi
         if let url = user.imageURL {
             cell.profileImage.sd_setImage(with: URL(string: url), placeholderImage: UIImage(named: ""), options: [.progressiveDownload], completed: nil)
         }
-        cell.profileImage.circle()
         return cell
     }
     
@@ -237,6 +237,12 @@ class ProfileInfoCell: UITableViewCell {
 
 class UsersCell: UICollectionViewCell {
     @IBOutlet weak var profileImage: UIImageView!
+    
+    override func awakeFromNib() {
+        self.profileImage.circle()
+
+    }
+    
     override func prepareForReuse() {
         self.profileImage = nil
     }

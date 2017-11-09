@@ -111,26 +111,18 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider {
     
     func updateThirdBar () {
         self.livelyChart.backgroundColor = UIColor.white
-        self.livelyChart.xAxis.centerAxisLabelsEnabled = true
+        let entry1 = BarChartDataEntry(x: 0, y: 2)
+        let entry2 = BarChartDataEntry(x:1, y: 8)
+        let entry3 = BarChartDataEntry(x: 2, y: 6)
+        let entry4 = BarChartDataEntry(x: 3, y: 12)
         
-
-        
-        
-        let entry1 = BarChartDataEntry(x: 1, y: 1)
-        let entry2 = BarChartDataEntry(x: 2, y: 1)
-        let entry3 = BarChartDataEntry(x: 3, y: 1)
-        let entry4 = BarChartDataEntry(x: 4, y: 1)
         
         livelyChart.xAxis.granularityEnabled = true
         livelyChart.xAxis.granularity = 1.0
         
-        
         livelyChart.barData?.highlightEnabled = false
         livelyChart.isUserInteractionEnabled = false
         
-
-        let formater = ChartStringFormatter()
-        self.livelyChart.xAxis.valueFormatter = formater
         
         
         livelyChart.rightAxis.drawLabelsEnabled = false
@@ -143,7 +135,6 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider {
         
         livelyChart.xAxis.drawAxisLineEnabled = false
         livelyChart.xAxis.drawGridLinesEnabled = false
-
         
         
         let pFormatter = NumberFormatter()
@@ -152,18 +143,23 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider {
         pFormatter.multiplier = 1.0
         pFormatter.percentSymbol = " hrs"
         let formatter = DefaultValueFormatter(formatter: pFormatter)
- 
-        let formatere = ChartStringFormattesr()
-        self.livelyChart.xAxis.valueFormatter = formatere
-
-        let dataSet = BarChartDataSet(values: [entry1, entry2, entry3, entry4], label: "Wandering Analysis")
-        dataSet.colors = [self.thirdColor]
+        
+        
+        let formater = ChartStringFormatter()
+        self.livelyChart.xAxis.valueFormatter = formater
+        
+        let dataSet = BarChartDataSet(values: [entry1, entry2, entry3, entry4], label: "Chilling Analysis")
         let data = BarChartData(dataSets: [dataSet])
         data.setValueFormatter(formatter)
+        
+        livelyChart.data?.highlightEnabled = false
+        
+        
+        dataSet.colors = [forthColor]
         livelyChart.data = data
         livelyChart.chartDescription?.text = ""
         //This must stay at end of function
-        barChart.notifyDataSetChanged()
+        livelyChart.notifyDataSetChanged()
         
     }
     
