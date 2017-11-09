@@ -191,7 +191,7 @@ extension PetInfromationViewController: UITableViewDelegate, UITableViewDataSour
 
 }
 
-extension PetInfromationViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension PetInfromationViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return presenter.users.count
@@ -201,22 +201,27 @@ extension PetInfromationViewController: UICollectionViewDelegate, UICollectionVi
         let cell = usersCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! UsersCell
         let user = presenter.users[indexPath.row]
         if let url = user.imageURL {
-            cell.usersCell.sd_setImage(with: URL(string: url), placeholderImage: UIImage(named: ""), options: [.progressiveDownload], completed: nil)
+            cell.profileImage.sd_setImage(with: URL(string: url), placeholderImage: UIImage(named: ""), options: [.progressiveDownload], completed: nil)
         }
-        
-        cell.usersCell.circle()
-        
-        cell.userNameLbl.text = user.name
-
+        cell.profileImage.circle()
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 60, height: 60)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 6
+    }
+    
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let user = presenter.users[indexPath.row]
          self.present(user, isOwner: user.isOwner)
+        
     }
-    
-    
+
 }
 
 class ProfileInfoCell: UITableViewCell {
@@ -231,8 +236,9 @@ class ProfileInfoCell: UITableViewCell {
 }
 
 class UsersCell: UICollectionViewCell {
-    @IBOutlet weak var usersCell: UIImageView!
-    @IBOutlet weak var userNameLbl: UILabel!
-    
+    @IBOutlet weak var profileImage: UIImageView!
+    override func prepareForReuse() {
+        self.profileImage = nil
+    }
 }
 

@@ -89,16 +89,9 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
             let view = YNDropDownMenu(frame: CGRect(x: 0, y: 64, width: UIScreen.main.bounds.size.width, height: 38),
                             dropDownViews: _ZBdropDownViews, dropDownViewTitles: ["Show SafeZone Settings"])
             view.setImageWhen(normal: UIImage(named: "arrow-show-1x"), selected: UIImage(named: "arrow-show-1x"), disabled: UIImage(named: "arrow-show-1x"))
-            
-            
-//            view.setLabelColorWhen(normal: .black, selected: .black, disabled: .black)
-//            view.setImageWhen(normal: UIImage(named: "arrow-show-1x"), selectedTintColor: .clear, disabledTintColor: .black)
             view.bottomLine.backgroundColor = UIColor.black
             view.bottomLine.isHidden = false
-            
             if let settingsView = ZBdropDownViews?.first as? SettingsViews {
-                
-                
                 settingsView.nameTextField.placeholder = "Name of the safezone?"
                 settingsView.nameTextField.title = "Your safeZone name"
                 settingsView.nameTextField.titleColor = UIColor(red: 155/255, green: 153/255, blue: 169/255, alpha: 1)

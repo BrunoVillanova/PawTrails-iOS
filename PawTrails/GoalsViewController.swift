@@ -51,7 +51,7 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider {
         
         pieChartUpdate()
         barChartUpdate()
-//        updateThirdBar()
+        updateThirdBar()
         updateSecondBar()
 
     }
