@@ -40,9 +40,6 @@ class AdventuresListViewController: UIViewController, IndicatorInfoProvider  {
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "Adventure")
     }
-
-
-
 }
 
 

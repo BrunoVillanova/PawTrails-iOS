@@ -169,27 +169,6 @@ extension PetInfromationViewController: UITableViewDelegate, UITableViewDataSour
             navigationController?.pushViewController(vc, animated: true)
         }
     }
-    
-    
-//    func removeBtnPressed(sender: UIButton?) {
-//
-//            let selectedUser = presenter.users[(sender?.tag)!]
-//            let owner = pet.owner
-//            let appuser = Int(SharedPreferences.get(.id))
-//
-//
-//            if appuser == owner?.id && appuser != selectedUser.id {
-//                // Owner Remove that user
-//                self.popUpDestructive(title: "Remove \(selectedUser.name ?? "this user") from \(pet.name ?? "this pet")", msg: "If you proceed you will remove this user from the pet sharing list.", cancelHandler: nil, proceedHandler: { (remove) in
-//                    self.presenter.removePetUser(with: selectedUser.id, from: self.pet.id)
-//                })
-//            } else if appuser == owner?.id && appuser == selectedUser.id {
-//
-//
-//        }
-//
-//    }
-
 }
 
 extension PetInfromationViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -218,10 +197,8 @@ extension PetInfromationViewController: UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let user = presenter.users[indexPath.row]
-         self.present(user, isOwner: user.isOwner)
-        
+        self.present(user, isOwner: user.isOwner)
     }
-
 }
 
 class ProfileInfoCell: UITableViewCell {

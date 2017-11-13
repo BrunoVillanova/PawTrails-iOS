@@ -268,7 +268,6 @@ class SafeZoneCell: UITableViewCell {
     @IBOutlet weak var iconeImage: UIImageView!
     @IBOutlet weak var safeZoneName: UILabel!
     @IBOutlet weak var switcher: UISwitch!
-    
 }
 
 enum Icons: String {

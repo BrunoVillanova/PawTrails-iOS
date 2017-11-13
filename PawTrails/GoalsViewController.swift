@@ -11,15 +11,18 @@ import Charts
 
 
 
-class GoalsViewController: UIViewController, IndicatorInfoProvider {
 
-    @IBOutlet weak var livelyChart: BarChartView!
-    @IBOutlet weak var wanderingChart: BarChartView!
+class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDelegate {
+
+    @IBOutlet weak var combinedCharts: BarChartView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var barChart: BarChartView!
     @IBOutlet weak var pieChart: PieChartView!
-    
     @IBOutlet weak var datePicker: UIView!
+    @IBOutlet weak var chartTitle: UILabel!
+    
+    
+    
     
     lazy var mydatePicker: AirbnbDatePicker = {
         let btn = AirbnbDatePicker()
@@ -31,12 +34,22 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider {
     let secondColor = UIColor(red: 206/255, green: 19/255, blue: 54/255, alpha: 1)
     let thirdColor = UIColor(red: 255/255, green: 86/255, blue: 96/255, alpha: 1)
     let forthColor = UIColor(red: 149/255, green: 0/255, blue: 17/255, alpha: 1)
-
+    
+    
+    let months = ["6am-12pm", "12pm - 6pm", "6pm - 12am", "12am -6am"]
+    let lively = [20, 4, 6, 3]
+    let chiling = [10, 14, 60, 13]
+    let wandering = [20, 44, 60, 32]
     var pet: Pet!
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    
+    weak var axisFormatDelegate: IAxisValueFormatter?
 
     
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.chartTitle.text = "Grouped Analysis"
+        self.barChart.isHidden = true
         self.datePicker.addSubview(mydatePicker)
 
         self.mydatePicker.bounds = datePicker.bounds
@@ -47,25 +60,49 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider {
         mydatePicker.topAnchor.constraint(equalTo: datePicker.topAnchor).isActive = true
         mydatePicker.bottomAnchor.constraint(equalTo: datePicker.bottomAnchor).isActive = true
 
+        barChart.delegate = self
+        pieChart.delegate = self
+        combinedCharts.delegate = self
         
+        if let currentPet = self.pet, let name = currentPet.name {
+            barChart.noDataText = "No activity data available for \(name)"
+            combinedCharts.noDataText = "No activity data available for \(name)"
+            pieChart.noDataText = "No activity data available for \(name)"
+        } else {
+            barChart.noDataText = "No activity data available"
+            combinedCharts.noDataText = "No activity data available"
+            pieChart.noDataText = "No activity data available"
+        }
         
         pieChartUpdate()
-        barChartUpdate()
-        updateThirdBar()
-        updateSecondBar()
+        combinedChartView(myxaxis: self.months, lively: self.lively, chiling: self.chiling, wandering: self.wandering)
+
 
     }
 
-    func barChartUpdate () {
+    func barChartUpdate(myxaxis: [String], values: [Int], color: UIColor) {
+        
         self.barChart.backgroundColor = UIColor.white
-        let entry1 = BarChartDataEntry(x: 0, y: 2)
-        let entry2 = BarChartDataEntry(x:1, y: 8)
-        let entry3 = BarChartDataEntry(x: 2, y: 4)
-        let entry4 = BarChartDataEntry(x: 3, y: 12)
+        var dataEntries: [BarChartDataEntry] = []
+        for i in 0..<myxaxis.count {
+            let dataEntry = BarChartDataEntry(x: Double(i) , y: Double(values[i]))
+            dataEntries.append(dataEntry)
+        }
+
+        let xaxis = barChart.xAxis
+        xaxis.valueFormatter = axisFormatDelegate
+        xaxis.labelPosition = .bottom
+//        xaxis.centerAxisLabelsEnabled = true
+        xaxis.granularityEnabled = true
+        xaxis.granularity = 1.0
         
+        xaxis.drawAxisLineEnabled = false
+        xaxis.drawGridLinesEnabled = false
+        xaxis.valueFormatter = IndexAxisValueFormatter(values: myxaxis)
+      
         
-        barChart.xAxis.granularityEnabled = true
-        barChart.xAxis.granularity = 1.0
+//        barChart.xAxis.
+//        barChart.xAxis.granularity = 1.0
         
         barChart.barData?.highlightEnabled = false
         barChart.isUserInteractionEnabled = false
@@ -80,8 +117,7 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider {
         barChart.leftAxis.drawLabelsEnabled = false
         barChart.leftAxis.drawAxisLineEnabled = false
         
-        barChart.xAxis.drawAxisLineEnabled = false
-        barChart.xAxis.drawGridLinesEnabled = false
+        
         
         
         let pFormatter = NumberFormatter()
@@ -92,76 +128,133 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider {
         let formatter = DefaultValueFormatter(formatter: pFormatter)
         
 
-        let formater = ChartStringFormatter()
-        self.barChart.xAxis.valueFormatter = formater
-        let dataSet = BarChartDataSet(values: [entry1, entry2, entry3, entry4], label: "Chilling Analysis")
+        let dataSet = BarChartDataSet(values: dataEntries, label: "Chilling Analysis")
+        
         let data = BarChartData(dataSets: [dataSet])
         data.setValueFormatter(formatter)
         
         barChart.data?.highlightEnabled = false
 
         
-        dataSet.colors = [UIColor.primary]
+        dataSet.colors = [color]
         barChart.data = data
         barChart.chartDescription?.text = ""
         //This must stay at end of function
         barChart.notifyDataSetChanged()
         
+        barChart.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
+
     }
     
-    func updateThirdBar () {
-        self.livelyChart.backgroundColor = UIColor.white
-        let entry1 = BarChartDataEntry(x: 0, y: 2)
-        let entry2 = BarChartDataEntry(x:1, y: 8)
-        let entry3 = BarChartDataEntry(x: 2, y: 6)
-        let entry4 = BarChartDataEntry(x: 3, y: 12)
+    
+    func combinedChartView(myxaxis: [String], lively: [Int], chiling: [Int], wandering: [Int]) {
+        // legand
+        
+        self.combinedCharts.chartDescription?.text = ""
+        let legand = combinedCharts.legend
+        legand.enabled = true
+        legand.horizontalAlignment = .right
+        legand.verticalAlignment = .top
+        legand.orientation = .vertical
+        legand.drawInside = true
+        legand.yOffset = 10.0;
+        legand.xOffset = 10.0;
+        legand.yEntrySpace = 0.0;
+        
+        // xaxis
+        let xaxis = combinedCharts.xAxis
+        xaxis.valueFormatter = axisFormatDelegate
+        xaxis.drawGridLinesEnabled = true
+        xaxis.labelPosition = .bottom
+        xaxis.centerAxisLabelsEnabled = true
+        xaxis.valueFormatter = IndexAxisValueFormatter(values: myxaxis)
+        xaxis.granularity = 1
         
         
-        livelyChart.xAxis.granularityEnabled = true
-        livelyChart.xAxis.granularity = 1.0
+        // left xaxis
+        let leftAxisFormatter = NumberFormatter()
+        leftAxisFormatter.numberStyle = .percent
+        leftAxisFormatter.percentSymbol = " hr"
+        leftAxisFormatter.maximumFractionDigits = 1
+        leftAxisFormatter.multiplier = 1.0
         
-        livelyChart.barData?.highlightEnabled = false
-        livelyChart.isUserInteractionEnabled = false
-        
-        
-        
-        livelyChart.rightAxis.drawLabelsEnabled = false
-        livelyChart.rightAxis.drawAxisLineEnabled = false
-        livelyChart.rightAxis.drawGridLinesEnabled = false
-        livelyChart.rightAxis.drawTopYLabelEntryEnabled = false
-        livelyChart.leftAxis.drawGridLinesEnabled = false
-        livelyChart.leftAxis.drawLabelsEnabled = false
-        livelyChart.leftAxis.drawAxisLineEnabled = false
-        
-        livelyChart.xAxis.drawAxisLineEnabled = false
-        livelyChart.xAxis.drawGridLinesEnabled = false
+        let formatter = DefaultValueFormatter(formatter: leftAxisFormatter)
+
+        let yaxis = combinedCharts.leftAxis
+        yaxis.spaceTop = 0.35
+        yaxis.axisMinimum = 0
+        yaxis.drawGridLinesEnabled = false
+        combinedCharts.rightAxis.enabled = false
         
         
-        let pFormatter = NumberFormatter()
-        pFormatter.numberStyle = .percent
-        pFormatter.maximumFractionDigits = 1
-        pFormatter.multiplier = 1.0
-        pFormatter.percentSymbol = " hrs"
-        let formatter = DefaultValueFormatter(formatter: pFormatter)
+        //axisFormatDelegate = self
+
+        
+        // data entry
+        
+        var dataEntries: [BarChartDataEntry] = []
+        var dataEntries1: [BarChartDataEntry] = []
+        var dataEntries2: [BarChartDataEntry] = []
         
         
-        let formater = ChartStringFormatter()
-        self.livelyChart.xAxis.valueFormatter = formater
+
+
+        for i in 0..<myxaxis.count {
+            let dataEntry = BarChartDataEntry(x: Double(i) , y: Double(wandering[i]))
+            dataEntries.append(dataEntry)
+            
+            let dataEntry1 = BarChartDataEntry(x: Double(i) , y: Double(chiling[i]))
+            dataEntries1.append(dataEntry1)
+            let dataEntry2 = BarChartDataEntry(x: Double(i) , y: Double(lively[i]))
+            dataEntries2.append(dataEntry2)
+            
+        }
         
-        let dataSet = BarChartDataSet(values: [entry1, entry2, entry3, entry4], label: "Chilling Analysis")
-        let data = BarChartData(dataSets: [dataSet])
-        data.setValueFormatter(formatter)
+        let chartDataSet = BarChartDataSet(values: dataEntries, label: "Wandering")
         
-        livelyChart.data?.highlightEnabled = false
+        let chartDataSet1 = BarChartDataSet(values: dataEntries1, label: "Chilling")
+        let chartDataSet2 = BarChartDataSet(values: dataEntries2, label: "Lively")
+        
+        let dataSets: [BarChartDataSet] = [chartDataSet,chartDataSet1, chartDataSet2]
+        
+        chartDataSet.colors = [secondColor]
+        chartDataSet1.colors = [forthColor]
+        chartDataSet2.colors = [thirdColor]
+
+        
+        let chartData = BarChartData(dataSets: dataSets)
+        chartData.setValueFormatter(formatter)
         
         
-        dataSet.colors = [forthColor]
-        livelyChart.data = data
-        livelyChart.chartDescription?.text = ""
-        //This must stay at end of function
-        livelyChart.notifyDataSetChanged()
+        let groupSpace = 0.01
+        let barSpace = 0.03
+        let barWidth = 0.3
+        
+        // (0.3 + 0.03) * 4 + 0.01 = 1.00 -> interval per "group"
+        
+        
+        let groupCount = myxaxis.count
+        let startYear = 0
+        
+        chartData.barWidth = barWidth
+        combinedCharts.xAxis.axisMinimum = Double(startYear)
+        let gg = chartData.groupWidth(groupSpace: groupSpace, barSpace: barSpace)
+        combinedCharts.xAxis.axisMaximum = Double(startYear) + gg * Double(groupCount)
+        chartData.groupBars(fromX: Double(startYear), groupSpace: groupSpace, barSpace: barSpace)
+        combinedCharts.notifyDataSetChanged()
+        combinedCharts.data = chartData
+        combinedCharts.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
+
+
+
+
+
+
+
+
         
     }
+
     
     class ChartStringFormatter: NSObject, IAxisValueFormatter {
         
@@ -182,67 +275,6 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider {
             return String(describing: nameValues[Int(value)])
         }
     }
-    
-    
-    
-    
-    func updateSecondBar () {
-        self.wanderingChart.backgroundColor = UIColor.white
-
- 
-        let entry1 = BarChartDataEntry(x: 0, y: 2)
-        let entry2 = BarChartDataEntry(x: 1, y: 2)
-        let entry3 = BarChartDataEntry(x: 2, y: 1)
-        let entry4 = BarChartDataEntry(x: 3, y: 3)
-        
-        
-        wanderingChart.barData?.highlightEnabled = false
-        wanderingChart.isUserInteractionEnabled = false
-
-        wanderingChart.rightAxis.drawLabelsEnabled = false
-        wanderingChart.rightAxis.drawAxisLineEnabled = false
-        wanderingChart.rightAxis.drawGridLinesEnabled = false
-        wanderingChart.rightAxis.drawTopYLabelEntryEnabled = false
-        wanderingChart.leftAxis.drawGridLinesEnabled = false
-        wanderingChart.leftAxis.drawLabelsEnabled = false
-        wanderingChart.leftAxis.drawAxisLineEnabled = false
-        
-        wanderingChart.xAxis.drawAxisLineEnabled = false
-        wanderingChart.xAxis.drawGridLinesEnabled = false
-        
-        wanderingChart.xAxis.granularityEnabled = true
-        wanderingChart.xAxis.granularity = 1.0
-        
-        let pFormatter = NumberFormatter()
-        pFormatter.numberStyle = .percent
-        pFormatter.maximumFractionDigits = 1
-        pFormatter.multiplier = 1.0
-        pFormatter.percentSymbol = " hrs"
-        let formatter = DefaultValueFormatter(formatter: pFormatter)
-        
-        let formatere = ChartStringFormatter()
-        self.wanderingChart.xAxis.valueFormatter = formatere
-        
-        
-        let dataSet = BarChartDataSet(values: [entry1, entry2, entry3, entry4], label: "Lively Analysis")
-        dataSet.colors = [self.thirdColor]
-
-        dataSet.drawValuesEnabled = true
-        let data = BarChartData(dataSets: [dataSet])
-        data.setValueFormatter(formatter)
-        wanderingChart.data = data
-        wanderingChart.chartDescription?.text = ""
-        
-
-        //This must stay at end of function
-        barChart.notifyDataSetChanged()
-        
-    }
-    
-    
-    
-    
-    
     
     func pieChartUpdate() {
         self.pieChart.backgroundColor = UIColor.white
@@ -269,11 +301,59 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider {
         pieChart.chartDescription?.text = ""
         //This must stay at end of function
         pieChart.notifyDataSetChanged()
+        pieChart.animate(xAxisDuration: 1)
     }
     
     
     
+    @IBAction func changeModePressed(_ sender: Any) {
+        showActionSheet()
+    }
+    
+    
+    func showActionSheet() {
+        let actionSheet = UIAlertController(title: "Change charts mode", message: nil, preferredStyle: .actionSheet)
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        let chiling = UIAlertAction(title: "Chilling", style: .default) { action in
+            self.barChartUpdate(myxaxis: self.months, values: self.wandering, color: self.thirdColor)
 
+            self.barChart.isHidden = false
+            self.combinedCharts.isHidden = true
+            self.chartTitle.text = "Chilling Analysis"
+        }
+        
+        let wandering = UIAlertAction(title: "Wandering", style: .default) { action in
+            self.barChartUpdate(myxaxis: self.months, values: self.wandering, color: UIColor.primary)
+
+            self.barChart.isHidden = false
+            self.combinedCharts.isHidden = true
+            self.chartTitle.text = "Wandering Analysis"
+        }
+        
+        let lively = UIAlertAction(title: "Lively", style: .default) { action in
+            self.barChartUpdate(myxaxis: self.months, values: self.wandering, color: self.forthColor)
+
+            self.barChart.isHidden = false
+            self.combinedCharts.isHidden = true
+            self.chartTitle.text = "Lively Analysis"
+
+        }
+        
+        let groupedChart = UIAlertAction(title: "Grouped data", style: .default) { action in
+            self.barChart.isHidden = true
+            self.combinedCharts.isHidden = false
+            self.chartTitle.text = "Grouped Analysis"
+        }
+        
+        actionSheet.addAction(chiling)
+        actionSheet.addAction(wandering)
+        actionSheet.addAction(lively)
+        actionSheet.addAction(cancel)
+        actionSheet.addAction(groupedChart)
+        present(actionSheet, animated: true, completion: nil)
+    }
+    
 
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
