@@ -181,6 +181,7 @@
 		44C0409D1FAB6D9A00CF6E88 /* SharedUsersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C0409B1FAB6D9A00CF6E88 /* SharedUsersTableViewCell.swift */; };
 		44C0409E1FAB6D9A00CF6E88 /* SharedUsersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44C0409C1FAB6D9A00CF6E88 /* SharedUsersTableViewCell.xib */; };
 		44C7F7501E4CD3DA00171170 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F74F1E4CD3DA00171170 /* HomePresenter.swift */; };
+		44CEE4521FBAF1B300EF6DA6 /* AboutPawTrails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CEE4511FBAF1B300EF6DA6 /* AboutPawTrails.swift */; };
 		44D5FE921EE6E9560049232F /* DataManagerPetSafeZonesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D5FE911EE6E9560049232F /* DataManagerPetSafeZonesTests.swift */; };
 		44EAB45F1F614095006A64AE /* JoinTripVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EAB45E1F614095006A64AE /* JoinTripVC.swift */; };
 		44F0BF361EFBF6C7008C26B3 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F0BF351EFBF6C7008C26B3 /* EventManager.swift */; };
@@ -429,6 +430,7 @@
 		44C0409B1FAB6D9A00CF6E88 /* SharedUsersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedUsersTableViewCell.swift; sourceTree = "<group>"; };
 		44C0409C1FAB6D9A00CF6E88 /* SharedUsersTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SharedUsersTableViewCell.xib; sourceTree = "<group>"; };
 		44C7F74F1E4CD3DA00171170 /* HomePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomePresenter.swift; path = Presenter/HomePresenter.swift; sourceTree = "<group>"; };
+		44CEE4511FBAF1B300EF6DA6 /* AboutPawTrails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutPawTrails.swift; sourceTree = "<group>"; };
 		44D5FE911EE6E9560049232F /* DataManagerPetSafeZonesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerPetSafeZonesTests.swift; sourceTree = "<group>"; };
 		44EAB45E1F614095006A64AE /* JoinTripVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinTripVC.swift; sourceTree = "<group>"; };
 		44F0BF351EFBF6C7008C26B3 /* EventManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventManager.swift; path = Model/EventManager.swift; sourceTree = "<group>"; };
@@ -562,6 +564,7 @@
 				443E80741F5D4F21008679FC /* MapViewController.swift */,
 				443E80761F5D53D5008679FC /* PetsCollectionViewCell.swift */,
 				44223B511F97480700D8CA1E /* Recommandation */,
+				44CEE44F1FBAF18400EF6DA6 /* Settings */,
 				441A0D4B1E55A5A500D02CE4 /* Auth */,
 				44251B1F1F0CD5DF0067F401 /* User Profile */,
 				44251B291F0CD5DF0067F401 /* Pet Profile */,
@@ -660,7 +663,6 @@
 		441A0D4B1E55A5A500D02CE4 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				44251B171F0CD5BD0067F401 /* SettingsTableViewController.swift */,
 				44251B181F0CD5BD0067F401 /* EmailVerificationViewController.swift */,
 				44251B191F0CD5BD0067F401 /* InitialViewController.swift */,
 				44251B1A1F0CD5BD0067F401 /* PasswordRecoveryViewController.swift */,
@@ -980,6 +982,15 @@
 				44251AEE1F0CD55F0067F401 /* Reachability.swift */,
 			);
 			name = Utils;
+			sourceTree = "<group>";
+		};
+		44CEE44F1FBAF18400EF6DA6 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				44251B171F0CD5BD0067F401 /* SettingsTableViewController.swift */,
+				44CEE4511FBAF1B300EF6DA6 /* AboutPawTrails.swift */,
+			);
+			name = Settings;
 			sourceTree = "<group>";
 		};
 		91352D1B7E01CC1C0CF51D38 /* Frameworks */ = {
@@ -1476,6 +1487,7 @@
 				446607BE1F95FF4C00833683 /* AirbnbDatePickerFooter.swift in Sources */,
 				442F2D9A1FAC735E0072D2B6 /* PetUserTableViewController.swift in Sources */,
 				443E807A1F5D87EC008679FC /* SelectPetsVC.swift in Sources */,
+				44CEE4521FBAF1B300EF6DA6 /* AboutPawTrails.swift in Sources */,
 				444698851F6BC75C006EE4CD /* SelectPetView.swift in Sources */,
 				441858ED1F98FAA1003710A8 /* BSC4ViewController.swift in Sources */,
 				44251B3F1F0CD5DF0067F401 /* BirthdayViewController.swift in Sources */,

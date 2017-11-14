@@ -98,10 +98,10 @@ class SingleResultViewController: UIViewController {
         
         mapView.delegate = self
         
-        totalDistnceLbl.text = "8.23 km"
+        totalDistnceLbl.text = "8.23 Km"
         totalTimeLbl.text = "00:43:27"
-        speed.text = "6.2 km/h"
-        avargeSpeed.text = "142 bpm"
+        speed.text = "15 km/h"
+        avargeSpeed.text = "5.7 Km/h"
         shareBtn.backgroundColor = UIColor.primary
         shareBtn.layer.cornerRadius = 20
         shareBtn.clipsToBounds = true
