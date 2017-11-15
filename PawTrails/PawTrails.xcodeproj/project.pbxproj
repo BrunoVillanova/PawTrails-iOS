@@ -266,7 +266,7 @@
 		1E2B813BA9CAE948174F2C71 /* Pods_PawTrailsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PawTrailsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		440784481F8B85A1005E9E1B /* SettingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsView.xib; sourceTree = "<group>"; };
 		4407844A1F8B85E8005E9E1B /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		440823C91F8F94900004B90F /* SetUpYourGoalController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SetUpYourGoalController.swift; path = ../../../SetUpYourGoalController.swift; sourceTree = "<group>"; };
+		440823C91F8F94900004B90F /* SetUpYourGoalController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetUpYourGoalController.swift; sourceTree = "<group>"; };
 		441292301FAB254300745ED2 /* TabPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabPageViewController.swift; sourceTree = "<group>"; };
 		441292321FAB25F900745ED2 /* PetInfromationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetInfromationViewController.swift; sourceTree = "<group>"; };
 		441292341FAB260500745ED2 /* GoalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsViewController.swift; sourceTree = "<group>"; };
@@ -539,7 +539,6 @@
 		440067D01F8E5DDB00D8B89E /* PetActivities */ = {
 			isa = PBXGroup;
 			children = (
-				440823C91F8F94900004B90F /* SetUpYourGoalController.swift */,
 			);
 			name = PetActivities;
 			sourceTree = "<group>";
@@ -627,6 +626,7 @@
 				444831C61FBC4429009D55A1 /* UsersViewController.swift */,
 				441292321FAB25F900745ED2 /* PetInfromationViewController.swift */,
 				441292301FAB254300745ED2 /* TabPageViewController.swift */,
+				440823C91F8F94900004B90F /* SetUpYourGoalController.swift */,
 				445F5F361F5EA7900069B513 /* Classes */,
 				443E80781F5D87B1008679FC /* Adventures */,
 				4415FF411E3B822900A81B13 /* PawTrails */,

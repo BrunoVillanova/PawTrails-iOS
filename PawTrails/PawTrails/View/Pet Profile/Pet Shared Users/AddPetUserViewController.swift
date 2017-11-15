@@ -46,6 +46,9 @@ class AddPetUserViewController: UIViewController, UITableViewDataSource, UITable
             profile.tableView.reloadData()
             navigationController?.popToViewController(profile, animated: true)
         }
+        
+        self.alert(title: "", msg: "Your request has been processed", type: .blue, disableTime: 3, handler: nil)
+
     }
     
     func emailFormat() {

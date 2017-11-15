@@ -37,6 +37,22 @@ class AdventuresListViewController: UIViewController, IndicatorInfoProvider  {
 
     }
     
+    
+    @IBAction func setUpGoalBtnPressed(_ sender: Any) {
+        presentGoalsVc()
+    }
+    
+    
+
+    func presentGoalsVc() {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "SetUpYourGoalController") as? SetUpYourGoalController, let pet = self.pet {
+            vc.petUser = pet.owner
+            vc.isOwner = pet.isOwner
+            vc.pet = pet
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "Adventure")
     }
