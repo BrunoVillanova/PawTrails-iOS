@@ -150,6 +150,7 @@
 		4447217D1F03F12A001DCDE1 /* PawTrailsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4447217C1F03F12A001DCDE1 /* PawTrailsUITests.swift */; };
 		44475ADB1F5960B800D41AAA /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44475ADA1F5960B800D41AAA /* SignUpViewController.swift */; };
 		44477CB91F599EFC00083295 /* UiimageViewWithMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44477CB81F599EFC00083295 /* UiimageViewWithMask.swift */; };
+		444831C71FBC4429009D55A1 /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444831C61FBC4429009D55A1 /* UsersViewController.swift */; };
 		4452EEEE1ED58063004E13DC /* APITablesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4452EEED1ED58063004E13DC /* APITablesTests.swift */; };
 		4452EEF01ED5824D004E13DC /* APIPetRegistrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4452EEEF1ED5824D004E13DC /* APIPetRegistrationTests.swift */; };
 		4452EEF21ED59A93004E13DC /* APIPetShareUsersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4452EEF11ED59A93004E13DC /* APIPetShareUsersTests.swift */; };
@@ -395,6 +396,7 @@
 		4447217E1F03F12A001DCDE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		44475ADA1F5960B800D41AAA /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		44477CB81F599EFC00083295 /* UiimageViewWithMask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UiimageViewWithMask.swift; sourceTree = "<group>"; };
+		444831C61FBC4429009D55A1 /* UsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersViewController.swift; sourceTree = "<group>"; };
 		4452EEED1ED58063004E13DC /* APITablesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APITablesTests.swift; sourceTree = "<group>"; };
 		4452EEEF1ED5824D004E13DC /* APIPetRegistrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIPetRegistrationTests.swift; sourceTree = "<group>"; };
 		4452EEF11ED59A93004E13DC /* APIPetShareUsersTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIPetShareUsersTests.swift; sourceTree = "<group>"; };
@@ -622,6 +624,7 @@
 				4446BAE71FB1CA3600809805 /* AdventuresListViewController.swift */,
 				441292361FAB262300745ED2 /* SafeZoneViewController.swift */,
 				441292341FAB260500745ED2 /* GoalsViewController.swift */,
+				444831C61FBC4429009D55A1 /* UsersViewController.swift */,
 				441292321FAB25F900745ED2 /* PetInfromationViewController.swift */,
 				441292301FAB254300745ED2 /* TabPageViewController.swift */,
 				445F5F361F5EA7900069B513 /* Classes */,
@@ -1467,6 +1470,7 @@
 				445F5F421F5EA7900069B513 /* BEMPathManager.m in Sources */,
 				44B179621E4B62690070A18B /* Presenter.swift in Sources */,
 				15226D901F8D18EA007EEFF2 /* SocketIO+RxSwift.swift in Sources */,
+				444831C71FBC4429009D55A1 /* UsersViewController.swift in Sources */,
 				440823CA1F8F94900004B90F /* SetUpYourGoalController.swift in Sources */,
 				44251B7F1F0CD6130067F401 /* CDSafeZone+CoreDataClass.swift in Sources */,
 				44251B6F1F0CD6130067F401 /* NotificationManager.swift in Sources */,

@@ -106,18 +106,14 @@ class PetUserTableViewController: UITableViewController, PetUserView {
     
     // MARK:- PetUserView
     
+  
+    
     func removed() {
         
-        if appUserId == petOwnerId && appUserId != currentUserId {
-            if let profile = navigationController?.viewControllers.first(where: { $0 is PetInfromationViewController}) as? PetInfromationViewController {
-                profile.reloadUsers()
+            if let profile = navigationController?.viewControllers.first(where: { $0 is PetsViewController}) as? PetsViewController {
+                profile.reloadPets()
+                profile.tableView.reloadData()
                 navigationController?.popToViewController(profile, animated: true)
-            }
-        }else if let petList = navigationController?.viewControllers.first(where: { $0 is PetsViewController}) as? PetsViewController {
-            petList.reloadPets()
-            navigationController?.popToViewController(petList, animated: true)
-        }else{
-            navigationController?.popToRootViewController(animated: true)
         }
     }
     

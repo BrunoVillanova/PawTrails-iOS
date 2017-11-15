@@ -162,9 +162,9 @@ extension PetInfromationViewController: UITableViewDelegate, UITableViewDataSour
     
     
     
-    func present(_ user: PetUser, isOwner: Bool) {
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "PetUserTableViewController") as? PetUserTableViewController {
-            vc.petUser = user
+    func present(_ users: [PetUser]) {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "UsersViewController") as? UsersViewController {
+            vc.users = users
             vc.pet = pet
             navigationController?.pushViewController(vc, animated: true)
         }
@@ -196,9 +196,11 @@ extension PetInfromationViewController: UICollectionViewDelegate, UICollectionVi
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let user = presenter.users[indexPath.row]
-        self.present(user, isOwner: user.isOwner)
+        self.present(presenter.users)
     }
+    
+    
+    
 }
 
 class ProfileInfoCell: UITableViewCell {

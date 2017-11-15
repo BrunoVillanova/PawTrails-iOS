@@ -94,7 +94,6 @@ class UserProfileTableViewController: UITableViewController, UserProfileView, UI
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         if segue.destination is EditUserProfileTableViewController {
             (segue.destination as! EditUserProfileTableViewController).user = presenter.user
         }else if segue.destination is SettingsTableViewController {
