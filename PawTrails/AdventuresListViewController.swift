@@ -13,6 +13,11 @@ import XLPagerTabStrip
 class AdventuresListViewController: UIViewController, IndicatorInfoProvider  {
     var pet: Pet!
     
+    @IBOutlet weak var distanceCircle: CircleChart!
+    @IBOutlet weak var timeCircle: CircleChart!
+    @IBOutlet weak var childContainerView: UIView!
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var editBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var topView: UIView!
     
@@ -25,6 +30,17 @@ class AdventuresListViewController: UIViewController, IndicatorInfoProvider  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let playingColors = UIColor(red: 67/255, green: 62/255, blue: 54/255, alpha: 1)
+        let adventureColor = UIColor(red: 108/255, green: 176/255, blue: 255/255, alpha: 1)
+
+        distanceCircle.setChart(at: 0.9, color: adventureColor, text: "Km")
+        timeCircle.setChart(at: 0.5, color: playingColors, text: "min")
+        
+        editBtn.border(color: UIColor.darkGray, width: 1)
+        containerView.border(color: UIColor.darkGray, width: 1)
+        childContainerView.border(color: UIColor.darkGray, width: 1)
+
         
         self.topView.addSubview(mydatePicker)
         self.mydatePicker.bounds = topView.bounds

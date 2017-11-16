@@ -62,38 +62,7 @@ class SingleResultViewController: UIViewController {
         
         
         mapView.add(polyine)
-//        mapView.centerOn(point1)
 
-//        mapView.addAnnotation(point2)
-//        mapView.centerCoordinate = point2.coordinate
-        
-//        mapView.setRegion(MKCoordinateRegionMake(point2.coordinate, MKCoordinateSpanMake(0.7,0.7)), animated: true)
-//
-//        let directionsRequest = MKDirectionsRequest()
-//
-//        let markTaipei = MKPlacemark(coordinate: CLLocationCoordinate2DMake(point1.coordinate.latitude, point1.coordinate.longitude), addressDictionary: nil)
-//
-//        let markChungli = MKPlacemark(coordinate: CLLocationCoordinate2DMake(point2.coordinate.latitude, point2.coordinate.longitude), addressDictionary: nil)
-//
-//        directionsRequest.source = MKMapItem(placemark: markChungli)
-//        directionsRequest.destination = MKMapItem(placemark: markTaipei)
-//
-//        directionsRequest.transportType = MKDirectionsTransportType.automobile
-//
-//        let directions = MKDirections(request: directionsRequest)
-//
-//        directions.calculate(completionHandler: {
-//
-//            response, error in
-//
-//            if error == nil {
-//
-//                self.myRoute = response!.routes[0] as MKRoute
-//
-//                self.mapView.add(self.myRoute.polyline)
-//
-//            }
-//        })
         
         
         mapView.delegate = self

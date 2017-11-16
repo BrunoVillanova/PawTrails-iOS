@@ -134,6 +134,7 @@
 		44251B8A1F0CD6210067F401 /* APIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44251B871F0CD6210067F401 /* APIRepository.swift */; };
 		442531311F5FE6FF0017D21A /* TripScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442531301F5FE6FF0017D21A /* TripScreenViewController.swift */; };
 		442531371F6047290017D21A /* FinishAdventureVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442531361F6047290017D21A /* FinishAdventureVC.swift */; };
+		442C32081FBDA33700B3A8BF /* PieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442C32071FBDA33700B3A8BF /* PieChart.swift */; };
 		442F2D9A1FAC735E0072D2B6 /* PetUserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442F2D991FAC735E0072D2B6 /* PetUserTableViewController.swift */; };
 		443060721FB21625006FCC53 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443060711FB21625006FCC53 /* BaseCell.swift */; };
 		44340F3D1EB22B4900EB4312 /* APIPetProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44340F3C1EB22B4900EB4312 /* APIPetProfileTests.swift */; };
@@ -379,6 +380,7 @@
 		44251B871F0CD6210067F401 /* APIRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIRepository.swift; path = Model/Repositories/APIRepository.swift; sourceTree = "<group>"; };
 		442531301F5FE6FF0017D21A /* TripScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripScreenViewController.swift; sourceTree = "<group>"; };
 		442531361F6047290017D21A /* FinishAdventureVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinishAdventureVC.swift; sourceTree = "<group>"; };
+		442C32071FBDA33700B3A8BF /* PieChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChart.swift; sourceTree = "<group>"; };
 		442F2D991FAC735E0072D2B6 /* PetUserTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetUserTableViewController.swift; sourceTree = "<group>"; };
 		443060711FB21625006FCC53 /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
 		44340F3C1EB22B4900EB4312 /* APIPetProfileTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIPetProfileTests.swift; sourceTree = "<group>"; };
@@ -622,6 +624,7 @@
 				44C0409C1FAB6D9A00CF6E88 /* SharedUsersTableViewCell.xib */,
 				4446BAE71FB1CA3600809805 /* AdventuresListViewController.swift */,
 				441292361FAB262300745ED2 /* SafeZoneViewController.swift */,
+				442C32071FBDA33700B3A8BF /* PieChart.swift */,
 				441292341FAB260500745ED2 /* GoalsViewController.swift */,
 				444831C61FBC4429009D55A1 /* UsersViewController.swift */,
 				441292321FAB25F900745ED2 /* PetInfromationViewController.swift */,
@@ -1500,6 +1503,7 @@
 				445F5F3F1F5EA7900069B513 /* BEMAnimationManager.m in Sources */,
 				44251B781F0CD6130067F401 /* CDCountryCode+CoreDataProperties.swift in Sources */,
 				44251B001F0CD5740067F401 /* InitialPresenter.swift in Sources */,
+				442C32081FBDA33700B3A8BF /* PieChart.swift in Sources */,
 				44251AFD1F0CD5740067F401 /* ChangePasswordPresenter.swift in Sources */,
 				44251B7A1F0CD6130067F401 /* CDPet+CoreDataProperties.swift in Sources */,
 				446607BC1F95FF4C00833683 /* AirbnbDatePickerCell.swift in Sources */,
