@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import RxSwift
 
 class FinishAdventureVC: UIViewController, BEMCheckBoxDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var finishAdventureBtn: UIButton!
     @IBOutlet weak var resumeAdventureBtn: UIButton!
+    let disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,7 +25,7 @@ class FinishAdventureVC: UIViewController, BEMCheckBoxDelegate {
         resumeAdventureBtn.tintColor = UIColor.primary
         resumeAdventureBtn.border(color: UIColor.primary, width: 1.0)
         
-}
+    }
     
     
     
@@ -32,9 +35,16 @@ class FinishAdventureVC: UIViewController, BEMCheckBoxDelegate {
     }
     
 
+    
     @IBAction func finishAdventureBtnPressed(_ sender: Any) {
         self.popUpDestructive(title: "", msg: "Are you sure you want to finish the trip", cancelHandler: nil) { (UIAlertAction) in
-            print("do something here")
+            DataManager.instance.finishAdventure().subscribe(onNext: { (stoppedTrips) in
+                
+                for trip in stoppedTrips {
+                    print("TripID \(trip.id) stopped!")
+                }
+                self.navigationController?.dismiss(animated: true, completion: nil)
+            }).addDisposableTo(self.disposeBag)
         }
     }
     

@@ -19,7 +19,7 @@ class SelectedPetView {
     
     
     var trips = [Trip]()
-    var tripList = [TripList]()
+    var tripList = [Trip]()
     
     func attatchView(_ view: SelectPetView) {
         self.view = view

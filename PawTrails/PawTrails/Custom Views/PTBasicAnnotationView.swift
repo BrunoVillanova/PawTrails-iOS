@@ -14,6 +14,8 @@ class PTBasicAnnotationView: MKAnnotationView {
     static let identifier = "PTBasicAnnotationView"
     var borderImageView: UIImageView?
     var pictureImageView: UIImageView?
+    var calloutView: PTPetCalloutView?
+    let defaultAnimationDuration = 0.3
     
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
@@ -25,6 +27,7 @@ class PTBasicAnnotationView: MKAnnotationView {
     }
     
     override func prepareForReuse() {
+        calloutView?.isHidden = true
         pictureImageView?.image = nil
     }
     
@@ -83,6 +86,38 @@ class PTBasicAnnotationView: MKAnnotationView {
     func configureWithAnnotation(_ annotation: PTAnnotation) {
         if let image = annotation.petDeviceData?.pet.image {
             pictureImageView?.image = UIImage(data: image)
+        }
+    }
+    
+    func showCallout() {
+        
+        if calloutView == nil {
+            let views = Bundle.main.loadNibNamed("PTPetCalloutView", owner: nil, options: nil)
+            
+            if let theView = views?[0] as! PTPetCalloutView? {
+                calloutView = theView
+                calloutView?.alpha = 0
+                self.addSubview(calloutView!)
+            }
+        }
+
+        let petAnnotation = self.annotation as! PTAnnotation
+        calloutView!.configureWithAnnotation(petAnnotation)
+        calloutView!.center = CGPoint(x: (self.bounds.size.width / 2) + 46, y: -calloutView!.bounds.size.height*0.42)
+        calloutView?.isHidden = false
+        
+        UIView.animate(withDuration: defaultAnimationDuration) {
+            self.calloutView?.alpha = 1
+        }
+    }
+    
+    func hideCallout() {
+        UIView.animate(withDuration: defaultAnimationDuration, animations: {
+            self.calloutView?.alpha = 0
+        }) { (finished) in
+            if finished {
+                self.calloutView?.isHidden = true
+            }
         }
     }
 }

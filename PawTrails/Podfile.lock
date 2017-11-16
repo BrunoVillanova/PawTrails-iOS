@@ -21,6 +21,8 @@ PODS:
   - FBSDKLoginKit (4.26.0):
     - FBSDKCoreKit
   - IQKeyboardManagerSwift (5.0.0)
+  - RxCocoa (3.6.1):
+    - RxSwift (~> 3.6)
   - RxSwift (3.6.1)
   - SkyFloatingLabelTextField (3.2.0)
   - Socket.IO-Client-Swift (11.1.3):
@@ -36,6 +38,7 @@ DEPENDENCIES:
   - FacebookCore
   - FacebookLogin
   - IQKeyboardManagerSwift (= 5.0.0)
+  - RxCocoa
   - RxSwift
   - SkyFloatingLabelTextField (~> 3.0)
   - Socket.IO-Client-Swift (~> 11.1.3)
@@ -52,6 +55,7 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: c8b8582311ec11b145451d8b9717dc6cc2ae5a76
   FBSDKLoginKit: f3f03b94c21eb834af243c0a881d48641f47ca60
   IQKeyboardManagerSwift: 3f340202ebe1a7076279b9b9b3c817243ddb3aab
+  RxCocoa: 84a08739ab186248c7f31ce4ee92d6f8a947d690
   RxSwift: f9de85ea20cd2f7716ee5409fc13523dc638e4e4
   SkyFloatingLabelTextField: 4e2d2f7160af660ed1da6bb9d0027b5c474b4b79
   Socket.IO-Client-Swift: b8e59ddc16bc3609ca2f49a4b50253f095d535c8
@@ -60,6 +64,6 @@ SPEC CHECKSUMS:
   XLPagerTabStrip: d1ab378af0923320ec0b5eab11d7b2f803d31261
   YNDropDownMenu: 4f4b463ecbfd492dc886abaf18d73dead0e32133
 
-PODFILE CHECKSUM: 1b6b740a9f9f206adea64c544bd800819c390448
+PODFILE CHECKSUM: 222a77d8e877472eb9f9781927193b714dd51fca
 
 COCOAPODS: 1.3.1

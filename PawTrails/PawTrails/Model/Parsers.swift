@@ -159,6 +159,11 @@ extension Pet {
         users = nil
     }
     
+    init(_ id: Int) {
+        self.init()
+        self.id = id
+    }
+    
     init(_ json: JSON) {
         id = json["id"].intValue
         deviceCode = json["device_code"].stringValue
@@ -269,11 +274,30 @@ extension PetDeviceData {
             id = deviceData.id
         }
         
-        if let pets = CoreDataManager.instance.retrieve(.pet, with: NSPredicate("id", .equal, json["petId"]!)) {
-            pet = Pet(pets.first as! CDPet)
+        if let petID = json["petId"] as? Int {
+            if let storedPet = CoreDataManager.instance.retrieve(.pet, with: NSPredicate("id", .equal, petID))?.first as! CDPet? {
+                pet = Pet(storedPet)
+            } else {
+                pet = Pet(petID)
+            }
         } else {
             pet = Pet()
         }
+    }
+    
+    static func fromJson(_ json: Any?) -> [PetDeviceData]? {
+        var petDeviceDataList : [PetDeviceData]?
+        if let jsonValues = json as! [Any]!, jsonValues.count > 0 {
+            petDeviceDataList = [PetDeviceData]()
+            for petDeviceDataObject in jsonValues {
+                if let petDeviceDataJson = petDeviceDataObject as? [String:Any] {
+                    let petDeviceData = PetDeviceData(petDeviceDataJson)
+                    petDeviceDataList!.append(petDeviceData)
+                }
+            }
+        }
+        
+        return petDeviceDataList
     }
     
     init(_ cdPetDeviceData: CDPetDeviceData) {
@@ -292,33 +316,36 @@ extension DeviceData {
     init() {
         id = 0
         crs = 0.0
-        coordinates = Point()
+        point = Point()
         speed = 0.0
         battery = 0
         internetSignal = false
         satelliteSignal = false
+        deviceTime = 0
         deviceDate = Date()
     }
     
     init(_ json: [String:Any]) {
         id = json["idpos"] != nil ? json["idpos"] as! Int : 0
         crs = json["crs"] as! Float
-        coordinates = Point(json["lat"] as! Double, json["lon"] as! Double)
+        point = Point(json["lat"] as! Double, json["lon"] as! Double)
         speed = json["speed"] as! Float
-        battery = json["battery"] as! Int
+        battery = json["battery"] as! Int16
         internetSignal = json["netSignal"] as! Bool
         satelliteSignal = json["satSignal"] as! Bool
+        deviceTime = json["deviceTime"] as! Int64
         deviceDate = Date.init(timeIntervalSince1970: TimeInterval(json["deviceTime"] as! Int))
     }
     
     init(_ cdPetDeviceData: CDPetDeviceData) {
         id = Int(cdPetDeviceData.id)
         crs = cdPetDeviceData.crs
-        coordinates = Point(cdPetDeviceData.latitude, cdPetDeviceData.longitude)
+        point = Point(cdPetDeviceData.latitude, cdPetDeviceData.longitude)
         speed = cdPetDeviceData.speed
-        battery = Int(cdPetDeviceData.battery)
+        battery = Int16(cdPetDeviceData.battery)
         internetSignal = cdPetDeviceData.netSignal
         satelliteSignal = cdPetDeviceData.satSignal
+        deviceTime = cdPetDeviceData.deviceTime
         deviceDate = Date.init(timeIntervalSince1970: TimeInterval(cdPetDeviceData.deviceTime))
     }
 }
@@ -379,17 +406,93 @@ extension TripList {
 
 
 extension Trip {
-    init(_ json: JSON) {
-        id = json["id"].intValue
-        name = json["name"].string
-        petId = json["petId"].intValue
-        status = json["status"].intValue
-        timeStart = json["timeStart"].intValue
-        timeStamp = json["timeStamp"].intValue
+    init(_ values: [String:Any]) {
+        // Required
+        id = values["id"] as! Int64
+        petId = values["petId"] as! Int64
+        name = values["name"] as! String?
+        status = values["status"] as! Int16
+        startTimestamp = values["timeStart"] as! Int64?
+        // Optional
+        stopTimestamp = values["timeStop"] as? Int64
+        timestamp = values["timeStamp"] as? Int64
+        totalTime = values["totalTime"] as? Int64
+        totalDistance = values["totalDistance"] as? Int64
+        averageSpeed = values["averageSpeed"] as? Float
+        maxSpeed = values["maxSpeed"] as? Float
+        steps = values["steps"] as? Int64
+        points = [TripPoint]()
+        
+        if let pointsValues = values["rawData"] as! [[Any]]? {
+            for pointValue in pointsValues {
+                if let pointArray = pointValue as [Any]! {
+                    points!.append(TripPoint(pointArray))
+                }
+            }
+        }
+        
+        if let petID = values["petId"] as? Int {
+            if let storedPet = CoreDataManager.instance.retrieve(.pet, with: NSPredicate("id", .equal, petID))?.first as! CDPet? {
+                pet = Pet(storedPet)
+            } else {
+                pet = Pet(petID)
+            }
+        } else {
+            pet = Pet()
+        }
     }
+    
+    init(_ json: JSON) {
+        // Required
+        id = json["id"].int64Value
+        petId = json["petId"].int64Value
+        name = json["name"].stringValue
+        status = json["status"].int16Value
+        startTimestamp = json["timeStart"].int64Value
+        // Optional
+        stopTimestamp = json["timeStop"].int64
+        timestamp = json["timeStamp"].int64
+        totalTime = json["totalTime"].int64
+        totalDistance = json["totalDistance"].int64
+        averageSpeed = json["averageSpeed"].float
+        maxSpeed = json["maxSpeed"].float
+        steps = json["steps"].int64
+        points = [TripPoint]()
+        pet = Pet()
 
+        if let pointsValues = json["rawData"].arrayObject as! [[Any]]! {
+            for pointValue in pointsValues {
+                if let pointArray = pointValue as [Any]! {
+                    points!.append(TripPoint(pointArray))
+                }
+            }
+        }
+        
+        if let petID = json["petId"].int, let storedPet = CoreDataManager.instance.retrieve(.pet, with: NSPredicate("id", .equal, petID))?.first as! CDPet? {
+            pet = Pet(storedPet)
+        }
+    }
 }
 
+
+extension TripPoint {
+    init(_ json: [Any]) {
+        // Required
+        timestamp = 0
+        point = Point()
+        
+        if let jsonArray = json as [Any]!  {
+            timestamp = Int64(jsonArray[0] as! Int)
+            let latitudeValue = jsonArray[1]
+            let longitudeValue = jsonArray[2]
+            
+            if !(latitudeValue is NSNull) && !(longitudeValue is NSNull) {
+                point = Point(latitudeValue as! Double, longitudeValue as! Double)
+            }
+            
+        }
+    }
+}
 
 extension SafeZone {
     

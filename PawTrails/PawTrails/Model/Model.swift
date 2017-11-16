@@ -84,19 +84,28 @@ struct Pet {
 
 
 
-
-
-
-struct Trip {
-    var id: Int
-    var name: String?
-    var petId: Int
-    var status: Int
-    var timeStart: Int
-    var timeStamp : Int
+struct TripPoint {
+    var timestamp: Int64
+    var point: Point?
 }
 
 
+struct Trip {
+    var id: Int64
+    var pet: Pet
+    var petId: Int64
+    var name: String?
+    var status: Int16
+    var startTimestamp: Int64?
+    var stopTimestamp: Int64?
+    var timestamp: Int64?
+    var totalTime: Int64?
+    var totalDistance: Int64?
+    var averageSpeed: Float?
+    var maxSpeed: Float?
+    var steps: Int64?
+    var points: [TripPoint]?
+}
 
 
 struct TripList {
@@ -170,12 +179,13 @@ extension PetUser: Equatable {
 struct DeviceData {
     var id: Int
     var crs: Float
-    var coordinates: Point
+    var point: Point
     var speed: Float
-    var battery: Int
+    var battery: Int16
     var internetSignal: Bool
     var satelliteSignal: Bool
     var deviceDate: Date
+    var deviceTime: Int64
 }
 
 struct PetDeviceData {

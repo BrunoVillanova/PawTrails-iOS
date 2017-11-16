@@ -177,22 +177,6 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
     
     override func viewWillAppear(_ animated: Bool) {
         MyPet.pet = pet
-
-        
-        presenter.startPetsGPSUpdates(for: pet.id) { (data) in
-
-            print("I GOT THE DATA \(data)")
-        }
-        presenter.startPetsGeocodeUpdates(for: pet.id, { (type,name) in
-            Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Released Geocode \(type) - \(name)")
-            if type == .pet {
-                self.load(locationAndTime: name)
-            }else if type == .safezone {
-                self.presenter.getPet(with: self.pet.id)
-            }
-        })
-        
-
     }
     
 //
@@ -201,13 +185,6 @@ class PetProfileCollectionViewController: UICollectionViewController, UICollecti
     
     func loadPetwithmypet(pet: Pet) {
         self.pet = pet
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        presenter.stopPetGPSUpdates(of: pet.id)
-        presenter.stopPetsGeocodeUpdates()
-        
-        
     }
     
     

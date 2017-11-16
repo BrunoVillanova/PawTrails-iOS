@@ -57,7 +57,7 @@ class PTBatteryView: UIView {
         batteryFillWidthProportion = Float((self.frame.size.width-5) / 100.0)
     }
     
-    func setBatteryLevel(_ level: Int) {
+    func setBatteryLevel(_ level: Int16) {
         
         let newWidth = CGFloat(batteryFillWidthProportion * Float(level))
         let newBatteryFrame = CGRect(x: batteryFillView.frame.origin.x, y: batteryFillView.frame.origin.y, width: newWidth, height: batteryFillView.frame.size.height)
@@ -69,7 +69,7 @@ class PTBatteryView: UIView {
         }
     }
     
-    fileprivate func colorForBatteryLevel(_ level: Int) -> UIColor {
+    fileprivate func colorForBatteryLevel(_ level: Int16) -> UIColor {
         var theColor = batteryColor
         
         if level <= 20 {

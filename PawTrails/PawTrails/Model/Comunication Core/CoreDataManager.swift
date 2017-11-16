@@ -14,6 +14,7 @@ enum Entity: String {
     case breed = "CDBreed"
     case countryCode = "CDCountryCode"
     case pet = "CDPet"
+    case petDeviceData = "CDPetDeviceData"
     case petUser = "CDPetUser"
     case phone = "CDPhone"
     case safeZone = "CDSafeZone"

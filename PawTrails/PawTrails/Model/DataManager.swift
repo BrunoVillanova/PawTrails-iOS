@@ -7,9 +7,9 @@
 //
 
 import Foundation
+import RxSwift
 
-
-class DataManager {
+class DataManager: NSObject {
     
     static let instance = DataManager()
     
@@ -27,6 +27,17 @@ class DataManager {
     typealias safezoneCallback = ((_ error:DataManagerError?, _ safezone:SafeZone?) -> Void)
     typealias startTripCallBack = ((_ error:DataManagerError?, _ safezone:[Trip]?) -> Void)
     
+    let disposeBag = DisposeBag()
+    var authenticatedUser: Variable<Authentication> = Variable(Authentication())
+    var petsDevicesData: Variable<[PetDeviceData]> = Variable([PetDeviceData]())
+    var runningTrips: Variable<[Trip]> = Variable([Trip]())
+    var allTheTrips: Variable<[Trip]> = Variable([Trip]())
+    
+    override init() {
+        super.init()
+        self.retrieveRunningTrips()
+    }
+    
     //MARK:- Authentication
     
     /// Checks if user is properly authenticated
@@ -34,6 +45,11 @@ class DataManager {
     /// - Returns: bool value
     func isAuthenticated() -> Bool {
         return SharedPreferences.has(.id) && SharedPreferences.has(.token)
+    }
+    
+    func userAuthenticated() -> Observable<Authentication> {
+        //        return Observable.from(optional: petGpsUpdates)
+        return authenticatedUser.asObservable()
     }
     
     /// Check is the user is logged by social media
@@ -86,7 +102,6 @@ class DataManager {
     ///   - token: social media token
     ///   - callback: *nil* or *error*
     func login(socialMedia: SocialMedia, _ token: String, callback: @escaping errorCallback){
-        
         APIRepository.instance.login(socialMedia: socialMedia, token) { (error, authentication) in
             
             if let error = error {
@@ -111,6 +126,10 @@ class DataManager {
             callback(DataManagerError.init(responseError: ResponseError.NotFound))
             return
         }
+        
+        // Set authenticated user reactive var
+        self.authenticatedUser.value = authentication
+        
         if let socialNetwork = authentication.socialNetwork?.rawValue {
             SharedPreferences.set(.socialnetwork, with: socialNetwork)
         }
@@ -140,7 +159,10 @@ class DataManager {
                     errors.append(error)
                 }
             }else if let pets = pets {
-                SocketIOManager.instance.startGPSUpdates(for: pets.map({ $0.id}))
+                print("\(pets)")
+//                SocketIOManager.instance.startGPSUpdates(for: pets.map({ $0.id})).subscribe(onNext: { (data) in
+//                    print("aqui")
+//                }).addDisposableTo(self.disposeBag)
             }
             tasks.leave()
         })
@@ -271,10 +293,6 @@ class DataManager {
     }
     
     
-    
-    
-    
-    
     /// Upload user image to API and update it on the local storage
     ///
     /// - Parameters:
@@ -336,7 +354,7 @@ class DataManager {
         
         CDRepository.instance.upsert(pet) { (error, pet) in
             if error == nil, let pet = pet, let callback = callback {
-                SocketIOManager.instance.startGPSUpdates(for: [pet.id])
+//                SocketIOManager.instance.startGPSUpdates(for: [pet.id])
                 callback(nil, pet)
             }else if let error = error, let callback = callback{
                 callback(DataManagerError(DBError: error), nil)
@@ -368,7 +386,7 @@ class DataManager {
     func removePetDB(by petId: Int, callback: @escaping errorCallback) {
         
         CDRepository.instance.removePet(by: petId) { (success) in
-            SocketIOManager.instance.stopGPSUpdates(for: petId)
+//            SocketIOManager.instance.stopGPSUpdates(for: petId)
             callback(success ? nil : DataManagerError(DBError: DatabaseError(type: .Unknown, entity: Entity.pet, action: .remove, error: nil)))
         }
     }
@@ -521,6 +539,8 @@ class DataManager {
         
     }
     
+    
+
     /// Update pet to API and local storage
     ///
     /// - Parameters:
@@ -568,7 +588,7 @@ class DataManager {
     
     /// Check Local Breeds and download them if need
     ///
-    /// - Parameter callback: error list, it might be empty if no errors
+    /// -  callback: error list, it might be empty if no errors
     func checkBreeds(callback: @escaping ([DataManagerError])->Void) {
         
         var errors = [DataManagerError]()
@@ -963,9 +983,7 @@ class DataManager {
     ///
     /// - Parameter callback: country codes or nil
     func getCountryCodes(callback: @escaping ([CountryCode]?)->Void) {
-        
         CDRepository.instance.getAllCountryCodes(callback: callback)
-
     }
     
     /// Get Current country code from system
@@ -976,21 +994,65 @@ class DataManager {
     }
 
     
+
     
     
     // MARK -- Start Trip and recieve data from api.
-    
     func startMyAdventure(_ petIdss: [Int], callback: @escaping startTripCallBack) {
         APIRepository.instance.startTrips(petIdss) { (error, data) in
             if error == nil {
+                self.retrieveRunningTrips()
                 callback(nil, data)
-                
             } else if let error = error{
                 callback(DataManagerError(APIError: error), nil)
             }
         }
+    }
+    
+    func startTrips(_ petIDs: [Int]) -> Observable<[Trip]> {
         
-}
+        let apiStartTrips = Observable<[Trip]>.create({ observer in
+            APIRepository.instance.startTrips(petIDs) { (error, data) in
+                if error != nil {
+                    observer.onError(error!)
+                } else {
+                    observer.onNext(data!)
+                    observer.onCompleted()
+                }
+            }
+            return Disposables.create()
+        })
+        
+        return apiStartTrips
+        
+//        return apiStartTrips.flatMap({ (trips) -> Observable<[Trip]> in
+//            return self.allTrips()
+//        })
+    }
+    
+    func finishAdventure() -> Observable<[Trip]> {
+        
+        return self.getActivePetTrips()
+            .filter({ (trips) -> Bool in
+                return trips.count > 0
+            })
+            .flatMap { (trips) -> Observable<[Trip]> in
+                let tripIDs = trips.map({Int($0.id)})
+                
+                return Observable.create({ observer in
+                    APIRepository.instance.finishTrip(tripIDs) { (error, data) in
+                        if error != nil {
+                            observer.onError(error!)
+                        } else {
+                            self.retrieveRunningTrips()
+                            observer.onNext(data!)
+                            observer.onCompleted()
+                        }
+                    }
+                    return Disposables.create()
+                })
+        }
+    }
 
 }
 

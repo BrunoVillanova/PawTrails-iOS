@@ -149,23 +149,24 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let pet = getPet(at: indexPath)
         cell.subtitleLabel.text = "Getting address..."
 
-        SocketIOManager.instance.gpsUpdates()?.subscribe(onNext: { (data) in
-            if let json = data.first as? [Any] {
-                for petDeviceDataObject in json {
-                    if let petDeviceDataJson = petDeviceDataObject as? [String:Any] {
-                        let petdata = PetDeviceData(petDeviceDataJson)
-                        if petdata.pet.id == pet.id {
-                            cell.batterlyLevl.setBatteryLevel(petdata.deviceData.battery)
-                            petdata.deviceData.coordinates.getFullFormatedAddress(handler: { (address) in
-                                cell.subtitleLabel.text = address
-                            })
-                        }
-                    }
-                }
-            } else{
-                Reporter.debugPrint(file: "\(#file)", function: "\(#function)", data)
-            }
-        }){}.disposed(by: disposeBag)
+        // TODO: replace this method
+//        SocketIOManager.instance.gpsUpdates().subscribe(onNext: { (data) in
+//            if let json = data.first as? [Any] {
+//                for petDeviceDataObject in json {
+//                    if let petDeviceDataJson = petDeviceDataObject as? [String:Any] {
+//                        let petdata = PetDeviceData(petDeviceDataJson)
+//                        if petdata.pet.id == pet.id {
+//                            cell.batterlyLevl.setBatteryLevel(petdata.deviceData.battery)
+//                            petdata.deviceData.coordinates.getFullFormatedAddress(handler: { (address) in
+//                                cell.subtitleLabel.text = address
+//                            })
+//                        }
+//                    }
+//                }
+//            } else{
+//                Reporter.debugPrint(file: "\(#file)", function: "\(#function)", data)
+//            }
+//        }){}.disposed(by: disposeBag)
         
         
         

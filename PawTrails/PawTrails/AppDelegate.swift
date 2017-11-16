@@ -13,7 +13,6 @@ import Crashlytics
 import SocketIO
 import SwiftyJSON
 import IQKeyboardManagerSwift
-import RxSwift
 
 let isDebug = true
 
@@ -28,9 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     var window: UIWindow?
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    private let disposeBag = DisposeBag()
-    
-    var runningTripArray = [TripList]()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -50,11 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         var out = true
         
         if DataManager.instance.isAuthenticated() {
-            getRunningandPausedTrips()
-            SocketIOManager.instance.connect()
-            
             if let socialMedia = DataManager.instance.isSocialMedia() {
-                
                 if let sm = SocialMedia(rawValue: socialMedia) {
                     switch sm {
                     case .facebook:
@@ -65,32 +57,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                         break
                     }
                 }
-                
             }
-            
             loadHomeScreen()
-            
         } else {
             loadAuthenticationScreen()
         }
         
         return out
-    }
-    
-    private func getStatus(_ data: [Any]) -> SocketIOStatus {
-        if let json = data.first as? [String:Any] {
-            if let code = json["errors"] as? Int {
-                return SocketIOStatus(rawValue: code) ?? SocketIOStatus.unknown
-            }
-            if let code = json["status"] as? Int {
-                return SocketIOStatus(rawValue: code) ?? SocketIOStatus.unknown
-            }
-        }
-        if let element = ((data as NSArray)[0] as? NSArray)?[0] as? String {
-            return element == "unauthorized" ? SocketIOStatus.unauthorized : SocketIOStatus.unknown
-        }
-        Reporter.debugPrint(file: "\(#file)", function: "\(#function)", data, data.first as? [String:Any] ?? "", data as? [String] ?? "")
-        return SocketIOStatus.unknown
     }
     
     func configureGoogleLogin() {
@@ -108,26 +81,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     func loadAuthenticationScreen() {
             let initial = storyboard.instantiateViewController(withIdentifier: "InitialViewController") as? InitialViewController
             window?.rootViewController = initial
-        
-    }
-    
-    
-    
-    
-    func getRunningandPausedTrips() {
-        APIRepository.instance.getTripList([0]) { (error, trips) in
-            if let error = error {
-                print(error.localizedDescription)
-            } else {
-                if let trips = trips {
-                    for trip in trips {
-                        self.runningTripArray.append(trip)
-                        print("Here is your truos \(self.runningTripArray)")
-                        
-                    }
-                }
-            }
-        }
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
@@ -137,27 +90,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
-
         SocketIOManager.instance.disconnect()
     }
 //
     func applicationDidBecomeActive(_ application: UIApplication) {
         
-        if DataManager.instance.isAuthenticated() {
-            getRunningandPausedTrips()
-            SocketIOManager.instance.connect()
-            DataManager.instance.loadPets { (error, pets) in
-                if error == nil, let pets = pets {
-                    SocketIOManager.instance.startGPSUpdates(for: pets.map({ $0.id}))
-                    NotificationManager.instance.postPetListUpdates(with: pets)
-                }
-            }
-
-        }
-        
-        NotificationManager.instance.getEventsUpdates { (event) in
-            EventManager.instance.handle(event: event, for: self.visibleViewController)
-        }
+//        if DataManager.instance.isAuthenticated() {
+//            getRunningandPausedTrips()
+//            SocketIOManager.instance.connect()
+//            DataManager.instance.loadPets { (error, pets) in
+//                if error == nil, let pets = pets {
+////                    SocketIOManager.instance.startGPSUpdates(for: pets.map({ $0.id}))
+//                    NotificationManager.instance.postPetListUpdates(with: pets)
+//                }
+//            }
+//
+//        }
+//
+//        NotificationManager.instance.getEventsUpdates { (event) in
+//            EventManager.instance.handle(event: event, for: self.visibleViewController)
+//        }
     }
     
     var visibleViewController: UIViewController? {

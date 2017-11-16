@@ -188,31 +188,31 @@ class PetPresenter {
     
     //MARK:- Geocode
     
-    func startPetsGeocodeUpdates(for id: Int, _ callback: @escaping ((GeocodeType, String)->())){
-        NotificationManager.instance.getPetGeoCodeUpdates { (code) in
-            
-            if (code.type == .pet && code.id == id) || code.type == .safezone {
-                if code.type == .safezone, let name = code.placemark?.name {
-                    self.set(address: name, for: code.id) { (msg) in
-                        if let msg = msg {
-                            self.view?.errorMessage(msg)
-                        }else{
-                            callback(code.type, code.name)
-                        }
-                    }
-                    
-                }else if code.type == .pet, let data = SocketIOManager.instance.getGPSData(for: code.id){
-                    callback(code.type, data.locationAndTime)
-                }
-            }
-            
-        }
-    }
-    
-    func stopPetsGeocodeUpdates(){
-        NotificationManager.instance.removePetGeoCodeUpdates()
-    }
-    
+//    func startPetsGeocodeUpdates(for id: Int, _ callback: @escaping ((GeocodeType, String)->())){
+//        NotificationManager.instance.getPetGeoCodeUpdates { (code) in
+//            
+//            if (code.type == .pet && code.id == id) || code.type == .safezone {
+//                if code.type == .safezone, let name = code.placemark?.name {
+//                    self.set(address: name, for: code.id) { (msg) in
+//                        if let msg = msg {
+//                            self.view?.errorMessage(msg)
+//                        }else{
+//                            callback(code.type, code.name)
+//                        }
+//                    }
+//                    
+//                }else if code.type == .pet, let data = SocketIOManager.instance.getGPSData(for: code.id){
+//                    callback(code.type, data.locationAndTime)
+//                }
+//            }
+//            
+//        }
+//    }
+//    
+//    func stopPetsGeocodeUpdates(){
+//        NotificationManager.instance.removePetGeoCodeUpdates()
+//    }
+//    
     
     func removePetUser(with id: Int, from petId: Int) {
         DataManager.instance.removeSharedUser(by: id, from: petId) { (error) in

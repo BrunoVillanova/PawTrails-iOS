@@ -8,11 +8,17 @@
 
 import UIKit
 
+protocol PTPetCalloutViewDelegate {
+    func didTapOnCallout(annotation: PTAnnotation)
+}
+
 class PTPetCalloutView: UIView {
 
     var petNameLabel : UILabel?
     var addressLabel : UILabel?
     var batteryView : PTBatteryView?
+    var annotation : PTAnnotation?
+    var delegate: PTPetCalloutViewDelegate?
     
     override func awakeFromNib() {
         petNameLabel = self.viewWithTag(100) as? UILabel
@@ -20,24 +26,35 @@ class PTPetCalloutView: UIView {
         batteryView = self.viewWithTag(200) as? PTBatteryView
     }
 
+    @objc fileprivate func tappedOnView(sender: UITapGestureRecognizer) {
+        if let theAnnotation = self.annotation as PTAnnotation! {
+            delegate?.didTapOnCallout(annotation: theAnnotation)
+        }
+    }
+    
     public func configureWithAnnotation(_ annotation: PTAnnotation) {
         
+        self.annotation = annotation
+        
+        petNameLabel?.text = nil
+        addressLabel?.text = nil
+        
         if let petName = annotation.petDeviceData?.pet.name {
-            petNameLabel?.text = petName
+            petNameLabel?.text = petName.uppercased()
         }
         
-        self.addressLabel?.text = ""
-        
         if let deviceData = annotation.petDeviceData?.deviceData {
-            
             batteryView?.setBatteryLevel(deviceData.battery)
             
             self.addressLabel?.text = "Getting address..."
-            deviceData.coordinates.getFullFormatedAddress(handler: {
+            deviceData.point.getFullFormatedAddress(handler: {
                 (address) in
-                self.addressLabel?.text = address
+                self.addressLabel?.text = address?.uppercased()
                 self.addressLabel?.sizeToFit()
             })
         }
+        
+        let gesture = UITapGestureRecognizer(target: self, action: #selector (self.tappedOnView(sender:)))
+        self.addGestureRecognizer(gesture)
     }
 }

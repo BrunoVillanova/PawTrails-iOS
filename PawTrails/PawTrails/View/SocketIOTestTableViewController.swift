@@ -29,7 +29,7 @@ class SocketIOTestTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         
 //        SocketIOManager.instance.startGettingGpsUpdates(for: [96])
-        SocketIOManager.instance.startGPSUpdates(for: [96])
+//        SocketIOManager.instance.startGPSUpdates(for: [96])
 
     }
     

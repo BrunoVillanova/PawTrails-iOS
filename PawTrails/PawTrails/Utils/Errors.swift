@@ -65,6 +65,7 @@ enum ErrorCode: Int {
     case OTPexpired = 27
     case AccountNotVerified = 29
     case SocialNetworkError = 32
+    case NoGpsFromPet = 31
     
     case PathFormat = 33
     case MissingUserId = 34

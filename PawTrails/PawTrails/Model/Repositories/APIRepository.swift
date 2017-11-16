@@ -27,7 +27,7 @@ class APIRepository {
     typealias APIRepPetSafeZoneCallback = (APIManagerError?, SafeZone?) -> Void
     typealias APIRepPetSafeZonesCallback = (APIManagerError?, [SafeZone]?) -> Void
     typealias ApiTrip = (APIManagerError?, [Trip]?) -> Void
-    typealias ApiTripListCallBack = (APIManagerError?, [TripList]?) -> Void
+//    typealias ApiTripListCallBack = (APIManagerError?, [Trip]?) -> Void
 
     
     
@@ -541,14 +541,14 @@ class APIRepository {
         }
     }
 
-    func getTripList(_ status: [Int], callback: @escaping ApiTripListCallBack) {
+    func getTripList(_ status: [Int], callback: @escaping ApiTrip) {
         
         let dataa = ["status":status]
         APIManager.instance.perform(call: .getTripList, with: dataa) { (error, json) in
             if error == nil, let tripListJson = json?["trips"].array {
-                var tripList = [TripList]()
+                var tripList = [Trip]()
                 for trip in tripListJson {
-                    tripList.append(TripList(trip))
+                    tripList.append(Trip(trip))
                 }
                  callback(nil, tripList)
             } else if let error = error {
@@ -563,20 +563,20 @@ class APIRepository {
     // Finish Trips
     // callBack: returns nil or data
 //    
-    func finishTrip(_ tripIds: Int, timeStamp: Int, callback: @escaping ApiTripListCallBack) {
-        let trips = ["tripId":tripIds, "timeStamp": timeStamp]
-        APIManager.instance.perform(call: .finishTrip, withKey: "trips", with: trips) { (error, json) in
+    func finishTrip(_ tripIDs: [Int], callback: @escaping ApiTrip) {
+        let data: [String: Any] = ["trips": tripIDs, "timeStamp": Int(Date().timeIntervalSince1970)]
+        APIManager.instance.perform(call: .finishTrip, with: data) { (error, json) in
             if error == nil, let tripListJson = json?["trips"].array {
-                var tripList = [TripList]()
+                var tripList = [Trip]()
                 for trip in tripListJson {
-                    tripList.append(TripList(trip))
+                    tripList.append(Trip(trip))
                 }
                 callback(nil, tripList)
             } else if let error = error {
                 callback(error, nil)
             }
         }
-        }
+    }
 
     
     // Pause Trips
@@ -586,8 +586,6 @@ class APIRepository {
             callback(error)
         }
     }
-    
-
     
     
     // Resume trips

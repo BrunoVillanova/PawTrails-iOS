@@ -8,19 +8,37 @@
 
 import UIKit
 import MapKit
-
+import RxSwift
+import RxCocoa
 
 class TripScreenViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var mapView: PTMapView!
     @IBOutlet weak var pageControl: UIPageControl!
 
     let locationManager = CLLocationManager()
     var petArray = [Dictionary<String,String>]()
     
-    var runningTripArray = [TripList]()
+    var runningTripArray = [Trip]()
     var tripIds = [Int]()
+    
+    var scrollViewPageIndex :Int {
+        set {
+            let contentX = collectionView.frame.size.width * CGFloat(newValue)
+            DispatchQueue.main.async {
+                UIView.animate(withDuration: 0.2, animations: { [weak self] _ in
+                    self?.collectionView.contentOffset = CGPoint.init(x: contentX, y: 0)
+                })
+            }
+        }
+        get {
+            return Int(collectionView.contentOffset.x / collectionView.frame.size.width)
+        }
+    }
+    var selectedPageIndex = Variable(Int())
+    
+    final let bag = DisposeBag()
     
     // Variables to hold the width and hights of the collectionview.
     var myCollectionViewHeight: CGFloat = 0.0 {
@@ -38,7 +56,7 @@ class TripScreenViewController: UIViewController {
             }
         }
     }
-    
+     let disposeBag = DisposeBag()
     //MARK: -
     //MARK: View Lifecycle
     override func viewDidLoad() {
@@ -48,39 +66,54 @@ class TripScreenViewController: UIViewController {
         collectionView.dataSource = self
         pageControl.hidesForSinglePage = true
         
-        // Access user location
-        if CLLocationManager.locationServicesEnabled() {
-//            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.startUpdatingLocation()
-        }
+//        // Access user location
+//        if CLLocationManager.locationServicesEnabled() {
+////            locationManager.delegate = self
+//            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+//            locationManager.startUpdatingLocation()
+//        }
         
-        mapView.showsUserLocation = true
+        mapView.tripMode = true
+        
+        DataManager.instance.allTrips().subscribe(onNext: { (trips) in
+            self.runningTripArray = trips;
+            self.collectionView.reloadData()
+            self.pageControl.numberOfPages = self.runningTripArray.count
+        }).addDisposableTo(disposeBag)
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
-        if tripIds.count == 1 {
-            self.pageControl.isHidden = true
-        } else {
-            self.pageControl.isHidden = false
-        }
         tabBarController?.tabBar.isHidden = true
         self.navigationItem.setHidesBackButton(true, animated: true)
+    }
+    
+    private func setupSubViews() {
+        selectedPageIndex.asObservable().bind(to: pageControl.rx.currentPage).addDisposableTo(bag)
+ 
+        collectionView.rx.contentOffset.bind { [weak self] (point) in
+            guard let _ = self?.collectionView.frame.size.width else {
+                return
+            }
         
+            if Int(point.x.truncatingRemainder(dividingBy: (self?.collectionView.frame.width)!)) != 0 {
+                return
+            }
+            
+            self?.selectedPageIndex.value = (self?.scrollViewPageIndex)!
+            
+        }.addDisposableTo(bag)
     }
     
     override func viewDidLayoutSubviews() {
-        
-        pageControl.hidesForSinglePage = true
-        
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
-            
+
             collectionView.isPagingEnabled = true
             collectionView.showsHorizontalScrollIndicator = false
         }
-        
+
         myCollectionViewHeight = collectionView.frame.size.height
         myCollectionViewWidith = collectionView.frame.size.width
     }
@@ -101,46 +134,24 @@ class TripScreenViewController: UIViewController {
             locationManager.requestWhenInUseAuthorization()
         }
     }
-
-    func getRunningandPausedTrips() {
-        APIRepository.instance.getTripList([0]) { (error, trips) in
-            if let error = error {
-                print(error.localizedDescription)
-            } else {
-                if let trips = trips {
-                    for trip in trips {
-                        self.runningTripArray.append(trip)
-                        print("Here is your truos \(self.runningTripArray)")
-                        for tripp in self.runningTripArray {
-                            self.tripIds.append(tripp.id)
-                        }
-                    }
-                }
-            }
-        }
-    }
     
     //MARK: -
     //MARK: IBActions
     @IBAction func focousOnUserBtnPressed(_ sender: Any) {
         self.mapView.setVisibleMapFor([self.mapView.userLocation.coordinate])
-        
     }
     
     
     @IBAction func AddPetsToTripBtnPressed(_ sender: Any) {
         performSegue(withIdentifier: "join", sender: self)
-        
-        
     }
     
     @IBAction func pauseTripBtnPressed(_ sender: Any) {
-        
+//        let vc = self.storyboard?.instantiateViewController(withIdentifier: <#T##String#>)
     }
     
     @IBAction func StopTripBtnPressed(_ sender: Any) {
         performSegue(withIdentifier: "finish", sender: self)
-        
     }
     
     @IBAction func BackBtnPressed(_ sender: Any) {
@@ -153,33 +164,23 @@ class TripScreenViewController: UIViewController {
             appDelegate.window?.rootViewController = testController
         }
     }
+    
+    @IBAction func pageControlValueChanged(_ sender: UIPageControl) {
+        scrollViewPageIndex = sender.currentPage
+    }
 }
 
 extension TripScreenViewController: UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return tripIds.count
+        return self.runningTripArray.count
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CsustomCell
-
-        cell.maskImage.maskImage = UIImage(named: "userprofilemask-1x-png_360")
-        cell.totalDistanceImageVIew.image = UIImage(named: "TotalDistanceLabel-1x-png")
-        cell.totalDistancesubLabel.text = "total distance"
-        cell.totalTimeImageVIew.image = UIImage(named: "TotalTimeLabel-1x-png")
-        cell.totalTimeSubLabel.text = "total time"
-        cell.currentSpeedImageView.image = UIImage(named: "CurrentSpeedLabel-1x-png")
-        cell.currentSpeedsubLabel.text = "current speed"
-        cell.avarageSpeedImageView.image = UIImage(named: "AvgSpeedLabel-1x-png")
-        cell.avarageSpeedSubLabel.text = "avarge speed"
         
-        cell.petName.text = "My Pet"
-        cell.totalDistance.text = "8.32 KM"
-        cell.userProfileImg.image = UIImage(named: "")
-        cell.avargeSpeed.text = "142 bpm"
-        cell.currentSpeed.text = "6.2 km/h"
-        cell.totalTime.text = "00:43:27"
+        let trip = self.runningTripArray[indexPath.row]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! TripDetailsCell
+        cell.configureWithTrip(trip)
         
         return cell
     }
@@ -195,13 +196,13 @@ extension TripScreenViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: myCollectionViewWidith, height: myCollectionViewHeight)
     }
-    
+
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout
         collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -209,7 +210,7 @@ extension TripScreenViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-class CsustomCell: UICollectionViewCell {
+class TripDetailsCell: UICollectionViewCell {
     
     @IBOutlet weak var maskImage: UiimageViewWithMask!
     @IBOutlet weak var totalDistanceImageVIew: UIImageView!
@@ -230,6 +231,27 @@ class CsustomCell: UICollectionViewCell {
     @IBOutlet weak var avargeSpeed: UILabel!
     @IBOutlet weak var currentSpeed: UILabel!
     @IBOutlet weak var totalTime: UILabel!
+    
+    override func awakeFromNib() {
+        self.maskImage.maskImage = UIImage(named: "userprofilemask-1x-png_360")
+        self.totalDistanceImageVIew.image = UIImage(named: "TotalDistanceLabel-1x-png")
+        self.totalDistancesubLabel.text = "total distance"
+        self.totalTimeImageVIew.image = UIImage(named: "TotalTimeLabel-1x-png")
+        self.totalTimeSubLabel.text = "total time"
+        self.currentSpeedImageView.image = UIImage(named: "CurrentSpeedLabel-1x-png")
+        self.currentSpeedsubLabel.text = "current speed"
+        self.avarageSpeedImageView.image = UIImage(named: "AvgSpeedLabel-1x-png")
+        self.avarageSpeedSubLabel.text = "avarge speed"
+    }
+    
+    func configureWithTrip(_ trip: Trip) {
+        self.petName.text = trip.pet.name
+        self.totalDistance.text = "8.32 KM"
+        self.userProfileImg.image = UIImage(named: "")
+        self.avargeSpeed.text = "142 bpm"
+        self.currentSpeed.text = "6.2 km/h"
+        self.totalTime.text = "00:43:27"
+    }
 }
 
 extension UIViewController {

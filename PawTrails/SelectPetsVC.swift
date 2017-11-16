@@ -7,23 +7,24 @@
 //
 
 import UIKit
+import RxSwift
 
-class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, PetsView, SelectPetView {
+class SelectPetsVC: UIViewController, PetsView, SelectPetView {
+    
     @IBOutlet weak var petsCollectionView: UICollectionView!
     @IBOutlet weak var startAdventureBtn: UIButton!
 
     var refreshControl = UIRefreshControl()
     
-    
-    
     fileprivate let presenter = PetsPresenter()
     fileprivate let presenter2 = SelectedPetView()
     
     var runningTripArray = [TripList]()
-
-
     
     fileprivate var pets = [Int:IndexPath]()
+    fileprivate let disposeBag = DisposeBag()
+    fileprivate var petIDsOnTrip = [Int64]()
+    fileprivate var petIDsToStartTrip : Variable<Set<Int>> = Variable(Set<Int>())
     
     
     var tripListArray = [Int]()
@@ -36,16 +37,11 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
         startAdventureBtn.fullyroundedCorner()
         startAdventureBtn.backgroundColor = UIColor.primary
 
-
-        
-        
         refreshControl.backgroundColor = UIColor.secondary
         refreshControl.tintColor = UIColor.primary
         refreshControl.addTarget(self, action: #selector(reloadPetsAPI), for: .valueChanged)
         petsCollectionView.addSubview(refreshControl)
-        
-        
-        UIApplication.shared.statusBarStyle = .lightContent
+
         presenter.attachView(self)
         presenter2.attatchView(self)
         
@@ -53,31 +49,20 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
         petsCollectionView.dataSource = self
         petsCollectionView.allowsMultipleSelection = true
         
-        getRunningandPausedTrips()
-
-}
-    
-    
-    
-    func getRunningandPausedTrips() {
-        runningTripArray.removeAll()
-        tripListArray.removeAll()
-        APIRepository.instance.getTripList([0,1]) { (error, trips) in
-            if let error = error {
-                print(error.localizedDescription)
-            } else {
-                if let trips = trips {
-                    for trip in trips {
-                        self.runningTripArray.append(trip)
-                        
-                    }
-                    print("Print \(self.tripListArray)")
-                }
-            }
-        }
+        initialize()
     }
     
-    
+    fileprivate func initialize() {
+        DataManager.instance.getActivePetTrips().subscribe(onNext: { (data) in
+            self.petIDsOnTrip = data.map({$0.petId})
+            self.petsCollectionView.reloadData()
+        }).addDisposableTo(disposeBag)
+        
+        petIDsToStartTrip.asObservable().subscribe(onNext: { (data) in
+            self.startAdventureBtn.isEnabled = data.count > 0
+            self.petsCollectionView.reloadData()
+        }).addDisposableTo(disposeBag)
+    }
     
     func clearOnAppearance() {
         for indexPath in petsCollectionView.indexPathsForSelectedItems ?? [] {
@@ -98,20 +83,6 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
         clearOnAppearance()
         self.tabBarController?.tabBar.isHidden = true
         reloadPets()
-        presenter.startPetsListUpdates()
-        presenter.startPetsGPSUpdates { (id) in
-//            self.updateItem(by: id)
-        }
-        presenter.startPetsGeocodeUpdates { (geocode) in
-            self.updateItem(by: geocode.id)
-        }
-
-        if var selectedItem = petsCollectionView.indexPathsForSelectedItems {
-            selectedItem.removeAll()
-        } else {
-            print("No index were found")
-        }
-
     }
 
     
@@ -124,11 +95,8 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
     
     override func viewWillDisappear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
-//        presenter.stopPetListUpdates()
-//        presenter.stopPetGPSUpdates()
-//        presenter.stopPetsGeocodeUpdates()
-//
     }
+    
     override func viewDidDisappear(_ animated: Bool) {
         presenter2.tripList.removeAll()
         
@@ -143,8 +111,6 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
     
     func reloadPets(){
         presenter.getPets()
-        
-        
     }
     
     
@@ -164,9 +130,7 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
         petsCollectionView.reloadData()
     }
     
-    
     func getPet(at indexPath: IndexPath) -> Pet {
-        
         if presenter.pets.count > 0 {
             return presenter.pets[indexPath.item]
         }else if presenter.ownedPets.count > 0 {
@@ -174,11 +138,64 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
         }else{
             return presenter.sharedPets[indexPath.row]
         }
-        
+    }
+    
+    @IBAction func selectAllPressed(_ sender: Any) {
+        petIDsToStartTrip.value = Set(presenter.pets.map({$0.id}).filter { !petIDsOnTrip.contains(Int64($0)) })
+        petsCollectionView.reloadData()
+    }
+    
+    @IBAction func StartAdventureBtnPressed(_ sender: Any) {
+        showLoadingView()
+        DataManager.instance.startTrips(petIDsToStartTrip.value.map({$0})).subscribe(onNext: { (startedTrips) in
+            print("Started Trips! \(startedTrips)")
+            self.hideLoadingView()
+            self.performSegue(withIdentifier: "Segue", sender: self)
+        }, onError: { (error) in
+            self.hideLoadingView()
+            self.petIDsToStartTrip.value.removeAll()
+            let error = error as! APIManagerError
+            print("Error \(error.errorCode!)!")
+      
+        }).addDisposableTo(disposeBag)
     }
 
+    @IBAction func closebtnPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
     
-    // Mohamed: - UicollectionViewDataSource
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "Segue"  {
+            dismiss(animated: true, completion: nil)
+            if let navigationController = segue.destination as? UINavigationController {
+                _ = navigationController.topViewController as? TripScreenViewController
+            }
+        }
+    }
+}
+
+
+extension SelectPetsVC: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let pet = presenter.pets[indexPath.row]
+        let cell = collectionView.cellForItem(at: indexPath)
+        cell!.isSelected = false
+        
+        if petIDsToStartTrip.value.contains(pet.id) {
+            petIDsToStartTrip.value.remove(pet.id)
+        } else {
+            petIDsToStartTrip.value.insert(pet.id)
+        }
+        
+        collectionView.reloadItems(at: [indexPath])
+    }
+}
+
+
+extension SelectPetsVC: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -188,136 +205,18 @@ class SelectPetsVC: UIViewController, UICollectionViewDelegate, UICollectionView
         return presenter.pets.count
     }
     
-
-
     // CollectionVIew Method
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let pet = presenter.pets[indexPath.row]
+        let petIsOnTrip = petIDsOnTrip.contains(Int64(pet.id))
+        let checked = petIsOnTrip || petIDsToStartTrip.value.contains(pet.id)
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! SelectPetsCell
-
-          let pet = getPet(at: indexPath)
-           pets[pet.id] = indexPath
-
-            if tripListArray.contains(indexPath.item) {
-                cell.backgroundColor = UIColor.brown
- 
-        } else {
-            cell.petTitle.text = pet.name
-            if let imageData = pet.image as Data? {
-                cell.petImage.image = UIImage(data: imageData)
-            }else{
-                cell.petImage.image = nil
-            }
-            cell.petImage.circle()
-                           cell.checkMarkView.isEnabled = false
-            cell.checkMarkView.isUserInteractionEnabled = false
-
-        }
-
+        cell.configureWithPet(pet)
+        cell.checkMarkView.setOn(checked, animated: true)
+        cell.isUserInteractionEnabled = !petIsOnTrip
+        
         return cell
+    }
 }
-
-
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
-        let cell = collectionView.cellForItem(at: indexPath) as! SelectPetsCell
-        cell.checkMarkView.setOn(true, animated: true)
-
-        let selectedPet = indexPath
-        let pet = getPet(at: selectedPet).id
-        for item in runningTripArray {
-            tripListArray.append(item.petId)
-        }
-        if tripListArray.contains(pet) {
-            
-            cell.isUserInteractionEnabled = false
-            cell.layer.borderWidth = 2.0
-            cell.layer.borderColor = UIColor.gray.cgColor
-            cell.isSelected = false
-            
-            if var selected = petsCollectionView.indexPathsForSelectedItems {
-                if indexPath.item < selected.count {
-                    selected.remove(at: indexPath.item)
-                }
-            }
-            
-            cell.checkMarkView.setOn(false, animated: true)
-            self.startAdventureBtn.isEnabled = true
-
-            self.alert(title: "Error", msg: "You cannot select this pet because it's already on trip", type: .red, disableTime: 4, handler: nil)
-            
-        } else {
-            self.startAdventureBtn.isEnabled = true
-        }
-        
-}
-    
-    
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        let cell = petsCollectionView.cellForItem(at: indexPath) as! SelectPetsCell
-        cell.checkMarkView.setOn(false, animated: true)
-        
-    }
-
-    @IBAction func selectAllPressed(_ sender: Any) {
-        for i in 0..<petsCollectionView.numberOfSections {
-            for j in 0..<petsCollectionView.numberOfItems(inSection: i) {
-                petsCollectionView.selectItem(at: IndexPath(row: j, section: i), animated: false, scrollPosition: .bottom)
-            }
-        }
-
-        for i in 0..<petsCollectionView.numberOfSections {
-            for j in 0..<petsCollectionView.numberOfItems(inSection: i) {
-                let index = NSIndexPath(item: j, section: i)
-                let cell = petsCollectionView.cellForItem(at: index as IndexPath) as! SelectPetsCell
-                cell.checkMarkView.setOn(true, animated: true)
-            }
-        }
-    }
-    
- 
-    @IBAction func StartAdventureBtnPressed(_ sender: Any) {
-                var petIds = [Int]()
-                petIds.removeAll()
-                if let indexpath = petsCollectionView.indexPathsForSelectedItems {
-                    for index in indexpath {
-                       let pets =  getPet(at: index)
-                        petIds.append(pets.id)
-                        for trip in runningTripArray {
-                           petIds = petIds.filter() {$0 != trip.petId}
-                        }
-                        
-                        if petIds.count > 0 {
-                            self.presenter2.startTrip(with: petIds)
-                            performSegue(withIdentifier: "Segue", sender: self)
-                            
-                        } else {
-                            alert(title: "", msg: "Selected pets are already on trip, please try selecting different pet", type: .red, disableTime: 4, handler: nil)
-                    }
-                }
-        
-                }else {
-                    alert(title: "", msg: "Internal error, Please try again later", type: .red, disableTime: 4, handler: nil)
-
-        }
-    }
-
-    
-    
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "Segue"  {
-            if let navigationController = segue.destination as? UINavigationController {
-                _ = navigationController.topViewController as? TripScreenViewController
-            }
-        }
-    }
-
-    
-    
-    
-    @IBAction func closebtnPressed(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
-
-}
-

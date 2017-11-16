@@ -85,6 +85,7 @@ extension UIViewController {
     
     func alertwithGeature(title:String, msg:String, type: notificationType = .red, disableTime: Int = 3, geatureReconginzer: UITapGestureRecognizer, handler: (()->())? = nil){
         self.hideLoadingView(animated:false)
+        self.hideNotification()
         self.showNotificationWithGesture(title: msg, type: type, geaturseRecognizer: geatureReconginzer)
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(disableTime)) {
             self.hideNotification()
@@ -136,7 +137,9 @@ extension UIViewController {
     
     func hideNotification() {
 
-        if let notificationViews = UIApplication.shared.keyWindow?.subviews.filter({ $0.tag == subviewId.notification.rawValue }) {
+//        if let notificationViews = UIApplication.shared.keyWindow?.subviews.filter({ $0.tag == subviewId.notification.rawValue }) {
+        if let notificationViews = UIApplication.shared.keyWindow?.rootViewController?.view.subviews.filter({ $0.tag == subviewId.notification.rawValue }) {
+
             for notificationView in notificationViews {
                 DispatchQueue.main.async {
                     notificationView.removeFromSuperview()
@@ -165,10 +168,9 @@ extension UIViewController {
         
         notificationView.addSubview(label)
         DispatchQueue.main.async {
-            UIApplication.shared.keyWindow?.addSubview(notificationView)
+//            UIApplication.shared.keyWindow?.addSubview(notificationView)
+            UIApplication.shared.keyWindow?.rootViewController?.view.addSubview(notificationView)
         }
-        
-        
     }
     
     
@@ -196,10 +198,9 @@ extension UIViewController {
         notificationView.addGestureRecognizer(geaturseRecognizer)
 
         DispatchQueue.main.async {
-            UIApplication.shared.keyWindow?.addSubview(notificationView)
+//            UIApplication.shared.keyWindow?.addSubview(notificationView)
+            UIApplication.shared.keyWindow?.rootViewController?.view.addSubview(notificationView)
         }
-
-        
     }
     
     
@@ -233,12 +234,9 @@ extension UIViewController {
     }
     
     func hideLoadingView(animated: Bool = true) {
-        
-        
-        
         if let loadingView = UIApplication.shared.keyWindow?.subviews.first(where: { $0.tag == subviewId.loading.rawValue }) as? UIVisualEffectView {
             
-            if let activity = loadingView.subviews.first(where: { $0.tag == subviewId.activity.rawValue }) as? UIActivityIndicatorView {
+            if let activity = loadingView.contentView.subviews.first(where: { $0.tag == subviewId.activity.rawValue }) as? UIActivityIndicatorView {
                 DispatchQueue.main.async {
                     if animated {
                     UIView.animate(withDuration: 0.4, animations: {

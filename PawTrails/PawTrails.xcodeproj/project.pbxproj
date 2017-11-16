@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		15226D901F8D18EA007EEFF2 /* SocketIO+RxSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15226D8F1F8D18EA007EEFF2 /* SocketIO+RxSwift.swift */; };
+		152A8F701FB5E0CB00C54DD8 /* DataManager+RxSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152A8F6F1FB5E0CB00C54DD8 /* DataManager+RxSwift.swift */; };
 		157401A41F9E268200A854C5 /* PTBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157401911F9E268200A854C5 /* PTBubbleView.swift */; };
 		157401A51F9E268200A854C5 /* Battery@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 157401931F9E268200A854C5 /* Battery@2x.png */; };
 		157401A61F9E268200A854C5 /* BatteryLow@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 157401941F9E268200A854C5 /* BatteryLow@1x.png */; };
@@ -24,6 +25,7 @@
 		157401B11F9E268200A854C5 /* PTBasicAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157401A11F9E268200A854C5 /* PTBasicAnnotationView.swift */; };
 		157401B21F9E268200A854C5 /* PTBatteryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157401A21F9E268200A854C5 /* PTBatteryView.swift */; };
 		157401B31F9E268200A854C5 /* PTPetCalloutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 157401A31F9E268200A854C5 /* PTPetCalloutView.xib */; };
+		159646A11FB1D334009DC172 /* PTMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159646A01FB1D334009DC172 /* PTMapView.swift */; };
 		440067C91F8E485800D8B89E /* PieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440067C81F8E485800D8B89E /* PieChart.swift */; };
 		440067D51F8E5E6600D8B89E /* PetActivitiesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440067D31F8E5E6600D8B89E /* PetActivitiesCell.swift */; };
 		440067D61F8E5E6600D8B89E /* PetActivitiesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 440067D41F8E5E6600D8B89E /* PetActivitiesCell.xib */; };
@@ -219,6 +221,7 @@
 
 /* Begin PBXFileReference section */
 		15226D8F1F8D18EA007EEFF2 /* SocketIO+RxSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SocketIO+RxSwift.swift"; path = "Extensions/SocketIO+RxSwift.swift"; sourceTree = "<group>"; };
+		152A8F6F1FB5E0CB00C54DD8 /* DataManager+RxSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataManager+RxSwift.swift"; sourceTree = "<group>"; };
 		157401911F9E268200A854C5 /* PTBubbleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTBubbleView.swift; sourceTree = "<group>"; };
 		157401931F9E268200A854C5 /* Battery@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Battery@2x.png"; sourceTree = "<group>"; };
 		157401941F9E268200A854C5 /* BatteryLow@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BatteryLow@1x.png"; sourceTree = "<group>"; };
@@ -235,6 +238,7 @@
 		157401A11F9E268200A854C5 /* PTBasicAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTBasicAnnotationView.swift; sourceTree = "<group>"; };
 		157401A21F9E268200A854C5 /* PTBatteryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTBatteryView.swift; sourceTree = "<group>"; };
 		157401A31F9E268200A854C5 /* PTPetCalloutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PTPetCalloutView.xib; sourceTree = "<group>"; };
+		159646A01FB1D334009DC172 /* PTMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTMapView.swift; sourceTree = "<group>"; };
 		1E2B813BA9CAE948174F2C71 /* Pods_PawTrailsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PawTrailsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		440067C81F8E485800D8B89E /* PieChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PieChart.swift; path = ../PieChart.swift; sourceTree = "<group>"; };
 		440067D31F8E5E6600D8B89E /* PetActivitiesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetActivitiesCell.swift; sourceTree = "<group>"; };
@@ -479,6 +483,7 @@
 				157401A01F9E268200A854C5 /* PawTrailsStyleKit.swift */,
 				157401A11F9E268200A854C5 /* PTBasicAnnotationView.swift */,
 				157401A31F9E268200A854C5 /* PTPetCalloutView.xib */,
+				159646A01FB1D334009DC172 /* PTMapView.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -587,6 +592,7 @@
 				44F0BF351EFBF6C7008C26B3 /* EventManager.swift */,
 				44973D541F06811B00B8CC8C /* Communication Core */,
 				441D9BB01F01021200D64482 /* Repositories */,
+				152A8F6F1FB5E0CB00C54DD8 /* DataManager+RxSwift.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -606,6 +612,7 @@
 		4415FF361E3B822900A81B13 = {
 			isa = PBXGroup;
 			children = (
+				4415FF411E3B822900A81B13 /* PawTrails */,
 				442F2D991FAC735E0072D2B6 /* PetUserTableViewController.swift */,
 				44C0409B1FAB6D9A00CF6E88 /* SharedUsersTableViewCell.swift */,
 				44C0409C1FAB6D9A00CF6E88 /* SharedUsersTableViewCell.xib */,
@@ -615,7 +622,6 @@
 				441292301FAB254300745ED2 /* TabPageViewController.swift */,
 				445F5F361F5EA7900069B513 /* Classes */,
 				443E80781F5D87B1008679FC /* Adventures */,
-				4415FF411E3B822900A81B13 /* PawTrails */,
 				4414AE691EA0DD5B004A5134 /* PawTrailsTests */,
 				4447217B1F03F12A001DCDE1 /* PawTrailsUITests */,
 				4415FF401E3B822900A81B13 /* Products */,
@@ -1083,19 +1089,20 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = AttitudeTech;
 				TargetAttributes = {
 					4414AE671EA0DD5B004A5134 = {
 						CreatedOnToolsVersion = 8.3;
 						DevelopmentTeam = 7E2855LEH4;
+						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 4415FF3E1E3B822900A81B13;
 					};
 					4415FF3E1E3B822900A81B13 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 7E2855LEH4;
-						LastSwiftMigration = 0820;
+						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -1109,6 +1116,7 @@
 					444721791F03F12A001DCDE1 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = DJBJW6R236;
+						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 4415FF3E1E3B822900A81B13;
 					};
@@ -1290,6 +1298,7 @@
 				"${BUILT_PRODUCTS_DIR}/FacebookCore/FacebookCore.framework",
 				"${BUILT_PRODUCTS_DIR}/FacebookLogin/FacebookLogin.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework",
 				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
@@ -1306,6 +1315,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookLogin.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkyFloatingLabelTextField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketIO.framework",
@@ -1468,6 +1478,7 @@
 				443E807A1F5D87EC008679FC /* SelectPetsVC.swift in Sources */,
 				444698851F6BC75C006EE4CD /* SelectPetView.swift in Sources */,
 				441858ED1F98FAA1003710A8 /* BSC4ViewController.swift in Sources */,
+				159646A11FB1D334009DC172 /* PTMapView.swift in Sources */,
 				44251B3F1F0CD5DF0067F401 /* BirthdayViewController.swift in Sources */,
 				449751EE1F9DE7E7008C317C /* PetInfromationCell.swift in Sources */,
 				44251B801F0CD6130067F401 /* CDSafeZone+CoreDataProperties.swift in Sources */,
@@ -1486,6 +1497,7 @@
 				4407844B1F8B85E8005E9E1B /* SettingsView.swift in Sources */,
 				44251B0E1F0CD5870067F401 /* PetBreedPresenter.swift in Sources */,
 				44251B501F0CD5DF0067F401 /* PetWeightTableViewController.swift in Sources */,
+				152A8F701FB5E0CB00C54DD8 /* DataManager+RxSwift.swift in Sources */,
 				44251AF21F0CD55F0067F401 /* Errors.swift in Sources */,
 				44690B6A1F62891C00719911 /* PetProfileCollectionViewCell.swift in Sources */,
 				44251B4F1F0CD5DF0067F401 /* PetTypeTableViewController.swift in Sources */,
@@ -1638,7 +1650,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -1646,7 +1660,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1688,7 +1706,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -1696,7 +1716,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;

@@ -18,6 +18,8 @@ class CDRepository {
     typealias CDRepUserCallback = (DatabaseError?, User?) -> Void
     typealias CDRepPetCallback = (DatabaseError?, Pet?) -> Void
     typealias CDRepPetsCallback = (DatabaseError?, [Pet]?) -> Void
+    typealias CDRepPetDeviceDataCallback = (DatabaseError?, PetDeviceData?) -> Void
+    typealias CDRepPetsDeviceDataCallback = (DatabaseError?, [PetDeviceData]?) -> Void
     typealias CDRepPetUserCallback = (DatabaseError?, PetUser?) -> Void
     typealias CDRepPetUsersCallback = (DatabaseError?, [PetUser]?) -> Void
     typealias CDRepSafeZoneCallback = (DatabaseError?, SafeZone?) -> Void
@@ -168,6 +170,75 @@ class CDRepository {
         CoreDataManager.instance.retrieve(.user, with: predicate) { (objects) in
             callback(objects == nil)
         }
+    }
+    
+    //MARK:- PetDeviceData
+    
+    /// Upsert pet device data
+    ///
+    /// - Parameters:
+    ///   - petDeviceData: pet device data to upsert
+    ///   - callback: returns upserted pet or *error*
+    func upsert(_ petDeviceData: PetDeviceData, callback: @escaping CDRepPetDeviceDataCallback) {
+        
+        CoreDataManager.instance.upsert(.petDeviceData, with: ["id": petDeviceData.id]) { (object) in
+            
+            if let cdPet = object as? CDPetDeviceData {
+                let deviceData = petDeviceData.deviceData
+                cdPet.battery = deviceData.battery
+                cdPet.crs = deviceData.crs
+                cdPet.deviceTime = deviceData.deviceTime
+                cdPet.latitude = deviceData.point.latitude
+                cdPet.longitude = deviceData.point.longitude
+                cdPet.netSignal = deviceData.internetSignal
+                cdPet.satSignal = deviceData.satelliteSignal
+                cdPet.speed = deviceData.speed
+                
+                CoreDataManager.instance.save(callback: { (error) in
+                    if let error = error {
+                        callback(error, nil)
+                    } else {
+                        callback(nil, PetDeviceData(cdPet))
+                    }
+                })
+
+            }
+        }
+    }
+    
+    /// Upsert pets device data
+    ///
+    /// - Parameters:
+    ///   - pets: pets to upsert
+    ///   - callback: returns upserted pets or *error*
+    func upsert(_ petsDeviceData: [PetDeviceData], callback: @escaping CDRepPetsDeviceDataCallback) {
+        
+        var upsertedPetsDeviceData = [PetDeviceData]()
+        var errors = [DatabaseError]()
+        let group = DispatchGroup()
+        
+        for petDeviceData in petsDeviceData {
+            group.enter()
+            self.upsert(petDeviceData, callback: { (error, pet) in
+                if error == nil, let pet = pet {
+                    upsertedPetsDeviceData.append(pet)
+                }else if let error = error {
+                    errors.append(error)
+                }
+                group.leave()
+            })
+        }
+        
+        group.notify(queue: .main, execute: {
+            if errors.count == 0 {
+                callback(nil, upsertedPetsDeviceData)
+            }else{
+                for error in errors {
+                    Reporter.send(file: "\(#file)", function: "\(#function)", error)
+                }
+                callback(errors.first, nil)
+            }
+        })
     }
     
     //MARK:- Pet
