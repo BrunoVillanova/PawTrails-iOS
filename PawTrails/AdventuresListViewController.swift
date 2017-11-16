@@ -31,11 +31,11 @@ class AdventuresListViewController: UIViewController, IndicatorInfoProvider  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let playingColors = UIColor(red: 67/255, green: 62/255, blue: 54/255, alpha: 1)
-        let adventureColor = UIColor(red: 108/255, green: 176/255, blue: 255/255, alpha: 1)
+        let distanceColor = UIColor(red: 153/255, green: 202/255, blue: 186/255, alpha: 1)
+        let timeColor = UIColor(red: 211/255, green: 100/255, blue: 59/255, alpha: 1)
 
-        distanceCircle.setChart(at: 0.9, color: adventureColor, text: "Km")
-        timeCircle.setChart(at: 0.5, color: playingColors, text: "min")
+        distanceCircle.setChart(at: 0.9, color: distanceColor, text: "Km")
+        timeCircle.setChart(at: 0.5, color: timeColor, text: "min")
         
         editBtn.border(color: UIColor.darkGray, width: 1)
         containerView.border(color: UIColor.darkGray, width: 1)
