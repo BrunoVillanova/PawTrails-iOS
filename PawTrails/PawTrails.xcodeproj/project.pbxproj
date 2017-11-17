@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		15226D901F8D18EA007EEFF2 /* SocketIO+RxSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15226D8F1F8D18EA007EEFF2 /* SocketIO+RxSwift.swift */; };
 		152A8F701FB5E0CB00C54DD8 /* DataManager+RxSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152A8F6F1FB5E0CB00C54DD8 /* DataManager+RxSwift.swift */; };
+		155316D31FBF189E009230B1 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 155316D01FBF1897009230B1 /* Charts.framework */; };
 		157401A41F9E268200A854C5 /* PTBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157401911F9E268200A854C5 /* PTBubbleView.swift */; };
 		157401A51F9E268200A854C5 /* Battery@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 157401931F9E268200A854C5 /* Battery@2x.png */; };
 		157401A61F9E268200A854C5 /* BatteryLow@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 157401941F9E268200A854C5 /* BatteryLow@1x.png */; };
@@ -26,9 +27,6 @@
 		157401B21F9E268200A854C5 /* PTBatteryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157401A21F9E268200A854C5 /* PTBatteryView.swift */; };
 		157401B31F9E268200A854C5 /* PTPetCalloutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 157401A31F9E268200A854C5 /* PTPetCalloutView.xib */; };
 		159646A11FB1D334009DC172 /* PTMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159646A01FB1D334009DC172 /* PTMapView.swift */; };
-		440067C91F8E485800D8B89E /* PieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440067C81F8E485800D8B89E /* PieChart.swift */; };
-		440067D51F8E5E6600D8B89E /* PetActivitiesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440067D31F8E5E6600D8B89E /* PetActivitiesCell.swift */; };
-		440067D61F8E5E6600D8B89E /* PetActivitiesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 440067D41F8E5E6600D8B89E /* PetActivitiesCell.xib */; };
 		440784491F8B85A1005E9E1B /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 440784481F8B85A1005E9E1B /* SettingsView.xib */; };
 		4407844B1F8B85E8005E9E1B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4407844A1F8B85E8005E9E1B /* SettingsView.swift */; };
 		440823CA1F8F94900004B90F /* SetUpYourGoalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440823C91F8F94900004B90F /* SetUpYourGoalController.swift */; };
@@ -150,8 +148,6 @@
 		4441ACA61EB8C72500FBE27F /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4441ACA51EB8C72500FBE27F /* SafariServices.framework */; };
 		4441ACA81EB8C72E00FBE27F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4441ACA71EB8C72E00FBE27F /* SystemConfiguration.framework */; };
 		444698851F6BC75C006EE4CD /* SelectPetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444698841F6BC75C006EE4CD /* SelectPetView.swift */; };
-		4446BAE11FB1C6AE00809805 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4446BADE1FB1C69A00809805 /* Charts.framework */; };
-		4446BAE21FB1C6AE00809805 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4446BADE1FB1C69A00809805 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4446BAE81FB1CA3600809805 /* AdventuresListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446BAE71FB1CA3600809805 /* AdventuresListViewController.swift */; };
 		4447217D1F03F12A001DCDE1 /* PawTrailsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4447217C1F03F12A001DCDE1 /* PawTrailsUITests.swift */; };
 		44475ADB1F5960B800D41AAA /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44475ADA1F5960B800D41AAA /* SignUpViewController.swift */; };
@@ -200,33 +196,26 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		4414AE6D1EA0DD5B004A5134 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4415FF371E3B822900A81B13 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4415FF3E1E3B822900A81B13;
-			remoteInfo = PawTrails;
-		};
-		4446BADD1FB1C69A00809805 /* PBXContainerItemProxy */ = {
+		155316CF1FBF1897009230B1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4446BAD81FB1C69A00809805 /* Charts.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 65AD9E95D9ED4DC0BD73A743;
 			remoteInfo = Charts;
 		};
-		4446BADF1FB1C69A00809805 /* PBXContainerItemProxy */ = {
+		155316D11FBF1897009230B1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4446BAD81FB1C69A00809805 /* Charts.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 1CBBC58C6CE1EBEE9852CE41;
 			remoteInfo = ChartsTests;
 		};
-		4446BAE31FB1C6AE00809805 /* PBXContainerItemProxy */ = {
+		4414AE6D1EA0DD5B004A5134 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 4446BAD81FB1C69A00809805 /* Charts.xcodeproj */;
+			containerPortal = 4415FF371E3B822900A81B13 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = A58A4ED274A941CA248EA921;
-			remoteInfo = Charts;
+			remoteGlobalIDString = 4415FF3E1E3B822900A81B13;
+			remoteInfo = PawTrails;
 		};
 		4447217F1F03F12A001DCDE1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -244,7 +233,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				4446BAE21FB1C6AE00809805 /* Charts.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -398,7 +386,7 @@
 		4441ACA51EB8C72500FBE27F /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		4441ACA71EB8C72E00FBE27F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		444698841F6BC75C006EE4CD /* SelectPetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPetView.swift; sourceTree = "<group>"; };
-		4446BAD81FB1C69A00809805 /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = "../../../Downloads/Charts-master/Charts.xcodeproj"; sourceTree = "<group>"; };
+		4446BAD81FB1C69A00809805 /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = Libraries/Charts/Charts.xcodeproj; sourceTree = "<group>"; };
 		4446BAE71FB1CA3600809805 /* AdventuresListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdventuresListViewController.swift; sourceTree = "<group>"; };
 		4447217A1F03F12A001DCDE1 /* PawTrailsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PawTrailsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4447217C1F03F12A001DCDE1 /* PawTrailsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PawTrailsUITests.swift; sourceTree = "<group>"; };
@@ -470,10 +458,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				155316D31FBF189E009230B1 /* Charts.framework in Frameworks */,
 				44251AD61F0CD5170067F401 /* GoogleSymbolUtilities.framework in Frameworks */,
 				447D4C171E44C4F5008F82F4 /* MapKit.framework in Frameworks */,
 				44251AD21F0CD5170067F401 /* GoogleSignIn.framework in Frameworks */,
-				4446BAE11FB1C6AE00809805 /* Charts.framework in Frameworks */,
 				44251AD41F0CD5170067F401 /* GoogleAppUtilities.framework in Frameworks */,
 				44251AD51F0CD5170067F401 /* GoogleSignInDependencies.framework in Frameworks */,
 				E710CBA5471FDC34DDA7BEB8 /* Pods_PawTrails.framework in Frameworks */,
@@ -497,6 +485,15 @@
 				157401A21F9E268200A854C5 /* PTBatteryView.swift */,
 			);
 			path = PTBatteryView;
+			sourceTree = "<group>";
+		};
+		155316CB1FBF1896009230B1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				155316D01FBF1897009230B1 /* Charts.framework */,
+				155316D21FBF1897009230B1 /* ChartsTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		157401901F9E268200A854C5 /* Custom Views */ = {
@@ -883,15 +880,6 @@
 			name = AdventuresPressenters;
 			sourceTree = "<group>";
 		};
-		4446BAD91FB1C69A00809805 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				4446BADE1FB1C69A00809805 /* Charts.framework */,
-				4446BAE01FB1C69A00809805 /* ChartsTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		4447217B1F03F12A001DCDE1 /* PawTrailsUITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -1071,7 +1059,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				4446BAE41FB1C6AE00809805 /* PBXTargetDependency */,
 			);
 			name = PawTrails;
 			productName = Snout;
@@ -1147,7 +1134,7 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 4446BAD91FB1C69A00809805 /* Products */;
+					ProductGroup = 155316CB1FBF1896009230B1 /* Products */;
 					ProjectRef = 4446BAD81FB1C69A00809805 /* Charts.xcodeproj */;
 				},
 			);
@@ -1161,18 +1148,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		4446BADE1FB1C69A00809805 /* Charts.framework */ = {
+		155316D01FBF1897009230B1 /* Charts.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = Charts.framework;
-			remoteRef = 4446BADD1FB1C69A00809805 /* PBXContainerItemProxy */;
+			remoteRef = 155316CF1FBF1897009230B1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		4446BAE01FB1C69A00809805 /* ChartsTests.xctest */ = {
+		155316D21FBF1897009230B1 /* ChartsTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = ChartsTests.xctest;
-			remoteRef = 4446BADF1FB1C69A00809805 /* PBXContainerItemProxy */;
+			remoteRef = 155316D11FBF1897009230B1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1549,11 +1536,6 @@
 			isa = PBXTargetDependency;
 			target = 4415FF3E1E3B822900A81B13 /* PawTrails */;
 			targetProxy = 4414AE6D1EA0DD5B004A5134 /* PBXContainerItemProxy */;
-		};
-		4446BAE41FB1C6AE00809805 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Charts;
-			targetProxy = 4446BAE31FB1C6AE00809805 /* PBXContainerItemProxy */;
 		};
 		444721801F03F12A001DCDE1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
