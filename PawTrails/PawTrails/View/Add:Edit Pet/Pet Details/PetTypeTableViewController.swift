@@ -10,7 +10,7 @@ import UIKit
 
 class PetTypeTableViewController: UITableViewController, UITextFieldDelegate {
 
-    @IBOutlet weak var catCell: UITableViewCell!
+//    @IBOutlet weak var catCell: UITableViewCell!
     @IBOutlet weak var dogCell: UITableViewCell!
     @IBOutlet weak var otherTextField: UITextField!
     
@@ -22,8 +22,8 @@ class PetTypeTableViewController: UITableViewController, UITextFieldDelegate {
         if let type = parentEditor.pet.type?.type {
             
             switch type {
-            case .cat: catCell.accessoryType = .checkmark
-                break
+//            case .cat: catCell.accessoryType = .checkmark
+//                break
             case .dog: dogCell.accessoryType = .checkmark
                 break
             default:
@@ -43,9 +43,11 @@ class PetTypeTableViewController: UITableViewController, UITextFieldDelegate {
         
         var type: Type? = nil
         parentEditor.pet.type?.description = nil
-        if catCell.accessoryType == .checkmark {
-            type = Type.cat
-        }else if dogCell.accessoryType == .checkmark {
+//        if catCell.accessoryType == .checkmark {
+//            type = Type.cat
+//        }else
+        
+        if dogCell.accessoryType == .checkmark {
             type = Type.dog
         }else if otherTextField.text != nil {
             type = Type.other
@@ -66,13 +68,13 @@ class PetTypeTableViewController: UITableViewController, UITextFieldDelegate {
         if let cell = tableView.cellForRow(at: indexPath) {
             
             switch cell {
-            case catCell:
-                catCell.accessoryType = .checkmark
-                dogCell.accessoryType = .none
-                otherTextField.text = ""
-                break
+//            case catCell:
+//                catCell.accessoryType = .checkmark
+//                dogCell.accessoryType = .none
+//                otherTextField.text = ""
+//                break
             case dogCell:
-                catCell.accessoryType = .none
+//                catCell.accessoryType = .none
                 dogCell.accessoryType = .checkmark
                 otherTextField.text = ""
                 break
@@ -85,7 +87,7 @@ class PetTypeTableViewController: UITableViewController, UITextFieldDelegate {
     //MARK:- UITextFieldDelegate
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        catCell.accessoryType = .none
+//        catCell.accessoryType = .none
         dogCell.accessoryType = .none
     }
     

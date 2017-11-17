@@ -27,6 +27,7 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadPetsAPI), name: NSNotification.Name(rawValue: "petAdded"), object: nil)
 
 
         noPetsFound.isHidden = true
@@ -66,6 +67,7 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @objc func reloadPetsAPI(){
         presenter.loadPets()
+        self.tableView.reloadData()
     }
     
     deinit {
