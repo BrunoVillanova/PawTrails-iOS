@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13533" systemVersion="17B48" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13241" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CDAddress" representedClassName="CDAddress" syncable="YES">
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
@@ -27,7 +27,7 @@
         <attribute name="breed_descr" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="deviceCode" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="gender" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="id" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="Binary" storedInTruthFile="YES" syncable="YES"/>
         <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isOwner" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
@@ -37,11 +37,10 @@
         <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="type_descr" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="weight" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" customClassName="Weight" syncable="YES"/>
-        <relationship name="deviceData" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="CDPetDeviceData" inverseName="pet" inverseEntity="CDPetDeviceData" syncable="YES"/>
+        <relationship name="deviceData" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDPetDeviceData" inverseName="pet" inverseEntity="CDPetDeviceData" syncable="YES"/>
         <relationship name="firstBreed" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDBreed" inverseName="petFirst" inverseEntity="CDBreed" syncable="YES"/>
         <relationship name="safezones" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDSafeZone" inverseName="pet" inverseEntity="CDSafeZone" syncable="YES"/>
         <relationship name="secondBreed" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDBreed" inverseName="petSecond" inverseEntity="CDBreed" syncable="YES"/>
-        <relationship name="trips" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDPetTrip" inverseName="pet" inverseEntity="CDPetTrip" syncable="YES"/>
         <relationship name="users" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDPetUser" inverseName="petUsers" inverseEntity="CDPetUser" syncable="YES"/>
     </entity>
     <entity name="CDPetDeviceData" representedClassName="CDPetDeviceData" syncable="YES" codeGenerationType="class">
@@ -55,27 +54,6 @@
         <attribute name="satSignal" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="speed" optional="YES" attributeType="Float" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="pet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDPet" inverseName="deviceData" inverseEntity="CDPet" syncable="YES"/>
-    </entity>
-    <entity name="CDPetTrip" representedClassName="CDPetTrip" syncable="YES" codeGenerationType="class">
-        <attribute name="averageSpeed" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="maxSpeed" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="startTimestamp" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="steps" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="stopTimestamp" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="timestamp" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="totalDistance" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="totalTime" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="pet" maxCount="1" deletionRule="Nullify" destinationEntity="CDPet" inverseName="trips" inverseEntity="CDPet" syncable="YES"/>
-        <relationship name="points" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDPetTripPoint" inverseName="trip" inverseEntity="CDPetTripPoint" syncable="YES"/>
-    </entity>
-    <entity name="CDPetTripPoint" representedClassName="CDPetTripPoint" syncable="YES" codeGenerationType="class">
-        <attribute name="latitude" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="longitude" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="timestamp" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="trip" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDPetTrip" inverseName="points" inverseEntity="CDPetTrip" syncable="YES"/>
     </entity>
     <entity name="CDPetUser" representedClassName="CDPetUser" syncable="YES">
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
@@ -97,6 +75,7 @@
         <attribute name="active" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="point1" optional="YES" attributeType="Transformable" customClassName="Point" syncable="YES"/>
         <attribute name="point2" optional="YES" attributeType="Transformable" customClassName="Point" syncable="YES"/>
@@ -122,13 +101,11 @@
         <element name="CDAddress" positionX="18" positionY="144" width="128" height="165"/>
         <element name="CDBreed" positionX="-18" positionY="135" width="128" height="120"/>
         <element name="CDCountryCode" positionX="-18" positionY="108" width="128" height="90"/>
-        <element name="CDPet" positionX="-63" positionY="-18" width="128" height="345"/>
+        <element name="CDPet" positionX="-63" positionY="-18" width="128" height="330"/>
         <element name="CDPetDeviceData" positionX="-18" positionY="135" width="128" height="195"/>
-        <element name="CDPetTrip" positionX="-18" positionY="135" width="128" height="240"/>
-        <element name="CDPetTripPoint" positionX="-18" positionY="135" width="128" height="105"/>
         <element name="CDPetUser" positionX="-27" positionY="135" width="128" height="180"/>
         <element name="CDPhone" positionX="-18" positionY="117" width="128" height="90"/>
-        <element name="CDSafeZone" positionX="-18" positionY="144" width="128" height="180"/>
+        <element name="CDSafeZone" positionX="-18" positionY="144" width="128" height="195"/>
         <element name="CDUser" positionX="-36" positionY="45" width="128" height="225"/>
     </elements>
 </model>

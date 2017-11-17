@@ -110,9 +110,9 @@ class MapViewController: UIViewController {
     func presentPet(_ pet: Pet, activityEnabled:Bool = false) {
         
         let nc = UINavigationController()
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "PetProfileCollectionViewController") as? PetProfileCollectionViewController {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "PetProfileCollectionViewController") as? PetInfromationViewController {
             vc.pet = pet
-            vc.fromMap = true
+//            vc.fromMap = true
             nc.pushViewController(vc, animated: true)
             present(nc, animated: true, completion: nil)
         }

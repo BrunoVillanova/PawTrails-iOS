@@ -444,7 +444,6 @@ class APIRepository {
     ///   - petId: pet id
     ///   - callback: returns **safezones** or **error**
     func loadSafeZones(of petId:Int, callback: @escaping APIRepPetSafeZonesCallback) {
-        
         APIManager.instance.perform(call: .listSafeZones, withKey: petId) { (error, json) in
             if error == nil, let safezonesJson = json?["safezones"].array {
                 var safezones = [SafeZone]()

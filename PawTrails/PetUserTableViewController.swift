@@ -22,7 +22,7 @@ class PetUserTableViewController: UITableViewController, PetUserView {
     var petUser: PetUser!
     
     fileprivate let presenter = PetUserPresenter()
-    
+
     fileprivate var currentUserId = -1
     fileprivate var petOwnerId = -2
     fileprivate var appUserId = -3
@@ -106,18 +106,14 @@ class PetUserTableViewController: UITableViewController, PetUserView {
     
     // MARK:- PetUserView
     
+  
+    
     func removed() {
         
-        if appUserId == petOwnerId && appUserId != currentUserId {
-            if let profile = navigationController?.viewControllers.first(where: { $0 is PetInfromationViewController}) as? PetInfromationViewController {
-                profile.reloadUsers()
+            if let profile = navigationController?.viewControllers.first(where: { $0 is PetsViewController}) as? PetsViewController {
+                profile.reloadPets()
+                profile.tableView.reloadData()
                 navigationController?.popToViewController(profile, animated: true)
-            }
-        }else if let petList = navigationController?.viewControllers.first(where: { $0 is PetsViewController}) as? PetsViewController {
-            petList.reloadPets()
-            navigationController?.popToViewController(petList, animated: true)
-        }else{
-            navigationController?.popToRootViewController(animated: true)
         }
     }
     
@@ -127,11 +123,11 @@ class PetUserTableViewController: UITableViewController, PetUserView {
     
     
     func beginLoadingContent() {
-//        showLoadingView()
+        
     }
     
     func endLoadingContent() {
-//        hideLoadingView()
+        self.alert(title: "", msg: "Your request has been processed", type: .blue, disableTime: 3, handler: nil)
     }
     
     
@@ -140,17 +136,6 @@ class PetUserTableViewController: UITableViewController, PetUserView {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return actionCell.isHidden ? 1 : 2
     }
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }
 

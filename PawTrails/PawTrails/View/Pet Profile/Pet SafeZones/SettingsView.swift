@@ -16,10 +16,7 @@ class SettingsViews: YNDropDownView {
     @IBOutlet weak var circleBtn: UIButton!
     @IBOutlet weak var squareBtn: UIButton!
     @IBOutlet weak var slider: UISlider!
-    
     @IBOutlet weak var collectionView: UICollectionView!
-    
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         

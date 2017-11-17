@@ -125,7 +125,6 @@ class PetPresenter {
     //MARK:- Safe Zones
     
     func loadSafeZones(for id: Int){
-        
         DataManager.instance.loadSafeZones(of: id) { (error) in
             if let error = error {
                 self.view?.errorMessage(error.msg)

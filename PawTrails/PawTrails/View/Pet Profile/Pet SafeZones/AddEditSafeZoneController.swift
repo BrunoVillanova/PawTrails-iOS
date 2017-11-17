@@ -22,8 +22,8 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
     var sliderLabel: UILabel?
     
 
-    let icons = ["house-icon-dark-1x", "park-icon-dark-1x", "dogPlay-icon-dark-1x", "veterinarian-icon-dark-1x" , "travel-icon-dark-1x", "paw-icon-dark-1x"]
-   
+    let icons = ["buildings-dark-1x", "fountain-dark-1x", "girl-and-boy-dark-1x" , "home-dark-1x", "palm-tree-shape-dark-1x", "park-dark-1x"]
+    var selectedIcon: Int!
     
     fileprivate var opened:CGFloat = 360.0, closed:CGFloat = 600
     fileprivate var shape:Shape = Shape.circle
@@ -49,8 +49,6 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
         
         
         presenter.attachView(self, safezone: safezone)
-        
-    
         map.showsUserLocation = true
         map.showsScale = false
         map.showsCompass = false
@@ -91,22 +89,16 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
             let view = YNDropDownMenu(frame: CGRect(x: 0, y: 64, width: UIScreen.main.bounds.size.width, height: 38),
                             dropDownViews: _ZBdropDownViews, dropDownViewTitles: ["Show SafeZone Settings"])
             view.setImageWhen(normal: UIImage(named: "arrow-show-1x"), selected: UIImage(named: "arrow-show-1x"), disabled: UIImage(named: "arrow-show-1x"))
-            
-            
-//            view.setLabelColorWhen(normal: .black, selected: .black, disabled: .black)
-//            view.setImageWhen(normal: UIImage(named: "arrow-show-1x"), selectedTintColor: .clear, disabledTintColor: .black)
             view.bottomLine.backgroundColor = UIColor.black
             view.bottomLine.isHidden = false
-            
             if let settingsView = ZBdropDownViews?.first as? SettingsViews {
-                
-                
                 settingsView.nameTextField.placeholder = "Name of the safezone?"
                 settingsView.nameTextField.title = "Your safeZone name"
                 settingsView.nameTextField.titleColor = UIColor(red: 155/255, green: 153/255, blue: 169/255, alpha: 1)
                 
                 settingsView.collectionView.delegate = self
                 settingsView.collectionView.dataSource = self
+                settingsView.collectionView.allowsMultipleSelection = false
 
                 settingsView.collectionView.contentInset = UIEdgeInsetsMake(0, 2, 0, 16)
                 let nib = UINib(nibName: "IconCell", bundle: nil)
@@ -274,16 +266,24 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
     }
     
     @IBAction func startTripBtnPressed(_ sender: Any) {
+        
     }
 
     @IBAction func saveBtnPressed(_ sender: Any) {
-        
         if let petId = petId {
             if fence.isIdle {
                 let id = safezone?.id ?? 0
                 if let settingsView = ZBdropDownViews?.first as? SettingsViews {
-                    presenter.addEditSafeZone(safezoneId: id, name: settingsView.nameTextField.text, shape: shape, active: true, points: geoCodeFence(), into: petId)
+                    if selectedIcon != nil {
+                         presenter.addEditSafeZone(safezoneId: id, name: settingsView.nameTextField.text, shape: shape, active: true, points: geoCodeFence(), imageId: selectedIcon, into: petId)
+                    } else if let number = safezone?.image {
+                        presenter.addEditSafeZone(safezoneId: id, name: settingsView.nameTextField.text, shape: shape, active: true, points: geoCodeFence(), imageId:Int(number) , into: petId)
+                    } else {
+                         presenter.addEditSafeZone(safezoneId: id, name: settingsView.nameTextField.text, shape: shape, active: true, points: geoCodeFence(), imageId: 0 , into: petId)
+                    }
+                   
                 }
+                
             }else{
                 alert(title: "", msg: "The area is too small. Please, zoom out.", type: .red)
             }
@@ -329,15 +329,11 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
     }
     
     func success() {
-        //        if let profile = navigationController?.viewControllers.first(where: { $0 is PetProfileCollectionViewController}) as? PetProfileCollectionViewController {
-        ////            profile.reloadSafeZones()
-        //            navigationController?.popToViewController(profile, animated: true)
-        //        }
-        
         self.navigationController?.popViewController(animated: true)
         self.petId = nil
         self.safezone = nil
         self.isOwner = nil
+        self.popUp(title: "Success", msg: "Safezone has been successfully added/Edited ")
     }
     
     func missingName() {
@@ -378,17 +374,33 @@ extension AddEditSafeZOneController: UICollectionViewDelegate, UICollectionViewD
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        return icons.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myCell", for: indexPath) as! IconCell
         cell.imageView.image = UIImage(named: icons[indexPath.item])
-        
-        cell.backgroundColor = UIColor.groupTableViewBackground
-        cell.shadow()
+        cell.backgroundColor = UIColor.clear
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.selectedIcon = self.icons.index(of: self.icons[indexPath.item])
+        
+        print(selectedIcon)
+        if let cell = collectionView.cellForItem(at: indexPath) {
+            cell.backgroundColor = UIColor.groupTableViewBackground
+            
+        }
+    }
+    
+
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) {
+            cell.backgroundColor = UIColor.clear
+
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -405,7 +417,6 @@ extension AddEditSafeZOneController: MKMapViewDelegate {
     // MARK: - MKMapViewDelegate
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        
         if fence != nil {
             updateFenceDistance()
             if !fenceDistanceIsIdle() && !changingRegion {

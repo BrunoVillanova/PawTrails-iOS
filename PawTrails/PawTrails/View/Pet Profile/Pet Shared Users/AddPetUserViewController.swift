@@ -41,11 +41,14 @@ class AddPetUserViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func successfullyAdded() {
-        if let profile = navigationController?.viewControllers.first(where: { $0 is PetProfileCollectionViewController}) as? PetProfileCollectionViewController {
-            profile.reloadUsers()
-            profile.collectionView?.reloadData()
+        if let profile = navigationController?.viewControllers.first(where: { $0 is PetsViewController}) as? PetsViewController {
+            profile.reloadPets()
+            profile.tableView.reloadData()
             navigationController?.popToViewController(profile, animated: true)
         }
+        
+        self.alert(title: "", msg: "Your request has been processed", type: .blue, disableTime: 3, handler: nil)
+
     }
     
     func emailFormat() {

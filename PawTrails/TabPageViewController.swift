@@ -62,14 +62,15 @@ class TabPageViewController: ButtonBarPagerTabStripViewController {
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         let child_1 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PetInfromationViewController") as! PetInfromationViewController
         child_1.pet = self.pet
-        
         let SafeZoneViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GoalsViewController") as! GoalsViewController
         SafeZoneViewController.pet = self.pet
         
         let child_3 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SafeZoneViewController") as! SafeZoneViewController
         child_3.pet = self.pet
         
-        return [child_1, SafeZoneViewController, child_3]
+        let child_4 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AdventuresListViewController") as! AdventuresListViewController
+        child_4.pet = self.pet
+        return [child_1, SafeZoneViewController, child_3, child_4]
     }
 
 }

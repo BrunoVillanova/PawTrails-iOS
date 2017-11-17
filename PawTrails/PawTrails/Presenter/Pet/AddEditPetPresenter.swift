@@ -49,6 +49,7 @@ class AddEditPetPresenter {
             saveImatge(petId: pet.id)
         }else{
             save()
+            
         }
     }
     
@@ -77,11 +78,8 @@ class AddEditPetPresenter {
     private func save(){
         
         view?.beginLoadingContent()
-        
         if editMode  {
-            
             DataManager.instance.save(pet, callback: { (error) in
-                
                 self.view?.endLoadingContent()
                 if let error = error {
                     self.view?.errorMessage(error.msg)
@@ -91,9 +89,7 @@ class AddEditPetPresenter {
             })
             
         }else{
-            
             DataManager.instance.register(pet, callback: { (error, pet) in
-                
                 if let error = error {
                     self.view?.endLoadingContent()
                     self.view?.errorMessage(error.msg)

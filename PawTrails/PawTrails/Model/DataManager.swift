@@ -471,9 +471,7 @@ class DataManager: NSObject {
     ///   - petId: pet id
     ///   - callback: nil or *error*
     func removePet(_ petId: Int, callback: @escaping errorCallback) {
-        
         APIRepository.instance.removePet(petId) { (error) in
-
             if error == nil {
                 self.removePetDB(by: petId, callback: callback)
             }else if let error = error {
@@ -843,11 +841,8 @@ class DataManager: NSObject {
     ///   - petId: pet id
     ///   - callback: nil or *error*
     func loadSafeZones(of petId:Int, callback: @escaping errorCallback) {
-        
         APIRepository.instance.loadSafeZones(of: petId) { (error, safezones) in
-
             if error == nil, let safezones = safezones {
-
                 CDRepository.instance.upsert(safezones, into: petId)
                 callback(nil)
             }else if let error = error {
@@ -863,11 +858,8 @@ class DataManager: NSObject {
     ///   - petId: pet id
     ///   - callback: safezone added or *error*
     func add(_ safezone: SafeZone, to petId: Int, callback: @escaping safezoneCallback) {
-        
         APIRepository.instance.add(safezone, to: petId) { (error, safezone) in
-
             if error == nil, let safezone = safezone {
-
                 CDRepository.instance.upsert(safezone, into: petId, callback: { (error, safezones) in
                     if error == nil, safezones != nil {
                         callback(nil, safezone)
@@ -888,9 +880,7 @@ class DataManager: NSObject {
     ///   - petId: pet id
     ///   - callback: updated safe zone or *error*
     func save(_ safezone: SafeZone, into petId: Int, callback: @escaping errorCallback) {
-        
         APIRepository.instance.save(safezone, to: petId) { (error) in
-
             if error == nil {
                 // CHECK
                 self.loadSafeZones(of: petId, callback: { (error) in
@@ -950,7 +940,6 @@ class DataManager: NSObject {
     ///   - id: safezone id
     ///   - callback: nil or *error*
     func setSafeZone(imageData:Data, for id: Int, callback: @escaping errorCallback){
-      
         CDRepository.instance.setSafeZone(imageData: imageData, for: id) { (error) in
             if let error = error {
                 callback(DataManagerError(DBError: error))

@@ -30,15 +30,12 @@ class PetBreedViewController: UIViewController,  UITableViewDataSource, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadBreeds()
         presenter.attachView(self)
     
         tableView.tableFooterView = UIView()
         
         if let type = parentEditor.pet.type?.type {
-
             noTypeSelected.isHidden = true
-            
             if type == .other {
                 searchBar.isHidden = true
                 tableView.allowsSelection = false
@@ -53,6 +50,7 @@ class PetBreedViewController: UIViewController,  UITableViewDataSource, UITableV
             
             if type == .cat || type == .dog {
                 presenter.getBreeds(for: type)
+                presenter.loadBreeds(for: type)
             }
         }else{
             segmentControl.isHidden = true
@@ -100,6 +98,8 @@ class PetBreedViewController: UIViewController,  UITableViewDataSource, UITableV
     func errorMessage(_ error: ErrorMsg) {
         alert(title: error.title, msg: error.msg)
     }
+    
+    
     
     func loadBreeds() {
         filteredBreeds = presenter.breeds

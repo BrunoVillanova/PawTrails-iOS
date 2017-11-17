@@ -505,6 +505,7 @@ extension SafeZone {
         point2 = nil
         address = nil
         preview = nil
+        image = 0
     }
     
     init(_ json: JSON) {
@@ -512,6 +513,7 @@ extension SafeZone {
         name = json["name"].string
         shape = Shape(rawValue: Int16(json["shape"].intValue)) ?? .circle
         active = json["active"].bool ?? false
+        image = Int16(json["class"].intValue)
         point1 = Point(json["point1"].dictionaryObject)
         point2 = Point(json["point2"].dictionaryObject)
         address = nil
@@ -527,11 +529,13 @@ extension SafeZone {
         point2 = cdSafezone.point2
         address = cdSafezone.address
         preview = cdSafezone.preview
+        image = cdSafezone.image
     }
     
     var toDict: [String:Any] {
         var dict = [String:Any](object:self)
         dict["id"] = id == 0 ? nil : id
+        dict["class"] = image
         dict["shape"] = shape.code
         dict["point1"] = point1?.toDict ?? ""
         dict["point2"] = point2?.toDict ?? ""

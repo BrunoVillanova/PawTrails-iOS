@@ -9,8 +9,6 @@
 import Foundation
 
 protocol SelectPetView: NSObjectProtocol, View {
-    
-    
 }
 
 

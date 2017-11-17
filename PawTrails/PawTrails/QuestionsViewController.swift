@@ -17,6 +17,8 @@ class QuestionsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        print(UIDevice.current.model)
         collectionView.delegate = self
         collectionView.dataSource = self
 //        collectionView.register(questionCells.self, forCellWithReuseIdentifier: "cell")
@@ -55,7 +57,13 @@ extension QuestionsViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 145, height: 175)
+            return CGSize(width: 100, height: 175)
+
+    }
+
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 30
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

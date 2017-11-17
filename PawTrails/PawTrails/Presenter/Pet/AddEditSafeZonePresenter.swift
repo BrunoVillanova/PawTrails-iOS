@@ -26,16 +26,12 @@ class AddEditSafeZonePresenter {
         self.view = nil
     }
     
-    func addEditSafeZone(safezoneId: Int, name: String?, shape: Shape, active: Bool, points: (Point,Point), into petId: Int){
-        
+    func addEditSafeZone(safezoneId: Int, name: String?, shape: Shape, active: Bool, points: (Point,Point), imageId: Int, into petId: Int){
         if name == nil || (name != nil && name == "") {
             view?.missingName()
         }else{
-            
-            let safezone = SafeZone(id: safezoneId, name: name, point1: points.0, point2: points.1, shape: shape, active: active, address: nil, preview: nil)
-            
+            let safezone = SafeZone(id: safezoneId, name: name, point1: points.0, point2: points.1, shape: shape, active: active, address: nil, preview: nil, image: Int16(imageId))
             if safezoneId != 0 {
-                
                 DataManager.instance.save(safezone, into: petId, callback: { (error) in
                     if let error = error {
                         self.view?.errorMessage(error.msg)
@@ -45,7 +41,6 @@ class AddEditSafeZonePresenter {
                 })
                 
             }else{
-                
                 DataManager.instance.add(safezone, to: petId, callback: { (error, _) in
                     if let error = error {
                         self.view?.errorMessage(error.msg)

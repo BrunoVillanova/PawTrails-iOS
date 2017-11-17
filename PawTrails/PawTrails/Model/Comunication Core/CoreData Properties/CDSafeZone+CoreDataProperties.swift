@@ -18,6 +18,7 @@ extension CDSafeZone {
 
     @NSManaged public var active: Bool
     @NSManaged public var address: String?
+    @NSManaged public var image: Int16
     @NSManaged public var id: Int16
     @NSManaged public var name: String?
     @NSManaged public var point1: Point?

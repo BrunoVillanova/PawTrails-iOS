@@ -8,19 +8,31 @@
 
 import UIKit
 import XLPagerTabStrip
+import SDWebImage
 
 class PetInfromationViewController: UIViewController, IndicatorInfoProvider, PetView {
     var pet: Pet!
     fileprivate let presenter = PetPresenter()
 
+    @IBOutlet weak var usersCollectionView: UICollectionView!
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        tableView.isScrollEnabled = false
         tableView.dataSource = self
+        tableView.allowsSelection = false
         tableView.delegate = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 1000
+        
+        usersCollectionView.backgroundColor = UIColor.white
+        self.tableView.backgroundColor = UIColor.groupTableViewBackground
+        self.view.backgroundColor = UIColor.groupTableViewBackground
+
+        
+        usersCollectionView.delegate = self
+        usersCollectionView.dataSource = self
 
         presenter.attachView(self, pet:pet)
         if let pet = pet {
@@ -50,7 +62,7 @@ class PetInfromationViewController: UIViewController, IndicatorInfoProvider, Pet
             //reload users?
         }else{
             presenter.loadPetUsers(for: pet.id)
-            self.tableView.reloadData()
+            self.usersCollectionView.reloadData()
 
         }
     }
@@ -101,15 +113,11 @@ class PetInfromationViewController: UIViewController, IndicatorInfoProvider, Pet
 extension PetInfromationViewController: UITableViewDelegate, UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
             return 1
-        } else {
-            return presenter.users.count
-        }
         
     }
     
@@ -124,20 +132,13 @@ extension PetInfromationViewController: UITableViewDelegate, UITableViewDataSour
 
     }
     
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 1 {
-            let user = presenter.users[indexPath.row]
-            self.present(user, isOwner: user.isOwner)
-        }
-        
-    }
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ProfileInfoCell
 
-        if indexPath.section == 0 {
-            cell.isUserInteractionEnabled = false
+//        if indexPath.section == 0 {
+//            cell.isUserInteractionEnabled = false
 
             if let pet = self.pet{
                 cell.petName.text = pet.name
@@ -146,58 +147,61 @@ extension PetInfromationViewController: UITableViewDelegate, UITableViewDataSour
                 cell.weightLbl.text = pet.weightString
                 cell.typeLbl.text = pet.typeString
                 cell.birthDayLbl.text = pet.birthday?.toStringShow
-                if let image = pet.image {
-                    cell.profileImage.image = UIImage(data: image)
+
+                if let imageUrl = pet.imageURL {
+                    cell.profileImage.sd_setImage(with: URL(string: imageUrl), placeholderImage: #imageLiteral(resourceName: "PetPlaceholderImage"), options: [.continueInBackground])
+                } else {
+                    cell.profileImage.image = nil
                 }
+                
             }
             return cell
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "nib", for: indexPath) as! SharedUsersTableViewCell
-            let user = presenter.users[indexPath.row]
-            let imageData = user.image ?? Data()
-            cell.userImage.image = UIImage(data: imageData)
-            let fullName = "\(user.name ?? "") \(user.surname ?? "")"
-            cell.nameLbl.text = fullName
-            cell.emailLbl.text = user.email
-//            cell.removebtn.addTarget(self, action: #selector(removeBtnPressed), for: .touchUpInside)
-            return cell
 
-        }
 
     }
     
     
     
-    func present(_ user: PetUser, isOwner: Bool) {
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "PetUserTableViewController") as? PetUserTableViewController {
-            vc.petUser = user
+    func present(_ users: [PetUser]) {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "UsersViewController") as? UsersViewController {
+            vc.users = users
             vc.pet = pet
             navigationController?.pushViewController(vc, animated: true)
         }
     }
-    
-    
-//    func removeBtnPressed(sender: UIButton?) {
-//
-//            let selectedUser = presenter.users[(sender?.tag)!]
-//            let owner = pet.owner
-//            let appuser = Int(SharedPreferences.get(.id))
-//
-//
-//            if appuser == owner?.id && appuser != selectedUser.id {
-//                // Owner Remove that user
-//                self.popUpDestructive(title: "Remove \(selectedUser.name ?? "this user") from \(pet.name ?? "this pet")", msg: "If you proceed you will remove this user from the pet sharing list.", cancelHandler: nil, proceedHandler: { (remove) in
-//                    self.presenter.removePetUser(with: selectedUser.id, from: self.pet.id)
-//                })
-//            } else if appuser == owner?.id && appuser == selectedUser.id {
-//
-//
-//        }
-//
-//    }
-
 }
 
+extension PetInfromationViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return presenter.users.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = usersCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! UsersCell
+        let user = presenter.users[indexPath.row]
+        if let url = user.imageURL {
+            cell.profileImage.sd_setImage(with: URL(string: url), placeholderImage: UIImage(named: ""), options: [.progressiveDownload], completed: nil)
+        }
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 60, height: 60)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 6
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.present(presenter.users)
+    }
+    
+    
+    
+}
 
 class ProfileInfoCell: UITableViewCell {
     @IBOutlet weak var profileImage: UiimageViewWithMask!
@@ -209,3 +213,17 @@ class ProfileInfoCell: UITableViewCell {
     @IBOutlet weak var petName: UILabel!
     
 }
+
+class UsersCell: UICollectionViewCell {
+    @IBOutlet weak var profileImage: UIImageView!
+    
+    override func awakeFromNib() {
+        self.profileImage.circle()
+
+    }
+    
+    override func prepareForReuse() {
+        self.profileImage = nil
+    }
+}
+

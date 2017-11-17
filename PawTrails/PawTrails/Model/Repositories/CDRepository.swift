@@ -707,20 +707,16 @@ class CDRepository {
     private func upsert(_ safezone: SafeZone, callback: @escaping (DatabaseError?, CDSafeZone?)->Void) {
         
         CoreDataManager.instance.upsert(.safeZone,with: ["id":safezone.id]) { (object) in
-            
             if let cdSafezone = object as? CDSafeZone {
-                
                 cdSafezone.name = safezone.name
+                cdSafezone.image = safezone.image
                 cdSafezone.active = safezone.active
                 cdSafezone.shape = safezone.shape.rawValue
-                
                 let p1 = cdSafezone.point1
                 let p2 = cdSafezone.point2
-                
                 if let point1 = safezone.point1 {
                     cdSafezone.point1 = point1
                 }
-                
                 if let point2 = safezone.point2 {
                     cdSafezone.point2 = point2
                 }
@@ -794,7 +790,6 @@ class CDRepository {
     func upsert(_ safezones: [SafeZone], into petId: Int) {
         self.getPetCD(by: petId) { (error, cdPet) in
             if error == nil, let cdPet = cdPet {
-                
                 let safezonesMutable = cdPet.mutableSetValue(forKeyPath: "safezones")
                 safezonesMutable.removeAllObjects()
                 let group = DispatchGroup()

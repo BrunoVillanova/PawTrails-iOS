@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import SDWebImage
 
 
 class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, PetsView {
@@ -29,19 +30,15 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
 
         noPetsFound.isHidden = true
-
         tableView.tableFooterView = UIView()
         
         refreshControl.backgroundColor = UIColor.secondary
         refreshControl.tintColor = UIColor.primary
         refreshControl.addTarget(self, action: #selector(reloadPetsAPI), for: .valueChanged)
         tableView.addSubview(refreshControl)
-        
         presenter.attachView(self)
         reloadPets()
-
-        
-        addButton()
+//        addButton()
     }
     
     
@@ -147,7 +144,8 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! petListCell
         let pet = getPet(at: indexPath)
-        cell.subtitleLabel.text = "Getting address..."
+        
+        cell.subtitleLabel.text = "Getting address ..."
 
         // TODO: replace this method
 //        SocketIOManager.instance.gpsUpdates().subscribe(onNext: { (data) in
@@ -171,11 +169,19 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         
         cell.titleLabel.text = pet.name
-        if let imageData = pet.image as Data? {
-            cell.petImageView.image = UIImage(data: imageData)
-        }else{
+        
+        if let imageUrl = pet.imageURL {
+            cell.petImageView.sd_setImage(with: URL(string: imageUrl), placeholderImage: #imageLiteral(resourceName: "PetPlaceholderImage"), options: [.continueInBackground])
+        } else {
             cell.petImageView.image = nil
         }
+        
+//        if pet.name == "Max" {
+//            cell.petImageView.image = UIImage(named: "max")
+//        } else {
+//            cell.petImageView.image = UIImage(named: "max2")
+//        }
+        
         return cell
     }
     

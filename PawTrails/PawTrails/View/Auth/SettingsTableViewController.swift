@@ -10,7 +10,7 @@ import UIKit
 
 class SettingsTableViewController: UITableViewController, SettingsView {
     
-    @IBOutlet weak var allNotificationsSwitch: UISwitch!
+//    @IBOutlet weak var allNotificationsSwitch: UISwitch!
     
     fileprivate let presenter = SettingsPresenter()
     
@@ -27,14 +27,14 @@ class SettingsTableViewController: UITableViewController, SettingsView {
         presenter.deteachView()
     }
 
-    @IBAction func allNotificationsValueChanged(_ sender: UISwitch) {
-        self.presenter.changeNotification(value: sender.isOn)
-    }
+//    @IBAction func allNotificationsValueChanged(_ sender: UISwitch) {
+//        self.presenter.changeNotification(value: sender.isOn)
+//    }
     
     func loadUser(){
-        if let user = user {
-            allNotificationsSwitch.isOn = user.notification
-        }
+//        if let user = user {
+////            allNotificationsSwitch.isOn = user.notification
+//        }
     }
     
     // MARK: - SettingsView
@@ -47,12 +47,12 @@ class SettingsTableViewController: UITableViewController, SettingsView {
     }
     
     func notificationValueChangeFailed() {
-        allNotificationsSwitch.isOn = !allNotificationsSwitch.isOn
+//        allNotificationsSwitch.isOn = !allNotificationsSwitch.isOn
     }
     
     func notificationValueChanged() {
-        let value = allNotificationsSwitch.isOn ? "On" : "Off"
-        self.alert(title: "", msg: "All Notifications turned \(value) successfully", type: .green)
+//        let value = allNotificationsSwitch.isOn ? "On" : "Off"
+//        self.alert(title: "", msg: "All Notifications turned \(value) successfully", type: .green)
     }
     
     func errorMessage(_ error: ErrorMsg) {
@@ -70,9 +70,7 @@ class SettingsTableViewController: UITableViewController, SettingsView {
     
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         if indexPath.section == 2 && indexPath.row == 0 {
-            
             let alert = UIAlertController(title: "Warning", message: "Are you sure you want to log out?", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
                 self.presenter.logout()
