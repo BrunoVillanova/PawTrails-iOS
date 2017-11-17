@@ -36,7 +36,7 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
         petImageView.circle()
         presenter.attachView(self, pet, deviceCode)
         NotificationManager.instance.post(Event())
-    }
+}
     
     
 
@@ -83,9 +83,15 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
     func doneSuccessfully() {
         if pet == nil {
             dismiss(animated: true, completion: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "petAdded"), object: nil)
+            self.alert(title: "", msg: "Your request has been processed", type: .blue, disableTime: 3, handler: nil)
         }else{
             if let navigation = (navigationController?.viewControllers.first(where: { $0 is PetsViewController }) as? PetsViewController) {
                     navigation.reloadPetsAPI()
+
+                self.alert(title: "", msg: "Your request has been processed", type: .blue, disableTime: 3, handler: nil)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "petAdded"), object: nil)
+
                 }
             _ = navigationController?.popViewController(animated: true)
         }

@@ -29,6 +29,7 @@ class PetInfromationViewController: UIViewController, IndicatorInfoProvider, Pet
         usersCollectionView.backgroundColor = UIColor.white
         self.tableView.backgroundColor = UIColor.groupTableViewBackground
         self.view.backgroundColor = UIColor.groupTableViewBackground
+        
 
         
         usersCollectionView.delegate = self
@@ -104,8 +105,6 @@ class PetInfromationViewController: UIViewController, IndicatorInfoProvider, Pet
     func removed() {
         self.reloadUsers()
     }
-    
-
 
 
 }
