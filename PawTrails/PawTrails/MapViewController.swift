@@ -44,8 +44,7 @@ class MapViewController: UIViewController {
         reloadPets()
         
         DataManager.instance.getActivePetTrips().subscribe(onNext: { (tripList) in
-            
-            
+            print("MapViewController -> getActivePetTrips \(tripList.count)")
             if (tripList.count > 0){
                 let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(gestureRecognizer:)))
                 gestureRecognizer.delegate = self

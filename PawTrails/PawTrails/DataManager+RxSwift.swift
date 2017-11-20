@@ -102,16 +102,23 @@ extension DataManager {
             var finalTrips = tripsFromApi.map{$0}
 
             for socketTrip in tripsFromSocket {
-                var theTripOnApi = finalTrips.first(where: { (trip) -> Bool in
-                    return trip.id == socketTrip.id
-                })
+                var theTripOnApi = finalTrips.first { $0.id == socketTrip.id }
                 
                 if theTripOnApi != nil {
                     theTripOnApi!.status = socketTrip.status
+                    finalTrips.remove(at: finalTrips.index(where: { (trip) -> Bool in
+                        return trip.id == theTripOnApi?.id
+                    })!)
+                    finalTrips.append(theTripOnApi!)
                 } else {
                     finalTrips.append(socketTrip)
                 }
             }
+            
+        
+            print("DataManager -> allTrips -> active tripsFromApi = \(tripsFromApi.filter{$0.status < 2}.count)")
+            print("DataManager -> allTrips -> active tripsFromSocket = \(tripsFromSocket.filter{$0.status < 2}.count)")
+            print("DataManager -> allTrips -> active finalTrips = \(finalTrips.filter{$0.status < 2}.count)")
 
             return finalTrips
         }
