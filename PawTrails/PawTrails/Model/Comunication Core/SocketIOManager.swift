@@ -188,10 +188,11 @@ class SocketIOManager: NSObject, URLSessionDelegate {
             return value == true
         }).flatMap({ (isReady) -> Observable<[Pet]> in
             DataManager.instance.pets().subscribe(onNext: { (pets) in
-                let petIDs = pets?.map({ (pet) -> Int in
-                    return pet.id
-                })
-                self.socket.emit(channel.pets.name, ["ids": petIDs!, "noLastPos": false])
+//                let petIDs = pets.map({ (pet) -> Int in
+//                    return pet.id
+//                })
+//                self.socket.emit(channel.pets.name, with: ["ids": petIDs!, "noLastPos": false])
+                
             }).addDisposableTo(self.disposeBag)
            
             return self.pets.asObservable()

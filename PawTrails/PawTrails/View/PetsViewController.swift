@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 import SDWebImage
-
+import RxCocoa
 
 class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, PetsView {
 
@@ -27,9 +27,7 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadPetsAPI), name: NSNotification.Name(rawValue: "petAdded"), object: nil)
-
-
+        
         noPetsFound.isHidden = true
         tableView.tableFooterView = UIView()
         
@@ -40,11 +38,13 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         presenter.attachView(self)
         reloadPets()
 //        addButton()
+        
+        DataManager.instance.pets()
+            .bind(to: tableView.rx.items(cellIdentifier: "cell", cellType: petListCell.self)) { (_, element, cell) in
+           cell.configure(element)
+        }.disposed(by: disposeBag)
     }
     
-    
-    
-  
    
     fileprivate func addButton(){
         let button = UIButton()
@@ -79,14 +79,6 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.tabBarController?.tabBar.isHidden = false
     }
     
-    
-
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        presenter.stopPetListUpdates()
-        presenter.stopPetGPSUpdates()
-        presenter.stopPetsGeocodeUpdates()
-    }
 
     func reloadPets(){
         presenter.getPets()
@@ -146,44 +138,7 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! petListCell
         let pet = getPet(at: indexPath)
-        
-        cell.subtitleLabel.text = "Getting address ..."
-
-        // TODO: replace this method
-//        SocketIOManager.instance.gpsUpdates().subscribe(onNext: { (data) in
-//            if let json = data.first as? [Any] {
-//                for petDeviceDataObject in json {
-//                    if let petDeviceDataJson = petDeviceDataObject as? [String:Any] {
-//                        let petdata = PetDeviceData(petDeviceDataJson)
-//                        if petdata.pet.id == pet.id {
-//                            cell.batterlyLevl.setBatteryLevel(petdata.deviceData.battery)
-//                            petdata.deviceData.coordinates.getFullFormatedAddress(handler: { (address) in
-//                                cell.subtitleLabel.text = address
-//                            })
-//                        }
-//                    }
-//                }
-//            } else{
-//                Reporter.debugPrint(file: "\(#file)", function: "\(#function)", data)
-//            }
-//        }){}.disposed(by: disposeBag)
-        
-        
-        
-        cell.titleLabel.text = pet.name
-        
-        if let imageUrl = pet.imageURL {
-            cell.petImageView.sd_setImage(with: URL(string: imageUrl), placeholderImage: #imageLiteral(resourceName: "PetPlaceholderImage"), options: [.continueInBackground])
-        } else {
-            cell.petImageView.image = nil
-        }
-        
-//        if pet.name == "Max" {
-//            cell.petImageView.image = UIImage(named: "max")
-//        } else {
-//            cell.petImageView.image = UIImage(named: "max2")
-//        }
-        
+        cell.configure(pet)
         return cell
     }
     
@@ -227,8 +182,29 @@ class petListCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var signalLevels: NSLayoutConstraint!
     
-    @IBOutlet weak var batterlyLevl: PTBatteryView!
+    @IBOutlet weak var batteryLevel: PTBatteryView!
     @IBOutlet weak var subtitleLabel: UILabel!
+    private let disposeBag = DisposeBag()
     
-  
+    func configure(_ pet: Pet) {
+        titleLabel.text = pet.name
+        
+        if let imageUrl = pet.imageURL {
+            petImageView.sd_setImage(with: URL(string: imageUrl), placeholderImage: #imageLiteral(resourceName: "PetPlaceholderImage"), options: [.continueInBackground])
+        } else {
+            petImageView.image = nil
+        }
+        
+        subtitleLabel.text = "Getting address ..."
+        
+        DataManager.instance.lastPetDeviceData(pet).subscribe(onNext: { (petDeviceData) in
+            if let petDeviceData = petDeviceData {
+                self.batteryLevel.setBatteryLevel(petDeviceData.deviceData.battery)
+                petDeviceData.deviceData.point.getFullFormatedAddress(handler: { (address) in
+                    self.subtitleLabel.text = address
+                })
+            }
+
+        }).addDisposableTo(disposeBag)
+    }
 }

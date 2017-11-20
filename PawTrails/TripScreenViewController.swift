@@ -74,18 +74,6 @@ class TripScreenViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
-        
-        
-//            .bind(to: collectionView.rx.items) { (collectionView, row, element) in
-//                let indexPath = IndexPath(row: row, section: 0)
-//                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! TripDetailsCell
-//                cell.configureWithTrip(element)
-//                return cell
-//            }
-//            .addDisposableTo(disposeBag)
-        
-//        collectionView.rx.setDelegate(self).addDisposableTo(disposeBag)
-        
         self.setupSubViews()
     }
     
