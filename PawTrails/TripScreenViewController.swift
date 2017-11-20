@@ -243,6 +243,7 @@ class TripDetailsCell: UICollectionViewCell {
            self.petName.text = petName
         }
         
+
         self.totalDistance.text = "8.32 KM"
         self.userProfileImg.image = nil
         self.avargeSpeed.text = "142 bpm"

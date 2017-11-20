@@ -26,6 +26,7 @@
 		157401B11F9E268200A854C5 /* PTBasicAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157401A11F9E268200A854C5 /* PTBasicAnnotationView.swift */; };
 		157401B21F9E268200A854C5 /* PTBatteryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157401A21F9E268200A854C5 /* PTBatteryView.swift */; };
 		157401B31F9E268200A854C5 /* PTPetCalloutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 157401A31F9E268200A854C5 /* PTPetCalloutView.xib */; };
+		157AC4B31FC3192E0005A717 /* Convert.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 157AC4B21FC3192E0005A717 /* Convert.framework */; };
 		159646A11FB1D334009DC172 /* PTMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159646A01FB1D334009DC172 /* PTMapView.swift */; };
 		15C50A231FC20855001ED601 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 155316D01FBF1897009230B1 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		440784491F8B85A1005E9E1B /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 440784481F8B85A1005E9E1B /* SettingsView.xib */; };
@@ -260,6 +261,7 @@
 		157401A11F9E268200A854C5 /* PTBasicAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTBasicAnnotationView.swift; sourceTree = "<group>"; };
 		157401A21F9E268200A854C5 /* PTBatteryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTBatteryView.swift; sourceTree = "<group>"; };
 		157401A31F9E268200A854C5 /* PTPetCalloutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PTPetCalloutView.xib; sourceTree = "<group>"; };
+		157AC4B21FC3192E0005A717 /* Convert.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Convert.framework; path = Carthage/Build/iOS/Convert.framework; sourceTree = "<group>"; };
 		159646A01FB1D334009DC172 /* PTMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTMapView.swift; sourceTree = "<group>"; };
 		1E2B813BA9CAE948174F2C71 /* Pods_PawTrailsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PawTrailsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		440784481F8B85A1005E9E1B /* SettingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsView.xib; sourceTree = "<group>"; };
@@ -460,6 +462,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				157AC4B31FC3192E0005A717 /* Convert.framework in Frameworks */,
 				155316D31FBF189E009230B1 /* Charts.framework in Frameworks */,
 				44251AD61F0CD5170067F401 /* GoogleSymbolUtilities.framework in Frameworks */,
 				447D4C171E44C4F5008F82F4 /* MapKit.framework in Frameworks */,
@@ -1001,6 +1004,7 @@
 		91352D1B7E01CC1C0CF51D38 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				157AC4B21FC3192E0005A717 /* Convert.framework */,
 				4441ACA71EB8C72E00FBE27F /* SystemConfiguration.framework */,
 				4441ACA51EB8C72500FBE27F /* SafariServices.framework */,
 				447D4C161E44C4F5008F82F4 /* MapKit.framework */,
@@ -1057,6 +1061,7 @@
 				93543C9FAEDDD0332AFDC816 /* [CP] Embed Pods Frameworks */,
 				39885238018EFB6CB9FCB2C6 /* [CP] Copy Pods Resources */,
 				443D9CF01FB0AE2700550B1D /* Embed Frameworks */,
+				157AC4AF1FC317FE0005A717 /* Carthage Copy Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1228,6 +1233,22 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		157AC4AF1FC317FE0005A717 /* Carthage Copy Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Convert.framework",
+			);
+			name = "Carthage Copy Frameworks";
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Convert.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
 		39885238018EFB6CB9FCB2C6 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1768,6 +1789,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/PawTrails",
 					"$(PROJECT_DIR)/PawTrails/Assets/Google",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/PawTrails/Assets/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1799,6 +1821,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/PawTrails",
 					"$(PROJECT_DIR)/PawTrails/Assets/Google",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/PawTrails/Assets/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
