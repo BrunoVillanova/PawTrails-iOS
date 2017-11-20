@@ -89,61 +89,36 @@ extension DataManager {
                 return trips.filter({ (trip) -> Bool in
                     return trip.status < 2
                 })
-            })
+            }).ifEmpty(default: [Trip]())
     }
     
     func allTrips() -> Observable<[Trip]> {
         let apiTrips = getApiTrips()
         let socketTrips = SocketIOManager.instance.trips()
         
-        return apiTrips.concatMap({ (trips) -> Observable<[Trip]> in
+        let allTrips = Observable.combineLatest(apiTrips, socketTrips) { (tripsFromApi, tripsFromSocket) -> [Trip] in
+            
+            var finalTrips = tripsFromApi.map{$0}
 
-            return socketTrips.asObservable()
-        })
+            for socketTrip in tripsFromSocket {
+                var theTripOnApi = finalTrips.first(where: { (trip) -> Bool in
+                    return trip.id == socketTrip.id
+                })
+                
+                if theTripOnApi != nil {
+                    theTripOnApi!.status = socketTrip.status
+                } else {
+                    finalTrips.append(socketTrip)
+                }
+            }
+
+            return finalTrips
+        }
         
-//        let observable = Observable.zip(apiTrips, socketTrips) { tripsOnApi, tripsOnSocket -> [Trip] in
-//            var finalTrips = [Trip]()
-//            finalTrips.append(contentsOf: tripsOnApi)
-//            
-//            for socketTrip in tripsOnSocket {
-//                if var theTripOnApi = finalTrips.first(where: { (trip) -> Bool in
-//                    return trip.id == socketTrip.id
-//                }) {
-//                    theTripOnApi.status = socketTrip.status
-//                } else {
-//                    finalTrips.append(socketTrip)
-//                }
-//            }
-// 
-//            self.allTheTrips.value = finalTrips;
-//            return finalTrips
-//        }
-//        
-//        return observable
+        return allTrips
     }
     
-//    func allPetsGpsUpdates() -> Observable<[PetDeviceData]> {
-//        return Observable.create({ () -> Disposable in
-//
-//        })
-//    }
-//
-//    func getPetDeviceDataList() -> Observable<[PetDeviceData]?> {
-//        return Observable.create({ observer in
-//
-//            CDRepository.instance.getPetsDeviceData { (error, petsDeviceData) in
-//                if error != nil {
-//                    observer.onError(error)
-//                } else {
-//                    observer.onNext(storagePets)
-//                    observer.onCompleted()
-//                }
-//            }
-//
-//            return Disposables.create()
-//        })
-//    }
-//
+    
     func allPetDeviceData() -> Observable<[PetDeviceData]> {
 
         let pets = self.pets()

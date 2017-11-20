@@ -175,8 +175,7 @@ extension PTMapView: MKMapViewDelegate {
             annotationView?.canShowCallout = false
         }
         
-        annotationView!.configureWithAnnotation(annotation as! PTAnnotation)
-        
+        annotationView?.configureWithAnnotation(annotation as! PTAnnotation)
         
         return annotationView
     }

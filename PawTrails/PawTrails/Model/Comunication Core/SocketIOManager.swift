@@ -74,10 +74,12 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     private var isConnecting = false
     private var isAuthenticating = false
     private var isAuthenticated = false
-//    var petGpsUpdates: [PetDeviceData]?
+
+    var pets: Variable<[Pet]> = Variable([Pet]())
     var petGpsUpdates: Variable<[PetDeviceData]> = Variable([PetDeviceData]())
     var petTrips: Variable<[Trip]> = Variable([Trip]())
     var isReadyForCommunication: Variable<Bool> = Variable(false)
+    
     fileprivate var openChannels: Set<channel> = Set<channel>()
     
 //    var petGpsUpdates: Observable<[PetDeviceData]?> = Observable.from(optional: [PetDeviceData]())
@@ -129,6 +131,13 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         }){}.disposed(by: disposeBag)
         
         
+        socketReactive?.on(channel.pets.name).subscribe(onNext: { (data) in
+            print("SocketIO -> Pets")
+            self.openChannels.insert(channel.pets)
+//            self.petGpsUpdates.value = PetDeviceData.fromJson(data.first)!
+        }).addDisposableTo(disposeBag)
+        
+        
         socketReactive?.on(channel.gpsUpdates.name).subscribe(onNext: { (data) in
             print("SocketIO -> GPS Updates")
             self.openChannels.insert(channel.gpsUpdates)
@@ -138,6 +147,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         
         socketReactive?.on(channel.trips.name).subscribe(onNext: { (data) in
             print("SocketIO -> Trips")
+            self.openChannels.insert(channel.trips)
             if let json = data.first as? [String:Any] {
                 
                 if let tripActionValue = json["action"] as? Int, let tripAction = TripAction(rawValue: tripActionValue) {
@@ -150,7 +160,8 @@ class SocketIOManager: NSObject, URLSessionDelegate {
                         
                         for tripJson in tripsData {
                             tripList.append(Trip(tripJson))
-                            print("SocketIO -> Trips -> Trip: \(Trip(tripJson))")
+//                            print("SocketIO -> Trips -> Trip: \(Trip(tripJson))")
+                            print("SocketIO -> Trips -> Trip!")
                         }
                         
                         self.petTrips.value = tripList
@@ -168,6 +179,23 @@ class SocketIOManager: NSObject, URLSessionDelegate {
                 rootViewController.present(vc, animated: true, completion: nil)
             }
         }
+    }
+    
+    func getPets() -> Observable<[Pet]> {
+//        let petList = DataManager.instance.pets()
+//        let
+        return isReady().filter({ (value) -> Bool in
+            return value == true
+        }).flatMap({ (isReady) -> Observable<[Pet]> in
+            DataManager.instance.pets().subscribe(onNext: { (pets) in
+                let petIDs = pets?.map({ (pet) -> Int in
+                    return pet.id
+                })
+                self.socket.emit(channel.pets.name, ["ids": petIDs!, "noLastPos": false])
+            }).addDisposableTo(self.disposeBag)
+           
+            return self.pets.asObservable()
+        })
     }
     
     func gpsUpdates(_ petIDs: [Int]) -> Observable<[PetDeviceData]> {

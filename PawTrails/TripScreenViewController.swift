@@ -62,26 +62,31 @@ class TripScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        pageControl.hidesForSinglePage = true
-        
-//        // Access user location
-//        if CLLocationManager.locationServicesEnabled() {
-////            locationManager.delegate = self
-//            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-//            locationManager.startUpdatingLocation()
-//        }
-        
         mapView.tripMode = true
         
-        DataManager.instance.allTrips().subscribe(onNext: { (trips) in
-            self.runningTripArray = trips;
-            self.collectionView.reloadData()
-            self.pageControl.numberOfPages = self.runningTripArray.count
-        }).addDisposableTo(disposeBag)
+        let activeTripsObservable = DataManager.instance.getActivePetTrips()
+        
+        activeTripsObservable.map{$0.count}.bind(to: pageControl.rx.numberOfPages).disposed(by: disposeBag)
+        
+        activeTripsObservable
+            .bind(to: collectionView.rx.items(cellIdentifier: "cell", cellType: TripDetailsCell.self)) { (row, element, cell) in
+                cell.configureWithTrip(element)
+            }
+            .disposed(by: disposeBag)
         
         
+        
+//            .bind(to: collectionView.rx.items) { (collectionView, row, element) in
+//                let indexPath = IndexPath(row: row, section: 0)
+//                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! TripDetailsCell
+//                cell.configureWithTrip(element)
+//                return cell
+//            }
+//            .addDisposableTo(disposeBag)
+        
+//        collectionView.rx.setDelegate(self).addDisposableTo(disposeBag)
+        
+        self.setupSubViews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -212,6 +217,7 @@ extension TripScreenViewController: UICollectionViewDelegateFlowLayout {
 
 class TripDetailsCell: UICollectionViewCell {
     
+
     @IBOutlet weak var maskImage: UiimageViewWithMask!
     @IBOutlet weak var totalDistanceImageVIew: UIImageView!
     @IBOutlet weak var totalDistancesubLabel: UILabel!
@@ -245,9 +251,12 @@ class TripDetailsCell: UICollectionViewCell {
     }
     
     func configureWithTrip(_ trip: Trip) {
-        self.petName.text = trip.pet.name
+        if let petName = trip.pet.name {
+           self.petName.text = petName
+        }
+        
         self.totalDistance.text = "8.32 KM"
-        self.userProfileImg.image = UIImage(named: "")
+        self.userProfileImg.image = nil
         self.avargeSpeed.text = "142 bpm"
         self.currentSpeed.text = "6.2 km/h"
         self.totalTime.text = "00:43:27"

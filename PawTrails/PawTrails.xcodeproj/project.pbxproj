@@ -27,6 +27,7 @@
 		157401B21F9E268200A854C5 /* PTBatteryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157401A21F9E268200A854C5 /* PTBatteryView.swift */; };
 		157401B31F9E268200A854C5 /* PTPetCalloutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 157401A31F9E268200A854C5 /* PTPetCalloutView.xib */; };
 		159646A11FB1D334009DC172 /* PTMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159646A01FB1D334009DC172 /* PTMapView.swift */; };
+		15C50A231FC20855001ED601 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 155316D01FBF1897009230B1 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		440784491F8B85A1005E9E1B /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 440784481F8B85A1005E9E1B /* SettingsView.xib */; };
 		4407844B1F8B85E8005E9E1B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4407844A1F8B85E8005E9E1B /* SettingsView.swift */; };
 		440823CA1F8F94900004B90F /* SetUpYourGoalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440823C91F8F94900004B90F /* SetUpYourGoalController.swift */; };
@@ -233,6 +234,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				15C50A231FC20855001ED601 /* Charts.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1101,7 +1103,7 @@
 					};
 					4415FF3E1E3B822900A81B13 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 7E2855LEH4;
+						DevelopmentTeam = CQ878R6EW5;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -1759,7 +1761,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 7E2855LEH4;
+				DEVELOPMENT_TEAM = CQ878R6EW5;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1790,7 +1792,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 7E2855LEH4;
+				DEVELOPMENT_TEAM = CQ878R6EW5;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
