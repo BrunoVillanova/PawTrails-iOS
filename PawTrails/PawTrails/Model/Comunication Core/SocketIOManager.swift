@@ -170,7 +170,15 @@ class SocketIOManager: NSObject, URLSessionDelegate {
             }
         }).addDisposableTo(disposeBag)
         
-        self.connect()
+        DataManager.instance.userToken.asObservable().subscribe(onNext: { (authentication) in
+            if authentication != nil {
+                // User is authenticated
+                self.connect()
+//                self.socket.emit(channel.auth.name, token)
+            } else {
+                self.socket.disconnect()
+            }
+        }).addDisposableTo(disposeBag)
     }
     
     func userNotSigned() {

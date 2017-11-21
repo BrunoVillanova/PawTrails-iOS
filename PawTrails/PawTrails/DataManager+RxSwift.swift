@@ -59,17 +59,9 @@ extension DataManager {
             return Disposables.create()
         })
     }
-    
-    func retrieveRunningTrips() {
-        APIRepository.instance.getTripList([0,1]) { (error, trips) in
-            if error == nil {
-                self.runningTrips.value = trips!
-            }
-        }
-    }
+
     
     func getApiTrips() -> Observable<[Trip]> {
-        
         return Observable.create({observer in
             APIRepository.instance.getTripList([]) { (error, trips) in
                 if let error = error {
@@ -96,6 +88,7 @@ extension DataManager {
     func allTrips() -> Observable<[Trip]> {
         let apiTrips = getApiTrips()
         let socketTrips = SocketIOManager.instance.trips()
+        print("DataManager -> allTrips")
         
         let allTrips = Observable.combineLatest(apiTrips, socketTrips) { (tripsFromApi, tripsFromSocket) -> [Trip] in
             

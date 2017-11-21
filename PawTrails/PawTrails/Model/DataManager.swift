@@ -28,14 +28,18 @@ class DataManager: NSObject {
     typealias startTripCallBack = ((_ error:DataManagerError?, _ safezone:[Trip]?) -> Void)
     
     let disposeBag = DisposeBag()
-    var authenticatedUser: Variable<Authentication> = Variable(Authentication())
+    var userToken: Variable<String?> = Variable(nil)
     var petsDevicesData: Variable<[PetDeviceData]> = Variable([PetDeviceData]())
-    var runningTrips: Variable<[Trip]> = Variable([Trip]())
-    var allTheTrips: Variable<[Trip]> = Variable([Trip]())
     
     override init() {
         super.init()
-        self.retrieveRunningTrips()
+
+        // Set authenticated user reactive var
+        let token = SharedPreferences.get(.token)
+        
+        if token.count > 0 {
+            self.userToken.value = token
+        }
     }
     
     //MARK:- Authentication
@@ -46,11 +50,7 @@ class DataManager: NSObject {
     func isAuthenticated() -> Bool {
         return SharedPreferences.has(.id) && SharedPreferences.has(.token)
     }
-    
-    func userAuthenticated() -> Observable<Authentication> {
-        //        return Observable.from(optional: petGpsUpdates)
-        return authenticatedUser.asObservable()
-    }
+
     
     /// Check is the user is logged by social media
     ///
@@ -128,7 +128,7 @@ class DataManager: NSObject {
         }
         
         // Set authenticated user reactive var
-        self.authenticatedUser.value = authentication
+        self.userToken.value = authentication.token
         
         if let socialNetwork = authentication.socialNetwork?.rawValue {
             SharedPreferences.set(.socialnetwork, with: socialNetwork)
@@ -160,9 +160,6 @@ class DataManager: NSObject {
                 }
             }else if let pets = pets {
                 print("\(pets)")
-//                SocketIOManager.instance.startGPSUpdates(for: pets.map({ $0.id})).subscribe(onNext: { (data) in
-//                    print("aqui")
-//                }).addDisposableTo(self.disposeBag)
             }
             tasks.leave()
         })
@@ -990,7 +987,6 @@ class DataManager: NSObject {
     func startMyAdventure(_ petIdss: [Int], callback: @escaping startTripCallBack) {
         APIRepository.instance.startTrips(petIdss) { (error, data) in
             if error == nil {
-                self.retrieveRunningTrips()
                 callback(nil, data)
             } else if let error = error{
                 callback(DataManagerError(APIError: error), nil)
@@ -1013,28 +1009,53 @@ class DataManager: NSObject {
         })
         
         return apiStartTrips
+    }
+    
+    func stopTrips(_ tripIDs: [Int]) -> Observable<[Trip]> {
+        let finishTripApiObserver = Observable<[Trip]>.create({ observer in
+            APIRepository.instance.finishTrip(tripIDs) { (error, data) in
+                if error != nil {
+                    observer.onError(error!)
+                } else {
+                    observer.onNext(data!)
+                    observer.onCompleted()
+                }
+            }
+            return Disposables.create()
+        })
         
-//        return apiStartTrips.flatMap({ (trips) -> Observable<[Trip]> in
-//            return self.allTrips()
-//        })
+        return finishTripApiObserver
     }
     
     func finishAdventure() -> Observable<[Trip]> {
-        
         return self.getActivePetTrips()
             .filter({ (trips) -> Bool in
                 return trips.count > 0
             })
+            .take(1)
+            .flatMap { (trips) -> Observable<[Trip]> in
+                let tripIDs = trips.map({Int($0.id)})
+                return self.stopTrips(tripIDs)
+            }
+    }
+    
+    
+    func pauseAdventure() -> Observable<[Trip]> {
+        
+        return self.getActivePetTrips()
+            .filter({ (trips) -> Bool in
+                return trips.count > 0
+            }).take(1)
             .flatMap { (trips) -> Observable<[Trip]> in
                 let tripIDs = trips.map({Int($0.id)})
                 
                 return Observable.create({ observer in
-                    APIRepository.instance.finishTrip(tripIDs) { (error, data) in
+                    APIRepository.instance.pauseTrip(tripIDs) { (error) in
                         if error != nil {
                             observer.onError(error!)
                         } else {
-                            self.retrieveRunningTrips()
-                            observer.onNext(data!)
+//                            self.retrieveRunningTrips()
+//                            observer.onNext(data!)
                             observer.onCompleted()
                         }
                     }
@@ -1042,6 +1063,7 @@ class DataManager: NSObject {
                 })
         }
     }
+    
 
 }
 

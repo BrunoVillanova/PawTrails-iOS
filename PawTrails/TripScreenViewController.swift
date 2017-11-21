@@ -10,13 +10,14 @@ import UIKit
 import MapKit
 import RxSwift
 import RxCocoa
+import SCLAlertView
 
 class TripScreenViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var mapView: PTMapView!
     @IBOutlet weak var pageControl: UIPageControl!
-
+    
     let locationManager = CLLocationManager()
     var petArray = [Dictionary<String,String>]()
     
@@ -56,7 +57,9 @@ class TripScreenViewController: UIViewController {
             }
         }
     }
-     let disposeBag = DisposeBag()
+    
+    let disposeBag = DisposeBag()
+    
     //MARK: -
     //MARK: View Lifecycle
     override func viewDidLoad() {
@@ -84,29 +87,29 @@ class TripScreenViewController: UIViewController {
     
     private func setupSubViews() {
         selectedPageIndex.asObservable().bind(to: pageControl.rx.currentPage).addDisposableTo(bag)
- 
+        
         collectionView.rx.contentOffset.bind { [weak self] (point) in
             guard let _ = self?.collectionView.frame.size.width else {
                 return
             }
-        
+            
             if Int(point.x.truncatingRemainder(dividingBy: (self?.collectionView.frame.width)!)) != 0 {
                 return
             }
             
             self?.selectedPageIndex.value = (self?.scrollViewPageIndex)!
             
-        }.addDisposableTo(bag)
+            }.addDisposableTo(bag)
     }
     
     override func viewDidLayoutSubviews() {
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
-
+            
             collectionView.isPagingEnabled = true
             collectionView.showsHorizontalScrollIndicator = false
         }
-
+        
         myCollectionViewHeight = collectionView.frame.size.height
         myCollectionViewWidith = collectionView.frame.size.width
     }
@@ -140,7 +143,46 @@ class TripScreenViewController: UIViewController {
     }
     
     @IBAction func pauseTripBtnPressed(_ sender: Any) {
-//        let vc = self.storyboard?.instantiateViewController(withIdentifier: <#T##String#>)
+        
+        let appearance = SCLAlertView.SCLAppearance(
+            kCircleTopPosition: 40,
+            kCircleBackgroundTopPosition: 40,
+            kCircleIconHeight: 90,
+            showCloseButton: false,
+            showCircularIcon: true
+        )
+        
+        let alertView = SCLAlertView(appearance: appearance)
+        
+        let alertViewIcon = #imageLiteral(resourceName: "PauseTripButton-1x-png")
+        
+        alertView.addButton("Pause it now!") {
+            
+            print("Okay, let's pause the adventure now.")
+            DataManager.instance.pauseAdventure().subscribe(onNext: { (stoppedTrips) in
+                
+//                for trip in stoppedTrips {
+//                    print("TripID \(trip.id) stopped!")
+//                }
+                self.navigationController?.dismiss(animated: true, completion: nil)
+            }).addDisposableTo(self.disposeBag)
+        }
+        
+        alertView.addButton("Let's continue!") {
+            print("User regrets on pausing. So, let's continue the adventure.")
+        }
+        alertView.showTitle(
+            "Pause Adventure?", // Title of view
+            subTitle: "You can resume it later", // String of view
+            duration: 2.0, // Duration to show before closing automatically, default: 0.0
+            completeText: "Done", // Optional button value, default: ""
+            style: .notice, // Styles - see below.
+            colorStyle: 0xA429FF,
+            colorTextButton: 0xFFFFFF,
+            circleIconImage: alertViewIcon
+        )
+        
+//        alertView.showWarning("Pause Adventure?", subTitle: "You can resume it later.", circleIconImage: alertViewIcon)
     }
     
     @IBAction func StopTripBtnPressed(_ sender: Any) {
@@ -189,13 +231,13 @@ extension TripScreenViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: myCollectionViewWidith, height: myCollectionViewHeight)
     }
-
+    
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout
         collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -205,7 +247,7 @@ extension TripScreenViewController: UICollectionViewDelegateFlowLayout {
 
 class TripDetailsCell: UICollectionViewCell {
     
-
+    
     @IBOutlet weak var maskImage: UiimageViewWithMask!
     @IBOutlet weak var totalDistanceImageVIew: UIImageView!
     @IBOutlet weak var totalDistancesubLabel: UILabel!
@@ -240,10 +282,10 @@ class TripDetailsCell: UICollectionViewCell {
     
     func configureWithTrip(_ trip: Trip) {
         if let petName = trip.pet.name {
-           self.petName.text = petName
+            self.petName.text = petName
         }
         
-
+        
         self.totalDistance.text = "8.32 KM"
         self.userProfileImg.image = nil
         self.avargeSpeed.text = "142 bpm"

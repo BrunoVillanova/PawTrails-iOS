@@ -561,7 +561,6 @@ class APIRepository {
 
     // Finish Trips
     // callBack: returns nil or data
-//    
     func finishTrip(_ tripIDs: [Int], callback: @escaping ApiTrip) {
         let data: [String: Any] = ["trips": tripIDs, "timeStamp": Int(Date().timeIntervalSince1970)]
         APIManager.instance.perform(call: .finishTrip, with: data) { (error, json) in
@@ -580,9 +579,12 @@ class APIRepository {
     
     // Pause Trips
     // callBack: returns nil or data
-    func pauseTrip(callback: @escaping APIRepErrorCallback) {
-        APIManager.instance.perform(call: .pauseTrip) { (error, json) in
-            callback(error)
+    func pauseTrip(_ tripIDs: [Int], callback: @escaping APIRepErrorCallback) {
+        let data: [String: Any] = ["trips": tripIDs, "timeStamp": Int(Date().timeIntervalSince1970)]
+        APIManager.instance.perform(call: .pauseTrip, with: data) { (error, json) in
+            if let error = error {
+                callback(error)
+            }
         }
     }
     

@@ -147,17 +147,18 @@ class SelectPetsVC: UIViewController, PetsView, SelectPetView {
     
     @IBAction func StartAdventureBtnPressed(_ sender: Any) {
         showLoadingView()
-        DataManager.instance.startTrips(petIDsToStartTrip.value.map({$0})).subscribe(onNext: { (startedTrips) in
-            print("Started Trips! \(startedTrips)")
-            self.hideLoadingView()
-            self.performSegue(withIdentifier: "Segue", sender: self)
-        }, onError: { (error) in
-            self.hideLoadingView()
-            self.petIDsToStartTrip.value.removeAll()
-            let error = error as! APIManagerError
-            print("Error \(error.errorCode!)!")
-      
-        }).addDisposableTo(disposeBag)
+        DataManager.instance.startTrips(petIDsToStartTrip.value.map({$0}))
+            .take(1)
+            .subscribe(onNext: { (startedTrips) in
+                print("Started Trips! \(startedTrips)")
+                self.hideLoadingView()
+                self.performSegue(withIdentifier: "Segue", sender: self)
+            }, onError: { (error) in
+                self.hideLoadingView()
+                self.petIDsToStartTrip.value.removeAll()
+                let error = error as! APIManagerError
+                print("Error \(error.errorCode!)!")
+            }).addDisposableTo(disposeBag)
     }
 
     @IBAction func closebtnPressed(_ sender: Any) {
