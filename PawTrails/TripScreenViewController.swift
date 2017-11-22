@@ -11,18 +11,22 @@ import MapKit
 import RxSwift
 import RxCocoa
 import SCLAlertView
+import Convert
 
 class TripScreenViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var mapView: PTMapView!
     @IBOutlet weak var pageControl: UIPageControl!
+    @IBOutlet weak var pauseButton: UIButton!
+    @IBOutlet weak var joinButton: UIButton!
     
     let locationManager = CLLocationManager()
     var petArray = [Dictionary<String,String>]()
     
     var runningTripArray = [Trip]()
     var tripIds = [Int]()
+    var adventurePaused: Bool?
     
     var scrollViewPageIndex :Int {
         set {
@@ -76,6 +80,45 @@ class TripScreenViewController: UIViewController {
                 cell.configureWithTrip(element)
             }
             .disposed(by: disposeBag)
+        
+        activeTripsObservable
+            .subscribe(onNext: { (activeTrips) in
+                let pausedTrips = activeTrips.filter { $0.status == 1 }
+                self.adventurePaused = (pausedTrips.count > 0)
+                self.pauseButton.isEnabled = true
+                
+                if self.adventurePaused! {
+                    self.pauseButton.changeImageAnimated(image: #imageLiteral(resourceName: "StartTrip-1x-png"))
+                } else {
+                    self.pauseButton.changeImageAnimated(image: #imageLiteral(resourceName: "PauseTripButton-1x-png"))
+                }
+                
+                if self.pauseButton.isHidden {
+                    self.pauseButton.alpha = 0
+                    self.pauseButton.isHidden = false
+                    UIView.animate(withDuration: 0.3, animations: {
+                        self.pauseButton.alpha = 1;
+                    })
+                }
+                
+                if self.joinButton.isHidden {
+                    self.joinButton.alpha = 0
+                    self.joinButton.isHidden = false
+                    UIView.animate(withDuration: 0.3, animations: {
+                        self.joinButton.alpha = 1;
+                    })
+                }
+                
+            }).addDisposableTo(disposeBag)
+        
+//        activeTripsObservable.map { (activeTrips) -> UIImage in
+//            let pausedTrips = activeTrips.filter { $0.status == 1 }
+//            if pausedTrips.count > 0 {
+//                return #imageLiteral(resourceName: "StartTrip-1x-png")
+//            } else {
+//                return #imageLiteral(resourceName: "PauseTripButton-1x-png")
+//            }
+//        }.bind(to: self.pauseButton.rx.image(for: .normal)).addDisposableTo(disposeBag)
         
         self.setupSubViews()
     }
@@ -144,45 +187,63 @@ class TripScreenViewController: UIViewController {
     
     @IBAction func pauseTripBtnPressed(_ sender: Any) {
         
+        let theButton = sender as UIButton
+        theButton.isEnabled = false
+        
+        let isPaused = self.adventurePaused!
+        var title: String
+        var subTitle: String
+        var buttonOkTitle: String
+        var buttonCancelTitle: String
+        
+        if !isPaused {
+            title = "Pause Adventure?"
+            subTitle = "You can resume it later."
+            buttonOkTitle = "Pause it now!"
+            buttonCancelTitle = "Let's continue!"
+        } else {
+            title = "Resume Adventure?"
+            subTitle = "Let's continue our adventure."
+            buttonOkTitle = "Resume the adventure!"
+            buttonCancelTitle = "Keep it paused!"
+        }
+        
         let appearance = SCLAlertView.SCLAppearance(
-            kCircleTopPosition: 40,
-            kCircleBackgroundTopPosition: 40,
-            kCircleIconHeight: 90,
             showCloseButton: false,
             showCircularIcon: true
         )
         
         let alertView = SCLAlertView(appearance: appearance)
         
-        let alertViewIcon = #imageLiteral(resourceName: "PauseTripButton-1x-png")
-        
-        alertView.addButton("Pause it now!") {
+        alertView.addButton(buttonOkTitle) {
             
-            print("Okay, let's pause the adventure now.")
-            DataManager.instance.pauseAdventure().subscribe(onNext: { (stoppedTrips) in
-                
-//                for trip in stoppedTrips {
-//                    print("TripID \(trip.id) stopped!")
-//                }
-                self.navigationController?.dismiss(animated: true, completion: nil)
-            }).addDisposableTo(self.disposeBag)
+            if (!isPaused) {
+                DataManager.instance.pauseAdventure().subscribe(onNext: { (stoppedTrips) in
+//                    self.navigationController?.dismiss(animated: true, completion: nil)
+                }).addDisposableTo(self.disposeBag)
+            } else {
+                DataManager.instance.resumeAdventure().subscribe(onNext: { (stoppedTrips) in
+//                    self.navigationController?.dismiss(animated: true, completion: nil)
+                }).addDisposableTo(self.disposeBag)
+            }
         }
         
-        alertView.addButton("Let's continue!") {
-            print("User regrets on pausing. So, let's continue the adventure.")
+        alertView.addButton(buttonCancelTitle) {
+            print("User canceled action!")
         }
+
         alertView.showTitle(
-            "Pause Adventure?", // Title of view
-            subTitle: "You can resume it later", // String of view
-            duration: 2.0, // Duration to show before closing automatically, default: 0.0
+            title, // Title of view
+            subTitle: subTitle, // String of view
+            duration: 0.0, // Duration to show before closing automatically, default: 0.0
             completeText: "Done", // Optional button value, default: ""
             style: .notice, // Styles - see below.
-            colorStyle: 0xA429FF,
-            colorTextButton: 0xFFFFFF,
-            circleIconImage: alertViewIcon
+            colorStyle: 0xD4143D,
+            colorTextButton: 0xFFFFFF
+            //            circleIconImage: alertViewIcon
         )
-        
-//        alertView.showWarning("Pause Adventure?", subTitle: "You can resume it later.", circleIconImage: alertViewIcon)
+
+
     }
     
     @IBAction func StopTripBtnPressed(_ sender: Any) {
@@ -286,8 +347,12 @@ class TripDetailsCell: UICollectionViewCell {
         }
         
         
-        self.totalDistance.text = "8.32 KM"
-        self.userProfileImg.image = nil
+        self.totalDistance.text = "120.0 km"
+        
+        if let imageData = trip.pet.image {
+            self.userProfileImg.image = UIImage(data: imageData)
+        }
+        
         self.avargeSpeed.text = "142 bpm"
         self.currentSpeed.text = "6.2 km/h"
         self.totalTime.text = "00:43:27"

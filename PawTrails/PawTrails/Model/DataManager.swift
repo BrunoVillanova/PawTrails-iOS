@@ -994,75 +994,7 @@ class DataManager: NSObject {
         }
     }
     
-    func startTrips(_ petIDs: [Int]) -> Observable<[Trip]> {
-        
-        let apiStartTrips = Observable<[Trip]>.create({ observer in
-            APIRepository.instance.startTrips(petIDs) { (error, data) in
-                if error != nil {
-                    observer.onError(error!)
-                } else {
-                    observer.onNext(data!)
-                    observer.onCompleted()
-                }
-            }
-            return Disposables.create()
-        })
-        
-        return apiStartTrips
-    }
-    
-    func stopTrips(_ tripIDs: [Int]) -> Observable<[Trip]> {
-        let finishTripApiObserver = Observable<[Trip]>.create({ observer in
-            APIRepository.instance.finishTrip(tripIDs) { (error, data) in
-                if error != nil {
-                    observer.onError(error!)
-                } else {
-                    observer.onNext(data!)
-                    observer.onCompleted()
-                }
-            }
-            return Disposables.create()
-        })
-        
-        return finishTripApiObserver
-    }
-    
-    func finishAdventure() -> Observable<[Trip]> {
-        return self.getActivePetTrips()
-            .filter({ (trips) -> Bool in
-                return trips.count > 0
-            })
-            .take(1)
-            .flatMap { (trips) -> Observable<[Trip]> in
-                let tripIDs = trips.map({Int($0.id)})
-                return self.stopTrips(tripIDs)
-            }
-    }
-    
-    
-    func pauseAdventure() -> Observable<[Trip]> {
-        
-        return self.getActivePetTrips()
-            .filter({ (trips) -> Bool in
-                return trips.count > 0
-            }).take(1)
-            .flatMap { (trips) -> Observable<[Trip]> in
-                let tripIDs = trips.map({Int($0.id)})
-                
-                return Observable.create({ observer in
-                    APIRepository.instance.pauseTrip(tripIDs) { (error) in
-                        if error != nil {
-                            observer.onError(error!)
-                        } else {
-//                            self.retrieveRunningTrips()
-//                            observer.onNext(data!)
-                            observer.onCompleted()
-                        }
-                    }
-                    return Disposables.create()
-                })
-        }
-    }
+   
     
 
 }
