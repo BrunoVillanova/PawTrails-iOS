@@ -85,7 +85,12 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     @IBAction func addUserbtnPressed(_ sender: Any) {
-        presentAddUser()
+        guard let pet = self.pet else {return}
+        if pet.isOwner {
+            presentAddUser()
+        } else {
+            self.alert(title: "", msg: "Only pet owners can edit trip goals", type: .blue, disableTime: 3, handler: nil)
+        }
     }
     
     

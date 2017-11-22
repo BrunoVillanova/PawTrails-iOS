@@ -30,6 +30,9 @@ class PetInfromationViewController: UIViewController, IndicatorInfoProvider, Pet
         self.tableView.backgroundColor = UIColor.groupTableViewBackground
         self.view.backgroundColor = UIColor.groupTableViewBackground
         
+        let leftItemBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(leftBarButtonTapped))
+        self.navigationItem.rightBarButtonItem = leftItemBarButton
+
 
         
         usersCollectionView.delegate = self
@@ -49,6 +52,10 @@ class PetInfromationViewController: UIViewController, IndicatorInfoProvider, Pet
     }
     deinit {
         presenter.deteachView()
+    }
+    
+    func leftBarButtonTapped() {
+        print("Left Bar Button Item")
     }
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {

@@ -361,6 +361,14 @@ extension PetUser {
     }
 }
 
+extension DailyGoals {
+    init(_ json: JSON) {
+        petId = json["petId"].intValue
+        distanceGoal = json["distanceGoal"].intValue
+        timeGoal = json["timeGoal"].intValue
+    }
+}
+
 
 
 extension TripList {

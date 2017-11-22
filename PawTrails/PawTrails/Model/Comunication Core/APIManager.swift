@@ -18,7 +18,7 @@ public enum APICallType {
     registerPet, getPets, getPet, setPet, checkDevice, changeDevice, unregisterPet,
     getPetClasses, getBreeds, getContinents, getCountries,
     sharePet, getSharedPetUsers, removeSharedPet,leaveSharedPet,
-    addSafeZone, setSafeZone, getSafeZone, listSafeZones, removeSafeZone, startTrip, finishTrip, pauseTrip, resumeTrip, getTripList, getTripsAchievements
+    addSafeZone, setSafeZone, getSafeZone, listSafeZones, removeSafeZone, startTrip, finishTrip, pauseTrip, resumeTrip, getTripList, getTripsAchievements, editDailyGoal, getDailyGoals
     
     /// Defines APICallType need of token
     
@@ -80,6 +80,8 @@ public enum APICallType {
         case .resumeTrip: return "/trips/resume"
         case .getTripList: return "/trips/list"
         case .getTripsAchievements: return "/trips/achievementsget"
+        case .editDailyGoal: return "/pets/dailygoalsedit"
+        case .getDailyGoals: return "/pets/dailygoalsget"
         }
     }
     

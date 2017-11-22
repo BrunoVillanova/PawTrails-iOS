@@ -29,6 +29,8 @@ class APIRepository {
     typealias ApiTrip = (APIManagerError?, [Trip]?) -> Void
     typealias ApiTripListCallBack = (APIManagerError?, [TripList]?) -> Void
     typealias ApiGetAchievmenetCallBack = (APIManagerError?, TripAchievements?) -> Void
+    typealias ApiGetDailyGoalCallBack = (APIManagerError?, DailyGoals?) -> Void
+
 
     
     
@@ -604,7 +606,6 @@ class APIRepository {
     //callBack: returns nil or data
 
     func getPetTripAchievements(_ petId: Int, from: Int, to: Int, status: [Int], callback: @escaping ApiGetAchievmenetCallBack) {
-        
         var achievments: [String:Any] {
             var dict = [String:Any](object:self)
             dict["from"] = from
@@ -624,6 +625,40 @@ class APIRepository {
 
     }
     
+    func getDailyGoals(_ petId: Int, callback: @escaping ApiGetDailyGoalCallBack) {
+        var petId: [String:Any] {
+            var dict = [String:Any](object:self)
+            dict["petId"] = petId
+            return dict
+        }
+        APIManager.instance.perform(call: .getDailyGoals, with: petId) { (error, json) in
+            if error == nil, let dailyGoal = json {
+                callback(nil, DailyGoals(dailyGoal))
+            } else {
+                callback(error, nil)
+
+            }
+        }
+
+    }
+    
+    
+    
+    
+    
+    
+    func editTripDailyGoal(_ petId: Int, distanceGoal: Int, timeGoal: Int, callback: @escaping APIRepErrorCallback) {
+        var goal: [String:Any] {
+            var dict = [String:Any](object:self)
+            dict["petId"] = petId
+            dict["distanceGoal"] = distanceGoal
+            dict["timeGoal"] = timeGoal
+            return dict
+        }
+        APIManager.instance.perform(call: .editDailyGoal, with: goal) { (json, error) in
+            callback(json)
+        }
+    }
 }
 
 

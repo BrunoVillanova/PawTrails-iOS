@@ -3121,7 +3121,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wda-Bc-iZi">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="108" width="375" height="510"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" id="qiR-Lj-qfu">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -3181,7 +3181,7 @@
                                 </connections>
                             </tableView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="P2d-7B-yrz">
-                                <rect key="frame" x="16" y="28" width="343" height="29"/>
+                                <rect key="frame" x="16" y="72" width="343" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="lQg-Fg-KG7"/>
                                 </constraints>
@@ -4106,7 +4106,7 @@
                     <connections>
                         <outlet property="buttonBarView" destination="Kix-04-002" id="BAd-Td-QvO"/>
                         <outlet property="containerView" destination="osN-NO-pbf" id="vqP-kh-ueX"/>
-                        <segue destination="9OU-Qn-OVQ" kind="show" identifier="ChangeDevice" id="Mpc-Ja-22V"/>
+                        <segue destination="K64-4m-oVn" kind="show" identifier="editPetDetails" id="IG6-st-y6n"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HMt-Qw-LXS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4375,7 +4375,6 @@
                     <connections>
                         <outlet property="tableView" destination="tHL-n0-Jza" id="EA3-jc-hIF"/>
                         <outlet property="usersCollectionView" destination="kQs-DV-eqz" id="M4o-US-POi"/>
-                        <segue destination="K64-4m-oVn" kind="show" identifier="editPetDetails" id="gjN-xE-RCG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w36-VC-44e" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -7191,7 +7190,6 @@ finish the Adventure?</string>
         <segue reference="dP0-u9-NvB"/>
         <segue reference="5Sd-jc-pKD"/>
         <segue reference="Nln-Sh-wxV"/>
-        <segue reference="Mpc-Ja-22V"/>
-        <segue reference="gjN-xE-RCG"/>
+        <segue reference="IG6-st-y6n"/>
     </inferredMetricsTieBreakers>
 </document>

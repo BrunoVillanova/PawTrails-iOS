@@ -48,7 +48,6 @@ class AdventuresListViewController: UIViewController, IndicatorInfoProvider  {
         mydatePicker.heightAnchor.constraint(equalTo: topView.heightAnchor).isActive = true
         mydatePicker.topAnchor.constraint(equalTo: topView.topAnchor).isActive = true
         mydatePicker.bottomAnchor.constraint(equalTo: topView.bottomAnchor).isActive = true
-
     }
     
     
@@ -130,10 +129,19 @@ class AdventuresListViewController: UIViewController, IndicatorInfoProvider  {
         
     }
     
+   
+    
     
     
     @IBAction func setUpGoalBtnPressed(_ sender: Any) {
-       presentGoalsVc()
+        guard let pet = self.pet else {return}
+        guard let petName = pet.name else {return}
+        if !pet.isOwner {
+            self.alert(title: "", msg: "Only \(petName) owner can edit trip goal. ", type: .blue, disableTime: 5, handler: nil)
+        } else {
+            presentGoalsVc()
+        }
+
     }
     
     
