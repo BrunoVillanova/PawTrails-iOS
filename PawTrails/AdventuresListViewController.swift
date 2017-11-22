@@ -40,7 +40,6 @@ class AdventuresListViewController: UIViewController, IndicatorInfoProvider  {
         editBtn.border(color: UIColor.darkGray, width: 1)
         containerView.border(color: UIColor.darkGray, width: 1)
         childContainerView.border(color: UIColor.darkGray, width: 1)
-
         self.topView.addSubview(mydatePicker)
         self.mydatePicker.bounds = topView.bounds
         self.mydatePicker.center = topView.center
