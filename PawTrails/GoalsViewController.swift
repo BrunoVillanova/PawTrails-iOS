@@ -59,6 +59,7 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
         mydatePicker.heightAnchor.constraint(equalTo: datePicker.heightAnchor).isActive = true
         mydatePicker.topAnchor.constraint(equalTo: datePicker.topAnchor).isActive = true
         mydatePicker.bottomAnchor.constraint(equalTo: datePicker.bottomAnchor).isActive = true
+        
 
         barChart.delegate = self
         pieChart.delegate = self

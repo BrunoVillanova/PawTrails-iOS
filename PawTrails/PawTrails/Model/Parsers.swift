@@ -374,8 +374,16 @@ extension TripList {
     }
 }
 
-
-
+extension TripAchievements {
+    init(_ json: JSON) {
+        petId = json["petId"].intValue
+        distance = json["distanceGoal"].intValue
+        timeGoal = json["timeGoal"].intValue
+        totalTime = json["totalTime"].intValue
+        totalDistance = json["totalDistance"].intValue
+        totalDays = json["totalDays"].intValue
+    }
+}
 
 
 extension Trip {
@@ -440,6 +448,8 @@ extension SafeZone {
         return dict
     }
 }
+
+
 
 extension CountryCode {
     

@@ -34,7 +34,7 @@ class CircleChart: UIView {
         let y = NSLayoutConstraint(item: percentLabel, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0)
         
         percentLabel.adjustsFontSizeToFitWidth = true
-        percentLabel.font = UIFont.systemFont(ofSize: 25)
+        percentLabel.font = UIFont.systemFont(ofSize: 15)
         percentLabel.textColor = UIColor.darkGray
         percentLabel.textAlignment = .center
         percentLabel.adjustsFontSizeToFitWidth = true
@@ -70,8 +70,8 @@ class CircleChart: UIView {
         percent = p
         circlee.strokeColor = color.cgColor
         percentLabel.textColor = color
-        let number: Float = Float(percent * 100)
-        percentLabel.text = "\(number.cleanValue) \(text)"
+//        let number: Float = Float(percent * 100)
+        percentLabel.text = text
         
         if p == 0 {
             circlee.path = nil

@@ -74,14 +74,16 @@ class AirbnbDatePickerCell: BaseCell {
                 dateLabel.layer.cornerRadius = frame.size.width / 2
             }
             
-        } else if type.contains(.PastDate) {
-            
-            dateLabel.layer.cornerRadius = 0
-            dateLabel.layer.borderColor = UIColor.clear.cgColor
-            dateLabel.layer.borderWidth = 0
-            dateLabel.layer.backgroundColor = UIColor.clear.cgColor
-            dateLabel.layer.mask = nil
-            dateLabel.textColor = UIColor.secondPrimary
+        
+        
+//        else if type.contains(.PastDate) {
+//
+//            dateLabel.layer.cornerRadius = 0
+//            dateLabel.layer.borderColor = UIColor.clear.cgColor
+//            dateLabel.layer.borderWidth = 0
+//            dateLabel.layer.backgroundColor = UIColor.clear.cgColor
+//            dateLabel.layer.mask = nil
+//            dateLabel.textColor = UIColor.secondPrimary
 
         } else if type.contains(.Today) {
             

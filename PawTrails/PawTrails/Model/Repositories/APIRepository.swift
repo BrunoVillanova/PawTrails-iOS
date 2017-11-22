@@ -28,6 +28,7 @@ class APIRepository {
     typealias APIRepPetSafeZonesCallback = (APIManagerError?, [SafeZone]?) -> Void
     typealias ApiTrip = (APIManagerError?, [Trip]?) -> Void
     typealias ApiTripListCallBack = (APIManagerError?, [TripList]?) -> Void
+    typealias ApiGetAchievmenetCallBack = (APIManagerError?, TripAchievements?) -> Void
 
     
     
@@ -598,9 +599,32 @@ class APIRepository {
         }
     }
     
+    
+    // Get pet trip achievements
+    //callBack: returns nil or data
+
+    func getPetTripAchievements(_ petId: Int, from: Int, to: Int, status: [Int], callback: @escaping ApiGetAchievmenetCallBack) {
+        
+        var achievments: [String:Any] {
+            var dict = [String:Any](object:self)
+            dict["from"] = from
+            dict["to"] = to
+            dict["petId"] = petId
+            dict["status"] = status
+            return dict
+        }
+        
+        APIManager.instance.perform(call: .getTripsAchievements, with: achievments) { (error, json) in
+            if error == nil, let achievmeentsJson = json {
+                callback(nil, TripAchievements(achievmeentsJson))
+            } else if let error = error {
+                callback(error, nil)
+            }
+        }
+
+    }
+    
 }
-
-
 
 
 

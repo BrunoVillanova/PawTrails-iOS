@@ -185,6 +185,15 @@ struct PetDeviceData {
     var pet: Pet
 }
 
+struct TripAchievements {
+    var petId: Int
+    var distance: Int
+    var timeGoal: Int
+    var totalTime: Int
+    var totalDistance: Int
+    var totalDays: Int
+}
+
 extension PetDeviceData: Equatable {
     static func == (lhs: PetDeviceData, rhs: PetDeviceData) -> Bool {
         return lhs.id == rhs.id
