@@ -43,17 +43,20 @@ class MapViewController: UIViewController {
         presenter.attachView(self)
         reloadPets()
         
-        DataManager.instance.getActivePetTrips().subscribe(onNext: { (tripList) in
-            print("MapViewController -> getActivePetTrips \(tripList.count)")
-            if (tripList.count > 0){
-                let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(gestureRecognizer:)))
-                gestureRecognizer.delegate = self
-                self.alertwithGeature(title: "", msg: "ADVENTURE IN PROGRESS, CLICK TO RESUME", type: .red, disableTime: 150, geatureReconginzer: gestureRecognizer, handler: {
-                })
-            } else {
-                print("No running trips")
-                self.hideNotification()
-            }
+        DataManager.instance.getActivePetTrips()
+            .subscribe(onNext: { (tripList) in
+                
+                print("MapViewController -> getActivePetTrips \(tripList.count)")
+                if (tripList.count > 0){
+                    let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(gestureRecognizer:)))
+                    gestureRecognizer.delegate = self
+                    self.alertwithGeature(title: "", msg: "ADVENTURE IN PROGRESS, CLICK TO RESUME", type: .red, disableTime: 150, geatureReconginzer: gestureRecognizer, handler: {
+                    })
+                } else {
+                    print("No running trips")
+                    self.hideNotification()
+                }
+                
         }).addDisposableTo(disposeBag)
     }
     

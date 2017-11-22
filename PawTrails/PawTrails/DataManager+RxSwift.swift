@@ -59,17 +59,9 @@ extension DataManager {
             return Disposables.create()
         })
     }
-    
-    func retrieveRunningTrips() {
-        APIRepository.instance.getTripList([0,1]) { (error, trips) in
-            if error == nil {
-                self.runningTrips.value = trips!
-            }
-        }
-    }
+
     
     func getApiTrips() -> Observable<[Trip]> {
-        
         return Observable.create({observer in
             APIRepository.instance.getTripList([]) { (error, trips) in
                 if let error = error {
@@ -96,6 +88,7 @@ extension DataManager {
     func allTrips() -> Observable<[Trip]> {
         let apiTrips = getApiTrips()
         let socketTrips = SocketIOManager.instance.trips()
+        print("DataManager -> allTrips")
         
         let allTrips = Observable.combineLatest(apiTrips, socketTrips) { (tripsFromApi, tripsFromSocket) -> [Trip] in
             
@@ -157,5 +150,100 @@ extension DataManager {
             
             return nil
         })
+    }
+    
+    func startTrips(_ petIDs: [Int]) -> Observable<[Trip]> {
+        
+        let apiStartTrips = Observable<[Trip]>.create({ observer in
+            APIRepository.instance.startTrips(petIDs) { (error, data) in
+                if error != nil {
+                    observer.onError(error!)
+                } else {
+                    observer.onNext(data!)
+                    observer.onCompleted()
+                }
+            }
+            return Disposables.create()
+        })
+        
+        return apiStartTrips
+    }
+    
+    func stopTrips(_ tripIDs: [Int]) -> Observable<[Trip]> {
+        let finishTripApiObserver = Observable<[Trip]>.create({ observer in
+            APIRepository.instance.finishTrip(tripIDs) { (error, data) in
+                if error != nil {
+                    observer.onError(error!)
+                } else {
+                    observer.onNext(data!)
+                    observer.onCompleted()
+                }
+            }
+            return Disposables.create()
+        })
+        
+        return finishTripApiObserver
+    }
+    
+    func finishAdventure() -> Observable<[Trip]> {
+        return self.getActivePetTrips()
+            .filter({ (trips) -> Bool in
+                return trips.count > 0
+            })
+            .take(1)
+            .flatMap { (trips) -> Observable<[Trip]> in
+                let tripIDs = trips.map({Int($0.id)})
+                return self.stopTrips(tripIDs)
+        }
+    }
+    
+    
+    func pauseAdventure() -> Observable<[Trip]> {
+        
+        return self.getActivePetTrips()
+            .filter({ (trips) -> Bool in
+                return trips.count > 0
+            }).take(1)
+            .flatMap { (trips) -> Observable<[Trip]> in
+                let tripIDs = trips.map({Int($0.id)})
+                
+                return Observable.create({ observer in
+                    APIRepository.instance.pauseTrip(tripIDs) { (error) in
+                        if error != nil {
+                            observer.onError(error!)
+                        } else {
+                            //                            self.retrieveRunningTrips()
+                            //                            observer.onNext(data!)
+                            observer.onCompleted()
+                        }
+                    }
+                    return Disposables.create()
+                })
+        }
+    }
+    
+    func resumeAdventure() -> Observable<[Trip]> {
+        
+        return self.getActivePetTrips()
+            .filter({ (trips) -> Bool in
+                let pausedTrips = trips.filter { $0.status == 1}
+                return pausedTrips.count > 0
+            })
+            .take(1)
+            .flatMap { (trips) -> Observable<[Trip]> in
+
+                return Observable.create({ observer in
+                    APIRepository.instance.resumeTrip { (error) in
+                        if error != nil {
+                            observer.onError(error!)
+                        } else {
+                            //                            self.retrieveRunningTrips()
+                            //                            observer.onNext(data!)
+                            observer.onCompleted()
+                        }
+                    }
+                    return Disposables.create()
+                })
+        }
     }
 }

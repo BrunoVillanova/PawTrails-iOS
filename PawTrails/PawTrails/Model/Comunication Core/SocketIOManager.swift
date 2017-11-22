@@ -134,14 +134,17 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         socketReactive?.on(channel.pets.name).subscribe(onNext: { (data) in
             print("SocketIO -> Pets")
             self.openChannels.insert(channel.pets)
-//            self.petGpsUpdates.value = PetDeviceData.fromJson(data.first)!
         }).addDisposableTo(disposeBag)
         
         
         socketReactive?.on(channel.gpsUpdates.name).subscribe(onNext: { (data) in
             print("SocketIO -> GPS Updates")
             self.openChannels.insert(channel.gpsUpdates)
-            self.petGpsUpdates.value = PetDeviceData.fromJson(data.first)!
+            
+            if let petDeviceData = PetDeviceData.fromJson(data.first) {
+                self.petGpsUpdates.value = petDeviceData
+            }
+            
         }).addDisposableTo(disposeBag)
         
         
@@ -170,7 +173,18 @@ class SocketIOManager: NSObject, URLSessionDelegate {
             }
         }).addDisposableTo(disposeBag)
         
-        self.connect()
+        DataManager.instance.userToken.asObservable().subscribe(onNext: { (authentication) in
+            if authentication != nil {
+                // User is authenticated
+                
+                self.isConnecting = true
+                self.socket.connect()
+                
+//                self.socket.emit(channel.auth.name, token)
+            } else {
+                self.socket.disconnect()
+            }
+        }).addDisposableTo(disposeBag)
     }
     
     func userNotSigned() {

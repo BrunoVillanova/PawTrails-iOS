@@ -10,18 +10,23 @@ import UIKit
 import MapKit
 import RxSwift
 import RxCocoa
+import SCLAlertView
+import Convert
 
 class TripScreenViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var mapView: PTMapView!
     @IBOutlet weak var pageControl: UIPageControl!
-
+    @IBOutlet weak var pauseButton: UIButton!
+    @IBOutlet weak var joinButton: UIButton!
+    
     let locationManager = CLLocationManager()
     var petArray = [Dictionary<String,String>]()
     
     var runningTripArray = [Trip]()
     var tripIds = [Int]()
+    var adventurePaused: Bool?
     
     var scrollViewPageIndex :Int {
         set {
@@ -56,7 +61,9 @@ class TripScreenViewController: UIViewController {
             }
         }
     }
-     let disposeBag = DisposeBag()
+    
+    let disposeBag = DisposeBag()
+    
     //MARK: -
     //MARK: View Lifecycle
     override func viewDidLoad() {
@@ -74,6 +81,45 @@ class TripScreenViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
+        activeTripsObservable
+            .subscribe(onNext: { (activeTrips) in
+                let pausedTrips = activeTrips.filter { $0.status == 1 }
+                self.adventurePaused = (pausedTrips.count > 0)
+                self.pauseButton.isEnabled = true
+                
+                if self.adventurePaused! {
+                    self.pauseButton.changeImageAnimated(image: #imageLiteral(resourceName: "StartTrip-1x-png"))
+                } else {
+                    self.pauseButton.changeImageAnimated(image: #imageLiteral(resourceName: "PauseTripButton-1x-png"))
+                }
+                
+                if self.pauseButton.isHidden {
+                    self.pauseButton.alpha = 0
+                    self.pauseButton.isHidden = false
+                    UIView.animate(withDuration: 0.3, animations: {
+                        self.pauseButton.alpha = 1;
+                    })
+                }
+                
+                if self.joinButton.isHidden {
+                    self.joinButton.alpha = 0
+                    self.joinButton.isHidden = false
+                    UIView.animate(withDuration: 0.3, animations: {
+                        self.joinButton.alpha = 1;
+                    })
+                }
+                
+            }).addDisposableTo(disposeBag)
+        
+//        activeTripsObservable.map { (activeTrips) -> UIImage in
+//            let pausedTrips = activeTrips.filter { $0.status == 1 }
+//            if pausedTrips.count > 0 {
+//                return #imageLiteral(resourceName: "StartTrip-1x-png")
+//            } else {
+//                return #imageLiteral(resourceName: "PauseTripButton-1x-png")
+//            }
+//        }.bind(to: self.pauseButton.rx.image(for: .normal)).addDisposableTo(disposeBag)
+        
         self.setupSubViews()
     }
     
@@ -84,29 +130,29 @@ class TripScreenViewController: UIViewController {
     
     private func setupSubViews() {
         selectedPageIndex.asObservable().bind(to: pageControl.rx.currentPage).addDisposableTo(bag)
- 
+        
         collectionView.rx.contentOffset.bind { [weak self] (point) in
             guard let _ = self?.collectionView.frame.size.width else {
                 return
             }
-        
+            
             if Int(point.x.truncatingRemainder(dividingBy: (self?.collectionView.frame.width)!)) != 0 {
                 return
             }
             
             self?.selectedPageIndex.value = (self?.scrollViewPageIndex)!
             
-        }.addDisposableTo(bag)
+            }.addDisposableTo(bag)
     }
     
     override func viewDidLayoutSubviews() {
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
-
+            
             collectionView.isPagingEnabled = true
             collectionView.showsHorizontalScrollIndicator = false
         }
-
+        
         myCollectionViewHeight = collectionView.frame.size.height
         myCollectionViewWidith = collectionView.frame.size.width
     }
@@ -140,7 +186,64 @@ class TripScreenViewController: UIViewController {
     }
     
     @IBAction func pauseTripBtnPressed(_ sender: Any) {
-//        let vc = self.storyboard?.instantiateViewController(withIdentifier: <#T##String#>)
+        
+        let theButton = sender as UIButton
+        theButton.isEnabled = false
+        
+        let isPaused = self.adventurePaused!
+        var title: String
+        var subTitle: String
+        var buttonOkTitle: String
+        var buttonCancelTitle: String
+        
+        if !isPaused {
+            title = "Pause Adventure?"
+            subTitle = "You can resume it later."
+            buttonOkTitle = "Pause it now!"
+            buttonCancelTitle = "Let's continue!"
+        } else {
+            title = "Resume Adventure?"
+            subTitle = "Let's continue our adventure."
+            buttonOkTitle = "Resume the adventure!"
+            buttonCancelTitle = "Keep it paused!"
+        }
+        
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false,
+            showCircularIcon: true
+        )
+        
+        let alertView = SCLAlertView(appearance: appearance)
+        
+        alertView.addButton(buttonOkTitle) {
+            
+            if (!isPaused) {
+                DataManager.instance.pauseAdventure().subscribe(onNext: { (stoppedTrips) in
+//                    self.navigationController?.dismiss(animated: true, completion: nil)
+                }).addDisposableTo(self.disposeBag)
+            } else {
+                DataManager.instance.resumeAdventure().subscribe(onNext: { (stoppedTrips) in
+//                    self.navigationController?.dismiss(animated: true, completion: nil)
+                }).addDisposableTo(self.disposeBag)
+            }
+        }
+        
+        alertView.addButton(buttonCancelTitle) {
+            print("User canceled action!")
+        }
+
+        alertView.showTitle(
+            title, // Title of view
+            subTitle: subTitle, // String of view
+            duration: 0.0, // Duration to show before closing automatically, default: 0.0
+            completeText: "Done", // Optional button value, default: ""
+            style: .notice, // Styles - see below.
+            colorStyle: 0xD4143D,
+            colorTextButton: 0xFFFFFF
+            //            circleIconImage: alertViewIcon
+        )
+
+
     }
     
     @IBAction func StopTripBtnPressed(_ sender: Any) {
@@ -189,13 +292,13 @@ extension TripScreenViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: myCollectionViewWidith, height: myCollectionViewHeight)
     }
-
+    
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout
         collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -205,7 +308,7 @@ extension TripScreenViewController: UICollectionViewDelegateFlowLayout {
 
 class TripDetailsCell: UICollectionViewCell {
     
-
+    
     @IBOutlet weak var maskImage: UiimageViewWithMask!
     @IBOutlet weak var totalDistanceImageVIew: UIImageView!
     @IBOutlet weak var totalDistancesubLabel: UILabel!
@@ -240,12 +343,16 @@ class TripDetailsCell: UICollectionViewCell {
     
     func configureWithTrip(_ trip: Trip) {
         if let petName = trip.pet.name {
-           self.petName.text = petName
+            self.petName.text = petName
         }
         
-
-        self.totalDistance.text = "8.32 KM"
-        self.userProfileImg.image = nil
+        
+        self.totalDistance.text = "120.0 km"
+        
+        if let imageData = trip.pet.image {
+            self.userProfileImg.image = UIImage(data: imageData)
+        }
+        
         self.avargeSpeed.text = "142 bpm"
         self.currentSpeed.text = "6.2 km/h"
         self.totalTime.text = "00:43:27"

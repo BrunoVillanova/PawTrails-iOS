@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		15226D901F8D18EA007EEFF2 /* SocketIO+RxSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15226D8F1F8D18EA007EEFF2 /* SocketIO+RxSwift.swift */; };
 		152A8F701FB5E0CB00C54DD8 /* DataManager+RxSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152A8F6F1FB5E0CB00C54DD8 /* DataManager+RxSwift.swift */; };
+		1548B82A1FC5ADA200DC7E2B /* UIButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1548B8291FC5ADA200DC7E2B /* UIButtonExtensions.swift */; };
 		155316D31FBF189E009230B1 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 155316D01FBF1897009230B1 /* Charts.framework */; };
 		157401A41F9E268200A854C5 /* PTBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157401911F9E268200A854C5 /* PTBubbleView.swift */; };
 		157401A51F9E268200A854C5 /* Battery@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 157401931F9E268200A854C5 /* Battery@2x.png */; };
@@ -245,6 +246,7 @@
 /* Begin PBXFileReference section */
 		15226D8F1F8D18EA007EEFF2 /* SocketIO+RxSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SocketIO+RxSwift.swift"; path = "Extensions/SocketIO+RxSwift.swift"; sourceTree = "<group>"; };
 		152A8F6F1FB5E0CB00C54DD8 /* DataManager+RxSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataManager+RxSwift.swift"; sourceTree = "<group>"; };
+		1548B8291FC5ADA200DC7E2B /* UIButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtensions.swift; sourceTree = "<group>"; };
 		157401911F9E268200A854C5 /* PTBubbleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTBubbleView.swift; sourceTree = "<group>"; };
 		157401931F9E268200A854C5 /* Battery@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Battery@2x.png"; sourceTree = "<group>"; };
 		157401941F9E268200A854C5 /* BatteryLow@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BatteryLow@1x.png"; sourceTree = "<group>"; };
@@ -860,6 +862,7 @@
 				44251AE21F0CD54D0067F401 /* MapExtensions.swift */,
 				44251AE31F0CD54D0067F401 /* ViewExtensions.swift */,
 				44477CB81F599EFC00083295 /* UiimageViewWithMask.swift */,
+				1548B8291FC5ADA200DC7E2B /* UIButtonExtensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1341,6 +1344,7 @@
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SCLAlertView/SCLAlertView.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework",
 				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
@@ -1359,6 +1363,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SCLAlertView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkyFloatingLabelTextField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketIO.framework",
@@ -1464,6 +1469,7 @@
 				44251B771F0CD6130067F401 /* CDCountryCode+CoreDataClass.swift in Sources */,
 				157401A41F9E268200A854C5 /* PTBubbleView.swift in Sources */,
 				44EAB45F1F614095006A64AE /* JoinTripVC.swift in Sources */,
+				1548B82A1FC5ADA200DC7E2B /* UIButtonExtensions.swift in Sources */,
 				44251B7E1F0CD6130067F401 /* CDPhone+CoreDataProperties.swift in Sources */,
 				44251B4B1F0CD5DF0067F401 /* PetBirthdayTableViewController.swift in Sources */,
 				441858EB1F98FA85003710A8 /* BCS3ViewController.swift in Sources */,
