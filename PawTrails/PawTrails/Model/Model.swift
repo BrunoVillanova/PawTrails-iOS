@@ -77,6 +77,7 @@ struct Pet {
     var isOwner: Bool
     var neutered: Bool
     var weight: Double?
+    var bcScore: Int
 
     var safezones: [SafeZone]?
     var users: [PetUser]?

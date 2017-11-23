@@ -26,6 +26,14 @@ class ResultViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        APIRepository.instance.loadPet(pet.id, callback: { (error, pet) in
+            if error == nil, let pet = pet {
+                self.pet = pet
+            }
+        })
+        
+        
         if let pet = pet, let bscescroe = bscText, let weights = weight {
             self.bscLabel.text = bscescroe
             self.weightLbl.text = weights
@@ -61,6 +69,30 @@ class ResultViewController: UIViewController {
     }
 
     @IBAction func showRecomBtnPressed(_ sender: UIButton) {
+        
+        if var pet = self.pet, let bcScore = self.bscText {
+            
+            if bcScore == "BCS 1" {
+                pet.bcScore = 1
+            } else if bcScore == "BCS 2" {
+                pet.bcScore = 2
+            } else if bcScore == "BCS 3" {
+                pet.bcScore = 3
+            }else if bcScore == "BCS 4" {
+                pet.bcScore = 4
+            }else if bcScore == "BCS 5" {
+                pet.bcScore = 5
+            }
+            APIRepository.instance.save(pet, callback: { (error, pet) in
+                if error == nil, let pet = pet {
+                    print(pet.bcScore)
+                } else {
+                    self.alert(title: "", msg: "An error occured, please try again", type: .red, disableTime: 3, handler: nil)
+                }
+            })
+
+        }
+ 
     }
 
     @IBAction func restartBtnPressed(_ sender: UIButton) {
@@ -74,7 +106,7 @@ class ResultViewController: UIViewController {
     }
     
     
-    
+
     
     
     

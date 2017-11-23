@@ -655,7 +655,7 @@ extension AirbnbDatePickerViewController: AirbnbDatePickerFooterDelegate {
                 del.datePickerController(self, didSaveStartDate: selectedStartDate, endDate: selectedEndDate)
 
             }
-            self.navigationController?.dismiss(animated: true, completion: nil)
+            self.navigationController?.dismiss(animated: false, completion: nil)
         }
     }
 }

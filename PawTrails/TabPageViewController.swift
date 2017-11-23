@@ -34,8 +34,6 @@ class TabPageViewController: ButtonBarPagerTabStripViewController {
             newCell?.label.textColor = self?.color
         }
         super.viewDidLoad()
-        
-        
         APIRepository.instance.loadPet(pet.id, callback: { (error, pet) in
             if error == nil, let pet = pet {
                 self.pet = pet
@@ -47,15 +45,14 @@ class TabPageViewController: ButtonBarPagerTabStripViewController {
         self.navigationItem.rightBarButtonItem =  UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(addTapped(_sender:)))
         
         
-//        (image: UIImage(named:"switch-device-button-1x-png"), style: .plain, target: self, action: #selector(addTapped(_sender:)))
 
         navigationItem.title = pet.name
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
-//        self.tabBarController?.tabBar.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
     }
     

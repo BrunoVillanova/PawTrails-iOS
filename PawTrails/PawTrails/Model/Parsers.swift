@@ -157,6 +157,7 @@ extension Pet {
         weight = nil
         safezones = nil
         users = nil
+        bcScore = 0
     }
     
     init(_ json: JSON) {
@@ -174,6 +175,7 @@ extension Pet {
         weight = json["weight"].double
         safezones = nil
         users = nil
+        bcScore = json["bcScore"].intValue
     }
     
     init(_ cdPet: CDPet) {
@@ -191,6 +193,7 @@ extension Pet {
         weight = cdPet.weight
         safezones = (cdPet.safezones?.allObjects as? [CDSafeZone])?.map({ SafeZone($0) })
         users = (cdPet.users?.allObjects as? [CDPetUser])?.map({ PetUser($0) })
+        bcScore = Int(cdPet.bcScore)
     }
     
     var toDict: [String:Any] {
@@ -205,6 +208,7 @@ extension Pet {
         dict["breed1"] = breeds?.breeds[1]
         dict["breed_descr"] = breeds?.description
         dict["weight"] = weight != 0.0 ? weight : nil
+        dict["bcScore"] = bcScore == 0 ? nil : bcScore
         dict.filter(by: ["image", "imageURL", "birthday", "safezones", "users", "breeds", "isOwner", "deviceCode"])
         return dict
     }

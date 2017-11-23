@@ -189,6 +189,7 @@ class CDRepository {
                 cdPet.isOwner =  pet.isOwner
                 cdPet.type = pet.type?.type?.rawValue ?? Int16(-1.0)
                 cdPet.gender = pet.gender?.rawValue ?? Int16(-1.0)
+                cdPet.bcScore = Int16(pet.bcScore)
                
                 let group = DispatchGroup()
                 
