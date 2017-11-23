@@ -34,6 +34,28 @@ class SetUpYourGoalController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.restToDefult.round()
+        restingGoalSlider.maximumValue = 50.0
+        NormalGoalSlider.maximumValue = 12.0
+        
+        guard let pet = self.pet else {return}
+
+        APIRepository.instance.getDailyGoals(pet.id) { (error, goal) in
+            if error == nil, let goal = goal {
+                if goal.distanceGoal > 0, goal.timeGoal > 0 {
+                    let totalDistance = Float(goal.distanceGoal / 1000)
+                    let totaltime = Float(goal.timeGoal / 60)
+                    self.NormalGoalSlider.value = totaltime
+                    self.nomralSliderValue = totaltime
+                    
+                    self.restingSliderLabel?.text = "\(Int(totalDistance)) Km"
+                    
+                    self.nomalSliderLabel?.text = "\(Int(totaltime)) hrs"
+
+                    self.restingSliderValue = totalDistance
+                    self.restingGoalSlider.value = totalDistance
+                }
+            }
+        }
     }
     
     
@@ -55,10 +77,7 @@ class SetUpYourGoalController: UIViewController {
             label.textAlignment = .center
             handleView.addSubview(label)
             label.textColor = restingColors
-
-            
             self.restingSliderLabel = label
-            self.restingSliderLabel?.text = "\(Int(restingSliderValue)) Km"
 
         }
         
@@ -70,8 +89,6 @@ class SetUpYourGoalController: UIViewController {
             label.textColor = normalColors
             handleView.addSubview(label)
             self.nomalSliderLabel = label
-            
-            self.nomalSliderLabel?.text = "\(Int(nomralSliderValue)) hrs"
 
         }
 
@@ -95,6 +112,34 @@ class SetUpYourGoalController: UIViewController {
     }
    
     @IBAction func SaveBtnPressed(_ sender: UIBarButtonItem) {
+        // owner only can edit this
+        guard let pet = self.pet else {return}
+        guard let petName = pet.name else {return}
+
+        
+        if pet.isOwner {
+            if self.restingSliderValue > 0, self.nomralSliderValue > 0 {
+                let distanceGoalInMeter = Int(self.restingSliderValue * 1000)
+                let timeGoalInHours = Int(self.nomralSliderValue * 60)
+                
+                APIRepository.instance.editTripDailyGoal(pet.id, distanceGoal: distanceGoalInMeter, timeGoal: timeGoalInHours, callback: { (error) in
+                    if error == nil {
+                        self.alert(title: "", msg: "Your request has been proceed", type: .blue, disableTime: 3, handler: nil)
+                        if let navController = self.navigationController {
+                            navController.popViewController(animated: true)
+                        }
+                        
+                    } else {
+                        self.alert(title: "", msg: "Error, Please try again", type: .blue, disableTime: 3, handler: nil)
+                    }
+                })
+            } else {
+                self.alert(title: "", msg: "Please change distance and times values", type: .red, disableTime: 3, handler: nil)
+            }
+        }else {
+            self.alert(title: "", msg: "Only \(petName) owner can edit trip goal. ", type: .blue, disableTime: 3, handler: nil)
+        }
+        
     }
     
 

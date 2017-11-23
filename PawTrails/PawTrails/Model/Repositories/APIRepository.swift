@@ -27,7 +27,9 @@ class APIRepository {
     typealias APIRepPetSafeZoneCallback = (APIManagerError?, SafeZone?) -> Void
     typealias APIRepPetSafeZonesCallback = (APIManagerError?, [SafeZone]?) -> Void
     typealias ApiTrip = (APIManagerError?, [Trip]?) -> Void
-//    typealias ApiTripListCallBack = (APIManagerError?, [Trip]?) -> Void
+    typealias ApiTripListCallBack = (APIManagerError?, [Trip]?) -> Void
+    typealias ApiGetAchievmenetCallBack = (APIManagerError?, TripAchievements?) -> Void
+    typealias ApiGetDailyGoalCallBack = (APIManagerError?, DailyGoals?) -> Void
 
     
     
@@ -574,7 +576,7 @@ class APIRepository {
                 callback(error, nil)
             }
         }
-    }
+        }
 
     
     // Pause Trips
@@ -583,9 +585,9 @@ class APIRepository {
         let data: [String: Any] = ["trips": tripIDs, "timeStamp": Int(Date().timeIntervalSince1970)]
         APIManager.instance.perform(call: .pauseTrip, with: data) { (error, json) in
             if let error = error {
-                callback(error)
-            }
+            callback(error)
         }
+    }
     }
     
     

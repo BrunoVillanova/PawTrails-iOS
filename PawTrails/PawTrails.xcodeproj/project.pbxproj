@@ -177,10 +177,10 @@
 		446607C31F95FFE900833683 /* AirbnbDatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446607C21F95FFE900833683 /* AirbnbDatePickerViewController.swift */; };
 		446607C51F96004000833683 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446607C41F96004000833683 /* Date.swift */; };
 		446607C71F96028F00833683 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446607C61F96028F00833683 /* Utility.swift */; };
-		447D4C171E44C4F5008F82F4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 447D4C161E44C4F5008F82F4 /* MapKit.framework */; };
 		448BE9681ED47F5C00665608 /* APIUserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448BE9671ED47F5C00665608 /* APIUserTest.swift */; };
 		448BE96A1ED490D900665608 /* APIImageUploadTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448BE9691ED490D900665608 /* APIImageUploadTest.swift */; };
 		448C7CEC1F87C8C700BF7106 /* AddEditSafeZOneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C7CEB1F87C8C700BF7106 /* AddEditSafeZOneController.swift */; };
+		448D47A11FC6EF0F003B5333 /* ResultDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448D47A01FC6EF0F003B5333 /* ResultDetailsViewController.swift */; };
 		44A1AC501E92923A003EF6CA /* PetsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A1AC4F1E92923A003EF6CA /* PetsPresenter.swift */; };
 		44B179621E4B62690070A18B /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B179611E4B62690070A18B /* Presenter.swift */; };
 		44BC63CA1FB078FD006E38F4 /* SingleResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BC63C91FB078FD006E38F4 /* SingleResultViewController.swift */; };
@@ -359,7 +359,7 @@
 		44251B571F0CD6130067F401 /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationManager.swift; path = "Model/Comunication Core/NotificationManager.swift"; sourceTree = "<group>"; };
 		44251B581F0CD6130067F401 /* SharedPreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SharedPreferences.swift; path = "Model/Comunication Core/SharedPreferences.swift"; sourceTree = "<group>"; };
 		44251B591F0CD6130067F401 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDataManager.swift; path = "Model/Comunication Core/CoreDataManager.swift"; sourceTree = "<group>"; };
-		44251B5A1F0CD6130067F401 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIManager.swift; path = "Model/Comunication Core/APIManager.swift"; sourceTree = "<group>"; };
+		44251B5A1F0CD6130067F401 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = APIManager.swift; path = "Model/Comunication Core/APIManager.swift"; sourceTree = "<group>"; };
 		44251B5C1F0CD6130067F401 /* CDAddress+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CDAddress+CoreDataClass.swift"; sourceTree = "<group>"; };
 		44251B5D1F0CD6130067F401 /* CDAddress+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CDAddress+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		44251B5E1F0CD6130067F401 /* CDBreed+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CDBreed+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -425,10 +425,11 @@
 		446607C21F95FFE900833683 /* AirbnbDatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirbnbDatePickerViewController.swift; sourceTree = "<group>"; };
 		446607C41F96004000833683 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		446607C61F96028F00833683 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
-		447D4C161E44C4F5008F82F4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		4485007D1FC6DE3300F9510E /* PawTrails.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PawTrails.entitlements; sourceTree = "<group>"; };
 		448BE9671ED47F5C00665608 /* APIUserTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIUserTest.swift; sourceTree = "<group>"; };
 		448BE9691ED490D900665608 /* APIImageUploadTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIImageUploadTest.swift; sourceTree = "<group>"; };
 		448C7CEB1F87C8C700BF7106 /* AddEditSafeZOneController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditSafeZOneController.swift; sourceTree = "<group>"; };
+		448D47A01FC6EF0F003B5333 /* ResultDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultDetailsViewController.swift; sourceTree = "<group>"; };
 		44A1AC4F1E92923A003EF6CA /* PetsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetsPresenter.swift; path = Presenter/PetsPresenter.swift; sourceTree = "<group>"; };
 		44B179611E4B62690070A18B /* Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Presenter.swift; path = Presenter/Presenter.swift; sourceTree = "<group>"; };
 		44BC63C91FB078FD006E38F4 /* SingleResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleResultViewController.swift; sourceTree = "<group>"; };
@@ -467,7 +468,6 @@
 				157AC4B31FC3192E0005A717 /* Convert.framework in Frameworks */,
 				155316D31FBF189E009230B1 /* Charts.framework in Frameworks */,
 				44251AD61F0CD5170067F401 /* GoogleSymbolUtilities.framework in Frameworks */,
-				447D4C171E44C4F5008F82F4 /* MapKit.framework in Frameworks */,
 				44251AD21F0CD5170067F401 /* GoogleSignIn.framework in Frameworks */,
 				44251AD41F0CD5170067F401 /* GoogleAppUtilities.framework in Frameworks */,
 				44251AD51F0CD5170067F401 /* GoogleSignInDependencies.framework in Frameworks */,
@@ -667,6 +667,7 @@
 		4415FF411E3B822900A81B13 /* PawTrails */ = {
 			isa = PBXGroup;
 			children = (
+				4485007D1FC6DE3300F9510E /* PawTrails.entitlements */,
 				4415FF421E3B822900A81B13 /* AppDelegate.swift */,
 				157401901F9E268200A854C5 /* Custom Views */,
 				440CEE4C1E3B8D3D00F58A09 /* Model */,
@@ -712,6 +713,7 @@
 				441858E81F98EC7E003710A8 /* ResultViewController.swift */,
 				441858EA1F98FA85003710A8 /* BCS3ViewController.swift */,
 				441858EC1F98FAA1003710A8 /* BSC4ViewController.swift */,
+				448D47A01FC6EF0F003B5333 /* ResultDetailsViewController.swift */,
 			);
 			name = Recommandation;
 			sourceTree = "<group>";
@@ -1010,7 +1012,6 @@
 				157AC4B21FC3192E0005A717 /* Convert.framework */,
 				4441ACA71EB8C72E00FBE27F /* SystemConfiguration.framework */,
 				4441ACA51EB8C72500FBE27F /* SafariServices.framework */,
-				447D4C161E44C4F5008F82F4 /* MapKit.framework */,
 				D3E63257CC5E13A67F31124B /* Pods_PawTrails.framework */,
 				1E2B813BA9CAE948174F2C71 /* Pods_PawTrailsTests.framework */,
 			);
@@ -1115,10 +1116,16 @@
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
 							com.apple.Keychain = {
 								enabled = 0;
 							};
 							com.apple.Maps.iOS = {
+								enabled = 0;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
@@ -1437,6 +1444,7 @@
 				44251B711F0CD6130067F401 /* CoreDataManager.swift in Sources */,
 				44475ADB1F5960B800D41AAA /* SignUpViewController.swift in Sources */,
 				157401AE1F9E268200A854C5 /* PTSignalView.swift in Sources */,
+				448D47A11FC6EF0F003B5333 /* ResultDetailsViewController.swift in Sources */,
 				44223B551F97526500D8CA1E /* SelectPetForRecommandationController.swift in Sources */,
 				44251B0C1F0CD5870067F401 /* AddEditSafeZonePresenter.swift in Sources */,
 				44251B3E1F0CD5DF0067F401 /* AddressTableViewController.swift in Sources */,
@@ -1786,6 +1794,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = PawTrails/PawTrails.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = CQ878R6EW5;
@@ -1801,7 +1810,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
-				PRODUCT_BUNDLE_IDENTIFIER = attitudetech.PawTrails;
+				PRODUCT_BUNDLE_IDENTIFIER = attitudetech.PawTrailss;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "PawTrails/Assets/PawTrails-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1818,6 +1827,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = PawTrails/PawTrails.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = CQ878R6EW5;
@@ -1833,7 +1843,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
-				PRODUCT_BUNDLE_IDENTIFIER = attitudetech.PawTrails;
+				PRODUCT_BUNDLE_IDENTIFIER = attitudetech.PawTrailss;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "PawTrails/Assets/PawTrails-Bridging-Header.h";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;

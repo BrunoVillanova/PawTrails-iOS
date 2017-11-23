@@ -30,6 +30,9 @@ class PetInfromationViewController: UIViewController, IndicatorInfoProvider, Pet
         self.tableView.backgroundColor = UIColor.groupTableViewBackground
         self.view.backgroundColor = UIColor.groupTableViewBackground
         
+        let leftItemBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(leftBarButtonTapped))
+        self.navigationItem.rightBarButtonItem = leftItemBarButton
+
 
         
         usersCollectionView.delegate = self
@@ -49,6 +52,10 @@ class PetInfromationViewController: UIViewController, IndicatorInfoProvider, Pet
     }
     deinit {
         presenter.deteachView()
+    }
+    
+    func leftBarButtonTapped() {
+        print("Left Bar Button Item")
     }
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
@@ -146,6 +153,8 @@ extension PetInfromationViewController: UITableViewDelegate, UITableViewDataSour
                 cell.weightLbl.text = pet.weightString
                 cell.typeLbl.text = pet.typeString
                 cell.birthDayLbl.text = pet.birthday?.toStringShow
+                
+                print("lkfdsj lksdjf klj ds \(pet.bcScore)")
 
                 if let imageUrl = pet.imageURL {
                     cell.profileImage.sd_setImage(with: URL(string: imageUrl), placeholderImage: #imageLiteral(resourceName: "PetPlaceholderImage"), options: [.continueInBackground])

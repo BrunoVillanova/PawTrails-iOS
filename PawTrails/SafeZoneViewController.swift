@@ -18,8 +18,13 @@ class SafeZoneViewController: UIViewController, IndicatorInfoProvider, PetView {
 
 
     @IBAction func addButton(_ sender: Any) {
+        
+        guard let pet = self.pet else {return}
+        guard let petName = pet.name else {return}
+
+        
         if !pet.isOwner {
-            self.alert(title: "", msg: "You cannot add user for this pet because you don't own it", type: .blue, disableTime: 5, handler: nil)
+            self.alert(title: "", msg: "Only \(petName) owner can add a safezone. ", type: .blue, disableTime: 5, handler: nil)
         } else {
             if let vc = storyboard?.instantiateViewController(withIdentifier: "AddEditSafeZOneController") as? AddEditSafeZOneController {
                 vc.petId = pet.id

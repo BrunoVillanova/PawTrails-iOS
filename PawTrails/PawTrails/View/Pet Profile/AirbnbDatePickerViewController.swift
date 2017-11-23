@@ -88,8 +88,13 @@ public class AirbnbDatePickerViewController: UICollectionViewController {
     }
     
     func initDates() {
-        let month = calendar.component(.month, from: today)
-        let year = calendar.component(.year, from: today)
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy MM dd"
+        formatter.timeZone = Calendar.current.timeZone
+        formatter.locale = Calendar.current.locale
+        let startDate = formatter.date(from: "2017 01 01")!
+        let month = calendar.component(.month, from: startDate)
+        let year = calendar.component(.year, from: startDate)
         let dateComp = DateComponents(year: year, month: month, day: 1)
         var curMonth = calendar.date(from: dateComp)
         
@@ -305,9 +310,7 @@ public class AirbnbDatePickerViewController: UICollectionViewController {
     
     override public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! AirbnbDatePickerCell
-        
         configure(cell: cell, withIndexPath: indexPath)
-        
         return cell
     }
   
@@ -652,10 +655,7 @@ extension AirbnbDatePickerViewController: AirbnbDatePickerFooterDelegate {
                 del.datePickerController(self, didSaveStartDate: selectedStartDate, endDate: selectedEndDate)
 
             }
-            
-
-            
-            self.navigationController?.dismiss(animated: true, completion: nil)
+            self.navigationController?.dismiss(animated: false, completion: nil)
         }
     }
 }

@@ -77,6 +77,7 @@ struct Pet {
     var isOwner: Bool
     var neutered: Bool
     var weight: Double?
+    var bcScore: Int
 
     var safezones: [SafeZone]?
     var users: [PetUser]?
@@ -194,6 +195,25 @@ struct PetDeviceData {
     var deviceData: DeviceData
     var pet: Pet
 }
+
+struct TripAchievements {
+    var petId: Int
+    var distance: Int
+    var timeGoal: Int
+    var totalTime: Int
+    var totalDistance: Int
+    var totalDays: Int
+}
+
+
+struct DailyGoals {
+    var petId: Int
+    var distanceGoal: Int
+    var timeGoal: Int
+}
+
+
+
 
 extension PetDeviceData: Equatable {
     static func == (lhs: PetDeviceData, rhs: PetDeviceData) -> Bool {

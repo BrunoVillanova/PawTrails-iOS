@@ -12,6 +12,8 @@ import XLPagerTabStrip
 class TabPageViewController: ButtonBarPagerTabStripViewController {
     
     var pet: Pet!
+    
+    
     let color = UIColor(red: 206.0/255.0, green: 19.0/255.0, blue: 54.0/255.0, alpha: 1.0)
     override func viewDidLoad() {
         settings.style.buttonBarBackgroundColor = .white
@@ -32,32 +34,45 @@ class TabPageViewController: ButtonBarPagerTabStripViewController {
             newCell?.label.textColor = self?.color
         }
         super.viewDidLoad()
+        APIRepository.instance.loadPet(pet.id, callback: { (error, pet) in
+            if error == nil, let pet = pet {
+                self.pet = pet
+            }
+        })
+        
         self.automaticallyAdjustsScrollViewInsets = false
-        self.navigationItem.rightBarButtonItem =  UIBarButtonItem(image: UIImage(named:"switch-device-button-1x-png"), style: .plain, target: self, action: #selector(addTapped(_sender:)))
+        
+        self.navigationItem.rightBarButtonItem =  UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(addTapped(_sender:)))
+        
+        
 
         navigationItem.title = pet.name
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
     }
     
     
     func addTapped(_sender: UIBarButtonItem) {
-        self.performSegue(withIdentifier: "ChangeDevice", sender: self)
+        self.performSegue(withIdentifier: "editPetDetails", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "changeDevice" {
-            if let navigationController = segue.destination as? UINavigationController {
-                if let childVC = navigationController.topViewController as? AddPetDeviceTableViewController {
-                    if let petid = self.pet {
-                        childVC.petId = petid.id
+        if segue.identifier == "editPetDetails" {
+            if let navigationController = segue.destination as? AddEditPetDetailsTableViewController {
+                    if let pet = self.pet {
+                        navigationController.pet = pet
                     }
-                }
             }
         }
     }
 
+    
+    
 
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         let child_1 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PetInfromationViewController") as! PetInfromationViewController

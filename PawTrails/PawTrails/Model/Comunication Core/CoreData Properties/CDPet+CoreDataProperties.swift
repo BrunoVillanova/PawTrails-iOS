@@ -34,6 +34,8 @@ extension CDPet {
     @NSManaged public var safezones: NSSet?
     @NSManaged public var secondBreed: CDBreed?
     @NSManaged public var users: NSSet?
+    @NSManaged public var bcScore: Int16
+
 
 }
 
