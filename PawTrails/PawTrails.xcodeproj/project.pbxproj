@@ -180,7 +180,6 @@
 		448BE9681ED47F5C00665608 /* APIUserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448BE9671ED47F5C00665608 /* APIUserTest.swift */; };
 		448BE96A1ED490D900665608 /* APIImageUploadTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448BE9691ED490D900665608 /* APIImageUploadTest.swift */; };
 		448C7CEC1F87C8C700BF7106 /* AddEditSafeZOneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C7CEB1F87C8C700BF7106 /* AddEditSafeZOneController.swift */; };
-		448D47A11FC6EF0F003B5333 /* ResultDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448D47A01FC6EF0F003B5333 /* ResultDetailsViewController.swift */; };
 		44A1AC501E92923A003EF6CA /* PetsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A1AC4F1E92923A003EF6CA /* PetsPresenter.swift */; };
 		44B179621E4B62690070A18B /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B179611E4B62690070A18B /* Presenter.swift */; };
 		44BC63CA1FB078FD006E38F4 /* SingleResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BC63C91FB078FD006E38F4 /* SingleResultViewController.swift */; };
@@ -429,7 +428,6 @@
 		448BE9671ED47F5C00665608 /* APIUserTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIUserTest.swift; sourceTree = "<group>"; };
 		448BE9691ED490D900665608 /* APIImageUploadTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIImageUploadTest.swift; sourceTree = "<group>"; };
 		448C7CEB1F87C8C700BF7106 /* AddEditSafeZOneController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditSafeZOneController.swift; sourceTree = "<group>"; };
-		448D47A01FC6EF0F003B5333 /* ResultDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultDetailsViewController.swift; sourceTree = "<group>"; };
 		44A1AC4F1E92923A003EF6CA /* PetsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetsPresenter.swift; path = Presenter/PetsPresenter.swift; sourceTree = "<group>"; };
 		44B179611E4B62690070A18B /* Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Presenter.swift; path = Presenter/Presenter.swift; sourceTree = "<group>"; };
 		44BC63C91FB078FD006E38F4 /* SingleResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleResultViewController.swift; sourceTree = "<group>"; };
@@ -713,7 +711,6 @@
 				441858E81F98EC7E003710A8 /* ResultViewController.swift */,
 				441858EA1F98FA85003710A8 /* BCS3ViewController.swift */,
 				441858EC1F98FAA1003710A8 /* BSC4ViewController.swift */,
-				448D47A01FC6EF0F003B5333 /* ResultDetailsViewController.swift */,
 			);
 			name = Recommandation;
 			sourceTree = "<group>";
@@ -1112,7 +1109,7 @@
 					};
 					4415FF3E1E3B822900A81B13 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = CQ878R6EW5;
+						DevelopmentTeam = 7E2855LEH4;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -1444,7 +1441,6 @@
 				44251B711F0CD6130067F401 /* CoreDataManager.swift in Sources */,
 				44475ADB1F5960B800D41AAA /* SignUpViewController.swift in Sources */,
 				157401AE1F9E268200A854C5 /* PTSignalView.swift in Sources */,
-				448D47A11FC6EF0F003B5333 /* ResultDetailsViewController.swift in Sources */,
 				44223B551F97526500D8CA1E /* SelectPetForRecommandationController.swift in Sources */,
 				44251B0C1F0CD5870067F401 /* AddEditSafeZonePresenter.swift in Sources */,
 				44251B3E1F0CD5DF0067F401 /* AddressTableViewController.swift in Sources */,
@@ -1797,7 +1793,7 @@
 				CODE_SIGN_ENTITLEMENTS = PawTrails/PawTrails.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = CQ878R6EW5;
+				DEVELOPMENT_TEAM = 7E2855LEH4;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1830,7 +1826,7 @@
 				CODE_SIGN_ENTITLEMENTS = PawTrails/PawTrails.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = CQ878R6EW5;
+				DEVELOPMENT_TEAM = 7E2855LEH4;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
