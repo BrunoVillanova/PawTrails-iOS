@@ -22,7 +22,7 @@ class MapViewController: UIViewController {
     fileprivate let presenter = HomePresenter()
     var selectedPet: Pet?
     var data = [searchElement]()
-    var tripListArray = [TripList]()
+    var activeTrips = [Trip]()
 
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -45,7 +45,7 @@ class MapViewController: UIViewController {
         
         DataManager.instance.getActivePetTrips()
             .subscribe(onNext: { (tripList) in
-                
+                self.activeTrips = tripList
                 print("MapViewController -> getActivePetTrips \(tripList.count)")
                 if (tripList.count > 0){
                     let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(gestureRecognizer:)))
@@ -77,7 +77,7 @@ class MapViewController: UIViewController {
     
     
     @IBAction func firstButtonPressed(_ sender: Any) {
-        if tripListArray.isEmpty == true   {
+        if self.activeTrips.isEmpty {
             performSegue(withIdentifier: "startAdventue", sender: nil)
         } else {
             performSegue(withIdentifier: "adventrueInProgress", sender: nil)
@@ -98,16 +98,6 @@ class MapViewController: UIViewController {
         self.mapView.setVisibleMapFor([self.mapView.userLocation.coordinate])
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "adventrueInProgress" {
-            let destinationController = segue.destination as! UINavigationController
-            let targetController = destinationController.topViewController as! TripScreenViewController
-            for trip in tripListArray {
-                targetController.tripIds.append(trip.id)
-            }
-            
-        }
-    }
     
     func presentPet(_ pet: Pet, activityEnabled:Bool = false) {
         
