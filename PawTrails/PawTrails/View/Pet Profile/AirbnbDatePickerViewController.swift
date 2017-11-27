@@ -480,7 +480,7 @@ public class AirbnbDatePickerViewController: UICollectionViewController {
             
             cell.dateLabel.text = String(curDay)
             cell.dateLabel.textColor = isPastDate ? UIColor.secondPrimary : UIColor.white
-            cell.type = isPastDate ? [.PastDate] : [.Date]
+            cell.type = [.Date]
             
             if todayDay == curDay, todayMonth == month, todayYear == year  {
                 cell.type.insert(.Today)

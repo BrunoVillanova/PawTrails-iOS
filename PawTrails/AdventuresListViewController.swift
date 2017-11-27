@@ -35,6 +35,7 @@ class AdventuresListViewController: UIViewController, IndicatorInfoProvider  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.tableFooterView = UIView()
 
         
         editBtn.border(color: UIColor.darkGray, width: 1)

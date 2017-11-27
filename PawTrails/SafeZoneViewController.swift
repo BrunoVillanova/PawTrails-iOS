@@ -40,6 +40,7 @@ class SafeZoneViewController: UIViewController, IndicatorInfoProvider, PetView {
         super.viewDidLoad()
         
         loadAllData()
+        tableView.tableFooterView = UIView()
 
         self.tableView.delegate = self
         self.tableView.dataSource = self
