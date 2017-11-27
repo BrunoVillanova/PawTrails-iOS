@@ -15,6 +15,7 @@ class RecommandationController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var startnowBtn: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var addBtn: UIBarButtonItem!
     
     fileprivate let presenter = PetsPresenter()
 
@@ -65,16 +66,15 @@ class RecommandationController: UIViewController {
             self.pImage.isHidden = true
             self.startnowBtn.isHidden = true
             self.scrollView.isHidden = true
-
+            self.navigationItem.rightBarButtonItem = self.addBtn
         } else {
             self.tableView.isHidden = true
             self.cImage.isHidden = false
             self.pImage.isHidden = false
             self.startnowBtn.isHidden = false
             self.scrollView.isHidden = false
+            self.navigationItem.rightBarButtonItem = nil
         }
-        
-   
     }
     
     @objc func reloadPetsAPI(){

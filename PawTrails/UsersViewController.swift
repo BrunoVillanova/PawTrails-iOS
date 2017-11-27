@@ -18,6 +18,8 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.tableFooterView = UIView()
+
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.reloadData()
