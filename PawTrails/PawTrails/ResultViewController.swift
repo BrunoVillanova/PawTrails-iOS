@@ -13,6 +13,11 @@ class ResultViewController: UIViewController {
     var pet: Pet!
     var bscText: String?
     var weight: String?
+    
+    
+    let idealColor = UIColor(red: 112/255, green: 163/255, blue: 8/255, alpha: 1)
+    let obseAndVeryThinColor = UIColor(red: 213/255, green: 0/255, blue: 0/255, alpha: 1)
+    let threeColor = UIColor(red: 247/255, green: 101/255, blue: 0/255, alpha: 1)
 
     
     @IBOutlet weak var bcScoreLbl: UILabel!
@@ -21,6 +26,8 @@ class ResultViewController: UIViewController {
     @IBOutlet weak var petImage: UiimageViewWithMask!
     @IBOutlet weak var weightLbl: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,6 +36,7 @@ class ResultViewController: UIViewController {
         } else {
             automaticallyAdjustsScrollViewInsets = false
         }
+        
         
 
         
@@ -107,7 +115,8 @@ class ResultViewController: UIViewController {
     
     func updateTextViewBasedOnWeightAndOtherUI() {
         guard let weightt = weight else {return}
-        
+        self.weightLbl.textColor = obseAndVeryThinColor
+
         if weightt == "Very thin" {
             self.reccomTextView.text = """
             Recommendations
@@ -119,6 +128,9 @@ class ResultViewController: UIViewController {
             reccomTextView.shadow()
 
         } else if weightt == "Underweight" {
+            
+            self.weightLbl.textColor = threeColor
+
             
             self.reccomTextView.text = """
             Recommendations
@@ -133,7 +145,8 @@ class ResultViewController: UIViewController {
 
 
         } else if weightt == "Ideal" {
-            
+            self.weightLbl.textColor = idealColor
+
             
             self.reccomTextView.text = """
             Recommendations:
@@ -150,7 +163,8 @@ class ResultViewController: UIViewController {
 
 
         }else if weightt == "Overweight" {
-            
+            self.weightLbl.textColor = threeColor
+
             self.reccomTextView.text = """
             Recommendations:
             
@@ -168,7 +182,8 @@ class ResultViewController: UIViewController {
 
 
         }else if weightt == "Obese" {
-            
+            self.weightLbl.textColor = obseAndVeryThinColor
+
             self.reccomTextView.text = """
             Recommendations:
             

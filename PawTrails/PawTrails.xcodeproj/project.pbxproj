@@ -166,6 +166,7 @@
 		445F5F411F5EA7900069B513 /* BEMCheckBoxGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 445F5F3C1F5EA7900069B513 /* BEMCheckBoxGroup.m */; };
 		445F5F421F5EA7900069B513 /* BEMPathManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 445F5F3E1F5EA7900069B513 /* BEMPathManager.m */; };
 		446231401EE6BE4200B53C1D /* DataManagerPetSharingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4462313F1EE6BE4200B53C1D /* DataManagerPetSharingTests.swift */; };
+		4464EE8D1FCC2B150049C50F /* ResultFromListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4464EE8C1FCC2B150049C50F /* ResultFromListViewController.swift */; };
 		4464F12D1F8CBC1A00E0BBD7 /* IconCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4464F12B1F8CBC1A00E0BBD7 /* IconCell.swift */; };
 		4464F12E1F8CBC1B00E0BBD7 /* IconCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4464F12C1F8CBC1A00E0BBD7 /* IconCell.xib */; };
 		446607BB1F95FF4C00833683 /* AirbnbDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446607B41F95FF4C00833683 /* AirbnbDatePicker.swift */; };
@@ -413,6 +414,7 @@
 		445F5F3D1F5EA7900069B513 /* BEMPathManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMPathManager.h; sourceTree = "<group>"; };
 		445F5F3E1F5EA7900069B513 /* BEMPathManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMPathManager.m; sourceTree = "<group>"; };
 		4462313F1EE6BE4200B53C1D /* DataManagerPetSharingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerPetSharingTests.swift; sourceTree = "<group>"; };
+		4464EE8C1FCC2B150049C50F /* ResultFromListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultFromListViewController.swift; sourceTree = "<group>"; };
 		4464F12B1F8CBC1A00E0BBD7 /* IconCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconCell.swift; sourceTree = "<group>"; };
 		4464F12C1F8CBC1A00E0BBD7 /* IconCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IconCell.xib; sourceTree = "<group>"; };
 		446607B41F95FF4C00833683 /* AirbnbDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirbnbDatePicker.swift; sourceTree = "<group>"; };
@@ -711,6 +713,7 @@
 				441858E81F98EC7E003710A8 /* ResultViewController.swift */,
 				441858EA1F98FA85003710A8 /* BCS3ViewController.swift */,
 				441858EC1F98FAA1003710A8 /* BSC4ViewController.swift */,
+				4464EE8C1FCC2B150049C50F /* ResultFromListViewController.swift */,
 			);
 			name = Recommandation;
 			sourceTree = "<group>";
@@ -1423,6 +1426,7 @@
 				44251B4A1F0CD5DF0067F401 /* AddPetDeviceTableViewController.swift in Sources */,
 				44251AFF1F0CD5740067F401 /* EmailVerificationPresenter.swift in Sources */,
 				44251B8A1F0CD6210067F401 /* APIRepository.swift in Sources */,
+				4464EE8D1FCC2B150049C50F /* ResultFromListViewController.swift in Sources */,
 				4464F12D1F8CBC1A00E0BBD7 /* IconCell.swift in Sources */,
 				44251B421F0CD5DF0067F401 /* NameTableViewController.swift in Sources */,
 				44477CB91F599EFC00083295 /* UiimageViewWithMask.swift in Sources */,

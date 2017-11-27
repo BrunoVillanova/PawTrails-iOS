@@ -154,7 +154,6 @@ extension PetInfromationViewController: UITableViewDelegate, UITableViewDataSour
                 cell.typeLbl.text = pet.typeString
                 cell.birthDayLbl.text = pet.birthday?.toStringShow
                 
-                print("lkfdsj lksdjf klj ds \(pet.bcScore)")
 
                 if let imageUrl = pet.imageURL {
                     cell.profileImage.sd_setImage(with: URL(string: imageUrl), placeholderImage: #imageLiteral(resourceName: "PetPlaceholderImage"), options: [.continueInBackground])
