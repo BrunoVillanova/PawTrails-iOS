@@ -101,8 +101,12 @@ class ResultViewController: UIViewController {
                 pet.bcScore = 5
             }
             APIRepository.instance.save(pet, callback: { (error, pet) in
-                if error == nil, let pet = pet {
-                    print(pet.bcScore)
+                if error == nil, let _ = pet {
+                    let notificationName = Notification.Name("BcScore")
+                    NotificationCenter.default.post(name: notificationName, object: nil)
+
+                    self.dismiss(animated: true, completion: nil)
+                    
                 } else {
                     self.alert(title: "", msg: "An error occured, please try again", type: .red, disableTime: 3, handler: nil)
                 }
@@ -125,7 +129,8 @@ class ResultViewController: UIViewController {
             """
             
             self.reccomTextView.textColor = UIColor.gray
-            reccomTextView.shadow()
+
+            reccomTextView.border(color: .primary, width: 0.7)
 
         } else if weightt == "Underweight" {
             
@@ -141,7 +146,7 @@ class ResultViewController: UIViewController {
             """
             
             self.reccomTextView.textColor = UIColor.gray
-            reccomTextView.shadow()
+            reccomTextView.border(color: .primary, width: 0.7)
 
 
         } else if weightt == "Ideal" {
@@ -157,7 +162,7 @@ class ResultViewController: UIViewController {
             """
             
             self.reccomTextView.textColor = UIColor.gray
-            reccomTextView.shadow()
+            reccomTextView.border(color: .primary, width: 0.7)
             
 
 
@@ -178,7 +183,7 @@ class ResultViewController: UIViewController {
             """
             
             self.reccomTextView.textColor = UIColor.gray
-            reccomTextView.shadow()
+            reccomTextView.border(color: .primary, width: 0.7)
 
 
         }else if weightt == "Obese" {
@@ -193,7 +198,7 @@ class ResultViewController: UIViewController {
             """
             
             self.reccomTextView.textColor = UIColor.gray
-            reccomTextView.shadow()
+            reccomTextView.border(color: .primary, width: 0.7)
             
         }
         

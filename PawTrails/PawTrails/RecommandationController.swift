@@ -24,14 +24,15 @@ class RecommandationController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         presenter.attachView(self)
         tableView.tableFooterView = UIView()
 
         startnowBtn.backgroundColor = UIColor.primary
         startnowBtn.layer.cornerRadius = 25
         startnowBtn.clipsToBounds = true
-        
+        let notificationName = Notification.Name("BcScore")
+
+        NotificationCenter.default.addObserver(self, selector: #selector(self.getPetsForNotification(_:)), name: notificationName, object: nil)
 
         
         self.tableView.delegate = self
@@ -41,13 +42,15 @@ class RecommandationController: UIViewController {
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.navigationItem.title = "Professional Guides"
         
-
     }
     
-    
+    @objc func getPetsForNotification(_ sender: Notification) {
+        self.presenter.loadPets()
+        loadPets()
+        
+    }
     
     func updateUi() {
-
         var count = [Int]()
 
         count.removeAll(keepingCapacity: false)
@@ -60,6 +63,7 @@ class RecommandationController: UIViewController {
             }
         }
 
+        print(count)
         if count.count > 0 {
             self.tableView.isHidden = false
             self.cImage.isHidden = true
@@ -77,6 +81,20 @@ class RecommandationController: UIViewController {
         }
     }
     
+    
+    func hideNotificationn() {
+        
+        //        if let notificationViews = UIApplication.shared.keyWindow?.subviews.filter({ $0.tag == subviewId.notification.rawValue }) {
+        if let notificationViews = UIApplication.shared.keyWindow?.rootViewController?.view.subviews.filter({ $0.tag == subviewId.notification.rawValue }) {
+            
+            for notificationView in notificationViews {
+                DispatchQueue.main.async {
+                    notificationView.removeFromSuperview()
+                }
+            }
+        }
+    }
+    
     @objc func reloadPetsAPI(){
         presenter.loadPets()
     }
@@ -88,7 +106,10 @@ class RecommandationController: UIViewController {
     
     
     override func viewWillAppear(_ animated: Bool) {
+        hideNotificationn()
+
         reloadPets()
+        loadPets()
     }
     
     
@@ -110,14 +131,16 @@ extension RecommandationController: UITableViewDelegate, UITableViewDataSource {
         var count = [Int]()
         count.removeAll(keepingCapacity: false)
         if presenter.pets.isEmpty != true {
+            
             for pet in presenter.pets {
+                print(pet.id)
                 if pet.bcScore > 0 {
                     count.append(1)
                 } else {
                 }
             }
         }
-       
+       print(count.count)
         if count.count > 0 {
             return count.count
         } else {
@@ -131,17 +154,17 @@ extension RecommandationController: UITableViewDelegate, UITableViewDataSource {
         
         if presenter.pets.isEmpty != true {
             let pet = presenter.pets[indexPath.item]
+            let usedPet = pet.bcScore > 0
             
-            if pet.bcScore > 0 {
+            if usedPet {
                 if let name = pet.name {
+                    
                     if pet.bcScore == 1 {
                         cell.nameAndResultLbl.text = "\(name) is very thin"
                     } else if pet.bcScore == 2 {
-                        cell.nameAndResultLbl.text = "\(name) is under weight"
-                        
+                        cell.nameAndResultLbl.text = "\(name) is underweight"
                     } else if pet.bcScore == 3 {
-                        cell.nameAndResultLbl.text = "\(name) is ideal"
-                        
+                        cell.nameAndResultLbl.text = "\(name) is the ideal weight"
                     } else if pet.bcScore == 4 {
                         cell.nameAndResultLbl.text = "\(name) is overweight"
                         

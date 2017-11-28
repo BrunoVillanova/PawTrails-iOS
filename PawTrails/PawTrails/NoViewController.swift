@@ -27,10 +27,6 @@ class NoViewController: UIViewController {
         collectionView.allowsMultipleSelection = false
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: nil)
         collectionView.isScrollEnabled = false
-
-
-        
-        
     }
 }
 
@@ -57,10 +53,7 @@ extension NoViewController: UICollectionViewDelegate, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
             return CGSize(width: 100, height: 175)
-
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -94,7 +87,6 @@ extension NoViewController: UICollectionViewDelegate, UICollectionViewDataSource
                 destination.pet = self.pet
             }
         } else if segue.identifier == "Nope" {
-            
             if let destination = segue.destination as? BSC4ViewController {
                 destination.pet = self.pet
             }
