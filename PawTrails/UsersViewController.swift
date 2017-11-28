@@ -18,6 +18,8 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.tableFooterView = UIView()
+
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.reloadData()
@@ -89,7 +91,7 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
         if pet.isOwner {
             presentAddUser()
         } else {
-            self.alert(title: "", msg: "Only pet owners can edit trip goals", type: .blue, disableTime: 3, handler: nil)
+            self.alert(title: "", msg: "Only pet owners can add a user", type: .blue, disableTime: 3, handler: nil)
         }
     }
     

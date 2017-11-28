@@ -166,6 +166,7 @@
 		445F5F411F5EA7900069B513 /* BEMCheckBoxGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 445F5F3C1F5EA7900069B513 /* BEMCheckBoxGroup.m */; };
 		445F5F421F5EA7900069B513 /* BEMPathManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 445F5F3E1F5EA7900069B513 /* BEMPathManager.m */; };
 		446231401EE6BE4200B53C1D /* DataManagerPetSharingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4462313F1EE6BE4200B53C1D /* DataManagerPetSharingTests.swift */; };
+		4464EE8D1FCC2B150049C50F /* ResultFromListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4464EE8C1FCC2B150049C50F /* ResultFromListViewController.swift */; };
 		4464F12D1F8CBC1A00E0BBD7 /* IconCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4464F12B1F8CBC1A00E0BBD7 /* IconCell.swift */; };
 		4464F12E1F8CBC1B00E0BBD7 /* IconCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4464F12C1F8CBC1A00E0BBD7 /* IconCell.xib */; };
 		446607BB1F95FF4C00833683 /* AirbnbDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446607B41F95FF4C00833683 /* AirbnbDatePicker.swift */; };
@@ -180,7 +181,6 @@
 		448BE9681ED47F5C00665608 /* APIUserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448BE9671ED47F5C00665608 /* APIUserTest.swift */; };
 		448BE96A1ED490D900665608 /* APIImageUploadTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448BE9691ED490D900665608 /* APIImageUploadTest.swift */; };
 		448C7CEC1F87C8C700BF7106 /* AddEditSafeZOneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C7CEB1F87C8C700BF7106 /* AddEditSafeZOneController.swift */; };
-		448D47A11FC6EF0F003B5333 /* ResultDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448D47A01FC6EF0F003B5333 /* ResultDetailsViewController.swift */; };
 		44A1AC501E92923A003EF6CA /* PetsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A1AC4F1E92923A003EF6CA /* PetsPresenter.swift */; };
 		44B179621E4B62690070A18B /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B179611E4B62690070A18B /* Presenter.swift */; };
 		44BC63CA1FB078FD006E38F4 /* SingleResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BC63C91FB078FD006E38F4 /* SingleResultViewController.swift */; };
@@ -414,6 +414,7 @@
 		445F5F3D1F5EA7900069B513 /* BEMPathManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMPathManager.h; sourceTree = "<group>"; };
 		445F5F3E1F5EA7900069B513 /* BEMPathManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMPathManager.m; sourceTree = "<group>"; };
 		4462313F1EE6BE4200B53C1D /* DataManagerPetSharingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerPetSharingTests.swift; sourceTree = "<group>"; };
+		4464EE8C1FCC2B150049C50F /* ResultFromListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultFromListViewController.swift; sourceTree = "<group>"; };
 		4464F12B1F8CBC1A00E0BBD7 /* IconCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconCell.swift; sourceTree = "<group>"; };
 		4464F12C1F8CBC1A00E0BBD7 /* IconCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IconCell.xib; sourceTree = "<group>"; };
 		446607B41F95FF4C00833683 /* AirbnbDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirbnbDatePicker.swift; sourceTree = "<group>"; };
@@ -429,7 +430,6 @@
 		448BE9671ED47F5C00665608 /* APIUserTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIUserTest.swift; sourceTree = "<group>"; };
 		448BE9691ED490D900665608 /* APIImageUploadTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIImageUploadTest.swift; sourceTree = "<group>"; };
 		448C7CEB1F87C8C700BF7106 /* AddEditSafeZOneController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditSafeZOneController.swift; sourceTree = "<group>"; };
-		448D47A01FC6EF0F003B5333 /* ResultDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultDetailsViewController.swift; sourceTree = "<group>"; };
 		44A1AC4F1E92923A003EF6CA /* PetsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PetsPresenter.swift; path = Presenter/PetsPresenter.swift; sourceTree = "<group>"; };
 		44B179611E4B62690070A18B /* Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Presenter.swift; path = Presenter/Presenter.swift; sourceTree = "<group>"; };
 		44BC63C91FB078FD006E38F4 /* SingleResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleResultViewController.swift; sourceTree = "<group>"; };
@@ -713,7 +713,7 @@
 				441858E81F98EC7E003710A8 /* ResultViewController.swift */,
 				441858EA1F98FA85003710A8 /* BCS3ViewController.swift */,
 				441858EC1F98FAA1003710A8 /* BSC4ViewController.swift */,
-				448D47A01FC6EF0F003B5333 /* ResultDetailsViewController.swift */,
+				4464EE8C1FCC2B150049C50F /* ResultFromListViewController.swift */,
 			);
 			name = Recommandation;
 			sourceTree = "<group>";
@@ -1112,7 +1112,7 @@
 					};
 					4415FF3E1E3B822900A81B13 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = CQ878R6EW5;
+						DevelopmentTeam = 7E2855LEH4;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -1426,6 +1426,7 @@
 				44251B4A1F0CD5DF0067F401 /* AddPetDeviceTableViewController.swift in Sources */,
 				44251AFF1F0CD5740067F401 /* EmailVerificationPresenter.swift in Sources */,
 				44251B8A1F0CD6210067F401 /* APIRepository.swift in Sources */,
+				4464EE8D1FCC2B150049C50F /* ResultFromListViewController.swift in Sources */,
 				4464F12D1F8CBC1A00E0BBD7 /* IconCell.swift in Sources */,
 				44251B421F0CD5DF0067F401 /* NameTableViewController.swift in Sources */,
 				44477CB91F599EFC00083295 /* UiimageViewWithMask.swift in Sources */,
@@ -1444,7 +1445,6 @@
 				44251B711F0CD6130067F401 /* CoreDataManager.swift in Sources */,
 				44475ADB1F5960B800D41AAA /* SignUpViewController.swift in Sources */,
 				157401AE1F9E268200A854C5 /* PTSignalView.swift in Sources */,
-				448D47A11FC6EF0F003B5333 /* ResultDetailsViewController.swift in Sources */,
 				44223B551F97526500D8CA1E /* SelectPetForRecommandationController.swift in Sources */,
 				44251B0C1F0CD5870067F401 /* AddEditSafeZonePresenter.swift in Sources */,
 				44251B3E1F0CD5DF0067F401 /* AddressTableViewController.swift in Sources */,
@@ -1797,7 +1797,7 @@
 				CODE_SIGN_ENTITLEMENTS = PawTrails/PawTrails.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = CQ878R6EW5;
+				DEVELOPMENT_TEAM = 7E2855LEH4;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1830,7 +1830,7 @@
 				CODE_SIGN_ENTITLEMENTS = PawTrails/PawTrails.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = CQ878R6EW5;
+				DEVELOPMENT_TEAM = 7E2855LEH4;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

@@ -37,7 +37,6 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.addSubview(refreshControl)
         presenter.attachView(self)
         reloadPets()
-//        addButton()
         
         DataManager.instance.pets()
             .bind(to: tableView.rx.items(cellIdentifier: "cell", cellType: petListCell.self)) { (_, element, cell) in

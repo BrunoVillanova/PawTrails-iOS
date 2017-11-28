@@ -21,10 +21,8 @@ class SelectPetForRecommandationController: UIViewController {
     fileprivate var pets = [Int:IndexPath]()
 
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: nil)
         
         refreshControl.backgroundColor = UIColor.secondary
         refreshControl.tintColor = UIColor.primary
@@ -37,8 +35,7 @@ class SelectPetForRecommandationController: UIViewController {
         collectionView.dataSource = self
         collectionView.allowsMultipleSelection = false
 
-        
-        
+
         presenter.attachView(self)
 
     }
@@ -96,7 +93,7 @@ class SelectPetForRecommandationController: UIViewController {
         if segue.identifier == "show"{
             if let destination = segue.destination as? QuestionsViewController{
                 if let index = self.collectionView.indexPathsForSelectedItems?.first {
-                    let pet = presenter.pets[index.item]
+                    let pet = presenter.ownedPets[index.item]
                     destination.pet = pet
                     clearOnAppearance()
                     self.startbtn.isEnabled = false
@@ -152,8 +149,8 @@ extension SelectPetForRecommandationController:  UICollectionViewDataSource, UIC
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if presenter.pets.isEmpty != true {
-            return presenter.pets.count
+        if presenter.ownedPets.isEmpty != true {
+            return presenter.ownedPets.count
         } else {
             return 0
         }
@@ -164,8 +161,8 @@ extension SelectPetForRecommandationController:  UICollectionViewDataSource, UIC
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! SelectPetsCell
-        if presenter.pets.isEmpty != true {
-            let pet = presenter.pets[indexPath.item]
+        if presenter.ownedPets.isEmpty != true {
+            let pet = presenter.ownedPets[indexPath.item]
             cell.petTitle.text = pet.name
             if let imageData = pet.image as Data? {
                 cell.petImage.image = UIImage(data: imageData)
@@ -189,8 +186,6 @@ extension SelectPetForRecommandationController:  UICollectionViewDataSource, UIC
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! SelectPetsCell
-        let pet = presenter.pets[indexPath.item]
-        print("fsdfsdf\(pet)")
         cell.checkMarkView.setOn(true, animated: true)
         self.startbtn.isEnabled = true
         self.startbtn.backgroundColor = UIColor.primary
