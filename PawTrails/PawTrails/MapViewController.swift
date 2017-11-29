@@ -78,11 +78,18 @@ class MapViewController: UIViewController {
     
     @IBAction func firstButtonPressed(_ sender: Any) {
         if self.activeTrips.isEmpty {
-            performSegue(withIdentifier: "startAdventue", sender: nil)
+            performSegue(withIdentifier: "startAdventue", sender: sender)
         } else {
             performSegue(withIdentifier: "adventrueInProgress", sender: nil)
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let selectPetsViewController = segue.destination as? SelectPetsVC {
+            selectPetsViewController.action = selectPetsAction.startAdventure
+        }
+    }
+    
     
     @IBAction func secButtonPressed(_ sender: Any) {
         if (!self.petsCollectionView.isHidden) {

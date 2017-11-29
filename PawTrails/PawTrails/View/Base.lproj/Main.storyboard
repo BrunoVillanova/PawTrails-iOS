@@ -3451,7 +3451,7 @@
         <!--Start Adventure-->
         <scene sceneID="YSb-Cl-efO">
             <objects>
-                <viewController id="qEc-Wm-4QD" customClass="SelectPetsVC" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="selectPets" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qEc-Wm-4QD" customClass="SelectPetsVC" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="q5D-M2-2TW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3614,6 +3614,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="headerImageView" destination="ifa-2R-jLC" id="3gc-bF-Kq2"/>
+                        <outlet property="headerTitleLabel" destination="dlm-xG-Zjg" id="2su-VI-7JB"/>
                         <outlet property="petsCollectionView" destination="gL5-IH-8Ya" id="fRQ-Io-p4s"/>
                         <outlet property="startAdventureBtn" destination="mac-bO-czy" id="bJ8-um-geJ"/>
                         <segue destination="jFO-5u-YF9" kind="show" identifier="Segue" id="G7h-iD-Glq"/>
@@ -3621,7 +3623,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QsV-Ap-hHV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-5674" y="1522"/>
+            <point key="canvasLocation" x="-6654" y="-54"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="ffa-2u-1m5">
@@ -5491,7 +5493,7 @@
         <!--Navigation Controller-->
         <scene sceneID="jc5-aM-cOy">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nw8-QG-a4h" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="selectPetsNavigation" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nw8-QG-a4h" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="cIs-8x-udw">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -5504,7 +5506,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7aa-kj-Fwh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4559" y="1573"/>
+            <point key="canvasLocation" x="-4790" y="161"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ah8-Sb-igv">
@@ -5522,7 +5524,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X98-WU-lM8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-6671" y="1546"/>
+            <point key="canvasLocation" x="-6655" y="786"/>
         </scene>
         <!--Finish Adventure-->
         <scene sceneID="eQ2-yf-4tu">

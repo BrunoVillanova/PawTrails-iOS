@@ -9,11 +9,17 @@
 import UIKit
 import RxSwift
 
+enum selectPetsAction {
+    case startAdventure, joinAdventure
+}
+
 class SelectPetsVC: UIViewController, PetsView, SelectPetView {
     
     @IBOutlet weak var petsCollectionView: UICollectionView!
     @IBOutlet weak var startAdventureBtn: UIButton!
-
+    @IBOutlet weak var headerImageView: UIImageView!
+    @IBOutlet weak var headerTitleLabel: UILabel!
+    
     var refreshControl = UIRefreshControl()
     
     fileprivate let presenter = PetsPresenter()
@@ -28,20 +34,60 @@ class SelectPetsVC: UIViewController, PetsView, SelectPetView {
     
     
     var tripListArray = [Int]()
+    var action: selectPetsAction? {
+        didSet {
+            if action != oldValue {
+                updateControlsForAction(action)
+            }
+        }
+    }
     
-
+    fileprivate func updateControlsForAction(_ action: selectPetsAction?) {
+        
+        guard action != nil else {
+            return
+        }
+        
+        var headerImage = #imageLiteral(resourceName: "startAdventure")
+        var navBarTitle = "Start Adventure"
+        var titleText = "Select Pets to Start Adventure"
+        var buttonTitle = "START ADVENTURE"
+        
+        if action == .joinAdventure {
+            headerImage = #imageLiteral(resourceName: "JoinAdventure-1x-png")
+            navBarTitle = "Join Adventure"
+            titleText = "Select Pets to Join Adventure"
+            buttonTitle = "JOIN ADVENTURE"
+        }
+        
+        headerImageView?.image = headerImage
+        headerTitleLabel?.text = titleText
+        startAdventureBtn?.setTitle(buttonTitle, for: UIControlState.normal)
+        self.title = navBarTitle
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        initialize()
+    }
+    
+    fileprivate func initialize() {
+        
+        if action == nil {
+            action = .startAdventure
+        }
+        
+        updateControlsForAction(action)
         
         startAdventureBtn.isEnabled = false
         startAdventureBtn.fullyroundedCorner()
         startAdventureBtn.backgroundColor = UIColor.primary
-
+        
         refreshControl.backgroundColor = UIColor.secondary
         refreshControl.tintColor = UIColor.primary
         refreshControl.addTarget(self, action: #selector(reloadPetsAPI), for: .valueChanged)
         petsCollectionView.addSubview(refreshControl)
-
+        
         presenter.attachView(self)
         presenter2.attatchView(self)
         
@@ -49,10 +95,6 @@ class SelectPetsVC: UIViewController, PetsView, SelectPetView {
         petsCollectionView.dataSource = self
         petsCollectionView.allowsMultipleSelection = true
         
-        initialize()
-    }
-    
-    fileprivate func initialize() {
         DataManager.instance.getActivePetTrips().subscribe(onNext: { (data) in
             self.petIDsOnTrip = data.map({$0.petId})
             self.petsCollectionView.reloadData()
@@ -147,12 +189,18 @@ class SelectPetsVC: UIViewController, PetsView, SelectPetView {
     
     @IBAction func StartAdventureBtnPressed(_ sender: Any) {
         showLoadingView()
+        
         DataManager.instance.startTrips(petIDsToStartTrip.value.map({$0}))
             .take(1)
             .subscribe(onNext: { (startedTrips) in
                 print("Started Trips! \(startedTrips)")
                 self.hideLoadingView()
-                self.performSegue(withIdentifier: "Segue", sender: self)
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "TripScreenViewController")
+                
+                self.dismiss(animated: true, completion: {
+                    self.navigationController?.present(vc!, animated: false, completion: nil)
+                })
+                
             }, onError: { (error) in
                 self.hideLoadingView()
                 self.petIDsToStartTrip.value.removeAll()

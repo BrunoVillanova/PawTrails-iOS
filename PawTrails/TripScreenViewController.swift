@@ -111,15 +111,6 @@ class TripScreenViewController: UIViewController {
                 
             }).addDisposableTo(disposeBag)
         
-//        activeTripsObservable.map { (activeTrips) -> UIImage in
-//            let pausedTrips = activeTrips.filter { $0.status == 1 }
-//            if pausedTrips.count > 0 {
-//                return #imageLiteral(resourceName: "StartTrip-1x-png")
-//            } else {
-//                return #imageLiteral(resourceName: "PauseTripButton-1x-png")
-//            }
-//        }.bind(to: self.pauseButton.rx.image(for: .normal)).addDisposableTo(disposeBag)
-        
         self.setupSubViews()
     }
     
@@ -182,7 +173,11 @@ class TripScreenViewController: UIViewController {
     
     
     @IBAction func AddPetsToTripBtnPressed(_ sender: Any) {
-        performSegue(withIdentifier: "join", sender: self)
+        if let nc = self.storyboard?.instantiateViewController(withIdentifier: "selectPetsNavigation") as? UINavigationController,
+            let selectPetsViewController = nc.topViewController as? SelectPetsVC {
+            selectPetsViewController.action = selectPetsAction.joinAdventure
+            self.navigationController?.present(nc, animated: true, completion: nil)
+        }
     }
     
     @IBAction func pauseTripBtnPressed(_ sender: Any) {
