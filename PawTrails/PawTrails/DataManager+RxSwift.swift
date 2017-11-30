@@ -115,7 +115,7 @@ extension DataManager {
             print("DataManager -> allTrips -> active finalTrips = \(finalTrips.filter{$0.status < 2}.count)")
 
             return finalTrips
-        }
+        }.ifEmpty(default: [Trip]())
         
         return allTrips
     }
