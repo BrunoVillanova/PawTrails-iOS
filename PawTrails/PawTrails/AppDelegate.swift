@@ -14,7 +14,11 @@ import SocketIO
 import SwiftyJSON
 import IQKeyboardManagerSwift
 
+#if DEBUG
 let isDebug = true
+#else
+let isDebug = false
+#endif
 
 public struct ezdebug {
     public static let email = "ios@test.com"
