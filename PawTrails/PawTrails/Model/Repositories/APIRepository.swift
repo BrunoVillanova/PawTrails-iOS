@@ -45,6 +45,7 @@ class APIRepository {
     func signUp(_ email:String, _ password: String, callback: @escaping APIRepAuthCallback) {
         
         let data = isDebug ? ["email":email, "password":password, "is4test":ezdebug.is4test] : ["email":email, "password":password]
+//        let secondData = ["email":email, "password":password]
         
         APIManager.instance.perform(call: .signUp, with: data) { (error, json) in
             if let error = error {
