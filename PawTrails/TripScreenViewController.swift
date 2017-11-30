@@ -69,6 +69,7 @@ class TripScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        collectionView.delegate = self
         mapView.tripMode = true
         
         let activeTripsObservable = DataManager.instance.getActivePetTrips()
@@ -277,16 +278,12 @@ extension TripScreenViewController: UICollectionViewDataSource {
     }
 }
 
-extension TripScreenViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        self.pageControl.currentPage = indexPath.item
-    }
-}
 
 extension TripScreenViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: myCollectionViewWidith, height: myCollectionViewHeight)
     }
+    
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
