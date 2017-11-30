@@ -79,6 +79,7 @@ extension DataManager {
     func getActivePetTrips() -> Observable<[Trip]> {
         return allTrips()
             .map({ (trips) -> [Trip] in
+                print("func getActivePetTrips")
                 return trips.filter({ (trip) -> Bool in
                     return trip.status < 2
                 })
