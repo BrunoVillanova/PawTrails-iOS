@@ -31,22 +31,10 @@ class MapViewController: UIViewController {
     //MARK: View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        firstButtonfromthebottom.contentHorizontalAlignment = .fill
-        firstButtonfromthebottom.contentMode = .scaleToFill
-        firstButtonfromthebottom.imageView?.contentMode = .scaleToFill
-        
-        petsCollectionView.delegate = self
-        petsCollectionView.dataSource = self
-        petsCollectionView.reloadData()
-        petsCollectionView.isHidden = true
-        
-        presenter.attachView(self)
-        reloadPets()
+        initialize()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
+    func initialize() {
         DataManager.instance.getActivePetTrips()
             .subscribe(onNext: { (tripList) in
                 self.activeTrips = tripList
@@ -62,8 +50,19 @@ class MapViewController: UIViewController {
                 }
                 
             }).addDisposableTo(disposeBag)
+        
+        firstButtonfromthebottom.contentHorizontalAlignment = .fill
+        firstButtonfromthebottom.contentMode = .scaleToFill
+        firstButtonfromthebottom.imageView?.contentMode = .scaleToFill
+        
+        petsCollectionView.delegate = self
+        petsCollectionView.dataSource = self
+        petsCollectionView.reloadData()
+        petsCollectionView.isHidden = true
+        
+        presenter.attachView(self)
+        reloadPets()
     }
-    
     
     func reloadPets(){
         presenter.getPets()
