@@ -42,6 +42,10 @@ class MapViewController: UIViewController {
         
         presenter.attachView(self)
         reloadPets()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         DataManager.instance.getActivePetTrips()
             .subscribe(onNext: { (tripList) in
@@ -57,7 +61,7 @@ class MapViewController: UIViewController {
                     self.hideNotification()
                 }
                 
-        }).addDisposableTo(disposeBag)
+            }).addDisposableTo(disposeBag)
     }
     
     
