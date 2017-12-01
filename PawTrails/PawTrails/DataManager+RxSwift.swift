@@ -78,10 +78,18 @@ extension DataManager {
     
     func getActivePetTrips() -> Observable<[Trip]> {
         return allTrips()
-            .map({ (trips) -> [Trip] in
-                print("func getActivePetTrips")
-                return trips.filter({ (trip) -> Bool in
-                    return trip.status < 2
+            .flatMapLatest({ (trips) -> Observable<[Trip]> in
+                print("func getActivePetTrips \(trips.count)")
+                //TODO: add pets from socketIO
+                return Observable.create({ observer in
+                    let onlyActiveTrips = trips.filter({ (trip) -> Bool in
+                        return trip.status < 2
+                    })
+                    
+                    print("onlyActiveTrips \(onlyActiveTrips.count)")
+                    observer.onNext(onlyActiveTrips)
+                    observer.onCompleted()
+                    return Disposables.create()
                 })
             }).ifEmpty(default: [Trip]())
     }
@@ -213,8 +221,6 @@ extension DataManager {
                         if error != nil {
                             observer.onError(error!)
                         } else {
-                            //                            self.retrieveRunningTrips()
-                            //                            observer.onNext(data!)
                             observer.onCompleted()
                         }
                     }
