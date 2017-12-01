@@ -50,6 +50,7 @@
 		441858EB1F98FA85003710A8 /* BCS3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441858EA1F98FA85003710A8 /* BCS3ViewController.swift */; };
 		441858ED1F98FAA1003710A8 /* BSC4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441858EC1F98FAA1003710A8 /* BSC4ViewController.swift */; };
 		441CEBED1EE16F8F00A37877 /* DataManagerPetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441CEBEC1EE16F8F00A37877 /* DataManagerPetTests.swift */; };
+		441CF74B1FD1B28900FB1088 /* CalanderForActivityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441CF74A1FD1B28900FB1088 /* CalanderForActivityController.swift */; };
 		44223B531F97483800D8CA1E /* RecommandationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44223B521F97483800D8CA1E /* RecommandationController.swift */; };
 		44223B551F97526500D8CA1E /* SelectPetForRecommandationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44223B541F97526500D8CA1E /* SelectPetForRecommandationController.swift */; };
 		4424DCF91E8E9F2300ACDF07 /* UserProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4424DCF81E8E9F2300ACDF07 /* UserProfileTableViewController.swift */; };
@@ -289,6 +290,7 @@
 		441858EA1F98FA85003710A8 /* BCS3ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCS3ViewController.swift; sourceTree = "<group>"; };
 		441858EC1F98FAA1003710A8 /* BSC4ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BSC4ViewController.swift; sourceTree = "<group>"; };
 		441CEBEC1EE16F8F00A37877 /* DataManagerPetTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerPetTests.swift; sourceTree = "<group>"; };
+		441CF74A1FD1B28900FB1088 /* CalanderForActivityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalanderForActivityController.swift; sourceTree = "<group>"; };
 		44223B521F97483800D8CA1E /* RecommandationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommandationController.swift; sourceTree = "<group>"; };
 		44223B541F97526500D8CA1E /* SelectPetForRecommandationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPetForRecommandationController.swift; sourceTree = "<group>"; };
 		4424DCF81E8E9F2300ACDF07 /* UserProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserProfileTableViewController.swift; path = View/UserProfileTableViewController.swift; sourceTree = "<group>"; };
@@ -444,10 +446,12 @@
 		44F27DBD1F0CE23300DAB441 /* PawTrails.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PawTrails.xcdatamodel; sourceTree = "<group>"; };
 		44FE723C1E4A2EF0007C7E24 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = DataManager.swift; path = Model/DataManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		734D05AA5E231C24EBC9332D /* Pods-PawTrails.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PawTrails.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PawTrails/Pods-PawTrails.debug.xcconfig"; sourceTree = "<group>"; };
+		85A3950B851162A9AD058D22 /* Pods-PawTrailsTests.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PawTrailsTests.beta.xcconfig"; path = "Pods/Target Support Files/Pods-PawTrailsTests/Pods-PawTrailsTests.beta.xcconfig"; sourceTree = "<group>"; };
 		A8782C798F51A66A5AFC788C /* Pods-PawTrailsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PawTrailsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PawTrailsTests/Pods-PawTrailsTests.release.xcconfig"; sourceTree = "<group>"; };
 		B4A45B026D67F7FA0B3729DF /* Pods-PawTrailsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PawTrailsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PawTrailsTests/Pods-PawTrailsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		CDF43BC48AA97ADEA16BD58D /* Pods-PawTrails.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PawTrails.release.xcconfig"; path = "Pods/Target Support Files/Pods-PawTrails/Pods-PawTrails.release.xcconfig"; sourceTree = "<group>"; };
 		D3E63257CC5E13A67F31124B /* Pods_PawTrails.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PawTrails.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E89F72637ABD3F9989B50AF4 /* Pods-PawTrails.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PawTrails.beta.xcconfig"; path = "Pods/Target Support Files/Pods-PawTrails/Pods-PawTrails.beta.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -643,6 +647,7 @@
 				441292321FAB25F900745ED2 /* PetInfromationViewController.swift */,
 				441292301FAB254300745ED2 /* TabPageViewController.swift */,
 				440823C91F8F94900004B90F /* SetUpYourGoalController.swift */,
+				441CF74A1FD1B28900FB1088 /* CalanderForActivityController.swift */,
 				445F5F361F5EA7900069B513 /* Classes */,
 				443E80781F5D87B1008679FC /* Adventures */,
 				4415FF411E3B822900A81B13 /* PawTrails */,
@@ -1025,6 +1030,8 @@
 				CDF43BC48AA97ADEA16BD58D /* Pods-PawTrails.release.xcconfig */,
 				B4A45B026D67F7FA0B3729DF /* Pods-PawTrailsTests.debug.xcconfig */,
 				A8782C798F51A66A5AFC788C /* Pods-PawTrailsTests.release.xcconfig */,
+				E89F72637ABD3F9989B50AF4 /* Pods-PawTrails.beta.xcconfig */,
+				85A3950B851162A9AD058D22 /* Pods-PawTrailsTests.beta.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1413,6 +1420,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				441CF74B1FD1B28900FB1088 /* CalanderForActivityController.swift in Sources */,
 				44251B091F0CD5870067F401 /* PetPresenter.swift in Sources */,
 				44251B701F0CD6130067F401 /* SharedPreferences.swift in Sources */,
 				441858E51F98DDD8003710A8 /* YesViewController.swift in Sources */,
@@ -1647,7 +1655,7 @@
 		};
 		1575D6891FD02E0B00ECC2DF /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CDF43BC48AA97ADEA16BD58D /* Pods-PawTrails.release.xcconfig */;
+			baseConfigurationReference = E89F72637ABD3F9989B50AF4 /* Pods-PawTrails.beta.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1683,7 +1691,7 @@
 		};
 		1575D68A1FD02E0B00ECC2DF /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A8782C798F51A66A5AFC788C /* Pods-PawTrailsTests.release.xcconfig */;
+			baseConfigurationReference = 85A3950B851162A9AD058D22 /* Pods-PawTrailsTests.beta.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;

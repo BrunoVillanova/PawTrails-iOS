@@ -13,7 +13,9 @@ import Charts
 
 
 class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDelegate {
-
+ 
+    @IBOutlet weak var dateBtn: UIButton!
+    
     @IBOutlet weak var combinedCharts: BarChartView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var barChart: BarChartView!
@@ -21,15 +23,19 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
     @IBOutlet weak var datePicker: UIView!
     @IBOutlet weak var chartTitle: UILabel!
     
+    @IBOutlet weak var weekelyGoalBarChart: BarChartView!
     
+    @IBOutlet weak var individualWeelyGoalChart: BarChartView!
+    @IBOutlet weak var monthlyGoalBarChart: BarChartView!
     
+    @IBOutlet weak var individualMonthlyGoalChart: BarChartView!
     
-    lazy var mydatePicker: AirbnbDatePicker = {
-        let btn = AirbnbDatePicker()
-        btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.delegate = self
-        return btn
-    }()
+//    lazy var mydatePicker: AirbnbDatePicker = {
+//        let btn = AirbnbDatePicker()
+//        btn.translatesAutoresizingMaskIntoConstraints = false
+//        btn.delegate = self
+//        return btn
+//    }()
     
     let secondColor = UIColor(red: 206/255, green: 19/255, blue: 54/255, alpha: 1)
     let thirdColor = UIColor(red: 255/255, green: 86/255, blue: 96/255, alpha: 1)
@@ -50,35 +56,59 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
         super.viewDidLoad()
         self.chartTitle.text = "Grouped Analysis"
         self.barChart.isHidden = true
-        self.datePicker.addSubview(mydatePicker)
+//        self.datePicker.addSubview(mydatePicker)
 
-        self.mydatePicker.bounds = datePicker.bounds
-        self.mydatePicker.center = datePicker.center
-        mydatePicker.centerXAnchor.constraint(equalTo: datePicker.centerXAnchor).isActive = true
-        mydatePicker.widthAnchor.constraint(equalTo: datePicker.widthAnchor).isActive = true
-        mydatePicker.heightAnchor.constraint(equalTo: datePicker.heightAnchor).isActive = true
-        mydatePicker.topAnchor.constraint(equalTo: datePicker.topAnchor).isActive = true
-        mydatePicker.bottomAnchor.constraint(equalTo: datePicker.bottomAnchor).isActive = true
-        
+//        self.mydatePicker.bounds = datePicker.bounds
+//        self.mydatePicker.center = datePicker.center
+//        mydatePicker.centerXAnchor.constraint(equalTo: datePicker.centerXAnchor).isActive = true
+//        mydatePicker.widthAnchor.constraint(equalTo: datePicker.widthAnchor).isActive = true
+//        mydatePicker.heightAnchor.constraint(equalTo: datePicker.heightAnchor).isActive = true
+//        mydatePicker.topAnchor.constraint(equalTo: datePicker.topAnchor).isActive = true
+//        mydatePicker.bottomAnchor.constraint(equalTo: datePicker.bottomAnchor).isActive = true
+//        
 
         barChart.delegate = self
         pieChart.delegate = self
         combinedCharts.delegate = self
         
+        // Weekly Chart
+        weekelyGoalBarChart.delegate = self
+        individualWeelyGoalChart.delegate = self
+        
+        // Monthly Chart
+        monthlyGoalBarChart.delegate = self
+        individualMonthlyGoalChart.delegate = self
+        
         if let currentPet = self.pet, let name = currentPet.name {
             barChart.noDataText = "No activity data available for \(name)"
             combinedCharts.noDataText = "No activity data available for \(name)"
             pieChart.noDataText = "No activity data available for \(name)"
+            
+            // weekly
+            weekelyGoalBarChart.noDataText = "No activity data available for \(name)"
+            individualWeelyGoalChart.noDataText = "No activity data available for \(name)"
+            
+            // monthly
+            
+            monthlyGoalBarChart.noDataText = "No activity data available for \(name)"
+            individualMonthlyGoalChart.noDataText = "No activity data available for \(name)"
         } else {
             barChart.noDataText = "No activity data available"
             combinedCharts.noDataText = "No activity data available"
             pieChart.noDataText = "No activity data available"
+            
+            
+            weekelyGoalBarChart.noDataText = "No activity data available"
+            individualWeelyGoalChart.noDataText = "No activity data available"
+            
+            // monthly
+            
+            monthlyGoalBarChart.noDataText = "No activity data available"
+            individualMonthlyGoalChart.noDataText = "No activity data available"
         }
         
         pieChartUpdate()
         combinedChartView(myxaxis: self.months, lively: self.lively, chiling: self.chiling, wandering: self.wandering)
-
-
     }
 
     func barChartUpdate(myxaxis: [String], values: [Int], color: UIColor) {
@@ -309,6 +339,13 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
     
     @IBAction func changeModePressed(_ sender: Any) {
         showActionSheet()
+    }
+    
+    @IBAction func changeModeForWeeklyChartPressed(_ sender: Any) {
+        
+    }
+    
+    @IBAction func changeModeForMonthlyChartPressed(_ sender: Any) {
     }
     
     
