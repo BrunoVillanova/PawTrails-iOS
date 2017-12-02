@@ -89,7 +89,7 @@ class TripScreenViewController: UIViewController {
                 self.pauseButton.isEnabled = true
                 
                 if self.adventurePaused! {
-                    self.pauseButton.changeImageAnimated(image: #imageLiteral(resourceName: "StartTrip-1x-png"))
+                    self.pauseButton.changeImageAnimated(image: #imageLiteral(resourceName: "ResumeTripIcon"))
                 } else {
                     self.pauseButton.changeImageAnimated(image: #imageLiteral(resourceName: "PauseTripButton-1x-png"))
                 }
@@ -212,14 +212,14 @@ class TripScreenViewController: UIViewController {
         let alertView = SCLAlertView(appearance: appearance)
         
         alertView.addButton(buttonOkTitle) {
-            
+            self.showLoadingView()
             if (!isPaused) {
                 DataManager.instance.pauseAdventure().subscribe(onNext: { (stoppedTrips) in
-//                    self.navigationController?.dismiss(animated: true, completion: nil)
+                    self.hideLoadingView()
                 }).addDisposableTo(self.disposeBag)
             } else {
                 DataManager.instance.resumeAdventure().subscribe(onNext: { (stoppedTrips) in
-//                    self.navigationController?.dismiss(animated: true, completion: nil)
+                    self.hideLoadingView()
                 }).addDisposableTo(self.disposeBag)
             }
         }
