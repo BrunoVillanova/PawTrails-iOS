@@ -80,7 +80,7 @@ class TripScreenViewController: UIViewController {
             .bind(to: collectionView.rx.items(cellIdentifier: "cell", cellType: TripDetailsCell.self)) { (row, element, cell) in
                 cell.configureWithTrip(element)
             }
-            .disposed(by: disposeBag)
+            .addDisposableTo(disposeBag)
         
         activeTripsObservable
             .subscribe(onNext: { (activeTrips) in
@@ -301,7 +301,6 @@ extension TripScreenViewController: UICollectionViewDelegateFlowLayout {
 class TripDetailsCell: UICollectionViewCell {
     
     
-    @IBOutlet weak var maskImage: UiimageViewWithMask!
     @IBOutlet weak var totalDistanceImageVIew: UIImageView!
     @IBOutlet weak var totalDistancesubLabel: UILabel!
     
@@ -316,13 +315,21 @@ class TripDetailsCell: UICollectionViewCell {
     
     @IBOutlet weak var petName: UILabel!
     @IBOutlet weak var totalDistance: UILabel!
-    @IBOutlet weak var userProfileImg: UIImageView!
+    @IBOutlet weak var balloonImageView: PTBalloonImageView!
     @IBOutlet weak var avargeSpeed: UILabel!
     @IBOutlet weak var currentSpeed: UILabel!
     @IBOutlet weak var totalTime: UILabel!
+    var trip: Trip? {
+        didSet {
+            self.finalTotalTime = trip!.totalTime!
+            startTimerIfNeeded()
+            stopTimerIfNeeded()
+        }
+    }
+    var totalTimeTimer : Timer?
+    var finalTotalTime: Int64 = 0
     
     override func awakeFromNib() {
-        self.maskImage.maskImage = UIImage(named: "userprofilemask-1x-png_360")
         self.totalDistanceImageVIew.image = UIImage(named: "TotalDistanceLabel-1x-png")
         self.totalDistancesubLabel.text = "total distance"
         self.totalTimeImageVIew.image = UIImage(named: "TotalTimeLabel-1x-png")
@@ -334,21 +341,85 @@ class TripDetailsCell: UICollectionViewCell {
     }
     
     func configureWithTrip(_ trip: Trip) {
+        
+        self.trip = trip
+        
         if let petName = trip.pet.name {
             self.petName.text = petName
         }
         
-        
-        self.totalDistance.text = "120.0 km"
-        
         if let imageData = trip.pet.image {
-            self.userProfileImg.image = UIImage(data: imageData)
+            self.balloonImageView.image = UIImage(data: imageData)
         }
         
-        self.avargeSpeed.text = "142 bpm"
-        self.currentSpeed.text = "6.2 km/h"
-        self.totalTime.text = "00:43:27"
+        
+        // Set defaults
+        var tripTotalDistanceText = "0 km"
+        var tripAverageSpeedText = "0 bpm"
+        var tripCurrentSpeed = "0 km/h"
+
+        
+        if let totalDistanceInMeters = trip.totalDistance {
+            let totalDistanceInKm = Double(totalDistanceInMeters)/1000.0
+            tripTotalDistanceText = String(format:"%0.2f km", totalDistanceInKm)
+        }
+        
+        if let averageSpeed = trip.steps {
+            tripAverageSpeedText = String(format:"%2i bpm", averageSpeed)
+        }
+        
+        if let currentSpeed = trip.averageSpeed {
+            tripCurrentSpeed = String(format:"%.2f km/h", currentSpeed)
+        }
+        
+        self.totalDistance.text = tripTotalDistanceText
+        self.avargeSpeed.text = tripAverageSpeedText
+        self.currentSpeed.text = tripCurrentSpeed
+        self.totalTime.text = timeStampToTimeString(trip.totalTime)
     }
+    
+    func startTimerIfNeeded() {
+        if (self.totalTimeTimer == nil && trip?.status == 0) {
+            self.totalTimeTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(TripDetailsCell.tick), userInfo: nil, repeats: true)
+        }
+    }
+    
+    func stopTimerIfNeeded() {
+        if let totalTimeTimer = self.totalTimeTimer, let trip = trip, trip.status > 0 {
+            totalTimeTimer.invalidate()
+            self.totalTimeTimer = nil
+        }
+    }
+    
+    func timeStampToTimeString(_ timeStamp: Int64?) -> String {
+        
+        var hours = 0
+        var minutes = 0
+        var seconds = 0
+        
+        if let totalTime = timeStamp as Int64! {
+            hours = Int(totalTime) / 3600
+            minutes = Int(totalTime) / 60 % 60
+            seconds = Int(totalTime) % 60
+        }
+        
+       return String(format:"%02i:%02i:%02i", hours, minutes, seconds)
+    }
+    
+    func tick() {
+        DispatchQueue.global().async {
+            if let totalTime = self.finalTotalTime as Int64! {
+                self.finalTotalTime = totalTime+1
+                
+                DispatchQueue.main.async(execute: {
+                    self.totalTime.text = self.timeStampToTimeString(self.finalTotalTime )
+                })
+            }
+        }
+        
+    }
+    
+    
 }
 
 extension UIViewController {

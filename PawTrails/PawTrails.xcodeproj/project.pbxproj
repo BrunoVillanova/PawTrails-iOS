@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		15226D901F8D18EA007EEFF2 /* SocketIO+RxSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15226D8F1F8D18EA007EEFF2 /* SocketIO+RxSwift.swift */; };
 		152A8F701FB5E0CB00C54DD8 /* DataManager+RxSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152A8F6F1FB5E0CB00C54DD8 /* DataManager+RxSwift.swift */; };
+		153DF70D1FD4AD5C008AE32D /* PTBalloonImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153DF70C1FD4AD5C008AE32D /* PTBalloonImageView.swift */; };
 		1548B82A1FC5ADA200DC7E2B /* UIButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1548B8291FC5ADA200DC7E2B /* UIButtonExtensions.swift */; };
 		155316D31FBF189E009230B1 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 155316D01FBF1897009230B1 /* Charts.framework */; };
 		157401A41F9E268200A854C5 /* PTBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157401911F9E268200A854C5 /* PTBubbleView.swift */; };
@@ -247,6 +248,7 @@
 /* Begin PBXFileReference section */
 		15226D8F1F8D18EA007EEFF2 /* SocketIO+RxSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SocketIO+RxSwift.swift"; path = "Extensions/SocketIO+RxSwift.swift"; sourceTree = "<group>"; };
 		152A8F6F1FB5E0CB00C54DD8 /* DataManager+RxSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataManager+RxSwift.swift"; sourceTree = "<group>"; };
+		153DF70C1FD4AD5C008AE32D /* PTBalloonImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PTBalloonImageView.swift; path = PTBalloonImageView/PTBalloonImageView.swift; sourceTree = "<group>"; };
 		1548B8291FC5ADA200DC7E2B /* UIButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtensions.swift; sourceTree = "<group>"; };
 		157401911F9E268200A854C5 /* PTBubbleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTBubbleView.swift; sourceTree = "<group>"; };
 		157401931F9E268200A854C5 /* Battery@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Battery@2x.png"; sourceTree = "<group>"; };
@@ -518,6 +520,7 @@
 				157401A11F9E268200A854C5 /* PTBasicAnnotationView.swift */,
 				157401A31F9E268200A854C5 /* PTPetCalloutView.xib */,
 				159646A01FB1D334009DC172 /* PTMapView.swift */,
+				153DF70C1FD4AD5C008AE32D /* PTBalloonImageView.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -1448,6 +1451,7 @@
 				44251B511F0CD5DF0067F401 /* ScanQRViewController.swift in Sources */,
 				446607C51F96004000833683 /* Date.swift in Sources */,
 				44F0BF361EFBF6C7008C26B3 /* EventManager.swift in Sources */,
+				153DF70D1FD4AD5C008AE32D /* PTBalloonImageView.swift in Sources */,
 				44251B741F0CD6130067F401 /* CDAddress+CoreDataProperties.swift in Sources */,
 				44251B551F0CD5FE0067F401 /* Parsers.swift in Sources */,
 				44251B711F0CD6130067F401 /* CoreDataManager.swift in Sources */,
