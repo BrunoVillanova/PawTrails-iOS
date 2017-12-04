@@ -204,8 +204,10 @@ class SelectPetsVC: UIViewController, PetsView, SelectPetView {
             }, onError: { (error) in
                 self.hideLoadingView()
                 self.petIDsToStartTrip.value.removeAll()
-                let error = error as! APIManagerError
-                print("Error \(error.errorCode!)!")
+                let apiError = error as! APIManagerError
+                if let errorCode = apiError.errorCode {
+                    print("Error \(errorCode)!")
+                }
             }).addDisposableTo(disposeBag)
     }
 

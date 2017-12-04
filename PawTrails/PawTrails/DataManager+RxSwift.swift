@@ -75,23 +75,15 @@ extension DataManager {
             return Disposables.create()
         })
     }
-    
+  
     func getActivePetTrips() -> Observable<[Trip]> {
         return allTrips()
-            .flatMapLatest({ (trips) -> Observable<[Trip]> in
-                print("func getActivePetTrips \(trips.count)")
-                //TODO: add pets from socketIO
-                return Observable.create({ observer in
-                    let onlyActiveTrips = trips.filter({ (trip) -> Bool in
-                        return trip.status < 2
-                    })
-                    
-                    print("onlyActiveTrips \(onlyActiveTrips.count)")
-                    observer.onNext(onlyActiveTrips)
-                    observer.onCompleted()
-                    return Disposables.create()
+            .map({ (trips) -> [Trip] in
+                return trips.filter({ (trip) -> Bool in
+                    trip.status < 2
                 })
-            }).ifEmpty(default: [Trip]())
+            })
+            .ifEmpty(default: [Trip]())
     }
     
     func allTrips() -> Observable<[Trip]> {
@@ -99,34 +91,20 @@ extension DataManager {
         let socketTrips = SocketIOManager.instance.trips()
         print("DataManager -> allTrips")
         
-        let allTrips = Observable.combineLatest(apiTrips, socketTrips) { (tripsFromApi, tripsFromSocket) -> [Trip] in
-            
-            var finalTrips = tripsFromApi.map{$0}
-
-            for socketTrip in tripsFromSocket {
-                var theTripOnApi = finalTrips.first { $0.id == socketTrip.id }
-                
-                if theTripOnApi != nil {
-                    theTripOnApi!.status = socketTrip.status
-                    finalTrips.remove(at: finalTrips.index(where: { (trip) -> Bool in
-                        return trip.id == theTripOnApi?.id
-                    })!)
-                    finalTrips.append(theTripOnApi!)
-                } else {
-                    finalTrips.append(socketTrip)
-                }
-            }
-            
-        
-            print("DataManager -> allTrips -> active tripsFromApi = \(tripsFromApi.filter{$0.status < 2}.count)")
-            print("DataManager -> allTrips -> active tripsFromSocket = \(tripsFromSocket.filter{$0.status < 2}.count)")
-            print("DataManager -> allTrips -> active finalTrips = \(finalTrips.filter{$0.status < 2}.count)")
-
-            return finalTrips
-        }.ifEmpty(default: [Trip]())
-        
-        return allTrips
+        return apiTrips
+            .flatMapLatest({ (tripsFromApi) -> Observable<[Trip]> in
+                return socketTrips
+                    .filter({ (tripsFromSocket) -> Bool in
+                        return tripsFromSocket.count > 0
+                    })
+                    .flatMap({ (theTripsFromSocket) -> Observable<[Trip]> in
+                        return apiTrips
+                    })
+                    .ifEmpty(default: tripsFromApi)
+            })
     }
+
+    
     
     
     func allPetDeviceData() -> Observable<[PetDeviceData]> {
@@ -173,12 +151,15 @@ extension DataManager {
                 }
             }
             return Disposables.create()
+        }).flatMap({ (trips) -> Observable<[Trip]> in
+            return self.allTrips()
         })
         
         return apiStartTrips
     }
     
     func stopTrips(_ tripIDs: [Int]) -> Observable<[Trip]> {
+        
         let finishTripApiObserver = Observable<[Trip]>.create({ observer in
             APIRepository.instance.finishTrip(tripIDs) { (error, data) in
                 if error != nil {
@@ -189,6 +170,8 @@ extension DataManager {
                 }
             }
             return Disposables.create()
+        }).flatMap({ (trips) -> Observable<[Trip]> in
+            return self.allTrips()
         })
         
         return finishTripApiObserver
@@ -203,7 +186,7 @@ extension DataManager {
             .flatMap { (trips) -> Observable<[Trip]> in
                 let tripIDs = trips.map({Int($0.id)})
                 return self.stopTrips(tripIDs)
-        }
+            }
     }
     
     
@@ -212,45 +195,57 @@ extension DataManager {
         return self.getActivePetTrips()
             .filter({ (trips) -> Bool in
                 return trips.count > 0
-            }).take(1)
+            })
+            .take(1)
             .flatMap { (trips) -> Observable<[Trip]> in
-                let tripIDs = trips.map({Int($0.id)})
                 
-                return Observable.create({ observer in
+                let tripIDs = trips.map({Int($0.id)})
+                let pauseTrips = Observable<[Trip]>.create({ observer in
                     APIRepository.instance.pauseTrip(tripIDs) { (error) in
                         if error != nil {
                             observer.onError(error!)
                         } else {
+                            observer.onNext([])
                             observer.onCompleted()
                         }
                     }
                     return Disposables.create()
                 })
+                
+                return Observable.zip(pauseTrips, self.allTrips()) {(pausedTrips, tripsFromApi) -> [Trip] in
+                    return tripsFromApi
+                }
         }
     }
     
     func resumeAdventure() -> Observable<[Trip]> {
         
-        return self.getActivePetTrips()
+        let resumeTripObservable = self.getActivePetTrips()
             .filter({ (trips) -> Bool in
                 let pausedTrips = trips.filter { $0.status == 1}
                 return pausedTrips.count > 0
             })
             .take(1)
             .flatMap { (trips) -> Observable<[Trip]> in
-
-                return Observable.create({ observer in
+                
+                let resumeTrips = Observable<[Trip]>.create({ observer in
                     APIRepository.instance.resumeTrip { (error) in
                         if error != nil {
                             observer.onError(error!)
                         } else {
-                            //                            self.retrieveRunningTrips()
-                            //                            observer.onNext(data!)
+                            observer.onNext([])
                             observer.onCompleted()
                         }
                     }
                     return Disposables.create()
                 })
+                .flatMap({ (trip) -> Observable<[Trip]> in
+                    return self.allTrips()
+                })
+                
+                return resumeTrips
         }
+        
+        return resumeTripObservable
     }
 }

@@ -223,12 +223,22 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     }
     
     func trips() -> Observable<[Trip]> {
-        return isReady().filter({ (value) -> Bool in
-            return value == true
-        }).flatMap({ (isReady) -> Observable<[Trip]> in
-            self.socket.emit(channel.trips.name)
-            return self.petTrips.asObservable()
-        })
+        return isReady()
+//            .debounce(1, scheduler: MainScheduler.instance) // Wait 1s for changes.
+//            .distinctUntilChanged() // If they didn't occur, check if the new value is the same as old.
+                .filter({ (value) -> Bool in
+                    print("SocketIOManager -> trips() -> filter -> \(value)")
+                    return value == true
+                })
+                .flatMapLatest({ (isReady) -> Observable<[Trip]> in
+                    print("SocketIOManager -> trips() -> flatMap")
+                    if !self.openChannels.contains(channel.trips) {
+                        self.openChannels.insert(channel.trips)
+                         print("SocketIOManager -> trips() -> flatMap -> self.socket.emit(channel.trips.name)")
+                        self.socket.emit(channel.trips.name)
+                    }
+                    return self.petTrips.asObservable()
+                })
     }
     
     func isReady() -> Observable<Bool> {
