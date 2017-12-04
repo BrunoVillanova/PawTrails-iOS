@@ -21,6 +21,7 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
     @IBOutlet weak var weightLabel: UILabel!
     @IBOutlet weak var neuteredSwitch: UISwitch!
     
+    @IBOutlet weak var sizeLbl: UILabel!
     fileprivate let imagePicker = UIImagePickerController()
     fileprivate let presenter = AddEditPetPresenter()
     
@@ -70,8 +71,24 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
         }else if let imageData = presenter.pet.image {
             petImageView.image = UIImage(data: imageData)
         }
+        
+        if presenter.pet.size == 0 {
+            self.sizeLbl.text = "Small"
+            
+        } else if presenter.pet.size == 1 {
+            self.sizeLbl.text = "Medium"
+
+        } else if presenter.pet.size == 2 {
+            self.sizeLbl.text = "Large"
+        }
+        
+        
         nameLabel.text = presenter.pet.name
         typeLabel.text = presenter.pet.typeString
+        
+        
+        
+        
         genderLabel.text = presenter.pet.gender?.name
         breedLabel.text = presenter.pet.breedsString
         birthdayLabel.text = presenter.pet.birthday?.toStringShow
@@ -142,6 +159,7 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
             break
         case is PetWeightTableViewController: (segue.destination as! PetWeightTableViewController).parentEditor = presenter
             break
+        case is PetSizeTableViewController: (segue.destination as! PetSizeTableViewController).parentEditor = presenter
         default: break
         }
     }

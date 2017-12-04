@@ -162,6 +162,9 @@
                                         </fragment>
                                     </attributedString>
                                 </state>
+                                <connections>
+                                    <segue destination="StW-Tg-rpZ" kind="show" id="2Aw-lB-w85"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -745,7 +748,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2We-Vy-Ktb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3276" y="1305.697151424288"/>
+            <point key="canvasLocation" x="3615.1999999999998" y="1305.697151424288"/>
         </scene>
         <!--Edit Profile-->
         <scene sceneID="7Wm-be-A9C">
@@ -1032,7 +1035,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" Name" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="vlc-pt-weZ">
-                                                    <rect key="frame" x="11" y="0.0" width="344" height="23"/>
+                                                    <rect key="frame" x="11" y="0.0" width="344" height="22"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -1052,7 +1055,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" Surname" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="oqE-wd-eWx">
-                                                    <rect key="frame" x="11" y="0.0" width="344" height="23"/>
+                                                    <rect key="frame" x="11" y="0.0" width="344" height="22"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -1470,7 +1473,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="keV-Ml-sWp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3890.4000000000001" y="2175.562218890555"/>
+            <point key="canvasLocation" x="4229.6000000000004" y="2175.562218890555"/>
         </scene>
         <!--Settings-->
         <scene sceneID="fGq-hb-6XF">
@@ -1570,11 +1573,11 @@
         <scene sceneID="wSI-74-ret">
             <objects>
                 <viewController hidesBottomBarWhenPushed="YES" id="dWy-cf-3Fz" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="W7A-Oh-SQ5">
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="W7A-Oh-SQ5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Under Construction" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pdd-OI-KXN">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Under Construction" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pdd-OI-KXN">
                                 <rect key="frame" x="80" y="293" width="215" height="81"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <color key="textColor" red="0.99932557339999994" green="0.63401025529999999" blue="0.2850541472" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1604,11 +1607,400 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Irl-ap-dJF">
-                                <rect key="frame" x="16" y="64" width="343" height="603"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Irl-ap-dJF">
+                                <rect key="frame" x="16" y="108" width="343" height="510"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">This agreement is made between you, the “User” and Attitude Technologies Ltd of Unit 12A, South Ring Business Park, Kinsale Road, Cork, in relation to the use of the services provided by the “PawTrails App” software.  
+By using our Services, you are agreeing to these terms. Please read them carefully.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Using our Services">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+In agreeing to use our services you to follow any policies relevant to your use of said services as have been provided to you.
+Using our Services does not give you ownership of any intellectual property rights in our Services. 
+In connection with your use of the Services, we may send you service announcements, administrative messages, and other information. By continuing with your registration, you are consenting to receive such announcements etc. You may opt out of some of those communications by sending an email to info@attitudetech.ie 
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Your PawTrails Account">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+As part of the registration process for the PawTrails App you will be asked to create a unique user account.
+To protect your Paw Trails Account, keep your password confidential. You are responsible for the activity that happens on or through your PawTrails Account. If you believe there has been unauthorised access to your account, please send an email to info@attitudetech.ie requesting your password to be reset.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Privacy and Copyright Protection">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+Attitude Technologies LTD Privacy Statement explains how we treat your personal data and protect your privacy when you use our Services. By signing this agreement, you agree that Attitude Technologies LTD can use such data in accordance with our privacy statement. From time to time it may be necessary to update our Privacy Statement and a copy of the revised statement will be sent to the email address you provided on registration. If, as a result of same, you wish to withdraw from using our services you can do so by forwarding an email stating same to info@attitudetech.ie
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Your Content in our Services">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+Our Services allow you to upload, submit, store, send or receive content. You retain ownership of any intellectual property rights that you hold in that content. 
+When you upload, submit, store, send or receive content to or through our Services, you give Attitude Technologies LTD license to use, host, store, reproduce, modify, said content for any and all purposes as set out in our Privacy Statement.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="About Software in our Services">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+Attitude Technologies LTD gives you a personal, worldwide, non­assignable and non­exclusive license to use the software provided to you by Attitude Technologies LTD as part of the Services. This license is for the sole purpose of enabling you to use and enjoy the benefit of the Services as  provided by Attitude Technologies LTD, in the manner permitted by these terms. You may not copy, modify, distribute, sell, or lease any part of our Services or included software, nor may you reverse engineer or attempt to extract the source code of that software.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Modifying and Terminating our Services">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+We are constantly changing and improving our Services. We may add or remove functionalities or features, and we may suspend or stop a Service altogether.
+You can stop using our Services at any time using the process set out above. Attitude Technologies LTD may also stop providing Services to you, or add or create new limits to our Services at any time.
+We believe that you own your data and preserving your access to such data is important. If we discontinue a Service, where reasonably possible, we will give you reasonable advance notice and a chance to get information out of that Service.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Our Warranties and Disclaimers">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+We provide our Services using a commercially reasonable level of skill and care and we hope that you will enjoy using them. But there are certain things that we don’t promise about our Services.
+OTHER THAN AS EXPRESSLY SET OUT IN THESE TERMS OR ADDITIONAL TERMS, NO SPECIFIC PROMISES ABOUT THE SERVICES ARE MADE. FOR EXAMPLE, WE DON’T MAKE ANY COMMITMENTS ABOUT THE CONTENT WITHIN THE SERVICES, THE SPECIFIC FUNCTIONS OF THE SERVICES, OR THEIR RELIABILITY, AVAILABILITY, OR ABILITY TO MEET YOUR NEEDS. WE PROVIDE THE SERVICES “AS IS”.
+TO THE EXTENT PERMITTED BY LAW, WE EXCLUDE ALL WARRANTIES.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Liability for our Services">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+WHEN PERMITTED BY LAW, ATTITUDE TECHNOLOGIES LTD, WILL NOT BE RESPONSIBLE FOR LOST PROFITS, REVENUES, OR DATA, FINANCIAL LOSSES OR INDIRECT, SPECIAL, CONSEQUENTIAL, EXEMPLARY, OR PUNITIVE DAMAGES.
+TO THE EXTENT PERMITTED BY LAW, THE TOTAL LIABILITY OF ATTITUDE TECHNOLOGIES LTD FOR ANY CLAIMS UNDER THESE TERMS, INCLUDING FOR ANY IMPLIED WARRANTIES, IS LIMITED TO THE AMOUNT YOU PAID US TO USE THE SERVICES AND ONLY IF SAID LOSS IS REASONABLY FORESEEABLE.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Business uses of our Services">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+If you are using our Services on behalf of a business, that business accepts these terms. It will hold harmless and indemnify Attitude Technologies LTD from any claim, suit or action arising from or related to the use of the Services or violation of these terms, including any liability or expense arising from claims, losses, damages, suits, judgments, litigation costs and attorneys’ fees.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="About these Terms">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+We may modify these terms or any additional terms that apply to a Service to, for example, reflect changes to the law or changes to our Services. A copy of the revised terms will be sent to the email address you specified on registration. If you do not agree to the modified terms for a Service, you should discontinue your use of that Service using the process set out above.
+If there is a conflict between these terms and the additional terms, the additional terms will control for that conflict.
+If you do not comply with these terms, and Attitude Technologies LTD do not take any immediate action this does not prohibit the taking of such action in the future.
+If it turns out that a particular term is not enforceable, this will not affect any other terms.
+The laws of Republic of Ireland, will apply to any disputes arising out of or relating to these terms or the Services. All claims arising out of or relating to these terms or the Services will be litigated exclusively in Irish Courts, and you and Attitude Technologies LTD consent to personal jurisdiction in those courts.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Privacy Statement ">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+Attitude Technologies Ltd of Unit 12A, South Ring Business Park, Kinsale Road, Cork built the PawTrails app as a Free app to download. This SERVICE is provided by Attitude Technologies Ltd, at no cost and is intended for use on an “as is” basis. Attitude Technologies Ltd give no warranty that the service will be free of defects and/or faults. 
+This page is used to inform App visitors about our privacy statement and in relation to the collection, use, and disclosure of personal information which will occur should you decide to use our service 
+By choosing to use our Service, then you give your consent to the collection and use of information as set out in this Statement. The Personal Information that we collect is used for providing and improving the Service. We will not use or share your information with anyone except as described in this Privacy Statement.
+A Privacy Statement describes the type of personal information collected and how the data is used and distributed. The Privacy Statement is a document that addresses the often-delicate matter of online privacy of users.
+Your Privacy Statement will not contain rules of use or conditions when membership can be terminated, which are to be found in our Terms &amp; Conditions agreement instead.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Information Collection and Use">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+For a better experience, while using our Service, we require you to provide us with your email address. You are also asked in the app for the name of user, their date of birth, home address, contact number and gender, but these are not mandatory fields. All this information is used for demographic purposes- which allows our marketing department to be able to build a better idea of our target market. None of the information will be sold / shared with 3rd parties Should you decide to terminate your use of the service then your personal information can be deleted. If you require us to delete the information you can contact us on info@attitudetech.ie   However, the information that has been collected with regards to the pet’s information is kept and is also used for demographic purposes. This is to help us determine the most common size, breed of dog etc that are being added to the PawTrails app.  The pet’s information that is kept is the pets name, date of birth, size, breed, gender, neutered/ not neutered, weight, body condition score, location &amp; activity monitor. 
+The app does use third party services that may collect information used to identify you.                                                        Link to privacy statement of third party service providers used by the app 
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="https://www.apple.com/ie/legal/privacy/en-ww/">
+                                        <attributes>
+                                            <color key="NSColor" red="0.019609999999999999" green="0.38823999999999997" blue="0.75685999999999998" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="11" name="Helvetica"/>
+                                            <url key="NSLink" string="https://www.apple.com/ie/legal/privacy/en-ww/"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="5" paragraphSpacingBefore="5" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                            <integer key="NSUnderline" value="1"/>
+                                            <color key="NSUnderlineColor" red="0.019609999999999999" green="0.38823999999999997" blue="0.75685999999999998" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" ">
+                                        <attributes>
+                                            <font key="NSFont" size="11" name="Helvetica"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="5" paragraphSpacingBefore="5" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content" base64-UTF8="YES">
+IAo
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="5" paragraphSpacingBefore="5" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Relevant IOS permissions requested by this app">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+Storage permission- this permission allows the app to load and store images. These images are used for the user and their pets' profiles.
+Location permission-this permission allows the app to access the location of the user to determine his pets' location.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Push Notifications ">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+A push notification is a message from an app that pops up at random times on a mobile device They’re typically formatted like mobile alerts and text messages and pop up regardless of whether a user is actually within the app at the time or not. 
+Push notification may include, alerts, sounds, icons and badges. These can be configured in settings.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Log Data">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+We want to inform you that whenever you use our service, in a case of an error in the app we collect data and information (through third party products) on your phone called Log Data. This Log Data may include information such as your device Internet Protocol (“IP”) address, device name, operating system version, the configuration of the app when utilizing our Service, the time and date of your use of the Service, and other statistics. 
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Service Providers">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+We may employ third-party companies and individuals due to the following reasons:
+•	To facilitate our service;
+•	To provide the service on our behalf;
+•	To perform service-related services; or
+•	To assist us in analysing how our service is used.
+We want to inform users of this service that these third parties have access to your Personal Information. The reason is to perform the tasks assigned to them on our behalf. However, they are obligated not to disclose or use the information for any purpose other than that set out in this Statement. 
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Security">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+We value your trust in providing us your Personal Information, and Attitude Technologies uses the best commercially acceptable means of protecting it. But remember that no method of transmission over the internet, or method of electronic storage is 100% secure and reliable, and we cannot guarantee its absolute security.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Links to Other Sites">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+This service may contain links to other sites. If you click on a third-party link, you will be directed to that site. Note that these external sites are not operated by us. Therefore, we strongly advise you to review the privacy statement of these websites. We have no control over and assume no responsibility for the content, privacy policies, or practices of any third-party sites or services. When you press a link inside the app you have to open a webpage/app either inside a pop up or another 3rd party app.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Children’s Privacy">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+These Services do not address anyone under the age of 13. We do not knowingly collect personally identifiable information from children under 13. In the case we discover that a child under 13 has provided us with personal information, we immediately delete this from our servers. If you are a parent or guardian and you are aware that your child has provided us with personal information, please contact us so that we will be able to do necessary actions. You can contact us on info@attitudetech.ie 
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Changes to This Privacy Statement">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+If there are changes to the privacy statement they will be emailed to you.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Contact Us">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+If you have any questions or suggestions about our Privacy Statement, do not hesitate to contact us 
+attitudetech.ie
+Unit 12A, South Ring Business Park
+Cork,
+Ireland
+info@attitudetech.ie
++353214312004
+
+Last Edited on 2017-12-04
+
+</string>
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
@@ -1625,7 +2017,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gB8-2i-MUg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5634.3999999999996" y="2903.2983508245879"/>
+            <point key="canvasLocation" x="2676" y="2985"/>
         </scene>
         <!--About Paw Trails-->
         <scene sceneID="HRX-08-psL">
@@ -1636,7 +2028,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qf4-Ct-DNe">
-                                <rect key="frame" x="0.0" y="64" width="375" height="786"/>
+                                <rect key="frame" x="0.0" y="108" width="375" height="693"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LTF-ve-xvE">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="828"/>
@@ -1931,7 +2323,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="98f-Ae-ufe">
-                                <rect key="frame" x="0.0" y="102" width="375" height="216"/>
+                                <rect key="frame" x="0.0" y="146" width="375" height="216"/>
                                 <subviews>
                                     <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="nOV-Lr-0ne">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="216"/>
@@ -3034,8 +3426,35 @@
                                             <segue destination="kbv-fo-KmC" kind="show" id="hJd-aX-adl"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="44" id="xWb-X1-5IN">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="r9j-1x-D8t" detailTextLabel="7AG-49-W1j" rowHeight="44" style="IBUITableViewCellStyleValue1" id="73D-yf-sbc">
                                         <rect key="frame" x="0.0" y="359" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="73D-yf-sbc" id="d21-VO-Ezg">
+                                            <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Size" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="r9j-1x-D8t">
+                                                    <rect key="frame" x="16" y="12" width="32.5" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text=" " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7AG-49-W1j">
+                                                    <rect key="frame" x="335.5" y="12" width="4.5" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="ygu-8G-gBG" kind="show" id="fzh-u9-bOM"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="44" id="xWb-X1-5IN">
+                                        <rect key="frame" x="0.0" y="403" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xWb-X1-5IN" id="EPz-L6-Vug">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -3091,6 +3510,7 @@
                         <outlet property="nameLabel" destination="qKv-2g-yhZ" id="Jo0-kR-k7R"/>
                         <outlet property="neuteredSwitch" destination="z8v-J1-4fr" id="KAh-ZJ-hqc"/>
                         <outlet property="petImageView" destination="Gfh-gH-drR" id="Rxn-tx-mKX"/>
+                        <outlet property="sizeLbl" destination="7AG-49-W1j" id="wbp-5R-Crh"/>
                         <outlet property="typeLabel" destination="Cmh-fj-Ot9" id="HMR-oA-rzj"/>
                         <outlet property="weightLabel" destination="0rq-aT-GEU" id="nne-ds-frA"/>
                     </connections>
@@ -3642,7 +4062,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dRF-Cr-JSo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="252" y="1885.9070464767617"/>
+            <point key="canvasLocation" x="591.20000000000005" y="1885.9070464767617"/>
         </scene>
         <!--Email-->
         <scene sceneID="1Fb-Uz-mf9">
@@ -4061,7 +4481,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fja-6r-gKI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8743" y="1239"/>
+            <point key="canvasLocation" x="9080.7999999999993" y="1238.2308845577213"/>
         </scene>
         <!--Tab Page View Controller-->
         <scene sceneID="X09-JD-dxV">
@@ -4106,6 +4526,7 @@
                         <outlet property="buttonBarView" destination="Kix-04-002" id="BAd-Td-QvO"/>
                         <outlet property="containerView" destination="osN-NO-pbf" id="vqP-kh-ueX"/>
                         <segue destination="9OU-Qn-OVQ" kind="show" identifier="ChangeDevice" id="Mpc-Ja-22V"/>
+                        <segue destination="K64-4m-oVn" kind="show" identifier="editPetDetails" id="Avi-do-lZw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HMt-Qw-LXS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4192,7 +4613,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j4Z-EI-fDi">
-                                                    <rect key="frame" x="16" y="200" width="343" height="16"/>
+                                                    <rect key="frame" x="16" y="200" width="151.5" height="16"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="16" id="489-xp-bKd"/>
                                                     </constraints>
@@ -4201,7 +4622,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l9g-0o-ZYw">
-                                                    <rect key="frame" x="16" y="224" width="343" height="20"/>
+                                                    <rect key="frame" x="16" y="224" width="163.5" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="6hc-pG-xUr"/>
                                                     </constraints>
@@ -4257,14 +4678,28 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Size" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XzC-ga-5ZP">
+                                                    <rect key="frame" x="175.5" y="200" width="25.5" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" red="0.7843137255" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gyv-e7-eh2">
+                                                    <rect key="frame" x="187.5" y="224" width="0.0" height="20"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="j4Z-EI-fDi" secondAttribute="trailing" constant="16" id="0qx-nz-0S2"/>
                                                 <constraint firstAttribute="trailing" secondItem="gzh-e9-ZCh" secondAttribute="trailing" constant="16" id="0wR-tY-OmR"/>
                                                 <constraint firstItem="X4q-SJ-xRR" firstAttribute="top" secondItem="gzh-e9-ZCh" secondAttribute="bottom" constant="16" id="1cF-oS-n3J"/>
                                                 <constraint firstItem="nrw-gc-X21" firstAttribute="leading" secondItem="1tQ-gt-Gnc" secondAttribute="leading" id="2qN-Lg-etZ"/>
+                                                <constraint firstItem="gyv-e7-eh2" firstAttribute="centerX" secondItem="XzC-ga-5ZP" secondAttribute="centerX" id="2rR-3f-TDp"/>
                                                 <constraint firstItem="PdH-l3-IJc" firstAttribute="top" secondItem="1tQ-gt-Gnc" secondAttribute="top" constant="8" id="42D-LM-mAx"/>
                                                 <constraint firstAttribute="trailing" secondItem="D2b-nj-hsf" secondAttribute="trailing" constant="16" id="7Vq-sB-TEF"/>
+                                                <constraint firstItem="XzC-ga-5ZP" firstAttribute="top" secondItem="smD-KH-GaK" secondAttribute="bottom" constant="8" id="919-Ud-U0x"/>
+                                                <constraint firstItem="gyv-e7-eh2" firstAttribute="top" secondItem="j4Z-EI-fDi" secondAttribute="bottom" constant="8" id="9HC-YY-2gR"/>
                                                 <constraint firstItem="D2b-nj-hsf" firstAttribute="leading" secondItem="1tQ-gt-Gnc" secondAttribute="leading" constant="16" id="EQf-Qy-wI2"/>
                                                 <constraint firstItem="gzh-e9-ZCh" firstAttribute="top" secondItem="D2b-nj-hsf" secondAttribute="bottom" constant="8" id="Eiu-OG-j4S"/>
                                                 <constraint firstItem="8oh-kc-sI1" firstAttribute="leading" secondItem="1tQ-gt-Gnc" secondAttribute="leading" constant="16" id="GgU-22-nxl"/>
@@ -4272,10 +4707,13 @@
                                                 <constraint firstItem="GcY-bF-7WP" firstAttribute="centerX" secondItem="1tQ-gt-Gnc" secondAttribute="centerX" id="Iga-nY-RgP"/>
                                                 <constraint firstAttribute="bottom" secondItem="p6W-ql-lrB" secondAttribute="bottom" constant="16" id="LPP-cp-k2g"/>
                                                 <constraint firstItem="8cM-NB-8Dr" firstAttribute="leading" secondItem="1tQ-gt-Gnc" secondAttribute="leading" constant="16" id="MCr-4n-8dC"/>
+                                                <constraint firstItem="XzC-ga-5ZP" firstAttribute="centerX" secondItem="1tQ-gt-Gnc" secondAttribute="centerX" id="NoV-ul-avW"/>
                                                 <constraint firstItem="l9g-0o-ZYw" firstAttribute="top" secondItem="j4Z-EI-fDi" secondAttribute="bottom" constant="8" id="T3R-1z-gqB"/>
+                                                <constraint firstItem="XzC-ga-5ZP" firstAttribute="leading" secondItem="j4Z-EI-fDi" secondAttribute="trailing" constant="8" id="TLP-w8-Jvr"/>
                                                 <constraint firstAttribute="trailing" secondItem="8oh-kc-sI1" secondAttribute="trailing" constant="16" id="Uic-Ra-gQl"/>
                                                 <constraint firstItem="smD-KH-GaK" firstAttribute="leading" secondItem="1tQ-gt-Gnc" secondAttribute="leading" constant="16" id="WRR-7M-rzX"/>
                                                 <constraint firstItem="X4q-SJ-xRR" firstAttribute="centerX" secondItem="1tQ-gt-Gnc" secondAttribute="centerX" id="Ya8-a3-rcr"/>
+                                                <constraint firstItem="XzC-ga-5ZP" firstAttribute="centerY" secondItem="j4Z-EI-fDi" secondAttribute="centerY" id="c8c-ll-qPx"/>
                                                 <constraint firstAttribute="bottom" secondItem="ZgW-b3-X51" secondAttribute="bottom" constant="16" id="dxE-o1-RHg"/>
                                                 <constraint firstAttribute="trailing" secondItem="nrw-gc-X21" secondAttribute="trailing" id="f0z-Vu-vvY"/>
                                                 <constraint firstItem="nrw-gc-X21" firstAttribute="top" secondItem="1tQ-gt-Gnc" secondAttribute="top" id="fG3-Wa-QND"/>
@@ -4284,15 +4722,16 @@
                                                 <constraint firstItem="p6W-ql-lrB" firstAttribute="top" secondItem="X4q-SJ-xRR" secondAttribute="bottom" constant="8" id="hXV-eY-ER2"/>
                                                 <constraint firstItem="smD-KH-GaK" firstAttribute="top" secondItem="8oh-kc-sI1" secondAttribute="bottom" constant="8" id="jyc-GQ-obi"/>
                                                 <constraint firstAttribute="trailing" secondItem="smD-KH-GaK" secondAttribute="trailing" constant="16" id="kft-4P-DKj"/>
+                                                <constraint firstItem="gyv-e7-eh2" firstAttribute="centerY" secondItem="l9g-0o-ZYw" secondAttribute="centerY" id="kgB-4m-TNL"/>
                                                 <constraint firstItem="PdH-l3-IJc" firstAttribute="centerX" secondItem="1tQ-gt-Gnc" secondAttribute="centerX" id="lYh-TD-eCl"/>
                                                 <constraint firstItem="p6W-ql-lrB" firstAttribute="centerX" secondItem="1tQ-gt-Gnc" secondAttribute="centerX" id="m8k-5a-b2Q"/>
-                                                <constraint firstAttribute="trailing" secondItem="l9g-0o-ZYw" secondAttribute="trailing" constant="16" id="n3B-42-Wli"/>
                                                 <constraint firstItem="8oh-kc-sI1" firstAttribute="top" secondItem="nrw-gc-X21" secondAttribute="bottom" constant="8" id="qB1-4s-oPC"/>
                                                 <constraint firstItem="p6W-ql-lrB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ZgW-b3-X51" secondAttribute="trailing" constant="8" id="qhx-jQ-crr"/>
                                                 <constraint firstItem="D2b-nj-hsf" firstAttribute="top" secondItem="l9g-0o-ZYw" secondAttribute="bottom" constant="16" id="sVT-fL-V5b"/>
                                                 <constraint firstItem="gzh-e9-ZCh" firstAttribute="leading" secondItem="1tQ-gt-Gnc" secondAttribute="leading" constant="16" id="voW-MU-0rp"/>
                                                 <constraint firstItem="ZgW-b3-X51" firstAttribute="leading" secondItem="1tQ-gt-Gnc" secondAttribute="leading" constant="16" id="wRr-ar-iPi"/>
                                                 <constraint firstItem="GcY-bF-7WP" firstAttribute="top" secondItem="1tQ-gt-Gnc" secondAttribute="top" constant="8" id="xbP-pS-eMt"/>
+                                                <constraint firstItem="gyv-e7-eh2" firstAttribute="leading" secondItem="l9g-0o-ZYw" secondAttribute="trailing" constant="8" id="xpl-Kt-6od"/>
                                                 <constraint firstItem="j4Z-EI-fDi" firstAttribute="leading" secondItem="1tQ-gt-Gnc" secondAttribute="leading" constant="16" id="yMu-5i-dcI"/>
                                                 <constraint firstItem="ZgW-b3-X51" firstAttribute="top" secondItem="8cM-NB-8Dr" secondAttribute="bottom" constant="8" id="zUi-7M-J3P"/>
                                             </constraints>
@@ -4303,6 +4742,7 @@
                                             <outlet property="genderLbl" destination="ZgW-b3-X51" id="Nzu-JN-n3j"/>
                                             <outlet property="petName" destination="akB-EX-xc6" id="fWx-YA-3aW"/>
                                             <outlet property="profileImage" destination="GcY-bF-7WP" id="YHS-Jm-Xi6"/>
+                                            <outlet property="sizeLbl" destination="gyv-e7-eh2" id="LoV-N6-fm4"/>
                                             <outlet property="typeLbl" destination="l9g-0o-ZYw" id="Uj7-gV-F8a"/>
                                             <outlet property="weightLbl" destination="p6W-ql-lrB" id="pkk-Bv-9ov"/>
                                         </connections>
@@ -4374,7 +4814,7 @@
                     <connections>
                         <outlet property="tableView" destination="tHL-n0-Jza" id="EA3-jc-hIF"/>
                         <outlet property="usersCollectionView" destination="kQs-DV-eqz" id="M4o-US-POi"/>
-                        <segue destination="K64-4m-oVn" kind="show" identifier="editPetDetails" id="gjN-xE-RCG"/>
+                        <segue destination="K64-4m-oVn" kind="show" identifier="" id="gjN-xE-RCG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w36-VC-44e" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4566,7 +5006,7 @@
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="yw5-ml-zpf" kind="show" id="4Fd-BY-gZz"/>
+                                            <action selector="dateBtnPressed:" destination="Glf-Jh-hfn" eventType="touchUpInside" id="agx-RM-mwr"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -4621,11 +5061,12 @@
                         <outlet property="pieChart" destination="hEv-df-JLI" id="UBv-nB-C84"/>
                         <outlet property="scrollView" destination="ucd-hr-yj5" id="t7t-Cu-OfU"/>
                         <outlet property="weekelyGoalBarChart" destination="MnP-gQ-5I3" id="5k8-GO-lO5"/>
+                        <segue destination="yw5-ml-zpf" kind="show" identifier="showCalender" id="Jae-yt-EQT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="akv-2d-2pU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="11218.4" y="2520.5397301349326"/>
+            <point key="canvasLocation" x="11140" y="2507"/>
         </scene>
         <!--Safe Zone View Controller-->
         <scene sceneID="c6F-2m-Goc">
@@ -5196,7 +5637,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TNg-WK-Acv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5167.1999999999998" y="2175.562218890555"/>
+            <point key="canvasLocation" x="5506.3999999999996" y="2175.562218890555"/>
         </scene>
         <!--Add Pet User View Controller-->
         <scene sceneID="nqJ-qj-Sgu">
@@ -5282,7 +5723,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YrT-CU-Dlr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6351.1999999999998" y="1951.5742128935533"/>
+            <point key="canvasLocation" x="6690.3999999999996" y="1951.5742128935533"/>
         </scene>
         <!--My Pets-->
         <scene sceneID="0Ue-jR-wlR">
@@ -5301,7 +5742,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rgY-ko-VfL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2458.4000000000001" y="1306.5967016491754"/>
+            <point key="canvasLocation" x="2797.5999999999999" y="1306.5967016491754"/>
         </scene>
         <!--Me-->
         <scene sceneID="1Vy-6p-WEu">
@@ -5320,7 +5761,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jS9-cR-GGn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2797.5999999999999" y="2203.4482758620693"/>
+            <point key="canvasLocation" x="3136.8000000000002" y="2203.4482758620693"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="DdQ-xS-2g7">
@@ -5349,17 +5790,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pawtrails-logo-1x-png" translatesAutoresizingMaskIntoConstraints="NO" id="ILA-mU-fYT">
-                                <rect key="frame" x="60" y="114" width="80" height="50"/>
+                                <rect key="frame" x="60" y="158" width="80" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="MZO-Kh-6x2"/>
                                     <constraint firstAttribute="width" constant="80" id="mkI-L3-sDP"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sunbeam-logo-1x-png" translatesAutoresizingMaskIntoConstraints="NO" id="FeI-1n-QoM">
-                                <rect key="frame" x="146" y="114" width="189" height="50"/>
+                                <rect key="frame" x="146" y="158" width="189" height="50"/>
                             </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wMi-oC-V8K">
-                                <rect key="frame" x="-4" y="174" width="383" height="405"/>
+                                <rect key="frame" x="-4" y="218" width="383" height="312"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PawTrails work together with Sunbeam to give our customers perfessional recommandations based on the" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q4u-vi-c5L">
                                         <rect key="frame" x="20" y="20" width="343" height="100"/>
@@ -5473,7 +5914,7 @@
                                 </constraints>
                             </scrollView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rFc-dO-isr">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="108" width="375" height="461"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="100" id="3v1-5Y-nEn" customClass="ReccomendationCell" customModule="PawTrails" customModuleProvider="target">
@@ -5832,7 +6273,7 @@ finish the Adventure?</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LOI-82-vgG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8047" y="1238"/>
+            <point key="canvasLocation" x="8384.7999999999993" y="1237.3313343328336"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="DJp-Ti-fEh">
@@ -7048,7 +7489,7 @@ finish the Adventure?</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rfL-Sn-QFW">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="108" width="375" height="461"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HRI-ee-D9R">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="369.5"/>
@@ -7217,6 +7658,491 @@ finish the Adventure?</string>
             </objects>
             <point key="canvasLocation" x="12363.200000000001" y="3211.394302848576"/>
         </scene>
+        <!--Pet Type-->
+        <scene sceneID="W9P-Ek-QO1">
+            <objects>
+                <tableViewController id="ygu-8G-gBG" customClass="PetSizeTableViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="GxQ-ha-YCw">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection id="Gil-oe-vZV">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="bVr-Dx-CEl" style="IBUITableViewCellStyleDefault" id="NJp-Zf-NSv">
+                                        <rect key="frame" x="0.0" y="35" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NJp-Zf-NSv" id="TQs-sz-MZM">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Small" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bVr-Dx-CEl">
+                                                    <rect key="frame" x="16" y="0.0" width="343" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="CR8-Ml-hkn" style="IBUITableViewCellStyleDefault" id="Efa-rz-eIv">
+                                        <rect key="frame" x="0.0" y="79" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Efa-rz-eIv" id="bOc-wG-SHs">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Medium" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CR8-Ml-hkn">
+                                                    <rect key="frame" x="16" y="0.0" width="343" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="XJl-wu-cEG" style="IBUITableViewCellStyleDefault" id="HNd-YC-0qA">
+                                        <rect key="frame" x="0.0" y="123" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HNd-YC-0qA" id="3Fi-Em-Rrq">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Large" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XJl-wu-cEG">
+                                                    <rect key="frame" x="16" y="0.0" width="343" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Pet Type" id="q5F-sV-mVL">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="eS7-Ef-WEd">
+                            <connections>
+                                <action selector="doneAction:" destination="ygu-8G-gBG" id="xjB-39-GrS"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="largeCell" destination="HNd-YC-0qA" id="j4Q-Am-JzU"/>
+                        <outlet property="mediumCell" destination="Efa-rz-eIv" id="hBl-bm-oY5"/>
+                        <outlet property="sizeTableView" destination="GxQ-ha-YCw" id="Xtl-fc-M5e"/>
+                        <outlet property="smallCell" destination="NJp-Zf-NSv" id="15Y-bS-Xjw"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Auc-dO-aNW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="9425" y="525"/>
+        </scene>
+        <!--T&C and Privacy policy-->
+        <scene sceneID="cGa-55-iDz">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="gee-dD-c08" customClass="PrivacyViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dfl-k8-LCi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QqL-5a-BnC">
+                                <rect key="frame" x="16" y="64" width="343" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">This agreement is made between you, the “User” and Attitude Technologies Ltd of Unit 12A, South Ring Business Park, Kinsale Road, Cork, in relation to the use of the services provided by the “PawTrails App” software.  
+By using our Services, you are agreeing to these terms. Please read them carefully.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Using our Services">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+In agreeing to use our services you to follow any policies relevant to your use of said services as have been provided to you.
+Using our Services does not give you ownership of any intellectual property rights in our Services. 
+In connection with your use of the Services, we may send you service announcements, administrative messages, and other information. By continuing with your registration, you are consenting to receive such announcements etc. You may opt out of some of those communications by sending an email to info@attitudetech.ie 
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Your PawTrails Account">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+As part of the registration process for the PawTrails App you will be asked to create a unique user account.
+To protect your Paw Trails Account, keep your password confidential. You are responsible for the activity that happens on or through your PawTrails Account. If you believe there has been unauthorised access to your account, please send an email to info@attitudetech.ie requesting your password to be reset.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Privacy and Copyright Protection">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+Attitude Technologies LTD Privacy Statement explains how we treat your personal data and protect your privacy when you use our Services. By signing this agreement, you agree that Attitude Technologies LTD can use such data in accordance with our privacy statement. From time to time it may be necessary to update our Privacy Statement and a copy of the revised statement will be sent to the email address you provided on registration. If, as a result of same, you wish to withdraw from using our services you can do so by forwarding an email stating same to info@attitudetech.ie
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Your Content in our Services">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+Our Services allow you to upload, submit, store, send or receive content. You retain ownership of any intellectual property rights that you hold in that content. 
+When you upload, submit, store, send or receive content to or through our Services, you give Attitude Technologies LTD license to use, host, store, reproduce, modify, said content for any and all purposes as set out in our Privacy Statement.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="About Software in our Services">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+Attitude Technologies LTD gives you a personal, worldwide, non­assignable and non­exclusive license to use the software provided to you by Attitude Technologies LTD as part of the Services. This license is for the sole purpose of enabling you to use and enjoy the benefit of the Services as  provided by Attitude Technologies LTD, in the manner permitted by these terms. You may not copy, modify, distribute, sell, or lease any part of our Services or included software, nor may you reverse engineer or attempt to extract the source code of that software.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Modifying and Terminating our Services">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+We are constantly changing and improving our Services. We may add or remove functionalities or features, and we may suspend or stop a Service altogether.
+You can stop using our Services at any time using the process set out above. Attitude Technologies LTD may also stop providing Services to you, or add or create new limits to our Services at any time.
+We believe that you own your data and preserving your access to such data is important. If we discontinue a Service, where reasonably possible, we will give you reasonable advance notice and a chance to get information out of that Service.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Our Warranties and Disclaimers">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+We provide our Services using a commercially reasonable level of skill and care and we hope that you will enjoy using them. But there are certain things that we don’t promise about our Services.
+OTHER THAN AS EXPRESSLY SET OUT IN THESE TERMS OR ADDITIONAL TERMS, NO SPECIFIC PROMISES ABOUT THE SERVICES ARE MADE. FOR EXAMPLE, WE DON’T MAKE ANY COMMITMENTS ABOUT THE CONTENT WITHIN THE SERVICES, THE SPECIFIC FUNCTIONS OF THE SERVICES, OR THEIR RELIABILITY, AVAILABILITY, OR ABILITY TO MEET YOUR NEEDS. WE PROVIDE THE SERVICES “AS IS”.
+TO THE EXTENT PERMITTED BY LAW, WE EXCLUDE ALL WARRANTIES.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Liability for our Services">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+WHEN PERMITTED BY LAW, ATTITUDE TECHNOLOGIES LTD, WILL NOT BE RESPONSIBLE FOR LOST PROFITS, REVENUES, OR DATA, FINANCIAL LOSSES OR INDIRECT, SPECIAL, CONSEQUENTIAL, EXEMPLARY, OR PUNITIVE DAMAGES.
+TO THE EXTENT PERMITTED BY LAW, THE TOTAL LIABILITY OF ATTITUDE TECHNOLOGIES LTD FOR ANY CLAIMS UNDER THESE TERMS, INCLUDING FOR ANY IMPLIED WARRANTIES, IS LIMITED TO THE AMOUNT YOU PAID US TO USE THE SERVICES AND ONLY IF SAID LOSS IS REASONABLY FORESEEABLE.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Business uses of our Services">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+If you are using our Services on behalf of a business, that business accepts these terms. It will hold harmless and indemnify Attitude Technologies LTD from any claim, suit or action arising from or related to the use of the Services or violation of these terms, including any liability or expense arising from claims, losses, damages, suits, judgments, litigation costs and attorneys’ fees.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="About these Terms">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+We may modify these terms or any additional terms that apply to a Service to, for example, reflect changes to the law or changes to our Services. A copy of the revised terms will be sent to the email address you specified on registration. If you do not agree to the modified terms for a Service, you should discontinue your use of that Service using the process set out above.
+If there is a conflict between these terms and the additional terms, the additional terms will control for that conflict.
+If you do not comply with these terms, and Attitude Technologies LTD do not take any immediate action this does not prohibit the taking of such action in the future.
+If it turns out that a particular term is not enforceable, this will not affect any other terms.
+The laws of Republic of Ireland, will apply to any disputes arising out of or relating to these terms or the Services. All claims arising out of or relating to these terms or the Services will be litigated exclusively in Irish Courts, and you and Attitude Technologies LTD consent to personal jurisdiction in those courts.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Privacy Statement ">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+Attitude Technologies Ltd of Unit 12A, South Ring Business Park, Kinsale Road, Cork built the PawTrails app as a Free app to download. This SERVICE is provided by Attitude Technologies Ltd, at no cost and is intended for use on an “as is” basis. Attitude Technologies Ltd give no warranty that the service will be free of defects and/or faults. 
+This page is used to inform App visitors about our privacy statement and in relation to the collection, use, and disclosure of personal information which will occur should you decide to use our service 
+By choosing to use our Service, then you give your consent to the collection and use of information as set out in this Statement. The Personal Information that we collect is used for providing and improving the Service. We will not use or share your information with anyone except as described in this Privacy Statement.
+A Privacy Statement describes the type of personal information collected and how the data is used and distributed. The Privacy Statement is a document that addresses the often-delicate matter of online privacy of users.
+Your Privacy Statement will not contain rules of use or conditions when membership can be terminated, which are to be found in our Terms &amp; Conditions agreement instead.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Information Collection and Use">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+For a better experience, while using our Service, we require you to provide us with your email address. You are also asked in the app for the name of user, their date of birth, home address, contact number and gender, but these are not mandatory fields. All this information is used for demographic purposes- which allows our marketing department to be able to build a better idea of our target market. None of the information will be sold / shared with 3rd parties Should you decide to terminate your use of the service then your personal information can be deleted. If you require us to delete the information you can contact us on info@attitudetech.ie   However, the information that has been collected with regards to the pet’s information is kept and is also used for demographic purposes. This is to help us determine the most common size, breed of dog etc that are being added to the PawTrails app.  The pet’s information that is kept is the pets name, date of birth, size, breed, gender, neutered/ not neutered, weight, body condition score, location &amp; activity monitor. 
+The app does use third party services that may collect information used to identify you.                                                        Link to privacy statement of third party service providers used by the app 
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="https://www.apple.com/ie/legal/privacy/en-ww/">
+                                        <attributes>
+                                            <color key="NSColor" red="0.019607843137254902" green="0.38823529411764707" blue="0.75686274509803919" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="11" name="Helvetica"/>
+                                            <url key="NSLink" string="https://www.apple.com/ie/legal/privacy/en-ww/"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="5" paragraphSpacingBefore="5" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                            <integer key="NSUnderline" value="1"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" ">
+                                        <attributes>
+                                            <font key="NSFont" size="11" name="Helvetica"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="5" paragraphSpacingBefore="5" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content" base64-UTF8="YES">
+IA0KA
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="5" paragraphSpacingBefore="5" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Relevant IOS permissions requested by this app">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+Storage permission- this permission allows the app to load and store images. These images are used for the user and their pets' profiles.
+Location permission-this permission allows the app to access the location of the user to determine his pets' location.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Push Notifications ">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+A push notification is a message from an app that pops up at random times on a mobile device They’re typically formatted like mobile alerts and text messages and pop up regardless of whether a user is actually within the app at the time or not. 
+Push notification may include, alerts, sounds, icons and badges. These can be configured in settings.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Log Data">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+We want to inform you that whenever you use our service, in a case of an error in the app we collect data and information (through third party products) on your phone called Log Data. This Log Data may include information such as your device Internet Protocol (“IP”) address, device name, operating system version, the configuration of the app when utilizing our Service, the time and date of your use of the Service, and other statistics. 
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Service Providers">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+We may employ third-party companies and individuals due to the following reasons:
+•	To facilitate our service;
+•	To provide the service on our behalf;
+•	To perform service-related services; or
+•	To assist us in analysing how our service is used.
+We want to inform users of this service that these third parties have access to your Personal Information. The reason is to perform the tasks assigned to them on our behalf. However, they are obligated not to disclose or use the information for any purpose other than that set out in this Statement. 
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Security">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+We value your trust in providing us your Personal Information, and Attitude Technologies uses the best commercially acceptable means of protecting it. But remember that no method of transmission over the internet, or method of electronic storage is 100% secure and reliable, and we cannot guarantee its absolute security.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Links to Other Sites">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+This service may contain links to other sites. If you click on a third-party link, you will be directed to that site. Note that these external sites are not operated by us. Therefore, we strongly advise you to review the privacy statement of these websites. We have no control over and assume no responsibility for the content, privacy policies, or practices of any third-party sites or services. When you press a link inside the app you have to open a webpage/app either inside a pop up or another 3rd party app.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Children’s Privacy">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+These Services do not address anyone under the age of 13. We do not knowingly collect personally identifiable information from children under 13. In the case we discover that a child under 13 has provided us with personal information, we immediately delete this from our servers. If you are a parent or guardian and you are aware that your child has provided us with personal information, please contact us so that we will be able to do necessary actions. You can contact us on info@attitudetech.ie 
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Changes to This Privacy Statement">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+If there are changes to the privacy statement they will be emailed to you.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Contact Us">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+If you have any questions or suggestions about our Privacy Statement, do not hesitate to contact us 
+attitudetech.ie
+Unit 12A, South Ring Business Park
+Cork,
+Ireland
+info@attitudetech.ie
++353214312004
+
+Last Edited on 2017-12-04
+
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="QqL-5a-BnC" firstAttribute="trailing" secondItem="dfl-k8-LCi" secondAttribute="trailingMargin" id="LfT-y0-p1g"/>
+                            <constraint firstItem="E8F-UD-SSH" firstAttribute="bottom" secondItem="QqL-5a-BnC" secondAttribute="bottom" symbolic="YES" id="Uiy-KN-UAd"/>
+                            <constraint firstItem="QqL-5a-BnC" firstAttribute="top" secondItem="E8F-UD-SSH" secondAttribute="top" id="eCj-hc-DNd"/>
+                            <constraint firstItem="QqL-5a-BnC" firstAttribute="leading" secondItem="dfl-k8-LCi" secondAttribute="leadingMargin" id="sv5-s7-75v"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="E8F-UD-SSH"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="T&amp;C and Privacy policy" id="I5r-eW-hyj">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="YjJ-vr-jl3">
+                            <connections>
+                                <action selector="doneActionBtn:" destination="gee-dD-c08" id="GXo-YJ-1Sr"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3L6-T3-nia" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1504.8" y="1620.5397301349326"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="cEf-gY-Db1">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="StW-Tg-rpZ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="cPo-sX-SlG">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="gee-dD-c08" kind="relationship" relationship="rootViewController" id="Xbi-KG-D9S"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8qv-Et-HMd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2199" y="1621"/>
+        </scene>
     </scenes>
     <resources>
         <image name="AvgSpeedLabel-1x-png" width="32" height="26"/>
@@ -7263,7 +8189,7 @@ finish the Adventure?</string>
         <segue reference="5Sd-jc-pKD"/>
         <segue reference="vrB-0n-aak"/>
         <segue reference="Nln-Sh-wxV"/>
-        <segue reference="ob8-Ot-1y8"/>
+        <segue reference="Mpc-Ja-22V"/>
         <segue reference="gjN-xE-RCG"/>
     </inferredMetricsTieBreakers>
 </document>

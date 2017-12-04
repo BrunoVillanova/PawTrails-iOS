@@ -12,7 +12,26 @@ import Charts
 
 
 
-class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDelegate {
+class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDelegate, DateDelegate {
+  
+    @IBAction func dateBtnPressed(_ sender: Any) {
+    
+        self.performSegue(withIdentifier: "showCalender", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? UINavigationController {
+            if let topController = destination.topViewController as? CalanderForActivityController {
+                topController.delegate = self
+                if let date = self.date {
+                    topController.date = date
+                } else {
+                    topController.date = Date()
+                }
+
+            }
+        }
+    }
  
     @IBOutlet weak var dateBtn: UIButton!
     
@@ -22,13 +41,14 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
     @IBOutlet weak var pieChart: PieChartView!
     @IBOutlet weak var datePicker: UIView!
     @IBOutlet weak var chartTitle: UILabel!
-    
     @IBOutlet weak var weekelyGoalBarChart: BarChartView!
-    
     @IBOutlet weak var individualWeelyGoalChart: BarChartView!
     @IBOutlet weak var monthlyGoalBarChart: BarChartView!
-    
     @IBOutlet weak var individualMonthlyGoalChart: BarChartView!
+    
+    
+    var date: Date?
+    
     
 //    lazy var mydatePicker: AirbnbDatePicker = {
 //        let btn = AirbnbDatePicker()
@@ -56,6 +76,9 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
         super.viewDidLoad()
         self.chartTitle.text = "Grouped Analysis"
         self.barChart.isHidden = true
+        
+      
+        
 //        self.datePicker.addSubview(mydatePicker)
 
 //        self.mydatePicker.bounds = datePicker.bounds
@@ -109,7 +132,31 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
         
         pieChartUpdate()
         combinedChartView(myxaxis: self.months, lively: self.lively, chiling: self.chiling, wandering: self.wandering)
+       
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if let date = self.date {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "EEEE, MMMM dd, yyy"
+            let result = formatter.string(from: date)
+            self.dateBtn.setTitle(result, for: .normal)
+        } else {
+            let date = Date()
+            let formatter = DateFormatter()
+            formatter.dateFormat = "EEEE, MMMM dd, yyy"
+            let result = formatter.string(from: date)
+            self.dateBtn.setTitle(result, for: .normal)
+        }
+    }
+    
+    
+    func date(date: Date) {
+        self.date = date
+    }
+    
+    
+
 
     func barChartUpdate(myxaxis: [String], values: [Int], color: UIColor) {
         
