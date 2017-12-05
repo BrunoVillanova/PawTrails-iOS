@@ -81,7 +81,11 @@ class MapViewController: UIViewController {
     
     @IBAction func firstButtonPressed(_ sender: Any) {
         if self.activeTrips.isEmpty {
-            performSegue(withIdentifier: "startAdventue", sender: sender)
+            if let nc = self.storyboard?.instantiateViewController(withIdentifier: "selectPetsNavigation") as? UINavigationController,
+                let selectPetsViewController = nc.topViewController as? SelectPetsVC {
+                selectPetsViewController.action = selectPetsAction.startAdventure
+                self.navigationController?.present(nc, animated: true, completion: nil)
+            }
         } else {
             performSegue(withIdentifier: "adventrueInProgress", sender: nil)
         }
