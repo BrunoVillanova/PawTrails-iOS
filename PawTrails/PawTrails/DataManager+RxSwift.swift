@@ -61,9 +61,9 @@ extension DataManager {
     }
 
     
-    func getApiTrips() -> Observable<[Trip]> {
+    func getApiTrips(_ status: [Int] = []) -> Observable<[Trip]> {
         return Observable.create({observer in
-            APIRepository.instance.getTripList([]) { (error, trips) in
+            APIRepository.instance.getTripList(status) { (error, trips) in
                 if let error = error {
                     observer.onError(error)
                 } else {
@@ -75,15 +75,23 @@ extension DataManager {
             return Disposables.create()
         })
     }
-  
+    
     func getActivePetTrips() -> Observable<[Trip]> {
-        return allTrips()
-            .map({ (trips) -> [Trip] in
-                return trips.filter({ (trip) -> Bool in
-                    trip.status < 2
-                })
+        let apiTrips = getApiTrips([0,1])
+        let socketTrips = SocketIOManager.instance.trips()
+        print("DataManager -> allTrips")
+        
+        return apiTrips
+            .flatMapLatest({ (tripsFromApi) -> Observable<[Trip]> in
+                return socketTrips
+                    .filter({ (tripsFromSocket) -> Bool in
+                        return tripsFromSocket.count > 0
+                    })
+                    .flatMap({ (theTripsFromSocket) -> Observable<[Trip]> in
+                        return apiTrips
+                    })
+                    .ifEmpty(default: tripsFromApi)
             })
-            .ifEmpty(default: [Trip]())
     }
     
     func allTrips() -> Observable<[Trip]> {
@@ -211,10 +219,11 @@ extension DataManager {
                     }
                     return Disposables.create()
                 })
+                .flatMap({ (trip) -> Observable<[Trip]> in
+                    return self.getActivePetTrips()
+                })
                 
-                return Observable.zip(pauseTrips, self.allTrips()) {(pausedTrips, tripsFromApi) -> [Trip] in
-                    return tripsFromApi
-                }
+                return pauseTrips
         }
     }
     
@@ -240,7 +249,7 @@ extension DataManager {
                     return Disposables.create()
                 })
                 .flatMap({ (trip) -> Observable<[Trip]> in
-                    return self.allTrips()
+                    return self.getActivePetTrips()
                 })
                 
                 return resumeTrips
