@@ -195,11 +195,16 @@ class SelectPetsVC: UIViewController, PetsView, SelectPetView {
             .subscribe(onNext: { (startedTrips) in
                 print("Started Trips! \(startedTrips)")
                 self.hideLoadingView()
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "TripScreenViewController")
-                
-                self.dismiss(animated: true, completion: {
-                    self.navigationController?.present(vc!, animated: false, completion: nil)
-                })
+
+                if let previousVc = self.presentingViewController as? UITabBarController {
+                    
+                    if let nc = self.storyboard?.instantiateViewController(withIdentifier: "adventuresNavigationController") as? UINavigationController {
+                        
+                        self.dismiss(animated: true) {
+                            previousVc.present(nc, animated: true, completion: nil)
+                        }
+                    }
+                }
                 
             }, onError: { (error) in
                 self.hideLoadingView()
