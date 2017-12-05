@@ -110,6 +110,27 @@ struct Trip {
 }
 
 
+struct ActivityMonitor {
+    var petId: Int
+    var groupedBy: Int
+    var activities: [Activities]?
+ 
+}
+struct Activities {
+    var dateStart: Int
+    var dateEnd: Int
+    var chilling: Int
+    var wandering: Int
+    var lively: Int
+
+}
+
+
+
+
+
+
+
 struct TripList {
     var id: Int
     var name: String?

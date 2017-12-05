@@ -204,6 +204,9 @@ extension Pet {
         size = Int(cdPet.size)
     }
     
+    
+
+    
     var toDict: [String:Any] {
         var dict = [String:Any](object:self)
         dict["id"] = id == 0 ? nil : id
@@ -222,6 +225,8 @@ extension Pet {
         return dict
     }
 }
+
+
 
 extension PetBreeds {
     
@@ -401,6 +406,17 @@ extension DailyGoals {
         petId = json["petId"].intValue
         distanceGoal = json["distanceGoal"].intValue
         timeGoal = json["timeGoal"].intValue
+    }
+}
+
+
+extension Activities {
+    init(_ json: JSON) {
+    dateStart = json["dateStart"].intValue
+    dateEnd = json["dateEnd"].intValue
+    chilling = json["1"].intValue
+    wandering = json["2"].intValue
+    lively = json["3"].intValue
     }
 }
 

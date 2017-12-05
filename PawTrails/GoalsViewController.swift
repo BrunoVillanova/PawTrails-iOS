@@ -34,7 +34,6 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
     }
  
     @IBOutlet weak var dateBtn: UIButton!
-    
     @IBOutlet weak var combinedCharts: BarChartView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var barChart: BarChartView!
@@ -62,10 +61,26 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
     let forthColor = UIColor(red: 149/255, green: 0/255, blue: 17/255, alpha: 1)
     
     
-    let months = ["6am-12pm", "12pm - 6pm", "6pm - 12am", "12am -6am"]
-    let lively = [20, 4, 6, 3]
-    let chiling = [10, 14, 60, 13]
-    let wandering = [20, 44, 60, 32]
+    let periodsOfDay = ["6am-12pm", "12pm - 6pm", "6pm - 12am", "12am -6am"]
+    
+    let weekDays = ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"]
+    
+    let weeks = ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5"]
+
+    var lively = [Int]()
+    var chiling = [Int]()
+    var wandering = [Int]()
+    
+    var weeklyLively = [Int]()
+    var weeklychiling = [Int]()
+    var weeklywandering = [Int]()
+    
+    
+    var monthlyLively = [Int]()
+    var monthlychiling = [Int]()
+    var monthlywandering = [Int]()
+    
+    
     var pet: Pet!
     
     weak var axisFormatDelegate: IAxisValueFormatter?
@@ -76,19 +91,10 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
         super.viewDidLoad()
         self.chartTitle.text = "Grouped Analysis"
         self.barChart.isHidden = true
+        self.individualWeelyGoalChart.isHidden = true
+        self.individualMonthlyGoalChart.isHidden = true
         
-      
-        
-//        self.datePicker.addSubview(mydatePicker)
-
-//        self.mydatePicker.bounds = datePicker.bounds
-//        self.mydatePicker.center = datePicker.center
-//        mydatePicker.centerXAnchor.constraint(equalTo: datePicker.centerXAnchor).isActive = true
-//        mydatePicker.widthAnchor.constraint(equalTo: datePicker.widthAnchor).isActive = true
-//        mydatePicker.heightAnchor.constraint(equalTo: datePicker.heightAnchor).isActive = true
-//        mydatePicker.topAnchor.constraint(equalTo: datePicker.topAnchor).isActive = true
-//        mydatePicker.bottomAnchor.constraint(equalTo: datePicker.bottomAnchor).isActive = true
-//        
+        self.dateBtn.setTitle("Select Date to show activity", for: .normal)
 
         barChart.delegate = self
         pieChart.delegate = self
@@ -130,23 +136,164 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
             individualMonthlyGoalChart.noDataText = "No activity data available"
         }
         
-        pieChartUpdate()
-        combinedChartView(myxaxis: self.months, lively: self.lively, chiling: self.chiling, wandering: self.wandering)
        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if let date = self.date {
+        
+        
+        if let date = self.date, let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: date), let pet = self.pet {
+            
+            let startDate = Int(date.timeIntervalSince1970)
+            let tomorrowDate = Int(tomorrow.timeIntervalSince1970)
+            
+            // API Request for Today
+            APIRepository.instance.getActivityMonitorData(pet.id, startDate: startDate, endDate: tomorrowDate, groupedBy: 0) { (error, data) in
+                if error == nil, let data =  data ,let activities = data.activities {
+                    
+                    var chilling = [Int]()
+                    var wandering = [Int]()
+                    var lively = [Int]()
+                    
+                    
+                    for activity in activities {
+                        let chiling = activity.chilling
+                        let wanderingg = activity.wandering
+                        let livelyy = activity.lively
+                        chilling.append(chiling)
+                        wandering.append(wanderingg)
+                        lively.append(livelyy)
+                    }
+                    
+                    
+                    let sum =  chilling.reduce(0, +)
+                    let totalChiling = sum / 60
+                    
+                    let sumW =  wandering.reduce(0, +)
+                    let totalWandering = sumW / 60
+                    
+                    let sumC = lively.reduce(0, +)
+                    let totalLively = sumC / 60
+                    
+                    
+                    chilling.enumerated().forEach { index, value in
+                        chilling[index] = value / 60
+                    }
+                    
+                    wandering.enumerated().forEach { index, value in
+                        wandering[index] = value / 60
+                    }
+                    lively.enumerated().forEach { index, value in
+                        lively[index] = value / 60
+                    }
+                    
+                    self.lively = lively
+                    self.chiling = chilling
+                    self.wandering = wandering
+                    
+                    if totalChiling > 0, totalWandering > 0 , totalLively > 0 {
+                        self.pieChartUpdate(firstvalue: totalChiling, secondValue: totalWandering, thirdValue: totalLively)
+                        self.combinedChartView(myxaxis: self.periodsOfDay, lively: chilling, chiling: wandering, wandering: lively, chart: self.combinedCharts)
+                    } else {
+                    }
+                } else {
+
+                }
+            }
+            
+            guard let startOfWeekDay = date.startOfWeek else {return}
+            guard let endOfTheWeek = date.endOfWeek else {return}
+            guard let endOfTheWeekWithAddedDay = Calendar.current.date(byAdding: .day, value: 1, to: endOfTheWeek) else {return}
+            
+            
+        
+            let startOfWeekInTimeInterval = Int(startOfWeekDay.timeIntervalSince1970)
+            let endOfWeekInTimeInterval = Int(endOfTheWeekWithAddedDay.timeIntervalSince1970)
+
+            
+            
+            APIRepository.instance.getActivityMonitorData(pet.id, startDate: startOfWeekInTimeInterval, endDate: endOfWeekInTimeInterval, groupedBy: 1) { (error, data) in
+                if error == nil, let data = data, let activities = data.activities {
+                    
+                    
+                    var chilling = [Int]()
+                    var wandering = [Int]()
+                    var lively = [Int]()
+                    
+                    
+                    for activity in activities {
+                        let chiling = activity.chilling
+                        let wanderingg = activity.wandering
+                        let livelyy = activity.lively
+                        chilling.append(chiling)
+                        wandering.append(wanderingg)
+                        lively.append(livelyy)
+                    }
+                    
+                    self.weeklyLively = lively
+                    self.weeklywandering = wandering
+                    self.weeklyLively = lively
+                    
+                      self.combinedChartView(myxaxis: self.weekDays, lively: chilling, chiling: wandering, wandering: lively, chart: self.weekelyGoalBarChart)
+
+                            
+        
+                    
+                } else if let error = error {
+                    print(error.localizedDescription)
+                }
+            }
+            
+
+
+            guard let startOfMonth = date.getThisMonthStart() else {return}
+            
+             guard let endOfMonth = date.getThisMonthStart() else {return}
+
+            guard let nextDayOfEndOfMonth = Calendar.current.date(byAdding: .day, value: 1, to: endOfMonth) else {return}
+                
+                let startOfMonthDateInterval = Int(startOfMonth.timeIntervalSince1970)
+                let tomorrowMonthDateInterval = Int(nextDayOfEndOfMonth.timeIntervalSince1970)
+            
+            
+            
+            APIRepository.instance.getActivityMonitorData(pet.id, startDate: startOfMonthDateInterval, endDate: tomorrowMonthDateInterval, groupedBy: 2) { (error, data) in
+                if error == nil, let activities = data?.activities {
+                    
+                    var chilling = [Int]()
+                    var wandering = [Int]()
+                    var lively = [Int]()
+                    
+                    
+                    for activity in activities {
+                        let chiling = activity.chilling
+                        let wanderingg = activity.wandering
+                        let livelyy = activity.lively
+                        chilling.append(chiling)
+                        wandering.append(wanderingg)
+                        lively.append(livelyy)
+                    }
+                    
+                    self.monthlyLively = lively
+                    self.monthlywandering = wandering
+                    self.monthlychiling = chilling
+                    self.combinedChartView(myxaxis: self.weeks, lively: chilling, chiling: wandering, wandering: lively, chart: self.monthlyGoalBarChart)
+
+                } else if let error = error {
+                    print(error.localizedDescription)
+                }
+            }
+            
             let formatter = DateFormatter()
             formatter.dateFormat = "EEEE, MMMM dd, yyy"
             let result = formatter.string(from: date)
             self.dateBtn.setTitle(result, for: .normal)
         } else {
-            let date = Date()
-            let formatter = DateFormatter()
-            formatter.dateFormat = "EEEE, MMMM dd, yyy"
-            let result = formatter.string(from: date)
-            self.dateBtn.setTitle(result, for: .normal)
+//            let date = Date()
+//            let formatter = DateFormatter()
+//            formatter.dateFormat = "EEEE, MMMM dd, yyy"
+//            let result = formatter.string(from: date)
+//            self.dateBtn.setTitle(result, for: .normal)
         }
     }
     
@@ -158,16 +305,16 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
     
 
 
-    func barChartUpdate(myxaxis: [String], values: [Int], color: UIColor) {
+    func barChartUpdate(myxaxis: [String], values: [Int], color: UIColor, dateSetLabel: String, barChartt: BarChartView) {
         
-        self.barChart.backgroundColor = UIColor.white
+        barChartt.backgroundColor = UIColor.white
         var dataEntries: [BarChartDataEntry] = []
-        for i in 0..<myxaxis.count {
+        for i in 0..<values.count {
             let dataEntry = BarChartDataEntry(x: Double(i) , y: Double(values[i]))
             dataEntries.append(dataEntry)
         }
 
-        let xaxis = barChart.xAxis
+        let xaxis = barChartt.xAxis
         xaxis.valueFormatter = axisFormatDelegate
         xaxis.labelPosition = .bottom
 //        xaxis.centerAxisLabelsEnabled = true
@@ -178,22 +325,20 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
         xaxis.drawGridLinesEnabled = false
         xaxis.valueFormatter = IndexAxisValueFormatter(values: myxaxis)
       
+    
         
-//        barChart.xAxis.
-//        barChart.xAxis.granularity = 1.0
-        
-        barChart.barData?.highlightEnabled = false
-        barChart.isUserInteractionEnabled = false
+        barChartt.barData?.highlightEnabled = false
+        barChartt.isUserInteractionEnabled = false
         
         
 
-        barChart.rightAxis.drawLabelsEnabled = false
-        barChart.rightAxis.drawAxisLineEnabled = false
-        barChart.rightAxis.drawGridLinesEnabled = false
-        barChart.rightAxis.drawTopYLabelEntryEnabled = false
-        barChart.leftAxis.drawGridLinesEnabled = false
-        barChart.leftAxis.drawLabelsEnabled = false
-        barChart.leftAxis.drawAxisLineEnabled = false
+        barChartt.rightAxis.drawLabelsEnabled = false
+        barChartt.rightAxis.drawAxisLineEnabled = false
+        barChartt.rightAxis.drawGridLinesEnabled = false
+        barChartt.rightAxis.drawTopYLabelEntryEnabled = false
+        barChartt.leftAxis.drawGridLinesEnabled = false
+        barChartt.leftAxis.drawLabelsEnabled = false
+        barChartt.leftAxis.drawAxisLineEnabled = false
         
         
         
@@ -206,30 +351,30 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
         let formatter = DefaultValueFormatter(formatter: pFormatter)
         
 
-        let dataSet = BarChartDataSet(values: dataEntries, label: "Chilling Analysis")
+        let dataSet = BarChartDataSet(values: dataEntries, label: dateSetLabel)
         
         let data = BarChartData(dataSets: [dataSet])
         data.setValueFormatter(formatter)
         
-        barChart.data?.highlightEnabled = false
+        barChartt.data?.highlightEnabled = false
 
         
         dataSet.colors = [color]
-        barChart.data = data
-        barChart.chartDescription?.text = ""
+        barChartt.data = data
+        barChartt.chartDescription?.text = ""
         //This must stay at end of function
         barChart.notifyDataSetChanged()
         
-        barChart.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
+        barChartt.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
 
     }
     
     
-    func combinedChartView(myxaxis: [String], lively: [Int], chiling: [Int], wandering: [Int]) {
+    func combinedChartView(myxaxis: [String], lively: [Int], chiling: [Int], wandering: [Int], chart: BarChartView) {
         // legand
         
-        self.combinedCharts.chartDescription?.text = ""
-        let legand = combinedCharts.legend
+        chart.chartDescription?.text = ""
+        let legand = chart.legend
         legand.enabled = true
         legand.horizontalAlignment = .right
         legand.verticalAlignment = .top
@@ -240,7 +385,7 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
         legand.yEntrySpace = 0.0;
         
         // xaxis
-        let xaxis = combinedCharts.xAxis
+        let xaxis = chart.xAxis
         xaxis.valueFormatter = axisFormatDelegate
         xaxis.drawGridLinesEnabled = true
         xaxis.labelPosition = .bottom
@@ -258,11 +403,11 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
         
         let formatter = DefaultValueFormatter(formatter: leftAxisFormatter)
 
-        let yaxis = combinedCharts.leftAxis
+        let yaxis = chart.leftAxis
         yaxis.spaceTop = 0.35
         yaxis.axisMinimum = 0
         yaxis.drawGridLinesEnabled = false
-        combinedCharts.rightAxis.enabled = false
+        chart.rightAxis.enabled = false
         
         
         //axisFormatDelegate = self
@@ -275,9 +420,7 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
         var dataEntries2: [BarChartDataEntry] = []
         
         
-
-
-        for i in 0..<myxaxis.count {
+        for i in 0..<wandering.count {
             let dataEntry = BarChartDataEntry(x: Double(i) , y: Double(wandering[i]))
             dataEntries.append(dataEntry)
             
@@ -315,22 +458,14 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
         let startYear = 0
         
         chartData.barWidth = barWidth
-        combinedCharts.xAxis.axisMinimum = Double(startYear)
+        chart.xAxis.axisMinimum = Double(startYear)
         let gg = chartData.groupWidth(groupSpace: groupSpace, barSpace: barSpace)
-        combinedCharts.xAxis.axisMaximum = Double(startYear) + gg * Double(groupCount)
+        chart.xAxis.axisMaximum = Double(startYear) + gg * Double(groupCount)
         chartData.groupBars(fromX: Double(startYear), groupSpace: groupSpace, barSpace: barSpace)
-        combinedCharts.notifyDataSetChanged()
-        combinedCharts.data = chartData
-        combinedCharts.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
+        chart.notifyDataSetChanged()
+        chart.data = chartData
+        chart.animate(xAxisDuration: 1.5, yAxisDuration: 1.5, easingOption: .linear)
 
-
-
-
-
-
-
-
-        
     }
 
     
@@ -354,11 +489,11 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
         }
     }
     
-    func pieChartUpdate() {
+    func pieChartUpdate(firstvalue: Int, secondValue: Int, thirdValue: Int) {
         self.pieChart.backgroundColor = UIColor.white
-        let entry1 = PieChartDataEntry(value: 12, label: "Chiling")
-        let entry2 = PieChartDataEntry(value: 8, label: "Wandering")
-        let entry3 = PieChartDataEntry(value: 4, label: "Lively")
+        let entry1 = PieChartDataEntry(value: Double(firstvalue), label: "Chiling")
+        let entry2 = PieChartDataEntry(value: Double(secondValue), label: "Wandering")
+        let entry3 = PieChartDataEntry(value: Double(thirdValue), label: "Lively")
         let pFormatter = NumberFormatter()
         pFormatter.numberStyle = .percent
         pFormatter.maximumFractionDigits = 1
@@ -385,49 +520,49 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
     
     
     @IBAction func changeModePressed(_ sender: Any) {
-        showActionSheet()
+        showActionSheet(barchart: self.barChart, cominedChart: self.combinedCharts, chiling: self.chiling, wandering: self.wandering, lively: self.lively, myaxiais: self.periodsOfDay)
     }
     
     @IBAction func changeModeForWeeklyChartPressed(_ sender: Any) {
-        
+        showActionSheet(barchart: individualWeelyGoalChart, cominedChart: weekelyGoalBarChart, chiling: self.weeklychiling, wandering: self.weeklywandering, lively: self.weeklyLively, myaxiais: self.weekDays)
     }
     
     @IBAction func changeModeForMonthlyChartPressed(_ sender: Any) {
+        showActionSheet(barchart: individualMonthlyGoalChart, cominedChart: monthlyGoalBarChart, chiling: self.monthlychiling, wandering: self.monthlywandering, lively: self.monthlyLively, myaxiais: self.weeks)
     }
     
     
-    func showActionSheet() {
+    func showActionSheet(barchart: BarChartView, cominedChart: BarChartView, chiling: [Int], wandering: [Int], lively: [Int], myaxiais: [String]) {
         let actionSheet = UIAlertController(title: "Change charts mode", message: nil, preferredStyle: .actionSheet)
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
         let chiling = UIAlertAction(title: "Chilling", style: .default) { action in
-            self.barChartUpdate(myxaxis: self.months, values: self.wandering, color: self.thirdColor)
+            self.barChartUpdate(myxaxis: myaxiais, values: chiling, color: self.secondColor, dateSetLabel: "Chilling Analysis", barChartt: barchart)
 
-            self.barChart.isHidden = false
-            self.combinedCharts.isHidden = true
+            barchart.isHidden = false
+            cominedChart.isHidden = true
             self.chartTitle.text = "Chilling Analysis"
         }
         
         let wandering = UIAlertAction(title: "Wandering", style: .default) { action in
-            self.barChartUpdate(myxaxis: self.months, values: self.wandering, color: UIColor.primary)
 
-            self.barChart.isHidden = false
-            self.combinedCharts.isHidden = true
+            self.barChartUpdate(myxaxis: myaxiais, values: wandering, color: self.thirdColor, dateSetLabel: "Wandering Analysis", barChartt: barchart)
+            barchart.isHidden = false
+            cominedChart.isHidden = true
             self.chartTitle.text = "Wandering Analysis"
         }
         
         let lively = UIAlertAction(title: "Lively", style: .default) { action in
-            self.barChartUpdate(myxaxis: self.months, values: self.wandering, color: self.forthColor)
-
-            self.barChart.isHidden = false
-            self.combinedCharts.isHidden = true
+            self.barChartUpdate(myxaxis: myaxiais, values: lively, color: self.forthColor, dateSetLabel: "Lively Analysis", barChartt: barchart)
+            barchart.isHidden = false
+            cominedChart.isHidden = true
             self.chartTitle.text = "Lively Analysis"
 
         }
         
         let groupedChart = UIAlertAction(title: "Grouped data", style: .default) { action in
-            self.barChart.isHidden = true
-            self.combinedCharts.isHidden = false
+            barchart.isHidden = true
+            cominedChart.isHidden = false
             self.chartTitle.text = "Grouped Analysis"
         }
         
@@ -460,4 +595,75 @@ extension UIScrollView {
         let newSize = CGSize(width: oldSize.width, height: newHeight + 20)
         contentSize = newSize
     }
+}
+
+extension Date {
+    var startOfWeek: Date? {
+        let gregorian = Calendar(identifier: .gregorian)
+        guard let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)) else { return nil }
+        return gregorian.date(byAdding: .day, value: 1, to: sunday)
+    }
+    
+    var endOfWeek: Date? {
+        let gregorian = Calendar(identifier: .gregorian)
+        guard let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)) else { return nil }
+        return gregorian.date(byAdding: .day, value: 7, to: sunday)
+    }
+
+}
+
+extension Date {
+    
+    func getLast6Month() -> Date? {
+        return Calendar.current.date(byAdding: .month, value: -6, to: self)
+    }
+    
+    func getLast3Month() -> Date? {
+        return Calendar.current.date(byAdding: .month, value: -3, to: self)
+    }
+    
+    func getYesterday() -> Date? {
+        return Calendar.current.date(byAdding: .day, value: -1, to: self)
+    }
+    
+    func getLast7Day() -> Date? {
+        return Calendar.current.date(byAdding: .day, value: -7, to: self)
+    }
+    func getLast30Day() -> Date? {
+        return Calendar.current.date(byAdding: .day, value: -30, to: self)
+    }
+    
+    func getPreviousMonth() -> Date? {
+        return Calendar.current.date(byAdding: .month, value: -1, to: self)
+    }
+    
+    // This Month Start
+    func getThisMonthStart() -> Date? {
+        let components = Calendar.current.dateComponents([.year, .month], from: self)
+        return Calendar.current.date(from: components)!
+    }
+    
+    func getThisMonthEnd() -> Date? {
+        let components:NSDateComponents = Calendar.current.dateComponents([.year, .month], from: self) as NSDateComponents
+        components.month += 1
+        components.day = 1
+        components.day -= 1
+        return Calendar.current.date(from: components as DateComponents)!
+    }
+    
+    //Last Month Start
+    func getLastMonthStart() -> Date? {
+        let components:NSDateComponents = Calendar.current.dateComponents([.year, .month], from: self) as NSDateComponents
+        components.month -= 1
+        return Calendar.current.date(from: components as DateComponents)!
+    }
+    
+    //Last Month End
+    func getLastMonthEnd() -> Date? {
+        let components:NSDateComponents = Calendar.current.dateComponents([.year, .month], from: self) as NSDateComponents
+        components.day = 1
+        components.day -= 1
+        return Calendar.current.date(from: components as DateComponents)!
+    }
+    
 }
