@@ -38,10 +38,14 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         presenter.attachView(self)
         reloadPets()
         
-        DataManager.instance.pets()
-            .bind(to: tableView.rx.items(cellIdentifier: "cell", cellType: petListCell.self)) { (_, element, cell) in
-           cell.configure(element)
-        }.disposed(by: disposeBag)
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        // Todo: make tableview reactive
+//        DataManager.instance.pets()
+//            .bind(to: tableView.rx.items(cellIdentifier: "cell", cellType: petListCell.self)) { (_, element, cell) in
+//           cell.configure(element)
+//        }.disposed(by: disposeBag)
     }
     
    
