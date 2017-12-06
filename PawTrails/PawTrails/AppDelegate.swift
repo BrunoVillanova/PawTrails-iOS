@@ -43,9 +43,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         // KeyboardManager
         IQKeyboardManager.sharedManager().enable = true
 
-        NotificationManager.instance.getEventsUpdates { (event) in
-            EventManager.instance.handle(event: event, for: self.visibleViewController)
-        }
         
         var out = true
         
