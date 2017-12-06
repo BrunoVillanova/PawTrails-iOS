@@ -42,6 +42,7 @@
 		4414AE781EA0DD8C004A5134 /* AuthManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4414AE731EA0DD8C004A5134 /* AuthManagerTests.swift */; };
 		4414AE7A1EA0DD8C004A5134 /* SocketIOManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4414AE751EA0DD8C004A5134 /* SocketIOManagerTest.swift */; };
 		4414AE7B1EA0DD8C004A5134 /* DataManagerUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4414AE761EA0DD8C004A5134 /* DataManagerUserTests.swift */; };
+		44150FD91FD55EBB009A1DEF /* PetSizeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44150FD81FD55EBB009A1DEF /* PetSizeTableViewController.swift */; };
 		4415FF431E3B822900A81B13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4415FF421E3B822900A81B13 /* AppDelegate.swift */; };
 		441858E11F98B25B003710A8 /* QuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441858E01F98B25B003710A8 /* QuestionsViewController.swift */; };
 		441858E31F98BACE003710A8 /* questionCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441858E21F98BACE003710A8 /* questionCells.swift */; };
@@ -179,6 +180,7 @@
 		446607C31F95FFE900833683 /* AirbnbDatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446607C21F95FFE900833683 /* AirbnbDatePickerViewController.swift */; };
 		446607C51F96004000833683 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446607C41F96004000833683 /* Date.swift */; };
 		446607C71F96028F00833683 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446607C61F96028F00833683 /* Utility.swift */; };
+		447D02E61FD5890800D3ECB2 /* PrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447D02E51FD5890800D3ECB2 /* PrivacyViewController.swift */; };
 		448BE9681ED47F5C00665608 /* APIUserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448BE9671ED47F5C00665608 /* APIUserTest.swift */; };
 		448BE96A1ED490D900665608 /* APIImageUploadTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448BE9691ED490D900665608 /* APIImageUploadTest.swift */; };
 		448C7CEC1F87C8C700BF7106 /* AddEditSafeZOneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C7CEB1F87C8C700BF7106 /* AddEditSafeZOneController.swift */; };
@@ -281,6 +283,7 @@
 		4414AE731EA0DD8C004A5134 /* AuthManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AuthManagerTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		4414AE751EA0DD8C004A5134 /* SocketIOManagerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketIOManagerTest.swift; sourceTree = "<group>"; };
 		4414AE761EA0DD8C004A5134 /* DataManagerUserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerUserTests.swift; sourceTree = "<group>"; };
+		44150FD81FD55EBB009A1DEF /* PetSizeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetSizeTableViewController.swift; sourceTree = "<group>"; };
 		4415FF3F1E3B822900A81B13 /* PawTrails Debug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PawTrails Debug.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4415FF421E3B822900A81B13 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		441858E01F98B25B003710A8 /* QuestionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionsViewController.swift; sourceTree = "<group>"; };
@@ -428,6 +431,7 @@
 		446607C21F95FFE900833683 /* AirbnbDatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirbnbDatePickerViewController.swift; sourceTree = "<group>"; };
 		446607C41F96004000833683 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		446607C61F96028F00833683 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		447D02E51FD5890800D3ECB2 /* PrivacyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyViewController.swift; sourceTree = "<group>"; };
 		4485007D1FC6DE3300F9510E /* PawTrails.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PawTrails.entitlements; sourceTree = "<group>"; };
 		448BE9671ED47F5C00665608 /* APIUserTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIUserTest.swift; sourceTree = "<group>"; };
 		448BE9691ED490D900665608 /* APIImageUploadTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIImageUploadTest.swift; sourceTree = "<group>"; };
@@ -693,6 +697,7 @@
 				44251B191F0CD5BD0067F401 /* InitialViewController.swift */,
 				44251B1A1F0CD5BD0067F401 /* PasswordRecoveryViewController.swift */,
 				44475ADA1F5960B800D41AAA /* SignUpViewController.swift */,
+				447D02E51FD5890800D3ECB2 /* PrivacyViewController.swift */,
 			);
 			name = Auth;
 			sourceTree = "<group>";
@@ -803,6 +808,7 @@
 				44251B381F0CD5DF0067F401 /* PetNameTableViewController.swift */,
 				44251B391F0CD5DF0067F401 /* PetTypeTableViewController.swift */,
 				44251B3A1F0CD5DF0067F401 /* PetWeightTableViewController.swift */,
+				44150FD81FD55EBB009A1DEF /* PetSizeTableViewController.swift */,
 			);
 			path = "Pet Details";
 			sourceTree = "<group>";
@@ -1496,6 +1502,7 @@
 				4415FF431E3B822900A81B13 /* AppDelegate.swift in Sources */,
 				441292351FAB260500745ED2 /* GoalsViewController.swift in Sources */,
 				446607C31F95FFE900833683 /* AirbnbDatePickerViewController.swift in Sources */,
+				44150FD91FD55EBB009A1DEF /* PetSizeTableViewController.swift in Sources */,
 				44251AF31F0CD55F0067F401 /* Constants.swift in Sources */,
 				443E808C1F5D9236008679FC /* SelectPetsCell.swift in Sources */,
 				4446BAE81FB1CA3600809805 /* AdventuresListViewController.swift in Sources */,
@@ -1541,6 +1548,7 @@
 				444698851F6BC75C006EE4CD /* SelectPetView.swift in Sources */,
 				441858ED1F98FAA1003710A8 /* BSC4ViewController.swift in Sources */,
 				159646A11FB1D334009DC172 /* PTMapView.swift in Sources */,
+				447D02E61FD5890800D3ECB2 /* PrivacyViewController.swift in Sources */,
 				44251B3F1F0CD5DF0067F401 /* BirthdayViewController.swift in Sources */,
 				44251B801F0CD6130067F401 /* CDSafeZone+CoreDataProperties.swift in Sources */,
 				4424DCFF1E8EA1D900ACDF07 /* UserProfilePresenter.swift in Sources */,

@@ -30,7 +30,7 @@ class APIRepository {
     typealias ApiTripListCallBack = (APIManagerError?, [Trip]?) -> Void
     typealias ApiGetAchievmenetCallBack = (APIManagerError?, TripAchievements?) -> Void
     typealias ApiGetDailyGoalCallBack = (APIManagerError?, DailyGoals?) -> Void
-
+    typealias ApiGetActivityMonitorCallBack = (APIManagerError? , ActivityMonitor?) -> Void
     
     
     //MARK:- Authentication
@@ -560,6 +560,10 @@ class APIRepository {
     }
     
     
+
+
+    
+    
     
 
     // Finish Trips
@@ -655,7 +659,45 @@ class APIRepository {
             callback(json)
         }
     }
+    
+    func getActivityMonitorData (_ petId: Int, startDate: Int, endDate: Int, groupedBy: Int, callback: @escaping ApiGetActivityMonitorCallBack) {
+        var activity: [String:Any] {
+            var dict = [String:Any](object:self)
+            dict["petId"] = petId
+            dict["dateStart"] = startDate
+            dict["dateEnd"] = endDate
+            dict["groupBy"] = groupedBy
+            return dict
+        }
+        APIManager.instance.perform(call: .activityMonitor, with: activity) { (error, json) in
+            if error == nil, let json = json {
+                
+                var myactivities = [Activities]()
+                let petId = json["petId"].intValue
+                let groupedBy = json["groupBy"].intValue
+                guard let activities = json["activities"].array else {return}
+                for activityy in activities {
+                    myactivities.append(Activities(activityy))
+                }
+                let activity = ActivityMonitor.init(petId: petId, groupedBy: groupedBy, activities: myactivities)
+                callback(nil, activity)
+                
+//
+            } else if let error = error {
+                callback(error, nil)
+
+            }
+        }
+        
+    }
 }
+
+
+
+
+
+
+
 
 
 

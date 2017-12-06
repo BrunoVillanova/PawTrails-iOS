@@ -94,16 +94,14 @@
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
-		<true/>
+		<false/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Change pet and user profile photo or scan tracking device</string>
+	<string>Change pet and user profile photo or scan tracking device.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Locate user on the screen and define safe zones</string>
+	<string>Locate user on the screen and define safe zones.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Change user and pet profile photo</string>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
+	<string>Change user and pet profile photos.</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>

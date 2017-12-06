@@ -8,18 +8,25 @@
 
 import UIKit
 
+protocol DateDelegate {
+    func date(date: Date)
+}
+
 class CalanderForActivityController: UIViewController {
     @IBOutlet weak var datePicker: UIDatePicker!
     
+     var delegate: DateDelegate?
+     var date: Date?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        datePicker.maximumDate = Date()
-        
-   
+        datePicker.maximumDate = date
     }
 
     @IBAction func doneBtnPressed(_ sender: Any) {
+     let mydate = self.datePicker.date
+        self.delegate?.date(date: mydate)
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func cancelBtnPressed(_ sender: Any) {
@@ -27,3 +34,4 @@ class CalanderForActivityController: UIViewController {
     }
     
 }
+

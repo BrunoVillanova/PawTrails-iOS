@@ -18,7 +18,7 @@ public enum APICallType {
     registerPet, getPets, getPet, setPet, checkDevice, changeDevice, unregisterPet,
     getPetClasses, getBreeds, getContinents, getCountries,
     sharePet, getSharedPetUsers, removeSharedPet,leaveSharedPet,
-    addSafeZone, setSafeZone, getSafeZone, listSafeZones, removeSafeZone, startTrip, finishTrip, pauseTrip, resumeTrip, getTripList, getTripsAchievements, editDailyGoal, getDailyGoals
+    addSafeZone, setSafeZone, getSafeZone, listSafeZones, removeSafeZone, startTrip, finishTrip, pauseTrip, resumeTrip, getTripList, getTripsAchievements, editDailyGoal, getDailyGoals, activityMonitor
     
     /// Defines APICallType need of token
     
@@ -82,6 +82,7 @@ public enum APICallType {
         case .getTripsAchievements: return "/trips/achievementsget"
         case .editDailyGoal: return "/pets/dailygoalsedit"
         case .getDailyGoals: return "/pets/dailygoalsget"
+        case .activityMonitor: return "/activity/load"
         }
     }
     
@@ -113,8 +114,8 @@ class APIManager {
     
     static let instance = APIManager()
     
-    fileprivate static let mainURL = "https://eu.pawtrails.pet/api"
-    fileprivate static let mainURLTest = "https://eu.pawtrails.pet/test"
+    fileprivate static let mainURL = "https://eu.pawtrails.com/api"
+    fileprivate static let mainURLTest = "https://eu.pawtrails.com/test"
     
     fileprivate let boundary = "%%%PawTrails%%%"
     
