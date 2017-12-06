@@ -27,7 +27,7 @@ class PTMapView: MKMapView {
         self.showsUserLocation = true
         
         
-        DataManager.instance.allTrips().subscribe(onNext: { (trips) in
+        DataManager.instance.getActivePetTrips().subscribe(onNext: { (trips) in
             
             if !self.tripMode {
                 return
@@ -81,7 +81,9 @@ class PTMapView: MKMapView {
     }
     
     fileprivate func loadGpsUpdates(_ gpsUpdates: [PetDeviceData]?) {
+        
         if let petsDevicesData = gpsUpdates as [PetDeviceData]!, petsDevicesData.count > 0 {
+            
             for petDeviceData in petsDevicesData {
                 
                 self.load(petDeviceData)
@@ -150,10 +152,18 @@ class PTMapView: MKMapView {
     
     func focusOnPet(_ pet: Pet) {
         if let petAnnotationOnMap = petAnnotationOnMap(pet: pet) as PTAnnotation! {
-            self.centerOn(petAnnotationOnMap.coordinate, animated: true)
-            CATransaction.setCompletionBlock({
-                self.selectAnnotation(petAnnotationOnMap, animated: true)
-            })
+            
+            self.setVisibleMapFor([petAnnotationOnMap.coordinate])
+            
+//            let coordinates = petAnnotationOnMap.map({ $0.coordinate })
+//            if coordinates.count > 0 {
+//                self.setVisibleMapFor(coordinates)
+//            }
+            
+//            self.centerOn(petAnnotationOnMap.coordinate, animated: true)
+//            CATransaction.setCompletionBlock({
+//                self.selectAnnotation(petAnnotationOnMap, animated: true)
+//            })
         }
     }
 }
