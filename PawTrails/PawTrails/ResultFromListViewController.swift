@@ -59,7 +59,6 @@ class ResultFromListViewController: UIViewController {
             """
             
             self.textView.textColor = UIColor.gray
-            self.textView.border(color: .primary, width: 0.7)
             
         } else if myPet.bcScore == 2 {
             self.weightLbl.text = "Under weight"
@@ -73,7 +72,6 @@ class ResultFromListViewController: UIViewController {
             """
             
             self.textView.textColor = UIColor.gray
-            self.textView.border(color: .primary, width: 0.7)
 
             
         }else if myPet.bcScore == 3 {
@@ -89,8 +87,6 @@ class ResultFromListViewController: UIViewController {
             
             self.textView.textColor = UIColor.gray
             
-
-            self.textView.border(color: .primary, width: 0.7)
 
             
         }else if myPet.bcScore == 4 {
@@ -109,10 +105,7 @@ class ResultFromListViewController: UIViewController {
             
             self.textView.textColor = UIColor.gray
 
-            self.textView.border(color: .primary, width: 0.7)
 
-
-            
         }else if myPet.bcScore == 5 {
             self.weightLbl.text = "Obese"
             self.weightLbl.textColor = obseAndVeryThinColor
@@ -124,8 +117,6 @@ class ResultFromListViewController: UIViewController {
             """
             
             self.textView.textColor = UIColor.gray
-            self.textView.border(color: .primary, width: 0.7)
-
         }
     }
     
