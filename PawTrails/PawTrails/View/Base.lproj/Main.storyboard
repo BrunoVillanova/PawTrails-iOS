@@ -1549,36 +1549,6 @@
             </objects>
             <point key="canvasLocation" x="2021.5999999999999" y="2997.7511244377815"/>
         </scene>
-        <!--Tutorial-->
-        <scene sceneID="wSI-74-ret">
-            <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="dWy-cf-3Fz" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="W7A-Oh-SQ5">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Under Construction" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pdd-OI-KXN">
-                                <rect key="frame" x="80" y="249" width="215" height="169"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <color key="textColor" red="0.99932557339999994" green="0.63401025529999999" blue="0.2850541472" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="Pdd-OI-KXN" firstAttribute="top" secondItem="xKg-cS-b3E" secondAttribute="top" constant="229" id="bqD-g1-LH8"/>
-                            <constraint firstItem="Pdd-OI-KXN" firstAttribute="leading" secondItem="W7A-Oh-SQ5" secondAttribute="leadingMargin" constant="64" id="jT3-8D-hQ6"/>
-                            <constraint firstItem="Pdd-OI-KXN" firstAttribute="centerY" secondItem="W7A-Oh-SQ5" secondAttribute="centerY" id="tdK-04-LwS"/>
-                            <constraint firstItem="Pdd-OI-KXN" firstAttribute="centerX" secondItem="xKg-cS-b3E" secondAttribute="centerX" id="u0r-dy-dFZ"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="xKg-cS-b3E"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Tutorial" id="Cy1-l3-Pq1"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="uZf-LL-XiZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="6296.8000000000002" y="2904.1979010494756"/>
-        </scene>
         <!--Legal-->
         <scene sceneID="13D-xl-Rxr">
             <objects>
