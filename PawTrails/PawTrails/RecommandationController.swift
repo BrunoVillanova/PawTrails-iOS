@@ -13,7 +13,6 @@ class RecommandationController: UIViewController {
     @IBOutlet weak var cImage: UIImageView!
     @IBOutlet weak var pImage: UIImageView!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var startnowBtn: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var addBtn: UIBarButtonItem!
     
@@ -21,15 +20,27 @@ class RecommandationController: UIViewController {
 
     fileprivate var pets = [Int:IndexPath]()
 
+    @IBAction func playBtnPressed(_ sender: Any) {
+        let youtubeId = "C9ng5Dw8kIU"
+        if let urlFromStr = URL(string: "youtube://\(youtubeId)") {
+            if UIApplication.shared.canOpenURL(urlFromStr) {
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(urlFromStr, options: [:], completionHandler: nil)
+                } else {
+                    UIApplication.shared.openURL(urlFromStr)
+                }
+            } else if let webURL = URL(string: "https://www.youtube.com/watch?v=C9ng5Dw8kIU") {
+                UIApplication.shared.openURL(webURL)
+                
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.attachView(self)
         tableView.tableFooterView = UIView()
 
-        startnowBtn.backgroundColor = UIColor.primary
-        startnowBtn.layer.cornerRadius = 25
-        startnowBtn.clipsToBounds = true
         let notificationName = Notification.Name("BcScore")
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.getPetsForNotification(_:)), name: notificationName, object: nil)
@@ -68,16 +79,16 @@ class RecommandationController: UIViewController {
             self.tableView.isHidden = false
             self.cImage.isHidden = true
             self.pImage.isHidden = true
-            self.startnowBtn.isHidden = true
             self.scrollView.isHidden = true
             self.navigationItem.rightBarButtonItem = self.addBtn
         } else {
             self.tableView.isHidden = true
             self.cImage.isHidden = false
             self.pImage.isHidden = false
-            self.startnowBtn.isHidden = false
             self.scrollView.isHidden = false
-            self.navigationItem.rightBarButtonItem = nil
+//            self.navigationItem.rightBarButtonItem = nil
+            self.navigationItem.rightBarButtonItem = self.addBtn
+
         }
     }
     
@@ -231,7 +242,6 @@ extension RecommandationController: PetsView {
             self.tableView.isHidden = true
             self.cImage.isHidden = false
             self.pImage.isHidden = false
-            self.startnowBtn.isHidden = false
             self.scrollView.isHidden = false
         }
     }

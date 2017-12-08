@@ -29,6 +29,8 @@ class ResultFromListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.textView.border(color: UIColor.primary, width: 0.7)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(closedPress(sender:)))
         
         self.navigationItem.title = "Recommendations"

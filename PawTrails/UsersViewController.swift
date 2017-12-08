@@ -61,8 +61,9 @@ class UsersViewController: UIViewController, UITableViewDelegate, UITableViewDat
             cell.nameLbl.text = userAtIndex.name
             cell.emailLbl.text = userAtIndex.email
             cell.profileImage.circle()
+            cell.profileImage.border(color: UIColor.primary, width: 0.7)
             if let url = userAtIndex.imageURL {
-                cell.profileImage.sd_setImage(with: URL(string: url), placeholderImage: UIImage(named: ""), options: [.progressiveDownload], completed: nil)
+                cell.profileImage.sd_setImage(with: URL(string: url), placeholderImage: UIImage(named: "PetPlaceholderImage"), options: [.progressiveDownload], completed: nil)
             }
             return cell
         } else {

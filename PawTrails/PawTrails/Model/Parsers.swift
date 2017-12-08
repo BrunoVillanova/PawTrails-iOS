@@ -344,7 +344,7 @@ extension DeviceData {
         point = Point(json["lat"] as! Double, json["lon"] as! Double)
         speed = json["speed"] as! Float
         battery = json["battery"] as! Int16
-        internetSignal = json["netSignal"] as! Bool
+        internetSignal = (json["netSignal"] != nil)
         satelliteSignal = json["satSignal"] as! Bool
         deviceTime = json["deviceTime"] as! Int64
         deviceDate = Date.init(timeIntervalSince1970: TimeInterval(json["deviceTime"] as! Int))

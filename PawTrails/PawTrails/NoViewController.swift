@@ -21,7 +21,7 @@ class NoViewController: UIViewController {
         collectionView.dataSource = self
         //        collectionView.register(questionCells.self, forCellWithReuseIdentifier: "cell")
         
-        self.navigationItem.title = "Recommandation"
+        self.navigationItem.title = "Recommendations"
         collectionView.contentInset.left = 15
         collectionView.contentInset.right = 15
         collectionView.allowsMultipleSelection = false

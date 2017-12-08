@@ -64,7 +64,7 @@ class ResultViewController: UIViewController {
 
         }
         
-        self.navigationItem.title = "Recommendation"
+        self.navigationItem.title = "Recommendations"
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(closedPress(sender:)))
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneBtnPressed(sender:)))
@@ -72,7 +72,6 @@ class ResultViewController: UIViewController {
         updateTextViewBasedOnWeightAndOtherUI()
         
 
-//        self.view.backgroundColor = UIColor.groupTableViewBackground
     }
     
     
