@@ -114,8 +114,14 @@ class APIManager {
     
     static let instance = APIManager()
     
+    
+    #if RELEASE
     fileprivate static let mainURL = "https://eu.pawtrails.com/api"
     fileprivate static let mainURLTest = "https://eu.pawtrails.com/test"
+    #else
+    fileprivate static let mainURL = "https://eu.pawtrails.pet/api"
+    fileprivate static let mainURLTest = "https://eu.pawtrails.pet/test"
+    #endif
     
     fileprivate let boundary = "%%%PawTrails%%%"
     
