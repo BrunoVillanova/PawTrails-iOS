@@ -212,8 +212,8 @@ struct DeviceData {
     var point: Point
     var speed: Float
     var battery: Int16
-    var internetSignal: Bool
-    var satelliteSignal: Bool
+    var internetSignal: Int16
+    var satelliteSignal: Int16
     var deviceDate: Date
     var deviceTime: Int64
 }

@@ -332,8 +332,8 @@ extension DeviceData {
         point = Point()
         speed = 0.0
         battery = 0
-        internetSignal = false
-        satelliteSignal = false
+        internetSignal = 100
+        satelliteSignal = 100
         deviceTime = 0
         deviceDate = Date()
     }
@@ -344,8 +344,8 @@ extension DeviceData {
         point = Point(json["lat"] as! Double, json["lon"] as! Double)
         speed = json["speed"] as! Float
         battery = json["battery"] as! Int16
-        internetSignal = (json["netSignal"] != nil)
-        satelliteSignal = json["satSignal"] as! Bool
+        internetSignal = json["netSignal"] as! Int16
+        satelliteSignal = json["satSignal"] as! Int16
         deviceTime = json["deviceTime"] as! Int64
         deviceDate = Date.init(timeIntervalSince1970: TimeInterval(json["deviceTime"] as! Int))
     }
