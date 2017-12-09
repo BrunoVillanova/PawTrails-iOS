@@ -20,6 +20,22 @@ class SelectPetForRecommandationController: UIViewController {
 
     fileprivate var pets = [Int:IndexPath]()
 
+    @IBAction func videoBtnPressed(_ sender: Any) {
+        
+        let youtubeId = "DPhk6Qfg04A"
+        if let urlFromStr = URL(string: "youtube://\(youtubeId)") {
+            if UIApplication.shared.canOpenURL(urlFromStr) {
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(urlFromStr, options: [:], completionHandler: nil)
+                } else {
+                    UIApplication.shared.openURL(urlFromStr)
+                }
+            } else if let webURL = URL(string: "https://www.youtube.com/watch?v=DPhk6Qfg04A") {
+                UIApplication.shared.openURL(webURL)
+                
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

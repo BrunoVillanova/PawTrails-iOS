@@ -258,9 +258,9 @@ extension SafeZoneViewController:UITableViewDelegate, UITableViewDataSource  {
             if !success {
                 sender.isOn = !sender.isOn
             }else if success && sender.isOn {
-                self.popUp(title: "Hey", msg: "Turned On")
+                self.popUp(title: "", msg: "Safe Zone is activated")
             }else if success && !sender.isOn {
-                self.popUp(title: "Hey", msg: "Turned Off")
+                self.popUp(title: "", msg: "Safe Zone is deactivated")
             }
         }
     }

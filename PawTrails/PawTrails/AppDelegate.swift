@@ -13,6 +13,7 @@ import Crashlytics
 import SocketIO
 import SwiftyJSON
 import IQKeyboardManagerSwift
+import Firebase
 
 #if DEBUG
 let isDebug = true
@@ -36,6 +37,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         // Configure UI
         configureUIPreferences()
+        
+        FirebaseApp.configure()
         
         // Configure services
         Fabric.with([Crashlytics.self])

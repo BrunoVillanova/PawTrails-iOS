@@ -63,6 +63,7 @@ class TripScreenViewController: UIViewController {
     }
     
     let disposeBag = DisposeBag()
+    var activeTrips = [Trip]()
     
     //MARK: -
     //MARK: View Lifecycle
@@ -72,16 +73,175 @@ class TripScreenViewController: UIViewController {
         collectionView.delegate = self
         mapView.tripMode = true
         
-        let activeTripsObservable = DataManager.instance.getActivePetTrips()
-        
-        activeTripsObservable.map{$0.count}.bind(to: pageControl.rx.numberOfPages).disposed(by: disposeBag)
-        
+        let activeTripsObservable: Observable<[Trip]> = DataManager.instance.getActivePetTrips()
+        let allPetDeviceData = DataManager.instance.allPetDeviceData()
+    
         activeTripsObservable
+            .flatMap { (trips) -> Observable<[Trip]> in
+                print("TripScreen -> activeTripsObservable -> flatMap -> \(trips.count)")
+                let petIDsOnTrip = trips.map { $0.pet.id }
+                return allPetDeviceData
+                    .map({ (petDeviceDataList) -> [PetDeviceData] in
+                        print("TripScreen -> allPetDeviceData -> map")
+                        return petDeviceDataList.filter({ (petDeviceData) -> Bool in
+                            return petIDsOnTrip.contains(Int(petDeviceData.pet.id))
+                        })
+                    })
+                    .flatMap({ (result) -> Observable<[Trip]> in
+                        print("TripScreen -> allPetDeviceData -> flatMap")
+                        return activeTripsObservable
+                    })
+            }
             .bind(to: collectionView.rx.items(cellIdentifier: "cell", cellType: TripDetailsCell.self)) { (row, element, cell) in
+                print("TripScreen -> Configure cell")
                 cell.configureWithTrip(element)
             }
             .addDisposableTo(disposeBag)
+
         
+        
+
+
+
+        
+        
+        
+//        let activeTripsObservable = DataManager.instance.getActivePetTrips()
+//            .flatMap { (tripsFromObservable) -> Observable<[Trip]> in
+//
+//                var finalTrips = [Trip]()
+//
+//                let onlyActiveLocal = self.activeTrips.filter({ (localActiveTrip) -> Bool in
+//                    return tripsFromObservable.map{$0.id}.contains(localActiveTrip.id)
+//                })
+//
+//                for tripFromObservable in tripsFromObservable {
+//                    var theTripToAppend = tripFromObservable
+//
+//                    if let existingTripOnLocal = onlyActiveLocal.first(where: {$0.id == tripFromObservable.id}), let existingDeviceData = existingTripOnLocal.deviceData as [DeviceData]! {
+//                        theTripToAppend.deviceData?.insert(contentsOf: existingDeviceData, at: 0)
+//                    }
+//
+//                    finalTrips.append(theTripToAppend)
+//                }
+//
+//                self.activeTrips = finalTrips.map{$0}
+//                return Observable.of(self.activeTrips)
+//        }
+
+        
+        activeTripsObservable.map{$0.count}.bind(to: pageControl.rx.numberOfPages).disposed(by: disposeBag)
+        
+//        activeTripsObservable
+//            .bind(to: collectionView.rx.items(cellIdentifier: "cell", cellType: TripDetailsCell.self)) { (row, element, cell) in
+//                cell.configureWithTrip(element)
+//            }
+//            .addDisposableTo(disposeBag)
+
+        
+        
+//        let theTripsReceivedGpsUpdates = Observable.combineLatest(activeTripsObservable, DataManager.instance.allPetDeviceData()) { (trips, petDeviceDataList) -> [PetDeviceData] in
+//                let petIDsOnTrip = trips.map{$0.petId}
+//                return petDeviceDataList.filter({ (petDeviceData) -> Bool in
+//                    return petIDsOnTrip.contains(Int64(petDeviceData.pet.id))
+//                })
+//            }
+//            .filter({ (petDeviceDataOnTrip) -> Bool in
+//                return petDeviceDataOnTrip.count > 0
+//            })
+//            .flatMap({ (petDeviceDataOnTrip) -> Observable<[Trip]> in
+//                return activeTripsObservable
+//            })
+//            .ifEmpty(default: self.activeTrips)
+        
+        
+        
+//        activeTripsObservable
+//            .bind(to: collectionView.rx.items(cellIdentifier: "cell", cellType: TripDetailsCell.self)) { (row, trip, cell) in
+//                cell.configureWithTrip(trip)
+//            }
+//            .addDisposableTo(disposeBag)
+//
+//        theTripsReceivedGpsUpdates
+//            .bind(to: collectionView.rx.items(cellIdentifier: "cell", cellType: TripDetailsCell.self)) { (row, trip, cell) in
+//            cell.configureWithTrip(trip)
+//        }
+//        .addDisposableTo(disposeBag)
+
+        
+        
+
+        
+//        theTripsReceivedGpsUpdates
+//            .map({ (<#[Trip]#>) -> R in
+//                <#code#>
+//            })
+//            .map({ (petDeviceDataList) -> [PetDeviceData] in
+//                print("TripScreen -> allPetDeviceData -> map")
+//                return petDeviceDataList.filter({ (petDeviceData) -> Bool in
+//                    return petIDsOnTrip.contains(Int64(petDeviceData.pet.id))
+//                })
+//            })
+//            .flatMap({ (theFinalTrips) -> Observable<[Trip]> in
+//                print("TripScreen -> allPetDeviceData -> flatMap")
+//                //                                    self.activeTrips = theFinalTrips.map{$0}
+//                //                                    return Observable.of(self.activeTrips)
+//                return activeTripsObservable
+//            })
+//            .ifEmpty(default: activeTrips)
+//            .bind(to: collectionView.rx.items(cellIdentifier: "cell", cellType: TripDetailsCell.self)) { (row, trip, cell) in
+//                cell.configureWithTrip(trip)
+//            }
+//            .addDisposableTo(disposeBag)
+        
+//        activeTripsObservable
+//                    .debug("activeTripsObservable")
+//                    .flatMap({ (activeTrips) -> Observable<[Trip]> in
+//                            let petIDsOnTrip = activeTrips.map{$0.petId}
+//                            return DataManager.instance.allPetDeviceData()
+//                                .debug("TripScreen -> allPetDeviceData")
+//                                .map({ (petDeviceDataList) -> [PetDeviceData] in
+//                                    print("TripScreen -> allPetDeviceData -> map")
+//                                    return petDeviceDataList.filter({ (petDeviceData) -> Bool in
+//                                        return petIDsOnTrip.contains(Int64(petDeviceData.pet.id))
+//                                    })
+//                                })
+////                                .filter({ (petDeviceDataListOnTrip) -> Bool in
+////                                    print("TripScreen -> allPetDeviceData -> filter")
+////                                    return petDeviceDataListOnTrip.count > 0
+////                                })
+////                                .map({ (filteredPetDeviceDataList) -> [Trip] in
+////                                    var finalTrips = [Trip]()
+////                                    for activeTrip in self.activeTrips {
+////                                        let deviceDataListForTrip = filteredPetDeviceDataList.filter({ (petDeviceData) -> Bool in
+////                                            return petDeviceData.pet.id == activeTrip.petId
+////                                        })
+////
+////                                        var tripToAppend = activeTrip
+////
+////                                        var deviceData = activeTrip.deviceData.map{$0}
+////                                        deviceData?.append(contentsOf: deviceDataListForTrip.map{$0.deviceData})
+////
+////                                        tripToAppend.deviceData = deviceData
+////
+////                                        finalTrips.append(tripToAppend)
+////                                    }
+////                                    return finalTrips
+////                                })
+//                                .flatMap({ (theFinalTrips) -> Observable<[Trip]> in
+//                                    print("TripScreen -> allPetDeviceData -> flatMap")
+////                                    self.activeTrips = theFinalTrips.map{$0}
+////                                    return Observable.of(self.activeTrips)
+//                                    return activeTripsObservable
+//                                })
+//                                .ifEmpty(default: activeTrips)
+//
+//                        })
+//                    .bind(to: collectionView.rx.items(cellIdentifier: "cell", cellType: TripDetailsCell.self)) { (row, trip, cell) in
+//                            cell.configureWithTrip(trip)
+//                        }
+//                    .addDisposableTo(disposeBag)
+
         activeTripsObservable
             .subscribe(onNext: { (activeTrips) in
                 let pausedTrips = activeTrips.filter { $0.status == 1 }
@@ -359,6 +519,20 @@ class TripDetailsCell: UICollectionViewCell {
         var tripCurrentSpeed = "0 km/h"
 
         
+//        let lastDeviceData = trip.deviceData?.last
+//        let lastTripPoint = trip.points?.last
+        
+//        if (lastDeviceData != nil && lastTripPoint != nil) {
+//            if let lastDeviceDataTimestamp = lastDeviceData?.deviceTime, let lastTripTimestamp = lastTripPoint?.timestamp {
+//                if (lastDeviceDataTimestamp > lastTripTimestamp) {
+//                    print("Lets calculate the distance here")
+//                } else {
+//                    print("Leave the distance how it is on Trip object")
+//                }
+//            }
+//        }
+        
+        
         if let totalDistanceInMeters = trip.totalDistance {
             let totalDistanceInKm = Double(totalDistanceInMeters)/1000.0
             tripTotalDistanceText = String(format:"%0.2f km", totalDistanceInKm)
@@ -371,6 +545,12 @@ class TripDetailsCell: UICollectionViewCell {
         if let currentSpeed = trip.averageSpeed {
             tripCurrentSpeed = String(format:"%.2f km/h", currentSpeed)
         }
+        
+//        if let lastDeviceDataSpeed = lastDeviceData?.speed {
+//            tripCurrentSpeed = String(format:"%.2f km/h", lastDeviceDataSpeed)
+//        } else if let currentSpeed = trip.averageSpeed {
+//            tripCurrentSpeed = String(format:"%.2f km/h", currentSpeed)
+//        }
         
         self.totalDistance.text = tripTotalDistanceText
         self.avargeSpeed.text = tripAverageSpeedText

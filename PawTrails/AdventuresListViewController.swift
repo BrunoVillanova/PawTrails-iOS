@@ -63,7 +63,13 @@ class AdventuresListViewController: UIViewController, IndicatorInfoProvider  {
             startDateInDateFormate = date
         } else {
             let date = Date()
-            startDate = Int(date.timeIntervalSince1970)
+            let gregorian = Calendar(identifier: .gregorian)
+            var components = gregorian.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
+            components.hour = 0
+            components.minute = 0
+            components.second = 0
+            guard let newDate = gregorian.date(from: components) else {return}
+            startDate = Int(newDate.timeIntervalSince1970)
             startDateInDateFormate = date
         }
         
@@ -90,16 +96,13 @@ class AdventuresListViewController: UIViewController, IndicatorInfoProvider  {
                     
                     let distanceColor = UIColor(red: 153/255, green: 202/255, blue: 186/255, alpha: 1)
                     let timeColor = UIColor(red: 211/255, green: 100/255, blue: 59/255, alpha: 1)
-                    
                     let distanceGoalForPeriod = achieve.distance * achieve.totalDays
-                    
                     let timeGoalForPeriod = achieve.timeGoal * achieve.totalDays
                     
                     let totalDistanceAchievement = achieve.totalDistance / 1000
                     let totalHour = achieve.totalTime / 60
                     if timeGoalForPeriod > 0 {
                         timeGoalAchievmenet = CGFloat((100 * achieve.totalTime) / timeGoalForPeriod)
-                        print(timeGoalAchievmenet)
                     } else {
                         timeGoalAchievmenet = 0
                     }

@@ -462,6 +462,7 @@ extension Trip {
         maxSpeed = values["maxSpeed"] as? Float
         steps = values["steps"] as? Int64
         points = [TripPoint]()
+        deviceData = [DeviceData]()
         
         if let pointsValues = values["rawData"] as! [[Any]]? {
             for pointValue in pointsValues {
@@ -499,6 +500,7 @@ extension Trip {
         steps = json["steps"].int64
         points = [TripPoint]()
         pet = Pet()
+        deviceData = [DeviceData]()
 
         if let pointsValues = json["rawData"].arrayObject as! [[Any]]! {
             for pointValue in pointsValues {

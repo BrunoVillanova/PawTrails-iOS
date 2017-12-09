@@ -33,6 +33,7 @@ class PetInfromationViewController: UIViewController, IndicatorInfoProvider, Pet
         let leftItemBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(leftBarButtonTapped))
         self.navigationItem.rightBarButtonItem = leftItemBarButton
 
+        usersCollectionView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap)))
 
         
         usersCollectionView.delegate = self
@@ -60,6 +61,12 @@ class PetInfromationViewController: UIViewController, IndicatorInfoProvider, Pet
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "Profile")
+    }
+    
+    
+    func tap(sender: UITapGestureRecognizer){
+        self.present(presenter.users)
+
     }
     
     
@@ -195,8 +202,9 @@ extension PetInfromationViewController: UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = usersCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! UsersCell
         let user = presenter.users[indexPath.row]
-        if let url = user.imageURL {
-            cell.profileImage.sd_setImage(with: URL(string: url), placeholderImage: UIImage(named: ""), options: [.progressiveDownload], completed: nil)
+        cell.profileImage.border(color: UIColor.primary, width: 0.7)
+            if let url = user.imageURL {
+                cell.profileImage.sd_setImage(with: URL(string: url), placeholderImage: UIImage(named: "PetPlaceholderImage"), options: [.progressiveDownload], completed: nil)
         }
         return cell
     }

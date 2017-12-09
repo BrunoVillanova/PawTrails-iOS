@@ -107,9 +107,11 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
                     navigation.reloadPetsAPI()
 
                 self.alert(title: "", msg: "Your request has been processed", type: .blue, disableTime: 3, handler: nil)
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "petAdded"), object: nil)
 
                 }
+            
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "petAdded"), object: nil)
+
             _ = navigationController?.popViewController(animated: true)
         }
     }

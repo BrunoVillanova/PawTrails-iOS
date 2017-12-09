@@ -77,12 +77,8 @@ class CircleChart: UIView {
             circlee.path = nil
         } else {
             let circlePath = CGMutablePath()
-            
             let radians: CGFloat = 2 * .pi * p
-            
             circlePath.addRelativeArc(center: CGPoint(x: bounds.midX, y: bounds.midY), radius: 0.46 * bounds.width, startAngle: -.pi/2, delta: -radians)
-            
-            
             let trace = CABasicAnimation(keyPath: "strokeEnd")
             trace.fromValue = 0
             trace.toValue = 1

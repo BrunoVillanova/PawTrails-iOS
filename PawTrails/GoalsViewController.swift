@@ -15,7 +15,6 @@ import Charts
 class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDelegate, DateDelegate {
   
     @IBAction func dateBtnPressed(_ sender: Any) {
-    
         self.performSegue(withIdentifier: "showCalender", sender: self)
     }
     
@@ -289,11 +288,7 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
             let result = formatter.string(from: date)
             self.dateBtn.setTitle(result, for: .normal)
         } else {
-//            let date = Date()
-//            let formatter = DateFormatter()
-//            formatter.dateFormat = "EEEE, MMMM dd, yyy"
-//            let result = formatter.string(from: date)
-//            self.dateBtn.setTitle(result, for: .normal)
+
         }
     }
     

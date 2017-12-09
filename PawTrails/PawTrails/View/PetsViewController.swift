@@ -40,6 +40,11 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         tableView.dataSource = self
         tableView.delegate = self
+        let notificationIdentifier: String = "petAdded"
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadPetsAPI), name: NSNotification.Name(rawValue: notificationIdentifier), object: nil)
+
+        
+        
         
         // Todo: make tableview reactive
 //        DataManager.instance.pets()
