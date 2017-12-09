@@ -222,6 +222,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         return isReady().filter({ (isReady) -> Bool in
             return isReady
         }).flatMap({ (isReady) -> Observable<[PetDeviceData]> in
+            print("Emitting gps updates")
             self.socket.emit("gpsPets", ["ids": petIDs, "noLastPos": false])
             return self.petGpsUpdates.asObservable()
         })

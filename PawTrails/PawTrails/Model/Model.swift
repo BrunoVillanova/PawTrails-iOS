@@ -107,6 +107,7 @@ struct Trip {
     var maxSpeed: Float?
     var steps: Int64?
     var points: [TripPoint]?
+    var deviceData: [DeviceData]?
 }
 
 

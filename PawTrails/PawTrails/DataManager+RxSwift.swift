@@ -79,19 +79,28 @@ extension DataManager {
     func getActivePetTrips() -> Observable<[Trip]> {
         let apiTrips = getApiTrips([0,1])
         let socketTrips = SocketIOManager.instance.trips()
-        print("DataManager -> allTrips")
+        print("DataManager -> getActivePetTrips")
         
-        return apiTrips
-            .flatMapLatest({ (tripsFromApi) -> Observable<[Trip]> in
-                return socketTrips
-                    .filter({ (tripsFromSocket) -> Bool in
-                        return tripsFromSocket.count > 0
-                    })
-                    .flatMap({ (theTripsFromSocket) -> Observable<[Trip]> in
-                        return apiTrips
-                    })
-                    .ifEmpty(default: tripsFromApi)
-            })
+        return apiTrips.flatMap({ (trips) -> Observable<[Trip]> in
+            print("DataManager -> getActivePetTrips - > concatMap")
+            return socketTrips
+                .flatMap({ (socketTrips) -> Observable<[Trip]> in
+                    print("DataManager -> getActivePetTrips - > concatMap - > flatMap")
+                    return apiTrips
+                })
+                .ifEmpty(switchTo: apiTrips)
+        })
+//        return apiTrips
+//            .flatMap({ (tripsFromApi) -> Observable<[Trip]> in
+//                return socketTrips
+//                    .filter({ (tripsFromSocket) -> Bool in
+//                        return tripsFromSocket.count > 0
+//                    })
+//                    .flatMap({ (theTripsFromSocket) -> Observable<[Trip]> in
+//                        return apiTrips
+//                    })
+//                    .ifEmpty(default: tripsFromApi)
+//            })
     }
     
     func allTrips() -> Observable<[Trip]> {
