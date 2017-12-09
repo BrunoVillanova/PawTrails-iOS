@@ -1074,9 +1074,10 @@
 				4415FF3B1E3B822900A81B13 /* Sources */,
 				4415FF3C1E3B822900A81B13 /* Frameworks */,
 				4415FF3D1E3B822900A81B13 /* Resources */,
-				44136F081E8429250003B531 /* ShellScript */,
+				15D8B6CB1FDC9BC0004B951B /* ShellScript */,
 				93543C9FAEDDD0332AFDC816 /* [CP] Embed Pods Frameworks */,
 				39885238018EFB6CB9FCB2C6 /* [CP] Copy Pods Resources */,
+				44136F081E8429250003B531 /* ShellScript */,
 				443D9CF01FB0AE2700550B1D /* Embed Frameworks */,
 				157AC4AF1FC317FE0005A717 /* Carthage Copy Frameworks */,
 			);
@@ -1272,6 +1273,19 @@
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
+		15D8B6CB1FDC9BC0004B951B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cp \"${GOOGLE_SERVICES_PLIST_FILE}\" \"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/GoogleService-Info.plist\"";
+		};
 		39885238018EFB6CB9FCB2C6 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1360,6 +1374,7 @@
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FacebookCore/FacebookCore.framework",
 				"${BUILT_PRODUCTS_DIR}/FacebookLogin/FacebookLogin.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
@@ -1371,6 +1386,7 @@
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
 				"${BUILT_PRODUCTS_DIR}/YNDropDownMenu/YNDropDownMenu.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -1379,6 +1395,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookLogin.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
@@ -1390,6 +1407,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YNDropDownMenu.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1674,6 +1692,8 @@
 					"$(PROJECT_DIR)/PawTrails/Assets/Google",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
+				GOOGLE_SERVICES_PLIST_DIR = "${SRCROOT}/PawTrails/ConfigFiles";
+				GOOGLE_SERVICES_PLIST_FILE = "${GOOGLE_SERVICES_PLIST_DIR}/GoogleService-Info-${CONFIGURATION}.plist";
 				INFOPLIST_FILE = "$(SRCROOT)/PawTrails/Assets/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1681,7 +1701,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.attitudetech.PawTrails.beta;
 				PRODUCT_NAME = "$(TARGET_NAME)$(PRODUCT_NAME_SUFFIX)";
 				PRODUCT_NAME_SUFFIX = " Beta";
-				PROVISIONING_PROFILE = "236fa4c6-a243-4063-b93d-b82ab91c3620";
+				PROVISIONING_PROFILE = "1a6da20b-6e8a-435b-a522-81bb0f90da61";
 				PROVISIONING_PROFILE_SPECIFIER = "PawTrails Beta";
 				SWIFT_OBJC_BRIDGING_HEADER = "PawTrails/Assets/PawTrails-Bridging-Header.h";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
@@ -1959,6 +1979,8 @@
 					"$(PROJECT_DIR)/PawTrails/Assets/Google",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
+				GOOGLE_SERVICES_PLIST_DIR = "${SRCROOT}/PawTrails/ConfigFiles";
+				GOOGLE_SERVICES_PLIST_FILE = "${GOOGLE_SERVICES_PLIST_DIR}/GoogleService-Info-${CONFIGURATION}.plist";
 				INFOPLIST_FILE = "$(SRCROOT)/PawTrails/Assets/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1966,7 +1988,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.attitudetech.PawTrails.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)$(PRODUCT_NAME_SUFFIX)";
 				PRODUCT_NAME_SUFFIX = " Debug";
-				PROVISIONING_PROFILE = "186dd105-7e9c-4f35-b6ef-5c2179cded29";
+				PROVISIONING_PROFILE = "e23ac0b0-2f4d-4dc9-bb40-f2514d6587cf";
 				PROVISIONING_PROFILE_SPECIFIER = "PawTrails Debug";
 				SWIFT_OBJC_BRIDGING_HEADER = "PawTrails/Assets/PawTrails-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1997,6 +2019,8 @@
 					"$(PROJECT_DIR)/PawTrails/Assets/Google",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
+				GOOGLE_SERVICES_PLIST_DIR = "${SRCROOT}/PawTrails/ConfigFiles";
+				GOOGLE_SERVICES_PLIST_FILE = "${GOOGLE_SERVICES_PLIST_DIR}/GoogleService-Info-${CONFIGURATION}.plist";
 				INFOPLIST_FILE = "$(SRCROOT)/PawTrails/Assets/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
