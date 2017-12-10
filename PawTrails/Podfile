@@ -26,6 +26,7 @@ target 'PawTrails' do
     pod 'Firebase/Core'
     pod 'BarcodeScanner', '~> 2.1.2'
     pod 'HockeySDK'
+    pod 'SwiftMessages'
 
   target 'PawTrailsTests' do
     inherit! :search_paths  	

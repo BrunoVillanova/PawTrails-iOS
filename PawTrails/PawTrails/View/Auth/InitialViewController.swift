@@ -57,9 +57,6 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
             self.emailTextField.text = ezdebug.email
             self.passwordTextField.text = ezdebug.password
         }
-        
-//        setTopBar(alpha: 1.0)
-//        GIDSignIn.sharedInstance().uiDelegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {

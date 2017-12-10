@@ -7,7 +7,8 @@
 //
 
 import UIKit
-
+//TODO: replace alert with this library
+//import SwiftMessages
 // MARK:- View
 
 enum notificationType {
@@ -149,60 +150,95 @@ extension UIViewController {
     }
     
     func showNotification(title:String, type:notificationType = .blue) {
+        self.showNotification(title: title, type: type, originY: 0.0)
+    }
+    
+    func showNotification(title:String, type:notificationType = .blue, originY: CGFloat?) {
         
-        let viewHeight:CGFloat = 30
-        let yOffset:CGFloat = UIApplication.shared.statusBarFrame.size.height + (navigationController?.navigationBar.frame.height ?? 0.0)
-        let viewFrame = CGRect(x: 0.0, y: yOffset, width: self.view.bounds.width, height: viewHeight)
         
-        let notificationView = UIView(frame: viewFrame)
-        notificationView.backgroundColor = type.color
-        notificationView.tag = subviewId.notification.rawValue
-        
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: viewHeight))
-        label.text = title
-        label.textColor = UIColor.white
-        label.font = UIFont.preferredFont(forTextStyle: .headline)
-        label.textAlignment = .center
-        label.adjustsFontSizeToFitWidth = true
-        label.numberOfLines = 2
-        
-        notificationView.addSubview(label)
-        DispatchQueue.main.async {
-//            UIApplication.shared.keyWindow?.addSubview(notificationView)
-            UIApplication.shared.keyWindow?.rootViewController?.view.addSubview(notificationView)
+//        var theme = Theme.info
+//
+//        switch type {
+//            case .green:
+//                theme = Theme.success
+//            case .red:
+//                theme = Theme.error
+//            case .blue:
+//                theme = Theme.info
+//        }
+//
+//        SwiftMessages.show {
+//            let view = MessageView.viewFromNib(layout: .messageView)
+//
+//
+//
+//            // Theme message elements with the warning style.
+//            view.configureTheme(theme)
+//
+//            // Add a drop shadow.
+//            view.configureDropShadow()
+//
+//
+//
+//            return view
+//        }
+        let notificationView = viewForNotification(title: title, type: type, originY: originY)
+        showNotificationView(notificationView)
+
+    }
+    
+    fileprivate func showNotificationView(_ notificationView: UIView) {
+    
+        if let rootViewController = UIApplication.shared.keyWindow?.rootViewController {
+            var topMostView = UIView()
+    
+            if let presentedViewController = rootViewController.presentedViewController {
+            topMostView = presentedViewController.view
+            } else {
+            topMostView = rootViewController.view
+            }
+    
+            DispatchQueue.main.async {
+            topMostView.addSubview(notificationView)
+            }
         }
     }
     
     
     func showNotificationWithGesture(title:String, type:notificationType = .blue, geaturseRecognizer: UITapGestureRecognizer) {
-        
-        
+        let notificationView = viewForNotification(title: title, type: type, originY: nil)
+        notificationView.addGestureRecognizer(geaturseRecognizer)
+        showNotificationView(notificationView)
+    }
+    
+    
+    fileprivate func viewForNotification(title:String, type:notificationType = .blue, originY: CGFloat?) -> UIView {
+    
         let viewHeight:CGFloat = 30
-        let yOffset:CGFloat = UIApplication.shared.statusBarFrame.size.height + (navigationController?.navigationBar.frame.height ?? 0.0)
-        let viewFrame = CGRect(x: 0.0, y: yOffset, width: self.view.bounds.width, height: viewHeight)
+        var yOffset:CGFloat = UIApplication.shared.statusBarFrame.size.height + (navigationController?.navigationBar.frame.height ?? 0.0)
         
+        if let originY =  originY {
+            yOffset = yOffset + originY
+        }
+        
+        let viewFrame = CGRect(x: 0.0, y: yOffset, width: self.view.bounds.width, height: viewHeight)
+    
         let notificationView = UIView(frame: viewFrame)
         notificationView.backgroundColor = type.color
         notificationView.tag = subviewId.notification.rawValue
-        
+    
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: viewHeight))
-        label.text = title
+        label.text = title.uppercased()
         label.textColor = UIColor.white
         label.font = UIFont.systemFont(ofSize: 10, weight: UIFontWeightBold)
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         label.numberOfLines = 2
-        
-        notificationView.addSubview(label)
-        
-        notificationView.addGestureRecognizer(geaturseRecognizer)
-
-        DispatchQueue.main.async {
-//            UIApplication.shared.keyWindow?.addSubview(notificationView)
-            UIApplication.shared.keyWindow?.rootViewController?.view.addSubview(notificationView)
-        }
-    }
     
+        notificationView.addSubview(label)
+    
+        return notificationView
+    }
     
     // Loading View
     

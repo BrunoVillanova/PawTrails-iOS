@@ -8,36 +8,26 @@
 
 import UIKit
 
-class PasswordRecoveryViewController: UIViewController, PasswordRecoveryView, UITextFieldDelegate {
+class PasswordRecoveryViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var checkButton: UIButton!
     @IBOutlet weak var sendButton: UIButton!
 
-    fileprivate let unchecked = " ⃝"
-    fileprivate let checked = "◉"
     
     var email:String?
     
-    fileprivate let presenter = PasswordRecoveryPresenter()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.attachView(self)
-        checkButton.setTitle(unchecked, for: .normal)
-        checkButton.tintColor = UIColor.primary
-        emailTextField.underline()
-        sendButton.round()
-        sendButton.tintColor = UIColor.secondary
-        sendButton.backgroundColor = UIColor.primary
-        cancelButton.tintColor = UIColor.primary
-
         
+        emailTextField.underline()
         emailTextField.setLeftPaddingPoints(5)
+        
+        cancelButton.tintColor = UIColor.primary
+        
         if email != nil {
             emailTextField.text = email
-        }else{
+        } else {
             emailTextField.becomeFirstResponder()
         }
         
@@ -51,17 +41,30 @@ class PasswordRecoveryViewController: UIViewController, PasswordRecoveryView, UI
         UIApplication.shared.statusBarStyle = .default
     }
     
-    
-    @IBAction func checkAction(_ sender: UIButton) {
-        if sender.titleLabel?.text == unchecked {
-            sender.setTitle(checked, for: .normal)
-        }else{
-            sender.setTitle(unchecked, for: .normal)
+    func sendRecoveryEmail(email:String, checked: Bool) {
+        
+        if !email.isValidEmail {
+            self.showNotification(title: "Email is not valid!", type: notificationType.red, originY: 39)
+        } else {
+
+            self.showLoadingView()
+            DataManager.instance.sendPasswordReset(email, callback: { (error) in
+                
+                self.hideLoadingView()
+                
+                if let error = error {
+                    self.showNotification(title: error.msg.msg, type: notificationType.red, originY: 39)
+                } else {
+                    self.showNotification(title: "Recovery instructions was sent to your email!", type: notificationType.green, originY: 39)
+                }
+            })
         }
     }
     
+    
+    
     @IBAction func sendAction(_ sender: UIButton) {
-        self.presenter.sendRecoveryEmail(email: self.emailTextField.text ?? "", checked: checkButton.titleLabel?.text == checked)
+        self.sendRecoveryEmail(email: self.emailTextField.text ?? "", checked: true)
     }
 
     // MARK: - PasswordRecoveryView
@@ -74,9 +77,6 @@ class PasswordRecoveryViewController: UIViewController, PasswordRecoveryView, UI
         self.emailTextField.shake()
     }
     
-    func emailNotChecked() {
-        self.checkButton.shake()
-    }
     
     func emailSent() {
         self.view.endEditing(true)

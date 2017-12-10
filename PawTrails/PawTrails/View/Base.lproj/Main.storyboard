@@ -413,30 +413,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E9A-Ij-tzc">
-                                <rect key="frame" x="51" y="269" width="30" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="VJl-V0-Ucw"/>
-                                    <constraint firstAttribute="height" constant="30" id="nmO-f2-Adc"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <state key="normal" title="⃝"/>
-                                <state key="selected" title="◉"/>
-                                <connections>
-                                    <action selector="checkAction:" destination="vvB-yd-XBa" eventType="touchUpInside" id="Aog-yb-Whc"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DDb-F8-D8z">
-                                <rect key="frame" x="51" y="353" width="273" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="sA9-5b-3ct"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                                <state key="normal" title="Send"/>
-                                <connections>
-                                    <action selector="sendAction:" destination="vvB-yd-XBa" eventType="touchUpInside" id="cTA-ug-0kE"/>
-                                </connections>
-                            </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gtv-Wg-QCS">
                                 <rect key="frame" x="51" y="201" width="273" height="44"/>
                                 <constraints>
@@ -449,7 +425,18 @@
                                     <outlet property="delegate" destination="wPd-hI-X1n" id="poT-x5-9YO"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We will send you a recovery email, please check if the email is correct." lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v4U-Yk-g00">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DDb-F8-D8z" customClass="PTWideButton" customModule="PawTrails" customModuleProvider="target">
+                                <rect key="frame" x="51" y="277" width="273" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="sA9-5b-3ct"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                <state key="normal" title="Submit"/>
+                                <connections>
+                                    <action selector="sendAction:" destination="vvB-yd-XBa" eventType="touchUpInside" id="cTA-ug-0kE"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please provide your email to reset your password" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v4U-Yk-g00">
                                 <rect key="frame" x="51" y="79" width="273" height="86"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="86" id="kTe-w0-q7L"/>
@@ -458,38 +445,26 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I have checked the email." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="dYn-zS-QUn">
-                                <rect key="frame" x="89" y="268" width="235" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="zaz-4H-wHP" secondAttribute="trailing" constant="47" id="1ec-9k-1vH"/>
                             <constraint firstItem="zaz-4H-wHP" firstAttribute="leading" secondItem="rmB-70-IoX" secondAttribute="trailing" constant="8" id="3r6-Kt-ZEA"/>
                             <constraint firstAttribute="trailingMargin" secondItem="v4U-Yk-g00" secondAttribute="trailing" constant="35" id="67k-5I-IOU"/>
-                            <constraint firstItem="E9A-Ij-tzc" firstAttribute="leading" secondItem="gtv-Wg-QCS" secondAttribute="leading" id="B1p-11-fNw"/>
                             <constraint firstItem="zaz-4H-wHP" firstAttribute="top" secondItem="tRJ-lN-3Dk" secondAttribute="top" id="EAm-O0-2T2"/>
                             <constraint firstItem="tRJ-lN-3Dk" firstAttribute="trailing" secondItem="5B9-hU-BPl" secondAttribute="trailing" id="Gaf-Iu-ZDa"/>
                             <constraint firstItem="gtv-Wg-QCS" firstAttribute="top" secondItem="v4U-Yk-g00" secondAttribute="bottom" constant="36" id="Hyg-Rl-hcS"/>
-                            <constraint firstItem="dYn-zS-QUn" firstAttribute="top" secondItem="E9A-Ij-tzc" secondAttribute="top" constant="-1" id="MnM-ZT-Dxb"/>
-                            <constraint firstItem="dYn-zS-QUn" firstAttribute="trailing" secondItem="gtv-Wg-QCS" secondAttribute="trailing" id="P8c-hP-W8H"/>
                             <constraint firstItem="rmB-70-IoX" firstAttribute="leading" secondItem="4n7-C8-PYi" secondAttribute="leadingMargin" id="ROu-8W-hIZ"/>
                             <constraint firstItem="v4U-Yk-g00" firstAttribute="top" secondItem="zaz-4H-wHP" secondAttribute="bottom" constant="30" id="V79-LM-4SQ"/>
                             <constraint firstItem="gtv-Wg-QCS" firstAttribute="width" secondItem="v4U-Yk-g00" secondAttribute="width" id="VB2-c1-TAK"/>
                             <constraint firstItem="5B9-hU-BPl" firstAttribute="leading" secondItem="tRJ-lN-3Dk" secondAttribute="leading" id="WSr-1p-fmH"/>
-                            <constraint firstItem="dYn-zS-QUn" firstAttribute="bottom" secondItem="E9A-Ij-tzc" secondAttribute="bottom" constant="-1" id="aCa-Ml-pI1"/>
                             <constraint firstItem="DDb-F8-D8z" firstAttribute="centerX" secondItem="tRJ-lN-3Dk" secondAttribute="centerX" id="aIN-jl-nhu"/>
                             <constraint firstItem="v4U-Yk-g00" firstAttribute="leading" secondItem="4n7-C8-PYi" secondAttribute="leadingMargin" constant="35" id="ff4-La-PII"/>
                             <constraint firstItem="5B9-hU-BPl" firstAttribute="top" secondItem="rmB-70-IoX" secondAttribute="bottom" constant="8" id="gKs-Wn-7Nw"/>
                             <constraint firstItem="v4U-Yk-g00" firstAttribute="top" secondItem="5B9-hU-BPl" secondAttribute="bottom" constant="20" id="hdz-Uu-5b7"/>
-                            <constraint firstItem="E9A-Ij-tzc" firstAttribute="top" secondItem="gtv-Wg-QCS" secondAttribute="bottom" constant="24" id="hjf-AY-JKy"/>
-                            <constraint firstItem="DDb-F8-D8z" firstAttribute="top" secondItem="E9A-Ij-tzc" secondAttribute="bottom" constant="54" id="hzC-Ij-hoB"/>
+                            <constraint firstItem="DDb-F8-D8z" firstAttribute="top" secondItem="gtv-Wg-QCS" secondAttribute="bottom" constant="32" id="ivY-bY-WHT"/>
                             <constraint firstItem="rmB-70-IoX" firstAttribute="top" secondItem="tRJ-lN-3Dk" secondAttribute="top" id="kuL-Is-X7n"/>
                             <constraint firstItem="gtv-Wg-QCS" firstAttribute="centerX" secondItem="tRJ-lN-3Dk" secondAttribute="centerX" id="mMl-CJ-bgm"/>
-                            <constraint firstItem="dYn-zS-QUn" firstAttribute="leading" secondItem="E9A-Ij-tzc" secondAttribute="trailing" constant="8" id="nKD-RK-4dB"/>
                             <constraint firstItem="DDb-F8-D8z" firstAttribute="width" secondItem="v4U-Yk-g00" secondAttribute="width" id="nSg-0w-YB5"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tRJ-lN-3Dk"/>
@@ -497,7 +472,6 @@
                     <navigationItem key="navigationItem" title="Password Reset" id="cpj-zF-Kqa"/>
                     <connections>
                         <outlet property="cancelButton" destination="rmB-70-IoX" id="Ajb-mg-wyH"/>
-                        <outlet property="checkButton" destination="E9A-Ij-tzc" id="vLp-G5-aOi"/>
                         <outlet property="emailTextField" destination="gtv-Wg-QCS" id="ou1-fj-IaB"/>
                         <outlet property="sendButton" destination="DDb-F8-D8z" id="Qov-F3-gLk"/>
                     </connections>
@@ -1553,7 +1527,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Irl-ap-dJF">
-                                <rect key="frame" x="16" y="64" width="343" height="603"/>
+                                <rect key="frame" x="16" y="108" width="343" height="510"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <attributedString key="attributedText">
                                     <fragment>
@@ -1973,7 +1947,7 @@ Last Edited on 2017-12-04
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qf4-Ct-DNe">
-                                <rect key="frame" x="0.0" y="64" width="375" height="786"/>
+                                <rect key="frame" x="0.0" y="108" width="375" height="693"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LTF-ve-xvE">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="828"/>
@@ -2263,7 +2237,7 @@ PawTrails is a product created by Attitude Technologies.
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="98f-Ae-ufe">
-                                <rect key="frame" x="0.0" y="102" width="375" height="216"/>
+                                <rect key="frame" x="0.0" y="146" width="375" height="216"/>
                                 <subviews>
                                     <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="nOV-Lr-0ne">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="216"/>
@@ -5649,17 +5623,17 @@ PawTrails is a product created by Attitude Technologies.
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pawtrails-logo-1x-png" translatesAutoresizingMaskIntoConstraints="NO" id="ILA-mU-fYT">
-                                <rect key="frame" x="80" y="158" width="80" height="50"/>
+                                <rect key="frame" x="80" y="114" width="80" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="MZO-Kh-6x2"/>
                                     <constraint firstAttribute="width" constant="80" id="mkI-L3-sDP"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sunbeam-logo-1x-png-nobg" translatesAutoresizingMaskIntoConstraints="NO" id="FeI-1n-QoM">
-                                <rect key="frame" x="166" y="158" width="144" height="50"/>
+                                <rect key="frame" x="166" y="114" width="144" height="50"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rFc-dO-isr">
-                                <rect key="frame" x="0.0" y="105" width="375" height="456"/>
+                                <rect key="frame" x="0.0" y="56" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="100" id="3v1-5Y-nEn" customClass="ReccomendationCell" customModule="PawTrails" customModuleProvider="target">
@@ -5723,7 +5697,7 @@ PawTrails is a product created by Attitude Technologies.
                                 </prototypes>
                             </tableView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wMi-oC-V8K">
-                                <rect key="frame" x="-4" y="218" width="383" height="312"/>
+                                <rect key="frame" x="-4" y="174" width="383" height="405"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q4u-vi-c5L">
                                         <rect key="frame" x="20" y="20" width="343" height="100"/>
@@ -7290,7 +7264,7 @@ finish the Adventure?</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rfL-Sn-QFW">
-                                <rect key="frame" x="0.0" y="108" width="375" height="461"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HRI-ee-D9R">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="369.5"/>
