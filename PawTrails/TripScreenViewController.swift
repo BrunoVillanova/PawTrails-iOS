@@ -96,7 +96,7 @@ class TripScreenViewController: UIViewController {
                 print("TripScreen -> Configure cell")
                 cell.configureWithTrip(element)
             }
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
 
         
         
@@ -270,7 +270,7 @@ class TripScreenViewController: UIViewController {
                     })
                 }
                 
-            }).addDisposableTo(disposeBag)
+            }).disposed(by: disposeBag)
         
         self.setupSubViews()
     }
@@ -281,7 +281,7 @@ class TripScreenViewController: UIViewController {
     }
     
     private func setupSubViews() {
-        selectedPageIndex.asObservable().bind(to: pageControl.rx.currentPage).addDisposableTo(bag)
+        selectedPageIndex.asObservable().bind(to: pageControl.rx.currentPage).disposed(by: disposeBag)
         
         collectionView.rx.contentOffset.bind { [weak self] (point) in
             guard let _ = self?.collectionView.frame.size.width else {
@@ -294,7 +294,7 @@ class TripScreenViewController: UIViewController {
             
             self?.selectedPageIndex.value = (self?.scrollViewPageIndex)!
             
-            }.addDisposableTo(bag)
+            }.disposed(by: disposeBag)
     }
     
     override func viewDidLayoutSubviews() {
@@ -376,11 +376,11 @@ class TripScreenViewController: UIViewController {
             if (!isPaused) {
                 DataManager.instance.pauseAdventure().subscribe(onNext: { (stoppedTrips) in
                     self.hideLoadingView()
-                }).addDisposableTo(self.disposeBag)
+                }).disposed(by: self.disposeBag)
             } else {
                 DataManager.instance.resumeAdventure().subscribe(onNext: { (stoppedTrips) in
                     self.hideLoadingView()
-                }).addDisposableTo(self.disposeBag)
+                }).disposed(by: self.disposeBag)
             }
         }
         

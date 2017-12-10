@@ -49,7 +49,7 @@ class MapViewController: UIViewController {
                     self.hideNotification()
                 }
                 
-            }).addDisposableTo(disposeBag)
+            }).disposed(by: disposeBag)
         
         firstButtonfromthebottom.contentHorizontalAlignment = .fill
         firstButtonfromthebottom.contentMode = .scaleToFill

@@ -93,25 +93,23 @@ class InitialPresenter {
     //Facebook
     
     func loginFB(vc: InitialViewController) {
-        let loginManager = LoginManager()
-        loginManager.logIn([ .publicProfile, .email ], viewController: vc) { loginResult in
+        LoginManager().logIn(readPermissions: [ .publicProfile, .email ], viewController: vc) { (loginResult) in
             switch loginResult {
             case .failed(let error):
                 self.view?.errorMessage(DataManagerError(error: error).msg)
                 break
             case .success(_, _, let accessToken):
                 DataManager.instance.login(socialMedia: .facebook, accessToken.authenticationToken, callback: { (error) in
-                        if let error = error {
-                            self.view?.errorMessage(error.msg)
-                        }else{
-                            self.view?.loggedSocialMedia()
+                    if let error = error {
+                        self.view?.errorMessage(error.msg)
+                    }else{
+                        self.view?.loggedSocialMedia()
                     }
                 })
             default:
                 break
             }
         }
-        
     }
     
     //Google
