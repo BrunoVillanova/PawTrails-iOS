@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		150B05011FDDE22100095772 /* PTTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150B05001FDDE22100095772 /* PTTextField.swift */; };
 		15226D901F8D18EA007EEFF2 /* SocketIO+RxSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15226D8F1F8D18EA007EEFF2 /* SocketIO+RxSwift.swift */; };
 		152A8F701FB5E0CB00C54DD8 /* DataManager+RxSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152A8F6F1FB5E0CB00C54DD8 /* DataManager+RxSwift.swift */; };
 		153DF70D1FD4AD5C008AE32D /* PTBalloonImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153DF70C1FD4AD5C008AE32D /* PTBalloonImageView.swift */; };
@@ -220,6 +221,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		150B05001FDDE22100095772 /* PTTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTTextField.swift; sourceTree = "<group>"; };
 		15226D8F1F8D18EA007EEFF2 /* SocketIO+RxSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SocketIO+RxSwift.swift"; path = "Extensions/SocketIO+RxSwift.swift"; sourceTree = "<group>"; };
 		152A8F6F1FB5E0CB00C54DD8 /* DataManager+RxSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataManager+RxSwift.swift"; sourceTree = "<group>"; };
 		153DF70C1FD4AD5C008AE32D /* PTBalloonImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PTBalloonImageView.swift; path = PTBalloonImageView/PTBalloonImageView.swift; sourceTree = "<group>"; };
@@ -490,6 +492,7 @@
 				159646A01FB1D334009DC172 /* PTMapView.swift */,
 				153DF70C1FD4AD5C008AE32D /* PTBalloonImageView.swift */,
 				15E8EC181FDDC3B30088EEB2 /* PTWideButton.swift */,
+				150B05001FDDE22100095772 /* PTTextField.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -1255,7 +1258,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-PawTrails/Pods-PawTrails-resources.sh",
-				"$PODS_CONFIGURATION_BUILD_DIR/HockeySDK/HockeySDKResources.bundle",
+				$PODS_CONFIGURATION_BUILD_DIR/HockeySDK/HockeySDKResources.bundle,
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -1531,6 +1534,7 @@
 				44251B0F1F0CD5870067F401 /* PetUserPresenter.swift in Sources */,
 				44251AE41F0CD54D0067F401 /* Extensions.swift in Sources */,
 				44251AF01F0CD55F0067F401 /* Messages.swift in Sources */,
+				150B05011FDDE22100095772 /* PTTextField.swift in Sources */,
 				446607BE1F95FF4C00833683 /* AirbnbDatePickerFooter.swift in Sources */,
 				442F2D9A1FAC735E0072D2B6 /* PetUserTableViewController.swift in Sources */,
 				443E807A1F5D87EC008679FC /* SelectPetsVC.swift in Sources */,

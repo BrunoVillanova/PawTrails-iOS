@@ -55,7 +55,9 @@ class PasswordRecoveryViewController: UIViewController, UITextFieldDelegate {
                 if let error = error {
                     self.showNotification(title: error.msg.msg, type: notificationType.red, originY: 39)
                 } else {
-                    self.showNotification(title: "Recovery instructions was sent to your email!", type: notificationType.green, originY: 39)
+                    self.dismiss(animated: true, completion: {
+                        self.showNotification(title: "Recovery instructions was sent to your email!", type: notificationType.green, originY: 39)
+                    })
                 }
             })
         }
