@@ -188,7 +188,7 @@ extension UIViewController {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: viewHeight))
         label.text = title
         label.textColor = UIColor.white
-        label.font = UIFont.preferredFont(forTextStyle: .callout)
+        label.font = UIFont.systemFont(ofSize: 10, weight: UIFontWeightBold)
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         label.numberOfLines = 2
