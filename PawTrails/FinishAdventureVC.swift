@@ -44,7 +44,7 @@ class FinishAdventureVC: UIViewController, BEMCheckBoxDelegate {
                     print("TripID \(trip.id) stopped!")
                 }
                 self.navigationController?.dismiss(animated: true, completion: nil)
-            }).addDisposableTo(self.disposeBag)
+            }).disposed(by: self.disposeBag)
         }
     }
     

@@ -197,13 +197,15 @@ class APIManager {
     /// - Parameter data: input of information.
     /// - Returns: `JSON` Object
     private func parseResponse(_ data:Data?) -> JSON {
+        
         if let data = data {
-            let json =  JSON(data: data)
-            Reporter.debugPrint(file: "\(#file)", function: "\(#function)", json.dictionaryObject ?? "")
-            return json
-        }else{
-            return JSON(parseJSON: "")
+            if let json =  try? JSON(data: data) {
+                Reporter.debugPrint(file: "\(#file)", function: "\(#function)", json.dictionaryObject ?? "")
+                return json
+            }
         }
+        
+        return JSON(parseJSON: "")
     }
     
     private func handleResponse(for call: APICallType, _ code: Int, _ data: Data?, _ callback: @escaping (_ error:APIManagerError?, _ data:JSON?) -> Void ) {

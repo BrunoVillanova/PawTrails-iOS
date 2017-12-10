@@ -213,6 +213,6 @@ class petListCell: UITableViewCell {
                 })
             }
 
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
     }
 }

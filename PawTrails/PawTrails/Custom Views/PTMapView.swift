@@ -68,7 +68,7 @@ class PTMapView: MKMapView {
                 
                 self.drawOverlayForPetAnnotations(self.myAnnotations[id])
             }
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
             
 
         
@@ -77,7 +77,7 @@ class PTMapView: MKMapView {
                 self.loadGpsUpdates(gpsUpdates)
             }
 
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
     }
     
     fileprivate func loadGpsUpdates(_ gpsUpdates: [PetDeviceData]?) {

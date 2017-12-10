@@ -126,7 +126,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
             } else if (status != .waiting) {
                 self.socketAuth()
             }
-        }).addDisposableTo(self.disposeBag)
+        }).disposed(by: disposeBag)
         
         
         socketReactive?.on(channel.diconnect.name).subscribe(onNext: { (data) in
@@ -139,7 +139,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         socketReactive?.on(channel.pets.name).subscribe(onNext: { (data) in
             print("SocketIO -> Pets")
             self.openChannels.insert(channel.pets)
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
         
         
         socketReactive?.on(channel.gpsUpdates.name).subscribe(onNext: { (data) in
@@ -150,7 +150,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
                 self.petGpsUpdates.value = petDeviceData
             }
             
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
         
         
         socketReactive?.on(channel.trips.name).subscribe(onNext: { (data) in
@@ -176,7 +176,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
                     }
                 }
             }
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
         
         DataManager.instance.userToken.asObservable().subscribe(onNext: { (authentication) in
             if authentication != nil {
@@ -189,7 +189,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
             } else {
                 self.socket.disconnect()
             }
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
     }
     
     func userNotSigned() {
@@ -212,7 +212,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
 //                })
 //                self.socket.emit(channel.pets.name, with: ["ids": petIDs!, "noLastPos": false])
                 
-            }).addDisposableTo(self.disposeBag)
+            }).disposed(by: self.disposeBag)
            
             return self.pets.asObservable()
         })

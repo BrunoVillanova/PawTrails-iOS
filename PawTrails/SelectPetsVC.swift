@@ -98,12 +98,12 @@ class SelectPetsVC: UIViewController, PetsView, SelectPetView {
         DataManager.instance.getActivePetTrips().subscribe(onNext: { (data) in
             self.petIDsOnTrip = data.map({$0.petId})
             self.petsCollectionView.reloadData()
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
         
         petIDsToStartTrip.asObservable().subscribe(onNext: { (data) in
             self.startAdventureBtn.isEnabled = data.count > 0
             self.petsCollectionView.reloadData()
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
     }
     
     func clearOnAppearance() {
@@ -213,7 +213,7 @@ class SelectPetsVC: UIViewController, PetsView, SelectPetView {
                 if let errorCode = apiError.errorCode {
                     print("Error \(errorCode)!")
                 }
-            }).addDisposableTo(disposeBag)
+            }).disposed(by: disposeBag)
     }
 
     @IBAction func closebtnPressed(_ sender: Any) {
