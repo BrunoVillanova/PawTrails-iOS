@@ -18,7 +18,7 @@ class MapViewController: UIViewController {
     @IBOutlet weak var secButtonFromTheBottom: UIButton!
     @IBOutlet weak var thirdButtonFromTheBottom: UIButton!
     
-    var locationManager : CLLocationManager?
+    
     fileprivate let presenter = HomePresenter()
     var selectedPet: Pet?
     var data = [searchElement]()
@@ -34,6 +34,11 @@ class MapViewController: UIViewController {
         initialize()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+    }
+    
     func initialize() {
         DataManager.instance.getActivePetTrips()
             .subscribe(onNext: { (tripList) in
@@ -42,13 +47,12 @@ class MapViewController: UIViewController {
                 if (tripList.count > 0){
                     let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(gestureRecognizer:)))
                     gestureRecognizer.delegate = self
-                    self.alertwithGeature(title: "", msg: "ADVENTURE IN PROGRESS, CLICK TO RESUME", type: .red, disableTime: 150, geatureReconginzer: gestureRecognizer, handler: {
-                    })
+                    self.alertwithGeature(title: "", msg: "ADVENTURE IN PROGRESS, CLICK TO RESUME", type: .red, disableTime: 150, geatureReconginzer: gestureRecognizer, handler: nil)
                 } else {
                     print("No running trips")
                     self.hideNotification()
                 }
-                
+
             }).disposed(by: disposeBag)
         
         firstButtonfromthebottom.contentHorizontalAlignment = .fill
@@ -63,6 +67,7 @@ class MapViewController: UIViewController {
         presenter.attachView(self)
         reloadPets()
     }
+
     
     func reloadPets(){
         presenter.getPets()
@@ -118,7 +123,6 @@ class MapViewController: UIViewController {
         let nc = UINavigationController()
         if let vc = storyboard?.instantiateViewController(withIdentifier: "PetProfileCollectionViewController") as? PetInfromationViewController {
             vc.pet = pet
-//            vc.fromMap = true
             nc.pushViewController(vc, animated: true)
             present(nc, animated: true, completion: nil)
         }

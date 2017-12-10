@@ -19,13 +19,15 @@ class PTMapView: MKMapView {
     var firstTimeLoadingData = true
     var shouldFocusOnPets = true
     var activeTripsPetIDs = [Int]()
+    let locationManager  = CLLocationManager()
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.delegate = self
-        self.showsScale = false
+        self.showsScale = true
         self.showsUserLocation = true
         
+        self.requestLocationAccess()
         
         DataManager.instance.getActivePetTrips().subscribe(onNext: { (trips) in
             
@@ -164,6 +166,39 @@ class PTMapView: MKMapView {
 //            CATransaction.setCompletionBlock({
 //                self.selectAnnotation(petAnnotationOnMap, animated: true)
 //            })
+        }
+    }
+    
+    fileprivate func requestLocationAccess() {
+        let status = CLLocationManager.authorizationStatus()
+        
+        switch status {
+        case .authorizedAlways, .authorizedWhenInUse:
+            return
+        case .denied, .restricted:
+            self.showAcessDeniedAlert()
+        default:
+            locationManager.requestWhenInUseAuthorization()
+        }
+    }
+    
+    fileprivate func showAcessDeniedAlert() {
+        let alertController = UIAlertController(title: "Location Accees Requested",
+                                                message: "The location permission was not authorized. Please enable it in Settings to continue.",
+                                                preferredStyle: .alert)
+        
+        let settingsAction = UIAlertAction(title: "Settings", style: .default) { (alertAction) in
+            if let appSettings = URL(string: UIApplicationOpenSettingsURLString) {
+                UIApplication.shared.openURL(appSettings)
+            }
+        }
+        alertController.addAction(settingsAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        if let rootViewController = UIApplication.shared.keyWindow?.rootViewController {
+            rootViewController.present(alertController, animated: true, completion: nil)
         }
     }
 }
