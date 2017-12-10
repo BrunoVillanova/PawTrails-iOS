@@ -11,7 +11,6 @@
 		152A8F701FB5E0CB00C54DD8 /* DataManager+RxSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152A8F6F1FB5E0CB00C54DD8 /* DataManager+RxSwift.swift */; };
 		153DF70D1FD4AD5C008AE32D /* PTBalloonImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153DF70C1FD4AD5C008AE32D /* PTBalloonImageView.swift */; };
 		1548B82A1FC5ADA200DC7E2B /* UIButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1548B8291FC5ADA200DC7E2B /* UIButtonExtensions.swift */; };
-		155316D31FBF189E009230B1 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 155316D01FBF1897009230B1 /* Charts.framework */; };
 		157401A41F9E268200A854C5 /* PTBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157401911F9E268200A854C5 /* PTBubbleView.swift */; };
 		157401A51F9E268200A854C5 /* Battery@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 157401931F9E268200A854C5 /* Battery@2x.png */; };
 		157401A61F9E268200A854C5 /* BatteryLow@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 157401941F9E268200A854C5 /* BatteryLow@1x.png */; };
@@ -29,8 +28,8 @@
 		157401B21F9E268200A854C5 /* PTBatteryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157401A21F9E268200A854C5 /* PTBatteryView.swift */; };
 		157401B31F9E268200A854C5 /* PTPetCalloutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 157401A31F9E268200A854C5 /* PTPetCalloutView.xib */; };
 		157AC4B31FC3192E0005A717 /* Convert.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 157AC4B21FC3192E0005A717 /* Convert.framework */; };
+		1585469C1FDCFBCB004C82EC /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1585469B1FDCFBCB004C82EC /* Charts.framework */; };
 		159646A11FB1D334009DC172 /* PTMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159646A01FB1D334009DC172 /* PTMapView.swift */; };
-		15C50A231FC20855001ED601 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 155316D01FBF1897009230B1 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		440784491F8B85A1005E9E1B /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 440784481F8B85A1005E9E1B /* SettingsView.xib */; };
 		4407844B1F8B85E8005E9E1B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4407844A1F8B85E8005E9E1B /* SettingsView.swift */; };
 		440823CA1F8F94900004B90F /* SetUpYourGoalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440823C91F8F94900004B90F /* SetUpYourGoalController.swift */; };
@@ -202,20 +201,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		155316CF1FBF1897009230B1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4446BAD81FB1C69A00809805 /* Charts.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 65AD9E95D9ED4DC0BD73A743;
-			remoteInfo = Charts;
-		};
-		155316D11FBF1897009230B1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4446BAD81FB1C69A00809805 /* Charts.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 1CBBC58C6CE1EBEE9852CE41;
-			remoteInfo = ChartsTests;
-		};
 		4414AE6D1EA0DD5B004A5134 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4415FF371E3B822900A81B13 /* Project object */;
@@ -231,20 +216,6 @@
 			remoteInfo = PawTrails;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		443D9CF01FB0AE2700550B1D /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				15C50A231FC20855001ED601 /* Charts.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		15226D8F1F8D18EA007EEFF2 /* SocketIO+RxSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SocketIO+RxSwift.swift"; path = "Extensions/SocketIO+RxSwift.swift"; sourceTree = "<group>"; };
@@ -268,6 +239,7 @@
 		157401A21F9E268200A854C5 /* PTBatteryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTBatteryView.swift; sourceTree = "<group>"; };
 		157401A31F9E268200A854C5 /* PTPetCalloutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PTPetCalloutView.xib; sourceTree = "<group>"; };
 		157AC4B21FC3192E0005A717 /* Convert.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Convert.framework; path = Carthage/Build/iOS/Convert.framework; sourceTree = "<group>"; };
+		1585469B1FDCFBCB004C82EC /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = Carthage/Build/iOS/Charts.framework; sourceTree = "<group>"; };
 		159646A01FB1D334009DC172 /* PTMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTMapView.swift; sourceTree = "<group>"; };
 		1E2B813BA9CAE948174F2C71 /* Pods_PawTrailsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PawTrailsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		440784481F8B85A1005E9E1B /* SettingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsView.xib; sourceTree = "<group>"; };
@@ -397,7 +369,6 @@
 		4441ACA51EB8C72500FBE27F /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		4441ACA71EB8C72E00FBE27F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		444698841F6BC75C006EE4CD /* SelectPetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPetView.swift; sourceTree = "<group>"; };
-		4446BAD81FB1C69A00809805 /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = Libraries/Charts/Charts.xcodeproj; sourceTree = "<group>"; };
 		4446BAE71FB1CA3600809805 /* AdventuresListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdventuresListViewController.swift; sourceTree = "<group>"; };
 		4447217A1F03F12A001DCDE1 /* PawTrailsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PawTrailsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4447217C1F03F12A001DCDE1 /* PawTrailsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PawTrailsUITests.swift; sourceTree = "<group>"; };
@@ -473,8 +444,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1585469C1FDCFBCB004C82EC /* Charts.framework in Frameworks */,
 				157AC4B31FC3192E0005A717 /* Convert.framework in Frameworks */,
-				155316D31FBF189E009230B1 /* Charts.framework in Frameworks */,
 				44251AD61F0CD5170067F401 /* GoogleSymbolUtilities.framework in Frameworks */,
 				44251AD21F0CD5170067F401 /* GoogleSignIn.framework in Frameworks */,
 				44251AD41F0CD5170067F401 /* GoogleAppUtilities.framework in Frameworks */,
@@ -500,15 +471,6 @@
 				157401A21F9E268200A854C5 /* PTBatteryView.swift */,
 			);
 			path = PTBatteryView;
-			sourceTree = "<group>";
-		};
-		155316CB1FBF1896009230B1 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				155316D01FBF1897009230B1 /* Charts.framework */,
-				155316D21FBF1897009230B1 /* ChartsTests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		157401901F9E268200A854C5 /* Custom Views */ = {
@@ -640,7 +602,6 @@
 		4415FF361E3B822900A81B13 = {
 			isa = PBXGroup;
 			children = (
-				4446BAD81FB1C69A00809805 /* Charts.xcodeproj */,
 				442F2D991FAC735E0072D2B6 /* PetUserTableViewController.swift */,
 				44C0409B1FAB6D9A00CF6E88 /* SharedUsersTableViewCell.swift */,
 				44C0409C1FAB6D9A00CF6E88 /* SharedUsersTableViewCell.xib */,
@@ -1020,6 +981,7 @@
 		91352D1B7E01CC1C0CF51D38 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1585469B1FDCFBCB004C82EC /* Charts.framework */,
 				157AC4B21FC3192E0005A717 /* Convert.framework */,
 				4441ACA71EB8C72E00FBE27F /* SystemConfiguration.framework */,
 				4441ACA51EB8C72500FBE27F /* SafariServices.framework */,
@@ -1070,15 +1032,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4415FF671E3B822A00A81B13 /* Build configuration list for PBXNativeTarget "PawTrails" */;
 			buildPhases = (
+				158546971FDCF342004C82EC /* Build Bump */,
 				61379AC374253DF712E5F31A /* [CP] Check Pods Manifest.lock */,
 				4415FF3B1E3B822900A81B13 /* Sources */,
 				4415FF3C1E3B822900A81B13 /* Frameworks */,
 				4415FF3D1E3B822900A81B13 /* Resources */,
-				15D8B6CB1FDC9BC0004B951B /* ShellScript */,
+				15D8B6CB1FDC9BC0004B951B /* Google Services PLIST Copy */,
 				93543C9FAEDDD0332AFDC816 /* [CP] Embed Pods Frameworks */,
 				39885238018EFB6CB9FCB2C6 /* [CP] Copy Pods Resources */,
-				44136F081E8429250003B531 /* ShellScript */,
-				443D9CF01FB0AE2700550B1D /* Embed Frameworks */,
+				44136F081E8429250003B531 /* Fabric */,
 				157AC4AF1FC317FE0005A717 /* Carthage Copy Frameworks */,
 			);
 			buildRules = (
@@ -1163,12 +1125,6 @@
 			mainGroup = 4415FF361E3B822900A81B13;
 			productRefGroup = 4415FF401E3B822900A81B13 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 155316CB1FBF1896009230B1 /* Products */;
-					ProjectRef = 4446BAD81FB1C69A00809805 /* Charts.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				4415FF3E1E3B822900A81B13 /* PawTrails */,
@@ -1177,23 +1133,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		155316D01FBF1897009230B1 /* Charts.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Charts.framework;
-			remoteRef = 155316CF1FBF1897009230B1 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		155316D21FBF1897009230B1 /* ChartsTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = ChartsTests.xctest;
-			remoteRef = 155316D11FBF1897009230B1 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		4414AE661EA0DD5B004A5134 /* Resources */ = {
@@ -1264,22 +1203,39 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Convert.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Charts.framework",
 			);
 			name = "Carthage Copy Frameworks";
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Convert.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Charts.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
-		15D8B6CB1FDC9BC0004B951B /* ShellScript */ = {
+		158546971FDCF342004C82EC /* Build Bump */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Build Bump";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#if [ \"$CONFIGURATION\" != \"Release\" ]\n#then\n#exit\n#fi\nbuildPlist=${PROJECT_DIR}/${INFOPLIST_FILE}\nbuildDate=$(date \"+%y%m%d%H%M\")\n#buildDate=$(date \"+%s\")\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${INFOPLIST_FILE}\")\n#buildNumber=$(($buildNumber + 1))\n\nbuildNumber=$buildDate\n\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${INFOPLIST_FILE}\"\n\n# Set the version numbers in the buildPlist\n#/usr/libexec/PlistBuddy -c \"Set :CFBuildNumber $buildNumber\" \"$buildPlist\"\n#/usr/libexec/PlistBuddy -c  \"Set :CFBuildDate $buildDate\" \"$buildPlist\"\n#/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildVersion.$buildNumber\" \"$buildPlist\"\n#/usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString $buildVersion.$buildNumber\" \"$buildPlist\"\n#/usr/libexec/PlistBuddy -c \"Set :CFBundleLongVersionString $buildVersion.$buildNumber.$buildDate\" \"$buildPlist\"\n";
+		};
+		15D8B6CB1FDC9BC0004B951B /* Google Services PLIST Copy */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Google Services PLIST Copy";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1293,7 +1249,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-PawTrails/Pods-PawTrails-resources.sh",
-				"$PODS_CONFIGURATION_BUILD_DIR/XLPagerTabStrip/XLPagerTabStrip.bundle",
+				$PODS_CONFIGURATION_BUILD_DIR/XLPagerTabStrip/XLPagerTabStrip.bundle,
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -1304,13 +1260,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PawTrails/Pods-PawTrails-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		44136F081E8429250003B531 /* ShellScript */ = {
+		44136F081E8429250003B531 /* Fabric */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = Fabric;
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1686,7 +1643,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E89F72637ABD3F9989B50AF4 /* Pods-PawTrails.beta.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
@@ -1702,6 +1658,7 @@
 					"$(PROJECT_DIR)/PawTrails",
 					"$(PROJECT_DIR)/PawTrails/Assets/Google",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Libraries/**",
 				);
 				GOOGLE_SERVICES_PLIST_DIR = "${SRCROOT}/PawTrails/ConfigFiles";
 				GOOGLE_SERVICES_PLIST_FILE = "${GOOGLE_SERVICES_PLIST_DIR}/GoogleService-Info-${CONFIGURATION}.plist";
@@ -1712,7 +1669,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.attitudetech.PawTrails.beta;
 				PRODUCT_NAME = "$(TARGET_NAME)$(PRODUCT_NAME_SUFFIX)";
 				PRODUCT_NAME_SUFFIX = " Beta";
-				PROVISIONING_PROFILE = "1a6da20b-6e8a-435b-a522-81bb0f90da61";
+				PROVISIONING_PROFILE = "1dcd10b6-2dff-43d4-9b02-782f4e1f2b18";
 				PROVISIONING_PROFILE_SPECIFIER = "PawTrails Beta";
 				SWIFT_OBJC_BRIDGING_HEADER = "PawTrails/Assets/PawTrails-Bridging-Header.h";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
@@ -1985,7 +1942,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 734D05AA5E231C24EBC9332D /* Pods-PawTrails.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
@@ -2001,6 +1957,7 @@
 					"$(PROJECT_DIR)/PawTrails",
 					"$(PROJECT_DIR)/PawTrails/Assets/Google",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Libraries/**",
 				);
 				GOOGLE_SERVICES_PLIST_DIR = "${SRCROOT}/PawTrails/ConfigFiles";
 				GOOGLE_SERVICES_PLIST_FILE = "${GOOGLE_SERVICES_PLIST_DIR}/GoogleService-Info-${CONFIGURATION}.plist";
@@ -2025,7 +1982,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CDF43BC48AA97ADEA16BD58D /* Pods-PawTrails.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
@@ -2041,6 +1997,7 @@
 					"$(PROJECT_DIR)/PawTrails",
 					"$(PROJECT_DIR)/PawTrails/Assets/Google",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Libraries/**",
 				);
 				GOOGLE_SERVICES_PLIST_DIR = "${SRCROOT}/PawTrails/ConfigFiles";
 				GOOGLE_SERVICES_PLIST_FILE = "${GOOGLE_SERVICES_PLIST_DIR}/GoogleService-Info-${CONFIGURATION}.plist";

@@ -9,9 +9,6 @@ import UIKit
 import XLPagerTabStrip
 import Charts
 
-
-
-
 class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDelegate, DateDelegate {
   
     @IBAction func dateBtnPressed(_ sender: Any) {
