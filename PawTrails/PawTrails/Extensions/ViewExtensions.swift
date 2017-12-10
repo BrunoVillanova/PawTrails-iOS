@@ -138,13 +138,25 @@ extension UIViewController {
     
     func hideNotification() {
 
-//        if let notificationViews = UIApplication.shared.keyWindow?.subviews.filter({ $0.tag == subviewId.notification.rawValue }) {
-        if let notificationViews = UIApplication.shared.keyWindow?.rootViewController?.view.subviews.filter({ $0.tag == subviewId.notification.rawValue }) {
-
-            for notificationView in notificationViews {
-                DispatchQueue.main.async {
-                    notificationView.removeFromSuperview()
-                }
+        if let rootViewController = UIApplication.shared.keyWindow?.rootViewController {
+            var topMostView = rootViewController.view!
+            
+            if let presentedViewController = rootViewController.presentedViewController {
+                topMostView = presentedViewController.view
+            } else if let navigationController = rootViewController as? UINavigationController, let topViewController = navigationController.topViewController {
+                topMostView = topViewController.view
+            }
+            
+            removeNotificationIfFoundInView(topMostView)
+        }
+        
+    }
+    
+    fileprivate func removeNotificationIfFoundInView(_ view: UIView) {
+        let notificationViews = view.subviews.filter({ $0.tag == subviewId.notification.rawValue })
+        for notificationView in notificationViews {
+            DispatchQueue.main.async {
+                notificationView.removeFromSuperview()
             }
         }
     }
@@ -190,16 +202,19 @@ extension UIViewController {
     fileprivate func showNotificationView(_ notificationView: UIView) {
     
         if let rootViewController = UIApplication.shared.keyWindow?.rootViewController {
-            var topMostView = UIView()
+            var topMostView = rootViewController.view!
     
             if let presentedViewController = rootViewController.presentedViewController {
-            topMostView = presentedViewController.view
-            } else {
-            topMostView = rootViewController.view
+                topMostView = presentedViewController.view
+            } else if let navigationController = rootViewController as? UINavigationController, let topViewController = navigationController.topViewController {
+                topMostView = topViewController.view
             }
+            
+            let timer = Timer.init(timeInterval: 3, target: self, selector: #selector(self.hideNotification), userInfo: nil, repeats: false)
+            timer.fire()
     
             DispatchQueue.main.async {
-            topMostView.addSubview(notificationView)
+                topMostView.addSubview(notificationView)
             }
         }
     }
