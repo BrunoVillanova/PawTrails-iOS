@@ -44,9 +44,12 @@ class PasswordRecoveryViewController: UIViewController, PasswordRecoveryView, UI
         if #available(iOS 10.0, *) {
             self.emailTextField.textContentType = UITextContentType.emailAddress
         }
-        setTopBar(alpha: 1.0)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.shared.statusBarStyle = .default
+    }
     
     
     @IBAction func checkAction(_ sender: UIButton) {

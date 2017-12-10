@@ -1032,7 +1032,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4415FF671E3B822A00A81B13 /* Build configuration list for PBXNativeTarget "PawTrails" */;
 			buildPhases = (
-				158546971FDCF342004C82EC /* Build Bump */,
+				158546971FDCF342004C82EC /* [BNV] Build Bump */,
 				61379AC374253DF712E5F31A /* [CP] Check Pods Manifest.lock */,
 				4415FF3B1E3B822900A81B13 /* Sources */,
 				4415FF3C1E3B822900A81B13 /* Frameworks */,
@@ -1214,19 +1214,19 @@
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
-		158546971FDCF342004C82EC /* Build Bump */ = {
+		158546971FDCF342004C82EC /* [BNV] Build Bump */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Build Bump";
+			name = "[BNV] Build Bump";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#if [ \"$CONFIGURATION\" != \"Release\" ]\n#then\n#exit\n#fi\nbuildPlist=${PROJECT_DIR}/${INFOPLIST_FILE}\nbuildDate=$(date \"+%y%m%d%H%M\")\n#buildDate=$(date \"+%s\")\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${INFOPLIST_FILE}\")\n#buildNumber=$(($buildNumber + 1))\n\nbuildNumber=$buildDate\n\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${INFOPLIST_FILE}\"\n\n# Set the version numbers in the buildPlist\n#/usr/libexec/PlistBuddy -c \"Set :CFBuildNumber $buildNumber\" \"$buildPlist\"\n#/usr/libexec/PlistBuddy -c  \"Set :CFBuildDate $buildDate\" \"$buildPlist\"\n#/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildVersion.$buildNumber\" \"$buildPlist\"\n#/usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString $buildVersion.$buildNumber\" \"$buildPlist\"\n#/usr/libexec/PlistBuddy -c \"Set :CFBundleLongVersionString $buildVersion.$buildNumber.$buildDate\" \"$buildPlist\"\n";
+			shellScript = "if [ ${CONFIGURATION} == \"Debug\" ]; then\nexit\nfi\n\nbuildPlist=${PROJECT_DIR}/${INFOPLIST_FILE}\nbuildDate=$(date \"+%y%m%d%H%M\")\n\nplistFile=\"${INFOPLIST_FILE}\"\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" $plistFile)\n\nbuildNumber=$buildDate\n\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" $plistFile";
 		};
 		15D8B6CB1FDC9BC0004B951B /* Google Services PLIST Copy */ = {
 			isa = PBXShellScriptBuildPhase;

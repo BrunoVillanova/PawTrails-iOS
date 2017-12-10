@@ -58,11 +58,12 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
             self.passwordTextField.text = ezdebug.password
         }
         
-        setTopBar(alpha: 1.0)
+//        setTopBar(alpha: 1.0)
 //        GIDSignIn.sharedInstance().uiDelegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         UIApplication.shared.statusBarStyle = .lightContent
     }
     

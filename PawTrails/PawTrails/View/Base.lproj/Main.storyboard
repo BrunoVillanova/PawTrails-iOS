@@ -333,30 +333,30 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="LYM-Kj-gTR" firstAttribute="top" secondItem="Ftr-1s-i1N" secondAttribute="bottom" constant="22" id="09d-7V-XKr"/>
+                            <constraint firstItem="oI3-pV-cT8" firstAttribute="height" secondItem="4hK-rv-i5a" secondAttribute="height" id="0og-QP-GL7"/>
                             <constraint firstItem="em9-fE-cWb" firstAttribute="leading" secondItem="bVo-r0-B4V" secondAttribute="leading" constant="16" id="2GG-Ei-jsU"/>
-                            <constraint firstItem="bVo-r0-B4V" firstAttribute="bottom" secondItem="oI3-pV-cT8" secondAttribute="bottom" id="5Kb-6D-mQV"/>
                             <constraint firstItem="F5V-3O-LJg" firstAttribute="leading" secondItem="bVo-r0-B4V" secondAttribute="leading" constant="16" id="5MJ-BL-WaW"/>
                             <constraint firstItem="bVo-r0-B4V" firstAttribute="trailing" secondItem="c3x-gd-GfT" secondAttribute="trailing" constant="16" id="5Zq-R4-1jK"/>
                             <constraint firstItem="nBg-4h-XSu" firstAttribute="leading" secondItem="bVo-r0-B4V" secondAttribute="leading" constant="130" id="9be-aU-3uc"/>
                             <constraint firstItem="c3x-gd-GfT" firstAttribute="top" secondItem="F5V-3O-LJg" secondAttribute="bottom" constant="8" id="9rq-US-5RD"/>
                             <constraint firstItem="em9-fE-cWb" firstAttribute="top" secondItem="nBg-4h-XSu" secondAttribute="bottom" constant="48" id="GjO-4W-M8v"/>
                             <constraint firstItem="bVo-r0-B4V" firstAttribute="trailing" secondItem="nBg-4h-XSu" secondAttribute="trailing" constant="128" id="K7b-5M-vgZ"/>
+                            <constraint firstAttribute="trailing" secondItem="oI3-pV-cT8" secondAttribute="trailing" id="Laj-wP-eTj"/>
                             <constraint firstItem="bVo-r0-B4V" firstAttribute="trailing" secondItem="em9-fE-cWb" secondAttribute="trailing" constant="16" id="Ldt-ZF-vC3"/>
                             <constraint firstItem="LYM-Kj-gTR" firstAttribute="leading" secondItem="bVo-r0-B4V" secondAttribute="leading" constant="35" id="Nmv-L2-37a"/>
                             <constraint firstItem="bVo-r0-B4V" firstAttribute="trailing" secondItem="Ftr-1s-i1N" secondAttribute="trailing" constant="35" id="OWo-ny-kD2"/>
                             <constraint firstItem="c3x-gd-GfT" firstAttribute="leading" secondItem="bVo-r0-B4V" secondAttribute="leading" constant="16" id="Q7r-JT-4Ub"/>
                             <constraint firstItem="rxa-0O-Yrw" firstAttribute="leading" secondItem="bVo-r0-B4V" secondAttribute="leading" constant="36" id="R8v-Fs-b1H"/>
                             <constraint firstItem="Ftr-1s-i1N" firstAttribute="leading" secondItem="bVo-r0-B4V" secondAttribute="leading" constant="35" id="WZk-aZ-1IT"/>
+                            <constraint firstItem="oI3-pV-cT8" firstAttribute="leading" secondItem="bVo-r0-B4V" secondAttribute="leading" id="YSp-Nb-Irc"/>
                             <constraint firstItem="Ftr-1s-i1N" firstAttribute="top" secondItem="rxa-0O-Yrw" secondAttribute="bottom" constant="22" id="YVA-Oo-BBb"/>
-                            <constraint firstItem="bVo-r0-B4V" firstAttribute="trailing" secondItem="oI3-pV-cT8" secondAttribute="trailing" id="drA-DC-PHY"/>
                             <constraint firstItem="nBg-4h-XSu" firstAttribute="top" secondItem="bVo-r0-B4V" secondAttribute="top" constant="50" id="fd2-zE-vNJ"/>
-                            <constraint firstItem="oI3-pV-cT8" firstAttribute="leading" secondItem="bVo-r0-B4V" secondAttribute="leading" id="h4I-hn-JU4"/>
                             <constraint firstItem="bVo-r0-B4V" firstAttribute="trailing" secondItem="LYM-Kj-gTR" secondAttribute="trailing" constant="35" id="iJg-ew-gPT"/>
                             <constraint firstItem="bVo-r0-B4V" firstAttribute="trailing" secondItem="rxa-0O-Yrw" secondAttribute="trailing" constant="34" id="kjW-zP-AHa"/>
+                            <constraint firstItem="oI3-pV-cT8" firstAttribute="top" secondItem="4hK-rv-i5a" secondAttribute="top" id="q64-38-ynl"/>
                             <constraint firstItem="rxa-0O-Yrw" firstAttribute="top" secondItem="c3x-gd-GfT" secondAttribute="bottom" constant="30" id="qR2-hB-z3R"/>
                             <constraint firstItem="bVo-r0-B4V" firstAttribute="trailing" secondItem="F5V-3O-LJg" secondAttribute="trailing" constant="16" id="rTe-oa-iHd"/>
                             <constraint firstItem="F5V-3O-LJg" firstAttribute="top" secondItem="em9-fE-cWb" secondAttribute="bottom" constant="2" id="ryN-3c-Fdy"/>
-                            <constraint firstItem="oI3-pV-cT8" firstAttribute="top" secondItem="4hK-rv-i5a" secondAttribute="top" id="zkf-tc-vZ6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="bVo-r0-B4V"/>
                     </view>
@@ -2763,63 +2763,6 @@ PawTrails is a product created by Attitude Technologies.
             </objects>
             <point key="canvasLocation" x="5138" y="-1061"/>
         </scene>
-        <!--SocketIO Test Table View Controller-->
-        <scene sceneID="0IX-4r-fK7">
-            <objects>
-                <tableViewController hidesBottomBarWhenPushed="YES" id="Ecm-Kd-cyv" customClass="SocketIOTestTableViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="350" sectionHeaderHeight="28" sectionFooterHeight="28" id="bmA-C0-HJW">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="3yI-th-FQd" customClass="testSocketCell" customModule="PawTrails" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="350"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3yI-th-FQd" id="ymx-mP-kGw">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="349.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="m6P-Hi-e7l">
-                                            <rect key="frame" x="16" y="37" width="343" height="302.5"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
-                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                        </textView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kNG-6w-gyt">
-                                            <rect key="frame" x="16" y="11" width="343" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="kNG-6w-gyt" firstAttribute="trailing" secondItem="ymx-mP-kGw" secondAttribute="trailingMargin" id="3iz-CB-8dB"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="m6P-Hi-e7l" secondAttribute="bottom" constant="-0.5" id="KB4-cD-dM0"/>
-                                        <constraint firstItem="kNG-6w-gyt" firstAttribute="trailing" secondItem="m6P-Hi-e7l" secondAttribute="trailing" id="QMT-rw-Z1S"/>
-                                        <constraint firstItem="kNG-6w-gyt" firstAttribute="top" secondItem="ymx-mP-kGw" secondAttribute="topMargin" id="Qi8-G0-xQ2"/>
-                                        <constraint firstItem="kNG-6w-gyt" firstAttribute="leading" secondItem="ymx-mP-kGw" secondAttribute="leadingMargin" id="XLF-9r-dwb"/>
-                                        <constraint firstItem="kNG-6w-gyt" firstAttribute="leading" secondItem="m6P-Hi-e7l" secondAttribute="leading" id="mjR-Ae-re9"/>
-                                        <constraint firstItem="m6P-Hi-e7l" firstAttribute="top" secondItem="kNG-6w-gyt" secondAttribute="bottom" constant="5" id="pZi-3h-b7I"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <connections>
-                                    <outlet property="textView" destination="m6P-Hi-e7l" id="NIY-L0-FGQ"/>
-                                    <outlet property="titleLabel" destination="kNG-6w-gyt" id="rcu-GU-fgW"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="Ecm-Kd-cyv" id="hAa-sg-soe"/>
-                            <outlet property="delegate" destination="Ecm-Kd-cyv" id="trG-AH-goB"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="XHw-jn-WHe" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2255.1999999999998" y="524.8875562218891"/>
-        </scene>
         <!--Pet Name-->
         <scene sceneID="Hyc-6O-SIk">
             <objects>
@@ -3658,8 +3601,8 @@ PawTrails is a product created by Attitude Technologies.
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="7TZ-Ow-5av" customClass="PTMapView" customModule="PawTrails" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="68" width="375" height="550"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="7TZ-Ow-5av" customClass="PTMapView" customModule="PawTrails" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="93O-q0-eKh">
                                 <rect key="frame" x="295" y="538" width="80" height="80"/>
@@ -3747,19 +3690,19 @@ PawTrails is a product created by Attitude Technologies.
                             <constraint firstItem="yde-DI-cy3" firstAttribute="bottom" secondItem="93O-q0-eKh" secondAttribute="bottom" id="0X6-j5-Foy"/>
                             <constraint firstItem="QMo-ic-gTj" firstAttribute="height" secondItem="0oC-dH-GlK" secondAttribute="height" id="1eA-g9-xfS"/>
                             <constraint firstItem="X26-Zz-hRg" firstAttribute="leading" secondItem="yde-DI-cy3" secondAttribute="leading" constant="16" id="9hu-jg-R32"/>
-                            <constraint firstItem="7TZ-Ow-5av" firstAttribute="top" secondItem="yde-DI-cy3" secondAttribute="top" id="BxB-1q-gMj"/>
                             <constraint firstItem="0oC-dH-GlK" firstAttribute="top" secondItem="QMo-ic-gTj" secondAttribute="bottom" constant="-12" id="JQh-JR-h6b"/>
                             <constraint firstItem="0oC-dH-GlK" firstAttribute="width" secondItem="93O-q0-eKh" secondAttribute="width" id="KOe-G6-l50"/>
                             <constraint firstItem="0oC-dH-GlK" firstAttribute="height" secondItem="93O-q0-eKh" secondAttribute="height" id="M0T-xR-PZm"/>
                             <constraint firstItem="QMo-ic-gTj" firstAttribute="width" secondItem="0oC-dH-GlK" secondAttribute="width" id="MOX-lK-ECy"/>
-                            <constraint firstItem="yde-DI-cy3" firstAttribute="bottom" secondItem="7TZ-Ow-5av" secondAttribute="bottom" id="O4L-CA-P3k"/>
                             <constraint firstItem="yde-DI-cy3" firstAttribute="bottom" secondItem="X26-Zz-hRg" secondAttribute="bottom" id="Rnn-IL-Ia3"/>
                             <constraint firstItem="93O-q0-eKh" firstAttribute="top" secondItem="0oC-dH-GlK" secondAttribute="bottom" constant="-8" id="Z3a-Vy-JgZ"/>
+                            <constraint firstItem="7TZ-Ow-5av" firstAttribute="bottom" secondItem="yde-DI-cy3" secondAttribute="bottom" id="e1o-AI-C4D"/>
                             <constraint firstItem="QMo-ic-gTj" firstAttribute="centerX" secondItem="0oC-dH-GlK" secondAttribute="centerX" id="gw7-G7-oJd"/>
-                            <constraint firstItem="yde-DI-cy3" firstAttribute="trailing" secondItem="7TZ-Ow-5av" secondAttribute="trailing" id="i36-os-NKd"/>
-                            <constraint firstItem="7TZ-Ow-5av" firstAttribute="leading" secondItem="yde-DI-cy3" secondAttribute="leading" id="kzf-CM-IRO"/>
                             <constraint firstItem="yde-DI-cy3" firstAttribute="trailing" secondItem="93O-q0-eKh" secondAttribute="trailing" id="o40-JA-HVz"/>
+                            <constraint firstItem="7TZ-Ow-5av" firstAttribute="trailing" secondItem="yde-DI-cy3" secondAttribute="trailing" id="oXN-PA-Rbe"/>
+                            <constraint firstItem="7TZ-Ow-5av" firstAttribute="top" secondItem="yde-DI-cy3" secondAttribute="top" id="pPh-ba-6Tf"/>
                             <constraint firstItem="0oC-dH-GlK" firstAttribute="leading" secondItem="X26-Zz-hRg" secondAttribute="trailing" constant="4" id="qpw-CY-TYL"/>
+                            <constraint firstItem="7TZ-Ow-5av" firstAttribute="leading" secondItem="yde-DI-cy3" secondAttribute="leading" id="vCN-ZY-Cv2"/>
                             <constraint firstItem="0oC-dH-GlK" firstAttribute="centerX" secondItem="93O-q0-eKh" secondAttribute="centerX" id="vCc-hK-vIz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="yde-DI-cy3"/>
@@ -4840,6 +4783,7 @@ PawTrails is a product created by Attitude Technologies.
                                             <constraint firstAttribute="trailing" secondItem="dyO-fe-kYW" secondAttribute="trailing" constant="2" id="6Iy-gX-f3g"/>
                                             <constraint firstItem="dyO-fe-kYW" firstAttribute="leading" secondItem="MnP-gQ-5I3" secondAttribute="leading" id="Bo5-vu-aln"/>
                                             <constraint firstItem="dyO-fe-kYW" firstAttribute="trailing" secondItem="MnP-gQ-5I3" secondAttribute="trailing" id="LVq-PQ-Jz0"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fBW-MV-ae0" secondAttribute="trailing" constant="20" symbolic="YES" id="MFT-4F-cYS"/>
                                             <constraint firstAttribute="height" constant="350" id="PGW-Mh-S70"/>
                                             <constraint firstItem="MnP-gQ-5I3" firstAttribute="leading" secondItem="4ad-lF-yuJ" secondAttribute="leading" id="PSO-2a-688"/>
                                             <constraint firstItem="ikW-Jc-yFD" firstAttribute="top" secondItem="fBW-MV-ae0" secondAttribute="top" id="Rzu-mo-CCI"/>
@@ -4892,6 +4836,7 @@ PawTrails is a product created by Attitude Technologies.
                                             <constraint firstItem="TNe-QM-NYR" firstAttribute="leading" secondItem="kbt-Au-6Wh" secondAttribute="leading" id="hsB-TN-oS4"/>
                                             <constraint firstAttribute="trailing" secondItem="kbt-Au-6Wh" secondAttribute="trailing" id="lIv-8B-yaa"/>
                                             <constraint firstItem="kbt-Au-6Wh" firstAttribute="leading" secondItem="u3c-aM-LW3" secondAttribute="leading" id="oS0-Or-3ku"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="kgE-De-Udj" secondAttribute="trailingMargin" id="yc0-LD-TOo"/>
                                             <constraint firstItem="TNe-QM-NYR" firstAttribute="top" secondItem="BtS-IC-hah" secondAttribute="bottom" constant="16" id="yru-xm-5xa"/>
                                             <constraint firstAttribute="height" constant="350" id="z4P-NU-b8r"/>
                                         </constraints>
