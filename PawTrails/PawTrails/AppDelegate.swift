@@ -14,6 +14,7 @@ import SocketIO
 import SwiftyJSON
 import IQKeyboardManagerSwift
 import Firebase
+import HockeySDK
 
 #if DEBUG
 let isDebug = true
@@ -35,14 +36,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        #if !DEBUG
+        BITHockeyManager.shared().configure(withIdentifier: PTConstants.keys.hockeyAppAppId)
+        BITHockeyManager.shared().start()
+        BITHockeyManager.shared().authenticator.authenticateInstallation() // This line is obsolete in the crash only builds
+        
+        Fabric.with([Crashlytics.self])
+        FirebaseApp.configure()
+        #endif
+            
         // Configure UI
         configureUIPreferences()
-        
-        FirebaseApp.configure()
-        
-        // Configure services
-        Fabric.with([Crashlytics.self])
-        
+
         // KeyboardManager
         IQKeyboardManager.sharedManager().enable = true
 
@@ -96,24 +101,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         SocketIOManager.instance.disconnect()
     }
-//
+
     func applicationDidBecomeActive(_ application: UIApplication) {
-        
-//        if DataManager.instance.isAuthenticated() {
-//            getRunningandPausedTrips()
-//            SocketIOManager.instance.connect()
-//            DataManager.instance.loadPets { (error, pets) in
-//                if error == nil, let pets = pets {
-////                    SocketIOManager.instance.startGPSUpdates(for: pets.map({ $0.id}))
-//                    NotificationManager.instance.postPetListUpdates(with: pets)
-//                }
-//            }
-//
-//        }
-//
-//        NotificationManager.instance.getEventsUpdates { (event) in
-//            EventManager.instance.handle(event: event, for: self.visibleViewController)
-//        }
+        SocketIOManager.instance.connect()
     }
     
     var visibleViewController: UIViewController? {
