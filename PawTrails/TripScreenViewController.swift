@@ -343,8 +343,6 @@ class TripScreenViewController: UIViewController {
     
     @IBAction func pauseTripBtnPressed(_ sender: Any) {
         
-        let theButton = sender as! UIButton
-        theButton.isEnabled = false
         
         let isPaused = self.adventurePaused!
         var title: String
