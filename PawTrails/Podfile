@@ -24,6 +24,7 @@ target 'PawTrails' do
     pod 'SDWebImage'
     pod 'SCLAlertView'
     pod 'Firebase/Core'
+    pod 'BarcodeScanner', '~> 2.1.2'
   # Pods for PawTrails
 
   target 'PawTrailsTests' do

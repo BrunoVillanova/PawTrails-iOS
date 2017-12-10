@@ -732,7 +732,7 @@
                     <navigationItem key="navigationItem" title="My Pets" id="JtI-fJ-fdh">
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="add" id="Lyw-I8-wQu">
                             <connections>
-                                <segue destination="9OU-Qn-OVQ" kind="presentation" identifier="AddPet" id="ob8-Ot-1y8"/>
+                                <action selector="addDeviceButtonTapped:" destination="mn3-hz-uuF" id="Asu-KJ-YMw"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -8035,7 +8035,7 @@ Last Edited on 2017-12-04
         <image name="qrcode" width="64" height="64"/>
         <image name="settings-1x-png" width="22" height="22"/>
         <image name="startAdventure" width="80" height="66"/>
-        <image name="sunbeam-logo-1x-png-nobg" width="16" height="16"/>
+        <image name="sunbeam-logo-1x-png-nobg" width="110" height="100"/>
         <image name="userProfileMask-1x-png" width="140" height="140"/>
         <image name="userprofilemask-1x-png_360" width="140" height="141"/>
         <image name="youtube" width="32" height="32"/>
@@ -8043,7 +8043,6 @@ Last Edited on 2017-12-04
     <inferredMetricsTieBreakers>
         <segue reference="yp5-bT-5uy"/>
         <segue reference="G7h-iD-Glq"/>
-        <segue reference="Mpc-Ja-22V"/>
         <segue reference="Avi-do-lZw"/>
     </inferredMetricsTieBreakers>
 </document>

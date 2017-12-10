@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import SDWebImage
 import RxCocoa
+import BarcodeScanner
 
 class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, PetsView {
 
@@ -28,6 +29,11 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        initialize()
+    }
+    
+    fileprivate func initialize() {
+        
         noPetsFound.isHidden = true
         tableView.tableFooterView = UIView()
         
@@ -42,15 +48,24 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.delegate = self
         let notificationIdentifier: String = "petAdded"
         NotificationCenter.default.addObserver(self, selector: #selector(reloadPetsAPI), name: NSNotification.Name(rawValue: notificationIdentifier), object: nil)
-
-        
         
         
         // Todo: make tableview reactive
-//        DataManager.instance.pets()
-//            .bind(to: tableView.rx.items(cellIdentifier: "cell", cellType: petListCell.self)) { (_, element, cell) in
-//           cell.configure(element)
-//        }.disposed(by: disposeBag)
+        //        DataManager.instance.pets()
+        //            .bind(to: tableView.rx.items(cellIdentifier: "cell", cellType: petListCell.self)) { (_, element, cell) in
+        //           cell.configure(element)
+        //        }.disposed(by: disposeBag)
+        
+        // Strings
+        BarcodeScanner.Title.text = NSLocalizedString("Scan QR Code", comment: "")
+        BarcodeScanner.CloseButton.text = NSLocalizedString("Close", comment: "")
+        BarcodeScanner.SettingsButton.text = NSLocalizedString("Settings", comment: "")
+        BarcodeScanner.Info.text = NSLocalizedString(
+            "Place the QR code within the window to scan. The search will start automatically.", comment: "")
+        BarcodeScanner.Info.loadingText = NSLocalizedString("Loading...", comment: "")
+        BarcodeScanner.Info.notFoundText = NSLocalizedString("No product found.", comment: "")
+        BarcodeScanner.Info.settingsText = NSLocalizedString(
+            "To scan the QR Code you have to allow camera access under iOS settings.", comment: "")
     }
     
    
@@ -68,6 +83,14 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         button.heightAnchor.constraint(equalToConstant: 80).isActive = true
     }
     
+    @IBAction func addDeviceButtonTapped(_ sender: UIBarButtonItem) {
+        let controller = BarcodeScannerController()
+        controller.codeDelegate = self
+        controller.errorDelegate = self
+        controller.dismissalDelegate = self
+        
+        present(controller, animated: true, completion: nil)
+    }
     
     func buttonAction(sender: UIButton!) {
         print("Button tapped")
@@ -216,3 +239,30 @@ class petListCell: UITableViewCell {
         }).disposed(by: disposeBag)
     }
 }
+ 
+extension PetsViewController: BarcodeScannerCodeDelegate {
+
+    func barcodeScanner(_ controller: BarcodeScannerController, didCaptureCode code: String, type: String) {
+
+        controller.dismiss(animated: true, completion: { [weak self] _ in
+            if let vc = self?.storyboard?.instantiateViewController(withIdentifier: "AddEditPetDetailsTableViewController") as? AddEditPetDetailsTableViewController {
+                vc.deviceCode = code
+                self?.navigationController?.pushViewController(vc, animated: true)
+            }
+        })
+    }
+}
+
+ extension PetsViewController: BarcodeScannerErrorDelegate {
+    
+    func barcodeScanner(_ controller: BarcodeScannerController, didReceiveError error: Error) {
+        print(error)
+    }
+ }
+ 
+ extension PetsViewController: BarcodeScannerDismissalDelegate {
+    
+    func barcodeScannerDidDismiss(_ controller: BarcodeScannerController) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+ }
