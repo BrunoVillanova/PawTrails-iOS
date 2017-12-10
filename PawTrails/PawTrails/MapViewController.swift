@@ -84,6 +84,12 @@ class MapViewController: UIViewController {
     }
     
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let selectPetsViewController = segue.destination as? SelectPetsVC {
+            selectPetsViewController.action = selectPetsAction.startAdventure
+        }
+    }
+    
     @IBAction func firstButtonPressed(_ sender: Any) {
         if self.activeTrips.isEmpty {
             if let nc = self.storyboard?.instantiateViewController(withIdentifier: "selectPetsNavigation") as? UINavigationController,
@@ -96,13 +102,6 @@ class MapViewController: UIViewController {
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let selectPetsViewController = segue.destination as? SelectPetsVC {
-            selectPetsViewController.action = selectPetsAction.startAdventure
-        }
-    }
-    
-    
     @IBAction func secButtonPressed(_ sender: Any) {
         if (!self.petsCollectionView.isHidden) {
             self.petsCollectionView.slideInAffect(direction: kCATransitionFromLeft)
@@ -114,7 +113,7 @@ class MapViewController: UIViewController {
     }
     
     @IBAction func thirdButtonPressed(_ sender: Any) {
-        self.mapView.setVisibleMapFor([self.mapView.userLocation.coordinate])
+        mapView.showAnnotations([self.mapView.userLocation], animated: true)
     }
     
     

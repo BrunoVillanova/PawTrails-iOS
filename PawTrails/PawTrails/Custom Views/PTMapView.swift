@@ -20,6 +20,7 @@ class PTMapView: MKMapView {
     var shouldFocusOnPets = true
     var activeTripsPetIDs = [Int]()
     let locationManager  = CLLocationManager()
+    var alreadyFocusedOnUserLocation = false
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -258,6 +259,13 @@ extension PTMapView: MKMapViewDelegate {
             return polylineRenderer
         }
         return MKPolylineRenderer()
+    }
+    
+    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+        if !(tripMode && alreadyFocusedOnUserLocation) {
+            mapView.showAnnotations([userLocation], animated: true)
+            alreadyFocusedOnUserLocation = true
+        }
     }
 }
 
