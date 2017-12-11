@@ -15,8 +15,8 @@ class TabPageViewController: ButtonBarPagerTabStripViewController {
     var date: Date?
     
     
-    
     let color = UIColor(red: 206.0/255.0, green: 19.0/255.0, blue: 54.0/255.0, alpha: 1.0)
+    
     override func viewDidLoad() {
         settings.style.buttonBarBackgroundColor = .white
         self.automaticallyAdjustsScrollViewInsets = false
@@ -49,8 +49,8 @@ class TabPageViewController: ButtonBarPagerTabStripViewController {
         
 
         navigationItem.title = pet.name
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        navigationController?.navigationBar.shadowImage = UIImage()
+//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+//        navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     override func viewWillAppear(_ animated: Bool) {

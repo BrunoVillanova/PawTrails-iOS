@@ -24,6 +24,9 @@ PODS:
   - Firebase/Core (4.7.0):
     - FirebaseAnalytics (= 4.0.5)
     - FirebaseCore (= 4.0.12)
+  - Firebase/Messaging (4.7.0):
+    - Firebase/Core
+    - FirebaseMessaging (= 2.0.7)
   - FirebaseAnalytics (4.0.5):
     - FirebaseCore (~> 4.0)
     - FirebaseInstanceID (~> 2.0)
@@ -32,18 +35,66 @@ PODS:
   - FirebaseCore (4.0.12):
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
   - FirebaseInstanceID (2.0.7)
+  - FirebaseMessaging (2.0.7):
+    - FirebaseAnalytics (~> 4.0)
+    - FirebaseCore (~> 4.0)
+    - FirebaseInstanceID (~> 2.0)
+    - GoogleToolboxForMac/Logger (~> 2.1)
+    - Protobuf (~> 3.1)
   - GoogleToolboxForMac/Defines (2.1.3)
+  - GoogleToolboxForMac/Logger (2.1.3):
+    - GoogleToolboxForMac/Defines (= 2.1.3)
   - GoogleToolboxForMac/NSData+zlib (2.1.3):
     - GoogleToolboxForMac/Defines (= 2.1.3)
   - HockeySDK (5.0.0):
     - HockeySDK/DefaultLib (= 5.0.0)
   - HockeySDK/DefaultLib (5.0.0)
   - IQKeyboardManagerSwift (5.0.0)
+  - MaterialComponents/Buttons (42.0.0):
+    - MaterialComponents/Buttons/ColorThemer (= 42.0.0)
+    - MaterialComponents/Buttons/Component (= 42.0.0)
+    - MaterialComponents/Buttons/TitleColorAccessibilityMutator (= 42.0.0)
+    - MaterialComponents/private/Math
+  - MaterialComponents/Buttons/ColorThemer (42.0.0):
+    - MaterialComponents/Buttons/Component
+    - MaterialComponents/private/Math
+    - MaterialComponents/Themes
+  - MaterialComponents/Buttons/Component (42.0.0):
+    - MaterialComponents/Ink
+    - MaterialComponents/private/Math
+    - MaterialComponents/ShadowElevations
+    - MaterialComponents/ShadowLayer
+    - MaterialComponents/Typography
+    - MDFInternationalization
+    - MDFTextAccessibility
+  - MaterialComponents/Buttons/TitleColorAccessibilityMutator (42.0.0):
+    - MaterialComponents/Buttons/Component
+    - MaterialComponents/private/Math
+    - MDFTextAccessibility
+  - MaterialComponents/Ink (42.0.0):
+    - MaterialComponents/Ink/ColorThemer (= 42.0.0)
+    - MaterialComponents/Ink/Component (= 42.0.0)
+  - MaterialComponents/Ink/ColorThemer (42.0.0):
+    - MaterialComponents/Ink/Component
+    - MaterialComponents/Themes
+  - MaterialComponents/Ink/Component (42.0.0):
+    - MaterialComponents/private/Math
+  - MaterialComponents/private/Application (42.0.0)
+  - MaterialComponents/private/Math (42.0.0)
+  - MaterialComponents/ShadowElevations (42.0.0)
+  - MaterialComponents/ShadowLayer (42.0.0):
+    - MaterialComponents/ShadowElevations
+  - MaterialComponents/Themes (42.0.0)
+  - MaterialComponents/Typography (42.0.0):
+    - MaterialComponents/private/Application
+  - MDFInternationalization (1.0.4)
+  - MDFTextAccessibility (1.2.0)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - Protobuf (3.5.0)
   - RxCocoa (4.0.0):
     - RxSwift (~> 4.0)
   - RxSwift (4.0.0)
@@ -67,8 +118,10 @@ DEPENDENCIES:
   - FacebookCore
   - FacebookLogin
   - Firebase/Core
+  - Firebase/Messaging
   - HockeySDK
   - IQKeyboardManagerSwift (= 5.0.0)
+  - MaterialComponents/Buttons
   - RxCocoa
   - RxSwift
   - SCLAlertView
@@ -93,10 +146,15 @@ SPEC CHECKSUMS:
   FirebaseAnalytics: 5b02a63ead2c3f0259cfc7f15e053e440587ecf8
   FirebaseCore: 6cf108b63997bc08c04a1ffa55a3ac0d71a59ffc
   FirebaseInstanceID: 148c25c986c8699e67304b114e365713dce467f2
+  FirebaseMessaging: 1a11d1c0a9ed9b3f75a0685bb0ae5932e1062f5f
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
   HockeySDK: 82bf8dcbe1af3c87c24dc98924fcf2e2ba5be8c4
   IQKeyboardManagerSwift: 3f340202ebe1a7076279b9b9b3c817243ddb3aab
+  MaterialComponents: cb196890171008087c38fe21a1528e745c9807c2
+  MDFInternationalization: e355b0cebecf53d60233bd267084e49366c82513
+  MDFTextAccessibility: 94098925e0853551c5a311ce7c1ecefbe297cdb6
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  Protobuf: 8a9838fba8dae3389230e1b7f8c104aa32389c03
   RxCocoa: d62846ca96495d862fa4c59ea7d87e5031d7340e
   RxSwift: fd680d75283beb5e2559486f3c0ff852f0d35334
   SCLAlertView: 8a14ffc40590c619e183eed2298b854385f30be1
@@ -109,6 +167,6 @@ SPEC CHECKSUMS:
   XLPagerTabStrip: d1ab378af0923320ec0b5eab11d7b2f803d31261
   YNDropDownMenu: 967ebe0c633ce8f40e8667574525aa230ba24560
 
-PODFILE CHECKSUM: 1379019383c537ee8402a4341fbb12f01b97874e
+PODFILE CHECKSUM: 07f04fdbe63cfd23ba9977ee7bdb61092ad111d7
 
 COCOAPODS: 1.3.1

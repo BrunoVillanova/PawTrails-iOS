@@ -17,7 +17,7 @@ class PTMapView: MKMapView {
     var myOverlays = [MKLocationId:MKOverlay]()
     var tripMode = false
     var firstTimeLoadingData = true
-    var shouldFocusOnPets = true
+    var shouldFocusOnPets = false
     var activeTripsPetIDs = [Int]()
     let locationManager  = CLLocationManager()
     var alreadyFocusedOnUserLocation = false

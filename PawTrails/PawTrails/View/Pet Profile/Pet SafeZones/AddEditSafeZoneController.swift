@@ -50,6 +50,7 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.title = "Add SafeZone"
         
         presenter.attachView(self, safezone: safezone)
         map.showsUserLocation = true
@@ -73,7 +74,8 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
         ZBdropDownViews = Bundle.main.loadNibNamed("SettingsView", owner: nil, options: nil) as? [UIView]
         if let vieww = ZBdropDownViews?.first as? SettingsViews {
             if let safezone = safezone {
-                navigationController?.title = "SafeZone"
+                
+                self.navigationItem.title = "Edit SafeZone"
                 
                 vieww.nameTextField.text = safezone.name
                 shape = safezone.shape
@@ -141,17 +143,14 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
                 
                 
                 if let safezone = safezone {
-                    navigationController?.title = "SafeZone"
+                    self.navigationItem.title = "Edit SafeZone"
                     settingsView.nameTextField.text = safezone.name
                     shape = safezone.shape
                     
                     if !isOwner {
                         view.isHidden = true
-                    } else {
-                        navigationItem.title = "SafeZone"
+                        self.navigationItem.title = "SafeZone"
                     }
-                    
-                    
                 }
                 
             }

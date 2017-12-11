@@ -83,7 +83,8 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         button.heightAnchor.constraint(equalToConstant: 80).isActive = true
     }
     
-    @IBAction func addDeviceButtonTapped(_ sender: UIBarButtonItem) {
+
+    @IBAction func addDeviceButtonTapped(_ sender: Any) {
         let controller = BarcodeScannerController()
         controller.codeDelegate = self
         controller.errorDelegate = self

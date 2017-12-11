@@ -13,12 +13,13 @@ import SDWebImage
 class PetInfromationViewController: UIViewController, IndicatorInfoProvider, PetView {
     var pet: Pet!
     fileprivate let presenter = PetPresenter()
-
+    
     @IBOutlet weak var usersCollectionView: UICollectionView!
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //        tableView.isScrollEnabled = false
         tableView.dataSource = self
         tableView.allowsSelection = false
         tableView.delegate = self
@@ -31,19 +32,19 @@ class PetInfromationViewController: UIViewController, IndicatorInfoProvider, Pet
         
         let leftItemBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(leftBarButtonTapped))
         self.navigationItem.rightBarButtonItem = leftItemBarButton
-
+        
         usersCollectionView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap)))
-
+        
         
         usersCollectionView.delegate = self
         usersCollectionView.dataSource = self
-
+        
         presenter.attachView(self, pet:pet)
         if let pet = pet {
             reloadPetInfo()
             reloadUsers()
             load(pet)
-
+            
         }
         
         let nib = UINib(nibName: "SharedUsersTableViewCell", bundle: nil)
@@ -65,7 +66,7 @@ class PetInfromationViewController: UIViewController, IndicatorInfoProvider, Pet
     
     func tap(sender: UITapGestureRecognizer){
         self.present(presenter.users)
-
+        
     }
     
     
@@ -77,13 +78,13 @@ class PetInfromationViewController: UIViewController, IndicatorInfoProvider, Pet
         }else{
             presenter.loadPetUsers(for: pet.id)
             self.usersCollectionView.reloadData()
-
+            
         }
     }
     func errorMessage(_ error: ErrorMsg) {
         alert(title: error.title, msg: error.msg)
     }
-
+    
     func load(_ pet: Pet) {
         self.pet = pet
         self.tableView.reloadData()
@@ -103,7 +104,7 @@ class PetInfromationViewController: UIViewController, IndicatorInfoProvider, Pet
     
     func petNotFound() {
         alert(title: "", msg: "couldn't load pet")
-
+        
     }
     
     func petRemoved() {
@@ -118,8 +119,8 @@ class PetInfromationViewController: UIViewController, IndicatorInfoProvider, Pet
     func removed() {
         self.reloadUsers()
     }
-
-
+    
+    
 }
 
 extension PetInfromationViewController: UITableViewDelegate, UITableViewDataSource{
@@ -129,61 +130,49 @@ extension PetInfromationViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return 1
-        
+        return 1
     }
-    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
-
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
-
+        
     }
-    
 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ProfileInfoCell
-
-//        if indexPath.section == 0 {
-//            cell.isUserInteractionEnabled = false
-
-            if let pet = self.pet{
-                cell.petName.text = pet.name
-                cell.breedLbl.text = pet.breedsString
-                cell.genderLbl.text = pet.gender?.name
-                cell.weightLbl.text = pet.weightString
-                cell.typeLbl.text = pet.typeString
-                cell.birthDayLbl.text = pet.birthday?.toStringShow
+        
+        if let pet = self.pet{
+            cell.petName.text = pet.name
+            cell.breedLbl.text = pet.breedsString
+            cell.genderLbl.text = pet.gender?.name
+            cell.weightLbl.text = pet.weightString
+            cell.typeLbl.text = pet.typeString
+            cell.birthDayLbl.text = pet.birthday?.toStringShow
+            
+            if pet.size == 0 {
+                cell.sizeLbl.text = "Small"
+            } else if pet.size == 1 {
+                cell.sizeLbl.text = "Medium"
                 
-                if pet.size == 0 {
-                    cell.sizeLbl.text = "Small"
-                } else if pet.size == 1 {
-                    cell.sizeLbl.text = "Medium"
-                    
-                } else if pet.size == 2 {
-                    cell.sizeLbl.text = "Large"
-                }
-                
-                cell.bcsLbl.text = "\(pet.bcScore)"
-
-                if let imageUrl = pet.imageURL {
-                    cell.profileImage.sd_setImage(with: URL(string: imageUrl), placeholderImage: #imageLiteral(resourceName: "PetPlaceholderImage"), options: [.continueInBackground])
-                } else {
-                    cell.profileImage.image = nil
-                }
-                
+            } else if pet.size == 2 {
+                cell.sizeLbl.text = "Large"
             }
-            return cell
-
-
+            
+            if let imageUrl = pet.imageURL {
+                cell.profileImage.sd_setImage(with: URL(string: imageUrl), placeholderImage: #imageLiteral(resourceName: "PetPlaceholderImage"), options: [.continueInBackground])
+            } else {
+                cell.profileImage.image = nil
+            }
+            
+        }
+        
+        return cell
     }
-    
-    
     
     func present(_ users: [PetUser]) {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "UsersViewController") as? UsersViewController {
@@ -197,16 +186,27 @@ extension PetInfromationViewController: UITableViewDelegate, UITableViewDataSour
 extension PetInfromationViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return presenter.users.count
+        
+        if presenter.users.count > 0 {
+            return presenter.users.count
+        }
+        
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = usersCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! UsersCell
-        let user = presenter.users[indexPath.row]
         cell.profileImage.border(color: UIColor.primary, width: 0.7)
+        
+        if presenter.users.count > indexPath.row {
+            let user = presenter.users[indexPath.row]
             if let url = user.imageURL {
                 cell.profileImage.sd_setImage(with: URL(string: url), placeholderImage: UIImage(named: "PetPlaceholderImage"), options: [.progressiveDownload], completed: nil)
+            }
+        } else {
+            cell.profileImage.image = #imageLiteral(resourceName: "AddCircularBigIcon")
         }
+        
         return cell
     }
     
@@ -222,9 +222,6 @@ extension PetInfromationViewController: UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.present(presenter.users)
     }
-    
-    
-    
 }
 
 class ProfileInfoCell: UITableViewCell {
@@ -236,7 +233,6 @@ class ProfileInfoCell: UITableViewCell {
     @IBOutlet weak var weightLbl: UILabel!
     @IBOutlet weak var petName: UILabel!
     @IBOutlet weak var sizeLbl: UILabel!
-    @IBOutlet weak var bcsLbl: UILabel!
     
 }
 
@@ -245,7 +241,7 @@ class UsersCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         self.profileImage.circle()
-
+        
     }
     
     override func prepareForReuse() {

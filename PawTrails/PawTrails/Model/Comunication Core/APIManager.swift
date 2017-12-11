@@ -114,17 +114,17 @@ class APIManager {
     
     static let instance = APIManager()
     
-    
-    //    #if DEBUG
-    //    fileprivate static let mainURL = "https://eu.pawtrails.pet/api"
-    //    fileprivate static let mainURLTest = "https://eu.pawtrails.pet/test"
-    //    #else
-    //    fileprivate static let mainURL = "https://eu.pawtrails.com/api"
-    //    fileprivate static let mainURLTest = "https://eu.pawtrails.com/test"
-    //    #endif
-    
+    #if DEBUG
+    fileprivate static let mainURL = "https://eu.pawtrails.pet/api"
+    fileprivate static let mainURLTest = "https://eu.pawtrails.pet/test"
+    #else
     fileprivate static let mainURL = "https://eu.pawtrails.com/api"
     fileprivate static let mainURLTest = "https://eu.pawtrails.com/test"
+    #endif
+    
+//    fileprivate static let mainURL = "https://eu.pawtrails.com/api"
+//    fileprivate static let mainURLTest = "https://eu.pawtrails.com/test"
+    
     fileprivate let boundary = "%%%PawTrails%%%"
     
     /// Creates a `URLRequest` given the specific `APICall` and adds the information contained in `data`.
@@ -237,7 +237,8 @@ class APIManager {
                 let jsonObject = parseResponse(data)
 
                 let code = jsonObject.dictionaryObject?.tryCastInteger(for: "errors") ?? -1
-                return APIManagerError(call: call, kind: .clientError, httpCode: httpCode, error: nil, errorCode: ErrorCode(rawValue: code))
+                return APIManagerError(call: call, kind: .clientError, httpCode: httpCode, error: nil, errorCode: ErrorCode(code: code))
+
             }else{
                 return APIManagerError(call: call, kind: .noClientError, httpCode: httpCode, error: nil, errorCode: nil)
             }

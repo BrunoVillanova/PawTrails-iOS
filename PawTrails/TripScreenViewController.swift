@@ -329,7 +329,7 @@ class TripScreenViewController: UIViewController {
     //MARK: -
     //MARK: IBActions
     @IBAction func focousOnUserBtnPressed(_ sender: Any) {
-        self.mapView.setVisibleMapFor([self.mapView.userLocation.coordinate])
+        mapView.showAnnotations([self.mapView.userLocation], animated: true)
     }
     
     
@@ -342,7 +342,6 @@ class TripScreenViewController: UIViewController {
     }
     
     @IBAction func pauseTripBtnPressed(_ sender: Any) {
-        
         
         let isPaused = self.adventurePaused!
         var title: String
@@ -396,8 +395,6 @@ class TripScreenViewController: UIViewController {
             colorTextButton: 0xFFFFFF
             //            circleIconImage: alertViewIcon
         )
-
-
     }
     
     @IBAction func StopTripBtnPressed(_ sender: Any) {
