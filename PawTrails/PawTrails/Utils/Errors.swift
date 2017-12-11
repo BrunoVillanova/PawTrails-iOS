@@ -96,12 +96,148 @@ enum ErrorCode: Int {
     case TheTripIsPaused = 72
     case TheIdInTheInputArrayMustBeAnInteger = 76
     
-    init(code:Int) {
-        self = ErrorCode(rawValue: code) ?? ErrorCode.Unknown
-    }
-    
+
+//    init(code:Int) {
+//        self = ErrorCode(rawValue: code) ?? ErrorCode.Unknown
+//    }
+//
     var description: String {
-        return "error \(self.rawValue):\(self)"
+        switch self {
+        case .Unknown:
+            return "Unknown"
+        case .NotFound:
+            return "Not Found"
+
+        case .NoConection:
+            return "Not Internet connection"
+
+        case .WrongRequest:
+            return "Unknown request"
+
+        case .MissingToken:
+            return ""
+
+        case .Unauthorized:
+            return ""
+        case .MissingEmail:
+            return "This account doesn't exsist."
+        case .EmailFormat:
+            return "Email format is wrong."
+        case .MissingPassword:
+            return "Please enter a password"
+        case .WeakPassword:
+            return "Weak Passsword (Needs to contain 6 characters, one upper case, one lower case and one number)"
+        case .UserAlreadyExists:
+            return "Another account is using this email. "
+        case .UserDisabled:
+            return "Account Disabled, Please Contact Us."
+
+        case .DateOfBirth:
+            return "Error, please try again later"
+
+        case .GenderFormat:
+            return "Error, please try again later"
+        case .PhoneFormat:
+            return "Error, please try again later"
+        case .UserNotFound:
+            return "Error, please try again later"
+        case .WrongPassword:
+            return "Incorrect password. "
+        case .WrongCredentials:
+            return "Incorrect email or password"
+        case .TooManyRequests:
+            return "You've tried to reset too many times, please try again in 5 minutes."
+
+        case .WrongOTP:
+            return "You've tried to reset too many times, please try again in 5 minutes."
+        case .PasswordUnmatch:
+            return "Passwords don't match, please try again"
+
+        case .OTPnotFound:
+            return "This link has expired."
+
+        case .OTPexpired:
+            return "This link has expired."
+
+        case .AccountNotVerified:
+            return "Your account is not verified, please check your email to verify your account"
+
+        case .SocialNetworkError:
+            return "Error connecting to your social media account."
+        case .NoGpsFromPet:
+            return "No Gps updates from your pet"
+
+        case .PathFormat:
+            return "Error, please try again later"
+
+        case .MissingUserId:
+            return "Error, please try again later"
+
+        case .MissingPetId:
+            return "Error, please try again later"
+
+        case .MissingImageFile:
+            return "Error, please try again later"
+
+        case .IncorrectImageMime:
+            return "Error, please try again later"
+
+        case .ImageFileSize:
+            return "The image is too big , the picture size limit is 2MB."
+        case .UploadFailed:
+            return "Error, please try again later"
+
+        case .DeviceIdNotFound:
+            return "This device ID is not available."
+        case .WrongBreed:
+            return "Error, please try again later"
+
+        case .MissingPetName:
+            return "Pet's name is mandatory."
+        case .AlreadyShared:
+            return "The pet is already shared with this user"
+
+        case .WeightOutOfRange:
+            return "This weight size is unavailable."
+        case .DeviceNotAvailable:
+            return "This device is already used by different user"
+
+        case .NotEnoughRights:
+            return "You have no permissions to proceed with your request"
+
+        case .MissingRelationUserPet:
+            return "Error, please try again later"
+
+        case .MissingSafeZoneName:
+            return "Safe Zone name is mandatory."
+        case .WrongShapeFormat:
+            return "Error, please try again later"
+
+        case .CoordinatesOutOfBounds:
+            return "Error, please try again later"
+
+        case .SafeZoneNotFound:
+            return "Error, please try again later"
+
+        case .WrongRadius:
+            return "Safe Zone radius is too small."
+        case .SharedConnectionAlreadyExists:
+            return "This user already has access to this pet. "
+
+        case .ThereIsApetWithAnActiveTrip:
+            return "The pet/pets already is in a trip with anoter user"
+
+        case .TheTripIsPaused:
+            return "Error, please try again later"
+
+        case .TheIdInTheInputArrayMustBeAnInteger:
+            return "Error, please try again later"
+
+        }
+        
+        
+        
+//        return "error \(self.rawValue):\(self)"
     }
 
 }
@@ -152,10 +288,10 @@ struct DataManagerError: Error {
     var localizedDescription: String {
         var out = ""
         if let call = APIError?.call { out = out.appending("\(call) ")}
-        if let errorCode = APIError?.errorCode { out = out.appending("APIError: \(errorCode)")}
-        if let responseError = responseError { out = out.appending(", ResponseError: \(responseError)") }
-        if let DBError = DBError { out = out.appending(", DBError: \(DBError.localizedDescription)") }
-        if let error = error { out = out.appending(", DBError: \(error.localizedDescription)") }
+        if let errorCode = APIError?.errorCode?.description { out = out.appending("\(errorCode)")}
+        if let responseError = responseError { out = out.appending("\(responseError)") }
+        if let DBError = DBError { out = out.appending("\(DBError.localizedDescription)") }
+        if let error = error { out = out.appending("\(error.localizedDescription)") }
         return out
     }
     

@@ -140,7 +140,13 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
         
         if let date = self.date, let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: date), let pet = self.pet {
             
-            let startDate = Int(date.timeIntervalSince1970)
+            let gregorian = Calendar(identifier: .gregorian)
+            var components = gregorian.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
+            components.hour = 0
+            components.minute = 0
+            components.second = 0
+            guard let newDate = gregorian.date(from: components) else {return}
+            let startDate = Int(newDate.timeIntervalSince1970)
             let tomorrowDate = Int(tomorrow.timeIntervalSince1970)
             
             // API Request for Today
@@ -186,12 +192,11 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
                     self.lively = lively
                     self.chiling = chilling
                     self.wandering = wandering
+                
                     
-                    if totalChiling > 0, totalWandering > 0 , totalLively > 0 {
                         self.pieChartUpdate(firstvalue: totalChiling, secondValue: totalWandering, thirdValue: totalLively)
-                        self.combinedChartView(myxaxis: self.periodsOfDay, lively: chilling, chiling: wandering, wandering: lively, chart: self.combinedCharts)
-                    } else {
-                    }
+                        self.combinedChartView(myxaxis: self.periodsOfDay, lively: lively, chiling: chilling, wandering: wandering, chart: self.combinedCharts)
+                   
                 } else {
 
                 }
@@ -201,22 +206,23 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
             guard let endOfTheWeek = date.endOfWeek else {return}
             guard let endOfTheWeekWithAddedDay = Calendar.current.date(byAdding: .day, value: 1, to: endOfTheWeek) else {return}
             
-            
-        
-            let startOfWeekInTimeInterval = Int(startOfWeekDay.timeIntervalSince1970)
+            let gregorianss = Calendar(identifier: .gregorian)
+            var componentsss = gregorianss.dateComponents([.year, .month, .day, .hour, .minute, .second], from: startOfWeekDay)
+            componentsss.hour = 0
+            componentsss.minute = 0
+            componentsss.second = 0
+            guard let newDateee = gregorian.date(from: components) else {return}
+
+            let startOfWeekInTimeInterval = Int(newDateee.timeIntervalSince1970)
             let endOfWeekInTimeInterval = Int(endOfTheWeekWithAddedDay.timeIntervalSince1970)
 
             
             
             APIRepository.instance.getActivityMonitorData(pet.id, startDate: startOfWeekInTimeInterval, endDate: endOfWeekInTimeInterval, groupedBy: 1) { (error, data) in
                 if error == nil, let data = data, let activities = data.activities {
-                    
-                    
                     var chilling = [Int]()
                     var wandering = [Int]()
                     var lively = [Int]()
-                    
-                    
                     for activity in activities {
                         let chiling = activity.chilling
                         let wanderingg = activity.wandering
@@ -225,16 +231,10 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
                         wandering.append(wanderingg)
                         lively.append(livelyy)
                     }
-                    
                     self.weeklyLively = lively
                     self.weeklywandering = wandering
                     self.weeklyLively = lively
-                    
-                      self.combinedChartView(myxaxis: self.weekDays, lively: chilling, chiling: wandering, wandering: lively, chart: self.weekelyGoalBarChart)
-
-                            
-        
-                    
+                      self.combinedChartView(myxaxis: self.weekDays, lively: lively, chiling: chilling, wandering: wandering, chart: self.weekelyGoalBarChart)
                 } else if let error = error {
                     print(error.localizedDescription)
                 }
@@ -309,7 +309,6 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
         let xaxis = barChartt.xAxis
         xaxis.valueFormatter = axisFormatDelegate
         xaxis.labelPosition = .bottom
-//        xaxis.centerAxisLabelsEnabled = true
         xaxis.granularityEnabled = true
         xaxis.granularity = 1.0
         
@@ -501,7 +500,6 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
         let data = PieChartData(dataSet: dataSet)
         data.setValueFont(UIFont.systemFont(ofSize: 13))
         data.setValueFormatter(formatter)
-
         pieChart.data = data
         pieChart.chartDescription?.text = ""
         //This must stay at end of function

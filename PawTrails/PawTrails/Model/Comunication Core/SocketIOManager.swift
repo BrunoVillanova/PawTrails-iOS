@@ -28,6 +28,13 @@ enum TripAction: Int {
     }
 }
 
+
+
+
+
+
+
+
 fileprivate enum channel {
     
     case connect, diconnect, auth, trips, pets, gpsUpdates

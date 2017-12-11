@@ -56,7 +56,9 @@ class PetUserTableViewController: UITableViewController, PetUserView {
             
             if currentUserId == petOwnerId && petOwnerId == appUserId {
                 // Remove Pet
-                actionLabel = nil
+                if let petname = pet.name {
+                    actionLabel.text = "Remove \(petname)"
+                }
             }else if appUserId == petOwnerId && appUserId != currentUserId {
                 // Owner Remove that user
                 actionLabel.text = "Remove \(petUser.name ?? "this user") from '\(name)'"

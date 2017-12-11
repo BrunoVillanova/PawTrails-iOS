@@ -82,9 +82,7 @@ class APIRepository {
     ///   - token: social media token provided
     ///   - callback: returns the **authentication information** or **error**
     func login(socialMedia: SocialMedia, _ token: String, callback: @escaping APIRepAuthCallback){
-        
         let data: [String : Any] = ["loginToken" : token, "itsIOS": socialMedia == .google ? 1 : ""]
-        
         APIManager.instance.perform(call: APICallType(socialMedia), with: data) { (error, json) in
             if let error = error {
                 callback(error, nil)

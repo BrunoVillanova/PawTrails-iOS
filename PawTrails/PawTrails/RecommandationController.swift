@@ -15,43 +15,35 @@ class RecommandationController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var addBtn: UIBarButtonItem!
-    
+    @IBOutlet weak var videoTurorialBtn: UIButton!
+    @IBOutlet weak var startNowBtn: UIButton!
     fileprivate let presenter = PetsPresenter()
 
     fileprivate var pets = [Int:IndexPath]()
 
-    @IBAction func playBtnPressed(_ sender: Any) {
-        let youtubeId = "C9ng5Dw8kIU"
-        if let urlFromStr = URL(string: "youtube://\(youtubeId)") {
-            if UIApplication.shared.canOpenURL(urlFromStr) {
-                if #available(iOS 10.0, *) {
-                    UIApplication.shared.open(urlFromStr, options: [:], completionHandler: nil)
-                } else {
-                    UIApplication.shared.openURL(urlFromStr)
-                }
-            } else if let webURL = URL(string: "https://www.youtube.com/watch?v=C9ng5Dw8kIU") {
-                UIApplication.shared.openURL(webURL)
-                
-            }
-        }
-    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.attachView(self)
         tableView.tableFooterView = UIView()
+        
+        startNowBtn.backgroundColor = UIColor.primary
+        startNowBtn.round()
 
+        videoTurorialBtn.backgroundColor = UIColor.primary
+        videoTurorialBtn.round()
         let notificationName = Notification.Name("BcScore")
-
         NotificationCenter.default.addObserver(self, selector: #selector(self.getPetsForNotification(_:)), name: notificationName, object: nil)
 
-        
         self.tableView.delegate = self
         self.tableView.dataSource = self
 
         self.tableView.estimatedRowHeight = 120
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.navigationItem.title = "Professional Guides"
+        
+        self.tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0)
         
     }
     
@@ -60,6 +52,28 @@ class RecommandationController: UIViewController {
         loadPets()
         
     }
+    @IBAction func startNowBtn(_ sender: Any) {
+    }
+    
+    
+    @IBAction func videoTotBtnPressed(_ sender: Any) {
+        self.popUpDestructive(title: "", msg: "You are being redirected to youtube to watch the Tutorial", cancelHandler: nil) { (done) in
+            let youtubeId = "C9ng5Dw8kIU"
+            if let urlFromStr = URL(string: "youtube://\(youtubeId)") {
+                if UIApplication.shared.canOpenURL(urlFromStr) {
+                    if #available(iOS 10.0, *) {
+                        UIApplication.shared.open(urlFromStr, options: [:], completionHandler: nil)
+                    } else {
+                        UIApplication.shared.openURL(urlFromStr)
+                    }
+                } else if let webURL = URL(string: "https://www.youtube.com/watch?v=C9ng5Dw8kIU") {
+                    UIApplication.shared.openURL(webURL)
+                }
+            }
+        }
+        
+    }
+    
     
     func updateUi() {
         var count = [Int]()
@@ -81,14 +95,17 @@ class RecommandationController: UIViewController {
             self.pImage.isHidden = true
             self.scrollView.isHidden = true
             self.navigationItem.rightBarButtonItem = self.addBtn
+            self.startNowBtn.isHidden = true
+            self.videoTurorialBtn.isHidden = false
         } else {
             self.tableView.isHidden = true
             self.cImage.isHidden = false
             self.pImage.isHidden = false
             self.scrollView.isHidden = false
-//            self.navigationItem.rightBarButtonItem = nil
+            self.navigationItem.rightBarButtonItem = nil
             self.navigationItem.rightBarButtonItem = self.addBtn
-
+            self.startNowBtn.isHidden = false
+            self.videoTurorialBtn.isHidden = true
         }
     }
     

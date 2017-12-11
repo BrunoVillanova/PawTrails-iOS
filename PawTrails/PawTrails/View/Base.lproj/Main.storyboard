@@ -632,7 +632,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="mXp-8N-Ipx">
-                                                    <rect key="frame" x="86" y="65" width="0.0" height="37"/>
+                                                    <rect key="frame" x="86" y="65" width="225" height="37"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="37" id="ap7-LK-daj"/>
                                                     </constraints>
@@ -676,6 +676,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="qDu-LV-mYt" secondAttribute="trailing" constant="8" id="i1Z-rM-sEC"/>
                                                 <constraint firstItem="NYy-W4-DcK" firstAttribute="top" secondItem="0Pk-Vi-mvl" secondAttribute="top" id="lXs-OV-ksW"/>
                                                 <constraint firstItem="mXp-8N-Ipx" firstAttribute="bottom" secondItem="0Pk-Vi-mvl" secondAttribute="bottom" id="oxK-2T-xpj"/>
+                                                <constraint firstItem="zPE-k9-Nut" firstAttribute="leading" secondItem="mXp-8N-Ipx" secondAttribute="trailing" constant="8" id="q8R-sP-rNN"/>
                                                 <constraint firstItem="qDu-LV-mYt" firstAttribute="leading" secondItem="zPE-k9-Nut" secondAttribute="trailing" constant="8" id="tSX-KP-Ysi"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1200,6 +1201,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="oQC-mM-GWi">
+                            <rect key="frame" x="0.0" y="456" width="375" height="73"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
                         <sections>
                             <tableViewSection id="YdS-i0-Bfa">
                                 <cells>
@@ -1400,10 +1406,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Profile" id="WdP-pA-90T">
-                        <barButtonItem key="leftBarButtonItem" title="Edit" style="done" id="TxS-sj-gUV">
-                            <color key="tintColor" red="0.80784313730000001" green="0.074509803920000006" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <barButtonItem key="leftBarButtonItem" image="edit-flat-icon" id="1sL-Gs-XVl">
                             <connections>
-                                <segue destination="1W5-qA-pEh" kind="show" id="CDw-5Z-rf5"/>
+                                <segue destination="1W5-qA-pEh" kind="show" id="eTa-eg-0aW"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="settings-1x-png" id="84c-rT-gc1">
@@ -3349,7 +3354,7 @@ PawTrails is a product created by Attitude Technologies.
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wda-Bc-iZi">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="108" width="375" height="510"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" id="qiR-Lj-qfu">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -3409,7 +3414,7 @@ PawTrails is a product created by Attitude Technologies.
                                 </connections>
                             </tableView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="P2d-7B-yrz">
-                                <rect key="frame" x="16" y="28" width="343" height="29"/>
+                                <rect key="frame" x="16" y="72" width="343" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="lQg-Fg-KG7"/>
                                 </constraints>
@@ -5435,7 +5440,7 @@ PawTrails is a product created by Attitude Technologies.
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xYN-AW-Xgb">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -5632,11 +5637,34 @@ PawTrails is a product created by Attitude Technologies.
                                 <rect key="frame" x="166" y="158" width="144" height="50"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rFc-dO-isr">
-                                <rect key="frame" x="0.0" y="105" width="375" height="456"/>
+                                <rect key="frame" x="0.0" y="106" width="375" height="455"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="g72-ZG-vyw">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="61"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R1C-uL-DOZ">
+                                            <rect key="frame" x="50" y="8" width="275" height="45"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <state key="normal" title="Video Tutorial">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="videoTotBtnPressed:" destination="tHl-no-jtU" eventType="touchUpInside" id="uH5-B7-cvo"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="R1C-uL-DOZ" secondAttribute="trailing" constant="50" id="4kx-YG-trI"/>
+                                        <constraint firstAttribute="bottom" secondItem="R1C-uL-DOZ" secondAttribute="bottom" constant="8" id="4vw-z9-9Is"/>
+                                        <constraint firstItem="R1C-uL-DOZ" firstAttribute="top" secondItem="g72-ZG-vyw" secondAttribute="top" constant="8" id="Rqm-Qb-E6U"/>
+                                        <constraint firstItem="R1C-uL-DOZ" firstAttribute="leading" secondItem="g72-ZG-vyw" secondAttribute="leading" constant="50" id="crR-Ke-rhZ"/>
+                                    </constraints>
+                                </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="100" id="3v1-5Y-nEn" customClass="ReccomendationCell" customModule="PawTrails" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="100"/>
+                                        <rect key="frame" x="0.0" y="89" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="3v1-5Y-nEn" id="DRq-TQ-Fbf">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="99.5"/>
@@ -5696,7 +5724,7 @@ PawTrails is a product created by Attitude Technologies.
                                 </prototypes>
                             </tableView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wMi-oC-V8K">
-                                <rect key="frame" x="-4" y="218" width="383" height="312"/>
+                                <rect key="frame" x="-4" y="218" width="383" height="449"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q4u-vi-c5L">
                                         <rect key="frame" x="20" y="20" width="343" height="100"/>
@@ -5726,6 +5754,20 @@ PawTrails is a product created by Attitude Technologies.
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j5t-aq-ymu">
+                                        <rect key="frame" x="60" y="284" width="263" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="qBr-Wb-mvz"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" title="START NOW">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="startNowBtn:" destination="tHl-no-jtU" eventType="touchUpInside" id="kHo-u9-D0c"/>
+                                            <segue destination="9xm-Fr-8aE" kind="show" id="Rzx-2e-OhR"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="oIA-qk-GUy" secondAttribute="bottom" constant="151" id="1xu-xI-oJL"/>
@@ -5734,9 +5776,12 @@ PawTrails is a product created by Attitude Technologies.
                                     <constraint firstItem="q4u-vi-c5L" firstAttribute="centerX" secondItem="wMi-oC-V8K" secondAttribute="centerX" id="GQL-Lk-dJU"/>
                                     <constraint firstItem="7mo-RX-P4u" firstAttribute="leading" secondItem="wMi-oC-V8K" secondAttribute="leading" constant="20" id="N0u-zd-tuM"/>
                                     <constraint firstAttribute="trailing" secondItem="q4u-vi-c5L" secondAttribute="trailing" constant="20" id="OjV-mM-ocM"/>
+                                    <constraint firstAttribute="trailing" secondItem="j5t-aq-ymu" secondAttribute="trailing" constant="60" id="TCX-XE-G4U"/>
+                                    <constraint firstItem="j5t-aq-ymu" firstAttribute="leading" secondItem="wMi-oC-V8K" secondAttribute="leading" constant="60" id="XjM-Dh-bSY"/>
                                     <constraint firstItem="q4u-vi-c5L" firstAttribute="top" secondItem="wMi-oC-V8K" secondAttribute="top" constant="20" id="ann-wH-O1o"/>
                                     <constraint firstItem="oIA-qk-GUy" firstAttribute="top" secondItem="7mo-RX-P4u" secondAttribute="bottom" constant="2" id="cJA-TT-GPT"/>
                                     <constraint firstAttribute="trailing" secondItem="oIA-qk-GUy" secondAttribute="trailing" constant="20" id="djC-J7-DUx"/>
+                                    <constraint firstItem="j5t-aq-ymu" firstAttribute="top" secondItem="oIA-qk-GUy" secondAttribute="bottom" constant="30" id="hoC-kf-Duc"/>
                                     <constraint firstItem="q4u-vi-c5L" firstAttribute="leading" secondItem="wMi-oC-V8K" secondAttribute="leading" constant="20" id="q0C-V3-tXA"/>
                                     <constraint firstItem="oIA-qk-GUy" firstAttribute="leading" secondItem="wMi-oC-V8K" secondAttribute="leading" constant="20" id="tnM-aP-nOj"/>
                                 </constraints>
@@ -5747,6 +5792,7 @@ PawTrails is a product created by Attitude Technologies.
                             <constraint firstItem="rFc-dO-isr" firstAttribute="leading" secondItem="rLC-65-53d" secondAttribute="leading" id="0MP-V8-1pi"/>
                             <constraint firstItem="dWZ-4r-rKy" firstAttribute="bottom" secondItem="rFc-dO-isr" secondAttribute="bottom" constant="8" id="81e-ud-aoE"/>
                             <constraint firstItem="FeI-1n-QoM" firstAttribute="height" secondItem="ILA-mU-fYT" secondAttribute="height" id="FN3-UY-vmc"/>
+                            <constraint firstAttribute="bottom" secondItem="wMi-oC-V8K" secondAttribute="bottom" id="FYH-fT-Ta7"/>
                             <constraint firstItem="rFc-dO-isr" firstAttribute="centerY" secondItem="rLC-65-53d" secondAttribute="centerY" id="HSy-V3-Zkk"/>
                             <constraint firstItem="FeI-1n-QoM" firstAttribute="bottom" secondItem="ILA-mU-fYT" secondAttribute="bottom" id="P37-wT-p9C"/>
                             <constraint firstItem="FeI-1n-QoM" firstAttribute="leading" secondItem="ILA-mU-fYT" secondAttribute="trailing" constant="6" id="QUW-zN-qfq"/>
@@ -5763,11 +5809,6 @@ PawTrails is a product created by Attitude Technologies.
                         <viewLayoutGuide key="safeArea" id="dWZ-4r-rKy"/>
                     </view>
                     <navigationItem key="navigationItem" title="Recommandation" id="u04-84-Sup">
-                        <barButtonItem key="leftBarButtonItem" systemItem="play" id="vKH-86-lsc">
-                            <connections>
-                                <action selector="playBtnPressed:" destination="tHl-no-jtU" id="HGf-Zo-zzO"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="add" id="XSS-64-Zcd">
                             <connections>
                                 <segue destination="9xm-Fr-8aE" kind="show" id="UeI-2G-9og"/>
@@ -5779,7 +5820,9 @@ PawTrails is a product created by Attitude Technologies.
                         <outlet property="cImage" destination="FeI-1n-QoM" id="WLV-33-9gH"/>
                         <outlet property="pImage" destination="ILA-mU-fYT" id="PSK-23-emd"/>
                         <outlet property="scrollView" destination="wMi-oC-V8K" id="hkM-Ey-w6G"/>
+                        <outlet property="startNowBtn" destination="j5t-aq-ymu" id="PUf-0E-ey8"/>
                         <outlet property="tableView" destination="rFc-dO-isr" id="5st-4t-R0j"/>
+                        <outlet property="videoTurorialBtn" destination="R1C-uL-DOZ" id="Wnl-ls-7od"/>
                         <segue destination="Wnk-XD-ISe" kind="show" identifier="showResult" id="luz-np-8po"/>
                     </connections>
                 </viewController>
@@ -7936,6 +7979,7 @@ Last Edited on 2017-12-04
         <image name="close-1x-png" width="26" height="26"/>
         <image name="close-envelope" width="32" height="32"/>
         <image name="dot-nocolor-1x" width="19" height="5"/>
+        <image name="edit-flat-icon" width="25" height="25"/>
         <image name="facebook" width="32" height="32"/>
         <image name="facebookLogin-1x-png" width="322" height="44"/>
         <image name="instagram" width="32" height="32"/>
@@ -7960,7 +8004,8 @@ Last Edited on 2017-12-04
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="yp5-bT-5uy"/>
+        <segue reference="UeI-2G-9og"/>
         <segue reference="G7h-iD-Glq"/>
-        <segue reference="gjN-xE-RCG"/>
+        <segue reference="Avi-do-lZw"/>
     </inferredMetricsTieBreakers>
 </document>

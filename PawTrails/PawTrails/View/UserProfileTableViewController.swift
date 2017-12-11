@@ -22,7 +22,8 @@ class UserProfileTableViewController: UITableViewController, UserProfileView, UI
     let presenter = UserProfilePresenter()
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.attachView(self)        
+        presenter.attachView(self)
+
     }
     
     
@@ -90,7 +91,7 @@ class UserProfileTableViewController: UITableViewController, UserProfileView, UI
             return super.tableView(tableView, heightForRowAt: indexPath)
         }
     }
-    
+
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
