@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyJSON
+import FirebaseMessaging
 
 /// Communicates with *APIManager* to perform all REST API calls.
 class APIRepository {
@@ -44,8 +45,21 @@ class APIRepository {
     ///   - callback: returns the **authentication information** or **error**
     func signUp(_ email:String, _ password: String, callback: @escaping APIRepAuthCallback) {
         
-        let data = isDebug ? ["email":email, "password":password, "is4test":ezdebug.is4test] : ["email":email, "password":password]
-//        let secondData = ["email":email, "password":password]
+        var cloudNotification = [String:Any]()
+        
+        if let token = Messaging.messaging().fcmToken {
+            cloudNotification = [
+                "envType": 1,
+                "deviceType": 2,
+                "token": token
+            ]
+        }
+        
+        var data : [String:Any] = ["email":email, "password": password, "cloudNoti": cloudNotification]
+        
+        if isDebug {
+            data["is4test"] = ezdebug.is4test
+        }
         
         APIManager.instance.perform(call: .signUp, with: data) { (error, json) in
             if let error = error {
@@ -63,8 +77,22 @@ class APIRepository {
     ///   - password: current user password
     ///   - callback: returns the **authentication information** or **error**
     func signIn(_ email:String, _ password: String, callback: @escaping APIRepAuthCallback) {
+       
+        var cloudNotification = [String:Any]()
         
-        let data = isDebug ? ["email":email, "password":password, "is4test":ezdebug.is4test] : ["email":email, "password":password]
+        if let token = Messaging.messaging().fcmToken {
+            cloudNotification = [
+                "envType": 1,
+                "deviceType": 2,
+                "token": token
+            ]
+        }
+        
+        var data : [String:Any] = ["email":email, "password": password, "cloudNoti": cloudNotification]
+        
+        if isDebug {
+            data["is4test"] = ezdebug.is4test
+        }
         
         APIManager.instance.perform(call: .signIn, with: data) { (error, json) in
             if let error = error {
@@ -83,7 +111,21 @@ class APIRepository {
     ///   - callback: returns the **authentication information** or **error**
     func login(socialMedia: SocialMedia, _ token: String, callback: @escaping APIRepAuthCallback){
         
-        let data: [String : Any] = ["loginToken" : token, "itsIOS": socialMedia == .google ? 1 : ""]
+        var cloudNotification = [String:Any]()
+        
+        if let token = Messaging.messaging().fcmToken {
+            cloudNotification = [
+                "envType": 1,
+                "deviceType": 2,
+                "token": token
+            ]
+        }
+        
+        var data: [String : Any] = ["loginToken" : token, "itsIOS": socialMedia == .google ? 1 : "", "cloudNoti": cloudNotification]
+        
+        if isDebug {
+            data["is4test"] = ezdebug.is4test
+        }
         
         APIManager.instance.perform(call: APICallType(socialMedia), with: data) { (error, json) in
             if let error = error {
