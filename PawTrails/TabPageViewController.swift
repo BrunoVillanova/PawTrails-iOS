@@ -61,6 +61,7 @@ class TabPageViewController: ButtonBarPagerTabStripViewController {
     
     func addTapped(_sender: UIBarButtonItem) {
         self.performSegue(withIdentifier: "editPetDetails", sender: self)
+  
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

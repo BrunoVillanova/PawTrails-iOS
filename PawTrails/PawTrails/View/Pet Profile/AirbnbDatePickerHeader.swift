@@ -122,7 +122,7 @@ class AirbnbDatePickerHeader: UIView {
         setupEndDayLabel()
         setupEndDateLabel()
         
-        setupSlashView()
+//        setupSlashView()
         
         setupDayLabels()
     }

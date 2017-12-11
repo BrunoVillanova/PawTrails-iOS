@@ -30,8 +30,8 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
     fileprivate var changingRegion = false
     fileprivate var focused = true
     fileprivate var fence:Fence!
-    fileprivate let fenceSide: Double = 50.0 //meters
-    fileprivate var fenceDistance:Int = 50 //meters
+    fileprivate let fenceSide: Double = 100.0 //meters
+    fileprivate var fenceDistance:Int = 100 //meters
     fileprivate var  manager = CLLocationManager()
 
     fileprivate let presenter = AddEditSafeZonePresenter()
@@ -43,6 +43,9 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
     var petId: Int!
     var isOwner: Bool!
     var ZBdropDownViews: [UIView]?
+    var yNDropDownMenu: YNDropDownMenu?
+    
+    
 //
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,15 +89,33 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
         }
         
         if let _ZBdropDownViews = ZBdropDownViews {
-            let view = YNDropDownMenu(frame: CGRect(x: 0, y: 64, width: UIScreen.main.bounds.size.width, height: 38),
-                            dropDownViews: _ZBdropDownViews, dropDownViewTitles: ["Show SafeZone Settings"])
-            view.setImageWhen(normal: UIImage(named: "arrow-show-1x"), selected: UIImage(named: "arrow-show-1x"), disabled: UIImage(named: "arrow-show-1x"))
-            view.bottomLine.backgroundColor = UIColor.black
-            view.bottomLine.isHidden = false
+        
+            if UIScreen.main.nativeBounds.height == 2436 {
+            
+                self.yNDropDownMenu = YNDropDownMenu(frame: CGRect(x: 0, y: 89, width: UIScreen.main.bounds.size.width, height: 38),
+                                                     dropDownViews: _ZBdropDownViews, dropDownViewTitles: ["Show SafeZone Settings"])
+            } else {
+                self.yNDropDownMenu = YNDropDownMenu(frame: CGRect(x: 0, y: 64, width: UIScreen.main.bounds.size.width, height: 38),
+                                                     dropDownViews: _ZBdropDownViews, dropDownViewTitles: ["Show SafeZone Settings"])
+            }
+            
+ 
+            
+            
+                
+            
+            
+            
+            
+            self.yNDropDownMenu?.setImageWhen(normal: UIImage(named: "arrow-show-1x"), selected: UIImage(named: "arrow-show-1x"), disabled: UIImage(named: "arrow-show-1x"))
+            self.yNDropDownMenu?.bottomLine.backgroundColor = UIColor.black
+            self.yNDropDownMenu?.bottomLine.isHidden = false
+            
             if let settingsView = ZBdropDownViews?.first as? SettingsViews {
                 settingsView.nameTextField.placeholder = "Name of the safezone?"
                 settingsView.nameTextField.title = "Your safeZone name"
                 settingsView.nameTextField.titleColor = UIColor(red: 155/255, green: 153/255, blue: 169/255, alpha: 1)
+                
                 
                 settingsView.collectionView.delegate = self
                 settingsView.collectionView.dataSource = self
@@ -135,8 +156,12 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
                 
             }
 
-            view.alwaysSelected(at: 0)
-            self.view.addSubview(view)
+            self.yNDropDownMenu?.alwaysSelected(at: 0)
+            
+            if let view = self.yNDropDownMenu {
+                self.view.addSubview(view)
+
+            }
             
         }
  
@@ -145,17 +170,6 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
     
     
     override func viewDidLayoutSubviews() {
-        
-//        
-//        let image = UIImage(named: "SliderBtn")?.scaleToSize(newSize: CGSize(width: 70, height: 40))
-//        self.slider?.setThumbImage(image, for: .normal)
-//        if let handleView = slider?.subviews.last as? UIImageView {
-//            let label = UILabel(frame: handleView.bounds)
-//            label.backgroundColor = UIColor.clear
-//            handleView.addSubview(label)
-//            self.sliderLabel = label
-//            sliderLabel?.textColor = UIColor.black
-//        }
 
     }
     
@@ -176,7 +190,10 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
             })
             
         }else{
+            
+           
             let sonhugoCoordinate = CLLocationCoordinate2D(latitude: 39.592217, longitude: 2.662322)
+            
             self.map.centerOn(sonhugoCoordinate, with: 50, animated: false)
             self.map.load(with: sonhugoCoordinate, shape: shape, into: _view, callback: { (fence) in
                 self.fence = fence
@@ -235,8 +252,6 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
             fenceDistance = Int(round(x0y0.location.distance(from: xfy0.location)))
             fence.isIdle = fenceDistanceIsIdle()
             self.distanceLabel.text = fenceDistance < 1000 ? "\(fenceDistance) m" : "\(Double(fenceDistance)/1000.0) km"
-            slider?.value = Float(fenceDistance)
-
         }
     }
     
@@ -337,10 +352,17 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
     }
     
     func missingName() {
+        
         if let vieww = ZBdropDownViews?.first as? SettingsViews {
         vieww.nameTextField.becomeFirstResponder()
             vieww.nameTextField.shake()
+            self.alert(title: "", msg: "Please enter a safe zone name", type: .red, disableTime: 3, handler: nil)
             
+            if let view = self.yNDropDownMenu {
+                view.showAndHideMenu(at: 0)
+            }
+            
+      
         }
        
     }
@@ -404,7 +426,7 @@ extension AddEditSafeZOneController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 60, height: 60)
+        return CGSize(width: 40, height: 40)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

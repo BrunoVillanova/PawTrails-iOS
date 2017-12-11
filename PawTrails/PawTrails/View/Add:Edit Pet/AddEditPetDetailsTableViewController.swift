@@ -38,9 +38,14 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
         presenter.attachView(self, pet, deviceCode)
         NotificationManager.instance.post(Event())
 }
-    
-    
 
+    
+    
+    override func viewDidLayoutSubviews() {
+
+
+    }
+    
     deinit {
         presenter.deteachView()
     }
@@ -96,6 +101,7 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
         neuteredSwitch.setOn(presenter.pet.neutered , animated: true)
         tableView.reloadData()
     }
+
     
     func doneSuccessfully() {
         if pet == nil {

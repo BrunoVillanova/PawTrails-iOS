@@ -169,6 +169,8 @@ extension PetInfromationViewController: UITableViewDelegate, UITableViewDataSour
                 } else if pet.size == 2 {
                     cell.sizeLbl.text = "Large"
                 }
+                
+                cell.bcsLbl.text = "\(pet.bcScore)"
 
                 if let imageUrl = pet.imageURL {
                     cell.profileImage.sd_setImage(with: URL(string: imageUrl), placeholderImage: #imageLiteral(resourceName: "PetPlaceholderImage"), options: [.continueInBackground])
@@ -235,6 +237,7 @@ class ProfileInfoCell: UITableViewCell {
     @IBOutlet weak var weightLbl: UILabel!
     @IBOutlet weak var petName: UILabel!
     @IBOutlet weak var sizeLbl: UILabel!
+    @IBOutlet weak var bcsLbl: UILabel!
     
 }
 

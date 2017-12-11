@@ -83,7 +83,10 @@ class PetUserTableViewController: UITableViewController, PetUserView {
         if indexPath.section == 1 {
             DispatchQueue.main.async {
                 if self.currentUserId == self.petOwnerId && self.petOwnerId == self.appUserId {
-                    
+                    // Remove Pet
+                    self.popUpDestructive(title: "Remove \(self.pet.name ?? "this pet")", msg: "If you proceed you will loose all the information of this pet.", cancelHandler: nil, proceedHandler: { (remove) in
+                        self.presenter.removePet(with: self.pet.id)
+                    })
                 }else if self.appUserId == self.petOwnerId && self.appUserId != self.currentUserId {
                     // Owner Remove that user
                     self.popUpDestructive(title: "Remove \(self.petUser.name ?? "this user") from \(self.pet.name ?? "this pet")", msg: "If you proceed you will remove this user from the pet sharing list.", cancelHandler: nil, proceedHandler: { (remove) in

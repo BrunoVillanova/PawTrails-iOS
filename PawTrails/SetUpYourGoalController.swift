@@ -14,7 +14,6 @@ class SetUpYourGoalController: UIViewController {
     var isOwner: Bool!
     var petUser: PetUser!
 
-    @IBOutlet weak var restToDefult: UIButton!
     @IBOutlet weak var NormalGoalSlider: UISlider!
     @IBOutlet weak var restingGoalSlider: UISlider!
     
@@ -33,7 +32,6 @@ class SetUpYourGoalController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.restToDefult.round()
         restingGoalSlider.maximumValue = 50.0
         NormalGoalSlider.maximumValue = 12.0
         
@@ -124,7 +122,7 @@ class SetUpYourGoalController: UIViewController {
                 
                 APIRepository.instance.editTripDailyGoal(pet.id, distanceGoal: distanceGoalInMeter, timeGoal: timeGoalInHours, callback: { (error) in
                     if error == nil {
-                        self.alert(title: "", msg: "Your request has been proceed", type: .blue, disableTime: 3, handler: nil)
+//                        self.alert(title: "", msg: "Your request has been proceed", type: .blue, disableTime: 3, handler: nil)
                         if let navController = self.navigationController {
                             navController.popViewController(animated: true)
                         }
@@ -143,42 +141,42 @@ class SetUpYourGoalController: UIViewController {
     }
     
 
-    @IBAction func restToDefultBtnPressed(_ sender: Any) {
-        // Create the alert controller
-        let alertController = UIAlertController(title: "Default Time Goal", message: "The time goal default is recommended by Joe Keane , veterinary surgeon. These guidelines should be followed if you dog is the ideal weight on the Body Condition Score (BCS).", preferredStyle: .alert)
-        
-        // Create the actions
-        let setTimeGoal = UIAlertAction(title: "Set TIME GOAL", style: UIAlertActionStyle.default) {
-            UIAlertAction in
-            
-            // do something here
-        }
-        
-        
-        let goToBsc = UIAlertAction(title: "GO TO BCS", style: UIAlertActionStyle.default) {
-            UIAlertAction in
-            if let tabViewController = self.storyboard?.instantiateViewController(withIdentifier: "tabBarController") as? UITabBarController {
-                tabViewController.selectedIndex = 2
-                self.present(tabViewController, animated: true, completion: nil)
-            }
-        }
-        
-        
-        let cancelAction = UIAlertAction(title: "CANCEL", style: UIAlertActionStyle.cancel) {
-            UIAlertAction in
-        }
-        
-        // Add the actions
-        alertController.addAction(setTimeGoal)
-        alertController.addAction(goToBsc)
-        alertController.addAction(cancelAction)
-        
-        // Present the controller
-        self.present(alertController, animated: true, completion: nil)
-        alertController.view.tintColor = UIColor.primary
-        
-    }
-    
+//    @IBAction func restToDefultBtnPressed(_ sender: Any) {
+//        // Create the alert controller
+//        let alertController = UIAlertController(title: "Default Time Goal", message: "The time goal default is recommended by Joe Keane , veterinary surgeon. These guidelines should be followed if you dog is the ideal weight on the Body Condition Score (BCS).", preferredStyle: .alert)
+//
+//        // Create the actions
+//        let setTimeGoal = UIAlertAction(title: "Set TIME GOAL", style: UIAlertActionStyle.default) {
+//            UIAlertAction in
+//
+//            // do something here
+//        }
+//
+//
+//        let goToBsc = UIAlertAction(title: "GO TO BCS", style: UIAlertActionStyle.default) {
+//            UIAlertAction in
+//            if let tabViewController = self.storyboard?.instantiateViewController(withIdentifier: "tabBarController") as? UITabBarController {
+//                tabViewController.selectedIndex = 2
+//                self.present(tabViewController, animated: true, completion: nil)
+//            }
+//        }
+//
+//
+//        let cancelAction = UIAlertAction(title: "CANCEL", style: UIAlertActionStyle.cancel) {
+//            UIAlertAction in
+//        }
+//
+//        // Add the actions
+//        alertController.addAction(setTimeGoal)
+//        alertController.addAction(goToBsc)
+//        alertController.addAction(cancelAction)
+//
+//        // Present the controller
+//        self.present(alertController, animated: true, completion: nil)
+//        alertController.view.tintColor = UIColor.primary
+//
+//    }
+//
 }
 
 
