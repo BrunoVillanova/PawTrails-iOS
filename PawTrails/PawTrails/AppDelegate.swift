@@ -251,10 +251,17 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         if let messageID = userInfo[gcmMessageIDKey] {
             print("Message ID: \(messageID)")
         }
+
         
-        // Print full message.
-        print(userInfo)
-        
+        if let data = userInfo["aps"] as! [String:Any]! {
+            if let alert = data["alert"] as! [String:Any]! {
+                print("\(String(describing: alert))")
+                if let rootViewController = UIApplication.shared.keyWindow?.rootViewController {
+                    rootViewController.alert(title: alert["title"] as! String, msg: alert["body"] as! String, type: notificationType.blue, disableTime: 5, handler: nil)
+                }
+            }
+        }
+
         // Change this to your preferred presentation option
         completionHandler([])
     }
@@ -267,10 +274,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         if let messageID = userInfo[gcmMessageIDKey] {
             print("Message ID: \(messageID)")
         }
-        
-        // Print full message.
-        print(userInfo)
-        
+  
         completionHandler()
     }
 }
@@ -291,21 +295,6 @@ extension AppDelegate : MessagingDelegate {
     // To enable direct data messages, you can set Messaging.messaging().shouldEstablishDirectChannel to true.
     func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
         print("Received data message: \(remoteMessage.appData)")
-        let notification = remoteMessage.appData["notification"] as! String
-
-        let data = notification.data(using: String.Encoding.utf8, allowLossyConversion: false)
-        
-        if let jsonData = data {
-            // Will return an object or nil if JSON decoding fails
-            if let json = try? JSONSerialization.jsonObject(with: jsonData, options: JSONSerialization.ReadingOptions.mutableContainers) as! [String:Any] {
-
-                if let rootViewController = UIApplication.shared.keyWindow?.rootViewController {
-                    rootViewController.alert(title: json["title"] as! String, msg: json["msg"] as! String, type: notificationType.blue, disableTime: 5, handler: nil)
-                }
-            }
-        }
-        
-  
     }
     // [END ios_10_data_message]
 }

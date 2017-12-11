@@ -237,7 +237,7 @@ class APIManager {
                 let jsonObject = parseResponse(data)
 
                 let code = jsonObject.dictionaryObject?.tryCastInteger(for: "errors") ?? -1
-                return APIManagerError(call: call, kind: .clientError, httpCode: httpCode, error: nil, errorCode: ErrorCode(code: code))
+                return APIManagerError(call: call, kind: .clientError, httpCode: httpCode, error: nil, errorCode: ErrorCode(rawValue: code))
 
             }else{
                 return APIManagerError(call: call, kind: .noClientError, httpCode: httpCode, error: nil, errorCode: nil)

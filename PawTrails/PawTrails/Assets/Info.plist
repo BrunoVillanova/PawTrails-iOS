@@ -50,7 +50,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1712111333</string>
+	<string>1712111922</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -100,6 +100,10 @@
 	<string>Locate user on the screen and define safe zones.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Change user and pet profile photos.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
