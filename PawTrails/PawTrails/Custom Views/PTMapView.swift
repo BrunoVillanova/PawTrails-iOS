@@ -21,6 +21,7 @@ class PTMapView: MKMapView {
     var activeTripsPetIDs = [Int]()
     let locationManager  = CLLocationManager()
     var alreadyFocusedOnUserLocation = false
+    var alreadyFocusedOnPets = false
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -91,7 +92,7 @@ class PTMapView: MKMapView {
                 
                 self.load(petDeviceData)
                 
-                if self.activeTripsPetIDs.contains(petDeviceData.pet.id) {
+                if self.activeTripsPetIDs.contains(petDeviceData.pet.id) && tripMode {
                     let id = MKLocationId(id: Int(petDeviceData.pet.id), type: .pet)
                     if self.myAnnotations[id] != nil {
                         let newAnnotation = PTAnnotation(petDeviceData.deviceData.point.coordinates)
@@ -110,6 +111,7 @@ class PTMapView: MKMapView {
             
             
             if shouldFocusOnPets {
+                alreadyFocusedOnPets = true
                 self.focusOnPets()
             }
         }
