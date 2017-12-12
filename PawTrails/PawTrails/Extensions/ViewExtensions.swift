@@ -7,8 +7,8 @@
 //
 
 import UIKit
-//TODO: replace alert with this library
-//import SwiftMessages
+import GSMessages
+
 // MARK:- View
 
 enum notificationType {
@@ -76,23 +76,45 @@ extension UIViewController {
     }
     
     func alert(title:String, msg:String, type: notificationType = .red, disableTime: Int = 3, handler: (()->())? = nil){
-        self.hideLoadingView(animated:false)
-        self.showNotification(title: msg, type: type)
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(disableTime)) {
-            self.hideNotification()
-            if let handler = handler { handler() }
+        
+        var messageType = GSMessageType.info
+        
+        switch type {
+        case notificationType.blue:
+            messageType = GSMessageType.info
+        case notificationType.green:
+            messageType = GSMessageType.success
+        case notificationType.red:
+            messageType = GSMessageType.error
         }
+        
+        self.showMessage(msg, type: messageType)
     }
     
     func alertwithGeature(title:String, msg:String, type: notificationType = .red, disableTime: Int = 3, geatureReconginzer: UITapGestureRecognizer, handler: (()->())? = nil){
-        self.hideLoadingView(animated:false)
-        self.hideNotification()
-        self.showNotificationWithGesture(title: msg, type: type, geaturseRecognizer: geatureReconginzer)
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(disableTime)) {
-            self.hideNotification()
-            if let handler = handler { handler() }
+//        self.hideLoadingView(animated:false)
+//        self.hideNotification()
+//        self.showNotificationWithGesture(title: msg, type: type, geaturseRecognizer: geatureReconginzer)
+//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(disableTime)) {
+//            self.hideNotification()
+//            if let handler = handler { handler() }
+//        }
+        
+        
+        var messageType = GSMessageType.info
+        
+        switch type {
+        case notificationType.blue:
+            messageType = GSMessageType.info
+        case notificationType.green:
+            messageType = GSMessageType.success
+        case notificationType.red:
+            messageType = GSMessageType.error
         }
+        
+        self.showMessage(msg, type: messageType)
     }
+    
 
     
     // Alert for Image Picker
@@ -167,52 +189,26 @@ extension UIViewController {
     
     func showNotification(title:String, type:notificationType = .blue, originY: CGFloat?) {
         
-        
-//        var theme = Theme.info
-//
-//        switch type {
-//            case .green:
-//                theme = Theme.success
-//            case .red:
-//                theme = Theme.error
-//            case .blue:
-//                theme = Theme.info
-//        }
-//
-//        SwiftMessages.show {
-//            let view = MessageView.viewFromNib(layout: .messageView)
-//
-//
-//
-//            // Theme message elements with the warning style.
-//            view.configureTheme(theme)
-//
-//            // Add a drop shadow.
-//            view.configureDropShadow()
-//
-//
-//
-//            return view
-//        }
         let notificationView = viewForNotification(title: title, type: type, originY: originY)
         showNotificationView(notificationView)
-
     }
     
     fileprivate func showNotificationView(_ notificationView: UIView) {
     
+ 
+        
         if let rootViewController = UIApplication.shared.keyWindow?.rootViewController {
             var topMostView = rootViewController.view!
-    
+
             if let presentedViewController = rootViewController.presentedViewController {
                 topMostView = presentedViewController.view
             } else if let navigationController = rootViewController as? UINavigationController, let topViewController = navigationController.topViewController {
                 topMostView = topViewController.view
             }
-            
+
             let timer = Timer.init(timeInterval: 3, target: self, selector: #selector(self.hideNotification), userInfo: nil, repeats: false)
             timer.fire()
-    
+
             DispatchQueue.main.async {
                 topMostView.addSubview(notificationView)
             }
