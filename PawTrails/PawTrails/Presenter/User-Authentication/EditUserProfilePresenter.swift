@@ -51,7 +51,17 @@ class EditUserProfilePresenter {
     }
     
     func set(image data:Data){
-        imageData = data
+        view?.beginLoadingContent()
+        
+        DataManager.instance.saveUser(image: data) { (error) in
+            if let error = error {
+                self.view?.endLoadingContent()
+                self.view?.errorMessage(error.msg)
+            }else{
+                self.imageData = data
+                self.saveProfile()
+            }
+        }
     }
     
     func socialMediaLoggedIn() -> Bool {

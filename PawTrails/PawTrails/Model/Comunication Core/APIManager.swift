@@ -114,6 +114,7 @@ class APIManager {
     
     static let instance = APIManager()
     
+    //TODO: DO NOT FORGET! TO REMOVE THIS COMMENT!!
     #if DEBUG
     fileprivate static let mainURL = "https://eu.pawtrails.pet/api"
     fileprivate static let mainURLTest = "https://eu.pawtrails.pet/test"

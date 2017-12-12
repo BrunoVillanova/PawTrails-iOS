@@ -86,11 +86,13 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     private var isConnecting = false
     private var isAuthenticating = false
     private var isAuthenticated = false
+    private var shouldReconnect = false
 
     var pets: Variable<[Pet]> = Variable([Pet]())
     var petGpsUpdates: Variable<[PetDeviceData]> = Variable([PetDeviceData]())
     var petTrips: Variable<[Trip]> = Variable([Trip]())
     var isReadyForCommunication: Variable<Bool> = Variable(false)
+    var triedToReconnectOnUnauthorized = false
     
     fileprivate var openChannels: Set<channel> = Set<channel>()
     
@@ -127,9 +129,15 @@ class SocketIOManager: NSObject, URLSessionDelegate {
                 print("SocketIO -> AuthCheck -> Authenticated and Ready for Communitcation")
                 self.isReadyForCommunication.value = true
             } else if (status == .unauthorized || status == .unauthorized2) {
-                //TODO: force user to login again
-                self.userNotSigned()
-               
+                
+                if self.triedToReconnectOnUnauthorized {
+                    //TODO: force user to login again
+                    self.userNotSigned()
+                } else {
+                    self.triedToReconnectOnUnauthorized = true
+                    self.reconnect()
+                }
+                
             } else if (status != .waiting) {
                 self.socketAuth()
             }
@@ -140,6 +148,11 @@ class SocketIOManager: NSObject, URLSessionDelegate {
             print("SocketIO -> Disconnect")
             self.isConnected = false
             self.isReadyForCommunication.value = false
+            
+            if self.shouldReconnect {
+                self.shouldReconnect = false
+                self.connect()
+            }
         }){}.disposed(by: disposeBag)
         
         
@@ -199,7 +212,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         }).disposed(by: disposeBag)
     }
     
-    func userNotSigned() {
+    func userNotSigned() {        
         if let rootViewController = UIApplication.shared.keyWindow?.rootViewController, let storyboard = rootViewController.storyboard {
             if let vc = storyboard.instantiateViewController(withIdentifier: "InitialViewController") as? InitialViewController {
                 rootViewController.present(vc, animated: true, completion: nil)
@@ -282,10 +295,23 @@ class SocketIOManager: NSObject, URLSessionDelegate {
             return
         }
         
+        guard !self.isConnected else {
+            return
+        }
+        
+        guard !self.isAuthenticating else {
+            return
+        }
+        
         if DataManager.instance.isAuthenticated() {
             self.isConnecting = true
             socket.connect()
         }
+    }
+    
+    func reconnect() {
+        self.shouldReconnect = true
+        self.disconnect()
     }
     
     /// Disconnects from Socket I.O.

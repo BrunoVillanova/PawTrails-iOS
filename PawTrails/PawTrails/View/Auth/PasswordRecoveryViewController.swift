@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GSMessages
 
 class PasswordRecoveryViewController: UIViewController, UITextFieldDelegate {
     
@@ -44,7 +45,7 @@ class PasswordRecoveryViewController: UIViewController, UITextFieldDelegate {
     func sendRecoveryEmail(email:String, checked: Bool) {
         
         if !email.isValidEmail {
-            self.showNotification(title: "Email is not valid!", type: notificationType.red, originY: 39)
+            self.showMessage("Email is not valid!", type: GSMessageType.error)
         } else {
 
             self.showLoadingView()
@@ -53,10 +54,23 @@ class PasswordRecoveryViewController: UIViewController, UITextFieldDelegate {
                 self.hideLoadingView()
                 
                 if let error = error {
-                    self.showNotification(title: error.msg.msg, type: notificationType.red, originY: 39)
+                    self.showMessage(error.msg.msg, type: GSMessageType.error)
+
                 } else {
                     self.dismiss(animated: true, completion: {
-                        self.showNotification(title: "Recovery instructions was sent to your email!", type: notificationType.green, originY: 39)
+                        UIApplication.shared.keyWindow?.rootViewController!.showMessage("Recovery instructions was sent to your email!", type: GSMessageType.success,  options: [
+                            .animation(.slide),
+                            .animationDuration(0.3),
+                            .autoHide(true),
+                            .cornerRadius(0.0),
+                            .height(44.0),
+                            .hideOnTap(true),
+                            //                .margin(.init(top: 64, left: 0, bottom: 0, right: 0)),
+                            //                .padding(.zero),
+                            .position(.top),
+                            .textAlignment(.center),
+                            .textNumberOfLines(0),
+                            ])
                     })
                 }
             })

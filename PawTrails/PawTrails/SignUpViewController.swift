@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SCLAlertView
 
 class SignUpViewController: UIViewController, InitialView {
 
@@ -97,11 +98,42 @@ class SignUpViewController: UIViewController, InitialView {
     
     func verifyAccount(_ email:String, _ password:String) {
         
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "EmailVerificationViewController") as? EmailVerificationViewController {
-            vc.email = email
-            vc.password = password
-            self.present(vc, animated: true, completion: nil)
+        let title: String = "Account created!"
+        let subTitle: String = "We've sent you an email, please confirm to continue."
+        let buttonOkTitle: String = "OK"
+        
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false,
+            showCircularIcon: true
+        )
+        
+        let alertView = SCLAlertView(appearance: appearance)
+    
+        alertView.addButton(buttonOkTitle) {
+            self.dismiss(animated: true, completion: {
+                UIApplication.shared.keyWindow?.rootViewController!.showMessage("Please, confirm your e-mail address before login", type: .info)
+//                self.perform(#selector(self.showSuccessMessage), with: nil, afterDelay: 1000)
+            })
         }
+        
+//        alertView.addButton(buttonCancelTitle) {
+//            print("User canceled action!")
+//        }
+        
+        alertView.showTitle(
+            title, // Title of view
+            subTitle: subTitle, // String of view
+            duration: 0.0, // Duration to show before closing automatically, default: 0.0
+            completeText: "ok", // Optional button value, default: ""
+            style: .success, // Styles - see below.
+            colorStyle: 0x5cb85c,
+            colorTextButton: 0xFFFFFF
+        )
+        
+    }
+    
+    func showSuccessMessage() {
+        self.showMessage("Please, confirm your e-mail address before login", type: .info)
     }
     
     func successGoogleLogin(token:String){

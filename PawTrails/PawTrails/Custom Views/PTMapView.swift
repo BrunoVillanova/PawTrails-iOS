@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import RxSwift
+import GSMessages
 
 class PTMapView: MKMapView {
 
@@ -30,6 +31,7 @@ class PTMapView: MKMapView {
         self.showsUserLocation = true
         
         self.requestLocationAccess()
+        
         
         DataManager.instance.getActivePetTrips().subscribe(onNext: { (trips) in
             
@@ -77,6 +79,7 @@ class PTMapView: MKMapView {
 
         
         DataManager.instance.allPetDeviceData().subscribe(onNext: { (petDeviceDataList) in
+            UIApplication.shared.keyWindow?.rootViewController!.hideMessage()
             if let gpsUpdates = petDeviceDataList as [PetDeviceData]! {
                 self.loadGpsUpdates(gpsUpdates)
             }
@@ -264,7 +267,7 @@ extension PTMapView: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-        if !(tripMode && alreadyFocusedOnUserLocation) {
+        if (!tripMode && !alreadyFocusedOnUserLocation) {
             mapView.showAnnotations([userLocation], animated: true)
             alreadyFocusedOnUserLocation = true
         }

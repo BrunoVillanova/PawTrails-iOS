@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import RxSwift
+import GSMessages
 
 class MapViewController: UIViewController {
     
@@ -38,6 +39,19 @@ class MapViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        self.showMessage("Bring your device outdoor to receive GPS signal", type: GSMessageType.info,  options: [
+            .animation(.slide),
+            .animationDuration(0.3),
+            .autoHide(false),
+            .cornerRadius(0.0),
+            .height(44.0),
+            .hideOnTap(true),
+            //                .margin(.init(top: 64, left: 0, bottom: 0, right: 0)),
+            //                .padding(.zero),
+            .position(.top),
+            .textAlignment(.center),
+            .textNumberOfLines(0),
+            ])
     }
     
     func initialize() {
@@ -55,6 +69,12 @@ class MapViewController: UIViewController {
                 }
 
             }).disposed(by: disposeBag)
+        
+        
+        DataManager.instance.allPetDeviceData().subscribe(onNext: { (petDeviceDataList) in
+            self.hideMessage()
+            
+        }).disposed(by: disposeBag)
         
         firstButtonfromthebottom.contentHorizontalAlignment = .fill
         firstButtonfromthebottom.contentMode = .scaleToFill

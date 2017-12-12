@@ -88,7 +88,20 @@ extension UIViewController {
             messageType = GSMessageType.error
         }
         
-        self.showMessage(msg, type: messageType)
+        self.showMessage(msg, type: messageType,  options: [
+            .animation(.slide),
+            .animationDuration(0.3),
+            .autoHide(true),
+            .autoHideDelay(3.0),
+            .cornerRadius(0.0),
+            .height(44.0),
+            .hideOnTap(true),
+            .margin(.zero),
+            .padding(.init(top: 10, left: 30, bottom: 10, right: 30)),
+            .position(.top),
+            .textAlignment(.center),
+            .textNumberOfLines(0),
+        ])
     }
     
     func alertwithGeature(title:String, msg:String, type: notificationType = .red, disableTime: Int = 3, geatureReconginzer: UITapGestureRecognizer, handler: (()->())? = nil){
@@ -112,7 +125,20 @@ extension UIViewController {
             messageType = GSMessageType.error
         }
         
-        self.showMessage(msg, type: messageType)
+        self.showMessage(msg, type: messageType,  options: [
+            .animation(.slide),
+            .animationDuration(0.3),
+            .autoHide(true),
+            .autoHideDelay(3.0),
+            .cornerRadius(0.0),
+            .height(44.0),
+            .hideOnTap(true),
+            .margin(.zero),
+            .padding(.init(top: 10, left: 30, bottom: 10, right: 30)),
+            .position(.top),
+            .textAlignment(.center),
+            .textNumberOfLines(0),
+            ])
     }
     
 

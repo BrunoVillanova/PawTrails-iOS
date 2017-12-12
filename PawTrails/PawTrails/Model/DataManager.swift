@@ -71,8 +71,8 @@ class DataManager: NSObject {
             
             if let error = error {
                 self.handleAuthErrors(error, authentication, callback: callback)
-            }else if let authentication = authentication {
-                self.succeedLoginOrRegister(authentication, callback: callback)
+            }else {
+                callback(nil)
             }
         }
     }
@@ -173,6 +173,7 @@ class DataManager: NSObject {
             }
             callback(nil)
         }
+        SocketIOManager.instance.reconnect()
     }
     
     /// Removes user from this client as well as wipes out all the information related to the user.
