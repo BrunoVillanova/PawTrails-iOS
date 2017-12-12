@@ -195,7 +195,7 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
                 
                     
                         self.pieChartUpdate(firstvalue: totalChiling, secondValue: totalWandering, thirdValue: totalLively)
-                        self.combinedChartView(myxaxis: self.periodsOfDay, lively: lively, chiling: chilling, wandering: wandering, chart: self.combinedCharts)
+                    self.combinedChartView(myxaxis: self.periodsOfDay, lively: lively, chiling: chilling, wandering: wandering, chart: self.combinedCharts, symbol: "hrs")
                    
                 } else {
 
@@ -219,22 +219,25 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
             
             
             APIRepository.instance.getActivityMonitorData(pet.id, startDate: startOfWeekInTimeInterval, endDate: endOfWeekInTimeInterval, groupedBy: 1) { (error, data) in
+                
                 if error == nil, let data = data, let activities = data.activities {
                     var chilling = [Int]()
                     var wandering = [Int]()
                     var lively = [Int]()
                     for activity in activities {
-                        let chiling = activity.chilling
-                        let wanderingg = activity.wandering
-                        let livelyy = activity.lively
-                        chilling.append(chiling)
+                        let chiling = Float(activity.chilling / 60)
+                        let wanderingg = activity.wandering / 60
+                        let livelyy = activity.lively / 60
+                        
+                        
+                        chilling.append(Int(chiling))
                         wandering.append(wanderingg)
                         lively.append(livelyy)
                     }
                     self.weeklyLively = lively
                     self.weeklywandering = wandering
                     self.weeklyLively = lively
-                      self.combinedChartView(myxaxis: self.weekDays, lively: lively, chiling: chilling, wandering: wandering, chart: self.weekelyGoalBarChart)
+                    self.combinedChartView(myxaxis: self.weekDays, lively: lively, chiling: chilling, wandering: wandering, chart: self.weekelyGoalBarChart, symbol: "hrs")
                 } else if let error = error {
                     print(error.localizedDescription)
                 }
@@ -273,7 +276,7 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
                     self.monthlyLively = lively
                     self.monthlywandering = wandering
                     self.monthlychiling = chilling
-                    self.combinedChartView(myxaxis: self.weeks, lively: chilling, chiling: wandering, wandering: lively, chart: self.monthlyGoalBarChart)
+                    self.combinedChartView(myxaxis: self.weeks, lively: chilling, chiling: wandering, wandering: lively, chart: self.monthlyGoalBarChart, symbol: "mins")
 
                 } else if let error = error {
                     print(error.localizedDescription)
@@ -361,7 +364,7 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
     }
     
     
-    func combinedChartView(myxaxis: [String], lively: [Int], chiling: [Int], wandering: [Int], chart: BarChartView) {
+    func combinedChartView(myxaxis: [String], lively: [Int], chiling: [Int], wandering: [Int], chart: BarChartView, symbol: String) {
         // legand
         
         chart.chartDescription?.text = ""
@@ -388,9 +391,9 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
         // left xaxis
         let leftAxisFormatter = NumberFormatter()
         leftAxisFormatter.numberStyle = .percent
-        leftAxisFormatter.percentSymbol = " hr"
-        leftAxisFormatter.maximumFractionDigits = 1
-        leftAxisFormatter.multiplier = 1.0
+        leftAxisFormatter.percentSymbol = " \(symbol)"
+        leftAxisFormatter.maximumFractionDigits = 2
+        leftAxisFormatter.multiplier = 1
         
         let formatter = DefaultValueFormatter(formatter: leftAxisFormatter)
 

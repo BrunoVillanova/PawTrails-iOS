@@ -89,7 +89,6 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         controller.codeDelegate = self
         controller.errorDelegate = self
         controller.dismissalDelegate = self
-        
         present(controller, animated: true, completion: nil)
     }
     
@@ -227,7 +226,7 @@ class petListCell: UITableViewCell {
             petImageView.image = nil
         }
         
-        subtitleLabel.text = "Getting address ..."
+        subtitleLabel.text = "Bring your device outdoor to get location.."
         
         DataManager.instance.lastPetDeviceData(pet).subscribe(onNext: { (petDeviceData) in
             if let petDeviceData = petDeviceData {

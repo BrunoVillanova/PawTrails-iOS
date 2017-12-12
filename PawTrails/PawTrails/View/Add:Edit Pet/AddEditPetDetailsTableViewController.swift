@@ -105,15 +105,16 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
     
     func doneSuccessfully() {
         if pet == nil {
-            dismiss(animated: true, completion: nil)
+            if let navigation = (navigationController?.viewControllers.first(where: { $0 is PetsViewController }) as? PetsViewController) {
+                navigation.reloadPetsAPI()
+                _ = navigationController?.popViewController(animated: true)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "petAdded"), object: nil)
             self.alert(title: "", msg: "Your request has been processed", type: .blue, disableTime: 3, handler: nil)
+            }
         }else{
             if let navigation = (navigationController?.viewControllers.first(where: { $0 is PetsViewController }) as? PetsViewController) {
                     navigation.reloadPetsAPI()
-
                 self.alert(title: "", msg: "Your request has been processed", type: .blue, disableTime: 3, handler: nil)
-
                 }
             
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "petAdded"), object: nil)
@@ -173,3 +174,10 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
     }
 
 }
+
+//extension AddEditPetDetailsTableViewController: BarcodeScannerDismissalDelegate {
+//    func barcodeScannerDidDismiss(_ controller: BarcodeScannerController) {
+//        self.dismiss(animated: true, completion: nil)
+//    }
+//}
+

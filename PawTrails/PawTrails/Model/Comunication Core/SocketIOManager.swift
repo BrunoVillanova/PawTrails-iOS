@@ -75,6 +75,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     private let urlStringSSL = "https://eu.pawtrails.pet:4654"
     #endif
     
+    
     private var socket: SocketIOClient!
     private let disposeBag = DisposeBag()
     public var socketReactive: Reactive<SocketIOClient>?
