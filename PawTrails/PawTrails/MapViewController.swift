@@ -39,7 +39,7 @@ class MapViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.showMessage("Bring your device outdoor to receive GPS signal", type: GSMessageType.info,  options: [
+        self.showMessage("Please keep moving your device until you get your first location.", type: GSMessageType.info,  options: [
             .animation(.slide),
             .animationDuration(0.3),
             .autoHide(false),

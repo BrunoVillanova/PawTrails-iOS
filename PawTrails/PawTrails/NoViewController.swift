@@ -11,11 +11,33 @@ import UIKit
 class NoViewController: UIViewController {
     var pet: Pet!
     
+    @IBOutlet weak var watchNow: UIButton!
+    @IBAction func watchNowBtnPressed(_ sender: Any) {
+        self.popUpDestructive(title: "", msg: "You are being redirected to youtube to watch the Tutorial", cancelHandler: nil) { (done) in
+            let youtubeId = "DPhk6Qfg04A"
+            if let urlFromStr = URL(string: "youtube://\(youtubeId)") {
+                if UIApplication.shared.canOpenURL(urlFromStr) {
+                    if #available(iOS 10.0, *) {
+                        UIApplication.shared.open(urlFromStr, options: [:], completionHandler: nil)
+                    } else {
+                        UIApplication.shared.openURL(urlFromStr)
+                    }
+                } else if let webURL = URL(string: "https://www.youtube.com/watch?v=DPhk6Qfg04A") {
+                    UIApplication.shared.openURL(webURL)
+                }
+            }
+        }
+    }
     
     
     @IBOutlet weak var collectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        watchNow.backgroundColor = UIColor.primary
+        watchNow.round()
+        watchNow.setTitle("Video Tutorial", for: .normal)
+        watchNow.setTitleColor(UIColor.white, for: .normal)
         
         collectionView.delegate = self
         collectionView.dataSource = self

@@ -37,7 +37,7 @@ class AboutPawTrails: UIViewController {
     }
     
     @IBAction func contactUsBtnPressed(_ sender: Any) {
-        if let urlFromStr = URL(string: "mailto:info@attitudetech.ie") {
+        if let urlFromStr = URL(string: "mailto:info@pawtrails.ie") {
             if UIApplication.shared.canOpenURL(urlFromStr) {
                 if #available(iOS 10.0, *) {
                     UIApplication.shared.open(urlFromStr, options: [:], completionHandler: nil)

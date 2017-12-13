@@ -599,7 +599,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="130" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="q8V-d2-K1W">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="505"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -1514,7 +1514,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Irl-ap-dJF">
-                                <rect key="frame" x="16" y="64" width="343" height="603"/>
+                                <rect key="frame" x="16" y="108" width="343" height="510"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <attributedString key="attributedText">
                                     <fragment>
@@ -1934,10 +1934,10 @@ Last Edited on 2017-12-04
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qf4-Ct-DNe">
-                                <rect key="frame" x="0.0" y="64" width="375" height="786"/>
+                                <rect key="frame" x="0.0" y="108" width="375" height="693"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LTF-ve-xvE">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="828"/>
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LTF-ve-xvE">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="850"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pawtrails-logo-1x-png" translatesAutoresizingMaskIntoConstraints="NO" id="8Wu-Xz-nn3">
                                                 <rect key="frame" x="114" y="30" width="147" height="70"/>
@@ -2224,7 +2224,7 @@ PawTrails is a product created by Attitude Technologies.
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="98f-Ae-ufe">
-                                <rect key="frame" x="0.0" y="102" width="375" height="216"/>
+                                <rect key="frame" x="0.0" y="146" width="375" height="216"/>
                                 <subviews>
                                     <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="nOV-Lr-0ne">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="216"/>
@@ -4308,10 +4308,10 @@ PawTrails is a product created by Attitude Technologies.
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="osN-NO-pbf">
-                                <rect key="frame" x="0.0" y="114" width="375" height="504"/>
+                                <rect key="frame" x="0.0" y="158" width="375" height="411"/>
                             </scrollView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Kix-04-002" customClass="ButtonBarView" customModule="XLPagerTabStrip">
-                                <rect key="frame" x="0.0" y="64" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="108" width="375" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="xe5-DQ-oFK"/>
@@ -5626,17 +5626,17 @@ PawTrails is a product created by Attitude Technologies.
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pawtrails-logo-1x-png" translatesAutoresizingMaskIntoConstraints="NO" id="ILA-mU-fYT">
-                                <rect key="frame" x="80" y="114" width="80" height="50"/>
+                                <rect key="frame" x="80" y="158" width="80" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="MZO-Kh-6x2"/>
                                     <constraint firstAttribute="width" constant="80" id="mkI-L3-sDP"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sunbeam-logo-1x-png-nobg" translatesAutoresizingMaskIntoConstraints="NO" id="FeI-1n-QoM">
-                                <rect key="frame" x="166" y="114" width="144" height="50"/>
+                                <rect key="frame" x="166" y="158" width="144" height="50"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rFc-dO-isr">
-                                <rect key="frame" x="0.0" y="57" width="375" height="553"/>
+                                <rect key="frame" x="0.0" y="106" width="375" height="455"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="g72-ZG-vyw">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="61"/>
@@ -5723,14 +5723,13 @@ PawTrails is a product created by Attitude Technologies.
                                 </prototypes>
                             </tableView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wMi-oC-V8K">
-                                <rect key="frame" x="-4" y="174" width="383" height="493"/>
+                                <rect key="frame" x="-4" y="218" width="383" height="449"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q4u-vi-c5L">
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PawTrails worked with a veterinary surgeon from Sunbeam Veterinary clinic to give our customers professional recommendation." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q4u-vi-c5L">
                                         <rect key="frame" x="20" y="20" width="343" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="pCl-Oy-llE"/>
                                         </constraints>
-                                        <string key="text">PawTrails worked with a veterinary surgeon from Sunbeam Veterinary clinic to give our customers perfessional recommandations based on the</string>
                                         <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="18"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -6120,7 +6119,7 @@ finish the Adventure?</string>
             </objects>
             <point key="canvasLocation" x="-4752.8000000000002" y="2997.7511244377815"/>
         </scene>
-        <!--Recommandation-->
+        <!--Recommendation-->
         <scene sceneID="5y6-fW-6hP">
             <objects>
                 <viewController id="8Ak-78-vA7" customClass="SelectPetForRecommandationController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
@@ -6266,7 +6265,7 @@ finish the Adventure?</string>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="U2C-b4-wrM"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Recommandation" id="GMH-gz-egg">
+                    <navigationItem key="navigationItem" title="Recommendation" id="GMH-gz-egg">
                         <barButtonItem key="leftBarButtonItem" title="Close" id="Uah-wD-73s">
                             <color key="tintColor" red="0.80784313730000001" green="0.074509803920000006" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
@@ -6415,18 +6414,31 @@ finish the Adventure?</string>
                                     <constraint firstAttribute="width" constant="100" id="xQ7-hJ-3oa"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NqQ-ZK-Zu7">
+                                <rect key="frame" x="60" y="432" width="255" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="znO-XY-HQ2"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="watchNowBtnPressed:" destination="MAI-vk-7xq" eventType="touchUpInside" id="hbg-Fb-qbI"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="IfA-u8-sNa" firstAttribute="bottom" secondItem="aCG-9D-sA0" secondAttribute="bottom" constant="8" id="07t-ym-gbn"/>
                             <constraint firstItem="aCG-9D-sA0" firstAttribute="leading" secondItem="IfA-u8-sNa" secondAttribute="leading" constant="16" id="AGS-R2-kPv"/>
                             <constraint firstItem="WfN-hY-vnx" firstAttribute="top" secondItem="IfA-u8-sNa" secondAttribute="top" constant="50" id="CjZ-Vc-ZU9"/>
+                            <constraint firstItem="Gs5-dU-N4x" firstAttribute="top" secondItem="NqQ-ZK-Zu7" secondAttribute="bottom" constant="20" id="Djb-fQ-fdT"/>
                             <constraint firstItem="f33-Yx-qXV" firstAttribute="top" secondItem="WfN-hY-vnx" secondAttribute="bottom" priority="749" constant="48.5" id="H3o-OB-Lcn"/>
                             <constraint firstItem="WfN-hY-vnx" firstAttribute="leading" secondItem="IfA-u8-sNa" secondAttribute="leading" constant="16" id="Per-rj-iqJ"/>
                             <constraint firstItem="IfA-u8-sNa" firstAttribute="trailing" secondItem="WfN-hY-vnx" secondAttribute="trailing" constant="16" id="Tug-hC-bKV"/>
+                            <constraint firstItem="IfA-u8-sNa" firstAttribute="trailing" secondItem="NqQ-ZK-Zu7" secondAttribute="trailing" constant="60" id="a7X-QV-mv4"/>
                             <constraint firstItem="IfA-u8-sNa" firstAttribute="trailing" secondItem="aCG-9D-sA0" secondAttribute="trailing" constant="16" id="cbC-Mr-YiG"/>
                             <constraint firstItem="f33-Yx-qXV" firstAttribute="leading" secondItem="IfA-u8-sNa" secondAttribute="leading" constant="16" id="dgT-rU-jn8"/>
                             <constraint firstItem="IfA-u8-sNa" firstAttribute="trailing" secondItem="f33-Yx-qXV" secondAttribute="trailing" constant="16" id="fIW-K5-BfX"/>
+                            <constraint firstItem="NqQ-ZK-Zu7" firstAttribute="leading" secondItem="IfA-u8-sNa" secondAttribute="leading" constant="60" id="lU9-AV-WNi"/>
                             <constraint firstItem="aCG-9D-sA0" firstAttribute="top" secondItem="Gs5-dU-N4x" secondAttribute="bottom" constant="8" id="qPZ-cT-qFb"/>
                             <constraint firstItem="Gs5-dU-N4x" firstAttribute="centerX" secondItem="IfA-u8-sNa" secondAttribute="centerX" id="vdh-Wi-iEO"/>
                         </constraints>
@@ -6434,6 +6446,7 @@ finish the Adventure?</string>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="f33-Yx-qXV" id="OnC-6Y-lMM"/>
+                        <outlet property="watchNow" destination="NqQ-ZK-Zu7" id="wUv-Cy-lO3"/>
                         <segue destination="ylO-gz-Dts" kind="show" identifier="yes" id="lXV-23-AvL"/>
                         <segue destination="S5q-CF-GBB" kind="show" identifier="no" id="3Jr-e1-yE9"/>
                     </connections>
@@ -6452,7 +6465,7 @@ finish the Adventure?</string>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" horizontalCompressionResistancePriority="748" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fvg-gU-6dA">
                                 <rect key="frame" x="16" y="114" width="343" height="70"/>
-                                <string key="text">The ribs, spine and pelvis are very easily felt with no fat or muscle cover. There is a very narrow waste and there is no visible belly</string>
+                                <string key="text">Are the ribs, spine and pelvis easily felt with no fat or muscle cover and does your dog have a very narrow waist with no visible belly?</string>
                                 <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -6551,25 +6564,39 @@ finish the Adventure?</string>
                                     <constraint firstAttribute="height" constant="50" id="xyy-bJ-WTn"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mfk-v2-vE1">
+                                <rect key="frame" x="60" y="432" width="255" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Abh-AH-p58"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="watchNotBtnPressed:" destination="ylO-gz-Dts" eventType="touchUpInside" id="psh-aQ-Osq"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="vAI-cg-ohs" firstAttribute="trailing" secondItem="Mfk-v2-vE1" secondAttribute="trailing" constant="60" id="3jQ-ZT-ovO"/>
                             <constraint firstItem="vAI-cg-ohs" firstAttribute="trailing" secondItem="Fvg-gU-6dA" secondAttribute="trailing" constant="16" id="6Fu-bS-CV6"/>
                             <constraint firstItem="vAI-cg-ohs" firstAttribute="bottom" secondItem="WSc-GN-6H5" secondAttribute="bottom" constant="8" id="72t-Is-iaq"/>
                             <constraint firstItem="vAI-cg-ohs" firstAttribute="trailing" secondItem="WSc-GN-6H5" secondAttribute="trailing" constant="16" id="91w-ZH-cBx"/>
                             <constraint firstItem="Fvg-gU-6dA" firstAttribute="leading" secondItem="vAI-cg-ohs" secondAttribute="leading" constant="16" id="9zX-d2-ybW"/>
                             <constraint firstItem="m05-nD-TaW" firstAttribute="leading" secondItem="vAI-cg-ohs" secondAttribute="leading" constant="16" id="J71-EW-LbF"/>
                             <constraint firstItem="5np-b5-GIe" firstAttribute="centerX" secondItem="vAI-cg-ohs" secondAttribute="centerX" id="RxA-7c-BMQ"/>
+                            <constraint firstItem="5np-b5-GIe" firstAttribute="top" secondItem="Mfk-v2-vE1" secondAttribute="bottom" constant="20" id="Xf9-yp-kNv"/>
                             <constraint firstItem="m05-nD-TaW" firstAttribute="top" secondItem="Fvg-gU-6dA" secondAttribute="bottom" priority="749" constant="48.5" id="ZFF-O1-f1X"/>
                             <constraint firstItem="WSc-GN-6H5" firstAttribute="top" secondItem="5np-b5-GIe" secondAttribute="bottom" constant="8" id="cfH-ZT-UZv"/>
                             <constraint firstItem="WSc-GN-6H5" firstAttribute="leading" secondItem="vAI-cg-ohs" secondAttribute="leading" constant="16" id="csT-fh-zbm"/>
                             <constraint firstItem="vAI-cg-ohs" firstAttribute="trailing" secondItem="m05-nD-TaW" secondAttribute="trailing" constant="16" id="iPk-fh-tYS"/>
+                            <constraint firstItem="Mfk-v2-vE1" firstAttribute="leading" secondItem="vAI-cg-ohs" secondAttribute="leading" constant="60" id="jnX-aq-KqJ"/>
                             <constraint firstItem="Fvg-gU-6dA" firstAttribute="top" secondItem="vAI-cg-ohs" secondAttribute="top" constant="50" id="mNM-tw-3MQ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vAI-cg-ohs"/>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="m05-nD-TaW" id="Bmi-hd-oOq"/>
+                        <outlet property="watchNow" destination="Mfk-v2-vE1" id="w8X-KQ-mU6"/>
                         <segue destination="Krq-aV-jdf" kind="show" identifier="result" id="5Sd-jc-pKD"/>
                     </connections>
                 </viewController>
@@ -6693,7 +6720,7 @@ finish the Adventure?</string>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" horizontalCompressionResistancePriority="748" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U9s-hv-cl3">
                                 <rect key="frame" x="16" y="114" width="343" height="46.5"/>
-                                <string key="text">Can you feel the ribs, spine and pelvis with light pressure?
+                                <string key="text">Can you feel the ribs, spine and pelvis with light pressure? 
 </string>
                                 <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -6793,6 +6820,16 @@ finish the Adventure?</string>
                                     <constraint firstAttribute="width" constant="100" id="xGg-rS-sKl"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0o9-gF-mK8">
+                                <rect key="frame" x="60" y="432" width="255" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="G88-JU-T0i"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="watchNowBtnPressed:" destination="S5q-CF-GBB" eventType="touchUpInside" id="B5c-5a-c4Z"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -6800,9 +6837,12 @@ finish the Adventure?</string>
                             <constraint firstItem="tMc-Vl-pkC" firstAttribute="leading" secondItem="B3a-gS-4HZ" secondAttribute="leading" constant="16" id="3xX-sa-i78"/>
                             <constraint firstItem="uO4-by-bw6" firstAttribute="centerX" secondItem="B3a-gS-4HZ" secondAttribute="centerX" id="6BU-Mp-JTp"/>
                             <constraint firstItem="B3a-gS-4HZ" firstAttribute="trailing" secondItem="U9s-hv-cl3" secondAttribute="trailing" constant="16" id="7Sp-fe-ur7"/>
+                            <constraint firstItem="B3a-gS-4HZ" firstAttribute="trailing" secondItem="0o9-gF-mK8" secondAttribute="trailing" constant="60" id="Cl9-l9-vcX"/>
                             <constraint firstItem="U9s-hv-cl3" firstAttribute="leading" secondItem="B3a-gS-4HZ" secondAttribute="leading" constant="16" id="EYB-oX-mKm"/>
                             <constraint firstItem="U9s-hv-cl3" firstAttribute="top" secondItem="B3a-gS-4HZ" secondAttribute="top" constant="50" id="Ml0-VC-2qn"/>
                             <constraint firstItem="tMc-Vl-pkC" firstAttribute="top" secondItem="U9s-hv-cl3" secondAttribute="bottom" priority="749" constant="48.5" id="PRg-Kt-246"/>
+                            <constraint firstItem="uO4-by-bw6" firstAttribute="top" secondItem="0o9-gF-mK8" secondAttribute="bottom" constant="20" id="TUJ-5r-mx3"/>
+                            <constraint firstItem="0o9-gF-mK8" firstAttribute="leading" secondItem="B3a-gS-4HZ" secondAttribute="leading" constant="60" id="Vec-w4-mHi"/>
                             <constraint firstItem="B3a-gS-4HZ" firstAttribute="bottom" secondItem="OXf-ox-Qxo" secondAttribute="bottom" constant="8" id="djE-ON-giH"/>
                             <constraint firstItem="OXf-ox-Qxo" firstAttribute="leading" secondItem="B3a-gS-4HZ" secondAttribute="leading" constant="16" id="eJg-cl-hHq"/>
                             <constraint firstItem="B3a-gS-4HZ" firstAttribute="trailing" secondItem="tMc-Vl-pkC" secondAttribute="trailing" constant="16" id="jcf-HQ-YgB"/>
@@ -6812,13 +6852,14 @@ finish the Adventure?</string>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="tMc-Vl-pkC" id="XF4-Ns-NH9"/>
+                        <outlet property="watchNow" destination="0o9-gF-mK8" id="N2V-GD-mw4"/>
                         <segue destination="inL-cb-6g1" kind="show" identifier="Yea" id="HYQ-cN-QEt"/>
                         <segue destination="eKy-Jj-Qfv" kind="show" identifier="Nope" id="zkd-2N-CMA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cpc-L1-fiy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2778" y="4252"/>
+            <point key="canvasLocation" x="-2727" y="4286"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="rWk-qp-HMO">
@@ -6828,7 +6869,7 @@ finish the Adventure?</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" horizontalCompressionResistancePriority="748" text="Has a waste line when felt from behind the ribs to in front of the pelvis" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z0d-J7-cxS">
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" horizontalCompressionResistancePriority="748" text="Has your dog a waistline when felt from behind the ribs to in front of the pelvis?" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z0d-J7-cxS">
                                 <rect key="frame" x="16" y="114" width="343" height="46.5"/>
                                 <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -6928,18 +6969,31 @@ finish the Adventure?</string>
                                     <constraint firstAttribute="width" constant="100" id="Idj-tj-hbc"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iqM-Ke-lld">
+                                <rect key="frame" x="60" y="432" width="255" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="lck-ZH-3HM"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="watchNowBtnPressed:" destination="inL-cb-6g1" eventType="touchUpInside" id="q6W-4p-OCU"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="c0B-FA-gmo" firstAttribute="trailing" secondItem="z2b-aW-JYE" secondAttribute="trailing" constant="16" id="0Ho-Tk-TsO"/>
+                            <constraint firstItem="iqM-Ke-lld" firstAttribute="leading" secondItem="c0B-FA-gmo" secondAttribute="leading" constant="60" id="3VC-Di-HNZ"/>
                             <constraint firstItem="c0B-FA-gmo" firstAttribute="trailing" secondItem="z0d-J7-cxS" secondAttribute="trailing" constant="16" id="4Co-N0-Y9w"/>
                             <constraint firstItem="z0d-J7-cxS" firstAttribute="top" secondItem="c0B-FA-gmo" secondAttribute="top" constant="50" id="Ah2-Cc-djS"/>
                             <constraint firstItem="c0B-FA-gmo" firstAttribute="bottom" secondItem="z2b-aW-JYE" secondAttribute="bottom" constant="8" id="DQo-x4-LGI"/>
+                            <constraint firstItem="z3Z-zd-D3x" firstAttribute="top" secondItem="iqM-Ke-lld" secondAttribute="bottom" constant="20" id="DbX-XK-Oio"/>
                             <constraint firstItem="dEq-aY-lAy" firstAttribute="top" secondItem="z0d-J7-cxS" secondAttribute="bottom" priority="749" constant="48.5" id="Fz5-w3-DV8"/>
                             <constraint firstItem="z2b-aW-JYE" firstAttribute="leading" secondItem="c0B-FA-gmo" secondAttribute="leading" constant="16" id="Loi-hM-KUM"/>
                             <constraint firstItem="z3Z-zd-D3x" firstAttribute="centerX" secondItem="c0B-FA-gmo" secondAttribute="centerX" id="U31-n0-6uY"/>
                             <constraint firstItem="z2b-aW-JYE" firstAttribute="top" secondItem="z3Z-zd-D3x" secondAttribute="bottom" constant="8" id="YcP-X3-8p1"/>
                             <constraint firstItem="z0d-J7-cxS" firstAttribute="leading" secondItem="c0B-FA-gmo" secondAttribute="leading" constant="16" id="Z8g-MI-VOs"/>
+                            <constraint firstItem="c0B-FA-gmo" firstAttribute="trailing" secondItem="iqM-Ke-lld" secondAttribute="trailing" constant="60" id="f9c-cB-Zfu"/>
                             <constraint firstItem="c0B-FA-gmo" firstAttribute="trailing" secondItem="dEq-aY-lAy" secondAttribute="trailing" constant="16" id="vEB-Dk-ESv"/>
                             <constraint firstItem="dEq-aY-lAy" firstAttribute="leading" secondItem="c0B-FA-gmo" secondAttribute="leading" constant="16" id="vZk-yf-swc"/>
                         </constraints>
@@ -6947,6 +7001,7 @@ finish the Adventure?</string>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="dEq-aY-lAy" id="eTF-7G-PPn"/>
+                        <outlet property="watchNow" destination="iqM-Ke-lld" id="mgM-Du-dMl"/>
                         <segue destination="Krq-aV-jdf" kind="show" identifier="bsc" id="lHA-KO-G9F"/>
                     </connections>
                 </viewController>
@@ -6962,7 +7017,7 @@ finish the Adventure?</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" horizontalCompressionResistancePriority="748" text="No waist line felt, saggy tummy, Lumps of fat felt" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pVu-6g-4SP">
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" horizontalCompressionResistancePriority="748" text="Does you dog have no waistline and instead a  saggy tummy and lumps of fat?" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pVu-6g-4SP">
                                 <rect key="frame" x="16" y="114" width="343" height="46.5"/>
                                 <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -7062,13 +7117,26 @@ finish the Adventure?</string>
                                     <constraint firstAttribute="width" constant="100" id="xMa-QX-vMT"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wtK-po-F3w">
+                                <rect key="frame" x="60" y="432" width="255" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="bU2-0s-ePo"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="watchNowBtnPressed:" destination="eKy-Jj-Qfv" eventType="touchUpInside" id="zhG-1T-Z5V"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="wtK-po-F3w" firstAttribute="leading" secondItem="I3T-ko-bsZ" secondAttribute="leading" constant="60" id="4pH-Cd-F4h"/>
                             <constraint firstItem="pVu-6g-4SP" firstAttribute="top" secondItem="I3T-ko-bsZ" secondAttribute="top" constant="50" id="CfQ-5q-Zks"/>
                             <constraint firstItem="I3T-ko-bsZ" firstAttribute="trailing" secondItem="pVu-6g-4SP" secondAttribute="trailing" constant="16" id="D08-8F-Oxv"/>
                             <constraint firstItem="I3T-ko-bsZ" firstAttribute="trailing" secondItem="gQh-2e-xG8" secondAttribute="trailing" constant="16" id="Fwz-7Z-DFn"/>
+                            <constraint firstItem="8Qg-pX-05C" firstAttribute="top" secondItem="wtK-po-F3w" secondAttribute="bottom" constant="20" id="X6l-MP-2d5"/>
                             <constraint firstItem="I3T-ko-bsZ" firstAttribute="bottom" secondItem="Mw0-W3-IEG" secondAttribute="bottom" constant="8" id="ZHn-hY-Vkq"/>
+                            <constraint firstItem="I3T-ko-bsZ" firstAttribute="trailing" secondItem="wtK-po-F3w" secondAttribute="trailing" constant="60" id="ZMt-U8-d4W"/>
                             <constraint firstItem="I3T-ko-bsZ" firstAttribute="trailing" secondItem="Mw0-W3-IEG" secondAttribute="trailing" constant="16" id="aJd-Wn-t9e"/>
                             <constraint firstItem="Mw0-W3-IEG" firstAttribute="top" secondItem="8Qg-pX-05C" secondAttribute="bottom" constant="8" id="gOE-rf-bsg"/>
                             <constraint firstItem="gQh-2e-xG8" firstAttribute="leading" secondItem="I3T-ko-bsZ" secondAttribute="leading" constant="16" id="iTH-Fq-X1K"/>
@@ -7081,6 +7149,7 @@ finish the Adventure?</string>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="gQh-2e-xG8" id="Tzq-nj-h8J"/>
+                        <outlet property="watchNow" destination="wtK-po-F3w" id="vXP-SN-2Pe"/>
                         <segue destination="Krq-aV-jdf" kind="show" identifier="bsc5" id="yp5-bT-5uy"/>
                     </connections>
                 </viewController>
@@ -7305,7 +7374,7 @@ finish the Adventure?</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rfL-Sn-QFW">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="108" width="375" height="461"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HRI-ee-D9R">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="369.5"/>
