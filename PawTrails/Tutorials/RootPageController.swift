@@ -17,7 +17,6 @@ class RootPageController: UIPageViewController, UIPageViewControllerDataSource, 
         let vc2 = sb.instantiateViewController(withIdentifier: "Second")
         let vc3 = sb.instantiateViewController(withIdentifier: "Third")
         return [vc1, vc2, vc3]
-        
     }()
 
     override func viewDidLoad() {

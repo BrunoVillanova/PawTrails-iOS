@@ -19,6 +19,8 @@ target 'PawTrails' do
     pod 'Firebase/Messaging'
     pod 'BarcodeScanner', '~> 2.1.2'
     pod 'MaterialComponents/Buttons'
+    pod "Pulsator"
+
 
   target 'PawTrailsTests' do
     inherit! :search_paths  	

@@ -91,12 +91,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
             
-            let tutorialShowen: Bool = UserDefaults.standard.bool(forKey: "tutorialShowen")
-            if tutorialShowen {
+            let tutorialShowen = UserDefaults.standard
+            
+            if !tutorialShowen.bool(forKey: "tutorialShowen") {
                 loadTutorial()
-
             } else {
-                loadTutorial()
+                loadHomeScreen()
             }
         } else {
             loadAuthenticationScreen()

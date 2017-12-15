@@ -51,7 +51,8 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
     }
     
     @IBAction func doneAction(_ sender: UIBarButtonItem?) {
-        doneSuccessfully()
+        presenter.done()
+//        doneSuccessfully()
     }
     
     @IBAction func neuteredValueChanged(_ sender: UISwitch) {

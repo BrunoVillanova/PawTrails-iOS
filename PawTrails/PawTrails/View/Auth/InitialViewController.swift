@@ -87,13 +87,35 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
     
     func userAuthenticated() {
         SocketIOManager.instance.connect()
-        guard let window = UIApplication.shared.delegate?.window else { return }
-        guard let root = storyboard?.instantiateViewController(withIdentifier: "tabBarController") else { return }
-        
-        window?.rootViewController = root
+        let tutorialShowen = UserDefaults.standard
+
+        if !tutorialShowen.bool(forKey: "tutorialShowen") {
+            loadTutorial()
+            
+        } else {
+            loadHomeScreen()
+        }
+   
+     
         
         self.view.endEditing(true)
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    func loadHomeScreen() {
+        
+             guard let window = UIApplication.shared.delegate?.window else { return }
+        //        if runningTripArray.isEmpty == false {
+        let root = storyboard?.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
+        root.selectedIndex = 0
+        window?.rootViewController = root
+    }
+    
+    func loadTutorial() {
+             guard let window = UIApplication.shared.delegate?.window else { return }
+        let root = storyboard?.instantiateViewController(withIdentifier: "SignUpYourDeviceVC") as! SignUpYourDeviceVC
+        window?.rootViewController = root
     }
     
     func emailFieldError() {
