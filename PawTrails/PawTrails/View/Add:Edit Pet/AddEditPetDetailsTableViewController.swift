@@ -51,7 +51,7 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
     }
     
     @IBAction func doneAction(_ sender: UIBarButtonItem?) {
-        presenter.done()
+        doneSuccessfully()
     }
     
     @IBAction func neuteredValueChanged(_ sender: UISwitch) {
@@ -105,12 +105,10 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
     
     func doneSuccessfully() {
         if pet == nil {
-            if let navigation = (navigationController?.viewControllers.first(where: { $0 is PetsViewController }) as? PetsViewController) {
-                navigation.reloadPetsAPI()
-                _ = navigationController?.popViewController(animated: true)
+                let StepThreeViewController = storyboard?.instantiateViewController(withIdentifier: "StepThreeViewController") as! StepThreeViewController
+                self.present(StepThreeViewController, animated: true, completion: nil)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "petAdded"), object: nil)
             self.alert(title: "", msg: "Your request has been processed", type: .blue, disableTime: 3, handler: nil)
-            }
         }else{
             if let navigation = (navigationController?.viewControllers.first(where: { $0 is PetsViewController }) as? PetsViewController) {
                     navigation.reloadPetsAPI()
