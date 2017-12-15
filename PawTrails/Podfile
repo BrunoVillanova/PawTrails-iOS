@@ -27,6 +27,8 @@ target 'PawTrails' do
     pod 'BarcodeScanner', '~> 2.1.2'
     pod 'HockeySDK'
     pod 'MaterialComponents/Buttons'
+    pod "Pulsator"
+
 
   target 'PawTrailsTests' do
     inherit! :search_paths  	
