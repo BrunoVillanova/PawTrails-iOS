@@ -105,7 +105,8 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         let urlString = SSLEnabled ? self.urlStringSSL : self.urlString
         
         if let url = URL(string: urlString) {
-            self.socket = SocketIOClient(socketURL: url, config: [.log(false), .secure(true)])
+            let manager = SocketManager(socketURL: url, config: [.log(false), .secure(true)])
+            self.socket = manager.defaultSocket
         }
         
         // Init SocketIO
@@ -396,13 +397,5 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         }
         Reporter.debugPrint(file: "\(#file)", function: "\(#function)", data, data.first as? [String:Any] ?? "", data as? [String] ?? "")
         return SocketIOStatus.unknown
-    }
-}
-
-
-
-fileprivate extension SocketIOClient {
-    var isConnected: Bool {
-        return self.status == SocketIOClientStatus.connected
     }
 }
