@@ -213,7 +213,11 @@ class SelectPetsVC: UIViewController, PetsView, SelectPetView {
                 if let errorCode = apiError.errorCode {
                     print("Error \(errorCode)!")
                 }
+            },
+            onCompleted: {
+                self.hideLoadingView()
             }).disposed(by: disposeBag)
+        
     }
 
     @IBAction func closebtnPressed(_ sender: Any) {
