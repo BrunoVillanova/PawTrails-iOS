@@ -47,6 +47,7 @@
 		440784491F8B85A1005E9E1B /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 440784481F8B85A1005E9E1B /* SettingsView.xib */; };
 		4407844B1F8B85E8005E9E1B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4407844A1F8B85E8005E9E1B /* SettingsView.swift */; };
 		440823CA1F8F94900004B90F /* SetUpYourGoalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440823C91F8F94900004B90F /* SetUpYourGoalController.swift */; };
+		440C213A1FE2B676003A2C70 /* RootPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440C21391FE2B676003A2C70 /* RootPageController.swift */; };
 		441292311FAB254300745ED2 /* TabPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441292301FAB254300745ED2 /* TabPageViewController.swift */; };
 		441292331FAB25F900745ED2 /* PetInfromationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441292321FAB25F900745ED2 /* PetInfromationViewController.swift */; };
 		441292351FAB260500745ED2 /* GoalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441292341FAB260500745ED2 /* GoalsViewController.swift */; };
@@ -188,6 +189,8 @@
 		446607C31F95FFE900833683 /* AirbnbDatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446607C21F95FFE900833683 /* AirbnbDatePickerViewController.swift */; };
 		446607C51F96004000833683 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446607C41F96004000833683 /* Date.swift */; };
 		446607C71F96028F00833683 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446607C61F96028F00833683 /* Utility.swift */; };
+		446FAE441FE3E9AF0039F819 /* GettingLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446FAE431FE3E9AF0039F819 /* GettingLocationViewController.swift */; };
+		446FAE461FE3EF510039F819 /* SuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446FAE451FE3EF510039F819 /* SuccessViewController.swift */; };
 		447D02E61FD5890800D3ECB2 /* PrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447D02E51FD5890800D3ECB2 /* PrivacyViewController.swift */; };
 		448BE9681ED47F5C00665608 /* APIUserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448BE9671ED47F5C00665608 /* APIUserTest.swift */; };
 		448BE96A1ED490D900665608 /* APIImageUploadTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448BE9691ED490D900665608 /* APIImageUploadTest.swift */; };
@@ -197,6 +200,10 @@
 		44BC63CA1FB078FD006E38F4 /* SingleResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BC63C91FB078FD006E38F4 /* SingleResultViewController.swift */; };
 		44C0409D1FAB6D9A00CF6E88 /* SharedUsersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C0409B1FAB6D9A00CF6E88 /* SharedUsersTableViewCell.swift */; };
 		44C0409E1FAB6D9A00CF6E88 /* SharedUsersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44C0409C1FAB6D9A00CF6E88 /* SharedUsersTableViewCell.xib */; };
+		44C0FBA31FE2D242005CC91B /* SignUpYourDeviceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C0FBA21FE2D241005CC91B /* SignUpYourDeviceVC.swift */; };
+		44C0FBA51FE2D863005CC91B /* StepOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C0FBA41FE2D863005CC91B /* StepOneViewController.swift */; };
+		44C0FBA71FE2D87D005CC91B /* StepTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C0FBA61FE2D87D005CC91B /* StepTwoViewController.swift */; };
+		44C0FBA91FE2D889005CC91B /* StepThreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C0FBA81FE2D889005CC91B /* StepThreeViewController.swift */; };
 		44C7F7501E4CD3DA00171170 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C7F74F1E4CD3DA00171170 /* HomePresenter.swift */; };
 		44CEE4521FBAF1B300EF6DA6 /* AboutPawTrails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CEE4511FBAF1B300EF6DA6 /* AboutPawTrails.swift */; };
 		44D5FE921EE6E9560049232F /* DataManagerPetSafeZonesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D5FE911EE6E9560049232F /* DataManagerPetSafeZonesTests.swift */; };
@@ -271,6 +278,7 @@
 		440784481F8B85A1005E9E1B /* SettingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsView.xib; sourceTree = "<group>"; };
 		4407844A1F8B85E8005E9E1B /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		440823C91F8F94900004B90F /* SetUpYourGoalController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetUpYourGoalController.swift; sourceTree = "<group>"; };
+		440C21391FE2B676003A2C70 /* RootPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootPageController.swift; sourceTree = "<group>"; };
 		441292301FAB254300745ED2 /* TabPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabPageViewController.swift; sourceTree = "<group>"; };
 		441292321FAB25F900745ED2 /* PetInfromationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetInfromationViewController.swift; sourceTree = "<group>"; };
 		441292341FAB260500745ED2 /* GoalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsViewController.swift; sourceTree = "<group>"; };
@@ -428,6 +436,8 @@
 		446607C21F95FFE900833683 /* AirbnbDatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirbnbDatePickerViewController.swift; sourceTree = "<group>"; };
 		446607C41F96004000833683 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		446607C61F96028F00833683 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		446FAE431FE3E9AF0039F819 /* GettingLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GettingLocationViewController.swift; sourceTree = "<group>"; };
+		446FAE451FE3EF510039F819 /* SuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessViewController.swift; sourceTree = "<group>"; };
 		447D02E51FD5890800D3ECB2 /* PrivacyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyViewController.swift; sourceTree = "<group>"; };
 		4485007D1FC6DE3300F9510E /* PawTrails.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PawTrails.entitlements; sourceTree = "<group>"; };
 		448BE9671ED47F5C00665608 /* APIUserTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIUserTest.swift; sourceTree = "<group>"; };
@@ -438,6 +448,10 @@
 		44BC63C91FB078FD006E38F4 /* SingleResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleResultViewController.swift; sourceTree = "<group>"; };
 		44C0409B1FAB6D9A00CF6E88 /* SharedUsersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedUsersTableViewCell.swift; sourceTree = "<group>"; };
 		44C0409C1FAB6D9A00CF6E88 /* SharedUsersTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SharedUsersTableViewCell.xib; sourceTree = "<group>"; };
+		44C0FBA21FE2D241005CC91B /* SignUpYourDeviceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpYourDeviceVC.swift; sourceTree = "<group>"; };
+		44C0FBA41FE2D863005CC91B /* StepOneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepOneViewController.swift; sourceTree = "<group>"; };
+		44C0FBA61FE2D87D005CC91B /* StepTwoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepTwoViewController.swift; sourceTree = "<group>"; };
+		44C0FBA81FE2D889005CC91B /* StepThreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepThreeViewController.swift; sourceTree = "<group>"; };
 		44C7F74F1E4CD3DA00171170 /* HomePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomePresenter.swift; path = Presenter/HomePresenter.swift; sourceTree = "<group>"; };
 		44CEE4511FBAF1B300EF6DA6 /* AboutPawTrails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutPawTrails.swift; sourceTree = "<group>"; };
 		44D5FE911EE6E9560049232F /* DataManagerPetSafeZonesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerPetSafeZonesTests.swift; sourceTree = "<group>"; };
@@ -563,6 +577,20 @@
 			name = PetActivities;
 			sourceTree = "<group>";
 		};
+		440C21371FE2B1EE003A2C70 /* Tutorials */ = {
+			isa = PBXGroup;
+			children = (
+				440C21391FE2B676003A2C70 /* RootPageController.swift */,
+				44C0FBA21FE2D241005CC91B /* SignUpYourDeviceVC.swift */,
+				44C0FBA41FE2D863005CC91B /* StepOneViewController.swift */,
+				44C0FBA61FE2D87D005CC91B /* StepTwoViewController.swift */,
+				44C0FBA81FE2D889005CC91B /* StepThreeViewController.swift */,
+				446FAE431FE3E9AF0039F819 /* GettingLocationViewController.swift */,
+				446FAE451FE3EF510039F819 /* SuccessViewController.swift */,
+			);
+			path = Tutorials;
+			sourceTree = "<group>";
+		};
 		440CEE491E3B8D0700F58A09 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -637,6 +665,7 @@
 		4415FF361E3B822900A81B13 = {
 			isa = PBXGroup;
 			children = (
+				440C21371FE2B1EE003A2C70 /* Tutorials */,
 				442F2D991FAC735E0072D2B6 /* PetUserTableViewController.swift */,
 				44C0409B1FAB6D9A00CF6E88 /* SharedUsersTableViewCell.swift */,
 				44C0409C1FAB6D9A00CF6E88 /* SharedUsersTableViewCell.xib */,
@@ -1467,6 +1496,7 @@
 				441CF74B1FD1B28900FB1088 /* CalanderForActivityController.swift in Sources */,
 				44251B091F0CD5870067F401 /* PetPresenter.swift in Sources */,
 				44251B701F0CD6130067F401 /* SharedPreferences.swift in Sources */,
+				44C0FBA51FE2D863005CC91B /* StepOneViewController.swift in Sources */,
 				441858E51F98DDD8003710A8 /* YesViewController.swift in Sources */,
 				44251B0A1F0CD5870067F401 /* AddEditPetPresenter.swift in Sources */,
 				445F5F401F5EA7900069B513 /* BEMCheckBox.m in Sources */,
@@ -1490,6 +1520,8 @@
 				446607C71F96028F00833683 /* Utility.swift in Sources */,
 				44251B0D1F0CD5870067F401 /* AddPetUserPresenter.swift in Sources */,
 				445F5F411F5EA7900069B513 /* BEMCheckBoxGroup.m in Sources */,
+				44C0FBA91FE2D889005CC91B /* StepThreeViewController.swift in Sources */,
+				440C213A1FE2B676003A2C70 /* RootPageController.swift in Sources */,
 				44251B511F0CD5DF0067F401 /* ScanQRViewController.swift in Sources */,
 				446607C51F96004000833683 /* Date.swift in Sources */,
 				44F0BF361EFBF6C7008C26B3 /* EventManager.swift in Sources */,
@@ -1519,6 +1551,7 @@
 				44251B011F0CD5740067F401 /* PasswordRecoveryPresenter.swift in Sources */,
 				157401B11F9E268200A854C5 /* PTBasicAnnotationView.swift in Sources */,
 				441858E11F98B25B003710A8 /* QuestionsViewController.swift in Sources */,
+				446FAE441FE3E9AF0039F819 /* GettingLocationViewController.swift in Sources */,
 				443E80771F5D53D5008679FC /* PetsCollectionViewCell.swift in Sources */,
 				44BC63CA1FB078FD006E38F4 /* SingleResultViewController.swift in Sources */,
 				44251AE51F0CD54D0067F401 /* ModelExtensions.swift in Sources */,
@@ -1538,6 +1571,7 @@
 				44251B1D1F0CD5BD0067F401 /* InitialViewController.swift in Sources */,
 				44251B4D1F0CD5DF0067F401 /* PetGenderTableViewController.swift in Sources */,
 				44251B411F0CD5DF0067F401 /* GenderTableViewController.swift in Sources */,
+				44C0FBA31FE2D242005CC91B /* SignUpYourDeviceVC.swift in Sources */,
 				441858E91F98EC7E003710A8 /* ResultViewController.swift in Sources */,
 				4415FF431E3B822900A81B13 /* AppDelegate.swift in Sources */,
 				441292351FAB260500745ED2 /* GoalsViewController.swift in Sources */,
@@ -1592,6 +1626,7 @@
 				159646A11FB1D334009DC172 /* PTMapView.swift in Sources */,
 				447D02E61FD5890800D3ECB2 /* PrivacyViewController.swift in Sources */,
 				44251B3F1F0CD5DF0067F401 /* BirthdayViewController.swift in Sources */,
+				44C0FBA71FE2D87D005CC91B /* StepTwoViewController.swift in Sources */,
 				44251B801F0CD6130067F401 /* CDSafeZone+CoreDataProperties.swift in Sources */,
 				4424DCFF1E8EA1D900ACDF07 /* UserProfilePresenter.swift in Sources */,
 				445F5F3F1F5EA7900069B513 /* BEMAnimationManager.m in Sources */,
@@ -1600,6 +1635,7 @@
 				442C32081FBDA33700B3A8BF /* PieChart.swift in Sources */,
 				44251AFD1F0CD5740067F401 /* ChangePasswordPresenter.swift in Sources */,
 				44251B7A1F0CD6130067F401 /* CDPet+CoreDataProperties.swift in Sources */,
+				446FAE461FE3EF510039F819 /* SuccessViewController.swift in Sources */,
 				446607BC1F95FF4C00833683 /* AirbnbDatePickerCell.swift in Sources */,
 				44251AE61F0CD54D0067F401 /* MapExtensions.swift in Sources */,
 				44251B731F0CD6130067F401 /* CDAddress+CoreDataClass.swift in Sources */,

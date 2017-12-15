@@ -90,7 +90,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                 }
             }
-            loadHomeScreen()
+            
+            let tutorialShowen: Bool = UserDefaults.standard.bool(forKey: "tutorialShowen")
+            if tutorialShowen {
+                loadTutorial()
+
+            } else {
+                loadTutorial()
+            }
         } else {
             loadAuthenticationScreen()
         }
@@ -153,6 +160,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             root.selectedIndex = 0
             window?.rootViewController = root
 }
+    
+    func loadTutorial() {
+        
+        let root = storyboard.instantiateViewController(withIdentifier: "SignUpYourDeviceVC") as! SignUpYourDeviceVC
+        window?.rootViewController = root
+    }
     
     func loadAuthenticationScreen() {
             let initial = storyboard.instantiateViewController(withIdentifier: "InitialViewController") as? InitialViewController

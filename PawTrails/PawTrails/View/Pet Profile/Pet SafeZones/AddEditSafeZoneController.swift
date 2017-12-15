@@ -50,7 +50,7 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = "Add SafeZone"
+        self.navigationItem.title = "Add Safe zone"
         
         presenter.attachView(self, safezone: safezone)
         map.showsUserLocation = true
