@@ -38,31 +38,34 @@ public protocol SocketLogger : class {
     /// - parameter message: The message being logged. Can include `%@` that will be replaced with `args`
     /// - parameter type: The type of entity that called for logging.
     /// - parameter args: Any args that should be inserted into the message. May be left out.
-    func log(_ message: @autoclosure () -> String, type: String)
+    func log(_ message: String, type: String, args: Any...)
 
     /// Error Messages
     ///
     /// - parameter message: The message being logged. Can include `%@` that will be replaced with `args`
     /// - parameter type: The type of entity that called for logging.
     /// - parameter args: Any args that should be inserted into the message. May be left out.
-    func error(_ message: @autoclosure () -> String, type: String)
+    func error(_ message: String, type: String, args: Any...)
 }
 
 public extension SocketLogger {
     /// Default implementation.
-    func log(_ message: @autoclosure () -> String, type: String) {
-        abstractLog("LOG", message: message, type: type)
+    func log(_ message: String, type: String, args: Any...) {
+        abstractLog("LOG", message: message, type: type, args: args)
     }
 
     /// Default implementation.
-    func error(_ message: @autoclosure () -> String, type: String) {
-        abstractLog("ERROR", message: message, type: type)
+    func error(_ message: String, type: String, args: Any...) {
+        abstractLog("ERROR", message: message, type: type, args: args)
     }
 
-    private func abstractLog(_ logType: String, message: @autoclosure () -> String, type: String) {
+    private func abstractLog(_ logType: String, message: String, type: String, args: [Any]) {
         guard log else { return }
 
-        NSLog("\(logType) \(type): %@", message())
+        let newArgs = args.map({arg -> CVarArg in String(describing: arg)})
+        let messageFormat = String(format: message, arguments: newArgs)
+
+        NSLog("\(logType) \(type): %@", messageFormat)
     }
 }
 

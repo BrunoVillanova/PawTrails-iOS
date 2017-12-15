@@ -105,8 +105,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         let urlString = SSLEnabled ? self.urlStringSSL : self.urlString
         
         if let url = URL(string: urlString) {
-            let manager = SocketManager(socketURL: url, config: [.log(false), .secure(true)])
-            self.socket = manager.defaultSocket
+            self.socket = SocketIOClient(socketURL: url, config: [.log(false), .secure(true)])
         }
         
         // Init SocketIO
@@ -204,8 +203,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
             if authentication != nil {
                 // User is authenticated
                 
-                self.isConnecting = true
-                self.socket.connect()
+                self.connect()
                 
 //                self.socket.emit(channel.auth.name, token)
             } else {
@@ -293,17 +291,17 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     /// - Parameter callback: returns socket IO connection status
     func connect(_ callback: ((SocketIOStatus)->())? = nil) {
         
-        guard !self.isConnecting else {
-            return
-        }
+//        guard !self.isConnecting else {
+//            return
+//        }
         
-        guard !self.isConnected else {
-            return
-        }
-        
-        guard !self.isAuthenticating else {
-            return
-        }
+//        guard !self.isConnected else {
+//            return
+//        }
+//        
+//        guard !self.isAuthenticating else {
+//            return
+//        }
         
         if DataManager.instance.isAuthenticated() {
             self.isConnecting = true

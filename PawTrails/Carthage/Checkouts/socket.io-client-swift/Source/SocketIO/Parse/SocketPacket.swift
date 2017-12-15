@@ -25,32 +25,22 @@
 
 import Foundation
 
-/// A struct that represents a socket.io packet.
-public struct SocketPacket : CustomStringConvertible {
-    // MARK: Properties
+struct SocketPacket {
+    enum PacketType: Int {
+        case connect, disconnect, event, ack, error, binaryEvent, binaryAck
+    }
+
+    private let placeholders: Int
 
     private static let logType = "SocketPacket"
 
-    /// The namespace for this packet.
-    public let nsp: String
+    let nsp: String
+    let id: Int
+    let type: PacketType
 
-    /// If > 0 then this packet is using acking.
-    public let id: Int
-
-    /// The type of this packet.
-    public let type: PacketType
-
-    /// An array of binary data for this packet.
-    public internal(set) var binary: [Data]
-
-    /// The data for this event.
-    ///
-    /// Note: This includes all data inside of the socket.io packet payload array, which includes the event name for
-    /// event type packets.
-    public internal(set) var data: [Any]
-
-    /// Returns the payload for this packet, minus the event name if this is an event or binaryEvent type packet.
-    public var args: [Any] {
+    var binary: [Data]
+    var data: [Any]
+    var args: [Any] {
         if type == .event || type == .binaryEvent && data.count != 0 {
             return Array(data.dropFirst())
         } else {
@@ -58,21 +48,16 @@ public struct SocketPacket : CustomStringConvertible {
         }
     }
 
-    private let placeholders: Int
-
-    /// A string representation of this packet.
-    public var description: String {
+    var description: String {
         return "SocketPacket {type: \(String(type.rawValue)); data: " +
             "\(String(describing: data)); id: \(id); placeholders: \(placeholders); nsp: \(nsp)}"
     }
 
-    /// The event name for this packet.
-    public var event: String {
+    var event: String {
         return String(describing: data[0])
     }
 
-    /// A string representation of this packet.
-    public var packetString: String {
+    var packetString: String {
         return createPacketString()
     }
 
@@ -142,8 +127,12 @@ public struct SocketPacket : CustomStringConvertible {
             if dict["_placeholder"] as? Bool ?? false {
                 return binary[dict["num"] as! Int]
             } else {
-                return dict.reduce(into: JSON(), {cur, keyValue in
+                return dict.reduce(JSON(), {cur, keyValue in
+                    var cur = cur
+
                     cur[keyValue.0] = _fillInPlaceholders(keyValue.1)
+
+                    return cur
                 })
             }
         case let arr as [Any]:
@@ -151,36 +140,6 @@ public struct SocketPacket : CustomStringConvertible {
         default:
             return object
         }
-    }
-}
-
-public extension SocketPacket {
-    // MARK: PacketType enum
-
-    /// The type of packets.
-    public enum PacketType: Int {
-        // MARK: Cases
-
-        /// Connect: 0
-        case connect
-
-        /// Disconnect: 1
-        case disconnect
-
-        /// Event: 2
-        case event
-
-        /// Ack: 3
-        case ack
-
-        /// Error: 4
-        case error
-
-        /// Binary Event: 5
-        case binaryEvent
-
-        /// Binary Ack: 6
-        case binaryAck
     }
 }
 
@@ -221,8 +180,12 @@ private extension SocketPacket {
         case let arr as [Any]:
             return arr.map({shred($0, binary: &binary)})
         case let dict as JSON:
-            return dict.reduce(into: JSON(), {cur, keyValue in
-                cur[keyValue.0] = shred(keyValue.1, binary: &binary)
+            return dict.reduce(JSON(), {cur, keyValue in
+                var mutCur = cur
+
+                mutCur[keyValue.0] = shred(keyValue.1, binary: &binary)
+
+                return mutCur
             })
         default:
             return data

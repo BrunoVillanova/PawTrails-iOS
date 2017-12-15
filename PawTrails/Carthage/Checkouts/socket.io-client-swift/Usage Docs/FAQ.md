@@ -13,11 +13,11 @@ One of the most common reasons your event might not be called is if the client i
 Take this code for example:
 
 ```swift
-class Manager {
+class SocketManager {
     func addHandlers() {
-        let manager = SocketManager(socketURL: URL(string: "http://somesocketioserver.com")!)
+        let socket = SocketIOClient(socketURL: URL(string: "http://somesocketioserver.com")!)
         
-        manager.defaultSocket.on("myEvent") {data, ack in
+        socket.on("myEvent") {data, ack in
             print(data)
         }
     }
@@ -25,20 +25,30 @@ class Manager {
 }
 ```
 
-This code is **incorrect**, and the event handler will never be called. Because as soon as this method is called `manager`
-will be released, along with the socket, and its memory reclaimed.
+This code is **incorrect**, and the event handler will never be called. Because as soon as this method is called `socket`
+will be released and its memory reclaimed.
 
 A correct way would be:
 
 ```swift
-class Manager {
-    let manager = SocketManager(socketURL: URL(string: "http://somesocketioserver.com")!)
+class SocketManager {
+    let socket = SocketIOClient(socketURL: URL(string: "http://somesocketioserver.com")!)
     
     func addHandlers() {
-        manager.defaultSocket.on("myEvent") {data, ack in
+        socket.on("myEvent") {data, ack in
             print(data)
         }
     }
 }
 
+```
+
+------
+
+Another case where this might happen is if you use namespaces in your socket.io application.
+
+In the JavaScript client a url that looks like `http://somesocketioserver.com/client` would be done with the `nsp` config.
+
+```swift
+let socket = SocketIOClient(socketURL: URL(string: "http://somesocketioserver.com")!, config: [.nsp("/client")])
 ```

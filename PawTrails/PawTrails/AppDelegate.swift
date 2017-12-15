@@ -79,6 +79,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var out = true
         
         if DataManager.instance.isAuthenticated() {
+            SocketIOManager.instance.connect()
             if let socialMedia = DataManager.instance.isSocialMedia() {
                 if let sm = SocialMedia(rawValue: socialMedia) {
                     switch sm {

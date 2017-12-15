@@ -27,8 +27,6 @@ import Foundation
 
 /// The status of an ack.
 public enum SocketAckStatus : String {
-    // MARK: Cases
-
     /// The ack timed out.
     case noAck = "NO ACK"
 }

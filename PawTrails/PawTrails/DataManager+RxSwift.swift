@@ -83,15 +83,22 @@ extension DataManager {
         
         return apiTrips.flatMap({ (trips) -> Observable<[Trip]> in
             print("DataManager -> getActivePetTrips - > concatMap")
-            return socketTrips
+            print("DataManager -> getActivePetTrips - > count = \(trips.count)")
+            return socketTrips.debug()
                 .flatMap({ (socketTrips) -> Observable<[Trip]> in
                     print("DataManager -> getActivePetTrips - > concatMap - > flatMap")
+                    print("DataManager -> getActivePetTrips - > count = \(socketTrips.count)")
                     return apiTrips
                 })
-                .ifEmpty(switchTo: apiTrips)
-        })
+                .map({ (finalTrips) -> [Trip] in
+                    return finalTrips
+                })
+                .ifEmpty(default: trips)
+        }).debug().ifEmpty(switchTo: apiTrips)
+        
+
 //        return apiTrips
-//            .flatMap({ (tripsFromApi) -> Observable<[Trip]> in
+//            .flatMapLatest({ (tripsFromApi) -> Observable<[Trip]> in
 //                return socketTrips
 //                    .filter({ (tripsFromSocket) -> Bool in
 //                        return tripsFromSocket.count > 0
