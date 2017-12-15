@@ -73,8 +73,6 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
     }
     
     @IBAction func googleLogin(_ sender: UIButton) {
-        UIApplication.shared.statusBarStyle = .default
-        presenter.loginG()
     }
     
     @IBAction func twitterLogin(_ sender: UIButton) {

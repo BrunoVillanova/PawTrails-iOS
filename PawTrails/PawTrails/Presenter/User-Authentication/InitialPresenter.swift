@@ -112,16 +112,6 @@ class InitialPresenter {
         }
     }
     
-    //Google
-    
-    func loginG() {
-        
-        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-            appDelegate.configureGoogleLogin()
-            GIDSignIn.sharedInstance().signIn()
-        }
-        
-    }
     
     func successGLogin(token:String) {
 
@@ -135,28 +125,4 @@ class InitialPresenter {
 
         })
     }
-    
-    //Twitter
-    
-//    func loginTW(vc: InitialViewController) {
-//        
-//        Twitter.sharedInstance().start(withConsumerKey: "FM1jiu1Iceq2IwDS6aT41X046", consumerSecret: "QGLiyOInRuZ3DlRXk0mxjWSi1hVUPEhAWl1b92wHp2B5C1Qys9")
-//        Twitter.sharedInstance().logIn(with: vc, methods: .webBased) { (session, error) in
-//            if let error = error {
-//                Reporter.send(file: "\(#file)", function: "\(#function)", error)
-//                DispatchQueue.main.async {
-//                    self.view?.errorMessage(ErrorMsg(title: "", msg: "Twitter Login Failed"))
-//                }
-//            }else if let session = session {
-//                DataManager.instance.login(socialMedia: .twitter, session.authToken, callback: { (error) in
-//                    if let error = error {
-//                        self.view?.errorMessage(error.msg)
-//                    }else{
-//                        self.view?.loggedSocialMedia()
-//                    }
-//                })
-//            }
-//            
-//        }
-//    }
 }

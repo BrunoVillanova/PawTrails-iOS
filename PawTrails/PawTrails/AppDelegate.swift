@@ -30,7 +30,7 @@ public struct ezdebug {
 }
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -84,8 +84,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                     switch sm {
                     case .facebook:
                         out = SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
-                    case .google:
-                        configureGoogleLogin()
                     default:
                         break
                     }
@@ -147,10 +145,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         // Messaging.messaging().apnsToken = deviceToken
     }
     
-    func configureGoogleLogin() {
-        GIDSignIn.sharedInstance().clientID = "994470408291-80qh373cjbu149ft6hb93c5dcslt2oup.apps.googleusercontent.com"
-        GIDSignIn.sharedInstance().delegate = self
-    }
     
     func loadHomeScreen() {
 //        if runningTripArray.isEmpty == false {
@@ -165,9 +159,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        let google = GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
-        
-        return SDKApplicationDelegate.shared.application(app, open: url, options: options) || google
+        return SDKApplicationDelegate.shared.application(app, open: url, options: options)
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {

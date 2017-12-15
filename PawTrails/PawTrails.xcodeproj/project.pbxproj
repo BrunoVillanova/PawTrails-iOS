@@ -74,11 +74,6 @@
 		4424DCFD1E8E9F9400ACDF07 /* PetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4424DCFC1E8E9F9400ACDF07 /* PetsViewController.swift */; };
 		4424DCFF1E8EA1D900ACDF07 /* UserProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4424DCFE1E8EA1D900ACDF07 /* UserProfilePresenter.swift */; };
 		44251AD11F0CD5170067F401 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44251ACB1F0CD5170067F401 /* GoogleService-Info.plist */; };
-		44251AD21F0CD5170067F401 /* GoogleSignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44251ACC1F0CD5170067F401 /* GoogleSignIn.framework */; };
-		44251AD31F0CD5170067F401 /* GoogleSignIn.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 44251ACD1F0CD5170067F401 /* GoogleSignIn.bundle */; };
-		44251AD41F0CD5170067F401 /* GoogleAppUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44251ACE1F0CD5170067F401 /* GoogleAppUtilities.framework */; };
-		44251AD51F0CD5170067F401 /* GoogleSignInDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44251ACF1F0CD5170067F401 /* GoogleSignInDependencies.framework */; };
-		44251AD61F0CD5170067F401 /* GoogleSymbolUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44251AD01F0CD5170067F401 /* GoogleSymbolUtilities.framework */; };
 		44251ADC1F0CD5260067F401 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44251AD71F0CD5260067F401 /* Assets.xcassets */; };
 		44251ADD1F0CD5260067F401 /* countrycodes.csv in Resources */ = {isa = PBXBuildFile; fileRef = 44251AD81F0CD5260067F401 /* countrycodes.csv */; };
 		44251ADF1F0CD5260067F401 /* attitudetechie.der in Resources */ = {isa = PBXBuildFile; fileRef = 44251ADA1F0CD5260067F401 /* attitudetechie.der */; };
@@ -492,10 +487,6 @@
 				1555FFF51FDF640D00F05C76 /* RxSwift.framework in Frameworks */,
 				1585469C1FDCFBCB004C82EC /* Charts.framework in Frameworks */,
 				1555FA611FDF3DC100DA9EEA /* GSMessages.framework in Frameworks */,
-				44251AD61F0CD5170067F401 /* GoogleSymbolUtilities.framework in Frameworks */,
-				44251AD21F0CD5170067F401 /* GoogleSignIn.framework in Frameworks */,
-				44251AD41F0CD5170067F401 /* GoogleAppUtilities.framework in Frameworks */,
-				44251AD51F0CD5170067F401 /* GoogleSignInDependencies.framework in Frameworks */,
 				E710CBA5471FDC34DDA7BEB8 /* Pods_PawTrails.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1212,7 +1203,6 @@
 				44251ADD1F0CD5260067F401 /* countrycodes.csv in Resources */,
 				44C0409E1FAB6D9A00CF6E88 /* SharedUsersTableViewCell.xib in Resources */,
 				44251ADF1F0CD5260067F401 /* attitudetechie.der in Resources */,
-				44251AD31F0CD5170067F401 /* GoogleSignIn.bundle in Resources */,
 				44251B161F0CD5A90067F401 /* Main.storyboard in Resources */,
 				157401A91F9E268200A854C5 /* BatteryLow@2x.png in Resources */,
 				157401A71F9E268200A854C5 /* Battery@3x.png in Resources */,
