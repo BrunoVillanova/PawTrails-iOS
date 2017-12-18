@@ -18,6 +18,7 @@ class AddEditPetPresenter {
     weak private var view: AddEditPetView?
     
     var pet = Pet()
+    var savedPet = Pet()
     private var editMode: Bool = false
     var imageData: Data? = nil
     
@@ -94,8 +95,11 @@ class AddEditPetPresenter {
                     self.view?.endLoadingContent()
                     self.view?.errorMessage(error.msg)
                 }else if self.imageData != nil, let pet = pet {
-                    self.saveImatge(petId: pet.id)
+                    self.savedPet = pet
+                    self.view?.endLoadingContent()
+                    self.view?.doneSuccessfully()
                 }else{
+                    
                     self.view?.endLoadingContent()
                     self.view?.doneSuccessfully()
                 }

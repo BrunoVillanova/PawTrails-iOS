@@ -10,7 +10,7 @@ import UIKit
 
 class StepThreeViewController: UIViewController {
     
-    var petId: Int?
+    var pet: Pet?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +18,9 @@ class StepThreeViewController: UIViewController {
     @IBAction func continoutBtnPressed(_ sender: Any) {
         
         let StepThreeViewController = storyboard?.instantiateViewController(withIdentifier: "GettingLocationViewController") as! GettingLocationViewController
+        if let pet = pet {
+            StepThreeViewController.pet = pet
+        }
         self.present(StepThreeViewController, animated: true, completion: nil)
     }
 }

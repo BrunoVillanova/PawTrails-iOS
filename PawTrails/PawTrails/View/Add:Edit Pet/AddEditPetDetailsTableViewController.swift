@@ -106,8 +106,10 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
     
     func doneSuccessfully() {
         if pet == nil {
-                let StepThreeViewController = storyboard?.instantiateViewController(withIdentifier: "StepThreeViewController") as! StepThreeViewController
-                self.present(StepThreeViewController, animated: true, completion: nil)
+                let stepThreeViewController = storyboard?.instantiateViewController(withIdentifier: "StepThreeViewController") as! StepThreeViewController
+            
+               stepThreeViewController.pet = presenter.savedPet
+                self.present(stepThreeViewController, animated: true, completion: nil)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "petAdded"), object: nil)
             self.alert(title: "", msg: "Your request has been processed", type: .blue, disableTime: 3, handler: nil)
         }else{

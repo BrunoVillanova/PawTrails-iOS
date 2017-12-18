@@ -13,9 +13,15 @@ class SuccessViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        suceessbtn.round()
 
     }
     @IBAction func sucessBtnPressed(_ sender: Any) {
+        let root = storyboard?.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
+        root.selectedIndex = 0
+        self.present(root, animated: true, completion: nil)
+        
     }
     
 }

@@ -114,18 +114,18 @@ class APIManager {
     
     static let instance = APIManager()
     
-    //TODO: DO NOT FORGET! TO REMOVE THIS COMMENT!!
-//    #if DEBUG
-//    fileprivate static let mainURL = "https://eu.pawtrails.pet/api"
-//    fileprivate static let mainURLTest = "https://eu.pawtrails.pet/test"
-//    #else
-//    fileprivate static let mainURL = "https://eu.pawtrails.com/api"
-//    fileprivate static let mainURLTest = "https://eu.pawtrails.com/test"
-//    #endif
-    
+//    TODO: DO NOT FORGET! TO REMOVE THIS COMMENT!!
+    #if DEBUG
+    fileprivate static let mainURL = "https://eu.pawtrails.pet/api"
+    fileprivate static let mainURLTest = "https://eu.pawtrails.pet/test"
+    #else
     fileprivate static let mainURL = "https://eu.pawtrails.com/api"
     fileprivate static let mainURLTest = "https://eu.pawtrails.com/test"
+    #endif
     
+//    fileprivate static let mainURL = "https://eu.pawtrails.com/api"
+//    fileprivate static let mainURLTest = "https://eu.pawtrails.com/test"
+//
     fileprivate let boundary = "%%%PawTrails%%%"
     
     /// Creates a `URLRequest` given the specific `APICall` and adds the information contained in `data`.
