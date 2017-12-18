@@ -97,7 +97,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             if !tutorialShowen.bool(forKey: "tutorialShowen") {
                 loadTutorial()
             } else {
-                loadTutorial()
+                loadHomeScreen()
             }
         } else {
             loadAuthenticationScreen()
