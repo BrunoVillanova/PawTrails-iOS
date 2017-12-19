@@ -9,7 +9,7 @@
 import UIKit
 import SCLAlertView
 
-class InitialViewController: UIViewController, InitialView, UITextFieldDelegate, GIDSignInUIDelegate {
+class InitialViewController: UIViewController, InitialView, UITextFieldDelegate {
 
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -86,37 +86,24 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
     }
     
     func userAuthenticated() {
-        SocketIOManager.instance.connect()
-        let tutorialShowen = UserDefaults.standard
-
-        if !tutorialShowen.bool(forKey: "tutorialShowen") {
-            loadTutorial()
-            
-        } else {
-            loadHomeScreen()
-        }
-   
-     
-        
         self.view.endEditing(true)
-        self.dismiss(animated: true, completion: nil)
+        SocketIOManager.instance.connect()
+        loadHomeScreen()
     }
-    
     
     func loadHomeScreen() {
-        
-             guard let window = UIApplication.shared.delegate?.window else { return }
-        //        if runningTripArray.isEmpty == false {
-        let root = storyboard?.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
-        root.selectedIndex = 0
-        window?.rootViewController = root
+        guard let window = UIApplication.shared.delegate?.window else { return }
+
+        if let currentRootViewController = window!.rootViewController {
+            let root = storyboard?.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
+            root.selectedIndex = 0
+            
+            UIView.transition(from: currentRootViewController.view, to: root.view, duration: 0.3, options: UIViewAnimationOptions.transitionCurlUp, completion: {(finished) in
+                UIApplication.shared.keyWindow?.rootViewController = root
+            })
+        }
     }
     
-    func loadTutorial() {
-             guard let window = UIApplication.shared.delegate?.window else { return }
-        let root = storyboard?.instantiateViewController(withIdentifier: "SignUpYourDeviceVC") as! SignUpYourDeviceVC
-        window?.rootViewController = root
-    }
     
     func emailFieldError() {
         self.emailTextField.shake()
@@ -181,10 +168,6 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate,
             colorStyle: 0x5cb85c,
             colorTextButton: 0xFFFFFF
         )
-    }
-    
-    func successGoogleLogin(token:String){
-        presenter.successGLogin(token: token)
     }
     
     func beginLoadingContent() {

@@ -95,7 +95,7 @@ enum ErrorCode: Int {
     case ThereIsApetWithAnActiveTrip = 71
     case TheTripIsPaused = 72
     case TheIdInTheInputArrayMustBeAnInteger = 76
-    
+    case RequiredPetSize = 99
 
 //    init(code:Int) {
 //        self = ErrorCode(rawValue: code) ?? ErrorCode.Unknown
@@ -233,10 +233,10 @@ enum ErrorCode: Int {
         case .TheIdInTheInputArrayMustBeAnInteger:
             return "Error, please try again later"
 
+        case .RequiredPetSize:
+            return "Pet size is required"
+        
         }
-        
-        
-        
 //        return "error \(self.rawValue):\(self)"
     }
 

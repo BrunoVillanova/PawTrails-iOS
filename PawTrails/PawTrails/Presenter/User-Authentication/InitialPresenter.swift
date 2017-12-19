@@ -35,8 +35,8 @@ class InitialPresenter {
             view?.beginLoadingContent()
             DataManager.instance.signIn(email!, password!) { (error) in
                 self.view?.endLoadingContent()
-                let window = UIApplication.shared.keyWindow?.subviews.last
-                window?.removeFromSuperview()
+//                let window = UIApplication.shared.keyWindow?.subviews.last
+//                window?.removeFromSuperview()
                 if let error = error {
                     if error.APIError?.errorCode == ErrorCode.AccountNotVerified {
                         self.view?.verifyAccount(email!, password!)
@@ -56,8 +56,8 @@ class InitialPresenter {
             view?.beginLoadingContent()
             DataManager.instance.signUp(email!, password!) { (error) in
                 self.view?.endLoadingContent()
-                let window = UIApplication.shared.keyWindow?.subviews.last
-                window?.removeFromSuperview()
+//                let window = UIApplication.shared.keyWindow?.subviews.last
+//                window?.removeFromSuperview()
                 if let error = error {
                     self.view?.errorMessage(error.msg)
                     
@@ -110,19 +110,5 @@ class InitialPresenter {
                 break
             }
         }
-    }
-    
-    
-    func successGLogin(token:String) {
-
-        DataManager.instance.login(socialMedia: .google, token, callback: { (error) in
-
-            if let error = error {
-                    self.view?.errorMessage(error.msg)
-                }else{
-                    self.view?.loggedSocialMedia()
-                }
-
-        })
     }
 }

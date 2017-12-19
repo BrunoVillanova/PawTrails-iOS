@@ -36,25 +36,11 @@ class MapViewController: UIViewController {
         UIApplication.shared.statusBarStyle = .default
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        self.showMessage("Bring your device outdoor to recieve GPS signal", type: GSMessageType.info,  options: [
-            .animation(.slide),
-            .animationDuration(0.3),
-            .autoHide(false),
-            .cornerRadius(0.0),
-            .height(44.0),
-            .hideOnTap(true),
-            //                .margin(.init(top: 64, left: 0, bottom: 0, right: 0)),
-            //                .padding(.zero),
-            .position(.top),
-            .textAlignment(.center),
-            .textNumberOfLines(0),
-            ])
-    }
     
     func initialize() {
+        
+
+        
         DataManager.instance.getActivePetTrips()
             .subscribe(onNext: { (tripList) in
                 self.activeTrips = tripList
@@ -72,8 +58,25 @@ class MapViewController: UIViewController {
         
         
         DataManager.instance.allPetDeviceData().subscribe(onNext: { (petDeviceDataList) in
-            self.hideMessage()
+            print("MapViewController -> allPetDeviceData \(petDeviceDataList.count)")
             
+            if (petDeviceDataList.count > 0) {
+               self.hideMessage()
+            } else {
+                self.showMessage("Bring your device outdoor to recieve GPS signal", type: GSMessageType.info,  options: [
+                    .animation(.slide),
+                    .animationDuration(0.3),
+                    .autoHide(false),
+                    .cornerRadius(0.0),
+                    .height(44.0),
+                    .hideOnTap(false),
+                    //                .margin(.init(top: 64, left: 0, bottom: 0, right: 0)),
+                    //                .padding(.zero),
+                    .position(.top),
+                    .textAlignment(.center),
+                    .textNumberOfLines(0),
+                    ])
+            }
         }).disposed(by: disposeBag)
         
         firstButtonfromthebottom.contentHorizontalAlignment = .fill

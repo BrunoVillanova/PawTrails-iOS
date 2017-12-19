@@ -14,6 +14,12 @@ class StepOneViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        initialize()
+    }
+    
+    fileprivate func initialize() {
+        self.navigationController?.navigationBar.backItem?.title = " "
+
         BarcodeScanner.Title.text = NSLocalizedString("Scan QR Code", comment: "")
         BarcodeScanner.CloseButton.text = NSLocalizedString("Close", comment: "")
         BarcodeScanner.SettingsButton.text = NSLocalizedString("Settings", comment: "")
@@ -25,12 +31,20 @@ class StepOneViewController: UIViewController {
             "To scan the QR Code you have to allow camera access under iOS settings.", comment: "")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.shared.statusBarStyle = .lightContent
+    }
+    
     @IBAction func scanNowBtnPressed(_ sender: Any) {
         let controller = BarcodeScannerController()
         controller.codeDelegate = self
         controller.errorDelegate = self
         controller.dismissalDelegate = self
-        present(controller, animated: true, completion: nil)
+        
+        present(controller, animated: true, completion: {
+            UIApplication.shared.statusBarStyle = .default
+        })
     }
     
 }
@@ -40,10 +54,11 @@ class StepOneViewController: UIViewController {
 extension StepOneViewController: BarcodeScannerCodeDelegate {
     
     func barcodeScanner(_ controller: BarcodeScannerController, didCaptureCode code: String, type: String) {
-        if let vc = self.storyboard?.instantiateViewController(withIdentifier: "StepTwoViewController") as? StepTwoViewController {
-            vc.deviceCode = code
-            controller.present(vc, animated: true, completion: {
-            })
+        controller.dismiss(animated: true) {
+            if let vc = self.storyboard?.instantiateViewController(withIdentifier: "StepTwoViewController") as? StepTwoViewController {
+                vc.deviceCode = code
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
         }
     }
 }

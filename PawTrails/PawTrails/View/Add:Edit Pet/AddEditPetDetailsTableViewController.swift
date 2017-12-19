@@ -9,9 +9,9 @@
 import UIKit
 
 class AddEditPetDetailsTableViewController: UITableViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, AddEditPetView {
-
+    
     fileprivate var headerView: UIView!
-
+    
     @IBOutlet weak var petImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
@@ -37,13 +37,6 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
         petImageView.circle()
         presenter.attachView(self, pet, deviceCode)
         NotificationManager.instance.post(Event())
-}
-
-    
-    
-    override func viewDidLayoutSubviews() {
-
-
     }
     
     deinit {
@@ -52,7 +45,7 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
     
     @IBAction func doneAction(_ sender: UIBarButtonItem?) {
         presenter.done()
-//        doneSuccessfully()
+        //        doneSuccessfully()
     }
     
     @IBAction func neuteredValueChanged(_ sender: UISwitch) {
@@ -83,7 +76,7 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
             
         } else if presenter.pet.size == 1 {
             self.sizeLbl.text = "Medium"
-
+            
         } else if presenter.pet.size == 2 {
             self.sizeLbl.text = "Large"
         }
@@ -91,10 +84,6 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
         
         nameLabel.text = presenter.pet.name
         typeLabel.text = presenter.pet.typeString
-        
-        
-        
-        
         genderLabel.text = presenter.pet.gender?.name
         breedLabel.text = presenter.pet.breedsString
         birthdayLabel.text = presenter.pet.birthday?.toStringShow
@@ -102,24 +91,38 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
         neuteredSwitch.setOn(presenter.pet.neutered , animated: true)
         tableView.reloadData()
     }
-
+    
     
     func doneSuccessfully() {
-        if pet == nil {
-                let stepThreeViewController = storyboard?.instantiateViewController(withIdentifier: "StepThreeViewController") as! StepThreeViewController
+        
+        if let presentingViewController = self.presentingViewController {
+            let stepThreeViewController = self.storyboard?.instantiateViewController(withIdentifier: "StepThreeViewController") as! StepThreeViewController
+            stepThreeViewController.pet = self.presenter.savedPet
             
-               stepThreeViewController.pet = presenter.savedPet
-                self.present(stepThreeViewController, animated: true, completion: nil)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "petAdded"), object: nil)
-            self.alert(title: "", msg: "Your request has been processed", type: .blue, disableTime: 3, handler: nil)
-        }else{
-            if let navigation = (navigationController?.viewControllers.first(where: { $0 is PetsViewController }) as? PetsViewController) {
-                    navigation.reloadPetsAPI()
-                self.alert(title: "", msg: "Your request has been processed", type: .blue, disableTime: 3, handler: nil)
+            self.dismiss(animated: true, completion: {
+                if presentingViewController is UINavigationController {
+                    let navigationController = presentingViewController as! UINavigationController
+                    navigationController.pushViewController(stepThreeViewController, animated: true)
+                    stepThreeViewController.alert(title: "", msg: "You've added one pet", type: .green, disableTime: 3, handler: nil)
                 }
+            })
+        }
+//        if pet == nil {
+//            let stepThreeViewController = storyboard?.instantiateViewController(withIdentifier: "StepThreeViewController") as! StepThreeViewController
+//
+//            stepThreeViewController.pet = presenter.savedPet
+//            self.present(stepThreeViewController, animated: true, completion: nil)
+//            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "petAdded"), object: nil)
+//            self.alert(title: "", msg: "Your request has been processed", type: .blue, disableTime: 3, handler: nil)
+//        }
+        else{
+            if let navigation = (navigationController?.viewControllers.first(where: { $0 is PetsViewController }) as? PetsViewController) {
+                navigation.reloadPetsAPI()
+                self.alert(title: "", msg: "Your request has been processed", type: .blue, disableTime: 3, handler: nil)
+            }
             
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "petAdded"), object: nil)
-
+            
             _ = navigationController?.popViewController(animated: true)
         }
     }
@@ -135,10 +138,10 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
     func endLoadingContent() {
         let window = UIApplication.shared.keyWindow?.subviews.last
         window?.removeFromSuperview()
-
+        
     }
     
-
+    
     //MARK: - UIImagePickerControllerDelegate
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
@@ -152,7 +155,7 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
-
+    
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -173,12 +176,5 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
         default: break
         }
     }
-
+    
 }
-
-//extension AddEditPetDetailsTableViewController: BarcodeScannerDismissalDelegate {
-//    func barcodeScannerDidDismiss(_ controller: BarcodeScannerController) {
-//        self.dismiss(animated: true, completion: nil)
-//    }
-//}
-

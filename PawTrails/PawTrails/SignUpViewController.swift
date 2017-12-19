@@ -158,10 +158,6 @@ class SignUpViewController: UIViewController, InitialView {
         self.showMessage("Please, confirm your e-mail address before login", type: .info)
     }
     
-    func successGoogleLogin(token:String){
-        presenter.successGLogin(token: token)
-    }
-    
     func beginLoadingContent() {
         showLoadingView()
     }

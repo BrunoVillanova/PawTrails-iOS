@@ -91,13 +91,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
             
-            let tutorialShowen = UserDefaults.standard
+            loadHomeScreen(animated: true)
             
-            if !tutorialShowen.bool(forKey: "tutorialShowen") {
-                loadTutorial()
-            } else {
-                loadHomeScreen()
-            }
         } else {
             loadAuthenticationScreen()
         }
@@ -154,17 +149,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
-    func loadHomeScreen() {
-//        if runningTripArray.isEmpty == false {
-            let root = storyboard.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
-            root.selectedIndex = 0
-            window?.rootViewController = root
-}
+    func loadHomeScreen(animated: Bool) {
+        let root = storyboard.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
+        root.selectedIndex = 0
+        self.window?.rootViewController = root
+    }
     
     func loadTutorial() {
         
         let root = storyboard.instantiateViewController(withIdentifier: "SignUpYourDeviceVC") as! SignUpYourDeviceVC
-        window?.rootViewController = root
+        let navigationController = UINavigationController.init(rootViewController: root)
+
+        if let currentRootViewController = self.window?.rootViewController {
+            UIView.transition(from:currentRootViewController.view, to: navigationController.view, duration: 0.5, options: UIViewAnimationOptions.transitionCurlDown, completion: {(finished) in
+                self.window?.rootViewController = navigationController
+            })
+        } else {
+            window?.rootViewController = navigationController
+        }
     }
     
     func loadAuthenticationScreen() {
@@ -219,25 +221,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIActivityIndicatorView.appearance().color = UIColor.primary
 //        UILabel.appearance().backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
     }
-    
-    //    MARK:- GIDSignInDelegate
-    
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        if let error = error {
-            Reporter.send(file: "\(#file)", function: "\(#function)", error)
-        }else{
-            if let root = window?.rootViewController as? InitialViewController {
-                root.successGoogleLogin(token: user.authentication.idToken)
-            }
-        }
-    }
-    
-    func sign(_ signIn: GIDSignIn!, didDisconnectWith user:GIDGoogleUser!, withError error: Error!) {
-        if let error = error {
-            Reporter.send(file: "\(#file)", function: "\(#function)", error)
-        }
-    }
-    
 }
 
 

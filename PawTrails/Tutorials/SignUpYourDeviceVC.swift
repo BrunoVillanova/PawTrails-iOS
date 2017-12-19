@@ -10,21 +10,53 @@ import UIKit
 
 class SignUpYourDeviceVC: UIViewController {
 
+    static let tutorialShownUserPreferecesKey = "tutorialShown"
+    static let userDefaults = UserDefaults.standard
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        UserDefaults.standard.set(true, forKey: "tutorialShowen")
-    }
-
-
-    
-    @IBAction func continou(_ sender: Any) {
+        initialize()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UIApplication.shared.statusBarStyle = .lightContent
+    }
+    
+    fileprivate func initialize() {
+        #if !DEBUG
+            userDefaults.set(true, forKey: tutorialShownUserPreferecesKey)
+        #endif
+        
+        self.extendedLayoutIncludesOpaqueBars = true
+        self.edgesForExtendedLayout = [.all]
+        configureNavigatonBar()
+    }
+    
+    fileprivate func configureNavigatonBar() {
+        // Transparent navigation bar
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.navigationBar.backgroundColor = UIColor.clear
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.topItem?.title = " "
+        self.navigationController?.navigationBar.backItem?.title = " "
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.plain, target:nil, action:nil)
+    }
+    
+    static func tutorialShown() -> Bool {
+        return userDefaults.bool(forKey: tutorialShownUserPreferecesKey)
+    }
+    
+    @IBAction func continueButtonTapped(_ sender: Any) {
+        if let vc = self.storyboard?.instantiateViewController(withIdentifier: "StepOneViewController") as? StepOneViewController {
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
     
     @IBAction func skipBtnPressed(_ sender: Any) {
-        let root = storyboard?.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
-        root.selectedIndex = 0
-        self.present(root, animated: true, completion: nil)
+        self.dismiss(animated: true)
     }
 
 }

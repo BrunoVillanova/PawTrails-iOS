@@ -15,6 +15,12 @@ class StepTwoViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.topItem?.title = " "
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.shared.statusBarStyle = .lightContent
     }
 
     @IBAction func ContinouBtnPressed(_ sender: Any) {
@@ -22,7 +28,9 @@ class StepTwoViewController: UIViewController {
         if let vc = self.storyboard?.instantiateViewController(withIdentifier: "AddEditPetDetailsTableViewController") as? AddEditPetDetailsTableViewController {
             vc.deviceCode = deviceCode
             let rootController = UINavigationController(rootViewController: vc)
-            self.present(rootController, animated: true, completion: nil)
+            self.present(rootController, animated: true, completion: {
+                UIApplication.shared.statusBarStyle = .default
+            })
         }
     }
 }

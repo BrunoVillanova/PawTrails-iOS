@@ -67,14 +67,16 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     /// Shared Instance
     static let instance = SocketIOManager()
     
-    #if RELEASE
+//    #if RELEASE
+//    private let urlString = "http://eu.pawtrails.com:2003"
+//    private let urlStringSSL = "https://eu.pawtrails.com:4654"
+//    #else
+//    private let urlString = "http://eu.pawtrails.pet:2003"
+//    private let urlStringSSL = "https://eu.pawtrails.pet:4654"
+//    #endif
+    
     private let urlString = "http://eu.pawtrails.com:2003"
     private let urlStringSSL = "https://eu.pawtrails.com:4654"
-    #else
-    private let urlString = "http://eu.pawtrails.pet:2003"
-    private let urlStringSSL = "https://eu.pawtrails.pet:4654"
-    #endif
-    
     
     private var socket: SocketIOClient!
     private let disposeBag = DisposeBag()
@@ -105,7 +107,11 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         let urlString = SSLEnabled ? self.urlStringSSL : self.urlString
         
         if let url = URL(string: urlString) {
-            self.socket = SocketIOClient(socketURL: url, config: [.log(false), .secure(true)])
+            self.socket = SocketIOClient(socketURL: url, config: [.log(true),
+                                                                  .secure(true),
+                                                                  .reconnectAttempts(50),
+                                                                  .reconnectWait(3),
+                                                                  .forceNew(true)])
         }
         
         // Init SocketIO
@@ -133,6 +139,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
                 
                 if self.triedToReconnectOnUnauthorized {
                     //TODO: force user to login again
+                    self.disconnect()
                     self.userNotSigned()
                 } else {
                     self.triedToReconnectOnUnauthorized = true
@@ -168,6 +175,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
             self.openChannels.insert(channel.gpsUpdates)
             
             if let petDeviceData = PetDeviceData.fromJson(data.first) {
+                print("SocketIO -> Setting petGpsUpdates.value")
                 self.petGpsUpdates.value = petDeviceData
             }
             
@@ -189,7 +197,6 @@ class SocketIOManager: NSObject, URLSessionDelegate {
                         
                         for tripJson in tripsData {
                             tripList.append(Trip(tripJson))
-//                            print("SocketIO -> Trips -> Trip: \(Trip(tripJson))")
                             print("SocketIO -> Trips -> Trip!")
                         }
                         
@@ -201,16 +208,26 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         
         DataManager.instance.userToken.asObservable().subscribe(onNext: { (authentication) in
             if authentication != nil {
-                // User is authenticated
-                
                 self.connect()
-                
-//                self.socket.emit(channel.auth.name, token)
             } else {
                 self.socket.disconnect()
             }
         }).disposed(by: disposeBag)
+        
+        self.socket.onAny { (socketAnyEvent) in
+            
+            if let items = socketAnyEvent.items, items.contains(where: { (event) -> Bool in
+                if let event = event as? SocketIOClientStatus {
+                    return event == SocketIOClientStatus.disconnected
+                }
+                return false
+                
+            }) {
+                self.socket.connect()
+            }
+        }
     }
+    
     
     func userNotSigned() {        
         if let rootViewController = UIApplication.shared.keyWindow?.rootViewController, let storyboard = rootViewController.storyboard {
@@ -239,7 +256,8 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     }
     
     func gpsUpdates(_ petIDs: [Int]) -> Observable<[PetDeviceData]> {
-        return isReady().filter({ (isReady) -> Bool in
+        return isReady()
+            .filter({ (isReady) -> Bool in
             return isReady
         }).flatMap({ (isReady) -> Observable<[PetDeviceData]> in
             print("Emitting gps updates")
@@ -250,21 +268,15 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     
     func trips() -> Observable<[Trip]> {
         return isReady()
-//            .debounce(1, scheduler: MainScheduler.instance) // Wait 1s for changes.
-//            .distinctUntilChanged() // If they didn't occur, check if the new value is the same as old.
                 .filter({ (value) -> Bool in
                     print("SocketIOManager -> trips() -> filter -> \(value)")
                     return value == true
                 })
                 .flatMapLatest({ (isReady) -> Observable<[Trip]> in
                     print("SocketIOManager -> trips() -> flatMap")
-                    if !self.openChannels.contains(channel.trips) {
-                        self.openChannels.insert(channel.trips)
-                         print("SocketIOManager -> trips() -> flatMap -> self.socket.emit(channel.trips.name)")
-                        self.socket.emit(channel.trips.name)
-                    }
+                    self.socket.emit(channel.trips.name)
                     return self.petTrips.asObservable()
-                })
+                }).share()
     }
     
     func isReady() -> Observable<Bool> {
@@ -291,17 +303,17 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     /// - Parameter callback: returns socket IO connection status
     func connect(_ callback: ((SocketIOStatus)->())? = nil) {
         
-//        guard !self.isConnecting else {
-//            return
-//        }
+        guard !self.isConnecting else {
+            return
+        }
         
-//        guard !self.isConnected else {
-//            return
-//        }
-//        
-//        guard !self.isAuthenticating else {
-//            return
-//        }
+        guard !self.isConnected else {
+            return
+        }
+        
+        guard !self.isAuthenticating else {
+            return
+        }
         
         if DataManager.instance.isAuthenticated() {
             self.isConnecting = true

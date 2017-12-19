@@ -1,26 +1,5 @@
 PODS:
   - BarcodeScanner (2.1.2)
-  - Bolts (1.8.4):
-    - Bolts/AppLinks (= 1.8.4)
-    - Bolts/Tasks (= 1.8.4)
-  - Bolts/AppLinks (1.8.4):
-    - Bolts/Tasks
-  - Bolts/Tasks (1.8.4)
-  - Crashlytics (3.9.3):
-    - Fabric (~> 1.7.2)
-  - Fabric (1.7.2)
-  - FacebookCore (0.3.0):
-    - Bolts (~> 1.8)
-    - FBSDKCoreKit (~> 4.27)
-  - FacebookLogin (0.3.0):
-    - Bolts (~> 1.8)
-    - FacebookCore (~> 0.3)
-    - FBSDKCoreKit (~> 4.27)
-    - FBSDKLoginKit (~> 4.27)
-  - FBSDKCoreKit (4.29.0):
-    - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.29.0):
-    - FBSDKCoreKit
   - Firebase/Core (4.7.0):
     - FirebaseAnalytics (= 4.0.5)
     - FirebaseCore (= 4.0.12)
@@ -46,9 +25,6 @@ PODS:
     - GoogleToolboxForMac/Defines (= 2.1.3)
   - GoogleToolboxForMac/NSData+zlib (2.1.3):
     - GoogleToolboxForMac/Defines (= 2.1.3)
-  - HockeySDK (5.0.0):
-    - HockeySDK/DefaultLib (= 5.0.0)
-  - HockeySDK/DefaultLib (5.0.0)
   - IQKeyboardManagerSwift (5.0.0)
   - MaterialComponents/Buttons (42.0.0):
     - MaterialComponents/Buttons/ColorThemer (= 42.0.0)
@@ -109,13 +85,8 @@ PODS:
 
 DEPENDENCIES:
   - BarcodeScanner (~> 2.1.2)
-  - Crashlytics
-  - Fabric
-  - FacebookCore
-  - FacebookLogin
   - Firebase/Core
   - Firebase/Messaging
-  - HockeySDK
   - IQKeyboardManagerSwift (= 5.0.0)
   - MaterialComponents/Buttons
   - Pulsator
@@ -128,20 +99,12 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   BarcodeScanner: 84b6e5c75b7efad823381ee9bde846b13171a009
-  Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
-  Crashlytics: dbb07d01876c171c5ccbdf7826410380189e452c
-  Fabric: 9cd6a848efcf1b8b07497e0b6a2e7d336353ba15
-  FacebookCore: 3ffa190a3f1f96cec0e44d3fc221bc322c595ffa
-  FacebookLogin: 0af839ea858faef99550d16596b87b4a8e8906e6
-  FBSDKCoreKit: 6f139173dc63a1deaff4430a55f2fe5bb222d2af
-  FBSDKLoginKit: 56a057ca6822535ea0faa25f57a7c41edb697fd4
   Firebase: dbfb98ccec2dcfcd21ab9cc1b4981a3f3c8c5e26
   FirebaseAnalytics: 5b02a63ead2c3f0259cfc7f15e053e440587ecf8
   FirebaseCore: 6cf108b63997bc08c04a1ffa55a3ac0d71a59ffc
   FirebaseInstanceID: 148c25c986c8699e67304b114e365713dce467f2
   FirebaseMessaging: 1a11d1c0a9ed9b3f75a0685bb0ae5932e1062f5f
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
-  HockeySDK: 82bf8dcbe1af3c87c24dc98924fcf2e2ba5be8c4
   IQKeyboardManagerSwift: 3f340202ebe1a7076279b9b9b3c817243ddb3aab
   MaterialComponents: cb196890171008087c38fe21a1528e745c9807c2
   MDFInternationalization: e355b0cebecf53d60233bd267084e49366c82513
@@ -157,6 +120,6 @@ SPEC CHECKSUMS:
   XLPagerTabStrip: d1ab378af0923320ec0b5eab11d7b2f803d31261
   YNDropDownMenu: 967ebe0c633ce8f40e8667574525aa230ba24560
 
-PODFILE CHECKSUM: 854764ba35b55d9e7102bc6aeae7f826546a6d31
+PODFILE CHECKSUM: 4044f7d32fd25d66b354e7bdb4b9fe31c20c63ae
 
 COCOAPODS: 1.3.1

@@ -27,6 +27,8 @@ class GettingLocationViewController: UIViewController {
     @IBOutlet weak var pinImage: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.topItem?.title = " "
+        
         pinImage.layer.superlayer?.insertSublayer(pulsator, below: pinImage.layer)
         pulsator.start()
         pulsator.backgroundColor = UIColor.white.cgColor
@@ -34,25 +36,26 @@ class GettingLocationViewController: UIViewController {
         pulsator.radius = 350
         pulsator.animationDuration = 8
         
-//        if let pet = pet {
-//            DataManager.instance.lastPetDeviceData(pet).subscribe(onNext: { (petDeviceData) in
-//                if let petDeviceData = petDeviceData {
-//                    print(petDeviceData)
-//                }
-//                
-//            }).disposed(by: disposeBag)
-//        }
-        
-        
 
+        if let pet = pet {
+            DataManager.instance.lastPetDeviceData(pet)
+                .subscribe(onNext: { (petDeviceData) in
+                    if petDeviceData != nil {
+                        self.goToSuccessViewController()
+                    }
+                }).disposed(by: disposeBag)
+        }
+        
     }
     
+    fileprivate func goToSuccessViewController() {
+        let successViewController = storyboard?.instantiateViewController(withIdentifier: "SuccessViewController") as! SuccessViewController
+        self.navigationController?.pushViewController(successViewController, animated: true)
+    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         view.layer.layoutIfNeeded()
         pulsator.position = pinImage.layer.position
-        
     }
-   
 }

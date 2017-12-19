@@ -57,7 +57,7 @@ extension DataManager {
                 }
             }
             return Disposables.create()
-        })
+        }).share()
     }
 
     
@@ -133,7 +133,7 @@ extension DataManager {
     
     func allPetDeviceData() -> Observable<[PetDeviceData]> {
 
-        let pets = self.pets()
+        let pets = self.pets().share()
 
         return pets.flatMap { (petList) -> Observable<[PetDeviceData]> in
             
@@ -141,7 +141,7 @@ extension DataManager {
                 pet.id
             })
             let liveGpsUpdates = SocketIOManager.instance.gpsUpdates(petIDs)
-            return liveGpsUpdates
+            return liveGpsUpdates.share()
         }
     }
     
@@ -160,7 +160,7 @@ extension DataManager {
             }
             
             return nil
-        })
+        }).share()
     }
     
     func startTrips(_ petIDs: [Int]) -> Observable<[Trip]> {

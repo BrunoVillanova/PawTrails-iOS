@@ -43,6 +43,7 @@
 		15C90DAE1FE36E6E008F73B3 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C90DAD1FE36E6D008F73B3 /* HockeySDK.framework */; };
 		15C90DB11FE36F56008F73B3 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C90DAF1FE36F55008F73B3 /* Fabric.framework */; };
 		15C90DB21FE36F56008F73B3 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C90DB01FE36F56008F73B3 /* Crashlytics.framework */; };
+		15D40E171FE8A98400D2B8EC /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D40E161FE8A98400D2B8EC /* MainTabBarViewController.swift */; };
 		15E8EC191FDDC3B30088EEB2 /* PTWideButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E8EC181FDDC3B30088EEB2 /* PTWideButton.swift */; };
 		440784491F8B85A1005E9E1B /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 440784481F8B85A1005E9E1B /* SettingsView.xib */; };
 		4407844B1F8B85E8005E9E1B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4407844A1F8B85E8005E9E1B /* SettingsView.swift */; };
@@ -273,6 +274,7 @@
 		15C90DAD1FE36E6D008F73B3 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HockeySDK.framework; path = Carthage/Build/iOS/HockeySDK.framework; sourceTree = "<group>"; };
 		15C90DAF1FE36F55008F73B3 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = Frameworks/Fabric.framework; sourceTree = "<group>"; };
 		15C90DB01FE36F56008F73B3 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = Frameworks/Crashlytics.framework; sourceTree = "<group>"; };
+		15D40E161FE8A98400D2B8EC /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		15E8EC181FDDC3B30088EEB2 /* PTWideButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTWideButton.swift; sourceTree = "<group>"; };
 		1E2B813BA9CAE948174F2C71 /* Pods_PawTrailsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PawTrailsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		440784481F8B85A1005E9E1B /* SettingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsView.xib; sourceTree = "<group>"; };
@@ -619,6 +621,7 @@
 				44251B291F0CD5DF0067F401 /* Pet Profile */,
 				44251B311F0CD5DF0067F401 /* Add:Edit Pet */,
 				44F239501EEEC1E70082FA36 /* SocketIOTestTableViewController.swift */,
+				15D40E161FE8A98400D2B8EC /* MainTabBarViewController.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1510,6 +1513,7 @@
 				443E80751F5D4F21008679FC /* MapViewController.swift in Sources */,
 				44251B4A1F0CD5DF0067F401 /* AddPetDeviceTableViewController.swift in Sources */,
 				44251AFF1F0CD5740067F401 /* EmailVerificationPresenter.swift in Sources */,
+				15D40E171FE8A98400D2B8EC /* MainTabBarViewController.swift in Sources */,
 				44251B8A1F0CD6210067F401 /* APIRepository.swift in Sources */,
 				4464EE8D1FCC2B150049C50F /* ResultFromListViewController.swift in Sources */,
 				4464F12D1F8CBC1A00E0BBD7 /* IconCell.swift in Sources */,
