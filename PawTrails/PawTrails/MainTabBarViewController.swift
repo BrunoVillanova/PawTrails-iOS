@@ -29,9 +29,14 @@ class MainTabBarViewController: UITabBarController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.tabBar.invalidateIntrinsicContentSize()
+    }
+    
 
     fileprivate func initialize() {
-        
+
         guard !SignUpYourDeviceVC.tutorialShown() else {
             return
         }
