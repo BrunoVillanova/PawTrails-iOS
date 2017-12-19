@@ -25,7 +25,7 @@ class SignUpYourDeviceVC: UIViewController {
     
     fileprivate func initialize() {
         #if !DEBUG
-            SignUpYourDeviceVC.userDefaults.set(true, forKey: tutorialShownUserPreferecesKey)
+            SignUpYourDeviceVC.userDefaults.set(true, forKey: SignUpYourDeviceVC.tutorialShownUserPreferecesKey)
         #endif
         
         self.extendedLayoutIncludesOpaqueBars = true
