@@ -44,18 +44,20 @@ class PTBatteryView: UIView {
         // Create the imageView with the battery image and add it to the view
         imageView.image = batteryIcon
         imageView.contentMode = UIViewContentMode.scaleAspectFit
-        imageView.frame = CGRect(x: 0, y:0, width: self.frame.width, height: self.frame.height)
+        imageView.frame = CGRect(x: 0, y:0, width: batteryIcon!.size.width, height: batteryIcon!.size.height)
         imageView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         self.addSubview(imageView)
         
+        
         // Create the battery fill view
-        batteryFillView.frame = CGRect(x:2, y: 2, width: 0, height: self.frame.size.height-5)
+        batteryFillView.frame = CGRect(x:imageView.frame.origin.x+2, y: imageView.bounds.origin.y+2, width: 0, height: imageView.image!.size.height-4)
         batteryFillView.backgroundColor = batteryColor
         batteryFillView.alpha = 0
         self.addSubview(batteryFillView)
         
         batteryFillWidthProportion = Float((self.frame.size.width-5) / 100.0)
     }
+    
     
     func setBatteryLevel(_ level: Int16) {
         
