@@ -105,9 +105,25 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         presenter.deteachView()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        self.hideNotification()
-        self.tabBarController?.tabBar.isHidden = false
+//    override func viewWillAppear(_ animated: Bool) {
+//        self.hideNotification()
+//        self.tabBarController?.tabBar.isHidden = false
+//    }
+//
+    var iphoneX = false
+
+    override func viewDidLayoutSubviews() {
+        
+        if #available(iOS 11.0, *) {
+            if ((UIApplication.shared.keyWindow?.safeAreaInsets.top)! > CGFloat(0.0)) {
+                iphoneX = true
+                print("iphone x")
+            } else {
+                        self.tabBarController?.tabBar.invalidateIntrinsicContentSize()
+                        self.tabBarController?.tabBar.isHidden = false
+            }
+        }
+
     }
     
 

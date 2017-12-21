@@ -67,16 +67,16 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     /// Shared Instance
     static let instance = SocketIOManager()
     
-//    #if RELEASE
-//    private let urlString = "http://eu.pawtrails.com:2003"
-//    private let urlStringSSL = "https://eu.pawtrails.com:4654"
-//    #else
-//    private let urlString = "http://eu.pawtrails.pet:2003"
-//    private let urlStringSSL = "https://eu.pawtrails.pet:4654"
-//    #endif
-    
+    #if RELEASE
     private let urlString = "http://eu.pawtrails.com:2003"
     private let urlStringSSL = "https://eu.pawtrails.com:4654"
+    #else
+    private let urlString = "http://eu.pawtrails.pet:2003"
+    private let urlStringSSL = "https://eu.pawtrails.pet:4654"
+    #endif
+    
+//    private let urlString = "http://eu.pawtrails.com:2003"
+//    private let urlStringSSL = "https://eu.pawtrails.com:4654"
     
     private var socket: SocketIOClient!
     private let disposeBag = DisposeBag()
