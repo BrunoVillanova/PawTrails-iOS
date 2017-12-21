@@ -38,7 +38,7 @@ class PTSignalView: UIView {
         // Create the imageView with the battery image and add it to the view
         imageView.image = signalFullIcon
         imageView.contentMode = UIViewContentMode.scaleAspectFit
-        imageView.frame = CGRect(x: 0, y:0, width: self.frame.width, height: self.frame.height)
+        imageView.frame = CGRect(x: 0, y:0, width: signalFullIcon!.size.width, height: signalFullIcon!.size.height)
         imageView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         self.addSubview(imageView)
     }
