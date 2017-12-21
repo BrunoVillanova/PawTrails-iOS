@@ -29,12 +29,6 @@ enum TripAction: Int {
 }
 
 
-
-
-
-
-
-
 fileprivate enum channel {
     
     case connect, diconnect, auth, trips, pets, gpsUpdates
@@ -67,16 +61,8 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     /// Shared Instance
     static let instance = SocketIOManager()
     
-//    #if RELEASE
-//    private let urlString = "http://eu.pawtrails.com:2003"
-//    private let urlStringSSL = "https://eu.pawtrails.com:4654"
-//    #else
-//    private let urlString = "http://eu.pawtrails.pet:2003"
-//    private let urlStringSSL = "https://eu.pawtrails.pet:4654"
-//    #endif
-    
-    private let urlString = "http://eu.pawtrails.com:2003"
-    private let urlStringSSL = "https://eu.pawtrails.com:4654"
+    private let urlString = Constants.socketURL
+    private let urlStringSSL = Constants.socketURLSSL
     
     private var socket: SocketIOClient!
     private let disposeBag = DisposeBag()
@@ -109,7 +95,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         if let url = URL(string: urlString) {
             self.socket = SocketIOClient(socketURL: url, config: [.log(true),
                                                                   .secure(true),
-                                                                  .reconnectAttempts(50),
+//                                                                  .reconnectAttempts(50),
                                                                   .reconnectWait(3),
                                                                   .forceNew(true)])
         }
@@ -230,7 +216,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     
     
     func userNotSigned() {        
-        if let rootViewController = UIApplication.shared.keyWindow?.rootViewController, let storyboard = rootViewController.storyboard {
+        if let rootViewController = UIApplication.shared.keyWindow?.rootViewController, let storyboard = rootViewController.storyboard, !rootViewController.isKind(of: InitialViewController.self) {
             if let vc = storyboard.instantiateViewController(withIdentifier: "InitialViewController") as? InitialViewController {
                 rootViewController.present(vc, animated: true, completion: nil)
             }
@@ -294,6 +280,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
             isAuthenticating = true
             socket.emit(channel.auth.name, token)
         } else{
+            isAuthenticating = false
             Reporter.send(file: "\(#file)", function: "\(#function)", NSError(domain: "Socket IO", code: -1, userInfo: ["reason": "missing token"]))
         }
     }

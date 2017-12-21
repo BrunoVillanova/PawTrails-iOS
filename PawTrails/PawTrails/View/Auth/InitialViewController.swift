@@ -54,10 +54,11 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate 
             self.emailTextField.textContentType = UITextContentType.emailAddress
         }
         
-        if isDebug {
-            self.emailTextField.text = ezdebug.email
-            self.passwordTextField.text = ezdebug.password
-        }
+        
+        #if !RELEASE
+            self.emailTextField.text = Constants.testUserEmail
+            self.passwordTextField.text = Constants.testUserPassword
+        #endif
     }
 
     
@@ -180,9 +181,7 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate 
     
     
     // MARK: - UITextFieldDelegate
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
         if textField == self.emailTextField {
             self.passwordTextField.becomeFirstResponder()
         }else if textField == self.passwordTextField {
@@ -193,30 +192,18 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate 
         return true
     }
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-//        textField.underline(color: UIColor.primary)
-        
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-//        textField.underline()
-    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
     
     // MARK: - Navigation
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "passwordRecovery" && (self.emailTextField.text?.isValidEmail)! {
             let vc = segue.destination as! PasswordRecoveryViewController
             vc.email = self.emailTextField.text
         }
     }
-    
-    // MARK:- GIDSignInUIDelegate   
-
 }
 
 

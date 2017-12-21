@@ -181,8 +181,9 @@ class DataManager: NSObject {
     /// - Returns: bool value to verify the operation was complete successfully.
     func signOut() -> Bool {
 //        CoreDataManager.instance.deleteAll()
+        let response = SharedPreferences.remove(.id) && SharedPreferences.remove(.token)
         SocketIOManager.instance.disconnect()
-        return SharedPreferences.remove(.id) && SharedPreferences.remove(.token)
+        return response
     }
     
     /// Sends password reset request to API
