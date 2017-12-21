@@ -53,14 +53,32 @@ class TabPageViewController: ButtonBarPagerTabStripViewController {
 //        navigationController?.navigationBar.shadowImage = UIImage()
     }
     
+    var iphoneX = false
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.tabBarController?.tabBar.isHidden = true
+        
+        if #available(iOS 11.0, *) {
+            if ((UIApplication.shared.keyWindow?.safeAreaInsets.top)! > CGFloat(0.0)) {
+                iphoneX = true
+                print("iphone x")
+            } else {
+                self.tabBarController?.tabBar.isHidden = true
+            }
+        }
+
     }
     
     
     func addTapped(_sender: UIBarButtonItem) {
-        self.performSegue(withIdentifier: "editPetDetails", sender: self)
+//        self.performSegue(withIdentifier: "editPetDetails", sender: self)
+        
+        if let vc = self.storyboard?.instantiateViewController(withIdentifier: "AddEditPetDetailsTableViewController") as? AddEditPetDetailsTableViewController {
+            if let pet = self.pet {
+                vc.pet = pet
+                self.navigationController?.pushViewController(vc, animated: true)
+
+            }
+        }
   
     }
     

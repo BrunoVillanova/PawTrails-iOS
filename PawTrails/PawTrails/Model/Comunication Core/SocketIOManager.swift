@@ -94,10 +94,11 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         
         if let url = URL(string: urlString) {
             self.socket = SocketIOClient(socketURL: url, config: [.log(true),
-                                                                  .secure(true),
+                                                                  .secure(true)
 //                                                                  .reconnectAttempts(50),
-                                                                  .reconnectWait(3),
-                                                                  .forceNew(true)])
+//                                                                  .reconnectWait(3),
+//                                                                  .forceNew(true)
+])
         }
         
         // Init SocketIO

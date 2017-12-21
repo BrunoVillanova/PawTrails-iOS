@@ -24,7 +24,6 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
                 } else {
                     topController.date = Date()
                 }
-
             }
         }
     }
