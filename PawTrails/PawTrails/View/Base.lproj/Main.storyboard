@@ -8,6 +8,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -591,16 +592,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No pets found. Please, Add your pet" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LKZ-CI-g8U">
-                                <rect key="frame" x="85" y="247" width="204" height="173"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="173" id="ROm-HW-B04"/>
-                                    <constraint firstAttribute="width" constant="204" id="Ufr-ms-QCv"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <color key="textColor" red="0.99932557339999994" green="0.63401025529999999" blue="0.2850541472" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="130" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="q8V-d2-K1W">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -695,13 +686,78 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="usd-cO-yur">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EuI-vE-6En" userLabel="Add First Pet View">
+                                        <rect key="frame" x="20" y="164.5" width="335" height="258"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PawDeviceImage" translatesAutoresizingMaskIntoConstraints="NO" id="bYi-jj-Mcy">
+                                                <rect key="frame" x="110.5" y="0.0" width="114" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="aS8-bl-57K"/>
+                                                    <constraint firstAttribute="width" constant="114" id="fbv-DV-gPy"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Link your PawTrails Device with PawTrails App" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DRn-vF-Q82">
+                                                <rect key="frame" x="30" y="114" width="276.5" height="16"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <color key="textColor" red="0.52156862749999999" green="0.56862745100000001" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please get your QR code ready" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ucd-E7-dtZ">
+                                                <rect key="frame" x="74.5" y="138" width="187" height="16"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <color key="textColor" red="0.52156862749999999" green="0.56862745100000001" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6yk-4b-WmH">
+                                                <rect key="frame" x="74" y="218" width="187.5" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="ZTC-eD-a2f"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <state key="normal" title="ADD MY FIRST PET">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="addMyFirstPetButtonTapped:" destination="mn3-hz-uuF" eventType="touchUpInside" id="ZdF-G3-emd"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="6yk-4b-WmH" firstAttribute="top" secondItem="Ucd-E7-dtZ" secondAttribute="bottom" constant="64" id="9ez-a8-Nbs"/>
+                                            <constraint firstAttribute="bottom" secondItem="6yk-4b-WmH" secondAttribute="bottom" id="IRr-nF-MWU"/>
+                                            <constraint firstItem="bYi-jj-Mcy" firstAttribute="centerX" secondItem="EuI-vE-6En" secondAttribute="centerX" id="KyD-Bw-cfx"/>
+                                            <constraint firstItem="Ucd-E7-dtZ" firstAttribute="centerX" secondItem="bYi-jj-Mcy" secondAttribute="centerX" id="NPc-Ix-Mda"/>
+                                            <constraint firstItem="bYi-jj-Mcy" firstAttribute="top" secondItem="EuI-vE-6En" secondAttribute="top" id="WT1-LH-8J3"/>
+                                            <constraint firstItem="DRn-vF-Q82" firstAttribute="top" secondItem="bYi-jj-Mcy" secondAttribute="bottom" constant="64" id="fPn-Fs-bmb"/>
+                                            <constraint firstItem="DRn-vF-Q82" firstAttribute="centerX" secondItem="bYi-jj-Mcy" secondAttribute="centerX" id="jtJ-W9-eWV"/>
+                                            <constraint firstItem="Ucd-E7-dtZ" firstAttribute="top" secondItem="DRn-vF-Q82" secondAttribute="bottom" constant="8" id="unJ-11-jLO"/>
+                                            <constraint firstItem="6yk-4b-WmH" firstAttribute="centerX" secondItem="EuI-vE-6En" secondAttribute="centerX" id="vmP-cb-n2z"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="EuI-vE-6En" firstAttribute="top" relation="greaterThanOrEqual" secondItem="usd-cO-yur" secondAttribute="top" constant="86" id="BAE-tA-TjE"/>
+                                    <constraint firstItem="EuI-vE-6En" firstAttribute="centerX" secondItem="usd-cO-yur" secondAttribute="centerX" id="bqN-I3-nmK"/>
+                                    <constraint firstItem="EuI-vE-6En" firstAttribute="leading" secondItem="usd-cO-yur" secondAttribute="leading" constant="20" id="gOz-bh-fzX"/>
+                                    <constraint firstItem="EuI-vE-6En" firstAttribute="centerY" secondItem="usd-cO-yur" secondAttribute="centerY" constant="-40" id="jk6-PX-3xC"/>
+                                    <constraint firstItem="6yk-4b-WmH" firstAttribute="width" secondItem="usd-cO-yur" secondAttribute="width" multiplier="0.5" id="m8u-O2-nMK"/>
+                                    <constraint firstAttribute="trailing" secondItem="EuI-vE-6En" secondAttribute="trailing" constant="20" id="rHk-Ai-QpM"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="q8V-d2-K1W" firstAttribute="bottom" secondItem="gV4-Ml-T18" secondAttribute="bottom" id="1Kb-a7-Ltc"/>
-                            <constraint firstItem="LKZ-CI-g8U" firstAttribute="centerX" secondItem="gV4-Ml-T18" secondAttribute="centerX" id="7xo-hI-XmJ"/>
-                            <constraint firstItem="LKZ-CI-g8U" firstAttribute="centerY" secondItem="mfc-e2-2Cg" secondAttribute="centerY" id="gcg-kv-FuK"/>
+                            <constraint firstAttribute="bottom" secondItem="usd-cO-yur" secondAttribute="bottom" id="8ig-QZ-yMy"/>
+                            <constraint firstItem="usd-cO-yur" firstAttribute="leading" secondItem="mfc-e2-2Cg" secondAttribute="leading" id="Gos-J3-KDY"/>
+                            <constraint firstItem="usd-cO-yur" firstAttribute="top" secondItem="mfc-e2-2Cg" secondAttribute="top" id="lKX-B3-iiL"/>
                             <constraint firstItem="q8V-d2-K1W" firstAttribute="top" secondItem="mfc-e2-2Cg" secondAttribute="top" constant="64" id="mEg-dP-YiK"/>
+                            <constraint firstAttribute="trailing" secondItem="usd-cO-yur" secondAttribute="trailing" id="uUM-LM-pRW"/>
                             <constraint firstItem="gV4-Ml-T18" firstAttribute="trailing" secondItem="q8V-d2-K1W" secondAttribute="trailing" id="wqI-QB-YUm"/>
                             <constraint firstItem="q8V-d2-K1W" firstAttribute="leading" secondItem="gV4-Ml-T18" secondAttribute="leading" id="xso-bm-4OU"/>
                         </constraints>
@@ -715,7 +771,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="noPetsFound" destination="LKZ-CI-g8U" id="e7d-Cn-T7m"/>
+                        <outlet property="addMyFirstPetButton" destination="6yk-4b-WmH" id="EAy-UD-hXB"/>
+                        <outlet property="noPetsFound" destination="usd-cO-yur" id="NHv-Mk-Bw5"/>
                         <outlet property="tableView" destination="q8V-d2-K1W" id="Fgs-NS-HWd"/>
                     </connections>
                 </viewController>
@@ -8514,6 +8571,7 @@ Last Edited on 2017-12-04
         <image name="Device" width="50" height="56"/>
         <image name="FinishAdventure-1x-png" width="80" height="80"/>
         <image name="PauseTripButton-1x-png" width="87" height="90"/>
+        <image name="PawDeviceImage" width="114" height="50"/>
         <image name="PetLocationpng" width="87" height="90"/>
         <image name="StartTrip-1x-png" width="87" height="90"/>
         <image name="StopTripButton-1x-png" width="87" height="89"/>
@@ -8554,7 +8612,7 @@ Last Edited on 2017-12-04
     <inferredMetricsTieBreakers>
         <segue reference="yp5-bT-5uy"/>
         <segue reference="UeI-2G-9og"/>
-        <segue reference="G7h-iD-Glq"/>
+        <segue reference="Nln-Sh-wxV"/>
         <segue reference="gjN-xE-RCG"/>
     </inferredMetricsTieBreakers>
 </document>

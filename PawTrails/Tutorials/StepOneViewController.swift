@@ -29,7 +29,18 @@ class StepOneViewController: UIViewController {
         BarcodeScanner.Info.notFoundText = NSLocalizedString("No product found.", comment: "")
         BarcodeScanner.Info.settingsText = NSLocalizedString(
             "To scan the QR Code you have to allow camera access under iOS settings.", comment: "")
+        
+        if let nc = self.navigationController, nc.viewControllers.first == self {
+            let closeBarButtonItem = UIBarButtonItem.init(title: "Close", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.closeViewController))
+            self.navigationItem.setRightBarButton(closeBarButtonItem, animated: true)
+        }
     }
+    
+    
+    @objc fileprivate func closeViewController() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

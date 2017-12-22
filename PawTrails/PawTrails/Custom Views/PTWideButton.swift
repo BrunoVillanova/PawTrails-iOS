@@ -24,8 +24,8 @@ class PTWideButton: UIButton {
         if let currentTitle = self.title(for: .normal) {
             self.setTitle(currentTitle.uppercased(), for: .normal)
         }
-        
     }
+    
     
     override func setTitle(_ title: String?, for state: UIControlState) {
         let finalTitle = title?.uppercased()

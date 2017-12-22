@@ -454,7 +454,7 @@ extension UIView {
     
   
     func fullyroundedCorner(radius: CGFloat = 20) {
-        self.layer.cornerRadius = radius
+        self.layer.cornerRadius = self.frame.size.height/2.0
         self.clipsToBounds = true
     }
     

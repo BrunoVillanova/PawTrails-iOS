@@ -42,17 +42,13 @@ class MainTabBarViewController: UITabBarController {
         }
         
         DataManager.instance.pets().subscribe(onNext: { (pets) in
-            #if DEBUG
-            let root = self.storyboard?.instantiateViewController(withIdentifier: "SignUpYourDeviceVC") as! SignUpYourDeviceVC
-            let navigationController = UINavigationController.init(rootViewController: root)
-            self.present(navigationController, animated: true, completion: nil)
-            #else
+            
             if pets.isEmpty || pets.count == 0 {
                 let root = self.storyboard?.instantiateViewController(withIdentifier: "SignUpYourDeviceVC") as! SignUpYourDeviceVC
                 let navigationController = UINavigationController.init(rootViewController: root)
                 self.present(navigationController, animated: true, completion: nil)
             }
-            #endif
+            
         }).disposed(by: disposeBag)
     }
 
