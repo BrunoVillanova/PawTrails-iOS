@@ -32,7 +32,7 @@ import UIKit
 
 protocol TestDelegateControl: NSObjectProtocol {
     associatedtype TestParentObject: AnyObject
-    associatedtype TestDelegate: NSObjectProtocol
+    associatedtype TestDelegate
     func doThatTest(_ value: Int)
 
     var delegateProxy: DelegateProxy<TestParentObject, TestDelegate> { get }
@@ -348,6 +348,28 @@ extension DelegateProxyTest {
     }
 }
 
+extension DelegateProxyTest {
+    func test_InstallPureSwiftDelegateProxy() {
+        let view = PureSwiftView()
+        let mock = MockPureSwiftDelegate()
+        
+        view.delegate = mock
+
+        let proxy = view.rx.proxy
+        XCTAssertTrue(view.delegate === proxy)
+        XCTAssertTrue(view.rx.proxy.forwardToDelegate() === mock)
+
+        var latestValue: Int? = nil
+        _ = view.rx.testIt.subscribe(onNext: {
+            latestValue = $0
+        })
+
+        XCTAssertEqual(latestValue, nil)
+        view.testIt(with: 3)
+        XCTAssertEqual(latestValue, 3)
+    }
+}
+
 #if os(iOS)
 extension DelegateProxyTest {
     func test_DelegateProxyHierarchyWorks() {
@@ -611,6 +633,72 @@ class ExtendClassViewDelegateProxy_b: InitialClassViewDelegateProxy {
 
     init(parentObject2: InitialClassViewSometimeExtended2_b) {
         super.init(parentObject: parentObject2)
+    }
+}
+
+
+protocol PureSwiftDelegate: class {
+    func delegateTestIt(with: Int)
+}
+
+class PureSwiftView: ReactiveCompatible {
+    weak var delegate: PureSwiftDelegate?
+
+    func testIt(with: Int) {
+        self.delegate?.delegateTestIt(with: with)
+    }
+}
+
+extension Reactive where Base: PureSwiftView {
+    var proxy: DelegateProxy<PureSwiftView, PureSwiftDelegate> {
+        return PureSwiftDelegateProxy.proxy(for: base)
+    }
+}
+
+extension Reactive where Base: PureSwiftView {
+    var testIt: ControlEvent<Int> {
+        return ControlEvent(events: PureSwiftDelegateProxy.proxy(for: base).testItObserver)
+    }
+}
+
+class PureSwiftDelegateProxy
+    : DelegateProxy<PureSwiftView, PureSwiftDelegate>
+    , DelegateProxyType
+    , PureSwiftDelegate {
+
+    fileprivate let testItObserver = PublishSubject<Int>()
+
+    init(parentObject: PureSwiftView) {
+        super.init(parentObject: parentObject, delegateProxy: PureSwiftDelegateProxy.self)
+    }
+    
+    static func registerKnownImplementations() {
+        self.register { PureSwiftDelegateProxy.init(parentObject: $0) }
+    }
+    
+    static func currentDelegate(for object: ParentObject) -> PureSwiftDelegate? {
+        return object.delegate
+    }
+    
+    static func setCurrentDelegate(_ delegate: PureSwiftDelegate?, to object: ParentObject) {
+        return object.delegate = delegate
+    }
+
+    func delegateTestIt(with: Int) {
+        testItObserver.on(.next(with))
+        self.forwardToDelegate()?.delegateTestIt(with: with)
+    }
+
+    deinit {
+        self.testItObserver.on(.completed)
+    }
+}
+
+final class MockPureSwiftDelegate: PureSwiftDelegate {
+    var latestValue: Int?
+
+    func delegateTestIt(with: Int) {
+        latestValue = with
     }
 }
 

@@ -26,11 +26,11 @@ extension SignalTests {
         var disposable3: Disposable!
 
         let coldObservable = scheduler.createColdObservable([
-            next(10, 0),
-            next(20, 1),
-            next(30, 2),
-            next(40, 3),
-            error(50, testError)
+            .next(10, 0),
+            .next(20, 1),
+            .next(30, 2),
+            .next(40, 3),
+            .error(50, testError)
             ])
         let signal = coldObservable.asSignal(onErrorJustReturn: -1)
 
@@ -63,21 +63,21 @@ extension SignalTests {
         scheduler.start()
 
         XCTAssertEqual(observer1.events, [
-            next(210, 0),
-            next(220, 1),
-            next(230, 2)
+            .next(210, 0),
+            .next(220, 1),
+            .next(230, 2)
             ])
 
         XCTAssertEqual(observer2.events, [
-            next(230, 2),
-            next(240, 3),
-            next(250, -1),
-            completed(250)
+            .next(230, 2),
+            .next(240, 3),
+            .next(250, -1),
+            .completed(250)
             ])
 
         XCTAssertEqual(observer3.events, [
-            next(270, 0),
-            next(280, 1),
+            .next(270, 0),
+            .next(280, 1),
             ])
 
         XCTAssertEqual(coldObservable.subscriptions, [
@@ -97,11 +97,11 @@ extension SignalTests {
         var disposable3: Disposable!
 
         let coldObservable = scheduler.createColdObservable([
-            next(10, 0),
-            next(20, 1),
-            next(30, 2),
-            next(40, 3),
-            completed(50)
+            .next(10, 0),
+            .next(20, 1),
+            .next(30, 2),
+            .next(40, 3),
+            .completed(50)
             ])
         let signal = coldObservable.asSignal(onErrorJustReturn: -1)
 
@@ -135,20 +135,20 @@ extension SignalTests {
         scheduler.start()
 
         XCTAssertEqual(observer1.events, [
-            next(210, 0),
-            next(220, 1),
-            next(230, 2)
+            .next(210, 0),
+            .next(220, 1),
+            .next(230, 2)
             ])
 
         XCTAssertEqual(observer2.events, [
-            next(230, 2),
-            next(240, 3),
-            completed(250)
+            .next(230, 2),
+            .next(240, 3),
+            .completed(250)
             ])
 
         XCTAssertEqual(observer3.events, [
-            next(270, 0),
-            next(280, 1),
+            .next(270, 0),
+            .next(280, 1),
             ])
 
         XCTAssertEqual(coldObservable.subscriptions, [
@@ -163,6 +163,21 @@ extension SignalTests {
     func testPublishRelayAsSignal() {
         let hotObservable: PublishRelay<Int> = PublishRelay()
         let xs = Signal.zip(hotObservable.asSignal(), Signal.of(0, 0)) { x, _ in
+            return x
+        }
+
+        let results = subscribeTwiceOnBackgroundSchedulerAndOnlyOneSubscription(xs, expectationFulfilled: { $0 == 2 }) {
+            hotObservable.accept(1)
+            hotObservable.accept(2)
+        }
+
+        XCTAssertEqual(results, [1, 2])
+    }
+
+    func testControlEventAsSignal() {
+        let hotObservable: PublishRelay<Int> = PublishRelay()
+        let controlEvent = ControlEvent(events: hotObservable.asObservable())
+        let xs = Signal.zip(controlEvent.asSignal(), Signal.of(0, 0)) { x, _ in
             return x
         }
 

@@ -35,6 +35,10 @@
 		25F6ECC91F48C407008552FA /* Single.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F6ECBF1F48C37C008552FA /* Single.swift */; };
 		271A97411CFC996B00D64125 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271A97401CFC996B00D64125 /* UIViewController+Rx.swift */; };
 		271A97441CFC9F7B00D64125 /* UIViewController+RxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271A97421CFC99FE00D64125 /* UIViewController+RxTests.swift */; };
+		4583D8231FE94BBA00AA1BB1 /* Recorded+Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4583D8211FE94BB100AA1BB1 /* Recorded+Event.swift */; };
+		4583D8241FE94BBB00AA1BB1 /* Recorded+Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4583D8211FE94BB100AA1BB1 /* Recorded+Event.swift */; };
+		4583D8251FE94BBC00AA1BB1 /* Recorded+Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4583D8211FE94BB100AA1BB1 /* Recorded+Event.swift */; };
+		4583D8261FE94BBD00AA1BB1 /* Recorded+Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4583D8211FE94BB100AA1BB1 /* Recorded+Event.swift */; };
 		4613456F1D9A4467001ABAF2 /* UIWebView+RxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4613456E1D9A4467001ABAF2 /* UIWebView+RxTests.swift */; };
 		461345711D9A4543001ABAF2 /* UIWebView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461345701D9A4543001ABAF2 /* UIWebView+Rx.swift */; };
 		4613457C1D9A4AEE001ABAF2 /* RxWebViewDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4613457B1D9A4AEE001ABAF2 /* RxWebViewDelegateProxy.swift */; };
@@ -129,6 +133,17 @@
 		C801DE4A1F6EBB84008DB060 /* Observable+PrimitiveSequenceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C801DE491F6EBB84008DB060 /* Observable+PrimitiveSequenceTest.swift */; };
 		C801DE4B1F6EBB84008DB060 /* Observable+PrimitiveSequenceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C801DE491F6EBB84008DB060 /* Observable+PrimitiveSequenceTest.swift */; };
 		C801DE4C1F6EBB84008DB060 /* Observable+PrimitiveSequenceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C801DE491F6EBB84008DB060 /* Observable+PrimitiveSequenceTest.swift */; };
+		C8091C4E1FAA345C001DB32A /* ObservableConvertibleType+SharedSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8091C4D1FAA345C001DB32A /* ObservableConvertibleType+SharedSequence.swift */; };
+		C8091C4F1FAA345C001DB32A /* ObservableConvertibleType+SharedSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8091C4D1FAA345C001DB32A /* ObservableConvertibleType+SharedSequence.swift */; };
+		C8091C501FAA345C001DB32A /* ObservableConvertibleType+SharedSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8091C4D1FAA345C001DB32A /* ObservableConvertibleType+SharedSequence.swift */; };
+		C8091C511FAA345C001DB32A /* ObservableConvertibleType+SharedSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8091C4D1FAA345C001DB32A /* ObservableConvertibleType+SharedSequence.swift */; };
+		C8091C531FAA3588001DB32A /* ObservableConvertibleType+SharedSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8091C521FAA3588001DB32A /* ObservableConvertibleType+SharedSequence.swift */; };
+		C8091C541FAA3588001DB32A /* ObservableConvertibleType+SharedSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8091C521FAA3588001DB32A /* ObservableConvertibleType+SharedSequence.swift */; };
+		C8091C551FAA3588001DB32A /* ObservableConvertibleType+SharedSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8091C521FAA3588001DB32A /* ObservableConvertibleType+SharedSequence.swift */; };
+		C8091C571FAA39C1001DB32A /* ControlEvent+Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8091C561FAA39C1001DB32A /* ControlEvent+Signal.swift */; };
+		C8091C581FAA39C1001DB32A /* ControlEvent+Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8091C561FAA39C1001DB32A /* ControlEvent+Signal.swift */; };
+		C8091C591FAA39C1001DB32A /* ControlEvent+Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8091C561FAA39C1001DB32A /* ControlEvent+Signal.swift */; };
+		C8091C5A1FAA39C1001DB32A /* ControlEvent+Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8091C561FAA39C1001DB32A /* ControlEvent+Signal.swift */; };
 		C8093CC51B8A72BE0088E94D /* Cancelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8093C491B8A72BE0088E94D /* Cancelable.swift */; };
 		C8093CC61B8A72BE0088E94D /* Cancelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8093C491B8A72BE0088E94D /* Cancelable.swift */; };
 		C8093CC71B8A72BE0088E94D /* AsyncLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8093C4B1B8A72BE0088E94D /* AsyncLock.swift */; };
@@ -1731,6 +1746,7 @@
 		25F6ECBF1F48C37C008552FA /* Single.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Single.swift; sourceTree = "<group>"; };
 		271A97401CFC996B00D64125 /* UIViewController+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		271A97421CFC99FE00D64125 /* UIViewController+RxTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+RxTests.swift"; sourceTree = "<group>"; };
+		4583D8211FE94BB100AA1BB1 /* Recorded+Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Recorded+Event.swift"; sourceTree = "<group>"; };
 		4613456E1D9A4467001ABAF2 /* UIWebView+RxTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIWebView+RxTests.swift"; sourceTree = "<group>"; };
 		461345701D9A4543001ABAF2 /* UIWebView+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIWebView+Rx.swift"; sourceTree = "<group>"; };
 		4613457B1D9A4AEE001ABAF2 /* RxWebViewDelegateProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxWebViewDelegateProxy.swift; sourceTree = "<group>"; };
@@ -1767,6 +1783,9 @@
 		C801DE3D1F6EAD57008DB060 /* CompletableTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletableTest.swift; sourceTree = "<group>"; };
 		C801DE411F6EBB29008DB060 /* ObservableType+PrimitiveSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableType+PrimitiveSequence.swift"; sourceTree = "<group>"; };
 		C801DE491F6EBB84008DB060 /* Observable+PrimitiveSequenceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+PrimitiveSequenceTest.swift"; sourceTree = "<group>"; };
+		C8091C4D1FAA345C001DB32A /* ObservableConvertibleType+SharedSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableConvertibleType+SharedSequence.swift"; sourceTree = "<group>"; };
+		C8091C521FAA3588001DB32A /* ObservableConvertibleType+SharedSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableConvertibleType+SharedSequence.swift"; sourceTree = "<group>"; };
+		C8091C561FAA39C1001DB32A /* ControlEvent+Signal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ControlEvent+Signal.swift"; sourceTree = "<group>"; };
 		C809396D1B8A71760088E94D /* RxCocoa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxCocoa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C80939E71B8A71840088E94D /* RxCocoa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxCocoa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8093BC71B8A71F00088E94D /* RxBlocking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxBlocking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2685,6 +2704,7 @@
 				C8D970E11F532FD20058F2FE /* SharedSequence+Extensions.swift */,
 				C8D970DE1F532FD20058F2FE /* Driver+Test.swift */,
 				C8D970E21F532FD30058F2FE /* SharedSequence+OperatorTest.swift */,
+				C8091C521FAA3588001DB32A /* ObservableConvertibleType+SharedSequence.swift */,
 				C83508DD1C38706D0027C24C /* ControlEventTests.swift */,
 				C83508DE1C38706D0027C24C /* ControlPropertyTests.swift */,
 				C83508E11C38706D0027C24C /* DelegateProxyTest.swift */,
@@ -2914,6 +2934,7 @@
 			children = (
 				C85E6FBB1F52FF4F00C5681E /* Signal.swift */,
 				C8B0F7141F530F5900548EBE /* PublishRelay+Signal.swift */,
+				C8091C561FAA39C1001DB32A /* ControlEvent+Signal.swift */,
 				C8B0F7211F53135100548EBE /* ObservableConvertibleType+Signal.swift */,
 				C8D970CD1F5324D90058F2FE /* Signal+Subscription.swift */,
 			);
@@ -3101,6 +3122,7 @@
 				C89AB1B81DAAC3350065FBE6 /* SharedSequence+Operators.swift */,
 				C89AB1B91DAAC3350065FBE6 /* SharedSequence.swift */,
 				C85E6FBD1F53025700C5681E /* SchedulerType+SharedSequence.swift */,
+				C8091C4D1FAA345C001DB32A /* ObservableConvertibleType+SharedSequence.swift */,
 			);
 			path = SharedSequence;
 			sourceTree = "<group>";
@@ -3155,6 +3177,7 @@
 				C89CFA121DAABBE20079D23B /* Event+Equatable.swift */,
 				C89CFA131DAABBE20079D23B /* HotObservable.swift */,
 				C89CFA151DAABBE20079D23B /* Recorded.swift */,
+				4583D8211FE94BB100AA1BB1 /* Recorded+Event.swift */,
 				C89CFA161DAABBE20079D23B /* RxTests.swift */,
 				C89CFA1A1DAABBE20079D23B /* Subscription.swift */,
 				C89CFA1B1DAABBE20079D23B /* TestableObservable.swift */,
@@ -4094,6 +4117,7 @@
 				F31F35B01BB4FED800961002 /* UIStepper+Rx.swift in Sources */,
 				C8B0F7221F53135100548EBE /* ObservableConvertibleType+Signal.swift in Sources */,
 				C89AB1C61DAAC3350065FBE6 /* ControlEvent.swift in Sources */,
+				C8091C571FAA39C1001DB32A /* ControlEvent+Signal.swift in Sources */,
 				C882542D1B8A752B00B02D69 /* UIImageView+Rx.swift in Sources */,
 				A520FFFC1F0D291500573734 /* RxPickerViewDataSourceProxy.swift in Sources */,
 				C882542A1B8A752B00B02D69 /* UIControl+Rx.swift in Sources */,
@@ -4138,6 +4162,7 @@
 				C85E6FC21F5305E300C5681E /* Signal.swift in Sources */,
 				C89AB2481DAAC3A60065FBE6 /* _RXKVOObserver.m in Sources */,
 				C88254281B8A752B00B02D69 /* UIButton+Rx.swift in Sources */,
+				C8091C4E1FAA345C001DB32A /* ObservableConvertibleType+SharedSequence.swift in Sources */,
 				C89AB1CA1DAAC3350065FBE6 /* ControlProperty.swift in Sources */,
 				ECBBA59E1DF8C0D400DDDC2E /* RxTabBarControllerDelegateProxy.swift in Sources */,
 				C89AB1F21DAAC3350065FBE6 /* SharedSequence+Operators.swift in Sources */,
@@ -4195,6 +4220,7 @@
 				C8A81CA11E05E82C0008DEF4 /* DispatchQueue+Extensions.swift in Sources */,
 				C88F76821CE5341700D5A014 /* TextInput.swift in Sources */,
 				C8C8BCD01F8944B800501D4D /* BehaviorRelay.swift in Sources */,
+				C8091C581FAA39C1001DB32A /* ControlEvent+Signal.swift in Sources */,
 				C89AB1DF1DAAC3350065FBE6 /* ObservableConvertibleType+Driver.swift in Sources */,
 				C89AB1D71DAAC3350065FBE6 /* Driver+Subscription.swift in Sources */,
 				C89AB2511DAAC3A60065FBE6 /* _RXObjCRuntime.m in Sources */,
@@ -4203,6 +4229,7 @@
 				A520FFFD1F0D291500573734 /* RxPickerViewDataSourceProxy.swift in Sources */,
 				C89AB2411DAAC3A60065FBE6 /* _RXDelegateProxy.m in Sources */,
 				C867819C1DB823B500B2029A /* NSControl+Rx.swift in Sources */,
+				C8091C4F1FAA345C001DB32A /* ObservableConvertibleType+SharedSequence.swift in Sources */,
 				C89AB2391DAAC3A60065FBE6 /* _RX.m in Sources */,
 				C8093EFE1B8A732E0088E94D /* RxTarget.swift in Sources */,
 				C89AB21F1DAAC3350065FBE6 /* NSObject+Rx.swift in Sources */,
@@ -4420,6 +4447,7 @@
 				C81B6AAA1DB2C15C0047CF86 /* Platform.Darwin.swift in Sources */,
 				C81A097D1E6C27A100900B3B /* Observable+ZipTests.swift in Sources */,
 				C83509321C38706E0027C24C /* DelegateProxyTest.swift in Sources */,
+				C8091C531FAA3588001DB32A /* ObservableConvertibleType+SharedSequence.swift in Sources */,
 				0BA9496C1E224B9C0036DD06 /* AsyncSubjectTests.swift in Sources */,
 				C8F27DC01CE68DA600D5FB4F /* UITextView+RxTests.swift in Sources */,
 				C820A9B21EB507D300D431BC /* Observable+TakeWhileTests.swift in Sources */,
@@ -4546,6 +4574,7 @@
 				C8C4F1871DE9DF0200003FA7 /* UISwitch+RxTests.swift in Sources */,
 				C820AA031EB5134000D431BC /* Observable+DelaySubscriptionTests.swift in Sources */,
 				7EDBAEC31C89BCB9006CBE67 /* UITabBarItem+RxTests.swift in Sources */,
+				C8091C541FAA3588001DB32A /* ObservableConvertibleType+SharedSequence.swift in Sources */,
 				914FCD681CCDB82E0058B304 /* UIPageControl+RxTest.swift in Sources */,
 				C8A81CA71E05EAF70008DEF4 /* Binder+Tests.swift in Sources */,
 				C83509DD1C38754C0027C24C /* EquatableArray.swift in Sources */,
@@ -4626,6 +4655,7 @@
 				C820A9581EB4ED7C00D431BC /* Observable+MulticastTests.swift in Sources */,
 				C822BAD01DB424EC00F98810 /* Reactive+Tests.swift in Sources */,
 				C83509E21C3875580027C24C /* BackgroundThreadPrimitiveHotObservable.swift in Sources */,
+				C8091C551FAA3588001DB32A /* ObservableConvertibleType+SharedSequence.swift in Sources */,
 				C8350A0E1C3875630027C24C /* Observable+ZipTests+arity.swift in Sources */,
 				C820AA001EB5110E00D431BC /* Observable+DematerializeTests.swift in Sources */,
 				C8D970F11F532FD30058F2FE /* SharedSequence+Extensions.swift in Sources */,
@@ -4916,6 +4946,7 @@
 				C89CFA3A1DAABBE20079D23B /* TestScheduler.swift in Sources */,
 				C86781831DB8143A00B2029A /* Bag.swift in Sources */,
 				C89CFA2A1DAABBE20079D23B /* HotObservable.swift in Sources */,
+				4583D8231FE94BBA00AA1BB1 /* Recorded+Event.swift in Sources */,
 				C89CFA421DAABBE20079D23B /* Subscription.swift in Sources */,
 				C89CFA1E1DAABBE20079D23B /* Any+Equatable.swift in Sources */,
 				C89CFA3E1DAABBE20079D23B /* TestSchedulerVirtualTimeConverter.swift in Sources */,
@@ -4937,6 +4968,7 @@
 				C89CFA3B1DAABBE20079D23B /* TestScheduler.swift in Sources */,
 				C86781841DB8143A00B2029A /* Bag.swift in Sources */,
 				C89CFA2B1DAABBE20079D23B /* HotObservable.swift in Sources */,
+				4583D8241FE94BBB00AA1BB1 /* Recorded+Event.swift in Sources */,
 				C89CFA431DAABBE20079D23B /* Subscription.swift in Sources */,
 				C89CFA1F1DAABBE20079D23B /* Any+Equatable.swift in Sources */,
 				C89CFA3F1DAABBE20079D23B /* TestSchedulerVirtualTimeConverter.swift in Sources */,
@@ -4958,6 +4990,7 @@
 				C89CFA3C1DAABBE20079D23B /* TestScheduler.swift in Sources */,
 				C86781851DB8143B00B2029A /* Bag.swift in Sources */,
 				C89CFA2C1DAABBE20079D23B /* HotObservable.swift in Sources */,
+				4583D8251FE94BBC00AA1BB1 /* Recorded+Event.swift in Sources */,
 				C89CFA441DAABBE20079D23B /* Subscription.swift in Sources */,
 				C89CFA201DAABBE20079D23B /* Any+Equatable.swift in Sources */,
 				C89CFA401DAABBE20079D23B /* TestSchedulerVirtualTimeConverter.swift in Sources */,
@@ -4979,6 +5012,7 @@
 				C89CFA3D1DAABBE20079D23B /* TestScheduler.swift in Sources */,
 				C86781861DB8143B00B2029A /* Bag.swift in Sources */,
 				C89CFA2D1DAABBE20079D23B /* HotObservable.swift in Sources */,
+				4583D8261FE94BBD00AA1BB1 /* Recorded+Event.swift in Sources */,
 				C89CFA451DAABBE20079D23B /* Subscription.swift in Sources */,
 				C89CFA211DAABBE20079D23B /* Any+Equatable.swift in Sources */,
 				C89CFA411DAABBE20079D23B /* TestSchedulerVirtualTimeConverter.swift in Sources */,
@@ -5339,6 +5373,7 @@
 				C89AB22A1DAAC33F0065FBE6 /* RxCocoa.swift in Sources */,
 				54D213931CE08DDB0028D5B4 /* UINavigationItem+Rx.swift in Sources */,
 				C8F0C01A1BBBFBB9001B112F /* RxCollectionViewDelegateProxy.swift in Sources */,
+				C8091C5A1FAA39C1001DB32A /* ControlEvent+Signal.swift in Sources */,
 				C817729B1E7F408100EA679B /* Deprecated.swift in Sources */,
 				C89AB1E11DAAC3350065FBE6 /* ObservableConvertibleType+Driver.swift in Sources */,
 				C8F0C01B1BBBFBB9001B112F /* RxScrollViewDelegateProxy.swift in Sources */,
@@ -5352,6 +5387,7 @@
 				A520FFFF1F0D291500573734 /* RxPickerViewDataSourceProxy.swift in Sources */,
 				C8F0C0221BBBFBB9001B112F /* UIButton+Rx.swift in Sources */,
 				9BA1CBFE1C0F84C40044B50A /* UIActivityIndicatorView+Rx.swift in Sources */,
+				C8091C511FAA345C001DB32A /* ObservableConvertibleType+SharedSequence.swift in Sources */,
 				C89AB1A91DAAC25A0065FBE6 /* RxCocoaObjCRuntimeError+Extensions.swift in Sources */,
 				842A5A2E1C357F94003568D5 /* NSTextStorage+Rx.swift in Sources */,
 				C8F0C0281BBBFBB9001B112F /* RxTextViewDelegateProxy.swift in Sources */,
@@ -5489,6 +5525,7 @@
 				C89AB2241DAAC3350065FBE6 /* URLSession+Rx.swift in Sources */,
 				D203C50D1BB9C53E00D02D00 /* UISegmentedControl+Rx.swift in Sources */,
 				C8A81CA21E05E82C0008DEF4 /* DispatchQueue+Extensions.swift in Sources */,
+				C8091C591FAA39C1001DB32A /* ControlEvent+Signal.swift in Sources */,
 				C89AB1CC1DAAC3350065FBE6 /* ControlProperty.swift in Sources */,
 				D2138C861BB9BEBE00339B5C /* Observable+Bind.swift in Sources */,
 				AAE623771C82475700FC7801 /* UIProgressView+Rx.swift in Sources */,
@@ -5513,6 +5550,7 @@
 				9D71C4D21BF08191006E8F59 /* UIButton+Rx.swift in Sources */,
 				D203C4FD1BB9C53700D02D00 /* RxSearchBarDelegateProxy.swift in Sources */,
 				7EDBAEBE1C89B9B7006CBE67 /* UITabBarItem+Rx.swift in Sources */,
+				C8091C501FAA345C001DB32A /* ObservableConvertibleType+SharedSequence.swift in Sources */,
 				84E4D3931C9AFD3500ADFDC9 /* UISearchController+Rx.swift in Sources */,
 				D203C50F1BB9C53E00D02D00 /* UIStepper+Rx.swift in Sources */,
 				C8E65EFD1F6E91D1004478C3 /* Binder.swift in Sources */,
