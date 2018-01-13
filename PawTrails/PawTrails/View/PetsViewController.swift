@@ -57,11 +57,11 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         addMyFirstPetButton.backgroundColor = UIColor.primary
         addMyFirstPetButton.round()
         
-        // Todo: make tableview reactive
-        //        DataManager.instance.pets()
-        //            .bind(to: tableView.rx.items(cellIdentifier: "cell", cellType: petListCell.self)) { (_, element, cell) in
-        //           cell.configure(element)
-        //        }.disposed(by: disposeBag)
+//         Todo: make tableview reactive
+//                DataManager.instance.pets()
+//                    .bind(to: tableView.rx.items(cellIdentifier: "cell", cellType: petListCell.self)) { (_, element, cell) in
+//                   cell.configure(element)
+//                }.disposed(by: disposeBag)
         
         // Strings
         BarcodeScanner.Title.text = NSLocalizedString("Scan QR Code", comment: "")

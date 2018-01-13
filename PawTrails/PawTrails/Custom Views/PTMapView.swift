@@ -23,21 +23,75 @@ class PTMapView: MKMapView {
     let locationManager  = CLLocationManager()
     var alreadyFocusedOnUserLocation = false
     var alreadyFocusedOnPets = false
+    var isStaticView = false
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        
         self.delegate = self
         self.showsScale = true
         self.showsUserLocation = true
         
         self.requestLocationAccess()
+    }
+    
+    func setStaticTripView(_ trip: Trip) {
+        self.showsUserLocation = false
+        self.isUserInteractionEnabled = false
+        self.isZoomEnabled = false
+        self.isScrollEnabled = false
+        self.isUserInteractionEnabled = false
+        self.showsPointsOfInterest = false
+        self.showsTraffic = false
+        self.showsBuildings = false
+        self.showsScale = false
         
+        
+        let id = MKLocationId(id: Int(trip.petId), type: .pet)
+        self.myAnnotations[id] = [PTAnnotation]()
+        
+        if let tripPoints = trip.points?.filter({ (tripPoint) -> Bool in
+            return tripPoint.point?.coordinates.latitude != 0 && tripPoint.point?.coordinates.longitude != 0
+        }) {
+            for tripPoint in tripPoints {
+                let newAnnotation = PTAnnotation(tripPoint.point!.coordinates)
+                self.myAnnotations[id]?.append(newAnnotation)
+            }
+        }
+        
+        self.drawOverlayForPetAnnotations(self.myAnnotations[id])
+        
+        if let lastAnnotation = self.myAnnotations[id]?.last {
+            let newAnnotation = PTAnnotation(lastAnnotation.coordinate)
+            self.addAnnotation(newAnnotation)
+        }
+        
+        if let allCoordinates = self.myAnnotations[id]?.map({ $0.coordinate
+        }), allCoordinates.count > 0 {
+            self.setVisibleMapFor(allCoordinates)
+        }
+    }
+    
+    func showGpsUpdates() {
+        DataManager.instance.allPetDeviceData().subscribe(onNext: { (petDeviceDataList) in
+            UIApplication.shared.keyWindow?.rootViewController!.hideMessage()
+            if let gpsUpdates = petDeviceDataList as [PetDeviceData]! {
+                self.loadGpsUpdates(gpsUpdates)
+            }
+            
+        }).disposed(by: disposeBag)
+    }
+    
+    func startTripMode() {
+        
+        if tripMode {
+            return
+        }
+        
+        tripMode = true
         
         DataManager.instance.getActivePetTrips().subscribe(onNext: { (trips) in
             
-            if !self.tripMode {
-                return
-            }
             
             var petIDsOnTrips = Set<Int64>()
             trips.forEach({ (trip) in
@@ -50,7 +104,7 @@ class PTMapView: MKMapView {
                 if let latestTrip = trips.filter({ (trip) -> Bool in
                     return trip.petId == petIDonTrip
                 }).sorted (by: {$0.status < $1.status}).first {
-                     latestTrips.append(latestTrip)
+                    latestTrips.append(latestTrip)
                 }
             }
             
@@ -62,7 +116,7 @@ class PTMapView: MKMapView {
                 
                 let id = MKLocationId(id: Int(trip.petId), type: .pet)
                 self.myAnnotations[id] = [PTAnnotation]()
-
+                
                 if let tripPoints = trip.points?.filter({ (tripPoint) -> Bool in
                     return tripPoint.point?.coordinates.latitude != 0 && tripPoint.point?.coordinates.longitude != 0
                 }) {
@@ -75,16 +129,8 @@ class PTMapView: MKMapView {
                 self.drawOverlayForPetAnnotations(self.myAnnotations[id])
             }
         }).disposed(by: disposeBag)
-            
-
         
-        DataManager.instance.allPetDeviceData().subscribe(onNext: { (petDeviceDataList) in
-            UIApplication.shared.keyWindow?.rootViewController!.hideMessage()
-            if let gpsUpdates = petDeviceDataList as [PetDeviceData]! {
-                self.loadGpsUpdates(gpsUpdates)
-            }
-
-        }).disposed(by: disposeBag)
+        self.showGpsUpdates()
     }
     
     fileprivate func loadGpsUpdates(_ gpsUpdates: [PetDeviceData]?) {
@@ -167,7 +213,7 @@ class PTMapView: MKMapView {
 //            if coordinates.count > 0 {
 //                self.setVisibleMapFor(coordinates)
 //            }
-            
+//            
 //            self.centerOn(petAnnotationOnMap.coordinate, animated: true)
 //            CATransaction.setCompletionBlock({
 //                self.selectAnnotation(petAnnotationOnMap, animated: true)
@@ -231,10 +277,6 @@ extension PTMapView: MKMapViewDelegate {
         return annotationView
     }
     
-//    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-//
-//    }
-    
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         
         if view.annotation is MKUserLocation {
@@ -259,8 +301,8 @@ extension PTMapView: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if overlay is MKPolyline {
             let polylineRenderer = MKPolylineRenderer(overlay: overlay)
-            polylineRenderer.strokeColor = UIColor.red
-            polylineRenderer.lineWidth = 5
+            polylineRenderer.strokeColor = .red
+            polylineRenderer.lineWidth = 3
             return polylineRenderer
         }
         return MKPolylineRenderer()

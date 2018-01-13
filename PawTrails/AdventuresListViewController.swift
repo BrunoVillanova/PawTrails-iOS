@@ -8,7 +8,8 @@
 
 import UIKit
 import XLPagerTabStrip
-
+import RxSwift
+import RxCocoa
 
 class AdventuresListViewController: UIViewController, IndicatorInfoProvider  {
     var pet: Pet!
@@ -24,7 +25,8 @@ class AdventuresListViewController: UIViewController, IndicatorInfoProvider  {
     var startDate: Int?
     var startDateInDateFormate: Date?
     var endDate: Int?
-
+    let disposeBag = DisposeBag()
+    
     
     lazy var mydatePicker: AirbnbDatePicker = {
         let btn = AirbnbDatePicker()
@@ -35,9 +37,11 @@ class AdventuresListViewController: UIViewController, IndicatorInfoProvider  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initialize()
+    }
+    
+    func initialize() {
         tableView.tableFooterView = UIView()
-
-        
         editBtn.border(color: UIColor.darkGray, width: 1)
         containerView.border(color: UIColor.darkGray, width: 1)
         childContainerView.border(color: UIColor.darkGray, width: 1)
@@ -49,11 +53,18 @@ class AdventuresListViewController: UIViewController, IndicatorInfoProvider  {
         mydatePicker.heightAnchor.constraint(equalTo: topView.heightAnchor).isActive = true
         mydatePicker.topAnchor.constraint(equalTo: topView.topAnchor).isActive = true
         mydatePicker.bottomAnchor.constraint(equalTo: topView.bottomAnchor).isActive = true
+        
+        
+        DataManager.instance.finishedTrips()
+            .bind(to: tableView.rx.items(cellIdentifier: "cell", cellType: AdvenetureeHistroyCell.self)) { (_, element, cell) in
+                cell.configure(element)
+            }.disposed(by: disposeBag)
+        
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
-      showGoalsDate()
+        showGoalsDate()
     }
     
     
@@ -133,8 +144,6 @@ class AdventuresListViewController: UIViewController, IndicatorInfoProvider  {
         
     }
     
-   
-    
     
     
     @IBAction func setUpGoalBtnPressed(_ sender: Any) {
@@ -145,11 +154,11 @@ class AdventuresListViewController: UIViewController, IndicatorInfoProvider  {
         } else {
             presentGoalsVc()
         }
-
+        
     }
     
     
-
+    
     func presentGoalsVc() {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "SetUpYourGoalController") as? SetUpYourGoalController, let pet = self.pet {
             vc.petUser = pet.owner
@@ -164,10 +173,43 @@ class AdventuresListViewController: UIViewController, IndicatorInfoProvider  {
     }
 }
 
-
 class AdvenetureeHistroyCell: UITableViewCell {
-    
     @IBOutlet weak var dateLbl: UILabel!
-    @IBOutlet weak var adventureImage: UIImageView!
+    @IBOutlet weak var adventureImage: PTMapView!
     @IBOutlet weak var petName: UILabel!
+    @IBOutlet weak var mainView: UIView!
+    
+    override func awakeFromNib() {
+        let view = mainView!
+        view.layer.borderColor = PTConstants.colors.lightGray.cgColor
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 5
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowRadius = 4.0
+        view.layer.shadowOpacity = 0.1
+        view.layer.shadowOffset = CGSize.zero
+        view.layer.masksToBounds = false
+    }
+    
+    func configure(_ trip: Trip) {
+        
+        if let name = trip.pet.name {
+            petName.text = "\(name)'s Adventure"
+        }
+        
+        if let ts = trip.startTimestamp {
+            let tripStartTimestamp = Double(ts)
+            let date = Date(timeIntervalSince1970: tripStartTimestamp)
+            let dateFormatter = DateFormatter()
+            dateFormatter.timeZone = TimeZone(abbreviation: "GMT") //Set timezone that you want
+            dateFormatter.locale = NSLocale.current
+            dateFormatter.amSymbol = "am"
+            dateFormatter.pmSymbol = "pm"
+            dateFormatter.dateFormat = "h:mma, d MMM, yyyy" //Specify your format that you want
+            let strDate = dateFormatter.string(from: date)
+            dateLbl.text = strDate
+        }
+        
+        adventureImage.setStaticTripView(trip)
+    }
 }

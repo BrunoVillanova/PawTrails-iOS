@@ -17,5 +17,8 @@ struct PTConstants {
         static let hockeyAppAppId = "fa1ebcdeb5484a2ea10e15c780fdd138"
         #endif
     }
+    struct colors {
+        static let lightGray = UIColor(white: 0, alpha: 0.1)
+    }
 }
 

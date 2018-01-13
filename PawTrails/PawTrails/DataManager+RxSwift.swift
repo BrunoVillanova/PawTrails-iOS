@@ -76,60 +76,36 @@ extension DataManager {
         })
     }
     
+    func finishedTrips() -> Observable<[Trip]> {
+        let apiTrips = getApiTrips([2])
+        let socketTrips = SocketIOManager.instance.trips()
+        return apiTrips.flatMapLatest({ (apiTripsData) -> Observable<[Trip]> in
+            return socketTrips.flatMap({ (socketTripsData) -> Observable<[Trip]> in
+                return apiTrips
+            })
+        })
+    }
+    
     func getActivePetTrips() -> Observable<[Trip]> {
         let apiTrips = getApiTrips([0,1])
         let socketTrips = SocketIOManager.instance.trips()
-        print("DataManager -> getActivePetTrips")
-        
-        return apiTrips.flatMap({ (trips) -> Observable<[Trip]> in
-            print("DataManager -> getActivePetTrips - > concatMap")
-            print("DataManager -> getActivePetTrips - > count = \(trips.count)")
-            return socketTrips.debug()
-                .flatMap({ (socketTrips) -> Observable<[Trip]> in
-                    print("DataManager -> getActivePetTrips - > concatMap - > flatMap")
-                    print("DataManager -> getActivePetTrips - > count = \(socketTrips.count)")
-                    return apiTrips
-                })
-                .map({ (finalTrips) -> [Trip] in
-                    return finalTrips
-                })
-                .ifEmpty(default: trips)
-        }).debug().ifEmpty(switchTo: apiTrips)
-        
-
-//        return apiTrips
-//            .flatMapLatest({ (tripsFromApi) -> Observable<[Trip]> in
-//                return socketTrips
-//                    .filter({ (tripsFromSocket) -> Bool in
-//                        return tripsFromSocket.count > 0
-//                    })
-//                    .flatMap({ (theTripsFromSocket) -> Observable<[Trip]> in
-//                        return apiTrips
-//                    })
-//                    .ifEmpty(default: tripsFromApi)
-//            })
+        return apiTrips.flatMapLatest({ (apiTripsData) -> Observable<[Trip]> in
+            return socketTrips.flatMap({ (socketTripsData) -> Observable<[Trip]> in
+                return apiTrips
+            })
+        })
     }
     
     func allTrips() -> Observable<[Trip]> {
         let apiTrips = getApiTrips()
         let socketTrips = SocketIOManager.instance.trips()
-        print("DataManager -> allTrips")
-        
-        return apiTrips
-            .flatMapLatest({ (tripsFromApi) -> Observable<[Trip]> in
-                return socketTrips
-                    .filter({ (tripsFromSocket) -> Bool in
-                        return tripsFromSocket.count > 0
-                    })
-                    .flatMap({ (theTripsFromSocket) -> Observable<[Trip]> in
-                        return apiTrips
-                    })
-                    .ifEmpty(default: tripsFromApi)
+        return apiTrips.flatMapLatest({ (apiTripsData) -> Observable<[Trip]> in
+            return socketTrips.flatMap({ (socketTripsData) -> Observable<[Trip]> in
+                return apiTrips
             })
+        })
     }
 
-    
-    
     
     func allPetDeviceData() -> Observable<[PetDeviceData]> {
 
@@ -206,7 +182,7 @@ extension DataManager {
             .filter({ (trips) -> Bool in
                 return trips.count > 0
             })
-            .take(1)
+//            .take(1)
             .flatMap { (trips) -> Observable<[Trip]> in
                 let tripIDs = trips.map({Int($0.id)})
                 return self.stopTrips(tripIDs)
@@ -220,7 +196,6 @@ extension DataManager {
             .filter({ (trips) -> Bool in
                 return trips.count > 0
             })
-            .take(1)
             .flatMap { (trips) -> Observable<[Trip]> in
                 
                 let tripIDs = trips.map({Int($0.id)})

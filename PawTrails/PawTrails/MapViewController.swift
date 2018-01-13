@@ -39,8 +39,7 @@ class MapViewController: UIViewController {
     
     func initialize() {
         
-
-        
+        mapView.showGpsUpdates()
         DataManager.instance.getActivePetTrips()
             .subscribe(onNext: { (tripList) in
                 self.activeTrips = tripList

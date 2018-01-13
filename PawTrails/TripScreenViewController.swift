@@ -71,7 +71,7 @@ class TripScreenViewController: UIViewController {
         super.viewDidLoad()
         
         collectionView.delegate = self
-        mapView.tripMode = true
+        mapView.startTripMode()
         
         let activeTripsObservable: Observable<[Trip]> = DataManager.instance.getActivePetTrips()
         let allPetDeviceData = DataManager.instance.allPetDeviceData()
@@ -88,9 +88,9 @@ class TripScreenViewController: UIViewController {
                         })
                     })
                     .flatMap({ (result) -> Observable<[Trip]> in
-                        print("TripScreen -> allPetDeviceData -> flatMap")
-                        return activeTripsObservable
-                    })
+                        print("TripScreen -> allPetDeviceData -> flatMap \(result.count)")
+                        return DataManager.instance.getApiTrips([0,1])
+                    }).ifEmpty(default: trips)
             }
             .bind(to: collectionView.rx.items(cellIdentifier: "cell", cellType: TripDetailsCell.self)) { (row, element, cell) in
                 print("TripScreen -> Configure cell")
@@ -369,12 +369,24 @@ class TripScreenViewController: UIViewController {
         let alertView = SCLAlertView(appearance: appearance)
         
         alertView.addButton(buttonOkTitle) {
-            self.showLoadingView()
+            
             if (!isPaused) {
-                DataManager.instance.pauseAdventure().subscribe(onNext: { (stoppedTrips) in
+                self.showLoadingView()
+                DataManager.instance.pauseAdventure().subscribe(onNext: { (trips) in
+                    print("onNext")
+                    self.hideLoadingView()
+                }, onError: { (error) in
+                    print("onError")
+                    self.hideLoadingView()
+                }, onCompleted: {
+                    print("onCompleted")
+                    self.hideLoadingView()
+                }, onDisposed: {
+                    print("onDisposed")
                     self.hideLoadingView()
                 }).disposed(by: self.disposeBag)
             } else {
+                self.showLoadingView()
                 DataManager.instance.resumeAdventure().subscribe(onNext: { (stoppedTrips) in
                     self.hideLoadingView()
                 }).disposed(by: self.disposeBag)

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Constants {
+struct Constants {
     
     // Image Max Size
     
@@ -68,4 +68,6 @@ class Constants {
             return testUserPasswordStaging
         }
     }
+    
+    
 }
