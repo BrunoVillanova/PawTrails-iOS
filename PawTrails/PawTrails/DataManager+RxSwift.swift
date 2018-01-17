@@ -11,26 +11,6 @@ import RxSwift
 
 extension DataManager {
     
-//    static var authorized: Observable<Bool> {
-//        return Observable.create { observer in
-//
-//            DispatchQueue.main.async {
-//                if self.instance.isAuthenticated() {
-//                    observer.onNext(true)
-//                    observer.onCompleted()
-//                } else {
-//                    observer.onNext(false)
-//                    observer.onCompleted()
-//                    requestAuthorization { newStatus in
-//                        observer.onNext(newStatus == .authorized)
-//                        observer.onCompleted()
-//                    }
-//                } }
-//
-//            return Disposables.create()
-//        }
-//    }
-    
     /// Try to load pets from API then if error, get pets from storage
     ///
     /// - Returns: bool value to verify the operation was complete successfully.
