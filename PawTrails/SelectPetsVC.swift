@@ -145,7 +145,7 @@ class SelectPetsVC: UIViewController, PetsView, SelectPetView {
         if var selectedItem = petsCollectionView.indexPathsForSelectedItems {
             selectedItem.removeAll()
         } else {
-            print("No index were found")
+            Reporter.debugPrint("No index were found")
         }
 
     }
@@ -193,7 +193,7 @@ class SelectPetsVC: UIViewController, PetsView, SelectPetView {
         DataManager.instance.startTrips(petIDsToStartTrip.value.map({$0}))
             .take(1)
             .subscribe(onNext: { (startedTrips) in
-                print("Started Trips! \(startedTrips)")
+                Reporter.debugPrint("Started Trips! \(startedTrips)")
                 self.hideLoadingView()
 
                 if let previousVc = self.presentingViewController as? UITabBarController {
@@ -211,7 +211,7 @@ class SelectPetsVC: UIViewController, PetsView, SelectPetView {
                 self.petIDsToStartTrip.value.removeAll()
                 let apiError = error as! APIManagerError
                 if let errorCode = apiError.errorCode {
-                    print("Error \(errorCode)!")
+                    Reporter.debugPrint("Error \(errorCode)!")
                 }
             },
             onCompleted: {

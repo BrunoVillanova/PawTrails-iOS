@@ -238,7 +238,7 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
                     self.weeklyLively = lively
                     self.combinedChartView(myxaxis: self.weekDays, lively: lively, chiling: chilling, wandering: wandering, chart: self.weekelyGoalBarChart, symbol: "hrs")
                 } else if let error = error {
-                    print(error.localizedDescription)
+                    Reporter.debugPrint(error.localizedDescription)
                 }
             }
             
@@ -278,7 +278,7 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
                     self.combinedChartView(myxaxis: self.weeks, lively: chilling, chiling: wandering, wandering: lively, chart: self.monthlyGoalBarChart, symbol: "mins")
 
                 } else if let error = error {
-                    print(error.localizedDescription)
+                    Reporter.debugPrint(error.localizedDescription)
                 }
             }
             

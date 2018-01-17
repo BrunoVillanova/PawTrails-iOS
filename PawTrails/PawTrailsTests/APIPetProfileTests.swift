@@ -472,7 +472,7 @@ class APIPetProfileTests: XCTestCase {
             
             if let pets = data?["pets"] as? [[String:Any]] {
                 for pet in pets {
-                    print(pet)
+                    Reporter.debugPrint(pet)
                 }
             }
             

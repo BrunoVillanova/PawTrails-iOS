@@ -41,7 +41,7 @@ class FinishAdventureVC: UIViewController, BEMCheckBoxDelegate {
             DataManager.instance.finishAdventure().subscribe(onNext: { (stoppedTrips) in
                 
                 for trip in stoppedTrips {
-                    print("TripID \(trip.id) stopped!")
+                    Reporter.debugPrint("TripID \(trip.id) stopped!")
                 }
                 self.navigationController?.dismiss(animated: true, completion: nil)
             }).disposed(by: self.disposeBag)

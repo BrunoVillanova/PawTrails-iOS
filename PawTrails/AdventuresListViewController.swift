@@ -136,7 +136,7 @@ class AdventuresListViewController: UIViewController, IndicatorInfoProvider  {
                     }
                     
                 } else if let error = error {
-                    print(error.localizedDescription)
+                    Reporter.debugPrint(error.localizedDescription)
                 }
             }
         }

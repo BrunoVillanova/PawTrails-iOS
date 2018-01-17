@@ -16,6 +16,7 @@ import IQKeyboardManagerSwift
 import Firebase
 import HockeySDK
 import UserNotifications
+import CocoaLumberjackSwift
 
 #if DEBUG
 let isDebug = true
@@ -38,6 +39,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        DDLog.add(DDTTYLogger.sharedInstance) // TTY = Xcode console
+        DDLog.add(DDASLLogger.sharedInstance) // ASL = Apple System Logs
+        
+        let fileLogger: DDFileLogger = DDFileLogger() // File Logger
+        fileLogger.rollingFrequency = TimeInterval(60*60*24)  // 24 hours
+        fileLogger.logFileManager.maximumNumberOfLogFiles = 7
+        DDLog.add(fileLogger)
         
 #if !DEBUG
         BITHockeyManager.shared().configure(withIdentifier: PTConstants.keys.hockeyAppAppId)
@@ -109,11 +118,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Messaging.messaging().appDidReceiveMessage(userInfo)
         // Print message ID.
         if let messageID = userInfo[gcmMessageIDKey] {
-            print("Message ID: \(messageID)")
+            Reporter.debugPrint("Message ID: \(messageID)")
         }
         
         // Print full message.
-        print(userInfo)
+//        Reporter.debugPrint(userInfo)
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
@@ -125,24 +134,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Messaging.messaging().appDidReceiveMessage(userInfo)
         // Print message ID.
         if let messageID = userInfo[gcmMessageIDKey] {
-            print("Message ID: \(messageID)")
+            Reporter.debugPrint("Message ID: \(messageID)")
         }
         
         // Print full message.
-        print(userInfo)
+        Reporter.debugPrint("\(userInfo)")
         
         completionHandler(UIBackgroundFetchResult.newData)
     }
     // [END receive_message]
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("Unable to register for remote notifications: \(error.localizedDescription)")
+        Reporter.debugPrint("Unable to register for remote notifications: \(error.localizedDescription)")
     }
     
     // This function is added here only for debugging purposes, and can be removed if swizzling is enabled.
     // If swizzling is disabled then this function must be implemented so that the APNs token can be paired to
     // the FCM registration token.
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        print("APNs token retrieved: \(deviceToken)")
+        Reporter.debugPrint("APNs token retrieved: \(deviceToken)")
         
         // With swizzling disabled you must set the APNs token here.
         // Messaging.messaging().apnsToken = deviceToken
@@ -238,13 +247,13 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         // Messaging.messaging().appDidReceiveMessage(userInfo)
         // Print message ID.
         if let messageID = userInfo[gcmMessageIDKey] {
-            print("Message ID: \(messageID)")
+            Reporter.debugPrint("Message ID: \(messageID)")
         }
 
         
         if let data = userInfo["aps"] as! [String:Any]! {
             if let alert = data["alert"] as! [String:Any]! {
-                print("\(String(describing: alert))")
+                Reporter.debugPrint("\(String(describing: alert))")
                 if let rootViewController = UIApplication.shared.keyWindow?.rootViewController {
                     rootViewController.alert(title: alert["title"] as! String, msg: alert["body"] as! String, type: notificationType.blue, disableTime: 5, handler: nil)
                 }
@@ -261,7 +270,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         let userInfo = response.notification.request.content.userInfo
         // Print message ID.
         if let messageID = userInfo[gcmMessageIDKey] {
-            print("Message ID: \(messageID)")
+            Reporter.debugPrint("Message ID: \(messageID)")
         }
   
         completionHandler()
@@ -272,7 +281,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
 extension AppDelegate : MessagingDelegate {
     // [START refresh_token]
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
-        print("Firebase registration token: \(fcmToken)")
+        Reporter.debugPrint("Firebase registration token: \(fcmToken)")
         
  
         // TODO: If necessary send token to application server.
@@ -283,7 +292,7 @@ extension AppDelegate : MessagingDelegate {
     // Receive data messages on iOS 10+ directly from FCM (bypassing APNs) when the app is in the foreground.
     // To enable direct data messages, you can set Messaging.messaging().shouldEstablishDirectChannel to true.
     func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
-        print("Received data message: \(remoteMessage.appData)")
+        Reporter.debugPrint("Received data message: \(remoteMessage.appData)")
     }
     // [END ios_10_data_message]
 }

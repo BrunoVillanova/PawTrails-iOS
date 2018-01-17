@@ -106,7 +106,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         
         // Define SocketIO event handlers
         socketReactive?.on(channel.connect.name).subscribe(onNext: { (data) in
-            print("SocketIO -> Connect \(data)")
+            Reporter.debugPrint("SocketIO -> Connect \(data)")
             self.isConnected = true
             self.isConnecting = false
             self.socketAuth()
@@ -117,10 +117,10 @@ class SocketIOManager: NSObject, URLSessionDelegate {
             
             self.isAuthenticating = false
             let status = self.getStatus(data)
-            print("SocketIO -> AuthCheck -> \(status) -> \(data)")
+            Reporter.debugPrint("SocketIO -> AuthCheck -> \(status) -> \(data)")
             if (status == .connected) {
                 self.isAuthenticated = true
-                print("SocketIO -> AuthCheck -> Authenticated and Ready for Communitcation")
+                Reporter.debugPrint("SocketIO -> AuthCheck -> Authenticated and Ready for Communitcation")
                 self.isReadyForCommunication.value = true
             } else if (status == .unauthorized || status == .unauthorized2) {
                 
@@ -140,7 +140,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         
         
         socketReactive?.on(channel.diconnect.name).subscribe(onNext: { (data) in
-            print("SocketIO -> Disconnect")
+            Reporter.debugPrint("SocketIO -> Disconnect")
             self.isConnected = false
             self.isReadyForCommunication.value = false
             
@@ -152,17 +152,17 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         
         
         socketReactive?.on(channel.pets.name).subscribe(onNext: { (data) in
-            print("SocketIO -> Pets")
+            Reporter.debugPrint("SocketIO -> Pets")
             self.openChannels.insert(channel.pets)
         }).disposed(by: disposeBag)
         
         
         socketReactive?.on(channel.gpsUpdates.name).subscribe(onNext: { (data) in
-            print("SocketIO -> GPS Updates")
+            Reporter.debugPrint("SocketIO -> GPS Updates")
             self.openChannels.insert(channel.gpsUpdates)
             
             if let petDeviceData = PetDeviceData.fromJson(data.first) {
-                print("SocketIO -> Setting petGpsUpdates.value")
+                Reporter.debugPrint("SocketIO -> Setting petGpsUpdates.value")
                 self.petGpsUpdates.value = petDeviceData
             }
             
@@ -170,13 +170,13 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         
         
         socketReactive?.on(channel.trips.name).subscribe(onNext: { (data) in
-            print("SocketIO -> Trips")
+            Reporter.debugPrint("SocketIO -> Trips")
             self.openChannels.insert(channel.trips)
             if let json = data.first as? [String:Any] {
                 
                 if let tripActionValue = json["action"] as? Int, let tripAction = TripAction(rawValue: tripActionValue) {
     
-                    print("SocketIO -> Trips -> Action: \(tripAction.name)")
+                    Reporter.debugPrint("SocketIO -> Trips -> Action: \(tripAction.name)")
                     
                     if let tripsData = json["trips"] as? [[String:Any]] {
                         
@@ -184,7 +184,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
                         
                         for tripJson in tripsData {
                             tripList.append(Trip(tripJson))
-                            print("SocketIO -> Trips -> Trip!")
+                            Reporter.debugPrint("SocketIO -> Trips -> Trip!")
                         }
                         
                         self.petTrips.value = tripList
@@ -247,7 +247,6 @@ class SocketIOManager: NSObject, URLSessionDelegate {
             .filter({ (isReady) -> Bool in
             return isReady
         }).flatMap({ (isReady) -> Observable<[PetDeviceData]> in
-            print("Emitting gps updates")
             self.socket.emit("gpsPets", ["ids": petIDs, "noLastPos": false])
             return self.petGpsUpdates.asObservable()
         })
@@ -256,11 +255,11 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     func trips() -> Observable<[Trip]> {
         return isReady()
                 .filter({ (value) -> Bool in
-                    print("SocketIOManager -> trips() -> filter -> \(value)")
+                    Reporter.debugPrint("SocketIOManager -> trips() -> filter -> \(value)")
                     return value == true
                 })
                 .flatMapLatest({ (isReady) -> Observable<[Trip]> in
-                    print("SocketIOManager -> trips() -> flatMap")
+                    Reporter.debugPrint("SocketIOManager -> trips() -> flatMap")
                     self.socket.emit(channel.trips.name)
                     return self.petTrips.asObservable()
                 }).share()
@@ -325,7 +324,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     func connectToPetChannel() {
         self.socket.emit("getPetList", false)
         self.socket.on("pets", callback: { (data, ack) in
-            print("SocketIO pets")
+            Reporter.debugPrint("SocketIO pets")
         })
     }
 
@@ -353,7 +352,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     ///
     //    /// - Parameter petIds: pet ids
     func startGPSUpdates(for petIds: [Int]) -> Observable<[PetDeviceData]> {
-        print("SocketIO GPS Pets Emited for petIDs \(petIds)")
+        Reporter.debugPrint("SocketIO GPS Pets Emited for petIDs \(petIds)")
         return self.gpsUpdates(petIds)
     }
     

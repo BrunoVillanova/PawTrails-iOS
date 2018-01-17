@@ -60,7 +60,7 @@ class TabPageViewController: ButtonBarPagerTabStripViewController {
         if #available(iOS 11.0, *) {
             if ((UIApplication.shared.keyWindow?.safeAreaInsets.top)! > CGFloat(0.0)) {
                 iphoneX = true
-                print("iphone x")
+                Reporter.debugPrint("iPhone X")
             } else {
                 self.tabBarController?.tabBar.isHidden = true
             }

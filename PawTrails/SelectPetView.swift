@@ -51,8 +51,6 @@ class SelectedPetView {
                 self.trips.removeAll()
                 self.view?.errorMessage(ErrorMsg(title: "", msg: error.localizedDescription))
             } else if let trips = trips {
-                
-                print(trips)
                 self.trips = trips
             }
         }

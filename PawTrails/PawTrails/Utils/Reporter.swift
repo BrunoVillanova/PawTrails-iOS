@@ -8,13 +8,30 @@
 
 import Foundation
 import Crashlytics
-
+import CocoaLumberjackSwift
 
 class Reporter {
     
+    static let sharedInstance = Reporter()
+    
+    init() {
+        DDLog.add(DDTTYLogger.sharedInstance) // TTY = Xcode console
+        DDLog.add(DDASLLogger.sharedInstance) // ASL = Apple System Logs
+        
+        let fileLogger: DDFileLogger = DDFileLogger() // File Logger
+        fileLogger.rollingFrequency = TimeInterval(60*60*24)  // 24 hours
+        fileLogger.logFileManager.maximumNumberOfLogFiles = 7
+        DDLog.add(fileLogger)
+    }
+    
+    static func debugPrint(_ message: String) {
+        
+        DDLogDebug(message)
+    }
+    
     static func debugPrint(file: String, function: String, _ items: Any...){
-//        let itemsDescription = items.map({ String(describing: $0) }).joined(separator: ",")
-//        NSLog("\(file.components(separatedBy: "/").last ?? "") - \(function): \(itemsDescription)")
+        let itemsDescription = items.map({ String(describing: $0) }).joined(separator: ",")
+        DDLogDebug("\(file.components(separatedBy: "/").last ?? "") - \(function): \(itemsDescription)")
     }
     
     static func log(_ string: String){

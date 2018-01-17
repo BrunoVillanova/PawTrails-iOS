@@ -158,8 +158,6 @@ class DataManager: NSObject {
                 queue.async {
                     errors.append(error)
                 }
-            }else if let pets = pets {
-                print("\(pets)")
             }
             tasks.leave()
         })

@@ -56,7 +56,7 @@ class PetInfromationViewController: UIViewController, IndicatorInfoProvider, Pet
     }
     
     func leftBarButtonTapped() {
-        print("Left Bar Button Item")
+        
     }
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {

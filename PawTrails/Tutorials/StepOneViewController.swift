@@ -76,7 +76,7 @@ extension StepOneViewController: BarcodeScannerCodeDelegate {
 
 extension StepOneViewController: BarcodeScannerErrorDelegate {
     func barcodeScanner(_ controller: BarcodeScannerController, didReceiveError error: Error) {
-        print(error)
+        Reporter.debugPrint(error.localizedDescription)
     }
 }
 

@@ -4,12 +4,21 @@ All notable changes to this project will be documented in this file.
 ---
 ## Master
 
+* Replaces global timeless functions `next`, `error`, `completed` with `Recorded.next`, `Recorded.error`, `Recorded.completed` in **Tests**. #1537
+
 #### Anomalies
+
+## [4.1.1](https://github.com/ReactiveX/RxSwift/releases/tag/4.1.1)
+
+#### Anomalies
+
+* Fixes compilation issue with  Xcode 9.1.
+* Deprecates `Single.do(onNext:onError:onSubscribe:onSubscribed:onDispose:)` in favor of `Single.do(onSuccess:onError:onSubscribe:onSubscribed:onDispose:)`.
 
 ## [4.1.0](https://github.com/ReactiveX/RxSwift/releases/tag/4.1.0)
 
-* Adds `Recorded<Event<T>>` array factory method in **RxText**. #1531
-* Replaces global functions `next`, `error`, `completed` with `Recorded.next`, `Recorded.error`, `Recorded.completed` in **RxText**. #1510
+* Adds `Recorded<Event<T>>` array factory method in **RxTest**. #1531
+* Replaces global functions `next`, `error`, `completed` with `Recorded.next`, `Recorded.error`, `Recorded.completed` in **RxTest**. #1510
 * Removes `AnyObject` constraint from `Delegate` parameter on `DelegateProxy`. #1442
 * Adds `ObservableType.bind(to:)` overloads for `PublishRelay` and `BehaviorRelay`.
 * Adds `ControlEvent.asSignal()`.

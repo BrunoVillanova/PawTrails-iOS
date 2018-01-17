@@ -113,7 +113,7 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func buttonAction(sender: UIButton!) {
-        print("Button tapped")
+        Reporter.debugPrint("Button tapped")
     }
     
     @objc func reloadPetsAPI(){
@@ -132,7 +132,7 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if #available(iOS 11.0, *) {
             if ((UIApplication.shared.keyWindow?.safeAreaInsets.top)! > CGFloat(0.0)) {
                 iphoneX = true
-                print("iphone x")
+                Reporter.debugPrint("iphone x")
             } else {
                         self.tabBarController?.tabBar.invalidateIntrinsicContentSize()
                         self.tabBarController?.tabBar.isHidden = false
@@ -287,7 +287,7 @@ extension PetsViewController: BarcodeScannerCodeDelegate {
  extension PetsViewController: BarcodeScannerErrorDelegate {
     
     func barcodeScanner(_ controller: BarcodeScannerController, didReceiveError error: Error) {
-        print(error)
+        Reporter.debugPrint("\(error)")
     }
  }
  

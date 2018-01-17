@@ -408,7 +408,6 @@ extension AddEditSafeZOneController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.selectedIcon = self.icons.index(of: self.icons[indexPath.item])
         
-        print(selectedIcon)
         if let cell = collectionView.cellForItem(at: indexPath) {
             cell.backgroundColor = UIColor.groupTableViewBackground
             

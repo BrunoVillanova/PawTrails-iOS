@@ -138,9 +138,6 @@ class SignUpViewController: UIViewController, InitialView {
             })
         }
         
-//        alertView.addButton(buttonCancelTitle) {
-//            print("User canceled action!")
-//        }
         
         alertView.showTitle(
             title, // Title of view

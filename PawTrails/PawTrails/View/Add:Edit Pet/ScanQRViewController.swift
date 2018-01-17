@@ -98,7 +98,7 @@ class ScanQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
             captureSession?.addInput(input)
             
         } catch {
-            print(error)
+            Reporter.debugPrint("\(error)")
         }
     }
     

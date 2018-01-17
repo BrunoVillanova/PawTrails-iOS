@@ -283,7 +283,7 @@ fileprivate struct Storage {
         container.loadPersistentStores { (storeDescription, error) in
             
             guard error == nil else {
-                print("CoreData: Unresolved error \(String(describing: error))")
+                Reporter.debugPrint("CoreData: Unresolved error \(String(describing: error))")
                 return
             }
         }
@@ -295,7 +295,7 @@ fileprivate struct Storage {
         do {
             return try NSPersistentStoreCoordinator.coordinator(name: "PawTrails")
         } catch {
-            print("CoreData: Unresolved error \(error)")
+            Reporter.debugPrint("CoreData: Unresolved error \(error)")
         }
         return nil
     }()

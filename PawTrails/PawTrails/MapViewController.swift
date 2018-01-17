@@ -43,13 +43,13 @@ class MapViewController: UIViewController {
         DataManager.instance.getActivePetTrips()
             .subscribe(onNext: { (tripList) in
                 self.activeTrips = tripList
-                print("MapViewController -> getActivePetTrips \(tripList.count)")
+                Reporter.debugPrint("MapViewController -> getActivePetTrips \(tripList.count)")
                 if (tripList.count > 0){
                     let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(gestureRecognizer:)))
                     gestureRecognizer.delegate = self
                     self.alertwithGeature(title: "", msg: "ADVENTURE IN PROGRESS, CLICK TO RESUME", type: .red, disableTime: 150, geatureReconginzer: gestureRecognizer, handler: nil)
                 } else {
-                    print("No running trips")
+                    Reporter.debugPrint("No running trips")
                     self.hideNotification()
                 }
 
@@ -57,7 +57,7 @@ class MapViewController: UIViewController {
         
         
         DataManager.instance.allPetDeviceData().subscribe(onNext: { (petDeviceDataList) in
-            print("MapViewController -> allPetDeviceData \(petDeviceDataList.count)")
+            Reporter.debugPrint("MapViewController -> allPetDeviceData \(petDeviceDataList.count)")
             
             if (petDeviceDataList.count > 0) {
                self.hideMessage()

@@ -89,7 +89,6 @@ class RecommandationController: UIViewController {
             }
         }
 
-        print(count)
         if count.count > 0 {
             self.tableView.isHidden = false
             self.cImage.isHidden = true
@@ -162,14 +161,13 @@ extension RecommandationController: UITableViewDelegate, UITableViewDataSource {
         if presenter.pets.isEmpty != true {
             
             for pet in presenter.pets {
-                print(pet.id)
                 if pet.bcScore > 0 {
                     count.append(1)
                 } else {
                 }
             }
         }
-       print(count.count)
+       
         if count.count > 0 {
             return count.count
         } else {

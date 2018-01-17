@@ -40,10 +40,8 @@ class QuestionsViewController: UIViewController {
         watchNow.setTitle("Video Tutorial", for: .normal)
         watchNow.setTitleColor(UIColor.white, for: .normal)
         
-        print(UIDevice.current.model)
         collectionView.delegate = self
         collectionView.dataSource = self
-//        collectionView.register(questionCells.self, forCellWithReuseIdentifier: "cell")
         
         self.navigationItem.title = "Recommendations"
         collectionView.contentInset.left = 15

@@ -573,14 +573,13 @@ class GPSData: NSObject {
                 locationAndTime = ""
                 point = newPoint
                 Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Requested for Update \(data["petId"] ?? "")")
-                print("Point printed \(newPoint)")
             }
         }else{
             point = Point()
         }
         signal = data.tryCastInteger(for: "netSignal") ?? -1
         satellites = -1
-        print(" Printed SIgnal   \(signal)")
+
         
         if let satellites = data["satSignal"] as? String {
             let components = satellites.components(separatedBy: "-")

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		150741C5200DB4B800EB761B /* CocoaLumberjackSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 150741C3200DB4B700EB761B /* CocoaLumberjackSwift.framework */; };
+		150741C6200DB4B800EB761B /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 150741C4200DB4B700EB761B /* CocoaLumberjack.framework */; };
 		150B05011FDDE22100095772 /* PTTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150B05001FDDE22100095772 /* PTTextField.swift */; };
 		15226D901F8D18EA007EEFF2 /* SocketIO+RxSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15226D8F1F8D18EA007EEFF2 /* SocketIO+RxSwift.swift */; };
 		152A8F701FB5E0CB00C54DD8 /* DataManager+RxSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152A8F6F1FB5E0CB00C54DD8 /* DataManager+RxSwift.swift */; };
@@ -235,6 +237,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		150741C3200DB4B700EB761B /* CocoaLumberjackSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjackSwift.framework; path = Carthage/Build/iOS/CocoaLumberjackSwift.framework; sourceTree = "<group>"; };
+		150741C4200DB4B700EB761B /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjack.framework; path = Carthage/Build/iOS/CocoaLumberjack.framework; sourceTree = "<group>"; };
 		150B05001FDDE22100095772 /* PTTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTTextField.swift; sourceTree = "<group>"; };
 		15226D8F1F8D18EA007EEFF2 /* SocketIO+RxSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SocketIO+RxSwift.swift"; path = "Extensions/SocketIO+RxSwift.swift"; sourceTree = "<group>"; };
 		152A8F6F1FB5E0CB00C54DD8 /* DataManager+RxSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataManager+RxSwift.swift"; sourceTree = "<group>"; };
@@ -500,6 +504,8 @@
 				1585469C1FDCFBCB004C82EC /* Charts.framework in Frameworks */,
 				1555FA611FDF3DC100DA9EEA /* GSMessages.framework in Frameworks */,
 				E710CBA5471FDC34DDA7BEB8 /* Pods_PawTrails.framework in Frameworks */,
+				150741C5200DB4B800EB761B /* CocoaLumberjackSwift.framework in Frameworks */,
+				150741C6200DB4B800EB761B /* CocoaLumberjack.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1049,6 +1055,8 @@
 		91352D1B7E01CC1C0CF51D38 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				150741C4200DB4B700EB761B /* CocoaLumberjack.framework */,
+				150741C3200DB4B700EB761B /* CocoaLumberjackSwift.framework */,
 				15C90DB01FE36F56008F73B3 /* Crashlytics.framework */,
 				15C90DAF1FE36F55008F73B3 /* Fabric.framework */,
 				15C90DAD1FE36E6D008F73B3 /* HockeySDK.framework */,
@@ -1294,6 +1302,8 @@
 				"$(SRCROOT)/Carthage/Build/iOS/FBSDKLoginKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Bolts.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/HockeySDK.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/CocoaLumberjack.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/CocoaLumberjackSwift.framework",
 			);
 			name = "Carthage Copy Frameworks";
 			outputPaths = (
@@ -1308,6 +1318,8 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/FBSDKLoginKit.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Bolts.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/HockeySDK.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/CocoaLumberjack.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/CocoaLumberjackSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

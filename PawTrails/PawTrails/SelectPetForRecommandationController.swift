@@ -76,7 +76,7 @@ class SelectPetForRecommandationController: UIViewController {
         if var selectedItem = collectionView.indexPathsForSelectedItems {
             selectedItem.removeAll()
         } else {
-            print("No index were found")
+            Reporter.debugPrint("No index were found")
         }
         
 
@@ -87,7 +87,7 @@ class SelectPetForRecommandationController: UIViewController {
         if var selectedItem = collectionView.indexPathsForSelectedItems {
             selectedItem.removeAll()
         } else {
-            print("No index were found")
+            Reporter.debugPrint("No index were found")
         }
 
     }
