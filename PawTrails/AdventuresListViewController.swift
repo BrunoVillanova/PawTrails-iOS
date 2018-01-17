@@ -11,37 +11,32 @@ import XLPagerTabStrip
 import RxSwift
 import RxCocoa
 
-class AdventuresListViewController: UIViewController, IndicatorInfoProvider  {
-    var pet: Pet!
+class AdventuresAchievementsView: UITableViewHeaderFooterView {
     
     @IBOutlet weak var distanceCircle: CircleChart!
     @IBOutlet weak var timeCircle: CircleChart!
     @IBOutlet weak var childContainerView: UIView!
-    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var editBtn: UIButton!
-    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var topView: UIView!
-    
-    var startDate: Int?
-    var startDateInDateFormate: Date?
-    var endDate: Int?
-    let disposeBag = DisposeBag()
-    
+    @IBOutlet weak var containerView: UIView!
     
     lazy var mydatePicker: AirbnbDatePicker = {
         let btn = AirbnbDatePicker()
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.delegate = self
         return btn
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        initialize()
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+//        initialize()
     }
     
-    func initialize() {
-        tableView.tableFooterView = UIView()
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+//        initialize()
+    }
+    
+    fileprivate func initialize() {
         editBtn.border(color: UIColor.darkGray, width: 1)
         containerView.border(color: UIColor.darkGray, width: 1)
         childContainerView.border(color: UIColor.darkGray, width: 1)
@@ -54,21 +49,78 @@ class AdventuresListViewController: UIViewController, IndicatorInfoProvider  {
         mydatePicker.topAnchor.constraint(equalTo: topView.topAnchor).isActive = true
         mydatePicker.bottomAnchor.constraint(equalTo: topView.bottomAnchor).isActive = true
         
-        
-        DataManager.instance.finishedTrips()
-            .bind(to: tableView.rx.items(cellIdentifier: "cell", cellType: AdvenetureeHistroyCell.self)) { (_, element, cell) in
-                cell.configure(element)
-            }.disposed(by: disposeBag)
-        
     }
     
+    func configure(_ tripAchievements: TripAchievements) {
+        self.initialize()
+        var distanceAchievement = CGFloat()
+        var timeGoalAchievmenet = CGFloat()
+        let distanceColor = UIColor(red: 153/255, green: 202/255, blue: 186/255, alpha: 1)
+        let timeColor = UIColor(red: 211/255, green: 100/255, blue: 59/255, alpha: 1)
+        let distanceGoalForPeriod = tripAchievements.distance * tripAchievements.totalDays
+        let timeGoalForPeriod = tripAchievements.timeGoal * tripAchievements.totalDays
+        let totalDistanceAchievement = tripAchievements.totalDistance / 1000
+        let totalHour = tripAchievements.totalTime / 60
+        
+        if timeGoalForPeriod > 0 {
+            timeGoalAchievmenet = CGFloat((100 * tripAchievements.totalTime) / timeGoalForPeriod)
+        } else {
+            timeGoalAchievmenet = 0
+        }
+        
+        if distanceGoalForPeriod > 0 {
+            distanceAchievement = CGFloat((100 * tripAchievements.totalDistance) / distanceGoalForPeriod)
+            
+        } else {
+            distanceAchievement = 0
+        }
+        
+        if distanceAchievement > 1 {
+            self.distanceCircle.setChart(at: 1, color: distanceColor, text: "\(totalDistanceAchievement) km")
+        } else {
+            self.distanceCircle.setChart(at: distanceAchievement, color: distanceColor, text: "\(totalDistanceAchievement) km")
+        }
+        
+        if timeGoalAchievmenet > 1 {
+            self.timeCircle.setChart(at: 1, color: timeColor, text:  "\(totalHour) hrs")
+        } else {
+            self.timeCircle.setChart(at: timeGoalAchievmenet, color: timeColor, text:  "\(totalHour) hrs")
+        }
+    }
+}
+
+class AdventuresListViewController: UIViewController  {
+    var pet: Pet!
+    
+
+    @IBOutlet weak var achievementsView: AdventuresAchievementsView!
+    @IBOutlet weak var tableView: UITableView!
+
+    var startDate: Int?
+    var startDateInDateFormate: Date?
+    var endDate: Int?
+    let disposeBag = DisposeBag()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        initialize()
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         showGoalsDate()
     }
     
+    func initialize() {
+        tableView.tableFooterView = UIView()
+
+        DataManager.instance.finishedTrips()
+            .bind(to: tableView.rx.items(cellIdentifier: "cell", cellType: AdventureHistoryCell.self)) { (_, element, cell) in
+                cell.configure(element)
+            }.disposed(by: disposeBag)
+    }
     
     func showGoalsDate() {
+        let mydatePicker = achievementsView.mydatePicker
         if let date = mydatePicker.selectedStartDate {
             startDate = Int(date.timeIntervalSince1970)
             startDateInDateFormate = date
@@ -99,51 +151,15 @@ class AdventuresListViewController: UIViewController, IndicatorInfoProvider  {
         
         
         if let startDate = self.startDate, let endDate = self.endDate {
-            APIRepository.instance.getPetTripAchievements(self.pet.id, from: startDate, to: endDate, status: [2]) { (error, achievments) in
-                if error == nil, let achieve = achievments {
-                    var distanceAchievement = CGFloat()
-                    var timeGoalAchievmenet = CGFloat()
-                    
-                    
-                    let distanceColor = UIColor(red: 153/255, green: 202/255, blue: 186/255, alpha: 1)
-                    let timeColor = UIColor(red: 211/255, green: 100/255, blue: 59/255, alpha: 1)
-                    let distanceGoalForPeriod = achieve.distance * achieve.totalDays
-                    let timeGoalForPeriod = achieve.timeGoal * achieve.totalDays
-                    
-                    let totalDistanceAchievement = achieve.totalDistance / 1000
-                    let totalHour = achieve.totalTime / 60
-                    if timeGoalForPeriod > 0 {
-                        timeGoalAchievmenet = CGFloat((100 * achieve.totalTime) / timeGoalForPeriod)
-                    } else {
-                        timeGoalAchievmenet = 0
-                    }
-                    
-                    if distanceGoalForPeriod > 0 {
-                        distanceAchievement = CGFloat((100 * achieve.totalDistance) / distanceGoalForPeriod)
-                        
-                    } else {
-                        distanceAchievement = 0
-                    }
-                    if distanceAchievement > 1 {
-                        self.distanceCircle.setChart(at: 1, color: distanceColor, text: "\(totalDistanceAchievement) km")
-                    } else {
-                        self.distanceCircle.setChart(at: distanceAchievement, color: distanceColor, text: "\(totalDistanceAchievement) km")
-                    }
-                    if timeGoalAchievmenet > 1 {
-                        self.timeCircle.setChart(at: 1, color: timeColor, text:  "\(totalHour) hrs")
-                    } else {
-                        self.timeCircle.setChart(at: timeGoalAchievmenet, color: timeColor, text:  "\(totalHour) hrs")
-                    }
-                    
+            APIRepository.instance.getPetTripAchievements(self.pet.id, from: startDate, to: endDate, status: [2]) { (error, achievements) in
+                if error == nil, let achievements = achievements {
+                    self.achievementsView.configure(achievements)
                 } else if let error = error {
                     Reporter.debugPrint(error.localizedDescription)
                 }
             }
         }
-        
-        
     }
-    
     
     
     @IBAction func setUpGoalBtnPressed(_ sender: Any) {
@@ -154,9 +170,7 @@ class AdventuresListViewController: UIViewController, IndicatorInfoProvider  {
         } else {
             presentGoalsVc()
         }
-        
     }
-    
     
     
     func presentGoalsVc() {
@@ -167,13 +181,16 @@ class AdventuresListViewController: UIViewController, IndicatorInfoProvider  {
             navigationController?.pushViewController(vc, animated: true)
         }
     }
-    
+}
+
+extension AdventuresListViewController: IndicatorInfoProvider {
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "Adventure")
     }
 }
 
-class AdvenetureeHistroyCell: UITableViewCell {
+
+class AdventureHistoryCell: UITableViewCell {
     @IBOutlet weak var dateLbl: UILabel!
     @IBOutlet weak var adventureImage: PTMapView!
     @IBOutlet weak var petName: UILabel!
