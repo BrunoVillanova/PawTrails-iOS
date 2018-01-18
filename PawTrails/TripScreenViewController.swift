@@ -11,7 +11,7 @@ import MapKit
 import RxSwift
 import RxCocoa
 import SCLAlertView
-import Convert
+
 
 class TripScreenViewController: UIViewController {
     

@@ -9,7 +9,7 @@ target 'PawTrails' do
   platform :ios, '9.0'
   use_frameworks!
 
-    pod 'Socket.IO-Client-Swift', '~> 11.1.3'
+    pod 'Socket.IO-Client-Swift', '11.1.3'
     pod 'YNDropDownMenu'
     pod 'SkyFloatingLabelTextField', '~> 3.0'
     pod 'IQKeyboardManagerSwift', '5.0.0'
