@@ -593,7 +593,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="130" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="q8V-d2-K1W">
-                                <rect key="frame" x="0.0" y="64" width="375" height="505"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -1574,7 +1574,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Irl-ap-dJF">
-                                <rect key="frame" x="16" y="108" width="343" height="510"/>
+                                <rect key="frame" x="16" y="64" width="343" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <attributedString key="attributedText">
                                     <fragment>
@@ -1994,7 +1994,7 @@ Last Edited on 2017-12-04
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qf4-Ct-DNe">
-                                <rect key="frame" x="0.0" y="108" width="375" height="693"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="786"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LTF-ve-xvE">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="850"/>
@@ -2284,7 +2284,7 @@ PawTrails is a product created by Attitude Technologies.
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="98f-Ae-ufe">
-                                <rect key="frame" x="0.0" y="146" width="375" height="216"/>
+                                <rect key="frame" x="0.0" y="102" width="375" height="216"/>
                                 <subviews>
                                     <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="nOV-Lr-0ne">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="216"/>
@@ -4368,10 +4368,10 @@ PawTrails is a product created by Attitude Technologies.
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="osN-NO-pbf">
-                                <rect key="frame" x="0.0" y="158" width="375" height="411"/>
+                                <rect key="frame" x="0.0" y="114" width="375" height="504"/>
                             </scrollView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Kix-04-002" customClass="ButtonBarView" customModule="XLPagerTabStrip">
-                                <rect key="frame" x="0.0" y="108" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="xe5-DQ-oFK"/>
@@ -6834,15 +6834,15 @@ your product.</string>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iBP-wL-rT2">
-                                <rect key="frame" x="16" y="310" width="343" height="67"/>
-                                <string key="text">Adding a new pet to your PawTrails account is the first step to connect with your pets. Follow our easy setup guide to start using your amazing smart collar/harness for your loved pets.</string>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iBP-wL-rT2">
+                                <rect key="frame" x="16" y="310" width="343" height="84"/>
+                                <string key="text">Adding a new pet to your PawTrails account is the first step to connect with your pets.   Follow our easy setup guide to start using your amazing smart collar/harness for your loved pets.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ahu-34-Qww">
-                                <rect key="frame" x="50" y="407" width="275" height="50"/>
+                                <rect key="frame" x="50" y="424" width="275" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="1YO-GE-mll"/>
                                 </constraints>
@@ -6852,7 +6852,7 @@ your product.</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FP6-4E-Zi9">
-                                <rect key="frame" x="50" y="465" width="275" height="50"/>
+                                <rect key="frame" x="50" y="482" width="275" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="ILi-MN-RJ1"/>
                                 </constraints>
@@ -6912,7 +6912,7 @@ your product.</string>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mdB-MN-SA9">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mdB-MN-SA9">
                                 <rect key="frame" x="16" y="267" width="343" height="67"/>
                                 <string key="text">Now, please bring your device outdoor, or put your device on your pet, go outdoor for a walk to get your first GPS location. Then everything will be set up and ready to go.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -8457,7 +8457,7 @@ Last Edited on 2017-12-04
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GBA-aU-Dql">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GBA-aU-Dql">
                                 <rect key="frame" x="16" y="267" width="343" height="50.5"/>
                                 <string key="text">Now your device has been linked to your account, please add pet information to let us know which pet are you using this device for</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -8516,7 +8516,7 @@ Last Edited on 2017-12-04
         <scene sceneID="2ba-VF-ibp">
             <objects>
                 <viewController storyboardIdentifier="StepOneViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zWC-kb-P44" customClass="StepOneViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="hyD-Bn-QET">
+                    <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="hyD-Bn-QET">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -8532,7 +8532,7 @@ Last Edited on 2017-12-04
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You need to link your device to your account by simply just scan the QR code on the back of the device" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YXd-KE-lmr">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You need to link your device to your account by simply just scan the QR code on the back of the device" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YXd-KE-lmr">
                                 <rect key="frame" x="16" y="267" width="343" height="50.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -8576,7 +8576,7 @@ Last Edited on 2017-12-04
                             <constraint firstItem="wPY-bf-Vq9" firstAttribute="leading" secondItem="hyD-Bn-QET" secondAttribute="leading" constant="16" id="tzF-lX-BM0"/>
                             <constraint firstItem="wPY-bf-Vq9" firstAttribute="centerX" secondItem="hyD-Bn-QET" secondAttribute="centerX" id="y4l-Xn-blt"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="wXd-El-NK5"/>
+                        <viewLayoutGuide key="safeArea" id="EYh-5q-ssw"/>
                     </view>
                     <navigationItem key="navigationItem" id="SQJ-i0-WMP"/>
                 </viewController>

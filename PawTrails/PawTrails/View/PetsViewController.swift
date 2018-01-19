@@ -10,31 +10,53 @@ import UIKit
 import RxSwift
 import SDWebImage
 import RxCocoa
-import BarcodeScanner
 
-class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, PetsView {
+class PetsViewController: UIViewController, PetsView {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noPetsFound: UIView!
     @IBOutlet weak var addMyFirstPetButton: UIButton!
     
-    var refreshControl = UIRefreshControl()
-    
+    fileprivate let refreshControl = UIRefreshControl()
     fileprivate let presenter = PetsPresenter()
-    
     fileprivate var pets = [Int:IndexPath]()
-    var petIdss = [Int]()
-    private let disposeBag = DisposeBag()
-
+    fileprivate var petIdss = [Int]()
+    fileprivate var petDeviceData: [PetDeviceData]?
+    fileprivate let disposeBag = DisposeBag()
+    fileprivate var iphoneX = false
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        initialize()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        
+        if #available(iOS 11.0, *) {
+            if ((UIApplication.shared.keyWindow?.safeAreaInsets.top)! > CGFloat(0.0)) {
+                iphoneX = true
+                Reporter.debugPrint("iphone x")
+            } else {
+                self.tabBarController?.tabBar.invalidateIntrinsicContentSize()
+                self.tabBarController?.tabBar.isHidden = false
+            }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is TabPageViewController {
+            if let indexPath = tableView.indexPathForSelectedRow {
+                (segue.destination as! TabPageViewController).pet = getPet(at: indexPath)
+            }
+        }
+    }
     
     @IBAction func addMyFirstPetButtonTapped(_ sender: Any) {
         self.goToAddDevice()
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        initialize()
+    @IBAction func addDeviceButtonTapped(_ sender: Any) {
+        self.goToAddDevice()
     }
     
     fileprivate func initialize() {
@@ -63,19 +85,9 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
 //                   cell.configure(element)
 //                }.disposed(by: disposeBag)
         
-        // Strings
-        BarcodeScanner.Title.text = NSLocalizedString("Scan QR Code", comment: "")
-        BarcodeScanner.CloseButton.text = NSLocalizedString("Close", comment: "")
-        BarcodeScanner.SettingsButton.text = NSLocalizedString("Settings", comment: "")
-        BarcodeScanner.Info.text = NSLocalizedString(
-            "Place the QR code within the window to scan. The search will start automatically.", comment: "")
-        BarcodeScanner.Info.loadingText = NSLocalizedString("Loading...", comment: "")
-        BarcodeScanner.Info.notFoundText = NSLocalizedString("No product found.", comment: "")
-        BarcodeScanner.Info.settingsText = NSLocalizedString(
-            "To scan the QR Code you have to allow camera access under iOS settings.", comment: "")
     }
     
-   
+    
     fileprivate func addButton(){
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -90,10 +102,6 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         button.heightAnchor.constraint(equalToConstant: 80).isActive = true
     }
     
-
-    @IBAction func addDeviceButtonTapped(_ sender: Any) {
-      self.goToAddDevice()
-    }
     
     fileprivate func goToAddDevice() {
         if let vc = self.storyboard?.instantiateViewController(withIdentifier: "StepOneViewController") as? StepOneViewController {
@@ -112,36 +120,22 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
-    func buttonAction(sender: UIButton!) {
+    
+    @objc fileprivate func buttonAction(sender: UIButton!) {
         Reporter.debugPrint("Button tapped")
     }
+    
     
     @objc func reloadPetsAPI(){
         presenter.loadPets()
         self.tableView.reloadData()
     }
     
+    
     deinit {
         presenter.deteachView()
     }
     
-    var iphoneX = false
-
-    override func viewDidLayoutSubviews() {
-        
-        if #available(iOS 11.0, *) {
-            if ((UIApplication.shared.keyWindow?.safeAreaInsets.top)! > CGFloat(0.0)) {
-                iphoneX = true
-                Reporter.debugPrint("iphone x")
-            } else {
-                        self.tabBarController?.tabBar.invalidateIntrinsicContentSize()
-                        self.tabBarController?.tabBar.isHidden = false
-            }
-        }
-
-    }
-    
-
     func reloadPets(){
         presenter.getPets()
     }
@@ -165,28 +159,6 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.reloadData()
     }
     
-    
-    var petDeviceData: [PetDeviceData]?
-
-    
-        
-    // MARK: - UITableViewDataSource
-
-    func numberOfSections(in tableView: UITableView) -> Int {
-        var number = 0
-        if presenter.ownedPets.count != 0 { number += 1 }
-        if presenter.sharedPets.count != 0 { number += 1 }
-        return number
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if presenter.ownedPets.count > 0 && presenter.sharedPets.count > 0 {
-            return section == 0 ? presenter.ownedPets.count : presenter.sharedPets.count
-        }else{
-            return presenter.ownedPets.count + presenter.sharedPets.count
-        }
-    }
-    
     func getPet(at indexPath: IndexPath) -> Pet {
         if presenter.ownedPets.count > 0 && presenter.sharedPets.count > 0 {
             return indexPath.section == 0 ? presenter.ownedPets[indexPath.row] : presenter.sharedPets[indexPath.row]
@@ -196,16 +168,38 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
             return presenter.sharedPets[indexPath.row]
         }
     }
+
+    func trackButtonAction(sender: UIButton){
+        // changed this when deleted homevc
+        if let home = tabBarController?.viewControllers?.first as? MapViewController {
+            home.selectedPet = presenter.getPet(with: sender.tag)
+            tabBarController?.selectedIndex = 0
+        }
+    }
+}
+ 
+extension PetsViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        var number = 0
+        if presenter.ownedPets.count != 0 { number += 1 }
+        if presenter.sharedPets.count != 0 { number += 1 }
+        return number
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if presenter.ownedPets.count > 0 && presenter.sharedPets.count > 0 {
+            return section == 0 ? presenter.ownedPets.count : presenter.sharedPets.count
+        }else{
+            return presenter.ownedPets.count + presenter.sharedPets.count
+        }
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! petListCell
         let pet = getPet(at: indexPath)
         cell.configure(pet)
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -218,26 +212,14 @@ class PetsViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         return nil
     }
-
-    func trackButtonAction(sender: UIButton){
-        // changed this when deleted homevc
-        if let home = tabBarController?.viewControllers?.first as? MapViewController {
-            home.selectedPet = presenter.getPet(with: sender.tag)
-            tabBarController?.selectedIndex = 0
-        }
-    }
-
-    
-//    // MARK: - Navigation
-////
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-                if segue.destination is TabPageViewController {
-            if let indexPath = tableView.indexPathForSelectedRow {
-                (segue.destination as! TabPageViewController).pet = getPet(at: indexPath)
-            }
-        }
-    }
 }
+
+ extension PetsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+ }
+ 
 
 class petListCell: UITableViewCell {
     @IBOutlet weak var petImageView: UIImageView!
@@ -270,30 +252,3 @@ class petListCell: UITableViewCell {
         }).disposed(by: disposeBag)
     }
 }
- 
-extension PetsViewController: BarcodeScannerCodeDelegate {
-
-    func barcodeScanner(_ controller: BarcodeScannerController, didCaptureCode code: String, type: String) {
-
-        controller.dismiss(animated: true, completion: { [weak self] _ in
-            if let vc = self?.storyboard?.instantiateViewController(withIdentifier: "AddEditPetDetailsTableViewController") as? AddEditPetDetailsTableViewController {
-                vc.deviceCode = code
-                self?.navigationController?.pushViewController(vc, animated: true)
-            }
-        })
-    }
-}
-
- extension PetsViewController: BarcodeScannerErrorDelegate {
-    
-    func barcodeScanner(_ controller: BarcodeScannerController, didReceiveError error: Error) {
-        Reporter.debugPrint("\(error)")
-    }
- }
- 
- extension PetsViewController: BarcodeScannerDismissalDelegate {
-    
-    func barcodeScannerDidDismiss(_ controller: BarcodeScannerController) {
-        controller.dismiss(animated: true, completion: nil)
-    }
- }
