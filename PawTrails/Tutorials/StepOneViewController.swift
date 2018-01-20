@@ -21,6 +21,7 @@ class StepOneViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        UIApplication.shared.statusBarStyle = .lightContent
         // Show the status bar
         statusBarShouldBeHidden = false
         UIView.animate(withDuration: 0.25) {
