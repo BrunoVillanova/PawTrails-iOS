@@ -98,11 +98,16 @@ class StepOneViewController: UIViewController {
 
 
 extension StepOneViewController: QRCodeScannerViewControllerDelegate {
-    func scanFinished(qrCodeScannerViewController: UIViewController, scanResult: String, error: String?){
-        if (qrCodeScannerViewController.presentingViewController != nil) {
+    
+    func scanFinished(qrCodeScannerViewController: UIViewController, scanResult: String?, error: String?){
+        
+        if let error = error {
+            self.alert(title: "=(", msg: error)
+        } else if let scanResult = scanResult, qrCodeScannerViewController.presentingViewController != nil {
             qrCodeScannerViewController.dismiss(animated: true, completion: {
                 self.goToNextStep(deviceCode: scanResult)
             })
         }
     }
+    
 }
