@@ -7,83 +7,107 @@
 //
 
 import UIKit
-import BarcodeScanner
-
+import swiftScan
 
 class StepOneViewController: UIViewController {
 
+    var statusBarShouldBeHidden = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        UIApplication.shared.statusBarStyle = .lightContent
+        // Show the status bar
+        statusBarShouldBeHidden = false
+        UIView.animate(withDuration: 0.25) {
+            self.setNeedsStatusBarAppearanceUpdate()
+        }
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return statusBarShouldBeHidden
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
+    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+        return .slide
+    }
+    
     fileprivate func initialize() {
         self.navigationController?.navigationBar.backItem?.title = " "
-
-        BarcodeScanner.Title.text = NSLocalizedString("Scan QR Code", comment: "")
-        BarcodeScanner.CloseButton.text = NSLocalizedString("Close", comment: "")
-        BarcodeScanner.SettingsButton.text = NSLocalizedString("Settings", comment: "")
-        BarcodeScanner.Info.text = NSLocalizedString(
-            "Place the QR code within the window to scan. The search will start automatically.", comment: "")
-        BarcodeScanner.Info.loadingText = NSLocalizedString("Loading...", comment: "")
-        BarcodeScanner.Info.notFoundText = NSLocalizedString("No product found.", comment: "")
-        BarcodeScanner.Info.settingsText = NSLocalizedString(
-            "To scan the QR Code you have to allow camera access under iOS settings.", comment: "")
-        
         if let nc = self.navigationController, nc.viewControllers.first == self {
             let closeBarButtonItem = UIBarButtonItem.init(title: "Close", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.closeViewController))
             self.navigationItem.setRightBarButton(closeBarButtonItem, animated: true)
         }
     }
     
-    
     @objc fileprivate func closeViewController() {
         self.dismiss(animated: true, completion: nil)
     }
     
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        UIApplication.shared.statusBarStyle = .lightContent
-    }
-    
     @IBAction func scanNowBtnPressed(_ sender: Any) {
-        let controller = BarcodeScannerController()
-        controller.codeDelegate = self
-        controller.errorDelegate = self
-        controller.dismissalDelegate = self
-        
-        present(controller, animated: true, completion: {
-            UIApplication.shared.statusBarStyle = .default
-        })
-    }
-    
-}
-
-
-
-extension StepOneViewController: BarcodeScannerCodeDelegate {
-    
-    func barcodeScanner(_ controller: BarcodeScannerController, didCaptureCode code: String, type: String) {
-        controller.dismiss(animated: true) {
-            if let vc = self.storyboard?.instantiateViewController(withIdentifier: "StepTwoViewController") as? StepTwoViewController {
-                vc.deviceCode = code
-                self.navigationController?.pushViewController(vc, animated: true)
+        QRCodeScannerViewController.authorizeCameraWith {[weak self](granted) in
+            if granted, let strongSelf = self {
+                let vc = QRCodeScannerViewController();
+                vc.delegate = strongSelf;
+            
+                // Hide the status bar
+                strongSelf.statusBarShouldBeHidden = true
+                UIView.animate(withDuration: 0.25) {
+                    strongSelf.setNeedsStatusBarAppearanceUpdate()
+                }
+                
+                let navigationController = UINavigationController.init(rootViewController: vc)
+                navigationController.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+                navigationController.navigationBar.shadowImage = UIImage()
+                navigationController.navigationBar.isTranslucent = true
+                navigationController.navigationBar.backgroundColor = UIColor.clear
+                navigationController.navigationBar.tintColor = UIColor.white
+                
+                let barButtonItem = UIBarButtonItem.init(title: "Close", style: UIBarButtonItemStyle.plain, target:strongSelf, action: #selector(strongSelf.closeScannerViewController))
+                
+                vc.navigationItem.setRightBarButton(barButtonItem, animated: true)
+                
+                strongSelf.present(navigationController, animated: true, completion: {
+                    
+                })
             }
         }
     }
-}
-
-extension StepOneViewController: BarcodeScannerErrorDelegate {
-    func barcodeScanner(_ controller: BarcodeScannerController, didReceiveError error: Error) {
-        Reporter.debugPrint(error.localizedDescription)
-    }
-}
-
-extension StepOneViewController: BarcodeScannerDismissalDelegate {
     
-    func barcodeScannerDidDismiss(_ controller: BarcodeScannerController) {
-        controller.dismiss(animated: true, completion: nil)
+    @objc fileprivate func closeScannerViewController() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    fileprivate func goToNextStep(deviceCode: String) {
+        if let vc = self.storyboard?.instantiateViewController(withIdentifier: "StepTwoViewController") as? StepTwoViewController {
+            vc.deviceCode = deviceCode
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+
     }
 }
 
+
+extension StepOneViewController: QRCodeScannerViewControllerDelegate {
+    
+    func scanFinished(qrCodeScannerViewController: UIViewController, scanResult: String?, error: String?){
+        
+        if let error = error {
+            self.alert(title: "=(", msg: error)
+        } else if let scanResult = scanResult, qrCodeScannerViewController.presentingViewController != nil {
+            qrCodeScannerViewController.dismiss(animated: true, completion: {
+                self.goToNextStep(deviceCode: scanResult)
+            })
+        }
+    }
+    
+}

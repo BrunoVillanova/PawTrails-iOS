@@ -10,6 +10,8 @@
 		150741C5200DB4B800EB761B /* CocoaLumberjackSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 150741C3200DB4B700EB761B /* CocoaLumberjackSwift.framework */; };
 		150741C6200DB4B800EB761B /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 150741C4200DB4B700EB761B /* CocoaLumberjack.framework */; };
 		150B05011FDDE22100095772 /* PTTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150B05001FDDE22100095772 /* PTTextField.swift */; };
+		1513D2202011B27E002EE716 /* QRCodeScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1513D21F2011B27E002EE716 /* QRCodeScannerViewController.swift */; };
+		151DE7482012C75100ED8AC1 /* CodeScan.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 151DE7472012C75100ED8AC1 /* CodeScan.bundle */; };
 		15226D901F8D18EA007EEFF2 /* SocketIO+RxSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15226D8F1F8D18EA007EEFF2 /* SocketIO+RxSwift.swift */; };
 		152A8F701FB5E0CB00C54DD8 /* DataManager+RxSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152A8F6F1FB5E0CB00C54DD8 /* DataManager+RxSwift.swift */; };
 		153DF70D1FD4AD5C008AE32D /* PTBalloonImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153DF70C1FD4AD5C008AE32D /* PTBalloonImageView.swift */; };
@@ -240,6 +242,8 @@
 		150741C3200DB4B700EB761B /* CocoaLumberjackSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjackSwift.framework; path = Carthage/Build/iOS/CocoaLumberjackSwift.framework; sourceTree = "<group>"; };
 		150741C4200DB4B700EB761B /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjack.framework; path = Carthage/Build/iOS/CocoaLumberjack.framework; sourceTree = "<group>"; };
 		150B05001FDDE22100095772 /* PTTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTTextField.swift; sourceTree = "<group>"; };
+		1513D21F2011B27E002EE716 /* QRCodeScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScannerViewController.swift; sourceTree = "<group>"; };
+		151DE7472012C75100ED8AC1 /* CodeScan.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CodeScan.bundle; sourceTree = "<group>"; };
 		15226D8F1F8D18EA007EEFF2 /* SocketIO+RxSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SocketIO+RxSwift.swift"; path = "Extensions/SocketIO+RxSwift.swift"; sourceTree = "<group>"; };
 		152A8F6F1FB5E0CB00C54DD8 /* DataManager+RxSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataManager+RxSwift.swift"; sourceTree = "<group>"; };
 		153DF70C1FD4AD5C008AE32D /* PTBalloonImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PTBalloonImageView.swift; path = PTBalloonImageView/PTBalloonImageView.swift; sourceTree = "<group>"; };
@@ -519,6 +523,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1513D21E2011B259002EE716 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1513D21F2011B27E002EE716 /* QRCodeScannerViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		1525B31C1FA202850055E5CA /* PTBatteryView */ = {
 			isa = PBXGroup;
 			children = (
@@ -602,6 +614,7 @@
 		440CEE491E3B8D0700F58A09 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				151DE7472012C75100ED8AC1 /* CodeScan.bundle */,
 				44251AD71F0CD5260067F401 /* Assets.xcassets */,
 				44251AD81F0CD5260067F401 /* countrycodes.csv */,
 				44251AD91F0CD5260067F401 /* Info.plist */,
@@ -711,6 +724,7 @@
 		4415FF411E3B822900A81B13 /* PawTrails */ = {
 			isa = PBXGroup;
 			children = (
+				1513D21E2011B259002EE716 /* Controllers */,
 				4485007D1FC6DE3300F9510E /* PawTrails.entitlements */,
 				4415FF421E3B822900A81B13 /* AppDelegate.swift */,
 				157401901F9E268200A854C5 /* Custom Views */,
@@ -1240,6 +1254,7 @@
 			files = (
 				44251ADD1F0CD5260067F401 /* countrycodes.csv in Resources */,
 				44C0409E1FAB6D9A00CF6E88 /* SharedUsersTableViewCell.xib in Resources */,
+				151DE7482012C75100ED8AC1 /* CodeScan.bundle in Resources */,
 				44251ADF1F0CD5260067F401 /* attitudetechie.der in Resources */,
 				44251B161F0CD5A90067F401 /* Main.storyboard in Resources */,
 				157401A91F9E268200A854C5 /* BatteryLow@2x.png in Resources */,
@@ -1458,6 +1473,7 @@
 				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
 				"${BUILT_PRODUCTS_DIR}/YNDropDownMenu/YNDropDownMenu.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${BUILT_PRODUCTS_DIR}/swiftScan/swiftScan.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -1477,6 +1493,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YNDropDownMenu.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/swiftScan.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1541,6 +1558,7 @@
 				44251B0D1F0CD5870067F401 /* AddPetUserPresenter.swift in Sources */,
 				445F5F411F5EA7900069B513 /* BEMCheckBoxGroup.m in Sources */,
 				44C0FBA91FE2D889005CC91B /* StepThreeViewController.swift in Sources */,
+				1513D2202011B27E002EE716 /* QRCodeScannerViewController.swift in Sources */,
 				440C213A1FE2B676003A2C70 /* RootPageController.swift in Sources */,
 				44251B511F0CD5DF0067F401 /* ScanQRViewController.swift in Sources */,
 				446607C51F96004000833683 /* Date.swift in Sources */,
