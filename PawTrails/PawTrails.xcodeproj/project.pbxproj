@@ -11,6 +11,7 @@
 		150741C6200DB4B800EB761B /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 150741C4200DB4B700EB761B /* CocoaLumberjack.framework */; };
 		150B05011FDDE22100095772 /* PTTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150B05001FDDE22100095772 /* PTTextField.swift */; };
 		1513D2202011B27E002EE716 /* QRCodeScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1513D21F2011B27E002EE716 /* QRCodeScannerViewController.swift */; };
+		151DE7482012C75100ED8AC1 /* CodeScan.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 151DE7472012C75100ED8AC1 /* CodeScan.bundle */; };
 		15226D901F8D18EA007EEFF2 /* SocketIO+RxSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15226D8F1F8D18EA007EEFF2 /* SocketIO+RxSwift.swift */; };
 		152A8F701FB5E0CB00C54DD8 /* DataManager+RxSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152A8F6F1FB5E0CB00C54DD8 /* DataManager+RxSwift.swift */; };
 		153DF70D1FD4AD5C008AE32D /* PTBalloonImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153DF70C1FD4AD5C008AE32D /* PTBalloonImageView.swift */; };
@@ -242,6 +243,7 @@
 		150741C4200DB4B700EB761B /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjack.framework; path = Carthage/Build/iOS/CocoaLumberjack.framework; sourceTree = "<group>"; };
 		150B05001FDDE22100095772 /* PTTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTTextField.swift; sourceTree = "<group>"; };
 		1513D21F2011B27E002EE716 /* QRCodeScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScannerViewController.swift; sourceTree = "<group>"; };
+		151DE7472012C75100ED8AC1 /* CodeScan.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CodeScan.bundle; sourceTree = "<group>"; };
 		15226D8F1F8D18EA007EEFF2 /* SocketIO+RxSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SocketIO+RxSwift.swift"; path = "Extensions/SocketIO+RxSwift.swift"; sourceTree = "<group>"; };
 		152A8F6F1FB5E0CB00C54DD8 /* DataManager+RxSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataManager+RxSwift.swift"; sourceTree = "<group>"; };
 		153DF70C1FD4AD5C008AE32D /* PTBalloonImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PTBalloonImageView.swift; path = PTBalloonImageView/PTBalloonImageView.swift; sourceTree = "<group>"; };
@@ -612,6 +614,7 @@
 		440CEE491E3B8D0700F58A09 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				151DE7472012C75100ED8AC1 /* CodeScan.bundle */,
 				44251AD71F0CD5260067F401 /* Assets.xcassets */,
 				44251AD81F0CD5260067F401 /* countrycodes.csv */,
 				44251AD91F0CD5260067F401 /* Info.plist */,
@@ -1251,6 +1254,7 @@
 			files = (
 				44251ADD1F0CD5260067F401 /* countrycodes.csv in Resources */,
 				44C0409E1FAB6D9A00CF6E88 /* SharedUsersTableViewCell.xib in Resources */,
+				151DE7482012C75100ED8AC1 /* CodeScan.bundle in Resources */,
 				44251ADF1F0CD5260067F401 /* attitudetechie.der in Resources */,
 				44251B161F0CD5A90067F401 /* Main.storyboard in Resources */,
 				157401A91F9E268200A854C5 /* BatteryLow@2x.png in Resources */,
