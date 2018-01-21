@@ -52,7 +52,6 @@
 		440784491F8B85A1005E9E1B /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 440784481F8B85A1005E9E1B /* SettingsView.xib */; };
 		4407844B1F8B85E8005E9E1B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4407844A1F8B85E8005E9E1B /* SettingsView.swift */; };
 		440823CA1F8F94900004B90F /* SetUpYourGoalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440823C91F8F94900004B90F /* SetUpYourGoalController.swift */; };
-		440C213A1FE2B676003A2C70 /* RootPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440C21391FE2B676003A2C70 /* RootPageController.swift */; };
 		441292311FAB254300745ED2 /* TabPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441292301FAB254300745ED2 /* TabPageViewController.swift */; };
 		441292331FAB25F900745ED2 /* PetInfromationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441292321FAB25F900745ED2 /* PetInfromationViewController.swift */; };
 		441292351FAB260500745ED2 /* GoalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441292341FAB260500745ED2 /* GoalsViewController.swift */; };
@@ -288,7 +287,6 @@
 		440784481F8B85A1005E9E1B /* SettingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsView.xib; sourceTree = "<group>"; };
 		4407844A1F8B85E8005E9E1B /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		440823C91F8F94900004B90F /* SetUpYourGoalController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetUpYourGoalController.swift; sourceTree = "<group>"; };
-		440C21391FE2B676003A2C70 /* RootPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootPageController.swift; sourceTree = "<group>"; };
 		441292301FAB254300745ED2 /* TabPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabPageViewController.swift; sourceTree = "<group>"; };
 		441292321FAB25F900745ED2 /* PetInfromationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetInfromationViewController.swift; sourceTree = "<group>"; };
 		441292341FAB260500745ED2 /* GoalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsViewController.swift; sourceTree = "<group>"; };
@@ -600,7 +598,6 @@
 		440C21371FE2B1EE003A2C70 /* Tutorials */ = {
 			isa = PBXGroup;
 			children = (
-				440C21391FE2B676003A2C70 /* RootPageController.swift */,
 				44C0FBA21FE2D241005CC91B /* SignUpYourDeviceVC.swift */,
 				44C0FBA41FE2D863005CC91B /* StepOneViewController.swift */,
 				44C0FBA61FE2D87D005CC91B /* StepTwoViewController.swift */,
@@ -1559,7 +1556,6 @@
 				445F5F411F5EA7900069B513 /* BEMCheckBoxGroup.m in Sources */,
 				44C0FBA91FE2D889005CC91B /* StepThreeViewController.swift in Sources */,
 				1513D2202011B27E002EE716 /* QRCodeScannerViewController.swift in Sources */,
-				440C213A1FE2B676003A2C70 /* RootPageController.swift in Sources */,
 				44251B511F0CD5DF0067F401 /* ScanQRViewController.swift in Sources */,
 				446607C51F96004000833683 /* Date.swift in Sources */,
 				44F0BF361EFBF6C7008C26B3 /* EventManager.swift in Sources */,

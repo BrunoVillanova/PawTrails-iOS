@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserProfileTableViewController: UITableViewController, UserProfileView, UIImagePickerControllerDelegate {
+class UserProfileTableViewController: UITableViewController {
     
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -26,17 +26,50 @@ class UserProfileTableViewController: UITableViewController, UserProfileView, UI
 
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
         presenter.loadUser()
         self.hideNotification()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is EditUserProfileTableViewController {
+            (segue.destination as! EditUserProfileTableViewController).user = presenter.user
+        } else if segue.destination is SettingsTableViewController {
+            (segue.destination as! SettingsTableViewController).user = presenter.user
+        }
+        
+    }
     
-    //MARC:- UserProfileView
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        view.backgroundColor = UIColor.white
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if indexPath.section == 0 && indexPath.row == 1 {
+            
+            let label = UILabel(frame: CGRect(x: 0.0, y: 0.0, width: emailLabel.frame.width, height: CGFloat(MAXFLOAT)))
+            label.numberOfLines = 0
+            label.lineBreakMode = .byWordWrapping
+            label.font = UIFont.preferredFont(forTextStyle: .body)
+            label.text = emailLabel.text
+            label.sizeToFit()
+            return 36.0 + label.frame.height
+        }else{
+            return super.tableView(tableView, heightForRowAt: indexPath)
+        }
+    }
+}
+
+
+extension UserProfileTableViewController: UserProfileView {
     
     func load(user: User) {
-
+        
         var fullname: String {
             let name = user.name ?? ""
             let surname = user.surname ?? ""
@@ -67,43 +100,5 @@ class UserProfileTableViewController: UITableViewController, UserProfileView, UI
         }
     }
     
-    
-    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        view.backgroundColor = UIColor.white
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        if indexPath.section == 0 && indexPath.row == 1 {
-            
-            let label = UILabel(frame: CGRect(x: 0.0, y: 0.0, width: emailLabel.frame.width, height: CGFloat(MAXFLOAT)))
-            label.numberOfLines = 0
-            label.lineBreakMode = .byWordWrapping
-            label.font = UIFont.preferredFont(forTextStyle: .body)
-            label.text = emailLabel.text
-            label.sizeToFit()
-            return 36.0 + label.frame.height
-        }else{
-            return super.tableView(tableView, heightForRowAt: indexPath)
-        }
-    }
-
-    // MARK: - Navigation
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.destination is EditUserProfileTableViewController {
-            (segue.destination as! EditUserProfileTableViewController).user = presenter.user
-        }else if segue.destination is SettingsTableViewController {
-            (segue.destination as! SettingsTableViewController).user = presenter.user
-        }
-        
-    }
-    
 }
-
-
 
