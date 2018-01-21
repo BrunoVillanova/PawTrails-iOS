@@ -524,6 +524,19 @@
 		1513D21E2011B259002EE716 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				440C21371FE2B1EE003A2C70 /* Tutorials */,
+				442F2D991FAC735E0072D2B6 /* PetUserTableViewController.swift */,
+				44C0409B1FAB6D9A00CF6E88 /* SharedUsersTableViewCell.swift */,
+				44C0409C1FAB6D9A00CF6E88 /* SharedUsersTableViewCell.xib */,
+				4446BAE71FB1CA3600809805 /* AdventuresListViewController.swift */,
+				441292361FAB262300745ED2 /* SafeZoneViewController.swift */,
+				442C32071FBDA33700B3A8BF /* PieChart.swift */,
+				441292341FAB260500745ED2 /* GoalsViewController.swift */,
+				444831C61FBC4429009D55A1 /* UsersViewController.swift */,
+				441292321FAB25F900745ED2 /* PetInfromationViewController.swift */,
+				441292301FAB254300745ED2 /* TabPageViewController.swift */,
+				440823C91F8F94900004B90F /* SetUpYourGoalController.swift */,
+				441CF74A1FD1B28900FB1088 /* CalanderForActivityController.swift */,
 				1513D21F2011B27E002EE716 /* QRCodeScannerViewController.swift */,
 			);
 			path = Controllers;
@@ -605,7 +618,8 @@
 				446FAE431FE3E9AF0039F819 /* GettingLocationViewController.swift */,
 				446FAE451FE3EF510039F819 /* SuccessViewController.swift */,
 			);
-			path = Tutorials;
+			name = Tutorials;
+			path = ../../Tutorials;
 			sourceTree = "<group>";
 		};
 		440CEE491E3B8D0700F58A09 /* Assets */ = {
@@ -684,27 +698,13 @@
 		4415FF361E3B822900A81B13 = {
 			isa = PBXGroup;
 			children = (
-				440C21371FE2B1EE003A2C70 /* Tutorials */,
-				442F2D991FAC735E0072D2B6 /* PetUserTableViewController.swift */,
-				44C0409B1FAB6D9A00CF6E88 /* SharedUsersTableViewCell.swift */,
-				44C0409C1FAB6D9A00CF6E88 /* SharedUsersTableViewCell.xib */,
-				4446BAE71FB1CA3600809805 /* AdventuresListViewController.swift */,
-				441292361FAB262300745ED2 /* SafeZoneViewController.swift */,
-				442C32071FBDA33700B3A8BF /* PieChart.swift */,
-				441292341FAB260500745ED2 /* GoalsViewController.swift */,
-				444831C61FBC4429009D55A1 /* UsersViewController.swift */,
-				441292321FAB25F900745ED2 /* PetInfromationViewController.swift */,
-				441292301FAB254300745ED2 /* TabPageViewController.swift */,
-				440823C91F8F94900004B90F /* SetUpYourGoalController.swift */,
-				441CF74A1FD1B28900FB1088 /* CalanderForActivityController.swift */,
-				445F5F361F5EA7900069B513 /* Classes */,
 				443E80781F5D87B1008679FC /* Adventures */,
 				4415FF411E3B822900A81B13 /* PawTrails */,
 				4414AE691EA0DD5B004A5134 /* PawTrailsTests */,
 				4447217B1F03F12A001DCDE1 /* PawTrailsUITests */,
-				4415FF401E3B822900A81B13 /* Products */,
 				91352D1B7E01CC1C0CF51D38 /* Frameworks */,
 				93341773EA1038EF2DA0117E /* Pods */,
+				4415FF401E3B822900A81B13 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -721,9 +721,11 @@
 		4415FF411E3B822900A81B13 /* PawTrails */ = {
 			isa = PBXGroup;
 			children = (
+				4415FF421E3B822900A81B13 /* AppDelegate.swift */,
+				1550793D1FDD8D3A00417BAA /* PTConstants.swift */,
+				445F5F361F5EA7900069B513 /* Classes */,
 				1513D21E2011B259002EE716 /* Controllers */,
 				4485007D1FC6DE3300F9510E /* PawTrails.entitlements */,
-				4415FF421E3B822900A81B13 /* AppDelegate.swift */,
 				157401901F9E268200A854C5 /* Custom Views */,
 				440CEE4C1E3B8D3D00F58A09 /* Model */,
 				440CEE4A1E3B8D2500F58A09 /* View */,
@@ -731,7 +733,6 @@
 				44B179671E4B78FB0070A18B /* Utils */,
 				4440C5D01E8BA6B0007A13B1 /* Extensions */,
 				440CEE491E3B8D0700F58A09 /* Assets */,
-				1550793D1FDD8D3A00417BAA /* PTConstants.swift */,
 			);
 			path = PawTrails;
 			sourceTree = "<group>";
@@ -980,7 +981,8 @@
 				445F5F3D1F5EA7900069B513 /* BEMPathManager.h */,
 				445F5F3E1F5EA7900069B513 /* BEMPathManager.m */,
 			);
-			path = Classes;
+			name = Classes;
+			path = ../Classes;
 			sourceTree = "<group>";
 		};
 		446607B31F95FF3000833683 /* Calender */ = {
