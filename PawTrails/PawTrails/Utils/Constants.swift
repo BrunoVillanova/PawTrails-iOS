@@ -8,6 +8,18 @@
 
 import Foundation
 
+#if DEBUG
+let isDebug = true
+#else
+let isDebug = false
+#endif
+
+public struct ezdebug {
+    public static let email = "ios@test.com"
+    public static let password = "iOStest12345"
+    public static let is4test = "mohamed@attitudetech.ie"
+}
+
 struct Constants {
     
     // Image Max Size

@@ -10,31 +10,18 @@ import UIKit
 import FacebookCore
 import Fabric
 import Crashlytics
-import SocketIO
-import SwiftyJSON
 import IQKeyboardManagerSwift
 import Firebase
 import HockeySDK
 import UserNotifications
 import CocoaLumberjackSwift
 
-#if DEBUG
-let isDebug = true
-#else
-let isDebug = false
-#endif
-
-public struct ezdebug {
-    public static let email = "ios@test.com"
-    public static let password = "iOStest12345"
-    public static let is4test = "mohamed@attitudetech.ie"
-}
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+    var storyboard: UIStoryboard?
     let gcmMessageIDKey = "gcm.message_id"
     
     
@@ -78,6 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerForRemoteNotifications()
     
         
+        storyboard = UIStoryboard(name: "Main", bundle: nil)
         // Configure UI
         configureUIPreferences()
 
@@ -159,14 +147,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func loadHomeScreen(animated: Bool) {
-        let root = storyboard.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
+        let root = storyboard!.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
         root.selectedIndex = 0
         self.window?.rootViewController = root
     }
     
     func loadTutorial() {
         
-        let root = storyboard.instantiateViewController(withIdentifier: "SignUpYourDeviceVC") as! SignUpYourDeviceVC
+        let root = storyboard!.instantiateViewController(withIdentifier: "SignUpYourDeviceVC") as! SignUpYourDeviceVC
         let navigationController = UINavigationController.init(rootViewController: root)
 
         if let currentRootViewController = self.window?.rootViewController {
@@ -179,7 +167,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func loadAuthenticationScreen() {
-            let initial = storyboard.instantiateViewController(withIdentifier: "InitialViewController") as? InitialViewController
+            let initial = storyboard!.instantiateViewController(withIdentifier: "InitialViewController") as? InitialViewController
             window?.rootViewController = initial
     }
 

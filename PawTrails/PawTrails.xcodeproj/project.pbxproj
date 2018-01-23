@@ -101,12 +101,6 @@
 		15C762832016D046002AA7F8 /* PetsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C762712016D046002AA7F8 /* PetsPresenter.swift */; };
 		15C762842016D046002AA7F8 /* SelectPetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C762722016D046002AA7F8 /* SelectPetView.swift */; };
 		15C762A42016D06B002AA7F8 /* CodeScan.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 15C762862016D06B002AA7F8 /* CodeScan.bundle */; };
-		15C762A62016D06B002AA7F8 /* GoogleAppUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C762892016D06B002AA7F8 /* GoogleAppUtilities.framework */; };
-		15C762A72016D06B002AA7F8 /* GoogleSymbolUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C7628A2016D06B002AA7F8 /* GoogleSymbolUtilities.framework */; };
-		15C762A82016D06B002AA7F8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 15C7628B2016D06B002AA7F8 /* GoogleService-Info.plist */; };
-		15C762A92016D06B002AA7F8 /* GoogleSignIn.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 15C7628C2016D06B002AA7F8 /* GoogleSignIn.bundle */; };
-		15C762AA2016D06B002AA7F8 /* GoogleSignInDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C7628D2016D06B002AA7F8 /* GoogleSignInDependencies.framework */; };
-		15C762AB2016D06B002AA7F8 /* GoogleSignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C7628E2016D06B002AA7F8 /* GoogleSignIn.framework */; };
 		15C762AC2016D06B002AA7F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 15C7628F2016D06B002AA7F8 /* Assets.xcassets */; };
 		15C762AE2016D06B002AA7F8 /* countrycodes.csv in Resources */ = {isa = PBXBuildFile; fileRef = 15C762932016D06B002AA7F8 /* countrycodes.csv */; };
 		15C762AF2016D06B002AA7F8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C762952016D06B002AA7F8 /* Constants.swift */; };
@@ -351,12 +345,6 @@
 		15C762712016D046002AA7F8 /* PetsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetsPresenter.swift; sourceTree = "<group>"; };
 		15C762722016D046002AA7F8 /* SelectPetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPetView.swift; sourceTree = "<group>"; };
 		15C762862016D06B002AA7F8 /* CodeScan.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CodeScan.bundle; sourceTree = "<group>"; };
-		15C762892016D06B002AA7F8 /* GoogleAppUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleAppUtilities.framework; sourceTree = "<group>"; };
-		15C7628A2016D06B002AA7F8 /* GoogleSymbolUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSymbolUtilities.framework; sourceTree = "<group>"; };
-		15C7628B2016D06B002AA7F8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		15C7628C2016D06B002AA7F8 /* GoogleSignIn.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleSignIn.bundle; sourceTree = "<group>"; };
-		15C7628D2016D06B002AA7F8 /* GoogleSignInDependencies.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSignInDependencies.framework; sourceTree = "<group>"; };
-		15C7628E2016D06B002AA7F8 /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSignIn.framework; sourceTree = "<group>"; };
 		15C7628F2016D06B002AA7F8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		15C762902016D06B002AA7F8 /* PawTrails-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PawTrails-Bridging-Header.h"; sourceTree = "<group>"; };
 		15C762912016D06B002AA7F8 /* PawTrails.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = PawTrails.entitlements; sourceTree = "<group>"; };
@@ -511,15 +499,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				15C762A72016D06B002AA7F8 /* GoogleSymbolUtilities.framework in Frameworks */,
 				1555FFF71FDF662A00F05C76 /* SwiftyJSON.framework in Frameworks */,
 				1589EBC11FE3644E00280926 /* Bolts.framework in Frameworks */,
 				15C90DB11FE36F56008F73B3 /* Fabric.framework in Frameworks */,
 				154C7D831FE36264003437FF /* FacebookLogin.framework in Frameworks */,
 				154C7D841FE36264003437FF /* FBSDKLoginKit.framework in Frameworks */,
 				15C90DB21FE36F56008F73B3 /* Crashlytics.framework in Frameworks */,
-				15C762A62016D06B002AA7F8 /* GoogleAppUtilities.framework in Frameworks */,
-				15C762AA2016D06B002AA7F8 /* GoogleSignInDependencies.framework in Frameworks */,
 				154C7D851FE36264003437FF /* FacebookCore.framework in Frameworks */,
 				154C7D861FE36264003437FF /* FBSDKCoreKit.framework in Frameworks */,
 				15C90DAE1FE36E6E008F73B3 /* HockeySDK.framework in Frameworks */,
@@ -530,7 +515,6 @@
 				E710CBA5471FDC34DDA7BEB8 /* Pods_PawTrails.framework in Frameworks */,
 				150741C5200DB4B800EB761B /* CocoaLumberjackSwift.framework in Frameworks */,
 				150741C6200DB4B800EB761B /* CocoaLumberjack.framework in Frameworks */,
-				15C762AB2016D06B002AA7F8 /* GoogleSignIn.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -748,7 +732,6 @@
 		15C762852016D06B002AA7F8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				15C762882016D06B002AA7F8 /* Google */,
 				15C764212016EB41002AA7F8 /* ConfigFiles */,
 				15C7619A2016D002002AA7F8 /* Main.storyboard */,
 				15C762862016D06B002AA7F8 /* CodeScan.bundle */,
@@ -759,19 +742,6 @@
 				15C762932016D06B002AA7F8 /* countrycodes.csv */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		15C762882016D06B002AA7F8 /* Google */ = {
-			isa = PBXGroup;
-			children = (
-				15C762892016D06B002AA7F8 /* GoogleAppUtilities.framework */,
-				15C7628A2016D06B002AA7F8 /* GoogleSymbolUtilities.framework */,
-				15C7628B2016D06B002AA7F8 /* GoogleService-Info.plist */,
-				15C7628C2016D06B002AA7F8 /* GoogleSignIn.bundle */,
-				15C7628D2016D06B002AA7F8 /* GoogleSignInDependencies.framework */,
-				15C7628E2016D06B002AA7F8 /* GoogleSignIn.framework */,
-			);
-			path = Google;
 			sourceTree = "<group>";
 		};
 		15C762942016D06B002AA7F8 /* Utils */ = {
@@ -1247,7 +1217,6 @@
 				15C7640A2016D5C0002AA7F8 /* SharedUsersTableViewCell.xib in Resources */,
 				15C764262016EB41002AA7F8 /* GoogleService-Info-Release.plist in Resources */,
 				15C762412016D011002AA7F8 /* TripScreenXibView.xib in Resources */,
-				15C762A92016D06B002AA7F8 /* GoogleSignIn.bundle in Resources */,
 				15C762A42016D06B002AA7F8 /* CodeScan.bundle in Resources */,
 				15C762AC2016D06B002AA7F8 /* Assets.xcassets in Resources */,
 				15C764252016EB41002AA7F8 /* GoogleService-Info-Beta.plist in Resources */,
@@ -1267,7 +1236,6 @@
 				15C762422016D011002AA7F8 /* SignalFull@2x.png in Resources */,
 				15C762512016D011002AA7F8 /* Battery@2x.png in Resources */,
 				15C762432016D011002AA7F8 /* SignalFull@3x.png in Resources */,
-				15C762A82016D06B002AA7F8 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
