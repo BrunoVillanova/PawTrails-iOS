@@ -141,7 +141,6 @@
 		15C763E32016D5C0002AA7F8 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C763892016D5C0002AA7F8 /* InitialViewController.swift */; };
 		15C763E42016D5C0002AA7F8 /* EmailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C7638A2016D5C0002AA7F8 /* EmailVerificationViewController.swift */; };
 		15C763E52016D5C0002AA7F8 /* PasswordRecoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C7638B2016D5C0002AA7F8 /* PasswordRecoveryViewController.swift */; };
-		15C763E62016D5C0002AA7F8 /* SocketIOTestTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C7638C2016D5C0002AA7F8 /* SocketIOTestTableViewController.swift */; };
 		15C763E72016D5C0002AA7F8 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C7638D2016D5C0002AA7F8 /* MapViewController.swift */; };
 		15C763E82016D5C0002AA7F8 /* AdventuresListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C7638E2016D5C0002AA7F8 /* AdventuresListViewController.swift */; };
 		15C763E92016D5C0002AA7F8 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C763902016D5C0002AA7F8 /* Date.swift */; };
@@ -388,7 +387,6 @@
 		15C763892016D5C0002AA7F8 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		15C7638A2016D5C0002AA7F8 /* EmailVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailVerificationViewController.swift; sourceTree = "<group>"; };
 		15C7638B2016D5C0002AA7F8 /* PasswordRecoveryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordRecoveryViewController.swift; sourceTree = "<group>"; };
-		15C7638C2016D5C0002AA7F8 /* SocketIOTestTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketIOTestTableViewController.swift; sourceTree = "<group>"; };
 		15C7638D2016D5C0002AA7F8 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		15C7638E2016D5C0002AA7F8 /* AdventuresListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdventuresListViewController.swift; sourceTree = "<group>"; };
 		15C763902016D5C0002AA7F8 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
@@ -534,8 +532,6 @@
 				15C761202016CFF3002AA7F8 /* AppDelegate.swift */,
 				15C7610F2016CFF3002AA7F8 /* DataManager.swift */,
 				15C761102016CFF3002AA7F8 /* EventManager.swift */,
-				15C7611B2016CFF3002AA7F8 /* DataManager+RxSwift.swift */,
-				15C761122016CFF3002AA7F8 /* BEM */,
 				15C7611C2016CFF3002AA7F8 /* Repositories */,
 				15C761212016CFF3002AA7F8 /* Comunication Core */,
 			);
@@ -574,8 +570,6 @@
 				15C761232016CFF3002AA7F8 /* SocketIOManager.swift */,
 				15C761242016CFF3002AA7F8 /* NotificationManager.swift */,
 				15C761252016CFF3002AA7F8 /* APIManager.swift */,
-				15C761262016CFF3002AA7F8 /* PawTrails.xcdatamodeld */,
-				15C761282016CFF3002AA7F8 /* CoreData Properties */,
 				15C761392016CFF3002AA7F8 /* SharedPreferences.swift */,
 			);
 			path = "Comunication Core";
@@ -607,25 +601,24 @@
 		15C7621C2016D011002AA7F8 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
-				15C761BC2016D002002AA7F8 /* SelectPetsVC.swift */,
+				15C761122016CFF3002AA7F8 /* BEM */,
 				15C7621D2016D011002AA7F8 /* PTBalloonImageView */,
-				15C7621F2016D011002AA7F8 /* questionCells.swift */,
-				15C762202016D011002AA7F8 /* PTBubbleView.swift */,
-				15C762212016D011002AA7F8 /* TripScreenXibView.xib */,
 				15C762222016D011002AA7F8 /* PTSignalView */,
+				15C762342016D011002AA7F8 /* PTBatteryView */,
+				15C764292016FAEF002AA7F8 /* PTPetCalloutView */,
+				15C7642A2016FB55002AA7F8 /* Cells */,
+				15C762202016D011002AA7F8 /* PTBubbleView.swift */,
+				15C763B92016D5C0002AA7F8 /* PieChart.swift */,
+				15C762212016D011002AA7F8 /* TripScreenXibView.xib */,
 				15C762282016D011002AA7F8 /* UiimageViewWithMask.swift */,
 				15C7622A2016D011002AA7F8 /* TripXib.xib */,
 				15C7622B2016D011002AA7F8 /* CheckMarkHeader.h */,
 				15C7622C2016D011002AA7F8 /* PTTextField.swift */,
 				15C7622D2016D011002AA7F8 /* PTMapView.swift */,
-				15C7622E2016D011002AA7F8 /* PTPetCalloutView.swift */,
 				15C7622F2016D011002AA7F8 /* PTWideButton.swift */,
-				15C762302016D011002AA7F8 /* PetsCollectionViewCell.swift */,
 				15C762312016D011002AA7F8 /* PawTrailsStyleKit.swift */,
 				15C762322016D011002AA7F8 /* TripView.swift */,
 				15C762332016D011002AA7F8 /* PTBasicAnnotationView.swift */,
-				15C762342016D011002AA7F8 /* PTBatteryView */,
-				15C7623D2016D011002AA7F8 /* PTPetCalloutView.xib */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -682,6 +675,8 @@
 		15C762592016D026002AA7F8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				15C761282016CFF3002AA7F8 /* CoreData Properties */,
+				15C761262016CFF3002AA7F8 /* PawTrails.xcdatamodeld */,
 				15C7625A2016D026002AA7F8 /* Model.swift */,
 				15C7625B2016D026002AA7F8 /* Parsers.swift */,
 			);
@@ -692,12 +687,9 @@
 			isa = PBXGroup;
 			children = (
 				15C7625F2016D045002AA7F8 /* User-Authentication */,
-				15C762662016D045002AA7F8 /* Presenter.swift */,
-				15C762672016D045002AA7F8 /* UserProfilePresenter.swift */,
 				15C762682016D045002AA7F8 /* Pet */,
+				15C762662016D045002AA7F8 /* Presenter.swift */,
 				15C762702016D046002AA7F8 /* HomePresenter.swift */,
-				15C762712016D046002AA7F8 /* PetsPresenter.swift */,
-				15C762722016D046002AA7F8 /* SelectPetView.swift */,
 			);
 			path = Presenters;
 			sourceTree = "<group>";
@@ -705,6 +697,7 @@
 		15C7625F2016D045002AA7F8 /* User-Authentication */ = {
 			isa = PBXGroup;
 			children = (
+				15C762672016D045002AA7F8 /* UserProfilePresenter.swift */,
 				15C762602016D045002AA7F8 /* EditUserProfilePresenter.swift */,
 				15C762612016D045002AA7F8 /* EmailVerificationPresenter.swift */,
 				15C762622016D045002AA7F8 /* ChangePasswordPresenter.swift */,
@@ -718,6 +711,8 @@
 		15C762682016D045002AA7F8 /* Pet */ = {
 			isa = PBXGroup;
 			children = (
+				15C762722016D046002AA7F8 /* SelectPetView.swift */,
+				15C762712016D046002AA7F8 /* PetsPresenter.swift */,
 				15C762692016D046002AA7F8 /* DeviceCodePresenter.swift */,
 				15C7626A2016D046002AA7F8 /* AddEditSafeZonePresenter.swift */,
 				15C7626B2016D046002AA7F8 /* AddPetUserPresenter.swift */,
@@ -762,6 +757,7 @@
 		15C7629D2016D06B002AA7F8 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				15C7611B2016CFF3002AA7F8 /* DataManager+RxSwift.swift */,
 				15C7629E2016D06B002AA7F8 /* ViewExtensions.swift */,
 				15C7629F2016D06B002AA7F8 /* ModelExtensions.swift */,
 				15C762A02016D06B002AA7F8 /* SocketIO+RxSwift.swift */,
@@ -775,47 +771,19 @@
 		15C763702016D5C0002AA7F8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				15C763712016D5C0002AA7F8 /* SignUpViewController.swift */,
-				15C763722016D5C0002AA7F8 /* SharedUsersTableViewCell.swift */,
-				15C763732016D5C0002AA7F8 /* User Profile */,
+				15C7642D2016FDC1002AA7F8 /* Recommendation */,
+				15C7642C2016FCD7002AA7F8 /* User */,
+				15C7642B2016FBA9002AA7F8 /* Adventure */,
+				15C7638F2016D5C0002AA7F8 /* Pets */,
 				15C7637D2016D5C0002AA7F8 /* UsersViewController.swift */,
-				15C7637E2016D5C0002AA7F8 /* ResultFromListViewController.swift */,
 				15C7637F2016D5C0002AA7F8 /* SingleResultViewController.swift */,
 				15C763802016D5C0002AA7F8 /* AboutPawTrails.swift */,
-				15C763812016D5C0002AA7F8 /* BSC4ViewController.swift */,
-				15C763822016D5C0002AA7F8 /* SelectPetForRecommandationController.swift */,
-				15C763832016D5C0002AA7F8 /* ResultViewController.swift */,
-				15C763842016D5C0002AA7F8 /* QuestionsViewController.swift */,
-				15C763852016D5C0002AA7F8 /* CalanderForActivityController.swift */,
-				15C763862016D5C0002AA7F8 /* PetsViewController.swift */,
-				15C763872016D5C0002AA7F8 /* Auth */,
-				15C7638C2016D5C0002AA7F8 /* SocketIOTestTableViewController.swift */,
 				15C7638D2016D5C0002AA7F8 /* MapViewController.swift */,
-				15C7638E2016D5C0002AA7F8 /* AdventuresListViewController.swift */,
-				15C7638F2016D5C0002AA7F8 /* Pet Profile */,
-				15C763A42016D5C0002AA7F8 /* RecommandationController.swift */,
-				15C763A52016D5C0002AA7F8 /* SafeZoneViewController.swift */,
 				15C763A62016D5C0002AA7F8 /* ProfileCollectionViewCell.xib */,
 				15C763A82016D5C0002AA7F8 /* ProfileCollectionViewCell.swift */,
-				15C763AA2016D5C0002AA7F8 /* TripScreenViewController.swift */,
-				15C763AB2016D5C0002AA7F8 /* SelectPetsCell.swift */,
-				15C763AC2016D5C0002AA7F8 /* JoinTripVC.swift */,
-				15C763AD2016D5C0002AA7F8 /* NoViewController.swift */,
-				15C763AE2016D5C0002AA7F8 /* PetInfromationViewController.swift */,
-				15C763AF2016D5C0002AA7F8 /* Tutorials */,
 				15C763B62016D5C0002AA7F8 /* TabPageViewController.swift */,
-				15C763B72016D5C0002AA7F8 /* SharedUsersTableViewCell.xib */,
-				15C763B82016D5C0002AA7F8 /* YesViewController.swift */,
-				15C763B92016D5C0002AA7F8 /* PieChart.swift */,
 				15C763BA2016D5C0002AA7F8 /* PrivacyViewController.swift */,
 				15C763BB2016D5C0002AA7F8 /* MainTabBarViewController.swift */,
-				15C763BC2016D5C0002AA7F8 /* Add:Edit Pet */,
-				15C763C82016D5C0002AA7F8 /* UserProfileTableViewController.swift */,
-				15C763C92016D5C0002AA7F8 /* QRCodeScannerViewController.swift */,
-				15C763CA2016D5C0002AA7F8 /* FinishAdventureVC.swift */,
-				15C763CB2016D5C0002AA7F8 /* GoalsViewController.swift */,
-				15C763CC2016D5C0002AA7F8 /* BCS3ViewController.swift */,
-				15C763CD2016D5C0002AA7F8 /* SetUpYourGoalController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -854,16 +822,20 @@
 			path = Auth;
 			sourceTree = "<group>";
 		};
-		15C7638F2016D5C0002AA7F8 /* Pet Profile */ = {
+		15C7638F2016D5C0002AA7F8 /* Pets */ = {
 			isa = PBXGroup;
 			children = (
+				15C763BC2016D5C0002AA7F8 /* Add:Edit Pet */,
+				15C763AF2016D5C0002AA7F8 /* Add Device Tutorial */,
+				15C763912016D5C0002AA7F8 /* Pet SafeZones */,
+				15C7639B2016D5C0002AA7F8 /* Pet Shared Users */,
+				15C763AE2016D5C0002AA7F8 /* PetInfromationViewController.swift */,
+				15C763862016D5C0002AA7F8 /* PetsViewController.swift */,
 				15C7641F2016E794002AA7F8 /* AddPetUserViewController.swift */,
 				15C763902016D5C0002AA7F8 /* Date.swift */,
-				15C763912016D5C0002AA7F8 /* Pet SafeZones */,
 				15C763972016D5C0002AA7F8 /* AirbnbDatePickerFlowLayout.swift */,
 				15C763982016D5C0002AA7F8 /* AirbnbDatePickerMonthHeader.swift */,
 				15C763992016D5C0002AA7F8 /* AirbnbDatePickerFooter.swift */,
-				15C7639B2016D5C0002AA7F8 /* Pet Shared Users */,
 				15C7639E2016D5C0002AA7F8 /* AirbnbDatePickerViewController.swift */,
 				15C7639F2016D5C0002AA7F8 /* Utility.swift */,
 				15C763A02016D5C0002AA7F8 /* BaseCell.swift */,
@@ -871,7 +843,7 @@
 				15C763A22016D5C0002AA7F8 /* AirbnbDatePickerHeader.swift */,
 				15C763A32016D5C0002AA7F8 /* AirbnbDatePickerCell.swift */,
 			);
-			path = "Pet Profile";
+			path = Pets;
 			sourceTree = "<group>";
 		};
 		15C763912016D5C0002AA7F8 /* Pet SafeZones */ = {
@@ -894,9 +866,10 @@
 			path = "Pet Shared Users";
 			sourceTree = "<group>";
 		};
-		15C763AF2016D5C0002AA7F8 /* Tutorials */ = {
+		15C763AF2016D5C0002AA7F8 /* Add Device Tutorial */ = {
 			isa = PBXGroup;
 			children = (
+				15C763C92016D5C0002AA7F8 /* QRCodeScannerViewController.swift */,
 				15C763B02016D5C0002AA7F8 /* StepThreeViewController.swift */,
 				15C763B12016D5C0002AA7F8 /* SignUpYourDeviceVC.swift */,
 				15C763B22016D5C0002AA7F8 /* StepOneViewController.swift */,
@@ -904,7 +877,7 @@
 				15C763B42016D5C0002AA7F8 /* StepTwoViewController.swift */,
 				15C763B52016D5C0002AA7F8 /* SuccessViewController.swift */,
 			);
-			path = Tutorials;
+			path = "Add Device Tutorial";
 			sourceTree = "<group>";
 		};
 		15C763BC2016D5C0002AA7F8 /* Add:Edit Pet */ = {
@@ -940,6 +913,70 @@
 				15C764242016EB41002AA7F8 /* GoogleService-Info-Debug.plist */,
 			);
 			path = ConfigFiles;
+			sourceTree = "<group>";
+		};
+		15C764292016FAEF002AA7F8 /* PTPetCalloutView */ = {
+			isa = PBXGroup;
+			children = (
+				15C7622E2016D011002AA7F8 /* PTPetCalloutView.swift */,
+				15C7623D2016D011002AA7F8 /* PTPetCalloutView.xib */,
+			);
+			path = PTPetCalloutView;
+			sourceTree = "<group>";
+		};
+		15C7642A2016FB55002AA7F8 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				15C763722016D5C0002AA7F8 /* SharedUsersTableViewCell.swift */,
+				15C763B72016D5C0002AA7F8 /* SharedUsersTableViewCell.xib */,
+				15C763AB2016D5C0002AA7F8 /* SelectPetsCell.swift */,
+				15C7621F2016D011002AA7F8 /* questionCells.swift */,
+				15C762302016D011002AA7F8 /* PetsCollectionViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		15C7642B2016FBA9002AA7F8 /* Adventure */ = {
+			isa = PBXGroup;
+			children = (
+				15C763852016D5C0002AA7F8 /* CalanderForActivityController.swift */,
+				15C763A52016D5C0002AA7F8 /* SafeZoneViewController.swift */,
+				15C763CB2016D5C0002AA7F8 /* GoalsViewController.swift */,
+				15C763CD2016D5C0002AA7F8 /* SetUpYourGoalController.swift */,
+				15C763CA2016D5C0002AA7F8 /* FinishAdventureVC.swift */,
+				15C763AA2016D5C0002AA7F8 /* TripScreenViewController.swift */,
+				15C7638E2016D5C0002AA7F8 /* AdventuresListViewController.swift */,
+				15C761BC2016D002002AA7F8 /* SelectPetsVC.swift */,
+				15C763AC2016D5C0002AA7F8 /* JoinTripVC.swift */,
+			);
+			path = Adventure;
+			sourceTree = "<group>";
+		};
+		15C7642C2016FCD7002AA7F8 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				15C763872016D5C0002AA7F8 /* Auth */,
+				15C763732016D5C0002AA7F8 /* User Profile */,
+				15C763C82016D5C0002AA7F8 /* UserProfileTableViewController.swift */,
+				15C763712016D5C0002AA7F8 /* SignUpViewController.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		15C7642D2016FDC1002AA7F8 /* Recommendation */ = {
+			isa = PBXGroup;
+			children = (
+				15C763842016D5C0002AA7F8 /* QuestionsViewController.swift */,
+				15C7637E2016D5C0002AA7F8 /* ResultFromListViewController.swift */,
+				15C763812016D5C0002AA7F8 /* BSC4ViewController.swift */,
+				15C763CC2016D5C0002AA7F8 /* BCS3ViewController.swift */,
+				15C763AD2016D5C0002AA7F8 /* NoViewController.swift */,
+				15C763B82016D5C0002AA7F8 /* YesViewController.swift */,
+				15C763822016D5C0002AA7F8 /* SelectPetForRecommandationController.swift */,
+				15C763832016D5C0002AA7F8 /* ResultViewController.swift */,
+				15C763A42016D5C0002AA7F8 /* RecommandationController.swift */,
+			);
+			path = Recommendation;
 			sourceTree = "<group>";
 		};
 		4414AE691EA0DD5B004A5134 /* PawTrailsTests */ = {
@@ -1495,7 +1532,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				15C763E62016D5C0002AA7F8 /* SocketIOTestTableViewController.swift in Sources */,
 				15C7613B2016CFF3002AA7F8 /* EventManager.swift in Sources */,
 				15C763DB2016D5C0002AA7F8 /* AboutPawTrails.swift in Sources */,
 				15C7641C2016D5C0002AA7F8 /* GoalsViewController.swift in Sources */,
