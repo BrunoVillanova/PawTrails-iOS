@@ -783,14 +783,15 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		15C763732016D5C0002AA7F8 /* User Profile */ = {
+		15C763732016D5C0002AA7F8 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				15C763C82016D5C0002AA7F8 /* UserProfileTableViewController.swift */,
 				15C763742016D5C0002AA7F8 /* ChangePasswordTableViewController.swift */,
 				15C763752016D5C0002AA7F8 /* EditUserProfileTableViewController.swift */,
 				15C763762016D5C0002AA7F8 /* User Details */,
 			);
-			path = "User Profile";
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		15C763762016D5C0002AA7F8 /* User Details */ = {
@@ -809,6 +810,7 @@
 		15C763872016D5C0002AA7F8 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				15C763712016D5C0002AA7F8 /* SignUpViewController.swift */,
 				15C763882016D5C0002AA7F8 /* SettingsTableViewController.swift */,
 				15C763892016D5C0002AA7F8 /* InitialViewController.swift */,
 				15C7638A2016D5C0002AA7F8 /* EmailVerificationViewController.swift */,
@@ -953,9 +955,7 @@
 			isa = PBXGroup;
 			children = (
 				15C763872016D5C0002AA7F8 /* Auth */,
-				15C763732016D5C0002AA7F8 /* User Profile */,
-				15C763C82016D5C0002AA7F8 /* UserProfileTableViewController.swift */,
-				15C763712016D5C0002AA7F8 /* SignUpViewController.swift */,
+				15C763732016D5C0002AA7F8 /* Profile */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -1131,8 +1131,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4415FF671E3B822A00A81B13 /* Build configuration list for PBXNativeTarget "PawTrails" */;
 			buildPhases = (
-				158546971FDCF342004C82EC /* [BNV] Build Bump */,
 				61379AC374253DF712E5F31A /* [CP] Check Pods Manifest.lock */,
+				158546971FDCF342004C82EC /* [BNV] Build Bump */,
 				4415FF3B1E3B822900A81B13 /* Sources */,
 				4415FF3C1E3B822900A81B13 /* Frameworks */,
 				4415FF3D1E3B822900A81B13 /* Resources */,
@@ -1374,7 +1374,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-PawTrails/Pods-PawTrails-resources.sh",
-				$PODS_CONFIGURATION_BUILD_DIR/HockeySDK/HockeySDKResources.bundle,
+				"$PODS_CONFIGURATION_BUILD_DIR/HockeySDK/HockeySDKResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -1454,7 +1454,6 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-PawTrails/Pods-PawTrails-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/BarcodeScanner/BarcodeScanner.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFInternationalization/MDFInternationalization.framework",
@@ -1474,7 +1473,6 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BarcodeScanner.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFInternationalization.framework",
