@@ -196,9 +196,6 @@
 		15C7641D2016D5C0002AA7F8 /* BCS3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C763CC2016D5C0002AA7F8 /* BCS3ViewController.swift */; };
 		15C7641E2016D5C0002AA7F8 /* SetUpYourGoalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C763CD2016D5C0002AA7F8 /* SetUpYourGoalController.swift */; };
 		15C764202016E794002AA7F8 /* AddPetUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C7641F2016E794002AA7F8 /* AddPetUserViewController.swift */; };
-		15C764252016EB41002AA7F8 /* GoogleService-Info-Beta.plist in Resources */ = {isa = PBXBuildFile; fileRef = 15C764222016EB41002AA7F8 /* GoogleService-Info-Beta.plist */; };
-		15C764262016EB41002AA7F8 /* GoogleService-Info-Release.plist in Resources */ = {isa = PBXBuildFile; fileRef = 15C764232016EB41002AA7F8 /* GoogleService-Info-Release.plist */; };
-		15C764272016EB41002AA7F8 /* GoogleService-Info-Debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = 15C764242016EB41002AA7F8 /* GoogleService-Info-Debug.plist */; };
 		15C90DAE1FE36E6E008F73B3 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C90DAD1FE36E6D008F73B3 /* HockeySDK.framework */; };
 		15C90DB11FE36F56008F73B3 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C90DAF1FE36F55008F73B3 /* Fabric.framework */; };
 		15C90DB21FE36F56008F73B3 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C90DB01FE36F56008F73B3 /* Crashlytics.framework */; };
@@ -779,8 +776,6 @@
 				15C7637F2016D5C0002AA7F8 /* SingleResultViewController.swift */,
 				15C763802016D5C0002AA7F8 /* AboutPawTrails.swift */,
 				15C7638D2016D5C0002AA7F8 /* MapViewController.swift */,
-				15C763A62016D5C0002AA7F8 /* ProfileCollectionViewCell.xib */,
-				15C763A82016D5C0002AA7F8 /* ProfileCollectionViewCell.swift */,
 				15C763B62016D5C0002AA7F8 /* TabPageViewController.swift */,
 				15C763BA2016D5C0002AA7F8 /* PrivacyViewController.swift */,
 				15C763BB2016D5C0002AA7F8 /* MainTabBarViewController.swift */,
@@ -927,6 +922,8 @@
 		15C7642A2016FB55002AA7F8 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				15C763A62016D5C0002AA7F8 /* ProfileCollectionViewCell.xib */,
+				15C763A82016D5C0002AA7F8 /* ProfileCollectionViewCell.swift */,
 				15C763722016D5C0002AA7F8 /* SharedUsersTableViewCell.swift */,
 				15C763B72016D5C0002AA7F8 /* SharedUsersTableViewCell.xib */,
 				15C763AB2016D5C0002AA7F8 /* SelectPetsCell.swift */,
@@ -1253,11 +1250,9 @@
 			files = (
 				15C762442016D011002AA7F8 /* SignalFull@1x.png in Resources */,
 				15C7640A2016D5C0002AA7F8 /* SharedUsersTableViewCell.xib in Resources */,
-				15C764262016EB41002AA7F8 /* GoogleService-Info-Release.plist in Resources */,
 				15C762412016D011002AA7F8 /* TripScreenXibView.xib in Resources */,
 				15C762A42016D06B002AA7F8 /* CodeScan.bundle in Resources */,
 				15C762AC2016D06B002AA7F8 /* Assets.xcassets in Resources */,
-				15C764252016EB41002AA7F8 /* GoogleService-Info-Beta.plist in Resources */,
 				15C762562016D011002AA7F8 /* Battery@1x.png in Resources */,
 				15C763EB2016D5C0002AA7F8 /* SettingsView.xib in Resources */,
 				15C762582016D011002AA7F8 /* PTPetCalloutView.xib in Resources */,
@@ -1265,7 +1260,6 @@
 				15C762482016D011002AA7F8 /* TripXib.xib in Resources */,
 				15C761F92016D002002AA7F8 /* Main.storyboard in Resources */,
 				15C762AE2016D06B002AA7F8 /* countrycodes.csv in Resources */,
-				15C764272016EB41002AA7F8 /* GoogleService-Info-Debug.plist in Resources */,
 				15C762522016D011002AA7F8 /* BatteryLow@1x.png in Resources */,
 				15C762542016D011002AA7F8 /* BatteryLow@3x.png in Resources */,
 				15C762532016D011002AA7F8 /* Battery@3x.png in Resources */,
@@ -1810,10 +1804,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/PawTrails",
-					"$(PROJECT_DIR)/PawTrails/Assets/Google",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)/Frameworks",
-					"$(PROJECT_DIR)/PawTrails/Resources/Google",
 				);
 				GOOGLE_SERVICES_PLIST_DIR = "${SRCROOT}/PawTrails/Resources/ConfigFiles";
 				GOOGLE_SERVICES_PLIST_FILE = "${GOOGLE_SERVICES_PLIST_DIR}/GoogleService-Info-${CONFIGURATION}.plist";
@@ -2110,10 +2102,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/PawTrails",
-					"$(PROJECT_DIR)/PawTrails/Assets/Google",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)/Frameworks",
-					"$(PROJECT_DIR)/PawTrails/Resources/Google",
 				);
 				GOOGLE_SERVICES_PLIST_DIR = "${SRCROOT}/PawTrails/Resources/ConfigFiles";
 				GOOGLE_SERVICES_PLIST_FILE = "${GOOGLE_SERVICES_PLIST_DIR}/GoogleService-Info-${CONFIGURATION}.plist";
@@ -2151,10 +2141,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/PawTrails",
-					"$(PROJECT_DIR)/PawTrails/Assets/Google",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)/Frameworks",
-					"$(PROJECT_DIR)/PawTrails/Resources/Google",
 				);
 				GOOGLE_SERVICES_PLIST_DIR = "${SRCROOT}/PawTrails/Resources/ConfigFiles";
 				GOOGLE_SERVICES_PLIST_FILE = "${GOOGLE_SERVICES_PLIST_DIR}/GoogleService-Info-${CONFIGURATION}.plist";
