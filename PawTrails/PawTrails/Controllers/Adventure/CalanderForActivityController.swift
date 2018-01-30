@@ -18,9 +18,11 @@ class CalanderForActivityController: UIViewController {
      var delegate: DateDelegate?
      var date: Date?
     
+    var parentController: EditUserProfileTableViewController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        datePicker.maximumDate = date
+
     }
 
     @IBAction func doneBtnPressed(_ sender: Any) {

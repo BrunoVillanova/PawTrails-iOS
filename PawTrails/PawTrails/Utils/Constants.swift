@@ -11,7 +11,7 @@ import Foundation
 #if DEBUG
 let isDebug = true
 #else
-let isDebug = false
+let isDebug = true
 #endif
 
 public struct ezdebug {
@@ -46,22 +46,22 @@ struct Constants {
     static let testUserEmailStaging = "ios@test.com"
     static let testUserPasswordStaging = "iOStest12345"
     
-//    #if DEBUG
-//    static let apiURL = apiURLStaging
-//    static let apiURLTest = apiURLTestStaging
-//    static let socketURL = socketURLStaging
-//    static let socketURLSSL = socketURLSSLStaging
-//    #else
-//    static let apiURL = apiURLProduction
-//    static let apiURLTest = apiURLTestProduction
-//    static let socketURL = socketURLProduction
-//    static let socketURLSSL = socketURLSSLProduction
-//    #endif
-
+    #if DEBUG
+    static let apiURL = apiURLStaging
+    static let apiURLTest = apiURLTestStaging
+    static let socketURL = socketURLStaging
+    static let socketURLSSL = socketURLSSLStaging
+    #else
     static let apiURL = apiURLProduction
     static let apiURLTest = apiURLTestProduction
     static let socketURL = socketURLProduction
     static let socketURLSSL = socketURLSSLProduction
+    #endif
+
+//    static let apiURL = apiURLProduction
+//    static let apiURLTest = apiURLTestProduction
+//    static let socketURL = socketURLProduction
+//    static let socketURLSSL = socketURLSSLProduction
     
     static var testUserEmail: String {
         get {

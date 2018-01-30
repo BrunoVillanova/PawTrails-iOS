@@ -179,6 +179,13 @@ class DataManager: NSObject {
     /// - Returns: bool value to verify the operation was complete successfully.
     func signOut() -> Bool {
 //        CoreDataManager.instance.deleteAll()
+        APIRepository.instance.logout { (error) in
+            if error == nil {
+                print("Logged out successfuly")
+            } else if let error = error {
+                print(error.localizedDescription)
+            }
+        }
         let response = SharedPreferences.remove(.id) && SharedPreferences.remove(.token)
         SocketIOManager.instance.disconnect()
         return response

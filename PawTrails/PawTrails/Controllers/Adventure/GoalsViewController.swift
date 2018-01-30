@@ -13,6 +13,7 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
   
     @IBAction func dateBtnPressed(_ sender: Any) {
         self.performSegue(withIdentifier: "showCalender", sender: self)
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -191,9 +192,8 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
                     self.lively = lively
                     self.chiling = chilling
                     self.wandering = wandering
-                
-                    
-                        self.pieChartUpdate(firstvalue: totalChiling, secondValue: totalWandering, thirdValue: totalLively)
+    
+                    self.pieChartUpdate(firstvalue: totalChiling, secondValue: totalWandering, thirdValue: totalLively)
                     self.combinedChartView(myxaxis: self.periodsOfDay, lively: lively, chiling: chilling, wandering: wandering, chart: self.combinedCharts, symbol: "hrs")
                    
                 } else {

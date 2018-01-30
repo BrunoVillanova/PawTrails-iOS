@@ -219,6 +219,7 @@ struct DeviceData {
     var deviceTime: Int64
 }
 
+
 struct PetDeviceData {
     var id: Int
     var deviceData: DeviceData
