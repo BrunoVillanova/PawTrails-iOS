@@ -11,6 +11,8 @@ import Foundation
 protocol AddEditPetView: NSObjectProtocol, View, LoadingView {
     func loadPet()
     func doneSuccessfully()
+    func codeChanged()
+
 }
 
 class AddEditPetPresenter {
@@ -104,6 +106,17 @@ class AddEditPetPresenter {
                     self.view?.doneSuccessfully()
                 }
             })
+        }
+    }
+    
+    func change(_ code:String, to petId: Int){
+        
+        DataManager.instance.change(code, of: petId) { (error) in
+            if let error = error {
+                self.view?.errorMessage(error.msg)
+            }else{
+                self.view?.codeChanged()
+            }
         }
     }
 }

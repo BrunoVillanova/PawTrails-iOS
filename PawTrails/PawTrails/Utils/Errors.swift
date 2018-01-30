@@ -97,9 +97,9 @@ enum ErrorCode: Int {
     case TheIdInTheInputArrayMustBeAnInteger = 76
     case RequiredPetSize = 99
 
-//    init(code:Int) {
-//        self = ErrorCode(rawValue: code) ?? ErrorCode.Unknown
-//    }
+    init(code:Int) {
+        self = ErrorCode(rawValue: code) ?? ErrorCode.Unknown
+    }
 //
     var description: String {
         switch self {
@@ -128,19 +128,19 @@ enum ErrorCode: Int {
         case .WeakPassword:
             return "Weak Passsword (Needs to contain 6 characters, one upper case, one lower case and one number)"
         case .UserAlreadyExists:
-            return "Another account is using this email. "
+            return "Another account is already using this email. "
         case .UserDisabled:
             return "Account Disabled, Please Contact Us."
 
         case .DateOfBirth:
-            return "Error, please try again later"
+            return "Error. Please try again later"
 
         case .GenderFormat:
-            return "Error, please try again later"
+            return "Error. Please try again later"
         case .PhoneFormat:
-            return "Error, please try again later"
+            return "Error. Please try again later"
         case .UserNotFound:
-            return "Error, please try again later"
+            return "Error. Please try again later"
         case .WrongPassword:
             return "Incorrect password. "
         case .WrongCredentials:
@@ -168,29 +168,29 @@ enum ErrorCode: Int {
             return "No Gps updates from your pet"
 
         case .PathFormat:
-            return "Error, please try again later"
+            return "Error. Please try again later"
 
         case .MissingUserId:
-            return "Error, please try again later"
+            return "Error. Please try again later"
 
         case .MissingPetId:
-            return "Error, please try again later"
+            return "Error. Please try again later"
 
         case .MissingImageFile:
-            return "Error, please try again later"
+            return "Error. Please try again later"
 
         case .IncorrectImageMime:
-            return "Error, please try again later"
+            return "Error. Please try again later"
 
         case .ImageFileSize:
             return "The image is too big , the picture size limit is 2MB."
         case .UploadFailed:
-            return "Error, please try again later"
+            return "Error. Please try again later"
 
         case .DeviceIdNotFound:
             return "This device ID is not available."
         case .WrongBreed:
-            return "Error, please try again later"
+            return "Error, Please try again later"
 
         case .MissingPetName:
             return "Pet's name is mandatory."
@@ -206,18 +206,18 @@ enum ErrorCode: Int {
             return "You have no permissions to proceed with your request"
 
         case .MissingRelationUserPet:
-            return "Error, please try again later"
+            return "Error. Please try again later"
 
         case .MissingSafeZoneName:
             return "Safe Zone name is mandatory."
         case .WrongShapeFormat:
-            return "Error, please try again later"
+            return "Error. Please try again later"
 
         case .CoordinatesOutOfBounds:
-            return "Error, please try again later"
+            return "Error. Please try again later"
 
         case .SafeZoneNotFound:
-            return "Error, please try again later"
+            return "Error. Please try again later"
 
         case .WrongRadius:
             return "Safe Zone radius is too small."
@@ -228,16 +228,15 @@ enum ErrorCode: Int {
             return "The pet/pets already is in a trip with anoter user"
 
         case .TheTripIsPaused:
-            return "Error, please try again later"
+            return "Error. Please try again later"
 
         case .TheIdInTheInputArrayMustBeAnInteger:
-            return "Error, please try again later"
+            return "Error. Please try again later"
 
         case .RequiredPetSize:
             return "Pet size is required"
         
         }
-//        return "error \(self.rawValue):\(self)"
     }
 
 }

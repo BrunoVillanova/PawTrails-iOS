@@ -41,6 +41,7 @@ extension MKMapView {
         self.setRegion(check(region: coordinateRegion), animated: animated)
     }
     
+    
     func check(region: MKCoordinateRegion) -> MKCoordinateRegion {
         var region = region
         if region.span.latitudeDelta > 180 { region.span.latitudeDelta = 180 }

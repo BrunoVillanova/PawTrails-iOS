@@ -38,7 +38,6 @@ extension CDPet {
     @NSManaged public var size: Int16
 
 
-
 }
 
 // MARK: Generated accessors for safezones

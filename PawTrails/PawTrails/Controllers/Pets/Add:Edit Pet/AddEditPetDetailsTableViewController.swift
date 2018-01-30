@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import GSMessages
+
 
 class AddEditPetDetailsTableViewController: UITableViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, AddEditPetView {
     
     fileprivate var headerView: UIView!
     
+    @IBOutlet weak var changeDeviceId: UIButton!
     @IBOutlet weak var petImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
@@ -48,6 +51,43 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
         //        doneSuccessfully()
     }
     
+    @IBAction func changeDeviceIdBtnPressed(_ sender: Any) {
+        
+        QRCodeScannerViewController.authorizeCameraWith {[weak self](granted) in
+            if granted, let strongSelf = self {
+                let vc = QRCodeScannerViewController();
+                vc.delegate = strongSelf;
+                
+                // Hide the status bar
+//                strongSelf.statusBarShouldBeHidden = true
+                UIView.animate(withDuration: 0.25) {
+                    strongSelf.setNeedsStatusBarAppearanceUpdate()
+                }
+                
+                let navigationController = UINavigationController.init(rootViewController: vc)
+                navigationController.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+                navigationController.navigationBar.shadowImage = UIImage()
+                navigationController.navigationBar.isTranslucent = true
+                navigationController.navigationBar.backgroundColor = UIColor.clear
+                navigationController.navigationBar.tintColor = UIColor.white
+                
+                let barButtonItem = UIBarButtonItem.init(title: "Close", style: UIBarButtonItemStyle.plain, target:strongSelf, action: #selector(strongSelf.closeScannerViewController))
+                
+                vc.navigationItem.setRightBarButton(barButtonItem, animated: true)
+                
+                strongSelf.present(navigationController, animated: true, completion: {
+                    
+                })
+            }
+        }
+    }
+    
+    @objc fileprivate func closeScannerViewController() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
     @IBAction func neuteredValueChanged(_ sender: UISwitch) {
         presenter.pet.neutered = sender.isOn
     }
@@ -62,7 +102,7 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
         }
     }
     
-    //MARK: - AddEditPetView
+    //MARK: - AddEditPetViewi l
     
     func loadPet() {
         if let imageData = presenter.imageData {
@@ -92,6 +132,23 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
         tableView.reloadData()
     }
     
+    func codeChanged() {
+        self.dismiss(animated: true, completion: nil)
+        self.showMessage("The Pet Device ID Has Been Changed Successfully", type: GSMessageType.info,  options: [
+            .animation(.slide),
+            .animationDuration(0.3),
+            .autoHide(false),
+            .cornerRadius(0.0),
+            .height(44.0),
+            .hideOnTap(false),
+            //                .margin(.init(top: 64, left: 0, bottom: 0, right: 0)),
+            //                .padding(.zero),
+            .position(.top),
+            .textAlignment(.center),
+            .textNumberOfLines(0),
+            ])
+        
+    }
     
     func doneSuccessfully() {
         
@@ -177,4 +234,25 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
         }
     }
     
+    fileprivate func goToNextStep(deviceCode: String) {
+        guard let petid = self.pet?.id else {return}
+        self.presenter.change(deviceCode, to: petid)
+    }
 }
+
+
+extension AddEditPetDetailsTableViewController: QRCodeScannerViewControllerDelegate {
+    
+    func scanFinished(qrCodeScannerViewController: UIViewController, scanResult: String?, error: String?){
+        
+        if let error = error {
+            self.alert(title: "=(", msg: error)
+        } else if let scanResult = scanResult, qrCodeScannerViewController.presentingViewController != nil {
+            qrCodeScannerViewController.dismiss(animated: true, completion: {
+                self.goToNextStep(deviceCode: scanResult)
+            })
+        }
+    }
+    
+}
+

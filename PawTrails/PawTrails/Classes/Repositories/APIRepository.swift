@@ -734,6 +734,7 @@ class APIRepository {
     }
     
     func logout(callback: @escaping APIRepErrorCallback) {
+     
         APIManager.instance.perform(call: .logout) { (error, json) in
             if error == nil {
                 callback(nil)
