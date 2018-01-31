@@ -61,6 +61,21 @@ class PhoneTableViewController: UITableViewController, UIPickerViewDataSource, U
         self.selectedCC = parentEditor.CountryCodes[row]
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
+    {
+        if textField == numberTextField {
+            let str = (NSString(string: textField.text!)).replacingCharacters(in: range, with: string)
+            if str.count <= 20 {
+                return true
+            }
+            textField.text = str.substring(to: str.index(str.startIndex, offsetBy: 20))
+            return false
+        }
+        return true
+    }
+    
+    
+    
     // MARK: - UIPickerViewDataSource
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

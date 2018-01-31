@@ -352,7 +352,6 @@ extension DeviceData {
         } else {
             deviceTime = 0
         }
-        
             deviceDate = Date.init(timeIntervalSince1970: TimeInterval(json["deviceTime"] as? Int ?? 0))
     }
     
