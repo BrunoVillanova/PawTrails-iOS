@@ -37,6 +37,7 @@ struct APIManagerError: Error {
 
 enum ErrorCode: Int {
     
+    
     case Unknown = -1
     case NotFound = -2
     case NoConection = -3

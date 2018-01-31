@@ -29,8 +29,8 @@ class PetUserPresenter {
         view?.beginLoadingContent()
         DataManager.instance.removePet(id) { (error) in
             self.view?.endLoadingContent()
-            if let error = error {
-                self.view?.errorMessage(error.msg)
+            if error != nil {
+                    self.view?.removed()
             }else{
                 self.view?.removed()
             }

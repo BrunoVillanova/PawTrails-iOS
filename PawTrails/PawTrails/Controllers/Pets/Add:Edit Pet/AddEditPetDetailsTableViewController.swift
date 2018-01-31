@@ -33,6 +33,13 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if pet != nil {
+            self.changeDeviceId.isHidden = false
+        } else {
+            self.changeDeviceId.isHidden = true
+        }
+        
         if let name = pet?.name {
             navigationItem.title = "Edit \(name)"
         }
