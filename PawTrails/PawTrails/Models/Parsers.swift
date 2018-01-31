@@ -346,8 +346,14 @@ extension DeviceData {
         battery = json["battery"] as! Int16
         internetSignal = json["netSignal"] as! Int16
         satelliteSignal = json["satSignal"] as! Int16
-        deviceTime = json["deviceTime"] as! Int64
-        deviceDate = Date.init(timeIntervalSince1970: TimeInterval(json["deviceTime"] as! Int))
+        
+        if let deviceTime = json["deviceTime"] as? Int64 {
+            self.deviceTime = deviceTime
+        } else {
+            deviceTime = 0
+        }
+        
+            deviceDate = Date.init(timeIntervalSince1970: TimeInterval(json["deviceTime"] as? Int ?? 0))
     }
     
     init(_ cdPetDeviceData: CDPetDeviceData) {

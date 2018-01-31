@@ -98,9 +98,8 @@ enum ErrorCode: Int {
     case RequiredPetSize = 99
 
     init(code:Int) {
-        self = ErrorCode(rawValue: code) ?? ErrorCode.Unknown
-    }
-//
+       self = ErrorCode(rawValue: code) ?? ErrorCode.Unknown
+   }
     var description: String {
         switch self {
         case .Unknown:
@@ -286,7 +285,7 @@ struct DataManagerError: Error {
     
     var localizedDescription: String {
         var out = ""
-        if let call = APIError?.call { out = out.appending("\(call) ")}
+        if (APIError?.call) != nil { out = out.appending("")}
         if let errorCode = APIError?.errorCode?.description { out = out.appending("\(errorCode)")}
         if let responseError = responseError { out = out.appending("\(responseError)") }
         if let DBError = DBError { out = out.appending("\(DBError.localizedDescription)") }

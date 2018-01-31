@@ -155,13 +155,15 @@
                                         <fragment content="By Tapping “Sign up now”, you agree to the">
                                             <attributes>
                                                 <color key="NSColor" red="0.19586770304568524" green="0.041086188488294706" blue="0.070621953063953011" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <font key="NSFont" metaFont="cellTitle"/>
+                                                <font key="NSFont" size="12" name=".AppleSystemUIFont"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                             </attributes>
                                         </fragment>
                                         <fragment content=" terms &amp; conditions">
                                             <attributes>
                                                 <color key="NSColor" red="0.83137254900000002" green="0.078431372550000003" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                <font key="NSFont" metaFont="cellTitle"/>
+                                                <font key="NSFont" size="12" name=".AppleSystemUIFont"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                             </attributes>
                                         </fragment>
                                     </attributedString>
@@ -5342,14 +5344,14 @@ PawTrails is a product created by Attitude Technologies.
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dgo-VO-TEK">
-                                                    <rect key="frame" x="16" y="8.5" width="40.5" height="18"/>
+                                                    <rect key="frame" x="16" y="9" width="40" height="18"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cfc-JD-qoD">
-                                                    <rect key="frame" x="16" y="29" width="4.5" height="20.5"/>
+                                                    <rect key="frame" x="16" y="29" width="4" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
@@ -5366,14 +5368,14 @@ PawTrails is a product created by Attitude Technologies.
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Surname" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PQ2-Kh-Jzz">
-                                                    <rect key="frame" x="16" y="8.5" width="61.5" height="18"/>
+                                                    <rect key="frame" x="16" y="9" width="61" height="18"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HTq-Te-Y1N">
-                                                    <rect key="frame" x="16" y="29" width="4.5" height="20.5"/>
+                                                    <rect key="frame" x="16" y="29" width="4" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
@@ -5390,14 +5392,14 @@ PawTrails is a product created by Attitude Technologies.
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DBs-sf-JLZ">
-                                                    <rect key="frame" x="16" y="8.5" width="37" height="18"/>
+                                                    <rect key="frame" x="16" y="9" width="37" height="18"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="B3b-XZ-eA4">
-                                                    <rect key="frame" x="16" y="29" width="4.5" height="20.5"/>
+                                                    <rect key="frame" x="16" y="29" width="4" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
@@ -5603,17 +5605,17 @@ PawTrails is a product created by Attitude Technologies.
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pawtrails-logo-1x-png" translatesAutoresizingMaskIntoConstraints="NO" id="ILA-mU-fYT">
-                                <rect key="frame" x="80" y="158" width="80" height="50"/>
+                                <rect key="frame" x="80" y="114" width="80" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="MZO-Kh-6x2"/>
                                     <constraint firstAttribute="width" constant="80" id="mkI-L3-sDP"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sunbeam-logo-1x-png-nobg" translatesAutoresizingMaskIntoConstraints="NO" id="FeI-1n-QoM">
-                                <rect key="frame" x="166" y="158" width="144" height="50"/>
+                                <rect key="frame" x="166" y="114" width="144" height="50"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rFc-dO-isr">
-                                <rect key="frame" x="0.0" y="106" width="375" height="455"/>
+                                <rect key="frame" x="0.0" y="57" width="375" height="553"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="g72-ZG-vyw">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="61"/>
@@ -5700,7 +5702,7 @@ PawTrails is a product created by Attitude Technologies.
                                 </prototypes>
                             </tableView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wMi-oC-V8K">
-                                <rect key="frame" x="-4" y="218" width="383" height="449"/>
+                                <rect key="frame" x="-4" y="174" width="383" height="493"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PawTrails worked with a veterinary surgeon from Sunbeam Veterinary clinic to give our customers professional recommendation." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q4u-vi-c5L">
                                         <rect key="frame" x="20" y="20" width="343" height="100"/>
@@ -6932,8 +6934,8 @@ your product.</string>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please keep your device outdoor untill all setup" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7rt-TC-JPf">
-                                <rect key="frame" x="36" y="81" width="304" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please keep your device outdoors untill setup is complete" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7rt-TC-JPf">
+                                <rect key="frame" x="16" y="81" width="343" height="33.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -6962,6 +6964,7 @@ your product.</string>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="0Md-Jw-V4c" secondAttribute="trailing" id="BMv-7J-JEV"/>
+                            <constraint firstItem="7rt-TC-JPf" firstAttribute="leading" secondItem="9TN-NQ-SZE" secondAttribute="leading" constant="16" id="Bky-T9-b9t"/>
                             <constraint firstAttribute="bottom" secondItem="0Md-Jw-V4c" secondAttribute="bottom" id="KwF-mE-et5"/>
                             <constraint firstItem="0Md-Jw-V4c" firstAttribute="leading" secondItem="mP3-wb-qnb" secondAttribute="leading" id="LNi-u2-VBW"/>
                             <constraint firstItem="uqa-rl-etV" firstAttribute="centerX" secondItem="mP3-wb-qnb" secondAttribute="centerX" id="Ni7-Hs-LiB"/>
@@ -6970,6 +6973,7 @@ your product.</string>
                             <constraint firstAttribute="bottom" secondItem="uqa-rl-etV" secondAttribute="bottom" constant="20" id="b98-m1-KJ7"/>
                             <constraint firstItem="Wfc-7s-xHR" firstAttribute="centerX" secondItem="mP3-wb-qnb" secondAttribute="centerX" id="bcW-0S-Sdc"/>
                             <constraint firstItem="7rt-TC-JPf" firstAttribute="centerX" secondItem="mP3-wb-qnb" secondAttribute="centerX" id="hOZ-Si-bah"/>
+                            <constraint firstItem="9TN-NQ-SZE" firstAttribute="trailing" secondItem="7rt-TC-JPf" secondAttribute="trailing" constant="16" id="hfp-UV-b5t"/>
                             <constraint firstItem="4DV-EU-9Ia" firstAttribute="centerX" secondItem="mP3-wb-qnb" secondAttribute="centerX" id="ob2-Ma-vUD"/>
                             <constraint firstItem="0Md-Jw-V4c" firstAttribute="top" secondItem="mP3-wb-qnb" secondAttribute="top" id="rKQ-ei-hFZ"/>
                             <constraint firstItem="4DV-EU-9Ia" firstAttribute="top" secondItem="mP3-wb-qnb" secondAttribute="top" constant="30" id="yS3-Po-65d"/>
@@ -7440,7 +7444,7 @@ your product.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rfL-Sn-QFW">
-                                <rect key="frame" x="0.0" y="108" width="375" height="461"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HRI-ee-D9R">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="369.5"/>
@@ -8189,7 +8193,7 @@ Last Edited on 2017-12-04
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You need to link your device to your account by simply just scan the QR code on the back of the device" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YXd-KE-lmr">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You need to link your device to your account by simply scanning the QR code on the back of the device" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YXd-KE-lmr">
                                 <rect key="frame" x="16" y="267" width="343" height="50.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
