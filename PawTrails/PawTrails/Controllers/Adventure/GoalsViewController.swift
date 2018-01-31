@@ -153,6 +153,9 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
             APIRepository.instance.getActivityMonitorData(pet.id, startDate: startDate, endDate: tomorrowDate, groupedBy: 0) { (error, data) in
                 if error == nil, let data =  data ,let activities = data.activities {
                     
+                    if activities.count != 0 {
+                        
+                    
                     var chilling = [Int]()
                     var wandering = [Int]()
                     var lively = [Int]()
@@ -194,8 +197,10 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
                     self.wandering = wandering
     
                     self.pieChartUpdate(firstvalue: totalChiling, secondValue: totalWandering, thirdValue: totalLively)
+                    
                     self.combinedChartView(myxaxis: self.periodsOfDay, lively: lively, chiling: chilling, wandering: wandering, chart: self.combinedCharts, symbol: "hrs")
-                   
+                    }
+
                 } else {
 
                 }
@@ -220,23 +225,25 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
             APIRepository.instance.getActivityMonitorData(pet.id, startDate: startOfWeekInTimeInterval, endDate: endOfWeekInTimeInterval, groupedBy: 1) { (error, data) in
                 
                 if error == nil, let data = data, let activities = data.activities {
+                    if activities.count != 0 {
                     var chilling = [Int]()
                     var wandering = [Int]()
                     var lively = [Int]()
+                    
                     for activity in activities {
                         let chiling = Float(activity.chilling / 60)
                         let wanderingg = activity.wandering / 60
                         let livelyy = activity.lively / 60
-                        
-                        
                         chilling.append(Int(chiling))
                         wandering.append(wanderingg)
                         lively.append(livelyy)
                     }
+                    
                     self.weeklyLively = lively
                     self.weeklywandering = wandering
                     self.weeklyLively = lively
                     self.combinedChartView(myxaxis: self.weekDays, lively: lively, chiling: chilling, wandering: wandering, chart: self.weekelyGoalBarChart, symbol: "hrs")
+                    }
                 } else if let error = error {
                     Reporter.debugPrint(error.localizedDescription)
                 }
@@ -257,6 +264,9 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
             
             APIRepository.instance.getActivityMonitorData(pet.id, startDate: startOfMonthDateInterval, endDate: tomorrowMonthDateInterval, groupedBy: 2) { (error, data) in
                 if error == nil, let activities = data?.activities {
+                    
+                    if activities.count != 0 {
+
                     
                     var chilling = [Int]()
                     var wandering = [Int]()
@@ -286,6 +296,7 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
             formatter.dateFormat = "EEEE, MMMM dd, yyy"
             let result = formatter.string(from: date)
             self.dateBtn.setTitle(result, for: .normal)
+            }
         } else {
 
         }
