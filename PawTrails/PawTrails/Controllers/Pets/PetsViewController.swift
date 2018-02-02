@@ -128,8 +128,14 @@ class PetsViewController: UIViewController, PetsView {
     
     
     @objc func reloadPetsAPI(){
-        presenter.loadPets()
-        self.tableView.reloadData()
+        if presenter.pets.count != 0 {
+            var petIds = [Int]()
+            for pet in presenter.pets {
+                petIds.append(pet.id)
+            }
+            self.presenter.getImmediateLocation(petIds: petIds)
+        }
+//        self.tableView.reloadData()
     }
     
     
