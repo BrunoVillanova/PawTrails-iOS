@@ -71,7 +71,7 @@ class MapViewController: UIViewController {
             if (petDeviceDataList.count > 0) {
                self.hideMessage()
             } else {
-                self.showMessage("Bring your device outdoor to recieve GPS signal", type: GSMessageType.info,  options: [
+                self.showMessage("Searching for new location...", type: GSMessageType.info,  options: [
                     .animation(.slide),
                     .animationDuration(0.3),
                     .autoHide(false),

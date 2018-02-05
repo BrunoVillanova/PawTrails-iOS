@@ -246,7 +246,7 @@ class petListCell: UITableViewCell {
             petImageView.image = nil
         }
         
-        subtitleLabel.text = "Bring your device outdoor to get location.."
+        subtitleLabel.text = "Searching for new location..."
         
         DataManager.instance.lastPetDeviceData(pet).subscribe(onNext: { (petDeviceData) in
             if let petDeviceData = petDeviceData {
