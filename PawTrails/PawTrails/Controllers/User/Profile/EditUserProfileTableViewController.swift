@@ -40,6 +40,8 @@ class EditUserProfileTableViewController: UITableViewController, EditUserProfile
     }
     
     
+
+    
     
     deinit {
         self.presenter.deteachView()
@@ -121,8 +123,6 @@ class EditUserProfileTableViewController: UITableViewController, EditUserProfile
         
         switch segue.destination {
         case is NameTableViewController: (segue.destination as! NameTableViewController).parentEditor = presenter
-            break
-        case is EmailTableViewController: (segue.destination as! EmailTableViewController).parentEditor = presenter
             break
         case is GenderTableViewController: (segue.destination as! GenderTableViewController).parentEditor = presenter
             break

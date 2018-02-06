@@ -92,13 +92,23 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         
         let urlString = SSLEnabled ? self.urlStringSSL : self.urlString
         
+    #if DEBUG
+        let config : SocketIOClientConfiguration = [
+            .log(true),
+            .secure(true),
+            .reconnectAttempts(50),
+            .reconnectWait(3),
+            .forceNew(true)]
+    #else
+        let config : SocketIOClientConfiguration = [
+            .secure(true),
+            .reconnectAttempts(50),
+            .reconnectWait(3),
+            .forceNew(true)]
+    #endif
+        
         if let url = URL(string: urlString) {
-            self.socket = SocketIOClient(socketURL: url, config: [
-//                                                                .log(true),
-                                                                  .secure(true),
-                                                                  .reconnectAttempts(50),
-                                                                  .reconnectWait(3),
-                                                                  .forceNew(true)])
+            self.socket = SocketIOClient(socketURL: url, config: config)
         }
         
         // Init SocketIO
@@ -225,8 +235,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     }
     
     func getPets() -> Observable<[Pet]> {
-//        let petList = DataManager.instance.pets()
-//        let
+
         return isReady().filter({ (value) -> Bool in
             return value == true
         }).flatMap({ (isReady) -> Observable<[Pet]> in

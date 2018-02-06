@@ -732,11 +732,28 @@ class APIRepository {
         }
         
     }
+    
+    func logout(callback: @escaping APIRepErrorCallback) {
+     
+        APIManager.instance.perform(call: .logout) { (error, json) in
+            if error == nil {
+                callback(nil)
+            } else if let error = error {
+                callback(error)
+            }
+        }
+    }
+    func getImmediateLocation(_ petIdss: [Int], callback: @escaping APIRepErrorCallback) {
+         let petIds = ["ids":petIdss]
+        APIManager.instance.perform(call: .getImmediateLocation, with: petIds) { (error, json) in
+            if let error = error {
+                callback(error)
+            } else {
+                callback(nil)
+            }
+        }
+    }
 }
-
-
-
-
 
 
 

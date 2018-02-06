@@ -9,14 +9,6 @@
 import UIKit
 
 class PTBatteryView: UIView {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
     
     let batteryIcon = UIImage(named: "Battery")
     let batteryLowIcon = UIImage(named: "BatteryLow")
@@ -45,7 +37,6 @@ class PTBatteryView: UIView {
         imageView.image = batteryIcon
         imageView.contentMode = UIViewContentMode.scaleAspectFit
         imageView.frame = CGRect(x: 0, y:0, width: batteryIcon!.size.width, height: batteryIcon!.size.height)
-        imageView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         self.addSubview(imageView)
         
         
@@ -55,11 +46,16 @@ class PTBatteryView: UIView {
         batteryFillView.alpha = 0
         self.addSubview(batteryFillView)
         
-        batteryFillWidthProportion = Float((self.frame.size.width-5) / 100.0)
+        batteryFillWidthProportion = Float((self.imageView.frame.size.width-5) / 100.0)
+        
+        self.frame = imageView.frame
     }
     
+    override func layoutSubviews() {
+        
+    }
     
-    func setBatteryLevel(_ level: Int16) {
+    func setBatteryLevel(_ level: Int16, animated: Bool = true) {
         
         let newWidth = CGFloat(batteryFillWidthProportion * Float(level))
         let newBatteryFrame = CGRect(x: batteryFillView.frame.origin.x, y: batteryFillView.frame.origin.y, width: newWidth, height: batteryFillView.frame.size.height)

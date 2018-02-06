@@ -1,29 +1,30 @@
  //
-//  PetsViewController.swift
-//  PawTrails
-//
-//  Created by Marc Perello on 31/03/2017.
-//  Copyright © 2017 AttitudeTech. All rights reserved.
-//
-
-import UIKit
-import RxSwift
-import SDWebImage
-import RxCocoa
-
-class PetsViewController: UIViewController, PetsView {
-
+ //  PetsViewController.swift
+ //  PawTrails
+ //
+ //  Copyright © 2017 AttitudeTech. All rights reserved.
+ //
+ 
+ import UIKit
+ import RxSwift
+ import SDWebImage
+ import RxCocoa
+ import RxDataSources
+ import Differentiator
+ 
+ class PetsViewController: UIViewController {
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noPetsFound: UIView!
     @IBOutlet weak var addMyFirstPetButton: UIButton!
     
-    fileprivate let refreshControl = UIRefreshControl()
-    fileprivate let presenter = PetsPresenter()
     fileprivate var pets = [Int:IndexPath]()
     fileprivate var petIdss = [Int]()
     fileprivate var petDeviceData: [PetDeviceData]?
     fileprivate let disposeBag = DisposeBag()
     fileprivate var iphoneX = false
+    
+    fileprivate let dataSource = RxTableViewSectionedReloadDataSource<PetSection>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,14 +44,6 @@ class PetsViewController: UIViewController, PetsView {
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.destination is TabPageViewController {
-            if let indexPath = tableView.indexPathForSelectedRow {
-                (segue.destination as! TabPageViewController).pet = getPet(at: indexPath)
-            }
-        }
-    }
-    
     @IBAction func addMyFirstPetButtonTapped(_ sender: Any) {
         self.goToAddDevice()
     }
@@ -59,32 +52,75 @@ class PetsViewController: UIViewController, PetsView {
         self.goToAddDevice()
     }
     
+    func reloadPets() {
+        DataManager.instance.pets()
+            .map({ (pets) -> [PetSection] in
+                let owned = pets.filter({ $0.isOwner == true })
+                let shared = pets.filter({ $0.isOwner == false })
+                let sections = [
+                    PetSection(header: "Owned", items: owned),
+                    PetSection(header: "Shared", items: shared)
+                ]
+                
+                self.noPetsFound.isHidden = pets.count > 0;
+                return sections
+            })
+            .bind(to: tableView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
+    }
+    
     fileprivate func initialize() {
         
         noPetsFound.isHidden = true
         tableView.tableFooterView = UIView()
         
-        refreshControl.backgroundColor = UIColor.secondary
-        refreshControl.tintColor = UIColor.primary
-        refreshControl.addTarget(self, action: #selector(reloadPetsAPI), for: .valueChanged)
-        tableView.addSubview(refreshControl)
-        presenter.attachView(self)
-        reloadPets()
-        
-        tableView.dataSource = self
-        tableView.delegate = self
         let notificationIdentifier: String = "petAdded"
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadPetsAPI), name: NSNotification.Name(rawValue: notificationIdentifier), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadPets), name: NSNotification.Name(rawValue: notificationIdentifier), object: nil)
         
         addMyFirstPetButton.backgroundColor = UIColor.primary
         addMyFirstPetButton.round()
         
-//         Todo: make tableview reactive
-//                DataManager.instance.pets()
-//                    .bind(to: tableView.rx.items(cellIdentifier: "cell", cellType: petListCell.self)) { (_, element, cell) in
-//                   cell.configure(element)
-//                }.disposed(by: disposeBag)
+
+        dataSource.configureCell = { dataSource, tableView, indexPath, element in
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PetCell
+            cell.configure(element)
+            return cell
+        }
+
+        dataSource.titleForHeaderInSection = { ds, index in
+            return ds.sectionModels[index].header
+        }
         
+        DataManager.instance.pets()
+            .map({ (pets) -> [PetSection] in
+                let owned = pets.filter({ $0.isOwner == true })
+                let shared = pets.filter({ $0.isOwner == false })
+                let sections = [
+                    PetSection(header: "Owned", items: owned),
+                    PetSection(header: "Shared", items: shared)
+                ]
+                
+                self.noPetsFound.isHidden = pets.count > 0;
+                return sections
+            })
+            .bind(to: tableView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
+        
+        Observable
+            .zip(tableView.rx.itemSelected, tableView.rx.modelSelected(PetSection.Item.self))
+            .bind { [unowned self] indexPath, item in
+                self.tableView.deselectRow(at: indexPath, animated: true)
+                self.goToPetDetails(item)
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    fileprivate func goToPetDetails(_ pet: Pet) {
+        if let petDetailsViewController = self.storyboard?.instantiateViewController(withIdentifier: "PetDetails") as? TabPageViewController {
+            petDetailsViewController.pet = pet
+            
+            self.navigationController?.pushViewController(petDetailsViewController, animated: true)
+        }
     }
     
     
@@ -124,131 +160,72 @@ class PetsViewController: UIViewController, PetsView {
     @objc fileprivate func buttonAction(sender: UIButton!) {
         Reporter.debugPrint("Button tapped")
     }
-    
-    
-    @objc func reloadPetsAPI(){
-        presenter.loadPets()
-        self.tableView.reloadData()
-    }
-    
-    
-    deinit {
-        presenter.deteachView()
-    }
-    
-    func reloadPets(){
-        presenter.getPets()
-    }
-
-    // MARK: - PetsView
-    
-    func errorMessage(_ error: ErrorMsg) {
-        refreshControl.endRefreshing()
-        alert(title: error.title, msg: error.msg)
-    }
-    
-    func loadPets() {
-        refreshControl.endRefreshing()
-        noPetsFound.isHidden = presenter.sharedPets.count != 0 || presenter.ownedPets.count != 0
-        tableView.reloadData()
-    }
-    
-    func petsNotFound() {
-        refreshControl.endRefreshing()
-        noPetsFound.isHidden = presenter.sharedPets.count != 0 || presenter.ownedPets.count != 0
-        tableView.reloadData()
-    }
-    
-    func getPet(at indexPath: IndexPath) -> Pet {
-        if presenter.ownedPets.count > 0 && presenter.sharedPets.count > 0 {
-            return indexPath.section == 0 ? presenter.ownedPets[indexPath.row] : presenter.sharedPets[indexPath.row]
-        }else if presenter.ownedPets.count > 0 {
-            return presenter.ownedPets[indexPath.row]
-        }else{
-            return presenter.sharedPets[indexPath.row]
-        }
-    }
-
-    func trackButtonAction(sender: UIButton){
-        // changed this when deleted homevc
-        if let home = tabBarController?.viewControllers?.first as? MapViewController {
-            home.selectedPet = presenter.getPet(with: sender.tag)
-            tabBarController?.selectedIndex = 0
-        }
-    }
-}
+ }
  
-extension PetsViewController: UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        var number = 0
-        if presenter.ownedPets.count != 0 { number += 1 }
-        if presenter.sharedPets.count != 0 { number += 1 }
-        return number
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if presenter.ownedPets.count > 0 && presenter.sharedPets.count > 0 {
-            return section == 0 ? presenter.ownedPets.count : presenter.sharedPets.count
-        }else{
-            return presenter.ownedPets.count + presenter.sharedPets.count
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! petListCell
-        let pet = getPet(at: indexPath)
-        cell.configure(pet)
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if presenter.sharedPets.count != 0 && presenter.ownedPets.count != 0 {
-            return section == 0 ? "Owned" : "Shared"
-        }else if presenter.sharedPets.count != 0 {
-            return "Shared"
-        }else if presenter.ownedPets.count != 0 {
-            return "Owned"
-        }
-        return nil
-    }
-}
-
  extension PetsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
  }
  
-
-class petListCell: UITableViewCell {
+ 
+ struct PetSection {
+    var header: String
+    var items: [Item]
+ }
+ 
+ extension PetSection: SectionModelType {
+    typealias Item = Pet
+    
+    init(original: PetSection, items: [Item]) {
+        self = original
+        self.items = items
+    }
+ }
+ 
+ class PetCell: UITableViewCell {
+    
     @IBOutlet weak var petImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var signalLevels: NSLayoutConstraint!
-    
-    @IBOutlet weak var batteryLevel: PTBatteryView!
+    @IBOutlet weak var deviceStatusView: PTDeviceStatusView!
     @IBOutlet weak var subtitleLabel: UILabel!
-    private let disposeBag = DisposeBag()
+    
+    
+    var currentPet: Pet?
+    var disposable: Disposable?
+    
+    fileprivate let disposeBag = DisposeBag()
+    
+    override func prepareForReuse() {
+        disposable?.dispose()
+        currentPet = nil
+        titleLabel.text = nil
+        petImageView.image = nil
+        subtitleLabel.text = ""
+        deviceStatusView.resetAllSubviews()
+    }
     
     func configure(_ pet: Pet) {
-        titleLabel.text = pet.name
-        
-        if let imageUrl = pet.imageURL {
-            petImageView.sd_setImage(with: URL(string: imageUrl), placeholderImage: #imageLiteral(resourceName: "PetPlaceholderImage"), options: [.continueInBackground])
-        } else {
-            petImageView.image = nil
-        }
-        
-        subtitleLabel.text = "Bring your device outdoor to get location.."
-        
-        DataManager.instance.lastPetDeviceData(pet).subscribe(onNext: { (petDeviceData) in
-            if let petDeviceData = petDeviceData {
-                self.batteryLevel.setBatteryLevel(petDeviceData.deviceData.battery)
-                petDeviceData.deviceData.point.getFullFormatedAddress(handler: { (address) in
-                    self.subtitleLabel.text = address
-                })
+        DispatchQueue.main.async {
+            self.currentPet = pet
+            self.titleLabel.text = pet.name
+            
+            if let imageUrl = pet.imageURL {
+                self.petImageView.sd_setImage(with: URL(string: imageUrl), placeholderImage: #imageLiteral(resourceName: "PetPlaceholderImage"), options: [.continueInBackground])
+            } else {
+                self.petImageView.image = nil
             }
-
-        }).disposed(by: disposeBag)
+            
+            self.subtitleLabel.text = "Bring your device outdoor to get location.."
+            
+            self.disposable = DataManager.instance.lastPetDeviceData(pet).subscribe(onNext: {[weak self] (petDeviceData) in
+                if let petDeviceData = petDeviceData, let pet = self?.currentPet, petDeviceData.pet.id == pet.id {
+                    self?.deviceStatusView.configure(petDeviceData, animated: true)
+                    petDeviceData.deviceData.point.getFullFormatedAddress(handler: {[weak self] (address) in
+                        self?.subtitleLabel.text = address
+                    })
+                }
+            })
+        }
     }
-}
+ }

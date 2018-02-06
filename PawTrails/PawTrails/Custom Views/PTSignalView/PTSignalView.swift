@@ -39,7 +39,20 @@ class PTSignalView: UIView {
         imageView.image = signalFullIcon
         imageView.contentMode = UIViewContentMode.scaleAspectFit
         imageView.frame = CGRect(x: 0, y:0, width: signalFullIcon!.size.width, height: signalFullIcon!.size.height)
-        imageView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+//        imageView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         self.addSubview(imageView)
+    }
+    
+    func setSignal(_ level: Int16, animated: Bool = true) {
+        //TODO: set images for different levels ANIMATED!!!! =)
+        
+//        let newWidth = CGFloat(batteryFillWidthProportion * Float(level))
+//        let newBatteryFrame = CGRect(x: batteryFillView.frame.origin.x, y: batteryFillView.frame.origin.y, width: newWidth, height: batteryFillView.frame.size.height)
+//
+//        UIView.animate(withDuration: 2.0) {
+//            self.batteryFillView.alpha = 1
+//            self.batteryFillView.frame = newBatteryFrame
+//            self.batteryFillView.backgroundColor = self.colorForBatteryLevel(level)
+//        }
     }
 }

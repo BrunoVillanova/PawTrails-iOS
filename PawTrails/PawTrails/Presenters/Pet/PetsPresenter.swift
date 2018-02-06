@@ -93,6 +93,18 @@ class PetsPresenter {
         }
     }
     
+    func getImmediateLocation(petIds: [Int]) {
+        if pets.count != 0 {
+            APIRepository.instance.getImmediateLocation(petIds, callback: { (error) in
+                if error == nil {
+                    self.view?.loadPets()
+                } else {
+                    self.view?.petsNotFound()
+                }
+            })
+        }
+    }
+    
     //MARK:- Socket IO
     
     func startPetsGPSUpdates(_ callback: @escaping ((_ id: Int)->())){

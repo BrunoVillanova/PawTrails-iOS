@@ -11,88 +11,9 @@ import XLPagerTabStrip
 import RxSwift
 import RxCocoa
 
-class AdventuresAchievementsView: UITableViewHeaderFooterView {
-    
-    @IBOutlet weak var distanceCircle: CircleChart!
-    @IBOutlet weak var timeCircle: CircleChart!
-    @IBOutlet weak var childContainerView: UIView!
-    @IBOutlet weak var editBtn: UIButton!
-    @IBOutlet weak var topView: UIView!
-    @IBOutlet weak var containerView: UIView!
-    
-    lazy var mydatePicker: AirbnbDatePicker = {
-        let btn = AirbnbDatePicker()
-        btn.translatesAutoresizingMaskIntoConstraints = false
-        return btn
-    }()
-    
-    override init(reuseIdentifier: String?) {
-        super.init(reuseIdentifier: reuseIdentifier)
-//        initialize()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-//        initialize()
-    }
-    
-    fileprivate func initialize() {
-        editBtn.border(color: UIColor.darkGray, width: 1)
-        containerView.border(color: UIColor.darkGray, width: 1)
-        childContainerView.border(color: UIColor.darkGray, width: 1)
-        self.topView.addSubview(mydatePicker)
-        self.mydatePicker.bounds = topView.bounds
-        self.mydatePicker.center = topView.center
-        mydatePicker.centerXAnchor.constraint(equalTo: topView.centerXAnchor).isActive = true
-        mydatePicker.widthAnchor.constraint(equalTo: topView.widthAnchor).isActive = true
-        mydatePicker.heightAnchor.constraint(equalTo: topView.heightAnchor).isActive = true
-        mydatePicker.topAnchor.constraint(equalTo: topView.topAnchor).isActive = true
-        mydatePicker.bottomAnchor.constraint(equalTo: topView.bottomAnchor).isActive = true
-        
-    }
-    
-    func configure(_ tripAchievements: TripAchievements) {
-        self.initialize()
-        var distanceAchievement = CGFloat()
-        var timeGoalAchievmenet = CGFloat()
-        let distanceColor = UIColor(red: 153/255, green: 202/255, blue: 186/255, alpha: 1)
-        let timeColor = UIColor(red: 211/255, green: 100/255, blue: 59/255, alpha: 1)
-        let distanceGoalForPeriod = tripAchievements.distance * tripAchievements.totalDays
-        let timeGoalForPeriod = tripAchievements.timeGoal * tripAchievements.totalDays
-        let totalDistanceAchievement = tripAchievements.totalDistance / 1000
-        let totalHour = tripAchievements.totalTime / 60
-        
-        if timeGoalForPeriod > 0 {
-            timeGoalAchievmenet = CGFloat((100 * tripAchievements.totalTime) / timeGoalForPeriod)
-        } else {
-            timeGoalAchievmenet = 0
-        }
-        
-        if distanceGoalForPeriod > 0 {
-            distanceAchievement = CGFloat((100 * tripAchievements.totalDistance) / distanceGoalForPeriod)
-            
-        } else {
-            distanceAchievement = 0
-        }
-        
-        if distanceAchievement > 1 {
-            self.distanceCircle.setChart(at: 1, color: distanceColor, text: "\(totalDistanceAchievement) km")
-        } else {
-            self.distanceCircle.setChart(at: distanceAchievement, color: distanceColor, text: "\(totalDistanceAchievement) km")
-        }
-        
-        if timeGoalAchievmenet > 1 {
-            self.timeCircle.setChart(at: 1, color: timeColor, text:  "\(totalHour) hrs")
-        } else {
-            self.timeCircle.setChart(at: timeGoalAchievmenet, color: timeColor, text:  "\(totalHour) hrs")
-        }
-    }
-}
-
 class AdventuresListViewController: UIViewController  {
-    var pet: Pet!
     
-
+    var pet: Pet!
     @IBOutlet weak var achievementsView: AdventuresAchievementsView!
     @IBOutlet weak var tableView: UITableView!
 
@@ -121,6 +42,7 @@ class AdventuresListViewController: UIViewController  {
     
     func showGoalsDate() {
         let mydatePicker = achievementsView.mydatePicker
+        mydatePicker.delegate = self
         if let date = mydatePicker.selectedStartDate {
             startDate = Int(date.timeIntervalSince1970)
             startDateInDateFormate = date
@@ -228,5 +150,73 @@ class AdventureHistoryCell: UITableViewCell {
         }
         
         adventureImage.setStaticTripView(trip)
+    }
+}
+
+
+class AdventuresAchievementsView: UITableViewHeaderFooterView {
+    
+    @IBOutlet weak var distanceCircle: CircleChart!
+    @IBOutlet weak var timeCircle: CircleChart!
+    @IBOutlet weak var childContainerView: UIView!
+    @IBOutlet weak var editBtn: UIButton!
+    @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var containerView: UIView!
+    
+    lazy var mydatePicker: AirbnbDatePicker = {
+        let btn = AirbnbDatePicker()
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        return btn
+    }()
+    
+    fileprivate func initialize() {
+        editBtn.border(color: UIColor.darkGray, width: 1)
+        containerView.border(color: UIColor.darkGray, width: 1)
+        childContainerView.border(color: UIColor.darkGray, width: 1)
+        self.topView.addSubview(mydatePicker)
+        self.mydatePicker.bounds = topView.bounds
+        self.mydatePicker.center = topView.center
+        mydatePicker.centerXAnchor.constraint(equalTo: topView.centerXAnchor).isActive = true
+        mydatePicker.widthAnchor.constraint(equalTo: topView.widthAnchor).isActive = true
+        mydatePicker.heightAnchor.constraint(equalTo: topView.heightAnchor).isActive = true
+        mydatePicker.topAnchor.constraint(equalTo: topView.topAnchor).isActive = true
+        mydatePicker.bottomAnchor.constraint(equalTo: topView.bottomAnchor).isActive = true
+    }
+    
+    func configure(_ tripAchievements: TripAchievements) {
+        self.initialize()
+        var distanceAchievement = CGFloat()
+        var timeGoalAchievmenet = CGFloat()
+        let distanceColor = UIColor(red: 153/255, green: 202/255, blue: 186/255, alpha: 1)
+        let timeColor = UIColor(red: 211/255, green: 100/255, blue: 59/255, alpha: 1)
+        let distanceGoalForPeriod = tripAchievements.distance * tripAchievements.totalDays
+        let timeGoalForPeriod = tripAchievements.timeGoal * tripAchievements.totalDays
+        let totalDistanceAchievement = tripAchievements.totalDistance / 1000
+        let totalHour = tripAchievements.totalTime / 60
+        
+        if timeGoalForPeriod > 0 {
+            timeGoalAchievmenet = CGFloat((100 * tripAchievements.totalTime) / timeGoalForPeriod)
+        } else {
+            timeGoalAchievmenet = 0
+        }
+        
+        if distanceGoalForPeriod > 0 {
+            distanceAchievement = CGFloat((100 * tripAchievements.totalDistance) / distanceGoalForPeriod)
+            
+        } else {
+            distanceAchievement = 0
+        }
+        
+        if distanceAchievement > 1 {
+            self.distanceCircle.setChart(at: 1, color: distanceColor, text: "\(totalDistanceAchievement) km")
+        } else {
+            self.distanceCircle.setChart(at: distanceAchievement, color: distanceColor, text: "\(totalDistanceAchievement) km")
+        }
+        
+        if timeGoalAchievmenet > 1 {
+            self.timeCircle.setChart(at: 1, color: timeColor, text:  "\(totalHour) hrs")
+        } else {
+            self.timeCircle.setChart(at: timeGoalAchievmenet, color: timeColor, text:  "\(totalHour) hrs")
+        }
     }
 }

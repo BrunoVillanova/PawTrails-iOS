@@ -14,7 +14,7 @@ struct ErrorMsg {
     
     let code:ErrorCode
     let title:String
-    let msg:String
+    let msg: String
     
     init(title:String, msg:String) {
         self.title = title

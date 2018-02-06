@@ -276,15 +276,21 @@ extension PetDeviceData {
         id = 0
         deviceData = DeviceData()
         pet = Pet()
+        deviceConnection = DeviceConnection()
     }
     
     init(_ json: [String:Any]) {
         id = 0
         deviceData = DeviceData()
+        deviceConnection = DeviceConnection()
         
         if json["deviceData"] != nil {
             deviceData = DeviceData(json["deviceData"] as! [String:Any])
             id = deviceData.id
+        }
+        
+        if json["connection"] != nil {
+            deviceConnection = DeviceConnection(json["connection"] as! [String:Any])
         }
         
         if let petID = json["petId"] as? Int {
@@ -315,6 +321,8 @@ extension PetDeviceData {
     
     init(_ cdPetDeviceData: CDPetDeviceData) {
         deviceData = DeviceData(cdPetDeviceData)
+        // TODO: Need to save DeviceConnection on database?
+        deviceConnection = DeviceConnection()
         id = deviceData.id
         if let pets = CoreDataManager.instance.retrieve(.pet, with: NSPredicate("id", .equal, id)) {
             pet = Pet(pets.first as! CDPet)
@@ -340,14 +348,24 @@ extension DeviceData {
     
     init(_ json: [String:Any]) {
         id = json["idpos"] != nil ? json["idpos"] as! Int : 0
-        crs = json["crs"] as! Float
-        point = Point(json["lat"] as! Double, json["lon"] as! Double)
+        
+        if let crs = json["crs"] as? Float {
+            self.crs = crs
+        } else {
+            self.crs = 0
+        }
+        point = Point(json["lat"] as! Double , json["lon"] as! Double)
         speed = json["speed"] as! Float
         battery = json["battery"] as! Int16
-        internetSignal = json["netSignal"] as! Int16
-        satelliteSignal = json["satSignal"] as! Int16
-        deviceTime = json["deviceTime"] as! Int64
-        deviceDate = Date.init(timeIntervalSince1970: TimeInterval(json["deviceTime"] as! Int))
+        internetSignal = json["netSignal"] as? Int16 ?? 0
+        satelliteSignal = json["satSignal"] as? Int16 ?? 0
+        
+        if let deviceTime = json["deviceTime"] as? Int64 {
+            self.deviceTime = deviceTime
+        } else {
+            deviceTime = 0
+        }
+            deviceDate = Date.init(timeIntervalSince1970: TimeInterval(json["deviceTime"] as? Int ?? 0))
     }
     
     init(_ cdPetDeviceData: CDPetDeviceData) {
@@ -362,6 +380,26 @@ extension DeviceData {
         deviceDate = Date.init(timeIntervalSince1970: TimeInterval(cdPetDeviceData.deviceTime))
     }
 }
+
+extension DeviceConnection {
+    
+    init() {
+        status = 0
+        statusTime = 0
+    }
+    
+    init(_ json: [String:Any]) {
+        status = json["deviceStatus"] != nil ? json["deviceStatus"] as! Int16 : 0
+        
+        if let statusTime = json["statusTime"] as? Int64 {
+            self.statusTime = statusTime
+        } else {
+            self.statusTime = 0
+        }
+
+    }
+}
+
 
 extension Breed {
     

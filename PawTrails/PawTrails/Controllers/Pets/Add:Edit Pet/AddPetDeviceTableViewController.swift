@@ -20,7 +20,7 @@ class AddPetDeviceTableViewController: UITableViewController, UITextFieldDelegat
         super.viewDidLoad()
         presenter.attachView(self)
         if petId != -1 {
-            navigationItem.rightBarButtonItem?.title = "Change"
+            navigationItem.rightBarButtonItem?.title = "Done"
             navigationItem.title = "Device"
         }
     }
@@ -56,13 +56,14 @@ class AddPetDeviceTableViewController: UITableViewController, UITextFieldDelegat
     
     func idle(_ code: String) {
         isDeviceIdle = true
-        
         if petId != -1 {
             presenter.change(code, to: petId)
         }else if let vc = storyboard?.instantiateViewController(withIdentifier: "AddEditPetDetailsTableViewController") as? AddEditPetDetailsTableViewController {
             vc.deviceCode = code
             navigationController?.pushViewController(vc, animated: true)
         }
+    }
+    @IBAction func donebtnPressed(_ sender: Any) {
     }
     
     

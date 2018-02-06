@@ -33,6 +33,7 @@ class ScanQRViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
         setupSession()
         setupPreview()
         startSession()
+        print(self.petId)
     }
     
     deinit {

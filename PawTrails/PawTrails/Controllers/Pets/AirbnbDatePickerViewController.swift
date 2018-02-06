@@ -51,6 +51,7 @@ public class AirbnbDatePickerViewController: UICollectionViewController {
         return floor(view.frame.size.width / 7)
     }
     var collectionViewWidthConstraint: NSLayoutConstraint?
+    var iPhoneX = false
 
     
     // MARK: - Initialization
@@ -119,7 +120,7 @@ public class AirbnbDatePickerViewController: UICollectionViewController {
     
     lazy var dismissButton: UIBarButtonItem = {
         let btn = UIButton(type: UIButtonType.custom)
-        btn.setImage(UIImage(named: "close-1x-png"), for: .normal)
+        btn.setImage(UIImage(named: "CloseIcon"), for: .normal)
         btn.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
         btn.contentHorizontalAlignment = UIControlContentHorizontalAlignment.left
         btn.addTarget(self, action: #selector(AirbnbDatePickerViewController.handleDismiss), for: .touchUpInside)
@@ -130,7 +131,7 @@ public class AirbnbDatePickerViewController: UICollectionViewController {
     lazy var clearButton: UIBarButtonItem = {
         let btn = UIButton(type: UIButtonType.custom)
         btn.setTitle("Clear", for: .normal)
-        btn.setTitleColor(.black, for: .normal)
+        btn.setTitleColor(.white, for: .normal)
         btn.frame = CGRect(x: 0, y: 0, width: 100, height: 20)
         btn.contentHorizontalAlignment = UIControlContentHorizontalAlignment.right
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
@@ -173,9 +174,6 @@ public class AirbnbDatePickerViewController: UICollectionViewController {
     
     override public func viewDidLoad() {
         super.viewDidLoad()
-   
-
-
     }
     
     override public func viewWillAppear(_ animated: Bool) {
@@ -185,7 +183,16 @@ public class AirbnbDatePickerViewController: UICollectionViewController {
         setupNavigationBar()
         setupViews()
         setupLayout()
+    }
+    
+    override public func viewDidLayoutSubviews() {
         
+        if #available(iOS 11.0, *) {
+            if ((UIApplication.shared.keyWindow?.safeAreaInsets.top)! > CGFloat(0.0)) {
+                iPhoneX = true
+                Reporter.debugPrint("iphone x")
+            }
+        }
     }
     
     func rotated() {
@@ -197,6 +204,12 @@ public class AirbnbDatePickerViewController: UICollectionViewController {
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.view.backgroundColor = UIColor.clear
+        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.navigationBar.backgroundColor = UIColor.clear
+        self.navigationController?.navigationBar.tintColor = UIColor.white
         
         self.navigationItem.setLeftBarButton(dismissButton, animated: true)
         self.navigationItem.setRightBarButton(clearButton, animated: true)

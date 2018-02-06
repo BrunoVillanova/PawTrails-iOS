@@ -10,7 +10,7 @@ import UIKit
 
 class AddressTableViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
-    @IBOutlet weak var firstLineTextField: UITextField!
+    @IBOutlet weak var firstLineTextField: AllowedCharsTextField!
     @IBOutlet weak var secondLineTextField: UITextField!
     @IBOutlet weak var thirdLineTextField: UITextField!
     @IBOutlet weak var cityTextField: UITextField!
@@ -29,6 +29,8 @@ class AddressTableViewController: UITableViewController, UIPickerViewDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
+
+        
 
         cityTextField.rightSeparator()
         postalCodeTextField.rightSeparator()
@@ -68,6 +70,68 @@ class AddressTableViewController: UITableViewController, UIPickerViewDelegate, U
         self.selectedCC = parentEditor.CountryCodes[index]
 
     }
+    
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
+    {
+        if textField == firstLineTextField {
+            let str = (NSString(string: textField.text!)).replacingCharacters(in: range, with: string)
+            if str.count <= 70 {
+                return true
+            }
+            textField.text = str.substring(to: str.index(str.startIndex, offsetBy: 70))
+            return false
+        } else if textField == secondLineTextField {
+            let str = (NSString(string: textField.text!)).replacingCharacters(in: range, with: string)
+            if str.count <= 70 {
+                return true
+            }
+            textField.text = str.substring(to: str.index(str.startIndex, offsetBy: 70))
+            return false
+        } else if textField == thirdLineTextField {
+            let str = (NSString(string: textField.text!)).replacingCharacters(in: range, with: string)
+            if str.count <= 70 {
+                return true
+            }
+            textField.text = str.substring(to: str.index(str.startIndex, offsetBy: 70))
+            return false
+        }else if textField == cityTextField {
+            let str = (NSString(string: textField.text!)).replacingCharacters(in: range, with: string)
+            if str.count <= 12 {
+                return true
+            }
+            textField.text = str.substring(to: str.index(str.startIndex, offsetBy: 12))
+            return false
+        }else if textField == stateTextField {
+            let str = (NSString(string: textField.text!)).replacingCharacters(in: range, with: string)
+            if str.count <= 12 {
+                return true
+            }
+            textField.text = str.substring(to: str.index(str.startIndex, offsetBy: 12))
+            return false
+        }else if textField == postalCodeTextField {
+            let str = (NSString(string: textField.text!)).replacingCharacters(in: range, with: string)
+            if str.count <= 10 {
+                return true
+            }
+            textField.text = str.substring(to: str.index(str.startIndex, offsetBy: 10))
+            return false
+        }else if textField == countryTextField {
+            let str = (NSString(string: textField.text!)).replacingCharacters(in: range, with: string)
+            if str.count <= 10 {
+                return true
+            }
+            textField.text = str.substring(to: str.index(str.startIndex, offsetBy: 10))
+            return false
+        }
+        
+        return true
+    }
+    
+    
+    
+    
+ 
     
     @IBAction func saveAction(_ sender: UIBarButtonItem?) {
         

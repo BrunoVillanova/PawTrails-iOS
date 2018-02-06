@@ -19,6 +19,7 @@ class MapViewController: UIViewController {
     @IBOutlet weak var secButtonFromTheBottom: UIButton!
     @IBOutlet weak var thirdButtonFromTheBottom: UIButton!
     
+    @IBOutlet weak var refreshBarBtn: UIBarButtonItem!
     
     fileprivate let presenter = HomePresenter()
     var selectedPet: Pet?
@@ -29,11 +30,19 @@ class MapViewController: UIViewController {
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     private let disposeBag = DisposeBag()
     
+    let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+    let button = UIButton(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+
+    
     //MARK: View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
         UIApplication.shared.statusBarStyle = .default
+        self.button.addTarget(self, action:  #selector(self.refreshBtnPressed(_:)), for: .touchUpInside)
+        button.setImage(UIImage(named: "refresh-button"), for: .normal)
+        self.navigationItem.rightBarButtonItem?.customView = button
+        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.primary
     }
     
     
@@ -62,7 +71,7 @@ class MapViewController: UIViewController {
             if (petDeviceDataList.count > 0) {
                self.hideMessage()
             } else {
-                self.showMessage("Bring your device outdoor to recieve GPS signal", type: GSMessageType.info,  options: [
+                self.showMessage("Searching for new location...", type: GSMessageType.info,  options: [
                     .animation(.slide),
                     .animationDuration(0.3),
                     .autoHide(false),
@@ -112,6 +121,50 @@ class MapViewController: UIViewController {
             selectPetsViewController.action = selectPetsAction.startAdventure
         }
     }
+    @IBAction func refreshBtnPressed(_ sender: Any) {
+        if  presenter.pets.count != 0 {
+            var petIds = [Int]()
+            for pet in presenter.pets {
+                petIds.append(pet.id)
+            }
+            showIndicator()
+            APIRepository.instance.getImmediateLocation(petIds) { (error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                    self.hideIndicator()
+                } else {
+                    self.hideIndicator()
+                }
+            }
+        } else {
+            self.showMessage("Please add a pet first", type: GSMessageType.info,  options: [
+                .animation(.slide),
+                .animationDuration(0.3),
+                .autoHide(false),
+                .cornerRadius(0.0),
+                .height(44.0),
+                .hideOnTap(false),
+                .position(.top),
+                .textAlignment(.center),
+                .textNumberOfLines(0),
+                ])
+        }
+    }
+    
+    
+    func showIndicator() {
+        self.refreshBarBtn.customView = self.activityIndicator
+        self.activityIndicator.isHidden = false
+        self.activityIndicator.startAnimating()
+        self.refreshBarBtn.isEnabled = false
+    }
+    
+    func hideIndicator() {
+        self.refreshBarBtn.isEnabled = true
+        self.activityIndicator.stopAnimating()
+        button.setImage(UIImage(named: "refresh-button"), for: .normal)
+        self.navigationItem.rightBarButtonItem?.customView = button
+    }
     
     @IBAction func firstButtonPressed(_ sender: Any) {
         if self.activeTrips.isEmpty {
@@ -155,6 +208,10 @@ class MapViewController: UIViewController {
 
 //MARK: HomeView
 extension MapViewController: HomeView {
+    func success() {
+    
+    }
+    
     func loadPets(){
         petsCollectionView.reloadData()
     }
