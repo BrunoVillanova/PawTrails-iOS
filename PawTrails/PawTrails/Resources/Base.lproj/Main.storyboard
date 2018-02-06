@@ -599,25 +599,15 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="7Db-9a-PV6" customClass="petListCell" customModule="PawTrails" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="7Db-9a-PV6" customClass="PetCell" customModule="PawTrails" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="375" height="130"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7Db-9a-PV6" id="jAO-6p-rUR">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="129.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="NYy-W4-DcK">
-                                                    <rect key="frame" x="86" y="27" width="150" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="150" id="VII-Dn-hVO"/>
-                                                        <constraint firstAttribute="height" constant="30" id="mRd-Vy-y66"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ypQ-Ix-BFS" customClass="UiimageViewWithMask" customModule="PawTrails" customModuleProvider="target">
-                                                    <rect key="frame" x="8" y="30" width="70" height="70"/>
+                                                    <rect key="frame" x="16" y="29.5" width="70" height="70"/>
                                                     <color key="backgroundColor" red="0.99932557339999994" green="0.63401025529999999" blue="0.2850541472" alpha="0.50393300513698636" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="70" id="Aui-Ro-OlO"/>
@@ -627,63 +617,52 @@
                                                         <userDefinedRuntimeAttribute type="image" keyPath="maskImage" value="userprofilemask-1x-png_360"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="mXp-8N-Ipx">
-                                                    <rect key="frame" x="86" y="65" width="225" height="37"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="37" id="ap7-LK-daj"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
-                                                    <color key="textColor" red="0.5490196078431373" green="0.5490196078431373" blue="0.5490196078431373" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userProfileMask-1x-png" translatesAutoresizingMaskIntoConstraints="NO" id="0Pk-Vi-mvl">
-                                                    <rect key="frame" x="6" y="27" width="75" height="75"/>
+                                                    <rect key="frame" x="14" y="26.5" width="75" height="75"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="75" id="3Jg-Es-JyP"/>
                                                         <constraint firstAttribute="width" constant="75" id="Xj8-Yi-jDo"/>
                                                     </constraints>
                                                 </imageView>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qDu-LV-mYt" customClass="PTSignalView" customModule="PawTrails" customModuleProvider="target">
-                                                    <rect key="frame" x="347" y="57" width="20" height="15"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="NYy-W4-DcK">
+                                                    <rect key="frame" x="97" y="27" width="0.0" height="0.0"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="mXp-8N-Ipx">
+                                                    <rect key="frame" x="97" y="31" width="0.0" height="0.0"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
+                                                    <color key="textColor" red="0.5490196078431373" green="0.5490196078431373" blue="0.5490196078431373" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qDu-LV-mYt" customClass="PTDeviceStatusView" customModule="PawTrails" customModuleProvider="target">
+                                                    <rect key="frame" x="323" y="27" width="44" height="45"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="15" id="fsA-8U-Nsx"/>
-                                                        <constraint firstAttribute="width" constant="20" id="g9G-dH-Zug"/>
-                                                    </constraints>
-                                                </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zPE-k9-Nut" customClass="PTBatteryView" customModule="PawTrails" customModuleProvider="target">
-                                                    <rect key="frame" x="319" y="57.5" width="20" height="15"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="20" id="9MZ-a1-UXn"/>
-                                                        <constraint firstAttribute="height" constant="15" id="qlb-zP-dbp"/>
-                                                    </constraints>
                                                 </view>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="mXp-8N-Ipx" firstAttribute="top" secondItem="NYy-W4-DcK" secondAttribute="bottom" constant="4" id="4Yb-YI-guv"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="mXp-8N-Ipx" secondAttribute="trailing" constant="16" id="A0t-Fr-5r4"/>
                                                 <constraint firstItem="ypQ-Ix-BFS" firstAttribute="centerY" secondItem="jAO-6p-rUR" secondAttribute="centerY" id="A9F-V0-FSe"/>
                                                 <constraint firstItem="0Pk-Vi-mvl" firstAttribute="centerY" secondItem="jAO-6p-rUR" secondAttribute="centerY" id="Dkz-S2-CHE"/>
-                                                <constraint firstItem="NYy-W4-DcK" firstAttribute="leading" secondItem="0Pk-Vi-mvl" secondAttribute="trailing" constant="5" id="Kdh-S7-AGf"/>
-                                                <constraint firstItem="qDu-LV-mYt" firstAttribute="centerY" secondItem="0Pk-Vi-mvl" secondAttribute="centerY" id="PgX-er-HKd"/>
-                                                <constraint firstItem="0Pk-Vi-mvl" firstAttribute="leading" secondItem="jAO-6p-rUR" secondAttribute="leading" constant="6" id="Srn-xJ-B9S"/>
-                                                <constraint firstItem="mXp-8N-Ipx" firstAttribute="leading" secondItem="0Pk-Vi-mvl" secondAttribute="trailing" constant="5" id="Tfe-rY-AE3"/>
-                                                <constraint firstItem="ypQ-Ix-BFS" firstAttribute="leading" secondItem="jAO-6p-rUR" secondAttribute="leading" constant="8" id="Vy1-aD-WDY"/>
-                                                <constraint firstItem="zPE-k9-Nut" firstAttribute="centerY" secondItem="0Pk-Vi-mvl" secondAttribute="centerY" id="WI9-cq-Gf4"/>
-                                                <constraint firstAttribute="trailing" secondItem="qDu-LV-mYt" secondAttribute="trailing" constant="8" id="i1Z-rM-sEC"/>
-                                                <constraint firstItem="NYy-W4-DcK" firstAttribute="top" secondItem="0Pk-Vi-mvl" secondAttribute="top" id="lXs-OV-ksW"/>
-                                                <constraint firstItem="mXp-8N-Ipx" firstAttribute="bottom" secondItem="0Pk-Vi-mvl" secondAttribute="bottom" id="oxK-2T-xpj"/>
-                                                <constraint firstItem="zPE-k9-Nut" firstAttribute="leading" secondItem="mXp-8N-Ipx" secondAttribute="trailing" constant="8" id="q8R-sP-rNN"/>
-                                                <constraint firstItem="qDu-LV-mYt" firstAttribute="leading" secondItem="zPE-k9-Nut" secondAttribute="trailing" constant="8" id="tSX-KP-Ysi"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="mXp-8N-Ipx" secondAttribute="bottom" constant="32" id="HNV-Ad-d7I"/>
+                                                <constraint firstItem="NYy-W4-DcK" firstAttribute="leading" secondItem="0Pk-Vi-mvl" secondAttribute="trailing" constant="8" id="Kdh-S7-AGf"/>
+                                                <constraint firstItem="0Pk-Vi-mvl" firstAttribute="leading" secondItem="jAO-6p-rUR" secondAttribute="leading" constant="14" id="Srn-xJ-B9S"/>
+                                                <constraint firstItem="ypQ-Ix-BFS" firstAttribute="leading" secondItem="jAO-6p-rUR" secondAttribute="leading" constant="16" id="Vy1-aD-WDY"/>
+                                                <constraint firstItem="qDu-LV-mYt" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="NYy-W4-DcK" secondAttribute="trailing" constant="16" id="WRr-cl-qSL"/>
+                                                <constraint firstItem="qDu-LV-mYt" firstAttribute="top" secondItem="NYy-W4-DcK" secondAttribute="top" id="fQ1-Jc-frn"/>
+                                                <constraint firstAttribute="trailing" secondItem="qDu-LV-mYt" secondAttribute="trailing" constant="16" id="i1Z-rM-sEC"/>
+                                                <constraint firstItem="NYy-W4-DcK" firstAttribute="top" secondItem="0Pk-Vi-mvl" secondAttribute="top" priority="999" id="lXs-OV-ksW"/>
+                                                <constraint firstItem="mXp-8N-Ipx" firstAttribute="leading" secondItem="NYy-W4-DcK" secondAttribute="leading" id="zJK-EB-ab8"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
-                                            <outlet property="batteryLevel" destination="zPE-k9-Nut" id="4i1-Ip-hFx"/>
+                                            <outlet property="deviceStatusView" destination="qDu-LV-mYt" id="KhO-VO-1yV"/>
                                             <outlet property="petImageView" destination="ypQ-Ix-BFS" id="QLy-m2-RhO"/>
-                                            <outlet property="signalLevels" destination="PgX-er-HKd" id="loh-qM-R29"/>
                                             <outlet property="subtitleLabel" destination="mXp-8N-Ipx" id="GPO-Qi-gtl"/>
                                             <outlet property="titleLabel" destination="NYy-W4-DcK" id="blk-uw-AJS"/>
-                                            <segue destination="N6c-8c-tif" kind="show" id="0lD-sZ-M1i"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -4259,16 +4238,16 @@ PawTrails is a product created by Attitude Technologies.
         <!--Tab Page View Controller-->
         <scene sceneID="X09-JD-dxV">
             <objects>
-                <viewController id="N6c-8c-tif" customClass="TabPageViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PetDetails" useStoryboardIdentifierAsRestorationIdentifier="YES" id="N6c-8c-tif" customClass="TabPageViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LMu-Ty-Pbf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="osN-NO-pbf">
-                                <rect key="frame" x="0.0" y="114" width="375" height="504"/>
+                                <rect key="frame" x="0.0" y="70" width="375" height="597"/>
                             </scrollView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Kix-04-002" customClass="ButtonBarView" customModule="XLPagerTabStrip">
-                                <rect key="frame" x="0.0" y="64" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="xe5-DQ-oFK"/>
@@ -5608,17 +5587,17 @@ PawTrails is a product created by Attitude Technologies.
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pawtrails-logo-1x-png" translatesAutoresizingMaskIntoConstraints="NO" id="ILA-mU-fYT">
-                                <rect key="frame" x="80" y="158" width="80" height="50"/>
+                                <rect key="frame" x="80" y="114" width="80" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="MZO-Kh-6x2"/>
                                     <constraint firstAttribute="width" constant="80" id="mkI-L3-sDP"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sunbeam-logo-1x-png-nobg" translatesAutoresizingMaskIntoConstraints="NO" id="FeI-1n-QoM">
-                                <rect key="frame" x="166" y="158" width="144" height="50"/>
+                                <rect key="frame" x="166" y="114" width="144" height="50"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rFc-dO-isr">
-                                <rect key="frame" x="0.0" y="106" width="375" height="455"/>
+                                <rect key="frame" x="0.0" y="57" width="375" height="553"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="g72-ZG-vyw">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="61"/>
@@ -5705,7 +5684,7 @@ PawTrails is a product created by Attitude Technologies.
                                 </prototypes>
                             </tableView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wMi-oC-V8K">
-                                <rect key="frame" x="-4" y="218" width="383" height="449"/>
+                                <rect key="frame" x="-4" y="174" width="383" height="493"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PawTrails worked with a veterinary surgeon from Sunbeam Veterinary clinic to give our customers professional recommendation." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q4u-vi-c5L">
                                         <rect key="frame" x="20" y="20" width="343" height="100"/>
@@ -7447,7 +7426,7 @@ your product.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rfL-Sn-QFW">
-                                <rect key="frame" x="0.0" y="108" width="375" height="461"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HRI-ee-D9R">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="369.5"/>
@@ -8302,6 +8281,6 @@ Last Edited on 2017-12-04
         <segue reference="yp5-bT-5uy"/>
         <segue reference="Rzx-2e-OhR"/>
         <segue reference="G7h-iD-Glq"/>
-        <segue reference="gjN-xE-RCG"/>
+        <segue reference="Avi-do-lZw"/>
     </inferredMetricsTieBreakers>
 </document>

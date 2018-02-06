@@ -225,8 +225,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     }
     
     func getPets() -> Observable<[Pet]> {
-//        let petList = DataManager.instance.pets()
-//        let
+
         return isReady().filter({ (value) -> Bool in
             return value == true
         }).flatMap({ (isReady) -> Observable<[Pet]> in

@@ -276,15 +276,21 @@ extension PetDeviceData {
         id = 0
         deviceData = DeviceData()
         pet = Pet()
+        deviceConnection = DeviceConnection()
     }
     
     init(_ json: [String:Any]) {
         id = 0
         deviceData = DeviceData()
+        deviceConnection = DeviceConnection()
         
         if json["deviceData"] != nil {
             deviceData = DeviceData(json["deviceData"] as! [String:Any])
             id = deviceData.id
+        }
+        
+        if json["connection"] != nil {
+            deviceConnection = DeviceConnection(json["connection"] as! [String:Any])
         }
         
         if let petID = json["petId"] as? Int {
@@ -315,6 +321,8 @@ extension PetDeviceData {
     
     init(_ cdPetDeviceData: CDPetDeviceData) {
         deviceData = DeviceData(cdPetDeviceData)
+        // TODO: Need to save DeviceConnection on database?
+        deviceConnection = DeviceConnection()
         id = deviceData.id
         if let pets = CoreDataManager.instance.retrieve(.pet, with: NSPredicate("id", .equal, id)) {
             pet = Pet(pets.first as! CDPet)
@@ -367,6 +375,26 @@ extension DeviceData {
         deviceDate = Date.init(timeIntervalSince1970: TimeInterval(cdPetDeviceData.deviceTime))
     }
 }
+
+extension DeviceConnection {
+    
+    init() {
+        status = 0
+        statusTime = 0
+    }
+    
+    init(_ json: [String:Any]) {
+        status = json["deviceStatus"] != nil ? json["deviceStatus"] as! Int16 : 0
+        
+        if let statusTime = json["statusTime"] as? Int64 {
+            self.statusTime = statusTime
+        } else {
+            self.statusTime = 0
+        }
+
+    }
+}
+
 
 extension Breed {
     

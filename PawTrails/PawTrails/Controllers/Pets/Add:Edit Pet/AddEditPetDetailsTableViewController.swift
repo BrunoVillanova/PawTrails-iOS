@@ -181,7 +181,7 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
 //        }
         else{
             if let navigation = (navigationController?.viewControllers.first(where: { $0 is PetsViewController }) as? PetsViewController) {
-                navigation.reloadPetsAPI()
+                navigation.reloadPets()
                 self.alert(title: "", msg: "Your request has been processed", type: .blue, disableTime: 3, handler: nil)
             }
             

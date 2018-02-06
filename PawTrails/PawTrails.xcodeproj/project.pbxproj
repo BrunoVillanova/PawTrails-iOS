@@ -17,8 +17,13 @@
 		1555FFF41FDF640D00F05C76 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1555FFF21FDF640D00F05C76 /* RxCocoa.framework */; };
 		1555FFF51FDF640D00F05C76 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1555FFF31FDF640D00F05C76 /* RxSwift.framework */; };
 		1555FFF71FDF662A00F05C76 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1555FFF61FDF662A00F05C76 /* SwiftyJSON.framework */; };
+		155F614B2028A070007D8A8B /* RxDataSources.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 155F614A2028A06F007D8A8B /* RxDataSources.framework */; };
+		155F614D20291528007D8A8B /* Differentiator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 155F614C20291527007D8A8B /* Differentiator.framework */; };
 		1585469C1FDCFBCB004C82EC /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1585469B1FDCFBCB004C82EC /* Charts.framework */; };
 		1589EBC11FE3644E00280926 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1589EBC01FE3644E00280926 /* Bolts.framework */; };
+		1599B22A2023E82B002D4025 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1599B2292023E82B002D4025 /* SnapKit.framework */; };
+		1599B22C2023F48A002D4025 /* PTDeviceStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1599B22B2023F48A002D4025 /* PTDeviceStatusView.swift */; };
+		15AAE9F72022BFCA007F9080 /* PTConnectionStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AAE9F62022BFCA007F9080 /* PTConnectionStatusView.swift */; };
 		15C7613A2016CFF3002AA7F8 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C7610F2016CFF3002AA7F8 /* DataManager.swift */; };
 		15C7613B2016CFF3002AA7F8 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C761102016CFF3002AA7F8 /* EventManager.swift */; };
 		15C7613D2016CFF3002AA7F8 /* BEMAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C761142016CFF3002AA7F8 /* BEMAnimationManager.m */; };
@@ -252,9 +257,14 @@
 		1555FFF21FDF640D00F05C76 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		1555FFF31FDF640D00F05C76 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		1555FFF61FDF662A00F05C76 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
+		155F614A2028A06F007D8A8B /* RxDataSources.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxDataSources.framework; path = Carthage/Build/iOS/RxDataSources.framework; sourceTree = "<group>"; };
+		155F614C20291527007D8A8B /* Differentiator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Differentiator.framework; path = Carthage/Build/iOS/Differentiator.framework; sourceTree = "<group>"; };
 		157AC4B21FC3192E0005A717 /* Convert.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Convert.framework; path = Carthage/Build/iOS/Convert.framework; sourceTree = "<group>"; };
 		1585469B1FDCFBCB004C82EC /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = Carthage/Build/iOS/Charts.framework; sourceTree = "<group>"; };
 		1589EBC01FE3644E00280926 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Carthage/Build/iOS/Bolts.framework; sourceTree = "<group>"; };
+		1599B2292023E82B002D4025 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
+		1599B22B2023F48A002D4025 /* PTDeviceStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTDeviceStatusView.swift; sourceTree = "<group>"; };
+		15AAE9F62022BFCA007F9080 /* PTConnectionStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTConnectionStatusView.swift; sourceTree = "<group>"; };
 		15C7610F2016CFF3002AA7F8 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		15C761102016CFF3002AA7F8 /* EventManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
 		15C761132016CFF3002AA7F8 /* BEMCheckBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMCheckBox.h; sourceTree = "<group>"; };
@@ -512,6 +522,9 @@
 				E710CBA5471FDC34DDA7BEB8 /* Pods_PawTrails.framework in Frameworks */,
 				150741C5200DB4B800EB761B /* CocoaLumberjackSwift.framework in Frameworks */,
 				150741C6200DB4B800EB761B /* CocoaLumberjack.framework in Frameworks */,
+				1599B22A2023E82B002D4025 /* SnapKit.framework in Frameworks */,
+				155F614B2028A070007D8A8B /* RxDataSources.framework in Frameworks */,
+				155F614D20291528007D8A8B /* Differentiator.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -619,6 +632,8 @@
 				15C762322016D011002AA7F8 /* TripView.swift */,
 				15C762332016D011002AA7F8 /* PTBasicAnnotationView.swift */,
 				447AF46C2021E22C0050F885 /* AllowedCharsTextField.swift */,
+				15AAE9F62022BFCA007F9080 /* PTConnectionStatusView.swift */,
+				1599B22B2023F48A002D4025 /* PTDeviceStatusView.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -1067,6 +1082,9 @@
 		91352D1B7E01CC1C0CF51D38 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				155F614C20291527007D8A8B /* Differentiator.framework */,
+				155F614A2028A06F007D8A8B /* RxDataSources.framework */,
+				1599B2292023E82B002D4025 /* SnapKit.framework */,
 				150741C4200DB4B700EB761B /* CocoaLumberjack.framework */,
 				150741C3200DB4B700EB761B /* CocoaLumberjackSwift.framework */,
 				15C90DB01FE36F56008F73B3 /* Crashlytics.framework */,
@@ -1321,6 +1339,9 @@
 				"$(SRCROOT)/Carthage/Build/iOS/HockeySDK.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/CocoaLumberjack.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/CocoaLumberjackSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxDataSources.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Differentiator.framework",
 			);
 			name = "Carthage Copy Frameworks";
 			outputPaths = (
@@ -1337,6 +1358,9 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/HockeySDK.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/CocoaLumberjack.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/CocoaLumberjackSwift.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SnapKit.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxDataSources.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Differentiator.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1661,10 +1685,12 @@
 				15C7624C2016D011002AA7F8 /* PTWideButton.swift in Sources */,
 				15C763F02016D5C0002AA7F8 /* AirbnbDatePickerMonthHeader.swift in Sources */,
 				15C7624A2016D011002AA7F8 /* PTMapView.swift in Sources */,
+				1599B22C2023F48A002D4025 /* PTDeviceStatusView.swift in Sources */,
 				15C763D62016D5C0002AA7F8 /* EmailTableViewController.swift in Sources */,
 				15C7614A2016CFF3002AA7F8 /* PawTrails.xcdatamodeld in Sources */,
 				15C7640E2016D5C0002AA7F8 /* MainTabBarViewController.swift in Sources */,
 				15C763F12016D5C0002AA7F8 /* AirbnbDatePickerFooter.swift in Sources */,
+				15AAE9F72022BFCA007F9080 /* PTConnectionStatusView.swift in Sources */,
 				15C764162016D5C0002AA7F8 /* PetSizeTableViewController.swift in Sources */,
 				15C763CE2016D5C0002AA7F8 /* SignUpViewController.swift in Sources */,
 				15C7640C2016D5C0002AA7F8 /* PieChart.swift in Sources */,

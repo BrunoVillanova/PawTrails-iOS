@@ -219,11 +219,16 @@ struct DeviceData {
     var deviceTime: Int64
 }
 
+struct DeviceConnection {
+    var statusTime: Int64
+    var status: Int16
+}
 
 struct PetDeviceData {
     var id: Int
     var deviceData: DeviceData
     var pet: Pet
+    var deviceConnection: DeviceConnection
 }
 
 struct TripAchievements {
@@ -451,14 +456,12 @@ extension Point {
         let geocoder = CLGeocoder()
         
         geocoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) in
-            
             if let placemark = placemarks?[0] as CLPlacemark! {
                 if let formattedAddressLines = placemark.addressDictionary?["FormattedAddressLines"] as? [String] {
                     address = formattedAddressLines.joined(separator: ", ")
+                    handler(address)
                 }
             }
-            
-            handler(address)
         })
         
     }

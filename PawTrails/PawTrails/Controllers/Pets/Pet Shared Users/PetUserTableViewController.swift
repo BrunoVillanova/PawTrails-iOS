@@ -114,7 +114,6 @@ class PetUserTableViewController: UITableViewController, PetUserView {
         
         if let profile = navigationController?.viewControllers.first(where: { $0 is PetsViewController}) as? PetsViewController {
             profile.reloadPets()
-            profile.tableView.reloadData()
             navigationController?.popToViewController(profile, animated: true)
         }
     }
