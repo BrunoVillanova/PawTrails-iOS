@@ -150,7 +150,7 @@ extension DataManager {
                 }
             }
             return Disposables.create()
-        }).flatMap({ (trips) -> Observable<[Trip]> in
+        }).flatMapLatest({ (_) -> Observable<[Trip]> in
             return self.allTrips()
         })
         
