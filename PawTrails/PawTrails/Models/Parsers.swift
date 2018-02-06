@@ -348,12 +348,17 @@ extension DeviceData {
     
     init(_ json: [String:Any]) {
         id = json["idpos"] != nil ? json["idpos"] as! Int : 0
-        crs = json["crs"] as! Float
-        point = Point(json["lat"] as! Double, json["lon"] as! Double)
+        
+        if let crs = json["crs"] as? Float {
+            self.crs = crs
+        } else {
+            self.crs = 0
+        }
+        point = Point(json["lat"] as! Double , json["lon"] as! Double)
         speed = json["speed"] as! Float
         battery = json["battery"] as! Int16
-        internetSignal = json["netSignal"] as! Int16
-        satelliteSignal = json["satSignal"] as! Int16
+        internetSignal = json["netSignal"] as? Int16 ?? 0
+        satelliteSignal = json["satSignal"] as? Int16 ?? 0
         
         if let deviceTime = json["deviceTime"] as? Int64 {
             self.deviceTime = deviceTime

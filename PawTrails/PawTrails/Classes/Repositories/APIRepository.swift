@@ -743,8 +743,17 @@ class APIRepository {
             }
         }
     }
+    func getImmediateLocation(_ petIdss: [Int], callback: @escaping APIRepErrorCallback) {
+         let petIds = ["ids":petIdss]
+        APIManager.instance.perform(call: .getImmediateLocation, with: petIds) { (error, json) in
+            if let error = error {
+                callback(error)
+            } else {
+                callback(nil)
+            }
+        }
+    }
 }
-
 
 
 

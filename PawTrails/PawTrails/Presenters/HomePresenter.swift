@@ -13,6 +13,7 @@ protocol HomeView: NSObjectProtocol, View {
     func reload()
     func noPetsFound()
     func userNotSigned()
+    func success()
 }
 
 class HomePresenter {
@@ -79,6 +80,7 @@ class HomePresenter {
         NotificationManager.instance.removePetListUpdates()
     }
     
+
     //Socket IO
     
     func startPetsGPSUpdates(_ callback: @escaping ((_ id: MKLocationId, _ point: Point)->())){
