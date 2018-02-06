@@ -144,7 +144,7 @@ class AirbnbDatePickerHeader: UIView {
         addSubview(startDayLabel)
         
         startDayLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 20).isActive = true
-        startDayLabel.topAnchor.constraint(equalTo: topAnchor, constant: 25).isActive = true
+        startDayLabel.topAnchor.constraint(equalTo: topAnchor, constant: 40).isActive = true
         startDayLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         startDayLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1/3).isActive = true
     }
@@ -162,7 +162,7 @@ class AirbnbDatePickerHeader: UIView {
         addSubview(endDayLabel)
         
         endDayLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -20).isActive = true
-        endDayLabel.topAnchor.constraint(equalTo: topAnchor, constant: 25).isActive = true
+        endDayLabel.topAnchor.constraint(equalTo: topAnchor, constant: 40).isActive = true
         endDayLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         endDayLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1/3).isActive = true
     }
