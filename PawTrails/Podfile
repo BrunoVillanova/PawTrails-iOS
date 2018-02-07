@@ -21,7 +21,6 @@ target 'PawTrails' do
     pod 'MaterialComponents/Buttons'
     pod "Pulsator"
     pod 'swiftScan', '1.1.1'
-    pod 'RxDataSources', '~> 2.0.2'
 
   target 'PawTrailsTests' do
     inherit! :search_paths  	
