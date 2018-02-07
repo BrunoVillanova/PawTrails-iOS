@@ -17,13 +17,8 @@
 		1555FFF41FDF640D00F05C76 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1555FFF21FDF640D00F05C76 /* RxCocoa.framework */; };
 		1555FFF51FDF640D00F05C76 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1555FFF31FDF640D00F05C76 /* RxSwift.framework */; };
 		1555FFF71FDF662A00F05C76 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1555FFF61FDF662A00F05C76 /* SwiftyJSON.framework */; };
-		155F614B2028A070007D8A8B /* RxDataSources.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 155F614A2028A06F007D8A8B /* RxDataSources.framework */; };
-		155F614D20291528007D8A8B /* Differentiator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 155F614C20291527007D8A8B /* Differentiator.framework */; };
 		1585469C1FDCFBCB004C82EC /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1585469B1FDCFBCB004C82EC /* Charts.framework */; };
 		1589EBC11FE3644E00280926 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1589EBC01FE3644E00280926 /* Bolts.framework */; };
-		1599B22A2023E82B002D4025 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1599B2292023E82B002D4025 /* SnapKit.framework */; };
-		1599B22C2023F48A002D4025 /* PTDeviceStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1599B22B2023F48A002D4025 /* PTDeviceStatusView.swift */; };
-		15AAE9F72022BFCA007F9080 /* PTConnectionStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AAE9F62022BFCA007F9080 /* PTConnectionStatusView.swift */; };
 		15C7613A2016CFF3002AA7F8 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C7610F2016CFF3002AA7F8 /* DataManager.swift */; };
 		15C7613B2016CFF3002AA7F8 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C761102016CFF3002AA7F8 /* EventManager.swift */; };
 		15C7613D2016CFF3002AA7F8 /* BEMAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C761142016CFF3002AA7F8 /* BEMAnimationManager.m */; };
@@ -218,15 +213,10 @@
 		4452EEF41ED5CF03004E13DC /* APIPetSafeZonesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4452EEF31ED5CF03004E13DC /* APIPetSafeZonesTests.swift */; };
 		4452EEF61ED5DD41004E13DC /* APIAuthenticationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4452EEF51ED5DD41004E13DC /* APIAuthenticationTests.swift */; };
 		446231401EE6BE4200B53C1D /* DataManagerPetSharingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4462313F1EE6BE4200B53C1D /* DataManagerPetSharingTests.swift */; };
-<<<<<<< HEAD
-		4488970820237E1400E4E594 /* AddPetUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4488970720237E1400E4E594 /* AddPetUserViewController.swift */; };
-=======
-		447AF46D2021E22C0050F885 /* AllowedCharsTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447AF46C2021E22C0050F885 /* AllowedCharsTextField.swift */; };
->>>>>>> f639e0d2132a9a0e711d5e8d8c35d6c89194e409
 		448BE9681ED47F5C00665608 /* APIUserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448BE9671ED47F5C00665608 /* APIUserTest.swift */; };
 		448BE96A1ED490D900665608 /* APIImageUploadTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448BE9691ED490D900665608 /* APIImageUploadTest.swift */; };
 		44D5FE921EE6E9560049232F /* DataManagerPetSafeZonesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D5FE911EE6E9560049232F /* DataManagerPetSafeZonesTests.swift */; };
-		44F76575201B60A800B552FF /* AddPetUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F76574201B60A800B552FF /* AddPetUserViewController.swift */; };
+		44E7934F2023630600C31B0A /* AddPetUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E7934E2023630600C31B0A /* AddPetUserViewController.swift */; };
 		8AD2F6B7B0A8110072345C01 /* Pods_PawTrailsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E2B813BA9CAE948174F2C71 /* Pods_PawTrailsTests.framework */; };
 		E710CBA5471FDC34DDA7BEB8 /* Pods_PawTrails.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3E63257CC5E13A67F31124B /* Pods_PawTrails.framework */; };
 /* End PBXBuildFile section */
@@ -261,14 +251,9 @@
 		1555FFF21FDF640D00F05C76 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		1555FFF31FDF640D00F05C76 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		1555FFF61FDF662A00F05C76 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
-		155F614A2028A06F007D8A8B /* RxDataSources.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxDataSources.framework; path = Carthage/Build/iOS/RxDataSources.framework; sourceTree = "<group>"; };
-		155F614C20291527007D8A8B /* Differentiator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Differentiator.framework; path = Carthage/Build/iOS/Differentiator.framework; sourceTree = "<group>"; };
 		157AC4B21FC3192E0005A717 /* Convert.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Convert.framework; path = Carthage/Build/iOS/Convert.framework; sourceTree = "<group>"; };
 		1585469B1FDCFBCB004C82EC /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = Carthage/Build/iOS/Charts.framework; sourceTree = "<group>"; };
 		1589EBC01FE3644E00280926 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Carthage/Build/iOS/Bolts.framework; sourceTree = "<group>"; };
-		1599B2292023E82B002D4025 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
-		1599B22B2023F48A002D4025 /* PTDeviceStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTDeviceStatusView.swift; sourceTree = "<group>"; };
-		15AAE9F62022BFCA007F9080 /* PTConnectionStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTConnectionStatusView.swift; sourceTree = "<group>"; };
 		15C7610F2016CFF3002AA7F8 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		15C761102016CFF3002AA7F8 /* EventManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
 		15C761132016CFF3002AA7F8 /* BEMCheckBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMCheckBox.h; sourceTree = "<group>"; };
@@ -481,15 +466,10 @@
 		4452EEF31ED5CF03004E13DC /* APIPetSafeZonesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIPetSafeZonesTests.swift; sourceTree = "<group>"; };
 		4452EEF51ED5DD41004E13DC /* APIAuthenticationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIAuthenticationTests.swift; sourceTree = "<group>"; };
 		4462313F1EE6BE4200B53C1D /* DataManagerPetSharingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerPetSharingTests.swift; sourceTree = "<group>"; };
-<<<<<<< HEAD
-		4488970720237E1400E4E594 /* AddPetUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPetUserViewController.swift; sourceTree = "<group>"; };
-=======
-		447AF46C2021E22C0050F885 /* AllowedCharsTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllowedCharsTextField.swift; sourceTree = "<group>"; };
->>>>>>> f639e0d2132a9a0e711d5e8d8c35d6c89194e409
 		448BE9671ED47F5C00665608 /* APIUserTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIUserTest.swift; sourceTree = "<group>"; };
 		448BE9691ED490D900665608 /* APIImageUploadTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIImageUploadTest.swift; sourceTree = "<group>"; };
 		44D5FE911EE6E9560049232F /* DataManagerPetSafeZonesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerPetSafeZonesTests.swift; sourceTree = "<group>"; };
-		44F76574201B60A800B552FF /* AddPetUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPetUserViewController.swift; sourceTree = "<group>"; };
+		44E7934E2023630600C31B0A /* AddPetUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPetUserViewController.swift; sourceTree = "<group>"; };
 		734D05AA5E231C24EBC9332D /* Pods-PawTrails.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PawTrails.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PawTrails/Pods-PawTrails.debug.xcconfig"; sourceTree = "<group>"; };
 		85A3950B851162A9AD058D22 /* Pods-PawTrailsTests.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PawTrailsTests.beta.xcconfig"; path = "Pods/Target Support Files/Pods-PawTrailsTests/Pods-PawTrailsTests.beta.xcconfig"; sourceTree = "<group>"; };
 		A8782C798F51A66A5AFC788C /* Pods-PawTrailsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PawTrailsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PawTrailsTests/Pods-PawTrailsTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -530,9 +510,6 @@
 				E710CBA5471FDC34DDA7BEB8 /* Pods_PawTrails.framework in Frameworks */,
 				150741C5200DB4B800EB761B /* CocoaLumberjackSwift.framework in Frameworks */,
 				150741C6200DB4B800EB761B /* CocoaLumberjack.framework in Frameworks */,
-				1599B22A2023E82B002D4025 /* SnapKit.framework in Frameworks */,
-				155F614B2028A070007D8A8B /* RxDataSources.framework in Frameworks */,
-				155F614D20291528007D8A8B /* Differentiator.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -639,9 +616,6 @@
 				15C762312016D011002AA7F8 /* PawTrailsStyleKit.swift */,
 				15C762322016D011002AA7F8 /* TripView.swift */,
 				15C762332016D011002AA7F8 /* PTBasicAnnotationView.swift */,
-				447AF46C2021E22C0050F885 /* AllowedCharsTextField.swift */,
-				15AAE9F62022BFCA007F9080 /* PTConnectionStatusView.swift */,
-				1599B22B2023F48A002D4025 /* PTDeviceStatusView.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -848,16 +822,13 @@
 		15C7638F2016D5C0002AA7F8 /* Pets */ = {
 			isa = PBXGroup;
 			children = (
+				44E7934E2023630600C31B0A /* AddPetUserViewController.swift */,
 				15C763BC2016D5C0002AA7F8 /* Add:Edit Pet */,
 				15C763AF2016D5C0002AA7F8 /* Add Device Tutorial */,
 				15C763912016D5C0002AA7F8 /* Pet SafeZones */,
 				15C7639B2016D5C0002AA7F8 /* Pet Shared Users */,
 				15C763AE2016D5C0002AA7F8 /* PetInfromationViewController.swift */,
 				15C763862016D5C0002AA7F8 /* PetsViewController.swift */,
-<<<<<<< HEAD
-				4488970720237E1400E4E594 /* AddPetUserViewController.swift */,
-=======
->>>>>>> f639e0d2132a9a0e711d5e8d8c35d6c89194e409
 				15C763902016D5C0002AA7F8 /* Date.swift */,
 				15C763972016D5C0002AA7F8 /* AirbnbDatePickerFlowLayout.swift */,
 				15C763982016D5C0002AA7F8 /* AirbnbDatePickerMonthHeader.swift */,
@@ -888,7 +859,6 @@
 			isa = PBXGroup;
 			children = (
 				15C7639D2016D5C0002AA7F8 /* PetUserTableViewController.swift */,
-				44F76574201B60A800B552FF /* AddPetUserViewController.swift */,
 			);
 			path = "Pet Shared Users";
 			sourceTree = "<group>";
@@ -1094,9 +1064,6 @@
 		91352D1B7E01CC1C0CF51D38 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				155F614C20291527007D8A8B /* Differentiator.framework */,
-				155F614A2028A06F007D8A8B /* RxDataSources.framework */,
-				1599B2292023E82B002D4025 /* SnapKit.framework */,
 				150741C4200DB4B700EB761B /* CocoaLumberjack.framework */,
 				150741C3200DB4B700EB761B /* CocoaLumberjackSwift.framework */,
 				15C90DB01FE36F56008F73B3 /* Crashlytics.framework */,
@@ -1351,9 +1318,6 @@
 				"$(SRCROOT)/Carthage/Build/iOS/HockeySDK.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/CocoaLumberjack.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/CocoaLumberjackSwift.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxDataSources.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Differentiator.framework",
 			);
 			name = "Carthage Copy Frameworks";
 			outputPaths = (
@@ -1370,9 +1334,6 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/HockeySDK.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/CocoaLumberjack.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/CocoaLumberjackSwift.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SnapKit.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxDataSources.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Differentiator.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1413,7 +1374,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-PawTrails/Pods-PawTrails-resources.sh",
-				$PODS_CONFIGURATION_BUILD_DIR/HockeySDK/HockeySDKResources.bundle,
+				"$PODS_CONFIGURATION_BUILD_DIR/HockeySDK/HockeySDKResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -1493,6 +1454,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-PawTrails/Pods-PawTrails-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFInternationalization/MDFInternationalization.framework",
@@ -1500,6 +1462,9 @@
 				"${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/Pulsator/Pulsator.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SCLAlertView/SCLAlertView.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework",
@@ -1512,6 +1477,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFInternationalization.framework",
@@ -1519,6 +1485,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialComponents.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pulsator.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SCLAlertView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkyFloatingLabelTextField.framework",
@@ -1575,6 +1544,7 @@
 				15C764102016D5C0002AA7F8 /* AddPetDeviceTableViewController.swift in Sources */,
 				15C764172016D5C0002AA7F8 /* PetBreedTableViewController.swift in Sources */,
 				15C762402016D011002AA7F8 /* PTBubbleView.swift in Sources */,
+				44E7934F2023630600C31B0A /* AddPetUserViewController.swift in Sources */,
 				15C7627E2016D046002AA7F8 /* AddEditPetPresenter.swift in Sources */,
 				15C7627F2016D046002AA7F8 /* PetPresenter.swift in Sources */,
 				15C7641D2016D5C0002AA7F8 /* BCS3ViewController.swift in Sources */,
@@ -1652,16 +1622,10 @@
 				15C7625D2016D026002AA7F8 /* Parsers.swift in Sources */,
 				15C762752016D046002AA7F8 /* ChangePasswordPresenter.swift in Sources */,
 				15C7614E2016CFF3002AA7F8 /* CDPetUser+CoreDataClass.swift in Sources */,
-<<<<<<< HEAD
-				4488970820237E1400E4E594 /* AddPetUserViewController.swift in Sources */,
-=======
-				44F76575201B60A800B552FF /* AddPetUserViewController.swift in Sources */,
->>>>>>> f639e0d2132a9a0e711d5e8d8c35d6c89194e409
 				15C762B72016D06B002AA7F8 /* ViewExtensions.swift in Sources */,
 				15C7615A2016CFF3002AA7F8 /* CDCountryCode+CoreDataClass.swift in Sources */,
 				15C761562016CFF3002AA7F8 /* CDAddress+CoreDataClass.swift in Sources */,
 				15C761402016CFF3002AA7F8 /* BEMCheckBox.m in Sources */,
-				447AF46D2021E22C0050F885 /* AllowedCharsTextField.swift in Sources */,
 				15C761552016CFF3002AA7F8 /* CDAddress+CoreDataProperties.swift in Sources */,
 				15C764072016D5C0002AA7F8 /* StepTwoViewController.swift in Sources */,
 				15C7640F2016D5C0002AA7F8 /* AddEditPetDetailsTableViewController.swift in Sources */,
@@ -1701,12 +1665,10 @@
 				15C7624C2016D011002AA7F8 /* PTWideButton.swift in Sources */,
 				15C763F02016D5C0002AA7F8 /* AirbnbDatePickerMonthHeader.swift in Sources */,
 				15C7624A2016D011002AA7F8 /* PTMapView.swift in Sources */,
-				1599B22C2023F48A002D4025 /* PTDeviceStatusView.swift in Sources */,
 				15C763D62016D5C0002AA7F8 /* EmailTableViewController.swift in Sources */,
 				15C7614A2016CFF3002AA7F8 /* PawTrails.xcdatamodeld in Sources */,
 				15C7640E2016D5C0002AA7F8 /* MainTabBarViewController.swift in Sources */,
 				15C763F12016D5C0002AA7F8 /* AirbnbDatePickerFooter.swift in Sources */,
-				15AAE9F72022BFCA007F9080 /* PTConnectionStatusView.swift in Sources */,
 				15C764162016D5C0002AA7F8 /* PetSizeTableViewController.swift in Sources */,
 				15C763CE2016D5C0002AA7F8 /* SignUpViewController.swift in Sources */,
 				15C7640C2016D5C0002AA7F8 /* PieChart.swift in Sources */,
