@@ -192,7 +192,7 @@ class SelectPetsVC: UIViewController, PetsView, SelectPetView {
         
         DataManager.instance.startTrips(petIDsToStartTrip.value.map({$0}))
             .take(1)
-            .subscribe(onNext: { (startedTrips) in
+            .subscribe(onNext: { [unowned self] (startedTrips) in
                 Reporter.debugPrint("Started Trips! \(startedTrips)")
                 self.hideLoadingView()
 
@@ -211,6 +211,8 @@ class SelectPetsVC: UIViewController, PetsView, SelectPetView {
                 self.petIDsToStartTrip.value.removeAll()
                 let apiError = error as! APIManagerError
                 if let errorCode = apiError.errorCode {
+                    //TODO: we need a way to inform what pet is causing the error, now we only get a generic message from server
+                    self.alert(title: "Sorry, cannot start Adventure", msg: errorCode.description)
                     Reporter.debugPrint("Error \(errorCode)!")
                 }
             },
