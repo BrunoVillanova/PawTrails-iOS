@@ -94,7 +94,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         
     #if DEBUG
         let config : SocketIOClientConfiguration = [
-            .log(true),
+//            .log(true),
             .secure(true),
             .reconnectAttempts(50),
             .reconnectWait(3),
@@ -173,7 +173,14 @@ class SocketIOManager: NSObject, URLSessionDelegate {
             
             if let petDeviceData = PetDeviceData.fromJson(data.first) {
                 Reporter.debugPrint("SocketIO -> Setting petGpsUpdates.value")
-                self.petGpsUpdates.value = petDeviceData
+    
+                for newPetDeviceData in petDeviceData {
+                    if !self.petGpsUpdates.value.contains(newPetDeviceData) {  // if there is a name in the new list also in the old list
+                        self.petGpsUpdates.value = petDeviceData
+                        break
+                    }
+                }
+
             }
             
         }).disposed(by: disposeBag)

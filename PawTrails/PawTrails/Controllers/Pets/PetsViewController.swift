@@ -207,6 +207,7 @@
     
     func configure(_ pet: Pet) {
         DispatchQueue.main.async {
+            self.disposable?.dispose()
             self.currentPet = pet
             self.titleLabel.text = pet.name
             

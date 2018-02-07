@@ -165,7 +165,7 @@ enum ErrorCode: Int {
         case .SocialNetworkError:
             return "Error connecting to your social media account."
         case .NoGpsFromPet:
-            return "No Gps updates from your pet"
+            return "No GPS data from this pet. Maybe the collar is turned off or in a weak GPS signal area."
 
         case .PathFormat:
             return "Error. Please try again later"
