@@ -150,8 +150,6 @@ extension DataManager {
                 }
             }
             return Disposables.create()
-        }).flatMapLatest({ (_) -> Observable<[Trip]> in
-            return self.allTrips()
         })
         
         return finishTripApiObserver

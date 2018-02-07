@@ -172,10 +172,9 @@ class SocketIOManager: NSObject, URLSessionDelegate {
             self.openChannels.insert(channel.gpsUpdates)
             
             if let petDeviceData = PetDeviceData.fromJson(data.first) {
-                Reporter.debugPrint("SocketIO -> Setting petGpsUpdates.value")
-    
                 for newPetDeviceData in petDeviceData {
                     if !self.petGpsUpdates.value.contains(newPetDeviceData) {  // if there is a name in the new list also in the old list
+                        Reporter.debugPrint("SocketIO -> Setting petGpsUpdates.value")
                         self.petGpsUpdates.value = petDeviceData
                         break
                     }

@@ -38,8 +38,9 @@ class FinishAdventureVC: UIViewController, BEMCheckBoxDelegate {
     
     @IBAction func finishAdventureBtnPressed(_ sender: Any) {
         self.popUpDestructive(title: "", msg: "Are you sure you want to finish the trip", cancelHandler: nil) { (UIAlertAction) in
+            self.showLoadingView()
             DataManager.instance.finishAdventure().subscribe(onNext: { (stoppedTrips) in
-                
+                self.hideLoadingView()
                 for trip in stoppedTrips {
                     Reporter.debugPrint("TripID \(trip.id) stopped!")
                 }
