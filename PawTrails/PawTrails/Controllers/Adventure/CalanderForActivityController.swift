@@ -22,6 +22,9 @@ class CalanderForActivityController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //hide the future dates
+        self.datePicker.maximumDate = Date()
 
     }
 
