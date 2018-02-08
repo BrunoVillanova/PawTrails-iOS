@@ -183,6 +183,12 @@ extension RecommandationController: UITableViewDelegate, UITableViewDataSource {
             let pet = presenter.pets[indexPath.item]
             let usedPet = pet.bcScore > 0
             
+            if let imageData = pet.image as Data? {
+                cell.petImage.image = UIImage(data: imageData)
+            } else {
+                cell.petImage.image = nil
+            }
+            
             if usedPet {
                 if let name = pet.name {
                     
@@ -199,14 +205,13 @@ extension RecommandationController: UITableViewDelegate, UITableViewDataSource {
                         cell.nameAndResultLbl.text = "\(name) is obese"
                     }
                 }
-                if let imageData = pet.image as Data? {
-                    cell.petImage.image = UIImage(data: imageData)
-                }else{
-                    cell.petImage.image = nil
-                }
+
             } else {
-            cell.nameAndResultLbl.text = ""
-                cell.petImage.image = nil
+                if let name = pet.name {
+                    cell.nameAndResultLbl.text = "No data for \(name)"
+                } else {
+                    cell.nameAndResultLbl.text = "No score data for pet"
+                }
             }
         }
         return cell
