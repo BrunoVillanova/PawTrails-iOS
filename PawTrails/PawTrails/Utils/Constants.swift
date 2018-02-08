@@ -11,7 +11,7 @@ import Foundation
 #if DEBUG
 let isDebug = true
 #else
-let isDebug = true
+let isDebug = false
 #endif
 
 public struct ezdebug {
