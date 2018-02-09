@@ -125,14 +125,14 @@ extension FlowTests {
 extension FlowTests {
     func testControls() {
         for test in [
-            _testUITextView,
-            _testUITextField,
-            _testDatePicker,
-            _testBarButtonItemTap,
-            _testButtonTap,
-            _testSegmentedControl,
-            _testUISwitch,
-            _testSlider
+        _testDatePicker,
+        _testBarButtonItemTap,
+        _testButtonTap,
+        _testSegmentedControl,
+        _testUISwitch,
+        _testUITextField,
+        _testUITextView,
+        _testSlider
             ] {
             goToControlsView()
             test()
@@ -148,14 +148,9 @@ extension FlowTests {
         tableView.cells.allElementsBoundByIndex[5].tap()
     }
 
-    func checkDebugLabelValue(_ expected: String, hasPrefix: Bool = false) {
+    func checkDebugLabelValue(_ expected: String) {
         let textValue = app.staticTexts["debugLabel"].value as? String
-        if hasPrefix {
-            XCTAssertTrue((textValue ?? "").hasPrefix(expected))
-        }
-        else {
-            XCTAssertEqual(textValue, expected)
-        }
+        XCTAssertEqual(textValue, expected)
     }
 
     func _testDatePicker() {
@@ -189,9 +184,9 @@ extension FlowTests {
 
     func _testUISwitch() {
         let switchControl = app.switches.allElementsBoundByIndex[0]
-        switchControl.twoFingerTap()
+        switchControl.tap()
         checkDebugLabelValue("UISwitch value false")
-        switchControl.twoFingerTap()
+        switchControl.tap()
         checkDebugLabelValue("UISwitch value true")
     }
 
@@ -200,10 +195,6 @@ extension FlowTests {
         textField.tap()
         textField.typeText("f")
         checkDebugLabelValue("UITextField text f")
-        let textField2 = app.textFields.allElementsBoundByIndex[1]
-        textField2.tap()
-        textField2.typeText("f2")
-        checkDebugLabelValue("UITextField attributedText f2{", hasPrefix: true)
     }
 
     func _testUITextView() {
@@ -211,18 +202,12 @@ extension FlowTests {
         textView.tap()
         textView.typeText("f")
         checkDebugLabelValue("UITextView text f")
-        goBack()
-        goToControlsView()
-        let textView2 = app.textViews.allElementsBoundByIndex[1]
-        textView2.tap()
-        textView2.typeText("f2")
-        checkDebugLabelValue("UITextView attributedText f2{", hasPrefix: true)
     }
 
     func _testSlider() {
         let slider = app.sliders.allElementsBoundByIndex[0]
         slider.adjust(toNormalizedSliderPosition: 0)
-        checkDebugLabelValue("UISlider value 0.0", hasPrefix: true)
+        checkDebugLabelValue("UISlider value 0.0")
     }
 }
 
@@ -235,7 +220,7 @@ extension FlowTests {
         wait(interval: 1.5)
     }
 
-    func waitForElementToAppear(_ element: XCUIElement, timeout: TimeInterval = 2,  file: String = #file, line: Int = #line) {
+    func waitForElementToAppear(_ element: XCUIElement, timeout: TimeInterval = 2,  file: String = #file, line: UInt = #line) {
         let existsPredicate = NSPredicate(format: "exists == true")
 
         expectation(for: existsPredicate,

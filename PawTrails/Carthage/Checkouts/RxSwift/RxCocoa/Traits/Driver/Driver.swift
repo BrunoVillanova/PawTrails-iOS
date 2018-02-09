@@ -6,22 +6,21 @@
 //  Copyright © 2016 Krunoslav Zaher. All rights reserved.
 //
 
-import RxSwift
+#if !RX_NO_MODULE
+    import RxSwift
+#endif
+
 
 /**
  Trait that represents observable sequence with following properties:
 
  - it never fails
  - it delivers events on `MainScheduler.instance`
- - `share(replay: 1, scope: .whileConnected)` sharing strategy
- 
- Additional explanation:
+ - `shareReplayLatestWhileConnected()` behavior
  - all observers share sequence computation resources
  - it's stateful, upon subscription (calling subscribe) last element is immediately replayed if it was produced
  - computation of elements is reference counted with respect to the number of observers
  - if there are no subscribers, it will release sequence computation resources
-
- In case trait that models event bus is required, please check `Signal`.
 
  `Driver<Element>` can be considered a builder pattern for observable sequences that drive the application.
 
@@ -38,9 +37,9 @@ import RxSwift
 public typealias Driver<E> = SharedSequence<DriverSharingStrategy, E>
 
 public struct DriverSharingStrategy: SharingStrategyProtocol {
-    public static var scheduler: SchedulerType { return SharingScheduler.make() }
+    public static var scheduler: SchedulerType { return driverObserveOnScheduler() }
     public static func share<E>(_ source: Observable<E>) -> Observable<E> {
-        return source.share(replay: 1, scope: .whileConnected)
+        return source.shareReplayLatestWhileConnected()
     }
 }
 
@@ -51,3 +50,41 @@ extension SharedSequenceConvertibleType where SharingStrategy == DriverSharingSt
     }
 }
 
+/**
+ This method can be used in unit tests to ensure that driver is using mock schedulers instead of
+ main schedulers.
+
+ **This shouldn't be used in normal release builds.**
+*/
+public func driveOnScheduler(_ scheduler: SchedulerType, action: () -> ()) {
+    let originalObserveOnScheduler = driverObserveOnScheduler
+    driverObserveOnScheduler = { return scheduler }
+
+    action()
+
+    // If you remove this line , compiler buggy optimizations will change behavior of this code
+    _forceCompilerToStopDoingInsaneOptimizationsThatBreakCode(scheduler)
+    // Scary, I know
+
+    driverObserveOnScheduler = originalObserveOnScheduler
+}
+
+#if os(Linux)
+    import Glibc
+#else
+    import func Foundation.arc4random
+#endif
+
+func _forceCompilerToStopDoingInsaneOptimizationsThatBreakCode(_ scheduler: SchedulerType) {
+    let a: Int32 = 1
+#if os(Linux)
+    let b = 314 + Int32(Glibc.random() & 1)
+#else
+    let b = 314 + Int32(arc4random() & 1)
+#endif
+    if a == b {
+        print(scheduler)
+    }
+}
+
+fileprivate var driverObserveOnScheduler: () -> SchedulerType = { MainScheduler() }

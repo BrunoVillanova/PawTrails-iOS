@@ -129,7 +129,7 @@ final fileprivate class SkipTimeSink<ElementType, O: ObserverType> : Sink<O>, Ob
     }
     
     func run() -> Disposable {
-        let disposeTimer = parent.scheduler.scheduleRelative((), dueTime: self.parent.duration) { _ in 
+        let disposeTimer = parent.scheduler.scheduleRelative((), dueTime: self.parent.duration) {
             self.tick()
             return Disposables.create()
         }

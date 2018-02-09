@@ -6,7 +6,7 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
-extension ObservableType where E : RxAbstractInteger {
+extension Observable where Element : SignedInteger {
     /**
      Returns an observable sequence that produces a value after each period, using the specified scheduler to run timers and to send out observer messages.
 
@@ -25,7 +25,7 @@ extension ObservableType where E : RxAbstractInteger {
     }
 }
 
-extension ObservableType where E: RxAbstractInteger {
+extension Observable where Element: SignedInteger {
     /**
      Returns an observable sequence that periodically produces a value after the specified initial relative due time has elapsed, using the specified scheduler to run timers.
 
@@ -46,7 +46,7 @@ extension ObservableType where E: RxAbstractInteger {
     }
 }
 
-final fileprivate class TimerSink<O: ObserverType> : Sink<O> where O.E : RxAbstractInteger  {
+final fileprivate class TimerSink<O: ObserverType> : Sink<O> where O.E : SignedInteger  {
     typealias Parent = Timer<O.E>
     
     private let _parent: Parent
@@ -64,7 +64,7 @@ final fileprivate class TimerSink<O: ObserverType> : Sink<O> where O.E : RxAbstr
     }
 }
 
-final fileprivate class TimerOneOffSink<O: ObserverType> : Sink<O> where O.E : RxAbstractInteger {
+final fileprivate class TimerOneOffSink<O: ObserverType> : Sink<O> where O.E : SignedInteger {
     typealias Parent = Timer<O.E>
     
     private let _parent: Parent
@@ -85,7 +85,7 @@ final fileprivate class TimerOneOffSink<O: ObserverType> : Sink<O> where O.E : R
     }
 }
 
-final fileprivate class Timer<E: RxAbstractInteger>: Producer<E> {
+final fileprivate class Timer<E: SignedInteger>: Producer<E> {
     fileprivate let _scheduler: SchedulerType
     fileprivate let _dueTime: RxTimeInterval
     fileprivate let _period: RxTimeInterval?

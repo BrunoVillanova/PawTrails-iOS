@@ -47,7 +47,7 @@ func processFile(path: String, outputPath: String) -> String {
         let suffix = codePlusSuffixSeparated[1]
         
         if code.hasPrefix("=") {
-            functionContentComponents.append("components.append(String(\(String(code[code.index(after: code.startIndex) ..< code.endIndex]))))\n")
+            functionContentComponents.append("components.append(String(\(code.substring(from: code.index(after: code.startIndex)))))\n")
         }
         else {
             functionContentComponents.append("\(code)\n")
@@ -90,7 +90,7 @@ for file in files {
     
     let path = (sourceFilesRoot as NSString).appendingPathComponent(file as String)
     let endIndex = path.index(before: path.index(before: path.index(before: path.endIndex)))
-    let outputPath = String(path[path.startIndex ..<  endIndex]) + ".swift"
+    let outputPath = path.substring(to: endIndex) + ".swift"
     
     generateAllFiles.append("_ = { () -> Void in\n\(processFile(path: path, outputPath: outputPath))\n}()\n")
 }

@@ -16,16 +16,10 @@ import class Foundation.NSObject
 import struct Foundation.Date
 
 func XCTAssertErrorEqual(_ lhs: Swift.Error, _ rhs: Swift.Error, file: StaticString = #file, line: UInt = #line) {
-    let lhsEvent: Event<Int> = .error(lhs)
-    let rhsEvent: Event<Int> = .error(rhs)
+    let event1: Event<Int> = .error(lhs)
+    let event2: Event<Int> = .error(rhs)
     
-    XCTAssertTrue(lhsEvent == rhsEvent, "expected \(rhsEvent) but received \(lhsEvent)", file: file, line: line)
-}
-
-func XCTAssertThrowsErrorEqual<T>(_ expression: @autoclosure () throws -> T, _ expectedError: Error, file: StaticString = #file, line: UInt = #line) {
-    XCTAssertThrowsError(expression, file: file, line: line) { actualError in
-        XCTAssertErrorEqual(actualError, expectedError, file: file, line: line)
-    }
+    XCTAssertTrue(event1 == event2, file: file, line: line)
 }
 
 func NSValuesAreEqual(_ lhs: Any, _ rhs: Any) -> Bool {

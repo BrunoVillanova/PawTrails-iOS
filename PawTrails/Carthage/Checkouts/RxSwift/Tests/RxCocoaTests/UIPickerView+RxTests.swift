@@ -45,7 +45,7 @@ final class UIPickerViewTests: RxTest {
         let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         let adapter = StubPickerViewAdapter()
         
-        adapter.titleForRow = { _, _, _ in
+        adapter.titleForRow = { _ in
             titleForRowCalled = true
             return ""
         }
@@ -209,7 +209,7 @@ final class UIPickerViewTests: RxTest {
     func test_modelAtIdexPath_ThrowsError_itemTitles() {
         let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         
-        _ = Observable<[Int]>.never().bind(to: pickerView.rx.itemTitles) { _, _ in
+        _ = Observable<[Int]>.never().bind(to: pickerView.rx.itemTitles) { _ in
             return ""
         }
         
@@ -226,7 +226,7 @@ final class UIPickerViewTests: RxTest {
     func test_modelAtIdexPath_ThrowsError_itemAttributedTitles() {
         let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         
-        _ = Observable<[Int]>.never().bind(to: pickerView.rx.itemAttributedTitles) { _, _ in
+        _ = Observable<[Int]>.never().bind(to: pickerView.rx.itemAttributedTitles) { _ in
             return NSAttributedString()
         }
         
@@ -243,7 +243,7 @@ final class UIPickerViewTests: RxTest {
     func test_modelAtIdexPath_ThrowsError_items() {
         let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         
-        _ = Observable<[Int]>.never().bind(to: pickerView.rx.items) { _, _, _ in
+        _ = Observable<[Int]>.never().bind(to: pickerView.rx.items) { _ in
             return UIView()
         }
         

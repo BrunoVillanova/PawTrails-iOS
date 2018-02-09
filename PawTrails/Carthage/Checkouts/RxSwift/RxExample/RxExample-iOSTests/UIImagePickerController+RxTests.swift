@@ -14,7 +14,6 @@ import RxSwift
 import RxCocoa
 import XCTest
 import UIKit
-import RxExample_iOS
 
 class UIImagePickerControllerTests: RxTest {
     

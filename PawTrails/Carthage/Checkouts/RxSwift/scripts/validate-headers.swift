@@ -34,13 +34,11 @@ let allowedExtensions = [
 ]
 
 let excludedRootPaths = [
-    "Carthage",
     ".git",
     "build",
     "Rx.playground",
     "vendor",
     "Sources",
-    "Carthage"
 ]
 
 let excludePaths = [
@@ -72,7 +70,7 @@ let createdBy = try NSRegularExpression(pattern: "//  Created by .* on \\d+/\\d+
 let copyrightLine = try NSRegularExpression(pattern: "//  Copyright © (\\d+) Krunoslav Zaher. All rights reserved.", options: [])
 
 func validateRegexMatches(regularExpression: NSRegularExpression, content: String) -> ([String], Bool) {
-    let range = NSRange(location: 0, length: content.count)
+    let range = NSRange(location: 0, length: content.characters.count)
     let matches = regularExpression.matches(in: content, options: [], range: range)
 
     if matches.count == 0 {
@@ -89,7 +87,6 @@ func validateRegexMatches(regularExpression: NSRegularExpression, content: Strin
 
     return (matches[0 ..< matches.count].flatMap { m -> [String] in
         return (1 ..< m.numberOfRanges).map { index in
-
 #if swift(>=4.0)
             let range = m.range(at: index)
 #else

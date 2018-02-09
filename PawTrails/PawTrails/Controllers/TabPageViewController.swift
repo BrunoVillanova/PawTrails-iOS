@@ -44,8 +44,9 @@ class TabPageViewController: ButtonBarPagerTabStripViewController {
         
         self.automaticallyAdjustsScrollViewInsets = false
         
-        self.navigationItem.rightBarButtonItem =  UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(addTapped(_sender:)))
-        
+        if pet.isOwner {
+            self.navigationItem.rightBarButtonItem =  UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(addTapped(_sender:)))
+        }
         
 
         navigationItem.title = pet.name
@@ -100,6 +101,7 @@ class TabPageViewController: ButtonBarPagerTabStripViewController {
         child_1.pet = self.pet
         let SafeZoneViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GoalsViewController") as! GoalsViewController
         SafeZoneViewController.pet = self.pet
+        SafeZoneViewController.date = Date()
         
         let child_3 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SafeZoneViewController") as! SafeZoneViewController
         child_3.pet = self.pet

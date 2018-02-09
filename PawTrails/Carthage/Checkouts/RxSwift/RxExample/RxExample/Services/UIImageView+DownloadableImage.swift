@@ -7,19 +7,20 @@
 //
 
 #if os(iOS) || os(tvOS)
-
+#if !RX_NO_MODULE
 import RxSwift
 import RxCocoa
+#endif
 import UIKit
 
 extension Reactive where Base: UIImageView {
 
-    var downloadableImage: Binder<DownloadableImage>{
+    var downloadableImage: UIBindingObserver<Base, DownloadableImage>{
         return downloadableImageAnimated(nil)
     }
 
-    func downloadableImageAnimated(_ transitionType:String?) -> Binder<DownloadableImage> {
-        return Binder(base) { imageView, image in
+    func downloadableImageAnimated(_ transitionType:String?) -> UIBindingObserver<Base, DownloadableImage> {
+        return UIBindingObserver(UIElement: base) { imageView, image in
             for subview in imageView.subviews {
                 subview.removeFromSuperview()
             }

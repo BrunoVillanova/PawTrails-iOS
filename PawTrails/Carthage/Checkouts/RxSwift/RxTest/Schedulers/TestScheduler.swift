@@ -71,7 +71,7 @@ public class TestScheduler : VirtualTimeScheduler<TestSchedulerVirtualTimeConver
      - parameter time: Absolute virtual time at which to execute the action.
      */
     public func scheduleAt(_ time: TestTime, action: @escaping () -> Void) {
-        _ = self.scheduleAbsoluteVirtual((), time: time, action: { _ -> Disposable in
+        _ = self.scheduleAbsoluteVirtual((), time: time, action: { () -> Disposable in
             action()
             return Disposables.create()
         })
@@ -98,17 +98,17 @@ public class TestScheduler : VirtualTimeScheduler<TestSchedulerVirtualTimeConver
         var subscription : Disposable? = nil
         let observer = createObserver(Element.self)
         
-        _ = self.scheduleAbsoluteVirtual((), time: created) { _ in
+        _ = self.scheduleAbsoluteVirtual((), time: created) {
             source = create()
             return Disposables.create()
         }
         
-        _ = self.scheduleAbsoluteVirtual((), time: subscribed) { _ in
+        _ = self.scheduleAbsoluteVirtual((), time: subscribed) {
             subscription = source!.subscribe(observer)
             return Disposables.create()
         }
         
-        _ = self.scheduleAbsoluteVirtual((), time: disposed) { _ in
+        _ = self.scheduleAbsoluteVirtual((), time: disposed) {
             subscription!.dispose()
             return Disposables.create()
         }

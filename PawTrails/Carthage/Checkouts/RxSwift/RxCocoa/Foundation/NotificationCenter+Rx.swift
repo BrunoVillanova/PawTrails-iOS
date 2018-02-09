@@ -9,7 +9,9 @@
 import class Foundation.NotificationCenter
 import struct Foundation.Notification
 
+#if !RX_NO_MODULE
 import RxSwift
+#endif
 
 extension Reactive where Base: NotificationCenter {
     /**

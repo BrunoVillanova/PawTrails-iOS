@@ -13,60 +13,35 @@ import XCTest
 
 // UITextField
 final class UITextFieldTests : RxTest {
-    
-    func test_completesOnDealloc() {
-        // because of leak in iOS 11.2
-        if #available(iOS 11.3, tvOS 11.3, *) {
-            ensurePropertyDeallocated({ UITextField() }, "a", comparer: { $0 == $1 }) { (view: UITextField) in view.rx.text }
-            ensurePropertyDeallocated({ UITextField() }, "a", comparer: { $0 == $1 }) { (view: UITextField) in view.rx.value }
-            ensurePropertyDeallocated({ UITextField() }, "a".enrichedWithTextFieldAttributes, comparer: { $0 == $1 }) { (view: UITextField) in view.rx.attributedText }
-        }
+    func test_TextCompletesOnDealloc() {
+        ensurePropertyDeallocated({ UITextField() }, "a", comparer: { $0 == $1 }) { (view: UITextField) in view.rx.text }
     }
-    
-    func test_settingTextDoesntClearMarkedText() {
-        // because of leak in iOS 11.2
-        if #available(iOS 11.3, tvOS 11.3, *) {
-            let textField = UITextFieldSubclass(frame: CGRect.zero)
-            textField.text = "Text1"
-            textField.didSetText = false
-            textField.rx.text.on(.next("Text1"))
-            XCTAssertTrue(!textField.didSetText)
-            textField.rx.text.on(.next("Text2"))
-            XCTAssertTrue(textField.didSetText)
-        }
+    func test_ValueCompletesOnDealloc() {
+        ensurePropertyDeallocated({ UITextField() }, "a", comparer: { $0 == $1 }) { (view: UITextField) in view.rx.value }
     }
-    
-    func test_attributedTextObserver() {
-        // because of leak in iOS 11.2
-        if #available(iOS 11.3, tvOS 11.3, *) {
-            let textField = UITextField()
-            XCTAssertEqual(textField.attributedText, "".enrichedWithTextFieldAttributes)
-            let attributedText = "Hello!".enrichedWithTextFieldAttributes
-            textField.rx.attributedText.onNext(attributedText)
-            XCTAssertEqual(textField.attributedText!, attributedText)
-        }
-    }
-}
 
-private extension String {
-    var enrichedWithTextFieldAttributes: NSAttributedString {
-        let tf = UITextField()
-        tf.attributedText = NSAttributedString(string: self)
-        return tf.attributedText!
+    func testSettingTextDoesntClearMarkedText() {
+        let textField = UITextFieldSubclass(frame: CGRect.zero)
+
+        textField.text = "Text1"
+        textField.set = false
+        textField.rx.text.on(.next("Text1"))
+        XCTAssertTrue(!textField.set)
+        textField.rx.text.on(.next("Text2"))
+        XCTAssertTrue(textField.set)
     }
 }
 
 final class UITextFieldSubclass : UITextField {
-    var didSetText = false
-    
+    var set: Bool = false
+
     override var text: String? {
         get {
             return super.text
         }
         set {
-            didSetText = true
+            set = true
             super.text = newValue
         }
     }
-    
 }

@@ -7,8 +7,10 @@
 //
 
 import UIKit
-import RxSwift
-import RxCocoa
+#if !RX_NO_MODULE
+    import RxSwift
+    import RxCocoa
+#endif
 
 final class SimplePickerViewExampleViewController: ViewController {
     
@@ -35,8 +37,8 @@ final class SimplePickerViewExampleViewController: ViewController {
             .bind(to: pickerView2.rx.itemAttributedTitles) { _, item in
                 return NSAttributedString(string: "\(item)",
                                           attributes: [
-                                            NSAttributedStringKey.foregroundColor: UIColor.cyan,
-                                            NSAttributedStringKey.underlineStyle: NSUnderlineStyle.styleDouble.rawValue
+                                            NSForegroundColorAttributeName: UIColor.cyan,
+                                            NSUnderlineStyleAttributeName: NSUnderlineStyle.styleDouble.rawValue
                                         ])
             }
             .disposed(by: disposeBag)
@@ -55,7 +57,7 @@ final class SimplePickerViewExampleViewController: ViewController {
             }
             .disposed(by: disposeBag)
 
-        pickerView3.rx.modelSelected(UIColor.self)
+        pickerView3.rx.modelSelected(Int.self)
             .subscribe(onNext: { models in
                 print("models selected 3: \(models)")
             })

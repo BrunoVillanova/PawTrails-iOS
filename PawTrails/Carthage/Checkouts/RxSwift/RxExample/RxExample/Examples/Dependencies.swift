@@ -6,7 +6,9 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
+#if !RX_NO_MODULE
 import RxSwift
+#endif
 
 import class Foundation.URLSession
 import class Foundation.OperationQueue
@@ -31,7 +33,9 @@ class Dependencies {
         
         let operationQueue = OperationQueue()
         operationQueue.maxConcurrentOperationCount = 2
+        #if !RX_NO_MODULE
         operationQueue.qualityOfService = QualityOfService.userInitiated
+        #endif
         backgroundWorkScheduler = OperationQueueScheduler(operationQueue: operationQueue)
         
         mainScheduler = MainScheduler.instance

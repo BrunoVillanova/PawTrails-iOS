@@ -24,7 +24,7 @@ extension UIWebViewTests {
         let webView = UIWebView()
         var didStartLoad = false
 
-        let subscription = webView.rx.didStartLoad.subscribe(onNext: { _ in
+        let subscription = webView.rx.didStartLoad.subscribe(onNext: {
             didStartLoad = true
         })
 
@@ -38,7 +38,7 @@ extension UIWebViewTests {
         let webView = UIWebView()
         var didFinishLoad = false
 
-        let subscription = webView.rx.didFinishLoad.subscribe(onNext: { _ in
+        let subscription = webView.rx.didFinishLoad.subscribe(onNext: {
             didFinishLoad = true
         })
 

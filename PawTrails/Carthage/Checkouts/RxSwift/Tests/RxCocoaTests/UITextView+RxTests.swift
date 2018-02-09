@@ -13,37 +13,25 @@ import XCTest
 
 // UITextView
 final class UITextViewTests : RxTest {
-    func test_completesOnDealloc() {
+    func testText_TextCompletesOnDealloc() {
         let createView: () -> UITextView = { UITextView(frame: CGRect(x: 0, y: 0, width: 1, height: 1)) }
-
         ensurePropertyDeallocated(createView, "text", comparer: { $0 == $1 }) { (view: UITextView) in view.rx.text }
-        ensurePropertyDeallocated(createView, "text", comparer: { $0 == $1 }) { (view: UITextView) in view.rx.value }
-        ensurePropertyDeallocated(createView, "text".enrichedWithTextFieldAttributes, comparer: { $0 == $1 }) { (view: UITextView) in view.rx.attributedText }
     }
-    
+
+    func testText_ValueCompletesOnDealloc() {
+        let createView: () -> UITextView = { UITextView(frame: CGRect(x: 0, y: 0, width: 1, height: 1)) }
+        ensurePropertyDeallocated(createView, "text", comparer: { $0 == $1 }) { (view: UITextView) in view.rx.value }
+    }
+
     func testSettingTextDoesntClearMarkedText() {
         let textView = UITextViewSubclass2(frame: CGRect.zero)
-        
+
         textView.text = "Text1"
-        textView.didSetText = false
+        textView.set = false
         textView.rx.text.on(.next("Text1"))
-        XCTAssertTrue(!textView.didSetText)
+        XCTAssertTrue(!textView.set)
         textView.rx.text.on(.next("Text2"))
-        XCTAssertTrue(textView.didSetText)
-    }
-    
-    func testSettingTextDoesntClearMarkedAttributtedText() {
-        let textView = UITextViewSubclass2(frame: CGRect.zero)
-        
-        let testAttributedString = "Test1".enrichedWithTextFieldAttributes
-        let test2AttributedString = "Test2".enrichedWithTextFieldAttributes
-        
-        textView.attributedText = testAttributedString
-        textView.didSetAttributedText = false
-        textView.rx.attributedText.on(.next(testAttributedString))
-        XCTAssertTrue(!textView.didSetAttributedText)
-        textView.rx.attributedText.on(.next(test2AttributedString))
-        XCTAssertTrue(textView.didSetAttributedText)
+        XCTAssertTrue(textView.set)
     }
 
     func testDidBeginEditing() {
@@ -127,35 +115,16 @@ final class UITextViewTests : RxTest {
     }
 }
 
-private extension String {
-    var enrichedWithTextFieldAttributes: NSAttributedString? {
-        let tf = UITextView()
-        tf.attributedText = NSAttributedString(string: self)
-        return tf.attributedText!
-    }
-}
-
 final class UITextViewSubclass2 : UITextView {
-    var didSetText = false
-    var didSetAttributedText = false
-    
+    var set: Bool = false
+
     override var text: String? {
         get {
             return super.text
         }
         set {
-            didSetText = true
+            set = true
             super.text = newValue
-        }
-    }
-    
-    override var attributedText: NSAttributedString? {
-        get {
-            return super.attributedText
-        }
-        set {
-            didSetAttributedText = true
-            super.attributedText = newValue
         }
     }
 }

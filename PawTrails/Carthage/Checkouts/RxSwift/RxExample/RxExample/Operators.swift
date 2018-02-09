@@ -6,8 +6,11 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
+#if !RX_NO_MODULE
 import RxSwift
 import RxCocoa
+#endif
+
 import UIKit
 
 // Two way binding operator between control property and variable, that's all it takes {
@@ -35,7 +38,7 @@ func nonMarkedText(_ textInput: UITextInput) -> String? {
     return (textInput.text(in: startRange) ?? "") + (textInput.text(in: endRange) ?? "")
 }
 
-func <-> <Base>(textInput: TextInput<Base>, variable: Variable<String>) -> Disposable {
+func <-> <Base: UITextInput>(textInput: TextInput<Base>, variable: Variable<String>) -> Disposable {
     let bindToUIDisposable = variable.asObservable()
         .bind(to: textInput.text)
     let bindToVariable = textInput.text

@@ -140,7 +140,7 @@ class RxExample_iOSTests
         
         This method enables using mock schedulers for while testing drivers.
         */
-        SharingScheduler.mock(scheduler: scheduler) {
+        driveOnScheduler(scheduler) {
             
             let viewModel = GithubSignupViewModel2(
                 input: (
@@ -185,8 +185,7 @@ extension RxExample_iOSTests {
                     return "---f"
                 }
             },
-            signup: scheduler.mock(values: booleans, errors: errors) { (args: (String, String)) -> String in
-                let (username, password) = args
+            signup: scheduler.mock(values: booleans, errors: errors) { (username, password) -> String in
                 if username == "secretusername" && password == "secret" {
                     return "--t"
                 }

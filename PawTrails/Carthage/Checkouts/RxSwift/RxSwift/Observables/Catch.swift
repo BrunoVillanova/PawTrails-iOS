@@ -36,7 +36,7 @@ extension ObservableType {
     
 }
 
-extension ObservableType {
+extension Observable {
     /**
      Continues an observable sequence that is terminated by an error with the next observable sequence.
 
@@ -44,8 +44,8 @@ extension ObservableType {
 
      - returns: An observable sequence containing elements from consecutive source sequences until a source sequence terminates successfully.
      */
-    public static func catchError<S: Sequence>(_ sequence: S) -> Observable<E>
-        where S.Iterator.Element == Observable<E> {
+    public static func catchError<S: Sequence>(_ sequence: S) -> Observable<Element>
+        where S.Iterator.Element == Observable<Element> {
         return CatchSequence(sources: sequence)
     }
 }
@@ -77,7 +77,7 @@ extension ObservableType {
      */
     public func retry(_ maxAttemptCount: Int)
         -> Observable<E> {
-        return CatchSequence(sources: Swift.repeatElement(self.asObservable(), count: maxAttemptCount))
+            return CatchSequence(sources: repeatElement(self.asObservable(), count: maxAttemptCount))
     }
 }
 

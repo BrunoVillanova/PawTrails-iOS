@@ -7,8 +7,10 @@
 //
 
 import UIKit
+#if !RX_NO_MODULE
 import RxSwift
 import RxCocoa
+#endif
 
 extension UIScrollView {
     func  isNearBottomEdge(edgeOffset: CGFloat = 20.0) -> Bool {
@@ -22,30 +24,31 @@ class GitHubSearchRepositoriesViewController: ViewController, UITableViewDelegat
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
 
-    let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, Repository>>(
-        configureCell: { (_, tv, ip, repository: Repository) in
-            let cell = tv.dequeueReusableCell(withIdentifier: "Cell")!
-            cell.textLabel?.text = repository.name
-            cell.detailTextLabel?.text = repository.url.absoluteString
-            return cell
-        },
-        titleForHeaderInSection: { dataSource, sectionIndex in
-            let section = dataSource[sectionIndex]
-            return section.items.count > 0 ? "Repositories (\(section.items.count))" : "No repositories found"
-        }
-    )
+    let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, Repository>>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        dataSource.configureCell = { (_, tv, ip, repository: Repository) in
+            let cell = tv.dequeueReusableCell(withIdentifier: "Cell")!
+            cell.textLabel?.text = repository.name
+            cell.detailTextLabel?.text = repository.url.absoluteString
+            return cell
+        }
+
+        dataSource.titleForHeaderInSection = { dataSource, sectionIndex in
+            let section = dataSource[sectionIndex]
+            return section.items.count > 0 ? "Repositories (\(section.items.count))" : "No repositories found"
+        }
+
         let tableView: UITableView = self.tableView
-        let loadNextPageTrigger: (Driver<GitHubSearchRepositoriesState>) -> Signal<()> =  { state in
+        let loadNextPageTrigger: (Driver<GitHubSearchRepositoriesState>) -> Driver<()> =  { state in
             tableView.rx.contentOffset.asDriver()
                 .withLatestFrom(state)
                 .flatMap { state in
                     return tableView.isNearBottomEdge(edgeOffset: 20.0) && !state.shouldLoadNextPage
-                        ? Signal.just(())
-                        : Signal.empty()
+                        ? Driver.just(())
+                        : Driver.empty()
                 }
         }
 
@@ -54,7 +57,7 @@ class GitHubSearchRepositoriesViewController: ViewController, UITableViewDelegat
         let searchBar: UISearchBar = self.searchBar
 
         let state = githubSearchRepositories(
-            searchText: searchBar.rx.text.orEmpty.changed.asSignal().throttle(0.3),
+            searchText: searchBar.rx.text.orEmpty.changed.asDriver().throttle(0.3),
             loadNextPageTrigger: loadNextPageTrigger,
             performSearch: { URL in
                 GitHubSearchRepositoriesAPI.sharedAPI.loadSearchURL(URL)

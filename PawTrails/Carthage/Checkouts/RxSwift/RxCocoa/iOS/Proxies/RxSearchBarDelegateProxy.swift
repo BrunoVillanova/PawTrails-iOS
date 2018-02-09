@@ -9,31 +9,38 @@
 #if os(iOS) || os(tvOS)
 
 import UIKit
+#if !RX_NO_MODULE
 import RxSwift
-
-extension UISearchBar: HasDelegate {
-    public typealias Delegate = UISearchBarDelegate
-}
+#endif
 
 /// For more information take a look at `DelegateProxyType`.
-open class RxSearchBarDelegateProxy
-    : DelegateProxy<UISearchBar, UISearchBarDelegate>
-    , DelegateProxyType 
-    , UISearchBarDelegate {
+public class RxSearchBarDelegateProxy
+    : DelegateProxy
+    , UISearchBarDelegate
+    , DelegateProxyType {
 
-    /// Typed parent object.
-    public weak private(set) var searchBar: UISearchBar?
-
-    /// - parameter searchBar: Parent object for delegate proxy.
-    public init(searchBar: ParentObject) {
-        self.searchBar = searchBar
-        super.init(parentObject: searchBar, delegateProxy: RxSearchBarDelegateProxy.self)
+    /// For more information take a look at `DelegateProxyType`.
+    public class func currentDelegateFor(_ object: AnyObject) -> AnyObject? {
+        let searchBar: UISearchBar = castOrFatalError(object)
+        return searchBar.delegate
     }
 
-    // Register known implementations
-    public static func registerKnownImplementations() {
-        self.register { RxSearchBarDelegateProxy(searchBar: $0) }
+    /// For more information take a look at `DelegateProxyType`.
+    public class func setCurrentDelegate(_ delegate: AnyObject?, toObject object: AnyObject) {
+        let searchBar: UISearchBar = castOrFatalError(object)
+        searchBar.delegate = castOptionalOrFatalError(delegate)
     }
+
+    // MARK: Delegate proxy methods
+    
+#if os(iOS)
+    /// For more information take a look at `DelegateProxyType`.
+    public override class func createProxyForObject(_ object: AnyObject) -> AnyObject {
+        let searchBar: UISearchBar = castOrFatalError(object)
+        return searchBar.createRxDelegateProxy()
+    }
+#endif
+    
 }
 
 #endif

@@ -6,9 +6,11 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
-import RxSwift
-
 import class Foundation.NSDictionary
+
+#if !RX_NO_MODULE
+import RxSwift
+#endif
 
 struct WikipediaPage {
     let title: String

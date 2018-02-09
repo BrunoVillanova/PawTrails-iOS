@@ -8,12 +8,14 @@
 
 import UIKit
 import CoreLocation
-import RxSwift
-import RxCocoa
+#if !RX_NO_MODULE
+    import RxSwift
+    import RxCocoa
+#endif
 
 private extension Reactive where Base: UILabel {
-    var coordinates: Binder<CLLocationCoordinate2D> {
-        return Binder(base) { label, location in
+    var coordinates: UIBindingObserver<Base, CLLocationCoordinate2D> {
+        return UIBindingObserver(UIElement: base) { label, location in
             label.text = "Lat: \(location.latitude)\nLon: \(location.longitude)"
         }
     }
@@ -42,13 +44,13 @@ class GeolocationViewController: ViewController {
             .disposed(by: disposeBag)
         
         button.rx.tap
-            .bind { [weak self] _ -> Void in
+            .bind { [weak self] in
                 self?.openAppPreferences()
             }
             .disposed(by: disposeBag)
         
         button2.rx.tap
-            .bind { [weak self] _ -> Void in
+            .bind { [weak self] in
                 self?.openAppPreferences()
             }
             .disposed(by: disposeBag)

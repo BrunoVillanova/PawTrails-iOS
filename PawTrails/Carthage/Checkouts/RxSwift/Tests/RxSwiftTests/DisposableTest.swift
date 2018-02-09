@@ -11,7 +11,6 @@ import RxSwift
 import RxTest
 
 import class Dispatch.DispatchQueue
-import class Dispatch.DispatchSpecificKey
 #if os(Linux)
     import func Glibc.random
 #else
@@ -52,18 +51,18 @@ extension DisposableTest {
         let scheduler = TestScheduler(initialClock: 0)
         
         let xs = scheduler.createHotObservable([
-            .next(110, 1),
-            .next(180, 2),
-            .next(230, 3),
-            .next(270, 4),
-            .next(340, 5),
-            .next(380, 6),
-            .next(390, 7),
-            .next(450, 8),
-            .next(470, 9),
-            .next(560, 10),
-            .next(580, 11),
-            .completed(600)
+            next(110, 1),
+            next(180, 2),
+            next(230, 3),
+            next(270, 4),
+            next(340, 5),
+            next(380, 6),
+            next(390, 7),
+            next(450, 8),
+            next(470, 9),
+            next(560, 10),
+            next(580, 11),
+            completed(600)
             ])
         
         let res = scheduler.start(disposed: 400) { () -> Observable<Int> in
@@ -71,11 +70,11 @@ extension DisposableTest {
         }
         
         XCTAssertEqual(res.events, [
-            .next(230, 3),
-            .next(270, 4),
-            .next(340, 5),
-            .next(380, 6),
-            .next(390, 7),
+            next(230, 3),
+            next(270, 4),
+            next(340, 5),
+            next(380, 6),
+            next(390, 7),
             ])
         
         XCTAssertEqual(xs.subscriptions, [
@@ -200,7 +199,6 @@ extension DisposableTest
     }
 }
 
-// refCount disposable
 extension DisposableTest {
     func testRefCountDisposable_RefCounting() {
         let d = BooleanDisposable()
@@ -245,93 +243,7 @@ extension DisposableTest {
         
         d2.dispose()
         XCTAssertEqual(d.isDisposed, true)
-    }
-}
-
-// scheduled disposable
-extension DisposableTest {
-    func testScheduledDisposable_correctQueue() {
-        let expectationQueue = expectation(description: "wait")
-        let label = "test label"
-        let queue = DispatchQueue(label: label)
-        let nameKey = DispatchSpecificKey<String>()
-        queue.setSpecific(key: nameKey, value: label)
-        let scheduler = ConcurrentDispatchQueueScheduler(queue: queue)
         
-        let testDisposable = Disposables.create {
-            XCTAssertEqual(DispatchQueue.getSpecific(key: nameKey), label)
-            expectationQueue.fulfill()
-        }
-
-        let scheduledDisposable = ScheduledDisposable(scheduler: scheduler, disposable: testDisposable)
-        scheduledDisposable.dispose()
-        
-        waitForExpectations(timeout: 0.5) { error in
-            XCTAssertNil(error)
-        }
-    }
-}
-
-// serial disposable
-extension DisposableTest {
-    func testSerialDisposable_firstDisposedThenSet() {
-        let serialDisposable = SerialDisposable()
-        XCTAssertFalse(serialDisposable.isDisposed)
-        
-        serialDisposable.dispose()
-        XCTAssertTrue(serialDisposable.isDisposed)
-        
-        let testDisposable = TestDisposable()
-        serialDisposable.disposable = testDisposable
-        XCTAssertEqual(testDisposable.count, 1)
-        
-        serialDisposable.dispose()
-        XCTAssertTrue(serialDisposable.isDisposed)
-        XCTAssertEqual(testDisposable.count, 1)
-    }
-    
-    func testSerialDisposable_firstSetThenDisposed() {
-        let serialDisposable = SerialDisposable()
-        XCTAssertFalse(serialDisposable.isDisposed)
-        
-        let testDisposable = TestDisposable()
-        
-        serialDisposable.disposable = testDisposable
-        XCTAssertEqual(testDisposable.count, 0)
-        
-        serialDisposable.dispose()
-        XCTAssertTrue(serialDisposable.isDisposed)
-        XCTAssertEqual(testDisposable.count, 1)
-        
-        serialDisposable.dispose()
-        XCTAssertTrue(serialDisposable.isDisposed)
-        XCTAssertEqual(testDisposable.count, 1)
-    }
-    
-    func testSerialDisposable_firstSetThenSetAnotherThenDisposed() {
-        let serialDisposable = SerialDisposable()
-        XCTAssertFalse(serialDisposable.isDisposed)
-        
-        let testDisposable1 = TestDisposable()
-        let testDisposable2 = TestDisposable()
-        
-        serialDisposable.disposable = testDisposable1
-        XCTAssertEqual(testDisposable1.count, 0)
-        XCTAssertEqual(testDisposable2.count, 0)
-
-        serialDisposable.disposable = testDisposable2
-        XCTAssertEqual(testDisposable1.count, 1)
-        XCTAssertEqual(testDisposable2.count, 0)
-        
-        serialDisposable.dispose()
-        XCTAssertTrue(serialDisposable.isDisposed)
-        XCTAssertEqual(testDisposable1.count, 1)
-        XCTAssertEqual(testDisposable2.count, 1)
-        
-        serialDisposable.dispose()
-        XCTAssertTrue(serialDisposable.isDisposed)
-        XCTAssertEqual(testDisposable1.count, 1)
-        XCTAssertEqual(testDisposable2.count, 1)
     }
 }
 

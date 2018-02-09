@@ -32,8 +32,7 @@ extension UINavigationControllerTests {
         XCTAssertNotEqual(animated, presentedAnimated)
 
         _ = navigationController.rx.willShow
-            .subscribe(onNext: { showEvent in
-                let (viewController, animated) = showEvent
+            .subscribe(onNext: { (viewController, animated) in
                 presentedViewController = viewController
                 presentedAnimated = animated
             })
@@ -70,8 +69,7 @@ extension UINavigationControllerTests {
             })
 
         _ = navigationController.rx.didShow
-            .subscribe(onNext: { showEvent in
-                let (viewController, animated) = showEvent
+            .subscribe(onNext: { (viewController, animated) in
                 presentedViewController = viewController
                 presentedAnimated = animated
             })

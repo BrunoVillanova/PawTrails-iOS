@@ -6,7 +6,9 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
-import RxSwift
+#if !RX_NO_MODULE
+    import RxSwift
+#endif
 
 /**
 `BlockingObservable` is a variety of `Observable` that provides blocking operators. 

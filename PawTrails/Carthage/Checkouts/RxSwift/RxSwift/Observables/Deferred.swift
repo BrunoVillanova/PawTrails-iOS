@@ -6,7 +6,7 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
-extension ObservableType {
+extension Observable {
     /**
      Returns an observable sequence that invokes the specified factory function whenever a new observer subscribes.
 

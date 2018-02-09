@@ -7,8 +7,10 @@
 //
 
 import UIKit
+#if !RX_NO_MODULE
 import RxSwift
 import RxCocoa
+#endif
 
 let generateCustomSize = true
 let runAutomatically = false
@@ -77,15 +79,11 @@ class PartialUpdatesViewController : ViewController {
 
         self.sections.value = generator.sections
 
-        let (configureCell, titleForSection) = PartialUpdatesViewController.tableViewDataSourceUI()
-        let tvAnimatedDataSource = RxTableViewSectionedAnimatedDataSource<NumberSection>(
-            configureCell: configureCell,
-            titleForHeaderInSection: titleForSection
-        )
-        let reloadDataSource = RxTableViewSectionedReloadDataSource<NumberSection>(
-            configureCell: configureCell,
-            titleForHeaderInSection: titleForSection
-        )
+        let tvAnimatedDataSource = RxTableViewSectionedAnimatedDataSource<NumberSection>()
+        let reloadDataSource = RxTableViewSectionedReloadDataSource<NumberSection>()
+
+        skinTableViewDataSource(tvAnimatedDataSource)
+        skinTableViewDataSource(reloadDataSource)
 
         self.sections.asObservable()
             .bind(to: partialUpdatesTableViewOutlet.rx.items(dataSource: tvAnimatedDataSource))
@@ -106,21 +104,17 @@ class PartialUpdatesViewController : ViewController {
         //
         // While `useAnimatedUpdateForCollectionView` is false, you can click as fast as
         // you want, table view doesn't seem to have same issues like collection view.
-        let (configureCollectionViewCell, configureSupplementaryView) = PartialUpdatesViewController.collectionViewDataSourceUI()
-        #if useAnimatedUpdateForCollectionView
-            let cvAnimatedDataSource = RxCollectionViewSectionedAnimatedDataSource(
-                configureCell: configureCollectionViewCell,
-                configureSupplementaryView: configureSupplementaryView
-            )
 
-            self.sections.asObservable()
+        #if useAnimatedUpdateForCollectionView
+            let cvAnimatedDataSource = RxCollectionViewSectionedAnimatedDataSource<NumberSection>()
+            skinCollectionViewDataSource(cvAnimatedDataSource)
+
+            updates
                 .bind(to: partialUpdatesCollectionViewOutlet.rx.itemsWithDataSource(cvAnimatedDataSource))
                 .disposed(by: disposeBag)
         #else
-            let cvReloadDataSource = RxCollectionViewSectionedReloadDataSource(
-                configureCell: configureCollectionViewCell,
-                configureSupplementaryView: configureSupplementaryView
-            )
+            let cvReloadDataSource = RxCollectionViewSectionedReloadDataSource<NumberSection>()
+            skinCollectionViewDataSource(cvReloadDataSource)
             self.sections.asObservable()
                 .bind(to: partialUpdatesCollectionViewOutlet.rx.items(dataSource: cvReloadDataSource))
                 .disposed(by: disposeBag)
@@ -142,6 +136,39 @@ class PartialUpdatesViewController : ViewController {
             .disposed(by: disposeBag)
     }
 
+    func skinTableViewDataSource(_ dataSource: TableViewSectionedDataSource<NumberSection>) {
+        dataSource.configureCell = { (_, tv, ip, i) in
+            let cell = tv.dequeueReusableCell(withIdentifier: "Cell")
+                ?? UITableViewCell(style:.default, reuseIdentifier: "Cell")
+
+            cell.textLabel!.text = "\(i)"
+
+            return cell
+        }
+
+        dataSource.titleForHeaderInSection = { (ds, section: Int) -> String in
+            return dataSource[section].model
+        }
+    }
+
+    func skinCollectionViewDataSource(_ dataSource: CollectionViewSectionedDataSource<NumberSection>) {
+        dataSource.configureCell = { (_, cv, ip, i) in
+            let cell = cv.dequeueReusableCell(withReuseIdentifier: "Cell", for: ip) as! NumberCell
+
+            cell.value!.text = "\(i)"
+
+            return cell
+        }
+
+        dataSource.supplementaryViewFactory = { (dataSource, cv, kind, ip) in
+            let section = cv.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Section", for: ip) as! NumberSectionView
+
+            section.value!.text = "\(dataSource[ip.section].model)"
+
+            return section
+        }
+    }
+
     override func viewWillDisappear(_ animated: Bool) {
         self.timer?.invalidate()
     }
@@ -160,44 +187,3 @@ class PartialUpdatesViewController : ViewController {
         sections.value = values
     }
 }
-
-extension PartialUpdatesViewController {
-    static func tableViewDataSourceUI() -> (
-        TableViewSectionedDataSource<NumberSection>.ConfigureCell,
-        TableViewSectionedDataSource<NumberSection>.TitleForHeaderInSection
-        ) {
-        return (
-            { (_, tv, ip, i) in
-                let cell = tv.dequeueReusableCell(withIdentifier: "Cell") ?? UITableViewCell(style:.default, reuseIdentifier: "Cell")
-                cell.textLabel!.text = "\(i)"
-                return cell
-            },
-            { (ds, section) -> String? in
-                return ds[section].model
-            }
-        )
-    }
-
-    static func collectionViewDataSourceUI() -> (
-        CollectionViewSectionedDataSource<NumberSection>.ConfigureCell,
-        CollectionViewSectionedDataSource<NumberSection>.ConfigureSupplementaryView
-        ) {
-        return (
-            { (_, cv, ip, i) in
-                let cell = cv.dequeueReusableCell(withReuseIdentifier: "Cell", for: ip) as! NumberCell
-                cell.value!.text = "\(i)"
-                return cell
-
-            },
-            { (ds ,cv, kind, ip) in
-                let section = cv.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Section", for: ip) as! NumberSectionView
-                section.value!.text = "\(ds[ip.section].model)"
-                return section
-            }
-        )
-    }
-}
-
-
-
-

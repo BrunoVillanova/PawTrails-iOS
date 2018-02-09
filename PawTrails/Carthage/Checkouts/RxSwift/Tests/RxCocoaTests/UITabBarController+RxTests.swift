@@ -51,8 +51,7 @@ extension UITabBarControllerTests {
         XCTAssertNotEqual(changed, true)
         
         _ = subject.rx.willEndCustomizing
-            .subscribe(onNext: { value in
-                let (vc, c) = value
+            .subscribe(onNext: { (vc, c) in
                 returnedViewControllers = vc
                 changed = c
             })
@@ -74,8 +73,7 @@ extension UITabBarControllerTests {
         XCTAssertNotEqual(changed, true)
         
         _ = subject.rx.didEndCustomizing
-            .subscribe(onNext: { value in
-                let (vc, c) = value
+            .subscribe(onNext: { (vc, c) in
                 returnedViewControllers = vc
                 changed = c
             })

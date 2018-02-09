@@ -6,7 +6,7 @@
 //  Copyright © 2016 Krunoslav Zaher. All rights reserved.
 //
 
-extension ObservableType {
+extension Observable {
     /**
      Converts a optional to an observable sequence.
 

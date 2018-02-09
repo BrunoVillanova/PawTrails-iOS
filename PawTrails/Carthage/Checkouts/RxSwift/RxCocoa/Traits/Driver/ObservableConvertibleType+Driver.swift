@@ -6,14 +6,16 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
+#if !RX_NO_MODULE
 import RxSwift
+#endif
 
 extension ObservableConvertibleType {
     /**
-    Converts observable sequence to `Driver` trait.
+    Converts anything convertible to `Observable` to `Driver` unit.
     
     - parameter onErrorJustReturn: Element to return in case of error and after that complete the sequence.
-    - returns: Driver trait.
+    - returns: Driving observable sequence.
     */
     public func asDriver(onErrorJustReturn: E) -> Driver<E> {
         let source = self
@@ -24,10 +26,10 @@ extension ObservableConvertibleType {
     }
     
     /**
-    Converts observable sequence to `Driver` trait.
+    Converts anything convertible to `Observable` to `Driver` unit.
     
     - parameter onErrorDriveWith: Driver that continues to drive the sequence in case of error.
-    - returns: Driver trait.
+    - returns: Driving observable sequence.
     */
     public func asDriver(onErrorDriveWith: Driver<E>) -> Driver<E> {
         let source = self
@@ -40,10 +42,10 @@ extension ObservableConvertibleType {
     }
 
     /**
-    Converts observable sequence to `Driver` trait.
+    Converts anything convertible to `Observable` to `Driver` unit.
     
     - parameter onErrorRecover: Calculates driver that continues to drive the sequence in case of error.
-    - returns: Driver trait.
+    - returns: Driving observable sequence.
     */
     public func asDriver(onErrorRecover: @escaping (_ error: Swift.Error) -> Driver<E>) -> Driver<E> {
         let source = self

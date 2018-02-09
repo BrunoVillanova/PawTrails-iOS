@@ -11,7 +11,7 @@ import RxCocoa
 import XCTest
 
 final class UITableViewTests : RxTest {
-    func test_DelegateEventCompletesOnDealloc() {
+    func testTableView_DelegateEventCompletesOnDealloc() {
         let createView: () -> UITableView = { UITableView(frame: CGRect(x: 0, y: 0, width: 1, height: 1)) }
 
         ensureEventDeallocated(createView) { (view: UITableView) in view.rx.itemSelected }
@@ -26,12 +26,9 @@ final class UITableViewTests : RxTest {
         ensureEventDeallocated(createView) { (view: UITableView) in view.rx.modelDeleted(Int.self) }
         ensureEventDeallocated(createView) { (view: UITableView) in view.rx.willDisplayCell }
         ensureEventDeallocated(createView) { (view: UITableView) in view.rx.didEndDisplayingCell }
-        #if os(tvOS)
-            ensureEventDeallocated(createView) { (view: UITableView) in view.rx.didUpdateFocusInContextWithAnimationCoordinator }
-        #endif
     }
 
-    func test_itemSelected() {
+    func testTableView_itemSelected() {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: 1, height: 1))
 
         var resultIndexPath: IndexPath? = nil
@@ -48,7 +45,7 @@ final class UITableViewTests : RxTest {
         subscription.dispose()
     }
 
-    func test_itemDeselected() {
+    func testTableView_itemDeselected() {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: 1, height: 1))
 
         var resultIndexPath: IndexPath? = nil
@@ -65,7 +62,7 @@ final class UITableViewTests : RxTest {
         subscription.dispose()
     }
 
-    func test_itemAccessoryButtonTapped() {
+    func testTableView_itemAccessoryButtonTapped() {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: 1, height: 1))
 
         var resultIndexPath: IndexPath? = nil
@@ -82,7 +79,7 @@ final class UITableViewTests : RxTest {
         subscription.dispose()
     }
 
-    func test_itemDeleted() {
+    func testTableView_itemDeleted() {
         let items: Observable<[Int]> = Observable.just([1, 2, 3])
 
         let createView: () -> (UITableView, Disposable) = {
@@ -111,7 +108,7 @@ final class UITableViewTests : RxTest {
         dataSourceSubscription.dispose()
     }
 
-    func test_itemInserted() {
+    func testTableView_itemInserted() {
         let items: Observable<[Int]> = Observable.just([1, 2, 3])
 
         let createView: () -> (UITableView, Disposable) = {
@@ -140,15 +137,14 @@ final class UITableViewTests : RxTest {
         dataSourceSubscription.dispose()
     }
 
-    func test_willDisplayCell() {
+    func testTableView_willDisplayCell() {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: 1, height: 1))
 
         var resultIndexPath: IndexPath? = nil
         var resultCell: UITableViewCell? = nil
 
         let subscription = tableView.rx.willDisplayCell
-            .subscribe(onNext: { cellInfo in
-                let (cell, indexPath) = cellInfo
+            .subscribe(onNext: { (cell, indexPath) in
                 resultIndexPath = indexPath
                 resultCell = cell
             })
@@ -162,15 +158,14 @@ final class UITableViewTests : RxTest {
         subscription.dispose()
     }
 
-    func test_didEndDisplayingCell() {
+    func testTableView_didEndDisplayingCell() {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: 1, height: 1))
 
         var resultIndexPath: IndexPath? = nil
         var resultCell: UITableViewCell? = nil
 
         let subscription = tableView.rx.didEndDisplayingCell
-            .subscribe(onNext: { cellInfo in
-                let (cell, indexPath) = cellInfo
+            .subscribe(onNext: { (cell, indexPath) in
                 resultIndexPath = indexPath
                 resultCell = cell
             })
@@ -184,7 +179,7 @@ final class UITableViewTests : RxTest {
         subscription.dispose()
     }
 
-    func test_itemMoved() {
+    func testTableView_itemMoved() {
         let items: Observable<[Int]> = Observable.just([1, 2, 3])
 
         let createView: () -> (UITableView, Disposable) = {
@@ -202,8 +197,7 @@ final class UITableViewTests : RxTest {
         var resultIndexPath2: IndexPath? = nil
 
         let subscription = tableView.rx.itemMoved
-            .subscribe(onNext: { indexPaths in
-                let (indexPath, indexPath2) = indexPaths
+            .subscribe(onNext: { (indexPath, indexPath2) in
                 resultIndexPath = indexPath
                 resultIndexPath2 = indexPath2
             })
@@ -218,7 +212,7 @@ final class UITableViewTests : RxTest {
         dataSourceSubscription.dispose()
     }
 
-    func test_delegateEventCompletesOnDealloc1() {
+    func testTableView_DelegateEventCompletesOnDealloc1() {
         let items: Observable<[Int]> = Observable.just([1, 2, 3])
 
         let createView: () -> (UITableView, Disposable) = {
@@ -232,7 +226,7 @@ final class UITableViewTests : RxTest {
         ensureEventDeallocated(createView) { (view: UITableView) in view.rx.modelSelected(Int.self) }
     }
 
-    func test_delegateEventCompletesOnDealloc2() {
+    func testTableView_DelegateEventCompletesOnDealloc2() {
         let items: Observable<[Int]> = Observable.just([1, 2, 3])
 
         let createView: () -> (UITableView, Disposable) = {
@@ -247,7 +241,7 @@ final class UITableViewTests : RxTest {
         ensureEventDeallocated(createView) { (view: UITableView) in view.rx.modelSelected(Int.self) }
     }
 
-    func test_delegateEventCompletesOnDealloc2_cellType() {
+    func testTableView_DelegateEventCompletesOnDealloc2_cellType() {
         let items: Observable<[Int]> = Observable.just([1, 2, 3])
 
         let createView: () -> (UITableView, Disposable) = {
@@ -262,7 +256,7 @@ final class UITableViewTests : RxTest {
         ensureEventDeallocated(createView) { (view: UITableView) in view.rx.modelSelected(Int.self) }
     }
 
-    func testx_modelSelected_rx_itemsWithCellFactory() {
+    func testTableView_ModelSelected_rx_itemsWithCellFactory() {
         let items: Observable<[Int]> = Observable.just([1, 2, 3])
         
         let createView: () -> (UITableView, Disposable) = {
@@ -291,7 +285,7 @@ final class UITableViewTests : RxTest {
         s.dispose()
     }
 
-    func test_modelSelected_itemsWithCellIdentifier() {
+    func testTableView_ModelSelected_itemsWithCellIdentifier() {
         let items: Observable<[Int]> = Observable.just([1, 2, 3])
 
         let createView: () -> (UITableView, Disposable) = {
@@ -321,7 +315,7 @@ final class UITableViewTests : RxTest {
         s.dispose()
     }
 
-    func test_modelDeselected_rx_itemsWithCellFactory() {
+    func testTableView_ModelDeselected_rx_itemsWithCellFactory() {
         let items: Observable<[Int]> = Observable.just([1, 2, 3])
 
         let createView: () -> (UITableView, Disposable) = {
@@ -350,7 +344,7 @@ final class UITableViewTests : RxTest {
         s.dispose()
     }
     
-    func test_ModelDeleted_rx_itemsWithCellFactory() {
+    func testTableView_ModelDeleted_rx_itemsWithCellFactory() {
         let items: Observable<[Int]> = Observable.just([1, 2, 3])
         
         let createView: () -> (UITableView, Disposable) = {
@@ -379,7 +373,7 @@ final class UITableViewTests : RxTest {
         s.dispose()
     }
 
-    func test_ModelDeselected_itemsWithCellIdentifier() {
+    func testTableView_ModelDeselected_itemsWithCellIdentifier() {
         let items: Observable<[Int]> = Observable.just([1, 2, 3])
 
         let createView: () -> (UITableView, Disposable) = {
@@ -409,7 +403,7 @@ final class UITableViewTests : RxTest {
         s.dispose()
     }
 
-    func test_modelAtIndexPath_normal() {
+    func testTableView_modelAtIndexPath_normal() {
         let items: Observable<[Int]> = Observable.just([1, 2, 3])
 
         let createView: () -> (UITableView, Disposable) = {
@@ -429,47 +423,6 @@ final class UITableViewTests : RxTest {
         
         dataSourceSubscription.dispose()
     }
-
-    #if os(tvOS)
-        func test_didUpdateFocusInContextWithAnimationCoordinator() {
-            let items: Observable<[Int]> = Observable.just([1, 2, 3])
-
-            let createView: () -> (UITableView, Disposable) = {
-                let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: 1, height: 1))
-                let dataSourceSubscription = items.bind(to: tableView.rx.items) { (tv, index: Int, item: Int) -> UITableViewCell in
-                    return UITableViewCell(style: .default, reuseIdentifier: "Identity")
-                }
-
-                return (tableView, dataSourceSubscription)
-            }
-
-            let (tableView, dataSourceSubscription) = createView()
-
-            var resultContext: UITableViewFocusUpdateContext? = nil
-            var resultAnimationCoordinator: UIFocusAnimationCoordinator? = nil
-
-            let subscription = tableView.rx.didUpdateFocusInContextWithAnimationCoordinator
-                .subscribe(onNext: { args in
-                    let (context, animationCoordinator) = args
-                    resultContext = context
-                    resultAnimationCoordinator = animationCoordinator
-                })
-
-            let context = UITableViewFocusUpdateContext()
-            let animationCoordinator = UIFocusAnimationCoordinator()
-
-            XCTAssertEqual(resultContext, nil)
-            XCTAssertEqual(resultAnimationCoordinator, nil)
-
-            tableView.delegate!.tableView!(tableView, didUpdateFocusIn: context, with: animationCoordinator)
-
-            XCTAssertEqual(resultContext, context)
-            XCTAssertEqual(resultAnimationCoordinator, animationCoordinator)
-
-            subscription.dispose()
-            dataSourceSubscription.dispose()
-        }
-    #endif
 }
 
 extension UITableViewTests {
@@ -538,7 +491,7 @@ extension UITableViewTests {
         XCTAssert(dataSourceDeallocated == true)
     }
 
-    func testDataSourceIsResetOnDispose() {
+    func testTableViewDataSourceIsResetOnDispose() {
         var disposeEvents: [String] = []
 
         let items: Observable<[Int]> = Observable.just([1, 2, 3]).concat(Observable.never())
@@ -558,7 +511,7 @@ extension UITableViewTests {
 
         let (tableView, dataSourceSubscription) = createView()
 
-        XCTAssertTrue(tableView.dataSource === RxTableViewDataSourceProxy.proxy(for: tableView))
+        XCTAssertTrue(tableView.dataSource === RxTableViewDataSourceProxy.proxyForObject(tableView))
 
         _ = tableView.rx.sentMessage(#selector(UITableView.layoutIfNeeded)).subscribe(onNext: { _ in
             disposeEvents.append("layoutIfNeeded")

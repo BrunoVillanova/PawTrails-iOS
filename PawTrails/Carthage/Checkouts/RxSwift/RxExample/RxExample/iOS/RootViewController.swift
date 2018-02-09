@@ -7,8 +7,10 @@
 //
 
 import UIKit
-import RxSwift
-import RxCocoa
+#if !RX_NO_MODULE
+    import RxSwift
+    import RxCocoa
+#endif
 
 public class RootViewController : UITableViewController {
     public override func viewDidLoad() {

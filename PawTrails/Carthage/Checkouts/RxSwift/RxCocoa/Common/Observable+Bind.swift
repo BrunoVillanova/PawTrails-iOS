@@ -6,8 +6,9 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
-
-import RxSwift
+#if !RX_NO_MODULE
+    import RxSwift
+#endif
 
 extension ObservableType {
     
@@ -38,73 +39,43 @@ extension ObservableType {
     }
 
     /**
-     Creates new subscription and sends elements to publish relay.
-     
-     In case error occurs in debug mode, `fatalError` will be raised.
-     In case error occurs in release mode, `error` will be logged.
-     
-     - parameter to: Target publish relay for sequence elements.
-     - returns: Disposable object that can be used to unsubscribe the observer.
-     */
-    public func bind(to relay: PublishRelay<E>) -> Disposable {
+    Creates new subscription and sends elements to variable.
+
+    In case error occurs in debug mode, `fatalError` will be raised.
+    In case error occurs in release mode, `error` will be logged.
+
+    - parameter to: Target variable for sequence elements.
+    - returns: Disposable object that can be used to unsubscribe the observer.
+    */
+    public func bind(to variable: Variable<E>) -> Disposable {
         return subscribe { e in
             switch e {
             case let .next(element):
-                relay.accept(element)
+                variable.value = element
             case let .error(error):
-                rxFatalErrorInDebug("Binding error to publish relay: \(error)")
+                let error = "Binding error to variable: \(error)"
+            #if DEBUG
+                rxFatalError(error)
+            #else
+                print(error)
+            #endif
             case .completed:
                 break
             }
         }
     }
-    
+
     /**
-     Creates new subscription and sends elements to publish relay.
-     
+     Creates new subscription and sends elements to variable.
+
      In case error occurs in debug mode, `fatalError` will be raised.
      In case error occurs in release mode, `error` will be logged.
-     
-     - parameter to: Target publish relay for sequence elements.
+
+     - parameter to: Target variable for sequence elements.
      - returns: Disposable object that can be used to unsubscribe the observer.
      */
-    public func bind(to relay: PublishRelay<E?>) -> Disposable {
-        return self.map { $0 as E? }.bind(to: relay)
-    }
-    
-    /**
-     Creates new subscription and sends elements to behavior relay.
-     
-     In case error occurs in debug mode, `fatalError` will be raised.
-     In case error occurs in release mode, `error` will be logged.
-     
-     - parameter to: Target behavior relay for sequence elements.
-     - returns: Disposable object that can be used to unsubscribe the observer.
-     */
-    public func bind(to relay: BehaviorRelay<E>) -> Disposable {
-        return subscribe { e in
-            switch e {
-            case let .next(element):
-                relay.accept(element)
-            case let .error(error):
-                rxFatalErrorInDebug("Binding error to behavior relay: \(error)")
-            case .completed:
-                break
-            }
-        }
-    }
-    
-    /**
-     Creates new subscription and sends elements to behavior relay.
-     
-     In case error occurs in debug mode, `fatalError` will be raised.
-     In case error occurs in release mode, `error` will be logged.
-     
-     - parameter to: Target behavior relay for sequence elements.
-     - returns: Disposable object that can be used to unsubscribe the observer.
-     */
-    public func bind(to relay: BehaviorRelay<E?>) -> Disposable {
-        return self.map { $0 as E? }.bind(to: relay)
+    public func bind(to variable: Variable<E?>) -> Disposable {
+        return self.map { $0 as E? }.bind(to: variable)
     }
     
     /**
@@ -145,7 +116,12 @@ extension ObservableType {
     */
     public func bind(onNext: @escaping (E) -> Void) -> Disposable {
         return subscribe(onNext: onNext, onError: { error in
-            rxFatalErrorInDebug("Binding error: \(error)")
+            let error = "Binding error: \(error)"
+            #if DEBUG
+                rxFatalError(error)
+            #else
+                print(error)
+            #endif
         })
     }
 }

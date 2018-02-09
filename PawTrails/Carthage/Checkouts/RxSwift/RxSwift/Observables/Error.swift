@@ -6,7 +6,7 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
-extension ObservableType {
+extension Observable {
     /**
      Returns an observable sequence that terminates with an `error`.
 

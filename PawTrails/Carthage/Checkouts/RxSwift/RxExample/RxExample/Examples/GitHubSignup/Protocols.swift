@@ -6,8 +6,10 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
+#if !RX_NO_MODULE
 import RxSwift
 import RxCocoa
+#endif
 
 enum ValidationResult {
     case ok(message: String)

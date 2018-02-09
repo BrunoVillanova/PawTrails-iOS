@@ -7,8 +7,10 @@
 //
 
 import UIKit
-import RxSwift
-import RxCocoa
+#if !RX_NO_MODULE
+    import RxSwift
+    import RxCocoa
+#endif
 
 func dismissViewController(_ viewController: UIViewController, animated: Bool) {
     if viewController.isBeingDismissed || viewController.isBeingPresented {
@@ -30,7 +32,7 @@ extension Reactive where Base: UIImagePickerController {
             let imagePicker = UIImagePickerController()
             let dismissDisposable = imagePicker.rx
                 .didCancel
-                .subscribe(onNext: { [weak imagePicker] _ in
+                .subscribe(onNext: { [weak imagePicker] in
                     guard let imagePicker = imagePicker else {
                         return
                     }

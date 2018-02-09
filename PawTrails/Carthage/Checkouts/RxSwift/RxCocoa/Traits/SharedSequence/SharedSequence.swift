@@ -6,7 +6,9 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
-import RxSwift
+#if !RX_NO_MODULE
+    import RxSwift
+#endif
 
 /**
     Trait that represents observable sequence that shares computation resources with following properties:
@@ -72,7 +74,7 @@ public protocol SharingStrategyProtocol {
     /**
      Computation resources sharing strategy for multiple sequence observers.
      
-     E.g. One can choose `share(replay:scope:)`
+     E.g. One can choose `shareReplayWhenConnected`, `shareReplay` or `share`
      as sequence event sharing strategies, but also do something more exotic, like
      implementing promises or lazy loading chains.
     */
@@ -194,7 +196,7 @@ extension SharedSequence {
     }
 }
 
-extension SharedSequence where Element : RxAbstractInteger {
+extension SharedSequence where Element : SignedInteger {
     /**
      Returns an observable sequence that produces a value after each period, using the specified scheduler to run timers and to send out observer messages.
 
@@ -211,7 +213,7 @@ extension SharedSequence where Element : RxAbstractInteger {
 
 // MARK: timer
 
-extension SharedSequence where Element: RxAbstractInteger {
+extension SharedSequence where Element: SignedInteger {
     /**
      Returns an observable sequence that periodically produces a value after the specified initial relative due time has elapsed, using the specified scheduler to run timers.
 

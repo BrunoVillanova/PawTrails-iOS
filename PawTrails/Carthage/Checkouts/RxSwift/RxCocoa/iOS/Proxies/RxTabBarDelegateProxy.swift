@@ -7,43 +7,36 @@
 //
 
 #if os(iOS) || os(tvOS)
-
 import UIKit
-import RxSwift
 
-extension UITabBar: HasDelegate {
-    public typealias Delegate = UITabBarDelegate
-}
+#if !RX_NO_MODULE
+import RxSwift
+#endif
 
 /// For more information take a look at `DelegateProxyType`.
-open class RxTabBarDelegateProxy
-    : DelegateProxy<UITabBar, UITabBarDelegate>
-    , DelegateProxyType 
-    , UITabBarDelegate {
+public class RxTabBarDelegateProxy
+    : DelegateProxy
+    , UITabBarDelegate
+    , DelegateProxyType {
 
-    /// Typed parent object.
-    public weak private(set) var tabBar: UITabBar?
-
-    /// - parameter tabBar: Parent object for delegate proxy.
-    public init(tabBar: ParentObject) {
-        self.tabBar = tabBar
-        super.init(parentObject: tabBar, delegateProxy: RxTabBarDelegateProxy.self)
-    }
-
-    // Register known implementations
-    public static func registerKnownImplementations() {
-        self.register { RxTabBarDelegateProxy(tabBar: $0) }
+    /// For more information take a look at `DelegateProxyType`.
+    public class func currentDelegateFor(_ object: AnyObject) -> AnyObject? {
+        let tabBar: UITabBar = castOrFatalError(object)
+        return tabBar.delegate
     }
 
     /// For more information take a look at `DelegateProxyType`.
-    open class func currentDelegate(for object: ParentObject) -> UITabBarDelegate? {
-        return object.delegate
+    public class func setCurrentDelegate(_ delegate: AnyObject?, toObject object: AnyObject) {
+        let tabBar: UITabBar = castOrFatalError(object)
+        tabBar.delegate = castOptionalOrFatalError(delegate)
     }
 
     /// For more information take a look at `DelegateProxyType`.
-    open class func setCurrentDelegate(_ delegate: UITabBarDelegate?, to object: ParentObject) {
-        object.delegate = delegate
+    public override class func createProxyForObject(_ object: AnyObject) -> AnyObject {
+        let tabBar: UITabBar = castOrFatalError(object)
+        return tabBar.createRxDelegateProxy()
     }
+
 }
 
 #endif

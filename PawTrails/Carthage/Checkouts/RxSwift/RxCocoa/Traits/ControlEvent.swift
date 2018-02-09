@@ -6,7 +6,9 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
+#if !RX_NO_MODULE
 import RxSwift
+#endif
 
 /// Protocol that enables extension of `ControlEvent`.
 public protocol ControlEventType : ObservableType {
@@ -34,7 +36,7 @@ public protocol ControlEventType : ObservableType {
     **If they aren't, then using this trait communicates wrong properties and could potentially break someone's code.**
 
     **In case `events` observable sequence that is being passed into initializer doesn't satisfy all enumerated
-     properties, please don't use this trait.**
+     properties, please don't use this unit.**
 */
 public struct ControlEvent<PropertyType> : ControlEventType {
     public typealias E = PropertyType

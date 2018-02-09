@@ -7,8 +7,10 @@
 //
 
 import UIKit
+#if !RX_NO_MODULE
 import RxSwift
 import RxCocoa
+#endif
 
 class GitHubSignupViewController2 : ViewController {
     @IBOutlet weak var usernameOutlet: UITextField!
@@ -31,7 +33,7 @@ class GitHubSignupViewController2 : ViewController {
                 username: usernameOutlet.rx.text.orEmpty.asDriver(),
                 password: passwordOutlet.rx.text.orEmpty.asDriver(),
                 repeatedPassword: repeatedPasswordOutlet.rx.text.orEmpty.asDriver(),
-                loginTaps: signupOutlet.rx.tap.asSignal()
+                loginTaps: signupOutlet.rx.tap.asDriver()
             ),
             dependency: (
                 API: GitHubDefaultAPI.sharedAPI,

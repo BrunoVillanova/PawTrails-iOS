@@ -6,7 +6,9 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
+#if !RX_NO_MODULE
 import RxSwift
+#endif
 
 #if os(iOS)
     import UIKit
@@ -18,7 +20,11 @@ import RxSwift
 
 class ViewController: OSViewController {
 #if TRACE_RESOURCES
+    #if !RX_NO_MODULE
     private let startResourceCount = RxSwift.Resources.total
+    #else
+    private let startResourceCount = Resources.total
+    #endif
 #endif
 
     var disposeBag = DisposeBag()

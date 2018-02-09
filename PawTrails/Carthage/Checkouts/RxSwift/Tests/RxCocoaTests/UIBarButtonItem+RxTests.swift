@@ -33,7 +33,7 @@ extension UIBarButtonItemTests {
     func testBarButtonItem_actionExecution() {
         let button = UIBarButtonItem()
         var onNextCalled = false
-        let disposable = button.rx.tap.subscribe(onNext: { _ in
+        let disposable = button.rx.tap.subscribe(onNext: {
             onNextCalled = true
         })
         defer { disposable.dispose() }

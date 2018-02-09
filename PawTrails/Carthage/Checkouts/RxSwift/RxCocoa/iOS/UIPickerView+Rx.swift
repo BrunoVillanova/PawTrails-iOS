@@ -8,15 +8,37 @@
 
 #if os(iOS)
     
+#if !RX_NO_MODULE
     import RxSwift
+#endif
     import UIKit
 
+    extension UIPickerView {
+
+        /// Factory method that enables subclasses to implement their own `delegate`.
+        ///
+        /// - returns: Instance of delegate proxy that wraps `delegate`.
+        public func createRxDelegateProxy() -> RxPickerViewDelegateProxy {
+            return RxPickerViewDelegateProxy(parentObject: self)
+        }
+        
+        /**
+         Factory method that enables subclasses to implement their own `rx.dataSource`.
+         
+         - returns: Instance of delegate proxy that wraps `dataSource`.
+         */
+        public func createRxDataSourceProxy() -> RxPickerViewDataSourceProxy {
+            return RxPickerViewDataSourceProxy(parentObject: self)
+        }
+
+    }
+    
     extension Reactive where Base: UIPickerView {
 
         /// Reactive wrapper for `delegate`.
         /// For more information take a look at `DelegateProxyType` protocol documentation.
-        public var delegate: DelegateProxy<UIPickerView, UIPickerViewDelegate> {
-            return RxPickerViewDelegateProxy.proxy(for: base)
+        public var delegate: DelegateProxy {
+            return RxPickerViewDelegateProxy.proxyForObject(base)
         }
         
         /// Installs delegate as forwarding delegate on `delegate`.
@@ -36,8 +58,8 @@
          
          For more information take a look at `DelegateProxyType` protocol documentation.
          */
-        public var dataSource: DelegateProxy<UIPickerView, UIPickerViewDataSource> {
-            return RxPickerViewDataSourceProxy.proxy(for: base)
+        public var dataSource: DelegateProxy {
+            return RxPickerViewDataSourceProxy.proxyForObject(base)
         }
         
         /**

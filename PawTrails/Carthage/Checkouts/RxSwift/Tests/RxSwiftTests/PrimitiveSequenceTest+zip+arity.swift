@@ -15,8 +15,8 @@ import RxTest
 
 // 2
 
-extension SingleTest {
-    func testZip2_selector() {
+extension PrimitiveSequenceTest {
+    func testZip2_selector_producesSingleElement() {
         let singleResult: Single<Int> = Single.zip(Single.just(1), Single.just(1)) { $0 + $1 }
 
         let result = try! singleResult
@@ -24,26 +24,8 @@ extension SingleTest {
         XCTAssertEqual(result, 2)
     }
 
-    func testZip2_tuple() {
+    func testZip2_producesSingleElement() {
         let singleResult: Single<Int> = Single.zip(Single.just(1), Single.just(1)).map { $0 + $1 }
-
-        let result = try! singleResult
-            .toBlocking().first()!
-        XCTAssertEqual(result, 2)
-    }
-}
-
-extension MaybeTest {
-    func testZip2_selector() {
-        let singleResult: Maybe<Int> = Maybe.zip(Maybe.just(1), Maybe.just(1)) { $0 + $1 }
-
-        let result = try! singleResult
-            .toBlocking().first()!
-        XCTAssertEqual(result, 2)
-    }
-
-    func testZip2_tuple() {
-        let singleResult: Maybe<Int> = Maybe.zip(Maybe.just(1), Maybe.just(1)).map { $0 + $1 }
 
         let result = try! singleResult
             .toBlocking().first()!
@@ -55,8 +37,8 @@ extension MaybeTest {
 
 // 3
 
-extension SingleTest {
-    func testZip3_selector() {
+extension PrimitiveSequenceTest {
+    func testZip3_selector_producesSingleElement() {
         let singleResult: Single<Int> = Single.zip(Single.just(1), Single.just(1), Single.just(1)) { $0 + $1 + $2 }
 
         let result = try! singleResult
@@ -64,26 +46,8 @@ extension SingleTest {
         XCTAssertEqual(result, 3)
     }
 
-    func testZip3_tuple() {
+    func testZip3_producesSingleElement() {
         let singleResult: Single<Int> = Single.zip(Single.just(1), Single.just(1), Single.just(1)).map { $0 + $1 + $2 }
-
-        let result = try! singleResult
-            .toBlocking().first()!
-        XCTAssertEqual(result, 3)
-    }
-}
-
-extension MaybeTest {
-    func testZip3_selector() {
-        let singleResult: Maybe<Int> = Maybe.zip(Maybe.just(1), Maybe.just(1), Maybe.just(1)) { $0 + $1 + $2 }
-
-        let result = try! singleResult
-            .toBlocking().first()!
-        XCTAssertEqual(result, 3)
-    }
-
-    func testZip3_tuple() {
-        let singleResult: Maybe<Int> = Maybe.zip(Maybe.just(1), Maybe.just(1), Maybe.just(1)).map { $0 + $1 + $2 }
 
         let result = try! singleResult
             .toBlocking().first()!
@@ -95,8 +59,8 @@ extension MaybeTest {
 
 // 4
 
-extension SingleTest {
-    func testZip4_selector() {
+extension PrimitiveSequenceTest {
+    func testZip4_selector_producesSingleElement() {
         let singleResult: Single<Int> = Single.zip(Single.just(1), Single.just(1), Single.just(1), Single.just(1)) { $0 + $1 + $2 + $3 }
 
         let result = try! singleResult
@@ -104,26 +68,8 @@ extension SingleTest {
         XCTAssertEqual(result, 4)
     }
 
-    func testZip4_tuple() {
+    func testZip4_producesSingleElement() {
         let singleResult: Single<Int> = Single.zip(Single.just(1), Single.just(1), Single.just(1), Single.just(1)).map { $0 + $1 + $2 + $3 }
-
-        let result = try! singleResult
-            .toBlocking().first()!
-        XCTAssertEqual(result, 4)
-    }
-}
-
-extension MaybeTest {
-    func testZip4_selector() {
-        let singleResult: Maybe<Int> = Maybe.zip(Maybe.just(1), Maybe.just(1), Maybe.just(1), Maybe.just(1)) { $0 + $1 + $2 + $3 }
-
-        let result = try! singleResult
-            .toBlocking().first()!
-        XCTAssertEqual(result, 4)
-    }
-
-    func testZip4_tuple() {
-        let singleResult: Maybe<Int> = Maybe.zip(Maybe.just(1), Maybe.just(1), Maybe.just(1), Maybe.just(1)).map { $0 + $1 + $2 + $3 }
 
         let result = try! singleResult
             .toBlocking().first()!
@@ -135,8 +81,8 @@ extension MaybeTest {
 
 // 5
 
-extension SingleTest {
-    func testZip5_selector() {
+extension PrimitiveSequenceTest {
+    func testZip5_selector_producesSingleElement() {
         let singleResult: Single<Int> = Single.zip(Single.just(1), Single.just(1), Single.just(1), Single.just(1), Single.just(1)) { $0 + $1 + $2 + $3 + $4 }
 
         let result = try! singleResult
@@ -144,26 +90,8 @@ extension SingleTest {
         XCTAssertEqual(result, 5)
     }
 
-    func testZip5_tuple() {
+    func testZip5_producesSingleElement() {
         let singleResult: Single<Int> = Single.zip(Single.just(1), Single.just(1), Single.just(1), Single.just(1), Single.just(1)).map { $0 + $1 + $2 + $3 + $4 }
-
-        let result = try! singleResult
-            .toBlocking().first()!
-        XCTAssertEqual(result, 5)
-    }
-}
-
-extension MaybeTest {
-    func testZip5_selector() {
-        let singleResult: Maybe<Int> = Maybe.zip(Maybe.just(1), Maybe.just(1), Maybe.just(1), Maybe.just(1), Maybe.just(1)) { $0 + $1 + $2 + $3 + $4 }
-
-        let result = try! singleResult
-            .toBlocking().first()!
-        XCTAssertEqual(result, 5)
-    }
-
-    func testZip5_tuple() {
-        let singleResult: Maybe<Int> = Maybe.zip(Maybe.just(1), Maybe.just(1), Maybe.just(1), Maybe.just(1), Maybe.just(1)).map { $0 + $1 + $2 + $3 + $4 }
 
         let result = try! singleResult
             .toBlocking().first()!
@@ -175,8 +103,8 @@ extension MaybeTest {
 
 // 6
 
-extension SingleTest {
-    func testZip6_selector() {
+extension PrimitiveSequenceTest {
+    func testZip6_selector_producesSingleElement() {
         let singleResult: Single<Int> = Single.zip(Single.just(1), Single.just(1), Single.just(1), Single.just(1), Single.just(1), Single.just(1)) { $0 + $1 + $2 + $3 + $4 + $5 }
 
         let result = try! singleResult
@@ -184,26 +112,8 @@ extension SingleTest {
         XCTAssertEqual(result, 6)
     }
 
-    func testZip6_tuple() {
+    func testZip6_producesSingleElement() {
         let singleResult: Single<Int> = Single.zip(Single.just(1), Single.just(1), Single.just(1), Single.just(1), Single.just(1), Single.just(1)).map { $0 + $1 + $2 + $3 + $4 + $5 }
-
-        let result = try! singleResult
-            .toBlocking().first()!
-        XCTAssertEqual(result, 6)
-    }
-}
-
-extension MaybeTest {
-    func testZip6_selector() {
-        let singleResult: Maybe<Int> = Maybe.zip(Maybe.just(1), Maybe.just(1), Maybe.just(1), Maybe.just(1), Maybe.just(1), Maybe.just(1)) { $0 + $1 + $2 + $3 + $4 + $5 }
-
-        let result = try! singleResult
-            .toBlocking().first()!
-        XCTAssertEqual(result, 6)
-    }
-
-    func testZip6_tuple() {
-        let singleResult: Maybe<Int> = Maybe.zip(Maybe.just(1), Maybe.just(1), Maybe.just(1), Maybe.just(1), Maybe.just(1), Maybe.just(1)).map { $0 + $1 + $2 + $3 + $4 + $5 }
 
         let result = try! singleResult
             .toBlocking().first()!
@@ -215,8 +125,8 @@ extension MaybeTest {
 
 // 7
 
-extension SingleTest {
-    func testZip7_selector() {
+extension PrimitiveSequenceTest {
+    func testZip7_selector_producesSingleElement() {
         let singleResult: Single<Int> = Single.zip(Single.just(1), Single.just(1), Single.just(1), Single.just(1), Single.just(1), Single.just(1), Single.just(1)) { $0 + $1 + $2 + $3 + $4 + $5 + $6 }
 
         let result = try! singleResult
@@ -224,26 +134,8 @@ extension SingleTest {
         XCTAssertEqual(result, 7)
     }
 
-    func testZip7_tuple() {
+    func testZip7_producesSingleElement() {
         let singleResult: Single<Int> = Single.zip(Single.just(1), Single.just(1), Single.just(1), Single.just(1), Single.just(1), Single.just(1), Single.just(1)).map { $0 + $1 + $2 + $3 + $4 + $5 + $6 }
-
-        let result = try! singleResult
-            .toBlocking().first()!
-        XCTAssertEqual(result, 7)
-    }
-}
-
-extension MaybeTest {
-    func testZip7_selector() {
-        let singleResult: Maybe<Int> = Maybe.zip(Maybe.just(1), Maybe.just(1), Maybe.just(1), Maybe.just(1), Maybe.just(1), Maybe.just(1), Maybe.just(1)) { $0 + $1 + $2 + $3 + $4 + $5 + $6 }
-
-        let result = try! singleResult
-            .toBlocking().first()!
-        XCTAssertEqual(result, 7)
-    }
-
-    func testZip7_tuple() {
-        let singleResult: Maybe<Int> = Maybe.zip(Maybe.just(1), Maybe.just(1), Maybe.just(1), Maybe.just(1), Maybe.just(1), Maybe.just(1), Maybe.just(1)).map { $0 + $1 + $2 + $3 + $4 + $5 + $6 }
 
         let result = try! singleResult
             .toBlocking().first()!
@@ -255,8 +147,8 @@ extension MaybeTest {
 
 // 8
 
-extension SingleTest {
-    func testZip8_selector() {
+extension PrimitiveSequenceTest {
+    func testZip8_selector_producesSingleElement() {
         let singleResult: Single<Int> = Single.zip(Single.just(1), Single.just(1), Single.just(1), Single.just(1), Single.just(1), Single.just(1), Single.just(1), Single.just(1)) { $0 + $1 + $2 + $3 + $4 + $5 + $6 + $7 }
 
         let result = try! singleResult
@@ -264,26 +156,8 @@ extension SingleTest {
         XCTAssertEqual(result, 8)
     }
 
-    func testZip8_tuple() {
+    func testZip8_producesSingleElement() {
         let singleResult: Single<Int> = Single.zip(Single.just(1), Single.just(1), Single.just(1), Single.just(1), Single.just(1), Single.just(1), Single.just(1), Single.just(1)).map { $0 + $1 + $2 + $3 + $4 + $5 + $6 + $7 }
-
-        let result = try! singleResult
-            .toBlocking().first()!
-        XCTAssertEqual(result, 8)
-    }
-}
-
-extension MaybeTest {
-    func testZip8_selector() {
-        let singleResult: Maybe<Int> = Maybe.zip(Maybe.just(1), Maybe.just(1), Maybe.just(1), Maybe.just(1), Maybe.just(1), Maybe.just(1), Maybe.just(1), Maybe.just(1)) { $0 + $1 + $2 + $3 + $4 + $5 + $6 + $7 }
-
-        let result = try! singleResult
-            .toBlocking().first()!
-        XCTAssertEqual(result, 8)
-    }
-
-    func testZip8_tuple() {
-        let singleResult: Maybe<Int> = Maybe.zip(Maybe.just(1), Maybe.just(1), Maybe.just(1), Maybe.just(1), Maybe.just(1), Maybe.just(1), Maybe.just(1), Maybe.just(1)).map { $0 + $1 + $2 + $3 + $4 + $5 + $6 + $7 }
 
         let result = try! singleResult
             .toBlocking().first()!

@@ -6,7 +6,7 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
-extension ObservableType {
+extension Observable {
     // MARK: of
 
     /**
@@ -23,7 +23,7 @@ extension ObservableType {
     }
 }
 
-extension ObservableType {
+extension Observable {
     /**
      Converts an array to an observable sequence.
 

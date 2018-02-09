@@ -10,7 +10,6 @@ import RxSwift
 import RxCocoa
 import XCTest
 import CoreLocation
-import RxExample_iOS
 
 class CLLocationManagerTests : RxTest {
 

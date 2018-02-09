@@ -8,7 +8,9 @@
 
 #if os(iOS) || os(tvOS)
 
+#if !RX_NO_MODULE
 import RxSwift
+#endif
 import UIKit
 
 // Items
@@ -158,6 +160,24 @@ extension Reactive where Base: UICollectionView {
     }
 }
 
+extension UICollectionView {
+   
+    /// Factory method that enables subclasses to implement their own `delegate`.
+    ///
+    /// - returns: Instance of delegate proxy that wraps `delegate`.
+    public override func createRxDelegateProxy() -> RxScrollViewDelegateProxy {
+        return RxCollectionViewDelegateProxy(parentObject: self)
+    }
+
+    /// Factory method that enables subclasses to implement their own `rx.dataSource`.
+    ///
+    /// - returns: Instance of delegate proxy that wraps `dataSource`.
+    public func createRxDataSourceProxy() -> RxCollectionViewDataSourceProxy {
+        return RxCollectionViewDataSourceProxy(parentObject: self)
+    }
+
+}
+
 extension Reactive where Base: UICollectionView {
     public typealias DisplayCollectionViewCellEvent = (cell: UICollectionViewCell, at: IndexPath)
     public typealias DisplayCollectionViewSupplementaryViewEvent = (supplementaryView: UICollectionReusableView, elementKind: String, at: IndexPath)
@@ -165,8 +185,8 @@ extension Reactive where Base: UICollectionView {
     /// Reactive wrapper for `dataSource`.
     ///
     /// For more information take a look at `DelegateProxyType` protocol documentation.
-    public var dataSource: DelegateProxy<UICollectionView, UICollectionViewDataSource> {
-        return RxCollectionViewDataSourceProxy.proxy(for: base)
+    public var dataSource: DelegateProxy {
+        return RxCollectionViewDataSourceProxy.proxyForObject(base)
     }
     
     /// Installs data source as forwarding delegate on `rx.dataSource`.
@@ -185,7 +205,7 @@ extension Reactive where Base: UICollectionView {
     public var itemSelected: ControlEvent<IndexPath> {
         let source = delegate.methodInvoked(#selector(UICollectionViewDelegate.collectionView(_:didSelectItemAt:)))
             .map { a in
-                return try castOrThrow(IndexPath.self, a[1])
+                return a[1] as! IndexPath
             }
         
         return ControlEvent(events: source)
@@ -195,7 +215,7 @@ extension Reactive where Base: UICollectionView {
     public var itemDeselected: ControlEvent<IndexPath> {
         let source = delegate.methodInvoked(#selector(UICollectionViewDelegate.collectionView(_:didDeselectItemAt:)))
             .map { a in
-                return try castOrThrow(IndexPath.self, a[1])
+                return a[1] as! IndexPath
         }
 
         return ControlEvent(events: source)
@@ -313,7 +333,7 @@ extension Reactive where Base: UICollectionView {
         
         let element = try dataSource.model(at: indexPath)
 
-        return try castOrThrow(T.self, element)
+        return element as! T
     }
 }
 #endif
@@ -327,8 +347,8 @@ extension Reactive where Base: UICollectionView {
 
         let source = delegate.methodInvoked(#selector(UICollectionViewDelegate.collectionView(_:didUpdateFocusIn:with:)))
             .map { a -> (context: UICollectionViewFocusUpdateContext, animationCoordinator: UIFocusAnimationCoordinator) in
-                let context = try castOrThrow(UICollectionViewFocusUpdateContext.self, a[1])
-                let animationCoordinator = try castOrThrow(UIFocusAnimationCoordinator.self, a[2])
+                let context = a[1] as! UICollectionViewFocusUpdateContext
+                let animationCoordinator = a[2] as! UIFocusAnimationCoordinator
                 return (context: context, animationCoordinator: animationCoordinator)
             }
 
