@@ -18,7 +18,6 @@ class MapViewController: UIViewController {
     @IBOutlet weak var firstButtonfromthebottom: UIButton!
     @IBOutlet weak var secButtonFromTheBottom: UIButton!
     @IBOutlet weak var thirdButtonFromTheBottom: UIButton!
-    
     @IBOutlet weak var refreshBarBtn: UIBarButtonItem!
     
     fileprivate let presenter = HomePresenter()
@@ -42,7 +41,7 @@ class MapViewController: UIViewController {
         self.button.addTarget(self, action:  #selector(self.refreshBtnPressed(_:)), for: .touchUpInside)
         button.setImage(UIImage(named: "refresh-button"), for: .normal)
         self.navigationItem.rightBarButtonItem?.customView = button
-        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.primary
+//        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.red
     }
     
     
