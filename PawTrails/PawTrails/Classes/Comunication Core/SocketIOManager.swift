@@ -28,6 +28,16 @@ enum TripAction: Int {
     }
 }
 
+enum GPSTimeIntervalMode: Int {
+    case smart, live
+    
+    var string: String {
+        switch self {
+        case .smart: return "smart"
+        case .live: return "live"
+        }
+    }
+}
 
 fileprivate enum channel {
     
@@ -277,12 +287,13 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         })
     }
     
-    func gpsUpdates(_ petIDs: [Int]) -> Observable<[PetDeviceData]> {
+    func gpsUpdates(_ petIDs: [Int], gpsMode: GPSTimeIntervalMode) -> Observable<[PetDeviceData]> {
         return isReady()
             .filter({ (isReady) -> Bool in
             return isReady
         }).flatMap({ (isReady) -> Observable<[PetDeviceData]> in
-            self.socket.emit("gpsPets", ["ids": petIDs, "noLastPos": false])
+            Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Emitting GPS updates for Pets IDs: \(petIDs.map{ $0 }) - Mode: \(gpsMode.string.uppercased())")
+            self.socket.emit("gpsPets", ["ids": petIDs, "noLastPos": false, "gpsTimeInterval": gpsMode.string])
             return self.petGpsUpdates.asObservable()
                 .map({ (petDeviceDataList) -> [PetDeviceData] in
                     return petDeviceDataList.filter { petIDs.contains($0.pet.id) }
@@ -386,13 +397,13 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         }
     }
     
-    /// Start pets GPS Updates
-    ///
-    //    /// - Parameter petIds: pet ids
-    func startGPSUpdates(for petIds: [Int]) -> Observable<[PetDeviceData]> {
-        Reporter.debugPrint("SocketIO GPS Pets Emited for petIDs \(petIds)")
-        return self.gpsUpdates(petIds)
-    }
+//    /// Start pets GPS Updates
+//    ///
+//    //    /// - Parameter petIds: pet ids
+//    func startGPSUpdates(for petIds: [Int]) -> Observable<[PetDeviceData]> {
+//        Reporter.debugPrint("SocketIO GPS Pets Emited for petIDs \(petIds)")
+//        return self.gpsUpdates(petIds)
+//    }
     
 
     

@@ -87,7 +87,7 @@ extension DataManager {
     }
 
     
-    func allPetDeviceData() -> Observable<[PetDeviceData]> {
+    func allPetDeviceData(_ gpsMode: GPSTimeIntervalMode) -> Observable<[PetDeviceData]> {
 
         let pets = self.pets()
 
@@ -96,20 +96,20 @@ extension DataManager {
             let petIDs = petList.map({ (pet) -> Int in
                 pet.id
             })
-            let liveGpsUpdates = SocketIOManager.instance.gpsUpdates(petIDs)
+            let liveGpsUpdates = SocketIOManager.instance.gpsUpdates(petIDs, gpsMode: gpsMode)
             return liveGpsUpdates.share()
         }
     }
     
-    func petDeviceData(_ petID: Int) -> Observable<PetDeviceData?> {
-        return SocketIOManager.instance.gpsUpdates([petID])
+    func petDeviceData(_ petID: Int, gpsMode: GPSTimeIntervalMode) -> Observable<PetDeviceData?> {
+        return SocketIOManager.instance.gpsUpdates([petID], gpsMode: gpsMode)
             .map({ (petDeviceDataList) -> PetDeviceData? in
                 return petDeviceDataList.first
             })
     }
     
     func lastPetDeviceData(_ pet: Pet) -> Observable<PetDeviceData?> {
-        return allPetDeviceData().map({ (petDeviceDataList) -> PetDeviceData? in
+        return allPetDeviceData(.smart).map({ (petDeviceDataList) -> PetDeviceData? in
             
             let filtered = petDeviceDataList.filter({ (element) -> Bool in
                 return element.pet.id == pet.id
