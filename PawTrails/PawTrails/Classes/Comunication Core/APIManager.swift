@@ -139,7 +139,7 @@ class APIManager {
         
         request.httpMethod = call.httpMethod
         request.cachePolicy = .useProtocolCachePolicy
-        request.timeoutInterval = 10.0
+        request.timeoutInterval = 20.0
         
         request.allHTTPHeaderFields = setHeaders(of: call)
         request.httpBody = setBody(of: call, with: data)

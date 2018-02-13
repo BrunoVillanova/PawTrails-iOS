@@ -450,18 +450,19 @@ public class Point: NSObject, NSCoding {
 }
 
 extension Point {
-    func getFullFormatedAddress(handler: @escaping (String?) -> Void) {
-        var address : String?
-        let location = CLLocation(latitude: self.latitude, longitude: self.longitude)
-        let geocoder = CLGeocoder()
+    func getFullFormatedAddress(handler: @escaping (String?, Error?) -> Void) {
         
-        geocoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) in
+        let location = CLLocation(latitude: self.latitude, longitude: self.longitude)
+
+        CLGeocoder().reverseGeocodeLocation(location, completionHandler: { (placemarks, error) in
+            var address : String?
             if let placemark = placemarks?[0] as CLPlacemark! {
                 if let formattedAddressLines = placemark.addressDictionary?["FormattedAddressLines"] as? [String] {
                     address = formattedAddressLines.joined(separator: ", ")
-                    handler(address)
+                    
                 }
             }
+            handler(address, error)
         })
         
     }

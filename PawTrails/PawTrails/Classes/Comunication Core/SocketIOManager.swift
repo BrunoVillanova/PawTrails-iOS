@@ -241,18 +241,10 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     }
     
     func getPets() -> Observable<[Pet]> {
-
         return isReady().filter({ (value) -> Bool in
             return value == true
         }).flatMap({ (isReady) -> Observable<[Pet]> in
-            DataManager.instance.pets().subscribe(onNext: { (pets) in
-//                let petIDs = pets.map({ (pet) -> Int in
-//                    return pet.id
-//                })
-//                self.socket.emit(channel.pets.name, with: ["ids": petIDs!, "noLastPos": false])
-                
-            }).disposed(by: self.disposeBag)
-           
+            self.socket.emit(channel.pets.name)
             return self.pets.asObservable()
         })
     }
@@ -264,6 +256,9 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         }).flatMap({ (isReady) -> Observable<[PetDeviceData]> in
             self.socket.emit("gpsPets", ["ids": petIDs, "noLastPos": false])
             return self.petGpsUpdates.asObservable()
+                .map({ (petDeviceDataList) -> [PetDeviceData] in
+                    return petDeviceDataList.filter { petIDs.contains($0.pet.id) }
+                })
         })
     }
     

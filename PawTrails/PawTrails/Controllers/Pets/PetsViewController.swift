@@ -18,6 +18,7 @@
     @IBOutlet weak var noPetsFound: UIView!
     @IBOutlet weak var addMyFirstPetButton: UIButton!
     
+    fileprivate let refreshControl = UIRefreshControl()
     fileprivate var pets = [Int:IndexPath]()
     fileprivate var petIdss = [Int]()
     fileprivate var petDeviceData: [PetDeviceData]?
@@ -29,6 +30,11 @@
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        reloadPets()
     }
     
     override func viewDidLayoutSubviews() {
@@ -53,7 +59,13 @@
     }
     
     func reloadPets() {
-        DataManager.instance.pets()
+        retrievePets()
+            .bind(to: tableView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
+    }
+    
+    func retrievePets() -> Observable<[PetSection]> {
+        return DataManager.instance.pets()
             .map({ (pets) -> [PetSection] in
                 let owned = pets.filter({ $0.isOwner == true })
                 let shared = pets.filter({ $0.isOwner == false })
@@ -65,14 +77,29 @@
                 self.noPetsFound.isHidden = pets.count > 0;
                 return sections
             })
-            .bind(to: tableView.rx.items(dataSource: dataSource))
-            .disposed(by: disposeBag)
     }
     
     fileprivate func initialize() {
         
         noPetsFound.isHidden = true
         tableView.tableFooterView = UIView()
+        
+        refreshControl.backgroundColor = UIColor.secondary
+        refreshControl.tintColor = UIColor.primary
+        refreshControl.addTarget(self, action: #selector(reloadPets), for: .valueChanged)
+        tableView.addSubview(refreshControl)
+        
+        
+        refreshControl.rx.controlEvent(.valueChanged)
+            .flatMap{ [unowned self] _ in
+                return self.retrievePets().do(onError: { (error) in
+                    self.refreshControl.endRefreshing()
+                }, onCompleted: {
+                    self.refreshControl.endRefreshing()
+                })
+            }
+             .bind(to: tableView.rx.items(dataSource: dataSource))
+             .disposed(by: disposeBag)
         
         let notificationIdentifier: String = "petAdded"
         NotificationCenter.default.addObserver(self, selector: #selector(reloadPets), name: NSNotification.Name(rawValue: notificationIdentifier), object: nil)
@@ -90,21 +117,6 @@
         dataSource.titleForHeaderInSection = { ds, index in
             return ds.sectionModels[index].header
         }
-        
-        DataManager.instance.pets()
-            .map({ (pets) -> [PetSection] in
-                let owned = pets.filter({ $0.isOwner == true })
-                let shared = pets.filter({ $0.isOwner == false })
-                let sections = [
-                    PetSection(header: "Owned", items: owned),
-                    PetSection(header: "Shared", items: shared)
-                ]
-                
-                self.noPetsFound.isHidden = pets.count > 0;
-                return sections
-            })
-            .bind(to: tableView.rx.items(dataSource: dataSource))
-            .disposed(by: disposeBag)
         
         Observable
             .zip(tableView.rx.itemSelected, tableView.rx.modelSelected(PetSection.Item.self))
@@ -207,7 +219,6 @@
     
     func configure(_ pet: Pet) {
         DispatchQueue.main.async {
-            self.disposable?.dispose()
             self.currentPet = pet
             self.titleLabel.text = pet.name
             
@@ -219,11 +230,18 @@
             
             self.subtitleLabel.text = "Bring your device outdoor to get location.."
             
-            self.disposable = DataManager.instance.lastPetDeviceData(pet).subscribe(onNext: {[weak self] (petDeviceData) in
+            self.disposable = DataManager.instance.petDeviceData(pet.id).subscribe(onNext: {[weak self] (petDeviceData) in
                 if let petDeviceData = petDeviceData, let pet = self?.currentPet, petDeviceData.pet.id == pet.id {
                     self?.deviceStatusView.configure(petDeviceData, animated: true)
-                    petDeviceData.deviceData.point.getFullFormatedAddress(handler: {[weak self] (address) in
-                        self?.subtitleLabel.text = address
+                    self?.subtitleLabel.text = "Getting Address..."
+                    petDeviceData.deviceData.point.getFullFormatedAddress(handler: {[weak self] (address, error) in
+                    
+                        if error != nil {
+                            self?.subtitleLabel.text = ""
+                        } else {
+                            self?.subtitleLabel.text = address
+                        }
+        
                     })
                 }
             })

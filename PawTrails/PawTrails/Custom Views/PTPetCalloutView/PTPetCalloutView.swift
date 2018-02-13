@@ -48,9 +48,13 @@ class PTPetCalloutView: UIView {
             
             self.addressLabel?.text = "Getting address..."
             deviceData.point.getFullFormatedAddress(handler: {
-                (address) in
-                self.addressLabel?.text = address?.uppercased()
-                self.addressLabel?.sizeToFit()
+                (address, error) in
+                
+                if error == nil, let address = address {
+                    self.addressLabel?.text = address.uppercased()
+                    self.addressLabel?.sizeToFit()
+                }
+
             })
         }
         

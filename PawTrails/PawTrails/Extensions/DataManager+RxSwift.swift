@@ -89,7 +89,7 @@ extension DataManager {
     
     func allPetDeviceData() -> Observable<[PetDeviceData]> {
 
-        let pets = self.pets().share()
+        let pets = self.pets()
 
         return pets.flatMap { (petList) -> Observable<[PetDeviceData]> in
             
@@ -99,6 +99,13 @@ extension DataManager {
             let liveGpsUpdates = SocketIOManager.instance.gpsUpdates(petIDs)
             return liveGpsUpdates.share()
         }
+    }
+    
+    func petDeviceData(_ petID: Int) -> Observable<PetDeviceData?> {
+        return SocketIOManager.instance.gpsUpdates([petID])
+            .map({ (petDeviceDataList) -> PetDeviceData? in
+                return petDeviceDataList.first
+            })
     }
     
     func lastPetDeviceData(_ pet: Pet) -> Observable<PetDeviceData?> {
@@ -225,5 +232,19 @@ extension DataManager {
         }
         
         return resumeTripObservable
+    }
+    
+    func getImmediateLocation(_ petIDs: [Int]) -> Observable<Void> {
+        return Observable.create({ observer in
+            APIRepository.instance.getImmediateLocation(petIDs, callback: { (error) in
+                if error != nil {
+                    observer.onError(error!)
+                } else {
+                    observer.onNext()
+                    observer.onCompleted()
+                }
+            })
+            return Disposables.create()
+        }).take(1)
     }
 }
