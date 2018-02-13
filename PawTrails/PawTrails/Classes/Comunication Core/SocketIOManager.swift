@@ -10,7 +10,7 @@ import UIKit
 import SocketIO
 import SwiftyJSON
 import RxSwift
-
+import SCLAlertView
 
 enum TripAction: Int {
     case initial = 0 // INITIAL VALUES
@@ -132,7 +132,10 @@ class SocketIOManager: NSObject, URLSessionDelegate {
                 self.isAuthenticated = true
                 Reporter.debugPrint("SocketIO -> AuthCheck -> Authenticated and Ready for Communitcation")
                 self.isReadyForCommunication.value = true
-            } else if (status == .unauthorized || status == .unauthorized2) {
+            } else if (status == .unauthorized) {
+                self.disconnect()
+                self.userNotSigned()
+            } else if (status == .unauthorized2) {
                 
                 if self.triedToReconnectOnUnauthorized {
                     //TODO: force user to login again
@@ -232,12 +235,37 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     }
     
     
-    func userNotSigned() {        
-        if let rootViewController = UIApplication.shared.keyWindow?.rootViewController, let storyboard = rootViewController.storyboard, !rootViewController.isKind(of: InitialViewController.self) {
-            if let vc = storyboard.instantiateViewController(withIdentifier: "InitialViewController") as? InitialViewController {
-                rootViewController.present(vc, animated: true, completion: nil)
+    func userNotSigned() {
+        //TODO: show alert prompt
+        
+        let title: String = "Authorization Needed"
+        let subTitle: String = "Please, you need to login."
+        
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false,
+            showCircularIcon: true
+        )
+        
+        let alertView = SCLAlertView(appearance: appearance)
+        
+        alertView.addButton("Login") {
+            if let rootViewController = UIApplication.shared.keyWindow?.rootViewController, let storyboard = rootViewController.storyboard, !rootViewController.isKind(of: InitialViewController.self) {
+                
+                if let vc = storyboard.instantiateViewController(withIdentifier: "InitialViewController") as? InitialViewController {
+                    rootViewController.present(vc, animated: true, completion: nil)
+                }
             }
         }
+        
+        alertView.showTitle(
+            title, // Title of view
+            subTitle: subTitle, // String of view
+            duration: 0.0, // Duration to show before closing automatically, default: 0.0
+            completeText: "ok", // Optional button value, default: ""
+            style: .notice, // Styles - see below.
+            colorStyle: 0xD4143D,
+            colorTextButton: 0xFFFFFF
+        )
     }
     
     func getPets() -> Observable<[Pet]> {
@@ -404,5 +432,29 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         }
         Reporter.debugPrint(file: "\(#file)", function: "\(#function)", data, data.first as? [String:Any] ?? "", data as? [String] ?? "")
         return SocketIOStatus.unknown
+    }
+}
+
+struct SocketIOManagerError: Error {
+    
+    enum errorKind {
+        case authError
+    }
+}
+
+
+enum SocketIOErrorCode: Int {
+    
+    
+    case Timeout = 419
+    case NotAuth = 414
+    
+    var description: String {
+        switch self {
+        case .Timeout:
+            return "Timeout on trying to authenticate with live channel."
+        case .NotAuth:
+            return "Live channel authentication error, please try login again."
+        }
     }
 }
