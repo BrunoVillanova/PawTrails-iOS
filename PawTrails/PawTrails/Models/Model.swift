@@ -453,18 +453,23 @@ extension Point {
     func getFullFormatedAddress(handler: @escaping (String?, Error?) -> Void) {
         
         let location = CLLocation(latitude: self.latitude, longitude: self.longitude)
-
-        CLGeocoder().reverseGeocodeLocation(location, completionHandler: { (placemarks, error) in
-            var address : String?
-            if let placemark = placemarks?[0] as CLPlacemark! {
-                if let formattedAddressLines = placemark.addressDictionary?["FormattedAddressLines"] as? [String] {
-                    address = formattedAddressLines.joined(separator: ", ")
-                    
-                }
-            }
-            handler(address, error)
-        })
+        let keyString = "\(self.latitude),\(self.longitude)"
         
+        // Load from storage
+        if let cachedAddress = try? CacheManager.sharedInstance.storage.object(ofType: String.self, forKey: keyString) {
+            handler(cachedAddress, nil)
+        } else {
+            CLGeocoder().reverseGeocodeLocation(location, completionHandler: { (placemarks, error) in
+                var address : String?
+                if let placemark = placemarks?[0] as CLPlacemark! {
+                    if let formattedAddressLines = placemark.addressDictionary?["FormattedAddressLines"] as? [String] {
+                        address = formattedAddressLines.joined(separator: ", ")
+                        try! CacheManager.sharedInstance.storage.setObject(address, forKey: keyString)
+                    }
+                }
+                handler(address, error)
+            })
+        }
     }
 }
 

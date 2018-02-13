@@ -24,6 +24,8 @@
 		1599B22A2023E82B002D4025 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1599B2292023E82B002D4025 /* SnapKit.framework */; };
 		1599B22C2023F48A002D4025 /* PTDeviceStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1599B22B2023F48A002D4025 /* PTDeviceStatusView.swift */; };
 		15AAE9F72022BFCA007F9080 /* PTConnectionStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AAE9F62022BFCA007F9080 /* PTConnectionStatusView.swift */; };
+		15B3FF1C20329C7F00C08D48 /* Cache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B3FF1B20329C7F00C08D48 /* Cache.framework */; };
+		15B3FF1E20329DE500C08D48 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B3FF1D20329DE500C08D48 /* CacheManager.swift */; };
 		15C7613A2016CFF3002AA7F8 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C7610F2016CFF3002AA7F8 /* DataManager.swift */; };
 		15C7613B2016CFF3002AA7F8 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C761102016CFF3002AA7F8 /* EventManager.swift */; };
 		15C7613D2016CFF3002AA7F8 /* BEMAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C761142016CFF3002AA7F8 /* BEMAnimationManager.m */; };
@@ -265,6 +267,8 @@
 		1599B2292023E82B002D4025 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
 		1599B22B2023F48A002D4025 /* PTDeviceStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTDeviceStatusView.swift; sourceTree = "<group>"; };
 		15AAE9F62022BFCA007F9080 /* PTConnectionStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTConnectionStatusView.swift; sourceTree = "<group>"; };
+		15B3FF1B20329C7F00C08D48 /* Cache.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cache.framework; path = Carthage/Build/iOS/Cache.framework; sourceTree = "<group>"; };
+		15B3FF1D20329DE500C08D48 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		15C7610F2016CFF3002AA7F8 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		15C761102016CFF3002AA7F8 /* EventManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
 		15C761132016CFF3002AA7F8 /* BEMCheckBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMCheckBox.h; sourceTree = "<group>"; };
@@ -525,6 +529,7 @@
 				1599B22A2023E82B002D4025 /* SnapKit.framework in Frameworks */,
 				155F614B2028A070007D8A8B /* RxDataSources.framework in Frameworks */,
 				155F614D20291528007D8A8B /* Differentiator.framework in Frameworks */,
+				15B3FF1C20329C7F00C08D48 /* Cache.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -546,6 +551,7 @@
 				15C761102016CFF3002AA7F8 /* EventManager.swift */,
 				15C7611C2016CFF3002AA7F8 /* Repositories */,
 				15C761212016CFF3002AA7F8 /* Comunication Core */,
+				15B3FF1D20329DE500C08D48 /* CacheManager.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1082,6 +1088,7 @@
 		91352D1B7E01CC1C0CF51D38 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				15B3FF1B20329C7F00C08D48 /* Cache.framework */,
 				155F614C20291527007D8A8B /* Differentiator.framework */,
 				155F614A2028A06F007D8A8B /* RxDataSources.framework */,
 				1599B2292023E82B002D4025 /* SnapKit.framework */,
@@ -1342,6 +1349,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxDataSources.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Differentiator.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Cache.framework",
 			);
 			name = "Carthage Copy Frameworks";
 			outputPaths = (
@@ -1361,6 +1369,7 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SnapKit.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxDataSources.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Differentiator.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Cache.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1557,6 +1566,7 @@
 				15C763DC2016D5C0002AA7F8 /* BSC4ViewController.swift in Sources */,
 				15C761512016CFF3002AA7F8 /* CDPetUser+CoreDataProperties.swift in Sources */,
 				15C763DD2016D5C0002AA7F8 /* SelectPetForRecommandationController.swift in Sources */,
+				15B3FF1E20329DE500C08D48 /* CacheManager.swift in Sources */,
 				15C7623F2016D011002AA7F8 /* questionCells.swift in Sources */,
 				15C762462016D011002AA7F8 /* UiimageViewWithMask.swift in Sources */,
 				15C763D12016D5C0002AA7F8 /* EditUserProfileTableViewController.swift in Sources */,
