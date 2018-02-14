@@ -47,6 +47,7 @@ class MapViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         mapView.showGpsUpdates()
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     
