@@ -44,6 +44,10 @@ class MapViewController: UIViewController {
 //        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.red
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+        self.tabBarController?.tabBar.isHidden = false
+    }
     
     func initialize() {
         

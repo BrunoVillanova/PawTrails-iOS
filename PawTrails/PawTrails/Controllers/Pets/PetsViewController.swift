@@ -34,8 +34,10 @@
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
         reloadPets()
     }
+    
     
     override func viewDidLayoutSubviews() {
         

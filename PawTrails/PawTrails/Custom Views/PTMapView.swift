@@ -207,7 +207,16 @@ class PTMapView: MKMapView {
     func focusOnPet(_ pet: Pet) {
         if let petAnnotationOnMap = petAnnotationOnMap(pet: pet) as PTAnnotation! {
             
-            self.setVisibleMapFor([petAnnotationOnMap.coordinate])
+            let coordinate = petAnnotationOnMap.coordinate
+            if CLLocationCoordinate2DIsValid(coordinate) && coordinate.latitude != 0 && coordinate.longitude != 0 {
+                self.setVisibleMapFor([petAnnotationOnMap.coordinate])
+            }
+            else {
+                
+                UIApplication.shared.keyWindow?.rootViewController!.showMessage("Move your device outdoors to get your first location.", type: .info)
+            }
+            
+            
             
 //            let coordinates = petAnnotationOnMap.map({ $0.coordinate })
 //            if coordinates.count > 0 {
