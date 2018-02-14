@@ -10,7 +10,7 @@ import UIKit
 import SocketIO
 import SwiftyJSON
 import RxSwift
-
+import SCLAlertView
 
 enum TripAction: Int {
     case initial = 0 // INITIAL VALUES
@@ -28,6 +28,16 @@ enum TripAction: Int {
     }
 }
 
+enum GPSTimeIntervalMode: Int {
+    case smart, live
+    
+    var string: String {
+        switch self {
+        case .smart: return "smart"
+        case .live: return "live"
+        }
+    }
+}
 
 fileprivate enum channel {
     
@@ -132,7 +142,10 @@ class SocketIOManager: NSObject, URLSessionDelegate {
                 self.isAuthenticated = true
                 Reporter.debugPrint("SocketIO -> AuthCheck -> Authenticated and Ready for Communitcation")
                 self.isReadyForCommunication.value = true
-            } else if (status == .unauthorized || status == .unauthorized2) {
+            } else if (status == .unauthorized) {
+                self.disconnect()
+                self.userNotSigned()
+            } else if (status == .unauthorized2) {
                 
                 if self.triedToReconnectOnUnauthorized {
                     //TODO: force user to login again
@@ -232,12 +245,37 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     }
     
     
-    func userNotSigned() {        
-        if let rootViewController = UIApplication.shared.keyWindow?.rootViewController, let storyboard = rootViewController.storyboard, !rootViewController.isKind(of: InitialViewController.self) {
-            if let vc = storyboard.instantiateViewController(withIdentifier: "InitialViewController") as? InitialViewController {
-                rootViewController.present(vc, animated: true, completion: nil)
+    func userNotSigned() {
+        //TODO: show alert prompt
+        
+        let title: String = "Authorization Needed"
+        let subTitle: String = "Please, you need to login."
+        
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false,
+            showCircularIcon: true
+        )
+        
+        let alertView = SCLAlertView(appearance: appearance)
+        
+        alertView.addButton("Login") {
+            if let rootViewController = UIApplication.shared.keyWindow?.rootViewController, let storyboard = rootViewController.storyboard, !rootViewController.isKind(of: InitialViewController.self) {
+                
+                if let vc = storyboard.instantiateViewController(withIdentifier: "InitialViewController") as? InitialViewController {
+                    rootViewController.present(vc, animated: true, completion: nil)
+                }
             }
         }
+        
+        alertView.showTitle(
+            title, // Title of view
+            subTitle: subTitle, // String of view
+            duration: 0.0, // Duration to show before closing automatically, default: 0.0
+            completeText: "ok", // Optional button value, default: ""
+            style: .notice, // Styles - see below.
+            colorStyle: 0xD4143D,
+            colorTextButton: 0xFFFFFF
+        )
     }
     
     func getPets() -> Observable<[Pet]> {
@@ -249,12 +287,13 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         })
     }
     
-    func gpsUpdates(_ petIDs: [Int]) -> Observable<[PetDeviceData]> {
+    func gpsUpdates(_ petIDs: [Int], gpsMode: GPSTimeIntervalMode) -> Observable<[PetDeviceData]> {
         return isReady()
             .filter({ (isReady) -> Bool in
             return isReady
         }).flatMap({ (isReady) -> Observable<[PetDeviceData]> in
-            self.socket.emit("gpsPets", ["ids": petIDs, "noLastPos": false])
+            Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Emitting GPS updates for Pets IDs: \(petIDs.map{ $0 }) - Mode: \(gpsMode.string.uppercased())")
+            self.socket.emit("gpsPets", ["ids": petIDs, "noLastPos": false, "gpsTimeInterval": gpsMode.string])
             return self.petGpsUpdates.asObservable()
                 .map({ (petDeviceDataList) -> [PetDeviceData] in
                     return petDeviceDataList.filter { petIDs.contains($0.pet.id) }
@@ -358,13 +397,13 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         }
     }
     
-    /// Start pets GPS Updates
-    ///
-    //    /// - Parameter petIds: pet ids
-    func startGPSUpdates(for petIds: [Int]) -> Observable<[PetDeviceData]> {
-        Reporter.debugPrint("SocketIO GPS Pets Emited for petIDs \(petIds)")
-        return self.gpsUpdates(petIds)
-    }
+//    /// Start pets GPS Updates
+//    ///
+//    //    /// - Parameter petIds: pet ids
+//    func startGPSUpdates(for petIds: [Int]) -> Observable<[PetDeviceData]> {
+//        Reporter.debugPrint("SocketIO GPS Pets Emited for petIDs \(petIds)")
+//        return self.gpsUpdates(petIds)
+//    }
     
 
     
@@ -404,5 +443,29 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         }
         Reporter.debugPrint(file: "\(#file)", function: "\(#function)", data, data.first as? [String:Any] ?? "", data as? [String] ?? "")
         return SocketIOStatus.unknown
+    }
+}
+
+struct SocketIOManagerError: Error {
+    
+    enum errorKind {
+        case authError
+    }
+}
+
+
+enum SocketIOErrorCode: Int {
+    
+    
+    case Timeout = 419
+    case NotAuth = 414
+    
+    var description: String {
+        switch self {
+        case .Timeout:
+            return "Timeout on trying to authenticate with live channel."
+        case .NotAuth:
+            return "Live channel authentication error, please try login again."
+        }
     }
 }

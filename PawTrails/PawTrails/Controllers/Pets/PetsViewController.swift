@@ -230,7 +230,7 @@
             
             self.subtitleLabel.text = "Bring your device outdoor to get location.."
             
-            self.disposable = DataManager.instance.petDeviceData(pet.id).subscribe(onNext: {[weak self] (petDeviceData) in
+            self.disposable = DataManager.instance.petDeviceData(pet.id, gpsMode: .smart).subscribe(onNext: {[weak self] (petDeviceData) in
                 if let petDeviceData = petDeviceData, let pet = self?.currentPet, petDeviceData.pet.id == pet.id {
                     self?.deviceStatusView.configure(petDeviceData, animated: true)
                     self?.subtitleLabel.text = "Getting Address..."
