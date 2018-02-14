@@ -14,6 +14,7 @@ protocol PTPetCalloutViewDelegate {
 
 class PTPetCalloutView: UIView {
 
+    var bubbleView : UIView?
     var petNameLabel : UILabel?
     var addressLabel : UILabel?
     var batteryView : PTBatteryView?
@@ -24,6 +25,17 @@ class PTPetCalloutView: UIView {
         petNameLabel = self.viewWithTag(100) as? UILabel
         addressLabel = self.viewWithTag(110) as? UILabel
         batteryView = self.viewWithTag(200) as? PTBatteryView
+        bubbleView = self.viewWithTag(10)
+    }
+    
+    override func layoutSubviews() {
+        if let bubbleView = bubbleView {
+            var frame = self.frame
+            frame.size.height = bubbleView.frame.size.height
+            frame.size.width = bubbleView.frame.size.width
+            self.frame = frame
+        }
+        super.layoutSubviews()
     }
 
     @objc fileprivate func tappedOnView(sender: UITapGestureRecognizer) {
@@ -43,16 +55,19 @@ class PTPetCalloutView: UIView {
             petNameLabel?.text = petName.uppercased()
         }
         
-        if let deviceData = annotation.petDeviceData?.deviceData {
+        if let deviceData = annotation.petDeviceData?.deviceData, let addressLabel = addressLabel {
             batteryView?.setBatteryLevel(deviceData.battery)
             
-            self.addressLabel?.text = "Getting address..."
+            addressLabel.text = "Getting address..."
             deviceData.point.getFullFormatedAddress(handler: {
                 (address, error) in
                 
                 if error == nil, let address = address {
-                    self.addressLabel?.text = address.uppercased()
-                    self.addressLabel?.sizeToFit()
+                    addressLabel.text = address.uppercased()
+                    addressLabel.sizeToFit()
+                    var frame = self.frame
+                    frame.size.height = addressLabel.frame.origin.y + addressLabel.frame.size.height
+                    self.frame = frame
                 }
 
             })

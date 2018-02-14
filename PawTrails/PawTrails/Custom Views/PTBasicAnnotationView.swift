@@ -55,6 +55,25 @@ class PTBasicAnnotationView: MKAnnotationView {
         return isInside
     }
     
+    override func layoutSubviews() {
+        
+        if let pictureImageView = pictureImageView {
+            let frame = pictureImageView.frame
+            self.frame.size.height = frame.height
+            self.frame.size.width = frame.width
+        }
+        
+        if let calloutView = calloutView {
+            var frame = calloutView.frame
+            frame.origin.y = frame.origin.y -  self.frame.size.height
+//            calloutView.frame = frame
+            calloutView.center = CGPoint(x: (self.frame.size.width / 2) + 46, y: -60)
+        }
+        
+        super.layoutSubviews()
+    
+    }
+    
     private func initialize() {
         
         self.frame = CGRect(x: 0, y: 0, width: 60, height: 60)
@@ -103,8 +122,12 @@ class PTBasicAnnotationView: MKAnnotationView {
 
         let petAnnotation = self.annotation as! PTAnnotation
         calloutView!.configureWithAnnotation(petAnnotation)
-        calloutView!.center = CGPoint(x: (self.bounds.size.width / 2) + 46, y: -calloutView!.bounds.size.height*0.42)
+//        calloutView!.center = CGPoint(x: (self.frame.size.width / 2) + 46, y: -30)
         calloutView?.isHidden = false
+        
+//        var frame = calloutView!.frame
+//        frame.origin.y = frame.origin.y - (pictureImageView!.frame.origin.y  + pictureImageView!.frame.size.height)
+//        calloutView!.frame = frame
         
         UIView.animate(withDuration: defaultAnimationDuration) {
             self.calloutView?.alpha = 1

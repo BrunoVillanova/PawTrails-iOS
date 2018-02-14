@@ -10,11 +10,10 @@ import UIKit
 import Cache
 
 class CacheManager {
-    
     static let sharedInstance = CacheManager()
     
     
-   static  let diskConfig = DiskConfig(
+    static  let diskConfig = DiskConfig(
         // The name of disk storage, this will be used as folder name within directory
         name: "AppCache",
         // Expiry date that will be applied by default for every added object
@@ -40,8 +39,4 @@ class CacheManager {
     )
     
     open var storage = try! Storage(diskConfig: CacheManager.diskConfig, memoryConfig: CacheManager.memoryConfig)
-    
-//    init() {
-//        storage = try! Storage(diskConfig: diskConfig, memoryConfig: memoryConfig)
-//    }
 }
