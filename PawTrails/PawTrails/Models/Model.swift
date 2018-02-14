@@ -252,7 +252,7 @@ struct DailyGoals {
 
 extension PetDeviceData: Equatable {
     static func == (lhs: PetDeviceData, rhs: PetDeviceData) -> Bool {
-        return lhs.id == rhs.id
+        return lhs.id == rhs.id && lhs.deviceData.deviceTime == rhs.deviceData.deviceTime
     }
 }
 
