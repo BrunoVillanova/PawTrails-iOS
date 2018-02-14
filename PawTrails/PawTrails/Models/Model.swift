@@ -252,7 +252,7 @@ struct DailyGoals {
 
 extension PetDeviceData: Equatable {
     static func == (lhs: PetDeviceData, rhs: PetDeviceData) -> Bool {
-        return lhs.id == rhs.id
+        return lhs.id == rhs.id && lhs.deviceData.deviceTime == rhs.deviceData.deviceTime
     }
 }
 
@@ -451,6 +451,11 @@ public class Point: NSObject, NSCoding {
 
 extension Point {
     func getFullFormatedAddress(handler: @escaping (String?, Error?) -> Void) {
+        
+        if self.latitude == 0 && self.longitude == 0 {
+            handler("No GPS position data", nil)
+            return
+        }
         
         let location = CLLocation(latitude: self.latitude, longitude: self.longitude)
         let keyString = "\(self.latitude),\(self.longitude)"

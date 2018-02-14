@@ -45,13 +45,13 @@ class MapViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
-        self.tabBarController?.tabBar.isHidden = false
+        super.viewWillAppear(animated)
+        mapView.showGpsUpdates()
     }
+    
     
     func initialize() {
         
-        mapView.showGpsUpdates()
         DataManager.instance.getActivePetTrips()
             .subscribe(onNext: { (tripList) in
                 self.activeTrips = tripList
@@ -68,7 +68,7 @@ class MapViewController: UIViewController {
             }).disposed(by: disposeBag)
         
         
-        DataManager.instance.allPetDeviceData().subscribe(onNext: { (petDeviceDataList) in
+        DataManager.instance.allPetDeviceData(.live).subscribe(onNext: { (petDeviceDataList) in
             Reporter.debugPrint("MapViewController -> allPetDeviceData \(petDeviceDataList.count)")
             
             if (petDeviceDataList.count > 0) {

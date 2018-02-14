@@ -24,6 +24,7 @@ class PTMapView: MKMapView {
     var alreadyFocusedOnUserLocation = false
     var alreadyFocusedOnPets = false
     var isStaticView = false
+    var currentGpsMode: GPSTimeIntervalMode = .live
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -34,6 +35,16 @@ class PTMapView: MKMapView {
         
         self.requestLocationAccess()
     }
+    
+//    override func willMove(toWindow newWindow: UIWindow?) {
+//        super.willMove(toWindow: newWindow)
+//
+//        if newWindow == nil {
+//            // UIView disappear
+//        } else {
+//            // UIView appear
+//        }
+//    }
     
     func setStaticTripView(_ trip: Trip) {
         self.showsUserLocation = false
@@ -73,7 +84,7 @@ class PTMapView: MKMapView {
     }
     
     func showGpsUpdates() {
-        DataManager.instance.allPetDeviceData().subscribe(onNext: { (petDeviceDataList) in
+        DataManager.instance.allPetDeviceData(currentGpsMode).subscribe(onNext: { (petDeviceDataList) in
             UIApplication.shared.keyWindow?.rootViewController!.hideMessage()
             if let gpsUpdates = petDeviceDataList as [PetDeviceData]! {
                 self.loadGpsUpdates(gpsUpdates)

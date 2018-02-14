@@ -71,10 +71,9 @@ class TripScreenViewController: UIViewController {
         super.viewDidLoad()
         
         collectionView.delegate = self
-        mapView.startTripMode()
         
         let activeTripsObservable: Observable<[Trip]> = DataManager.instance.getActivePetTrips()
-        let allPetDeviceData = DataManager.instance.allPetDeviceData()
+        let allPetDeviceData = DataManager.instance.allPetDeviceData(.live)
     
         activeTripsObservable
             .flatMap { (trips) -> Observable<[Trip]> in
@@ -138,6 +137,7 @@ class TripScreenViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = true
         self.navigationItem.setHidesBackButton(true, animated: true)
+        mapView.startTripMode()
     }
     
     private func setupSubViews() {
