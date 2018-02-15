@@ -224,7 +224,9 @@ class PTMapView: MKMapView {
             }
             else {
                 
-                UIApplication.shared.keyWindow?.rootViewController!.showMessage("Move your device outdoors to get your first location.", type: .info)
+                let alert = UIAlertController(title: "Location unavailable", message: "Move your device outdoors to get your first location", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                UIApplication.shared.keyWindow?.rootViewController!.present(alert, animated: true, completion: nil)
             }
             
             
