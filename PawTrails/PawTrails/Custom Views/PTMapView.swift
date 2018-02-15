@@ -25,6 +25,7 @@ class PTMapView: MKMapView {
     var alreadyFocusedOnPets = false
     var isStaticView = false
     var currentGpsMode: GPSTimeIntervalMode = .live
+    var calloutDelegate: PTPetCalloutViewDelegate?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -292,6 +293,10 @@ extension PTMapView: MKMapViewDelegate {
         if annotationView == nil {
             annotationView = PTBasicAnnotationView(annotation: annotation, reuseIdentifier: PTBasicAnnotationView.identifier)
             annotationView?.canShowCallout = false
+            
+            if let calloutDelegate = calloutDelegate {
+                annotationView?.calloutDelegate = calloutDelegate
+            }
         }
         
         annotationView?.configureWithAnnotation(annotation as! PTAnnotation)
