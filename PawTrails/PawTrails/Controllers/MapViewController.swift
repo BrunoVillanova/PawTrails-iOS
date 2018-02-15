@@ -52,6 +52,7 @@ class MapViewController: UIViewController {
     
     func initialize() {
         
+        mapView.calloutDelegate = self
         DataManager.instance.getActivePetTrips()
             .subscribe(onNext: { (tripList) in
                 self.activeTrips = tripList
@@ -206,7 +207,13 @@ class MapViewController: UIViewController {
         }
     }
     
-    
+    fileprivate func goToPetDetails(_ pet: Pet) {
+        if let petDetailsViewController = self.storyboard?.instantiateViewController(withIdentifier: "PetDetails") as? TabPageViewController {
+            petDetailsViewController.pet = pet
+            
+            self.navigationController?.pushViewController(petDetailsViewController, animated: true)
+        }
+    }
 }
 
 //MARK: HomeView
@@ -273,6 +280,9 @@ extension MapViewController: PTPetCalloutViewDelegate {
     
     func didTapOnCallout(annotation: PTAnnotation) {
         
+        if let petDeviceData = annotation.petDeviceData {
+             self.goToPetDetails(petDeviceData.pet)
+        }
     }
 }
 

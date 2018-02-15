@@ -16,6 +16,7 @@ class PTBasicAnnotationView: MKAnnotationView {
     var pictureImageView: UIImageView?
     var calloutView: PTPetCalloutView?
     let defaultAnimationDuration = 0.3
+    var calloutDelegate: PTPetCalloutViewDelegate?
     
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
@@ -67,7 +68,7 @@ class PTBasicAnnotationView: MKAnnotationView {
             var frame = calloutView.frame
             frame.origin.y = frame.origin.y -  self.frame.size.height
 //            calloutView.frame = frame
-            calloutView.center = CGPoint(x: (self.frame.size.width / 2) + 46, y: -60)
+            calloutView.center = CGPoint(x: (self.frame.size.width / 2) + 46, y: -50)
         }
         
         super.layoutSubviews()
@@ -115,6 +116,11 @@ class PTBasicAnnotationView: MKAnnotationView {
             
             if let theView = views?[0] as! PTPetCalloutView? {
                 calloutView = theView
+                
+                if let calloutDelegate = calloutDelegate {
+                    calloutView?.delegate = calloutDelegate
+                }
+    
                 calloutView?.alpha = 0
                 self.addSubview(calloutView!)
             }

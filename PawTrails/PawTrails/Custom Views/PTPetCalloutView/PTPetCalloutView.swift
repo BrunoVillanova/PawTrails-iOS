@@ -26,6 +26,9 @@ class PTPetCalloutView: UIView {
         addressLabel = self.viewWithTag(110) as? UILabel
         batteryView = self.viewWithTag(200) as? PTBatteryView
         bubbleView = self.viewWithTag(10)
+        
+        let gesture = UITapGestureRecognizer(target: self, action: #selector (self.tappedOnView(sender:)))
+        bubbleView!.addGestureRecognizer(gesture)
     }
     
     override func layoutSubviews() {
@@ -72,8 +75,5 @@ class PTPetCalloutView: UIView {
 
             })
         }
-        
-        let gesture = UITapGestureRecognizer(target: self, action: #selector (self.tappedOnView(sender:)))
-        self.addGestureRecognizer(gesture)
     }
 }
