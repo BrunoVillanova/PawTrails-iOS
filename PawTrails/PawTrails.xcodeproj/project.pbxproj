@@ -19,6 +19,7 @@
 		1555FFF71FDF662A00F05C76 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1555FFF61FDF662A00F05C76 /* SwiftyJSON.framework */; };
 		155F614B2028A070007D8A8B /* RxDataSources.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 155F614A2028A06F007D8A8B /* RxDataSources.framework */; };
 		155F614D20291528007D8A8B /* Differentiator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 155F614C20291527007D8A8B /* Differentiator.framework */; };
+		1570C7AC203B63DF00A7F59F /* TripDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1570C7AB203B63DF00A7F59F /* TripDetailViewController.swift */; };
 		1585469C1FDCFBCB004C82EC /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1585469B1FDCFBCB004C82EC /* Charts.framework */; };
 		1589EBC11FE3644E00280926 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1589EBC01FE3644E00280926 /* Bolts.framework */; };
 		1599B22A2023E82B002D4025 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1599B2292023E82B002D4025 /* SnapKit.framework */; };
@@ -64,20 +65,19 @@
 		15C7623E2016D011002AA7F8 /* PTBalloonImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C7621E2016D011002AA7F8 /* PTBalloonImageView.swift */; };
 		15C7623F2016D011002AA7F8 /* questionCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C7621F2016D011002AA7F8 /* questionCells.swift */; };
 		15C762402016D011002AA7F8 /* PTBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C762202016D011002AA7F8 /* PTBubbleView.swift */; };
-		15C762412016D011002AA7F8 /* TripScreenXibView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15C762212016D011002AA7F8 /* TripScreenXibView.xib */; };
 		15C762422016D011002AA7F8 /* SignalFull@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C762242016D011002AA7F8 /* SignalFull@2x.png */; };
 		15C762432016D011002AA7F8 /* SignalFull@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C762252016D011002AA7F8 /* SignalFull@3x.png */; };
 		15C762442016D011002AA7F8 /* SignalFull@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C762262016D011002AA7F8 /* SignalFull@1x.png */; };
 		15C762452016D011002AA7F8 /* PTSignalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C762272016D011002AA7F8 /* PTSignalView.swift */; };
 		15C762462016D011002AA7F8 /* UiimageViewWithMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C762282016D011002AA7F8 /* UiimageViewWithMask.swift */; };
-		15C762482016D011002AA7F8 /* TripXib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15C7622A2016D011002AA7F8 /* TripXib.xib */; };
+		15C762482016D011002AA7F8 /* PTTripInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15C7622A2016D011002AA7F8 /* PTTripInfoView.xib */; };
 		15C762492016D011002AA7F8 /* PTTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C7622C2016D011002AA7F8 /* PTTextField.swift */; };
 		15C7624A2016D011002AA7F8 /* PTMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C7622D2016D011002AA7F8 /* PTMapView.swift */; };
 		15C7624B2016D011002AA7F8 /* PTPetCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C7622E2016D011002AA7F8 /* PTPetCalloutView.swift */; };
 		15C7624C2016D011002AA7F8 /* PTWideButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C7622F2016D011002AA7F8 /* PTWideButton.swift */; };
 		15C7624D2016D011002AA7F8 /* PetsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C762302016D011002AA7F8 /* PetsCollectionViewCell.swift */; };
 		15C7624E2016D011002AA7F8 /* PawTrailsStyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C762312016D011002AA7F8 /* PawTrailsStyleKit.swift */; };
-		15C7624F2016D011002AA7F8 /* TripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C762322016D011002AA7F8 /* TripView.swift */; };
+		15C7624F2016D011002AA7F8 /* PTTripInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C762322016D011002AA7F8 /* PTTripInfoView.swift */; };
 		15C762502016D011002AA7F8 /* PTBasicAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C762332016D011002AA7F8 /* PTBasicAnnotationView.swift */; };
 		15C762512016D011002AA7F8 /* Battery@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C762362016D011002AA7F8 /* Battery@2x.png */; };
 		15C762522016D011002AA7F8 /* BatteryLow@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C762372016D011002AA7F8 /* BatteryLow@1x.png */; };
@@ -261,6 +261,7 @@
 		1555FFF61FDF662A00F05C76 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		155F614A2028A06F007D8A8B /* RxDataSources.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxDataSources.framework; path = Carthage/Build/iOS/RxDataSources.framework; sourceTree = "<group>"; };
 		155F614C20291527007D8A8B /* Differentiator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Differentiator.framework; path = Carthage/Build/iOS/Differentiator.framework; sourceTree = "<group>"; };
+		1570C7AB203B63DF00A7F59F /* TripDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailViewController.swift; sourceTree = "<group>"; };
 		157AC4B21FC3192E0005A717 /* Convert.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Convert.framework; path = Carthage/Build/iOS/Convert.framework; sourceTree = "<group>"; };
 		1585469B1FDCFBCB004C82EC /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = Carthage/Build/iOS/Charts.framework; sourceTree = "<group>"; };
 		1589EBC01FE3644E00280926 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Carthage/Build/iOS/Bolts.framework; sourceTree = "<group>"; };
@@ -311,13 +312,12 @@
 		15C7621E2016D011002AA7F8 /* PTBalloonImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTBalloonImageView.swift; sourceTree = "<group>"; };
 		15C7621F2016D011002AA7F8 /* questionCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = questionCells.swift; sourceTree = "<group>"; };
 		15C762202016D011002AA7F8 /* PTBubbleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTBubbleView.swift; sourceTree = "<group>"; };
-		15C762212016D011002AA7F8 /* TripScreenXibView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TripScreenXibView.xib; sourceTree = "<group>"; };
 		15C762242016D011002AA7F8 /* SignalFull@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SignalFull@2x.png"; sourceTree = "<group>"; };
 		15C762252016D011002AA7F8 /* SignalFull@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SignalFull@3x.png"; sourceTree = "<group>"; };
 		15C762262016D011002AA7F8 /* SignalFull@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SignalFull@1x.png"; sourceTree = "<group>"; };
 		15C762272016D011002AA7F8 /* PTSignalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTSignalView.swift; sourceTree = "<group>"; };
 		15C762282016D011002AA7F8 /* UiimageViewWithMask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UiimageViewWithMask.swift; sourceTree = "<group>"; };
-		15C7622A2016D011002AA7F8 /* TripXib.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TripXib.xib; sourceTree = "<group>"; };
+		15C7622A2016D011002AA7F8 /* PTTripInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PTTripInfoView.xib; sourceTree = "<group>"; };
 		15C7622B2016D011002AA7F8 /* CheckMarkHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckMarkHeader.h; sourceTree = "<group>"; };
 		15C7622C2016D011002AA7F8 /* PTTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTTextField.swift; sourceTree = "<group>"; };
 		15C7622D2016D011002AA7F8 /* PTMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTMapView.swift; sourceTree = "<group>"; };
@@ -325,7 +325,7 @@
 		15C7622F2016D011002AA7F8 /* PTWideButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTWideButton.swift; sourceTree = "<group>"; };
 		15C762302016D011002AA7F8 /* PetsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetsCollectionViewCell.swift; sourceTree = "<group>"; };
 		15C762312016D011002AA7F8 /* PawTrailsStyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PawTrailsStyleKit.swift; sourceTree = "<group>"; };
-		15C762322016D011002AA7F8 /* TripView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripView.swift; sourceTree = "<group>"; };
+		15C762322016D011002AA7F8 /* PTTripInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTTripInfoView.swift; sourceTree = "<group>"; };
 		15C762332016D011002AA7F8 /* PTBasicAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTBasicAnnotationView.swift; sourceTree = "<group>"; };
 		15C762362016D011002AA7F8 /* Battery@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Battery@2x.png"; sourceTree = "<group>"; };
 		15C762372016D011002AA7F8 /* BatteryLow@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BatteryLow@1x.png"; sourceTree = "<group>"; };
@@ -543,6 +543,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1570C7AD203B7C1300A7F59F /* PTTripInfoView */ = {
+			isa = PBXGroup;
+			children = (
+				15C7622A2016D011002AA7F8 /* PTTripInfoView.xib */,
+				15C762322016D011002AA7F8 /* PTTripInfoView.swift */,
+			);
+			path = PTTripInfoView;
+			sourceTree = "<group>";
+		};
 		15C7610E2016CFF3002AA7F8 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -619,6 +628,7 @@
 		15C7621C2016D011002AA7F8 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				1570C7AD203B7C1300A7F59F /* PTTripInfoView */,
 				15C761122016CFF3002AA7F8 /* BEM */,
 				15C7621D2016D011002AA7F8 /* PTBalloonImageView */,
 				15C762222016D011002AA7F8 /* PTSignalView */,
@@ -627,15 +637,12 @@
 				15C7642A2016FB55002AA7F8 /* Cells */,
 				15C762202016D011002AA7F8 /* PTBubbleView.swift */,
 				15C763B92016D5C0002AA7F8 /* PieChart.swift */,
-				15C762212016D011002AA7F8 /* TripScreenXibView.xib */,
 				15C762282016D011002AA7F8 /* UiimageViewWithMask.swift */,
-				15C7622A2016D011002AA7F8 /* TripXib.xib */,
 				15C7622B2016D011002AA7F8 /* CheckMarkHeader.h */,
 				15C7622C2016D011002AA7F8 /* PTTextField.swift */,
 				15C7622D2016D011002AA7F8 /* PTMapView.swift */,
 				15C7622F2016D011002AA7F8 /* PTWideButton.swift */,
 				15C762312016D011002AA7F8 /* PawTrailsStyleKit.swift */,
-				15C762322016D011002AA7F8 /* TripView.swift */,
 				15C762332016D011002AA7F8 /* PTBasicAnnotationView.swift */,
 				447AF46C2021E22C0050F885 /* AllowedCharsTextField.swift */,
 				15AAE9F62022BFCA007F9080 /* PTConnectionStatusView.swift */,
@@ -971,6 +978,7 @@
 				15C7638E2016D5C0002AA7F8 /* AdventuresListViewController.swift */,
 				15C761BC2016D002002AA7F8 /* SelectPetsVC.swift */,
 				15C763AC2016D5C0002AA7F8 /* JoinTripVC.swift */,
+				1570C7AB203B63DF00A7F59F /* TripDetailViewController.swift */,
 			);
 			path = Adventure;
 			sourceTree = "<group>";
@@ -1278,14 +1286,13 @@
 			files = (
 				15C762442016D011002AA7F8 /* SignalFull@1x.png in Resources */,
 				15C7640A2016D5C0002AA7F8 /* SharedUsersTableViewCell.xib in Resources */,
-				15C762412016D011002AA7F8 /* TripScreenXibView.xib in Resources */,
 				15C762A42016D06B002AA7F8 /* CodeScan.bundle in Resources */,
 				15C762AC2016D06B002AA7F8 /* Assets.xcassets in Resources */,
 				15C762562016D011002AA7F8 /* Battery@1x.png in Resources */,
 				15C763EB2016D5C0002AA7F8 /* SettingsView.xib in Resources */,
 				15C762582016D011002AA7F8 /* PTPetCalloutView.xib in Resources */,
 				15C763EE2016D5C0002AA7F8 /* IconCell.xib in Resources */,
-				15C762482016D011002AA7F8 /* TripXib.xib in Resources */,
+				15C762482016D011002AA7F8 /* PTTripInfoView.xib in Resources */,
 				15C761F92016D002002AA7F8 /* Main.storyboard in Resources */,
 				15C762AE2016D06B002AA7F8 /* countrycodes.csv in Resources */,
 				15C762522016D011002AA7F8 /* BatteryLow@1x.png in Resources */,
@@ -1589,7 +1596,7 @@
 				15C763FB2016D5C0002AA7F8 /* RecommandationController.swift in Sources */,
 				15C761532016CFF3002AA7F8 /* CDPhone+CoreDataProperties.swift in Sources */,
 				15C761582016CFF3002AA7F8 /* CDSafeZone+CoreDataProperties.swift in Sources */,
-				15C7624F2016D011002AA7F8 /* TripView.swift in Sources */,
+				15C7624F2016D011002AA7F8 /* PTTripInfoView.swift in Sources */,
 				15C762B02016D06B002AA7F8 /* Messages.swift in Sources */,
 				15C762B22016D06B002AA7F8 /* PTConstants.swift in Sources */,
 				15C762782016D046002AA7F8 /* SettingsPresenter.swift in Sources */,
@@ -1692,6 +1699,7 @@
 				15C762832016D046002AA7F8 /* PetsPresenter.swift in Sources */,
 				15C763DF2016D5C0002AA7F8 /* QuestionsViewController.swift in Sources */,
 				15C7624B2016D011002AA7F8 /* PTPetCalloutView.swift in Sources */,
+				1570C7AC203B63DF00A7F59F /* TripDetailViewController.swift in Sources */,
 				15C7624C2016D011002AA7F8 /* PTWideButton.swift in Sources */,
 				15C763F02016D5C0002AA7F8 /* AirbnbDatePickerMonthHeader.swift in Sources */,
 				15C7624A2016D011002AA7F8 /* PTMapView.swift in Sources */,

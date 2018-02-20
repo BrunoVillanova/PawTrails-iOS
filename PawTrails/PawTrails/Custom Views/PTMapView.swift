@@ -29,11 +29,19 @@ class PTMapView: MKMapView {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
+        initialize()
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        initialize()
+    }
+    
+    fileprivate func initialize() {
         self.delegate = self
         self.showsScale = true
         self.showsUserLocation = true
-        
+    
         self.requestLocationAccess()
     }
     

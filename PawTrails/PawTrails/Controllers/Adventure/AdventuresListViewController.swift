@@ -35,10 +35,32 @@ class AdventuresListViewController: UIViewController  {
         tableView.tableFooterView = UIView()
 
         DataManager.instance.finishedTrips()
+            .map({ [unowned self] (trips) -> [Trip] in
+                return trips.filter({ (trip) -> Bool in
+                    return trip.pet.id == self.pet.id
+                })
+            })
             .bind(to: tableView.rx.items(cellIdentifier: "cell", cellType: AdventureHistoryCell.self)) { (_, element, cell) in
                 cell.configure(element)
             }.disposed(by: disposeBag)
+        
+        Observable
+            .zip(tableView.rx.itemSelected, tableView.rx.modelSelected(Trip.self))
+            .bind { [unowned self] indexPath, item in
+                self.tableView.deselectRow(at: indexPath, animated: true)
+                self.goToTripDetails(item)
+            }
+            .disposed(by: disposeBag)
     }
+    
+    fileprivate func goToTripDetails(_ trip: Trip) {
+        
+        let tripDetailViewController = TripDetailViewController()
+        tripDetailViewController.trip = trip
+        
+        self.navigationController?.pushViewController(tripDetailViewController, animated: true)
+    }
+    
     
     func showGoalsDate() {
         let mydatePicker = achievementsView.mydatePicker
@@ -140,11 +162,11 @@ class AdventureHistoryCell: UITableViewCell {
             let tripStartTimestamp = Double(ts)
             let date = Date(timeIntervalSince1970: tripStartTimestamp)
             let dateFormatter = DateFormatter()
-            dateFormatter.timeZone = TimeZone(abbreviation: "GMT") //Set timezone that you want
+            dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
             dateFormatter.locale = NSLocale.current
             dateFormatter.amSymbol = "am"
             dateFormatter.pmSymbol = "pm"
-            dateFormatter.dateFormat = "h:mma, d MMM, yyyy" //Specify your format that you want
+            dateFormatter.dateFormat = "h:mma, d MMM, yyyy"
             let strDate = dateFormatter.string(from: date)
             dateLbl.text = strDate
         }

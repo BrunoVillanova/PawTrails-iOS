@@ -1,45 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="AvenirNext.ttc">
+            <string>AvenirNext-Regular</string>
+        </array>
+    </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PTTripInfoView" customModule="PawTrails" customModuleProvider="target">
+            <connections>
+                <outlet property="averageSpeedLabel" destination="Q0G-x8-ehk" id="2ti-Mb-Egx"/>
+                <outlet property="currentSpeedLabel" destination="3r5-Tv-kqk" id="2Gr-PY-X44"/>
+                <outlet property="petNameLabel" destination="O1v-2Y-nTU" id="gcU-tY-1dz"/>
+                <outlet property="petProfilePic" destination="wpf-jq-McT" id="SmC-Vz-xrO"/>
+                <outlet property="totalDistanceLabel" destination="wBr-Cp-M4s" id="gkm-qd-jF7"/>
+                <outlet property="totalTimeLabel" destination="N2J-nw-jSe" id="Sd8-r6-qgc"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="TripView" customModule="PawTrails" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="351" height="200"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wpf-jq-McT">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wpf-jq-McT" userLabel="Pet Profile Image View">
                     <rect key="frame" x="21" y="26" width="60" height="60"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="60" id="dep-ag-5ew"/>
                         <constraint firstAttribute="height" constant="60" id="yOn-QU-0M3"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gmm-gc-5d4">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userProfileMask-1x-png" translatesAutoresizingMaskIntoConstraints="NO" id="HUn-rs-KVW">
+                    <rect key="frame" x="17" y="22" width="68" height="68"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="68" id="qxh-2x-TnF"/>
+                        <constraint firstAttribute="height" constant="68" id="tvR-0A-NNc"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gmm-gc-5d4" userLabel="Total Time Icon">
                     <rect key="frame" x="256" y="13" width="16" height="19"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="16" id="1wF-f7-sAi"/>
                         <constraint firstAttribute="height" constant="19" id="yS9-yx-wQI"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PrU-f5-aTw">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PrU-f5-aTw" userLabel="Current Speed Icon">
                     <rect key="frame" x="125" y="117" width="20" height="15"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="15" id="41S-pX-WPb"/>
                         <constraint firstAttribute="width" constant="20" id="qfE-lM-ETN"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vc7-MR-Nke">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vc7-MR-Nke" userLabel="Total Distance Icon">
                     <rect key="frame" x="123" y="13" width="16" height="19"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="16" id="8YF-08-jdU"/>
                         <constraint firstAttribute="height" constant="19" id="awj-O5-hVb"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ySX-Ul-pvK" userLabel="Average Speed Icon">
+                    <rect key="frame" x="256" y="115" width="20" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="TTO-Gc-1sq"/>
+                        <constraint firstAttribute="width" constant="20" id="dTk-Pg-v2F"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:43:27" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N2J-nw-jSe">
@@ -72,7 +101,7 @@
                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O1v-2Y-nTU">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O1v-2Y-nTU" userLabel="Pet Name Label">
                     <rect key="frame" x="21" y="98" width="60" height="64"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="60" id="dXs-jZ-P0Z"/>
@@ -81,13 +110,6 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userProfileMask-1x-png" translatesAutoresizingMaskIntoConstraints="NO" id="HUn-rs-KVW">
-                    <rect key="frame" x="17" y="22" width="68" height="68"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="68" id="qxh-2x-TnF"/>
-                        <constraint firstAttribute="height" constant="68" id="tvR-0A-NNc"/>
-                    </constraints>
-                </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6.2 km/h" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3r5-Tv-kqk">
                     <rect key="frame" x="123" y="143" width="53" height="16"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -126,13 +148,6 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ySX-Ul-pvK">
-                    <rect key="frame" x="256" y="115" width="20" height="20"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="20" id="TTO-Gc-1sq"/>
-                        <constraint firstAttribute="width" constant="20" id="dTk-Pg-v2F"/>
-                    </constraints>
-                </imageView>
             </subviews>
             <constraints>
                 <constraint firstItem="O1v-2Y-nTU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="21" id="3RM-tb-Hxw"/>
@@ -173,15 +188,7 @@
                 <constraint firstItem="gmm-gc-5d4" firstAttribute="leading" secondItem="vc7-MR-Nke" secondAttribute="trailing" constant="117" id="z1Z-Qt-SC9"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <connections>
-                <outlet property="avarageSpeedLabel" destination="Q0G-x8-ehk" id="ENd-yU-KMI"/>
-                <outlet property="currentSpeedLabel" destination="3r5-Tv-kqk" id="Qvb-3c-OWC"/>
-                <outlet property="petNameLabel" destination="O1v-2Y-nTU" id="vTM-bL-hoQ"/>
-                <outlet property="petProfilePic" destination="wpf-jq-McT" id="he2-a3-4ka"/>
-                <outlet property="totalDistanceLabel" destination="wBr-Cp-M4s" id="E51-ww-Cdy"/>
-                <outlet property="totalTimeLabel" destination="N2J-nw-jSe" id="wSq-Iv-sQJ"/>
-            </connections>
-            <point key="canvasLocation" x="97.5" y="305.5"/>
+            <point key="canvasLocation" x="97.5" y="305"/>
         </view>
     </objects>
     <resources>
