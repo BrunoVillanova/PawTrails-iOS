@@ -266,7 +266,7 @@ class PTMapView: MKMapView {
     }
     
     fileprivate func showAcessDeniedAlert() {
-        let alertController = UIAlertController(title: "Location Accees Requested",
+        let alertController = UIAlertController(title: "Location Access Requested",
                                                 message: "The location permission was not authorized. Please enable it in Settings to continue.",
                                                 preferredStyle: .alert)
         
