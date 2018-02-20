@@ -259,13 +259,13 @@ class PTMapView: MKMapView {
         case .authorizedAlways, .authorizedWhenInUse:
             return
         case .denied, .restricted:
-            self.showAcessDeniedAlert()
+            self.showAccessDeniedAlert()
         default:
             locationManager.requestWhenInUseAuthorization()
         }
     }
     
-    fileprivate func showAcessDeniedAlert() {
+    fileprivate func showAccessDeniedAlert() {
         let alertController = UIAlertController(title: "Location Access Requested",
                                                 message: "The location permission was not authorized. Please enable it in Settings to continue.",
                                                 preferredStyle: .alert)
