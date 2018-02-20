@@ -151,6 +151,24 @@ extension Int16 {
     }
 }
 
+extension Int64 {
+    
+    func timeStampToTimeString() -> String {
+        
+        var hours = 0
+        var minutes = 0
+        var seconds = 0
+        
+        if let totalTime = self as Int64! {
+            hours = Int(totalTime) / 3600
+            minutes = Int(totalTime) / 60 % 60
+            seconds = Int(totalTime) % 60
+        }
+        
+        return String(format:"%02i:%02i:%02i", hours, minutes, seconds)
+    }
+}
+
 extension Dictionary {
     
     /// Returns a new dictionary filtering the specified keys

@@ -29,11 +29,19 @@ class PTMapView: MKMapView {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
+        initialize()
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        initialize()
+    }
+    
+    fileprivate func initialize() {
         self.delegate = self
         self.showsScale = true
         self.showsUserLocation = true
-        
+    
         self.requestLocationAccess()
     }
     
@@ -251,14 +259,14 @@ class PTMapView: MKMapView {
         case .authorizedAlways, .authorizedWhenInUse:
             return
         case .denied, .restricted:
-            self.showAcessDeniedAlert()
+            self.showAccessDeniedAlert()
         default:
             locationManager.requestWhenInUseAuthorization()
         }
     }
     
-    fileprivate func showAcessDeniedAlert() {
-        let alertController = UIAlertController(title: "Location Accees Requested",
+    fileprivate func showAccessDeniedAlert() {
+        let alertController = UIAlertController(title: "Location Access Requested",
                                                 message: "The location permission was not authorized. Please enable it in Settings to continue.",
                                                 preferredStyle: .alert)
         

@@ -1971,8 +1971,8 @@ Last Edited on 2017-12-04
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qf4-Ct-DNe">
                                 <rect key="frame" x="0.0" y="108" width="375" height="693"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LTF-ve-xvE">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="850"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LTF-ve-xvE">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="828"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pawtrails-logo-1x-png" translatesAutoresizingMaskIntoConstraints="NO" id="8Wu-Xz-nn3">
                                                 <rect key="frame" x="114" y="30" width="147" height="70"/>
@@ -2138,7 +2138,7 @@ PawTrails is a product created by Attitude Technologies.
                                                     <action selector="rateUsOnBtnPressed:" destination="NRd-8c-4gT" eventType="touchUpInside" id="VJn-sz-p9q"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 1.1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gel-oF-80D">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 1.06" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gel-oF-80D">
                                                 <rect key="frame" x="21" y="328.5" width="338" height="20.5"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
                                                 <nil key="textColor"/>
@@ -3833,7 +3833,7 @@ PawTrails is a product created by Attitude Technologies.
         <!--Email-->
         <scene sceneID="1Fb-Uz-mf9">
             <objects>
-                <tableViewController id="15R-a6-foB" customClass="EmailTableViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="UserProfileEmail" useStoryboardIdentifierAsRestorationIdentifier="YES" id="15R-a6-foB" customClass="EmailTableViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="IeY-Tx-HTt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4981,7 +4981,7 @@ PawTrails is a product created by Attitude Technologies.
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dIf-cT-ymP">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dIf-cT-ymP">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="zmP-Sj-L8d" userLabel="Achievements View" customClass="AdventuresAchievementsView" customModule="PawTrails" customModuleProvider="target">
@@ -5586,7 +5586,7 @@ PawTrails is a product created by Attitude Technologies.
         <!--Navigation Controller-->
         <scene sceneID="DdQ-xS-2g7">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9OU-Qn-OVQ" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ChangeDevice" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9OU-Qn-OVQ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="gdP-7h-jVW">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -6042,7 +6042,7 @@ finish the Adventure?</string>
         <!--Navigation Controller-->
         <scene sceneID="FGo-7c-iFl">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Bly-KD-ElT" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SafeZoneNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Bly-KD-ElT" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="g3g-AE-qS3">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -6248,7 +6248,7 @@ finish the Adventure?</string>
         <!--Navigation Controller-->
         <scene sceneID="9J4-MU-qFM">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9xm-Fr-8aE" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="RecommendationNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9xm-Fr-8aE" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ors-iA-44c">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
