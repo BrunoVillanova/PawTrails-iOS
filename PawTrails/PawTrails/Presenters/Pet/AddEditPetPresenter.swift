@@ -12,6 +12,7 @@ protocol AddEditPetView: NSObjectProtocol, View, LoadingView {
     func loadPet()
     func doneSuccessfully()
     func codeChanged()
+    func petRemoved()
 
 }
 
@@ -116,6 +117,21 @@ class AddEditPetPresenter {
                 self.view?.errorMessage(error.msg)
             }else{
                 self.view?.codeChanged()
+            }
+        }
+    }
+    
+    func removePet(with id: Int) {
+        
+        view?.beginLoadingContent()
+        DataManager.instance.removePet(id) { (error) in
+            self.view?.endLoadingContent()
+            if (((error?.APIError) != nil)||((error?.responseError) != nil)||((error?.error) != nil)) {
+                //self.view?.removed()
+                debugPrint("Error removing pet : \(String(describing: error))")
+            }else{
+                self.view?.petRemoved()
+                print("removed")
             }
         }
     }

@@ -15,6 +15,7 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
     fileprivate var headerView: UIView!
     
     @IBOutlet weak var changeDeviceId: UIButton!
+    @IBOutlet weak var removePetButton: UIButton!
     @IBOutlet weak var petImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
@@ -89,6 +90,18 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
         }
     }
     
+    @IBAction func removePetBtnPressed(_ sender: Any) {
+        
+        print("removing Pet")
+        //if self.currentUserId == self.petOwnerId && self.petOwnerId == self.appUserId {
+            // Remove Pet
+            self.popUpDestructive(title: "Remove \(self.pet?.name ?? "this pet")", msg: "If you proceed you will loose all the information of this pet.", cancelHandler: nil, proceedHandler: { (remove) in
+                self.presenter.removePet(with: (self.pet?.id)!)
+            })
+        //}
+        
+    }
+    
     @objc fileprivate func closeScannerViewController() {
         self.dismiss(animated: true, completion: nil)
     }
@@ -154,6 +167,32 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
             .textAlignment(.center),
             .textNumberOfLines(0),
             ])
+        
+    }
+    
+    func petRemoved() {
+        
+        UIApplication.shared.keyWindow?.rootViewController!.showMessage("The pet has been deleted successfully", type: GSMessageType.info,  options: [
+            .animation(.slide),
+            .animationDuration(0.3),
+            .autoHide(false),
+            .cornerRadius(0.0),
+            .height(44.0),
+            .hideOnTap(true),
+            .position(.top),
+            .textAlignment(.center),
+            .textNumberOfLines(0),
+            ])
+        
+        if let petList = navigationController?.viewControllers.first(where: { $0 is PetsViewController}) as? PetsViewController {
+            petList.reloadPets()
+            navigationController?.popToViewController(petList, animated: true)
+        }else{
+            //This case can be : User tap on pet in Map and open the detail page.
+            self.navigationController?.popToRootViewController(animated: true)
+            
+            //TODO: Reload the MAP to remove deleted pet.
+        }
         
     }
     
