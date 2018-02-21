@@ -7,15 +7,25 @@
 //
 
 import UIKit
+import SDWebImage
 
-class PTBalloonImageView: UIView {
+class PTBalloonImageView: UIImageView {
 
     let pictureBaseSize : CGFloat = 13.0
     var borderImageView: UIImageView?
     var pictureImageView: UIImageView?
-    var image: UIImage? {
+//    var image: UIImage? {
+//        didSet {
+//            pictureImageView?.image = image
+//        }
+//    }
+    var imageUrl: String? {
         didSet {
-            pictureImageView?.image = image
+            if let imageUrl = imageUrl {
+                pictureImageView?.sd_setImage(with: URL(string: imageUrl), placeholderImage: UIImage(named: "PetPlaceholderImage"))
+            } else {
+                pictureImageView?.image = #imageLiteral(resourceName: "PetPlaceholderImage")
+            }
         }
     }
     

@@ -595,7 +595,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="130" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="q8V-d2-K1W">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="505"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -3560,28 +3560,18 @@ PawTrails is a product created by Attitude Technologies.
                                             <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="896-1H-CaN" customClass="UiimageViewWithMask" customModule="PawTrails" customModuleProvider="target">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="896-1H-CaN" customClass="PTBalloonImageView" customModule="PawTrails" customModuleProvider="target">
                                                     <rect key="frame" x="4" y="4" width="52" height="52"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="image" keyPath="maskImage" value="userprofilemask-1x-png_360"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                </imageView>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userProfileMask-1x-png" translatesAutoresizingMaskIntoConstraints="NO" id="SVH-f6-pDs" customClass="UiimageViewWithMask" customModule="PawTrails" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                                 </imageView>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="896-1H-CaN" firstAttribute="leading" secondItem="2iA-lh-XHi" secondAttribute="leading" constant="4" id="00S-wx-Dx8"/>
-                                            <constraint firstItem="SVH-f6-pDs" firstAttribute="leading" secondItem="2iA-lh-XHi" secondAttribute="leading" id="6N7-bo-azG"/>
                                             <constraint firstAttribute="bottom" secondItem="896-1H-CaN" secondAttribute="bottom" constant="4" id="7ls-mS-mdu"/>
                                             <constraint firstItem="896-1H-CaN" firstAttribute="top" secondItem="2iA-lh-XHi" secondAttribute="top" constant="4" id="MHU-Wq-3RL"/>
                                             <constraint firstAttribute="bottom" secondItem="896-1H-CaN" secondAttribute="bottom" constant="4" id="X6c-R1-r32"/>
-                                            <constraint firstAttribute="bottom" secondItem="SVH-f6-pDs" secondAttribute="bottom" id="cAS-LU-VIf"/>
                                             <constraint firstAttribute="trailing" secondItem="896-1H-CaN" secondAttribute="trailing" constant="4" id="hvC-Eq-g3o"/>
-                                            <constraint firstItem="SVH-f6-pDs" firstAttribute="top" secondItem="2iA-lh-XHi" secondAttribute="top" id="lOh-Qx-R2c"/>
-                                            <constraint firstAttribute="trailing" secondItem="SVH-f6-pDs" secondAttribute="trailing" id="lg4-CV-4m3"/>
                                             <constraint firstAttribute="trailing" secondItem="896-1H-CaN" secondAttribute="trailing" constant="4" id="pen-m7-msN"/>
                                             <constraint firstItem="896-1H-CaN" firstAttribute="leading" secondItem="2iA-lh-XHi" secondAttribute="leading" constant="4" id="wUz-kI-sdv"/>
                                             <constraint firstItem="896-1H-CaN" firstAttribute="top" secondItem="2iA-lh-XHi" secondAttribute="top" constant="4" id="zAo-vl-g81"/>

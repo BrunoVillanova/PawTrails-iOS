@@ -262,11 +262,9 @@ extension MapViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = petsCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! PetsCollectionViewCell
         let pet = presenter.pets[indexPath.item]
-        if let image = pet.image {
-            cell.petImageCell?.image = UIImage(data: image)
-        }
+        let cell = petsCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! PetsCollectionViewCell
+        cell.petImageCell?.imageUrl = pet.imageURL
         return cell
     }
 }
