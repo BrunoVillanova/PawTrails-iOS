@@ -11,8 +11,7 @@ import YNDropDownMenu
 import MapKit
 import SkyFloatingLabelTextField
 
-//
-//
+
 class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, AddEditSafeZoneView {
     
     @IBOutlet weak var saveBtn: UIBarButtonItem!
@@ -21,7 +20,7 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
     var slider: UISlider?
     var sliderLabel: UILabel?
     
-
+    
     let icons = ["buildings-dark-1x", "fountain-dark-1x", "girl-and-boy-dark-1x" , "home-dark-1x", "palm-tree-shape-dark-1x", "park-dark-1x"]
     var selectedIcon: Int!
     
@@ -33,12 +32,10 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
     fileprivate let fenceSide: Double = 100.0 //meters
     fileprivate var fenceDistance:Int = 100 //meters
     fileprivate var  manager = CLLocationManager()
-
     fileprivate let presenter = AddEditSafeZonePresenter()
     fileprivate var petLocation:MKLocation? = nil
     fileprivate var updatingPetLocation = false
-
-
+    
     var safezone: SafeZone?
     var petId: Int!
     var isOwner: Bool!
@@ -46,7 +43,6 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
     var yNDropDownMenu: YNDropDownMenu?
     
     
-//
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -58,19 +54,15 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
         map.showsCompass = false
         map.mapType = .hybrid
         map.delegate = self
-    
+        
         manager.delegate = self
         let status = CLLocationManager.authorizationStatus()
         if status == .notDetermined { manager.requestWhenInUseAuthorization() }
         
-      
-
-
-        
-        self.navigationController?.navigationBar.shadowImage = UIImage(named: "")
+        self.navigationController?.navigationBar.shadowImage = UIImage()
         self.view.backgroundColor = UIColor.white
         
-       
+        
         ZBdropDownViews = Bundle.main.loadNibNamed("SettingsView", owner: nil, options: nil) as? [UIView]
         if let vieww = ZBdropDownViews?.first as? SettingsViews {
             if let safezone = safezone {
@@ -79,34 +71,24 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
                 
                 vieww.nameTextField.text = safezone.name
                 shape = safezone.shape
-
+                
                 if !isOwner {
                     self.saveBtn.isEnabled = false
                     view.isHidden = true
                 }
-
-                
             }
-            
         }
         
         if let _ZBdropDownViews = ZBdropDownViews {
-        
-            if UIScreen.main.nativeBounds.height == 2436 {
             
+            if UIScreen.main.nativeBounds.height == 2436 {
+                
                 self.yNDropDownMenu = YNDropDownMenu(frame: CGRect(x: 0, y: 89, width: UIScreen.main.bounds.size.width, height: 38),
                                                      dropDownViews: _ZBdropDownViews, dropDownViewTitles: ["Show SafeZone Settings"])
             } else {
                 self.yNDropDownMenu = YNDropDownMenu(frame: CGRect(x: 0, y: 64, width: UIScreen.main.bounds.size.width, height: 38),
                                                      dropDownViews: _ZBdropDownViews, dropDownViewTitles: ["Show SafeZone Settings"])
             }
-            
- 
-            
-            
-                
-            
-            
             
             
             self.yNDropDownMenu?.setImageWhen(normal: UIImage(named: "arrow-show-1x"), selected: UIImage(named: "arrow-show-1x"), disabled: UIImage(named: "arrow-show-1x"))
@@ -122,21 +104,20 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
                 settingsView.collectionView.delegate = self
                 settingsView.collectionView.dataSource = self
                 settingsView.collectionView.allowsMultipleSelection = false
-
+                
                 settingsView.collectionView.contentInset = UIEdgeInsetsMake(0, 2, 0, 16)
                 let nib = UINib(nibName: "IconCell", bundle: nil)
                 settingsView.collectionView?.register(nib, forCellWithReuseIdentifier: "myCell")
                 settingsView.collectionView.showsHorizontalScrollIndicator = false
                 settingsView.collectionView.showsVerticalScrollIndicator = false
-
                 
                 
                 settingsView.circleBtn.shadow()
                 settingsView.squareBtn.shadow()
                 settingsView.circleBtn.addTarget(self, action: #selector(handlePressed(sender:)), for: .touchUpInside)
                 settingsView.squareBtn.addTarget(self, action: #selector(handleSquaredBtnPressed(sender:)), for: .touchUpInside)
-
-                 slider = settingsView.slider
+                
+                slider = settingsView.slider
                 if let slider = slider {
                     slider.addTarget(self, action: #selector(handleSliderSlided(sender:)), for: .valueChanged)
                 }
@@ -154,24 +135,15 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
                 }
                 
             }
-
+            
             self.yNDropDownMenu?.alwaysSelected(at: 0)
             
             if let view = self.yNDropDownMenu {
                 self.view.addSubview(view)
-
+                
             }
-            
         }
- 
-
     }
-    
-    
-    override func viewDidLayoutSubviews() {
-
-    }
-    
     
     
     override func viewDidAppear(_ animated: Bool) {
@@ -190,7 +162,6 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
             
         }else{
             
-           
             let sonhugoCoordinate = CLLocationCoordinate2D(latitude: 39.592217, longitude: 2.662322)
             
             self.map.centerOn(sonhugoCoordinate, with: 50, animated: false)
@@ -212,15 +183,9 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
         }
     }
     
-
-    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
-    
-
-    
-    
     
     func geoCodeFence() -> (Point,Point) {
         let point1 = Point(coordinates: map.convert(fence.center, toCoordinateFrom: view))
@@ -229,20 +194,15 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
     }
     
     
-    
-    
-    
     func handleSliderSlided(sender: UISlider) {
-            let miles = Double(sender.value)
-            let delta = miles / 69.0
-            var currentRegion = self.map.region
-            currentRegion.span = MKCoordinateSpan(latitudeDelta: delta, longitudeDelta: delta)
-            let (lat, long) = (currentRegion.center.latitude, currentRegion.center.longitude)
-            let coordinate =  CLLocationCoordinate2D(latitude: lat, longitude: long)
-            map.centerOn(coordinate, with: miles, animated: true)
-}
-
-    
+        let miles = Double(sender.value)
+        let delta = miles / 69.0
+        var currentRegion = self.map.region
+        currentRegion.span = MKCoordinateSpan(latitudeDelta: delta, longitudeDelta: delta)
+        let (lat, long) = (currentRegion.center.latitude, currentRegion.center.longitude)
+        let coordinate =  CLLocationCoordinate2D(latitude: lat, longitude: long)
+        map.centerOn(coordinate, with: miles, animated: true)
+    }
     
     func updateFenceDistance() {
         if let fence = fence {
@@ -272,42 +232,42 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
             }else if status == .denied {
                 popUpUserLocationDenied()
             }else {
-//                beginLoadingLocation()
+                //                beginLoadingLocation()
                 manager.requestLocation()
             }
         }
-
+        
     }
     
     @IBAction func startTripBtnPressed(_ sender: Any) {
         
     }
-
+    
     @IBAction func saveBtnPressed(_ sender: Any) {
         if let petId = petId {
             if fence.isIdle {
                 let id = safezone?.id ?? 0
                 if let settingsView = ZBdropDownViews?.first as? SettingsViews {
                     if selectedIcon != nil {
-                         presenter.addEditSafeZone(safezoneId: id, name: settingsView.nameTextField.text, shape: shape, active: true, points: geoCodeFence(), imageId: selectedIcon, into: petId)
+                        presenter.addEditSafeZone(safezoneId: id, name: settingsView.nameTextField.text, shape: shape, active: true, points: geoCodeFence(), imageId: selectedIcon, into: petId)
                     } else if let number = safezone?.image {
                         presenter.addEditSafeZone(safezoneId: id, name: settingsView.nameTextField.text, shape: shape, active: true, points: geoCodeFence(), imageId:Int(number) , into: petId)
                     } else {
-                         presenter.addEditSafeZone(safezoneId: id, name: settingsView.nameTextField.text, shape: shape, active: true, points: geoCodeFence(), imageId: 0 , into: petId)
+                        presenter.addEditSafeZone(safezoneId: id, name: settingsView.nameTextField.text, shape: shape, active: true, points: geoCodeFence(), imageId: 0 , into: petId)
                     }
-                   
+                    
                 }
                 
             }else{
                 alert(title: "", msg: "The area is too small. Please, zoom out.", type: .red)
             }
         }
-
+        
     }
     
     
     func handlePressed(sender: UIButton) {
-   
+        
         if let settingsView = ZBdropDownViews?.first as? SettingsViews {
             settingsView.circleBtn.backgroundColor = UIColor.darkGray
             settingsView.circleBtn.setTitleColor(.white, for: .normal)
@@ -333,11 +293,7 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
         shape = .square
     }
     
-    
-    
-    
     //MARK: - AddEditSafeZoneView
-    
     func errorMessage(_ error: ErrorMsg) {
         alert(title: "", msg: error.msg)
     }
@@ -353,17 +309,14 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
     func missingName() {
         
         if let vieww = ZBdropDownViews?.first as? SettingsViews {
-        vieww.nameTextField.becomeFirstResponder()
+            vieww.nameTextField.becomeFirstResponder()
             vieww.nameTextField.shake()
             self.alert(title: "", msg: "Please enter a safe zone name", type: .red, disableTime: 3, handler: nil)
             
             if let view = self.yNDropDownMenu {
                 view.showAndHideMenu(at: 0)
             }
-            
-      
         }
-       
     }
     
     func beginLoadingContent() {
@@ -379,15 +332,10 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
         endLoadingLocation()
         alert(title: "", msg: "Couldn't locate the pet", type: .red)
     }
-
+    
     func endLoadingLocation() {
-
+        
     }
-
-    
-    
-    
-
 }
 
 
@@ -414,12 +362,10 @@ extension AddEditSafeZOneController: UICollectionViewDelegate, UICollectionViewD
         }
     }
     
-
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) {
             cell.backgroundColor = UIColor.clear
-
         }
     }
     
@@ -430,7 +376,7 @@ extension AddEditSafeZOneController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 16
     }
-
+    
 }
 
 extension AddEditSafeZOneController: MKMapViewDelegate {
@@ -454,7 +400,6 @@ extension AddEditSafeZOneController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         return mapView.getAnnotationView(annotation: annotation)
     }
-
+    
 }
-
 
