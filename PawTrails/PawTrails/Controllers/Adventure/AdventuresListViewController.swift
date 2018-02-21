@@ -41,6 +41,7 @@ class AdventuresListViewController: UIViewController  {
                 })
             })
             .bind(to: tableView.rx.items(cellIdentifier: "cell", cellType: AdventureHistoryCell.self)) { (_, element, cell) in
+                cell.selectionStyle = .none
                 cell.configure(element)
             }.disposed(by: disposeBag)
         
