@@ -24,6 +24,7 @@ class MapViewController: UIViewController {
     var selectedPet: Pet?
     var data = [searchElement]()
     var activeTrips = [Trip]()
+    var isDisplayedPetScreen = false
 
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -48,6 +49,11 @@ class MapViewController: UIViewController {
         super.viewWillAppear(animated)
         mapView.showGpsUpdates()
         self.tabBarController?.tabBar.isHidden = false
+        
+        if isDisplayedPetScreen {
+            reloadPets()
+            isDisplayedPetScreen = false;
+        }
     }
     
     
@@ -211,7 +217,6 @@ class MapViewController: UIViewController {
     fileprivate func goToPetDetails(_ pet: Pet) {
         if let petDetailsViewController = self.storyboard?.instantiateViewController(withIdentifier: "PetDetails") as? TabPageViewController {
             petDetailsViewController.pet = pet
-            
             self.navigationController?.pushViewController(petDetailsViewController, animated: true)
         }
     }
@@ -282,6 +287,7 @@ extension MapViewController: PTPetCalloutViewDelegate {
     func didTapOnCallout(annotation: PTAnnotation) {
         
         if let petDeviceData = annotation.petDeviceData {
+             isDisplayedPetScreen = true
              self.goToPetDetails(petDeviceData.pet)
         }
     }

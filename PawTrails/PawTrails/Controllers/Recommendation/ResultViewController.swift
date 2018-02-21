@@ -16,8 +16,8 @@ class ResultViewController: UIViewController {
     
     
     let idealColor = UIColor(red: 112/255, green: 163/255, blue: 8/255, alpha: 1)
-    let obseAndVeryThinColor = UIColor(red: 213/255, green: 0/255, blue: 0/255, alpha: 1)
-    let threeColor = UIColor(red: 247/255, green: 101/255, blue: 0/255, alpha: 1)
+    let obseAndVeryThinColor = UIColor(red: 212/255, green: 20/255, blue: 61/255, alpha: 1)
+    let threeColor = UIColor(red: 212/255, green: 20/255, blue: 61/255, alpha: 1)
 
     
     @IBOutlet weak var bcScoreLbl: UILabel!

@@ -6367,26 +6367,15 @@ finish the Adventure?</string>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aCG-9D-sA0">
-                                <rect key="frame" x="16" y="550" width="343" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="oDb-lW-3of"/>
-                                </constraints>
-                                <string key="text">Exercise and play Helps dog feel sleepy rather than hyperactive
-</string>
-                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="14"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pawtrails-logo-1x-png" translatesAutoresizingMaskIntoConstraints="NO" id="Gs5-dU-N4x">
-                                <rect key="frame" x="137.5" y="492" width="100" height="50"/>
+                                <rect key="frame" x="137.5" y="557" width="100" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="F7Y-mU-cXS"/>
                                     <constraint firstAttribute="width" constant="100" id="xQ7-hJ-3oa"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NqQ-ZK-Zu7">
-                                <rect key="frame" x="60" y="432" width="255" height="40"/>
+                                <rect key="frame" x="60" y="497" width="255" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="znO-XY-HQ2"/>
                                 </constraints>
@@ -6398,19 +6387,16 @@ finish the Adventure?</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="IfA-u8-sNa" firstAttribute="bottom" secondItem="aCG-9D-sA0" secondAttribute="bottom" constant="8" id="07t-ym-gbn"/>
-                            <constraint firstItem="aCG-9D-sA0" firstAttribute="leading" secondItem="IfA-u8-sNa" secondAttribute="leading" constant="16" id="AGS-R2-kPv"/>
                             <constraint firstItem="WfN-hY-vnx" firstAttribute="top" secondItem="IfA-u8-sNa" secondAttribute="top" constant="50" id="CjZ-Vc-ZU9"/>
                             <constraint firstItem="Gs5-dU-N4x" firstAttribute="top" secondItem="NqQ-ZK-Zu7" secondAttribute="bottom" constant="20" id="Djb-fQ-fdT"/>
                             <constraint firstItem="f33-Yx-qXV" firstAttribute="top" secondItem="WfN-hY-vnx" secondAttribute="bottom" priority="749" constant="48.5" id="H3o-OB-Lcn"/>
                             <constraint firstItem="WfN-hY-vnx" firstAttribute="leading" secondItem="IfA-u8-sNa" secondAttribute="leading" constant="16" id="Per-rj-iqJ"/>
                             <constraint firstItem="IfA-u8-sNa" firstAttribute="trailing" secondItem="WfN-hY-vnx" secondAttribute="trailing" constant="16" id="Tug-hC-bKV"/>
+                            <constraint firstItem="IfA-u8-sNa" firstAttribute="bottom" secondItem="Gs5-dU-N4x" secondAttribute="bottom" constant="11" id="X8J-GV-Tf7"/>
                             <constraint firstItem="IfA-u8-sNa" firstAttribute="trailing" secondItem="NqQ-ZK-Zu7" secondAttribute="trailing" constant="60" id="a7X-QV-mv4"/>
-                            <constraint firstItem="IfA-u8-sNa" firstAttribute="trailing" secondItem="aCG-9D-sA0" secondAttribute="trailing" constant="16" id="cbC-Mr-YiG"/>
                             <constraint firstItem="f33-Yx-qXV" firstAttribute="leading" secondItem="IfA-u8-sNa" secondAttribute="leading" constant="16" id="dgT-rU-jn8"/>
                             <constraint firstItem="IfA-u8-sNa" firstAttribute="trailing" secondItem="f33-Yx-qXV" secondAttribute="trailing" constant="16" id="fIW-K5-BfX"/>
                             <constraint firstItem="NqQ-ZK-Zu7" firstAttribute="leading" secondItem="IfA-u8-sNa" secondAttribute="leading" constant="60" id="lU9-AV-WNi"/>
-                            <constraint firstItem="aCG-9D-sA0" firstAttribute="top" secondItem="Gs5-dU-N4x" secondAttribute="bottom" constant="8" id="qPZ-cT-qFb"/>
                             <constraint firstItem="Gs5-dU-N4x" firstAttribute="centerX" secondItem="IfA-u8-sNa" secondAttribute="centerX" id="vdh-Wi-iEO"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="IfA-u8-sNa"/>
@@ -6517,26 +6503,15 @@ finish the Adventure?</string>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WSc-GN-6H5">
-                                <rect key="frame" x="16" y="550" width="343" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="wAV-NA-HpM"/>
-                                </constraints>
-                                <string key="text">Exercise and play Helps dog feel sleepy rather than hyperactive
-</string>
-                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="14"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pawtrails-logo-1x-png" translatesAutoresizingMaskIntoConstraints="NO" id="5np-b5-GIe">
-                                <rect key="frame" x="137.5" y="492" width="100" height="50"/>
+                                <rect key="frame" x="137.5" y="559" width="100" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="Swe-yf-zmV"/>
                                     <constraint firstAttribute="height" constant="50" id="xyy-bJ-WTn"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mfk-v2-vE1">
-                                <rect key="frame" x="60" y="432" width="255" height="40"/>
+                                <rect key="frame" x="60" y="499" width="255" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Abh-AH-p58"/>
                                 </constraints>
@@ -6550,15 +6525,12 @@ finish the Adventure?</string>
                         <constraints>
                             <constraint firstItem="vAI-cg-ohs" firstAttribute="trailing" secondItem="Mfk-v2-vE1" secondAttribute="trailing" constant="60" id="3jQ-ZT-ovO"/>
                             <constraint firstItem="vAI-cg-ohs" firstAttribute="trailing" secondItem="Fvg-gU-6dA" secondAttribute="trailing" constant="16" id="6Fu-bS-CV6"/>
-                            <constraint firstItem="vAI-cg-ohs" firstAttribute="bottom" secondItem="WSc-GN-6H5" secondAttribute="bottom" constant="8" id="72t-Is-iaq"/>
-                            <constraint firstItem="vAI-cg-ohs" firstAttribute="trailing" secondItem="WSc-GN-6H5" secondAttribute="trailing" constant="16" id="91w-ZH-cBx"/>
                             <constraint firstItem="Fvg-gU-6dA" firstAttribute="leading" secondItem="vAI-cg-ohs" secondAttribute="leading" constant="16" id="9zX-d2-ybW"/>
                             <constraint firstItem="m05-nD-TaW" firstAttribute="leading" secondItem="vAI-cg-ohs" secondAttribute="leading" constant="16" id="J71-EW-LbF"/>
                             <constraint firstItem="5np-b5-GIe" firstAttribute="centerX" secondItem="vAI-cg-ohs" secondAttribute="centerX" id="RxA-7c-BMQ"/>
+                            <constraint firstItem="vAI-cg-ohs" firstAttribute="bottom" secondItem="5np-b5-GIe" secondAttribute="bottom" constant="9" id="TBu-bV-yeM"/>
                             <constraint firstItem="5np-b5-GIe" firstAttribute="top" secondItem="Mfk-v2-vE1" secondAttribute="bottom" constant="20" id="Xf9-yp-kNv"/>
                             <constraint firstItem="m05-nD-TaW" firstAttribute="top" secondItem="Fvg-gU-6dA" secondAttribute="bottom" priority="749" constant="48.5" id="ZFF-O1-f1X"/>
-                            <constraint firstItem="WSc-GN-6H5" firstAttribute="top" secondItem="5np-b5-GIe" secondAttribute="bottom" constant="8" id="cfH-ZT-UZv"/>
-                            <constraint firstItem="WSc-GN-6H5" firstAttribute="leading" secondItem="vAI-cg-ohs" secondAttribute="leading" constant="16" id="csT-fh-zbm"/>
                             <constraint firstItem="vAI-cg-ohs" firstAttribute="trailing" secondItem="m05-nD-TaW" secondAttribute="trailing" constant="16" id="iPk-fh-tYS"/>
                             <constraint firstItem="Mfk-v2-vE1" firstAttribute="leading" secondItem="vAI-cg-ohs" secondAttribute="leading" constant="60" id="jnX-aq-KqJ"/>
                             <constraint firstItem="Fvg-gU-6dA" firstAttribute="top" secondItem="vAI-cg-ohs" secondAttribute="top" constant="50" id="mNM-tw-3MQ"/>
@@ -7088,26 +7060,15 @@ your product.</string>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OXf-ox-Qxo">
-                                <rect key="frame" x="16" y="550" width="343" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="cgC-hF-CBF"/>
-                                </constraints>
-                                <string key="text">Exercise and play Helps dog feel sleepy rather than hyperactive
-</string>
-                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="14"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pawtrails-logo-1x-png" translatesAutoresizingMaskIntoConstraints="NO" id="uO4-by-bw6">
-                                <rect key="frame" x="137.5" y="492" width="100" height="50"/>
+                                <rect key="frame" x="137.5" y="561" width="100" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Voo-pa-M3q"/>
                                     <constraint firstAttribute="width" constant="100" id="xGg-rS-sKl"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0o9-gF-mK8">
-                                <rect key="frame" x="60" y="432" width="255" height="40"/>
+                                <rect key="frame" x="60" y="501" width="255" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="G88-JU-T0i"/>
                                 </constraints>
@@ -7119,7 +7080,6 @@ your product.</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="OXf-ox-Qxo" firstAttribute="top" secondItem="uO4-by-bw6" secondAttribute="bottom" constant="8" id="3f2-3z-bdt"/>
                             <constraint firstItem="tMc-Vl-pkC" firstAttribute="leading" secondItem="B3a-gS-4HZ" secondAttribute="leading" constant="16" id="3xX-sa-i78"/>
                             <constraint firstItem="uO4-by-bw6" firstAttribute="centerX" secondItem="B3a-gS-4HZ" secondAttribute="centerX" id="6BU-Mp-JTp"/>
                             <constraint firstItem="B3a-gS-4HZ" firstAttribute="trailing" secondItem="U9s-hv-cl3" secondAttribute="trailing" constant="16" id="7Sp-fe-ur7"/>
@@ -7129,10 +7089,8 @@ your product.</string>
                             <constraint firstItem="tMc-Vl-pkC" firstAttribute="top" secondItem="U9s-hv-cl3" secondAttribute="bottom" priority="749" constant="48.5" id="PRg-Kt-246"/>
                             <constraint firstItem="uO4-by-bw6" firstAttribute="top" secondItem="0o9-gF-mK8" secondAttribute="bottom" constant="20" id="TUJ-5r-mx3"/>
                             <constraint firstItem="0o9-gF-mK8" firstAttribute="leading" secondItem="B3a-gS-4HZ" secondAttribute="leading" constant="60" id="Vec-w4-mHi"/>
-                            <constraint firstItem="B3a-gS-4HZ" firstAttribute="bottom" secondItem="OXf-ox-Qxo" secondAttribute="bottom" constant="8" id="djE-ON-giH"/>
-                            <constraint firstItem="OXf-ox-Qxo" firstAttribute="leading" secondItem="B3a-gS-4HZ" secondAttribute="leading" constant="16" id="eJg-cl-hHq"/>
+                            <constraint firstItem="B3a-gS-4HZ" firstAttribute="bottom" secondItem="uO4-by-bw6" secondAttribute="bottom" constant="7" id="cQe-Vy-RWd"/>
                             <constraint firstItem="B3a-gS-4HZ" firstAttribute="trailing" secondItem="tMc-Vl-pkC" secondAttribute="trailing" constant="16" id="jcf-HQ-YgB"/>
-                            <constraint firstItem="B3a-gS-4HZ" firstAttribute="trailing" secondItem="OXf-ox-Qxo" secondAttribute="trailing" constant="16" id="qds-aJ-aiB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="B3a-gS-4HZ"/>
                     </view>
@@ -7237,26 +7195,15 @@ your product.</string>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z2b-aW-JYE">
-                                <rect key="frame" x="16" y="550" width="343" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="q0A-za-oVR"/>
-                                </constraints>
-                                <string key="text">Exercise and play Helps dog feel sleepy rather than hyperactive
-</string>
-                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="14"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pawtrails-logo-1x-png" translatesAutoresizingMaskIntoConstraints="NO" id="z3Z-zd-D3x">
-                                <rect key="frame" x="137.5" y="492" width="100" height="50"/>
+                                <rect key="frame" x="137.5" y="559" width="100" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="FZf-0e-qdc"/>
                                     <constraint firstAttribute="width" constant="100" id="Idj-tj-hbc"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iqM-Ke-lld">
-                                <rect key="frame" x="60" y="432" width="255" height="40"/>
+                                <rect key="frame" x="60" y="499" width="255" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="lck-ZH-3HM"/>
                                 </constraints>
@@ -7268,16 +7215,13 @@ your product.</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="c0B-FA-gmo" firstAttribute="trailing" secondItem="z2b-aW-JYE" secondAttribute="trailing" constant="16" id="0Ho-Tk-TsO"/>
                             <constraint firstItem="iqM-Ke-lld" firstAttribute="leading" secondItem="c0B-FA-gmo" secondAttribute="leading" constant="60" id="3VC-Di-HNZ"/>
                             <constraint firstItem="c0B-FA-gmo" firstAttribute="trailing" secondItem="z0d-J7-cxS" secondAttribute="trailing" constant="16" id="4Co-N0-Y9w"/>
                             <constraint firstItem="z0d-J7-cxS" firstAttribute="top" secondItem="c0B-FA-gmo" secondAttribute="top" constant="50" id="Ah2-Cc-djS"/>
-                            <constraint firstItem="c0B-FA-gmo" firstAttribute="bottom" secondItem="z2b-aW-JYE" secondAttribute="bottom" constant="8" id="DQo-x4-LGI"/>
                             <constraint firstItem="z3Z-zd-D3x" firstAttribute="top" secondItem="iqM-Ke-lld" secondAttribute="bottom" constant="20" id="DbX-XK-Oio"/>
                             <constraint firstItem="dEq-aY-lAy" firstAttribute="top" secondItem="z0d-J7-cxS" secondAttribute="bottom" priority="749" constant="48.5" id="Fz5-w3-DV8"/>
-                            <constraint firstItem="z2b-aW-JYE" firstAttribute="leading" secondItem="c0B-FA-gmo" secondAttribute="leading" constant="16" id="Loi-hM-KUM"/>
+                            <constraint firstItem="c0B-FA-gmo" firstAttribute="bottom" secondItem="z3Z-zd-D3x" secondAttribute="bottom" constant="9" id="Q70-HU-wgc"/>
                             <constraint firstItem="z3Z-zd-D3x" firstAttribute="centerX" secondItem="c0B-FA-gmo" secondAttribute="centerX" id="U31-n0-6uY"/>
-                            <constraint firstItem="z2b-aW-JYE" firstAttribute="top" secondItem="z3Z-zd-D3x" secondAttribute="bottom" constant="8" id="YcP-X3-8p1"/>
                             <constraint firstItem="z0d-J7-cxS" firstAttribute="leading" secondItem="c0B-FA-gmo" secondAttribute="leading" constant="16" id="Z8g-MI-VOs"/>
                             <constraint firstItem="c0B-FA-gmo" firstAttribute="trailing" secondItem="iqM-Ke-lld" secondAttribute="trailing" constant="60" id="f9c-cB-Zfu"/>
                             <constraint firstItem="c0B-FA-gmo" firstAttribute="trailing" secondItem="dEq-aY-lAy" secondAttribute="trailing" constant="16" id="vEB-Dk-ESv"/>
@@ -7385,26 +7329,15 @@ your product.</string>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mw0-W3-IEG">
-                                <rect key="frame" x="16" y="550" width="343" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="2MM-8N-NJ1"/>
-                                </constraints>
-                                <string key="text">Exercise and play Helps dog feel sleepy rather than hyperactive
-</string>
-                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="14"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pawtrails-logo-1x-png" translatesAutoresizingMaskIntoConstraints="NO" id="8Qg-pX-05C">
-                                <rect key="frame" x="137.5" y="492" width="100" height="50"/>
+                                <rect key="frame" x="137.5" y="558" width="100" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="rE1-4m-8UL"/>
                                     <constraint firstAttribute="width" constant="100" id="xMa-QX-vMT"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wtK-po-F3w">
-                                <rect key="frame" x="60" y="432" width="255" height="40"/>
+                                <rect key="frame" x="60" y="498" width="255" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="bU2-0s-ePo"/>
                                 </constraints>
@@ -7420,14 +7353,11 @@ your product.</string>
                             <constraint firstItem="pVu-6g-4SP" firstAttribute="top" secondItem="I3T-ko-bsZ" secondAttribute="top" constant="50" id="CfQ-5q-Zks"/>
                             <constraint firstItem="I3T-ko-bsZ" firstAttribute="trailing" secondItem="pVu-6g-4SP" secondAttribute="trailing" constant="16" id="D08-8F-Oxv"/>
                             <constraint firstItem="I3T-ko-bsZ" firstAttribute="trailing" secondItem="gQh-2e-xG8" secondAttribute="trailing" constant="16" id="Fwz-7Z-DFn"/>
+                            <constraint firstItem="I3T-ko-bsZ" firstAttribute="bottom" secondItem="8Qg-pX-05C" secondAttribute="bottom" constant="10" id="SyJ-kW-Wqe"/>
                             <constraint firstItem="8Qg-pX-05C" firstAttribute="top" secondItem="wtK-po-F3w" secondAttribute="bottom" constant="20" id="X6l-MP-2d5"/>
-                            <constraint firstItem="I3T-ko-bsZ" firstAttribute="bottom" secondItem="Mw0-W3-IEG" secondAttribute="bottom" constant="8" id="ZHn-hY-Vkq"/>
                             <constraint firstItem="I3T-ko-bsZ" firstAttribute="trailing" secondItem="wtK-po-F3w" secondAttribute="trailing" constant="60" id="ZMt-U8-d4W"/>
-                            <constraint firstItem="I3T-ko-bsZ" firstAttribute="trailing" secondItem="Mw0-W3-IEG" secondAttribute="trailing" constant="16" id="aJd-Wn-t9e"/>
-                            <constraint firstItem="Mw0-W3-IEG" firstAttribute="top" secondItem="8Qg-pX-05C" secondAttribute="bottom" constant="8" id="gOE-rf-bsg"/>
                             <constraint firstItem="gQh-2e-xG8" firstAttribute="leading" secondItem="I3T-ko-bsZ" secondAttribute="leading" constant="16" id="iTH-Fq-X1K"/>
                             <constraint firstItem="gQh-2e-xG8" firstAttribute="top" secondItem="pVu-6g-4SP" secondAttribute="bottom" priority="749" constant="48.5" id="jxs-gC-L4l"/>
-                            <constraint firstItem="Mw0-W3-IEG" firstAttribute="leading" secondItem="I3T-ko-bsZ" secondAttribute="leading" constant="16" id="sJa-JU-wU4"/>
                             <constraint firstItem="8Qg-pX-05C" firstAttribute="centerX" secondItem="I3T-ko-bsZ" secondAttribute="centerX" id="v8a-Sz-FCU"/>
                             <constraint firstItem="pVu-6g-4SP" firstAttribute="leading" secondItem="I3T-ko-bsZ" secondAttribute="leading" constant="16" id="yPI-Di-N5f"/>
                         </constraints>
@@ -7455,12 +7385,12 @@ your product.</string>
                                 <rect key="frame" x="0.0" y="108" width="375" height="461"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HRI-ee-D9R">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="369.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="323"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Underweight" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aZ3-Gj-ouw">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Underweight" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aZ3-Gj-ouw">
                                                 <rect key="frame" x="104.5" y="205.5" width="166.5" height="40"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="29"/>
-                                                <color key="textColor" red="0.49803921569999998" green="0.71372549019999998" blue="0.062745098040000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" red="0.83137254900000002" green="0.078431372550000003" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Body condition score is:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4xc-7d-BAP">
@@ -7492,8 +7422,8 @@ your product.</string>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incidid" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="C3U-Rk-LLe">
-                                                <rect key="frame" x="16" y="275.5" width="343" height="86"/>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="C3U-Rk-LLe">
+                                                <rect key="frame" x="16" y="275.5" width="343" height="39.5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -8304,7 +8234,7 @@ Last Edited on 2017-12-04
         <image name="youtube" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="yp5-bT-5uy"/>
+        <segue reference="5Sd-jc-pKD"/>
         <segue reference="Rzx-2e-OhR"/>
         <segue reference="Nln-Sh-wxV"/>
         <segue reference="gjN-xE-RCG"/>
