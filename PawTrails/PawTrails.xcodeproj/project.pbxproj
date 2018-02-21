@@ -261,6 +261,7 @@
 		1555FFF61FDF662A00F05C76 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		155F614A2028A06F007D8A8B /* RxDataSources.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxDataSources.framework; path = Carthage/Build/iOS/RxDataSources.framework; sourceTree = "<group>"; };
 		155F614C20291527007D8A8B /* Differentiator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Differentiator.framework; path = Carthage/Build/iOS/Differentiator.framework; sourceTree = "<group>"; };
+		15608EF2203C7F7D0084C029 /* PawTrails 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PawTrails 2.xcdatamodel"; sourceTree = "<group>"; };
 		1570C7AB203B63DF00A7F59F /* TripDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailViewController.swift; sourceTree = "<group>"; };
 		157AC4B21FC3192E0005A717 /* Convert.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Convert.framework; path = Carthage/Build/iOS/Convert.framework; sourceTree = "<group>"; };
 		1585469B1FDCFBCB004C82EC /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = Carthage/Build/iOS/Charts.framework; sourceTree = "<group>"; };
@@ -2287,9 +2288,10 @@
 		15C761262016CFF3002AA7F8 /* PawTrails.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				15608EF2203C7F7D0084C029 /* PawTrails 2.xcdatamodel */,
 				15C761272016CFF3002AA7F8 /* PawTrails.xcdatamodel */,
 			);
-			currentVersion = 15C761272016CFF3002AA7F8 /* PawTrails.xcdatamodel */;
+			currentVersion = 15608EF2203C7F7D0084C029 /* PawTrails 2.xcdatamodel */;
 			path = PawTrails.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

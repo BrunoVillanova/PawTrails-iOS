@@ -344,6 +344,7 @@ extension DeviceData {
         satelliteSignal = 100
         deviceTime = 0
         deviceDate = Date()
+        lbsTimestamp = 0
     }
     
     init(_ json: [String:Any]) {
@@ -365,7 +366,14 @@ extension DeviceData {
         } else {
             deviceTime = 0
         }
-            deviceDate = Date.init(timeIntervalSince1970: TimeInterval(json["deviceTime"] as? Int ?? 0))
+        
+        deviceDate = Date.init(timeIntervalSince1970: TimeInterval(json["deviceTime"] as? Int ?? 0))
+        
+        if let lbsTimestamp = json["lbsTimestamp"] as? Int64 {
+            self.lbsTimestamp = lbsTimestamp
+        } else {
+            lbsTimestamp = 0
+        }
     }
     
     init(_ cdPetDeviceData: CDPetDeviceData) {
@@ -378,6 +386,7 @@ extension DeviceData {
         satelliteSignal = cdPetDeviceData.satSignal
         deviceTime = cdPetDeviceData.deviceTime
         deviceDate = Date.init(timeIntervalSince1970: TimeInterval(cdPetDeviceData.deviceTime))
+        lbsTimestamp = cdPetDeviceData.lbsTimestamp
     }
 }
 
@@ -680,29 +689,3 @@ extension Event {
     }
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

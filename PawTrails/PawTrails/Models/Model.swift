@@ -217,6 +217,7 @@ struct DeviceData {
     var satelliteSignal: Int16
     var deviceDate: Date
     var deviceTime: Int64
+    var lbsTimestamp: Int64
 }
 
 struct DeviceConnection {
