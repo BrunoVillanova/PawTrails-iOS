@@ -3,6 +3,7 @@
 //  PawTrails
 //
 //  Created by Marc Perello on 02/11/2017.
+//  Modified by Bruno Villanova on 02/20/2018.
 //  Copyright © 2017 AttitudeTech. All rights reserved.
 //
 
@@ -12,16 +13,47 @@ import MapKit
 
 
 class SafeZoneViewController: UIViewController, IndicatorInfoProvider, PetView {
+    
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var addButton: UIButton!
+    
     var pet: Pet!
+    
     fileprivate let presenter = PetPresenter()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        loadAllData()
+        tableView.tableFooterView = UIView()
+        tableView.backgroundColor = .clear
 
-
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.estimatedRowHeight = 450
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        presenter.attachView(self, pet:pet)
+        
+        if !pet.isOwner {
+            addButton.isHidden = true
+        } else {
+            self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 80, 0)
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.presenter.getPet(with: self.pet.id)
+    }
+    
+    deinit {
+        presenter.deteachView()
+    }
+    
     @IBAction func addButton(_ sender: Any) {
         
         guard let pet = self.pet else {return}
         guard let petName = pet.name else {return}
-
+        
         
         if !pet.isOwner {
             self.alert(title: "", msg: "Only \(petName) owner can add a safezone. ", type: .blue, disableTime: 5, handler: nil)
@@ -35,22 +67,6 @@ class SafeZoneViewController: UIViewController, IndicatorInfoProvider, PetView {
         }
     }
     
-    @IBOutlet weak var tableView: UITableView!
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        loadAllData()
-        tableView.tableFooterView = UIView()
-
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 80, 0)
-        self.tableView.estimatedRowHeight = 450
-        self.tableView.rowHeight = UITableViewAutomaticDimension
-        presenter.attachView(self, pet:pet)
-   
-    }
-    
     func loadAllData() {
         if let pet = pet {
             load(pet)
@@ -58,19 +74,9 @@ class SafeZoneViewController: UIViewController, IndicatorInfoProvider, PetView {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-            self.presenter.getPet(with: self.pet.id)
-    }
-    
-    
-    deinit {
-        presenter.deteachView()
-    }
-
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "SafeZones")
     }
-    
     
     func reloadPetInfo() {
         presenter.loadPet(with: pet.id)
@@ -100,10 +106,6 @@ class SafeZoneViewController: UIViewController, IndicatorInfoProvider, PetView {
     func loadUsers() {
 
     }
-    
-    
-    
-  
     
     func loadSafeZones() {
         pet.safezones = presenter.safezones
@@ -179,6 +181,7 @@ class SafeZoneViewController: UIViewController, IndicatorInfoProvider, PetView {
             handler(nil)
         }
     }
+    
     func load(locationAndTime: String){
 //        self.locationLabel.text = locationAndTime
     }
@@ -186,15 +189,13 @@ class SafeZoneViewController: UIViewController, IndicatorInfoProvider, PetView {
     func load(data: GPSData){
     }
 
-
 }
 
-extension SafeZoneViewController:UITableViewDelegate, UITableViewDataSource  {
+extension SafeZoneViewController: UITableViewDelegate, UITableViewDataSource  {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter.safezones.count
     }
-    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
@@ -205,40 +206,23 @@ extension SafeZoneViewController:UITableViewDelegate, UITableViewDataSource  {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SafeZoneCell
         let safezone = presenter.safezones[indexPath.row]
-        cell.safeZoneName.text = safezone.name
-        if safezone.image == 0 {
-            cell.iconeImage.image = UIImage(named: Icons.zero.rawValue)
-        } else if safezone.image == 1{
-            cell.iconeImage.image = UIImage(named: Icons.one.rawValue)
-        }else if safezone.image == 2 {
-            cell.iconeImage.image = UIImage(named: Icons.two.rawValue)
-
-        }else if safezone.image == 3 {
-            cell.iconeImage.image = UIImage(named: Icons.three.rawValue)
-
-        }else if safezone.image == 4 {
-            cell.iconeImage.image = UIImage(named: Icons.four.rawValue)
-
-        }else if safezone.image == 5{
-            cell.iconeImage.image = UIImage(named: Icons.five.rawValue)
-        }
-        cell.safeZoneImage.backgroundColor = UIColor.red.withAlphaComponent(0.5)
-        cell.switcher.isOn = safezone.active
+        
+        cell.configure(safezone)
+        
+        cell.switcher.isEnabled = pet.isOwner
         cell.switcher.tag = indexPath.row
         cell.switcher.addTarget(self, action: #selector(changeSwitchAction(sender:)), for: UIControlEvents.valueChanged)
-        if let preview = safezone.preview {
-            cell.safeZoneImage.image = UIImage(data: preview as Data)
-        }else{
-            cell.safeZoneImage.backgroundColor = UIColor.lightGray.withAlphaComponent(0.6)
-        }
+        
         return cell
-
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        present(presenter.safezones[indexPath.row])
+        if pet.isOwner {
+            present(presenter.safezones[indexPath.row])
+        }
     }
     
     func present(_ safezone: SafeZone?) {
@@ -249,8 +233,6 @@ extension SafeZoneViewController:UITableViewDelegate, UITableViewDataSource  {
             navigationController?.pushViewController(vc, animated: true)
         }
     }
-    
-
     
     func changeSwitchAction(sender: UISwitch){
         let safezone = presenter.safezones[sender.tag]
@@ -267,21 +249,66 @@ extension SafeZoneViewController:UITableViewDelegate, UITableViewDataSource  {
 
 }
 
-
-
 class SafeZoneCell: UITableViewCell {
+    
+    @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var safeZoneImage: UIImageView!
     @IBOutlet weak var iconeImage: UIImageView!
     @IBOutlet weak var safeZoneName: UILabel!
     @IBOutlet weak var switcher: UISwitch!
+    
+    override func awakeFromNib() {
+        configureLayout()
+    }
+    
+    fileprivate func configureLayout() {
+        self.selectionStyle = .none
+        mainView.layer.borderColor = PTConstants.colors.lightGray.cgColor
+        mainView.layer.borderWidth = 1
+        mainView.layer.cornerRadius = 5
+        mainView.layer.shadowColor = UIColor.black.cgColor
+        mainView.layer.shadowRadius = 4.0
+        mainView.layer.shadowOpacity = 0.1
+        mainView.layer.shadowOffset = CGSize.zero
+        mainView.layer.masksToBounds = true
+    }
+    
+    func configure(_ safezone: SafeZone) {
+        safeZoneName.text = safezone.name
+        
+        if let iconImage = Icons(rawValue: safezone.image) {
+            iconeImage.image = UIImage(named: iconImage.name)
+        }
+        
+        safeZoneImage.backgroundColor = UIColor.red.withAlphaComponent(0.5)
+        switcher.isOn = safezone.active
+
+        if let preview = safezone.preview {
+            safeZoneImage.image = UIImage(data: preview as Data)
+        } else{
+            safeZoneImage.backgroundColor = UIColor.lightGray.withAlphaComponent(0.6)
+        }
+    }
 }
 
-enum Icons: String {
-    case zero = "buildings-dark-1x"
-    case one = "fountain-dark-1x"
-    case two = "girl-and-boy-dark-1x"
-    case three = "home-dark-1x"
-    case four = "palm-tree-shape-dark-1x"
-    case five = "park-dark-1x"
+enum Icons: Int16 {
+    
+    case buildings = 0
+    case fountain = 1
+    case girlAndBoy = 2
+    case home = 3
+    case palmTree = 4
+    case parkDark = 5
+    
+    var name: String {
+        switch self {
+            case .buildings: return "buildings-dark-1x"
+            case .fountain: return "fountain-dark-1x"
+            case .girlAndBoy: return "girl-and-boy-dark-1x"
+            case .home: return "home-dark-1x"
+            case .palmTree: return "palm-tree-shape-dark-1x"
+            case .parkDark: return "park-dark-1x"
+        }
+    }
 }
 
