@@ -204,14 +204,12 @@
     @IBOutlet weak var deviceStatusView: PTDeviceStatusView!
     @IBOutlet weak var subtitleLabel: UILabel!
     
-    
     var currentPet: Pet?
     var disposable: Disposable?
     
     fileprivate let disposeBag = DisposeBag()
     
-    override func prepareForReuse() {
-        disposable?.dispose()
+    fileprivate func resetContent() {
         currentPet = nil
         titleLabel.text = nil
         petImageView.image = nil
@@ -220,7 +218,13 @@
     }
     
     func configure(_ pet: Pet) {
+        
+        disposable?.dispose()
+        
         DispatchQueue.main.async {
+            
+            self.resetContent()
+            
             self.currentPet = pet
             self.titleLabel.text = pet.name
             
