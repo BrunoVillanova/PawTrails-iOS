@@ -375,10 +375,7 @@ class TripDetailsCell: UICollectionViewCell {
             self.petName.text = petName
         }
         
-        if let imageData = trip.pet.image {
-            self.balloonImageView.image = UIImage(data: imageData)
-        }
-        
+        self.balloonImageView.imageUrl = trip.pet.imageURL
         
         // Set defaults
         var tripTotalDistanceText = "0 km"
