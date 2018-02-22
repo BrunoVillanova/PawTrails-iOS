@@ -185,14 +185,22 @@ class CDRepository {
             
             if let cdPet = object as? CDPetDeviceData {
                 let deviceData = petDeviceData.deviceData
-                cdPet.battery = deviceData.battery
-                cdPet.crs = deviceData.crs
-                cdPet.deviceTime = deviceData.deviceTime
-                cdPet.latitude = deviceData.point.latitude
-                cdPet.longitude = deviceData.point.longitude
-                cdPet.netSignal = deviceData.internetSignal
-                cdPet.satSignal = deviceData.satelliteSignal
-                cdPet.speed = deviceData.speed
+                cdPet.battery = deviceData.batteryLevel
+                
+                if let deviceTime = deviceData.deviceTime {
+                    cdPet.deviceTime = deviceTime
+                }
+                
+                if let point = deviceData.point {
+                    cdPet.latitude = point.latitude
+                    cdPet.longitude = point.longitude
+                }
+                
+                cdPet.netSignal =  deviceData.networkLevel
+                
+                if let speed = deviceData.speed {
+                    cdPet.speed = speed
+                }
                 
                 CoreDataManager.instance.save(callback: { (error) in
                     if let error = error {

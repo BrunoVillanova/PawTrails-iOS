@@ -336,54 +336,74 @@ extension DeviceData {
     
     init() {
         id = 0
-        crs = 0.0
-        point = Point()
-        speed = 0.0
-        battery = 0
-        internetSignal = 100
-        satelliteSignal = 100
-        deviceTime = 0
-        deviceDate = Date()
+        point = nil
+        speed = nil
+        deviceTime = nil
+        deviceDate = nil
         lbsTimestamp = 0
+        batteryLevel = 0
+        networkLevel = 0
     }
     
     init(_ json: [String:Any]) {
-        id = json["idpos"] != nil ? json["idpos"] as! Int : 0
         
-        if let crs = json["crs"] as? Float {
-            self.crs = crs
+        if let idPos = json["idpos"] as? Int {
+            self.id = idPos
         } else {
-            self.crs = 0
-        }
-        point = Point(json["lat"] as! Double , json["lon"] as! Double)
-        speed = json["speed"] as! Float
-        battery = json["battery"] as! Int16
-        internetSignal = json["netSignal"] as? Int16 ?? 0
-        satelliteSignal = json["satSignal"] as? Int16 ?? 0
-        
-        if let deviceTime = json["deviceTime"] as? Int64 {
-            self.deviceTime = deviceTime
-        } else {
-            deviceTime = 0
+            self.id = 0
         }
         
-        deviceDate = Date.init(timeIntervalSince1970: TimeInterval(json["deviceTime"] as? Int ?? 0))
+        // LBS Data
         
         if let lbsTimestamp = json["lbsTimestamp"] as? Int64 {
             self.lbsTimestamp = lbsTimestamp
         } else {
-            lbsTimestamp = 0
+            self.lbsTimestamp = 0
+        }
+        
+        if let batteryLevel = json["battery"] as? Int16 {
+            self.batteryLevel = batteryLevel
+        } else {
+            self.batteryLevel = 0
+        }
+        
+        if let networkLevel = json["netSignal"] as? Int16 {
+            self.networkLevel = networkLevel
+        } else {
+            self.networkLevel = 0
+        }
+        
+        // Position Data
+        
+        if let deviceTime = json["deviceTime"] as? Int64 {
+            self.deviceTime = deviceTime
+            self.deviceDate = Date.init(timeIntervalSince1970: TimeInterval(deviceTime))
+        } else {
+            self.deviceTime = nil
+            self.deviceDate = nil
+        }
+        
+        if let speed = json["speed"] as? Float {
+            self.speed = speed
+        } else {
+            self.speed = nil
+        }
+        
+        if let lat = json["lat"] as? Double, let lon = json["lon"] as? Double {
+            self.point = Point(lat, lon)
+        } else {
+            self.point = nil
         }
     }
     
     init(_ cdPetDeviceData: CDPetDeviceData) {
         id = Int(cdPetDeviceData.id)
-        crs = cdPetDeviceData.crs
+        
         point = Point(cdPetDeviceData.latitude, cdPetDeviceData.longitude)
         speed = cdPetDeviceData.speed
-        battery = Int16(cdPetDeviceData.battery)
-        internetSignal = cdPetDeviceData.netSignal
-        satelliteSignal = cdPetDeviceData.satSignal
+        batteryLevel = Int16(cdPetDeviceData.battery)
+        networkLevel = cdPetDeviceData.netSignal
+        
         deviceTime = cdPetDeviceData.deviceTime
         deviceDate = Date.init(timeIntervalSince1970: TimeInterval(cdPetDeviceData.deviceTime))
         lbsTimestamp = cdPetDeviceData.lbsTimestamp

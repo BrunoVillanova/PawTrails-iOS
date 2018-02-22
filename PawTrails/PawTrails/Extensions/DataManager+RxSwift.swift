@@ -117,7 +117,11 @@ extension DataManager {
             
             if filtered.count > 0 {
                 let sorted = filtered.sorted(by: { (elem1, elem2) -> Bool in
-                    return elem1.deviceData.deviceTime > elem2.deviceData.deviceTime
+                    if let deviceTime1 = elem1.deviceData.deviceTime, let deviceTime2 = elem2.deviceData.deviceTime {
+                        return deviceTime1 > deviceTime2
+                    } else {
+                        return elem1.deviceData.id > elem2.deviceData.id
+                    }
                 })
                 return sorted.first
             }

@@ -83,11 +83,11 @@ class PTDeviceStatusView: UIView {
             connectionStatusView?.isHidden = true
             signalView?.alpha = 1
             signalView?.isHidden = false
-            signalView?.setSignal(petDeviceData.deviceData.internetSignal, animated: animated)
+            signalView?.setSignal(petDeviceData.deviceData.networkLevel, animated: animated)
             
             batteryView?.alpha = 1
             batteryView?.isHidden = false
-            batteryView?.setBatteryLevel(petDeviceData.deviceData.battery, animated: animated)
+            batteryView?.setBatteryLevel(petDeviceData.deviceData.batteryLevel, animated: animated)
         }
 
 //        UIView.animate(withDuration: 2.0) {

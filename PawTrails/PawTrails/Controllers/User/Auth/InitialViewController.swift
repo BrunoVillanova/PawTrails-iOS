@@ -26,6 +26,8 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        SocketIOManager.instance.disconnect()
+        
         emailTextField.setLeftPaddingPoints(5)
         passwordTextField.setLeftPaddingPoints(5)
         

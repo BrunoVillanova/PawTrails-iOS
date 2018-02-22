@@ -339,14 +339,14 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     /// - Parameter callback: returns socket IO connection status
     func connect(_ callback: ((SocketIOStatus)->())? = nil) {
         
-        guard !self.isConnecting else {
-            return
-        }
-        
+//        guard !self.isConnecting else {
+//            return
+//        }
+
         guard !self.isConnected else {
             return
         }
-        
+
         guard !self.isAuthenticating else {
             return
         }
