@@ -81,7 +81,7 @@ extension BSC4ViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.item == 0 {
+        if indexPath.item == 1 {
             let cell = collectionView.cellForItem(at: indexPath) as! questionCells
             self.bscScroe = "BCS 4"
             self.weight = "Overweight"

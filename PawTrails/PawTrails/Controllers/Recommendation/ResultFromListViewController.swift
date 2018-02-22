@@ -22,8 +22,8 @@ class ResultFromListViewController: UIViewController {
     
     
     let idealColor = UIColor(red: 112/255, green: 163/255, blue: 8/255, alpha: 1)
-    let obseAndVeryThinColor = UIColor(red: 213/255, green: 0/255, blue: 0/255, alpha: 1)
-    let threeColor = UIColor(red: 247/255, green: 101/255, blue: 0/255, alpha: 1)
+    let obseAndVeryThinColor = UIColor(red: 212/255, green: 20/255, blue: 61/255, alpha: 1)
+    let threeColor = UIColor(red: 212/255, green: 20/255, blue: 61/255, alpha: 1)
 
     
     
@@ -100,9 +100,7 @@ class ResultFromListViewController: UIViewController {
             
             \u{2022}  Cut back on the food amounts your dog is eating
             
-            \u{2022}  Introduce exercise gradually if your dog is not fit
-            
-            \u{2022}  It takes a few months for a dog to lose noticeable weight so don't try to rush it too much
+            \u{2022}  Introduce exercise gradually if your dog is not fit. Start with a brisk walk of 10 to 15 minutes two or three times a day.It takes a few months for a dog to lose noticeable weight so don't try to rush it too much.
             """
             
             self.textView.textColor = UIColor.gray

@@ -125,12 +125,13 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
     //MARK: - AddEditPetViewi l
     
     func loadPet() {
-        if let imageData = presenter.imageData {
-            petImageView.image = UIImage(data: imageData)
-        }else if let imageData = presenter.pet.image {
-            petImageView.image = UIImage(data: imageData)
-        }
         
+        if let imageUrl = presenter.pet.imageURL {
+            petImageView.sd_setImage(with: URL(string: imageUrl), placeholderImage: #imageLiteral(resourceName: "PetPlaceholderImage"), options: [.continueInBackground])
+        } else {
+            petImageView.image = nil
+        }
+
         if presenter.pet.size == 0 {
             self.sizeLbl.text = "Small"
             

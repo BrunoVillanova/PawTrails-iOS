@@ -176,9 +176,7 @@ class ResultViewController: UIViewController {
             
             \u{2022}  Cut back on the food amounts your dog is eating
             
-            \u{2022}  Introduce exercise gradually if your dog is not fit
-            
-            \u{2022}  It takes a few months for a dog to lose noticeable weight so don't try to rush it too much
+            \u{2022}  Introduce exercise gradually if your dog is not fit. Start with a brisk walk of 10 to 15 minutes two or three times a day.It takes a few months for a dog to lose noticeable weight so don't try to rush it too much.
             """
             
             self.reccomTextView.textColor = UIColor.gray
