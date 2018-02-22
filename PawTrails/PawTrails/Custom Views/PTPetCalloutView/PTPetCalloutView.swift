@@ -59,21 +59,23 @@ class PTPetCalloutView: UIView {
         }
         
         if let deviceData = annotation.petDeviceData?.deviceData, let addressLabel = addressLabel {
-            batteryView?.setBatteryLevel(deviceData.battery)
+            batteryView?.setBatteryLevel(deviceData.batteryLevel)
             
-            addressLabel.text = "Getting address..."
-            deviceData.point.getFullFormatedAddress(handler: {
-                (address, error) in
-                
-                if error == nil, let address = address {
-                    addressLabel.text = address.uppercased()
-                    addressLabel.sizeToFit()
-                    var frame = self.frame
-                    frame.size.height = addressLabel.frame.origin.y + addressLabel.frame.size.height
-                    self.frame = frame
-                }
-
-            })
+            if let point = deviceData.point {
+                addressLabel.text = "Getting address..."
+                point.getFullFormatedAddress(handler: {
+                    (address, error) in
+                    
+                    if error == nil, let address = address {
+                        addressLabel.text = address.uppercased()
+                        addressLabel.sizeToFit()
+                        var frame = self.frame
+                        frame.size.height = addressLabel.frame.origin.y + addressLabel.frame.size.height
+                        self.frame = frame
+                    }
+                    
+                })
+            }
         }
     }
 }

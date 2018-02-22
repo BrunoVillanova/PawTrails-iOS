@@ -164,10 +164,12 @@ class PTMapView: MKMapView {
                 if self.activeTripsPetIDs.contains(petDeviceData.pet.id) && tripMode {
                     let id = MKLocationId(id: Int(petDeviceData.pet.id), type: .pet)
                     if self.myAnnotations[id] != nil {
-                        let newAnnotation = PTAnnotation(petDeviceData.deviceData.point.coordinates)
-                        self.myAnnotations[id]?.append(newAnnotation)
-                        self.drawOverlayForPetAnnotations(self.myAnnotations[id])
-                        self.focusOnPet(petDeviceData.pet)
+                        if let point = petDeviceData.deviceData.point {
+                            let newAnnotation = PTAnnotation(point.coordinates)
+                            self.myAnnotations[id]?.append(newAnnotation)
+                            self.drawOverlayForPetAnnotations(self.myAnnotations[id])
+                            self.focusOnPet(petDeviceData.pet)
+                        }
                     }
                 }
                 
@@ -393,13 +395,19 @@ class MKLocation: MKPointAnnotation {
         self.color = color
         super.init()
         self.coordinate = coordinate
-        
     }
     
     convenience init(_ petDeviceData: PetDeviceData, color: UIColor = UIColor.primary) {
-        let coordinate = petDeviceData.deviceData.point.coordinates
-        let id = MKLocationId(id:petDeviceData.pet.id, type: .pet)
-        self.init(id: id, coordinate: coordinate, color: color)
+        
+        let id = MKLocationId(id: petDeviceData.pet.id, type: .pet)
+        
+        if let point = petDeviceData.deviceData.point {
+            let coordinate = point.coordinates
+            self.init(id: id, coordinate: coordinate, color: color)
+        } else {
+            self.init(id: id, coordinate: CLLocationCoordinate2D(), color: color)
+        }
+
         self.petDeviceData = petDeviceData
     }
     
@@ -417,8 +425,13 @@ class PTAnnotation: NSObject, MKAnnotation {
     }
     
     convenience init(_ petDeviceData: PetDeviceData) {
-        let coordinate = petDeviceData.deviceData.point.coordinates
-        self.init(coordinate)
+        
+        if let point = petDeviceData.deviceData.point {
+            self.init(point.coordinates)
+        } else {
+            self.init(CLLocationCoordinate2D())
+        }
+        
         self.petDeviceData = petDeviceData
     }
     

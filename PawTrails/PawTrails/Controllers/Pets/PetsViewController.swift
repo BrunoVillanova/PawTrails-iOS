@@ -239,16 +239,20 @@
             self.disposable = DataManager.instance.petDeviceData(pet.id, gpsMode: .smart).subscribe(onNext: {[weak self] (petDeviceData) in
                 if let petDeviceData = petDeviceData, let pet = self?.currentPet, petDeviceData.pet.id == pet.id {
                     self?.deviceStatusView.configure(petDeviceData, animated: true)
-                    self?.subtitleLabel.text = "Getting Address..."
-                    petDeviceData.deviceData.point.getFullFormatedAddress(handler: {[weak self] (address, error) in
                     
-                        if error != nil {
-                            self?.subtitleLabel.text = ""
-                        } else {
-                            self?.subtitleLabel.text = address
-                        }
-        
-                    })
+                    if let point = petDeviceData.deviceData.point {
+                        self?.subtitleLabel.text = "Getting Address..."
+                        point.getFullFormatedAddress(handler: {[weak self] (address, error) in
+                            
+                            if error != nil {
+                                self?.subtitleLabel.text = ""
+                            } else {
+                                self?.subtitleLabel.text = address
+                            }
+                            
+                        })
+                    }
+                    
                 }
             })
         }

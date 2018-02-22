@@ -209,15 +209,14 @@ extension PetUser: Equatable {
 
 struct DeviceData {
     var id: Int
-    var crs: Float
-    var point: Point
-    var speed: Float
-    var battery: Int16
-    var internetSignal: Int16
-    var satelliteSignal: Int16
-    var deviceDate: Date
-    var deviceTime: Int64
+    var point: Point?
+    var speed: Float?
+    var deviceTime: Int64?
+    var deviceDate: Date?
+    // LBS data
     var lbsTimestamp: Int64
+    var batteryLevel: Int16
+    var networkLevel: Int16
 }
 
 struct DeviceConnection {
