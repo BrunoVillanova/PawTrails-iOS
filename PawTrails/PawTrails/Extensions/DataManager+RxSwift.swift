@@ -108,6 +108,28 @@ extension DataManager {
             })
     }
     
+    func lastPetDeviceData(_ pet: Pet, gpsMode: GPSTimeIntervalMode) -> Observable<PetDeviceData?> {
+        return allPetDeviceData(gpsMode).map({ (petDeviceDataList) -> PetDeviceData? in
+            
+            let filtered = petDeviceDataList.filter({ (element) -> Bool in
+                return element.pet.id == pet.id
+            })
+            
+            if filtered.count > 0 {
+                let sorted = filtered.sorted(by: { (elem1, elem2) -> Bool in
+                    if let deviceTime1 = elem1.deviceData.deviceTime, let deviceTime2 = elem2.deviceData.deviceTime {
+                        return deviceTime1 > deviceTime2
+                    } else {
+                        return elem1.deviceData.id > elem2.deviceData.id
+                    }
+                })
+                return sorted.first
+            }
+            
+            return nil
+        }).share()
+    }
+    
     func lastPetDeviceData(_ pet: Pet) -> Observable<PetDeviceData?> {
         return allPetDeviceData(.smart).map({ (petDeviceDataList) -> PetDeviceData? in
             

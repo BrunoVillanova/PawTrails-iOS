@@ -38,9 +38,9 @@ class GettingLocationViewController: UIViewController {
         
 
         if let pet = pet {
-            DataManager.instance.lastPetDeviceData(pet)
+            DataManager.instance.lastPetDeviceData(pet, gpsMode: .live)
                 .subscribe(onNext: { (petDeviceData) in
-                    if petDeviceData != nil {
+                    if let point = petDeviceData?.deviceData.point, point.latitude != 0 && point.longitude != 0 {
                         self.goToSuccessViewController()
                     }
                 }).disposed(by: disposeBag)
