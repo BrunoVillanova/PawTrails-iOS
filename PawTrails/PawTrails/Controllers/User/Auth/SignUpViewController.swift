@@ -26,25 +26,34 @@ class SignUpViewController: UIViewController, InitialView {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        initialize()
+    }
+    
+    fileprivate func initialize() {
+        presenter.attachView(self)
+        configureLayout()
+        #if DEBUG
+        emailTextField.text = "pttest1@mailinator.com"
+        passwordTextField.text = "Trails111"
+        confirmPasswordTextField.text = passwordTextField.text
+        #endif
+    }
+    
+    fileprivate func configureLayout() {
         emailTextField.setLeftPaddingPoints(5)
         passwordTextField.setLeftPaddingPoints(5)
         confirmPasswordTextField.setLeftPaddingPoints(5)
-        presenter.attachView(self)
+        
         emailTextField.layer.borderWidth = 0.5
         passwordTextField.layer.borderWidth = 0.5
         confirmPasswordTextField.layer.borderWidth = 0.5
-
         
         let myColor = UIColor.groupTableViewBackground
         emailTextField.layer.borderColor = myColor.cgColor
         passwordTextField.layer.borderColor = myColor.cgColor
         confirmPasswordTextField.layer.borderColor = myColor.cgColor
         
-        
         signUpButton.fullyroundedCorner()
-
-
     }
     
     
