@@ -43,6 +43,11 @@ class MapViewController: UIViewController {
         button.setImage(UIImage(named: "refresh-button"), for: .normal)
         self.navigationItem.rightBarButtonItem?.customView = button
 //        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.red
+        
+        
+        let notificationIdentifier: String = "petAdded"
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadPets), name: NSNotification.Name(rawValue: notificationIdentifier), object: nil)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

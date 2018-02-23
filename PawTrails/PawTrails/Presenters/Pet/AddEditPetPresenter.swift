@@ -42,6 +42,9 @@ class AddEditPetPresenter {
     
     func set(image data:Data?){
         imageData = data
+        if let imageData = data {
+            pet.image = imageData
+        }
     }
     
     func refresh(){
@@ -50,14 +53,14 @@ class AddEditPetPresenter {
     
     func done(){
         if editMode, imageData != nil {
-            saveImatge(petId: pet.id)
+            uploadImage(petId: pet.id)
         }else{
             save()
             
         }
     }
     
-    private func saveImatge(petId:Int){
+    private func uploadImage(petId:Int){
         
         if let imageData = imageData {
             
@@ -94,15 +97,14 @@ class AddEditPetPresenter {
             
         }else{
             DataManager.instance.register(pet, callback: { (error, pet) in
+                
                 if let error = error {
                     self.view?.endLoadingContent()
                     self.view?.errorMessage(error.msg)
                 }else if self.imageData != nil, let pet = pet {
                     self.savedPet = pet
-                    self.view?.endLoadingContent()
-                    self.view?.doneSuccessfully()
+                    self.uploadImage(petId: pet.id)
                 }else{
-                    
                     self.view?.endLoadingContent()
                     self.view?.doneSuccessfully()
                 }

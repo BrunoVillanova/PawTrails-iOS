@@ -63,6 +63,17 @@ struct CountryCode {
 }
 
 //MARK:- Pet
+enum PetSize: Int16 {
+    case small, medium, large
+    
+    var description: String {
+        switch self {
+            case .small: return "Small"
+            case .medium: return "Medium"
+            case .large: return "Large"
+        }
+    }
+}
 
 struct Pet {
     var id: Int
@@ -78,7 +89,7 @@ struct Pet {
     var neutered: Bool
     var weight: Double?
     var bcScore: Int
-    var size: Int
+    var size: PetSize?
 
     var safezones: [SafeZone]?
     var users: [PetUser]?
@@ -151,16 +162,8 @@ enum status: Int {
     
 }
 
-
-
 struct PetType {
     var type: Type?
-    var description: String?
-}
-
-
-struct PetSize {
-    var size: Size?
     var description: String?
 }
 
@@ -334,46 +337,6 @@ enum Type: Int16 {
     }
 }
 
-
-enum Size: Int16 {
-    
-    case small = 0
-    case medium = 1
-    case large = 2
-    
-    static func count() -> Int {
-        return 3
-    }
-    
-    var name:String {
-        switch self {
-        case .small: return "Small"
-        case .medium: return "Medium"
-        case .large: return "Large"
-        }
-    }
-    
-    var code:String {
-        switch self {
-        case .small: return "Small"
-        case .medium: return "Medium"
-        case .large: return "Large"
-        }
-    }
-    
-    static func build(code:String?)  -> Size? {
-        if let code = code {
-            switch code {
-            case "Small": return Size.small
-            case "Medium": return Size.medium
-            case "Large": return Size.large
-            default: return Size.small
-            }
-        }else{
-            return nil
-        }
-    }
-}
 
 enum Shape: Int16 {
     case circle = 2

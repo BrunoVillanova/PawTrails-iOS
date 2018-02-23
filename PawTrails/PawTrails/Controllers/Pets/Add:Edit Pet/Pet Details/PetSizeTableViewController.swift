@@ -21,27 +21,32 @@ class PetSizeTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let size = parentEditor.pet.size
-            if size == 0 {
-                smallCell.accessoryType = .checkmark
-            } else if size == 1 {
-                mediumCell.accessoryType = .checkmark
-            } else if size == 2 {
-                largeCell.accessoryType = .checkmark
+        if let size = parentEditor.pet.size {
+            switch size {
+                case .small:
+                    smallCell.accessoryType = .checkmark
+                    break
+                case .medium:
+                    mediumCell.accessoryType = .checkmark
+                    break
+                case .large:
+                    largeCell.accessoryType = .checkmark
+                    break
             }
+        }
     }
 
     
  
     @IBAction func doneAction(_ sender: Any) {
-        var size: Int?
+        var size: PetSize?
         
         if smallCell.accessoryType == .checkmark {
-            size = 0
+            size = .small
         } else if mediumCell.accessoryType == .checkmark {
-            size = 1
+            size = .medium
         }else if largeCell.accessoryType == .checkmark {
-            size = 2
+            size = .large
         }
         
         if let size = size {

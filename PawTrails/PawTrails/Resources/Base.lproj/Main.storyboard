@@ -595,7 +595,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="130" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="q8V-d2-K1W">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="505"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -1239,7 +1239,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <view key="tableFooterView" contentMode="scaleToFill" misplaced="YES" id="oQC-mM-GWi">
+                        <view key="tableFooterView" contentMode="scaleToFill" id="oQC-mM-GWi">
                             <rect key="frame" x="0.0" y="456" width="375" height="73"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -3043,7 +3043,7 @@ PawTrails is a product created by Attitude Technologies.
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="1Jf-yW-D69">
+                        <view key="tableFooterView" contentMode="scaleToFill" id="1Jf-yW-D69" userLabel="Remove Pet View">
                             <rect key="frame" x="0.0" y="465" width="375" height="117"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
@@ -3367,6 +3367,7 @@ PawTrails is a product created by Attitude Technologies.
                         <outlet property="neuteredSwitch" destination="z8v-J1-4fr" id="KAh-ZJ-hqc"/>
                         <outlet property="petImageView" destination="Gfh-gH-drR" id="Rxn-tx-mKX"/>
                         <outlet property="removePetButton" destination="YQt-T7-pm6" id="cmo-58-sYY"/>
+                        <outlet property="removePetView" destination="1Jf-yW-D69" id="gWE-k9-2dq"/>
                         <outlet property="sizeLbl" destination="7AG-49-W1j" id="wbp-5R-Crh"/>
                         <outlet property="typeLabel" destination="Cmh-fj-Ot9" id="HMR-oA-rzj"/>
                         <outlet property="weightLabel" destination="0rq-aT-GEU" id="nne-ds-frA"/>
@@ -5327,7 +5328,7 @@ PawTrails is a product created by Attitude Technologies.
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="87H-9f-BBS">
-                                                    <rect key="frame" x="255" y="8" width="90" height="84"/>
+                                                    <rect key="frame" x="142.5" y="8" width="90" height="84"/>
                                                     <color key="backgroundColor" red="0.99932557339999994" green="0.63401025529999999" blue="0.2850541472" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="90" id="GWg-aQ-hKi"/>
@@ -5426,7 +5427,7 @@ PawTrails is a product created by Attitude Technologies.
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xYN-AW-Xgb">
-                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>

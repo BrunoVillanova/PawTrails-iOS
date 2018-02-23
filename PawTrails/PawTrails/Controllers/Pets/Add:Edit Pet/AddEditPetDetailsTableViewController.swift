@@ -24,16 +24,20 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
     @IBOutlet weak var birthdayLabel: UILabel!
     @IBOutlet weak var weightLabel: UILabel!
     @IBOutlet weak var neuteredSwitch: UISwitch!
-    
     @IBOutlet weak var sizeLbl: UILabel!
+    @IBOutlet weak var removePetView: UIView!
+    
     fileprivate let imagePicker = UIImagePickerController()
     fileprivate let presenter = AddEditPetPresenter()
     
     var deviceCode: String!
     var pet: Pet?
+    var editingMode = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        editingMode = (pet != nil)
         
         if pet != nil {
             self.changeDeviceId.isHidden = false
@@ -41,9 +45,11 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
             self.changeDeviceId.isHidden = true
         }
         
-        if let name = pet?.name {
+        if editingMode, let name = pet?.name {
             navigationItem.title = "Edit \(name)"
         }
+        
+        removePetView.isHidden = !editingMode
         imagePicker.delegate = self
         petImageView.circle()
         presenter.attachView(self, pet, deviceCode)
@@ -61,7 +67,7 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
     
     @IBAction func changeDeviceIdBtnPressed(_ sender: Any) {
         
-        QRCodeScannerViewController.authorizeCameraWith {[weak self](granted) in
+        QRCodeScannerViewController.authorizeCameraWith {[weak self] (granted) in
             if granted, let strongSelf = self {
                 let vc = QRCodeScannerViewController();
                 vc.delegate = strongSelf;
@@ -126,20 +132,14 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
     
     func loadPet() {
         
-        if let imageUrl = presenter.pet.imageURL {
+        if let petImageData = presenter.pet.image {
+            petImageView.image = UIImage(data: petImageData)
+        } else if let imageUrl = presenter.pet.imageURL {
             petImageView.sd_setImage(with: URL(string: imageUrl), placeholderImage: #imageLiteral(resourceName: "PetPlaceholderImage"), options: [.continueInBackground])
-        } else {
-            petImageView.image = nil
         }
 
-        if presenter.pet.size == 0 {
-            self.sizeLbl.text = "Small"
-            
-        } else if presenter.pet.size == 1 {
-            self.sizeLbl.text = "Medium"
-            
-        } else if presenter.pet.size == 2 {
-            self.sizeLbl.text = "Large"
+        if let petSize = presenter.pet.size {
+            self.sizeLbl.text = petSize.description
         }
         
         
@@ -220,6 +220,7 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
 //            self.alert(title: "", msg: "Your request has been processed", type: .blue, disableTime: 3, handler: nil)
 //        }
         else{
+            loadPet()
             if let navigation = (navigationController?.viewControllers.first(where: { $0 is PetsViewController }) as? PetsViewController) {
                 navigation.reloadPets()
                 self.alert(title: "", msg: "Your request has been processed", type: .blue, disableTime: 3, handler: nil)

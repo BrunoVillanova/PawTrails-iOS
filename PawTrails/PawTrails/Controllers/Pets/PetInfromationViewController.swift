@@ -50,7 +50,11 @@ class PetInfromationViewController: UIViewController, IndicatorInfoProvider, Pet
         let nib = UINib(nibName: "SharedUsersTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "nib")
         
+        let notificationIdentifier: String = "petAdded"
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadPetInfo), name: NSNotification.Name(rawValue: notificationIdentifier), object: nil)
+        
     }
+    
     deinit {
         presenter.deteachView()
     }
@@ -153,15 +157,8 @@ extension PetInfromationViewController: UITableViewDelegate, UITableViewDataSour
             cell.weightLbl.text = pet.weightString
             cell.typeLbl.text = pet.typeString
             cell.birthDayLbl.text = pet.birthday?.toStringShow
-            
-            if pet.size == 0 {
-                cell.sizeLbl.text = "Small"
-            } else if pet.size == 1 {
-                cell.sizeLbl.text = "Medium"
-                
-            } else if pet.size == 2 {
-                cell.sizeLbl.text = "Large"
-            }
+            cell.sizeLbl.text = pet.size?.description
+        
             
             if let imageUrl = pet.imageURL {
                 cell.profileImage.sd_setImage(with: URL(string: imageUrl), placeholderImage: #imageLiteral(resourceName: "PetPlaceholderImage"), options: [.continueInBackground])

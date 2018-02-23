@@ -150,7 +150,7 @@ extension Pet {
         breeds = nil
         gender = nil
         birthday = nil
-        image = UIImagePNGRepresentation(#imageLiteral(resourceName: "PetPlaceholderImage"))
+        image = nil
         imageURL = nil
         isOwner = false
         neutered =  false
@@ -158,7 +158,7 @@ extension Pet {
         safezones = nil
         users = nil
         bcScore = 0
-        size = 0
+        size = nil
     }
     
     init(_ id: Int) {
@@ -174,7 +174,7 @@ extension Pet {
         breeds = PetBreeds(json)
         gender = Gender.build(code: json["gender"].string)
         birthday = (json["date_of_birth"].string)?.toDate
-        image = UIImagePNGRepresentation(#imageLiteral(resourceName: "PetPlaceholderImage"))
+        image = nil
         imageURL = json["img_url"].string
         isOwner = json["is_owner"].bool ?? false
         neutered = json["neutered"].bool ?? false
@@ -182,7 +182,7 @@ extension Pet {
         safezones = nil
         users = nil
         bcScore = json["bcScore"].intValue
-        size = json["size"].intValue
+        size = PetSize(rawValue: json["size"].int16Value)
     }
     
     init(_ cdPet: CDPet) {
@@ -193,7 +193,7 @@ extension Pet {
         breeds = PetBreeds(cdPet.firstBreed, cdPet.secondBreed, cdPet.breed_descr)
         gender = Gender(rawValue: cdPet.gender)
         birthday = cdPet.birthday
-        image = cdPet.image != nil ? cdPet.image : UIImagePNGRepresentation(#imageLiteral(resourceName: "PetPlaceholderImage"))
+        image = cdPet.image != nil ? cdPet.image : nil
         imageURL = cdPet.imageURL
         isOwner =  cdPet.isOwner
         neutered = cdPet.neutered
@@ -201,7 +201,7 @@ extension Pet {
         safezones = (cdPet.safezones?.allObjects as? [CDSafeZone])?.map({ SafeZone($0) })
         users = (cdPet.users?.allObjects as? [CDPetUser])?.map({ PetUser($0) })
         bcScore = Int(cdPet.bcScore)
-        size = Int(cdPet.size)
+        size = PetSize(rawValue: cdPet.size)
     }
     
     
@@ -220,7 +220,7 @@ extension Pet {
         dict["breed_descr"] = breeds?.description
         dict["weight"] = weight != 0.0 ? weight : nil
         dict["bcScore"] = bcScore == 0 ? nil : bcScore
-        dict["size"] = size == 0 ? nil : size
+        dict["size"] = size?.rawValue
         dict.filter(by: ["image", "imageURL", "birthday", "safezones", "users", "breeds", "isOwner", "deviceCode"])
         return dict
     }
