@@ -205,6 +205,8 @@
 		15C90DAE1FE36E6E008F73B3 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C90DAD1FE36E6D008F73B3 /* HockeySDK.framework */; };
 		15C90DB11FE36F56008F73B3 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C90DAF1FE36F55008F73B3 /* Fabric.framework */; };
 		15C90DB21FE36F56008F73B3 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C90DB01FE36F56008F73B3 /* Crashlytics.framework */; };
+		15E7EFA92044B020000BFCBF /* RobotoCondensed-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15E7EFA72044B005000BFCBF /* RobotoCondensed-Regular.ttf */; };
+		15E7EFAA2044B020000BFCBF /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15E7EFA82044B012000BFCBF /* Roboto-Medium.ttf */; };
 		4414AE6B1EA0DD5B004A5134 /* PawTrailsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4414AE6A1EA0DD5B004A5134 /* PawTrailsTests.swift */; };
 		4414AE781EA0DD8C004A5134 /* AuthManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4414AE731EA0DD8C004A5134 /* AuthManagerTests.swift */; };
 		4414AE7A1EA0DD8C004A5134 /* SocketIOManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4414AE751EA0DD8C004A5134 /* SocketIOManagerTest.swift */; };
@@ -461,6 +463,8 @@
 		15C90DAD1FE36E6D008F73B3 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HockeySDK.framework; path = Carthage/Build/iOS/HockeySDK.framework; sourceTree = "<group>"; };
 		15C90DAF1FE36F55008F73B3 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = Frameworks/Fabric.framework; sourceTree = "<group>"; };
 		15C90DB01FE36F56008F73B3 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = Frameworks/Crashlytics.framework; sourceTree = "<group>"; };
+		15E7EFA72044B005000BFCBF /* RobotoCondensed-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Regular.ttf"; sourceTree = "<group>"; };
+		15E7EFA82044B012000BFCBF /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		1E2B813BA9CAE948174F2C71 /* Pods_PawTrailsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PawTrailsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4414AE681EA0DD5B004A5134 /* PawTrailsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PawTrailsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4414AE6A1EA0DD5B004A5134 /* PawTrailsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PawTrailsTests.swift; sourceTree = "<group>"; };
@@ -756,6 +760,7 @@
 		15C762852016D06B002AA7F8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				15E7EFA62044AFBB000BFCBF /* Fonts */,
 				15C764212016EB41002AA7F8 /* ConfigFiles */,
 				15C7619A2016D002002AA7F8 /* Main.storyboard */,
 				15C762862016D06B002AA7F8 /* CodeScan.bundle */,
@@ -1007,6 +1012,15 @@
 				15C763A42016D5C0002AA7F8 /* RecommandationController.swift */,
 			);
 			path = Recommendation;
+			sourceTree = "<group>";
+		};
+		15E7EFA62044AFBB000BFCBF /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				15E7EFA82044B012000BFCBF /* Roboto-Medium.ttf */,
+				15E7EFA72044B005000BFCBF /* RobotoCondensed-Regular.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		4414AE691EA0DD5B004A5134 /* PawTrailsTests */ = {
@@ -1302,7 +1316,9 @@
 				15C763FD2016D5C0002AA7F8 /* ProfileCollectionViewCell.xib in Resources */,
 				15C762552016D011002AA7F8 /* BatteryLow@2x.png in Resources */,
 				15C762422016D011002AA7F8 /* SignalFull@2x.png in Resources */,
+				15E7EFAA2044B020000BFCBF /* Roboto-Medium.ttf in Resources */,
 				15C762512016D011002AA7F8 /* Battery@2x.png in Resources */,
+				15E7EFA92044B020000BFCBF /* RobotoCondensed-Regular.ttf in Resources */,
 				15C762432016D011002AA7F8 /* SignalFull@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

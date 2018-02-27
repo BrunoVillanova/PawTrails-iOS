@@ -13,6 +13,7 @@ class TripDetailViewController: UIViewController {
 
     var trip: Trip?
     let mapView = PTMapView(frame: CGRect.zero)
+    let infoViewContainer = UIView(frame: .zero)
     let infoView = PTTripInfoView(frame: CGRect.zero)
     
     override func viewDidLoad() {
@@ -34,21 +35,35 @@ class TripDetailViewController: UIViewController {
         self.extendedLayoutIncludesOpaqueBars = false
         self.view.backgroundColor = UIColor.white
         self.view.addSubview(mapView)
-        self.view.addSubview(infoView)
         
-        infoView.snp.makeConstraints { (make) in
+        infoViewContainer.backgroundColor = .white
+        self.view.addSubview(infoViewContainer)
+        infoViewContainer.addSubview(infoView)
+        
+        infoViewContainer.snp.makeConstraints { (make) in
             make.bottom.equalTo(self.view.snp.bottomMargin)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
-            make.height.equalTo(200)
+            make.height.equalTo(170)
+        }
+        
+        infoView.snp.makeConstraints { (make) in
+            make.bottom.equalToSuperview().offset(-16)
+            make.top.equalToSuperview().offset(16)
+            make.left.equalToSuperview().offset(16)
+            make.right.equalToSuperview().offset(-16)
         }
         
         mapView.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
             make.left.equalToSuperview()
             make.right.equalToSuperview()
-            make.bottom.equalTo(infoView.snp.top)
+            make.bottom.equalTo(infoViewContainer.snp.top)
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        infoViewContainer.dropShadow(color: .black, opacity: 0.3, offSet: CGSize(width: -1, height: 1), radius: 3, scale: true)
     }
     
     fileprivate func configureData() {

@@ -14,11 +14,11 @@ class PTBalloonImageView: UIImageView {
     let pictureBaseSize : CGFloat = 13.0
     var borderImageView: UIImageView?
     var pictureImageView: UIImageView?
-//    var image: UIImage? {
-//        didSet {
-//            pictureImageView?.image = image
-//        }
-//    }
+    override var image: UIImage? {
+        didSet {
+            pictureImageView?.image = image
+        }
+    }
     var imageUrl: String? {
         didSet {
             if let imageUrl = imageUrl {

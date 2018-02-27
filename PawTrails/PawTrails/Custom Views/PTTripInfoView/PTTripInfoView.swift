@@ -11,7 +11,7 @@ import UIKit
 
 class PTTripInfoView: UIView {
     
-    @IBOutlet weak var petProfilePic: UIImageView!
+    @IBOutlet weak var petProfilePic: PTBalloonImageView!
     @IBOutlet weak var petNameLabel: UILabel!
     @IBOutlet weak var totalDistanceLabel: UILabel!
     @IBOutlet weak var currentSpeedLabel: UILabel!
@@ -44,8 +44,8 @@ class PTTripInfoView: UIView {
             self.petNameLabel.text = petName
         }
         
-        if let imageData = trip.pet.image {
-            self.petProfilePic.image = UIImage(data: imageData)
+        if let imageUrl = trip.pet.imageURL {
+            self.petProfilePic.imageUrl = imageUrl
         }
         
         
