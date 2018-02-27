@@ -8,6 +8,7 @@
 
 import UIKit
 import swiftScan
+import SCLAlertView
 
 class StepOneViewController: UIViewController {
 
@@ -53,12 +54,43 @@ class StepOneViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func scanNowBtnPressed(_ sender: Any) {
+    fileprivate func showDeviceCodeAlert() {
+        
+        let title: String = "Device Code"
+        let subTitle: String = "You are in simulator, please type in the device code"
+        
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false,
+            showCircularIcon: true
+        )
+        
+        let alertView = SCLAlertView(appearance: appearance)
+        
+        let txt = alertView.addTextField("Device Code")
+        
+        alertView.addButton("Add Device") {
+            if let deviceCode = txt.text {
+                self.goToNextStep(deviceCode: deviceCode)
+            }
+        }
+        
+        alertView.showTitle(
+            title,
+            subTitle: subTitle,
+            duration: 0.0,
+            completeText: "ok",
+            style: .wait,
+            colorStyle: 0xD4143D,
+            colorTextButton: 0xFFFFFF
+        )
+    }
+    
+    fileprivate func showQrCodeScanner() {
         QRCodeScannerViewController.authorizeCameraWith {[weak self](granted) in
             if granted, let strongSelf = self {
                 let vc = QRCodeScannerViewController();
                 vc.delegate = strongSelf;
-            
+                
                 // Hide the status bar
                 strongSelf.statusBarShouldBeHidden = true
                 UIView.animate(withDuration: 0.25) {
@@ -80,6 +112,14 @@ class StepOneViewController: UIViewController {
                     
                 })
             }
+        }
+    }
+    
+    @IBAction func scanNowBtnPressed(_ sender: Any) {
+        if UIDevice().isSimulator {
+            showDeviceCodeAlert()
+        } else {
+            showQrCodeScanner()
         }
     }
     
