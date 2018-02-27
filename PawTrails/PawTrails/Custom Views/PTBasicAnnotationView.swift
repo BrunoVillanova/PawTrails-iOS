@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import SDWebImage
 
 class PTBasicAnnotationView: MKAnnotationView {
 
@@ -104,8 +105,10 @@ class PTBasicAnnotationView: MKAnnotationView {
     }
     
     func configureWithAnnotation(_ annotation: PTAnnotation) {
-        if let image = annotation.petDeviceData?.pet.image {
-            pictureImageView?.image = UIImage(data: image)
+        if let petDeviceData = annotation.petDeviceData, let imageUrl = petDeviceData.pet.imageURL {
+            pictureImageView?.sd_setImage(with: URL(string: imageUrl), placeholderImage: UIImage(named: "PetPlaceholderImage"))
+        } else {
+            pictureImageView?.image = #imageLiteral(resourceName: "PetPlaceholderImage")
         }
     }
     
