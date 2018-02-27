@@ -31,16 +31,13 @@ class SettingsViews: YNDropDownView {
     }
     
     override func dropDownViewOpened() {
-     self.changeMenu(title: "Hide SafeZone Settings", at: 0)
-        self.changeMenu(title: "Hide SafeZone Settings", at: 0)
+       self.changeMenu(title: "Hide SafeZone Settings", at: 0)
         
     }
     
     override func dropDownViewClosed() {
-//        self.changeMenu(title: "Show SafeZone Settings", at: 0)
-//        self.changeMenu(title: "Show SafeZone Settings", at: 0)
-        
-        
+        self.changeMenu(title: "Show SafeZone Settings", at: 0)
+
     }
     
     
