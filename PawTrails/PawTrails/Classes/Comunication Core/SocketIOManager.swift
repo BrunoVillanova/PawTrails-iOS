@@ -246,7 +246,6 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     
     
     func userNotSigned() {
-        //TODO: show alert prompt
         
         let title: String = "Authorization Needed"
         let subTitle: String = "Please, you need to login."
@@ -262,7 +261,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
             if let rootViewController = UIApplication.shared.keyWindow?.rootViewController, let storyboard = rootViewController.storyboard, !rootViewController.isKind(of: InitialViewController.self) {
                 
                 if let vc = storyboard.instantiateViewController(withIdentifier: "InitialViewController") as? InitialViewController {
-                    rootViewController.present(vc, animated: true, completion: nil)
+                    UIApplication.shared.keyWindow?.rootViewController = vc
                 }
             }
         }
