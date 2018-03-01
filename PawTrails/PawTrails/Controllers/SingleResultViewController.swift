@@ -102,9 +102,9 @@ extension SingleResultViewController: MKMapViewDelegate {
             annotationView?.canShowCallout = false
         }
         
-        if !(annotation is MKUserLocation) {
-            annotationView!.pictureImageView?.image = UIImage(named: "max")
-        }
+//        if !(annotation is MKUserLocation) {
+//            annotationView!.pictureImageView?.image = UIImage(named: "max")
+//        }
         
         return annotationView
 }
