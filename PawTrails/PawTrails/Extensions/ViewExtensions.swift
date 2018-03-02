@@ -483,8 +483,9 @@ extension UIView {
     }
     
     func circle() {
-        self.layer.cornerRadius = self.frame.height / 2.0
         self.clipsToBounds = true
+        self.layer.masksToBounds = true
+        self.layer.cornerRadius = self.frame.height / 2.0
     }
     
     func resetCorner() {
@@ -561,6 +562,25 @@ extension UIView {
         layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
         layer.shouldRasterize = true
         layer.rasterizationScale = scale ? UIScreen.main.scale : 1
+    }
+    
+    // Name this function in a way that makes sense to you...
+    // slideFromLeft, slideRight, slideLeftToRight, etc. are great alternative names
+    func slideInAffect(duration: TimeInterval = 1.0, completionDelegate: AnyObject? = nil, direction: String) {
+        // Create a CATransition animation
+        let slideInFromLeftTransition = CATransition()
+        // Set its callback delegate to the completionDelegate that was provided (if any)
+        if let delegate: AnyObject = completionDelegate {
+            slideInFromLeftTransition.delegate = delegate as? CAAnimationDelegate
+        }
+        // Customize the animation's properties
+        slideInFromLeftTransition.type = kCATransitionPush
+        slideInFromLeftTransition.subtype = direction
+        slideInFromLeftTransition.duration = duration
+        slideInFromLeftTransition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        slideInFromLeftTransition.fillMode = kCAFillModeRemoved
+        // Add the animation to the View's layer
+        self.layer.add(slideInFromLeftTransition, forKey: "slideInFromLeftTransition")
     }
 }
 

@@ -71,6 +71,7 @@ class TripScreenViewController: UIViewController {
         super.viewDidLoad()
         
         collectionView.delegate = self
+        self.pageControl.isHidden = true
         
         let activeTripsObservable: Observable<[Trip]> = DataManager.instance.getActivePetTrips()
         let allPetDeviceData = DataManager.instance.allPetDeviceData(.live)
@@ -93,6 +94,7 @@ class TripScreenViewController: UIViewController {
             }
             .bind(to: collectionView.rx.items(cellIdentifier: "cell", cellType: TripDetailsCell.self)) { (row, element, cell) in
                 Reporter.debugPrint("TripScreen -> Configure cell")
+                self.pageControl.isHidden = false
                 cell.configureWithTrip(element)
             }
             .disposed(by: disposeBag)

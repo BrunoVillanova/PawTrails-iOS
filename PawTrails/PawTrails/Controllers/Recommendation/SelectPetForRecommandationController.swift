@@ -180,12 +180,7 @@ extension SelectPetForRecommandationController:  UICollectionViewDataSource, UIC
         if presenter.ownedPets.isEmpty != true {
             let pet = presenter.ownedPets[indexPath.item]
             cell.petTitle.text = pet.name
-            if let imageData = pet.image as Data? {
-                cell.petImage.image = UIImage(data: imageData)
-            }else{
-                cell.petImage.image = nil
-            }
-            cell.petImage.circle()
+            cell.petImage.imageUrl = pet.imageURL
             cell.checkMarkView.isEnabled = false
             cell.checkMarkView.isUserInteractionEnabled = false
             cell.checkMarkView.setOn(false, animated: false)

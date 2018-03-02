@@ -10,7 +10,7 @@ import UIKit
 
 class UserProfileTableViewController: UITableViewController {
     
-    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var profileImageView: PTBalloonImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var genderLabel: UILabel!
@@ -81,10 +81,7 @@ extension UserProfileTableViewController: UserProfileView {
         birthdayLabel.text = user.birthday?.toStringShow
         phoneLabel.text = user.phone?.toString
         addressLabel.text = user.address?.toString
-        
-        if let imageData = user.image {
-            profileImageView.image = UIImage(data: imageData as Data)
-        }
+        profileImageView.imageUrl = user.imageURL
         tableView.reloadData()
     }
     

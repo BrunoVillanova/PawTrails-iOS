@@ -158,14 +158,7 @@ extension PetInfromationViewController: UITableViewDelegate, UITableViewDataSour
             cell.typeLbl.text = pet.typeString
             cell.birthDayLbl.text = pet.birthday?.toStringShow
             cell.sizeLbl.text = pet.size?.description
-        
-            
-            if let imageUrl = pet.imageURL {
-                cell.profileImage.sd_setImage(with: URL(string: imageUrl), placeholderImage: #imageLiteral(resourceName: "PetPlaceholderImage"), options: [.continueInBackground])
-            } else {
-                cell.profileImage.image = nil
-            }
-            
+            cell.profileImage.imageUrl = pet.imageURL
         }
         
         return cell
@@ -222,7 +215,7 @@ extension PetInfromationViewController: UICollectionViewDelegate, UICollectionVi
 }
 
 class ProfileInfoCell: UITableViewCell {
-    @IBOutlet weak var profileImage: UiimageViewWithMask!
+    @IBOutlet weak var profileImage: PTBalloonImageView!
     @IBOutlet weak var birthDayLbl: UILabel!
     @IBOutlet weak var typeLbl: UILabel!
     @IBOutlet weak var breedLbl: UILabel!

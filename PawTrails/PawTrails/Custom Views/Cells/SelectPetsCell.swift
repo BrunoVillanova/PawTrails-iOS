@@ -10,7 +10,7 @@ import UIKit
 
 
 class SelectPetsCell: UICollectionViewCell {
-    @IBOutlet weak var petImage: UIImageView!
+    @IBOutlet weak var petImage: PTBalloonImageView!
     @IBOutlet weak var petTitle: UILabel!
     @IBOutlet weak var checkMarkView: BEMCheckBox!
     
@@ -22,18 +22,10 @@ class SelectPetsCell: UICollectionViewCell {
         petTitle.text = nil
         petImage.image = nil
         checkMarkView.setOn(false, animated: false)
-//        self.isUserInteractionEnabled = true
     }
     
     func configureWithPet(_ pet: Pet) {
         petTitle.text = pet.name
-        petImage.circle()
-        
-        if let imageData = pet.image as Data? {
-            petImage.image = UIImage(data: imageData)
-        }
-        
-//        self.isUserInteractionEnabled = !isOnTrip
+        petImage.imageUrl = pet.imageURL
     }
-
 }

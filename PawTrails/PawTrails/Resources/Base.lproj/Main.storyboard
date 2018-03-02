@@ -27,6 +27,9 @@
         <array key="Helvetica.ttc">
             <string>Helvetica</string>
         </array>
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
         <array key="PingFang.ttc">
             <string>PingFangSC-Regular</string>
         </array>
@@ -615,31 +618,21 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="129.66666666666666"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ypQ-Ix-BFS" customClass="UiimageViewWithMask" customModule="PawTrails" customModuleProvider="target">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ypQ-Ix-BFS" customClass="PTBalloonImageView" customModule="PawTrails" customModuleProvider="target">
                                                     <rect key="frame" x="16" y="29.666666666666671" width="70" height="70"/>
                                                     <color key="backgroundColor" red="0.99932557339999994" green="0.63401025529999999" blue="0.2850541472" alpha="0.50393300513698636" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="70" id="Aui-Ro-OlO"/>
                                                         <constraint firstAttribute="height" constant="70" id="GlT-7i-5VY"/>
                                                     </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="image" keyPath="maskImage" value="userprofilemask-1x-png_360"/>
-                                                    </userDefinedRuntimeAttributes>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userProfileMask-1x-png" translatesAutoresizingMaskIntoConstraints="NO" id="0Pk-Vi-mvl">
-                                                    <rect key="frame" x="14" y="26.666666666666671" width="75" height="75"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="75" id="3Jg-Es-JyP"/>
-                                                        <constraint firstAttribute="width" constant="75" id="Xj8-Yi-jDo"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="NYy-W4-DcK">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="NYy-W4-DcK">
                                                     <rect key="frame" x="97" y="27" width="0.0" height="0.0"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="mXp-8N-Ipx">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="mXp-8N-Ipx">
                                                     <rect key="frame" x="97" y="31" width="0.0" height="0.0"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
                                                     <color key="textColor" red="0.5490196078431373" green="0.5490196078431373" blue="0.5490196078431373" alpha="1" colorSpace="calibratedRGB"/>
@@ -654,15 +647,11 @@
                                                 <constraint firstItem="mXp-8N-Ipx" firstAttribute="top" secondItem="NYy-W4-DcK" secondAttribute="bottom" constant="4" id="4Yb-YI-guv"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="mXp-8N-Ipx" secondAttribute="trailing" constant="16" id="A0t-Fr-5r4"/>
                                                 <constraint firstItem="ypQ-Ix-BFS" firstAttribute="centerY" secondItem="jAO-6p-rUR" secondAttribute="centerY" id="A9F-V0-FSe"/>
-                                                <constraint firstItem="0Pk-Vi-mvl" firstAttribute="centerY" secondItem="jAO-6p-rUR" secondAttribute="centerY" id="Dkz-S2-CHE"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="mXp-8N-Ipx" secondAttribute="bottom" constant="32" id="HNV-Ad-d7I"/>
-                                                <constraint firstItem="NYy-W4-DcK" firstAttribute="leading" secondItem="0Pk-Vi-mvl" secondAttribute="trailing" constant="8" id="Kdh-S7-AGf"/>
-                                                <constraint firstItem="0Pk-Vi-mvl" firstAttribute="leading" secondItem="jAO-6p-rUR" secondAttribute="leading" constant="14" id="Srn-xJ-B9S"/>
                                                 <constraint firstItem="ypQ-Ix-BFS" firstAttribute="leading" secondItem="jAO-6p-rUR" secondAttribute="leading" constant="16" id="Vy1-aD-WDY"/>
                                                 <constraint firstItem="qDu-LV-mYt" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="NYy-W4-DcK" secondAttribute="trailing" constant="16" id="WRr-cl-qSL"/>
                                                 <constraint firstItem="qDu-LV-mYt" firstAttribute="top" secondItem="NYy-W4-DcK" secondAttribute="top" id="fQ1-Jc-frn"/>
                                                 <constraint firstAttribute="trailing" secondItem="qDu-LV-mYt" secondAttribute="trailing" constant="16" id="i1Z-rM-sEC"/>
-                                                <constraint firstItem="NYy-W4-DcK" firstAttribute="top" secondItem="0Pk-Vi-mvl" secondAttribute="top" priority="999" id="lXs-OV-ksW"/>
                                                 <constraint firstItem="mXp-8N-Ipx" firstAttribute="leading" secondItem="NYy-W4-DcK" secondAttribute="leading" id="zJK-EB-ab8"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1263,26 +1252,13 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="176"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4eO-pC-ECe" customClass="UiimageViewWithMask" customModule="PawTrails" customModuleProvider="target">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4eO-pC-ECe" customClass="PTBalloonImageView" customModule="PawTrails" customModuleProvider="target">
                                                     <rect key="frame" x="141.66666666666666" y="8" width="92" height="92"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="92" id="1H5-zp-rg2"/>
                                                         <constraint firstAttribute="height" constant="92" id="fye-fY-DD8"/>
                                                     </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="image" keyPath="maskImage" value="userprofilemask-1x-png_360"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userProfileMask-1x-png" translatesAutoresizingMaskIntoConstraints="NO" id="zIm-pK-t0y" customClass="UiimageViewWithMask" customModule="PawTrails" customModuleProvider="target">
-                                                    <rect key="frame" x="133.66666666666666" y="2" width="108" height="105"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="105" id="FuH-IP-tUS"/>
-                                                        <constraint firstAttribute="width" constant="108" id="j5P-Au-pjA"/>
-                                                    </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="image" keyPath="maskImage" value="userprofilemask-1x-png_360"/>
-                                                    </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VuW-eG-8xV">
                                                     <rect key="frame" x="8" y="115" width="359" height="30"/>
@@ -1295,10 +1271,8 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="zIm-pK-t0y" firstAttribute="top" secondItem="Xdz-9j-1g9" secondAttribute="top" constant="2" id="0jx-iZ-bz8"/>
+                                                <constraint firstItem="VuW-eG-8xV" firstAttribute="top" secondItem="4eO-pC-ECe" secondAttribute="bottom" constant="15" id="Ipn-w0-jT1"/>
                                                 <constraint firstItem="4eO-pC-ECe" firstAttribute="top" secondItem="Xdz-9j-1g9" secondAttribute="top" constant="8" id="Nv6-iO-8Is"/>
-                                                <constraint firstItem="VuW-eG-8xV" firstAttribute="top" secondItem="zIm-pK-t0y" secondAttribute="bottom" constant="8" id="PU4-Qq-R5Z"/>
-                                                <constraint firstItem="zIm-pK-t0y" firstAttribute="centerX" secondItem="Xdz-9j-1g9" secondAttribute="centerX" id="QE4-EJ-kf9"/>
                                                 <constraint firstItem="4eO-pC-ECe" firstAttribute="centerX" secondItem="Xdz-9j-1g9" secondAttribute="centerX" id="cwx-yG-mQj"/>
                                                 <constraint firstItem="VuW-eG-8xV" firstAttribute="leading" secondItem="Xdz-9j-1g9" secondAttribute="leading" constant="8" id="kDp-tC-wGa"/>
                                                 <constraint firstAttribute="trailing" secondItem="VuW-eG-8xV" secondAttribute="trailing" constant="8" id="pRV-8h-oum"/>
@@ -1558,7 +1532,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Irl-ap-dJF">
-                                <rect key="frame" x="16" y="132" width="343" height="597"/>
+                                <rect key="frame" x="16" y="88" width="343" height="690"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <attributedString key="attributedText">
                                     <fragment>
@@ -1978,7 +1952,7 @@ Last Edited on 2017-12-04
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qf4-Ct-DNe">
-                                <rect key="frame" x="0.0" y="132" width="375" height="635"/>
+                                <rect key="frame" x="0.0" y="88" width="375" height="728"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LTF-ve-xvE">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="828"/>
@@ -2014,7 +1988,7 @@ PawTrails is a product created by Attitude Technologies.
                                                 </constraints>
                                             </view>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WechatIMG135" translatesAutoresizingMaskIntoConstraints="NO" id="ISo-1K-cRV">
-                                                <rect key="frame" x="16" y="388.66666666666788" width="40" height="40"/>
+                                                <rect key="frame" x="16" y="388.66666666666669" width="40" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="40" id="PH5-xL-laI"/>
                                                     <constraint firstAttribute="height" constant="40" id="hqI-IZ-ysq"/>
@@ -2034,14 +2008,14 @@ PawTrails is a product created by Attitude Technologies.
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I9s-DO-Mf9">
-                                                <rect key="frame" x="0.0" y="444.66666666666788" width="375" height="1"/>
+                                                <rect key="frame" x="0.0" y="444.66666666666663" width="375" height="1"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="xSB-fc-ywF"/>
                                                 </constraints>
                                             </view>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="close-envelope" translatesAutoresizingMaskIntoConstraints="NO" id="pBi-rc-UVl">
-                                                <rect key="frame" x="21" y="461.66666666666788" width="30" height="30"/>
+                                                <rect key="frame" x="21" y="461.66666666666663" width="30" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="VFT-Kt-hKk"/>
                                                     <constraint firstAttribute="width" constant="30" id="Z9I-Vo-cYh"/>
@@ -2061,14 +2035,14 @@ PawTrails is a product created by Attitude Technologies.
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JRc-cV-CoW">
-                                                <rect key="frame" x="0.0" y="507.66666666666788" width="375" height="1"/>
+                                                <rect key="frame" x="0.0" y="507.66666666666663" width="375" height="1"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="X4F-Nh-skF"/>
                                                 </constraints>
                                             </view>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="facebook" translatesAutoresizingMaskIntoConstraints="NO" id="J44-4Y-r4k">
-                                                <rect key="frame" x="21" y="524.66666666666788" width="30" height="30"/>
+                                                <rect key="frame" x="21" y="524.66666666666663" width="30" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="30" id="hEX-fI-MWS"/>
                                                     <constraint firstAttribute="height" constant="30" id="qQC-Q5-Fss"/>
@@ -2088,17 +2062,17 @@ PawTrails is a product created by Attitude Technologies.
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="27Y-GE-aiy">
-                                                <rect key="frame" x="0.0" y="570.66666666666788" width="375" height="1"/>
+                                                <rect key="frame" x="0.0" y="570.66666666666663" width="375" height="1"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="d5G-P0-3Gz"/>
                                                 </constraints>
                                             </view>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="instagram" translatesAutoresizingMaskIntoConstraints="NO" id="iyq-7P-iMy">
-                                                <rect key="frame" x="21" y="587.66666666666788" width="30" height="30"/>
+                                                <rect key="frame" x="21" y="587.66666666666663" width="30" height="30"/>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CoE-cT-1T4">
-                                                <rect key="frame" x="64" y="587.66666666666788" width="295" height="30"/>
+                                                <rect key="frame" x="64" y="587.66666666666663" width="295" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <state key="normal" title="Follow us on Instagram">
                                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -2108,14 +2082,14 @@ PawTrails is a product created by Attitude Technologies.
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CNM-GX-amZ">
-                                                <rect key="frame" x="0.0" y="633.66666666666788" width="375" height="1"/>
+                                                <rect key="frame" x="0.0" y="633.66666666666663" width="375" height="1"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="1oB-3J-0iJ"/>
                                                 </constraints>
                                             </view>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="youtube" translatesAutoresizingMaskIntoConstraints="NO" id="lO1-bt-YL1">
-                                                <rect key="frame" x="21" y="650.66666666666788" width="30" height="30"/>
+                                                <rect key="frame" x="21" y="650.66666666666663" width="30" height="30"/>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Coj-xh-t49">
                                                 <rect key="frame" x="64" y="650" width="295" height="30"/>
@@ -2128,17 +2102,17 @@ PawTrails is a product created by Attitude Technologies.
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gng-VG-out">
-                                                <rect key="frame" x="0.0" y="696.66666666666788" width="375" height="1"/>
+                                                <rect key="frame" x="0.0" y="696.66666666666663" width="375" height="1"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="vZk-95-63e"/>
                                                 </constraints>
                                             </view>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app-store" translatesAutoresizingMaskIntoConstraints="NO" id="yT4-5d-4zH">
-                                                <rect key="frame" x="21" y="713.66666666666788" width="30" height="30"/>
+                                                <rect key="frame" x="21" y="713.66666666666663" width="30" height="30"/>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i65-jo-bg2">
-                                                <rect key="frame" x="64" y="713.66666666666788" width="295" height="30"/>
+                                                <rect key="frame" x="64" y="713.66666666666663" width="295" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <state key="normal" title="Rate us on the App Store">
                                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -2268,7 +2242,7 @@ PawTrails is a product created by Attitude Technologies.
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="98f-Ae-ufe">
-                                <rect key="frame" x="0.0" y="170" width="375" height="216"/>
+                                <rect key="frame" x="0.0" y="126" width="375" height="216"/>
                                 <subviews>
                                     <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="nOV-Lr-0ne">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="216"/>
@@ -3550,7 +3524,7 @@ PawTrails is a product created by Attitude Technologies.
                                     <action selector="thirdButtonPressed:" destination="NB9-41-O2a" eventType="touchUpInside" id="Bwp-mK-NYl"/>
                                 </connections>
                             </button>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="X26-Zz-hRg">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" insetsLayoutMarginsFromSafeArea="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="X26-Zz-hRg">
                                 <rect key="frame" x="16" y="587" width="275" height="142"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -3563,14 +3537,14 @@ PawTrails is a product created by Attitude Technologies.
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="2iA-lh-XHi" customClass="PetsCollectionViewCell" customModule="PawTrails" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="cell" id="2iA-lh-XHi" customClass="PetsCollectionViewCell" customModule="PawTrails" customModuleProvider="target">
                                         <rect key="frame" x="215" y="0.0" width="60" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="896-1H-CaN" customClass="PTBalloonImageView" customModule="PawTrails" customModuleProvider="target">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="896-1H-CaN" customClass="PTBalloonImageView" customModule="PawTrails" customModuleProvider="target">
                                                     <rect key="frame" x="4" y="4" width="52" height="52"/>
                                                 </imageView>
                                             </subviews>
@@ -3689,11 +3663,8 @@ PawTrails is a product created by Attitude Technologies.
                                             <rect key="frame" x="0.0" y="0.0" width="84" height="132"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cuW-qj-p29" customClass="UiimageViewWithMask" customModule="PawTrails" customModuleProvider="target">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cuW-qj-p29" customClass="PTBalloonImageView" customModule="PawTrails" customModuleProvider="target">
                                                     <rect key="frame" x="8" y="8" width="68" height="66"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="image" keyPath="maskImage" value="userprofilemask-1x-png_360"/>
-                                                    </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K5Z-VD-O0X">
                                                     <rect key="frame" x="6" y="82" width="72" height="20"/>
@@ -3738,9 +3709,6 @@ PawTrails is a product created by Attitude Technologies.
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userProfileMask-1x-png" translatesAutoresizingMaskIntoConstraints="NO" id="8Qt-8K-gMI">
-                                                    <rect key="frame" x="2" y="2" width="80" height="78"/>
-                                                </imageView>
                                             </subviews>
                                         </view>
                                         <constraints>
@@ -3750,12 +3718,8 @@ PawTrails is a product created by Attitude Technologies.
                                             <constraint firstItem="RhK-UN-QJR" firstAttribute="top" secondItem="K5Z-VD-O0X" secondAttribute="bottom" constant="8" id="YgP-Ud-kKk"/>
                                             <constraint firstItem="cuW-qj-p29" firstAttribute="top" secondItem="KVH-uQ-Zp3" secondAttribute="top" constant="8" id="b8a-Bt-Ctt"/>
                                             <constraint firstAttribute="trailing" secondItem="cuW-qj-p29" secondAttribute="trailing" constant="8" id="dF3-eZ-i18"/>
-                                            <constraint firstItem="8Qt-8K-gMI" firstAttribute="leading" secondItem="KVH-uQ-Zp3" secondAttribute="leading" constant="2" id="jgC-9x-w3x"/>
                                             <constraint firstAttribute="trailing" secondItem="K5Z-VD-O0X" secondAttribute="trailing" constant="6" id="k6Y-SP-jNa"/>
-                                            <constraint firstItem="K5Z-VD-O0X" firstAttribute="top" secondItem="8Qt-8K-gMI" secondAttribute="bottom" constant="2" id="krP-sx-MID"/>
-                                            <constraint firstAttribute="trailing" secondItem="8Qt-8K-gMI" secondAttribute="trailing" constant="2" id="ohH-PU-ggq"/>
                                             <constraint firstItem="K5Z-VD-O0X" firstAttribute="top" secondItem="cuW-qj-p29" secondAttribute="bottom" constant="8" id="qgc-7K-cVr"/>
-                                            <constraint firstItem="8Qt-8K-gMI" firstAttribute="top" secondItem="KVH-uQ-Zp3" secondAttribute="top" constant="2" id="v9E-rr-YdW"/>
                                             <constraint firstAttribute="bottom" secondItem="RhK-UN-QJR" secondAttribute="bottom" constant="2" id="yvi-XI-42U"/>
                                         </constraints>
                                         <connections>
@@ -4340,32 +4304,24 @@ PawTrails is a product created by Attitude Technologies.
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GcY-bF-7WP" customClass="PTBalloonImageView" customModule="PawTrails" customModuleProvider="target">
+                                                            <rect key="frame" x="152" y="8" width="70" height="70"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="70" id="aMl-b2-dnG"/>
+                                                                <constraint firstAttribute="width" constant="70" id="oLr-IH-kCh"/>
+                                                            </constraints>
+                                                        </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="140" id="93S-pj-ErC"/>
+                                                        <constraint firstItem="GcY-bF-7WP" firstAttribute="centerX" secondItem="nrw-gc-X21" secondAttribute="centerX" id="JSQ-6s-rzl"/>
                                                         <constraint firstAttribute="trailing" secondItem="akB-EX-xc6" secondAttribute="trailing" constant="16" id="cHn-5S-2Rj"/>
+                                                        <constraint firstItem="GcY-bF-7WP" firstAttribute="top" secondItem="nrw-gc-X21" secondAttribute="top" constant="8" id="cMC-K5-lQe"/>
                                                         <constraint firstAttribute="bottom" secondItem="akB-EX-xc6" secondAttribute="bottom" constant="8" id="cij-SI-4ub"/>
                                                         <constraint firstItem="akB-EX-xc6" firstAttribute="leading" secondItem="nrw-gc-X21" secondAttribute="leading" constant="16" id="m6f-SD-XiJ"/>
                                                     </constraints>
                                                 </view>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GcY-bF-7WP" customClass="UiimageViewWithMask" customModule="PawTrails" customModuleProvider="target">
-                                                    <rect key="frame" x="152.66666666666666" y="8" width="70" height="70"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="70" id="aMl-b2-dnG"/>
-                                                        <constraint firstAttribute="width" constant="70" id="oLr-IH-kCh"/>
-                                                    </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="image" keyPath="maskImage" value="userprofilemask-1x-png_360"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userProfileMask-1x-png" translatesAutoresizingMaskIntoConstraints="NO" id="PdH-l3-IJc">
-                                                    <rect key="frame" x="149.66666666666666" y="8" width="76" height="76"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="76" id="MiC-ru-Dp5"/>
-                                                        <constraint firstAttribute="height" constant="76" id="XTL-mQ-yma"/>
-                                                    </constraints>
-                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Birthday" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8oh-kc-sI1">
                                                     <rect key="frame" x="16" y="148" width="343" height="16"/>
                                                     <constraints>
@@ -4480,7 +4436,6 @@ PawTrails is a product created by Attitude Technologies.
                                                 <constraint firstItem="X4q-SJ-xRR" firstAttribute="top" secondItem="gzh-e9-ZCh" secondAttribute="bottom" constant="16" id="1cF-oS-n3J"/>
                                                 <constraint firstItem="nrw-gc-X21" firstAttribute="leading" secondItem="1tQ-gt-Gnc" secondAttribute="leading" id="2qN-Lg-etZ"/>
                                                 <constraint firstItem="gyv-e7-eh2" firstAttribute="centerX" secondItem="XzC-ga-5ZP" secondAttribute="centerX" id="2rR-3f-TDp"/>
-                                                <constraint firstItem="PdH-l3-IJc" firstAttribute="top" secondItem="1tQ-gt-Gnc" secondAttribute="top" constant="8" id="42D-LM-mAx"/>
                                                 <constraint firstItem="XzC-ga-5ZP" firstAttribute="top" secondItem="smD-KH-GaK" secondAttribute="bottom" constant="8" id="919-Ud-U0x"/>
                                                 <constraint firstItem="gyv-e7-eh2" firstAttribute="top" secondItem="j4Z-EI-fDi" secondAttribute="bottom" constant="8" id="9HC-YY-2gR"/>
                                                 <constraint firstItem="D2b-nj-hsf" firstAttribute="leading" secondItem="1tQ-gt-Gnc" secondAttribute="leading" constant="16" id="EQf-Qy-wI2"/>
@@ -4488,7 +4443,6 @@ PawTrails is a product created by Attitude Technologies.
                                                 <constraint firstItem="8bP-1T-HAU" firstAttribute="top" secondItem="xfI-oc-qhQ" secondAttribute="bottom" constant="8" id="Fvg-6A-51K"/>
                                                 <constraint firstItem="8oh-kc-sI1" firstAttribute="leading" secondItem="1tQ-gt-Gnc" secondAttribute="leading" constant="16" id="GgU-22-nxl"/>
                                                 <constraint firstItem="8cM-NB-8Dr" firstAttribute="top" secondItem="gzh-e9-ZCh" secondAttribute="bottom" constant="16" id="Iem-tU-VqO"/>
-                                                <constraint firstItem="GcY-bF-7WP" firstAttribute="centerX" secondItem="1tQ-gt-Gnc" secondAttribute="centerX" id="Iga-nY-RgP"/>
                                                 <constraint firstItem="xfI-oc-qhQ" firstAttribute="centerY" secondItem="D2b-nj-hsf" secondAttribute="centerY" id="K2p-sR-gaA"/>
                                                 <constraint firstAttribute="bottom" secondItem="p6W-ql-lrB" secondAttribute="bottom" constant="16" id="LPP-cp-k2g"/>
                                                 <constraint firstItem="8cM-NB-8Dr" firstAttribute="leading" secondItem="1tQ-gt-Gnc" secondAttribute="leading" constant="16" id="MCr-4n-8dC"/>
@@ -4511,14 +4465,12 @@ PawTrails is a product created by Attitude Technologies.
                                                 <constraint firstAttribute="trailing" secondItem="smD-KH-GaK" secondAttribute="trailing" constant="16" id="kft-4P-DKj"/>
                                                 <constraint firstItem="gyv-e7-eh2" firstAttribute="centerY" secondItem="l9g-0o-ZYw" secondAttribute="centerY" id="kgB-4m-TNL"/>
                                                 <constraint firstItem="8bP-1T-HAU" firstAttribute="leading" secondItem="gzh-e9-ZCh" secondAttribute="trailing" constant="16" id="kmJ-sx-O6X"/>
-                                                <constraint firstItem="PdH-l3-IJc" firstAttribute="centerX" secondItem="1tQ-gt-Gnc" secondAttribute="centerX" id="lYh-TD-eCl"/>
                                                 <constraint firstItem="p6W-ql-lrB" firstAttribute="centerX" secondItem="1tQ-gt-Gnc" secondAttribute="centerX" id="m8k-5a-b2Q"/>
                                                 <constraint firstItem="8oh-kc-sI1" firstAttribute="top" secondItem="nrw-gc-X21" secondAttribute="bottom" constant="8" id="qB1-4s-oPC"/>
                                                 <constraint firstItem="p6W-ql-lrB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ZgW-b3-X51" secondAttribute="trailing" constant="8" id="qhx-jQ-crr"/>
                                                 <constraint firstItem="D2b-nj-hsf" firstAttribute="top" secondItem="l9g-0o-ZYw" secondAttribute="bottom" constant="16" id="sVT-fL-V5b"/>
                                                 <constraint firstItem="gzh-e9-ZCh" firstAttribute="leading" secondItem="1tQ-gt-Gnc" secondAttribute="leading" constant="16" id="voW-MU-0rp"/>
                                                 <constraint firstItem="ZgW-b3-X51" firstAttribute="leading" secondItem="1tQ-gt-Gnc" secondAttribute="leading" constant="16" id="wRr-ar-iPi"/>
-                                                <constraint firstItem="GcY-bF-7WP" firstAttribute="top" secondItem="1tQ-gt-Gnc" secondAttribute="top" constant="8" id="xbP-pS-eMt"/>
                                                 <constraint firstItem="gyv-e7-eh2" firstAttribute="leading" secondItem="l9g-0o-ZYw" secondAttribute="trailing" constant="8" id="xpl-Kt-6od"/>
                                                 <constraint firstItem="j4Z-EI-fDi" firstAttribute="leading" secondItem="1tQ-gt-Gnc" secondAttribute="leading" constant="16" id="yMu-5i-dcI"/>
                                                 <constraint firstItem="ZgW-b3-X51" firstAttribute="top" secondItem="8cM-NB-8Dr" secondAttribute="bottom" constant="8" id="zUi-7M-J3P"/>
@@ -5621,17 +5573,17 @@ PawTrails is a product created by Attitude Technologies.
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pawtrails-logo-1x-png" translatesAutoresizingMaskIntoConstraints="NO" id="ILA-mU-fYT">
-                                <rect key="frame" x="80" y="138" width="80" height="50"/>
+                                <rect key="frame" x="80" y="182" width="80" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="MZO-Kh-6x2"/>
                                     <constraint firstAttribute="width" constant="80" id="mkI-L3-sDP"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sunbeam-logo-1x-png-nobg" translatesAutoresizingMaskIntoConstraints="NO" id="FeI-1n-QoM">
-                                <rect key="frame" x="166" y="138" width="144" height="50"/>
+                                <rect key="frame" x="166" y="182" width="144" height="50"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rFc-dO-isr">
-                                <rect key="frame" x="0.0" y="91" width="375" height="630"/>
+                                <rect key="frame" x="0.0" y="140" width="375" height="532"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="g72-ZG-vyw">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="61"/>
@@ -5664,41 +5616,31 @@ PawTrails is a product created by Attitude Technologies.
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jiW-0l-Unw" customClass="UiimageViewWithMask" customModule="PawTrails" customModuleProvider="target">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jiW-0l-Unw" customClass="PTBalloonImageView" customModule="PawTrails" customModuleProvider="target">
                                                     <rect key="frame" x="8" y="8" width="70" height="70.333333333333329"/>
                                                     <color key="backgroundColor" red="0.99932557339999994" green="0.63401025529999999" blue="0.2850541472" alpha="0.50393300510000005" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="70" id="xp6-Jo-nH5"/>
                                                         <constraint firstAttribute="width" constant="70" id="yXw-yd-a7C"/>
                                                     </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="image" keyPath="maskImage" value="userprofilemask-1x-png_360"/>
-                                                    </userDefinedRuntimeAttributes>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userProfileMask-1x-png" translatesAutoresizingMaskIntoConstraints="NO" id="fKw-Yj-efM">
-                                                    <rect key="frame" x="6" y="5.3333333333333357" width="75" height="75.666666666666657"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="75" id="fOL-cN-dLY"/>
-                                                        <constraint firstAttribute="width" constant="75" id="xHF-nP-HaI"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Mike is overwight" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sMP-Vg-UJE">
-                                                    <rect key="frame" x="89" y="31.333333333333329" width="237" height="24"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Mike is overwight" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sMP-Vg-UJE">
+                                                    <rect key="frame" x="93.999999999999986" y="33.333333333333329" width="132.66666666666663" height="20"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="fKw-Yj-efM" firstAttribute="leading" secondItem="DRq-TQ-Fbf" secondAttribute="leading" constant="6" id="1u2-Q8-bum"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="sMP-Vg-UJE" secondAttribute="bottom" constant="-16" id="1Xp-Wc-og6"/>
                                                 <constraint firstItem="jiW-0l-Unw" firstAttribute="leading" secondItem="DRq-TQ-Fbf" secondAttribute="leading" constant="8" id="MJo-Dw-N7e"/>
-                                                <constraint firstItem="sMP-Vg-UJE" firstAttribute="leading" secondItem="fKw-Yj-efM" secondAttribute="trailing" constant="8" id="bSe-8V-DFC"/>
+                                                <constraint firstItem="sMP-Vg-UJE" firstAttribute="top" relation="greaterThanOrEqual" secondItem="DRq-TQ-Fbf" secondAttribute="top" constant="16" id="Nrc-2Z-Jq0"/>
                                                 <constraint firstItem="jiW-0l-Unw" firstAttribute="centerY" secondItem="DRq-TQ-Fbf" secondAttribute="centerY" id="eeo-QW-ExO"/>
                                                 <constraint firstItem="jiW-0l-Unw" firstAttribute="top" secondItem="DRq-TQ-Fbf" secondAttribute="top" constant="8" id="jif-6I-e7j"/>
                                                 <constraint firstItem="sMP-Vg-UJE" firstAttribute="centerY" secondItem="DRq-TQ-Fbf" secondAttribute="centerY" id="jtx-4P-ZzG"/>
                                                 <constraint firstAttribute="bottom" secondItem="jiW-0l-Unw" secondAttribute="bottom" constant="8" id="mpk-7V-PZi"/>
-                                                <constraint firstItem="fKw-Yj-efM" firstAttribute="centerY" secondItem="jiW-0l-Unw" secondAttribute="centerY" id="qiQ-bO-ebz"/>
-                                                <constraint firstAttribute="trailing" secondItem="sMP-Vg-UJE" secondAttribute="trailing" constant="16" id="tuP-Cq-jQS"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="sMP-Vg-UJE" secondAttribute="trailing" constant="16" id="tuP-Cq-jQS"/>
+                                                <constraint firstItem="sMP-Vg-UJE" firstAttribute="leading" secondItem="jiW-0l-Unw" secondAttribute="trailing" constant="16" id="zwe-TW-KNp"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -5710,7 +5652,7 @@ PawTrails is a product created by Attitude Technologies.
                                 </prototypes>
                             </tableView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wMi-oC-V8K">
-                                <rect key="frame" x="-4" y="198" width="383" height="614"/>
+                                <rect key="frame" x="-4" y="242" width="383" height="570"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PawTrails worked with a veterinary surgeon from Sunbeam Veterinary clinic to give our customers professional recommendation." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q4u-vi-c5L">
                                         <rect key="frame" x="20" y="20" width="343" height="100"/>
@@ -5912,11 +5854,8 @@ finish the Adventure?</string>
                                             <rect key="frame" x="0.0" y="0.0" width="84" height="132"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="h7E-hM-RPK" customClass="UiimageViewWithMask" customModule="PawTrails" customModuleProvider="target">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="h7E-hM-RPK" customClass="PTBalloonImageView" customModule="PawTrails" customModuleProvider="target">
                                                     <rect key="frame" x="8" y="8" width="68" height="66"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="image" keyPath="maskImage" value="userprofilemask-1x-png_360"/>
-                                                    </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="663-Hj-24u">
                                                     <rect key="frame" x="6" y="82" width="72" height="20"/>
@@ -5962,9 +5901,6 @@ finish the Adventure?</string>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userProfileMask-1x-png" translatesAutoresizingMaskIntoConstraints="NO" id="7K9-HI-Rqr">
-                                                    <rect key="frame" x="2" y="2" width="80" height="78"/>
-                                                </imageView>
                                             </subviews>
                                         </view>
                                         <constraints>
@@ -5974,13 +5910,9 @@ finish the Adventure?</string>
                                             <constraint firstItem="h7E-hM-RPK" firstAttribute="leading" secondItem="UXI-fP-eRU" secondAttribute="leading" constant="8" id="MYh-qy-zIA"/>
                                             <constraint firstItem="uzp-uv-HUK" firstAttribute="top" secondItem="663-Hj-24u" secondAttribute="bottom" constant="8" id="Mqn-oP-OAR"/>
                                             <constraint firstItem="uzp-uv-HUK" firstAttribute="centerX" secondItem="UXI-fP-eRU" secondAttribute="centerX" id="aIQ-zT-lN5"/>
-                                            <constraint firstItem="7K9-HI-Rqr" firstAttribute="top" secondItem="UXI-fP-eRU" secondAttribute="top" constant="2" id="nZa-55-LCk"/>
                                             <constraint firstItem="663-Hj-24u" firstAttribute="top" secondItem="h7E-hM-RPK" secondAttribute="bottom" constant="8" id="oCz-gT-Rl9"/>
-                                            <constraint firstAttribute="trailing" secondItem="7K9-HI-Rqr" secondAttribute="trailing" constant="2" id="wBD-vZ-Gqc"/>
                                             <constraint firstAttribute="trailing" secondItem="663-Hj-24u" secondAttribute="trailing" constant="6" id="wfm-0T-dcC"/>
-                                            <constraint firstItem="7K9-HI-Rqr" firstAttribute="leading" secondItem="UXI-fP-eRU" secondAttribute="leading" constant="2" id="yEo-Qy-GQq"/>
                                             <constraint firstItem="h7E-hM-RPK" firstAttribute="top" secondItem="UXI-fP-eRU" secondAttribute="top" constant="8" id="yN6-4K-riW"/>
-                                            <constraint firstItem="663-Hj-24u" firstAttribute="top" secondItem="7K9-HI-Rqr" secondAttribute="bottom" constant="2" id="yiJ-EB-Fbo"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="checkBoxView" destination="uzp-uv-HUK" id="8B7-eE-mj9"/>
@@ -6090,10 +6022,10 @@ finish the Adventure?</string>
             </objects>
             <point key="canvasLocation" x="-1332" y="2228"/>
         </scene>
-        <!--Recommendation-->
+        <!--Recommendation Select Pet-->
         <scene sceneID="5y6-fW-6hP">
             <objects>
-                <viewController id="8Ak-78-vA7" customClass="SelectPetForRecommandationController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="8Ak-78-vA7" userLabel="Recommendation Select Pet" customClass="SelectPetForRecommandationController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0GO-lD-uD3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -6141,11 +6073,8 @@ finish the Adventure?</string>
                                             <rect key="frame" x="0.0" y="0.0" width="84" height="132"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aZY-M1-iTg" customClass="UiimageViewWithMask" customModule="PawTrails" customModuleProvider="target">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aZY-M1-iTg" customClass="PTBalloonImageView" customModule="PawTrails" customModuleProvider="target">
                                                     <rect key="frame" x="8" y="8" width="68" height="66"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="image" keyPath="maskImage" value="userprofilemask-1x-png_360"/>
-                                                    </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dXn-Cn-Yb4">
                                                     <rect key="frame" x="6" y="82" width="72" height="20"/>
@@ -6190,24 +6119,17 @@ finish the Adventure?</string>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userProfileMask-1x-png" translatesAutoresizingMaskIntoConstraints="NO" id="wTm-B1-SJk">
-                                                    <rect key="frame" x="2" y="2" width="80" height="78"/>
-                                                </imageView>
                                             </subviews>
                                         </view>
                                         <constraints>
                                             <constraint firstItem="dXn-Cn-Yb4" firstAttribute="top" secondItem="aZY-M1-iTg" secondAttribute="bottom" constant="8" id="1Gh-OA-4Ng"/>
-                                            <constraint firstItem="dXn-Cn-Yb4" firstAttribute="top" secondItem="wTm-B1-SJk" secondAttribute="bottom" constant="2" id="811-WJ-RAX"/>
                                             <constraint firstItem="RYA-R1-DoO" firstAttribute="centerX" secondItem="JF3-fQ-kIk" secondAttribute="centerX" id="Fj0-lW-beo"/>
                                             <constraint firstItem="RYA-R1-DoO" firstAttribute="top" secondItem="dXn-Cn-Yb4" secondAttribute="bottom" constant="8" id="JLF-UF-2uF"/>
                                             <constraint firstItem="aZY-M1-iTg" firstAttribute="leading" secondItem="JF3-fQ-kIk" secondAttribute="leading" constant="8" id="LUA-IO-Vui"/>
                                             <constraint firstAttribute="bottom" secondItem="RYA-R1-DoO" secondAttribute="bottom" constant="2" id="LzN-nJ-VG9"/>
-                                            <constraint firstItem="wTm-B1-SJk" firstAttribute="leading" secondItem="JF3-fQ-kIk" secondAttribute="leading" constant="2" id="RKj-0t-gB2"/>
                                             <constraint firstAttribute="trailing" secondItem="aZY-M1-iTg" secondAttribute="trailing" constant="8" id="Rrc-DO-vpM"/>
-                                            <constraint firstAttribute="trailing" secondItem="wTm-B1-SJk" secondAttribute="trailing" constant="2" id="VRV-fp-LIx"/>
                                             <constraint firstAttribute="trailing" secondItem="dXn-Cn-Yb4" secondAttribute="trailing" constant="6" id="d6M-Bk-P3S"/>
                                             <constraint firstItem="aZY-M1-iTg" firstAttribute="top" secondItem="JF3-fQ-kIk" secondAttribute="top" constant="8" id="fdr-U9-cES"/>
-                                            <constraint firstItem="wTm-B1-SJk" firstAttribute="top" secondItem="JF3-fQ-kIk" secondAttribute="top" constant="2" id="nwF-jN-pem"/>
                                             <constraint firstItem="dXn-Cn-Yb4" firstAttribute="leading" secondItem="JF3-fQ-kIk" secondAttribute="leading" constant="6" id="uKj-ha-klW"/>
                                         </constraints>
                                         <connections>
@@ -6573,21 +6495,11 @@ finish the Adventure?</string>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3KT-b0-14T" customClass="UiimageViewWithMask" customModule="PawTrails" customModuleProvider="target">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3KT-b0-14T" customClass="PTBalloonImageView" customModule="PawTrails" customModuleProvider="target">
                                                 <rect key="frame" x="153" y="16" width="70" height="70"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="70" id="D4v-2n-tMi"/>
                                                     <constraint firstAttribute="height" constant="70" id="lUj-lj-TJU"/>
-                                                </constraints>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="image" keyPath="maskImage" value="userprofilemask-1x-png_360"/>
-                                                </userDefinedRuntimeAttributes>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userProfileMask-1x-png" translatesAutoresizingMaskIntoConstraints="NO" id="phx-Ab-evQ">
-                                                <rect key="frame" x="149" y="12" width="78" height="78"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="78" id="UvK-96-kOp"/>
-                                                    <constraint firstAttribute="height" constant="78" id="mID-gL-cLu"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CG0-NV-30H">
@@ -6610,13 +6522,11 @@ finish the Adventure?</string>
                                             <constraint firstItem="XTx-TC-eS6" firstAttribute="centerX" secondItem="djH-2S-TWr" secondAttribute="centerX" id="K8L-S0-CSQ"/>
                                             <constraint firstItem="xCu-G8-haQ" firstAttribute="top" secondItem="vOe-Vi-wst" secondAttribute="bottom" constant="30" id="Kw0-GI-RBb"/>
                                             <constraint firstItem="CG0-NV-30H" firstAttribute="centerX" secondItem="djH-2S-TWr" secondAttribute="centerX" id="LMn-NR-Xha"/>
-                                            <constraint firstItem="phx-Ab-evQ" firstAttribute="top" secondItem="djH-2S-TWr" secondAttribute="top" constant="12" id="QhP-Hp-vOj"/>
-                                            <constraint firstItem="CG0-NV-30H" firstAttribute="top" secondItem="phx-Ab-evQ" secondAttribute="bottom" constant="8" id="S0E-5Q-UzL"/>
                                             <constraint firstItem="3KT-b0-14T" firstAttribute="centerX" secondItem="djH-2S-TWr" secondAttribute="centerX" id="b3f-JE-vcw"/>
                                             <constraint firstItem="vOe-Vi-wst" firstAttribute="centerX" secondItem="djH-2S-TWr" secondAttribute="centerX" id="cD1-xR-ICm"/>
                                             <constraint firstItem="xCu-G8-haQ" firstAttribute="leading" secondItem="djH-2S-TWr" secondAttribute="leading" constant="16" id="dm2-AP-8tS"/>
-                                            <constraint firstItem="phx-Ab-evQ" firstAttribute="centerX" secondItem="djH-2S-TWr" secondAttribute="centerX" id="fc0-qT-IdK"/>
                                             <constraint firstItem="vOe-Vi-wst" firstAttribute="top" secondItem="XTx-TC-eS6" secondAttribute="bottom" constant="39.5" id="kmU-ww-vm3"/>
+                                            <constraint firstItem="CG0-NV-30H" firstAttribute="top" secondItem="3KT-b0-14T" secondAttribute="bottom" constant="12" id="ppp-RJ-Hx7"/>
                                             <constraint firstAttribute="bottom" secondItem="xCu-G8-haQ" secondAttribute="bottom" constant="8" id="q5j-kJ-gJb"/>
                                             <constraint firstItem="3KT-b0-14T" firstAttribute="top" secondItem="djH-2S-TWr" secondAttribute="top" constant="16" id="vso-1B-MAd"/>
                                         </constraints>
@@ -7391,7 +7301,7 @@ your product.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rfL-Sn-QFW">
-                                <rect key="frame" x="0.0" y="88" width="375" height="641"/>
+                                <rect key="frame" x="0.0" y="132" width="375" height="548"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HRI-ee-D9R">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="323"/>
@@ -7403,26 +7313,16 @@ your product.</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Body condition score is:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4xc-7d-BAP">
-                                                <rect key="frame" x="79" y="145.66666666666666" width="217" height="20.333333333333343"/>
+                                                <rect key="frame" x="79" y="145.66666666666669" width="217" height="20.333333333333343"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="feK-2J-ldS" customClass="UiimageViewWithMask" customModule="PawTrails" customModuleProvider="target">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="feK-2J-ldS" customClass="PTBalloonImageView" customModule="PawTrails" customModuleProvider="target">
                                                 <rect key="frame" x="153" y="16" width="70" height="70"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="70" id="MD1-dv-FXy"/>
                                                     <constraint firstAttribute="width" constant="70" id="mjs-UP-T6s"/>
-                                                </constraints>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="image" keyPath="maskImage" value="userprofilemask-1x-png_360"/>
-                                                </userDefinedRuntimeAttributes>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userProfileMask-1x-png" translatesAutoresizingMaskIntoConstraints="NO" id="V4t-7F-niC">
-                                                <rect key="frame" x="149" y="12" width="78" height="78"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="78" id="67S-db-9dy"/>
-                                                    <constraint firstAttribute="width" constant="78" id="8FD-SL-fnj"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g8w-5k-uNH">
@@ -7440,20 +7340,18 @@ your product.</string>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="V4t-7F-niC" firstAttribute="centerX" secondItem="HRI-ee-D9R" secondAttribute="centerX" id="10t-4B-bTm"/>
                                             <constraint firstItem="aZ3-Gj-ouw" firstAttribute="centerX" secondItem="HRI-ee-D9R" secondAttribute="centerX" id="2wi-aP-DeX"/>
                                             <constraint firstItem="4xc-7d-BAP" firstAttribute="top" secondItem="g8w-5k-uNH" secondAttribute="bottom" constant="26.5" id="4x8-8o-ZZ4"/>
                                             <constraint firstItem="feK-2J-ldS" firstAttribute="top" secondItem="HRI-ee-D9R" secondAttribute="top" constant="16" id="5Sd-mS-ytN"/>
                                             <constraint firstItem="feK-2J-ldS" firstAttribute="centerX" secondItem="HRI-ee-D9R" secondAttribute="centerX" id="69J-xN-WMf"/>
                                             <constraint firstItem="C3U-Rk-LLe" firstAttribute="top" secondItem="aZ3-Gj-ouw" secondAttribute="bottom" constant="30" id="IoN-4I-efv"/>
+                                            <constraint firstItem="g8w-5k-uNH" firstAttribute="top" secondItem="feK-2J-ldS" secondAttribute="bottom" constant="12" id="U3L-8l-fMZ"/>
                                             <constraint firstAttribute="trailing" secondItem="C3U-Rk-LLe" secondAttribute="trailing" constant="16" id="YaY-EN-eOa"/>
                                             <constraint firstItem="4xc-7d-BAP" firstAttribute="centerX" secondItem="HRI-ee-D9R" secondAttribute="centerX" id="Zgc-28-R41"/>
                                             <constraint firstItem="C3U-Rk-LLe" firstAttribute="leading" secondItem="HRI-ee-D9R" secondAttribute="leading" constant="16" id="d6W-J3-pcg"/>
-                                            <constraint firstItem="g8w-5k-uNH" firstAttribute="top" secondItem="V4t-7F-niC" secondAttribute="bottom" constant="8" id="v5q-hc-5vM"/>
                                             <constraint firstItem="g8w-5k-uNH" firstAttribute="centerX" secondItem="HRI-ee-D9R" secondAttribute="centerX" id="wB2-yS-jAL"/>
                                             <constraint firstAttribute="bottom" secondItem="C3U-Rk-LLe" secondAttribute="bottom" constant="8" id="x7T-9K-hJ1"/>
                                             <constraint firstItem="aZ3-Gj-ouw" firstAttribute="top" secondItem="4xc-7d-BAP" secondAttribute="bottom" constant="39.5" id="xhW-Ft-kHN"/>
-                                            <constraint firstItem="V4t-7F-niC" firstAttribute="top" secondItem="HRI-ee-D9R" secondAttribute="top" constant="12" id="zWk-hZ-MRZ"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -8240,14 +8138,12 @@ Last Edited on 2017-12-04
         <image name="settings-1x-png" width="22" height="22"/>
         <image name="startAdventure" width="80" height="66"/>
         <image name="sunbeam-logo-1x-png-nobg" width="110" height="100"/>
-        <image name="userProfileMask-1x-png" width="140" height="140"/>
-        <image name="userprofilemask-1x-png_360" width="119" height="120"/>
         <image name="youtube" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="yp5-bT-5uy"/>
         <segue reference="Rzx-2e-OhR"/>
-        <segue reference="Nln-Sh-wxV"/>
+        <segue reference="G7h-iD-Glq"/>
         <segue reference="gjN-xE-RCG"/>
     </inferredMetricsTieBreakers>
 </document>

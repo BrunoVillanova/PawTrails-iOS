@@ -17,7 +17,7 @@ class ResultFromListViewController: UIViewController {
     @IBOutlet weak var bcScoreLbl: UILabel!
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var weightLbl: UILabel!
-    @IBOutlet weak var petProfile: UiimageViewWithMask!
+    @IBOutlet weak var petProfile: PTBalloonImageView!
     @IBOutlet weak var petName: UILabel!
     
     
@@ -45,12 +45,7 @@ class ResultFromListViewController: UIViewController {
         
         self.petName.text = myPet.name
         self.bcScoreLbl.text = "The body condition score is \(myPet.bcScore)"
-        
-        if let imageData = pet.image as Data? {
-            petProfile.image = UIImage(data: imageData)
-        }else{
-            petProfile.image = nil
-        }
+        petProfile.imageUrl = myPet.imageURL
         
         if myPet.bcScore == 1 {
             self.weightLbl.text = "Very thin"

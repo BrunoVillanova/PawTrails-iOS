@@ -183,11 +183,8 @@ extension RecommandationController: UITableViewDelegate, UITableViewDataSource {
             let pet = presenter.pets[indexPath.item]
             let usedPet = pet.bcScore > 0
             
-            if let imageData = pet.image as Data? {
-                cell.petImage.image = UIImage(data: imageData)
-            } else {
-                cell.petImage.image = nil
-            }
+            cell.petImage.imageUrl = pet.imageURL
+            
             
             if usedPet {
                 if let name = pet.name {
@@ -281,6 +278,6 @@ extension RecommandationController: PetsView {
 
 
 class ReccomendationCell: UITableViewCell {
-    @IBOutlet weak var petImage: UiimageViewWithMask!
+    @IBOutlet weak var petImage: PTBalloonImageView!
     @IBOutlet weak var nameAndResultLbl: UILabel!
 }

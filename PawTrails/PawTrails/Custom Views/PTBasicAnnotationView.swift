@@ -13,8 +13,7 @@ import SDWebImage
 class PTBasicAnnotationView: MKAnnotationView {
 
     static let identifier = "PTBasicAnnotationView"
-    var borderImageView: UIImageView?
-    var pictureImageView: UIImageView?
+    let pictureImageView = PTBalloonImageView(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
     var calloutView: PTPetCalloutView?
     let defaultAnimationDuration = 0.3
     var calloutDelegate: PTPetCalloutViewDelegate?
@@ -25,12 +24,13 @@ class PTBasicAnnotationView: MKAnnotationView {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
+        self.initialize()
     }
     
     override func prepareForReuse() {
         calloutView?.isHidden = true
-        pictureImageView?.image = nil
+        pictureImageView.image = nil
     }
     
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
@@ -59,12 +59,10 @@ class PTBasicAnnotationView: MKAnnotationView {
     
     override func layoutSubviews() {
         
-        if let pictureImageView = pictureImageView {
-            let frame = pictureImageView.frame
-            self.frame.size.height = frame.height
-            self.frame.size.width = frame.width
-        }
-        
+        let frame = pictureImageView.frame
+        self.frame.size.height = frame.height
+        self.frame.size.width = frame.width
+
         if let calloutView = calloutView {
             var frame = calloutView.frame
             frame.origin.y = frame.origin.y -  self.frame.size.height
@@ -73,42 +71,18 @@ class PTBasicAnnotationView: MKAnnotationView {
         }
         
         super.layoutSubviews()
-    
     }
     
     private func initialize() {
-        
-        self.frame = CGRect(x: 0, y: 0, width: 60, height: 60)
         self.backgroundColor = UIColor.clear
-        
-        borderImageView = UIImageView(frame: self.frame)
-        borderImageView!.image = #imageLiteral(resourceName: "userProfileMask-1x-png");
-        self.addSubview(borderImageView!)
-        
-        let pictureBaseSize : CGFloat = 13.0
-        var pictureFrame = CGRect()
-        pictureFrame.size.height = self.frame.size.height - pictureBaseSize
-        pictureFrame.size.width = pictureFrame.size.height
-        pictureImageView = UIImageView()
-        pictureImageView?.frame = pictureFrame
-        pictureImageView?.center = self.center
-        pictureImageView?.image = #imageLiteral(resourceName: "PetPlaceholderImage")
-        pictureFrame = pictureImageView!.frame
-        pictureFrame.origin.y = pictureFrame.origin.y - 2
-        pictureImageView?.frame = pictureFrame
-        pictureImageView?.circle()
-        pictureImageView?.backgroundColor = UIColor.clear
-        self.addSubview(pictureImageView!)
-        self.bringSubview(toFront: pictureImageView!)
-        
         self.centerOffset = CGPoint(x: 0, y: -30)
+        self.addSubview(pictureImageView)
+        self.image = nil
     }
     
     func configureWithAnnotation(_ annotation: PTAnnotation) {
         if let petDeviceData = annotation.petDeviceData, let imageUrl = petDeviceData.pet.imageURL {
-            pictureImageView?.sd_setImage(with: URL(string: imageUrl), placeholderImage: UIImage(named: "PetPlaceholderImage"))
-        } else {
-            pictureImageView?.image = #imageLiteral(resourceName: "PetPlaceholderImage")
+            pictureImageView.imageUrl = imageUrl
         }
     }
     

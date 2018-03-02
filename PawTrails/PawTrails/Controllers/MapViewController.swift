@@ -63,7 +63,7 @@ class MapViewController: UIViewController {
     
     
     func initialize() {
-        
+        mapView.tripMode = true
         mapView.calloutDelegate = self
         DataManager.instance.getActivePetTrips()
             .subscribe(onNext: { (tripList) in
@@ -267,9 +267,9 @@ extension MapViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let pet = presenter.pets[indexPath.item]
+//        let pet = presenter.pets[indexPath.item]
         let cell = petsCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! PetsCollectionViewCell
-        cell.petImageCell?.imageUrl = pet.imageURL
+//        cell.petImageCell?.imageUrl = pet.imageURL
         return cell
     }
 }
@@ -293,28 +293,5 @@ extension MapViewController: PTPetCalloutViewDelegate {
              isDisplayedPetScreen = true
              self.goToPetDetails(petDeviceData.pet)
         }
-    }
-}
-
-
-//MARK: View Animations
-extension UIView {
-    // Name this function in a way that makes sense to you...
-    // slideFromLeft, slideRight, slideLeftToRight, etc. are great alternative names
-    func slideInAffect(duration: TimeInterval = 1.0, completionDelegate: AnyObject? = nil, direction: String) {
-        // Create a CATransition animation
-        let slideInFromLeftTransition = CATransition()
-        // Set its callback delegate to the completionDelegate that was provided (if any)
-        if let delegate: AnyObject = completionDelegate {
-            slideInFromLeftTransition.delegate = delegate as? CAAnimationDelegate
-        }
-        // Customize the animation's properties
-        slideInFromLeftTransition.type = kCATransitionPush
-        slideInFromLeftTransition.subtype = direction
-        slideInFromLeftTransition.duration = duration
-        slideInFromLeftTransition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        slideInFromLeftTransition.fillMode = kCAFillModeRemoved
-        // Add the animation to the View's layer
-        self.layer.add(slideInFromLeftTransition, forKey: "slideInFromLeftTransition")
     }
 }

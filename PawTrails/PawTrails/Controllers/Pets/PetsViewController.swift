@@ -199,7 +199,7 @@
  
  class PetCell: UITableViewCell {
     
-    @IBOutlet weak var petImageView: UIImageView!
+    @IBOutlet weak var petImageView: PTBalloonImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var deviceStatusView: PTDeviceStatusView!
     @IBOutlet weak var subtitleLabel: UILabel!
@@ -227,13 +227,7 @@
             
             self.currentPet = pet
             self.titleLabel.text = pet.name
-            
-            if let imageUrl = pet.imageURL {
-                self.petImageView.sd_setImage(with: URL(string: imageUrl), placeholderImage: #imageLiteral(resourceName: "PetPlaceholderImage"), options: [.continueInBackground])
-            } else {
-                self.petImageView.image = nil
-            }
-            
+            self.petImageView.imageUrl = pet.imageURL
             self.subtitleLabel.text = "Bring your device outdoor to get location.."
             
             self.disposable = DataManager.instance.petDeviceData(pet.id, gpsMode: .smart).subscribe(onNext: {[weak self] (petDeviceData) in

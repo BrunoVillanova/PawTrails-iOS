@@ -56,7 +56,7 @@ class FinishAdventureVC: UIViewController, BEMCheckBoxDelegate {
 }
 
 class FinishAdventureCell: UICollectionViewCell {
-    @IBOutlet weak var petImageView: UiimageViewWithMask!
+    @IBOutlet weak var petImageView: PTBalloonImageView!
     @IBOutlet weak var petNameLabel: UILabel!
     @IBOutlet weak var checkBoxView: BEMCheckBox!
 }
