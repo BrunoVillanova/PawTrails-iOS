@@ -152,18 +152,15 @@ class MapViewController: UIViewController {
     }
     
     @IBAction func refreshBtnPressed(_ sender: Any) {
-        if  presenter.pets.count != 0 {
-            var petIds = [Int]()
-            for pet in presenter.pets {
-                petIds.append(pet.id)
-            }
+        if presenter.pets.count != 0 {
+            let petIDs = presenter.pets.map { $0.id  }
             showIndicator()
-            APIRepository.instance.getImmediateLocation(petIds) { (error) in
+            APIRepository.instance.getImmediateLocation(petIDs) { (error) in
+                self.hideIndicator()
                 if let error = error {
-                    print(error.localizedDescription)
-                    self.hideIndicator()
+                    Reporter.debugPrint(error.localizedDescription)
                 } else {
-                    self.hideIndicator()
+                    self.mapView.showGpsUpdates()
                 }
             }
         } else {
