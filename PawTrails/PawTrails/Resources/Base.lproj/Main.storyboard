@@ -5116,10 +5116,9 @@ PawTrails is a product created by Attitude Technologies.
                                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mzy-ri-crB" userLabel="Delete Button">
-                                                                    <rect key="frame" x="313" y="9" width="30" height="30"/>
-                                                                    <color key="backgroundColor" red="0.83137254900000002" green="0.078431372550000003" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                                    <state key="normal" title="D"/>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mzy-ri-crB" userLabel="Delete Button">
+                                                                    <rect key="frame" x="319" y="12" width="24" height="24"/>
+                                                                    <state key="normal" image="DeleteIcon"/>
                                                                     <connections>
                                                                         <action selector="deleteAdventureTapped:" destination="iIb-w0-E8O" eventType="touchUpInside" id="eGh-RH-YCF"/>
                                                                     </connections>
@@ -8110,6 +8109,7 @@ Last Edited on 2017-12-04
         <image name="AvgSpeedLabel-1x-png" width="32" height="26"/>
         <image name="BackButton-1x-png" width="56" height="56"/>
         <image name="CurrentSpeedLabel-1x-png" width="39" height="34"/>
+        <image name="DeleteIcon" width="24" height="24"/>
         <image name="FinishAdventure-1x-png" width="80" height="80"/>
         <image name="PauseTripButton-1x-png" width="87" height="90"/>
         <image name="PawDeviceImage" width="114" height="50"/>
@@ -8150,6 +8150,6 @@ Last Edited on 2017-12-04
         <segue reference="yp5-bT-5uy"/>
         <segue reference="Rzx-2e-OhR"/>
         <segue reference="G7h-iD-Glq"/>
-        <segue reference="gjN-xE-RCG"/>
+        <segue reference="Avi-do-lZw"/>
     </inferredMetricsTieBreakers>
 </document>
