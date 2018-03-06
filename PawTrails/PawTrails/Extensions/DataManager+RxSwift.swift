@@ -93,9 +93,7 @@ extension DataManager {
 
         return pets.flatMap { (petList) -> Observable<[PetDeviceData]> in
             
-            let petIDs = petList.map({ (pet) -> Int in
-                pet.id
-            })
+            let petIDs = petList.map{ $0.id }
             let liveGpsUpdates = SocketIOManager.instance.gpsUpdates(petIDs, gpsMode: gpsMode)
             return liveGpsUpdates.share()
         }
