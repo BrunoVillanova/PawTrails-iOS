@@ -600,13 +600,6 @@ class APIRepository {
             }
         }
     }
-    
-    
-
-
-    
-    
-    
 
     // Finish Trips
     // callBack: returns nil or data
@@ -632,24 +625,30 @@ class APIRepository {
         let data: [String: Any] = ["trips": tripIDs, "timeStamp": Int(Date().timeIntervalSince1970)]
         APIManager.instance.perform(call: .pauseTrip, with: data) { (error, json) in
             if let error = error {
-            callback(error)
+                callback(error)
+            }
         }
-    }
     }
     
     
     // Resume trips
     //callBack: returns nil or data
-    
     func resumeTrip(callBack: @escaping APIRepErrorCallback) {
         APIManager.instance.perform(call: .resumeTrip) { (error, json) in
             callBack(error)
         }
     }
     
+    // Delete trip
+    //callBack: returns nil or error
+    func deleteTrip(_ tripID: Int, callBack: @escaping APIRepErrorCallback) {
+        APIManager.instance.perform(call: .deleteTrip, withKey: tripID) { (error, json) in
+            callBack(error)
+        }
+    }
     
     // Get pet trip achievements
-    //callBack: returns nil or data
+    //callBack: returns nil or error
     func getPetTripAchievements(_ petId: Int, from: Int, to: Int, status: [Int], callback: @escaping ApiGetAchievmenetCallBack) {
         var achievments: [String:Any] {
             var dict = [String:Any](object:self)

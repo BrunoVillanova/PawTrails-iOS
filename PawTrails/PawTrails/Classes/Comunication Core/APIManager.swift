@@ -18,7 +18,7 @@ public enum APICallType {
     registerPet, getPets, getPet, setPet, checkDevice, changeDevice, unregisterPet,
     getPetClasses, getBreeds, getContinents, getCountries,
     sharePet, getSharedPetUsers, removeSharedPet,leaveSharedPet,
-    addSafeZone, setSafeZone, getSafeZone, listSafeZones, removeSafeZone, startTrip, finishTrip, pauseTrip, resumeTrip, getTripList, getTripsAchievements, editDailyGoal, getDailyGoals, activityMonitor, logout, getImmediateLocation
+    addSafeZone, setSafeZone, getSafeZone, listSafeZones, removeSafeZone, startTrip, finishTrip, pauseTrip, resumeTrip, deleteTrip, getTripList, getTripsAchievements, editDailyGoal, getDailyGoals, activityMonitor, logout, getImmediateLocation
     
     /// Defines APICallType need of token
     
@@ -78,6 +78,7 @@ public enum APICallType {
         case .finishTrip: return "/trips/stop"
         case .pauseTrip: return "/trips/pause"
         case .resumeTrip: return "/trips/resume"
+        case .deleteTrip: return "/trips/delete/\(key)"
         case .getTripList: return "/trips/list"
         case .getTripsAchievements: return "/trips/achievementsget"
         case .editDailyGoal: return "/pets/dailygoalsedit"
@@ -91,9 +92,28 @@ public enum APICallType {
     /// Defines the HTTP Method Protocol: GET, POST...
     fileprivate var httpMethod: String {
         switch self {
-    case .getUser, .deleteUser, .getPetClasses, .getBreeds, .getCountries, .getContinents, .getPets, .getPet, .getSharedPetUsers, .unregisterPet, .leaveSharedPet, .friends, .getSafeZone, .listSafeZones, .removeSafeZone, .resumeTrip, .logout : return "GET"
-        default: return "POST"
-        }
+            case .getUser,
+                 .deleteUser,
+                 .getPetClasses,
+                 .getBreeds,
+                 .getCountries,
+                 .getContinents,
+                 .getPets,
+                 .getPet,
+                 .getSharedPetUsers,
+                 .unregisterPet,
+                 .leaveSharedPet,
+                 .friends,
+                 .getSafeZone,
+                 .listSafeZones,
+                 .removeSafeZone,
+                 .resumeTrip,
+                 .logout,
+                 .deleteTrip :
+                return "GET"
+            default:
+                return "POST"
+                }
     }
     
     fileprivate var requiresBody: Bool {

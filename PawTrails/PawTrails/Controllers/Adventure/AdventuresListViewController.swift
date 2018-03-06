@@ -10,6 +10,8 @@ import UIKit
 import XLPagerTabStrip
 import RxSwift
 import RxCocoa
+import SCLAlertView
+import GSMessages
 
 class AdventuresListViewController: UIViewController  {
     
@@ -31,7 +33,7 @@ class AdventuresListViewController: UIViewController  {
         showGoalsDate()
     }
     
-    func initialize() {
+    fileprivate func initialize() {
         tableView.tableFooterView = UIView()
 
         DataManager.instance.finishedTrips()
@@ -43,6 +45,8 @@ class AdventuresListViewController: UIViewController  {
             .bind(to: tableView.rx.items(cellIdentifier: "cell", cellType: AdventureHistoryCell.self)) { (_, element, cell) in
                 cell.selectionStyle = .none
                 cell.configure(element)
+                cell.delegate = self
+    
             }.disposed(by: disposeBag)
         
         Observable
@@ -64,7 +68,7 @@ class AdventuresListViewController: UIViewController  {
         }
     }
     
-    func showGoalsDate() {
+    fileprivate func showGoalsDate() {
         let mydatePicker = achievementsView.mydatePicker
         mydatePicker.delegate = self
         if let date = mydatePicker.selectedStartDate {
@@ -119,7 +123,7 @@ class AdventuresListViewController: UIViewController  {
     }
     
     
-    func presentGoalsVc() {
+    fileprivate func presentGoalsVc() {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "SetUpYourGoalController") as? SetUpYourGoalController, let pet = self.pet {
             vc.petUser = pet.owner
             vc.isOwner = pet.isOwner
@@ -135,12 +139,89 @@ extension AdventuresListViewController: IndicatorInfoProvider {
     }
 }
 
+extension AdventuresListViewController: AdventureHistoryCellDelegate {
+    func delete(trip: Trip) {
+        
+        let title: String = "Delete adventure?"
+        let subTitle: String = "Cannot undo this action."
+        let buttonOkTitle: String = "Delete adventure!"
+        let buttonCancelTitle: String = "No, keep this."
+        
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false,
+            showCircularIcon: true
+        )
+        
+        let alertView = SCLAlertView(appearance: appearance)
+        
+        alertView.addButton(buttonOkTitle) {
+            APIRepository.instance.deleteTrip(Int(trip.id)) { error in
+                if let error = error {
+                    Reporter.debugPrint("\(error.localizedDescription)")
+                    
+                    var errorMessage = "Error deleting adventure"
+                    
+                    if let errorCode = error.errorCode {
+                        errorMessage = errorMessage + "\n\n" + errorCode.description
+                    }
+                    
+                    self.showMessage(errorMessage,
+                                     type: .error,
+                                     options: [.animation(.slide),
+                                               .animationDuration(0.3),
+                                               .autoHide(true),
+                                               .cornerRadius(0.0),
+                                                .hideOnTap(true),
+                                                .position(.top),
+                                                .textAlignment(.center),
+                                                .textNumberOfLines(0),
+                                        ])
+                } else {
+                    self.showMessage("Adventure deleted!",
+                                     type: .success,
+                                     options: [.animation(.slide),
+                                                .animationDuration(0.3),
+                                                .autoHide(true),
+                                                .cornerRadius(0.0),
+                                                .hideOnTap(true),
+                                                .position(.top),
+                                                .textAlignment(.center),
+                                                .textNumberOfLines(0),
+                                                ])
+                }
+            }
+        }
+        
+        alertView.addButton(buttonCancelTitle) {
+            Reporter.debugPrint("User canceled action!")
+        }
+        
+        
+        alertView.showTitle(
+            title, // Title of view
+            subTitle: subTitle, // String of view
+            style: .warning,
+            colorStyle: 0xD4143D,
+            colorTextButton: 0xFFFFFF
+            //TODO: change icon to trash icon
+//            circleIconImage: alertViewIcon
+        )
+        
+
+    }
+}
+
+protocol AdventureHistoryCellDelegate {
+    func delete(trip: Trip)
+}
 
 class AdventureHistoryCell: UITableViewCell {
     @IBOutlet weak var dateLbl: UILabel!
     @IBOutlet weak var adventureImage: PTMapView!
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var deleteButton: UIButton!
+    var currentTrip: Trip?
+    var delegate: AdventureHistoryCellDelegate?
     
     override func awakeFromNib() {
         configureLayout()
@@ -160,6 +241,10 @@ class AdventureHistoryCell: UITableViewCell {
     
     func configure(_ trip: Trip) {
         
+        self.currentTrip = trip
+        
+        deleteButton.isHidden = !trip.pet.isOwner
+        
         if let ts = trip.startTimestamp {
             let tripStartTimestamp = Double(ts)
             let date = Date(timeIntervalSince1970: tripStartTimestamp)
@@ -177,7 +262,9 @@ class AdventureHistoryCell: UITableViewCell {
     }
     
     @IBAction func deleteAdventureTapped(_ sender: Any) {
-        
+        if let trip = self.currentTrip {
+            delegate?.delete(trip: trip)
+        }
     }
 }
 
