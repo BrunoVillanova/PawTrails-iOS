@@ -71,11 +71,17 @@ class PTMapView: MKMapView {
         self.myAnnotations[id] = [PTAnnotation]()
         
         if let tripPoints = trip.points?.filter({ (tripPoint) -> Bool in
-            return tripPoint.point?.coordinates.latitude != 0 && tripPoint.point?.coordinates.longitude != 0
+            if let coords = tripPoint.point?.coordinates {
+                 return coords.latitude != 0 && coords.longitude != 0
+            } else {
+                return false
+            }
         }) {
             for tripPoint in tripPoints {
-                let newAnnotation = PTAnnotation(tripPoint.point!.coordinates)
-                self.myAnnotations[id]?.append(newAnnotation)
+                if let point = tripPoint.point, let coords = point.coordinates {
+                    let newAnnotation = PTAnnotation(coords)
+                    self.myAnnotations[id]?.append(newAnnotation)
+                }
             }
         }
         
@@ -138,11 +144,17 @@ class PTMapView: MKMapView {
                 self.myAnnotations[id] = [PTAnnotation]()
                 
                 if let tripPoints = trip.points?.filter({ (tripPoint) -> Bool in
-                    return tripPoint.point?.coordinates.latitude != 0 && tripPoint.point?.coordinates.longitude != 0
+                    if let coords = tripPoint.point?.coordinates {
+                        return coords.latitude != 0 && coords.longitude != 0
+                    } else {
+                        return false
+                    }
                 }) {
                     for tripPoint in tripPoints {
-                        let newAnnotation = PTAnnotation(tripPoint.point!.coordinates)
-                        self.myAnnotations[id]?.append(newAnnotation)
+                        if let point = tripPoint.point, let coords = point.coordinates {
+                            let newAnnotation = PTAnnotation(coords)
+                            self.myAnnotations[id]?.append(newAnnotation)
+                        }
                     }
                 }
                 
@@ -164,8 +176,8 @@ class PTMapView: MKMapView {
                 if self.activeTripsPetIDs.contains(petDeviceData.pet.id) && tripMode {
                     let id = MKLocationId(id: Int(petDeviceData.pet.id), type: .pet)
                     if self.myAnnotations[id] != nil {
-                        if let point = petDeviceData.deviceData.point {
-                            let newAnnotation = PTAnnotation(point.coordinates)
+                        if let point = petDeviceData.deviceData.point, let coords = point.coordinates {
+                            let newAnnotation = PTAnnotation(coords)
                             self.myAnnotations[id]?.append(newAnnotation)
                             self.drawOverlayForPetAnnotations(self.myAnnotations[id])
                             self.focusOnPet(petDeviceData.pet)
@@ -401,9 +413,8 @@ class MKLocation: MKPointAnnotation {
         
         let id = MKLocationId(id: petDeviceData.pet.id, type: .pet)
         
-        if let point = petDeviceData.deviceData.point {
-            let coordinate = point.coordinates
-            self.init(id: id, coordinate: coordinate, color: color)
+        if let point = petDeviceData.deviceData.point, let coords = point.coordinates {
+            self.init(id: id, coordinate: coords, color: color)
         } else {
             self.init(id: id, coordinate: CLLocationCoordinate2D(), color: color)
         }
@@ -426,8 +437,8 @@ class PTAnnotation: NSObject, MKAnnotation {
     
     convenience init(_ petDeviceData: PetDeviceData) {
         
-        if let point = petDeviceData.deviceData.point {
-            self.init(point.coordinates)
+        if let point = petDeviceData.deviceData.point, let coords = point.coordinates {
+            self.init(coords)
         } else {
             self.init(CLLocationCoordinate2D())
         }

@@ -71,31 +71,4 @@ class AddEditSafeZonePresenter {
             self.view?.petLocationFailed()
         }
     }
-    
-    func startPetsGPSUpdates(for id: Int, _ callback: @escaping ((_ data: GPSData)->())){
-        let timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.petLocationFailed), userInfo: nil, repeats: false)
-        NotificationManager.instance.getPetGPSUpdates(for: id, { (id, data) in
-            timer.invalidate()
-            callback(data)
-        })
-    }
-    
-    func stopPetGPSUpdates(of id: Int){
-        NotificationManager.instance.removePetGPSUpdates(of: id)
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }

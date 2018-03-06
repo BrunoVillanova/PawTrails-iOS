@@ -112,14 +112,15 @@ class SafeZoneViewController: UIViewController, IndicatorInfoProvider, PetView {
         if self.presenter.safezones.count == 0 { return }
         let safezonesGroup = DispatchGroup()
         for safezone in self.presenter.safezones {
-            // Address
-            if safezone.address == nil {
-                guard let center = safezone.point1 else {
-                    Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "No center point found!")
-                    break
-                }
-                GeocoderManager.Intance.reverse(type: .safezone, with: center, for: safezone.id)
-            }
+            //TODO: check if removing this will cause any problem
+//            // Address
+//            if safezone.address == nil {
+//                guard let center = safezone.point1 else {
+//                    Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "No center point found!")
+//                    break
+//                }
+//                GeocoderManager.Intance.reverse(type: .safezone, with: center, for: safezone.id)
+//            }
             // Map
             if safezone.preview == nil {
                 guard let center = safezone.point1?.coordinates else {
@@ -184,9 +185,6 @@ class SafeZoneViewController: UIViewController, IndicatorInfoProvider, PetView {
     
     func load(locationAndTime: String){
 //        self.locationLabel.text = locationAndTime
-    }
-    
-    func load(data: GPSData){
     }
 
 }
