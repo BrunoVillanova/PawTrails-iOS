@@ -12,6 +12,7 @@ import RxSwift
 import RxCocoa
 import SCLAlertView
 import GSMessages
+import SnapKit
 
 class AdventuresListViewController: UIViewController  {
     
@@ -217,26 +218,36 @@ protocol AdventureHistoryCellDelegate {
 
 class AdventureHistoryCell: UITableViewCell {
     @IBOutlet weak var dateLbl: UILabel!
-    @IBOutlet weak var adventureImage: PTMapView!
+    @IBOutlet weak var adventureImage: UIView!
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var deleteButton: UIButton!
     var currentTrip: Trip?
     var delegate: AdventureHistoryCellDelegate?
+    var mapView: PTMapView?
+    var noDataView: UIView?
     
-    override func awakeFromNib() {
+    override func layoutSubviews() {
         configureLayout()
     }
     
+    override func prepareForReuse() {
+        dateLbl.text = nil
+        for view in adventureImage.subviews {
+            view.removeFromSuperview()
+        }
+    }
+    
     fileprivate func configureLayout() {
-        let view = mainView!
-        view.layer.borderColor = PTConstants.colors.lightGray.cgColor
-        view.layer.borderWidth = 1
-        view.layer.cornerRadius = 5
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowRadius = 4.0
-        view.layer.shadowOpacity = 0.1
-        view.layer.shadowOffset = CGSize.zero
-        view.layer.masksToBounds = false
+        if let view = mainView {
+            view.layer.borderColor = PTConstants.colors.lightGray.cgColor
+            view.layer.borderWidth = 1
+            view.layer.cornerRadius = 5
+            view.layer.shadowColor = UIColor.black.cgColor
+            view.layer.shadowRadius = 4.0
+            view.layer.shadowOpacity = 0.1
+            view.layer.shadowOffset = CGSize.zero
+            view.layer.masksToBounds = true
+        }
     }
     
     func configure(_ trip: Trip) {
@@ -258,7 +269,43 @@ class AdventureHistoryCell: UITableViewCell {
             dateLbl.text = strDate
         }
         
-        adventureImage.setStaticTripView(trip)
+        if trip.hasLocationData {
+            
+            if mapView == nil {
+                mapView = PTMapView()
+                mapView?.isStaticView = true
+            }
+            
+            mapView?.setStaticTripView(trip)
+            adventureImage.addSubview(mapView!)
+            
+            mapView?.snp.makeConstraints({ (maker) in
+                maker.edges.equalToSuperview()
+            })
+            
+        } else {
+            
+            if noDataView == nil {
+                noDataView = UIView(frame: .zero)
+                noDataView?.backgroundColor = UIColor(rgb: 0xD0D0D0)
+                let noDataLabel = UILabel()
+                noDataLabel.textColor = UIColor(rgb: 0x333333)
+                noDataLabel.font = UIFont(name: "Roboto-Medium", size:16)
+                noDataLabel.text = "There are no location points in this adventure!\nMaybe did not record for too long or did not have internet connection"
+                noDataView?.addSubview(noDataLabel)
+                
+                noDataLabel.snp.makeConstraints({ (maker) in
+                    maker.centerX.equalToSuperview()
+                    maker.centerY.equalToSuperview()
+                })
+            }
+            
+            adventureImage.addSubview(noDataView!)
+            
+            noDataView?.snp.makeConstraints({ (maker) in
+                maker.edges.equalToSuperview()
+            })
+        }
     }
     
     @IBAction func deleteAdventureTapped(_ sender: Any) {
