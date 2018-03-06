@@ -287,16 +287,20 @@ class AdventureHistoryCell: UITableViewCell {
             
             if noDataView == nil {
                 noDataView = UIView(frame: .zero)
-                noDataView?.backgroundColor = UIColor(rgb: 0xD0D0D0)
+                noDataView?.backgroundColor = PTConstants.colors.lightGray
                 let noDataLabel = UILabel()
-                noDataLabel.textColor = UIColor(rgb: 0x333333)
+                noDataLabel.numberOfLines = 0
+                noDataLabel.textAlignment = .center
+                noDataLabel.textColor = UIColor(rgb: 0x666666)
                 noDataLabel.font = UIFont(name: "Roboto-Medium", size:16)
-                noDataLabel.text = "There are no location points in this adventure!\nMaybe did not record for too long or did not have internet connection"
+                noDataLabel.text = "=(\nThere are no location points in this adventure!\nMaybe did not record for too long or did not have internet connection"
                 noDataView?.addSubview(noDataLabel)
                 
                 noDataLabel.snp.makeConstraints({ (maker) in
                     maker.centerX.equalToSuperview()
                     maker.centerY.equalToSuperview()
+                    maker.leading.greaterThanOrEqualToSuperview().offset(16)
+                    maker.trailing.greaterThanOrEqualToSuperview().offset(16)
                 })
             }
             
