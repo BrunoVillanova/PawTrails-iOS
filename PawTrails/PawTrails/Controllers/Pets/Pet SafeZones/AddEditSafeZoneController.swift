@@ -176,12 +176,7 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
         presenter.deteachView()
         NotificationCenter.default.removeObserver(self)
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        if updatingPetLocation {
-            presenter.stopPetGPSUpdates(of: petId)
-        }
-    }
+
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default

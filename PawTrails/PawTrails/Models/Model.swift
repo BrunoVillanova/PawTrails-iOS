@@ -119,6 +119,22 @@ struct Trip {
     var steps: Int64?
     var points: [TripPoint]?
     var deviceData: [DeviceData]?
+    var hasLocationData: Bool {
+        get {
+            if let tripsWithLocation = self.points?.filter({ (tripPoint) -> Bool in
+                if let point = tripPoint.point, point.coordinates != nil {
+                    return true
+                } else {
+                    return false
+                }
+            }), tripsWithLocation.count > 0 {
+                return true
+            } else {
+                return false
+            }
+            
+        }
+    }
 }
 
 
@@ -251,11 +267,9 @@ struct DailyGoals {
 }
 
 
-
-
 extension PetDeviceData: Equatable {
     static func == (lhs: PetDeviceData, rhs: PetDeviceData) -> Bool {
-        return lhs.id == rhs.id && lhs.deviceData.deviceTime == rhs.deviceData.deviceTime
+        return lhs.pet.id == rhs.pet.id && lhs.deviceData.deviceTime == rhs.deviceData.deviceTime
     }
 }
 
@@ -368,30 +382,39 @@ enum Shape: Int16 {
 
 public class Point: NSObject, NSCoding {
     
-    var latitude: Double
-    var longitude: Double
+    var latitude: Double?
+    var longitude: Double?
     
-    var toDict: [String:Any] {
-        return ["lat":latitude, "lon":longitude] as [String:Any]
+    var toDict: [String:Any]? {
+        if let lat = latitude, let lon = longitude {
+            return ["lat": lat, "lon":lon] as [String:Any]?
+        }
+        return nil
     }
     
     var toString: String {
-        return "\(latitude) - \(longitude)"
+        if let lat = latitude, let lon = longitude {
+            return "\(lat) - \(lon)"
+        }
+        return "No location data"
     }
     
     override init() {
-        latitude = 0.0
-        longitude = 0.0
+        latitude = nil
+        longitude = nil
     }
     
-    init(_ latitude: Double, _ longitude: Double) {
+    init(_ latitude: Double?, _ longitude: Double?) {
         self.latitude = latitude
         self.longitude = longitude
     }
     
     init(_ data:[String:Any]?) {
-        latitude = data?.tryCastDouble(for: "lat") ?? 0.0
-        longitude = data?.tryCastDouble(for: "lon") ?? 0.0
+        
+        if let lat = data?.tryCastDouble(for: "lat"), let lon = data?.tryCastDouble(for: "lon") {
+            latitude = lat
+            longitude = lon
+        }
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -415,28 +438,31 @@ public class Point: NSObject, NSCoding {
 extension Point {
     func getFullFormatedAddress(handler: @escaping (String?, Error?) -> Void) {
         
-        if self.latitude == 0 && self.longitude == 0 {
+        guard self.latitude != nil && self.longitude != nil else {
             handler("No GPS position data", nil)
             return
         }
         
-        let location = CLLocation(latitude: self.latitude, longitude: self.longitude)
-        let keyString = "\(self.latitude),\(self.longitude)"
         
-        // Load from storage
-        if let cachedAddress = try? CacheManager.sharedInstance.storage.object(ofType: String.self, forKey: keyString) {
-            handler(cachedAddress, nil)
-        } else {
-            CLGeocoder().reverseGeocodeLocation(location, completionHandler: { (placemarks, error) in
-                var address : String?
-                if let placemark = placemarks?[0] as CLPlacemark! {
-                    if let formattedAddressLines = placemark.addressDictionary?["FormattedAddressLines"] as? [String] {
-                        address = formattedAddressLines.joined(separator: ", ")
-                        try! CacheManager.sharedInstance.storage.setObject(address, forKey: keyString)
+        if let lat = self.latitude, let lon = self.longitude {
+            let location = CLLocation(latitude: lat, longitude: lon)
+            let keyString = "\(lat),\(lon)"
+            
+            // Load from storage
+            if let cachedAddress = try? CacheManager.sharedInstance.storage.object(ofType: String.self, forKey: keyString) {
+                handler(cachedAddress, nil)
+            } else {
+                CLGeocoder().reverseGeocodeLocation(location, completionHandler: { (placemarks, error) in
+                    var address : String?
+                    if let placemark = placemarks?[0] as CLPlacemark! {
+                        if let formattedAddressLines = placemark.addressDictionary?["FormattedAddressLines"] as? [String] {
+                            address = formattedAddressLines.joined(separator: ", ")
+                            try! CacheManager.sharedInstance.storage.setObject(address, forKey: keyString)
+                        }
                     }
-                }
-                handler(address, error)
-            })
+                    handler(address, error)
+                })
+            }
         }
     }
 }
@@ -507,93 +533,6 @@ class Fence: NSObject {
 
 public enum GPSStatus{
     case noDeviceFound, idle, disconected, unknown
-}
-
-class GPSData: NSObject {
-    
-    var status: GPSStatus
-    var point: Point
-    var signal: Int
-    var satellites: Int
-    var battery: Int
-    var serverDate: Date
-    var locationAndTime: String = ""
-    var source: String = ""
-    
-    override init() {
-        status = .unknown
-        point = Point()
-        signal = 0
-        satellites = 0
-        battery = 0
-        serverDate = Date()
-    }
-    
-    convenience init(_ data:[String:Any]) {
-        self.init()
-        update(data)
-    }
-    
-    func update(_ data:[String:Any]) {
-        
-        if let statusValue = data["error"] as? Int {
-            switch statusValue {
-            case 31: status = .noDeviceFound
-            default: break
-            }
-        }else{
-            status = .idle
-        }
-        
-        if let pointData = data["deviceData"] as? [String:Any] {
-            let newPoint = Point(pointData)
-            if point.coordinates.location.coordinateString != newPoint.coordinates.location.coordinateString {
-                locationAndTime = ""
-                point = newPoint
-                Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Requested for Update \(data["petId"] ?? "")")
-            }
-        }else{
-            point = Point()
-        }
-        signal = data.tryCastInteger(for: "netSignal") ?? -1
-        satellites = -1
-
-        
-        if let satellites = data["satSignal"] as? String {
-            let components = satellites.components(separatedBy: "-")
-            if components.count == 2 {
-                let min = Double(components[0]) ?? 0
-                let max = Double(components[1]) ?? 0
-                let sum = min + max
-                if sum > 0 { self.satellites = Int(sum/2.0) }
-            }
-        }
-        battery = data.tryCastInteger(for: "battery") ?? -1
-        if let serverTime = data.tryCastDouble(for: "serverTime") {
-            serverDate = Date.init(timeIntervalSince1970: TimeInterval(serverTime))
-        }else{
-            serverDate = Date()
-        }
-        source = data.debugDescription
-        
-   
-    }
-    
-    var distanceTime: String {
-        return Date().offset(from: serverDate)
-    }
-    
-    var batteryString: String? {
-        return battery != -1 ? "\(battery)%" : nil
-    }
-    
-    var signalString: String? {
-        return signal != -1 ? "\(signal)" : nil
-    }
-    
-    static func == (lhs: GPSData, rhs: GPSData) -> Bool {
-        return lhs.point == rhs.point && lhs.signal == rhs.signal && lhs.battery == rhs.battery
-    }
 }
 
 enum EventType: Int {

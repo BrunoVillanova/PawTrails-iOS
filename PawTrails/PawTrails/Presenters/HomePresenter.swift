@@ -79,22 +79,6 @@ class HomePresenter {
     func stopPetListUpdates(){
         NotificationManager.instance.removePetListUpdates()
     }
-    
 
-    //Socket IO
-    
-    func startPetsGPSUpdates(_ callback: @escaping ((_ id: MKLocationId, _ point: Point)->())){
-        NotificationManager.instance.getPetGPSUpdates({ (id, data) in
-            if data.status == .idle { callback(MKLocationId(id: id, type: .pet), data.point) }            
-        })
-    }
-    
-    func stopPetGPSUpdates(){
-        NotificationManager.instance.removePetGPSUpdates()
-    }
-
-    
-
-    
 }
 

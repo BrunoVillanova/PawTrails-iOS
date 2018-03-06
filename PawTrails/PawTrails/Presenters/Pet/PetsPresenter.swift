@@ -105,18 +105,6 @@ class PetsPresenter {
         }
     }
     
-    //MARK:- Socket IO
-    
-    func startPetsGPSUpdates(_ callback: @escaping ((_ id: Int)->())){
-        
-        NotificationManager.instance.getPetGPSUpdates({ (id, data) in
-            callback(id)
-        })
-    }
-    
-    func stopPetGPSUpdates(){
-        NotificationManager.instance.removePetGPSUpdates()
-    }
     
     //MARK:- Geocode
     

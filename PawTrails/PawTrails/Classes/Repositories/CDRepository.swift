@@ -191,9 +191,9 @@ class CDRepository {
                     cdPet.deviceTime = deviceTime
                 }
                 
-                if let point = deviceData.point {
-                    cdPet.latitude = point.latitude
-                    cdPet.longitude = point.longitude
+                if let point = deviceData.point, let lat = point.latitude, let lon = point.longitude {
+                    cdPet.latitude = lat
+                    cdPet.longitude = lon
                 }
                 
                 cdPet.netSignal =  deviceData.networkLevel

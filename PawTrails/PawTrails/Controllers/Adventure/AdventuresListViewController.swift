@@ -49,19 +49,20 @@ class AdventuresListViewController: UIViewController  {
             .zip(tableView.rx.itemSelected, tableView.rx.modelSelected(Trip.self))
             .bind { [unowned self] indexPath, item in
                 self.tableView.deselectRow(at: indexPath, animated: true)
-                self.goToTripDetails(item)
+                self.goToTripDetailsIfNeeded(item)
             }
             .disposed(by: disposeBag)
     }
     
-    fileprivate func goToTripDetails(_ trip: Trip) {
+    fileprivate func goToTripDetailsIfNeeded(_ trip: Trip) {
         
-        let tripDetailViewController = TripDetailViewController()
-        tripDetailViewController.trip = trip
-        
-        self.navigationController?.pushViewController(tripDetailViewController, animated: true)
+        if trip.hasLocationData {
+            let tripDetailViewController = TripDetailViewController()
+            tripDetailViewController.trip = trip
+            
+            self.navigationController?.pushViewController(tripDetailViewController, animated: true)
+        }
     }
-    
     
     func showGoalsDate() {
         let mydatePicker = achievementsView.mydatePicker
@@ -138,10 +139,14 @@ extension AdventuresListViewController: IndicatorInfoProvider {
 class AdventureHistoryCell: UITableViewCell {
     @IBOutlet weak var dateLbl: UILabel!
     @IBOutlet weak var adventureImage: PTMapView!
-    @IBOutlet weak var petName: UILabel!
     @IBOutlet weak var mainView: UIView!
+    @IBOutlet weak var deleteButton: UIButton!
     
     override func awakeFromNib() {
+        configureLayout()
+    }
+    
+    fileprivate func configureLayout() {
         let view = mainView!
         view.layer.borderColor = PTConstants.colors.lightGray.cgColor
         view.layer.borderWidth = 1
@@ -154,10 +159,6 @@ class AdventureHistoryCell: UITableViewCell {
     }
     
     func configure(_ trip: Trip) {
-        
-        if let name = trip.pet.name {
-            petName.text = "\(name)'s Adventure"
-        }
         
         if let ts = trip.startTimestamp {
             let tripStartTimestamp = Double(ts)
@@ -173,6 +174,10 @@ class AdventureHistoryCell: UITableViewCell {
         }
         
         adventureImage.setStaticTripView(trip)
+    }
+    
+    @IBAction func deleteAdventureTapped(_ sender: Any) {
+        
     }
 }
 

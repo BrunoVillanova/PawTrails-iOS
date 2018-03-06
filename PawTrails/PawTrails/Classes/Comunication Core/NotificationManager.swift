@@ -59,61 +59,6 @@ class NotificationManager {
         }
     }
     
-    //MARK:- GPSUpdates ALL
-    
-    /// Post Pet GPS Updates
-    /// It sends updates for the collective notification channel of all the pets and the single one for the specific pet.
-    /// - Parameter id: pet id
-    func postPetGPSUpdates(with id: Int){
-        self.post(Listener(.gpsUpdates), userInfo: ["id":id])
-        self.post(Listener(.gpsUpdates, id), userInfo: ["id":id])
-    }
-    
-    /// Get All Pets GPS Updates
-    ///
-    /// - Parameter callback: returns pet id and the GPS updates.
-    func getPetGPSUpdates(_ callback: @escaping ((_ id: Int, _ data: GPSData)->())){
-        self.addObserver(Listener(.gpsUpdates)) { (notification) in
-            self.handlePetGPSUpdates(notification, callback)
-        }
-    }
-    
-    private func handlePetGPSUpdates(_ notification: Notification, _ callback: @escaping ((_ id: Int, _ data: GPSData)->())){
-        if let petId = notification.userInfo?["id"] as? Int {
-            if let updates = SocketIOManager.instance.getGPSData(for: petId) {
-                if updates.locationAndTime == "" && !updates.point.coordinates.isDefaultZero {  GeocoderManager.Intance.reverse(type: .pet, with: updates.point, for: petId) }
-                DispatchQueue.main.async {
-                    callback(petId, updates)
-                }
-            }
-        }
-
-    }
-    
-    /// Removes All Pets GPS updates observer
-    func removePetGPSUpdates() {
-        self.removeObserver(Listener(.gpsUpdates))
-    }
-    
-    //MARK:- GPSUpdates ONE
-    
-    /// Get Single Pet GPS Updates
-    ///
-    /// - Parameters:
-    ///   - id: pet id
-    ///   - callback: returns pet id and the GPS updates.
-    func getPetGPSUpdates(for id: Int, _ callback: @escaping ((_ id: Int, _ data: GPSData)->())){
-        
-        self.addObserver(Listener(.gpsUpdates, id)) { (notification) in
-            self.handlePetGPSUpdates(notification, callback)
-        }
-    }
-
-    /// Removes Sinle Pet GPS updates observer
-    func removePetGPSUpdates(of id: Int) {
-        self.removeObserver(Listener(.gpsUpdates, id))
-    }
-    
     //MARK:- PetList
     
     /// Post Pet List Updates

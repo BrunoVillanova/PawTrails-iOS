@@ -528,7 +528,7 @@ extension Trip {
         averageSpeed = values["averageSpeed"] as? Float
         maxSpeed = values["maxSpeed"] as? Float
         steps = values["steps"] as? Int64
-        points = [TripPoint]()
+        points = nil
         deviceData = [DeviceData]()
         
         if let pointsValues = values["rawData"] as! [[Any]]? {
@@ -595,8 +595,8 @@ extension TripPoint {
             let latitudeValue = jsonArray[1]
             let longitudeValue = jsonArray[2]
             
-            if !(latitudeValue is NSNull) && !(longitudeValue is NSNull) {
-                point = Point(latitudeValue as! Double, longitudeValue as! Double)
+            if !(latitudeValue is NSNull) && !(longitudeValue is NSNull), let lat = latitudeValue as? Double, let lon = longitudeValue as? Double {
+                point = Point(lat, lon)
             }
             
         }

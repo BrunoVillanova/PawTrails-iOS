@@ -54,57 +54,6 @@ class GeocoderManager {
         sem = DispatchSemaphore(value: maxConcurrent)
     }
     
-    func reverse(type: GeocodeType, with point: Point, for id: Int){
-        reverse(type: type, with: point.coordinates.location, for: id)
-    }
-    
-    func reverse(type: GeocodeType, with location: CLLocation, for id: Int){
-        
-        let key = location.coordinateString
-        
-        if let placemark = cache.object(forKey: key as NSString) {
-            deliver(Geocode(type: type, id: id, location: location, placemark: placemark))
-        }else {
-            Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Geocode requested: ", id)
-            queue.async {
-                self.sem.wait()
-                self.geocoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) in
-
-                    if let error = error {
-                        self.placemark(error)
-                    }else if let placemark = placemarks?.first {
-                        self.cache.setObject(placemark, forKey: location.coordinateString as NSString)
-                        self.deliver(Geocode(type: type, id: id, location: location, placemark: placemark))
-                    }else{
-                        self.placemarkNotFound(Geocode(type: type, id: id, location: location))
-                    }
-                })
-            }
-        }
-    }
-    
-    private func deliver(_ geocode: Geocode){
-        DispatchQueue.main.async {
-            let name = geocode.name
-            Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Geocode released: ", geocode.id, name)
-            if geocode.type == .pet {
-                SocketIOManager.instance.set(name, for: geocode.id)
-                NotificationManager.instance.postPetGeoCodeUpdates(with: geocode)
-                self.sem.signal()
-            }else if geocode.type == .safezone {
-                DataManager.instance.setSafeZone(address: name, for: geocode.id, callback: { (error) in
-                    if let error = error {
-                        Reporter.send(file: "\(#file)", function: "\(#function)", error, ["Geocode id ": geocode.id, "Geocode name ": name])
-                    }else{
-                        Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Geocode posted: ", geocode.id, name)
-                        NotificationManager.instance.postPetGeoCodeUpdates(with: geocode)
-                    }
-                    self.sem.signal()
-                })
-            }
-        }
-    }
-    
     private func placemarkNotFound(_ geocode: Geocode){
         DispatchQueue.main.async {
             Reporter.debugPrint(file: "\(#file)", function: "\(#function)", "Placemark not found for: ", geocode.id, geocode.type)

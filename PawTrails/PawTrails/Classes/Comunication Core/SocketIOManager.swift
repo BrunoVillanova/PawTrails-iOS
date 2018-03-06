@@ -79,7 +79,6 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     public var socketReactive: Reactive<SocketIOClient>?
     
     private var onUpdates = [Int:Bool]()
-    private var PetsGPSData = NSCache<NSNumber,GPSData>()
     
     public var isConnected = false
     private var isConnecting = false
@@ -94,8 +93,6 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     var triedToReconnectOnUnauthorized = false
     
     fileprivate var openChannels: Set<channel> = Set<channel>()
-    
-//    var petGpsUpdates: Observable<[PetDeviceData]?> = Observable.from(optional: [PetDeviceData]())
     
     init(SSLEnabled: Bool = true) {
         super.init()
@@ -182,14 +179,13 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         
         socketReactive?.on(channel.gpsUpdates.name).subscribe(onNext: { (data) in
             Reporter.debugPrint("SocketIO -> GPS Updates")
-            self.openChannels.insert(channel.gpsUpdates)
             
             if let petDeviceData = PetDeviceData.fromJson(data.first) {
                 for newPetDeviceData in petDeviceData {
                     if !self.petGpsUpdates.value.contains(newPetDeviceData) {  // if there is a name in the new list also in the old list
                         Reporter.debugPrint("SocketIO -> Setting petGpsUpdates.value")
                         self.petGpsUpdates.value = petDeviceData
-                        break
+                        return
                     }
                 }
 
@@ -376,38 +372,6 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         })
     }
 
-    //MARK:- Pet
-    /// Collect GPS Data for pet id
-    ///
-    /// - Parameter id: pet id
-    /// - Returns: returns GPSData if available else *nil*
-    func getGPSData(for id: Int) -> GPSData? {
-        return PetsGPSData.object(forKey: NSNumber(integerLiteral: Int(id)))
-    }
-    
-    /// Set Location Name
-    ///
-    /// - Parameters:
-    ///   - locationName: location name
-    ///   - petId: pet id
-    func set(_ locationName: String, for petId: Int){
-        if let data = getGPSData(for: petId) {
-            data.locationAndTime = "\(locationName) - \(data.distanceTime)"
-        }
-    }
-    
-//    /// Start pets GPS Updates
-//    ///
-//    //    /// - Parameter petIds: pet ids
-//    func startGPSUpdates(for petIds: [Int]) -> Observable<[PetDeviceData]> {
-//        Reporter.debugPrint("SocketIO GPS Pets Emited for petIDs \(petIds)")
-//        return self.gpsUpdates(petIds)
-//    }
-    
-
-    
-
-    
     //Events
     
     private func handleEventUpdated(_ data:[Any]){

@@ -244,8 +244,13 @@ extension Point {
         self.init(coordinates.latitude, coordinates.longitude)
     }
     
-    public var coordinates: CLLocationCoordinate2D {
-        return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    public var coordinates: CLLocationCoordinate2D? {
+        
+        if let lat = latitude, let lon = longitude {
+            return CLLocationCoordinate2D(latitude: lat, longitude: lon)
+        } else {
+            return nil
+        }
     }
     
 }
