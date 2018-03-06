@@ -3591,7 +3591,9 @@ PawTrails is a product created by Attitude Technologies.
                         <viewLayoutGuide key="safeArea" id="yde-DI-cy3"/>
                     </view>
                     <navigationItem key="navigationItem" title="Live Tracking" id="o0o-KG-hqf">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="dSI-y6-ehr"/>
+                        <barButtonItem key="rightBarButtonItem" id="dSI-y6-ehr">
+                            <color key="tintColor" red="0.83137254900000002" green="0.078431372550000003" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="firstButtonfromthebottom" destination="93O-q0-eKh" id="xZg-ne-SSu"/>
@@ -8149,7 +8151,7 @@ Last Edited on 2017-12-04
     <inferredMetricsTieBreakers>
         <segue reference="yp5-bT-5uy"/>
         <segue reference="Rzx-2e-OhR"/>
-        <segue reference="G7h-iD-Glq"/>
+        <segue reference="Nln-Sh-wxV"/>
         <segue reference="Avi-do-lZw"/>
     </inferredMetricsTieBreakers>
 </document>

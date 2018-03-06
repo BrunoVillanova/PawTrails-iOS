@@ -21,28 +21,27 @@ class MapViewController: UIViewController {
     @IBOutlet weak var refreshBarBtn: UIBarButtonItem!
     
     fileprivate let presenter = HomePresenter()
+    fileprivate let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    fileprivate let disposeBag = DisposeBag()
+    fileprivate let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+    fileprivate let button = UIButton(frame: CGRect(x: 0, y: 0, width: 43, height: 44))
+    fileprivate let refreshIconImage = UIImage(named: "RefreshIcon")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+    
     var selectedPet: Pet?
     var data = [searchElement]()
     var activeTrips = [Trip]()
     var isDisplayedPetScreen = false
 
-    
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    private let disposeBag = DisposeBag()
-    
-    let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-    let button = UIButton(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-
-    
     //MARK: View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
         UIApplication.shared.statusBarStyle = .default
-        self.button.addTarget(self, action:  #selector(self.refreshBtnPressed(_:)), for: .touchUpInside)
-        button.setImage(UIImage(named: "refresh-button"), for: .normal)
+        button.addTarget(self, action:  #selector(self.refreshBtnPressed(_:)), for: .touchUpInside)
+        button.setImage(refreshIconImage, for: .normal)
+        button.tintColor = PTConstants.colors.primary
         self.navigationItem.rightBarButtonItem?.customView = button
-//        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.red
+        self.navigationItem.rightBarButtonItem?.tintColor = PTConstants.colors.primary
         
         
         let notificationIdentifier: String = "petAdded"
@@ -62,7 +61,7 @@ class MapViewController: UIViewController {
     }
     
     
-    func initialize() {
+    fileprivate func initialize() {
         mapView.tripMode = true
         mapView.calloutDelegate = self
         DataManager.instance.getActivePetTrips()
@@ -137,6 +136,21 @@ class MapViewController: UIViewController {
             selectPetsViewController.action = selectPetsAction.startAdventure
         }
     }
+    
+    fileprivate func showIndicator() {
+        refreshBarBtn.customView = self.activityIndicator
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+        refreshBarBtn.isEnabled = false
+    }
+    
+    fileprivate func hideIndicator() {
+        refreshBarBtn.isEnabled = true
+        activityIndicator.stopAnimating()
+        button.setImage(refreshIconImage, for: .normal)
+        navigationItem.rightBarButtonItem?.customView = button
+    }
+    
     @IBAction func refreshBtnPressed(_ sender: Any) {
         if  presenter.pets.count != 0 {
             var petIds = [Int]()
@@ -165,21 +179,6 @@ class MapViewController: UIViewController {
                 .textNumberOfLines(0),
                 ])
         }
-    }
-    
-    
-    func showIndicator() {
-        self.refreshBarBtn.customView = self.activityIndicator
-        self.activityIndicator.isHidden = false
-        self.activityIndicator.startAnimating()
-        self.refreshBarBtn.isEnabled = false
-    }
-    
-    func hideIndicator() {
-        self.refreshBarBtn.isEnabled = true
-        self.activityIndicator.stopAnimating()
-        button.setImage(UIImage(named: "refresh-button"), for: .normal)
-        self.navigationItem.rightBarButtonItem?.customView = button
     }
     
     @IBAction func firstButtonPressed(_ sender: Any) {

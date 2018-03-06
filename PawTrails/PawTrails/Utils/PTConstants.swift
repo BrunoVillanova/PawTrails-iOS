@@ -18,6 +18,7 @@ struct PTConstants {
         #endif
     }
     struct colors {
+        static let primary = UIColor(red: 212/255, green: 20/255, blue: 61/255, alpha: 1)
         static let lightGray = UIColor(white: 0, alpha: 0.1)
     }
 }
