@@ -202,15 +202,16 @@ class PTMapView: MKMapView {
     
     func load(_ petDeviceData: PetDeviceData) {
         
-        
-        let newAnnotation = PTAnnotation(petDeviceData)
-        
         if let existingPetAnnotation = self.annotations.first(where: { ($0 is PTAnnotation) && ($0 as! PTAnnotation).petDeviceData?.pet.id == petDeviceData.pet.id }) as! PTAnnotation!
         {
             self.removeAnnotation(existingPetAnnotation)
         }
         
-        self.addAnnotation(newAnnotation)
+        
+        if petDeviceData.deviceData.point != nil {
+            let newAnnotation = PTAnnotation(petDeviceData)
+            self.addAnnotation(newAnnotation)
+        }
     }
     
     func drawOverlayForPetAnnotations(_ annotations: [PTAnnotation]?) {
@@ -251,18 +252,11 @@ class PTMapView: MKMapView {
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                 UIApplication.shared.keyWindow?.rootViewController!.present(alert, animated: true, completion: nil)
             }
-            
-            
-            
-//            let coordinates = petAnnotationOnMap.map({ $0.coordinate })
-//            if coordinates.count > 0 {
-//                self.setVisibleMapFor(coordinates)
-//            }
-//            
-//            self.centerOn(petAnnotationOnMap.coordinate, animated: true)
-//            CATransaction.setCompletionBlock({
-//                self.selectAnnotation(petAnnotationOnMap, animated: true)
-//            })
+        } else {
+            // the pet is not even in the map yet
+            let alert = UIAlertController(title: "Location unavailable", message: "Move your device outdoors to get your first location", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            UIApplication.shared.keyWindow?.rootViewController!.present(alert, animated: true, completion: nil)
         }
     }
     
