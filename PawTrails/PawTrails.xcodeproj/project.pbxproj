@@ -1452,7 +1452,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-PawTrails/Pods-PawTrails-resources.sh",
-				"$PODS_CONFIGURATION_BUILD_DIR/HockeySDK/HockeySDKResources.bundle",
+				$PODS_CONFIGURATION_BUILD_DIR/HockeySDK/HockeySDKResources.bundle,
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -2189,7 +2189,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.attitudetech.PawTrails.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)$(PRODUCT_NAME_SUFFIX)";
 				PRODUCT_NAME_SUFFIX = " Debug";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "4e3abbdc-ba9a-4b75-afe4-8062bd1b403c";
 				PROVISIONING_PROFILE_SPECIFIER = "PawTrails Debug";
 				SWIFT_OBJC_BRIDGING_HEADER = "PawTrails/Resources/PawTrails-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
