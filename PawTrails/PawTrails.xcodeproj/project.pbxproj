@@ -22,6 +22,7 @@
 		1570C7AC203B63DF00A7F59F /* TripDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1570C7AB203B63DF00A7F59F /* TripDetailViewController.swift */; };
 		1585469C1FDCFBCB004C82EC /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1585469B1FDCFBCB004C82EC /* Charts.framework */; };
 		1589EBC11FE3644E00280926 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1589EBC01FE3644E00280926 /* Bolts.framework */; };
+		1599A625204F64940089FC8A /* SkyFloatingLabelTextField.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1599A624204F64940089FC8A /* SkyFloatingLabelTextField.framework */; };
 		1599B22A2023E82B002D4025 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1599B2292023E82B002D4025 /* SnapKit.framework */; };
 		1599B22C2023F48A002D4025 /* PTDeviceStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1599B22B2023F48A002D4025 /* PTDeviceStatusView.swift */; };
 		15AAE9F72022BFCA007F9080 /* PTConnectionStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AAE9F62022BFCA007F9080 /* PTConnectionStatusView.swift */; };
@@ -270,6 +271,7 @@
 		157AC4B21FC3192E0005A717 /* Convert.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Convert.framework; path = Carthage/Build/iOS/Convert.framework; sourceTree = "<group>"; };
 		1585469B1FDCFBCB004C82EC /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = Carthage/Build/iOS/Charts.framework; sourceTree = "<group>"; };
 		1589EBC01FE3644E00280926 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Carthage/Build/iOS/Bolts.framework; sourceTree = "<group>"; };
+		1599A624204F64940089FC8A /* SkyFloatingLabelTextField.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SkyFloatingLabelTextField.framework; path = Carthage/Build/iOS/SkyFloatingLabelTextField.framework; sourceTree = "<group>"; };
 		1599B2292023E82B002D4025 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
 		1599B22B2023F48A002D4025 /* PTDeviceStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTDeviceStatusView.swift; sourceTree = "<group>"; };
 		15AAE9F62022BFCA007F9080 /* PTConnectionStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTConnectionStatusView.swift; sourceTree = "<group>"; };
@@ -533,6 +535,7 @@
 				1555FFF41FDF640D00F05C76 /* RxCocoa.framework in Frameworks */,
 				1555FFF51FDF640D00F05C76 /* RxSwift.framework in Frameworks */,
 				1585469C1FDCFBCB004C82EC /* Charts.framework in Frameworks */,
+				1599A625204F64940089FC8A /* SkyFloatingLabelTextField.framework in Frameworks */,
 				1555FA611FDF3DC100DA9EEA /* GSMessages.framework in Frameworks */,
 				E710CBA5471FDC34DDA7BEB8 /* Pods_PawTrails.framework in Frameworks */,
 				150741C5200DB4B800EB761B /* CocoaLumberjackSwift.framework in Frameworks */,
@@ -1117,6 +1120,7 @@
 		91352D1B7E01CC1C0CF51D38 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1599A624204F64940089FC8A /* SkyFloatingLabelTextField.framework */,
 				15C0DB6A204EFDDC0098E735 /* SCLAlertView.framework */,
 				15C0DB69204EFDDC0098E735 /* XLPagerTabStrip.framework */,
 				15B3FF1B20329C7F00C08D48 /* Cache.framework */,
@@ -1384,6 +1388,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Cache.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SCLAlertView.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/XLPagerTabStrip.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SkyFloatingLabelTextField.framework",
 			);
 			name = "Carthage Copy Frameworks";
 			outputPaths = (
@@ -1406,6 +1411,7 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Cache.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SCLAlertView.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/XLPagerTabStrip.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SkyFloatingLabelTextField.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1446,7 +1452,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-PawTrails/Pods-PawTrails-resources.sh",
-				$PODS_CONFIGURATION_BUILD_DIR/HockeySDK/HockeySDKResources.bundle,
+				"$PODS_CONFIGURATION_BUILD_DIR/HockeySDK/HockeySDKResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -1534,7 +1540,6 @@
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/Pulsator/Pulsator.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
-				"${BUILT_PRODUCTS_DIR}/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework",
 				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
 				"${BUILT_PRODUCTS_DIR}/StarscreamSocketIO/StarscreamSocketIO.framework",
 				"${BUILT_PRODUCTS_DIR}/YNDropDownMenu/YNDropDownMenu.framework",
@@ -1551,7 +1556,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pulsator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkyFloatingLabelTextField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketIO.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StarscreamSocketIO.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YNDropDownMenu.framework",
