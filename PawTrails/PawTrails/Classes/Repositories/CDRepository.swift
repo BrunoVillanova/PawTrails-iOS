@@ -850,7 +850,13 @@ class CDRepository {
     ///   - address: address to set
     ///   - id: safezone id
     ///   - callback: returns nil or *error*
-    func setSafeZone(address: String, for id: Int, callback: @escaping CDRepErrorCallback){
+    func setSafeZone(address: String?, for id: Int, callback: @escaping CDRepErrorCallback){
+        
+        guard address != nil else {
+            callback(nil)
+            return
+        }
+        
         DispatchQueue.main.async {
             self.getSafeZoneCD(by: id) { (error, cdSafezone) in
                 if error == nil, let cdSafezone = cdSafezone {

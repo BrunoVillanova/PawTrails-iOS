@@ -418,8 +418,12 @@ public class Point: NSObject, NSCoding {
     }
     
     required public init?(coder aDecoder: NSCoder) {
-        latitude = aDecoder.decodeDouble(forKey: "latitude")
-        longitude = aDecoder.decodeDouble(forKey: "longitude")
+        
+        if let lat = aDecoder.decodeObject(forKey: "latitude") as? Double, let lon =  aDecoder.decodeObject(forKey: "longitude") as? Double {
+            latitude = lat
+            longitude = lon
+        }
+
     }
     
     public func encode(with aCoder: NSCoder) {
