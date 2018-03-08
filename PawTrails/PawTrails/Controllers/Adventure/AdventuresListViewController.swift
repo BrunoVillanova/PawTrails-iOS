@@ -335,6 +335,19 @@ class AdventuresAchievementsView: UITableViewHeaderFooterView {
         return btn
     }()
     
+    override func awakeFromNib() {
+        initialize()
+    }
+    
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+        initialize()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
     fileprivate func initialize() {
         editBtn.border(color: UIColor.darkGray, width: 1)
         containerView.border(color: UIColor.darkGray, width: 1)
@@ -350,7 +363,6 @@ class AdventuresAchievementsView: UITableViewHeaderFooterView {
     }
     
     func configure(_ tripAchievements: TripAchievements) {
-        self.initialize()
         var distanceAchievement = CGFloat()
         var timeGoalAchievmenet = CGFloat()
         let distanceColor = UIColor(red: 153/255, green: 202/255, blue: 186/255, alpha: 1)
