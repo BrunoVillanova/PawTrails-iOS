@@ -500,8 +500,10 @@
 		734D05AA5E231C24EBC9332D /* Pods-PawTrails.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PawTrails.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PawTrails/Pods-PawTrails.debug.xcconfig"; sourceTree = "<group>"; };
 		85A3950B851162A9AD058D22 /* Pods-PawTrailsTests.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PawTrailsTests.beta.xcconfig"; path = "Pods/Target Support Files/Pods-PawTrailsTests/Pods-PawTrailsTests.beta.xcconfig"; sourceTree = "<group>"; };
 		A8782C798F51A66A5AFC788C /* Pods-PawTrailsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PawTrailsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PawTrailsTests/Pods-PawTrailsTests.release.xcconfig"; sourceTree = "<group>"; };
+		AF3E9364CD7F647043AF020C /* Pods-PawTrails.beta demo.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PawTrails.beta demo.xcconfig"; path = "Pods/Target Support Files/Pods-PawTrails/Pods-PawTrails.beta demo.xcconfig"; sourceTree = "<group>"; };
 		B4A45B026D67F7FA0B3729DF /* Pods-PawTrailsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PawTrailsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PawTrailsTests/Pods-PawTrailsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		CDF43BC48AA97ADEA16BD58D /* Pods-PawTrails.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PawTrails.release.xcconfig"; path = "Pods/Target Support Files/Pods-PawTrails/Pods-PawTrails.release.xcconfig"; sourceTree = "<group>"; };
+		CE17CF91E95DB2944F08816D /* Pods-PawTrailsTests.beta demo.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PawTrailsTests.beta demo.xcconfig"; path = "Pods/Target Support Files/Pods-PawTrailsTests/Pods-PawTrailsTests.beta demo.xcconfig"; sourceTree = "<group>"; };
 		D3E63257CC5E13A67F31124B /* Pods_PawTrails.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PawTrails.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E89F72637ABD3F9989B50AF4 /* Pods-PawTrails.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PawTrails.beta.xcconfig"; path = "Pods/Target Support Files/Pods-PawTrails/Pods-PawTrails.beta.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1162,6 +1164,8 @@
 				A8782C798F51A66A5AFC788C /* Pods-PawTrailsTests.release.xcconfig */,
 				E89F72637ABD3F9989B50AF4 /* Pods-PawTrails.beta.xcconfig */,
 				85A3950B851162A9AD058D22 /* Pods-PawTrailsTests.beta.xcconfig */,
+				AF3E9364CD7F647043AF020C /* Pods-PawTrails.beta demo.xcconfig */,
+				CE17CF91E95DB2944F08816D /* Pods-PawTrailsTests.beta demo.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1961,6 +1965,155 @@
 			};
 			name = Beta;
 		};
+		15E1D9EF2050D65A00C5053F /* Beta Demo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "BETA DEMO";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Beta Demo";
+		};
+		15E1D9F02050D65A00C5053F /* Beta Demo */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AF3E9364CD7F647043AF020C /* Pods-PawTrails.beta demo.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = PawTrails/Resources/PawTrails.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 7E2855LEH4;
+				ENABLE_BITCODE = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/PawTrails",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Frameworks",
+				);
+				GOOGLE_SERVICES_PLIST_DIR = "${SRCROOT}/PawTrails/Resources/ConfigFiles";
+				GOOGLE_SERVICES_PLIST_FILE = "${GOOGLE_SERVICES_PLIST_DIR}/GoogleService-Info-Beta.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/PawTrails/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
+				PRODUCT_BUNDLE_IDENTIFIER = com.attitudetech.PawTrails.beta;
+				PRODUCT_NAME = "$(TARGET_NAME)$(PRODUCT_NAME_SUFFIX)";
+				PRODUCT_NAME_SUFFIX = " Beta";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "PawTrails Beta";
+				SWIFT_OBJC_BRIDGING_HEADER = "PawTrails/Resources/PawTrails-Bridging-Header.h";
+				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = "Beta Demo";
+		};
+		15E1D9F12050D65A00C5053F /* Beta Demo */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CE17CF91E95DB2944F08816D /* Pods-PawTrailsTests.beta demo.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				DEVELOPMENT_TEAM = 7E2855LEH4;
+				ENABLE_BITCODE = YES;
+				INFOPLIST_FILE = PawTrailsTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"Accounts\"",
+					"-framework",
+					"\"CoreData\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreMedia\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"Social\"",
+					"-framework",
+					"\"UIKit\"",
+					"-ObjC",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = attitudetech.PawTrailsTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PawTrails.app/PawTrails";
+			};
+			name = "Beta Demo";
+		};
+		15E1D9F22050D65A00C5053F /* Beta Demo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				DEVELOPMENT_TEAM = DJBJW6R236;
+				INFOPLIST_FILE = PawTrailsUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = attitudetech.PawTrailsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = PawTrails;
+			};
+			name = "Beta Demo";
+		};
 		4414AE701EA0DD5B004A5134 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B4A45B026D67F7FA0B3729DF /* Pods-PawTrailsTests.debug.xcconfig */;
@@ -2276,6 +2429,7 @@
 				4414AE701EA0DD5B004A5134 /* Debug */,
 				4414AE711EA0DD5B004A5134 /* Release */,
 				1575D68A1FD02E0B00ECC2DF /* Beta */,
+				15E1D9F12050D65A00C5053F /* Beta Demo */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2286,6 +2440,7 @@
 				4415FF651E3B822A00A81B13 /* Debug */,
 				4415FF661E3B822A00A81B13 /* Release */,
 				1575D6881FD02E0B00ECC2DF /* Beta */,
+				15E1D9EF2050D65A00C5053F /* Beta Demo */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2296,6 +2451,7 @@
 				4415FF681E3B822A00A81B13 /* Debug */,
 				4415FF691E3B822A00A81B13 /* Release */,
 				1575D6891FD02E0B00ECC2DF /* Beta */,
+				15E1D9F02050D65A00C5053F /* Beta Demo */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2306,6 +2462,7 @@
 				444721811F03F12A001DCDE1 /* Debug */,
 				444721821F03F12A001DCDE1 /* Release */,
 				1575D68B1FD02E0B00ECC2DF /* Beta */,
+				15E1D9F22050D65A00C5053F /* Beta Demo */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
