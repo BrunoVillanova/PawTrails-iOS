@@ -64,7 +64,7 @@ class PTBasicAnnotationView: MKAnnotationView {
         self.frame.size.width = frame.width
 
         if let calloutView = calloutView {
-            calloutView.center = CGPoint(x: (calloutView.frame.size.width/2.0)-8, y: -30)
+            calloutView.center = CGPoint(x: (calloutView.frame.size.width/2.0)-8, y: -(self.frame.size.height-16))
         }
         
     }
@@ -85,7 +85,6 @@ class PTBasicAnnotationView: MKAnnotationView {
     func showCallout() {
         
         if calloutView == nil {
-            
             calloutView = PTPetCalloutView(frame: .zero)
             if let calloutDelegate = calloutDelegate {
                 calloutView?.delegate = calloutDelegate
