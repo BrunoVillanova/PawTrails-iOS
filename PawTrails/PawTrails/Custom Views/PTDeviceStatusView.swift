@@ -79,6 +79,8 @@ class PTDeviceStatusView: UIView {
             connectionStatusView?.alpha = 1
             connectionStatusView?.isHidden = false
             connectionStatusView?.setStatus(petDeviceData.deviceConnection.status)
+            signalView?.isHidden = true
+            batteryView?.isHidden = true
         } else {
             connectionStatusView?.isHidden = true
             signalView?.alpha = 1

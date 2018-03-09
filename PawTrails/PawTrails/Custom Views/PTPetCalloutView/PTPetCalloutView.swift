@@ -7,38 +7,61 @@
 //
 
 import UIKit
+import SnapKit
 
 protocol PTPetCalloutViewDelegate {
     func didTapOnCallout(annotation: PTAnnotation)
 }
 
 class PTPetCalloutView: UIView {
-
-    var bubbleView : UIView?
-    var petNameLabel : UILabel?
-    var addressLabel : UILabel?
-    var batteryView : PTBatteryView?
+    
+    @IBOutlet weak var bubbleView: PTBubbleView!
+    @IBOutlet weak var petNameLabel: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var deviceStatusView: PTDeviceStatusView!
     var annotation : PTAnnotation?
     var delegate: PTPetCalloutViewDelegate?
-    
-    override func awakeFromNib() {
-        petNameLabel = self.viewWithTag(100) as? UILabel
-        addressLabel = self.viewWithTag(110) as? UILabel
-        batteryView = self.viewWithTag(200) as? PTBatteryView
-        bubbleView = self.viewWithTag(10)
-        
-        let gesture = UITapGestureRecognizer(target: self, action: #selector (self.tappedOnView(sender:)))
-        bubbleView!.addGestureRecognizer(gesture)
-    }
+    var contentView: UIView?
     
     override func layoutSubviews() {
-        if let bubbleView = bubbleView {
-            var frame = self.frame
-            frame.size.height = bubbleView.frame.size.height
-            frame.size.width = bubbleView.frame.size.width
-            self.frame = frame
-        }
         super.layoutSubviews()
+        if let contentView = contentView {
+            var frame = self.frame
+            frame.size.height = contentView.frame.size.height
+            frame.size.width = contentView.frame.size.width
+            self.frame = frame
+            
+            frame = contentView.frame
+            frame.origin.x = 0
+            frame.origin.y = 0
+            contentView.frame = frame
+
+        }
+    }
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        initialize()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        initialize()
+    }
+    
+    fileprivate func initialize() {
+    
+        
+        let nib = Bundle.main.loadNibNamed("PTPetCalloutView", owner: self, options: nil)
+        
+        if let contentView = nib?.first as? UIView {
+            contentView.translatesAutoresizingMaskIntoConstraints = false
+            addSubview(contentView)
+            self.contentView = contentView
+        }
+        self.isUserInteractionEnabled = true
+        let gesture = UITapGestureRecognizer(target: self, action: #selector (self.tappedOnView(sender:)))
+        bubbleView.addGestureRecognizer(gesture)
     }
 
     @objc fileprivate func tappedOnView(sender: UITapGestureRecognizer) {
@@ -58,20 +81,16 @@ class PTPetCalloutView: UIView {
             petNameLabel?.text = petName.uppercased()
         }
         
-        if let deviceData = annotation.petDeviceData?.deviceData, let addressLabel = addressLabel {
-            batteryView?.setBatteryLevel(deviceData.batteryLevel)
+        if let petDeviceData = annotation.petDeviceData, let addressLabel = addressLabel {
+            deviceStatusView?.configure(petDeviceData)
             
-            if let point = deviceData.point {
+            if let point = petDeviceData.deviceData.point {
                 addressLabel.text = "Getting address..."
                 point.getFullFormatedAddress(handler: {
                     (address, error) in
                     
                     if error == nil, let address = address {
                         addressLabel.text = address.uppercased()
-                        addressLabel.sizeToFit()
-                        var frame = self.frame
-                        frame.size.height = addressLabel.frame.origin.y + addressLabel.frame.size.height
-                        self.frame = frame
                     }
                     
                 })

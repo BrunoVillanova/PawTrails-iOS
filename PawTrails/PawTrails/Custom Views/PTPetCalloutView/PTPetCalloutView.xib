@@ -17,103 +17,86 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PTPetCalloutView" customModule="PawTrails" customModuleProvider="target">
+            <connections>
+                <outlet property="addressLabel" destination="xQf-1d-aD4" id="HK0-Nf-BpD"/>
+                <outlet property="bubbleView" destination="440-Y8-cNk" id="fAg-9l-Byw"/>
+                <outlet property="deviceStatusView" destination="yKY-xA-2It" id="i1g-od-jBx"/>
+                <outlet property="petNameLabel" destination="jR4-gw-Sik" id="8yX-Tw-5Rh"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iN0-l3-epB" customClass="PTPetCalloutView" customModule="PawTrails" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="176" height="105"/>
-            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="140" height="105"/>
+            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
-                <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Ah-80-bCh" userLabel="Content View">
-                    <rect key="frame" x="0.0" y="0.0" width="176" height="105"/>
+                <view opaque="NO" tag="10" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="440-Y8-cNk" userLabel="Bubble View" customClass="PTBubbleView" customModule="PawTrails" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="140" height="105"/>
                     <subviews>
-                        <view opaque="NO" tag="10" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="440-Y8-cNk" userLabel="Bubble View" customClass="PTBubbleView" customModule="PawTrails" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="23" width="160" height="82"/>
+                        <view contentMode="scaleToFill" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Csl-Pg-N2l" userLabel="Info View">
+                            <rect key="frame" x="16" y="16" width="108" height="57"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Csl-Pg-N2l" userLabel="Info View">
-                                    <rect key="frame" x="16" y="16" width="128" height="34"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" placeholderIntrinsicWidth="0.0" placeholderIntrinsicHeight="22" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jR4-gw-Sik" userLabel="Pet Name Label">
-                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="22"/>
-                                            <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="12"/>
-                                            <color key="textColor" red="0.82352941176470584" green="0.078431372549019607" blue="0.23921568627450979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="110" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xQf-1d-aD4" userLabel="Address Label">
-                                            <rect key="frame" x="0.0" y="26" width="112" height="0.0"/>
-                                            <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="10"/>
-                                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <view tag="200" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wKb-0A-7X7" userLabel="Battery View" customClass="PTBatteryView" customModule="PawTrails" customModuleProvider="target">
-                                            <rect key="frame" x="85" y="1" width="20" height="10"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="20" id="2eY-bA-OPL"/>
-                                                <constraint firstAttribute="height" constant="10" id="gw3-wf-342"/>
-                                            </constraints>
-                                        </view>
-                                        <view tag="210" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yKY-xA-2It" userLabel="Signal View" customClass="PTSignalView" customModule="PawTrails" customModuleProvider="target">
-                                            <rect key="frame" x="113" y="0.0" width="15" height="12"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="15" id="AmF-um-XJd"/>
-                                                <constraint firstAttribute="height" constant="12" id="WMc-9L-GTf"/>
-                                            </constraints>
-                                        </view>
-                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="KeyboardArrowRightGray-Small" translatesAutoresizingMaskIntoConstraints="NO" id="eHm-lI-E0F" userLabel="Arrow Image View">
-                                            <rect key="frame" x="120" y="20" width="8" height="12"/>
-                                            <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
-                                            <color key="tintColor" red="0.81514007939999999" green="0.81514007939999999" blue="0.81514007939999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="8" id="0WF-5g-fOt"/>
-                                                <constraint firstAttribute="height" constant="12" id="7vB-wc-UyX"/>
-                                            </constraints>
-                                        </imageView>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="jR4-gw-Sik" firstAttribute="leading" secondItem="Csl-Pg-N2l" secondAttribute="leading" id="60d-QJ-fBp"/>
-                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="32" id="DVz-gm-7Ke"/>
-                                        <constraint firstItem="jR4-gw-Sik" firstAttribute="top" secondItem="Csl-Pg-N2l" secondAttribute="top" id="HOv-fw-LvT"/>
-                                        <constraint firstAttribute="bottom" secondItem="xQf-1d-aD4" secondAttribute="bottom" constant="8" id="Ky2-FS-bJi"/>
-                                        <constraint firstItem="yKY-xA-2It" firstAttribute="top" secondItem="Csl-Pg-N2l" secondAttribute="top" id="LEj-wY-gTd"/>
-                                        <constraint firstItem="wKb-0A-7X7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="jR4-gw-Sik" secondAttribute="trailing" constant="8" id="PxX-si-Zcm"/>
-                                        <constraint firstAttribute="trailing" secondItem="eHm-lI-E0F" secondAttribute="trailing" id="TFw-fF-aum"/>
-                                        <constraint firstItem="yKY-xA-2It" firstAttribute="leading" secondItem="wKb-0A-7X7" secondAttribute="trailing" constant="8" id="ah5-no-nv3"/>
-                                        <constraint firstItem="wKb-0A-7X7" firstAttribute="centerY" secondItem="yKY-xA-2It" secondAttribute="centerY" id="bdo-Fm-YE4"/>
-                                        <constraint firstItem="eHm-lI-E0F" firstAttribute="centerY" secondItem="xQf-1d-aD4" secondAttribute="centerY" id="cdr-tj-Uh9"/>
-                                        <constraint firstAttribute="trailing" secondItem="yKY-xA-2It" secondAttribute="trailing" id="d7V-zm-sXe"/>
-                                        <constraint firstItem="xQf-1d-aD4" firstAttribute="top" secondItem="jR4-gw-Sik" secondAttribute="bottom" constant="4" id="gZH-ud-BFs"/>
-                                        <constraint firstItem="xQf-1d-aD4" firstAttribute="leading" secondItem="Csl-Pg-N2l" secondAttribute="leading" id="mkq-in-RN0"/>
-                                        <constraint firstItem="eHm-lI-E0F" firstAttribute="leading" secondItem="xQf-1d-aD4" secondAttribute="trailing" constant="8" id="tmx-d9-IKE"/>
-                                    </constraints>
+                                <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="250" placeholderIntrinsicWidth="0.0" placeholderIntrinsicHeight="22" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jR4-gw-Sik" userLabel="Pet Name Label">
+                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="45"/>
+                                    <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="12"/>
+                                    <color key="textColor" red="0.82352941176470584" green="0.078431372549019607" blue="0.23921568627450979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" tag="110" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xQf-1d-aD4" userLabel="Address Label">
+                                    <rect key="frame" x="0.0" y="49" width="92" height="0.0"/>
+                                    <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="10"/>
+                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <view tag="200" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yKY-xA-2It" customClass="PTDeviceStatusView" customModule="PawTrails" customModuleProvider="target">
+                                    <rect key="frame" x="93" y="0.0" width="15" height="12"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
+                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="KeyboardArrowRightGray-Small" translatesAutoresizingMaskIntoConstraints="NO" id="eHm-lI-E0F" userLabel="Arrow Image View">
+                                    <rect key="frame" x="100" y="43" width="8" height="12"/>
+                                    <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                    <color key="tintColor" red="0.81514007939999999" green="0.81514007939999999" blue="0.81514007939999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="8" id="0WF-5g-fOt"/>
+                                        <constraint firstAttribute="height" constant="12" id="7vB-wc-UyX"/>
+                                    </constraints>
+                                </imageView>
                             </subviews>
                             <constraints>
-                                <constraint firstAttribute="trailing" secondItem="Csl-Pg-N2l" secondAttribute="trailing" constant="16" id="5RN-fx-gTQ"/>
-                                <constraint firstItem="Csl-Pg-N2l" firstAttribute="leading" secondItem="440-Y8-cNk" secondAttribute="leading" constant="16" id="Dbi-F0-OJs"/>
-                                <constraint firstItem="Csl-Pg-N2l" firstAttribute="top" secondItem="440-Y8-cNk" secondAttribute="top" constant="16" id="Dmg-N6-SN8"/>
-                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="Dva-Lz-h9V"/>
-                                <constraint firstAttribute="bottom" secondItem="Csl-Pg-N2l" secondAttribute="bottom" constant="32" id="JZ3-GM-Gd6"/>
+                                <constraint firstItem="yKY-xA-2It" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="jR4-gw-Sik" secondAttribute="trailing" constant="16" id="5Xh-eP-eOc"/>
+                                <constraint firstItem="jR4-gw-Sik" firstAttribute="leading" secondItem="Csl-Pg-N2l" secondAttribute="leading" id="60d-QJ-fBp"/>
+                                <constraint firstItem="jR4-gw-Sik" firstAttribute="top" secondItem="Csl-Pg-N2l" secondAttribute="top" id="HOv-fw-LvT"/>
+                                <constraint firstAttribute="bottom" secondItem="xQf-1d-aD4" secondAttribute="bottom" constant="8" id="Ky2-FS-bJi"/>
+                                <constraint firstItem="yKY-xA-2It" firstAttribute="top" secondItem="Csl-Pg-N2l" secondAttribute="top" id="LEj-wY-gTd"/>
+                                <constraint firstAttribute="trailing" secondItem="eHm-lI-E0F" secondAttribute="trailing" id="TFw-fF-aum"/>
+                                <constraint firstItem="eHm-lI-E0F" firstAttribute="centerY" secondItem="xQf-1d-aD4" secondAttribute="centerY" id="cdr-tj-Uh9"/>
+                                <constraint firstAttribute="trailing" secondItem="yKY-xA-2It" secondAttribute="trailing" id="d7V-zm-sXe"/>
+                                <constraint firstItem="xQf-1d-aD4" firstAttribute="top" secondItem="jR4-gw-Sik" secondAttribute="bottom" constant="4" id="gZH-ud-BFs"/>
+                                <constraint firstItem="xQf-1d-aD4" firstAttribute="leading" secondItem="Csl-Pg-N2l" secondAttribute="leading" id="mkq-in-RN0"/>
+                                <constraint firstItem="eHm-lI-E0F" firstAttribute="leading" secondItem="xQf-1d-aD4" secondAttribute="trailing" constant="8" id="tmx-d9-IKE"/>
                             </constraints>
                         </view>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="440-Y8-cNk" firstAttribute="leading" secondItem="7Ah-80-bCh" secondAttribute="leading" id="4Uo-qf-h0Y"/>
-                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="440-Y8-cNk" secondAttribute="trailing" id="kQg-aY-Ntz"/>
-                        <constraint firstAttribute="bottom" secondItem="440-Y8-cNk" secondAttribute="bottom" id="wUe-Wa-xJa"/>
+                        <constraint firstAttribute="trailing" secondItem="Csl-Pg-N2l" secondAttribute="trailing" constant="16" id="5RN-fx-gTQ"/>
+                        <constraint firstItem="Csl-Pg-N2l" firstAttribute="leading" secondItem="440-Y8-cNk" secondAttribute="leading" constant="16" id="Dbi-F0-OJs"/>
+                        <constraint firstItem="Csl-Pg-N2l" firstAttribute="top" secondItem="440-Y8-cNk" secondAttribute="top" constant="16" id="Dmg-N6-SN8"/>
+                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="164" id="Dva-Lz-h9V"/>
+                        <constraint firstAttribute="bottom" secondItem="Csl-Pg-N2l" secondAttribute="bottom" constant="32" id="JZ3-GM-Gd6"/>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="128" id="pH9-RI-z1e"/>
                     </constraints>
                 </view>
             </subviews>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="7Ah-80-bCh" secondAttribute="trailing" id="2oS-eo-7mg"/>
-                <constraint firstItem="7Ah-80-bCh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="KP3-f8-dPV"/>
-                <constraint firstItem="7Ah-80-bCh" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="UxD-YL-wxW"/>
-                <constraint firstAttribute="bottom" secondItem="7Ah-80-bCh" secondAttribute="bottom" id="fXo-43-l4U"/>
+                <constraint firstItem="440-Y8-cNk" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" priority="999" id="LZY-jw-ZKQ"/>
+                <constraint firstAttribute="trailing" secondItem="440-Y8-cNk" secondAttribute="trailing" priority="999" id="TKq-3o-CDc"/>
+                <constraint firstItem="440-Y8-cNk" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Xxr-wi-iEr"/>
+                <constraint firstAttribute="bottom" secondItem="440-Y8-cNk" secondAttribute="bottom" id="aRF-Al-CS9"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-74" y="193.5"/>
+            <point key="canvasLocation" x="-92" y="193.5"/>
         </view>
     </objects>
     <resources>
