@@ -4321,10 +4321,10 @@ PawTrails is a product created by Attitude Technologies.
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GcY-bF-7WP" customClass="PTBalloonImageView" customModule="PawTrails" customModuleProvider="target">
-                                                            <rect key="frame" x="152" y="8" width="70" height="70"/>
+                                                            <rect key="frame" x="142" y="8" width="90" height="90"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="70" id="aMl-b2-dnG"/>
-                                                                <constraint firstAttribute="width" constant="70" id="oLr-IH-kCh"/>
+                                                                <constraint firstAttribute="height" constant="90" id="aMl-b2-dnG"/>
+                                                                <constraint firstAttribute="width" secondItem="GcY-bF-7WP" secondAttribute="height" multiplier="1:1" id="j7h-59-TZW"/>
                                                             </constraints>
                                                         </imageView>
                                                     </subviews>
@@ -8165,6 +8165,6 @@ Last Edited on 2017-12-04
         <segue reference="yp5-bT-5uy"/>
         <segue reference="Rzx-2e-OhR"/>
         <segue reference="Nln-Sh-wxV"/>
-        <segue reference="Avi-do-lZw"/>
+        <segue reference="gjN-xE-RCG"/>
     </inferredMetricsTieBreakers>
 </document>
