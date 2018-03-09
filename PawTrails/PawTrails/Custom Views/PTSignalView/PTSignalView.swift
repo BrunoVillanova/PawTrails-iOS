@@ -9,17 +9,9 @@
 import UIKit
 
 class PTSignalView: UIView {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
     
     let signalFullIcon = UIImage(named: "SignalFull")
-    let imageView = UIImageView(frame: CGRect(x: 0, y:0, width: 20, height: 10))
+    let imageView = UIImageView(frame: CGRect(x: 0, y:0, width: 15, height: 12))
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,17 +23,28 @@ class PTSignalView: UIView {
         setup()
     }
     
+    override public var intrinsicContentSize: CGSize {
+        return CGSize(width: 15, height: 12)
+    }
+    
     fileprivate func setup() {
         
         self.backgroundColor = UIColor.clear
         
         // Create the imageView with the battery image and add it to the view
         imageView.image = signalFullIcon
-        imageView.contentMode = UIViewContentMode.scaleAspectFit
+        imageView.contentMode = UIViewContentMode.center
         imageView.frame = CGRect(x: 0, y:0, width: signalFullIcon!.size.width, height: signalFullIcon!.size.height)
-//        imageView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         self.addSubview(imageView)
     }
+    
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//        var frame = self.frame
+//        frame.size.height = imageView.frame.size.height
+//        frame.size.width = imageView.frame.size.width
+//        self.frame = frame
+//    }
     
     func setSignal(_ level: Int16, animated: Bool = true) {
         //TODO: set images for different levels ANIMATED!!!! =)

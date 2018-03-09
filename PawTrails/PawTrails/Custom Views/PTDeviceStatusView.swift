@@ -11,88 +11,96 @@ import SnapKit
 
 class PTDeviceStatusView: UIView {
     
-    var signalView: PTSignalView?
-    var batteryView: PTBatteryView?
-    var connectionStatusView: PTConnectionStatusView?
+    let signalView = PTSignalView()
+    let batteryView = PTBatteryView()
+    let connectionStatusView = PTConnectionStatusView()
+    var currentData: PetDeviceData?
+    
     override public var intrinsicContentSize: CGSize {
-        return CGSize(width: 48, height: 15)
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setup()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setup()
-    }
-    
-    fileprivate func setup() {
-        // Add all subview for status
-        signalView = PTSignalView()
-        signalView?.alpha = 0
-        signalView?.isHidden = true
-        self.addSubview(signalView!)
 
-        batteryView = PTBatteryView()
-        batteryView?.alpha = 0
-        batteryView?.isHidden = true
-        self.addSubview(batteryView!)
-        
-        connectionStatusView = PTConnectionStatusView()
-        connectionStatusView?.alpha = 0
-        connectionStatusView?.isHidden = true
-        self.addSubview(connectionStatusView!)
-        
-        // Configure constraints
-        signalView?.snp.makeConstraints { (make) -> Void in
-            make.top.equalToSuperview()
-            make.bottom.equalToSuperview().priority(.low)
-            make.left.equalToSuperview()
+        if connectionStatusView.superview != nil {
+            return CGSize(width: connectionStatusView.frame.size.width, height: connectionStatusView.frame.size.height)
+        } else if signalView.superview != nil && batteryView.superview != nil {
+            let width = signalView.frame.size.width + (batteryView.frame.origin.y - signalView.frame.size.width) + batteryView.frame.size.width
+            let height = signalView.frame.size.height
+            return CGSize(width: width, height: height)
         }
 
-        batteryView?.snp.makeConstraints { (make) -> Void in
-            make.top.equalToSuperview()
-            make.right.equalToSuperview()
-            make.width.equalTo(20)
-            make.height.equalTo(10)
-        }
-        
-        connectionStatusView?.snp.makeConstraints { (make) -> Void in
-            make.edges.equalToSuperview()
-        }
+        return CGSize.zero
     }
     
-    open func resetAllSubviews() {
-        signalView?.alpha = 0
-        signalView?.isHidden = true
-        batteryView?.alpha = 0
-        batteryView?.isHidden = true
-        connectionStatusView?.alpha = 0
-        connectionStatusView?.isHidden = true
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        if signalView.superview != nil {
+            signalView.snp.remakeConstraints { (make) -> Void in
+                make.top.greaterThanOrEqualToSuperview().offset(0)
+                make.bottom.greaterThanOrEqualToSuperview().offset(0)
+                make.centerY.equalToSuperview()
+                make.left.equalToSuperview()
+                make.width.equalTo(15)
+                make.height.equalTo(12)
+            }
+        }
+        
+        if batteryView.superview != nil {
+            batteryView.snp.remakeConstraints { (make) -> Void in
+                make.top.greaterThanOrEqualToSuperview().offset(0)
+                make.bottom.lessThanOrEqualToSuperview().offset(0)
+                
+                if signalView.superview != nil {
+                    make.left.equalTo(signalView.snp.right).offset(6)
+                }
+                
+                make.right.equalToSuperview()
+                make.centerY.equalTo(signalView)
+                make.width.equalTo(20)
+                make.height.equalTo(10)
+            }
+        }
+        
+        if connectionStatusView.superview != nil {
+            connectionStatusView.snp.remakeConstraints { (make) -> Void in
+                make.edges.equalToSuperview()
+            }
+        }
+        
+        self.invalidateIntrinsicContentSize()
     }
     
     func configure(_ petDeviceData: PetDeviceData, animated: Bool = true) {
-
+        
         if (petDeviceData.deviceConnection.status == 0) {
-            connectionStatusView?.alpha = 1
-            connectionStatusView?.isHidden = false
-            connectionStatusView?.setStatus(petDeviceData.deviceConnection.status)
-        } else {
-            connectionStatusView?.isHidden = true
-            signalView?.alpha = 1
-            signalView?.isHidden = false
-            signalView?.setSignal(petDeviceData.deviceData.networkLevel, animated: animated)
+            signalView.removeFromSuperview()
+            batteryView.removeFromSuperview()
             
-            batteryView?.alpha = 1
-            batteryView?.isHidden = false
-            batteryView?.setBatteryLevel(petDeviceData.deviceData.batteryLevel, animated: animated)
+            connectionStatusView.setStatus(petDeviceData.deviceConnection.status)
+            self.addSubview(connectionStatusView)
+            
+        } else {
+            
+            connectionStatusView.removeFromSuperview()
+            
+            self.addSubview(signalView)
+            signalView.setSignal(petDeviceData.deviceData.networkLevel, animated: animated)
+            
+            self.addSubview(batteryView)
+            batteryView.setBatteryLevel(petDeviceData.deviceData.batteryLevel, animated: animated)
         }
 
-//        UIView.animate(withDuration: 2.0) {
-//
-//        }
+        UIView.animate(withDuration: 0.3) {
+            if self.signalView.superview != nil {
+                self.signalView.alpha = 1
+            }
+
+            if self.batteryView.superview != nil {
+                self.batteryView.alpha = 1
+            }
+
+            if self.connectionStatusView.superview != nil {
+                self.connectionStatusView.alpha = 1
+            }
+        }
     }
 
 }

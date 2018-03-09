@@ -214,7 +214,6 @@
         titleLabel.text = nil
         petImageView.image = nil
         subtitleLabel.text = ""
-        deviceStatusView.resetAllSubviews()
     }
     
     func configure(_ pet: Pet) {
