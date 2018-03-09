@@ -647,8 +647,9 @@ class APIRepository {
     
     // Delete trip
     //callBack: returns nil or error
-    func deleteTrip(_ tripID: Int, callBack: @escaping APIRepErrorCallback) {
-        APIManager.instance.perform(call: .deleteTrip, withKey: tripID) { (error, json) in
+    func deleteTrips(_ tripIDs: [Int], callBack: @escaping APIRepErrorCallback) {
+        let data = ["tripIds": tripIDs]
+        APIManager.instance.perform(call: .deleteTrip, with: data) { (error, json) in
             callBack(error)
         }
     }

@@ -78,7 +78,7 @@ public enum APICallType {
         case .finishTrip: return "/trips/stop"
         case .pauseTrip: return "/trips/pause"
         case .resumeTrip: return "/trips/resume"
-        case .deleteTrip: return "/trips/delete/\(key)"
+        case .deleteTrip: return "/trips/delete"
         case .getTripList: return "/trips/list"
         case .getTripsAchievements: return "/trips/achievementsget"
         case .editDailyGoal: return "/pets/dailygoalsedit"
@@ -108,8 +108,7 @@ public enum APICallType {
                  .listSafeZones,
                  .removeSafeZone,
                  .resumeTrip,
-                 .logout,
-                 .deleteTrip :
+                 .logout:
                 return "GET"
             default:
                 return "POST"

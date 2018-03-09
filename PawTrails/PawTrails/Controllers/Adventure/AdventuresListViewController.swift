@@ -141,7 +141,7 @@ extension AdventuresListViewController: IndicatorInfoProvider {
 }
 
 extension AdventuresListViewController: AdventureHistoryCellDelegate {
-    func delete(trip: Trip) {
+    func delete(cell: UITableViewCell, trip: Trip) {
         
         let title: String = "Delete adventure?"
         let subTitle: String = "Cannot undo this action."
@@ -156,7 +156,7 @@ extension AdventuresListViewController: AdventureHistoryCellDelegate {
         let alertView = SCLAlertView(appearance: appearance)
         
         alertView.addButton(buttonOkTitle) {
-            APIRepository.instance.deleteTrip(Int(trip.id)) { error in
+            APIRepository.instance.deleteTrips([Int(trip.id)]) { error in
                 if let error = error {
                     Reporter.debugPrint("\(error.localizedDescription)")
                     
@@ -178,6 +178,12 @@ extension AdventuresListViewController: AdventureHistoryCellDelegate {
                                                 .textNumberOfLines(0),
                                         ])
                 } else {
+                    if let indexPath = self.tableView.indexPath(for: cell) {
+                        self.tableView.beginUpdates()
+                        self.tableView.deleteItemsAtIndexPaths([indexPath], animationStyle: .left)
+                        self.tableView.endUpdates()
+                    }
+                    
                     self.showMessage("Adventure deleted!",
                                      type: .success,
                                      options: [.animation(.slide),
@@ -199,13 +205,12 @@ extension AdventuresListViewController: AdventureHistoryCellDelegate {
         
         
         alertView.showTitle(
-            title, // Title of view
-            subTitle: subTitle, // String of view
+            title,
+            subTitle: subTitle,
             style: .warning,
             colorStyle: 0xD4143D,
-            colorTextButton: 0xFFFFFF
-            //TODO: change icon to trash icon
-//            circleIconImage: alertViewIcon
+            colorTextButton: 0xFFFFFF,
+            circleIconImage: UIImage(named: "DeleteForeverIcon48")
         )
         
 
@@ -213,7 +218,7 @@ extension AdventuresListViewController: AdventureHistoryCellDelegate {
 }
 
 protocol AdventureHistoryCellDelegate {
-    func delete(trip: Trip)
+    func delete(cell: UITableViewCell, trip: Trip)
 }
 
 class AdventureHistoryCell: UITableViewCell {
@@ -314,7 +319,7 @@ class AdventureHistoryCell: UITableViewCell {
     
     @IBAction func deleteAdventureTapped(_ sender: Any) {
         if let trip = self.currentTrip {
-            delegate?.delete(trip: trip)
+            delegate?.delete(cell: self, trip: trip)
         }
     }
 }
