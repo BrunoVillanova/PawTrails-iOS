@@ -325,7 +325,13 @@ class APIRepository {
                 var pets = [Pet]()
                 if let petsJson = json?["pets"].array {
                     for petJson in petsJson {
-                        pets.append(Pet(petJson))
+                        let pet = Pet(petJson)
+                        pets.append(pet)
+                        CDRepository.instance.upsert(pet, callback: { (error, pet) in
+                            if let dbError = error, let error = dbError.error {
+                                Reporter.debugPrint(error.description)
+                            }
+                        })
                     }
                 }
                 callback(nil, pets)

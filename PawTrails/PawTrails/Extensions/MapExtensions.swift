@@ -49,6 +49,25 @@ extension MKMapView {
         return region
     }
     
+    func fitMapViewToAnnotaionList(annotations: [PTAnnotation]) -> Void {
+        let mapEdgePadding = UIEdgeInsets(top: 70, left: 70, bottom: 70, right: 70)
+        var zoomRect:MKMapRect = MKMapRectNull
+        
+        for index in 0..<annotations.count {
+            let annotation = annotations[index]
+            let aPoint:MKMapPoint = MKMapPointForCoordinate(annotation.coordinate)
+            let rect:MKMapRect = MKMapRectMake(aPoint.x, aPoint.y, 0.1, 0.1)
+            
+            if MKMapRectIsNull(zoomRect) {
+                zoomRect = rect
+            } else {
+                zoomRect = MKMapRectUnion(zoomRect, rect)
+            }
+        }
+        
+        self.setVisibleMapRect(zoomRect, edgePadding: mapEdgePadding, animated: true)
+    }
+    
     func setVisibleMapFor(_ coordinates: [CLLocationCoordinate2D ], padding: UIEdgeInsets = UIEdgeInsetsMake(UIScreen.main.bounds.height/10, UIScreen.main.bounds.width/10, UIScreen.main.bounds.height/5, UIScreen.main.bounds.width/10)) {
 
         var zoomRect = MKMapRectNull

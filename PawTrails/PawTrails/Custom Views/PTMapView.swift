@@ -79,7 +79,7 @@ class PTMapView: MKMapView {
         }) {
             for tripPoint in tripPoints {
                 if let point = tripPoint.point, let coords = point.coordinates {
-                    let newAnnotation = PTAnnotation(coords)
+                    let newAnnotation = PTAnnotation(coords, pet: trip.pet)
                     self.myAnnotations[id]?.append(newAnnotation)
                 }
             }
@@ -88,13 +88,12 @@ class PTMapView: MKMapView {
         self.drawOverlayForPetAnnotations(self.myAnnotations[id])
         
         if let lastAnnotation = self.myAnnotations[id]?.last {
-            let newAnnotation = PTAnnotation(lastAnnotation.coordinate)
+            let newAnnotation = PTAnnotation(lastAnnotation.coordinate, pet: trip.pet)
             self.addAnnotation(newAnnotation)
         }
         
-        if let allCoordinates = self.myAnnotations[id]?.map({ $0.coordinate
-        }), allCoordinates.count > 0 {
-            self.setVisibleMapFor(allCoordinates)
+        if let annotations = self.myAnnotations[id] {
+            fitMapViewToAnnotaionList(annotations: annotations)
         }
     }
     
@@ -344,8 +343,8 @@ extension PTMapView: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if overlay is MKPolyline {
             let polylineRenderer = MKPolylineRenderer(overlay: overlay)
-            polylineRenderer.strokeColor = .red
-            polylineRenderer.lineWidth = 3
+            polylineRenderer.strokeColor = PTConstants.colors.primary
+            polylineRenderer.lineWidth = 1.68
             return polylineRenderer
         }
         return MKPolylineRenderer()
@@ -424,9 +423,15 @@ class MKLocation: MKPointAnnotation {
 class PTAnnotation: NSObject, MKAnnotation {
     var coordinate: CLLocationCoordinate2D
     var petDeviceData: PetDeviceData?
+    var pet: Pet?
     
     init(_ coordinate: CLLocationCoordinate2D) {
         self.coordinate = coordinate
+    }
+    
+    convenience init(_ coordinate: CLLocationCoordinate2D, pet: Pet) {
+        self.init(coordinate)
+        self.pet = pet
     }
     
     convenience init(_ petDeviceData: PetDeviceData) {
@@ -438,6 +443,7 @@ class PTAnnotation: NSObject, MKAnnotation {
         }
         
         self.petDeviceData = petDeviceData
+        self.pet = petDeviceData.pet
     }
     
     func move(coordinate:CLLocationCoordinate2D){

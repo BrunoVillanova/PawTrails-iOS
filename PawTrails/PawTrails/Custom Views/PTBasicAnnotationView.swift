@@ -73,7 +73,7 @@ class PTBasicAnnotationView: MKAnnotationView {
         super.layoutSubviews()
     }
     
-    private func initialize() {
+    fileprivate func initialize() {
         self.backgroundColor = UIColor.clear
         self.centerOffset = CGPoint(x: 0, y: -30)
         self.addSubview(pictureImageView)
@@ -81,7 +81,7 @@ class PTBasicAnnotationView: MKAnnotationView {
     }
     
     func configureWithAnnotation(_ annotation: PTAnnotation) {
-        if let petDeviceData = annotation.petDeviceData, let imageUrl = petDeviceData.pet.imageURL {
+        if let pet = annotation.pet, let imageUrl = pet.imageURL {
             pictureImageView.imageUrl = imageUrl
         }
     }
