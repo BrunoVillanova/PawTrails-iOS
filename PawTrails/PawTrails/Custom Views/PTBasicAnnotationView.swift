@@ -58,14 +58,15 @@ class PTBasicAnnotationView: MKAnnotationView {
     }
     
     override func layoutSubviews() {
-        super.layoutSubviews()
+        
         let frame = pictureImageView.frame
         self.frame.size.height = frame.height
         self.frame.size.width = frame.width
 
         if let calloutView = calloutView {
-            calloutView.center = CGPoint(x: -4, y: -90)
+            calloutView.center = CGPoint(x: (calloutView.frame.size.width/2.0)-8, y: -30)
         }
+        
     }
     
     fileprivate func initialize() {
@@ -96,7 +97,7 @@ class PTBasicAnnotationView: MKAnnotationView {
         let petAnnotation = self.annotation as! PTAnnotation
         calloutView?.configureWithAnnotation(petAnnotation)
         calloutView?.isHidden = false
-        calloutView?.setNeedsLayout()
+        calloutView?.layoutIfNeeded()
 
         UIView.animate(withDuration: defaultAnimationDuration) {
             self.calloutView?.alpha = 1
