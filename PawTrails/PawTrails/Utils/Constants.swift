@@ -45,8 +45,17 @@ struct Constants {
     static let testUserPasswordProduction = "ABCd1234"
     static let testUserEmailStaging = "ios@test.com"
     static let testUserPasswordStaging = "iOStest12345"
+    static let testUserEmailProductionDemo = "trails@pawtrails.ie"
+    static let testUserPasswordProductionDemo = "Trails123!"
     
     #if DEBUG
+    static let apiURL = apiURLStaging
+    static let apiURLTest = apiURLTestStaging
+    static let socketURL = socketURLStaging
+    static let socketURLSSL = socketURLSSLStaging
+    #else
+    
+    #if DEMO
     static let apiURL = apiURLStaging
     static let apiURLTest = apiURLTestStaging
     static let socketURL = socketURLStaging
@@ -56,6 +65,8 @@ struct Constants {
     static let apiURLTest = apiURLTestProduction
     static let socketURL = socketURLProduction
     static let socketURLSSL = socketURLSSLProduction
+    #endif
+
     #endif
 
 //    static let apiURL = apiURLProduction
@@ -68,7 +79,11 @@ struct Constants {
             if apiURL == apiURLProduction {
                 return testUserEmailProduction
             }
-            return testUserEmailStaging
+            #if DEMO
+                return testUserEmailProductionDemo
+            #else
+                return testUserEmailStaging
+            #endif
         }
     }
     
@@ -77,7 +92,11 @@ struct Constants {
             if apiURL == apiURLProduction {
                 return testUserPasswordProduction
             }
-            return testUserPasswordStaging
+            #if DEMO
+                return testUserPasswordProductionDemo
+            #else
+                return testUserPasswordStaging
+            #endif
         }
     }
     
