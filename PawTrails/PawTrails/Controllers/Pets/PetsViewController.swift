@@ -218,13 +218,13 @@
     
     func configure(_ pet: Pet) {
         
-        disposable?.dispose()
+        self.currentPet = pet
         
         DispatchQueue.main.async {
+            self.disposable?.dispose()
             
             self.resetContent()
             
-            self.currentPet = pet
             self.titleLabel.text = pet.name
             self.petImageView.imageUrl = pet.imageURL
             self.subtitleLabel.text = "Bring your device outdoor to get location.."

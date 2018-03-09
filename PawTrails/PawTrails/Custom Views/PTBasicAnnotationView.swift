@@ -58,19 +58,14 @@ class PTBasicAnnotationView: MKAnnotationView {
     }
     
     override func layoutSubviews() {
-        
+        super.layoutSubviews()
         let frame = pictureImageView.frame
         self.frame.size.height = frame.height
         self.frame.size.width = frame.width
 
         if let calloutView = calloutView {
-            var frame = calloutView.frame
-            frame.origin.y = frame.origin.y -  self.frame.size.height
-//            calloutView.frame = frame
-            calloutView.center = CGPoint(x: (self.frame.size.width / 2) + 46, y: -50)
+            calloutView.center = CGPoint(x: -4, y: -90)
         }
-        
-        super.layoutSubviews()
     }
     
     fileprivate func initialize() {
@@ -89,29 +84,20 @@ class PTBasicAnnotationView: MKAnnotationView {
     func showCallout() {
         
         if calloutView == nil {
-            let views = Bundle.main.loadNibNamed("PTPetCalloutView", owner: nil, options: nil)
             
-            if let theView = views?[0] as! PTPetCalloutView? {
-                calloutView = theView
-                
-                if let calloutDelegate = calloutDelegate {
-                    calloutView?.delegate = calloutDelegate
-                }
-    
-                calloutView?.alpha = 0
-                self.addSubview(calloutView!)
+            calloutView = PTPetCalloutView(frame: .zero)
+            if let calloutDelegate = calloutDelegate {
+                calloutView?.delegate = calloutDelegate
             }
+            calloutView?.alpha = 0
+            self.addSubview(calloutView!)
         }
 
         let petAnnotation = self.annotation as! PTAnnotation
-        calloutView!.configureWithAnnotation(petAnnotation)
-//        calloutView!.center = CGPoint(x: (self.frame.size.width / 2) + 46, y: -30)
+        calloutView?.configureWithAnnotation(petAnnotation)
         calloutView?.isHidden = false
-        
-//        var frame = calloutView!.frame
-//        frame.origin.y = frame.origin.y - (pictureImageView!.frame.origin.y  + pictureImageView!.frame.size.height)
-//        calloutView!.frame = frame
-        
+        calloutView?.setNeedsLayout()
+
         UIView.animate(withDuration: defaultAnimationDuration) {
             self.calloutView?.alpha = 1
         }
