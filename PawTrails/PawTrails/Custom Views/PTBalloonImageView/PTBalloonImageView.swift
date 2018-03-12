@@ -46,7 +46,7 @@ class PTBalloonImageView: UIImageView {
 
                 })
             } else {
-                pictureImageView.image = #imageLiteral(resourceName: "PetPlaceholderImage")
+                pictureImageView.image = placeholderImage
                 self.layoutIfNeeded()
             }
         }
