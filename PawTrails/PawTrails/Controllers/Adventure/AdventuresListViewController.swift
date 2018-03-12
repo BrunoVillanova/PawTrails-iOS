@@ -37,6 +37,18 @@ class AdventuresListViewController: UIViewController  {
     fileprivate func initialize() {
         tableView.tableFooterView = UIView()
 
+        retrieveTrips()
+        
+        Observable
+            .zip(tableView.rx.itemSelected, tableView.rx.modelSelected(Trip.self))
+            .bind { [unowned self] indexPath, item in
+                self.tableView.deselectRow(at: indexPath, animated: true)
+                self.goToTripDetailsIfNeeded(item)
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    fileprivate func retrieveTrips() {
         DataManager.instance.finishedTrips()
             .map({ [unowned self] (trips) -> [Trip] in
                 return trips.filter({ (trip) -> Bool in
@@ -47,16 +59,8 @@ class AdventuresListViewController: UIViewController  {
                 cell.selectionStyle = .none
                 cell.configure(element)
                 cell.delegate = self
-    
+                
             }.disposed(by: disposeBag)
-        
-        Observable
-            .zip(tableView.rx.itemSelected, tableView.rx.modelSelected(Trip.self))
-            .bind { [unowned self] indexPath, item in
-                self.tableView.deselectRow(at: indexPath, animated: true)
-                self.goToTripDetailsIfNeeded(item)
-            }
-            .disposed(by: disposeBag)
     }
     
     fileprivate func goToTripDetailsIfNeeded(_ trip: Trip) {
@@ -178,11 +182,16 @@ extension AdventuresListViewController: AdventureHistoryCellDelegate {
                                                 .textNumberOfLines(0),
                                         ])
                 } else {
-                    if let indexPath = self.tableView.indexPath(for: cell) {
-                        self.tableView.beginUpdates()
-                        self.tableView.deleteItemsAtIndexPaths([indexPath], animationStyle: .left)
-                        self.tableView.endUpdates()
-                    }
+//                    if let indexPath = self.tableView.indexPath(for: cell) {
+//                        self.tableView.beginUpdates()
+//                        self.tableView.deleteItemsAtIndexPaths([indexPath], animationStyle: .left)
+//                        self.tableView.endUpdates()
+//
+//                        self.tableView.rx.itemDeleted.subscribe({ [unowned self] indexPath in self.data.value.remove(at: indexPath.row)}).disposed(by: disposeBag)
+//
+//                    }
+                    
+                    self.retrieveTrips()
                     
                     self.showMessage("Adventure deleted!",
                                      type: .success,
