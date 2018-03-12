@@ -36,10 +36,10 @@ struct Constants {
     static let socketURLProduction = "http://eu.pawtrails.com:2003"
     static let socketURLSSLProduction = "https://eu.pawtrails.com:4654"
 
-    static let apiURLStaging = "https://eu.pawtrails.pet/api"
-    static let apiURLTestStaging = "https://eu.pawtrails.pet/test"
-    static let socketURLStaging = "http://eu.pawtrails.pet:2003"
-    static let socketURLSSLStaging = "https://eu.pawtrails.pet:4654"
+    static let apiURLStaging = "https://alpha.pawtrails.com/api"
+    static let apiURLTestStaging = "https://alpha.pawtrails.com/test"
+    static let socketURLStaging = "http://alpha.pawtrails.com:2003"
+    static let socketURLSSLStaging = "https://alpha.pawtrails.com:4654"
 
     static let testUserEmailProduction = "attitudetech2017@gmail.com"
     static let testUserPasswordProduction = "ABCd1234"
