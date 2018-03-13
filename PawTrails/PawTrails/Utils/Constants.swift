@@ -14,6 +14,12 @@ let isDebug = true
 let isDebug = false
 #endif
 
+#if DEMO
+let isBetaDemo = true
+#else
+let isBetaDemo = false
+#endif
+
 public struct ezdebug {
     public static let email = "ios@test.com"
     public static let password = "iOStest12345"
@@ -47,6 +53,8 @@ struct Constants {
     static let testUserPasswordStaging = "iOStest12345"
     static let testUserEmailProductionDemo = "trails@pawtrails.ie"
     static let testUserPasswordProductionDemo = "Trails123!"
+    
+    static let deviceIdforDemo = "RcpWfA9PGGYz"
     
     #if DEBUG
     static let apiURL = apiURLStaging

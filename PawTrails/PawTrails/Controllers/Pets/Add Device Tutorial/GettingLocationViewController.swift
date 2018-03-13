@@ -43,6 +43,9 @@ class GettingLocationViewController: UIViewController {
                     if let point = petDeviceData?.deviceData.point, point.latitude != 0 && point.longitude != 0 {
                         self.goToSuccessViewController()
                     }
+                    else {
+                        print("location unavailable")
+                    }
                 }).disposed(by: disposeBag)
         }
         

@@ -145,7 +145,12 @@ extension StepOneViewController: QRCodeScannerViewControllerDelegate {
             self.alert(title: "=(", msg: error)
         } else if let scanResult = scanResult, qrCodeScannerViewController.presentingViewController != nil {
             qrCodeScannerViewController.dismiss(animated: true, completion: {
-                self.goToNextStep(deviceCode: scanResult)
+                if isBetaDemo {
+                    self.goToNextStep(deviceCode: Constants.deviceIdforDemo)
+                }
+                else {
+                    self.goToNextStep(deviceCode: scanResult)
+                }
             })
         }
     }
