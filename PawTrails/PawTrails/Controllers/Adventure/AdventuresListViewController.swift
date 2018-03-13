@@ -182,14 +182,6 @@ extension AdventuresListViewController: AdventureHistoryCellDelegate {
                                                 .textNumberOfLines(0),
                                         ])
                 } else {
-//                    if let indexPath = self.tableView.indexPath(for: cell) {
-//                        self.tableView.beginUpdates()
-//                        self.tableView.deleteItemsAtIndexPaths([indexPath], animationStyle: .left)
-//                        self.tableView.endUpdates()
-//
-//                        self.tableView.rx.itemDeleted.subscribe({ [unowned self] indexPath in self.data.value.remove(at: indexPath.row)}).disposed(by: disposeBag)
-//
-//                    }
                     
                     self.retrieveTrips()
                     
