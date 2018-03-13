@@ -24,6 +24,7 @@
     fileprivate var petDeviceData: [PetDeviceData]?
     fileprivate let disposeBag = DisposeBag()
     fileprivate var iphoneX = false
+    fileprivate var isFirstTimeViewAppears = true
     
     fileprivate let dataSource = RxTableViewSectionedReloadDataSource<PetSection>()
     
@@ -35,7 +36,18 @@
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
-        reloadPets()
+        if (!isFirstTimeViewAppears) {
+            reloadPets()
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if (isFirstTimeViewAppears) {
+            isFirstTimeViewAppears = false
+            refreshControl.beginRefreshing()
+            refreshControl.sendActions(for: .valueChanged)
+        }
     }
     
     
@@ -88,7 +100,7 @@
         
         refreshControl.backgroundColor = UIColor.secondary
         refreshControl.tintColor = UIColor.primary
-        refreshControl.addTarget(self, action: #selector(reloadPets), for: .valueChanged)
+//        refreshControl.addTarget(self, action: #selector(reloadPets), for: .valueChanged)
         tableView.addSubview(refreshControl)
         
         
