@@ -41,7 +41,9 @@ class GettingLocationViewController: UIViewController {
             DataManager.instance.lastPetDeviceData(pet, gpsMode: .live)
                 .subscribe(onNext: { (petDeviceData) in
                     if let point = petDeviceData?.deviceData.point, point.latitude != 0 && point.longitude != 0 {
+                        self.pulsator.stop()
                         self.goToSuccessViewController()
+
                     }
                 }).disposed(by: disposeBag)
         }
