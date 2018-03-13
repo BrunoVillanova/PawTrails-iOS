@@ -173,8 +173,8 @@ extension DataManager {
         
         let finishTripApiObserver = Observable<[Trip]>.create({ observer in
             APIRepository.instance.finishTrip(tripIDs) { (error, data) in
-                if error != nil {
-                    observer.onError(error!)
+                if let error = error {
+                    observer.onError(error)
                 } else {
                     observer.onNext(data!)
                     observer.onCompleted()
@@ -191,7 +191,7 @@ extension DataManager {
             .filter({ (trips) -> Bool in
                 return trips.count > 0
             })
-//            .take(1)
+            .take(1)
             .flatMap { (trips) -> Observable<[Trip]> in
                 let tripIDs = trips.map({Int($0.id)})
                 return self.stopTrips(tripIDs)
@@ -205,6 +205,7 @@ extension DataManager {
             .filter({ (trips) -> Bool in
                 return trips.count > 0
             })
+            .take(1)
             .flatMap { (trips) -> Observable<[Trip]> in
                 
                 let tripIDs = trips.map({Int($0.id)})
