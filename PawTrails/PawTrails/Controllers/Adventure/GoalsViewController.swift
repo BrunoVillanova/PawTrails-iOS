@@ -137,6 +137,11 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
     
     override func viewWillAppear(_ animated: Bool) {
         
+        //Display data for februry 20 for Demo
+        if isBetaDemo {
+            
+           self.date = Date(timeIntervalSince1970: 1519093661)
+        }
         
         if let date = self.date, let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: date), let pet = self.pet {
             
@@ -291,11 +296,21 @@ class GoalsViewController: UIViewController, IndicatorInfoProvider, ChartViewDel
                     Reporter.debugPrint(error.localizedDescription)
                 }
             }
-            
+                
             let formatter = DateFormatter()
             formatter.dateFormat = "EEEE, MMMM dd, yyy"
-            let result = formatter.string(from: date)
-            self.dateBtn.setTitle(result, for: .normal)
+            
+            //Display this date for Demo : March 8 2018
+            let dateForDemo = Date(timeIntervalSince1970: 1520476061)
+            if isBetaDemo {
+                let result = formatter.string(from: dateForDemo)
+                self.dateBtn.setTitle(result, for: .normal)
+            }
+            else {
+                let result = formatter.string(from: date)
+                self.dateBtn.setTitle(result, for: .normal)
+            }
+                
             }
         } else {
 
