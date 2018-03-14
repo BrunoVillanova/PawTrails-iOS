@@ -588,7 +588,8 @@ extension TripPoint {
     init(_ json: [Any]) {
         // Required
         timestamp = 0
-        point = Point()
+        point = nil
+        status = .running
         
         if let jsonArray = json as [Any]!  {
             timestamp = Int64(jsonArray[0] as! Int)
@@ -599,6 +600,9 @@ extension TripPoint {
                 point = Point(lat, lon)
             }
             
+            if jsonArray.count > 3, let tripPointStatusCode = jsonArray[3] as? Int {
+                status = TripPointStatus(rawValue: tripPointStatusCode)
+            }
         }
     }
 }

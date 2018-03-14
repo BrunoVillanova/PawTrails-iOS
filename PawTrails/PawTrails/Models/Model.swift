@@ -96,10 +96,14 @@ struct Pet {
 }
 
 
+enum TripPointStatus: Int {
+    case started, paused, stopped, running
+}
 
 struct TripPoint {
     var timestamp: Int64
     var point: Point?
+    var status: TripPointStatus?
 }
 
 
