@@ -36,20 +36,14 @@
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
-        if (!isFirstTimeViewAppears) {
-            reloadPets()
-        }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         if (isFirstTimeViewAppears) {
             isFirstTimeViewAppears = false
             refreshControl.beginRefreshing()
             refreshControl.sendActions(for: .valueChanged)
+        } else {
+            reloadPets()
         }
     }
-    
     
     override func viewDidLayoutSubviews() {
         
