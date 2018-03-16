@@ -72,12 +72,19 @@ class PTMapView: MKMapView {
         allowUserInteraction(false)
         
         if let tripAnnotations = self.drawOverlay(trip) {
+            
             let annotationsWithPoint = tripAnnotations.filter({ (ann) -> Bool in
                 return ann.tripPoint != nil && ann.tripPoint?.point != nil
             })
             
-            if let lastAnnotation = annotationsWithPoint.last {
-                let newAnnotation = PTAnnotation(lastAnnotation.coordinate, pet: trip.pet)
+            if let firstAnnotation = annotationsWithPoint.first, let tripPoint = firstAnnotation.tripPoint {
+                let newAnnotation = PTAnnotation(tripPoint, pet: trip.pet)
+                newAnnotation.isStartingCoordinate = true
+                self.addAnnotation(newAnnotation)
+            }
+            
+            if let lastAnnotation = annotationsWithPoint.last, let tripPoint = lastAnnotation.tripPoint {
+                let newAnnotation = PTAnnotation(tripPoint, pet: trip.pet)
                 self.addAnnotation(newAnnotation)
             }
             
@@ -218,7 +225,12 @@ class PTMapView: MKMapView {
             annotations.forEach({ (annotation) in
                 if let tripPoint = annotation.tripPoint {
                     if tripPoint.status == .running {
-                        points.append(annotation.coordinate)
+                        // We dont need to draw since the trip starting point coordinate because we will add a DonutCallout for it
+                        if !annotation.isStartingCoordinate {
+                           points.append(annotation.coordinate)
+                        } else {
+                            print("aqui")
+                        }
                     } else {
                         if points.count > 0 {
                             let polyline = MKPolyline(coordinates: points, count: points.count)
@@ -323,20 +335,43 @@ extension PTMapView: MKMapViewDelegate {
             return nil
         }
         
-        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: PTBasicAnnotationView.identifier) as? PTBasicAnnotationView
         
-        if annotationView == nil {
-            annotationView = PTBasicAnnotationView(annotation: annotation, reuseIdentifier: PTBasicAnnotationView.identifier)
-            annotationView?.canShowCallout = false
+        if let annotation = annotation as? PTAnnotation {
+            var annotationView: MKAnnotationView?
             
-            if let calloutDelegate = calloutDelegate {
-                annotationView?.calloutDelegate = calloutDelegate
+            if annotation.isStartingCoordinate {
+                
+                annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: PTDonutAnnotationView.identifier) as? PTDonutAnnotationView
+                
+                if annotationView == nil {
+                    annotationView = PTDonutAnnotationView(annotation: annotation, reuseIdentifier: PTDonutAnnotationView.identifier)
+                }
+                
+            } else {
+                annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: PTBasicAnnotationView.identifier) as? PTBasicAnnotationView
+            
+                if annotationView == nil {
+                    annotationView = PTBasicAnnotationView(annotation: annotation, reuseIdentifier: PTBasicAnnotationView.identifier)
+                }
+                
+                if let annotationView = annotationView as? PTBasicAnnotationView {
+                    annotationView.canShowCallout = false
+                    
+                    if let calloutDelegate = calloutDelegate {
+                        annotationView.calloutDelegate = calloutDelegate
+                    }
+                    
+                    annotationView.configureWithAnnotation(annotation)
+                
+                }
+                
             }
+            
+            return annotationView
         }
         
-        annotationView?.configureWithAnnotation(annotation as! PTAnnotation)
-        
-        return annotationView
+        return nil
+
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
@@ -364,7 +399,7 @@ extension PTMapView: MKMapViewDelegate {
         if overlay is MKPolyline {
             let polylineRenderer = MKPolylineRenderer(overlay: overlay)
             polylineRenderer.strokeColor = PTConstants.colors.primary
-            polylineRenderer.lineWidth = 1.68
+            polylineRenderer.lineWidth = 2.3
             return polylineRenderer
         }
         return MKPolylineRenderer()
@@ -444,7 +479,7 @@ class PTAnnotation: NSObject, MKAnnotation {
     var coordinate: CLLocationCoordinate2D
     var petDeviceData: PetDeviceData?
     var pet: Pet?
-    var paused = false
+    var isStartingCoordinate: Bool = false
     var tripPoint: TripPoint?
     
     init(_ coordinate: CLLocationCoordinate2D) {

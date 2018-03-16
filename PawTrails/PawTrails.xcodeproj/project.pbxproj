@@ -208,6 +208,7 @@
 		15C90DAE1FE36E6E008F73B3 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C90DAD1FE36E6D008F73B3 /* HockeySDK.framework */; };
 		15C90DB11FE36F56008F73B3 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C90DAF1FE36F55008F73B3 /* Fabric.framework */; };
 		15C90DB21FE36F56008F73B3 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C90DB01FE36F56008F73B3 /* Crashlytics.framework */; };
+		15DCFE9F205B6B6E00DF726C /* PTDonutAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DCFE9E205B6B6E00DF726C /* PTDonutAnnotationView.swift */; };
 		15E7EFA92044B020000BFCBF /* RobotoCondensed-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15E7EFA72044B005000BFCBF /* RobotoCondensed-Regular.ttf */; };
 		15E7EFAA2044B020000BFCBF /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15E7EFA82044B012000BFCBF /* Roboto-Medium.ttf */; };
 		4414AE6B1EA0DD5B004A5134 /* PawTrailsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4414AE6A1EA0DD5B004A5134 /* PawTrailsTests.swift */; };
@@ -469,6 +470,7 @@
 		15C90DAD1FE36E6D008F73B3 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HockeySDK.framework; path = Carthage/Build/iOS/HockeySDK.framework; sourceTree = "<group>"; };
 		15C90DAF1FE36F55008F73B3 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = Frameworks/Fabric.framework; sourceTree = "<group>"; };
 		15C90DB01FE36F56008F73B3 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = Frameworks/Crashlytics.framework; sourceTree = "<group>"; };
+		15DCFE9E205B6B6E00DF726C /* PTDonutAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTDonutAnnotationView.swift; sourceTree = "<group>"; };
 		15E7EFA72044B005000BFCBF /* RobotoCondensed-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Regular.ttf"; sourceTree = "<group>"; };
 		15E7EFA82044B012000BFCBF /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		1E2B813BA9CAE948174F2C71 /* Pods_PawTrailsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PawTrailsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -663,6 +665,7 @@
 				447AF46C2021E22C0050F885 /* AllowedCharsTextField.swift */,
 				15AAE9F62022BFCA007F9080 /* PTConnectionStatusView.swift */,
 				1599B22B2023F48A002D4025 /* PTDeviceStatusView.swift */,
+				15DCFE9E205B6B6E00DF726C /* PTDonutAnnotationView.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -1623,6 +1626,7 @@
 				15C762BA2016D06B002AA7F8 /* MapExtensions.swift in Sources */,
 				15C764012016D5C0002AA7F8 /* NoViewController.swift in Sources */,
 				15C763D32016D5C0002AA7F8 /* PhoneTableViewController.swift in Sources */,
+				15DCFE9F205B6B6E00DF726C /* PTDonutAnnotationView.swift in Sources */,
 				15C763D02016D5C0002AA7F8 /* ChangePasswordTableViewController.swift in Sources */,
 				15C764112016D5C0002AA7F8 /* PetWeightTableViewController.swift in Sources */,
 				15C762B82016D06B002AA7F8 /* ModelExtensions.swift in Sources */,
