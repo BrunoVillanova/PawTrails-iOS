@@ -12,6 +12,7 @@ import SnapKit
 class TripDetailViewController: UIViewController {
 
     var trip: Trip?
+    var trips: [Trip]?
     let mapView = PTMapView(frame: CGRect.zero)
     let infoViewContainer = UIView(frame: .zero)
     let infoView = PTTripInfoView(frame: CGRect.zero)
@@ -69,6 +70,7 @@ class TripDetailViewController: UIViewController {
     fileprivate func configureData() {
         if let trip = trip {
             mapView.setStaticTripView(trip)
+            mapView.allowUserInteraction(true)
             infoView.configure(trip)
             
             if let petName = trip.pet.name {
