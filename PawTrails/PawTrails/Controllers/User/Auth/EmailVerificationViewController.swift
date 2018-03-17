@@ -82,10 +82,8 @@ class EmailVerificationViewController: UIViewController, EmailVerificationView {
     }
     
     func verified() {
-        guard let window = UIApplication.shared.delegate?.window else { return }
-        guard let root = storyboard?.instantiateViewController(withIdentifier: "tabBarController") else { return }
-        
-        window?.rootViewController = root
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.loadHomeScreen(animated: false)
 
         self.dismiss(animated: true) {
             self.presentingViewController?.dismiss(animated: true, completion: nil)

@@ -129,7 +129,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
-    func loadHomeScreen(animated: Bool) {
+    open func loadHomeScreen(animated: Bool) {
         let root = storyboard!.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
         root.selectedIndex = 0
         self.window?.rootViewController = root
