@@ -36,9 +36,12 @@ class TripDetailViewController: UIViewController {
         configureLayout()
         configureData()
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "close-1x-png"), style: .plain, target: self, action: #selector(closeButtonTapped))
+        if self.navigationController != nil && self.presentingViewController != nil {
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "close-1x-png"), style: .plain, target: self, action: #selector(closeButtonTapped))
+            self.navigationItem.leftBarButtonItem?.tintColor = .darkGray
+        }
+        
         self.navigationItem.title = "Adventure Result"
-        self.view.tintColor = PTConstants.colors.lightGray
     }
     
     func closeButtonTapped() {
