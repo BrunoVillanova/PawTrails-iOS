@@ -9,6 +9,10 @@
 import UIKit
 import SnapKit
 
+protocol TripDetailViewControllerDelegate {
+    func closed(viewController: TripDetailViewController)
+}
+
 class TripDetailViewController: UIViewController {
 
     var trip: Trip?
@@ -16,6 +20,7 @@ class TripDetailViewController: UIViewController {
     let mapView = PTMapView(frame: CGRect.zero)
     let infoViewContainer = UIView(frame: .zero)
     let infoView = PTTripInfoView(frame: CGRect.zero)
+    var delegate: TripDetailViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +35,16 @@ class TripDetailViewController: UIViewController {
     fileprivate func initialize() {
         configureLayout()
         configureData()
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "close-1x-png"), style: .plain, target: self, action: #selector(closeButtonTapped))
+        self.navigationItem.title = "Adventure Result"
+        self.view.tintColor = PTConstants.colors.lightGray
+    }
+    
+    func closeButtonTapped() {
+        self.dismiss(animated: true, completion: {
+            self.delegate?.closed(viewController: self)
+        })
     }
     
     fileprivate func configureLayout() {
@@ -64,7 +79,7 @@ class TripDetailViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        infoViewContainer.dropShadow(color: .black, opacity: 0.3, offSet: CGSize(width: -1, height: 1), radius: 3, scale: true)
+        infoViewContainer.dropShadow(color: .black, opacity: 0.1, offSet: CGSize(width: 0, height: -2), radius: 1, scale: true)
     }
     
     fileprivate func configureData() {
