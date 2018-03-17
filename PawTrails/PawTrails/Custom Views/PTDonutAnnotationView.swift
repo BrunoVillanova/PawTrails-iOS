@@ -34,7 +34,7 @@ class PTDonutAnnotationView: MKAnnotationView {
     fileprivate func initialize() {
         
         self.backgroundColor = UIColor.clear
-        self.centerOffset = CGPoint(x: 3, y: 4)
+//        self.centerOffset = CGPoint(x: 3, y: 4)
         self.image = nil
         
         pictureImageView.image = UIImage(named: "DonutIcon")

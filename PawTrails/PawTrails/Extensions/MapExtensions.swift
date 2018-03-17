@@ -50,7 +50,7 @@ extension MKMapView {
     }
     
     func fitMapViewToAnnotaionList(annotations: [PTAnnotation], animated: Bool = true) -> Void {
-        let mapEdgePadding = UIEdgeInsets(top: 60, left: 30, bottom: 10, right: 30)
+        let mapEdgePadding = UIEdgeInsets(top: 70, left: 30, bottom: 20, right: 30)
         var zoomRect:MKMapRect = MKMapRectNull
         
         for index in 0..<annotations.count {
