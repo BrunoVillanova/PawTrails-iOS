@@ -23,8 +23,8 @@ class MapViewController: UIViewController {
     fileprivate let presenter = HomePresenter()
     fileprivate let appDelegate = UIApplication.shared.delegate as! AppDelegate
     fileprivate let disposeBag = DisposeBag()
-    fileprivate let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-    fileprivate let button = UIButton(frame: CGRect(x: 0, y: 0, width: 43, height: 44))
+    fileprivate let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
+    fileprivate let button = UIButton(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
     fileprivate let refreshIconImage = UIImage(named: "RefreshIcon")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
     
     var selectedPet: Pet?
