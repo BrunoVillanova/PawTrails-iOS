@@ -23,6 +23,7 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate 
     @IBOutlet weak var twitterButton: UIButton!
     
     fileprivate let presenter = InitialPresenter()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -62,7 +63,11 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate 
             self.passwordTextField.text = Constants.testUserPassword
         #endif
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.shared.statusBarStyle = .default
+    }
     
     @IBAction func loginAction(_ sender: UIButton?) {
         UIApplication.shared.statusBarStyle = .default
@@ -122,55 +127,11 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate 
     
     func verifyAccount(_ email:String, _ password:String) {
         
-        let title: String = "Email Verification Needed"
-        let subTitle: String = "Please, verify your email before login."
-        
-        let appearance = SCLAlertView.SCLAppearance(
-            showCloseButton: false,
-            showCircularIcon: true
-        )
-        
-        let alertView = SCLAlertView(appearance: appearance)
-        
-        alertView.addButton("Send email again") {
-            DataManager.instance.sendPasswordReset(email, callback: { (error) in
-                
-                self.hideLoadingView()
-                if let error = error {
-                    UIApplication.shared.keyWindow?.rootViewController!.showMessage(error.msg.msg, type: .error)
-                } else{
-                    UIApplication.shared.keyWindow?.rootViewController!.showMessage("We've sent you the verification email. Please, confirm your email address before login", type: .success, options: [
-                        .animation(.slide),
-                        .animationDuration(0.3),
-                        .autoHide(true),
-                        .autoHideDelay(3.0),
-                        .cornerRadius(0.0),
-                        .height(44.0),
-                        .hideOnTap(true),
-                        .margin(.zero),
-                        .padding(.init(top: 10, left: 30, bottom: 10, right: 30)),
-                        .position(.top),
-                        .textAlignment(.center),
-                        .textNumberOfLines(0),
-                        ])
-                }
-            })
+        if let vc = self.storyboard?.instantiateViewController(withIdentifier: "EmailVerificationViewController") as? EmailVerificationViewController {
+            vc.email = email
+            vc.password = password
+            self.present(vc, animated: true, completion: nil)
         }
-        
-        alertView.addButton("I'm already Verified!") {
-            
-        }
-        
-        
-        alertView.showTitle(
-            title, // Title of view
-            subTitle: subTitle, // String of view
-            duration: 0.0, // Duration to show before closing automatically, default: 0.0
-            completeText: "ok", // Optional button value, default: ""
-            style: .success, // Styles - see below.
-            colorStyle: 0x5cb85c,
-            colorTextButton: 0xFFFFFF
-        )
     }
     
     func beginLoadingContent() {

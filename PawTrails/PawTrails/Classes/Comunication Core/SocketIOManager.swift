@@ -145,7 +145,6 @@ class SocketIOManager: NSObject, URLSessionDelegate {
             } else if (status == .unauthorized2) {
                 
                 if self.triedToReconnectOnUnauthorized {
-                    //TODO: force user to login again
                     self.disconnect()
                     self.userNotSigned()
                 } else {
@@ -153,7 +152,10 @@ class SocketIOManager: NSObject, URLSessionDelegate {
                     self.reconnect()
                 }
                 
-            } else if (status != .waiting) {
+            } else if status == .accountNeedsVerification {
+                self.disconnect()
+            }
+            else if (status != .waiting) {
                 self.socketAuth()
             }
         }).disposed(by: disposeBag)
@@ -218,24 +220,34 @@ class SocketIOManager: NSObject, URLSessionDelegate {
             }
         }).disposed(by: disposeBag)
         
-        DataManager.instance.userToken.asObservable().subscribe(onNext: { (authentication) in
-            if authentication != nil {
-                self.connect()
-            } else {
-                self.socket.disconnect()
-            }
-        }).disposed(by: disposeBag)
+//        DataManager.instance.userToken.asObservable().subscribe(onNext: { (authentication) in
+//            if authentication != nil {
+//                self.connect()
+//            } else {
+//                self.socket.disconnect()
+//            }
+//        }).disposed(by: disposeBag)
         
         self.socket.onAny { (socketAnyEvent) in
             
             if let items = socketAnyEvent.items, items.contains(where: { (event) -> Bool in
                 if let event = event as? SocketIOClientStatus {
-                    return event == SocketIOClientStatus.disconnected
+                    let isEventDisconnected = event == SocketIOClientStatus.disconnected
+                    
+                    if isEventDisconnected {
+                        self.isConnected = false
+                    }
+                    
+                    return isEventDisconnected
                 }
                 return false
                 
             }) {
-                self.connect()
+                
+                if self.shouldReconnect {
+                    self.connect()
+                }
+                
             }
         }
     }
@@ -274,6 +286,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     }
     
     func getPets() -> Observable<[Pet]> {
+        self.connect()
         return isReady().filter({ (value) -> Bool in
             return value == true
         }).flatMap({ (isReady) -> Observable<[Pet]> in
@@ -283,6 +296,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     }
     
     func gpsUpdates(_ petIDs: [Int], gpsMode: GPSTimeIntervalMode) -> Observable<[PetDeviceData]> {
+        self.connect()
         return isReady()
             .filter({ (isReady) -> Bool in
             return isReady
@@ -297,6 +311,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     }
     
     func trips() -> Observable<[Trip]> {
+        self.connect()
         return isReady()
                 .filter({ (value) -> Bool in
                     Reporter.debugPrint("SocketIOManager -> trips() -> filter -> \(value)")
@@ -334,9 +349,9 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     /// - Parameter callback: returns socket IO connection status
     func connect(_ callback: ((SocketIOStatus)->())? = nil) {
         
-//        guard !self.isConnecting else {
-//            return
-//        }
+        guard !self.isConnecting else {
+            return
+        }
 
         guard !self.isConnected else {
             return
@@ -359,8 +374,8 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     
     /// Disconnects from Socket I.O.
     func disconnect() {
+        self.shouldReconnect = false
         self.socket.disconnect()
-        self.isConnected = false
     }
     
     
@@ -422,6 +437,7 @@ enum SocketIOErrorCode: Int {
     
     case Timeout = 419
     case NotAuth = 414
+    case AccountNeedsVerification = 417
     
     var description: String {
         switch self {
@@ -429,6 +445,8 @@ enum SocketIOErrorCode: Int {
             return "Timeout on trying to authenticate with live channel."
         case .NotAuth:
             return "Live channel authentication error, please try login again."
+        case .AccountNeedsVerification:
+            return "Your account is not verified, please check your email to verify your account"
         }
     }
 }

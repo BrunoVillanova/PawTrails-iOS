@@ -33,7 +33,7 @@ class SignUpViewController: UIViewController, InitialView {
         presenter.attachView(self)
         configureLayout()
         #if DEBUG
-        emailTextField.text = "pttest1@mailinator.com"
+        emailTextField.text = "pttest13@mailinator.com"
         passwordTextField.text = "Trails111"
         confirmPasswordTextField.text = passwordTextField.text
         #endif
@@ -93,16 +93,12 @@ class SignUpViewController: UIViewController, InitialView {
             loadHomeScreen()
         }
         
-        
-        
         self.view.endEditing(true)
         self.dismiss(animated: true, completion: nil)
     }
     
     func loadHomeScreen() {
-        
         guard let window = UIApplication.shared.delegate?.window else { return }
-        //        if runningTripArray.isEmpty == false {
         let root = storyboard?.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
         root.selectedIndex = 0
         window?.rootViewController = root
@@ -129,35 +125,15 @@ class SignUpViewController: UIViewController, InitialView {
     
     func verifyAccount(_ email:String, _ password:String) {
         
-        let title: String = "Account created!"
-        let subTitle: String = "We've sent you an email, please confirm to continue."
-        let buttonOkTitle: String = "OK"
-        
-        let appearance = SCLAlertView.SCLAppearance(
-            showCloseButton: false,
-            showCircularIcon: true
-        )
-        
-        let alertView = SCLAlertView(appearance: appearance)
-    
-        alertView.addButton(buttonOkTitle) {
+        if let vc = self.storyboard?.instantiateViewController(withIdentifier: "EmailVerificationViewController") as? EmailVerificationViewController, let pc = self.presentingViewController {
+            
+            vc.email = email
+            vc.password = password
+
             self.dismiss(animated: true, completion: {
-                UIApplication.shared.keyWindow?.rootViewController!.showMessage("Please, confirm your e-mail address before login", type: .info)
-//                self.perform(#selector(self.showSuccessMessage), with: nil, afterDelay: 1000)
+                pc.present(vc, animated: true, completion: nil)
             })
         }
-        
-        
-        alertView.showTitle(
-            title, // Title of view
-            subTitle: subTitle, // String of view
-            duration: 0.0, // Duration to show before closing automatically, default: 0.0
-            completeText: "ok", // Optional button value, default: ""
-            style: .success, // Styles - see below.
-            colorStyle: 0x5cb85c,
-            colorTextButton: 0xFFFFFF
-        )
-        
     }
     
     func showSuccessMessage() {
@@ -184,15 +160,6 @@ class SignUpViewController: UIViewController, InitialView {
         return true
     }
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        //        textField.underline(color: UIColor.primary)
-        
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        //        textField.underline()
-    }
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
@@ -208,9 +175,6 @@ class SignUpViewController: UIViewController, InitialView {
             vc.email = self.emailTextField.text
         }
     }
-
-    
-
 }
 
 

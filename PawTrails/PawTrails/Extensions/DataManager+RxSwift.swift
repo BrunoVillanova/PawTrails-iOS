@@ -59,7 +59,7 @@ extension DataManager {
     func finishedTrips() -> Observable<[Trip]> {
         let apiTrips = getApiTrips([2])
         let socketTrips = SocketIOManager.instance.trips()
-        return apiTrips.flatMapLatest({ (apiTripsData) -> Observable<[Trip]> in
+        return apiTrips.flatMap ({ (apiTripsData) -> Observable<[Trip]> in
             return socketTrips.flatMap({ (socketTripsData) -> Observable<[Trip]> in
                 return apiTrips
             })
@@ -69,9 +69,9 @@ extension DataManager {
     func getActivePetTrips() -> Observable<[Trip]> {
         let apiTrips = getApiTrips([0,1])
         let socketTrips = SocketIOManager.instance.trips()
-        return apiTrips.flatMapLatest({ (apiTripsData) -> Observable<[Trip]> in
+        return apiTrips.flatMap({ (apiTripsData) -> Observable<[Trip]> in
             return socketTrips.flatMap({ (socketTripsData) -> Observable<[Trip]> in
-                return apiTrips
+                return apiTrips.delaySubscription(RxTimeInterval(0.5), scheduler: MainScheduler.instance)
             })
         })
     }
@@ -79,7 +79,7 @@ extension DataManager {
     func allTrips() -> Observable<[Trip]> {
         let apiTrips = getApiTrips()
         let socketTrips = SocketIOManager.instance.trips()
-        return apiTrips.flatMapLatest({ (apiTripsData) -> Observable<[Trip]> in
+        return apiTrips.flatMap ({ (apiTripsData) -> Observable<[Trip]> in
             return socketTrips.flatMap({ (socketTripsData) -> Observable<[Trip]> in
                 return apiTrips
             })
@@ -91,7 +91,7 @@ extension DataManager {
 
         let pets = self.pets()
 
-        return pets.flatMapLatest { (petList) -> Observable<[PetDeviceData]> in
+        return pets.flatMap { (petList) -> Observable<[PetDeviceData]> in
             let petIDs = petList.map{ $0.id }
             let liveGpsUpdates = SocketIOManager.instance.gpsUpdates(petIDs, gpsMode: gpsMode)
             return liveGpsUpdates.share()
@@ -161,7 +161,7 @@ extension DataManager {
                 }
             }
             return Disposables.create()
-        }).flatMapLatest({ (trips) -> Observable<[Trip]> in
+        }).flatMap ({ (trips) -> Observable<[Trip]> in
             return self.allTrips()
         })
         
@@ -191,7 +191,7 @@ extension DataManager {
                 return trips.count > 0
             })
             .take(1)
-            .flatMapLatest { (trips) -> Observable<[Trip]> in
+            .flatMap { (trips) -> Observable<[Trip]> in
                 let tripIDs = trips.map({Int($0.id)})
                 return self.stopTrips(tripIDs)
             }
@@ -201,11 +201,8 @@ extension DataManager {
     func pauseAdventure() -> Observable<[Trip]> {
         
         return self.getActivePetTrips()
-            .filter({ (trips) -> Bool in
-                return trips.count > 0
-            })
             .take(1)
-            .flatMapLatest { (trips) -> Observable<[Trip]> in
+            .flatMap { (trips) -> Observable<[Trip]> in
                 let tripIDs = trips.map({Int($0.id)})
                 return self.pauseTrips(tripIDs)
         }
@@ -223,7 +220,7 @@ extension DataManager {
             }
             return Disposables.create()
         })
-        .flatMapLatest({ (trip) -> Observable<[Trip]> in
+        .flatMap({ (trip) -> Observable<[Trip]> in
             return self.getActivePetTrips()
         })
         
@@ -238,7 +235,7 @@ extension DataManager {
                 return pausedTrips.count > 0
             })
             .take(1)
-            .flatMapLatest { (trips) -> Observable<[Trip]> in
+            .flatMap { (trips) -> Observable<[Trip]> in
                 
                 let resumeTrips = Observable<[Trip]>.create({ observer in
                     APIRepository.instance.resumeTrip { (error) in
@@ -251,7 +248,7 @@ extension DataManager {
                     }
                     return Disposables.create()
                 })
-                .flatMapLatest({ (trip) -> Observable<[Trip]> in
+                .flatMap ({ (trip) -> Observable<[Trip]> in
                     return self.getActivePetTrips()
                 })
                 

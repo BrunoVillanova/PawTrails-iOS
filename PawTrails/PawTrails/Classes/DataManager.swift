@@ -71,8 +71,8 @@ class DataManager: NSObject {
             
             if let error = error {
                 self.handleAuthErrors(error, authentication, callback: callback)
-            }else {
-                callback(nil)
+            }else if let authentication = authentication {
+                self.succeedLoginOrRegister(authentication, callback: callback)
             }
         }
     }
