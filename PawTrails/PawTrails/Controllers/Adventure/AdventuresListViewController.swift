@@ -67,7 +67,7 @@ class AdventuresListViewController: UIViewController  {
         
         if trip.hasLocationData {
             let tripDetailViewController = TripDetailViewController()
-            tripDetailViewController.trip = trip
+            tripDetailViewController.trips = [trip]
             
             self.navigationController?.pushViewController(tripDetailViewController, animated: true)
         }
