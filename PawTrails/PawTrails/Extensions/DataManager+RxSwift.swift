@@ -195,6 +195,15 @@ extension DataManager {
                 let tripIDs = trips.map({Int($0.id)})
                 return self.stopTrips(tripIDs)
             }
+            .flatMap { (stoppedTrips) -> Observable<[Trip]> in
+                return self.getApiTrips([2]).map({ (trips) -> [Trip] in
+                    return trips.filter({ (trip) -> Bool in
+                        return stoppedTrips.contains(where: { (t) -> Bool in
+                            return t.id == trip.id
+                        })
+                    })
+                })
+            }
     }
     
     

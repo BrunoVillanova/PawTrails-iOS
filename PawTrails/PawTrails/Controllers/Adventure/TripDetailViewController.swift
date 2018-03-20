@@ -15,7 +15,6 @@ protocol TripDetailViewControllerDelegate {
 
 class TripDetailViewController: UIViewController {
 
-    var trip: Trip?
     var trips: [Trip]?
     let mapView = PTMapView(frame: CGRect.zero)
     let infoViewContainer = UIView(frame: .zero)
@@ -86,7 +85,8 @@ class TripDetailViewController: UIViewController {
     }
     
     fileprivate func configureData() {
-        if let trip = trip {
+        
+        trips?.forEach({ (trip) in
             mapView.setStaticTripView(trip)
             mapView.allowUserInteraction(true)
             infoView.configure(trip)
@@ -94,6 +94,6 @@ class TripDetailViewController: UIViewController {
             if let petName = trip.pet.name {
                 self.navigationItem.title = "\(petName)'s Adventure"
             }
-        }
+        })
     }
 }
