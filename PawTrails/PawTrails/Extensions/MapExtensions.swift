@@ -49,8 +49,8 @@ extension MKMapView {
         return region
     }
     
-    func fitMapViewToAnnotaionList(annotations: [PTAnnotation]) -> Void {
-        let mapEdgePadding = UIEdgeInsets(top: 70, left: 70, bottom: 70, right: 70)
+    func fitMapViewToAnnotaionList(annotations: [PTAnnotation], animated: Bool = true) -> Void {
+        let mapEdgePadding = UIEdgeInsets(top: 70, left: 30, bottom: 20, right: 30)
         var zoomRect:MKMapRect = MKMapRectNull
         
         for index in 0..<annotations.count {
@@ -65,7 +65,7 @@ extension MKMapView {
             }
         }
         
-        self.setVisibleMapRect(zoomRect, edgePadding: mapEdgePadding, animated: true)
+        self.setVisibleMapRect(zoomRect, edgePadding: mapEdgePadding, animated: animated)
     }
     
     func setVisibleMapFor(_ coordinates: [CLLocationCoordinate2D ], padding: UIEdgeInsets = UIEdgeInsetsMake(UIScreen.main.bounds.height/10, UIScreen.main.bounds.width/10, UIScreen.main.bounds.height/5, UIScreen.main.bounds.width/10)) {
@@ -73,9 +73,26 @@ extension MKMapView {
         var zoomRect = MKMapRectNull
         for i in coordinates {
             let point = MKMapPointForCoordinate(i)
-            zoomRect = MKMapRectUnion(zoomRect, MKMapRectMake(point.x, point.y, 20, 20))
+            zoomRect = MKMapRectUnion(zoomRect, MKMapRectMake(point.x, point.y, 40, 40))
         }
         self.setVisibleMapRect(zoomRect, edgePadding: padding, animated: true)
+    }
+    
+    func getZoom() -> Double {
+        // function returns current zoom of the map
+        var angleCamera = self.camera.heading
+        if angleCamera > 270 {
+            angleCamera = 360 - angleCamera
+        } else if angleCamera > 90 {
+            angleCamera = fabs(angleCamera - 180)
+        }
+        let angleRad = .pi * angleCamera / 180 // camera heading in radians
+        let width = Double(self.frame.size.width)
+        let height = Double(self.frame.size.height)
+        let heightOffset : Double = 20 // the offset (status bar height) which is taken by MapKit into consideration to calculate visible area height
+        // calculating Longitude span corresponding to normal (non-rotated) width
+        let spanStraight = width * self.region.span.longitudeDelta / (width * cos(angleRad) + (height - heightOffset) * sin(angleRad))
+        return log2(360 * ((width / 256) / spanStraight)) + 1;
     }
     
     // Safe Zone

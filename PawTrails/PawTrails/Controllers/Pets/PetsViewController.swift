@@ -36,20 +36,14 @@
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
-        if (!isFirstTimeViewAppears) {
-            reloadPets()
-        }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         if (isFirstTimeViewAppears) {
             isFirstTimeViewAppears = false
             refreshControl.beginRefreshing()
             refreshControl.sendActions(for: .valueChanged)
+        } else {
+            reloadPets()
         }
     }
-    
     
     override func viewDidLayoutSubviews() {
         
@@ -81,12 +75,17 @@
     func retrievePets() -> Observable<[PetSection]> {
         return DataManager.instance.pets()
             .map({ (pets) -> [PetSection] in
+                var sections = [PetSection]()
                 let owned = pets.filter({ $0.isOwner == true })
                 let shared = pets.filter({ $0.isOwner == false })
-                let sections = [
-                    PetSection(header: "Owned", items: owned),
-                    PetSection(header: "Shared", items: shared)
-                ]
+                
+                if owned.count > 0 {
+                    sections.append(PetSection(header: "Owned", items: owned))
+                }
+                
+                if shared.count > 0 {
+                    sections.append(PetSection(header: "Shared", items: shared))
+                }
                 
                 self.noPetsFound.isHidden = pets.count > 0;
                 return sections

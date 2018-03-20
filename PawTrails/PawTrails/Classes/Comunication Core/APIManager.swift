@@ -13,7 +13,7 @@ import SwiftyJSON
 /// The APICallType enum defines constants that can be used to specify the type of interactions that take place with the APIManager requests.
 public enum APICallType {
     
-    case signUp, signIn, facebookLogin, googleLogin, twitterLogin, weiboLogin, passwordReset, passwordChange,
+    case signUp, sendVerifcationEmail, signIn, facebookLogin, googleLogin, twitterLogin, weiboLogin, passwordReset, passwordChange,
     getUser, setUser, imageUpload, friends, deleteUser,
     registerPet, getPets, getPet, setPet, checkDevice, changeDevice, unregisterPet,
     getPetClasses, getBreeds, getContinents, getCountries,
@@ -24,7 +24,7 @@ public enum APICallType {
     
     fileprivate var requiresToken: Bool {
         switch self {
-        case .signUp, .signIn, .facebookLogin, .googleLogin, .twitterLogin, .weiboLogin, .passwordReset: return false
+        case .signUp, .sendVerifcationEmail, .signIn, .facebookLogin, .googleLogin, .twitterLogin, .weiboLogin, .passwordReset: return false
         default: return true
         }
     }
@@ -37,6 +37,7 @@ public enum APICallType {
         switch self {
             
         case .signUp: return "/users/register"
+        case .sendVerifcationEmail: return "/users/register"
         case .signIn: return "/users/login"
         case .facebookLogin: return "/users/login/facebook"
         case .googleLogin: return "/users/login/google"
@@ -235,29 +236,42 @@ class APIManager {
     
     private func handleError(_ call: APICallType, _ httpCode: Int, _ data: Data?) -> APIManagerError {
         
-        if httpCode.isUnauthorized {
-            return APIManagerError(call: call, kind: .clientError, httpCode: httpCode, error: nil, errorCode: ErrorCode.Unauthorized)
+        var errorKind: APIManagerError.errorKind = .clientError
+        var errorCode: ErrorCode?
         
-        }else if httpCode.isNotFound {
-            return APIManagerError(call: call, kind: .clientError, httpCode: httpCode, error: nil, errorCode: ErrorCode.NotFound)
-        }else {
-            
-            if httpCode.isClientError {
-                
-                guard let data = data else {
-                    return APIManagerError(call: call, kind: .httpResponseParse, httpCode:nil, error:nil, errorCode:nil)
-                }
-                let jsonObject = parseResponse(data)
-
-                let code = jsonObject.dictionaryObject?.tryCastInteger(for: "errors") ?? -1
-                return APIManagerError(call: call, kind: .clientError, httpCode: httpCode, error: nil, errorCode: ErrorCode(rawValue: code))
-
-            }else{
-                return APIManagerError(call: call, kind: .noClientError, httpCode: httpCode, error: nil, errorCode: nil)
+        if httpCode.isNotFound {
+            errorCode = ErrorCode.NotFound
+        } else if httpCode.isUnauthorized {
+            if let errorCodeForClientData = errorCodeForClientData(data) {
+                errorCode = errorCodeForClientData
+            } else {
+                errorCode = ErrorCode.Unauthorized
+            }
+        } else if httpCode.isClientError {
+            if let errorCodeForClientData = errorCodeForClientData(data) {
+                errorCode = errorCodeForClientData
+            } else {
+                errorKind = .httpResponseParse
+                errorCode = nil
             }
         }
+
+        return APIManagerError(call: call, kind: errorKind, httpCode: httpCode, error: nil, errorCode: errorCode)
     }
     
+    
+    fileprivate func errorCodeForClientData(_ data: Data?) -> ErrorCode? {
+        
+        if let data = data {
+            let jsonObject = parseResponse(data)
+            
+            if let code = jsonObject.dictionaryObject?.tryCastInteger(for: "errors") {
+                return ErrorCode(rawValue: code)
+            }
+        }
+
+        return nil
+    }
     //MARK:- Request Helpers
     
     private func setHeaders(of call:APICallType) -> [String:String] {

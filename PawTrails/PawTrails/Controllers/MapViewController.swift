@@ -23,8 +23,8 @@ class MapViewController: UIViewController {
     fileprivate let presenter = HomePresenter()
     fileprivate let appDelegate = UIApplication.shared.delegate as! AppDelegate
     fileprivate let disposeBag = DisposeBag()
-    fileprivate let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-    fileprivate let button = UIButton(frame: CGRect(x: 0, y: 0, width: 43, height: 44))
+    fileprivate let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
+    fileprivate let button = UIButton(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
     fileprivate let refreshIconImage = UIImage(named: "RefreshIcon")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
     
     var selectedPet: Pet?
@@ -67,6 +67,7 @@ class MapViewController: UIViewController {
         DataManager.instance.getActivePetTrips()
             .subscribe(onNext: { (tripList) in
                 self.activeTrips = tripList
+                self.firstButtonfromthebottom.isEnabled = true
                 Reporter.debugPrint("MapViewController -> getActivePetTrips \(tripList.count)")
                 if (tripList.count > 0){
                     let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(gestureRecognizer:)))
@@ -105,6 +106,7 @@ class MapViewController: UIViewController {
         firstButtonfromthebottom.contentHorizontalAlignment = .fill
         firstButtonfromthebottom.contentMode = .scaleToFill
         firstButtonfromthebottom.imageView?.contentMode = .scaleToFill
+        firstButtonfromthebottom.isEnabled = false
         
         petsCollectionView.delegate = self
         petsCollectionView.dataSource = self

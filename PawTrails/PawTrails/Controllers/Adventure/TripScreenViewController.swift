@@ -275,6 +275,14 @@ class TripScreenViewController: UIViewController {
         performSegue(withIdentifier: "finish", sender: self)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.destination is FinishAdventureVC {
+            let vc = (segue.destination as! FinishAdventureVC)
+            vc.delegate = self
+        }
+    }
+    
     @IBAction func BackBtnPressed(_ sender: Any) {
         if self.isModal {
             self.dismiss(animated: true, completion: nil)
@@ -324,6 +332,37 @@ extension TripScreenViewController: UICollectionViewDelegateFlowLayout {
         collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
+    }
+}
+
+
+extension TripScreenViewController: FinishAdventureVCDelegate {
+    
+    func adventureFinished(viewController: FinishAdventureVC, trips: [Trip]?) {
+        
+        viewController.dismiss(animated: true, completion: {
+            if let trips = trips {
+                let tripDetailViewController = TripDetailViewController()
+                tripDetailViewController.trips = trips
+                tripDetailViewController.delegate = self
+                let navigatiorController = UINavigationController(rootViewController: tripDetailViewController)
+                
+                self.present(navigatiorController, animated: true, completion: nil)
+            } else {
+                self.dismiss(animated: true, completion: nil)
+            }
+        })
+    }
+    
+    func adventureResumed(viewController: FinishAdventureVC, trips: [Trip]?) {
+        viewController.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension TripScreenViewController: TripDetailViewControllerDelegate {
+    
+    func closed(viewController: TripDetailViewController) {
+        self.dismiss(animated: true, completion: nil)
     }
 }
 

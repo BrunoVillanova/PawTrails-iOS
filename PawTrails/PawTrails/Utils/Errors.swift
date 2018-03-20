@@ -65,6 +65,7 @@ enum ErrorCode: Int {
     case OTPnotFound = 26
     case OTPexpired = 27
     case AccountNotVerified = 29
+    case AccountNeedsVerification = 417
     case SocialNetworkError = 32
     case NoGpsFromPet = 31
     
@@ -160,7 +161,10 @@ enum ErrorCode: Int {
             return "This link has expired."
 
         case .AccountNotVerified:
-            return "Your account is not verified, please check your email to verify your account"
+            return "Your account is not verified.\nPlease check your email to verify your account"
+            
+        case .AccountNeedsVerification:
+            return "Your account is not verified.\nPlease check your email to verify your account"
 
         case .SocialNetworkError:
             return "Error connecting to your social media account."
@@ -340,6 +344,7 @@ enum SocketIOStatus: Int {
     case waiting = 0
     case connected = 1
     case unauthorized = 414
+    case accountNeedsVerification = 417
     case unauthorized2 = 419
     case nodevice = 31
     case timeout = 61

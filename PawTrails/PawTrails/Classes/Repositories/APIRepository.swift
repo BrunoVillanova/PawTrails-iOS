@@ -630,9 +630,7 @@ class APIRepository {
     func pauseTrip(_ tripIDs: [Int], callback: @escaping APIRepErrorCallback) {
         let data: [String: Any] = ["trips": tripIDs, "timeStamp": Int(Date().timeIntervalSince1970)]
         APIManager.instance.perform(call: .pauseTrip, with: data) { (error, json) in
-            if let error = error {
-                callback(error)
-            }
+            callback(error)
         }
     }
     

@@ -8,32 +8,44 @@
 
 import UIKit
 import RxSwift
+import GSMessages
+
+protocol FinishAdventureVCDelegate {
+    func adventureFinished(viewController: FinishAdventureVC, trips: [Trip]?)
+    func adventureResumed(viewController: FinishAdventureVC, trips: [Trip]?)
+}
 
 class FinishAdventureVC: UIViewController, BEMCheckBoxDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var finishAdventureBtn: UIButton!
     @IBOutlet weak var resumeAdventureBtn: UIButton!
+    
+    var trips: [Trip]?
     let disposeBag = DisposeBag()
+    var delegate: FinishAdventureVCDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        initialize()
+    }
+    
+    fileprivate func initialize() {
+        configureLayout()
+    }
+    
+    fileprivate func configureLayout() {
         finishAdventureBtn.fullyroundedCorner()
         finishAdventureBtn.backgroundColor = UIColor.primary
         resumeAdventureBtn.fullyroundedCorner()
         resumeAdventureBtn.tintColor = UIColor.primary
         resumeAdventureBtn.border(color: UIColor.primary, width: 1.0)
-        
     }
-    
-    
     
     override func viewWillAppear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = true
         self.navigationItem.setHidesBackButton(true, animated: false)
     }
-    
 
     
     @IBAction func finishAdventureBtnPressed(_ sender: Any) {
@@ -41,17 +53,18 @@ class FinishAdventureVC: UIViewController, BEMCheckBoxDelegate {
             self.showLoadingView()
             DataManager.instance.finishAdventure().subscribe(onNext: { (stoppedTrips) in
                 self.hideLoadingView()
-                for trip in stoppedTrips {
-                    Reporter.debugPrint("TripID \(trip.id) stopped!")
-                }
-                self.navigationController?.dismiss(animated: true, completion: nil)
+                self.delegate?.adventureFinished(viewController: self, trips: stoppedTrips)
+                
+            }, onError: { (error) in
+                let errorMessage = "Error trying to finish adventure"
+                self.showMessage(errorMessage, type: .error)
             }).disposed(by: self.disposeBag)
         }
     }
     
     
     @IBAction func resumeAdventureBtnPressed(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        self.delegate?.adventureResumed(viewController: self, trips: trips)
     }
 }
 
