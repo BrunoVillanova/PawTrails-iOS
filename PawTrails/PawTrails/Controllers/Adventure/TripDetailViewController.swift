@@ -16,6 +16,7 @@ protocol TripDetailViewControllerDelegate {
 class TripDetailViewController: UIViewController {
 
     var trip: Trip?
+    var pet:Pet?
     var trips: [Trip]?
     let mapView = PTMapView(frame: CGRect.zero)
     let infoViewContainer = UIView(frame: .zero)
@@ -86,6 +87,58 @@ class TripDetailViewController: UIViewController {
     }
     
     fileprivate func configureData() {
+        
+//        if isBetaDemo {
+//
+//            self.trip = Trip(1916)
+//            self.trip?.id = 1916
+//            self.trip?.pet = pet!
+//            self.trip?.name = "311-1521542104"
+//            self.trip?.status = 2
+//            self.trip?.startTimestamp = 1521542104
+//            self.trip?.startTimestamp = 1521542132
+//            self.trip?.timestamp = nil
+//            self.trip?.totalTime = 28
+//            self.trip?.totalDistance = 233
+//            self.trip?.averageSpeed = 5
+//            self.trip?.maxSpeed = 5
+//            self.trip?.steps = 3
+//
+//            //Points
+////            var point1 = TripPoint([1521542104,"","", 0])
+////            point1.timestamp = 1521542104
+////            point1.point = nil
+////            point1.status = TripPointStatus.started
+//
+//            var point2 = TripPoint([1521542114,51.87686,-8.47968])
+//            point2.timestamp = 1521542114
+//            let pt = Point()
+//            pt.latitude = 51.876860000000001
+//            pt.longitude = -8.478800000000001
+//            point2.point = pt
+//            point2.status = TripPointStatus.started
+//
+//            var point3 = TripPoint([1521542120,51.8771,-8.478809999999999])
+//            point3.timestamp = 1521542120
+//            let pt3 = Point()
+//            pt3.latitude = 51.8771
+//            pt3.longitude = -8.478809999999993
+//            point3.point = pt3
+//            point3.status = TripPointStatus.running
+//
+//            var point4 = TripPoint([1521542126,51.877870000000001,-8.4767100000000006])
+//            point4.timestamp = 1521542126
+//            let pt4 = Point()
+//            pt4.latitude = 51.877870000000001
+//            pt4.longitude = -8.4767100000000006
+//            point4.point = pt4
+//            point4.status = TripPointStatus.stopped
+//
+//            self.trip?.points = [point2,point3,point4]
+//            self.trip?.deviceData = []
+//
+//        }
+        
         if let trip = trip {
             mapView.setStaticTripView(trip)
             mapView.allowUserInteraction(true)
@@ -96,4 +149,5 @@ class TripDetailViewController: UIViewController {
             }
         }
     }
+    
 }
