@@ -21,14 +21,32 @@ class TripDetailViewController: UIViewController {
     let infoView = PTTripInfoView(frame: CGRect.zero)
     var delegate: TripDetailViewControllerDelegate?
     
+    
+    let shareButton = UIButton()
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
+
+        
+        // isBetaDemo
+        //Share button
+        //shareButton.frame = CGRect(x: self.view.frame.size.width - 60, y: 450, width: 50, height: 50)
+        shareButton.setImage(UIImage(named:"ShareButton-1x-png"), for: .normal)
+        shareButton.addTarget(self, action: #selector(didTapShareButton), for: .touchUpInside)
+        self.view.addSubview(shareButton)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func didTapShareButton() {
+        
+        shareToSocialMedia(message: "yo",link: "https://pawtrails.com")
+
     }
     
     fileprivate func initialize() {
@@ -78,11 +96,16 @@ class TripDetailViewController: UIViewController {
             make.right.equalToSuperview()
             make.bottom.equalTo(infoViewContainer.snp.top)
         }
+        
     }
     
     override func viewDidLayoutSubviews() {
         infoViewContainer.dropShadow(color: .black, opacity: 0.1, offSet: CGSize(width: 0, height: -2), radius: 1, scale: true)
+        
+        shareButton.frame = CGRect(x: self.view.frame.size.width - 75, y: mapView.frame.height-34, width: 75, height: 75)
     }
+    
+    
     
     fileprivate func configureData() {
         

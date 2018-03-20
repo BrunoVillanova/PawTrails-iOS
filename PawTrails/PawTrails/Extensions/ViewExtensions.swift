@@ -364,6 +364,20 @@ extension UIViewController {
             return false
         }
     }
+    // isBetaDemo
+    func shareToSocialMedia(message:String,link: String) {
+        
+        if let link = NSURL(string: link)
+        {
+            let objectsToShare = [message,link] as [Any]
+            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+            activityVC.excludedActivityTypes = [UIActivityType.airDrop, UIActivityType.addToReadingList]
+            if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+                appDelegate.window?.rootViewController?.present(activityVC, animated: true, completion: nil)
+            }
+        }
+        
+    }
 }
 
 extension UINavigationController {
