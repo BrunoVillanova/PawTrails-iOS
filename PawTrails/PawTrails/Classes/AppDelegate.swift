@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
+
         DDLog.add(DDTTYLogger.sharedInstance) // TTY = Xcode console
         DDLog.add(DDASLLogger.sharedInstance) // ASL = Apple System Logs
         
@@ -72,30 +72,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // KeyboardManager
         IQKeyboardManager.sharedManager().enable = true
 
-        
-        var out = true
-        
-        if DataManager.instance.isAuthenticated() {
-            SocketIOManager.instance.connect()
-            if let socialMedia = DataManager.instance.isSocialMedia() {
-                if let sm = SocialMedia(rawValue: socialMedia) {
-                    switch sm {
-                    case .facebook:
-                        out = SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
-                    default:
-                        break
-                    }
-                }
-            }
-            
-            loadHomeScreen(animated: true)
-            
-        } else {
-            loadAuthenticationScreen()
+        if let socialMedia = DataManager.instance.isSocialMedia(), let sm = SocialMedia(rawValue: socialMedia), sm == .facebook {
+            return SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         }
         
-        return out
+        return true
     }
+    
     
     // [START receive_message]
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
@@ -146,7 +129,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
-    func loadHomeScreen(animated: Bool) {
+    open func loadHomeScreen(animated: Bool) {
         let root = storyboard!.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
         root.selectedIndex = 0
         self.window?.rootViewController = root
@@ -202,7 +185,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func configureUIPreferences() {
-        UIApplication.shared.statusBarStyle = .default
         UINavigationBar.appearance().backgroundColor = UIColor.secondary
         UINavigationBar.appearance().barTintColor = UIColor.secondary
         UINavigationBar.appearance().tintColor = UIColor.primary
@@ -216,7 +198,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UISwitch.appearance().onTintColor = UIColor.primary
         UISegmentedControl.appearance().tintColor = UIColor.primary
         UIActivityIndicatorView.appearance().color = UIColor.primary
-//        UILabel.appearance().backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
     }
 }
 

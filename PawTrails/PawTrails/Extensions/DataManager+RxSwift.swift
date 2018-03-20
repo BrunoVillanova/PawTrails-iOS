@@ -59,7 +59,7 @@ extension DataManager {
     func finishedTrips() -> Observable<[Trip]> {
         let apiTrips = getApiTrips([2])
         let socketTrips = SocketIOManager.instance.trips()
-        return apiTrips.flatMapLatest({ (apiTripsData) -> Observable<[Trip]> in
+        return apiTrips.flatMap ({ (apiTripsData) -> Observable<[Trip]> in
             return socketTrips.flatMap({ (socketTripsData) -> Observable<[Trip]> in
                 return apiTrips
             })
@@ -69,9 +69,9 @@ extension DataManager {
     func getActivePetTrips() -> Observable<[Trip]> {
         let apiTrips = getApiTrips([0,1])
         let socketTrips = SocketIOManager.instance.trips()
-        return apiTrips.flatMapLatest({ (apiTripsData) -> Observable<[Trip]> in
+        return apiTrips.flatMap({ (apiTripsData) -> Observable<[Trip]> in
             return socketTrips.flatMap({ (socketTripsData) -> Observable<[Trip]> in
-                return apiTrips
+                return apiTrips.delaySubscription(RxTimeInterval(0.5), scheduler: MainScheduler.instance)
             })
         })
     }
@@ -79,7 +79,7 @@ extension DataManager {
     func allTrips() -> Observable<[Trip]> {
         let apiTrips = getApiTrips()
         let socketTrips = SocketIOManager.instance.trips()
-        return apiTrips.flatMapLatest({ (apiTripsData) -> Observable<[Trip]> in
+        return apiTrips.flatMap ({ (apiTripsData) -> Observable<[Trip]> in
             return socketTrips.flatMap({ (socketTripsData) -> Observable<[Trip]> in
                 return apiTrips
             })
@@ -92,7 +92,6 @@ extension DataManager {
         let pets = self.pets()
 
         return pets.flatMap { (petList) -> Observable<[PetDeviceData]> in
-            
             let petIDs = petList.map{ $0.id }
             let liveGpsUpdates = SocketIOManager.instance.gpsUpdates(petIDs, gpsMode: gpsMode)
             return liveGpsUpdates.share()
@@ -162,7 +161,7 @@ extension DataManager {
                 }
             }
             return Disposables.create()
-        }).flatMap({ (trips) -> Observable<[Trip]> in
+        }).flatMap ({ (trips) -> Observable<[Trip]> in
             return self.allTrips()
         })
         
@@ -202,30 +201,30 @@ extension DataManager {
     func pauseAdventure() -> Observable<[Trip]> {
         
         return self.getActivePetTrips()
-            .filter({ (trips) -> Bool in
-                return trips.count > 0
-            })
             .take(1)
             .flatMap { (trips) -> Observable<[Trip]> in
-                
                 let tripIDs = trips.map({Int($0.id)})
-                let pauseTrips = Observable<[Trip]>.create({ observer in
-                    APIRepository.instance.pauseTrip(tripIDs) { (error) in
-                        if error != nil {
-                            observer.onError(error!)
-                        } else {
-                            observer.onNext([])
-                            observer.onCompleted()
-                        }
-                    }
-                    return Disposables.create()
-                })
-                .flatMap({ (trip) -> Observable<[Trip]> in
-                    return self.getActivePetTrips()
-                })
-                
-                return pauseTrips
+                return self.pauseTrips(tripIDs)
         }
+    }
+    
+    func pauseTrips(_ tripIDs: [Int]) -> Observable<[Trip]>{
+        let pauseTrips = Observable<[Trip]>.create({ observer in
+            APIRepository.instance.pauseTrip(tripIDs) { (error) in
+                if error != nil {
+                    observer.onError(error!)
+                } else {
+                    observer.onNext([])
+                    observer.onCompleted()
+                }
+            }
+            return Disposables.create()
+        })
+        .flatMap({ (trip) -> Observable<[Trip]> in
+            return self.getActivePetTrips()
+        })
+        
+        return pauseTrips
     }
     
     func resumeAdventure() -> Observable<[Trip]> {
@@ -249,7 +248,7 @@ extension DataManager {
                     }
                     return Disposables.create()
                 })
-                .flatMap({ (trip) -> Observable<[Trip]> in
+                .flatMap ({ (trip) -> Observable<[Trip]> in
                     return self.getActivePetTrips()
                 })
                 

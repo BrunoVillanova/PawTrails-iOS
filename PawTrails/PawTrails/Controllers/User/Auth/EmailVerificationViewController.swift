@@ -17,14 +17,25 @@ class EmailVerificationViewController: UIViewController, EmailVerificationView {
     
     fileprivate let presenter = EmailVerificationPresenter()
     
-    
-    
     var email:String!
     var password: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initalize()
+    }
+
+    deinit {
+        presenter.deteachView()
+    }
+    
+    fileprivate func initalize() {
         presenter.attachView(self)
+        configureLayout()
+        emailLabel.text = email
+    }
+    
+    fileprivate func configureLayout() {
         resendEmailButton.round()
         resendEmailButton.tintColor = UIColor.secondary
         resendEmailButton.backgroundColor = UIColor.primary
@@ -34,12 +45,10 @@ class EmailVerificationViewController: UIViewController, EmailVerificationView {
         signOutButton.round()
         signOutButton.tintColor = UIColor.primary
         signOutButton.border(color: UIColor.primary, width: 1.0)
-        emailLabel.text = email
-//        setTopBar()
     }
-
-    deinit {
-        presenter.deteachView()
+    
+    fileprivate func dismissViewController() {
+        self.dismiss(animated: true)
     }
     
     @IBAction func checkAction(_ sender: UIButton) {
@@ -51,9 +60,7 @@ class EmailVerificationViewController: UIViewController, EmailVerificationView {
     }
     
     @IBAction func signOutAction(_ sender: UIButton) {
-        self.dismiss(animated: true) {
-            self.presentingViewController?.dismiss(animated: true, completion: nil)
-        }
+        dismissViewController()
     }
     
     // MARK:- EmailVerificationView
@@ -75,10 +82,8 @@ class EmailVerificationViewController: UIViewController, EmailVerificationView {
     }
     
     func verified() {
-        guard let window = UIApplication.shared.delegate?.window else { return }
-        guard let root = storyboard?.instantiateViewController(withIdentifier: "tabBarController") else { return }
-        
-        window?.rootViewController = root
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.loadHomeScreen(animated: false)
 
         self.dismiss(animated: true) {
             self.presentingViewController?.dismiss(animated: true, completion: nil)
