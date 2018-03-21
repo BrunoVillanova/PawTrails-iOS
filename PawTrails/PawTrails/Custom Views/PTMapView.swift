@@ -93,7 +93,11 @@ class PTMapView: MKMapView {
                 self.addAnnotation(newAnnotation)
             }
             
-            fitMapViewToAnnotaionList(annotations: annotationsWithPoint, animated: false)
+            let allAnnotations = Array(self.myAnnotations.map({$0.value}).joined()).filter({ (ann) -> Bool in
+                return ann.tripPoint != nil && ann.tripPoint?.point != nil
+            })
+        
+            fitMapViewToAnnotaionList(annotations: allAnnotations, animated: false)
         }
         
     }
@@ -364,6 +368,8 @@ extension PTMapView: MKMapViewDelegate {
                 if annotationView == nil {
                     annotationView = PTDonutAnnotationView(annotation: annotation, reuseIdentifier: PTDonutAnnotationView.identifier)
                 }
+                
+                (annotationView as! PTDonutAnnotationView).petFocused = focusedPetID == annotation.pet?.id
                 
             } else {
                 annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: PTBasicAnnotationView.identifier) as? PTBasicAnnotationView
