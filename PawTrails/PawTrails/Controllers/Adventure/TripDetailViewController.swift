@@ -22,6 +22,7 @@ class TripDetailViewController: UIViewController {
     var delegate: TripDetailViewControllerDelegate?
     var collectionView: UICollectionView?
     var pageControl: UIPageControl?
+    var isFinishedAdventure = false
     var scrollViewPageIndex :Int {
         set {
             let contentX = collectionView!.frame.size.width * CGFloat(newValue)
@@ -44,7 +45,7 @@ class TripDetailViewController: UIViewController {
     
     
     let shareButton = UIButton()
-
+    var imageView : UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +58,15 @@ class TripDetailViewController: UIViewController {
         shareButton.setImage(UIImage(named:"ShareButton-1x-png"), for: .normal)
         shareButton.addTarget(self, action: #selector(didTapShareButton), for: .touchUpInside)
         self.view.addSubview(shareButton)
+        
+        if isBetaDemo && isFinishedAdventure {
+            let image = UIImage(named: "map_sample")
+            imageView = UIImageView(image: image!)
+            imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight, .flexibleBottomMargin, .flexibleRightMargin, .flexibleLeftMargin, .flexibleTopMargin]
+            imageView.contentMode = UIViewContentMode.scaleAspectFill
+            mapView.addSubview(imageView)
+        }
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -66,7 +76,7 @@ class TripDetailViewController: UIViewController {
     
     @IBAction func didTapShareButton() {
         
-        shareToSocialMedia(message: "yo",link: "https://pawtrails.com")
+        shareToSocialMedia(message: "yo",link: "https://pawtrails.com",inController: self)
 
     }
     
@@ -151,8 +161,10 @@ class TripDetailViewController: UIViewController {
                 make.edges.equalToSuperview()
             }
         }
+        if (pageControl != nil) {
+            selectedPageIndex.asObservable().bind(to: pageControl!.rx.currentPage).disposed(by: disposeBag)
+        }
         
-        selectedPageIndex.asObservable().bind(to: pageControl!.rx.currentPage).disposed(by: disposeBag)
         
         collectionView.rx.contentOffset.bind { [weak self] (point) in
             guard let _ = self?.collectionView!.frame.size.width else {
@@ -182,6 +194,9 @@ class TripDetailViewController: UIViewController {
         infoViewContainer.dropShadow(color: .black, opacity: 0.1, offSet: CGSize(width: 0, height: -2), radius: 1, scale: true)
         
         shareButton.frame = CGRect(x: self.view.frame.size.width - 75, y: mapView.frame.height-34, width: 75, height: 75)
+        if isBetaDemo && isFinishedAdventure {
+            imageView.frame = mapView.frame
+        }
     }
     
     

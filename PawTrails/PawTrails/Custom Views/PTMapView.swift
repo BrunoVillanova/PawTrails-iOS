@@ -69,7 +69,7 @@ class PTMapView: MKMapView {
         self.showsTraffic = false
         self.showsBuildings = false
         self.showsScale = false
-        allowUserInteraction(false)
+        allowUserInteraction(true)
         
         if let tripAnnotations = self.drawOverlay(trip) {
             
@@ -178,7 +178,7 @@ class PTMapView: MKMapView {
                             let newAnnotation = PTAnnotation(coords)
                             self.myAnnotations[id]?.append(newAnnotation)
                             self.drawOverlayForPetAnnotations(self.myAnnotations[id])
-                            self.focusOnPet(petDeviceData.pet)
+                            //self.focusOnPet(petDeviceData.pet)
                         }
                     }
                 }
@@ -190,7 +190,7 @@ class PTMapView: MKMapView {
                 firstTimeLoadingData = false
             }
             
-            
+            shouldFocusOnPets  = true
             if shouldFocusOnPets {
                 alreadyFocusedOnPets = true
                 self.focusOnPets()
