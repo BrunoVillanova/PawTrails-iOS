@@ -606,6 +606,35 @@ class APIRepository {
             }
         }
     }
+    
+    func getTrips(_ status: [Int], from: Int?, to: Int?, page: Int?, callback: @escaping ApiTrip) {
+        
+        var data: [String:Any] = ["status": status]
+        
+        if let from = from {
+            data["from"] = from
+        }
+        
+        if let to = to {
+            data["to"] = to
+        }
+        
+        if let page = page {
+            data["page"] = page
+        }
+        
+        APIManager.instance.perform(call: .getTripList, with: data) { (error, json) in
+            if error == nil, let tripListJson = json?["trips"].array {
+                var tripList = [Trip]()
+                for trip in tripListJson {
+                    tripList.append(Trip(trip))
+                }
+                callback(nil, tripList)
+            } else if let error = error {
+                callback(error, nil)
+            }
+        }
+    }
 
     // Finish Trips
     // callBack: returns nil or data

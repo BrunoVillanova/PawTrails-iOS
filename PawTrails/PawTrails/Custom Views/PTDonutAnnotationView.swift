@@ -13,7 +13,18 @@ class PTDonutAnnotationView: MKAnnotationView {
     
     static let identifier = "PTDonutAnnotationView"
     
+    var petFocused: Bool = true {
+        didSet {
+            if petFocused {
+                annotationImage = UIImage(named: "DonutIcon")
+            } else {
+                annotationImage = UIImage(named: "DonutIconGray")
+            }
+        }
+    }
+    
     let pictureImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 12, height: 12))
+    var annotationImage = UIImage(named: "DonutIcon")
     
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
@@ -37,7 +48,7 @@ class PTDonutAnnotationView: MKAnnotationView {
 //        self.centerOffset = CGPoint(x: 3, y: 4)
         self.image = nil
         
-        pictureImageView.image = UIImage(named: "DonutIcon")
+        pictureImageView.image = annotationImage
         self.addSubview(pictureImageView)
     }
 
