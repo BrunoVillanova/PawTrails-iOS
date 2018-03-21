@@ -152,7 +152,9 @@ class TripDetailViewController: UIViewController {
             }
         }
         
-        selectedPageIndex.asObservable().bind(to: pageControl!.rx.currentPage).disposed(by: disposeBag)
+        if let pageControl = pageControl {
+            selectedPageIndex.asObservable().bind(to: pageControl.rx.currentPage).disposed(by: disposeBag)
+        }
         
         collectionView.rx.contentOffset.bind { [weak self] (point) in
             guard let _ = self?.collectionView!.frame.size.width else {

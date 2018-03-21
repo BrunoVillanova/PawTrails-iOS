@@ -24,6 +24,7 @@ class AdventuresListViewController: UIViewController  {
     var startDateInDateFormate: Date?
     var endDate: Int?
     let disposeBag = DisposeBag()
+    var currentTripsPage: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +50,8 @@ class AdventuresListViewController: UIViewController  {
     }
     
     fileprivate func retrieveTrips() {
-        DataManager.instance.finishedTrips()
+    
+        DataManager.instance.getTrips([2], from: startDate, to: endDate, page: currentTripsPage)
             .map({ [unowned self] (trips) -> [Trip] in
                 return trips.filter({ (trip) -> Bool in
                     return trip.pet.id == self.pet.id
@@ -117,6 +119,7 @@ class AdventuresListViewController: UIViewController  {
                     Reporter.debugPrint(error.localizedDescription)
                 }
             }
+            retrieveTrips()
         }
     }
     

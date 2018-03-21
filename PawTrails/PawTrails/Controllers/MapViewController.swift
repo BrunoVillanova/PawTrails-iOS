@@ -62,7 +62,7 @@ class MapViewController: UIViewController {
     
     
     fileprivate func initialize() {
-        mapView.tripMode = true
+
         mapView.calloutDelegate = self
         DataManager.instance.getActivePetTrips()
             .subscribe(onNext: { (tripList) in
