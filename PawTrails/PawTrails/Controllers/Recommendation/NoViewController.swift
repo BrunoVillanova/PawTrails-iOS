@@ -47,7 +47,7 @@ class NoViewController: UIViewController {
         collectionView.contentInset.left = 15
         collectionView.contentInset.right = 15
         collectionView.allowsMultipleSelection = false
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: nil)
+        self.navigationController?.navigationBar.topItem?.title = " "
         collectionView.isScrollEnabled = false
     }
 }

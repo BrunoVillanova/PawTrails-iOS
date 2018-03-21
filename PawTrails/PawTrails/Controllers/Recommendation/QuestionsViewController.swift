@@ -33,7 +33,7 @@ class QuestionsViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.navigationController?.navigationBar.topItem?.title = " "
         
         watchNow.backgroundColor = UIColor.primary
         watchNow.round()
