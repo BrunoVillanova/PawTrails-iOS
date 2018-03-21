@@ -70,7 +70,7 @@ extension DataManager {
         let apiTrips = getApiTrips([0,1])
         let socketTrips = SocketIOManager.instance.trips()
         return apiTrips.flatMap({ (apiTripsData) -> Observable<[Trip]> in
-            return socketTrips.flatMap({ (socketTripsData) -> Observable<[Trip]> in
+            return socketTrips.flatMapLatest ({ (socketTripsData) -> Observable<[Trip]> in
                 return apiTrips.delaySubscription(RxTimeInterval(0.5), scheduler: MainScheduler.instance)
             })
         })

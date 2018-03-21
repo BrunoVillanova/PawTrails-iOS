@@ -80,6 +80,7 @@ class TripScreenViewController: UIViewController {
             .flatMap { (trips) -> Observable<[Trip]> in
                 Reporter.debugPrint("TripScreen -> activeTripsObservable -> flatMap -> \(trips.count)")
                 let petIDsOnTrip = trips.map { $0.pet.id }
+                self.activeTrips = trips
                 return allPetDeviceData
                     .map({ (petDeviceDataList) -> [PetDeviceData] in
                         Reporter.debugPrint("TripScreen -> allPetDeviceData -> map")
@@ -144,6 +145,14 @@ class TripScreenViewController: UIViewController {
     
     private func setupSubViews() {
         selectedPageIndex.asObservable().bind(to: pageControl.rx.currentPage).disposed(by: disposeBag)
+        
+        selectedPageIndex.asObservable().subscribe(onNext: { (pageIndex) in
+            if self.activeTrips.count > pageIndex {
+                let trip = self.activeTrips[pageIndex]
+                self.mapView.focusedPetID = trip.pet.id
+            }
+            
+        }).disposed(by: disposeBag)
         
         collectionView.rx.contentOffset.bind { [weak self] (point) in
             guard let _ = self?.collectionView.frame.size.width else {
