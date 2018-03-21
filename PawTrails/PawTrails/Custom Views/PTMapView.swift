@@ -306,6 +306,22 @@ class PTMapView: MKMapView {
         }
     }
     
+    func focusOnPet(_ petID: Int) {
+        
+        if let petAnnotationOnMap = petAnnotationOnMap(petID) as PTAnnotation! {
+            let coordinate = petAnnotationOnMap.coordinate
+            if CLLocationCoordinate2DIsValid(coordinate) && coordinate.latitude != 0 && coordinate.longitude != 0 {
+                self.setVisibleMapFor([petAnnotationOnMap.coordinate])
+                focusedPetID = petID
+            }
+            else {
+                showLocationUnavailableAlert()
+            }
+        } else {
+            showLocationUnavailableAlert()
+        }
+    }
+    
     fileprivate func showLocationUnavailableAlert() {
         // the pet is not even in the map yet
         let alert = UIAlertController(title: "Location unavailable", message: "Move your device outdoors to get your first location", preferredStyle: UIAlertControllerStyle.alert)
@@ -386,7 +402,11 @@ extension PTMapView: MKMapViewDelegate {
                     }
                     
                     annotationView.configureWithAnnotation(annotation)
-                
+                    
+                    if tripMode {
+                        annotationView.petFocused = focusedPetID == annotation.pet?.id
+                    }
+
                 }
                 
             }

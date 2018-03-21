@@ -149,7 +149,7 @@ class TripScreenViewController: UIViewController {
         selectedPageIndex.asObservable().subscribe(onNext: { (pageIndex) in
             if self.activeTrips.count > pageIndex {
                 let trip = self.activeTrips[pageIndex]
-                self.mapView.focusedPetID = trip.pet.id
+                self.mapView.focusOnPet(trip.pet.id)
             }
             
         }).disposed(by: disposeBag)
