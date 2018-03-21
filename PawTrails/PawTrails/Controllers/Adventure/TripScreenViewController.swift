@@ -11,7 +11,7 @@ import MapKit
 import RxSwift
 import RxCocoa
 import SCLAlertView
-
+import SwiftyJSON
 
 class TripScreenViewController: UIViewController {
     
@@ -143,6 +143,26 @@ class TripScreenViewController: UIViewController {
         mapView.startTripMode()
     }
     
+    override func viewDidLayoutSubviews() {
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.scrollDirection = .horizontal
+            
+            collectionView.isPagingEnabled = true
+            collectionView.showsHorizontalScrollIndicator = false
+        }
+        
+        myCollectionViewHeight = collectionView.frame.size.height
+        myCollectionViewWidith = collectionView.frame.size.width
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.destination is FinishAdventureVC {
+            let vc = (segue.destination as! FinishAdventureVC)
+            vc.delegate = self
+        }
+    }
+    
     private func setupSubViews() {
         selectedPageIndex.asObservable().bind(to: pageControl.rx.currentPage).disposed(by: disposeBag)
         
@@ -168,18 +188,6 @@ class TripScreenViewController: UIViewController {
             }.disposed(by: disposeBag)
     }
     
-    override func viewDidLayoutSubviews() {
-        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.scrollDirection = .horizontal
-            
-            collectionView.isPagingEnabled = true
-            collectionView.showsHorizontalScrollIndicator = false
-        }
-        
-        myCollectionViewHeight = collectionView.frame.size.height
-        myCollectionViewWidith = collectionView.frame.size.width
-    }
-    
     //MARK: -
     //MARK: Private Methods
     func requestLocationAccess() {
@@ -195,6 +203,30 @@ class TripScreenViewController: UIViewController {
         default:
             locationManager.requestWhenInUseAuthorization()
         }
+    }
+    
+    fileprivate func demoTrips() -> [Trip]? {
+        var trips: [Trip]?
+        
+        if let path = Bundle.main.path(forResource: "DemoTrips", ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
+            
+                if let json = try? JSON(data: data), let tripListJson = json["trips"].array {
+                    var tripList = [Trip]()
+                    for trip in tripListJson {
+                        tripList.append(Trip(trip))
+                    }
+                    trips = tripList
+                }
+            } catch let error {
+                print("parse error: \(error.localizedDescription)")
+            }
+        } else {
+            print("Invalid filename/path.")
+        }
+        
+        return trips
     }
     
     //MARK: -
@@ -284,14 +316,6 @@ class TripScreenViewController: UIViewController {
         performSegue(withIdentifier: "finish", sender: self)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.destination is FinishAdventureVC {
-            let vc = (segue.destination as! FinishAdventureVC)
-            vc.delegate = self
-        }
-    }
-    
     @IBAction func BackBtnPressed(_ sender: Any) {
         if self.isModal {
             self.dismiss(animated: true, completion: nil)
@@ -348,6 +372,22 @@ extension TripScreenViewController: UICollectionViewDelegateFlowLayout {
 extension TripScreenViewController: FinishAdventureVCDelegate {
     
     func adventureFinished(viewController: FinishAdventureVC, trips: [Trip]?) {
+        
+        if isBetaDemo {
+            viewController.dismiss(animated: true, completion: {
+                if let trips = self.demoTrips() {
+                    let tripDetailViewController = TripDetailViewController()
+                    tripDetailViewController.trips = trips
+                    tripDetailViewController.delegate = self
+                    let navigatiorController = UINavigationController(rootViewController: tripDetailViewController)
+                    
+                    self.present(navigatiorController, animated: true, completion: nil)
+                } else {
+                    self.dismiss(animated: true, completion: nil)
+                }
+            })
+            return
+        }
         
         viewController.dismiss(animated: true, completion: {
             if let trips = trips {
