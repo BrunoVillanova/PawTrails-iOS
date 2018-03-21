@@ -17,6 +17,11 @@ class PTBasicAnnotationView: MKAnnotationView {
     var calloutView: PTPetCalloutView?
     let defaultAnimationDuration = 0.3
     var calloutDelegate: PTPetCalloutViewDelegate?
+    var petFocused : Bool = true {
+        didSet {
+            pictureImageView.petFocused = petFocused
+        }
+    }
     
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
@@ -74,6 +79,7 @@ class PTBasicAnnotationView: MKAnnotationView {
         self.centerOffset = CGPoint(x: 0, y: -30)
         self.addSubview(pictureImageView)
         self.image = nil
+        pictureImageView.petFocused = petFocused
     }
     
     func configureWithAnnotation(_ annotation: PTAnnotation) {

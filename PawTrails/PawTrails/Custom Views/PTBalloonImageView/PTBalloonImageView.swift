@@ -15,6 +15,15 @@ class PTBalloonImageView: UIImageView {
     
     var borderImageView = UIImageView(frame: CGRect.zero)
     var pictureImageView = UIImageView(frame: CGRect.zero)
+    var petFocused : Bool = true {
+        didSet {
+            if petFocused {
+                borderImageView.image = #imageLiteral(resourceName: "userProfileMask-1x-png");
+            } else {
+                borderImageView.image = UIImage(named: "UserProfileMaskGray")
+            }
+        }
+    }
     
     override var image: UIImage? {
         get {
@@ -65,7 +74,12 @@ class PTBalloonImageView: UIImageView {
     fileprivate func initialize() {
         self.backgroundColor = .clear
         
-        borderImageView.image = #imageLiteral(resourceName: "userProfileMask-1x-png");
+        if petFocused {
+            borderImageView.image = #imageLiteral(resourceName: "userProfileMask-1x-png");
+        } else {
+            borderImageView.image = UIImage(named: "UserProfileMaskGray")
+        }
+
         borderImageView.backgroundColor = .clear
         
         pictureImageView.backgroundColor = .clear

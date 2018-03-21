@@ -28,6 +28,7 @@ class PTMapView: MKMapView {
     var currentGpsMode: GPSTimeIntervalMode = .live
     var calloutDelegate: PTPetCalloutViewDelegate?
     var focusedPetID: Int?
+    var focusedPetPolytine: MKPolyline?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -69,7 +70,11 @@ class PTMapView: MKMapView {
         self.showsTraffic = false
         self.showsBuildings = false
         self.showsScale = false
-        allowUserInteraction(true)
+        allowUserInteraction(false)
+        
+        if focusedPetID == nil {
+            focusedPetID = trip.pet.id
+        }
         
         if let tripAnnotations = self.drawOverlay(trip) {
             
@@ -88,7 +93,11 @@ class PTMapView: MKMapView {
                 self.addAnnotation(newAnnotation)
             }
             
-            fitMapViewToAnnotaionList(annotations: annotationsWithPoint, animated: false)
+            let allAnnotations = Array(self.myAnnotations.map({$0.value}).joined()).filter({ (ann) -> Bool in
+                return ann.tripPoint != nil && ann.tripPoint?.point != nil
+            })
+        
+            fitMapViewToAnnotaionList(annotations: allAnnotations, animated: false)
         }
         
     }
@@ -130,6 +139,10 @@ class PTMapView: MKMapView {
         tripMode = true
         
         DataManager.instance.getActivePetTrips().subscribe(onNext: { (trips) in
+            
+            if let firstTrip = trips.first, self.focusedPetID == nil {
+                self.focusedPetID = firstTrip.pet.id
+            }
             
             var petIDsOnTrips = Set<Int64>()
             trips.forEach({ (trip) in
@@ -175,10 +188,13 @@ class PTMapView: MKMapView {
                     let id = MKLocationId(id: Int(petDeviceData.pet.id), type: .pet)
                     if self.myAnnotations[id] != nil {
                         if let point = petDeviceData.deviceData.point, let coords = point.coordinates {
-                            let newAnnotation = PTAnnotation(coords)
+                            let newAnnotation = PTAnnotation(coords, pet: petDeviceData.pet)
                             self.myAnnotations[id]?.append(newAnnotation)
                             self.drawOverlayForPetAnnotations(self.myAnnotations[id])
-                            //self.focusOnPet(petDeviceData.pet)
+                            
+                            if focusedPetID == petDeviceData.pet.id {
+                                self.focusOnPet(petDeviceData.pet)
+                            }
                         }
                     }
                 }
@@ -190,7 +206,7 @@ class PTMapView: MKMapView {
                 firstTimeLoadingData = false
             }
             
-            shouldFocusOnPets  = true
+            
             if shouldFocusOnPets {
                 alreadyFocusedOnPets = true
                 self.focusOnPets()
@@ -234,6 +250,9 @@ class PTMapView: MKMapView {
                     } else {
                         if points.count > 0 {
                             let polyline = MKPolyline(coordinates: points, count: points.count)
+                            if let pet = annotation.pet, focusedPetID != nil, focusedPetID == pet.id {
+                                focusedPetPolytine = polyline
+                            }
                             self.add(polyline)
                         }
                         points = [CLLocationCoordinate2D]()
@@ -241,6 +260,9 @@ class PTMapView: MKMapView {
                 } else {
                     points.append(annotation.coordinate)
                     let polyline = MKPolyline(coordinates: points, count: points.count)
+                    if let pet = annotation.pet, focusedPetID != nil, focusedPetID == pet.id {
+                        focusedPetPolytine = polyline
+                    }
                     self.add(polyline)
                 }
             })
@@ -275,6 +297,22 @@ class PTMapView: MKMapView {
             if CLLocationCoordinate2DIsValid(coordinate) && coordinate.latitude != 0 && coordinate.longitude != 0 {
                 self.setVisibleMapFor([petAnnotationOnMap.coordinate])
                 focusedPetID = pet.id
+            }
+            else {
+                showLocationUnavailableAlert()
+            }
+        } else {
+            showLocationUnavailableAlert()
+        }
+    }
+    
+    func focusOnPet(_ petID: Int) {
+        
+        if let petAnnotationOnMap = petAnnotationOnMap(petID) as PTAnnotation! {
+            let coordinate = petAnnotationOnMap.coordinate
+            if CLLocationCoordinate2DIsValid(coordinate) && coordinate.latitude != 0 && coordinate.longitude != 0 {
+                self.setVisibleMapFor([petAnnotationOnMap.coordinate])
+                focusedPetID = petID
             }
             else {
                 showLocationUnavailableAlert()
@@ -347,6 +385,8 @@ extension PTMapView: MKMapViewDelegate {
                     annotationView = PTDonutAnnotationView(annotation: annotation, reuseIdentifier: PTDonutAnnotationView.identifier)
                 }
                 
+                (annotationView as! PTDonutAnnotationView).petFocused = focusedPetID == annotation.pet?.id
+                
             } else {
                 annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: PTBasicAnnotationView.identifier) as? PTBasicAnnotationView
             
@@ -362,7 +402,11 @@ extension PTMapView: MKMapViewDelegate {
                     }
                     
                     annotationView.configureWithAnnotation(annotation)
-                
+                    
+                    if tripMode {
+                        annotationView.petFocused = focusedPetID == annotation.pet?.id
+                    }
+
                 }
                 
             }
@@ -397,9 +441,15 @@ extension PTMapView: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if overlay is MKPolyline {
+            
+            var strokeColor = UIColor.lightGray
+            if overlay as? MKPolyline == focusedPetPolytine {
+                strokeColor = PTConstants.colors.primary
+            }
+
             let polylineRenderer = MKPolylineRenderer(overlay: overlay)
-            polylineRenderer.strokeColor = PTConstants.colors.primary
-            polylineRenderer.lineWidth = 2.3
+            polylineRenderer.strokeColor = strokeColor
+            polylineRenderer.lineWidth = 2.0
             return polylineRenderer
         }
         return MKPolylineRenderer()
