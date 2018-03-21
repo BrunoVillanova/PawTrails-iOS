@@ -394,7 +394,7 @@ extension TripScreenViewController: FinishAdventureVCDelegate {
                 let tripDetailViewController = TripDetailViewController()
                 tripDetailViewController.trips = trips
                 tripDetailViewController.delegate = self
-                tripDetailViewController.isFinishedAdventure = true;
+                
                 let navigatiorController = UINavigationController(rootViewController: tripDetailViewController)
                 
                 self.present(navigatiorController, animated: true, completion: nil)

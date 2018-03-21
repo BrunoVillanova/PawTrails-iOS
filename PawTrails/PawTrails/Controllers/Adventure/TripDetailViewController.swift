@@ -66,7 +66,7 @@ class TripDetailViewController: UIViewController {
     
     @IBAction func didTapShareButton() {
         
-        shareToSocialMedia(message: "yo",link: "https://pawtrails.com")
+        shareToSocialMedia(message: "yo",link: "https://pawtrails.com", inController: self)
 
     }
     
