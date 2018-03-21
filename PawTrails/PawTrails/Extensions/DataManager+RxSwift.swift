@@ -56,8 +56,23 @@ extension DataManager {
         })
     }
     
+    func getTrips(_ status: [Int] = [], from: Int? = nil, to: Int? = nil, page: Int? = nil) -> Observable<[Trip]> {
+        return Observable.create({observer in
+            APIRepository.instance.getTrips(status, from: from, to: to, page: page) { (error, trips) in
+                if let error = error {
+                    observer.onError(error)
+                } else {
+                    observer.onNext(trips!)
+                    observer.onCompleted()
+                }
+            }
+            
+            return Disposables.create()
+        })
+    }
+    
     func finishedTrips() -> Observable<[Trip]> {
-        let apiTrips = getApiTrips([2])
+        let apiTrips = getTrips([2])
         let socketTrips = SocketIOManager.instance.trips()
         return apiTrips.flatMap ({ (apiTripsData) -> Observable<[Trip]> in
             return socketTrips.flatMap({ (socketTripsData) -> Observable<[Trip]> in
@@ -67,17 +82,18 @@ extension DataManager {
     }
     
     func getActivePetTrips() -> Observable<[Trip]> {
-        let apiTrips = getApiTrips([0,1])
+        let apiTrips = getTrips([0,1])
         let socketTrips = SocketIOManager.instance.trips()
         return apiTrips.flatMap({ (apiTripsData) -> Observable<[Trip]> in
             return socketTrips.flatMapLatest ({ (socketTripsData) -> Observable<[Trip]> in
-                return apiTrips.delaySubscription(RxTimeInterval(0.5), scheduler: MainScheduler.instance)
+                return apiTrips
+//                return apiTrips.delaySubscription(RxTimeInterval(0.5), scheduler: MainScheduler.instance)
             })
         })
     }
     
     func allTrips() -> Observable<[Trip]> {
-        let apiTrips = getApiTrips()
+        let apiTrips = getTrips()
         let socketTrips = SocketIOManager.instance.trips()
         return apiTrips.flatMap ({ (apiTripsData) -> Observable<[Trip]> in
             return socketTrips.flatMap({ (socketTripsData) -> Observable<[Trip]> in
