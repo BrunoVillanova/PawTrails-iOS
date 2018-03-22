@@ -82,6 +82,12 @@ class EmailVerificationViewController: UIViewController, EmailVerificationView {
     }
     
     func verified() {
+        
+        //TODO remove this.ok
+        if isBetaDemo {
+            SignUpYourDeviceVC.userDefaults.set(false, forKey: SignUpYourDeviceVC.tutorialShownUserPreferecesKey)
+        }
+        
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.loadHomeScreen(animated: false)
 

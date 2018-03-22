@@ -28,6 +28,11 @@ class SignUpYourDeviceVC: UIViewController {
             SignUpYourDeviceVC.userDefaults.set(true, forKey: SignUpYourDeviceVC.tutorialShownUserPreferecesKey)
         #endif
         
+        //TODO remove this.ok
+        if isBetaDemo {
+            SignUpYourDeviceVC.userDefaults.set(false, forKey: SignUpYourDeviceVC.tutorialShownUserPreferecesKey)
+        }
+        
         self.extendedLayoutIncludesOpaqueBars = true
         self.edgesForExtendedLayout = [.all]
         configureNavigatonBar()
