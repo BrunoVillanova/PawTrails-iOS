@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 import GSMessages
 
 protocol FinishAdventureVCDelegate {
@@ -31,6 +32,10 @@ class FinishAdventureVC: UIViewController, BEMCheckBoxDelegate {
     }
     
     fileprivate func initialize() {
+        
+        DataManager.instance.pets().bind(to: collectionView.rx.items(cellIdentifier: "cell", cellType: FinishAdventureCell.self)) { (row, element, cell) in
+            cell.configureWithPet(element)
+        }.disposed(by: disposeBag)
         configureLayout()
     }
     
@@ -72,4 +77,9 @@ class FinishAdventureCell: UICollectionViewCell {
     @IBOutlet weak var petImageView: PTBalloonImageView!
     @IBOutlet weak var petNameLabel: UILabel!
     @IBOutlet weak var checkBoxView: BEMCheckBox!
+    
+    func configureWithPet(_ pet: Pet) {
+        petNameLabel.text = pet.name
+        petImageView.imageUrl = pet.imageURL
+    }
 }

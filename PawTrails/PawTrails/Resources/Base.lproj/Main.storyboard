@@ -3651,7 +3651,7 @@ PawTrails is a product created by Attitude Technologies.
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mac-bO-czy">
-                                <rect key="frame" x="60" y="669" width="255" height="40"/>
+                                <rect key="frame" x="60" y="718" width="255" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="gRV-GO-XGE"/>
                                 </constraints>
@@ -3671,7 +3671,7 @@ PawTrails is a product created by Attitude Technologies.
                                 </constraints>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" semanticContentAttribute="forceLeftToRight" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gL5-IH-8Ya">
-                                <rect key="frame" x="16" y="270" width="343" height="359"/>
+                                <rect key="frame" x="16" y="270" width="343" height="408"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="B3O-Gn-9LQ">
                                     <size key="itemSize" width="84" height="132"/>
@@ -5970,11 +5970,8 @@ finish the Adventure?</string>
                                         </constraints>
                                         <connections>
                                             <outlet property="checkBoxView" destination="uzp-uv-HUK" id="8B7-eE-mj9"/>
-                                            <outlet property="checkMarkView" destination="uzp-uv-HUK" id="feE-E1-Vb9"/>
-                                            <outlet property="petImage" destination="h7E-hM-RPK" id="Zu5-r5-g30"/>
                                             <outlet property="petImageView" destination="h7E-hM-RPK" id="REo-O5-cz3"/>
                                             <outlet property="petNameLabel" destination="663-Hj-24u" id="6Ca-ua-6VP"/>
-                                            <outlet property="petTitle" destination="663-Hj-24u" id="QyN-XE-syy"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
