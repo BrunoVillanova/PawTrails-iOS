@@ -46,6 +46,9 @@ class SignUpYourDeviceVC: UIViewController {
     }
     
     static func tutorialShown() -> Bool {
+        if isBetaDemo{
+            userDefaults.set(false, forKey: tutorialShownUserPreferecesKey)
+        }
         return userDefaults.bool(forKey: tutorialShownUserPreferecesKey)
     }
     

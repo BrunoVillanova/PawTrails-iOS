@@ -38,11 +38,19 @@ class InitialPresenter {
 //                let window = UIApplication.shared.keyWindow?.subviews.last
 //                window?.removeFromSuperview()
                 if let error = error {
-                    if error.APIError?.errorCode == ErrorCode.AccountNotVerified {
-                        self.view?.verifyAccount(email!, password!)
-                    }else{
-                        self.view?.errorMessage(error.msg)
+                    
+                    if isBetaDemo {
+                        
+                        self.view?.userAuthenticated()
                     }
+                    else {
+                        if error.APIError?.errorCode == ErrorCode.AccountNotVerified {
+                            self.view?.verifyAccount(email!, password!)
+                        }else{
+                            self.view?.errorMessage(error.msg)
+                        }
+                    }
+                    
                 }else{
                     self.view?.userAuthenticated()
                 }
@@ -58,6 +66,7 @@ class InitialPresenter {
                 self.view?.endLoadingContent()
 //                let window = UIApplication.shared.keyWindow?.subviews.last
 //                window?.removeFromSuperview()
+                
                 if let error = error {
                     self.view?.errorMessage(error.msg)
                     

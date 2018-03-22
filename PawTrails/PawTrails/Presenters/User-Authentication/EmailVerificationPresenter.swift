@@ -50,12 +50,22 @@ class EmailVerificationPresenter {
             self.view?.endLoadingContent()
             let window = UIApplication.shared.keyWindow?.subviews.last
             window?.removeFromSuperview()
-            if let error = error {
-                
-                self.view?.errorMessage(error.msg)
-            }else{
+            
+            if isBetaDemo {
+
                 self.view?.verified()
             }
+            else {
+                
+                if let error = error {
+                    
+                    self.view?.errorMessage(error.msg)
+                }else{
+                    self.view?.verified()
+                }
+            }
+            
+
             
         }
     }
