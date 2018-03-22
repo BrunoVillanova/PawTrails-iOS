@@ -3651,7 +3651,7 @@ PawTrails is a product created by Attitude Technologies.
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mac-bO-czy">
-                                <rect key="frame" x="60" y="718" width="255" height="40"/>
+                                <rect key="frame" x="60" y="669" width="255" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="gRV-GO-XGE"/>
                                 </constraints>
@@ -3671,7 +3671,7 @@ PawTrails is a product created by Attitude Technologies.
                                 </constraints>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" semanticContentAttribute="forceLeftToRight" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gL5-IH-8Ya">
-                                <rect key="frame" x="16" y="270" width="343" height="408"/>
+                                <rect key="frame" x="16" y="270" width="343" height="359"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="B3O-Gn-9LQ">
                                     <size key="itemSize" width="84" height="132"/>
@@ -8198,7 +8198,7 @@ Last Edited on 2017-12-04
     <inferredMetricsTieBreakers>
         <segue reference="yp5-bT-5uy"/>
         <segue reference="Rzx-2e-OhR"/>
-        <segue reference="Nln-Sh-wxV"/>
+        <segue reference="G7h-iD-Glq"/>
         <segue reference="gjN-xE-RCG"/>
     </inferredMetricsTieBreakers>
 </document>
