@@ -96,19 +96,8 @@ extension DataManager {
         let socketTrips = SocketIOManager.instance.trips()
         return apiTrips.flatMap ({ (apiTripsData) -> Observable<[Trip]> in
             return socketTrips
-//                .filter({ (trips) -> Bool in
-//                    return trips.filter { $0.status == 0 || $0.status == 1 }.count > 0
-//                })
-//                .take(1)
                 .flatMap ({ (socketTripsData) -> Observable<[Trip]> in
                     return apiTrips
-//                    if socketTripsData.filter( { $0.status == 0 || $0.status == 1 }).count > 0 {
-//                        return apiTrips
-//                    } else {
-//                        return socketTrips
-//                    }
-//                    return apiTrips
-//                return apiTrips.delaySubscription(RxTimeInterval(0.5), scheduler: MainScheduler.instance)
                 })
         })
     }

@@ -313,15 +313,15 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     func trips() -> Observable<[Trip]> {
         self.connect()
         return isReady()
-                .filter({ (value) -> Bool in
+                .filter ({ (value) -> Bool in
                     Reporter.debugPrint("SocketIOManager -> trips() -> filter -> \(value)")
                     return value == true
                 })
-                .flatMapLatest({ (isReady) -> Observable<[Trip]> in
+                .flatMapLatest ({ (isReady) -> Observable<[Trip]> in
                     Reporter.debugPrint("SocketIOManager -> trips() -> flatMap")
                     self.socket.emit(channel.trips.name)
                     return self.petTrips.asObservable()
-                }).share()
+                })
     }
     
     func isReady() -> Observable<Bool> {
