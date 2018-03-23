@@ -93,6 +93,9 @@ class TripScreenViewController: UIViewController {
                         return DataManager.instance.getApiTrips([0,1])
                     }).ifEmpty(default: trips)
             }
+            .filter({ (trips) -> Bool in
+                return trips.count > 0
+            })
             .bind(to: collectionView.rx.items(cellIdentifier: "cell", cellType: TripDetailsCell.self)) { (row, element, cell) in
                 Reporter.debugPrint("TripScreen -> Configure cell")
                 self.pageControl.isHidden = false
