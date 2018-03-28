@@ -52,6 +52,9 @@ class OnboardingStepViewController: UIViewController {
             imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight, .flexibleBottomMargin, .flexibleRightMargin, .flexibleLeftMargin, .flexibleTopMargin]
             imageView.contentMode = .scaleAspectFit
             imageView.clipsToBounds = true
+        } else if UIDevice.current.screenType == .iPhoneX {
+            titleLabelTopConstraint.constant = 100
+            textLabelToBottomConstraint.constant = 190
         }
     }
 }
