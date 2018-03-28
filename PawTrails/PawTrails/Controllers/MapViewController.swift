@@ -31,6 +31,7 @@ class MapViewController: UIViewController {
     var data = [searchElement]()
     var activeTrips = [Trip]()
     var isDisplayedPetScreen = false
+    fileprivate var isFirstTimeViewAppears = true
 
     //MARK: View lifecycle
     override func viewDidLoad() {
@@ -57,6 +58,15 @@ class MapViewController: UIViewController {
         if isDisplayedPetScreen {
             reloadPets()
             isDisplayedPetScreen = false;
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if isFirstTimeViewAppears {
+            isFirstTimeViewAppears = false
+            appDelegate.showOnboardingIfNeeded()
         }
     }
     

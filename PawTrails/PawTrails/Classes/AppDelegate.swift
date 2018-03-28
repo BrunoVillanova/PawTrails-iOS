@@ -149,6 +149,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    func showOnboardingIfNeeded() {
+        guard !OnboardingViewController.onboardingCompleted else {
+            return
+        }
+        self.showOnboardingModally()
+    }
+    
+    func showOnboardingModally() {
+        let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "onboarding")
+        window?.rootViewController?.present(vc, animated: true, completion: nil)
+    }
+    
+    func changeRootViewController(_ viewController: UIViewController, animated: Bool = false) {
+        if let currentRootViewController = self.window?.rootViewController {
+            UIView.transition(from:currentRootViewController.view, to: viewController.view, duration: 0.3, options: UIViewAnimationOptions.transitionCurlDown, completion: {(finished) in
+                self.window?.rootViewController = viewController
+            })
+        } else {
+            window?.rootViewController = viewController
+        }
+    }
+    
     func loadAuthenticationScreen() {
             let initial = storyboard!.instantiateViewController(withIdentifier: "InitialViewController") as? InitialViewController
             window?.rootViewController = initial

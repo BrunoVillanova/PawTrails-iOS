@@ -27,7 +27,12 @@
 		1599A625204F64940089FC8A /* SkyFloatingLabelTextField.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1599A624204F64940089FC8A /* SkyFloatingLabelTextField.framework */; };
 		1599B22A2023E82B002D4025 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1599B2292023E82B002D4025 /* SnapKit.framework */; };
 		1599B22C2023F48A002D4025 /* PTDeviceStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1599B22B2023F48A002D4025 /* PTDeviceStatusView.swift */; };
+		15A13A1F206AAFE4005790B3 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 15A13A1E206AAFE4005790B3 /* Onboarding.storyboard */; };
+		15A13A21206AB517005790B3 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15A13A20206AB4A7005790B3 /* Montserrat-Regular.ttf */; };
+		15A13A24206AC568005790B3 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A13A23206AC568005790B3 /* OnboardingViewController.swift */; };
+		15A13A26206AC73D005790B3 /* BWWalkthrough.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A13A25206AC73D005790B3 /* BWWalkthrough.framework */; };
 		15AAE9F72022BFCA007F9080 /* PTConnectionStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AAE9F62022BFCA007F9080 /* PTConnectionStatusView.swift */; };
+		15AD5EA7206AD6600069E01D /* OnboardingStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AD5EA6206AD6600069E01D /* OnboardingStepViewController.swift */; };
 		15B3FF1C20329C7F00C08D48 /* Cache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B3FF1B20329C7F00C08D48 /* Cache.framework */; };
 		15B3FF1E20329DE500C08D48 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B3FF1D20329DE500C08D48 /* CacheManager.swift */; };
 		15C0DB6B204EFDDC0098E735 /* XLPagerTabStrip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C0DB69204EFDDC0098E735 /* XLPagerTabStrip.framework */; };
@@ -280,7 +285,12 @@
 		1599A624204F64940089FC8A /* SkyFloatingLabelTextField.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SkyFloatingLabelTextField.framework; path = Carthage/Build/iOS/SkyFloatingLabelTextField.framework; sourceTree = "<group>"; };
 		1599B2292023E82B002D4025 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
 		1599B22B2023F48A002D4025 /* PTDeviceStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTDeviceStatusView.swift; sourceTree = "<group>"; };
+		15A13A1E206AAFE4005790B3 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
+		15A13A20206AB4A7005790B3 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
+		15A13A23206AC568005790B3 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		15A13A25206AC73D005790B3 /* BWWalkthrough.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BWWalkthrough.framework; path = Carthage/Build/iOS/BWWalkthrough.framework; sourceTree = "<group>"; };
 		15AAE9F62022BFCA007F9080 /* PTConnectionStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTConnectionStatusView.swift; sourceTree = "<group>"; };
+		15AD5EA6206AD6600069E01D /* OnboardingStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingStepViewController.swift; sourceTree = "<group>"; };
 		15B3FF1B20329C7F00C08D48 /* Cache.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cache.framework; path = Carthage/Build/iOS/Cache.framework; sourceTree = "<group>"; };
 		15B3FF1D20329DE500C08D48 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		15C0DB69204EFDDC0098E735 /* XLPagerTabStrip.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XLPagerTabStrip.framework; path = Carthage/Build/iOS/XLPagerTabStrip.framework; sourceTree = "<group>"; };
@@ -531,6 +541,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15A13A26206AC73D005790B3 /* BWWalkthrough.framework in Frameworks */,
 				1555FFF71FDF662A00F05C76 /* SwiftyJSON.framework in Frameworks */,
 				1589EBC11FE3644E00280926 /* Bolts.framework in Frameworks */,
 				15C90DB11FE36F56008F73B3 /* Fabric.framework in Frameworks */,
@@ -582,6 +593,23 @@
 				15C762322016D011002AA7F8 /* PTTripInfoView.swift */,
 			);
 			path = PTTripInfoView;
+			sourceTree = "<group>";
+		};
+		15A13A1D206AAFBD005790B3 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				15A13A1E206AAFE4005790B3 /* Onboarding.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		15A13A22206AC54A005790B3 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				15A13A23206AC568005790B3 /* OnboardingViewController.swift */,
+				15AD5EA6206AD6600069E01D /* OnboardingStepViewController.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		15C7610E2016CFF3002AA7F8 /* Classes */ = {
@@ -788,6 +816,7 @@
 		15C762852016D06B002AA7F8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				15A13A1D206AAFBD005790B3 /* Storyboards */,
 				1523D0AF20629643003D8653 /* Data */,
 				15E7EFA62044AFBB000BFCBF /* Fonts */,
 				15C764212016EB41002AA7F8 /* ConfigFiles */,
@@ -834,6 +863,7 @@
 		15C763702016D5C0002AA7F8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				15A13A22206AC54A005790B3 /* Onboarding */,
 				15C7642D2016FDC1002AA7F8 /* Recommendation */,
 				15C7642C2016FCD7002AA7F8 /* User */,
 				15C7642B2016FBA9002AA7F8 /* Adventure */,
@@ -1048,6 +1078,7 @@
 		15E7EFA62044AFBB000BFCBF /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				15A13A20206AB4A7005790B3 /* Montserrat-Regular.ttf */,
 				15E7EFA82044B012000BFCBF /* Roboto-Medium.ttf */,
 				15E7EFA72044B005000BFCBF /* RobotoCondensed-Regular.ttf */,
 			);
@@ -1142,6 +1173,7 @@
 		91352D1B7E01CC1C0CF51D38 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				15A13A25206AC73D005790B3 /* BWWalkthrough.framework */,
 				1599A624204F64940089FC8A /* SkyFloatingLabelTextField.framework */,
 				15C0DB6A204EFDDC0098E735 /* SCLAlertView.framework */,
 				15C0DB69204EFDDC0098E735 /* XLPagerTabStrip.framework */,
@@ -1335,6 +1367,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15A13A21206AB517005790B3 /* Montserrat-Regular.ttf in Resources */,
 				15C762442016D011002AA7F8 /* SignalFull@1x.png in Resources */,
 				15C7640A2016D5C0002AA7F8 /* SharedUsersTableViewCell.xib in Resources */,
 				15C762A42016D06B002AA7F8 /* CodeScan.bundle in Resources */,
@@ -1350,6 +1383,7 @@
 				15C762542016D011002AA7F8 /* BatteryLow@3x.png in Resources */,
 				15C762532016D011002AA7F8 /* Battery@3x.png in Resources */,
 				15C763FD2016D5C0002AA7F8 /* ProfileCollectionViewCell.xib in Resources */,
+				15A13A1F206AAFE4005790B3 /* Onboarding.storyboard in Resources */,
 				15C762552016D011002AA7F8 /* BatteryLow@2x.png in Resources */,
 				15C762422016D011002AA7F8 /* SignalFull@2x.png in Resources */,
 				15E7EFAA2044B020000BFCBF /* Roboto-Medium.ttf in Resources */,
@@ -1414,6 +1448,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/SCLAlertView.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/XLPagerTabStrip.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SkyFloatingLabelTextField.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/BWWalkthrough.framework",
 			);
 			name = "Carthage Copy Frameworks";
 			outputPaths = (
@@ -1437,6 +1472,7 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SCLAlertView.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/XLPagerTabStrip.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SkyFloatingLabelTextField.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/BWWalkthrough.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1693,6 +1729,7 @@
 				15C762762016D046002AA7F8 /* PasswordRecoveryPresenter.swift in Sources */,
 				15C7627A2016D046002AA7F8 /* UserProfilePresenter.swift in Sources */,
 				15C764042016D5C0002AA7F8 /* SignUpYourDeviceVC.swift in Sources */,
+				15AD5EA7206AD6600069E01D /* OnboardingStepViewController.swift in Sources */,
 				15C7614F2016CFF3002AA7F8 /* CDUser+CoreDataProperties.swift in Sources */,
 				15C763E82016D5C0002AA7F8 /* AdventuresListViewController.swift in Sources */,
 				15C7613D2016CFF3002AA7F8 /* BEMAnimationManager.m in Sources */,
@@ -1714,6 +1751,7 @@
 				15C7614E2016CFF3002AA7F8 /* CDPetUser+CoreDataClass.swift in Sources */,
 				44F76575201B60A800B552FF /* AddPetUserViewController.swift in Sources */,
 				15C762B72016D06B002AA7F8 /* ViewExtensions.swift in Sources */,
+				15A13A24206AC568005790B3 /* OnboardingViewController.swift in Sources */,
 				15C7615A2016CFF3002AA7F8 /* CDCountryCode+CoreDataClass.swift in Sources */,
 				15C761562016CFF3002AA7F8 /* CDAddress+CoreDataClass.swift in Sources */,
 				15C761402016CFF3002AA7F8 /* BEMCheckBox.m in Sources */,
