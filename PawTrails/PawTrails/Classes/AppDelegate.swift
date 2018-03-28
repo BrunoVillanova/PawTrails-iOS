@@ -71,6 +71,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // KeyboardManager
         IQKeyboardManager.sharedManager().enable = true
+        
+        //reset Onboarding presented
+        OnboardingViewController.onboardingPresented = false
 
         if let socialMedia = DataManager.instance.isSocialMedia(), let sm = SocialMedia(rawValue: socialMedia), sm == .facebook {
             return SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
@@ -149,17 +152,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func showOnboardingIfNeeded() {
-        guard !OnboardingViewController.onboardingCompleted else {
-            return
+    func showOnboardingIfNeeded(_ animated: Bool = true) {
+        if !OnboardingViewController.onboardingPresented && !OnboardingViewController.onboardingCompleted {
+            self.showOnboardingModally(animated)
         }
-        self.showOnboardingModally()
     }
     
-    func showOnboardingModally() {
+    func showOnboardingModally(_ animated: Bool = true) {
         let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "onboarding")
-        window?.rootViewController?.present(vc, animated: true, completion: nil)
+        window?.rootViewController?.present(vc, animated: animated, completion: nil)
     }
     
     func changeRootViewController(_ viewController: UIViewController, animated: Bool = false) {

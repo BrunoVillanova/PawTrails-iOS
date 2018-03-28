@@ -23,22 +23,33 @@ class OnboardingViewController: BWWalkthroughViewController {
     final let stepViewControllerIdentifier = "onboardingStep"
     final let onboardingSteps = [
         OnboardingStep(title: "Puts you in control of your pets",
-                         text: "PawTrails Smart Collar / Harness always puts you in control of your pets.",
+                         text: "PawTrails Smart Collar / Harness always puts you in control of your pets",
                     imageName: "Onboarding0"),
-        OnboardingStep(title: "Show up Your Pet’s Location",
-                         text: "Live tracking your pet’s current location, no more lost again.",
+        OnboardingStep(title: "See Your Pet’s Live Location",
+                       text: "Live track your pets location , to ensure you never misplace them again",
                     imageName: "Onboarding1"),
-        OnboardingStep(title: "Activity Tracking with Monitor",
-                         text: "Track your pet’s 24/7 activity with PawTrails Smart Collar / Harness.",
+        OnboardingStep(title: "Activity Monitor",
+                       text: "Tracks your pets 24/7 activity through the PawTrails app",
                     imageName: "Onboarding2"),
-        OnboardingStep(title: "Healthier, Happier Pets",
-                         text: "Manage your best friend’s care beyond health records.",
+        OnboardingStep(title: "Health Monitor",
+                       text: "Get professional veterinary recommendations through the PawTrails app",
                     imageName: "Onboarding3"),
     ]
     
     var onboardingStoryboard: UIStoryboard {
         get {
             return UIStoryboard(name: "Onboarding", bundle: nil)
+        }
+    }
+    
+    static var onboardingPresented: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: "onboardingPresented")
+        }
+        set {
+            let userDefaults = UserDefaults.standard
+            userDefaults.set(newValue, forKey: "onboardingPresented")
+            userDefaults.synchronize()
         }
     }
     
@@ -63,7 +74,7 @@ class OnboardingViewController: BWWalkthroughViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-       
+        OnboardingViewController.onboardingPresented = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -99,7 +110,7 @@ class OnboardingViewController: BWWalkthroughViewController {
     
     fileprivate func configureLayout() {
         if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
-            commonButtonBottomConstraint.constant = 22
+            commonButtonBottomConstraint.constant = 16
         } else if UIDevice.current.screenType == .iPhoneX {
             lastStepButtonAuxiliarViewHeightConstraint.constant = 44
         }

@@ -33,28 +33,41 @@ class OnboardingStepViewController: UIViewController {
     
     func configure(_ onboardingStep: OnboardingStep) {
         self.onboardingStep = onboardingStep
-    
+
     }
     
     fileprivate func initialize() {
         configureLayout()
+        
         if let onboardingStep = onboardingStep {
+            
+            let attributedString = NSMutableAttributedString(string: onboardingStep.text)
+            let paragraphStyle = NSMutableParagraphStyle()
+            
+            paragraphStyle.alignment = .center
+            paragraphStyle.lineSpacing = 6
+
+            attributedString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, attributedString.length))
+            
+            textLabel.attributedText = attributedString;
+            
             titleLabel.text = onboardingStep.title
-            textLabel.text = onboardingStep.text
             imageView.image = UIImage(named: onboardingStep.imageName)
         }
     }
     
     fileprivate func configureLayout() {
         if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
-            titleLabelTopConstraint.constant = 16
+            titleLabelTopConstraint.constant = 24
             textLabelToBottomConstraint.constant = 100
             imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight, .flexibleBottomMargin, .flexibleRightMargin, .flexibleLeftMargin, .flexibleTopMargin]
             imageView.contentMode = .scaleAspectFit
             imageView.clipsToBounds = true
+            titleLabel.font = UIFont(name: "Montserrat-Regular", size: 18)
+            textLabel.font = UIFont(name: "Montserrat-Regular", size: 12)
         } else if UIDevice.current.screenType == .iPhoneX {
-            titleLabelTopConstraint.constant = 100
-            textLabelToBottomConstraint.constant = 190
+            titleLabelTopConstraint.constant = 70
+            textLabelToBottomConstraint.constant = 180
         }
     }
 }
