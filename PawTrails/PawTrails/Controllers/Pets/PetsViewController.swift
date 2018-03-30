@@ -27,6 +27,7 @@
     fileprivate var isFirstTimeViewAppears = true
     
     fileprivate let dataSource = RxTableViewSectionedReloadDataSource<PetSection>()
+    fileprivate let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -165,20 +166,10 @@
     
     
     fileprivate func goToAddDevice() {
-        if let vc = self.storyboard?.instantiateViewController(withIdentifier: "StepOneViewController") as? StepOneViewController {
-            
-            let navigationController = UINavigationController.init(rootViewController: vc)
-            // Transparent navigation bar
-            navigationController.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-            navigationController.navigationBar.shadowImage = UIImage()
-            navigationController.navigationBar.isTranslucent = true
-            navigationController.navigationBar.backgroundColor = UIColor.clear
-            navigationController.navigationBar.tintColor = UIColor.white
-            navigationController.navigationBar.topItem?.title = " "
-            navigationController.navigationBar.backItem?.title = " "
-            
-            self.present(navigationController, animated: true, completion: nil)
-        }
+        
+        appDelegate.showPetWizardModally(true)
+        
+
     }
     
     

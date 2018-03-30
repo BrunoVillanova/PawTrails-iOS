@@ -164,6 +164,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController?.present(vc, animated: animated, completion: nil)
     }
     
+    func showPetWizardModally(_ animated: Bool = true) {
+        let storyboard = UIStoryboard(name: "PetWizard", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "wizard")
+        window?.rootViewController?.present(vc, animated: animated, completion: nil)
+    }
+    
     func changeRootViewController(_ viewController: UIViewController, animated: Bool = false) {
         if let currentRootViewController = self.window?.rootViewController {
             UIView.transition(from:currentRootViewController.view, to: viewController.view, duration: 0.3, options: UIViewAnimationOptions.transitionCurlDown, completion: {(finished) in
