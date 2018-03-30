@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Regular.ttf">
+            <string>Montserrat-Regular</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Onboarding View Controller-->
+        <scene sceneID="0gN-fP-rMA">
+            <objects>
+                <viewController storyboardIdentifier="onboarding" useStoryboardIdentifierAsRestorationIdentifier="YES" id="M3y-wm-aEa" customClass="OnboardingViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="TN6-C5-TNU">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="IV9-31-abg">
+                                <rect key="frame" x="140.5" y="471" width="39" height="37"/>
+                                <color key="pageIndicatorTintColor" red="0.56470588235294117" green="0.56470588235294117" blue="0.56470588235294117" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
+                                <color key="currentPageIndicatorTintColor" red="0.2627450980392157" green="0.50196078431372548" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </pageControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WVL-sb-o0c" userLabel="See It Later Button">
+                                <rect key="frame" x="123" y="532" width="74" height="12"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="12" id="yy2-WS-SO0"/>
+                                </constraints>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="See it later">
+                                            <attributes>
+                                                <color key="NSColor" red="0.56470588239999997" green="0.56470588239999997" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                <font key="NSFont" size="14" name="Montserrat-Regular"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                <integer key="NSUnderline" value="1"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <action selector="close:" destination="M3y-wm-aEa" eventType="touchUpInside" id="EUu-2g-8il"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" alpha="0.0" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kpe-4B-2jM">
+                                <rect key="frame" x="0.0" y="520" width="320" height="48"/>
+                                <color key="backgroundColor" red="0.98039215686274506" green="0.25490196078431371" blue="0.41176470588235292" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="Pcw-tP-Iim"/>
+                                </constraints>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="GET STARTED">
+                                            <attributes>
+                                                <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <font key="NSFont" size="16" name="Montserrat-Regular"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <action selector="lastStepOnlyButtonTapped:" destination="M3y-wm-aEa" eventType="touchUpInside" id="KU5-sj-lN9"/>
+                                </connections>
+                            </button>
+                            <view hidden="YES" alpha="0.0" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K6m-HC-aop" userLabel="Last Step Button Auxiliar View">
+                                <rect key="frame" x="0.0" y="568" width="320" height="0.0"/>
+                                <color key="backgroundColor" red="0.98039215690000003" green="0.25490196079999999" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" id="jvz-ef-JYa"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Kpe-4B-2jM" firstAttribute="leading" secondItem="TN6-C5-TNU" secondAttribute="leading" id="8x3-Ha-SgM"/>
+                            <constraint firstAttribute="trailing" secondItem="Kpe-4B-2jM" secondAttribute="trailing" id="9eY-lQ-qkY"/>
+                            <constraint firstItem="K6m-HC-aop" firstAttribute="top" secondItem="Kpe-4B-2jM" secondAttribute="bottom" id="OQE-W3-D8v"/>
+                            <constraint firstItem="nFz-y6-E0i" firstAttribute="bottom" secondItem="WVL-sb-o0c" secondAttribute="bottom" constant="24" id="Qcq-d3-vC1"/>
+                            <constraint firstItem="WVL-sb-o0c" firstAttribute="top" secondItem="IV9-31-abg" secondAttribute="bottom" constant="24" id="Tuq-Bz-VuB"/>
+                            <constraint firstItem="WVL-sb-o0c" firstAttribute="centerX" secondItem="TN6-C5-TNU" secondAttribute="centerX" id="Vqo-08-JCr"/>
+                            <constraint firstItem="K6m-HC-aop" firstAttribute="trailing" secondItem="Kpe-4B-2jM" secondAttribute="trailing" id="WFg-7b-nKs"/>
+                            <constraint firstItem="K6m-HC-aop" firstAttribute="leading" secondItem="Kpe-4B-2jM" secondAttribute="leading" id="ghB-MD-ZvB"/>
+                            <constraint firstItem="Kpe-4B-2jM" firstAttribute="bottom" secondItem="nFz-y6-E0i" secondAttribute="bottom" id="uZd-yY-cxu"/>
+                            <constraint firstItem="IV9-31-abg" firstAttribute="centerX" secondItem="TN6-C5-TNU" secondAttribute="centerX" id="y11-uD-bfC"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="nFz-y6-E0i"/>
+                    </view>
+                    <connections>
+                        <outlet property="closeButton" destination="WVL-sb-o0c" id="Am4-Rc-EGx"/>
+                        <outlet property="commonButton" destination="WVL-sb-o0c" id="PtH-3f-lDB"/>
+                        <outlet property="commonButtonBottomConstraint" destination="Tuq-Bz-VuB" id="7fQ-cX-PJE"/>
+                        <outlet property="lastStepButtonAuxiliarView" destination="K6m-HC-aop" id="bmA-h4-0Sg"/>
+                        <outlet property="lastStepButtonAuxiliarViewHeightConstraint" destination="jvz-ef-JYa" id="mum-e4-Web"/>
+                        <outlet property="lastStepOnlyButton" destination="Kpe-4B-2jM" id="bmB-in-8pk"/>
+                        <outlet property="pageControl" destination="IV9-31-abg" id="bFo-nI-tS1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bYI-hc-u4k" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-255" y="160"/>
+        </scene>
+        <!--Onboarding Step View Controller-->
+        <scene sceneID="Bu9-GN-4cu">
+            <objects>
+                <viewController storyboardIdentifier="onboardingStep" id="K9X-da-8DZ" userLabel="Onboarding Step View Controller" customClass="OnboardingStepViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MDr-du-blQ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="v94-En-6bU">
+                                <rect key="frame" x="8" y="50" width="304" height="304"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="v94-En-6bU" secondAttribute="height" multiplier="1:1" id="5bH-3p-3w1"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Puts you in control of your pets" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AJg-RG-kNm">
+                                <rect key="frame" x="24" y="386" width="272" height="24.5"/>
+                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="20"/>
+                                <color key="textColor" red="0.25490196078431371" green="0.28235294117647058" blue="0.32156862745098036" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="PawTrails Smart Collar / Harness always puts you in control of your pets" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qMg-RD-u6Y">
+                                <rect key="frame" x="24" y="426.5" width="272" height="17.5"/>
+                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
+                                <color key="textColor" red="0.56470588239999997" green="0.56470588239999997" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="qMg-RD-u6Y" firstAttribute="leading" secondItem="M89-Hf-MnN" secondAttribute="leading" constant="24" id="5aw-D9-91g"/>
+                            <constraint firstItem="v94-En-6bU" firstAttribute="leading" secondItem="M89-Hf-MnN" secondAttribute="leading" constant="8" id="Cwe-9v-958"/>
+                            <constraint firstItem="v94-En-6bU" firstAttribute="top" relation="greaterThanOrEqual" secondItem="M89-Hf-MnN" secondAttribute="top" id="QZb-hJ-WYP"/>
+                            <constraint firstItem="M89-Hf-MnN" firstAttribute="bottom" secondItem="qMg-RD-u6Y" secondAttribute="bottom" constant="124" id="ULV-vb-dSi"/>
+                            <constraint firstItem="M89-Hf-MnN" firstAttribute="trailing" secondItem="v94-En-6bU" secondAttribute="trailing" constant="8" id="VaI-Lj-BV0"/>
+                            <constraint firstItem="AJg-RG-kNm" firstAttribute="top" secondItem="v94-En-6bU" secondAttribute="bottom" constant="32" id="pm3-Nu-e8w"/>
+                            <constraint firstItem="M89-Hf-MnN" firstAttribute="trailing" secondItem="qMg-RD-u6Y" secondAttribute="trailing" constant="24" id="urB-Gs-ltX"/>
+                            <constraint firstItem="qMg-RD-u6Y" firstAttribute="top" secondItem="AJg-RG-kNm" secondAttribute="bottom" constant="16" id="wEX-2F-Dp8"/>
+                            <constraint firstItem="AJg-RG-kNm" firstAttribute="leading" secondItem="qMg-RD-u6Y" secondAttribute="leading" id="y8V-YG-Dpz"/>
+                            <constraint firstItem="AJg-RG-kNm" firstAttribute="trailing" secondItem="qMg-RD-u6Y" secondAttribute="trailing" id="ycV-xc-JTS"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="M89-Hf-MnN"/>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="v94-En-6bU" id="3xj-b0-knT"/>
+                        <outlet property="textLabel" destination="qMg-RD-u6Y" id="Ufd-7P-CNV"/>
+                        <outlet property="textLabelToBottomConstraint" destination="ULV-vb-dSi" id="iXm-pB-2bw"/>
+                        <outlet property="titleLabel" destination="AJg-RG-kNm" id="FYX-dm-fJY"/>
+                        <outlet property="titleLabelTopConstraint" destination="pm3-Nu-e8w" id="IBZ-ke-RQU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FIb-Ul-dZC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="378" y="160"/>
+        </scene>
+    </scenes>
+</document>

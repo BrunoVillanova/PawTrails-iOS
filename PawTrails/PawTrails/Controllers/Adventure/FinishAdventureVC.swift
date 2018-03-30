@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 import GSMessages
 
 protocol FinishAdventureVCDelegate {
@@ -24,6 +25,7 @@ class FinishAdventureVC: UIViewController, BEMCheckBoxDelegate {
     var trips: [Trip]?
     let disposeBag = DisposeBag()
     var delegate: FinishAdventureVCDelegate?
+    var selectedPetIDs = Set<Int>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +33,30 @@ class FinishAdventureVC: UIViewController, BEMCheckBoxDelegate {
     }
     
     fileprivate func initialize() {
+        
+        DataManager.instance.pets().bind(to: collectionView.rx.items(cellIdentifier: "cell", cellType: FinishAdventureCell.self)) { (row, pet, cell) in
+            cell.configureWithPet(pet)
+            let checked = self.selectedPetIDs.contains(pet.id)
+            cell.checkBoxView.setOn(checked, animated: false)
+            
+        }.disposed(by: disposeBag)
+        
+        Observable
+            .zip(collectionView.rx.itemSelected, collectionView.rx.modelSelected(Pet.self))
+            .bind { [unowned self] indexPath, pet in
+                let cell = self.collectionView.cellForItem(at: indexPath) as! FinishAdventureCell
+                cell.isSelected = false
+                
+                if self.selectedPetIDs.contains(pet.id) {
+                    self.selectedPetIDs.remove(pet.id)
+                } else {
+                    self.selectedPetIDs.insert(pet.id)
+                }
+                
+                self.collectionView.reloadItems(at: [indexPath])
+            }
+            .disposed(by: disposeBag)
+        
         configureLayout()
     }
     
@@ -72,4 +98,19 @@ class FinishAdventureCell: UICollectionViewCell {
     @IBOutlet weak var petImageView: PTBalloonImageView!
     @IBOutlet weak var petNameLabel: UILabel!
     @IBOutlet weak var checkBoxView: BEMCheckBox!
+    
+    override func awakeFromNib() {
+        checkBoxView.setOn(false, animated: false)
+    }
+    
+    override func prepareForReuse() {
+        petNameLabel.text = nil
+        petImageView.image = nil
+        checkBoxView.setOn(false, animated: false)
+    }
+    
+    func configureWithPet(_ pet: Pet) {
+        petNameLabel.text = pet.name
+        petImageView.imageUrl = pet.imageURL
+    }
 }

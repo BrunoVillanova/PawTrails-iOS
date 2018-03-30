@@ -18,24 +18,34 @@ extension DataManager {
         
         //TODO: add pets from socketIO
         return Observable.create({ observer in
-            
-            self.loadPets { (apiError, apiPets) in
+            // First load from DB because its fast
+            self.getPets { (storageError, storagePets) in
                 
-                // Error loading pets from API, try to get from storage
-                if apiError != nil {
-                    self.getPets { (storageError, storagePets) in
-                        if let error = storageError as DataManagerError! {
-                            observer.onError(error)
-                        } else {
-                            observer.onNext(storagePets!)
-                            observer.onCompleted()
+                if storageError == nil {
+                    observer.onNext(storagePets!)
+                }
+                
+                // Now lets call API to get updated pets
+                self.loadPets { (apiError, apiPets) in
+            
+                    // Error loading pets from API, try to get from storage
+                    if apiError != nil {
+                        self.getPets { (storageError, storagePets) in
+                            if let error = storageError as DataManagerError! {
+                                observer.onError(error)
+                            } else {
+                                observer.onNext(storagePets!)
+                                observer.onCompleted()
+                            }
                         }
+                    } else {
+                        // Finally we return the pets from API
+                        observer.onNext(apiPets!)
+                        observer.onCompleted()
                     }
-                } else {
-                    observer.onNext(apiPets!)
-                    observer.onCompleted()
                 }
             }
+            
             return Disposables.create()
         }).share()
     }
@@ -84,11 +94,11 @@ extension DataManager {
     func getActivePetTrips() -> Observable<[Trip]> {
         let apiTrips = getTrips([0,1])
         let socketTrips = SocketIOManager.instance.trips()
-        return apiTrips.flatMap({ (apiTripsData) -> Observable<[Trip]> in
-            return socketTrips.flatMapLatest ({ (socketTripsData) -> Observable<[Trip]> in
-                return apiTrips
-//                return apiTrips.delaySubscription(RxTimeInterval(0.5), scheduler: MainScheduler.instance)
-            })
+        return apiTrips.flatMap ({ (apiTripsData) -> Observable<[Trip]> in
+            return socketTrips
+                .flatMap ({ (socketTripsData) -> Observable<[Trip]> in
+                    return apiTrips
+                })
         })
     }
     
@@ -96,7 +106,7 @@ extension DataManager {
         let apiTrips = getTrips()
         let socketTrips = SocketIOManager.instance.trips()
         return apiTrips.flatMap ({ (apiTripsData) -> Observable<[Trip]> in
-            return socketTrips.flatMap({ (socketTripsData) -> Observable<[Trip]> in
+            return socketTrips.flatMap ({ (socketTripsData) -> Observable<[Trip]> in
                 return apiTrips
             })
         })
@@ -177,7 +187,7 @@ extension DataManager {
                 }
             }
             return Disposables.create()
-        }).flatMap ({ (trips) -> Observable<[Trip]> in
+        }).flatMapLatest ({ (trips) -> Observable<[Trip]> in
             return self.allTrips()
         })
         

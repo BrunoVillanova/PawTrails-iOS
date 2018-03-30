@@ -36,16 +36,29 @@ class GettingLocationViewController: UIViewController {
         pulsator.radius = 350
         pulsator.animationDuration = 8
         
-
-        if let pet = pet {
-            DataManager.instance.lastPetDeviceData(pet, gpsMode: .live)
-                .subscribe(onNext: { (petDeviceData) in
-                    if let point = petDeviceData?.deviceData.point, point.latitude != 0 && point.longitude != 0 {
-                        self.pulsator.stop()
-                        self.goToSuccessViewController()
-
-                    }
-                }).disposed(by: disposeBag)
+        if isBetaDemo {
+            //For the demo, close this page after 2 sec.
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                self.pulsator.stop()
+                self.goToSuccessViewController()
+            }
+            
+        }
+        else {
+            if let pet = pet {
+                DataManager.instance.lastPetDeviceData(pet, gpsMode: .live)
+                    .subscribe(onNext: { (petDeviceData) in
+                        if let point = petDeviceData?.deviceData.point, point.latitude != 0 && point.longitude != 0 {
+                            DispatchQueue.main.async {
+                                self.pulsator.stop()
+                                self.goToSuccessViewController()
+                            }
+                        }
+                        else {
+                            print("location unavailable")
+                        }
+                    }).disposed(by: disposeBag)
+            }
         }
         
     }

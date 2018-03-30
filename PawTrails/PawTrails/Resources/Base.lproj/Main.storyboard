@@ -3817,7 +3817,7 @@ PawTrails is a product created by Attitude Technologies.
                             <constraint firstAttribute="bottomMargin" secondItem="QGl-7L-XXT" secondAttribute="bottom" id="TlA-Ws-jnR"/>
                             <constraint firstItem="QGl-7L-XXT" firstAttribute="top" secondItem="f9z-ET-zUA" secondAttribute="topMargin" id="rkw-4H-yHr"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="OR5-fO-GfG"/>
+                        <viewLayoutGuide key="safeArea" id="CiE-3J-B8s"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gIT-gN-YXh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -5162,7 +5162,7 @@ PawTrails is a product created by Attitude Technologies.
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JuJ-O2-cPO" userLabel="Date Label">
                                                                     <rect key="frame" x="16" y="24.333333333333343" width="0.0" height="0.0"/>
                                                                     <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="12"/>
-                                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mzy-ri-crB" userLabel="Delete Button">
@@ -5970,11 +5970,8 @@ finish the Adventure?</string>
                                         </constraints>
                                         <connections>
                                             <outlet property="checkBoxView" destination="uzp-uv-HUK" id="8B7-eE-mj9"/>
-                                            <outlet property="checkMarkView" destination="uzp-uv-HUK" id="feE-E1-Vb9"/>
-                                            <outlet property="petImage" destination="h7E-hM-RPK" id="Zu5-r5-g30"/>
                                             <outlet property="petImageView" destination="h7E-hM-RPK" id="REo-O5-cz3"/>
                                             <outlet property="petNameLabel" destination="663-Hj-24u" id="6Ca-ua-6VP"/>
-                                            <outlet property="petTitle" destination="663-Hj-24u" id="QyN-XE-syy"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -6797,8 +6794,8 @@ your product.</string>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="All setup and ready to go" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ndn-bM-tCM">
-                                <rect key="frame" x="92" y="289" width="191" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="You are all setup and ready to go." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ndn-bM-tCM">
+                                <rect key="frame" x="60.333333333333329" y="289" width="254.66666666666669" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -8201,7 +8198,7 @@ Last Edited on 2017-12-04
     <inferredMetricsTieBreakers>
         <segue reference="yp5-bT-5uy"/>
         <segue reference="Rzx-2e-OhR"/>
-        <segue reference="Nln-Sh-wxV"/>
+        <segue reference="G7h-iD-Glq"/>
         <segue reference="gjN-xE-RCG"/>
     </inferredMetricsTieBreakers>
 </document>

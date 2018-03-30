@@ -31,6 +31,7 @@ class MapViewController: UIViewController {
     var data = [searchElement]()
     var activeTrips = [Trip]()
     var isDisplayedPetScreen = false
+    fileprivate var isFirstTimeViewAppears = true
 
     //MARK: View lifecycle
     override func viewDidLoad() {
@@ -60,6 +61,15 @@ class MapViewController: UIViewController {
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if isFirstTimeViewAppears {
+            isFirstTimeViewAppears = false
+            appDelegate.showOnboardingIfNeeded()
+        }
+    }
+    
     
     fileprivate func initialize() {
 
@@ -72,7 +82,9 @@ class MapViewController: UIViewController {
                 if (tripList.count > 0){
                     let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(gestureRecognizer:)))
                     gestureRecognizer.delegate = self
-                    self.alertwithGeature(title: "", msg: "ADVENTURE IN PROGRESS, CLICK TO RESUME", type: .red, disableTime: 150, geatureReconginzer: gestureRecognizer, handler: nil)
+                    if !isBetaDemo {
+                        self.alertwithGeature(title: "", msg: "ADVENTURE IN PROGRESS, CLICK TO RESUME", type: .red, disableTime: 150, geatureReconginzer: gestureRecognizer, handler: nil)
+                    }
                 } else {
                     Reporter.debugPrint("No running trips")
                     self.hideNotification()

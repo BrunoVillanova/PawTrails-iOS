@@ -106,6 +106,10 @@ class AdventuresListViewController: UIViewController  {
             endDate = Int(tomorrow.timeIntervalSince1970)
         }
         
+        if isBetaDemo {
+            
+            startDate = 1520476061
+        }
         
         if let startDate = self.startDate, let endDate = self.endDate {
             APIRepository.instance.getPetTripAchievements(self.pet.id, from: startDate, to: endDate, status: [2]) { (error, achievements) in
@@ -369,6 +373,12 @@ class AdventuresAchievementsView: UITableViewHeaderFooterView {
         mydatePicker.heightAnchor.constraint(equalTo: topView.heightAnchor).isActive = true
         mydatePicker.topAnchor.constraint(equalTo: topView.topAnchor).isActive = true
         mydatePicker.bottomAnchor.constraint(equalTo: topView.bottomAnchor).isActive = true
+        
+        if isBetaDemo {
+            mydatePicker.selectedStartDate = Date(timeIntervalSince1970: 1520473967) // March 8
+            mydatePicker.selectedEndDate = Date() // Current date
+            mydatePicker.dateInputButton.setTitle("\(mydatePicker.dateFormatter.string(from: mydatePicker.selectedStartDate!)) - \(mydatePicker.dateFormatter.string(from: mydatePicker.selectedEndDate!))", for: .normal)
+        }
     }
     
     func configure(_ tripAchievements: TripAchievements) {
@@ -383,6 +393,7 @@ class AdventuresAchievementsView: UITableViewHeaderFooterView {
         
         if timeGoalForPeriod > 0 {
             timeGoalAchievmenet = CGFloat((100 * tripAchievements.totalTime) / timeGoalForPeriod)
+            
         } else {
             timeGoalAchievmenet = 0
         }

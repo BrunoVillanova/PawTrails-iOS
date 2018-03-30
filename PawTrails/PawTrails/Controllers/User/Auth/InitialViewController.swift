@@ -23,6 +23,8 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate 
     @IBOutlet weak var twitterButton: UIButton!
     
     fileprivate let presenter = InitialPresenter()
+    fileprivate let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    var isFirstTimeViewAppears = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,6 +69,14 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.statusBarStyle = .default
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if isFirstTimeViewAppears {
+            isFirstTimeViewAppears = false
+            appDelegate.showOnboardingIfNeeded(false)
+        }
     }
     
     @IBAction func loginAction(_ sender: UIButton?) {

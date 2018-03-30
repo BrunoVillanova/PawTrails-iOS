@@ -28,6 +28,11 @@ class SignUpYourDeviceVC: UIViewController {
             SignUpYourDeviceVC.userDefaults.set(true, forKey: SignUpYourDeviceVC.tutorialShownUserPreferecesKey)
         #endif
         
+        //TODO remove this.ok
+        if isBetaDemo {
+            SignUpYourDeviceVC.userDefaults.set(false, forKey: SignUpYourDeviceVC.tutorialShownUserPreferecesKey)
+        }
+        
         self.extendedLayoutIncludesOpaqueBars = true
         self.edgesForExtendedLayout = [.all]
         configureNavigatonBar()
@@ -46,6 +51,9 @@ class SignUpYourDeviceVC: UIViewController {
     }
     
     static func tutorialShown() -> Bool {
+        if isBetaDemo{
+            userDefaults.set(false, forKey: tutorialShownUserPreferecesKey)
+        }
         return userDefaults.bool(forKey: tutorialShownUserPreferecesKey)
     }
     

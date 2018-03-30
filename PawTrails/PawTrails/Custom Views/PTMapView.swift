@@ -141,7 +141,7 @@ class PTMapView: MKMapView {
         DataManager.instance.getActivePetTrips().subscribe(onNext: { (trips) in
             
             if let firstTrip = trips.first, self.focusedPetID == nil {
-                self.focusedPetID = firstTrip.pet.id
+                self.focusOnPet(firstTrip.pet.id)
             }
             
             var petIDsOnTrips = Set<Int64>()
@@ -184,23 +184,20 @@ class PTMapView: MKMapView {
                 
                 self.load(petDeviceData)
                 
-                if self.activeTripsPetIDs.contains(petDeviceData.pet.id) && !self.pausedTripsPetIDs.contains(petDeviceData.pet.id) && tripMode {
+                if tripMode && self.activeTripsPetIDs.contains(petDeviceData.pet.id) && !self.pausedTripsPetIDs.contains(petDeviceData.pet.id) {
                     let id = MKLocationId(id: Int(petDeviceData.pet.id), type: .pet)
                     if self.myAnnotations[id] != nil {
                         if let point = petDeviceData.deviceData.point, let coords = point.coordinates {
                             let newAnnotation = PTAnnotation(coords, pet: petDeviceData.pet)
                             self.myAnnotations[id]?.append(newAnnotation)
                             self.drawOverlayForPetAnnotations(self.myAnnotations[id])
-                            
-                            if focusedPetID == petDeviceData.pet.id {
-                                self.focusOnPet(petDeviceData.pet)
-                            }
                         }
                     }
                 }
                 
                 self.shouldFocusOnPets = (petDeviceData == petsDevicesData.last && firstTimeLoadingData)
             }
+
             
             if firstTimeLoadingData {
                 firstTimeLoadingData = false
@@ -210,11 +207,10 @@ class PTMapView: MKMapView {
             if shouldFocusOnPets {
                 alreadyFocusedOnPets = true
                 self.focusOnPets()
-            } else if let focusedPetID = focusedPetID, let petAnnotationOnMap = petAnnotationOnMap(focusedPetID) as PTAnnotation!{
-                let coordinate = petAnnotationOnMap.coordinate
-                if CLLocationCoordinate2DIsValid(coordinate) && coordinate.latitude != 0 && coordinate.longitude != 0 {
-                    self.setVisibleMapFor([petAnnotationOnMap.coordinate])
-                }
+            }
+            
+            if let focusedPetID = focusedPetID {
+                self.focusOnPet(focusedPetID)
             }
         }
     }
@@ -311,8 +307,10 @@ class PTMapView: MKMapView {
         if let petAnnotationOnMap = petAnnotationOnMap(petID) as PTAnnotation! {
             let coordinate = petAnnotationOnMap.coordinate
             if CLLocationCoordinate2DIsValid(coordinate) && coordinate.latitude != 0 && coordinate.longitude != 0 {
-                self.setVisibleMapFor([petAnnotationOnMap.coordinate])
+                self.removeAnnotation(petAnnotationOnMap)
+                self.addAnnotation(petAnnotationOnMap)
                 focusedPetID = petID
+                self.setVisibleMapFor([petAnnotationOnMap.coordinate])
             }
             else {
                 showLocationUnavailableAlert()

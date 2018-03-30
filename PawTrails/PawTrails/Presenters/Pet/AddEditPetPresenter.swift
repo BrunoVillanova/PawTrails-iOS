@@ -66,10 +66,7 @@ class AddEditPetPresenter {
             
             DataManager.instance.savePet(image: imageData, into: petId, callback: { (error) in
                 
-                if let error = error {
-                    self.view?.endLoadingContent()
-                    self.view?.errorMessage(error.msg)
-                }else{
+                if isBetaDemo {
                     self.imageData = nil
                     if self.editMode {
                         self.save()
@@ -78,6 +75,22 @@ class AddEditPetPresenter {
                         self.view?.doneSuccessfully()
                     }
                 }
+                else {
+                    if let error = error {
+                        self.view?.endLoadingContent()
+                        self.view?.errorMessage(error.msg)
+                    }else{
+                        self.imageData = nil
+                        if self.editMode {
+                            self.save()
+                        }else{
+                            self.view?.endLoadingContent()
+                            self.view?.doneSuccessfully()
+                        }
+                    }
+                }
+                
+                
             })
         }
     }
@@ -88,26 +101,42 @@ class AddEditPetPresenter {
         if editMode  {
             DataManager.instance.save(pet, callback: { (error) in
                 self.view?.endLoadingContent()
-                if let error = error {
-                    self.view?.errorMessage(error.msg)
-                }else{
+                
+                if isBetaDemo {
                     self.view?.doneSuccessfully()
+                }
+                else {
+                    if let error = error {
+                        self.view?.errorMessage(error.msg)
+                    }else{
+                        self.view?.doneSuccessfully()
+                    }
                 }
             })
             
         }else{
             DataManager.instance.register(pet, callback: { (error, pet) in
                 
-                if let error = error {
-                    self.view?.endLoadingContent()
-                    self.view?.errorMessage(error.msg)
-                }else if self.imageData != nil, let pet = pet {
-                    self.savedPet = pet
-                    self.uploadImage(petId: pet.id)
-                }else{
+                
+                if isBetaDemo {
+                    
                     self.view?.endLoadingContent()
                     self.view?.doneSuccessfully()
                 }
+                else {
+                    
+                    if let error = error {
+                        self.view?.endLoadingContent()
+                        self.view?.errorMessage(error.msg)
+                    }else if self.imageData != nil, let pet = pet {
+                        self.savedPet = pet
+                        self.uploadImage(petId: pet.id)
+                    }else{
+                        self.view?.endLoadingContent()
+                        self.view?.doneSuccessfully()
+                    }
+                }
+                
             })
         }
     }
