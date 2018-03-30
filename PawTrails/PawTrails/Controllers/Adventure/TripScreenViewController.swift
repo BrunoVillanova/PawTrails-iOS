@@ -515,7 +515,7 @@ class TripDetailsCell: UICollectionViewCell {
         var minutes = 0
         var seconds = 0
         
-        if let totalTime = timeStamp as Int64! {
+        if let totalTime = timeStamp as Int64? {
             hours = Int(totalTime) / 3600
             minutes = Int(totalTime) / 60 % 60
             seconds = Int(totalTime) % 60
@@ -526,7 +526,7 @@ class TripDetailsCell: UICollectionViewCell {
     
     func tick() {
         DispatchQueue.global().async {
-            if let totalTime = self.finalTotalTime as Int64! {
+            if let totalTime = self.finalTotalTime as Int64? {
                 self.finalTotalTime = totalTime+1
                 
                 DispatchQueue.main.async(execute: {

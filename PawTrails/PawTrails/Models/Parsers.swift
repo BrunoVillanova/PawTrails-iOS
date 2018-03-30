@@ -306,7 +306,7 @@ extension PetDeviceData {
     
     static func fromJson(_ json: Any?) -> [PetDeviceData]? {
         var petDeviceDataList : [PetDeviceData]?
-        if let jsonValues = json as? [Any]!, jsonValues.count > 0 {
+        if let jsonValues = json as! [Any]?, jsonValues.count > 0 {
             petDeviceDataList = [PetDeviceData]()
             for petDeviceDataObject in jsonValues {
                 if let petDeviceDataJson = petDeviceDataObject as? [String:Any] {
@@ -533,7 +533,7 @@ extension Trip {
         
         if let pointsValues = values["rawData"] as! [[Any]]? {
             for pointValue in pointsValues {
-                if let pointArray = pointValue as [Any]! {
+                if let pointArray = pointValue as [Any]? {
                     points!.append(TripPoint(pointArray))
                 }
             }
@@ -569,9 +569,9 @@ extension Trip {
         pet = Pet()
         deviceData = [DeviceData]()
 
-        if let pointsValues = json["rawData"].arrayObject as! [[Any]]! {
+        if let pointsValues = json["rawData"].arrayObject as! [[Any]]? {
             for pointValue in pointsValues {
-                if let pointArray = pointValue as [Any]! {
+                if let pointArray = pointValue as [Any]? {
                     points!.append(TripPoint(pointArray))
                 }
             }
@@ -591,7 +591,7 @@ extension TripPoint {
         point = nil
         status = .running
         
-        if let jsonArray = json as [Any]!  {
+        if let jsonArray = json as [Any]?  {
             timestamp = Int64(jsonArray[0] as! Int)
             let latitudeValue = jsonArray[1]
             let longitudeValue = jsonArray[2]

@@ -462,7 +462,7 @@ extension Point {
             } else {
                 CLGeocoder().reverseGeocodeLocation(location, completionHandler: { (placemarks, error) in
                     var address : String?
-                    if let placemark = placemarks?[0] as CLPlacemark! {
+                    if let placemark = placemarks?[0] as CLPlacemark? {
                         if let formattedAddressLines = placemark.addressDictionary?["FormattedAddressLines"] as? [String] {
                             address = formattedAddressLines.joined(separator: ", ")
                             try! CacheManager.sharedInstance.storage.setObject(address, forKey: keyString)

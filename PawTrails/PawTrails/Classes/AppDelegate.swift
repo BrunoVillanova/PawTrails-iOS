@@ -251,8 +251,8 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         }
 
         
-        if let data = userInfo["aps"] as! [String:Any]! {
-            if let alert = data["alert"] as! [String:Any]! {
+        if let data = userInfo["aps"] as! [String:Any]? {
+            if let alert = data["alert"] as! [String:Any]? {
                 Reporter.debugPrint("\(String(describing: alert))")
                 if let rootViewController = UIApplication.shared.keyWindow?.rootViewController {
                     rootViewController.alert(title: alert["title"] as! String, msg: alert["body"] as! String, type: notificationType.blue, disableTime: 5, handler: nil)

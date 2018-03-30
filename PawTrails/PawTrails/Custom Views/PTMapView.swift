@@ -105,7 +105,7 @@ class PTMapView: MKMapView {
     func showGpsUpdates() {
         DataManager.instance.allPetDeviceData(currentGpsMode).subscribe(onNext: { (petDeviceDataList) in
             UIApplication.shared.keyWindow?.rootViewController!.hideMessage()
-            if let gpsUpdates = petDeviceDataList as [PetDeviceData]! {
+            if let gpsUpdates = petDeviceDataList as [PetDeviceData]? {
                 self.loadGpsUpdates(gpsUpdates)
             }
             
@@ -217,7 +217,7 @@ class PTMapView: MKMapView {
     
     func load(_ petDeviceData: PetDeviceData) {
         
-        if let existingPetAnnotation = self.annotations.first(where: { ($0 is PTAnnotation) && ($0 as! PTAnnotation).petDeviceData?.pet.id == petDeviceData.pet.id }) as! PTAnnotation!
+        if let existingPetAnnotation = self.annotations.first(where: { ($0 is PTAnnotation) && ($0 as! PTAnnotation).petDeviceData?.pet.id == petDeviceData.pet.id }) as! PTAnnotation?
         {
             self.removeAnnotation(existingPetAnnotation)
         }
@@ -231,7 +231,7 @@ class PTMapView: MKMapView {
     
     func drawOverlayForPetAnnotations(_ annotations: [PTAnnotation]?) {
         
-        if let annotations = annotations as [PTAnnotation]!, annotations.count > 1 {
+        if let annotations = annotations as [PTAnnotation]?, annotations.count > 1 {
             var points = [CLLocationCoordinate2D]()
             
             annotations.forEach({ (annotation) in
@@ -240,8 +240,6 @@ class PTMapView: MKMapView {
                         // We dont need to draw since the trip starting point coordinate because we will add a DonutCallout for it
                         if !annotation.isStartingCoordinate {
                            points.append(annotation.coordinate)
-                        } else {
-                            print("aqui")
                         }
                     } else {
                         if points.count > 0 {
@@ -272,7 +270,7 @@ class PTMapView: MKMapView {
     func petAnnotationOnMap(_ petID: Int) -> PTAnnotation? {
         if let existingPetAnnotation = self.annotations.first(where: {
             ($0 is PTAnnotation) && ($0 as! PTAnnotation).petDeviceData?.pet.id == petID
-        }) as! PTAnnotation! {
+        }) as! PTAnnotation? {
             
             return existingPetAnnotation
         }
@@ -288,10 +286,10 @@ class PTMapView: MKMapView {
     
     func focusOnPet(_ pet: Pet) {
         
-        if let petAnnotationOnMap = petAnnotationOnMap(pet: pet) as PTAnnotation! {
-            let coordinate = petAnnotationOnMap.coordinate
-            if CLLocationCoordinate2DIsValid(coordinate) && coordinate.latitude != 0 && coordinate.longitude != 0 {
-                self.setVisibleMapFor([petAnnotationOnMap.coordinate])
+        if let petAnnotationOnMap = petAnnotationOnMap(pet: pet) as PTAnnotation?? {
+
+            if let coordinate = petAnnotationOnMap?.coordinate, CLLocationCoordinate2DIsValid(coordinate) && coordinate.latitude != 0 && coordinate.longitude != 0 {
+                self.setVisibleMapFor([coordinate])
                 focusedPetID = pet.id
             }
             else {
@@ -304,7 +302,7 @@ class PTMapView: MKMapView {
     
     func focusOnPet(_ petID: Int) {
         
-        if let petAnnotationOnMap = petAnnotationOnMap(petID) as PTAnnotation! {
+        if let petAnnotationOnMap = petAnnotationOnMap(petID) as PTAnnotation? {
             let coordinate = petAnnotationOnMap.coordinate
             if CLLocationCoordinate2DIsValid(coordinate) && coordinate.latitude != 0 && coordinate.longitude != 0 {
                 self.removeAnnotation(petAnnotationOnMap)

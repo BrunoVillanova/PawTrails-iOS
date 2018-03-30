@@ -65,7 +65,7 @@ class PTPetCalloutView: UIView {
     }
 
     @objc fileprivate func tappedOnView(sender: UITapGestureRecognizer) {
-        if let theAnnotation = self.annotation as PTAnnotation! {
+        if let theAnnotation = self.annotation as PTAnnotation? {
             delegate?.didTapOnCallout(annotation: theAnnotation)
         }
     }

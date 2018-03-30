@@ -159,7 +159,7 @@ extension Int64 {
         var minutes = 0
         var seconds = 0
         
-        if let totalTime = self as Int64! {
+        if let totalTime = self as Int64? {
             hours = Int(totalTime) / 3600
             minutes = Int(totalTime) / 60 % 60
             seconds = Int(totalTime) % 60

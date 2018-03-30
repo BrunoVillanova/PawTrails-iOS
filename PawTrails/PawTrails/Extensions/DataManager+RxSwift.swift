@@ -31,7 +31,7 @@ extension DataManager {
                     // Error loading pets from API, try to get from storage
                     if apiError != nil {
                         self.getPets { (storageError, storagePets) in
-                            if let error = storageError as DataManagerError! {
+                            if let error = storageError as DataManagerError? {
                                 observer.onError(error)
                             } else {
                                 observer.onNext(storagePets!)
