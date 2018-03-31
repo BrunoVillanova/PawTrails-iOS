@@ -321,9 +321,12 @@ enum Type: Int16 {
     case other = 1
     case dog = 2
     case cat = 3
+    case bunny = 4
+    case bird = 5
+    case hamster = 6
     
     static func count() -> Int {
-        return 3
+        return 6
     }
     
     var name:String {
@@ -331,6 +334,9 @@ enum Type: Int16 {
         case .cat: return "Cat"
         case .dog: return "Dog"
         case .other: return "Other"
+        case .bunny: return "Bunny"
+        case .bird: return "Bird"
+        case .hamster: return "Hamster"
         }
     }
     
@@ -339,14 +345,20 @@ enum Type: Int16 {
         case .cat: return "cat"
         case .dog: return "dog"
         case .other: return "other"
+        case .bunny: return "bunny"
+        case .bird: return "bird"
+        case .hamster: return "hamster"
         }
     }
     
     static func build(code:String?)  -> Type? {
-        if let code = code {
+        if let code = code?.lowercased() {
             switch code {
             case "cat": return Type.cat
             case "dog": return Type.dog
+            case "bunny": return Type.bunny
+            case "bird": return Type.bird
+            case "hamster": return Type.hamster
             default: return Type.other
             }
         }else{

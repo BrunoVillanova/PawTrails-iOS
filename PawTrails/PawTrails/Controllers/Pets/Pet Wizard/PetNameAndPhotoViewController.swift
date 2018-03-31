@@ -19,7 +19,6 @@ class PetNameAndPhotoViewController: PetWizardStepViewController {
     @IBOutlet weak var petPhotoView: UIView!
     @IBOutlet weak var petPhotoImageView: UIImageView!
     
-    @IBOutlet weak var nextButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,13 +26,28 @@ class PetNameAndPhotoViewController: PetWizardStepViewController {
         // Do any additional setup after loading the view.
         initialize()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let petName = self.pet?.name, petName.count > 0 {
+            self.delegate?.stepCompleted(completed: true, pet: self.pet!)
+        } else  {
+            self.delegate?.stepCompleted(completed: false, pet: self.pet!)
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    override func nextButtonVisible() -> Bool {
+        return true
+    }
+    
     fileprivate func initialize() {
+        
+        self.showNextButton = true
         
         petPhotoView.layer.cornerRadius = petPhotoView.frame.size.height/2.0
         petPhotoView.layer.borderWidth = 1
@@ -42,23 +56,24 @@ class PetNameAndPhotoViewController: PetWizardStepViewController {
         
         imagePicker.delegate = self
         
-        self.nextButton.isEnabled = false
+
         
         petNameTextField.rx.text
             .asObservable()
             .subscribe(onNext: { value in
-                self.pet!.name = value
-                self.nextButton.isEnabled = value!.count > 0
+                if let value = value, value.count > 0 {
+                    self.pet!.name = value
+                    self.delegate?.stepCompleted(completed: true, pet: self.pet!)
+                } else {
+                    self.delegate?.stepCompleted(completed: false, pet: self.pet!)
+                }
             })
             .disposed(by: disposeBag)
     }
 
+
     @IBAction func selectPetPhotoButtonTapped(_ sender: Any) {
         alert(imagePicker)
-    }
-    
-    @IBAction func nextButtonTapped(_ sender: Any) {
-        self.delegate?.stepCompleted(pet: self.pet!)
     }
 }
 

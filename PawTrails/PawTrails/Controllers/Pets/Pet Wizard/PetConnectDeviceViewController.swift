@@ -53,7 +53,8 @@ class PetConnectDeviceViewController: PetWizardStepViewController {
             if let deviceCode = txt.text {
                 self.deviceCode = deviceCode
                 self.pet!.deviceCode = deviceCode
-                self.delegate?.stepCompleted(pet: self.pet!)
+                self.delegate?.stepCompleted(completed: true, pet: self.pet!)
+                self.delegate?.goToNextStep()
             }
         }
         
@@ -125,12 +126,14 @@ extension PetConnectDeviceViewController: QRCodeScannerViewControllerDelegate {
             qrCodeScannerViewController.dismiss(animated: true, completion: {
                 if isBetaDemo {
                     self.pet!.deviceCode = Constants.deviceIdforDemo
-                    self.delegate?.stepCompleted(pet: self.pet!)
+                    self.delegate?.stepCompleted(completed: true, pet: self.pet!)
+                    self.delegate?.goToNextStep()
                 }
                 else {
                     self.deviceCode = scanResult
                     self.pet!.deviceCode = scanResult
-                    self.delegate?.stepCompleted(pet: self.pet!)
+                    self.delegate?.stepCompleted(completed: true, pet: self.pet!)
+                    self.delegate?.goToNextStep()
                 }
             })
         }

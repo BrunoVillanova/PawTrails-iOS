@@ -9,12 +9,19 @@
 import UIKit
 
 protocol PetWizardStepViewControllerDelegate {
-    func stepCompleted(pet: Pet)
+    func stepCompleted(completed: Bool, pet: Pet)
     func stepCanceled(pet: Pet)
+    func goToNextStep()
 }
 
 class PetWizardStepViewController: UIViewController {
 
     var pet: Pet?
     var delegate:PetWizardStepViewControllerDelegate?
+    var showNextButton = false
+    
+    func nextButtonVisible() -> Bool {
+        return false
+    }
 }
+
