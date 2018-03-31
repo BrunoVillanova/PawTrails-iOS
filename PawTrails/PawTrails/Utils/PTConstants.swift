@@ -21,6 +21,7 @@ struct PTConstants {
         static let primary = UIColor(red: 212/255, green: 20/255, blue: 61/255, alpha: 1)
         static let lightGray = UIColor(white: 0, alpha: 0.1)
         static let darkGray = UIColor(red: 65/255, green: 72/255, blue: 82/255, alpha: 1)
+        static let newLightGray = UIColor(red: 229/255, green: 229/255, blue: 229/255, alpha: 1)
     }
 }
 

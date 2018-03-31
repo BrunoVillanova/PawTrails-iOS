@@ -6,11 +6,15 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="Montserrat-Light.ttf">
+            <string>Montserrat-Light</string>
+        </array>
         <array key="Montserrat-Regular.ttf">
             <string>Montserrat-Regular</string>
         </array>
@@ -258,23 +262,143 @@
             </objects>
             <point key="canvasLocation" x="-375.19999999999999" y="50.824587706146929"/>
         </scene>
-        <!--Name And Photo View Controller-->
-        <scene sceneID="iER-u0-ZGA">
+        <!--Pet Name And Photo View Controller-->
+        <scene sceneID="fTI-w3-Z7q">
             <objects>
-                <viewController storyboardIdentifier="nameAndPhoto" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3Lg-qu-MRm" userLabel="Name And Photo View Controller" customClass="PetNameAndPhotoViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Hri-0x-RPK">
+                <viewController storyboardIdentifier="nameAndPhoto" useStoryboardIdentifierAsRestorationIdentifier="YES" id="suP-Nz-0c2" customClass="PetNameAndPhotoViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="CiT-4c-Jc1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2J7-Mf-SHB" userLabel="Header View" customClass="HeaderView" customModule="PawTrails" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name &amp; Photo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Y5-Vo-G48">
+                                        <rect key="frame" x="24" y="32" width="175.5" height="29.5"/>
+                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="24"/>
+                                        <color key="textColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="0Y5-Vo-G48" firstAttribute="top" secondItem="2J7-Mf-SHB" secondAttribute="top" constant="32" id="UrF-XY-DRO"/>
+                                    <constraint firstItem="0Y5-Vo-G48" firstAttribute="leading" secondItem="2J7-Mf-SHB" secondAttribute="leading" constant="24" id="V7o-Qd-kdY"/>
+                                    <constraint firstAttribute="height" constant="64" id="oaH-tJ-D87"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RGw-If-7bF" userLabel="Content View">
+                                <rect key="frame" x="16" y="64" width="343" height="555"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tMf-8x-mT3" userLabel="Pet Photo View">
+                                        <rect key="frame" x="122" y="44" width="98" height="98"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PhotoPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="WaZ-R9-uIk">
+                                                <rect key="frame" x="0.0" y="0.0" width="98" height="98"/>
+                                            </imageView>
+                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jDp-wX-f8u" userLabel="Select Image Button">
+                                                <rect key="frame" x="0.0" y="0.0" width="98" height="98"/>
+                                                <connections>
+                                                    <action selector="selectPetPhotoButtonTapped:" destination="suP-Nz-0c2" eventType="touchUpInside" id="Z4K-5U-6BR"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="WaZ-R9-uIk" secondAttribute="trailing" id="4gJ-hW-xEb"/>
+                                            <constraint firstAttribute="bottom" secondItem="WaZ-R9-uIk" secondAttribute="bottom" id="DOo-1F-wsi"/>
+                                            <constraint firstAttribute="width" constant="98" id="F6r-Mm-prg"/>
+                                            <constraint firstAttribute="width" secondItem="tMf-8x-mT3" secondAttribute="height" multiplier="1:1" id="Sdb-70-aWH"/>
+                                            <constraint firstItem="WaZ-R9-uIk" firstAttribute="top" secondItem="tMf-8x-mT3" secondAttribute="top" id="Sif-kV-g2j"/>
+                                            <constraint firstItem="WaZ-R9-uIk" firstAttribute="leading" secondItem="tMf-8x-mT3" secondAttribute="leading" id="U3e-HU-JRl"/>
+                                            <constraint firstAttribute="trailing" secondItem="jDp-wX-f8u" secondAttribute="trailing" id="UFz-3j-1tr"/>
+                                            <constraint firstItem="jDp-wX-f8u" firstAttribute="top" secondItem="tMf-8x-mT3" secondAttribute="top" id="Xhe-dn-uNo"/>
+                                            <constraint firstItem="jDp-wX-f8u" firstAttribute="leading" secondItem="tMf-8x-mT3" secondAttribute="leading" id="bve-yh-bJi"/>
+                                            <constraint firstAttribute="bottom" secondItem="jDp-wX-f8u" secondAttribute="bottom" id="eA7-ey-pYj"/>
+                                        </constraints>
+                                    </view>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Pet Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5tI-j6-eWk">
+                                        <rect key="frame" x="24" y="200" width="295" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="A7q-Cl-R6K"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" smartDashesType="no" textContentType="name"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="tMf-8x-mT3" firstAttribute="centerX" secondItem="RGw-If-7bF" secondAttribute="centerX" id="GfC-f6-Q6s"/>
+                                    <constraint firstItem="5tI-j6-eWk" firstAttribute="leading" secondItem="RGw-If-7bF" secondAttribute="leading" constant="24" id="H1l-yT-wfH"/>
+                                    <constraint firstItem="tMf-8x-mT3" firstAttribute="top" secondItem="RGw-If-7bF" secondAttribute="top" constant="44" id="KA9-Kk-34t"/>
+                                    <constraint firstAttribute="trailing" secondItem="5tI-j6-eWk" secondAttribute="trailing" constant="24" id="dbC-wS-9Ey"/>
+                                    <constraint firstItem="5tI-j6-eWk" firstAttribute="top" secondItem="tMf-8x-mT3" secondAttribute="bottom" constant="58" id="mDQ-7o-SsK"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eai-38-BLx" userLabel="Footer View">
+                                <rect key="frame" x="0.0" y="619" width="375" height="48"/>
+                                <subviews>
+                                    <button opaque="NO" tag="69" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JHZ-4H-pac">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="48"/>
+                                        <color key="backgroundColor" red="0.98039215690000003" green="0.25490196079999999" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="aI3-mm-5Pf"/>
+                                        </constraints>
+                                        <state key="normal">
+                                            <attributedString key="attributedTitle">
+                                                <fragment content="NEXT">
+                                                    <attributes>
+                                                        <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <font key="NSFont" size="16" name="Montserrat-Regular"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                        </state>
+                                        <connections>
+                                            <action selector="nextButtonTapped:" destination="suP-Nz-0c2" eventType="touchUpInside" id="8qV-TK-BeS"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="JHZ-4H-pac" secondAttribute="trailing" id="4Sr-jD-jBh"/>
+                                    <constraint firstAttribute="bottom" secondItem="JHZ-4H-pac" secondAttribute="bottom" id="bUI-we-ZwH"/>
+                                    <constraint firstItem="JHZ-4H-pac" firstAttribute="top" secondItem="eai-38-BLx" secondAttribute="top" id="pv9-We-ZQ1"/>
+                                    <constraint firstItem="JHZ-4H-pac" firstAttribute="leading" secondItem="eai-38-BLx" secondAttribute="leading" id="uiw-0O-Cp0"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="l3b-ul-UrP"/>
+                        <constraints>
+                            <constraint firstItem="RGw-If-7bF" firstAttribute="leading" secondItem="CiT-4c-Jc1" secondAttribute="leadingMargin" id="2DU-VL-fey"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="eai-38-BLx" secondAttribute="bottom" id="QkJ-Iv-4w4"/>
+                            <constraint firstItem="eai-38-BLx" firstAttribute="top" secondItem="RGw-If-7bF" secondAttribute="bottom" id="VaA-ha-RUy"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="RGw-If-7bF" secondAttribute="trailing" id="acC-07-TF5"/>
+                            <constraint firstAttribute="trailing" secondItem="2J7-Mf-SHB" secondAttribute="trailing" id="byG-Zj-8Ac"/>
+                            <constraint firstItem="2J7-Mf-SHB" firstAttribute="leading" secondItem="CiT-4c-Jc1" secondAttribute="leading" id="fFW-bP-EXv"/>
+                            <constraint firstAttribute="trailing" secondItem="eai-38-BLx" secondAttribute="trailing" id="mqH-TG-jOL"/>
+                            <constraint firstItem="2J7-Mf-SHB" firstAttribute="top" secondItem="CiT-4c-Jc1" secondAttribute="top" id="o9R-dX-FBi"/>
+                            <constraint firstItem="eai-38-BLx" firstAttribute="leading" secondItem="CiT-4c-Jc1" secondAttribute="leading" id="p6j-Ze-H1t"/>
+                            <constraint firstItem="RGw-If-7bF" firstAttribute="top" secondItem="2J7-Mf-SHB" secondAttribute="bottom" id="pca-xg-c1r"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="trL-AB-rzY"/>
                     </view>
+                    <connections>
+                        <outlet property="nextButton" destination="JHZ-4H-pac" id="Pcc-Yt-GMo"/>
+                        <outlet property="petNameTextField" destination="5tI-j6-eWk" id="3x4-ZZ-0ls"/>
+                        <outlet property="petPhotoImageView" destination="WaZ-R9-uIk" id="EtM-vU-ZBZ"/>
+                        <outlet property="petPhotoView" destination="tMf-8x-mT3" id="a3g-le-VlA"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="p7p-0C-eEr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pVp-GI-kxn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="338" y="51"/>
+            <point key="canvasLocation" x="335" y="51"/>
         </scene>
     </scenes>
     <resources>
         <image name="ConnectDevice" width="280" height="201"/>
+        <image name="PhotoPlaceholder" width="98" height="98"/>
     </resources>
 </document>
