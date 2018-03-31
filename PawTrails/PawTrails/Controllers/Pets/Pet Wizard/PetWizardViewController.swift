@@ -19,7 +19,7 @@ class PetWizardViewController: UIViewController {
     @IBOutlet weak var stepIndicatorLabel: UILabel!
     @IBOutlet weak var contentView: UIView!
     
-    final let steps = ["connectDevice", "nameAndPhoto"]
+    final let steps = ["connectDevice", "nameAndPhoto", "type"]
     
     var stepsViewControllers = [PetWizardStepViewController]()
     var currentStepIndex: Int = 0 {
@@ -88,6 +88,17 @@ class PetWizardViewController: UIViewController {
         if currentStepIndex > 0 {
             self.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "BackIcon"), style: .plain, target: self, action: #selector(backButtonTapped))
             self.navigationBar.topItem?.leftBarButtonItem?.tintColor = PTConstants.colors.darkGray
+            
+            
+            let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelWizard))
+            cancelButton.setTitleTextAttributes([
+                NSFontAttributeName : UIFont(name: "Montserrat-Regular", size: 14)!,
+                NSForegroundColorAttributeName : PTConstants.colors.newRed,
+                ], for: .normal)
+      
+            self.navigationBar.topItem?.rightBarButtonItem = cancelButton
+            self.navigationBar.topItem?.rightBarButtonItem?.tintColor = PTConstants.colors.newRed
+            
         } else {
             self.navigationBar.topItem?.leftBarButtonItem = nil
         }
@@ -138,6 +149,10 @@ class PetWizardViewController: UIViewController {
         // Notify Child View Controller
         viewController.removeFromParentViewController()
     }
+    
+    func cancelWizard() {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
 
 extension PetWizardViewController: PetWizardStepViewControllerDelegate {
@@ -147,6 +162,6 @@ extension PetWizardViewController: PetWizardStepViewControllerDelegate {
     }
     
     func stepCanceled(pet: Pet) {
-        self.dismiss(animated: true, completion: nil)
+        cancelWizard()
     }
 }
