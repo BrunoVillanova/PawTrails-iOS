@@ -10,6 +10,7 @@
 		150741C5200DB4B800EB761B /* CocoaLumberjackSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 150741C3200DB4B700EB761B /* CocoaLumberjackSwift.framework */; };
 		150741C6200DB4B800EB761B /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 150741C4200DB4B700EB761B /* CocoaLumberjack.framework */; };
 		15160FEB20719448008CF9F4 /* PTAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15160FEA20719448008CF9F4 /* PTAlertViewController.swift */; };
+		15160FED20723037008CF9F4 /* PetGenderAndNeuterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15160FEC20723037008CF9F4 /* PetGenderAndNeuterViewController.swift */; };
 		1523D0AE20617EB7003D8653 /* TripInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1523D0AD20617EB7003D8653 /* TripInfoCollectionViewCell.swift */; };
 		1523D0B120629691003D8653 /* DemoTrips.json in Resources */ = {isa = PBXBuildFile; fileRef = 1523D0B020629691003D8653 /* DemoTrips.json */; };
 		1543F37F206ECBE90069EBEB /* PetNameAndPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1543F37E206ECBE90069EBEB /* PetNameAndPhotoViewController.swift */; };
@@ -276,6 +277,7 @@
 		150741C3200DB4B700EB761B /* CocoaLumberjackSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjackSwift.framework; path = Carthage/Build/iOS/CocoaLumberjackSwift.framework; sourceTree = "<group>"; };
 		150741C4200DB4B700EB761B /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjack.framework; path = Carthage/Build/iOS/CocoaLumberjack.framework; sourceTree = "<group>"; };
 		15160FEA20719448008CF9F4 /* PTAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTAlertViewController.swift; sourceTree = "<group>"; };
+		15160FEC20723037008CF9F4 /* PetGenderAndNeuterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetGenderAndNeuterViewController.swift; sourceTree = "<group>"; };
 		1523D0AD20617EB7003D8653 /* TripInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripInfoCollectionViewCell.swift; sourceTree = "<group>"; };
 		1523D0B020629691003D8653 /* DemoTrips.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DemoTrips.json; sourceTree = "<group>"; };
 		1543F37E206ECBE90069EBEB /* PetNameAndPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetNameAndPhotoViewController.swift; sourceTree = "<group>"; };
@@ -648,6 +650,7 @@
 				1543F37E206ECBE90069EBEB /* PetNameAndPhotoViewController.swift */,
 				1543F382206F1BCE0069EBEB /* PetTypeViewController.swift */,
 				1543F388206FF2210069EBEB /* PetBreedSelectViewController.swift */,
+				15160FEC20723037008CF9F4 /* PetGenderAndNeuterViewController.swift */,
 			);
 			path = "Pet Wizard";
 			sourceTree = "<group>";
@@ -1778,6 +1781,7 @@
 				15C761592016CFF3002AA7F8 /* CDPet+CoreDataProperties.swift in Sources */,
 				15C763FE2016D5C0002AA7F8 /* TripScreenViewController.swift in Sources */,
 				15C763F42016D5C0002AA7F8 /* PetUserTableViewController.swift in Sources */,
+				15160FED20723037008CF9F4 /* PetGenderAndNeuterViewController.swift in Sources */,
 				15AD5EAC206C4AA40069E01D /* PetWizardViewController.swift in Sources */,
 				15C764142016D5C0002AA7F8 /* PetGenderTableViewController.swift in Sources */,
 				15C7614D2016CFF3002AA7F8 /* CDSafeZone+CoreDataClass.swift in Sources */,
