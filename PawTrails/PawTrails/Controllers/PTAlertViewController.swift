@@ -14,6 +14,12 @@ typealias CancelResult = (_ alertViewController: PTAlertViewController) -> Void
 
 class PTAlertViewController: UIViewController {
 
+    var infoLabel: UILabel? {
+        let label = UILabel(frame: .zero)
+        label.font = UIFont(name: "Montserrat", size: 15)
+        label.textColor = PTConstants.colors.darkGray
+        return label
+    }
     let textField = UITextField(frame: .zero)
     let titleLabel = UILabel(frame: .zero)
     let okButton = NiceButton(title: "OK")
@@ -28,7 +34,7 @@ class PTAlertViewController: UIViewController {
         initialize()
     }
     
-    convenience init (_ title: String?, textFieldLabelTitle: String?, okResult: OkResult?, cancelResult: CancelResult?) {
+    convenience init (_ title: String?, infoText: String? = nil, textFieldLabelTitle: String?, okResult: OkResult?, cancelResult: CancelResult?) {
         self.init()
         modalPresentationStyle = .overCurrentContext
         titleLabel.text = title
@@ -44,7 +50,11 @@ class PTAlertViewController: UIViewController {
             cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
         }
         
+        if let infoText = infoText {
+            infoLabel?.text = infoText
+        }
     }
+    
     
     func okButtonTapped() {
         self.okResult?(self)
@@ -77,23 +87,31 @@ class PTAlertViewController: UIViewController {
             make.edges.equalToSuperview()
         }
         
-        // Alert View
-        
-        let alertView = UIView(frame: .zero)
-        alertView.layer.cornerRadius = 10
-        alertView.clipsToBounds = true
-        alertView.layer.masksToBounds = true
+        // AlertView
+        let alertView = RoundedShadowView(frame: .zero)
         self.view.addSubview(alertView)
         
         alertView.snp.makeConstraints { (make) in
             make.top.equalToSuperview().offset(120)
             make.centerX.equalToSuperview()
         }
+        // Alert View
+        
+        let alertContainerView = UIView(frame: .zero)
+        alertContainerView.layer.cornerRadius = 10
+        alertContainerView.clipsToBounds = true
+        alertContainerView.layer.masksToBounds = true
+
+        alertView.addSubview(alertContainerView)
+        
+        alertContainerView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
         
         // Title View
         
         let titleView = UIView(frame: .zero)
-        alertView.addSubview(titleView)
+        alertContainerView.addSubview(titleView)
         
         titleView.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
@@ -134,7 +152,7 @@ class PTAlertViewController: UIViewController {
         
         let contentView = UIView(frame: .zero)
         contentView.backgroundColor = .white
-        alertView.addSubview(contentView)
+        alertContainerView.addSubview(contentView)
         
         contentView.snp.makeConstraints { (make) in
             make.top.equalTo(titleView.snp.bottom)
@@ -143,9 +161,15 @@ class PTAlertViewController: UIViewController {
         }
         
         
+        // TODO: Add Label Before Text Field if needed
+        
+        
+        // Text Field
+        
         textField.font = UIFont(name: "Montserrat-Light", size: 14)
         textField.textColor = PTConstants.colors.darkGray
         textField.borderStyle = .roundedRect
+        textField.textAlignment = .center
         textField.tintColor = PTConstants.colors.darkGray
         
         contentView.addSubview(textField)
@@ -161,7 +185,7 @@ class PTAlertViewController: UIViewController {
         // Buttons View
         let buttonsView = UIView(frame: .zero)
         buttonsView.backgroundColor = .white
-        alertView.addSubview(buttonsView)
+        alertContainerView.addSubview(buttonsView)
         
         buttonsView.snp.makeConstraints { (make) in
             make.top.equalTo(contentView.snp.bottom)
@@ -216,41 +240,56 @@ class PTAlertViewController: UIViewController {
             make.left.equalTo(cancelButton.snp.right)
             make.right.equalTo(okButton.snp.left)
         }
-        
-        
-// addTarget(target, action: action, for: .touchUpInside)
+
     }
     
 
 }
 
+class RoundedShadowView: UIView {
+    
+    var shadowLayer: CAShapeLayer!
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        if shadowLayer == nil {
+            shadowLayer = CAShapeLayer()
+            shadowLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: 10).cgPath
+            shadowLayer.fillColor = UIColor.white.cgColor
+            
+            shadowLayer.shadowColor = UIColor.darkGray.cgColor
+            shadowLayer.shadowPath = shadowLayer.path
+            shadowLayer.shadowOffset = CGSize(width: 2.0, height: 2.0)
+            shadowLayer.shadowOpacity = 0.8
+            shadowLayer.shadowRadius = 2
+            
+            layer.insertSublayer(shadowLayer, at: 0)
+            //layer.insertSublayer(shadowLayer, below: nil) // also works
+        }
+    }
+    
+}
+
 class NiceButton: UIButton {
     
-    var buttonAction: Selector?
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        commonInit()
+    }
     
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-//        commonInit()
-//    }
-//
-//    required init?(coder aDecoder: NSCoder) {
-//        super.init(coder: aDecoder)
-//        commonInit()
-//    }
-    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
+    }
     
     convenience init(title: String) {
         self.init(frame: .zero)
         setTitle(title, for: .normal)
     }
     
-    override func didMoveToSuperview() {
-        super.didMoveToSuperview()
-        commonInit()
-    }
-    
-    fileprivate func commonInit() {
-        titleLabel?.font =  UIFont(name: "Monserrat-Regular", size: 15)
+    fileprivate func commonInit () {
+        titleLabel?.font = UIFont(name: "Montserrat-Regular", size: 15)
         setTitleColor(PTConstants.colors.lightBlue, for: .normal)
     }
 }
