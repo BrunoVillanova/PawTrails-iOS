@@ -144,7 +144,7 @@ class PetWizardViewController: UIViewController {
     fileprivate func cycleViewControllers(currentViewController: PetWizardStepViewController, nextViewController: PetWizardStepViewController) {
         
         currentViewController.view.hero.id = "step"
-        nextViewController.view.hero.modifiers = [.source(heroID: "step"), .fade]
+        nextViewController.view.hero.modifiers = [.source(heroID: "step"), .fade, .scale(0.5)]
         nextViewController.view.hero.id = "step"
         nextViewController.hero.isEnabled = true
         
@@ -157,7 +157,7 @@ class PetWizardViewController: UIViewController {
         nextViewController.view.frame = contentView.bounds
         nextViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
-        self.transition(from: currentViewController, to: nextViewController, duration: 0.5, options: .layoutSubviews, animations: {
+        self.transition(from: currentViewController, to: nextViewController, duration: 0.5, options: [], animations: {
             currentViewController.view.alpha = 0
             nextViewController.view.alpha = 1
         }) { (finished) in

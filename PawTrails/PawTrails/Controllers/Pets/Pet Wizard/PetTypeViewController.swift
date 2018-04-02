@@ -31,7 +31,8 @@ class PetTypeViewController: PetWizardStepViewController {
                 cell.isSelected = false
                 cell.selectCell()
                 if petTypeTitle.lowercased() != "other" {
-                    self.pet!.type = PetType(type: Type.build(code: petTypeTitle.lowercased()), description: petTypeTitle)
+                    let petType = PetType(type: Type.build(code: petTypeTitle.lowercased()), description: petTypeTitle)
+                    self.pet!.type = petType
                     self.delegate?.stepCompleted(completed: true, pet: self.pet!)
                     self.delegate?.goToNextStep()
                 } else  {

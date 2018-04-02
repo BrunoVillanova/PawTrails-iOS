@@ -50,6 +50,44 @@ extension DataManager {
         }).share()
     }
 
+    /// Try to load breeds from API then if error, get breeds from storage
+    ///
+    /// - Returns: bool value to verify the operation was complete successfully.
+    func breeds(for petType: Type) -> Observable<[Breed]> {
+        
+        //TODO: add pets from socketIO
+        return Observable.create({ observer in
+            // First load from DB because its fast
+            self.getBreeds(for: petType, callback: { (storageError, storagePets) in
+                
+                if storageError == nil {
+                    observer.onNext(storagePets!)
+                }
+                
+                // Now lets call API to get updated pets
+                self.loadBreeds(for: petType, callback: { (apiError, apiPets) in
+                    
+                    // Error loading pets from API, try to get from storage
+                    if apiError != nil {
+                        self.getBreeds(for: petType, callback: { (storageError, storagePets) in
+                            if let error = storageError as DataManagerError? {
+                                observer.onError(error)
+                            } else {
+                                observer.onNext(storagePets!)
+                                observer.onCompleted()
+                            }
+                        })
+                    } else {
+                        // Finally we return the pets from API
+                        observer.onNext(apiPets!)
+                        observer.onCompleted()
+                    }
+                })
+            })
+            
+            return Disposables.create()
+        }).share()
+    }
     
     func getApiTrips(_ status: [Int] = []) -> Observable<[Trip]> {
         return Observable.create({observer in

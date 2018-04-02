@@ -571,18 +571,64 @@
                                                 <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" smartDashesType="no" textContentType="name"/>
                                             </textField>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Nu-7W-HLO" userLabel="Separator View">
+                                                <rect key="frame" x="0.0" y="79" width="375" height="1"/>
+                                                <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="1" id="w2Y-eM-JEd"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="bLi-Kv-GXH" firstAttribute="leading" secondItem="saL-JD-gIc" secondAttribute="leading" constant="24" id="DwP-ne-Je8"/>
+                                            <constraint firstItem="8Nu-7W-HLO" firstAttribute="leading" secondItem="saL-JD-gIc" secondAttribute="leading" id="Myt-6w-dnS"/>
+                                            <constraint firstAttribute="trailing" secondItem="8Nu-7W-HLO" secondAttribute="trailing" id="NNu-aa-nIn"/>
                                             <constraint firstAttribute="trailing" secondItem="bLi-Kv-GXH" secondAttribute="trailing" constant="24" id="NpP-PG-IlY"/>
                                             <constraint firstItem="bLi-Kv-GXH" firstAttribute="top" secondItem="saL-JD-gIc" secondAttribute="top" constant="16" id="WEX-4z-tSY"/>
                                             <constraint firstAttribute="bottom" secondItem="bLi-Kv-GXH" secondAttribute="bottom" constant="16" id="aK5-1N-1gg"/>
+                                            <constraint firstAttribute="bottom" secondItem="8Nu-7W-HLO" secondAttribute="bottom" id="j0x-k8-R0a"/>
                                         </constraints>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UYW-kn-5OL">
                                         <rect key="frame" x="0.0" y="80" width="375" height="523"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PTSimpleTableViewCell" id="Ji0-0e-6vc" customClass="PTSimpleTableViewCell" customModule="PawTrails" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ji0-0e-6vc" id="Gy1-72-8XR">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wwg-4t-zlU">
+                                                            <rect key="frame" x="16" y="22" width="0.0" height="0.0"/>
+                                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
+                                                            <color key="textColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RedCheckMarkIcon" translatesAutoresizingMaskIntoConstraints="NO" id="vWk-ri-dh9" userLabel="Icon Image View">
+                                                            <rect key="frame" x="333" y="12.5" width="18" height="19"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="19" id="3AF-D4-tid"/>
+                                                                <constraint firstAttribute="width" constant="18" id="Atd-3c-8dJ"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="vWk-ri-dh9" firstAttribute="centerY" secondItem="Gy1-72-8XR" secondAttribute="centerY" id="CwE-AB-muv"/>
+                                                        <constraint firstItem="wwg-4t-zlU" firstAttribute="leading" secondItem="Gy1-72-8XR" secondAttribute="leading" constant="16" id="QEq-Sg-I0H"/>
+                                                        <constraint firstItem="vWk-ri-dh9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wwg-4t-zlU" secondAttribute="trailing" constant="8" id="Rk8-30-D3Y"/>
+                                                        <constraint firstAttribute="trailing" secondItem="vWk-ri-dh9" secondAttribute="trailing" constant="24" id="Tm0-IX-waP"/>
+                                                        <constraint firstItem="wwg-4t-zlU" firstAttribute="centerY" secondItem="Gy1-72-8XR" secondAttribute="centerY" id="cN6-bJ-TA6"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="iconImageView" destination="vWk-ri-dh9" id="XSe-Lr-JSS"/>
+                                                    <outlet property="titleLabel" destination="wwg-4t-zlU" id="fSO-E7-JFv"/>
+                                                </connections>
+                                            </tableViewCell>
+                                        </prototypes>
                                     </tableView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -622,5 +668,6 @@
     <resources>
         <image name="ConnectDevice" width="280" height="201"/>
         <image name="PhotoPlaceholder" width="98" height="98"/>
+        <image name="RedCheckMarkIcon" width="18" height="19"/>
     </resources>
 </document>
