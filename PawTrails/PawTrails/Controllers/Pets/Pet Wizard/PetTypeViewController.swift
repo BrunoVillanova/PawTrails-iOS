@@ -24,15 +24,6 @@ class PetTypeViewController: PetWizardStepViewController {
             flowLayout.estimatedItemSize = CGSize(width: 150, height: 150)
         }
         
-//        petTypes.asObservable().bind(to: collectionView.rx.items(cellIdentifier: "cell", cellType: PetTypeCollectionViewCell.self)) { (row, petTypeTitle, cell) in
-//            var selected = false
-//
-//            if let petType = self.pet!.type?.type?.code {
-//                selected = petTypeTitle.lowercased() == petType
-//            }
-//            cell.configure(petTypeTitle, selected: selected)
-//        }.disposed(by: disposeBag)
-        
         Observable
             .zip(collectionView.rx.itemSelected, collectionView.rx.modelSelected(String.self))
             .bind { [unowned self] indexPath, petTypeTitle in

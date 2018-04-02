@@ -92,10 +92,15 @@ class PetWizardViewController: UIViewController {
 //                rightBarButtonItem = vcRightBarButtonItem
 //            }
     
-            rightBarButtonItem.setTitleTextAttributes([
+            var titleTextAttributes = [
                 NSFontAttributeName : UIFont(name: "Montserrat-Regular", size: 14)!,
                 NSForegroundColorAttributeName : PTConstants.colors.newRed,
-                ], for: .normal)
+                ]
+            
+            rightBarButtonItem.setTitleTextAttributes(titleTextAttributes, for: .normal)
+            
+            titleTextAttributes[NSFontAttributeName] = UIFont(name: "Montserrat-Medium", size: 14)!
+            rightBarButtonItem.setTitleTextAttributes(titleTextAttributes, for: .highlighted)
       
             self.navigationBar.topItem?.rightBarButtonItem = rightBarButtonItem
             self.navigationBar.topItem?.rightBarButtonItem?.tintColor = PTConstants.colors.newRed
