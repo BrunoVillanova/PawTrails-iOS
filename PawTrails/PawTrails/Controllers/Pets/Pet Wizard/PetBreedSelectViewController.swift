@@ -17,8 +17,10 @@ class PetBreedSelectViewController: PetWizardStepViewController {
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     
-    fileprivate let dataSource = RxTableViewSectionedReloadDataSource<PetBreedSection>()
     final let disposeBag = DisposeBag()
+    fileprivate final let dataSource = RxTableViewSectionedReloadDataSource<PetBreedSection>()
+    fileprivate var petBreedSections: Variable<[PetBreedSection]> = Variable([PetBreedSection]())
+    fileprivate var selectedBreed: Variable<Breed?> = Variable(nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +29,7 @@ class PetBreedSelectViewController: PetWizardStepViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        reloadPets()
+        retrieveBreeds()
     }
     
     override func didReceiveMemoryWarning() {
@@ -42,32 +44,12 @@ class PetBreedSelectViewController: PetWizardStepViewController {
     fileprivate func initialize() {
         rightBarButtonItem = UIBarButtonItem(title: "Skip", style: .plain, target: self, action: #selector(skipTapped))
         configureSearchTextField()
-    
-        tableView.tableFooterView = UIView()
-        
-        dataSource.configureCell = { dataSource, tableView, indexPath, breed in
-            let cell = tableView.dequeueReusableCell(withIdentifier: PTSimpleTableViewCell.reuseIdentifier, for: indexPath) as! PTSimpleTableViewCell
-            let checked = false
-            cell.configure(title: breed.name, checked: checked)
-            return cell
-        }
-        
-        dataSource.titleForHeaderInSection = { ds, index in
-            return ds.sectionModels[index].header
-        }
-        
-        Observable
-            .zip(tableView.rx.itemSelected, tableView.rx.modelSelected(PetBreedSection.Item.self))
-            .bind { [unowned self] indexPath, item in
-                self.tableView.deselectRow(at: indexPath, animated: true)
-            }
-            .disposed(by: disposeBag)
-        
+        configureTableDataSource()
     }
     
-    fileprivate func retrieveBreeds() -> Observable<[PetBreedSection]>? {
+    fileprivate func retrieveBreeds() {
         if let petType = self.pet!.type, let type = petType.type {
-            return DataManager.instance.breeds(for: type)
+            DataManager.instance.breeds(for: type)
                 .map({ (breeds) -> [PetBreedSection] in
                     var sections = [PetBreedSection]()
                     
@@ -94,15 +76,9 @@ class PetBreedSelectViewController: PetWizardStepViewController {
 
                     return sections.sorted { $0.header < $1.header}
                 })
+                .bind(to: self.petBreedSections)
+                .disposed(by: disposeBag)
         }
-
-        return nil
-    }
-    
-    fileprivate func reloadPets() {
-        retrieveBreeds()?
-            .bind(to: tableView.rx.items(dataSource: dataSource))
-            .disposed(by: disposeBag)
     }
     
     fileprivate func configureSearchTextField() {
@@ -125,6 +101,105 @@ class PetBreedSelectViewController: PetWizardStepViewController {
     
     @IBAction func crossBreedButtonTapped(_ sender: Any) {
         
+        let otherAlertView = PTAlertViewController("Cross breed",
+                                                   textFieldLabelTitle: "Type in your pet’s breed",
+                                                   okResult: { alert in
+                                                    if let text = alert.textField.text {
+                                                        print(text)
+                                                        self.delegate?.stepCompleted(completed: true, pet: self.pet!)
+                                                        self.delegate?.goToNextStep()
+                                                    }
+                                                    alert.dismiss()
+        },
+                                                   cancelResult: { alert in
+                                                    alert.dismiss()
+        })
+        
+        if let petBreed = self.pet!.breeds, let breedDescription = petBreed.description {
+            otherAlertView.textField.text = breedDescription
+        }
+        self.present(otherAlertView, animated: false, completion: nil)
+    }
+    
+    func configureTableDataSource() {
+        
+        tableView.delegate = self
+        tableView.tableFooterView = UIView()
+        tableView.rowHeight = 52
+        
+        dataSource.configureCell = { dataSource, tableView, indexPath, breed in
+            let cell = tableView.dequeueReusableCell(withIdentifier: PTSimpleTableViewCell.reuseIdentifier, for: indexPath) as! PTSimpleTableViewCell
+            
+            var checked = false
+            
+            if let selectedBreed = self.selectedBreed.value, breed.id == selectedBreed.id {
+                checked = true
+            }
+            
+            cell.configure(title: breed.name, checked: checked)
+            return cell
+        }
+        
+        dataSource.titleForHeaderInSection = { ds, index in
+            return ds.sectionModels[index].header
+        }
+        
+        
+        let search = searchTextField.rx.text.orEmpty
+            .asDriver()
+            .throttle(0.3)
+            .distinctUntilChanged()
+        
+        let termAndBreeds = Observable.combineLatest(search.asObservable(), petBreedSections.asObservable())
+            .map({ (query, petBreedSections) -> [PetBreedSection] in
+                
+                if query.count > 0 {
+                    var filteredSections = [PetBreedSection]()
+                    
+                    for breedSection in petBreedSections {
+                        let filteredItems = breedSection.items.filter ({ $0.name.contains(query) })
+                        if filteredItems.count > 0 {
+                            filteredSections.append(PetBreedSection(header: breedSection.header, items: filteredItems))
+                        }
+                    }
+                    
+                    return filteredSections
+                } else {
+                    return petBreedSections
+                }
+            })
+        
+        Observable.combineLatest(termAndBreeds.asObservable(), selectedBreed.asObservable())
+            .map({ (petBreedSections, selectedBreed) -> [PetBreedSection] in
+                return petBreedSections
+            })
+            .asObservable()
+            .bind(to: tableView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
+
+        
+        Observable
+            .zip(tableView.rx.itemSelected, tableView.rx.modelSelected(PetBreedSection.Item.self))
+            .bind { [unowned self] indexPath, item in
+                self.selectedBreed.value = item
+                self.tableView.deselectRow(at: indexPath, animated: true)
+            }
+            .disposed(by: disposeBag)
+    }
+    
+}
+
+extension PetBreedSelectViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        view.tintColor = .white
+        let header:UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
+        header.textLabel?.textColor = PTConstants.colors.darkGray
+        header.textLabel?.font = UIFont(name: "Montserrat-Regular", size: 20)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 58
     }
 }
 
