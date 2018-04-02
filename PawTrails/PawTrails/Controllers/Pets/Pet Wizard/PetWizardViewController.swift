@@ -22,7 +22,7 @@ class PetWizardViewController: UIViewController {
     @IBOutlet weak var footerViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var nextButton: UIButton!
     
-    final let steps = ["connectDevice", "nameAndPhoto", "type", "breed", "genderAndNeuter"]
+    final let steps = ["connectDevice", "nameAndPhoto", "type", "breed", "genderAndNeuter", "birthdayAndWeight"]
     
     var stepsViewControllers = [PetWizardStepViewController]()
     var currentStepIndex: Int = 0 {

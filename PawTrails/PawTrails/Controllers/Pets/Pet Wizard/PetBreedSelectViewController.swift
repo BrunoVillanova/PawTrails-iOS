@@ -26,10 +26,15 @@ class PetBreedSelectViewController: PetWizardStepViewController {
         super.viewDidLoad()
         initialize()
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         retrieveBreeds()
+        if let _ = self.pet?.breeds {
+            self.delegate?.stepCompleted(completed: true, pet: self.pet!)
+        } else  {
+            self.delegate?.stepCompleted(completed: false, pet: self.pet!)
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -105,7 +110,7 @@ class PetBreedSelectViewController: PetWizardStepViewController {
                                                    textFieldLabelTitle: "Type in your pet’s breed",
                                                    okResult: { alert in
                                                     if let text = alert.textField.text {
-                                                        print(text)
+                                                        self.pet!.breeds = PetBreeds(first: nil, second: nil, text)
                                                         self.delegate?.stepCompleted(completed: true, pet: self.pet!)
                                                         self.delegate?.goToNextStep()
                                                     }
@@ -181,8 +186,10 @@ class PetBreedSelectViewController: PetWizardStepViewController {
         Observable
             .zip(tableView.rx.itemSelected, tableView.rx.modelSelected(PetBreedSection.Item.self))
             .bind { [unowned self] indexPath, item in
-                self.selectedBreed.value = item
                 self.tableView.deselectRow(at: indexPath, animated: true)
+                self.selectedBreed.value = item
+                self.pet!.breeds = PetBreeds(first: item, second: nil, nil)
+                self.delegate?.stepCompleted(completed: true, pet: self.pet!)
             }
             .disposed(by: disposeBag)
     }
