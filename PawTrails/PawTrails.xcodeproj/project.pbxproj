@@ -250,6 +250,8 @@
 		447AF46D2021E22C0050F885 /* AllowedCharsTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447AF46C2021E22C0050F885 /* AllowedCharsTextField.swift */; };
 		448BE9681ED47F5C00665608 /* APIUserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448BE9671ED47F5C00665608 /* APIUserTest.swift */; };
 		448BE96A1ED490D900665608 /* APIImageUploadTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448BE9691ED490D900665608 /* APIImageUploadTest.swift */; };
+		44B3B111206E436300FBF8CC /* PTButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B3B110206E436300FBF8CC /* PTButton.swift */; };
+		44B3B113206E449A00FBF8CC /* PTRulerSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B3B112206E449A00FBF8CC /* PTRulerSlider.swift */; };
 		44D5FE921EE6E9560049232F /* DataManagerPetSafeZonesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D5FE911EE6E9560049232F /* DataManagerPetSafeZonesTests.swift */; };
 		44F76575201B60A800B552FF /* AddPetUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F76574201B60A800B552FF /* AddPetUserViewController.swift */; };
 		8AD2F6B7B0A8110072345C01 /* Pods_PawTrailsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E2B813BA9CAE948174F2C71 /* Pods_PawTrailsTests.framework */; };
@@ -539,6 +541,8 @@
 		447AF46C2021E22C0050F885 /* AllowedCharsTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllowedCharsTextField.swift; sourceTree = "<group>"; };
 		448BE9671ED47F5C00665608 /* APIUserTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIUserTest.swift; sourceTree = "<group>"; };
 		448BE9691ED490D900665608 /* APIImageUploadTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIImageUploadTest.swift; sourceTree = "<group>"; };
+		44B3B110206E436300FBF8CC /* PTButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTButton.swift; sourceTree = "<group>"; };
+		44B3B112206E449A00FBF8CC /* PTRulerSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTRulerSlider.swift; sourceTree = "<group>"; };
 		44D5FE911EE6E9560049232F /* DataManagerPetSafeZonesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerPetSafeZonesTests.swift; sourceTree = "<group>"; };
 		44F76574201B60A800B552FF /* AddPetUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPetUserViewController.swift; sourceTree = "<group>"; };
 		734D05AA5E231C24EBC9332D /* Pods-PawTrails.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PawTrails.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PawTrails/Pods-PawTrails.debug.xcconfig"; sourceTree = "<group>"; };
@@ -731,6 +735,8 @@
 		15C7621C2016D011002AA7F8 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				44B3B10F206E433800FBF8CC /* PTRulerSlider */,
+				44B3B10E206E42F200FBF8CC /* PTButton */,
 				1570C7AD203B7C1300A7F59F /* PTTripInfoView */,
 				15C761122016CFF3002AA7F8 /* BEM */,
 				15C7621D2016D011002AA7F8 /* PTBalloonImageView */,
@@ -1215,6 +1221,22 @@
 				44D5FE911EE6E9560049232F /* DataManagerPetSafeZonesTests.swift */,
 			);
 			name = Managers;
+			sourceTree = "<group>";
+		};
+		44B3B10E206E42F200FBF8CC /* PTButton */ = {
+			isa = PBXGroup;
+			children = (
+				44B3B110206E436300FBF8CC /* PTButton.swift */,
+			);
+			path = PTButton;
+			sourceTree = "<group>";
+		};
+		44B3B10F206E433800FBF8CC /* PTRulerSlider */ = {
+			isa = PBXGroup;
+			children = (
+				44B3B112206E449A00FBF8CC /* PTRulerSlider.swift */,
+			);
+			path = PTRulerSlider;
 			sourceTree = "<group>";
 		};
 		91352D1B7E01CC1C0CF51D38 /* Frameworks */ = {
@@ -1744,6 +1766,7 @@
 				15C763FB2016D5C0002AA7F8 /* RecommandationController.swift in Sources */,
 				15C761532016CFF3002AA7F8 /* CDPhone+CoreDataProperties.swift in Sources */,
 				15C761582016CFF3002AA7F8 /* CDSafeZone+CoreDataProperties.swift in Sources */,
+				44B3B113206E449A00FBF8CC /* PTRulerSlider.swift in Sources */,
 				15C7624F2016D011002AA7F8 /* PTTripInfoView.swift in Sources */,
 				15C762B02016D06B002AA7F8 /* Messages.swift in Sources */,
 				15C762B22016D06B002AA7F8 /* PTConstants.swift in Sources */,
@@ -1815,6 +1838,7 @@
 				15A13A24206AC568005790B3 /* OnboardingViewController.swift in Sources */,
 				15C7615A2016CFF3002AA7F8 /* CDCountryCode+CoreDataClass.swift in Sources */,
 				15C761562016CFF3002AA7F8 /* CDAddress+CoreDataClass.swift in Sources */,
+				44B3B111206E436300FBF8CC /* PTButton.swift in Sources */,
 				15C761402016CFF3002AA7F8 /* BEMCheckBox.m in Sources */,
 				447AF46D2021E22C0050F885 /* AllowedCharsTextField.swift in Sources */,
 				15C761552016CFF3002AA7F8 /* CDAddress+CoreDataProperties.swift in Sources */,
