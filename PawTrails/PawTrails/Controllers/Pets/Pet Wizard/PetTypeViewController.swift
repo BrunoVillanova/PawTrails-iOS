@@ -43,6 +43,25 @@ class PetTypeViewController: PetWizardStepViewController {
                     self.pet!.type = PetType(type: Type.build(code: petTypeTitle.lowercased()), description: petTypeTitle)
                     self.delegate?.stepCompleted(completed: true, pet: self.pet!)
                     self.delegate?.goToNextStep()
+                } else  {
+                    let otherAlertView = PTAlertViewController("Other Pet Type",
+                                                               textFieldLabelTitle: "Pet Type",
+                                                               okResult: { alert in
+                                                                    if let text = alert.textField.text {
+                                                                        self.pet!.type = PetType(type: Type.build(code: petTypeTitle.lowercased()), description: text)
+                                                                        self.delegate?.stepCompleted(completed: true, pet: self.pet!)
+                                                                        self.delegate?.goToNextStep()
+                                                                    }
+                                                                    alert.dismiss()
+                                                                },
+                                                               cancelResult: { alert in
+                                                                    alert.dismiss()
+                                                                })
+                    
+                    if let petType = self.pet!.type, petType.type == .other, let description = petType.description {
+                        otherAlertView.textField.text = description
+                    }
+                    self.present(otherAlertView, animated: false, completion: nil)
                 }
             }
             .disposed(by: disposeBag)
@@ -68,10 +87,6 @@ class PetTypeViewController: PetWizardStepViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    override func nextButtonVisible() -> Bool {
-        return self.pet!.type != nil
-    }
 }
 
 class PetTypeCollectionViewCell: UICollectionViewCell {
@@ -85,7 +100,7 @@ class PetTypeCollectionViewCell: UICollectionViewCell {
         let petImage = UIImage(named: petTypeTitle)
         petPhotoImageView.image = petImage
         petTypeTitleLabel.text = petTypeTitle
-        setSelectedStyle(selected)
+//        setSelectedStyle(selected)
     }
     
     func setSelectedStyle(_ selected: Bool) {

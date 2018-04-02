@@ -83,14 +83,21 @@ class PetWizardViewController: UIViewController {
             self.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "BackIcon"), style: .plain, target: self, action: #selector(backButtonTapped))
             self.navigationBar.topItem?.leftBarButtonItem?.tintColor = PTConstants.colors.darkGray
             
+            let title = "Cancel"
+            let action = #selector(cancelWizard)
             
-            let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelWizard))
-            cancelButton.setTitleTextAttributes([
+            let rightBarButtonItem = UIBarButtonItem(title: title, style: .plain, target: self, action: action)
+            
+//            if let currentChildViewController = currentChildViewController, let vcRightBarButtonItem = currentChildViewController.rightBarButtonItem {
+//                rightBarButtonItem = vcRightBarButtonItem
+//            }
+    
+            rightBarButtonItem.setTitleTextAttributes([
                 NSFontAttributeName : UIFont(name: "Montserrat-Regular", size: 14)!,
                 NSForegroundColorAttributeName : PTConstants.colors.newRed,
                 ], for: .normal)
       
-            self.navigationBar.topItem?.rightBarButtonItem = cancelButton
+            self.navigationBar.topItem?.rightBarButtonItem = rightBarButtonItem
             self.navigationBar.topItem?.rightBarButtonItem?.tintColor = PTConstants.colors.newRed
             
         } else {

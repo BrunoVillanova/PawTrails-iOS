@@ -19,6 +19,7 @@ class PetWizardStepViewController: UIViewController {
     var pet: Pet?
     var delegate:PetWizardStepViewControllerDelegate?
     var showNextButton = false
+    var rightBarButtonItem: UIBarButtonItem?
     
     func nextButtonVisible() -> Bool {
         return false

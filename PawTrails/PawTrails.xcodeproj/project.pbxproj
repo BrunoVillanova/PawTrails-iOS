@@ -9,13 +9,14 @@
 /* Begin PBXBuildFile section */
 		150741C5200DB4B800EB761B /* CocoaLumberjackSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 150741C3200DB4B700EB761B /* CocoaLumberjackSwift.framework */; };
 		150741C6200DB4B800EB761B /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 150741C4200DB4B700EB761B /* CocoaLumberjack.framework */; };
+		15160FEB20719448008CF9F4 /* PTAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15160FEA20719448008CF9F4 /* PTAlertViewController.swift */; };
 		1523D0AE20617EB7003D8653 /* TripInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1523D0AD20617EB7003D8653 /* TripInfoCollectionViewCell.swift */; };
 		1523D0B120629691003D8653 /* DemoTrips.json in Resources */ = {isa = PBXBuildFile; fileRef = 1523D0B020629691003D8653 /* DemoTrips.json */; };
 		1543F37F206ECBE90069EBEB /* PetNameAndPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1543F37E206ECBE90069EBEB /* PetNameAndPhotoViewController.swift */; };
 		1543F381206F07390069EBEB /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1543F380206F07380069EBEB /* Montserrat-Light.ttf */; };
 		1543F383206F1BCE0069EBEB /* PetTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1543F382206F1BCE0069EBEB /* PetTypeViewController.swift */; };
 		1543F387206FD0100069EBEB /* Hero.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1543F386206FD0100069EBEB /* Hero.framework */; };
-		1543F389206FF2210069EBEB /* PetBreedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1543F388206FF2210069EBEB /* PetBreedViewController.swift */; };
+		1543F389206FF2210069EBEB /* PetBreedSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1543F388206FF2210069EBEB /* PetBreedSelectViewController.swift */; };
 		1543F38B207016460069EBEB /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1543F38A207016450069EBEB /* Montserrat-Medium.ttf */; };
 		154C7D831FE36264003437FF /* FacebookLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 154C7D7F1FE36263003437FF /* FacebookLogin.framework */; };
 		154C7D841FE36264003437FF /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 154C7D801FE36263003437FF /* FBSDKLoginKit.framework */; };
@@ -274,13 +275,14 @@
 /* Begin PBXFileReference section */
 		150741C3200DB4B700EB761B /* CocoaLumberjackSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjackSwift.framework; path = Carthage/Build/iOS/CocoaLumberjackSwift.framework; sourceTree = "<group>"; };
 		150741C4200DB4B700EB761B /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjack.framework; path = Carthage/Build/iOS/CocoaLumberjack.framework; sourceTree = "<group>"; };
+		15160FEA20719448008CF9F4 /* PTAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTAlertViewController.swift; sourceTree = "<group>"; };
 		1523D0AD20617EB7003D8653 /* TripInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripInfoCollectionViewCell.swift; sourceTree = "<group>"; };
 		1523D0B020629691003D8653 /* DemoTrips.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DemoTrips.json; sourceTree = "<group>"; };
 		1543F37E206ECBE90069EBEB /* PetNameAndPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetNameAndPhotoViewController.swift; sourceTree = "<group>"; };
 		1543F380206F07380069EBEB /* Montserrat-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.ttf"; sourceTree = "<group>"; };
 		1543F382206F1BCE0069EBEB /* PetTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetTypeViewController.swift; sourceTree = "<group>"; };
 		1543F386206FD0100069EBEB /* Hero.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Hero.framework; path = Carthage/Build/iOS/Hero.framework; sourceTree = "<group>"; };
-		1543F388206FF2210069EBEB /* PetBreedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetBreedViewController.swift; sourceTree = "<group>"; };
+		1543F388206FF2210069EBEB /* PetBreedSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetBreedSelectViewController.swift; sourceTree = "<group>"; };
 		1543F38A207016450069EBEB /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
 		154C7D7B1FE35E51003437FF /* SocketIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SocketIO.framework; path = Carthage/Build/iOS/SocketIO.framework; sourceTree = "<group>"; };
 		154C7D7D1FE35E55003437FF /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/iOS/Starscream.framework; sourceTree = "<group>"; };
@@ -645,7 +647,7 @@
 				15E6E38B206C7EB400484EAF /* PetWizardStepViewController.swift */,
 				1543F37E206ECBE90069EBEB /* PetNameAndPhotoViewController.swift */,
 				1543F382206F1BCE0069EBEB /* PetTypeViewController.swift */,
-				1543F388206FF2210069EBEB /* PetBreedViewController.swift */,
+				1543F388206FF2210069EBEB /* PetBreedSelectViewController.swift */,
 			);
 			path = "Pet Wizard";
 			sourceTree = "<group>";
@@ -914,6 +916,7 @@
 				15C763BA2016D5C0002AA7F8 /* PrivacyViewController.swift */,
 				15C763BB2016D5C0002AA7F8 /* MainTabBarViewController.swift */,
 				15DCFEA0205C647A00DF726C /* LaunchViewController.swift */,
+				15160FEA20719448008CF9F4 /* PTAlertViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1724,6 +1727,7 @@
 				15C7627F2016D046002AA7F8 /* PetPresenter.swift in Sources */,
 				15C7641D2016D5C0002AA7F8 /* BCS3ViewController.swift in Sources */,
 				15C763ED2016D5C0002AA7F8 /* IconCell.swift in Sources */,
+				15160FEB20719448008CF9F4 /* PTAlertViewController.swift in Sources */,
 				15C7627B2016D046002AA7F8 /* DeviceCodePresenter.swift in Sources */,
 				15C763F62016D5C0002AA7F8 /* Utility.swift in Sources */,
 				15C763FA2016D5C0002AA7F8 /* AirbnbDatePickerCell.swift in Sources */,
@@ -1851,7 +1855,7 @@
 				1570C7AC203B63DF00A7F59F /* TripDetailViewController.swift in Sources */,
 				15C7624C2016D011002AA7F8 /* PTWideButton.swift in Sources */,
 				15C763F02016D5C0002AA7F8 /* AirbnbDatePickerMonthHeader.swift in Sources */,
-				1543F389206FF2210069EBEB /* PetBreedViewController.swift in Sources */,
+				1543F389206FF2210069EBEB /* PetBreedSelectViewController.swift in Sources */,
 				1543F37F206ECBE90069EBEB /* PetNameAndPhotoViewController.swift in Sources */,
 				15C7624A2016D011002AA7F8 /* PTMapView.swift in Sources */,
 				1599B22C2023F48A002D4025 /* PTDeviceStatusView.swift in Sources */,

@@ -538,31 +538,81 @@
                                         <color key="textColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VnO-mo-Qw9">
+                                        <rect key="frame" x="206" y="34" width="145" height="30"/>
+                                        <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="14"/>
+                                        <state key="normal" title="My pet is cross breed"/>
+                                        <connections>
+                                            <action selector="crossBreedButtonTapped:" destination="LBf-zs-uqK" eventType="touchUpInside" id="zNQ-UM-iDM"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="VnO-mo-Qw9" secondAttribute="trailing" constant="24" id="GSs-QI-V75"/>
                                     <constraint firstItem="ZWt-81-qWC" firstAttribute="leading" secondItem="sS6-G6-mVu" secondAttribute="leading" constant="24" id="c1I-Lz-mSG"/>
                                     <constraint firstItem="ZWt-81-qWC" firstAttribute="top" secondItem="sS6-G6-mVu" secondAttribute="top" constant="32" id="cdt-MQ-FJP"/>
                                     <constraint firstAttribute="height" constant="64" id="rTG-36-gfQ"/>
+                                    <constraint firstAttribute="bottom" secondItem="VnO-mo-Qw9" secondAttribute="bottom" id="x4Q-9q-kwZ"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2S6-0O-KTO" userLabel="Content View">
-                                <rect key="frame" x="16" y="64" width="343" height="603"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="saL-JD-gIc" userLabel="Search View">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bLi-Kv-GXH">
+                                                <rect key="frame" x="24" y="16" width="327" height="48"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="48" id="vLq-Ic-xGP"/>
+                                                </constraints>
+                                                <color key="textColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" smartDashesType="no" textContentType="name"/>
+                                            </textField>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="bLi-Kv-GXH" firstAttribute="leading" secondItem="saL-JD-gIc" secondAttribute="leading" constant="24" id="DwP-ne-Je8"/>
+                                            <constraint firstAttribute="trailing" secondItem="bLi-Kv-GXH" secondAttribute="trailing" constant="24" id="NpP-PG-IlY"/>
+                                            <constraint firstItem="bLi-Kv-GXH" firstAttribute="top" secondItem="saL-JD-gIc" secondAttribute="top" constant="16" id="WEX-4z-tSY"/>
+                                            <constraint firstAttribute="bottom" secondItem="bLi-Kv-GXH" secondAttribute="bottom" constant="16" id="aK5-1N-1gg"/>
+                                        </constraints>
+                                    </view>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UYW-kn-5OL">
+                                        <rect key="frame" x="0.0" y="80" width="375" height="523"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableView>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="UYW-kn-5OL" secondAttribute="bottom" id="0uM-0E-dut"/>
+                                    <constraint firstItem="UYW-kn-5OL" firstAttribute="leading" secondItem="2S6-0O-KTO" secondAttribute="leading" id="RPe-MD-tgE"/>
+                                    <constraint firstAttribute="trailing" secondItem="UYW-kn-5OL" secondAttribute="trailing" id="Wrs-qm-cc4"/>
+                                    <constraint firstItem="UYW-kn-5OL" firstAttribute="top" secondItem="saL-JD-gIc" secondAttribute="bottom" id="ad8-Vw-mri"/>
+                                    <constraint firstItem="saL-JD-gIc" firstAttribute="top" secondItem="2S6-0O-KTO" secondAttribute="top" id="lHG-aU-iJ3"/>
+                                    <constraint firstItem="saL-JD-gIc" firstAttribute="leading" secondItem="2S6-0O-KTO" secondAttribute="leading" id="qsb-XR-XPx"/>
+                                    <constraint firstAttribute="trailing" secondItem="saL-JD-gIc" secondAttribute="trailing" id="vJx-f7-OTj"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="sS6-G6-mVu" firstAttribute="leading" secondItem="bwy-HR-Tbg" secondAttribute="leading" id="4gj-eY-ffn"/>
-                            <constraint firstItem="2S6-0O-KTO" firstAttribute="leading" secondItem="bwy-HR-Tbg" secondAttribute="leadingMargin" id="63P-Wx-FoN"/>
+                            <constraint firstItem="2S6-0O-KTO" firstAttribute="leading" secondItem="bwy-HR-Tbg" secondAttribute="leading" id="63P-Wx-FoN"/>
                             <constraint firstAttribute="trailing" secondItem="sS6-G6-mVu" secondAttribute="trailing" id="ixo-MX-WNZ"/>
                             <constraint firstItem="b5k-pr-cKF" firstAttribute="bottom" secondItem="2S6-0O-KTO" secondAttribute="bottom" id="jvJ-lk-UBQ"/>
                             <constraint firstItem="2S6-0O-KTO" firstAttribute="top" secondItem="sS6-G6-mVu" secondAttribute="bottom" id="mW3-ny-DYt"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="2S6-0O-KTO" secondAttribute="trailing" id="qgJ-VX-BBL"/>
+                            <constraint firstAttribute="trailing" secondItem="2S6-0O-KTO" secondAttribute="trailing" id="qgJ-VX-BBL"/>
                             <constraint firstItem="sS6-G6-mVu" firstAttribute="top" secondItem="bwy-HR-Tbg" secondAttribute="top" id="yEn-hT-4NK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="b5k-pr-cKF"/>
                     </view>
+                    <connections>
+                        <outlet property="searchTextField" destination="bLi-Kv-GXH" id="789-hW-P4i"/>
+                        <outlet property="tableView" destination="UYW-kn-5OL" id="WxA-1D-0cE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Owi-pi-n1L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
