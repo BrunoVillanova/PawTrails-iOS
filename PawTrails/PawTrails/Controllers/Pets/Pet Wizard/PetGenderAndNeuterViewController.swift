@@ -115,7 +115,8 @@ class PTOtherButton : UIButton {
     
     override public var isHighlighted: Bool {
         didSet {
-            self.tintColor = .clear
+            updateView()
+           
         }
     }
     
@@ -142,12 +143,15 @@ class PTOtherButton : UIButton {
     }
     
     fileprivate func updateView() {
-        if (isSelected) {
+         self.tintColor = .clear
+        if (isSelected || isHighlighted) {
             self.border(color: selectedBorderColor, width: 0)
             self.backgroundColor = selectedBackgroundColor
+            self.imageView?.tintColor = normalBackgroundColor
         } else {
             self.border(color: normalBorderColor, width: borderWidth)
             self.backgroundColor = normalBackgroundColor
+            self.imageView?.tintColor = selectedBackgroundColor
         }
     }
 }

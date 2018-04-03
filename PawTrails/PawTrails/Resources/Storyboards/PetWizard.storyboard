@@ -540,9 +540,9 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VnO-mo-Qw9">
-                                        <rect key="frame" x="206" y="34" width="145" height="30"/>
+                                        <rect key="frame" x="195" y="34" width="156" height="30"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="14"/>
-                                        <state key="normal" title="My pet is cross breed"/>
+                                        <state key="normal" title="My pet is not in the list"/>
                                         <connections>
                                             <action selector="crossBreedButtonTapped:" destination="LBf-zs-uqK" eventType="touchUpInside" id="zNQ-UM-iDM"/>
                                         </connections>
@@ -707,106 +707,76 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="331.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q00-cc-5fx" userLabel="Container View">
-                                                <rect key="frame" x="57.5" y="76" width="260" height="180.5"/>
+                                                <rect key="frame" x="73.5" y="84" width="228" height="164.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Is your pet a male or female?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Gm-ou-A60">
-                                                        <rect key="frame" x="29" y="0.0" width="202" height="17.5"/>
+                                                        <rect key="frame" x="13" y="0.0" width="202" height="17.5"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                                         <color key="textColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mYS-v6-uXG" userLabel="Male View">
-                                                        <rect key="frame" x="0.0" y="41.5" width="114" height="139"/>
+                                                        <rect key="frame" x="0.0" y="41.5" width="98" height="123"/>
                                                         <subviews>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bPJ-xv-CJH" userLabel="Pet Photo View">
-                                                                <rect key="frame" x="8" y="8" width="98" height="98"/>
-                                                                <subviews>
-                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GenderMaleImage" translatesAutoresizingMaskIntoConstraints="NO" id="l2N-Lv-kzu">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="98" height="98"/>
-                                                                    </imageView>
-                                                                </subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qNc-1r-cyW" customClass="PTOtherButton" customModule="PawTrails" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="98" height="98"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="trailing" secondItem="l2N-Lv-kzu" secondAttribute="trailing" id="NrQ-fU-0uf"/>
-                                                                    <constraint firstAttribute="width" constant="98" id="eja-7p-nLu"/>
-                                                                    <constraint firstAttribute="width" secondItem="bPJ-xv-CJH" secondAttribute="height" multiplier="1:1" id="nNh-4j-rXo"/>
-                                                                    <constraint firstItem="l2N-Lv-kzu" firstAttribute="top" secondItem="bPJ-xv-CJH" secondAttribute="top" id="q45-gu-NN9"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="l2N-Lv-kzu" secondAttribute="bottom" id="udN-UJ-3cG"/>
-                                                                    <constraint firstItem="l2N-Lv-kzu" firstAttribute="leading" secondItem="bPJ-xv-CJH" secondAttribute="leading" id="v1x-nt-2Ke"/>
+                                                                    <constraint firstAttribute="width" secondItem="qNc-1r-cyW" secondAttribute="height" multiplier="1:1" id="FFn-Zx-7Le"/>
+                                                                    <constraint firstAttribute="width" constant="98" id="jW4-AR-kax"/>
                                                                 </constraints>
-                                                            </view>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Male" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zRD-5w-1uO">
-                                                                <rect key="frame" x="8" y="114" width="98" height="17.5"/>
-                                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
-                                                                <color key="textColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qNc-1r-cyW" customClass="PTCircularButton" customModule="PawTrails" customModuleProvider="target">
-                                                                <rect key="frame" x="8" y="8" width="98" height="98"/>
+                                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <state key="normal" image="MaleGenderIcon"/>
                                                                 <connections>
                                                                     <action selector="genderMaleButtonTapped:" destination="CSL-aZ-fFz" eventType="touchUpInside" id="8oW-gY-jWY"/>
                                                                 </connections>
                                                             </button>
-                                                        </subviews>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <constraints>
-                                                            <constraint firstItem="bPJ-xv-CJH" firstAttribute="leading" secondItem="mYS-v6-uXG" secondAttribute="leading" constant="8" id="7xK-JE-bQw"/>
-                                                            <constraint firstAttribute="bottom" secondItem="zRD-5w-1uO" secondAttribute="bottom" constant="8" id="ApS-Zn-NPO"/>
-                                                            <constraint firstItem="qNc-1r-cyW" firstAttribute="bottom" secondItem="bPJ-xv-CJH" secondAttribute="bottom" id="CGO-5N-T4p"/>
-                                                            <constraint firstItem="zRD-5w-1uO" firstAttribute="top" secondItem="bPJ-xv-CJH" secondAttribute="bottom" constant="8" id="L5D-k3-ddp"/>
-                                                            <constraint firstItem="bPJ-xv-CJH" firstAttribute="top" secondItem="mYS-v6-uXG" secondAttribute="top" constant="8" id="MhX-Y8-QwL"/>
-                                                            <constraint firstItem="zRD-5w-1uO" firstAttribute="leading" secondItem="bPJ-xv-CJH" secondAttribute="leading" id="Tfo-cD-cVW"/>
-                                                            <constraint firstItem="zRD-5w-1uO" firstAttribute="trailing" secondItem="bPJ-xv-CJH" secondAttribute="trailing" id="Ycx-oz-bjN"/>
-                                                            <constraint firstAttribute="trailing" secondItem="bPJ-xv-CJH" secondAttribute="trailing" constant="8" id="hRq-YE-fUa"/>
-                                                            <constraint firstItem="qNc-1r-cyW" firstAttribute="top" secondItem="bPJ-xv-CJH" secondAttribute="top" id="ulV-0A-yX2"/>
-                                                            <constraint firstItem="qNc-1r-cyW" firstAttribute="leading" secondItem="bPJ-xv-CJH" secondAttribute="leading" id="vT0-oU-Zqp"/>
-                                                            <constraint firstItem="qNc-1r-cyW" firstAttribute="trailing" secondItem="bPJ-xv-CJH" secondAttribute="trailing" id="zuK-Tf-ahE"/>
-                                                        </constraints>
-                                                    </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8EJ-nD-PNZ" userLabel="Female View">
-                                                        <rect key="frame" x="146" y="41.5" width="114" height="139"/>
-                                                        <subviews>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h64-ok-0Yg" userLabel="Pet Photo View">
-                                                                <rect key="frame" x="8" y="8" width="98" height="98"/>
-                                                                <subviews>
-                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GenderFemaleImage" translatesAutoresizingMaskIntoConstraints="NO" id="nqa-fU-6Ow">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="98" height="98"/>
-                                                                    </imageView>
-                                                                </subviews>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="98" id="0Bw-Pq-aDc"/>
-                                                                    <constraint firstItem="nqa-fU-6Ow" firstAttribute="leading" secondItem="h64-ok-0Yg" secondAttribute="leading" id="5J5-LQ-Xhx"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="nqa-fU-6Ow" secondAttribute="bottom" id="BaS-Op-g88"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="nqa-fU-6Ow" secondAttribute="trailing" id="fY8-S9-dYs"/>
-                                                                    <constraint firstAttribute="width" secondItem="h64-ok-0Yg" secondAttribute="height" multiplier="1:1" id="iBN-rJ-HJv"/>
-                                                                    <constraint firstItem="nqa-fU-6Ow" firstAttribute="top" secondItem="h64-ok-0Yg" secondAttribute="top" id="lV8-nC-DkQ"/>
-                                                                </constraints>
-                                                            </view>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Female" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8MH-jX-N8q">
-                                                                <rect key="frame" x="8" y="114" width="98" height="17.5"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Male" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zRD-5w-1uO">
+                                                                <rect key="frame" x="32" y="105.5" width="34" height="17.5"/>
                                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                                                 <color key="textColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1MC-pu-Dbs" customClass="PTCircularButton" customModule="PawTrails" customModuleProvider="target">
-                                                                <rect key="frame" x="8" y="8" width="98" height="98"/>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstItem="qNc-1r-cyW" firstAttribute="top" secondItem="mYS-v6-uXG" secondAttribute="top" id="9Bx-O6-s3L"/>
+                                                            <constraint firstAttribute="bottom" secondItem="zRD-5w-1uO" secondAttribute="bottom" id="ApS-Zn-NPO"/>
+                                                            <constraint firstItem="zRD-5w-1uO" firstAttribute="centerX" secondItem="mYS-v6-uXG" secondAttribute="centerX" id="GfH-vJ-8yh"/>
+                                                            <constraint firstItem="zRD-5w-1uO" firstAttribute="top" secondItem="qNc-1r-cyW" secondAttribute="bottom" constant="8" id="MVg-4v-Pfe"/>
+                                                            <constraint firstItem="qNc-1r-cyW" firstAttribute="leading" secondItem="mYS-v6-uXG" secondAttribute="leading" id="c74-mS-ep0"/>
+                                                            <constraint firstAttribute="trailing" secondItem="qNc-1r-cyW" secondAttribute="trailing" id="lpq-oU-6Mb"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8EJ-nD-PNZ" userLabel="Female View">
+                                                        <rect key="frame" x="130" y="41" width="98" height="123.5"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1MC-pu-Dbs" customClass="PTOtherButton" customModule="PawTrails" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="98" height="98"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="98" id="Akz-Iu-nEs"/>
+                                                                    <constraint firstAttribute="width" secondItem="1MC-pu-Dbs" secondAttribute="height" multiplier="1:1" id="inP-Fw-VE1"/>
+                                                                </constraints>
+                                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <state key="normal" image="FemaleGenderIcon"/>
                                                                 <connections>
                                                                     <action selector="genderFemaleButtonTapped:" destination="CSL-aZ-fFz" eventType="touchUpInside" id="UNh-Vd-Cqq"/>
                                                                 </connections>
                                                             </button>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Female" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8MH-jX-N8q">
+                                                                <rect key="frame" x="23" y="106" width="52.5" height="17.5"/>
+                                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
+                                                                <color key="textColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
                                                         </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstItem="h64-ok-0Yg" firstAttribute="leading" secondItem="8EJ-nD-PNZ" secondAttribute="leading" constant="8" id="8CT-8g-3RL"/>
-                                                            <constraint firstItem="8MH-jX-N8q" firstAttribute="top" secondItem="h64-ok-0Yg" secondAttribute="bottom" constant="8" id="C2L-88-DE7"/>
-                                                            <constraint firstItem="1MC-pu-Dbs" firstAttribute="bottom" secondItem="h64-ok-0Yg" secondAttribute="bottom" id="Jou-3i-gnU"/>
-                                                            <constraint firstItem="1MC-pu-Dbs" firstAttribute="trailing" secondItem="h64-ok-0Yg" secondAttribute="trailing" id="KaN-hr-QdN"/>
-                                                            <constraint firstItem="8MH-jX-N8q" firstAttribute="trailing" secondItem="h64-ok-0Yg" secondAttribute="trailing" id="LMH-Je-Sf0"/>
-                                                            <constraint firstItem="1MC-pu-Dbs" firstAttribute="leading" secondItem="h64-ok-0Yg" secondAttribute="leading" id="Q7r-1E-2aY"/>
-                                                            <constraint firstItem="1MC-pu-Dbs" firstAttribute="top" secondItem="h64-ok-0Yg" secondAttribute="top" id="UkV-kX-uoQ"/>
-                                                            <constraint firstAttribute="bottom" secondItem="8MH-jX-N8q" secondAttribute="bottom" constant="8" id="Y97-ia-taa"/>
-                                                            <constraint firstItem="8MH-jX-N8q" firstAttribute="leading" secondItem="h64-ok-0Yg" secondAttribute="leading" id="bND-ec-zdY"/>
-                                                            <constraint firstAttribute="trailing" secondItem="h64-ok-0Yg" secondAttribute="trailing" constant="8" id="mwe-LB-zIA"/>
-                                                            <constraint firstItem="h64-ok-0Yg" firstAttribute="top" secondItem="8EJ-nD-PNZ" secondAttribute="top" constant="8" id="sJT-wL-jWS"/>
+                                                            <constraint firstItem="1MC-pu-Dbs" firstAttribute="leading" secondItem="8EJ-nD-PNZ" secondAttribute="leading" id="31R-9V-vtO"/>
+                                                            <constraint firstAttribute="trailing" secondItem="1MC-pu-Dbs" secondAttribute="trailing" id="HIR-JQ-7zg"/>
+                                                            <constraint firstItem="1MC-pu-Dbs" firstAttribute="bottom" secondItem="8MH-jX-N8q" secondAttribute="top" constant="-8" id="QkP-TB-aPM"/>
+                                                            <constraint firstItem="1MC-pu-Dbs" firstAttribute="top" secondItem="8EJ-nD-PNZ" secondAttribute="top" id="Tia-qy-EaY"/>
+                                                            <constraint firstAttribute="bottom" secondItem="8MH-jX-N8q" secondAttribute="bottom" id="Y97-ia-taa"/>
+                                                            <constraint firstItem="8MH-jX-N8q" firstAttribute="centerX" secondItem="8EJ-nD-PNZ" secondAttribute="centerX" id="nRA-3M-xnh"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>
@@ -1326,8 +1296,8 @@
     </scenes>
     <resources>
         <image name="ConnectDevice" width="280" height="201"/>
-        <image name="GenderFemaleImage" width="96" height="96"/>
-        <image name="GenderMaleImage" width="96" height="96"/>
+        <image name="FemaleGenderIcon" width="32" height="45"/>
+        <image name="MaleGenderIcon" width="44" height="43"/>
         <image name="PhotoPlaceholder" width="98" height="98"/>
         <image name="PlacemarkIcon" width="48" height="60"/>
         <image name="RedCheckMarkIcon" width="18" height="19"/>
