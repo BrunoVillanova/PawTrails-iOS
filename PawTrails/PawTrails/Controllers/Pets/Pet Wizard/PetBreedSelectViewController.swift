@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 import Differentiator
+import Foundation
 
 class PetBreedSelectViewController: PetWizardStepViewController {
 
@@ -163,7 +164,7 @@ class PetBreedSelectViewController: PetWizardStepViewController {
                     var filteredSections = [PetBreedSection]()
                     
                     for breedSection in petBreedSections {
-                        let filteredItems = breedSection.items.filter ({ $0.name.contains(query) })
+                        let filteredItems = breedSection.items.filter ({ $0.name.hasPrefix(query) })
                         if filteredItems.count > 0 {
                             filteredSections.append(PetBreedSection(header: breedSection.header, items: filteredItems))
                         }
