@@ -29,7 +29,7 @@ class PetNameAndPhotoViewController: PetWizardStepViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let petName = self.pet?.name, petName.count > 0 {
+        if let petName = pet!.name, petName.count > 0 {
             self.delegate?.stepCompleted(completed: true, pet: self.pet!)
         } else  {
             self.delegate?.stepCompleted(completed: false, pet: self.pet!)
@@ -92,5 +92,102 @@ extension PetNameAndPhotoViewController: UIImagePickerControllerDelegate, UINavi
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
+    }
+}
+
+import SkyFloatingLabelTextField
+
+class PTNiceTextField: SkyFloatingLabelTextField {
+
+    var labelBackgroundLayer: CALayer?
+    let marginLeft:CGFloat = 12
+    let labelPadding:CGFloat = 8
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        borderStyle = .roundedRect
+        titleFont = UIFont(name: "Montserrat-Regular", size: 10)!
+        titleColor = .clear
+        selectedTitleColor = .white
+        lineHeight = 0
+        lineColor = .clear
+        selectedLineHeight = 0
+        selectedLineColor = .clear
+        titleFormatter = { $0 }
+    }
+    
+    override func titleLabelRectForBounds(_ bounds: CGRect, editing: Bool) -> CGRect {
+        let superRect = super.titleLabelRectForBounds(bounds, editing: editing)
+        let newRect = CGRect(x: superRect.origin.x+marginLeft+labelPadding, y: superRect.origin.y-(superRect.size.height/2.0),
+                             width: titleLabel.intrinsicContentSize.width, height: superRect.size.height)
+        return newRect
+    }
+
+    
+    override func editingChanged() {
+        super.editingChanged()
+//        if let labelBackgroundLayer = labelBackgroundLayer {
+//            if isTitleVisible() {
+//                titleLabel.layer.superlayer?.insertSublayer(labelBackgroundLayer, below: titleLabel.layer)
+//            } else {
+//                labelBackgroundLayer.removeFromSuperlayer()
+//            }
+//        }
+        
+        updateLayerForTitleLabel(titleLabel.frame)
+    }
+    
+    override open func editingRect(forBounds bounds: CGRect) -> CGRect {
+        let superRect = super.editingRect(forBounds: bounds)
+        let titleHeight = self.titleHeight()
+
+        let padding:CGFloat = 10
+        let rect = CGRect(
+            x: superRect.origin.x,
+            y: padding,
+            width: superRect.size.width,
+            height: superRect.size.height + titleHeight + selectedLineHeight - padding
+        )
+        return rect
+    }
+    
+    override open func placeholderRect(forBounds bounds: CGRect) -> CGRect {
+        let padding:CGFloat = 8
+        let rect = CGRect(
+            x: 8,
+            y: 0,
+            width: bounds.size.width,
+            height: bounds.size.height + titleHeight() + selectedLineHeight - padding
+        )
+        return rect
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        if labelBackgroundLayer == nil {
+            labelBackgroundLayer = CALayer()
+            labelBackgroundLayer!.backgroundColor = PTConstants.colors.lightBlue.cgColor
+            titleLabel.layer.masksToBounds = true
+        }
+        
+//        updateLayerForTitleLabel(titleLabel.frame)
+    }
+    
+    fileprivate func updateLayerForTitleLabel(_ newRect: CGRect) {
+        if let labelBackgroundLayer = labelBackgroundLayer {
+            let newRect2 = CGRect(x: newRect.origin.x-labelPadding, y: newRect.origin.y,
+                                  width: newRect.size.width+(2*labelPadding), height: newRect.size.height)
+            labelBackgroundLayer.frame = newRect2
+            labelBackgroundLayer.cornerRadius = labelBackgroundLayer.frame.size.height/2.0
+            
+            let isVisible = isTitleVisible()
+            
+            if isVisible {
+                titleLabel.layer.superlayer?.insertSublayer(labelBackgroundLayer, below: titleLabel.layer)
+            } else {
+                labelBackgroundLayer.removeFromSuperlayer()
+            }
+        }
     }
 }

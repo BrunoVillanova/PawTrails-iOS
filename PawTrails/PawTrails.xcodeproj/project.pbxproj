@@ -12,6 +12,7 @@
 		15160FEB20719448008CF9F4 /* PTAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15160FEA20719448008CF9F4 /* PTAlertViewController.swift */; };
 		15160FED20723037008CF9F4 /* PetGenderAndNeuterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15160FEC20723037008CF9F4 /* PetGenderAndNeuterViewController.swift */; };
 		15160FEF207279AE008CF9F4 /* PetBirthdayAndWeightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15160FEE207279AE008CF9F4 /* PetBirthdayAndWeightViewController.swift */; };
+		15160FF120728E94008CF9F4 /* PetWizardFinalStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15160FF020728E94008CF9F4 /* PetWizardFinalStepViewController.swift */; };
 		1523D0AE20617EB7003D8653 /* TripInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1523D0AD20617EB7003D8653 /* TripInfoCollectionViewCell.swift */; };
 		1523D0B120629691003D8653 /* DemoTrips.json in Resources */ = {isa = PBXBuildFile; fileRef = 1523D0B020629691003D8653 /* DemoTrips.json */; };
 		1543F37F206ECBE90069EBEB /* PetNameAndPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1543F37E206ECBE90069EBEB /* PetNameAndPhotoViewController.swift */; };
@@ -282,6 +283,7 @@
 		15160FEA20719448008CF9F4 /* PTAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTAlertViewController.swift; sourceTree = "<group>"; };
 		15160FEC20723037008CF9F4 /* PetGenderAndNeuterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetGenderAndNeuterViewController.swift; sourceTree = "<group>"; };
 		15160FEE207279AE008CF9F4 /* PetBirthdayAndWeightViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetBirthdayAndWeightViewController.swift; sourceTree = "<group>"; };
+		15160FF020728E94008CF9F4 /* PetWizardFinalStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetWizardFinalStepViewController.swift; sourceTree = "<group>"; };
 		1523D0AD20617EB7003D8653 /* TripInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripInfoCollectionViewCell.swift; sourceTree = "<group>"; };
 		1523D0B020629691003D8653 /* DemoTrips.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DemoTrips.json; sourceTree = "<group>"; };
 		1543F37E206ECBE90069EBEB /* PetNameAndPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetNameAndPhotoViewController.swift; sourceTree = "<group>"; };
@@ -658,6 +660,7 @@
 				1543F388206FF2210069EBEB /* PetBreedSelectViewController.swift */,
 				15160FEC20723037008CF9F4 /* PetGenderAndNeuterViewController.swift */,
 				15160FEE207279AE008CF9F4 /* PetBirthdayAndWeightViewController.swift */,
+				15160FF020728E94008CF9F4 /* PetWizardFinalStepViewController.swift */,
 			);
 			path = "Pet Wizard";
 			sourceTree = "<group>";
@@ -1803,6 +1806,7 @@
 				15C763E92016D5C0002AA7F8 /* Date.swift in Sources */,
 				15C762B42016D06B002AA7F8 /* Errors.swift in Sources */,
 				15C762B32016D06B002AA7F8 /* Reachability.swift in Sources */,
+				15160FF120728E94008CF9F4 /* PetWizardFinalStepViewController.swift in Sources */,
 				15C763F52016D5C0002AA7F8 /* AirbnbDatePickerViewController.swift in Sources */,
 				15C761592016CFF3002AA7F8 /* CDPet+CoreDataProperties.swift in Sources */,
 				15C763FE2016D5C0002AA7F8 /* TripScreenViewController.swift in Sources */,

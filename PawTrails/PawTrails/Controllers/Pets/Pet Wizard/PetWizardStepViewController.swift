@@ -12,6 +12,8 @@ protocol PetWizardStepViewControllerDelegate {
     func stepCompleted(completed: Bool, pet: Pet)
     func stepCanceled(pet: Pet)
     func goToNextStep()
+    func getPet() -> Pet?
+    func updatePet(_ pet: Pet?)
 }
 
 class PetWizardStepViewController: UIViewController {

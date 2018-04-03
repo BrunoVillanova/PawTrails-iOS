@@ -30,19 +30,21 @@ class PetTypeViewController: PetWizardStepViewController {
                 let cell = self.collectionView.cellForItem(at: indexPath) as! PetTypeCollectionViewCell
                 cell.isSelected = false
                 cell.selectCell()
-                if petTypeTitle.lowercased() != "other" {
+                if petTypeTitle.lowercased() == "dog" || petTypeTitle.lowercased() == "cat" {
                     let petType = PetType(type: Type.build(code: petTypeTitle.lowercased()), description: petTypeTitle)
                     self.pet!.type = petType
+                    self.delegate?.updatePet(self.pet)
                     self.delegate?.stepCompleted(completed: true, pet: self.pet!)
                     self.delegate?.goToNextStep()
-                } else  {
+                } else if petTypeTitle.lowercased() == "other"  {
                     let otherAlertView = PTAlertViewController("Other Pet Type",
                                                                textFieldLabelTitle: "Pet Type",
                                                                okResult: { alert in
                                                                     if let text = alert.textField.text {
                                                                         self.pet!.type = PetType(type: Type.build(code: petTypeTitle.lowercased()), description: text)
-                                                                        self.delegate?.stepCompleted(completed: true, pet: self.pet!)
-                                                                        self.delegate?.goToNextStep()
+//                                                                        self.delegate?.stepCompleted(completed: true, pet: self.pet!)
+//                                                                        self.delegate?.goToNextStep()
+                                                                        self.showMessage("Sorry, but your device is not compatible with this pet type.", type: .warning)
                                                                     }
                                                                     alert.dismiss()
                                                                 },
@@ -54,6 +56,8 @@ class PetTypeViewController: PetWizardStepViewController {
                         otherAlertView.textField.text = description
                     }
                     self.present(otherAlertView, animated: false, completion: nil)
+                } else {
+                    self.showMessage("Sorry, but your device is not compatible with this pet type.", type: .warning)
                 }
             }
             .disposed(by: disposeBag)
@@ -86,6 +90,11 @@ class PetTypeCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var petPhotoImageView: UIImageView!
     @IBOutlet weak var petTypeTitleLabel: UILabel!
     @IBOutlet weak var mainView: UIView!
+    
+    override func prepareForReuse() {
+        self.petPhotoImageView.alpha = 1
+        self.petTypeTitleLabel.alpha = 1
+    }
     
     func configure(_ petTypeTitle: String, selected: Bool) {
         mainView.layer.cornerRadius = 10

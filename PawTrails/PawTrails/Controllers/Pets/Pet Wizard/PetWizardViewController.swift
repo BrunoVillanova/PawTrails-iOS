@@ -22,24 +22,21 @@ class PetWizardViewController: UIViewController {
     @IBOutlet weak var footerViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var nextButton: UIButton!
     
-    final let steps = ["connectDevice", "nameAndPhoto", "type", "breed", "genderAndNeuter", "birthdayAndWeight"]
+    final let steps = ["connectDevice", "nameAndPhoto", "type", "breed", "genderAndNeuter", "birthdayAndWeight", "final"]
     
     var stepsViewControllers = [PetWizardStepViewController]()
-    var currentStepIndex: Int = 0 {
-        didSet {
-            self.goToStep(currentStepIndex)
-        }
-    }
+    var currentStepIndex: Int = 0
     var currentChildViewController: PetWizardStepViewController?
     var pet: Pet?
-    var showNextButton: Bool = false {
-        didSet {
-            if showNextButton != oldValue {
-                let newHeight: CGFloat = showNextButton ? 48 : 0
-                footerViewHeightConstraint.constant = newHeight
-            }
-        }
-    }
+    var showNextButton: Bool = false
+//    {
+//        didSet {
+//            if showNextButton != oldValue {
+//                let newHeight: CGFloat = showNextButton ? 48 : 0
+//                footerViewHeightConstraint.constant = newHeight
+//            }
+//        }
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,13 +70,18 @@ class PetWizardViewController: UIViewController {
     
     fileprivate func updateUI() {
         
-        if let currentChildViewController = currentChildViewController {
-            self.showNextButton = currentChildViewController.nextButtonVisible()
+//        if let currentChildViewController = currentChildViewController {
+//            self.showNextButton = currentChildViewController.nextButtonVisible()
+//        }
+        guard currentChildViewController != nil else {
+            return
         }
         
-        stepIndicatorLabel.text = "Step \(currentStepIndex+1) - \(steps.count)"
+        let index = stepsViewControllers.index(of: currentChildViewController!)!
         
-        if currentStepIndex > 0 {
+        stepIndicatorLabel.text = "Step \(index+1) - \(steps.count)"
+        
+        if currentChildViewController != stepsViewControllers.first {
             self.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "BackIcon"), style: .plain, target: self, action: #selector(backButtonTapped))
             self.navigationBar.topItem?.leftBarButtonItem?.tintColor = PTConstants.colors.darkGray
             
@@ -112,12 +114,17 @@ class PetWizardViewController: UIViewController {
     }
     
     func backButtonTapped() {
-        self.currentStepIndex = self.currentStepIndex - 1
+        self.goToStep(currentStepIndex-1)
     }
     
     fileprivate func goToStep(_ index: Int) {
         
         if steps.count > index, let storyboard = self.storyboard {
+            
+            if index == steps.count-1, let pet = self.pet, pet.id <= 0 {
+                registerPet()
+                return
+            }
             
             var viewController: PetWizardStepViewController?
             
@@ -136,15 +143,47 @@ class PetWizardViewController: UIViewController {
             } else {
                 cycleViewControllers(currentViewController: currentChildViewController!, nextViewController: viewController!)
             }
-            
-            
+            currentStepIndex = index
+        }
+    }
+    
+    fileprivate func registerPet() {
+        if let pet = self.pet {
+            self.showLoadingView()
+            DataManager.instance.register(pet, callback: { (error, pet) in
+                self.hideLoadingView()
+                if let error = error {
+                    self.showMessage(error.msg.msg, type: .error)
+                } else {
+                    self.pet = pet
+                    self.uploadPetImageIfNeeded()
+                }
+            })
+        }
+    }
+    
+    fileprivate func uploadPetImageIfNeeded() {
+        if let pet = self.pet, let petImageData = pet.image {
+            self.showLoadingView()
+            DataManager.instance.savePet(image: petImageData, into: pet.id, callback: { (error) in
+                self.hideLoadingView()
+                self.goToStep(self.currentStepIndex)
+                if let error = error {
+                    self.showMessage(error.msg.msg, type: .error)
+                } else {
+                    self.uploadPetImageIfNeeded()
+                }
+            })
+        } else {
+            self.goToStep(self.currentStepIndex)
         }
     }
     
     fileprivate func cycleViewControllers(currentViewController: PetWizardStepViewController, nextViewController: PetWizardStepViewController) {
         
+        currentViewController.hero.isEnabled = false
         currentViewController.view.hero.id = "step"
-        nextViewController.view.hero.modifiers = [.source(heroID: "step"), .fade, .scale(0.5)]
+        nextViewController.view.hero.modifiers = [.translate(x: -100.0), .scale(0.5)]
         nextViewController.view.hero.id = "step"
         nextViewController.hero.isEnabled = true
         
@@ -157,14 +196,34 @@ class PetWizardViewController: UIViewController {
         nextViewController.view.frame = contentView.bounds
         nextViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
-        self.transition(from: currentViewController, to: nextViewController, duration: 0.5, options: [], animations: {
+        if !nextViewController.nextButtonVisible()  {
+            self.footerViewHeightConstraint.constant = 0
+
+            UIView.animate(withDuration: 0.1) {
+                self.view.layoutIfNeeded()
+            }
+        }
+        
+        self.currentChildViewController = nextViewController
+        
+        self.transition(from: currentViewController, to: nextViewController, duration: 0.2, options: .layoutSubviews, animations: {
             currentViewController.view.alpha = 0
             nextViewController.view.alpha = 1
-        }) { (finished) in
-            currentViewController.removeFromParentViewController()
-            nextViewController.didMove(toParentViewController: self)
-            self.currentChildViewController = nextViewController
             self.updateUI()
+        }) { (finished) in
+            
+            if finished {
+                currentViewController.removeFromParentViewController()
+                nextViewController.didMove(toParentViewController: self)
+                
+                if nextViewController.nextButtonVisible()  {
+                    self.footerViewHeightConstraint.constant = 48
+
+                    UIView.animate(withDuration: 0.1) {
+                        self.view.layoutIfNeeded()
+                    }
+                }
+            }
         }
     }
     
@@ -206,7 +265,7 @@ class PetWizardViewController: UIViewController {
     }
     
     @IBAction func nextButtonTapped(_ sender: Any) {
-        self.currentStepIndex = self.currentStepIndex + 1
+        self.goToStep(currentStepIndex+1)
     }
 }
 
@@ -222,6 +281,14 @@ extension PetWizardViewController: PetWizardStepViewControllerDelegate {
     }
     
     func goToNextStep() {
-        self.currentStepIndex = self.currentStepIndex + 1
+        self.goToStep(currentStepIndex+1)
+    }
+    
+    func getPet() -> Pet? {
+        return self.pet
+    }
+    
+    func updatePet(_ pet: Pet?) {
+        self.pet = pet
     }
 }

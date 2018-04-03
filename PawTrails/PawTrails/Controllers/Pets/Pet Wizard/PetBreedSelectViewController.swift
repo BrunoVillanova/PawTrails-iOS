@@ -53,7 +53,7 @@ class PetBreedSelectViewController: PetWizardStepViewController {
     }
     
     fileprivate func retrieveBreeds() {
-        if let petType = self.pet!.type, let type = petType.type {
+        if let pet = self.delegate?.getPet(), let petType = pet.type, let type = petType.type {
             DataManager.instance.breeds(for: type)
                 .map({ (breeds) -> [PetBreedSection] in
                     var sections = [PetBreedSection]()
@@ -110,7 +110,8 @@ class PetBreedSelectViewController: PetWizardStepViewController {
                                                    textFieldLabelTitle: "Type in your pet’s breed",
                                                    okResult: { alert in
                                                     if let text = alert.textField.text {
-                                                        self.pet!.breeds = PetBreeds(first: nil, second: nil, text)
+                                                        self.pet?.breeds = PetBreeds(first: nil, second: nil, text)
+                                                        self.delegate?.updatePet(self.pet)
                                                         self.delegate?.stepCompleted(completed: true, pet: self.pet!)
                                                         self.delegate?.goToNextStep()
                                                     }
