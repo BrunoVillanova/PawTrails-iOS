@@ -17,7 +17,6 @@ class PetGenderAndNeuterViewController: PetWizardStepViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initialize()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -32,18 +31,6 @@ class PetGenderAndNeuterViewController: PetWizardStepViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-
-    fileprivate func initialize() {
-        configureLayout()
-    }
-
-    fileprivate func configureLayout() {
-        let buttons = [neuteredYesButton, neuteredNoButton]
-    
-        for button in buttons {
-            button?.layer.cornerRadius = (button?.frame.size.height)!/2.0
-        }
     }
     
     fileprivate func validate() {
@@ -109,3 +96,59 @@ class PTCircularButton : UIButton {
         self.circle()
     }
 }
+
+class PTOtherButton : UIButton {
+    
+    final let borderWidth:CGFloat = 2.0
+    var normalBackgroundColor:UIColor = .white
+    var selectedBackgroundColor:UIColor = PTConstants.colors.newRed
+    var normalBorderColor:UIColor = PTConstants.colors.newRed
+    var selectedBorderColor:UIColor = .clear
+    var normalTitleColor:UIColor = PTConstants.colors.newRed
+    var selectedTitleColor:UIColor = .white
+    
+    override var isSelected: Bool {
+        didSet {
+            updateView()
+        }
+    }
+    
+    override public var isHighlighted: Bool {
+        didSet {
+            self.tintColor = .clear
+        }
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setupView()
+    }
+    
+    fileprivate func setupView() {
+        titleLabel?.font = UIFont(name: "Montserrat-Regular", size: 14)
+        setTitleColor(normalTitleColor, for: .normal)
+        setTitleColor(selectedTitleColor, for: .selected)
+        updateView()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.circle()
+    }
+    
+    override func prepareForInterfaceBuilder() {
+        print("prepareForInterfaceBuilder()")
+        setupView()
+    }
+    
+    fileprivate func updateView() {
+        if (isSelected) {
+            self.border(color: selectedBorderColor, width: 0)
+            self.backgroundColor = selectedBackgroundColor
+        } else {
+            self.border(color: normalBorderColor, width: borderWidth)
+            self.backgroundColor = normalBackgroundColor
+        }
+    }
+}
+
