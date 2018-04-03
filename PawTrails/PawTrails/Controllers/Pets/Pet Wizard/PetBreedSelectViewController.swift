@@ -115,21 +115,66 @@ class PetBreedSelectViewController: PetWizardStepViewController {
                                                 if result == .cancel {
                                                     alert.dismiss()
                                                 } else {
-                                                    if let text = alert.textField?.text {
-                                                        self.pet?.breeds = PetBreeds(first: nil, second: nil, text)
-                                                        self.delegate?.updatePet(self.pet)
-                                                        self.delegate?.stepCompleted(completed: true, pet: self.pet!)
-                                                        self.delegate?.goToNextStep()
-                                                    }
-                                                    alert.dismiss()
+                                                    alert.dismiss(animated: true, completion: {
+                                                        if let text = alert.textField?.text {
+                                                            self.pet?.breeds = PetBreeds(first: nil, second: nil, text)
+                                                            self.delegate?.updatePet(self.pet)
+                                                            self.showPetSizeInputAlert()
+                                                            //                                                        self.delegate?.stepCompleted(completed: true, pet: self.pet!)
+                                                            //                                                        self.delegate?.goToNextStep()
+                                                        }
+                                                    })
                                                     
                                                 }
         })
         if let petBreed = self.pet?.breeds, let description = petBreed.description {
             alertView.textFieldText = description
         }
-        self.present(alertView, animated: false, completion: nil)
+        self.present(alertView, animated: true, completion: nil)
     }
+    
+    fileprivate func showPetSizeInputAlert() {
+        
+        let title = "Size of pet"
+        let infoText = "Looks like we are not sure about the size of your pet, please select the size then"
+        let textFieldTitle = "Size of your pet"
+        
+        let alertView = PTAlertViewController(title, infoText: infoText, textFieldLabelTitle: textFieldTitle,
+                                              titleBarStyle: .green, alertResult: {alert, result in
+                                                alert.dismiss()
+                                                if result == .ok && self.pet!.size != nil {
+                                                    self.delegate?.updatePet(self.pet!)
+                                                    self.delegate?.stepCompleted(completed: true, pet: self.pet!)
+                                                    self.delegate?.goToNextStep()
+                                                }
+        })
+        
+        
+        // PickerView
+        
+        let petSizePickerView = UIPickerView(frame: .zero)
+        
+        Observable.just([PetSize.small, PetSize.medium, PetSize.large])
+            .bind(to: petSizePickerView.rx.itemTitles) { _, item in
+                return item.description
+            }
+            .disposed(by: disposeBag)
+        
+        
+        petSizePickerView.rx.modelSelected(PetSize.self)
+            .subscribe(onNext: { models in
+                if let selectedPetSize = models.first, let textField = alertView.textField {
+                    textField.text = selectedPetSize.title
+                    self.pet!.size = selectedPetSize
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        alertView.textFieldInputView = petSizePickerView
+    
+        self.present(alertView, animated: true, completion: nil)
+    }
+    
     
     func configureTableDataSource() {
         

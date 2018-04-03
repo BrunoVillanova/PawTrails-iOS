@@ -58,7 +58,12 @@ class PTAlertViewController: UIViewController {
     var titleBarStyle = AlertTitleBarStyle.green
     var infoText: String?
     var textFieldLabelTitle: String?
-    var textFieldText: String?
+    var textFieldText: String? {
+        didSet {
+            textField?.text = textFieldText
+        }
+    }
+    var textFieldInputView: UIView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -180,7 +185,7 @@ class PTAlertViewController: UIViewController {
         self.view.addSubview(alertView)
         
         alertView.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().offset(120)
+            make.top.equalToSuperview().offset(self.view.frame.size.height/4.0)
             make.centerX.equalToSuperview()
         }
         // Alert View
@@ -278,6 +283,7 @@ class PTAlertViewController: UIViewController {
             textField!.tintColor = PTConstants.colors.darkGray
             textField!.placeholder = textFieldLabelTitle
             textField!.text = textFieldText
+            textField!.inputView = textFieldInputView
             
             contentView.addSubview(textField!)
             
