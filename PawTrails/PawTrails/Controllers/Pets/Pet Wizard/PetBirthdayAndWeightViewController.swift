@@ -15,6 +15,8 @@ class PetBirthdayAndWeightViewController: PetWizardStepViewController {
 
     @IBOutlet weak var birthdayTextField: UITextField!
     @IBOutlet weak var weightSliderContainerView: UIView!
+    @IBOutlet weak var poundLabel : UILabel!
+    @IBOutlet weak var weightLabel : UILabel!
     
     let birthdayDatePicker = UIDatePicker()
     final let disposeBag = DisposeBag()
@@ -70,6 +72,10 @@ class PetBirthdayAndWeightViewController: PetWizardStepViewController {
 
 extension PetBirthdayAndWeightViewController: SliderDelegate {
     func sliderDidScroll(value: Double) {
+        
+        weightLabel.text = " ~\(value.rounded(toPlaces: 2)) Kg"
+        poundLabel.text = " \(PTUnitConversion.KgToLBS(weight: value).shortValue) lbs"
+        
         self.pet!.size = PetSize.medium
         self.pet!.weight = value
         self.validate()

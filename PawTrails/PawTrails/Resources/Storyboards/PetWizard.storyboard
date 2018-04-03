@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -96,7 +96,7 @@
                                                 <fragment content="NEXT">
                                                     <attributes>
                                                         <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <font key="NSFont" size="16" name="Montserrat-Regular"/>
+                                                        <font key="NSFont" metaFont="system" size="16"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                     </attributes>
                                                 </fragment>
@@ -198,7 +198,7 @@
                                         <rect key="frame" x="0.0" y="249" width="343" height="196"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connect your pet with the PawTrails app by scanning the QR code on the back of your device" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gwp-Xg-iT0">
-                                                <rect key="frame" x="41.5" y="72.5" width="260.5" height="51.5"/>
+                                                <rect key="frame" x="42" y="72.5" width="260.5" height="51.5"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                                 <color key="textColor" red="0.25490196078431371" green="0.28235294117647058" blue="0.32156862745098036" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -237,7 +237,7 @@
                                                 <fragment content="SCAN QR CODE">
                                                     <attributes>
                                                         <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <font key="NSFont" size="16" name="Montserrat-Regular"/>
+                                                        <font key="NSFont" metaFont="system" size="16"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                     </attributes>
                                                 </fragment>
@@ -248,7 +248,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5gj-1z-aYW" userLabel="See It Later Button">
-                                        <rect key="frame" x="137" y="88" width="69" height="12"/>
+                                        <rect key="frame" x="140" y="88" width="63" height="12"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="12" id="i8V-fZ-myT"/>
                                         </constraints>
@@ -257,7 +257,7 @@
                                                 <fragment content="Do it later">
                                                     <attributes>
                                                         <color key="NSColor" red="0.2627450980392157" green="0.50196078431372548" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <font key="NSFont" size="14" name="Montserrat-Regular"/>
+                                                        <font key="NSFont" metaFont="system" size="14"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                     </attributes>
                                                 </fragment>
@@ -741,7 +741,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qNc-1r-cyW" customClass="PTCircularButton" customModule="PawTrails" customModuleProvider="target">
-                                                                <rect key="frame" x="-0.5" y="-0.5" width="114" height="114"/>
+                                                                <rect key="frame" x="8" y="8" width="98" height="98"/>
                                                                 <connections>
                                                                     <action selector="genderMaleButtonTapped:" destination="CSL-aZ-fFz" eventType="touchUpInside" id="8oW-gY-jWY"/>
                                                                 </connections>
@@ -788,7 +788,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1MC-pu-Dbs" customClass="PTCircularButton" customModule="PawTrails" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="114" height="114"/>
+                                                                <rect key="frame" x="8" y="8" width="98" height="98"/>
                                                                 <connections>
                                                                     <action selector="genderFemaleButtonTapped:" destination="CSL-aZ-fFz" eventType="touchUpInside" id="UNh-Vd-Cqq"/>
                                                                 </connections>
@@ -1009,7 +1009,7 @@
                                         <rect key="frame" x="0.0" y="137.5" width="375" height="465.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fjK-oS-xwt" userLabel="Container View">
-                                                <rect key="frame" x="0.0" y="99.5" width="375" height="267"/>
+                                                <rect key="frame" x="0.0" y="99" width="375" height="268"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How Much Does Your Pet Weight?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dkG-Do-mmT">
                                                         <rect key="frame" x="66.5" y="0.0" width="242" height="17.5"/>
@@ -1017,22 +1017,22 @@
                                                         <color key="textColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24 lbs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XnU-1y-f2K" userLabel="Lbs Label">
-                                                        <rect key="frame" x="85" y="41.5" width="206.5" height="88"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 lbs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XnU-1y-f2K" userLabel="Lbs Label">
+                                                        <rect key="frame" x="103.5" y="25.5" width="168" height="88"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="72"/>
                                                         <color key="textColor" red="0.98039215690000003" green="0.25490196079999999" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="~10.88 kg" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XJq-aU-i2g" userLabel="Kg Label">
-                                                        <rect key="frame" x="156" y="133.5" width="63" height="17.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="~0 kg" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XJq-aU-i2g" userLabel="Kg Label">
+                                                        <rect key="frame" x="131" y="111" width="113" height="18"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="14"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2UU-9L-KT1" userLabel="Slider Container View">
-                                                        <rect key="frame" x="0.0" y="167" width="375" height="100"/>
+                                                        <rect key="frame" x="0.0" y="189" width="375" height="79"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="100" id="Jtk-hv-pXB"/>
+                                                            <constraint firstAttribute="height" constant="79" id="Jtk-hv-pXB"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>
@@ -1040,11 +1040,11 @@
                                                     <constraint firstAttribute="bottom" secondItem="2UU-9L-KT1" secondAttribute="bottom" id="FSD-tk-Kui"/>
                                                     <constraint firstAttribute="trailing" secondItem="2UU-9L-KT1" secondAttribute="trailing" id="M32-9R-7SH"/>
                                                     <constraint firstItem="XJq-aU-i2g" firstAttribute="centerX" secondItem="fjK-oS-xwt" secondAttribute="centerX" id="Mt1-t7-nOA"/>
-                                                    <constraint firstItem="XJq-aU-i2g" firstAttribute="bottom" secondItem="2UU-9L-KT1" secondAttribute="top" constant="-16" id="SWQ-xU-uk7"/>
+                                                    <constraint firstItem="XJq-aU-i2g" firstAttribute="bottom" secondItem="2UU-9L-KT1" secondAttribute="top" constant="-60" id="SWQ-xU-uk7"/>
                                                     <constraint firstItem="2UU-9L-KT1" firstAttribute="leading" secondItem="fjK-oS-xwt" secondAttribute="leading" id="Tm1-Mm-y03"/>
                                                     <constraint firstItem="dkG-Do-mmT" firstAttribute="centerX" secondItem="fjK-oS-xwt" secondAttribute="centerX" id="YhI-he-bVq"/>
-                                                    <constraint firstItem="XnU-1y-f2K" firstAttribute="top" secondItem="dkG-Do-mmT" secondAttribute="bottom" constant="24" id="e0Q-Hh-c3s"/>
-                                                    <constraint firstItem="XnU-1y-f2K" firstAttribute="bottom" secondItem="XJq-aU-i2g" secondAttribute="top" constant="-4" id="idb-66-RS7"/>
+                                                    <constraint firstItem="XnU-1y-f2K" firstAttribute="top" secondItem="dkG-Do-mmT" secondAttribute="bottom" constant="8" id="e0Q-Hh-c3s"/>
+                                                    <constraint firstItem="XnU-1y-f2K" firstAttribute="bottom" secondItem="XJq-aU-i2g" secondAttribute="top" constant="3" id="idb-66-RS7"/>
                                                     <constraint firstItem="XnU-1y-f2K" firstAttribute="centerX" secondItem="fjK-oS-xwt" secondAttribute="centerX" id="kle-uY-PBX"/>
                                                     <constraint firstItem="dkG-Do-mmT" firstAttribute="top" secondItem="fjK-oS-xwt" secondAttribute="top" id="ub3-V2-h2P"/>
                                                 </constraints>
@@ -1083,12 +1083,14 @@
                     </view>
                     <connections>
                         <outlet property="birthdayTextField" destination="u3X-Dy-ctd" id="Cet-kH-wyg"/>
+                        <outlet property="poundLabel" destination="XnU-1y-f2K" id="3xf-Vo-bom"/>
+                        <outlet property="weightLabel" destination="XJq-aU-i2g" id="6dd-mc-fTU"/>
                         <outlet property="weightSliderContainerView" destination="2UU-9L-KT1" id="A1Z-KC-quk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CtB-RT-8JU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3295" y="51"/>
+            <point key="canvasLocation" x="3293.5" y="50.5"/>
         </scene>
         <!--Pet Final Step View Controller-->
         <scene sceneID="rg7-yX-3hh">

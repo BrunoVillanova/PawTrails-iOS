@@ -250,6 +250,7 @@
 		4452EEF61ED5DD41004E13DC /* APIAuthenticationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4452EEF51ED5DD41004E13DC /* APIAuthenticationTests.swift */; };
 		446231401EE6BE4200B53C1D /* DataManagerPetSharingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4462313F1EE6BE4200B53C1D /* DataManagerPetSharingTests.swift */; };
 		447AF46D2021E22C0050F885 /* AllowedCharsTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447AF46C2021E22C0050F885 /* AllowedCharsTextField.swift */; };
+		447BF2AB20737A7200C11D8E /* PTUnitConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447BF2AA20737A7200C11D8E /* PTUnitConversion.swift */; };
 		448BE9681ED47F5C00665608 /* APIUserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448BE9671ED47F5C00665608 /* APIUserTest.swift */; };
 		448BE96A1ED490D900665608 /* APIImageUploadTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448BE9691ED490D900665608 /* APIImageUploadTest.swift */; };
 		44B3B111206E436300FBF8CC /* PTButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B3B110206E436300FBF8CC /* PTButton.swift */; };
@@ -543,6 +544,7 @@
 		4452EEF51ED5DD41004E13DC /* APIAuthenticationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIAuthenticationTests.swift; sourceTree = "<group>"; };
 		4462313F1EE6BE4200B53C1D /* DataManagerPetSharingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerPetSharingTests.swift; sourceTree = "<group>"; };
 		447AF46C2021E22C0050F885 /* AllowedCharsTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllowedCharsTextField.swift; sourceTree = "<group>"; };
+		447BF2AA20737A7200C11D8E /* PTUnitConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTUnitConversion.swift; sourceTree = "<group>"; };
 		448BE9671ED47F5C00665608 /* APIUserTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIUserTest.swift; sourceTree = "<group>"; };
 		448BE9691ED490D900665608 /* APIImageUploadTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIImageUploadTest.swift; sourceTree = "<group>"; };
 		44B3B110206E436300FBF8CC /* PTButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTButton.swift; sourceTree = "<group>"; };
@@ -897,6 +899,7 @@
 				15C7629A2016D06B002AA7F8 /* Errors.swift */,
 				15C7629B2016D06B002AA7F8 /* MapUtilsManager.swift */,
 				15C7629C2016D06B002AA7F8 /* Reporter.swift */,
+				447BF2AA20737A7200C11D8E /* PTUnitConversion.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1387,7 +1390,7 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 7E2855LEH4;
 						LastSwiftMigration = 0920;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1900,6 +1903,7 @@
 				15C7640E2016D5C0002AA7F8 /* MainTabBarViewController.swift in Sources */,
 				15C763F12016D5C0002AA7F8 /* AirbnbDatePickerFooter.swift in Sources */,
 				15AAE9F72022BFCA007F9080 /* PTConnectionStatusView.swift in Sources */,
+				447BF2AB20737A7200C11D8E /* PTUnitConversion.swift in Sources */,
 				15C764162016D5C0002AA7F8 /* PetSizeTableViewController.swift in Sources */,
 				15C763CE2016D5C0002AA7F8 /* SignUpViewController.swift in Sources */,
 				15C7640C2016D5C0002AA7F8 /* PieChart.swift in Sources */,
@@ -2032,10 +2036,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = PawTrails/Resources/PawTrails.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 7E2855LEH4;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2053,8 +2057,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.attitudetech.PawTrails.beta;
 				PRODUCT_NAME = "$(TARGET_NAME)$(PRODUCT_NAME_SUFFIX)";
 				PRODUCT_NAME_SUFFIX = " Beta";
-				PROVISIONING_PROFILE = "13a79de8-20df-4018-97ce-34df57593044";
-				PROVISIONING_PROFILE_SPECIFIER = "PawTrails Beta";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PawTrails/Resources/PawTrails-Bridging-Header.h";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 3.0;
@@ -2181,10 +2185,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = PawTrails/Resources/PawTrails.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 7E2855LEH4;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2202,8 +2206,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.attitudetech.PawTrails.beta;
 				PRODUCT_NAME = "$(TARGET_NAME)$(PRODUCT_NAME_SUFFIX)";
 				PRODUCT_NAME_SUFFIX = " Beta";
-				PROVISIONING_PROFILE = "13a79de8-20df-4018-97ce-34df57593044";
-				PROVISIONING_PROFILE_SPECIFIER = "PawTrails Beta";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PawTrails/Resources/PawTrails-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
@@ -2481,9 +2485,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = PawTrails/Resources/PawTrails.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 7E2855LEH4;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2501,8 +2505,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.attitudetech.PawTrails.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)$(PRODUCT_NAME_SUFFIX)";
 				PRODUCT_NAME_SUFFIX = " Debug";
-				PROVISIONING_PROFILE = "ed24e837-6554-426d-b341-3b706ee5351e";
-				PROVISIONING_PROFILE_SPECIFIER = "PawTrails Debug";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PawTrails/Resources/PawTrails-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
@@ -2519,10 +2523,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = PawTrails/Resources/PawTrails.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 7E2855LEH4;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2540,8 +2544,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.attitudetech.PawTrails;
 				PRODUCT_NAME = "$(TARGET_NAME)$(PRODUCT_NAME_SUFFIX)";
 				PRODUCT_NAME_SUFFIX = "";
-				PROVISIONING_PROFILE = "5876cea2-a86c-4f7e-8127-e6dd6282689b";
-				PROVISIONING_PROFILE_SPECIFIER = "PawTrails Release";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PawTrails/Resources/PawTrails-Bridging-Header.h";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 3.0;

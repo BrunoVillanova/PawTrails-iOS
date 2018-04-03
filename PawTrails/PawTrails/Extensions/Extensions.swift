@@ -59,6 +59,15 @@ extension Double {
     public var square: Double {
         return pow(self, 2.0)
     }
+
+    var shortValue: String {
+        return String(format: "%g", self)
+    }
+    
+    func rounded(toPlaces places:Int) -> Double {
+        let divisor = pow(10.0, Double(places))
+        return (self * divisor).rounded() / divisor
+    }
 }
 
 extension Date {
