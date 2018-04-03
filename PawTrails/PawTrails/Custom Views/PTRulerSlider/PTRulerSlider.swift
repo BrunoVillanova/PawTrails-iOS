@@ -31,13 +31,13 @@ import UIKit
     scaleP & scaleQ : Weight range
  
     Adjust the scrollP value to change the default scroll position to match with indicator arrow.
-    iphone 8 : 41
-    iPhone 8 plus : 61
+    iphone 8 : 71.25
+    iPhone 8 plus : 52
  
  */
 
 protocol SliderDelegate: class {
-    func sliderDidScroll(value:Double)
+    func sliderDidScroll(valueInKg:Double)
 }
 
 class PTRulerSlider: UIView, UIScrollViewDelegate {
@@ -84,7 +84,7 @@ class PTRulerSlider: UIView, UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
 
         let p = scaleDownNumber()
-        delegate?.sliderDidScroll(value: p)
+        delegate?.sliderDidScroll(valueInKg: p)
         
         if scroll.contentOffset.x < CGFloat(scrollP) {
             setDefaultScrollposition()
@@ -127,7 +127,9 @@ class PTRulerSlider: UIView, UIScrollViewDelegate {
         //Arrow image
         let image = UIImage(named:"scaleArrow")
         let imgView = UIImageView(image: image)
-        imgView.frame = CGRect(x: scroll.frame.size.width/2, y: -50, width: 22, height: 72)
+        let arrowWidth = 22.0
+        let arrowHeight = 72.0
+        imgView.frame = CGRect(x: Double((scroll.frame.size.width/2)) - (arrowWidth/2), y: -50, width: arrowWidth, height: arrowHeight)
         self.addSubview(imgView)
         
         self.backgroundColor = .clear
