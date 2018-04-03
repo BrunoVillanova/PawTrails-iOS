@@ -68,31 +68,24 @@ class PetWizardViewController: UIViewController {
         self.navigationBar.backItem?.title = " "
     }
     
-    fileprivate func updateUI() {
+    fileprivate func updateUI(for viewController: PetWizardStepViewController) {
         
-//        if let currentChildViewController = currentChildViewController {
-//            self.showNextButton = currentChildViewController.nextButtonVisible()
-//        }
-        guard currentChildViewController != nil else {
-            return
-        }
-        
-        let index = stepsViewControllers.index(of: currentChildViewController!)!
+        let index = stepsViewControllers.index(of: viewController)!
         
         stepIndicatorLabel.text = "Step \(index+1) - \(steps.count)"
         
-        if currentChildViewController != stepsViewControllers.first {
+        if viewController != stepsViewControllers.first {
             self.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "BackIcon"), style: .plain, target: self, action: #selector(backButtonTapped))
             self.navigationBar.topItem?.leftBarButtonItem?.tintColor = PTConstants.colors.darkGray
             
             let title = "Cancel"
             let action = #selector(cancelWizard)
             
-            let rightBarButtonItem = UIBarButtonItem(title: title, style: .plain, target: self, action: action)
+            var rightBarButtonItem = UIBarButtonItem(title: title, style: .plain, target: self, action: action)
             
-//            if let currentChildViewController = currentChildViewController, let vcRightBarButtonItem = currentChildViewController.rightBarButtonItem {
-//                rightBarButtonItem = vcRightBarButtonItem
-//            }
+            if let vcRightBarButtonItem = viewController.rightBarButtonItem {
+                rightBarButtonItem = vcRightBarButtonItem
+            }
     
             var titleTextAttributes = [
                 NSFontAttributeName : UIFont(name: "Montserrat-Regular", size: 14)!,
@@ -139,7 +132,7 @@ class PetWizardViewController: UIViewController {
             
             if currentChildViewController == nil {
                  self.add(asChildViewController: viewController!)
-                 updateUI()
+                 updateUI(for: viewController!)
             } else {
                 cycleViewControllers(currentViewController: currentChildViewController!, nextViewController: viewController!)
             }
@@ -166,16 +159,17 @@ class PetWizardViewController: UIViewController {
         if let pet = self.pet, let petImageData = pet.image {
             self.showLoadingView()
             DataManager.instance.savePet(image: petImageData, into: pet.id, callback: { (error) in
+    
                 self.hideLoadingView()
-                self.goToStep(self.currentStepIndex)
+                
                 if let error = error {
                     self.showMessage(error.msg.msg, type: .error)
-                } else {
-                    self.uploadPetImageIfNeeded()
                 }
+                
+                self.goToStep(self.currentStepIndex+1)
             })
         } else {
-            self.goToStep(self.currentStepIndex)
+            self.goToStep(self.currentStepIndex+1)
         }
     }
     
@@ -204,12 +198,10 @@ class PetWizardViewController: UIViewController {
             }
         }
         
-        self.currentChildViewController = nextViewController
-        
         self.transition(from: currentViewController, to: nextViewController, duration: 0.2, options: .layoutSubviews, animations: {
             currentViewController.view.alpha = 0
             nextViewController.view.alpha = 1
-            self.updateUI()
+            self.updateUI(for: nextViewController)
         }) { (finished) in
             
             if finished {
@@ -223,6 +215,7 @@ class PetWizardViewController: UIViewController {
                         self.view.layoutIfNeeded()
                     }
                 }
+                self.currentChildViewController = nextViewController
             }
         }
     }
