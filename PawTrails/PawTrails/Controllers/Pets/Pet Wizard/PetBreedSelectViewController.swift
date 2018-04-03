@@ -106,25 +106,28 @@ class PetBreedSelectViewController: PetWizardStepViewController {
     
     @IBAction func crossBreedButtonTapped(_ sender: Any) {
         
-        let otherAlertView = PTAlertViewController("Cross breed",
-                                                   textFieldLabelTitle: "Type in your pet’s breed",
-                                                   okResult: { alert in
-                                                    if let text = alert.textField.text {
+        let title = "Cross breed"
+        let textFieldTitle = "Type in your pet’s breed"
+        
+        let alertView = PTAlertViewController(title, textFieldLabelTitle: textFieldTitle,
+                                              titleBarStyle: .green, alertResult: {alert, result in
+                                                if result == .cancel {
+                                                    alert.dismiss()
+                                                } else {
+                                                    if let text = alert.textField?.text {
                                                         self.pet?.breeds = PetBreeds(first: nil, second: nil, text)
                                                         self.delegate?.updatePet(self.pet)
                                                         self.delegate?.stepCompleted(completed: true, pet: self.pet!)
                                                         self.delegate?.goToNextStep()
                                                     }
                                                     alert.dismiss()
-        },
-                                                   cancelResult: { alert in
-                                                    alert.dismiss()
+                                                    
+                                                }
         })
-        
-        if let petBreed = self.pet!.breeds, let breedDescription = petBreed.description {
-            otherAlertView.textField.text = breedDescription
+        if let petBreed = self.pet?.breeds, let description = petBreed.description {
+            alertView.textFieldText = description
         }
-        self.present(otherAlertView, animated: false, completion: nil)
+        self.present(alertView, animated: false, completion: nil)
     }
     
     func configureTableDataSource() {

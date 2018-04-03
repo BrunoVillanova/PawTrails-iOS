@@ -9,60 +9,89 @@
 import UIKit
 import SnapKit
 
-typealias OkResult = (_ alertViewController: PTAlertViewController) -> Void
-typealias CancelResult = (_ alertViewController: PTAlertViewController) -> Void
+enum AlertTitleBarStyle {
+    case green, red
+    
+    var backgroundImageName: String {
+        switch self {
+            case .green: return "AlertViewTitleBarBackgroundGreen"
+            case .red: return "AlertViewTitleBarBackgroundRed"
+        }
+    }
+}
+
+enum AlertResultType {
+    case ok, cancel
+}
+
+enum AlertButtontType: Int {
+    case ok = 0, cancel = 1
+    
+    var title: String {
+        switch self {
+            case .ok: return "OK"
+            case .cancel: return "Cancel"
+        }
+    }
+    
+    var resultType: AlertResultType {
+        switch self {
+            case .ok: return .ok
+            case .cancel: return .cancel
+        }
+    }
+}
+
+typealias AlertResult = (_ alertViewController: PTAlertViewController, _ alertResult: AlertResultType) -> Void
 
 class PTAlertViewController: UIViewController {
 
-    var infoLabel: UILabel? {
-        let label = UILabel(frame: .zero)
-        label.font = UIFont(name: "Montserrat", size: 15)
-        label.textColor = PTConstants.colors.darkGray
-        return label
-    }
-    let textField = UITextField(frame: .zero)
+    var textField: UITextField?
+    var infoLabel: UILabel?
     let titleLabel = UILabel(frame: .zero)
-    let okButton = NiceButton(title: "OK")
-    let cancelButton = NiceButton(title: "Cancel")
-    var okResult: OkResult?
-    var cancelResult: CancelResult?
+    var alertResult: AlertResult?
+    let verticalSeparatorWidth: CGFloat = 1
+    var maxButtonSize: CGFloat = UIScreen.main.bounds.size.width
+    let buttonsView = UIView(frame: .zero)
+    let buttonsTopSeparatorView = UIView(frame: .zero)
+    var resultButtons = [UIButton]()
+    var titleBarStyle = AlertTitleBarStyle.green
+    var infoText: String?
+    var textFieldLabelTitle: String?
+    var textFieldText: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
         initialize()
     }
     
-    convenience init (_ title: String?, infoText: String? = nil, textFieldLabelTitle: String?, okResult: OkResult?, cancelResult: CancelResult?) {
+    convenience init (_ title: String?,
+                      infoText: String? = nil,
+            textFieldLabelTitle: String? = nil,
+            buttonTypes: [AlertButtontType]? = [AlertButtontType.cancel, AlertButtontType.ok],
+            titleBarStyle: AlertTitleBarStyle? = AlertTitleBarStyle.green,
+            alertResult: AlertResult?) {
+        
         self.init()
         modalPresentationStyle = .overCurrentContext
         titleLabel.text = title
-        textField.placeholder = textFieldLabelTitle
+        self.textFieldLabelTitle = textFieldLabelTitle
+        self.infoText = infoText
+        self.alertResult = alertResult
+        self.titleBarStyle = titleBarStyle!
         
-        if let okResult = okResult {
-            self.okResult = okResult
-            okButton.addTarget(self, action: #selector(okButtonTapped), for: .touchUpInside)
-        }
-        
-        if let cancelResult = cancelResult {
-            self.cancelResult = cancelResult
-            cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
-        }
-        
-        if let infoText = infoText {
-            infoLabel?.text = infoText
+        if let buttonTypes = buttonTypes {
+            configureButtons(buttonTypes)
         }
     }
     
-    
-    func okButtonTapped() {
-        self.okResult?(self)
+    func buttonTapped(_ sender: UIButton) {
+        if let resultType = AlertButtontType(rawValue: sender.tag)?.resultType {
+            self.alertResult?(self, resultType)
+        }
     }
     
-    func cancelButtonTapped() {
-        self.cancelResult?(self)
-    }
     
     func dismiss() {
         self.dismiss(animated: false, completion: nil)
@@ -73,6 +102,65 @@ class PTAlertViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    fileprivate func configureButtons(_ buttonsTypes: [AlertButtontType]) {
+        
+        var buttons = [UIButton]()
+        
+        for buttonType in buttonsTypes {
+            let button = NiceButton(title: buttonType.title)
+            button.tag = buttonType.hashValue
+            buttons.append(button)
+        }
+        
+        resultButtons = buttons
+    }
+    
+    fileprivate func configureButtons() {
+        
+        let buttons = resultButtons
+        // Default cancel and ok buttons
+        let buttonsCount: CGFloat = CGFloat(buttons.count)
+        let buttonSize = (maxButtonSize/buttonsCount)-((buttonsCount-1.0)*verticalSeparatorWidth)
+        
+        for i in 0...buttons.count-1 {
+            
+            let button: UIButton = buttons[i]
+            button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+            
+            // Add buttons
+            buttonsView.addSubview(button)
+            
+            button.snp.makeConstraints { (make) in
+                make.top.equalTo(buttonsTopSeparatorView.snp.bottom)
+                make.bottom.equalToSuperview()
+                
+                if i == 0 {
+                   make.left.equalToSuperview()
+                } else if i == buttons.count-1 {
+                    make.right.equalToSuperview()
+                } else {
+                    let lastSubview = buttonsView.subviews[buttonsView.subviews.count-2]
+                    make.left.equalTo(lastSubview.snp.right)
+                }
+                
+                make.width.equalTo(buttonSize)
+            }
+            
+            if i < buttons.count-1 {
+                let buttonsVerticalSeparator = UIView(frame: .zero)
+                buttonsVerticalSeparator.backgroundColor = PTConstants.colors.newLightGray
+                buttonsView.addSubview(buttonsVerticalSeparator)
+                
+                buttonsVerticalSeparator.snp.makeConstraints { (make) in
+                    make.top.equalToSuperview()
+                    make.bottom.equalToSuperview()
+                    make.left.equalTo(button.snp.right)
+                    make.width.equalTo(verticalSeparatorWidth)
+                }
+            }
+        }
+    }
+    
     func initialize() {
         
         view.backgroundColor = .clear
@@ -122,7 +210,7 @@ class PTAlertViewController: UIViewController {
         // Title View Background
         
         let titleViewBackgroundImageView = UIImageView(frame: .zero)
-        let titleBarBackgroundImage = UIImage(named: "AlertViewTitleBarBackground")
+        let titleBarBackgroundImage = UIImage(named: titleBarStyle.backgroundImageName)
         titleViewBackgroundImageView.image = titleBarBackgroundImage
         titleView.addSubview(titleViewBackgroundImageView)
         
@@ -162,28 +250,62 @@ class PTAlertViewController: UIViewController {
         
         
         // TODO: Add Label Before Text Field if needed
-        
+        if let infoText = infoText {
+            infoLabel = UILabel(frame: .zero)
+            infoLabel!.text = infoText
+            infoLabel!.numberOfLines = 0
+            infoLabel!.font = UIFont(name: "Montserrat-Regular", size: 15)
+            infoLabel!.textColor = PTConstants.colors.darkGray
+            infoLabel!.textAlignment = .center
+            
+            contentView.addSubview(infoLabel!)
+            
+            infoLabel!.snp.makeConstraints { (make) in
+                make.top.equalToSuperview().offset(24)
+                make.left.equalToSuperview().offset(24)
+                make.right.equalToSuperview().offset(-24)
+            }
+        }
         
         // Text Field
         
-        textField.font = UIFont(name: "Montserrat-Light", size: 14)
-        textField.textColor = PTConstants.colors.darkGray
-        textField.borderStyle = .roundedRect
-        textField.textAlignment = .center
-        textField.tintColor = PTConstants.colors.darkGray
-        
-        contentView.addSubview(textField)
-        
-        textField.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().offset(24)
-            make.left.equalToSuperview().offset(16)
-            make.right.equalToSuperview().offset(-16)
-            make.bottom.equalToSuperview().offset(-24)
-            make.height.equalTo(52)
+        if let textFieldLabelTitle = textFieldLabelTitle {
+            textField = UITextField(frame: .zero)
+            textField!.font = UIFont(name: "Montserrat-Light", size: 14)
+            textField!.textColor = PTConstants.colors.darkGray
+            textField!.borderStyle = .roundedRect
+            textField!.textAlignment = .center
+            textField!.tintColor = PTConstants.colors.darkGray
+            textField!.placeholder = textFieldLabelTitle
+            textField!.text = textFieldText
+            
+            contentView.addSubview(textField!)
+            
+            textField!.snp.makeConstraints { (make) in
+                
+                if let infoLabel = infoLabel {
+                    make.top.equalTo(infoLabel.snp.bottom).offset(16)
+                } else {
+                    make.top.equalToSuperview().offset(24)
+                }
+
+                make.left.equalToSuperview().offset(24)
+                make.right.equalToSuperview().offset(-24)
+                make.height.equalTo(52)
+            }
         }
         
+        if let textField = textField {
+            textField.snp.makeConstraints { (make) in
+                make.bottom.equalToSuperview().offset(-24)
+            }
+        } else if let infoLabel = infoLabel {
+            infoLabel.snp.makeConstraints { (make) in
+                make.bottom.equalToSuperview().offset(-24)
+            }
+        }
+    
         // Buttons View
-        let buttonsView = UIView(frame: .zero)
         buttonsView.backgroundColor = .white
         alertContainerView.addSubview(buttonsView)
         
@@ -196,7 +318,6 @@ class PTAlertViewController: UIViewController {
         }
         
         // Button Top SeparatorView
-        let buttonsTopSeparatorView = UIView(frame: .zero)
         buttonsTopSeparatorView.backgroundColor = PTConstants.colors.newLightGray
         buttonsView.addSubview(buttonsTopSeparatorView)
 
@@ -207,43 +328,11 @@ class PTAlertViewController: UIViewController {
             make.height.equalTo(1)
         }
 
-        // Default cancel and ok buttons
-        let verticalSeparatorWidth: CGFloat = 1
-        let buttonSize: CGFloat = (titleBarBackgroundImage!.size.width)/2.0-verticalSeparatorWidth
-        // Add buttons
-        buttonsView.addSubview(cancelButton)
 
-        cancelButton.snp.makeConstraints { (make) in
-            make.top.equalTo(buttonsTopSeparatorView.snp.bottom)
-            make.bottom.equalToSuperview()
-            make.left.equalToSuperview()
-            make.width.equalTo(buttonSize)
-        }
-
+        maxButtonSize = titleBarBackgroundImage!.size.width
         
-        buttonsView.addSubview(okButton)
-
-        okButton.snp.makeConstraints { (make) in
-            make.top.equalTo(cancelButton)
-            make.bottom.equalToSuperview()
-            make.right.equalToSuperview()
-            make.width.equalTo(cancelButton)
-        }
-
-        let buttonsVerticalSeparator = UIView(frame: .zero)
-        buttonsVerticalSeparator.backgroundColor = PTConstants.colors.newLightGray
-        buttonsView.addSubview(buttonsVerticalSeparator)
-
-        buttonsVerticalSeparator.snp.makeConstraints { (make) in
-            make.top.equalToSuperview()
-            make.bottom.equalToSuperview()
-            make.left.equalTo(cancelButton.snp.right)
-            make.right.equalTo(okButton.snp.left)
-        }
-
+        configureButtons()
     }
-    
-
 }
 
 class RoundedShadowView: UIView {

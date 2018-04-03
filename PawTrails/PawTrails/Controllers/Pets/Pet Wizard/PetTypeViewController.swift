@@ -37,30 +37,44 @@ class PetTypeViewController: PetWizardStepViewController {
                     self.delegate?.stepCompleted(completed: true, pet: self.pet!)
                     self.delegate?.goToNextStep()
                 } else if petTypeTitle.lowercased() == "other"  {
-                    let otherAlertView = PTAlertViewController("Other Pet Type",
-                                                               textFieldLabelTitle: "Pet Type",
-                                                               okResult: { alert in
-                                                                    if let text = alert.textField.text {
-                                                                        self.pet!.type = PetType(type: Type.build(code: petTypeTitle.lowercased()), description: text)
-//                                                                        self.delegate?.stepCompleted(completed: true, pet: self.pet!)
-//                                                                        self.delegate?.goToNextStep()
-                                                                        self.showMessage("Sorry, but your device is not compatible with this pet type.", type: .warning)
-                                                                    }
-                                                                    alert.dismiss()
-                                                                },
-                                                               cancelResult: { alert in
-                                                                    alert.dismiss()
-                                                                })
+                    let title = "Other Pet Type"
+                    let textFieldTitle = "Pet Type"
                     
+                    let alertView = PTAlertViewController(title, textFieldLabelTitle: textFieldTitle,
+                                                          titleBarStyle: .green, alertResult: {alert, result in
+                        if result == .cancel {
+                            alert.dismiss()
+                        } else {
+                            if let text = alert.textField?.text {
+                                self.pet!.type = PetType(type: Type.build(code: petTypeTitle.lowercased()), description: text)
+                                self.showPetNotSupportedAlert()
+                            }
+                            alert.dismiss()
+
+                        }
+                    })
                     if let petType = self.pet!.type, petType.type == .other, let description = petType.description {
-                        otherAlertView.textField.text = description
+                        alertView.textFieldText = description
                     }
-                    self.present(otherAlertView, animated: false, completion: nil)
+                    self.present(alertView, animated: false, completion: nil)
                 } else {
-                    self.showMessage("Sorry, but your device is not compatible with this pet type.", type: .warning)
+                    self.showPetNotSupportedAlert()
                 }
             }
             .disposed(by: disposeBag)
+    }
+    
+    fileprivate func showPetNotSupportedAlert() {
+        let title = "Pet Type Not Supported"
+        let infoText = "Sorry, the pet type you selected is not supported by your device, please use another device or choose other pet type."
+        
+        let alertView = PTAlertViewController(title, infoText: infoText, buttonTypes: [AlertButtontType.ok], titleBarStyle: .red, alertResult: {alert, result in
+            if result == .ok {
+                alert.dismiss()
+            }
+        })
+        
+        self.present(alertView, animated: false, completion: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
