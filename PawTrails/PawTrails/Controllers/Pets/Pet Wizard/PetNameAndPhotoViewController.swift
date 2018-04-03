@@ -126,14 +126,6 @@ class PTNiceTextField: SkyFloatingLabelTextField {
     
     override func editingChanged() {
         super.editingChanged()
-//        if let labelBackgroundLayer = labelBackgroundLayer {
-//            if isTitleVisible() {
-//                titleLabel.layer.superlayer?.insertSublayer(labelBackgroundLayer, below: titleLabel.layer)
-//            } else {
-//                labelBackgroundLayer.removeFromSuperlayer()
-//            }
-//        }
-        
         updateLayerForTitleLabel(titleLabel.frame)
     }
     
@@ -170,8 +162,6 @@ class PTNiceTextField: SkyFloatingLabelTextField {
             labelBackgroundLayer!.backgroundColor = PTConstants.colors.lightBlue.cgColor
             titleLabel.layer.masksToBounds = true
         }
-        
-//        updateLayerForTitleLabel(titleLabel.frame)
     }
     
     fileprivate func updateLayerForTitleLabel(_ newRect: CGRect) {

@@ -57,6 +57,7 @@ class PetWizardFinalStepViewController: PetWizardStepViewController {
         pulsator.backgroundColor = PTConstants.colors.newRed.cgColor
         pulsator.numPulse = 6
         pulsator.animationDuration = 8
+        retryGetLocationButton.circle()
     }
     
     
@@ -85,7 +86,7 @@ class PetWizardFinalStepViewController: PetWizardStepViewController {
             
             pulsator.start()
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 20) {
                 self.pulsator.stop()
                 self.timeoutGettingLocation()
             }
