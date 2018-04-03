@@ -51,10 +51,7 @@ class PetConnectDeviceViewController: PetWizardStepViewController {
         
         alertView.addButton("Add Device") {
             if let deviceCode = txt.text {
-                self.deviceCode = deviceCode
-                self.pet!.deviceCode = deviceCode
-                self.delegate?.stepCompleted(completed: true, pet: self.pet!)
-                self.delegate?.goToNextStep()
+                self.verifyDeviceCode(deviceCode)
             }
         }
         
@@ -114,6 +111,37 @@ class PetConnectDeviceViewController: PetWizardStepViewController {
     @IBAction func cancelButtonTapped(_ sender: Any) {
         self.delegate?.stepCanceled(pet: self.pet!)
     }
+    
+    fileprivate func verifyDeviceCode(_ deviceCode: String) {
+        if isBetaDemo {
+            self.pet!.deviceCode = Constants.deviceIdforDemo
+            self.delegate?.stepCompleted(completed: true, pet: self.pet!)
+            self.delegate?.goToNextStep()
+        } else {
+            self.showLoadingView()
+            APIRepository.instance.check(deviceCode, callback: {error, success in
+                self.hideLoadingView()
+                
+                if let error = error {
+                    var errorMessage = "Sorry, an error occoured"
+                    
+                    if let errorCodeDescription = error.errorCode?.description {
+                        errorMessage = errorCodeDescription
+                    }
+                    self.showMessage(errorMessage, type: .error)
+                } else {
+                    if success {
+                        self.deviceCode = deviceCode
+                        self.pet!.deviceCode = deviceCode
+                        self.delegate?.stepCompleted(completed: true, pet: self.pet!)
+                        self.delegate?.goToNextStep()
+                    } else {
+                        self.showMessage("Code not available", type: .warning)
+                    }
+                }
+            })
+        }
+    }
 }
 
 extension PetConnectDeviceViewController: QRCodeScannerViewControllerDelegate {
@@ -124,17 +152,7 @@ extension PetConnectDeviceViewController: QRCodeScannerViewControllerDelegate {
             self.alert(title: "=(", msg: error)
         } else if let scanResult = scanResult, qrCodeScannerViewController.presentingViewController != nil {
             qrCodeScannerViewController.dismiss(animated: true, completion: {
-                if isBetaDemo {
-                    self.pet!.deviceCode = Constants.deviceIdforDemo
-                    self.delegate?.stepCompleted(completed: true, pet: self.pet!)
-                    self.delegate?.goToNextStep()
-                }
-                else {
-                    self.deviceCode = scanResult
-                    self.pet!.deviceCode = scanResult
-                    self.delegate?.stepCompleted(completed: true, pet: self.pet!)
-                    self.delegate?.goToNextStep()
-                }
+              self.verifyDeviceCode(scanResult)
             })
         }
     }
