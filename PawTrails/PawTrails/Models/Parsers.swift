@@ -306,7 +306,8 @@ extension PetDeviceData {
     
     static func fromJson(_ json: Any?) -> [PetDeviceData]? {
         var petDeviceDataList : [PetDeviceData]?
-        if let jsonValues = json as! [Any]?, jsonValues.count > 0 {
+        if let jsonValues = json as? [Any] {
+            print("\(jsonValues)")
             petDeviceDataList = [PetDeviceData]()
             for petDeviceDataObject in jsonValues {
                 if let petDeviceDataJson = petDeviceDataObject as? [String:Any] {

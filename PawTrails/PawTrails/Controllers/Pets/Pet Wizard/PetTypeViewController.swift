@@ -42,21 +42,19 @@ class PetTypeViewController: PetWizardStepViewController {
                     
                     let alertView = PTAlertViewController(title, textFieldLabelTitle: textFieldTitle,
                                                           titleBarStyle: .green, alertResult: {alert, result in
-                        if result == .cancel {
-                            alert.dismiss()
-                        } else {
-                            if let text = alert.textField?.text {
-                                self.pet!.type = PetType(type: Type.build(code: petTypeTitle.lowercased()), description: text)
-                                self.showPetNotSupportedAlert()
-                            }
-                            alert.dismiss()
-
-                        }
+                        
+                                                            alert.dismiss(animated: true, completion: {
+                                                                if result == .ok, let text = alert.textField?.text {
+                                                                    self.pet!.type = PetType(type: Type.build(code: petTypeTitle.lowercased()), description: text)
+                                                                    self.showPetNotSupportedAlert()
+                                                                }
+                                                            })
+    
                     })
                     if let petType = self.pet!.type, petType.type == .other, let description = petType.description {
                         alertView.textFieldText = description
                     }
-                    self.present(alertView, animated: false, completion: nil)
+                    self.present(alertView, animated: true, completion: nil)
                 } else {
                     self.showPetNotSupportedAlert()
                 }
@@ -69,12 +67,10 @@ class PetTypeViewController: PetWizardStepViewController {
         let infoText = "Sorry, the pet type you selected is not supported by your device, please use another device or choose other pet type."
         
         let alertView = PTAlertViewController(title, infoText: infoText, buttonTypes: [AlertButtontType.ok], titleBarStyle: .red, alertResult: {alert, result in
-            if result == .ok {
-                alert.dismiss()
-            }
+            alert.dismiss(animated: true, completion: nil)
         })
         
-        self.present(alertView, animated: false, completion: nil)
+        self.present(alertView, animated: true, completion: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {

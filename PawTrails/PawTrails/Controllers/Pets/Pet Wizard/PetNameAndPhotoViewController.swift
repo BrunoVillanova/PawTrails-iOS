@@ -82,10 +82,7 @@ extension PetNameAndPhotoViewController: UIImagePickerControllerDelegate, UINavi
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let chosenImage = info[UIImagePickerControllerEditedImage] as? UIImage {
             petPhotoImageView.image = chosenImage
-            
-            if var pet = self.pet {
-                pet.image = chosenImage.encoded
-            }
+            self.pet!.image = chosenImage.encoded
         }
         dismiss(animated:true, completion: nil)
     }

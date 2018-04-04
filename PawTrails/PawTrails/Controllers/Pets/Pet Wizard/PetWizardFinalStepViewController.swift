@@ -25,6 +25,7 @@ class PetWizardFinalStepViewController: PetWizardStepViewController {
     
     let pulsator = Pulsator()
     fileprivate let disposeBag = DisposeBag()
+    var success = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +59,7 @@ class PetWizardFinalStepViewController: PetWizardStepViewController {
         pulsator.numPulse = 6
         pulsator.animationDuration = 8
         retryGetLocationButton.circle()
+        getStartedButton.circle()
     }
     
     
@@ -87,16 +89,22 @@ class PetWizardFinalStepViewController: PetWizardStepViewController {
             pulsator.start()
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 20) {
-                self.pulsator.stop()
-                self.timeoutGettingLocation()
+                if !self.success {
+                    self.pulsator.stop()
+                    self.timeoutGettingLocation()
+                }
             }
             
             DataManager.instance.lastPetDeviceData(pet, gpsMode: .live)
-                .subscribe(onNext: { (petDeviceData) in
+                .subscribe(onNext: { [unowned self] (petDeviceData)  in
                     if let point = petDeviceData?.deviceData.point, point.latitude != 0 && point.longitude != 0 {
-                        DispatchQueue.main.async {
-                            self.pulsator.stop()
-                            self.showSuccessView()
+                        
+                        if !self.success {
+                            self.success = true
+                            DispatchQueue.main.async {
+                                self.pulsator.stop()
+                                self.showSuccessView()
+                            }
                         }
                     }
                 }).disposed(by: disposeBag)
@@ -120,9 +128,13 @@ class PetWizardFinalStepViewController: PetWizardStepViewController {
     
     fileprivate func showSuccessView() {
         
+        self.completedView.alpha = 0
+        self.completedView.isHidden = false
+        
         UIView.animate(withDuration: 0.3, animations: {
             self.gettingLocationView.alpha = 0
             self.completedView.alpha = 1
+            self.titleLabel.text = "All Setup & Ready"
         }) { (finished) in
             if finished {
                 self.gettingLocationView.isHidden = true

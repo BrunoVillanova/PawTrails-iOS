@@ -48,7 +48,7 @@ class PetBreedSelectViewController: PetWizardStepViewController {
     }
     
     fileprivate func initialize() {
-        rightBarButtonItem = UIBarButtonItem(title: "Skip", style: .plain, target: self, action: #selector(skipTapped))
+//        rightBarButtonItem = UIBarButtonItem(title: "Skip", style: .plain, target: self, action: #selector(skipTapped))
         configureSearchTextField()
         configureTableDataSource()
     }
@@ -98,7 +98,6 @@ class PetBreedSelectViewController: PetWizardStepViewController {
             searchTextField.leftViewMode = .always
             searchTextField.tintColor = PTConstants.colors.darkGray
         }
-
     }
     
     func skipTapped() {
@@ -112,24 +111,21 @@ class PetBreedSelectViewController: PetWizardStepViewController {
         
         let alertView = PTAlertViewController(title, textFieldLabelTitle: textFieldTitle,
                                               titleBarStyle: .green, alertResult: {alert, result in
-                                                if result == .cancel {
-                                                    alert.dismiss()
-                                                } else {
+                               
                                                     alert.dismiss(animated: true, completion: {
-                                                        if let text = alert.textField?.text {
+                                                        if result == .ok, let text = alert.textField?.text {
                                                             self.pet?.breeds = PetBreeds(first: nil, second: nil, text)
                                                             self.delegate?.updatePet(self.pet)
                                                             self.showPetSizeInputAlert()
-                                                            //                                                        self.delegate?.stepCompleted(completed: true, pet: self.pet!)
-                                                            //                                                        self.delegate?.goToNextStep()
                                                         }
                                                     })
-                                                    
-                                                }
+                                                
         })
+        
         if let petBreed = self.pet?.breeds, let description = petBreed.description {
             alertView.textFieldText = description
         }
+        
         self.present(alertView, animated: true, completion: nil)
     }
     
@@ -141,12 +137,13 @@ class PetBreedSelectViewController: PetWizardStepViewController {
         
         let alertView = PTAlertViewController(title, infoText: infoText, textFieldLabelTitle: textFieldTitle,
                                               titleBarStyle: .green, alertResult: {alert, result in
-                                                alert.dismiss()
-                                                if result == .ok && self.pet!.size != nil {
-                                                    self.delegate?.updatePet(self.pet!)
-                                                    self.delegate?.stepCompleted(completed: true, pet: self.pet!)
-                                                    self.delegate?.goToNextStep()
-                                                }
+                                                alert.dismiss(animated: true, completion: {
+                                                    if result == .ok && self.pet!.size != nil {
+                                                        self.delegate?.updatePet(self.pet!)
+                                                        self.delegate?.stepCompleted(completed: true, pet: self.pet!)
+                                                        self.delegate?.goToNextStep()
+                                                    }
+                                                })
         })
         
         

@@ -75,8 +75,13 @@ class PetWizardViewController: UIViewController {
         stepIndicatorLabel.text = "Step \(index+1) - \(steps.count)"
         
         if viewController != stepsViewControllers.first {
-            self.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "BackIcon"), style: .plain, target: self, action: #selector(backButtonTapped))
-            self.navigationBar.topItem?.leftBarButtonItem?.tintColor = PTConstants.colors.darkGray
+            
+            if index != steps.count-1 {
+                self.navigationBar.topItem?.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "BackIcon"), style: .plain, target: self, action: #selector(backButtonTapped))
+                self.navigationBar.topItem?.leftBarButtonItem?.tintColor = PTConstants.colors.darkGray
+            } else {
+                self.navigationBar.topItem?.leftBarButtonItem = nil
+            }
             
             let title = "Cancel"
             let action = #selector(cancelWizard)
@@ -141,36 +146,51 @@ class PetWizardViewController: UIViewController {
     }
     
     fileprivate func registerPet() {
-        if let pet = self.pet {
+        if let updatedPet = self.pet {
             self.showLoadingView()
-            DataManager.instance.register(pet, callback: { (error, pet) in
+            DataManager.instance.register(updatedPet, callback: { (error, registeredPet) in
                 self.hideLoadingView()
                 if let error = error {
                     self.showMessage(error.msg.msg, type: .error)
                 } else {
-                    self.pet = pet
-                    self.uploadPetImageIfNeeded()
+                    
+                    let petImage = updatedPet.image
+
+                    if let registeredPet = registeredPet {
+                        
+                        self.pet = registeredPet
+                        
+                        if let petImage = petImage {
+                            self.uploadPetImage(registeredPet.id, imageData: petImage)
+                        } else {
+                            self.goToStep(self.currentStepIndex+1)
+                        }
+
+                    }
                 }
             })
         }
     }
     
-    fileprivate func uploadPetImageIfNeeded() {
-        if let pet = self.pet, let petImageData = pet.image {
-            self.showLoadingView()
-            DataManager.instance.savePet(image: petImageData, into: pet.id, callback: { (error) in
+    fileprivate func uploadPetImage(_ petID: Int, imageData: Data) {
+        
+//        self.showLoadingView()
+        
+        DataManager.instance.savePet(image: imageData, into: petID, callback: { (error) in
+
+//            self.hideLoadingView()
+            
+            if let error = error {
+                self.showMessage(error.msg.msg, type: .error)
+            }
+            
+            self.goToOneStepForward()
+//            self.perform(#selector(self.goToOneStepForward), with: nil, afterDelay: 1)
+        })
+    }
     
-                self.hideLoadingView()
-                
-                if let error = error {
-                    self.showMessage(error.msg.msg, type: .error)
-                }
-                
-                self.goToStep(self.currentStepIndex+1)
-            })
-        } else {
-            self.goToStep(self.currentStepIndex+1)
-        }
+    func goToOneStepForward() {
+        self.goToStep(self.currentStepIndex+1)
     }
     
     fileprivate func cycleViewControllers(currentViewController: PetWizardStepViewController, nextViewController: PetWizardStepViewController) {
@@ -254,7 +274,40 @@ class PetWizardViewController: UIViewController {
     }
     
     func cancelWizard() {
-        self.dismiss(animated: true, completion: nil)
+
+        if currentStepIndex == steps.count-1, let petID = self.pet?.id {
+            let title = "Attention"
+            let infoText = "By skipping this step, all pet information you entered will be deleted and you will need to add your pet again. Are you sure you want to go ahead?"
+            
+            let alertView = PTAlertViewController(title, infoText: infoText,
+                                                  titleBarStyle: .yellow,
+                                                  alertResult: {alert, result in
+                                                    
+                                                    alert.dismiss(animated: true, completion: {
+                                                        if result == .ok {
+                                                            self.showLoadingView()
+                                                            
+                                                            DataManager.instance.removePet(petID) { (error) in
+                                                                self.hideLoadingView()
+                                                                self.dismiss(animated: true, completion: nil)
+                                                                // TODO: just ignoring error now because of api problem (see with andreas)
+//                                                                if (((error?.APIError) != nil)||((error?.responseError) != nil)||((error?.error) != nil)) {
+//                                                                    let errorMessage = "Error removing pet"
+//                                                                    self.showMessage(errorMessage, type: .error)
+//                                                                } else {
+//                                                                    self.dismiss(animated: true, completion: nil)
+//                                                                }
+                                                            }
+                                                        }
+                                                    })
+                                                    
+            })
+
+            self.present(alertView, animated: true, completion: nil)
+            
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     @IBAction func nextButtonTapped(_ sender: Any) {

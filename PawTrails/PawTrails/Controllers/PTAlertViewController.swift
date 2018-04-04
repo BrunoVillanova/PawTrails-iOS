@@ -10,12 +10,13 @@ import UIKit
 import SnapKit
 
 enum AlertTitleBarStyle {
-    case green, red
+    case green, red, yellow
     
     var backgroundImageName: String {
         switch self {
             case .green: return "AlertViewTitleBarBackgroundGreen"
             case .red: return "AlertViewTitleBarBackgroundRed"
+            case .yellow: return "AlertViewTitleBarBackgroundYellow"
         }
     }
 }
@@ -64,11 +65,35 @@ class PTAlertViewController: UIViewController {
         }
     }
     var textFieldInputView: UIView?
+    var backgroundView: UIView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         initialize()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let textField = textField {
+            textField.becomeFirstResponder()
+        }
+        
+        if let backgroundView = backgroundView, backgroundView.alpha == 0 {
+            UIView.animate(withDuration: 0.3) {
+                backgroundView.alpha = 1
+            }
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if let backgroundView = backgroundView, backgroundView.alpha == 1 {
+            UIView.animate(withDuration: 0.3) {
+                backgroundView.alpha = 0
+            }
+        }
     }
     
     convenience init (_ title: String?,
@@ -175,10 +200,13 @@ class PTAlertViewController: UIViewController {
         
         let backgroundView = UIView(frame: .zero)
         backgroundView.backgroundColor = UIColor(red: 65/255, green: 72/255, blue: 82/255, alpha: 0.7)
+        backgroundView.alpha = 0
         self.view.addSubview(backgroundView)
         backgroundView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
+        
+        self.backgroundView = backgroundView
         
         // AlertView
         let alertView = RoundedShadowView(frame: .zero)
