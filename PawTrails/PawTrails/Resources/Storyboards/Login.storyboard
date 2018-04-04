@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Light.ttf">
+            <string>Montserrat-Light</string>
+        </array>
+        <array key="Montserrat-Regular.ttf">
+            <string>Montserrat-Regular</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--User Login View Controller-->
+        <scene sceneID="QuN-8u-8Bq">
+            <objects>
+                <viewController storyboardIdentifier="InitialViewController" modalPresentationStyle="formSheet" id="grF-PC-ZUv" userLabel="User Login View Controller" customClass="InitialViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" userInteractionEnabled="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Cge-Tb-Fss">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="InitialBg" translatesAutoresizingMaskIntoConstraints="NO" id="w0p-jc-VIx">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6XG-eR-Nh1">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k2F-fO-Hlc">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" distribution="equalCentering" alignment="center" spacing="75" translatesAutoresizingMaskIntoConstraints="NO" id="kYT-7M-04v">
+                                                <rect key="frame" x="72" y="539" width="0.0" height="0.0"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <subviews>
+                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OBq-N8-m1c">
+                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="24"/>
+                                                        <state key="normal" image="login_Googleplus"/>
+                                                        <connections>
+                                                            <action selector="googleLogin:" destination="grF-PC-ZUv" eventType="touchUpInside" id="13Z-db-QmE"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mVR-Xm-RBV">
+                                                <rect key="frame" x="25" y="413" width="327" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <state key="normal" image="btn_create_account">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="loginAction:" destination="grF-PC-ZUv" eventType="touchUpInside" id="LPK-pG-t8e"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jLh-Ld-Kaw">
+                                                <rect key="frame" x="25" y="300" width="327" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" image="btn_facebook">
+                                                    <color key="titleColor" red="0.83137254900000002" green="0.078431372550000003" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="facebookLogin:" destination="grF-PC-ZUv" eventType="touchUpInside" id="sfZ-mv-yYg"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ou-xG-uET">
+                                                <rect key="frame" x="171" y="373" width="35" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="14.399999618530273"/>
+                                                <nil key="textColor"/>
+                                                <color key="highlightedColor" red="0.25490196078431371" green="0.28235294117647058" blue="0.32156862745098036" alpha="1" colorSpace="calibratedRGB"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Already have an account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xpA-Wb-H0E">
+                                                <rect key="frame" x="60" y="496" width="187" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
+                                                <color key="textColor" red="0.25490196078431371" green="0.28235294117647058" blue="0.32156862745098036" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gBI-fn-q4M">
+                                                <rect key="frame" x="243" y="491" width="73" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
+                                                <state key="normal" title="Login Now"/>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="By signing up,  you agree to our Terms &amp; Conditions and Privacy Statement" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hSd-RU-FlP">
+                                                <rect key="frame" x="49" y="598" width="277" height="39"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo 1 - no bg" translatesAutoresizingMaskIntoConstraints="NO" id="day-4c-dir">
+                                                <rect key="frame" x="129" y="100" width="117" height="86"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="86" id="6kt-9o-0hh"/>
+                                                    <constraint firstAttribute="width" constant="117" id="QCW-TX-q7t"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="day-4c-dir" firstAttribute="centerX" secondItem="k2F-fO-Hlc" secondAttribute="centerX" id="OqO-PX-hS7"/>
+                                            <constraint firstAttribute="height" constant="667" id="ikV-zs-Cxd"/>
+                                            <constraint firstItem="day-4c-dir" firstAttribute="top" secondItem="k2F-fO-Hlc" secondAttribute="top" constant="100" id="loP-XJ-6SU"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="k2F-fO-Hlc" firstAttribute="top" secondItem="6XG-eR-Nh1" secondAttribute="top" id="6K2-nH-J0n"/>
+                                    <constraint firstAttribute="bottom" secondItem="k2F-fO-Hlc" secondAttribute="bottom" id="9JW-NA-MB3"/>
+                                    <constraint firstAttribute="trailing" secondItem="k2F-fO-Hlc" secondAttribute="trailing" id="V7K-L1-vnb"/>
+                                    <constraint firstItem="k2F-fO-Hlc" firstAttribute="leading" secondItem="6XG-eR-Nh1" secondAttribute="leading" id="wpH-hL-0XL"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="k2F-fO-Hlc" firstAttribute="width" secondItem="Cge-Tb-Fss" secondAttribute="width" id="20V-kF-gFP"/>
+                            <constraint firstItem="6XG-eR-Nh1" firstAttribute="trailing" secondItem="G9a-H5-xaE" secondAttribute="trailing" id="76o-CG-5ub"/>
+                            <constraint firstAttribute="trailing" secondItem="w0p-jc-VIx" secondAttribute="trailing" id="LtO-qZ-rG2"/>
+                            <constraint firstItem="6XG-eR-Nh1" firstAttribute="leading" secondItem="G9a-H5-xaE" secondAttribute="leading" id="UyS-xH-rYg"/>
+                            <constraint firstItem="6XG-eR-Nh1" firstAttribute="top" secondItem="Cge-Tb-Fss" secondAttribute="top" id="WOD-lx-bZo"/>
+                            <constraint firstAttribute="bottom" secondItem="w0p-jc-VIx" secondAttribute="bottom" id="am5-vu-kgN"/>
+                            <constraint firstItem="w0p-jc-VIx" firstAttribute="top" secondItem="Cge-Tb-Fss" secondAttribute="top" id="dJY-uS-nxg"/>
+                            <constraint firstItem="6XG-eR-Nh1" firstAttribute="bottom" secondItem="G9a-H5-xaE" secondAttribute="bottom" id="htX-kn-sLM"/>
+                            <constraint firstItem="w0p-jc-VIx" firstAttribute="leading" secondItem="Cge-Tb-Fss" secondAttribute="leading" id="sfd-20-cPx"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="G9a-H5-xaE"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="JLY-vD-O5c"/>
+                    <connections>
+                        <outlet property="facebookButton" destination="jLh-Ld-Kaw" id="ryj-s7-mmh"/>
+                        <outlet property="googleButton" destination="OBq-N8-m1c" id="6x4-XI-vvx"/>
+                        <outlet property="loginButton" destination="mVR-Xm-RBV" id="Cre-w0-iEX"/>
+                        <outlet property="logoImageView" destination="day-4c-dir" id="dx9-k6-XHf"/>
+                        <outlet property="socialMediaBar" destination="kYT-7M-04v" id="LRj-md-oKE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9qG-Jq-G6p" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-7770.3999999999996" y="-1603.4482758620691"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="InitialBg" width="375" height="667"/>
+        <image name="Logo 1 - no bg" width="123" height="95"/>
+        <image name="btn_create_account" width="327" height="50"/>
+        <image name="btn_facebook" width="327" height="50"/>
+        <image name="login_Googleplus" width="39" height="24"/>
+    </resources>
+</document>
