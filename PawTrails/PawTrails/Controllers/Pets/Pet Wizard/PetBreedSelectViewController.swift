@@ -114,6 +114,7 @@ class PetBreedSelectViewController: PetWizardStepViewController {
                                
                                                     alert.dismiss(animated: true, completion: {
                                                         if result == .ok, let text = alert.textField?.text {
+                                                            self.selectedBreed.value = nil
                                                             self.pet?.breeds = PetBreeds(first: nil, second: nil, text)
                                                             self.delegate?.updatePet(self.pet)
                                                             self.showPetSizeInputAlert()
@@ -130,9 +131,6 @@ class PetBreedSelectViewController: PetWizardStepViewController {
     }
     
     fileprivate func showPetSizeInputAlert() {
-        
-
-        
         
         let title = "Size of pet"
         let infoText = "Looks like we are not sure about the size of your pet, please select the size then"
@@ -179,6 +177,7 @@ class PetBreedSelectViewController: PetWizardStepViewController {
                                                 
                                               },
                                               alertResult: {alert, result in
+                                                alert.view.endEditing(true)
                                                 alert.dismiss(animated: true, completion: {
                                                     if result == .ok && self.pet!.size != nil {
                                                         self.delegate?.updatePet(self.pet!)
@@ -187,13 +186,6 @@ class PetBreedSelectViewController: PetWizardStepViewController {
                                                     }
                                                 })
         })
-        
-        
-        // PickerView
-        
-
-        
-//        alertView.textFieldInputView = petSizePickerView
     
         self.present(alertView, animated: true, completion: nil)
     }
@@ -260,11 +252,23 @@ class PetBreedSelectViewController: PetWizardStepViewController {
             .zip(tableView.rx.itemSelected, tableView.rx.modelSelected(PetBreedSection.Item.self))
             .bind { [unowned self] indexPath, item in
                 self.tableView.deselectRow(at: indexPath, animated: true)
-                self.selectedBreed.value = item
-                self.pet!.breeds = PetBreeds(first: item, second: nil, nil)
-                self.delegate?.stepCompleted(completed: true, pet: self.pet!)
+                
+                if let selectedBreed = self.selectedBreed.value, selectedBreed.id == item.id {
+                     self.selectedBreed.value = nil
+                     self.pet!.breeds = nil
+                } else {
+                    self.selectedBreed.value = item
+                    self.pet!.breeds = PetBreeds(first: item, second: nil, nil)
+                }
+                
+                self.validateAndUpdate()
             }
             .disposed(by: disposeBag)
+    }
+
+    fileprivate func validateAndUpdate() {
+        let validated = self.pet!.breeds != nil
+        self.delegate?.stepCompleted(completed: validated, pet: self.pet!)
     }
     
 }
