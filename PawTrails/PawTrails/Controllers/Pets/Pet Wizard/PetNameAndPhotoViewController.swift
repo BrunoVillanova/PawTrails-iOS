@@ -60,17 +60,20 @@ class PetNameAndPhotoViewController: PetWizardStepViewController {
         imagePicker.delegate = self
         imagePicker.allowsEditing = false
         
+        
         petNameTextField.rx.text
             .asObservable()
             .subscribe(onNext: { value in
                 if let value = value, value.count > 0 {
-                    self.pet!.name = value
+                    self.pet!.name = value.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
                     self.delegate?.stepCompleted(completed: true, pet: self.pet!)
                 } else {
                     self.delegate?.stepCompleted(completed: false, pet: self.pet!)
                 }
             })
             .disposed(by: disposeBag)
+        
+        petNameTextField.delegate = self
     }
 
 
@@ -89,6 +92,25 @@ class PetNameAndPhotoViewController: PetWizardStepViewController {
         
         self.present(alert, animated: true, completion: nil)
     }
+}
+
+extension PetNameAndPhotoViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if let currentText = textField.text {
+            if (range.location == 0 && string == " ") || (range.location > 0 && currentText.hasSuffix(" ") && string == " ") {
+                return false
+            }
+        }
+        
+        let maxLength = 50
+        let currentString: NSString = textField.text! as NSString
+        let newString: NSString = currentString.replacingCharacters(in: range, with: string) as NSString
+   
+        return newString.length <= maxLength
+    }
+
 }
 
 extension PetNameAndPhotoViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -111,7 +133,7 @@ extension PetNameAndPhotoViewController: TOCropViewControllerDelegate {
     func cropViewController(_ cropViewController: TOCropViewController, didCropToImage image: UIImage, rect cropRect: CGRect, angle: Int) {
         
         cropViewController.dismiss(animated: true, completion: nil)
-        if let resizedImage = Toucan.Resize.resizeImage(image, size: CGSize(width: 200, height: 200)) {
+        if let resizedImage = Toucan.Resize.resizeImage(image, size: CGSize(width: 400, height: 400)) {
             petPhotoImageView.image = resizedImage
             self.pet!.image = UIImageJPEGRepresentation(resizedImage, 100)
         }
