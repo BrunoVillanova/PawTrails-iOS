@@ -87,7 +87,9 @@ class EmailVerificationViewController: UIViewController, EmailVerificationView {
     // MARK:- EmailVerificationView
     
     func errorMessage(_ error: ErrorMsg) {
-        self.alert(title: error.title, msg: error.msg)
+        //self.alert(title: error.title, msg: error.msg)
+        
+        showAlert(title: error.title, infoText: error.msg)
     }
     
     func beginLoadingContent() {
@@ -115,6 +117,17 @@ class EmailVerificationViewController: UIViewController, EmailVerificationView {
         self.dismiss(animated: true) {
             self.presentingViewController?.dismiss(animated: true, completion: nil)
         }
+    }
+    
+    fileprivate func showAlert(title:String,infoText:String) {
+        
+        let alertView = PTAlertViewController(title, infoText: infoText, buttonTypes: [AlertButtontType.ok], titleBarStyle: .red, alertResult: {alert, result in
+            if result == .ok {
+                alert.dismiss()
+            }
+        })
+        
+        self.present(alertView, animated: false, completion: nil)
     }
     
 }

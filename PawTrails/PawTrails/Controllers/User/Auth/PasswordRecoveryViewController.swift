@@ -125,6 +125,8 @@ class PasswordRecoveryViewController: UIViewController, UITextFieldDelegate {
         self.present(alert, animated: true, completion: nil)
     }
     
+    
+    
     func beginLoadingContent() {
         showLoadingView()
     }
