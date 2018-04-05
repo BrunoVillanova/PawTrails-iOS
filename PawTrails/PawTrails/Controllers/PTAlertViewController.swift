@@ -43,6 +43,7 @@ enum AlertButtontType: Int {
     }
 }
 
+typealias AlertWillAppear = (_ alertViewController: PTAlertViewController) -> Void
 typealias AlertResult = (_ alertViewController: PTAlertViewController, _ alertResult: AlertResultType) -> Void
 
 class PTAlertViewController: UIViewController {
@@ -51,6 +52,7 @@ class PTAlertViewController: UIViewController {
     var infoLabel: UILabel?
     let titleLabel = UILabel(frame: .zero)
     var alertResult: AlertResult?
+    var alertWillAppear: AlertWillAppear?
     let verticalSeparatorWidth: CGFloat = 1
     var maxButtonSize: CGFloat = UIScreen.main.bounds.size.width
     let buttonsView = UIView(frame: .zero)
@@ -75,6 +77,8 @@ class PTAlertViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.alertWillAppear?(self)
         
         if let textField = textField {
             textField.becomeFirstResponder()
@@ -101,6 +105,7 @@ class PTAlertViewController: UIViewController {
             textFieldLabelTitle: String? = nil,
             buttonTypes: [AlertButtontType]? = [AlertButtontType.cancel, AlertButtontType.ok],
             titleBarStyle: AlertTitleBarStyle? = AlertTitleBarStyle.green,
+            alertWillAppear: AlertWillAppear? = nil,
             alertResult: AlertResult?) {
         
         self.init()
@@ -108,6 +113,7 @@ class PTAlertViewController: UIViewController {
         titleLabel.text = title
         self.textFieldLabelTitle = textFieldLabelTitle
         self.infoText = infoText
+        self.alertWillAppear = alertWillAppear
         self.alertResult = alertResult
         self.titleBarStyle = titleBarStyle!
         

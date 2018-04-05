@@ -131,12 +131,54 @@ class PetBreedSelectViewController: PetWizardStepViewController {
     
     fileprivate func showPetSizeInputAlert() {
         
+
+        
+        
         let title = "Size of pet"
         let infoText = "Looks like we are not sure about the size of your pet, please select the size then"
         let textFieldTitle = "Size of your pet"
         
-        let alertView = PTAlertViewController(title, infoText: infoText, textFieldLabelTitle: textFieldTitle,
-                                              titleBarStyle: .green, alertResult: {alert, result in
+        let alertView = PTAlertViewController(title,
+                                              infoText: infoText,
+                                              textFieldLabelTitle: textFieldTitle,
+                                              titleBarStyle: .green,
+                                              alertWillAppear: {alert in
+                                                
+                                                if let textField = alert.textField {
+                                                    
+                                                    // Pet Size Picker View
+                                                    let petSizePickerView = UIPickerView(frame: .zero)
+                                                    
+                                                    Observable.just([PetSize.small, PetSize.medium, PetSize.large])
+                                                        .bind(to: petSizePickerView.rx.itemTitles) { _, item in
+                                                            return item.description
+                                                        }
+                                                        .disposed(by: self.disposeBag)
+
+                                                    textField.inputView = petSizePickerView
+                                                    
+                                                    petSizePickerView.rx.modelSelected(PetSize.self)
+                                                        .subscribe(onNext: { models in
+                                                            if let selectedPetSize = models.first {
+                                                                textField.text = selectedPetSize.title
+                                                                self.pet!.size = selectedPetSize
+                                                            }
+                                                        })
+                                                        .disposed(by: self.disposeBag)
+                                                    
+                                                    textField.rx.controlEvent([UIControlEvents.editingDidBegin])
+                                                        .asObservable()
+                                                        .subscribe(onNext: {
+                                                            if self.pet!.size == nil {
+                                                                self.pet!.size = .small
+                                                            }
+                                                            textField.text = self.pet!.size?.title
+                                                            petSizePickerView.selectRow(0, inComponent: 0, animated: false)
+                                                        }).disposed(by: self.disposeBag)
+                                                }
+                                                
+                                              },
+                                              alertResult: {alert, result in
                                                 alert.dismiss(animated: true, completion: {
                                                     if result == .ok && self.pet!.size != nil {
                                                         self.delegate?.updatePet(self.pet!)
@@ -149,25 +191,9 @@ class PetBreedSelectViewController: PetWizardStepViewController {
         
         // PickerView
         
-        let petSizePickerView = UIPickerView(frame: .zero)
+
         
-        Observable.just([PetSize.small, PetSize.medium, PetSize.large])
-            .bind(to: petSizePickerView.rx.itemTitles) { _, item in
-                return item.description
-            }
-            .disposed(by: disposeBag)
-        
-        
-        petSizePickerView.rx.modelSelected(PetSize.self)
-            .subscribe(onNext: { models in
-                if let selectedPetSize = models.first, let textField = alertView.textField {
-                    textField.text = selectedPetSize.title
-                    self.pet!.size = selectedPetSize
-                }
-            })
-            .disposed(by: disposeBag)
-        
-        alertView.textFieldInputView = petSizePickerView
+//        alertView.textFieldInputView = petSizePickerView
     
         self.present(alertView, animated: true, completion: nil)
     }
