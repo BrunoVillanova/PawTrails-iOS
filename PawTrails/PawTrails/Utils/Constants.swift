@@ -62,7 +62,7 @@ struct Constants {
     static let socketURL = socketURLStaging
     static let socketURLSSL = socketURLSSLStaging
     #else
-    
+
     #if DEMO
     static let apiURL = apiURLStaging
     static let apiURLTest = apiURLTestStaging

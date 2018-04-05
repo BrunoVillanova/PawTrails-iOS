@@ -10,12 +10,13 @@ import UIKit
 import SnapKit
 
 enum AlertTitleBarStyle {
-    case green, red
+    case green, red, yellow
     
     var backgroundImageName: String {
         switch self {
             case .green: return "AlertViewTitleBarBackgroundGreen"
             case .red: return "AlertViewTitleBarBackgroundRed"
+            case .yellow: return "AlertViewTitleBarBackgroundYellow"
         }
     }
 }
@@ -42,6 +43,7 @@ enum AlertButtontType: Int {
     }
 }
 
+typealias AlertWillAppear = (_ alertViewController: PTAlertViewController) -> Void
 typealias AlertResult = (_ alertViewController: PTAlertViewController, _ alertResult: AlertResultType) -> Void
 
 class PTAlertViewController: UIViewController {
@@ -50,6 +52,7 @@ class PTAlertViewController: UIViewController {
     var infoLabel: UILabel?
     let titleLabel = UILabel(frame: .zero)
     var alertResult: AlertResult?
+    var alertWillAppear: AlertWillAppear?
     let verticalSeparatorWidth: CGFloat = 1
     var maxButtonSize: CGFloat = UIScreen.main.bounds.size.width
     let buttonsView = UIView(frame: .zero)
@@ -64,6 +67,7 @@ class PTAlertViewController: UIViewController {
         }
     }
     var textFieldInputView: UIView?
+    var backgroundView: UIView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,11 +75,37 @@ class PTAlertViewController: UIViewController {
         initialize()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.alertWillAppear?(self)
+        
+        if let textField = textField {
+            textField.becomeFirstResponder()
+        }
+        
+        if let backgroundView = backgroundView, backgroundView.alpha == 0 {
+            UIView.animate(withDuration: 0.3) {
+                backgroundView.alpha = 1
+            }
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if let backgroundView = backgroundView, backgroundView.alpha == 1 {
+            UIView.animate(withDuration: 0.3) {
+                backgroundView.alpha = 0
+            }
+        }
+    }
+    
     convenience init (_ title: String?,
                       infoText: String? = nil,
             textFieldLabelTitle: String? = nil,
             buttonTypes: [AlertButtontType]? = [AlertButtontType.cancel, AlertButtontType.ok],
             titleBarStyle: AlertTitleBarStyle? = AlertTitleBarStyle.green,
+            alertWillAppear: AlertWillAppear? = nil,
             alertResult: AlertResult?) {
         
         self.init()
@@ -83,6 +113,7 @@ class PTAlertViewController: UIViewController {
         titleLabel.text = title
         self.textFieldLabelTitle = textFieldLabelTitle
         self.infoText = infoText
+        self.alertWillAppear = alertWillAppear
         self.alertResult = alertResult
         self.titleBarStyle = titleBarStyle!
         
@@ -175,10 +206,13 @@ class PTAlertViewController: UIViewController {
         
         let backgroundView = UIView(frame: .zero)
         backgroundView.backgroundColor = UIColor(red: 65/255, green: 72/255, blue: 82/255, alpha: 0.7)
+        backgroundView.alpha = 0
         self.view.addSubview(backgroundView)
         backgroundView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
+        
+        self.backgroundView = backgroundView
         
         // AlertView
         let alertView = RoundedShadowView(frame: .zero)

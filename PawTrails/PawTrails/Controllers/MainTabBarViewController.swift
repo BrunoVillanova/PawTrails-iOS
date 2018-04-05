@@ -7,15 +7,13 @@
 //
 
 import UIKit
-import RxSwift
 
 class MainTabBarViewController: UITabBarController {
 
-    let disposeBag = DisposeBag()
+    fileprivate let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initialize()
         // Do any additional setup after loading the view.
     }
     
@@ -33,23 +31,4 @@ class MainTabBarViewController: UITabBarController {
         super.viewDidLayoutSubviews()
         self.tabBar.invalidateIntrinsicContentSize()
     }
-    
-
-    fileprivate func initialize() {
-
-        guard !SignUpYourDeviceVC.tutorialShown() else {
-            return
-        }
-        
-        DataManager.instance.pets().subscribe(onNext: { (pets) in
-            
-            if pets.isEmpty || pets.count == 0 {
-                let root = self.storyboard?.instantiateViewController(withIdentifier: "SignUpYourDeviceVC") as! SignUpYourDeviceVC
-                let navigationController = UINavigationController.init(rootViewController: root)
-                self.present(navigationController, animated: true, completion: nil)
-            }
-            
-        }).disposed(by: disposeBag)
-    }
-
 }

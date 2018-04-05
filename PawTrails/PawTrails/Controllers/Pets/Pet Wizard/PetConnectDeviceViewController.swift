@@ -113,6 +113,8 @@ class PetConnectDeviceViewController: PetWizardStepViewController {
     }
     
     fileprivate func verifyDeviceCode(_ deviceCode: String) {
+
+        
         if isBetaDemo {
             self.pet!.deviceCode = Constants.deviceIdforDemo
             self.delegate?.stepCompleted(completed: true, pet: self.pet!)

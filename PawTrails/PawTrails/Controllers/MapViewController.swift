@@ -48,6 +48,13 @@ class MapViewController: UIViewController {
         let notificationIdentifier: String = "petAdded"
         NotificationCenter.default.addObserver(self, selector: #selector(reloadPets), name: NSNotification.Name(rawValue: notificationIdentifier), object: nil)
         
+        DataManager.instance.pets().subscribe(onNext: { (pets) in
+            if pets.isEmpty || pets.count == 0 {
+                self.appDelegate.showPetWizardModally(true)
+            }
+            
+        }).disposed(by: disposeBag)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

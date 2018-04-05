@@ -9,6 +9,9 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import Toucan
+import TOCropViewController
+//import CropViewController
 
 class PetNameAndPhotoViewController: PetWizardStepViewController {
 
@@ -55,8 +58,7 @@ class PetNameAndPhotoViewController: PetWizardStepViewController {
         petPhotoImageView.layer.cornerRadius = petPhotoView.frame.size.height/2.0
         
         imagePicker.delegate = self
-        
-
+        imagePicker.allowsEditing = false
         
         petNameTextField.rx.text
             .asObservable()
@@ -73,25 +75,46 @@ class PetNameAndPhotoViewController: PetWizardStepViewController {
 
 
     @IBAction func selectPetPhotoButtonTapped(_ sender: Any) {
-        alert(imagePicker)
+        
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Take a Photo", style: .default, handler: { (photo) in
+            self.imagePicker.sourceType = .camera
+            self.present(self.imagePicker, animated: true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "Choose from Gallery", style: .default, handler: { (galery) in
+            self.imagePicker.sourceType = .photoLibrary
+            self.present(self.imagePicker, animated: true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
 extension PetNameAndPhotoViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let chosenImage = info[UIImagePickerControllerEditedImage] as? UIImage {
-            petPhotoImageView.image = chosenImage
-            
-            if var pet = self.pet {
-                pet.image = chosenImage.encoded
-            }
+        picker.dismiss(animated:true, completion: nil)
+        if let chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            let cropViewController = TOCropViewController(croppingStyle: .circular, image: chosenImage)
+            cropViewController.delegate = self
+            present(cropViewController, animated: true, completion: nil)
         }
-        dismiss(animated:true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
+        picker.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension PetNameAndPhotoViewController: TOCropViewControllerDelegate {
+    func cropViewController(_ cropViewController: TOCropViewController, didCropToImage image: UIImage, rect cropRect: CGRect, angle: Int) {
+        
+        cropViewController.dismiss(animated: true, completion: nil)
+        if let resizedImage = Toucan.Resize.resizeImage(image, size: CGSize(width: 200, height: 200)) {
+            petPhotoImageView.image = resizedImage
+            self.pet!.image = UIImageJPEGRepresentation(resizedImage, 100)
+        }
     }
 }
 
