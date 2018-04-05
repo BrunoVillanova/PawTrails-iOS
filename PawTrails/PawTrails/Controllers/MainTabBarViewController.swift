@@ -7,16 +7,13 @@
 //
 
 import UIKit
-import RxSwift
 
 class MainTabBarViewController: UITabBarController {
 
-    let disposeBag = DisposeBag()
     fileprivate let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initialize()
         // Do any additional setup after loading the view.
     }
     
@@ -34,10 +31,4 @@ class MainTabBarViewController: UITabBarController {
         super.viewDidLayoutSubviews()
         self.tabBar.invalidateIntrinsicContentSize()
     }
-    
-
-    fileprivate func initialize() {
-
-    }
-
 }

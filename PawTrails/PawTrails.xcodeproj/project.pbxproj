@@ -15,6 +15,9 @@
 		15160FF120728E94008CF9F4 /* PetWizardFinalStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15160FF020728E94008CF9F4 /* PetWizardFinalStepViewController.swift */; };
 		1523D0AE20617EB7003D8653 /* TripInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1523D0AD20617EB7003D8653 /* TripInfoCollectionViewCell.swift */; };
 		1523D0B120629691003D8653 /* DemoTrips.json in Resources */ = {isa = PBXBuildFile; fileRef = 1523D0B020629691003D8653 /* DemoTrips.json */; };
+		1539DA2920765A4600653EF7 /* Toucan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1539DA2820765A4600653EF7 /* Toucan.framework */; };
+		1539DA2D2076621500653EF7 /* CropViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1539DA2C2076621500653EF7 /* CropViewController.framework */; };
+		1539DA2E2076643300653EF7 /* TOCropViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1539DA2A2076620100653EF7 /* TOCropViewController.framework */; };
 		1543F37F206ECBE90069EBEB /* PetNameAndPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1543F37E206ECBE90069EBEB /* PetNameAndPhotoViewController.swift */; };
 		1543F381206F07390069EBEB /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1543F380206F07380069EBEB /* Montserrat-Light.ttf */; };
 		1543F383206F1BCE0069EBEB /* PetTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1543F382206F1BCE0069EBEB /* PetTypeViewController.swift */; };
@@ -287,6 +290,9 @@
 		15160FF020728E94008CF9F4 /* PetWizardFinalStepViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetWizardFinalStepViewController.swift; sourceTree = "<group>"; };
 		1523D0AD20617EB7003D8653 /* TripInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripInfoCollectionViewCell.swift; sourceTree = "<group>"; };
 		1523D0B020629691003D8653 /* DemoTrips.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DemoTrips.json; sourceTree = "<group>"; };
+		1539DA2820765A4600653EF7 /* Toucan.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Toucan.framework; path = Carthage/Build/iOS/Toucan.framework; sourceTree = "<group>"; };
+		1539DA2A2076620100653EF7 /* TOCropViewController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TOCropViewController.framework; path = Carthage/Build/iOS/TOCropViewController.framework; sourceTree = "<group>"; };
+		1539DA2C2076621500653EF7 /* CropViewController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CropViewController.framework; path = Carthage/Build/iOS/CropViewController.framework; sourceTree = "<group>"; };
 		1543F37E206ECBE90069EBEB /* PetNameAndPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetNameAndPhotoViewController.swift; sourceTree = "<group>"; };
 		1543F380206F07380069EBEB /* Montserrat-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.ttf"; sourceTree = "<group>"; };
 		1543F382206F1BCE0069EBEB /* PetTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetTypeViewController.swift; sourceTree = "<group>"; };
@@ -577,6 +583,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1539DA2E2076643300653EF7 /* TOCropViewController.framework in Frameworks */,
+				1539DA2D2076621500653EF7 /* CropViewController.framework in Frameworks */,
+				1539DA2920765A4600653EF7 /* Toucan.framework in Frameworks */,
 				1543F387206FD0100069EBEB /* Hero.framework in Frameworks */,
 				15E6E38E206D5D6100484EAF /* GradientView.framework in Frameworks */,
 				15A13A26206AC73D005790B3 /* BWWalkthrough.framework in Frameworks */,
@@ -1251,6 +1260,9 @@
 		91352D1B7E01CC1C0CF51D38 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1539DA2C2076621500653EF7 /* CropViewController.framework */,
+				1539DA2A2076620100653EF7 /* TOCropViewController.framework */,
+				1539DA2820765A4600653EF7 /* Toucan.framework */,
 				1543F386206FD0100069EBEB /* Hero.framework */,
 				15E6E38D206D5D6100484EAF /* GradientView.framework */,
 				15A13A25206AC73D005790B3 /* BWWalkthrough.framework */,
@@ -1534,6 +1546,9 @@
 				"$(SRCROOT)/Carthage/Build/iOS/BWWalkthrough.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/GradientView.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Hero.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Toucan.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/CropViewController.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/TOCropViewController.framework",
 			);
 			name = "Carthage Copy Frameworks";
 			outputPaths = (
@@ -1560,6 +1575,9 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/BWWalkthrough.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/GradientView.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Hero.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Toucan.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/CropViewController.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/TOCropViewController.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
