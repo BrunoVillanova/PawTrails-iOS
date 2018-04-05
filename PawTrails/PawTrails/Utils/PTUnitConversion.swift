@@ -14,7 +14,7 @@ class PTUnitConversion: NSObject {
     class func KgToLBS(weight : Double)-> Double {
         
         let lbs = weight*2.2046226218488
-        return lbs.rounded(toPlaces: 0)
+        return lbs.rounded(toPlaces: 2)
     }
     
 }

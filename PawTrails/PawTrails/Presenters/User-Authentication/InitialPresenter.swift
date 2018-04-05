@@ -68,7 +68,12 @@ class InitialPresenter {
 //                window?.removeFromSuperview()
                 
                 if let error = error {
-                    self.view?.errorMessage(error.msg)
+//                    if error.msg.msg.count != 0 {
+                        self.view?.errorMessage(error.msg)
+//                    }
+//                    else {
+//                        self.view?.verifyAccount(email!, password!)
+//                    }
                     
                 }else{
                     self.view?.verifyAccount(email!, password!)

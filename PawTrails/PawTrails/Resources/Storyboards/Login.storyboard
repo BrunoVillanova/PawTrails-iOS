@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,11 +19,11 @@
         </array>
     </customFonts>
     <scenes>
-        <!--User Login View Controller-->
+        <!--Intitial View controller-->
         <scene sceneID="QuN-8u-8Bq">
             <objects>
-                <viewController storyboardIdentifier="InitialViewController" modalPresentationStyle="formSheet" id="grF-PC-ZUv" userLabel="User Login View Controller" customClass="InitialViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" userInteractionEnabled="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Cge-Tb-Fss">
+                <viewController storyboardIdentifier="InitialViewController" modalPresentationStyle="formSheet" id="grF-PC-ZUv" userLabel="Intitial View controller" customClass="InitialViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Cge-Tb-Fss">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -48,20 +49,24 @@
                                                     </button>
                                                 </subviews>
                                             </stackView>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mVR-Xm-RBV">
-                                                <rect key="frame" x="25" y="413" width="327" height="50"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mVR-Xm-RBV">
+                                                <rect key="frame" x="25" y="424" width="327" height="50"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="21T-Up-lNl"/>
+                                                </constraints>
                                                 <state key="normal" image="btn_create_account">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="loginAction:" destination="grF-PC-ZUv" eventType="touchUpInside" id="LPK-pG-t8e"/>
+                                                    <segue destination="fDJ-bG-Qb7" kind="push" id="fgw-Nw-EnJ"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jLh-Ld-Kaw">
-                                                <rect key="frame" x="25" y="300" width="327" height="50"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jLh-Ld-Kaw">
+                                                <rect key="frame" x="24" y="306" width="327" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="9ij-2Y-BJB"/>
+                                                </constraints>
                                                 <state key="normal" image="btn_facebook">
                                                     <color key="titleColor" red="0.83137254900000002" green="0.078431372550000003" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
@@ -69,30 +74,45 @@
                                                     <action selector="facebookLogin:" destination="grF-PC-ZUv" eventType="touchUpInside" id="sfZ-mv-yYg"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ou-xG-uET">
-                                                <rect key="frame" x="171" y="373" width="35" height="21"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ou-xG-uET">
+                                                <rect key="frame" x="170" y="380.5" width="35" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="21" id="hcu-1c-pIf"/>
+                                                    <constraint firstAttribute="width" constant="35" id="yvh-ey-HcY"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="14.399999618530273"/>
                                                 <nil key="textColor"/>
                                                 <color key="highlightedColor" red="0.25490196078431371" green="0.28235294117647058" blue="0.32156862745098036" alpha="1" colorSpace="calibratedRGB"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Already have an account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xpA-Wb-H0E">
-                                                <rect key="frame" x="60" y="496" width="187" height="21"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Already have an account?" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xpA-Wb-H0E">
+                                                <rect key="frame" x="60" y="504.5" width="186" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="21" id="IuD-Ju-0tK"/>
+                                                    <constraint firstAttribute="width" constant="186" id="s7W-bi-2c1"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                                 <color key="textColor" red="0.25490196078431371" green="0.28235294117647058" blue="0.32156862745098036" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gBI-fn-q4M">
-                                                <rect key="frame" x="243" y="491" width="73" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gBI-fn-q4M">
+                                                <rect key="frame" x="247" y="499.5" width="73" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="EgN-ff-7jl"/>
+                                                    <constraint firstAttribute="width" constant="73" id="sFM-EH-5Im"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                                 <state key="normal" title="Login Now"/>
+                                                <connections>
+                                                    <action selector="loginAction:" destination="grF-PC-ZUv" eventType="touchUpInside" id="Ger-F1-ZJr"/>
+                                                    <segue destination="4jX-eP-yhF" kind="push" id="Cfp-nI-3Xv"/>
+                                                </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="By signing up,  you agree to our Terms &amp; Conditions and Privacy Statement" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hSd-RU-FlP">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By signing up,  you agree to our Terms &amp; Conditions and Privacy Statement" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hSd-RU-FlP">
                                                 <rect key="frame" x="49" y="598" width="277" height="39"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="39" id="NFd-qF-MuK"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -103,11 +123,39 @@
                                                     <constraint firstAttribute="width" constant="117" id="QCW-TX-q7t"/>
                                                 </constraints>
                                             </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pMo-Sl-oRu">
+                                                <rect key="frame" x="49" y="586" width="288" height="64"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="64" id="qZ0-hR-mw7"/>
+                                                </constraints>
+                                                <connections>
+                                                    <segue destination="NlU-Ed-V5R" kind="show" id="hTd-oO-hfe"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <constraints>
+                                            <constraint firstItem="mVR-Xm-RBV" firstAttribute="leading" secondItem="k2F-fO-Hlc" secondAttribute="leading" constant="25" id="3ur-o9-e1A"/>
+                                            <constraint firstItem="xpA-Wb-H0E" firstAttribute="top" secondItem="mVR-Xm-RBV" secondAttribute="bottom" constant="30.5" id="BiL-I2-d9x"/>
+                                            <constraint firstAttribute="trailing" secondItem="mVR-Xm-RBV" secondAttribute="trailing" constant="23" id="CJB-ZB-zvK"/>
+                                            <constraint firstAttribute="bottom" secondItem="pMo-Sl-oRu" secondAttribute="bottom" constant="17" id="E98-a9-PXT"/>
+                                            <constraint firstItem="pMo-Sl-oRu" firstAttribute="leading" secondItem="k2F-fO-Hlc" secondAttribute="leading" constant="49" id="KOt-xE-99L"/>
                                             <constraint firstItem="day-4c-dir" firstAttribute="centerX" secondItem="k2F-fO-Hlc" secondAttribute="centerX" id="OqO-PX-hS7"/>
+                                            <constraint firstAttribute="trailing" secondItem="jLh-Ld-Kaw" secondAttribute="trailing" constant="24" id="SXC-zF-lL9"/>
+                                            <constraint firstItem="mVR-Xm-RBV" firstAttribute="top" secondItem="7Ou-xG-uET" secondAttribute="bottom" constant="22.5" id="ZVT-XI-QSy"/>
+                                            <constraint firstItem="gBI-fn-q4M" firstAttribute="top" secondItem="mVR-Xm-RBV" secondAttribute="bottom" constant="25.5" id="ZzG-ln-2Lb"/>
+                                            <constraint firstAttribute="bottom" secondItem="hSd-RU-FlP" secondAttribute="bottom" constant="30" id="bPN-CA-sPe"/>
+                                            <constraint firstItem="jLh-Ld-Kaw" firstAttribute="leading" secondItem="k2F-fO-Hlc" secondAttribute="leading" constant="24" id="ckw-9q-ZZP"/>
+                                            <constraint firstItem="7Ou-xG-uET" firstAttribute="top" secondItem="jLh-Ld-Kaw" secondAttribute="bottom" constant="24.5" id="cq3-2k-uKx"/>
+                                            <constraint firstAttribute="trailing" secondItem="hSd-RU-FlP" secondAttribute="trailing" constant="49" id="dZu-Wq-6js"/>
+                                            <constraint firstItem="gBI-fn-q4M" firstAttribute="leading" secondItem="xpA-Wb-H0E" secondAttribute="trailing" constant="1" id="fIj-7B-IGb"/>
+                                            <constraint firstItem="jLh-Ld-Kaw" firstAttribute="centerY" secondItem="k2F-fO-Hlc" secondAttribute="centerY" constant="-2.5" id="frv-tt-shp"/>
                                             <constraint firstAttribute="height" constant="667" id="ikV-zs-Cxd"/>
+                                            <constraint firstItem="jLh-Ld-Kaw" firstAttribute="centerX" secondItem="k2F-fO-Hlc" secondAttribute="centerX" id="jaQ-nd-wbw"/>
+                                            <constraint firstAttribute="trailing" secondItem="pMo-Sl-oRu" secondAttribute="trailing" constant="38" id="k98-P2-rqJ"/>
+                                            <constraint firstItem="7Ou-xG-uET" firstAttribute="centerX" secondItem="k2F-fO-Hlc" secondAttribute="centerX" id="lNE-RX-AaH"/>
                                             <constraint firstItem="day-4c-dir" firstAttribute="top" secondItem="k2F-fO-Hlc" secondAttribute="top" constant="100" id="loP-XJ-6SU"/>
+                                            <constraint firstItem="xpA-Wb-H0E" firstAttribute="leading" secondItem="k2F-fO-Hlc" secondAttribute="leading" constant="60" id="pux-3D-mmu"/>
+                                            <constraint firstItem="hSd-RU-FlP" firstAttribute="leading" secondItem="k2F-fO-Hlc" secondAttribute="leading" constant="49" id="wvG-FJ-Ega"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -135,23 +183,955 @@
                     </view>
                     <navigationItem key="navigationItem" id="JLY-vD-O5c"/>
                     <connections>
+                        <outlet property="agreementLabel" destination="hSd-RU-FlP" id="dMl-tl-MIF"/>
+                        <outlet property="createAccountButton" destination="mVR-Xm-RBV" id="9CF-3h-Xik"/>
                         <outlet property="facebookButton" destination="jLh-Ld-Kaw" id="ryj-s7-mmh"/>
-                        <outlet property="googleButton" destination="OBq-N8-m1c" id="6x4-XI-vvx"/>
-                        <outlet property="loginButton" destination="mVR-Xm-RBV" id="Cre-w0-iEX"/>
                         <outlet property="logoImageView" destination="day-4c-dir" id="dx9-k6-XHf"/>
-                        <outlet property="socialMediaBar" destination="kYT-7M-04v" id="LRj-md-oKE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9qG-Jq-G6p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-7770.3999999999996" y="-1603.4482758620691"/>
+            <point key="canvasLocation" x="-7706.3999999999996" y="-1609.745127436282"/>
+        </scene>
+        <!--Login View controller-->
+        <scene sceneID="JRH-VE-v7g">
+            <objects>
+                <viewController storyboardIdentifier="LoginViewController" modalPresentationStyle="formSheet" id="4jX-eP-yhF" userLabel="Login View controller" customClass="LoginViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="N1Y-e4-Hus">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="InitialBg" translatesAutoresizingMaskIntoConstraints="NO" id="M9T-aE-RfF">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tZI-Kw-wbL">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vdi-Df-XZa">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" distribution="equalCentering" alignment="center" spacing="75" translatesAutoresizingMaskIntoConstraints="NO" id="fj0-Pt-ChO">
+                                                <rect key="frame" x="72" y="539" width="0.0" height="0.0"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <subviews>
+                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DeR-7H-VTo">
+                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="24"/>
+                                                        <state key="normal" image="login_Googleplus"/>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account?" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AJO-mG-oTP">
+                                                <rect key="frame" x="47" y="618.5" width="165.5" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="21" id="qLy-hk-sFE"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
+                                                <color key="textColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.32156862749999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PdQ-RP-Upm">
+                                                <rect key="frame" x="213.5" y="614" width="94" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="94" id="W3g-gc-m9t"/>
+                                                    <constraint firstAttribute="height" constant="30" id="k0d-Qd-g79"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
+                                                <state key="normal" title="Sign up now"/>
+                                                <connections>
+                                                    <segue destination="fDJ-bG-Qb7" kind="push" id="LOX-RZ-afX"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome Back!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1So-tM-rVD">
+                                                <rect key="frame" x="107" y="127" width="160" height="32"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="32" id="irV-pQ-v5Q"/>
+                                                    <constraint firstAttribute="width" constant="160" id="xDg-mV-aMz"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="20"/>
+                                                <color key="textColor" red="0.25490196078431371" green="0.28235294117647058" blue="0.32156862745098036" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rbx-G8-kKa" customClass="PTNiceTextField" customModule="PawTrails" customModuleProvider="target">
+                                                <rect key="frame" x="33" y="190" width="308" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="33F-6f-pUw"/>
+                                                </constraints>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JKn-mn-2A3">
+                                                <rect key="frame" x="33" y="262" width="308" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="o3M-Vc-nTV"/>
+                                                </constraints>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jzl-Zq-OeH">
+                                                <rect key="frame" x="33" y="355" width="308" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="B3G-Yr-zLj"/>
+                                                </constraints>
+                                                <state key="normal" image="btn_Login"/>
+                                                <connections>
+                                                    <action selector="loginAction:" destination="4jX-eP-yhF" eventType="touchUpInside" id="IxM-Eb-Zuc"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aWq-kt-8HE">
+                                                <rect key="frame" x="99" y="436" width="178" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="178" id="9wJ-Dn-Tln"/>
+                                                    <constraint firstAttribute="height" constant="30" id="zDt-1g-G2M"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
+                                                <state key="normal" title="Forgot your password?">
+                                                    <color key="titleColor" red="0.2627450980392157" green="0.50196078431372548" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <segue destination="G0n-xB-LgE" kind="push" id="zFc-Iz-2Jz"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="Jzl-Zq-OeH" firstAttribute="top" secondItem="JKn-mn-2A3" secondAttribute="bottom" constant="43" id="3b0-ML-z23"/>
+                                            <constraint firstItem="aWq-kt-8HE" firstAttribute="centerX" secondItem="Vdi-Df-XZa" secondAttribute="centerX" id="3qs-J4-hsT"/>
+                                            <constraint firstItem="rbx-G8-kKa" firstAttribute="top" secondItem="1So-tM-rVD" secondAttribute="bottom" constant="31" id="5Gu-RI-Ncp"/>
+                                            <constraint firstItem="PdQ-RP-Upm" firstAttribute="leading" secondItem="AJO-mG-oTP" secondAttribute="trailing" constant="1" id="60o-xr-Zrj"/>
+                                            <constraint firstItem="JKn-mn-2A3" firstAttribute="leading" secondItem="Vdi-Df-XZa" secondAttribute="leading" constant="33" id="9IF-yl-Fbd"/>
+                                            <constraint firstItem="aWq-kt-8HE" firstAttribute="top" secondItem="Jzl-Zq-OeH" secondAttribute="bottom" constant="31" id="CVc-EK-939"/>
+                                            <constraint firstAttribute="trailing" secondItem="Jzl-Zq-OeH" secondAttribute="trailing" constant="34" id="F0r-hq-ozw"/>
+                                            <constraint firstItem="rbx-G8-kKa" firstAttribute="leading" secondItem="Vdi-Df-XZa" secondAttribute="leading" constant="33" id="Ieq-GP-mTm"/>
+                                            <constraint firstAttribute="trailing" secondItem="JKn-mn-2A3" secondAttribute="trailing" constant="34" id="Ilu-rZ-r6T"/>
+                                            <constraint firstAttribute="bottom" secondItem="PdQ-RP-Upm" secondAttribute="bottom" constant="23" id="Qac-xj-ngY"/>
+                                            <constraint firstAttribute="height" constant="667" id="TCb-rT-RZz"/>
+                                            <constraint firstItem="1So-tM-rVD" firstAttribute="top" secondItem="Vdi-Df-XZa" secondAttribute="top" constant="127" id="UnU-SJ-Md5"/>
+                                            <constraint firstItem="Jzl-Zq-OeH" firstAttribute="leading" secondItem="Vdi-Df-XZa" secondAttribute="leading" constant="33" id="VbF-tw-kBG"/>
+                                            <constraint firstAttribute="bottom" secondItem="AJO-mG-oTP" secondAttribute="bottom" constant="27.5" id="YuO-o8-jmX"/>
+                                            <constraint firstItem="1So-tM-rVD" firstAttribute="centerX" secondItem="Vdi-Df-XZa" secondAttribute="centerX" id="aFa-Z8-TVQ"/>
+                                            <constraint firstItem="JKn-mn-2A3" firstAttribute="top" secondItem="rbx-G8-kKa" secondAttribute="bottom" constant="22" id="gfV-UW-6XG"/>
+                                            <constraint firstItem="AJO-mG-oTP" firstAttribute="leading" secondItem="Vdi-Df-XZa" secondAttribute="leading" constant="47" id="kBG-vw-Cbn"/>
+                                            <constraint firstAttribute="trailing" secondItem="rbx-G8-kKa" secondAttribute="trailing" constant="34" id="vMf-rc-UG2"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Vdi-Df-XZa" firstAttribute="leading" secondItem="tZI-Kw-wbL" secondAttribute="leading" id="8mA-Ma-v7b"/>
+                                    <constraint firstAttribute="bottom" secondItem="Vdi-Df-XZa" secondAttribute="bottom" id="Hxm-gg-OLN"/>
+                                    <constraint firstAttribute="trailing" secondItem="Vdi-Df-XZa" secondAttribute="trailing" id="RQr-Yu-OJx"/>
+                                    <constraint firstItem="Vdi-Df-XZa" firstAttribute="top" secondItem="tZI-Kw-wbL" secondAttribute="top" id="l7s-T2-Xb5"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="M9T-aE-RfF" firstAttribute="leading" secondItem="N1Y-e4-Hus" secondAttribute="leading" id="7Ui-U8-mYz"/>
+                            <constraint firstItem="Vdi-Df-XZa" firstAttribute="width" secondItem="N1Y-e4-Hus" secondAttribute="width" id="9Bd-iH-9Og"/>
+                            <constraint firstItem="M9T-aE-RfF" firstAttribute="top" secondItem="N1Y-e4-Hus" secondAttribute="top" id="ENA-Vb-n4J"/>
+                            <constraint firstItem="tZI-Kw-wbL" firstAttribute="leading" secondItem="sdX-L4-sp0" secondAttribute="leading" id="NYI-0H-xP6"/>
+                            <constraint firstItem="tZI-Kw-wbL" firstAttribute="bottom" secondItem="sdX-L4-sp0" secondAttribute="bottom" id="Vkv-TZ-NL6"/>
+                            <constraint firstAttribute="bottom" secondItem="M9T-aE-RfF" secondAttribute="bottom" id="YP4-Uj-hjt"/>
+                            <constraint firstItem="tZI-Kw-wbL" firstAttribute="top" secondItem="N1Y-e4-Hus" secondAttribute="top" id="YZr-U3-Qec"/>
+                            <constraint firstAttribute="trailing" secondItem="M9T-aE-RfF" secondAttribute="trailing" id="nD7-Ux-aec"/>
+                            <constraint firstItem="tZI-Kw-wbL" firstAttribute="trailing" secondItem="sdX-L4-sp0" secondAttribute="trailing" id="tC8-tE-ee6"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="sdX-L4-sp0"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="AMY-0v-nco"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="emailTextField" destination="rbx-G8-kKa" id="9Hf-68-kgl"/>
+                        <outlet property="loginButton" destination="Jzl-Zq-OeH" id="HDi-xR-ijh"/>
+                        <outlet property="passwordTextField" destination="JKn-mn-2A3" id="9eP-TK-FM9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="C2g-xr-k1M" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-6630" y="-1931"/>
+        </scene>
+        <!--Register View controller-->
+        <scene sceneID="GRv-Dv-Tk4">
+            <objects>
+                <viewController storyboardIdentifier="SignUpViewController" modalPresentationStyle="formSheet" id="fDJ-bG-Qb7" userLabel="Register View controller" customClass="SignUpViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="LgM-mb-EA1">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="InitialBg" translatesAutoresizingMaskIntoConstraints="NO" id="Eb6-zY-DNh">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ui6-JR-uZn">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="04i-4a-pKJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zpG-y1-2oH" customClass="PTNiceTextField" customModule="PawTrails" customModuleProvider="target">
+                                                <rect key="frame" x="33" y="232" width="308" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="pqD-VI-Qlc"/>
+                                                </constraints>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iQJ-wJ-ORW" customClass="PTNiceTextField" customModule="PawTrails" customModuleProvider="target">
+                                                <rect key="frame" x="33" y="304" width="308" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="Zn7-3R-0em"/>
+                                                </constraints>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GYV-VT-0yn">
+                                                <rect key="frame" x="22" y="459" width="333" height="64"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="64" id="gU8-Zp-Wlt"/>
+                                                </constraints>
+                                                <state key="normal" image="btn_register"/>
+                                                <connections>
+                                                    <action selector="signUpBtnPressed:" destination="fDJ-bG-Qb7" eventType="touchUpInside" id="zV7-d9-4bL"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to PawTrails" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sYA-fs-fDZ">
+                                                <rect key="frame" x="76" y="154" width="225" height="32"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="32" id="dpL-0A-Q9v"/>
+                                                    <constraint firstAttribute="width" constant="225" id="gia-TX-7JA"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="20"/>
+                                                <color key="textColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.32156862749999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AiU-SF-8Hu" customClass="PTNiceTextField" customModule="PawTrails" customModuleProvider="target">
+                                                <rect key="frame" x="33" y="374" width="308" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="ozD-W4-MOx"/>
+                                                </constraints>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                            </textField>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By signing up,  you agree to our Terms &amp; Conditions and Privacy Statement" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mT8-OE-t8m">
+                                                <rect key="frame" x="49" y="596" width="277" height="39"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="39" id="2bC-Xe-bxh"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a2l-Us-B11">
+                                                <rect key="frame" x="57" y="585" width="269" height="56"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="56" id="bLK-eI-QhT"/>
+                                                </constraints>
+                                                <connections>
+                                                    <segue destination="NlU-Ed-V5R" kind="show" id="qRy-l5-zyK"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="sYA-fs-fDZ" firstAttribute="top" secondItem="04i-4a-pKJ" secondAttribute="top" constant="154" id="1kY-B8-n5m"/>
+                                            <constraint firstItem="iQJ-wJ-ORW" firstAttribute="leading" secondItem="04i-4a-pKJ" secondAttribute="leading" constant="33" id="2Hs-wK-5p9"/>
+                                            <constraint firstAttribute="bottom" secondItem="a2l-Us-B11" secondAttribute="bottom" constant="26" id="5g6-vj-hcy"/>
+                                            <constraint firstItem="GYV-VT-0yn" firstAttribute="top" secondItem="AiU-SF-8Hu" secondAttribute="bottom" constant="35" id="7cw-w3-IBO"/>
+                                            <constraint firstAttribute="trailing" secondItem="iQJ-wJ-ORW" secondAttribute="trailing" constant="34" id="FrU-xt-f0h"/>
+                                            <constraint firstAttribute="trailing" secondItem="GYV-VT-0yn" secondAttribute="trailing" constant="20" id="HOp-Gh-pub"/>
+                                            <constraint firstItem="zpG-y1-2oH" firstAttribute="top" secondItem="sYA-fs-fDZ" secondAttribute="bottom" constant="46" id="J36-Kq-XVn"/>
+                                            <constraint firstItem="a2l-Us-B11" firstAttribute="leading" secondItem="04i-4a-pKJ" secondAttribute="leading" constant="57" id="Ohu-cl-igE"/>
+                                            <constraint firstItem="GYV-VT-0yn" firstAttribute="leading" secondItem="04i-4a-pKJ" secondAttribute="leading" constant="22" id="VYE-yg-Vvk"/>
+                                            <constraint firstItem="mT8-OE-t8m" firstAttribute="leading" secondItem="04i-4a-pKJ" secondAttribute="leading" constant="49" id="W0J-IZ-P5a"/>
+                                            <constraint firstAttribute="bottom" secondItem="mT8-OE-t8m" secondAttribute="bottom" constant="32" id="ZFr-gm-Lbz"/>
+                                            <constraint firstAttribute="trailing" secondItem="a2l-Us-B11" secondAttribute="trailing" constant="49" id="a3m-uw-2Fv"/>
+                                            <constraint firstItem="zpG-y1-2oH" firstAttribute="leading" secondItem="04i-4a-pKJ" secondAttribute="leading" constant="33" id="bGG-fG-sef"/>
+                                            <constraint firstAttribute="trailing" secondItem="mT8-OE-t8m" secondAttribute="trailing" constant="49" id="drD-JN-pVp"/>
+                                            <constraint firstAttribute="trailing" secondItem="AiU-SF-8Hu" secondAttribute="trailing" constant="34" id="fRY-Dm-08b"/>
+                                            <constraint firstAttribute="height" constant="667" id="g7J-dj-LDv"/>
+                                            <constraint firstAttribute="trailing" secondItem="zpG-y1-2oH" secondAttribute="trailing" constant="34" id="hKY-bb-vCL"/>
+                                            <constraint firstItem="sYA-fs-fDZ" firstAttribute="centerX" secondItem="04i-4a-pKJ" secondAttribute="centerX" constant="1" id="ogJ-2s-ycX"/>
+                                            <constraint firstItem="iQJ-wJ-ORW" firstAttribute="top" secondItem="zpG-y1-2oH" secondAttribute="bottom" constant="22" id="pdk-Ro-QlZ"/>
+                                            <constraint firstItem="AiU-SF-8Hu" firstAttribute="top" secondItem="iQJ-wJ-ORW" secondAttribute="bottom" constant="20" id="tJy-3Z-Wb1"/>
+                                            <constraint firstItem="AiU-SF-8Hu" firstAttribute="leading" secondItem="04i-4a-pKJ" secondAttribute="leading" constant="33" id="y8v-ix-EaB"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="04i-4a-pKJ" firstAttribute="top" secondItem="ui6-JR-uZn" secondAttribute="top" id="2PN-PW-YEB"/>
+                                    <constraint firstAttribute="trailing" secondItem="04i-4a-pKJ" secondAttribute="trailing" id="Hwx-3v-jfK"/>
+                                    <constraint firstItem="04i-4a-pKJ" firstAttribute="leading" secondItem="ui6-JR-uZn" secondAttribute="leading" id="hht-AP-Jpt"/>
+                                    <constraint firstAttribute="bottom" secondItem="04i-4a-pKJ" secondAttribute="bottom" id="vls-we-tRX"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Eb6-zY-DNh" secondAttribute="trailing" id="BU2-S9-sss"/>
+                            <constraint firstItem="ui6-JR-uZn" firstAttribute="leading" secondItem="36b-J3-TD9" secondAttribute="leading" id="Kuy-9f-gB2"/>
+                            <constraint firstItem="Eb6-zY-DNh" firstAttribute="leading" secondItem="LgM-mb-EA1" secondAttribute="leading" id="NrV-Qi-TEd"/>
+                            <constraint firstAttribute="bottom" secondItem="Eb6-zY-DNh" secondAttribute="bottom" id="PPY-wc-Koa"/>
+                            <constraint firstItem="Eb6-zY-DNh" firstAttribute="top" secondItem="LgM-mb-EA1" secondAttribute="top" id="dCl-dB-TKa"/>
+                            <constraint firstItem="ui6-JR-uZn" firstAttribute="trailing" secondItem="36b-J3-TD9" secondAttribute="trailing" id="kKf-R1-KgV"/>
+                            <constraint firstItem="ui6-JR-uZn" firstAttribute="top" secondItem="LgM-mb-EA1" secondAttribute="top" id="kg5-TO-Got"/>
+                            <constraint firstItem="04i-4a-pKJ" firstAttribute="width" secondItem="LgM-mb-EA1" secondAttribute="width" id="vgM-6r-56R"/>
+                            <constraint firstItem="ui6-JR-uZn" firstAttribute="bottom" secondItem="36b-J3-TD9" secondAttribute="bottom" id="wiO-2q-qro"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="36b-J3-TD9"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="aYa-8I-oDL"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="agreementLabel" destination="mT8-OE-t8m" id="tWg-UM-Glx"/>
+                        <outlet property="confirmPasswordTextField" destination="AiU-SF-8Hu" id="vuB-Xg-Y2J"/>
+                        <outlet property="emailTextField" destination="zpG-y1-2oH" id="1qA-OC-IdD"/>
+                        <outlet property="passwordTextField" destination="iQJ-wJ-ORW" id="UyX-ob-Ei7"/>
+                        <outlet property="signUpButton" destination="GYV-VT-0yn" id="96u-mS-tnA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E6y-2D-Hqd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-5930.3999999999996" y="-1790.5547226386807"/>
+        </scene>
+        <!--Register View controller-->
+        <scene sceneID="ijK-lM-qia">
+            <objects>
+                <viewController storyboardIdentifier="EmailVerificationViewController" modalPresentationStyle="formSheet" id="aeh-Bd-87A" userLabel="Register View controller" customClass="EmailVerificationViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="VBJ-HN-Oai">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="InitialBg" translatesAutoresizingMaskIntoConstraints="NO" id="U1y-DX-hHs">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3gD-wg-KOL">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="Wmc-ra-COD">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V18-J0-OYI">
+                                                <rect key="frame" x="24" y="495" width="327" height="54"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="54" id="ick-5T-vet"/>
+                                                </constraints>
+                                                <state key="normal" image="btn_ge_back_login">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="goBackToLogin:" destination="aeh-Bd-87A" eventType="touchUpInside" id="9DP-8h-YH9"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="85C-op-QfX">
+                                                <rect key="frame" x="23" y="376" width="328" height="52"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="52" id="7sy-3H-eA3"/>
+                                                </constraints>
+                                                <state key="normal" image="btn_send_email">
+                                                    <color key="titleColor" red="0.83137254900000002" green="0.078431372550000003" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="facebookLogin:" destination="grF-PC-ZUv" eventType="touchUpInside" id="tJW-9a-15s"/>
+                                                    <action selector="sendEmailAgainAction:" destination="aeh-Bd-87A" eventType="touchUpInside" id="6b9-cN-12N"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mVb-jo-E5d">
+                                                <rect key="frame" x="170" y="453" width="35" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="35" id="Wrt-4c-XyY"/>
+                                                    <constraint firstAttribute="height" constant="21" id="ypL-wc-hWT"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="14.399999618530273"/>
+                                                <nil key="textColor"/>
+                                                <color key="highlightedColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_success" translatesAutoresizingMaskIntoConstraints="NO" id="H8w-12-z0H">
+                                                <rect key="frame" x="126" y="160" width="123" height="110"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="110" id="2VN-iw-px9"/>
+                                                    <constraint firstAttribute="width" constant="123" id="Buo-cJ-3ew"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Completed!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PPz-3C-eWg">
+                                                <rect key="frame" x="113" y="292" width="148" height="28"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="148" id="4D7-z2-m4D"/>
+                                                    <constraint firstAttribute="height" constant="28" id="tLa-OL-Un9"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <color key="highlightedColor" red="0.25490196078431371" green="0.28235294117647058" blue="0.32156862745098036" alpha="1" colorSpace="calibratedRGB"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ltx-2J-ldL">
+                                                <rect key="frame" x="322" y="28" width="51" height="42"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="51" id="eRx-uY-16e"/>
+                                                    <constraint firstAttribute="height" constant="42" id="wHw-l1-HLN"/>
+                                                </constraints>
+                                                <state key="normal" image="close_icon"/>
+                                                <connections>
+                                                    <action selector="signOutAction:" destination="aeh-Bd-87A" eventType="touchUpInside" id="By9-PJ-Yqs"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="V18-J0-OYI" secondAttribute="trailing" constant="24" id="8iJ-DZ-7qy"/>
+                                            <constraint firstItem="85C-op-QfX" firstAttribute="leading" secondItem="Wmc-ra-COD" secondAttribute="leading" constant="23" id="HcS-20-SvT"/>
+                                            <constraint firstItem="Ltx-2J-ldL" firstAttribute="top" secondItem="Wmc-ra-COD" secondAttribute="top" constant="28" id="Hsc-tg-zeW"/>
+                                            <constraint firstItem="PPz-3C-eWg" firstAttribute="top" secondItem="H8w-12-z0H" secondAttribute="bottom" constant="22" id="Ihd-iy-Tmu"/>
+                                            <constraint firstAttribute="trailing" secondItem="85C-op-QfX" secondAttribute="trailing" constant="24" id="JnH-jI-H9a"/>
+                                            <constraint firstItem="H8w-12-z0H" firstAttribute="centerX" secondItem="Wmc-ra-COD" secondAttribute="centerX" id="UUf-Vq-YMN"/>
+                                            <constraint firstItem="85C-op-QfX" firstAttribute="top" secondItem="PPz-3C-eWg" secondAttribute="bottom" constant="56" id="Vjh-ey-wUT"/>
+                                            <constraint firstItem="V18-J0-OYI" firstAttribute="leading" secondItem="Wmc-ra-COD" secondAttribute="leading" constant="24" id="cmp-hC-6or"/>
+                                            <constraint firstAttribute="trailing" secondItem="Ltx-2J-ldL" secondAttribute="trailing" constant="2" id="dH1-H3-vZh"/>
+                                            <constraint firstItem="V18-J0-OYI" firstAttribute="top" secondItem="mVb-jo-E5d" secondAttribute="bottom" constant="21" id="e9v-ks-2FR"/>
+                                            <constraint firstItem="PPz-3C-eWg" firstAttribute="centerX" secondItem="Wmc-ra-COD" secondAttribute="centerX" id="eoi-9D-i74"/>
+                                            <constraint firstItem="mVb-jo-E5d" firstAttribute="top" secondItem="85C-op-QfX" secondAttribute="bottom" constant="25" id="f9z-Q6-eHZ"/>
+                                            <constraint firstItem="H8w-12-z0H" firstAttribute="top" secondItem="Wmc-ra-COD" secondAttribute="top" constant="160" id="ofD-cg-WCR"/>
+                                            <constraint firstAttribute="height" constant="667" id="uxu-la-h1K"/>
+                                            <constraint firstItem="mVb-jo-E5d" firstAttribute="centerX" secondItem="Wmc-ra-COD" secondAttribute="centerX" id="yY8-ba-d0W"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Wmc-ra-COD" secondAttribute="trailing" id="BQY-sf-3XC"/>
+                                    <constraint firstItem="Wmc-ra-COD" firstAttribute="top" secondItem="3gD-wg-KOL" secondAttribute="top" id="NVJ-C2-SiQ"/>
+                                    <constraint firstAttribute="bottom" secondItem="Wmc-ra-COD" secondAttribute="bottom" id="y1H-aM-WPa"/>
+                                    <constraint firstItem="Wmc-ra-COD" firstAttribute="leading" secondItem="3gD-wg-KOL" secondAttribute="leading" id="zHK-nq-WZK"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="3gD-wg-KOL" firstAttribute="trailing" secondItem="rpu-0m-4sS" secondAttribute="trailing" id="6UW-bO-xN5"/>
+                            <constraint firstAttribute="trailing" secondItem="U1y-DX-hHs" secondAttribute="trailing" id="Ajx-OS-ktp"/>
+                            <constraint firstItem="Wmc-ra-COD" firstAttribute="width" secondItem="VBJ-HN-Oai" secondAttribute="width" id="GgK-BX-DET"/>
+                            <constraint firstItem="3gD-wg-KOL" firstAttribute="top" secondItem="VBJ-HN-Oai" secondAttribute="top" id="Ku3-dY-W3L"/>
+                            <constraint firstItem="U1y-DX-hHs" firstAttribute="top" secondItem="VBJ-HN-Oai" secondAttribute="top" id="X7i-By-sh3"/>
+                            <constraint firstItem="3gD-wg-KOL" firstAttribute="bottom" secondItem="rpu-0m-4sS" secondAttribute="bottom" id="d87-lz-o3V"/>
+                            <constraint firstItem="U1y-DX-hHs" firstAttribute="leading" secondItem="VBJ-HN-Oai" secondAttribute="leading" id="rxy-iA-xaS"/>
+                            <constraint firstItem="3gD-wg-KOL" firstAttribute="leading" secondItem="rpu-0m-4sS" secondAttribute="leading" id="s0d-Lg-R31"/>
+                            <constraint firstAttribute="bottom" secondItem="U1y-DX-hHs" secondAttribute="bottom" id="tsh-Po-bDc"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="rpu-0m-4sS"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="vqi-tb-DgY"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="resendEmailButton" destination="85C-op-QfX" id="pZV-ea-UtY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uYo-rP-ncd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-5020" y="-1586"/>
+        </scene>
+        <!--User Password Reset-->
+        <scene sceneID="ekH-Zz-8uC">
+            <objects>
+                <viewController storyboardIdentifier="PasswordRecoveryViewController" id="G0n-xB-LgE" userLabel="User Password Reset" customClass="PasswordRecoveryViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hu4-cM-Yhz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="InitialBg" translatesAutoresizingMaskIntoConstraints="NO" id="DA9-o6-Oqo" customClass="bg">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder=" Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tsu-pF-uYx" customClass="PTNiceTextField" customModule="PawTrails" customModuleProvider="target">
+                                <rect key="frame" x="28" y="193" width="319" height="49"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="49" id="wB9-5C-LCa"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password Recovery" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000001192092896" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CvA-TS-Y8X">
+                                <rect key="frame" x="73" y="110" width="221" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="T6B-0a-d1I"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I remember my password." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7IH-nN-nsd">
+                                <rect key="frame" x="28" y="385" width="227" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="227" id="5TM-9r-Ff6"/>
+                                    <constraint firstAttribute="height" constant="21" id="QG1-Rr-dqp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aW1-FD-tjE">
+                                <rect key="frame" x="257" y="380" width="86" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="S2z-aQ-4JN"/>
+                                    <constraint firstAttribute="width" constant="86" id="uFe-7q-QTZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="15"/>
+                                <state key="normal" title="Login now"/>
+                                <connections>
+                                    <action selector="backButtonTapped" destination="G0n-xB-LgE" eventType="touchUpInside" id="FaF-Dd-alN"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Slb-M2-Og3">
+                                <rect key="frame" x="28" y="284" width="319" height="49"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="49" id="1ID-Tl-s4F"/>
+                                    <constraint firstAttribute="width" constant="319" id="uZV-4T-7Ny"/>
+                                </constraints>
+                                <state key="normal" image="btn_next_forgot_password"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="customBGColor">
+                                        <color key="value" red="0.97647058823529409" green="0.2196078431372549" blue="0.36862745098039218" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="customTextColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="sendAction:" destination="G0n-xB-LgE" eventType="touchUpInside" id="VMa-Uh-a7u"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="DA9-o6-Oqo" firstAttribute="leading" secondItem="e4c-IA-mb2" secondAttribute="leading" id="30V-PA-nbU"/>
+                            <constraint firstItem="7IH-nN-nsd" firstAttribute="leading" secondItem="e4c-IA-mb2" secondAttribute="leading" constant="28" id="3p8-OL-hek"/>
+                            <constraint firstItem="Slb-M2-Og3" firstAttribute="top" secondItem="tsu-pF-uYx" secondAttribute="bottom" constant="42" id="6aO-7z-3MR"/>
+                            <constraint firstItem="7IH-nN-nsd" firstAttribute="top" secondItem="Slb-M2-Og3" secondAttribute="bottom" constant="52" id="APY-uP-XyB"/>
+                            <constraint firstItem="CvA-TS-Y8X" firstAttribute="leading" secondItem="e4c-IA-mb2" secondAttribute="leading" constant="73" id="BIk-F9-e53"/>
+                            <constraint firstItem="DA9-o6-Oqo" firstAttribute="trailing" secondItem="e4c-IA-mb2" secondAttribute="trailing" id="Ey6-ir-zJ4"/>
+                            <constraint firstItem="e4c-IA-mb2" firstAttribute="trailing" secondItem="tsu-pF-uYx" secondAttribute="trailing" constant="28" id="FwT-CV-AOg"/>
+                            <constraint firstItem="Slb-M2-Og3" firstAttribute="centerX" secondItem="hu4-cM-Yhz" secondAttribute="centerX" id="NP8-tH-Ey3"/>
+                            <constraint firstItem="aW1-FD-tjE" firstAttribute="top" secondItem="Slb-M2-Og3" secondAttribute="bottom" constant="47" id="PUy-7o-rXA"/>
+                            <constraint firstItem="e4c-IA-mb2" firstAttribute="trailing" secondItem="CvA-TS-Y8X" secondAttribute="trailing" constant="81" id="VVl-tU-xZe"/>
+                            <constraint firstItem="DA9-o6-Oqo" firstAttribute="bottom" secondItem="e4c-IA-mb2" secondAttribute="bottom" id="Ycg-i9-4EY"/>
+                            <constraint firstItem="CvA-TS-Y8X" firstAttribute="top" secondItem="e4c-IA-mb2" secondAttribute="top" constant="46" id="fWw-U4-oKC"/>
+                            <constraint firstItem="aW1-FD-tjE" firstAttribute="leading" secondItem="7IH-nN-nsd" secondAttribute="trailing" constant="2" id="kHq-6X-iHo"/>
+                            <constraint firstItem="tsu-pF-uYx" firstAttribute="top" secondItem="CvA-TS-Y8X" secondAttribute="bottom" constant="23" id="n76-vq-PWk"/>
+                            <constraint firstItem="tsu-pF-uYx" firstAttribute="leading" secondItem="e4c-IA-mb2" secondAttribute="leading" constant="28" id="zyI-h1-Deb"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="e4c-IA-mb2"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Password Reset" id="6in-Y8-Kmy"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="emailTextField" destination="tsu-pF-uYx" id="bKv-9Q-JdZ"/>
+                        <outlet property="sendButton" destination="Slb-M2-Og3" id="826-db-OlL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gdm-B2-HCR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-6631.1999999999998" y="-1118.5907046476761"/>
+        </scene>
+        <!--User Register Terms-->
+        <scene sceneID="ASp-90-ofZ">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="NlU-Ed-V5R" userLabel="User Register Terms" customClass="PrivacyViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mvT-FW-F2a">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lcY-OF-hIi">
+                                <rect key="frame" x="16" y="20" width="343" height="647"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">This agreement is made between you, the “User” and Attitude Technologies Ltd of Unit 12A, South Ring Business Park, Kinsale Road, Cork, in relation to the use of the services provided by the “PawTrails App” software.  
+By using our Services, you are agreeing to these terms. Please read them carefully.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Using our Services">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+In agreeing to use our services you to follow any policies relevant to your use of said services as have been provided to you.
+Using our Services does not give you ownership of any intellectual property rights in our Services. 
+In connection with your use of the Services, we may send you service announcements, administrative messages, and other information. By continuing with your registration, you are consenting to receive such announcements etc. You may opt out of some of those communications by sending an email to info@attitudetech.ie 
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Your PawTrails Account">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+As part of the registration process for the PawTrails App you will be asked to create a unique user account.
+To protect your Paw Trails Account, keep your password confidential. You are responsible for the activity that happens on or through your PawTrails Account. If you believe there has been unauthorised access to your account, please send an email to info@attitudetech.ie requesting your password to be reset.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Privacy and Copyright Protection">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+Attitude Technologies LTD Privacy Statement explains how we treat your personal data and protect your privacy when you use our Services. By signing this agreement, you agree that Attitude Technologies LTD can use such data in accordance with our privacy statement. From time to time it may be necessary to update our Privacy Statement and a copy of the revised statement will be sent to the email address you provided on registration. If, as a result of same, you wish to withdraw from using our services you can do so by forwarding an email stating same to info@attitudetech.ie
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Your Content in our Services">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+Our Services allow you to upload, submit, store, send or receive content. You retain ownership of any intellectual property rights that you hold in that content. 
+When you upload, submit, store, send or receive content to or through our Services, you give Attitude Technologies LTD license to use, host, store, reproduce, modify, said content for any and all purposes as set out in our Privacy Statement.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="About Software in our Services">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+Attitude Technologies LTD gives you a personal, worldwide, non­assignable and non­exclusive license to use the software provided to you by Attitude Technologies LTD as part of the Services. This license is for the sole purpose of enabling you to use and enjoy the benefit of the Services as  provided by Attitude Technologies LTD, in the manner permitted by these terms. You may not copy, modify, distribute, sell, or lease any part of our Services or included software, nor may you reverse engineer or attempt to extract the source code of that software.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Modifying and Terminating our Services">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+We are constantly changing and improving our Services. We may add or remove functionalities or features, and we may suspend or stop a Service altogether.
+You can stop using our Services at any time using the process set out above. Attitude Technologies LTD may also stop providing Services to you, or add or create new limits to our Services at any time.
+We believe that you own your data and preserving your access to such data is important. If we discontinue a Service, where reasonably possible, we will give you reasonable advance notice and a chance to get information out of that Service.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Our Warranties and Disclaimers">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+We provide our Services using a commercially reasonable level of skill and care and we hope that you will enjoy using them. But there are certain things that we don’t promise about our Services.
+OTHER THAN AS EXPRESSLY SET OUT IN THESE TERMS OR ADDITIONAL TERMS, NO SPECIFIC PROMISES ABOUT THE SERVICES ARE MADE. FOR EXAMPLE, WE DON’T MAKE ANY COMMITMENTS ABOUT THE CONTENT WITHIN THE SERVICES, THE SPECIFIC FUNCTIONS OF THE SERVICES, OR THEIR RELIABILITY, AVAILABILITY, OR ABILITY TO MEET YOUR NEEDS. WE PROVIDE THE SERVICES “AS IS”.
+TO THE EXTENT PERMITTED BY LAW, WE EXCLUDE ALL WARRANTIES.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Liability for our Services">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+WHEN PERMITTED BY LAW, ATTITUDE TECHNOLOGIES LTD, WILL NOT BE RESPONSIBLE FOR LOST PROFITS, REVENUES, OR DATA, FINANCIAL LOSSES OR INDIRECT, SPECIAL, CONSEQUENTIAL, EXEMPLARY, OR PUNITIVE DAMAGES.
+TO THE EXTENT PERMITTED BY LAW, THE TOTAL LIABILITY OF ATTITUDE TECHNOLOGIES LTD FOR ANY CLAIMS UNDER THESE TERMS, INCLUDING FOR ANY IMPLIED WARRANTIES, IS LIMITED TO THE AMOUNT YOU PAID US TO USE THE SERVICES AND ONLY IF SAID LOSS IS REASONABLY FORESEEABLE.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Business uses of our Services">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+If you are using our Services on behalf of a business, that business accepts these terms. It will hold harmless and indemnify Attitude Technologies LTD from any claim, suit or action arising from or related to the use of the Services or violation of these terms, including any liability or expense arising from claims, losses, damages, suits, judgments, litigation costs and attorneys’ fees.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="About these Terms">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+We may modify these terms or any additional terms that apply to a Service to, for example, reflect changes to the law or changes to our Services. A copy of the revised terms will be sent to the email address you specified on registration. If you do not agree to the modified terms for a Service, you should discontinue your use of that Service using the process set out above.
+If there is a conflict between these terms and the additional terms, the additional terms will control for that conflict.
+If you do not comply with these terms, and Attitude Technologies LTD do not take any immediate action this does not prohibit the taking of such action in the future.
+If it turns out that a particular term is not enforceable, this will not affect any other terms.
+The laws of Republic of Ireland, will apply to any disputes arising out of or relating to these terms or the Services. All claims arising out of or relating to these terms or the Services will be litigated exclusively in Irish Courts, and you and Attitude Technologies LTD consent to personal jurisdiction in those courts.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Privacy Statement ">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+Attitude Technologies Ltd of Unit 12A, South Ring Business Park, Kinsale Road, Cork built the PawTrails app as a Free app to download. This SERVICE is provided by Attitude Technologies Ltd, at no cost and is intended for use on an “as is” basis. Attitude Technologies Ltd give no warranty that the service will be free of defects and/or faults. 
+This page is used to inform App visitors about our privacy statement and in relation to the collection, use, and disclosure of personal information which will occur should you decide to use our service 
+By choosing to use our Service, then you give your consent to the collection and use of information as set out in this Statement. The Personal Information that we collect is used for providing and improving the Service. We will not use or share your information with anyone except as described in this Privacy Statement.
+A Privacy Statement describes the type of personal information collected and how the data is used and distributed. The Privacy Statement is a document that addresses the often-delicate matter of online privacy of users.
+Your Privacy Statement will not contain rules of use or conditions when membership can be terminated, which are to be found in our Terms &amp; Conditions agreement instead.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Information Collection and Use">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+For a better experience, while using our Service, we require you to provide us with your email address. You are also asked in the app for the name of user, their date of birth, home address, contact number and gender, but these are not mandatory fields. All this information is used for demographic purposes- which allows our marketing department to be able to build a better idea of our target market. None of the information will be sold / shared with 3rd parties Should you decide to terminate your use of the service then your personal information can be deleted. If you require us to delete the information you can contact us on info@attitudetech.ie   However, the information that has been collected with regards to the pet’s information is kept and is also used for demographic purposes. This is to help us determine the most common size, breed of dog etc that are being added to the PawTrails app.  The pet’s information that is kept is the pets name, date of birth, size, breed, gender, neutered/ not neutered, weight, body condition score, location &amp; activity monitor. 
+The app does use third party services that may collect information used to identify you.                                                        Link to privacy statement of third party service providers used by the app 
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="https://www.apple.com/ie/legal/privacy/en-ww/">
+                                        <attributes>
+                                            <color key="NSColor" red="0.019607843137254902" green="0.38823529411764707" blue="0.75686274509803919" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="11" name="Helvetica"/>
+                                            <url key="NSLink" string="https://www.apple.com/ie/legal/privacy/en-ww/"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="5" paragraphSpacingBefore="5" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                            <integer key="NSUnderline" value="1"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" ">
+                                        <attributes>
+                                            <font key="NSFont" size="11" name="Helvetica"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="5" paragraphSpacingBefore="5" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content" base64-UTF8="YES">
+IA0KA
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="5" paragraphSpacingBefore="5" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                                <tabStops/>
+                                            </paragraphStyle>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Relevant IOS permissions requested by this app">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+Storage permission- this permission allows the app to load and store images. These images are used for the user and their pets' profiles.
+Location permission-this permission allows the app to access the location of the user to determine his pets' location.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Push Notifications ">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+A push notification is a message from an app that pops up at random times on a mobile device They’re typically formatted like mobile alerts and text messages and pop up regardless of whether a user is actually within the app at the time or not. 
+Push notification may include, alerts, sounds, icons and badges. These can be configured in settings.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Log Data">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+We want to inform you that whenever you use our service, in a case of an error in the app we collect data and information (through third party products) on your phone called Log Data. This Log Data may include information such as your device Internet Protocol (“IP”) address, device name, operating system version, the configuration of the app when utilizing our Service, the time and date of your use of the Service, and other statistics. 
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Service Providers">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+We may employ third-party companies and individuals due to the following reasons:
+•	To facilitate our service;
+•	To provide the service on our behalf;
+•	To perform service-related services; or
+•	To assist us in analysing how our service is used.
+We want to inform users of this service that these third parties have access to your Personal Information. The reason is to perform the tasks assigned to them on our behalf. However, they are obligated not to disclose or use the information for any purpose other than that set out in this Statement. 
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Security">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+We value your trust in providing us your Personal Information, and Attitude Technologies uses the best commercially acceptable means of protecting it. But remember that no method of transmission over the internet, or method of electronic storage is 100% secure and reliable, and we cannot guarantee its absolute security.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Links to Other Sites">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+This service may contain links to other sites. If you click on a third-party link, you will be directed to that site. Note that these external sites are not operated by us. Therefore, we strongly advise you to review the privacy statement of these websites. We have no control over and assume no responsibility for the content, privacy policies, or practices of any third-party sites or services. When you press a link inside the app you have to open a webpage/app either inside a pop up or another 3rd party app.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Children’s Privacy">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+These Services do not address anyone under the age of 13. We do not knowingly collect personally identifiable information from children under 13. In the case we discover that a child under 13 has provided us with personal information, we immediately delete this from our servers. If you are a parent or guardian and you are aware that your child has provided us with personal information, please contact us so that we will be able to do necessary actions. You can contact us on info@attitudetech.ie 
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Changes to This Privacy Statement">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+If there are changes to the privacy statement they will be emailed to you.
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Contact Us">
+                                        <attributes>
+                                            <font key="NSFont" size="23" name="AvenirNext-Bold"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment>
+                                        <string key="content">
+If you have any questions or suggestions about our Privacy Statement, do not hesitate to contact us 
+attitudetech.ie
+Unit 12A, South Ring Business Park
+Cork,
+Ireland
+info@attitudetech.ie
++353214312004
+
+Last Edited on 2017-12-04
+
+</string>
+                                        <attributes>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="lcY-OF-hIi" firstAttribute="top" secondItem="mPs-WF-pKQ" secondAttribute="top" id="FIb-wl-CDO"/>
+                            <constraint firstItem="lcY-OF-hIi" firstAttribute="trailing" secondItem="mvT-FW-F2a" secondAttribute="trailingMargin" id="K9o-KP-Q8W"/>
+                            <constraint firstItem="mPs-WF-pKQ" firstAttribute="bottom" secondItem="lcY-OF-hIi" secondAttribute="bottom" symbolic="YES" id="PJl-wf-vWO"/>
+                            <constraint firstItem="lcY-OF-hIi" firstAttribute="leading" secondItem="mvT-FW-F2a" secondAttribute="leadingMargin" id="rGJ-lN-rW1"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="mPs-WF-pKQ"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Legal" id="VRA-sl-dsf">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="u7K-sL-o3N">
+                            <connections>
+                                <action selector="doneActionBtn:" destination="NlU-Ed-V5R" id="5cE-60-Pcn"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h7E-c2-Fh5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-5810" y="-996"/>
         </scene>
     </scenes>
     <resources>
         <image name="InitialBg" width="375" height="667"/>
         <image name="Logo 1 - no bg" width="123" height="95"/>
+        <image name="btn_Login" width="327" height="50"/>
         <image name="btn_create_account" width="327" height="50"/>
         <image name="btn_facebook" width="327" height="50"/>
+        <image name="btn_ge_back_login" width="327" height="50"/>
+        <image name="btn_next_forgot_password" width="327" height="50"/>
+        <image name="btn_register" width="327" height="50"/>
+        <image name="btn_send_email" width="327" height="50"/>
+        <image name="close_icon" width="14" height="14"/>
+        <image name="ic_success" width="120" height="120"/>
         <image name="login_Googleplus" width="39" height="24"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="hTd-oO-hfe"/>
+        <segue reference="fgw-Nw-EnJ"/>
+    </inferredMetricsTieBreakers>
 </document>

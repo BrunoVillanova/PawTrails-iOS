@@ -11,7 +11,7 @@ import GSMessages
 
 class PasswordRecoveryViewController: UIViewController, UITextFieldDelegate {
     
-    @IBOutlet weak var cancelButton: UIButton!
+    //@IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var sendButton: UIButton!
 
@@ -21,10 +21,10 @@ class PasswordRecoveryViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        emailTextField.underline()
+        //TEMP emailTextField.underline()
         emailTextField.setLeftPaddingPoints(5)
         
-        cancelButton.tintColor = UIColor.primary
+        //TEMP cancelButton.tintColor = UIColor.primary
         
         if email != nil {
             emailTextField.text = email
@@ -35,6 +35,27 @@ class PasswordRecoveryViewController: UIViewController, UITextFieldDelegate {
         if #available(iOS 10.0, *) {
             self.emailTextField.textContentType = UITextContentType.emailAddress
         }
+        
+        configureNavigatonBar()
+    }
+    
+    fileprivate func configureNavigatonBar() {
+        
+        let btnLeftMenu: UIButton = UIButton()
+        btnLeftMenu.setImage(UIImage(named: "BackIcon"), for: UIControlState())
+        btnLeftMenu.addTarget(self, action: #selector(backButtonTapped), for: UIControlEvents.touchUpInside)
+        btnLeftMenu.frame = CGRect(x: 0, y: 0, width: 33, height: 27)
+        let barButton = UIBarButtonItem(customView: btnLeftMenu)
+        self.navigationItem.leftBarButtonItem = barButton
+        
+        self.title = "Forgot Password"
+        let attributes = [NSFontAttributeName: UIFont(name: "Montserrat-Regular", size: 14)!,NSForegroundColorAttributeName: PTConstants.colors.darkGray]
+        UINavigationBar.appearance().titleTextAttributes = attributes
+    }
+    
+    @IBAction func backButtonTapped() {
+        
+        self.navigationController?.popViewController(animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -82,6 +103,7 @@ class PasswordRecoveryViewController: UIViewController, UITextFieldDelegate {
     @IBAction func sendAction(_ sender: UIButton) {
         self.sendRecoveryEmail(email: self.emailTextField.text ?? "", checked: true)
     }
+    
 
     // MARK: - PasswordRecoveryView
     

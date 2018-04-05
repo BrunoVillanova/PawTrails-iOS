@@ -266,10 +266,19 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         let alertView = SCLAlertView(appearance: appearance)
         
         alertView.addButton("Login") {
-            if let rootViewController = UIApplication.shared.keyWindow?.rootViewController, let storyboard = rootViewController.storyboard, !rootViewController.isKind(of: InitialViewController.self) {
+            if let rootViewController = UIApplication.shared.keyWindow?.rootViewController, !rootViewController.isKind(of: InitialViewController.self) {
                 
-                if let vc = storyboard.instantiateViewController(withIdentifier: "InitialViewController") as? InitialViewController {
-                    UIApplication.shared.keyWindow?.rootViewController = vc
+//                let loginStoryboard = UIStoryboard(name: "Login", bundle: nil)
+//                if let vc = loginStoryboard.instantiateViewController(withIdentifier: "InitialViewController") as? InitialViewController {
+//                    UIApplication.shared.keyWindow?.rootViewController = vc
+//                }
+                
+                let loginStoryboard = UIStoryboard(name: "Login", bundle: nil)
+                if let vc = loginStoryboard.instantiateViewController(withIdentifier: "InitialViewController") as? InitialViewController {
+                    let navController = UINavigationController(rootViewController: vc)
+                    UIApplication.shared.keyWindow?.rootViewController?.present(navController, animated: true, completion: {
+                        //TEMP self.tabBarController?.selectedIndex = 0
+                    })
                 }
             }
         }

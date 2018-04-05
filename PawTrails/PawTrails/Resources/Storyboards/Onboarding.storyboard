@@ -30,7 +30,7 @@
                                 <color key="currentPageIndicatorTintColor" red="0.2627450980392157" green="0.50196078431372548" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </pageControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WVL-sb-o0c" userLabel="See It Later Button">
-                                <rect key="frame" x="123" y="532" width="74" height="12"/>
+                                <rect key="frame" x="125" y="532" width="70" height="12"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="12" id="yy2-WS-SO0"/>
                                 </constraints>
@@ -39,7 +39,7 @@
                                         <fragment content="See it later">
                                             <attributes>
                                                 <color key="NSColor" red="0.56470588239999997" green="0.56470588239999997" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
-                                                <font key="NSFont" size="14" name="Montserrat-Regular"/>
+                                                <font key="NSFont" metaFont="system" size="14"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                 <integer key="NSUnderline" value="1"/>
                                             </attributes>
@@ -61,7 +61,7 @@
                                         <fragment content="GET STARTED">
                                             <attributes>
                                                 <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <font key="NSFont" size="16" name="Montserrat-Regular"/>
+                                                <font key="NSFont" metaFont="system" size="16"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                             </attributes>
                                         </fragment>

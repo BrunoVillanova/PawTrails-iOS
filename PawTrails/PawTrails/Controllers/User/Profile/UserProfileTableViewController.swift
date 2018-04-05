@@ -90,11 +90,15 @@ extension UserProfileTableViewController: UserProfileView {
     }
     
     func userNotSigned() {
-        if let vc = self.storyboard?.instantiateViewController(withIdentifier: "InitialViewController") as? InitialViewController {
-            self.present(vc, animated: true, completion: {
+        let loginStoryboard = UIStoryboard(name: "Login", bundle: nil)
+        if let vc = loginStoryboard.instantiateViewController(withIdentifier: "InitialViewController") as? InitialViewController {
+            let navController = UINavigationController(rootViewController: vc)
+            self.present(navController, animated: true, completion: {
                 self.tabBarController?.selectedIndex = 0
             })
         }
+        
+        
     }
     
 }

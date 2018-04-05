@@ -98,7 +98,7 @@ extension PetBirthdayAndWeightViewController: SliderDelegate {
         
         //Display weight
         weightLabel.text = "~\(valueInKg.rounded(toPlaces: 2)) Kg"
-        poundLabel.text = "\(PTUnitConversion.KgToLBS(weight: valueInKg).shortValue) lbs"
+        poundLabel.text = "\(PTUnitConversion.KgToLBS(weight: valueInKg).rounded(toPlaces: 2)) lbs"
         
         //Set selected weight
         self.pet!.size = PetSize.medium

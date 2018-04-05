@@ -11,16 +11,20 @@ import SCLAlertView
 
 class InitialViewController: UIViewController, InitialView, UITextFieldDelegate {
 
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var forgotPasswordButton: UIButton!
-    @IBOutlet weak var loginButton: UIButton!
-    @IBOutlet weak var signUpButton: UIButton!
-    @IBOutlet weak var socialMediaBar: UIStackView!
+//    @IBOutlet weak var emailTextField: UITextField!
+//    @IBOutlet weak var passwordTextField: UITextField!
+//    @IBOutlet weak var forgotPasswordButton: UIButton!
+//    @IBOutlet weak var loginButton: UIButton!
+    //@IBOutlet weak var signUpButton: UIButton!
+    //@IBOutlet weak var socialMediaBar: UIStackView!
     @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var facebookButton: UIButton!
-    @IBOutlet weak var googleButton: UIButton!
-    @IBOutlet weak var twitterButton: UIButton!
+    //@IBOutlet weak var googleButton: UIButton!
+    //@IBOutlet weak var twitterButton: UIButton!
+    
+    //V2
+    @IBOutlet weak var createAccountButton: UIButton!
+    @IBOutlet weak var agreementLabel: UILabel!
     
     fileprivate let presenter = InitialPresenter()
     fileprivate let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -31,44 +35,64 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate 
         
         SocketIOManager.instance.disconnect()
         
-        emailTextField.setLeftPaddingPoints(5)
-        passwordTextField.setLeftPaddingPoints(5)
+        //TEMP
+        
+        //TEMP emailTextField.setLeftPaddingPoints(5)
+        //TEMP passwordTextField.setLeftPaddingPoints(5)
         
         self.view.isUserInteractionEnabled = true
 
         presenter.attachView(self)
 
-        loginButton.fullyroundedCorner()
+        //TEMP loginButton.fullyroundedCorner()
         
-        loginButton.backgroundColor = UIColor.primary
-        loginButton.tintColor = UIColor.secondary
+        //TEMP loginButton.backgroundColor = UIColor.primary
+        //TEMP loginButton.tintColor = UIColor.secondary
         
-        facebookButton.fullyroundedCorner()
-        facebookButton.tintColor = UIColor.primary
-        facebookButton.border(color: UIColor.primary, width: 1.0)
+        //TEMP facebookButton.fullyroundedCorner()
+        //TEMP facebookButton.tintColor = UIColor.primary
+        //TEMP facebookButton.border(color: UIColor.primary, width: 1.0)
 
         
-        forgotPasswordButton.tintColor = UIColor.primary
+        //TEMP forgotPasswordButton.tintColor = UIColor.primary
         logoImageView.tintColor = UIColor.primary
-        googleButton.imageView?.tintColor = UIColor.primary
-        twitterButton.imageView?.tintColor = UIColor.primary
+        //TEMP googleButton.imageView?.tintColor = UIColor.primary
+        //TEMP twitterButton.imageView?.tintColor = UIColor.primary
+        
         
        
+        let attributedString = NSMutableAttributedString(string: "By signing up,  you agree to our Terms & Conditions and Privacy Statement", attributes: [
+            NSFontAttributeName : UIFont(name: "Montserrat-Regular", size: 14)!,
+            NSForegroundColorAttributeName: UIColor.darkGray
+            ])
+        attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.red, range: NSRange(location: 33, length: 18))
+        attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.red, range: NSRange(location: 56, length: 17))
+        
+       agreementLabel.attributedText = attributedString
         
         if #available(iOS 10.0, *) {
-            self.emailTextField.textContentType = UITextContentType.emailAddress
+            //TEMP self.emailTextField.textContentType = UITextContentType.emailAddress
         }
         
         
         #if !RELEASE
-            self.emailTextField.text = Constants.testUserEmail
-            self.passwordTextField.text = Constants.testUserPassword
+            //TEMP self.emailTextField.text = Constants.testUserEmail
+            //TEMP self.passwordTextField.text = Constants.testUserPassword
         #endif
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.statusBarStyle = .default
+        // Hide the navigation bar on the this view controller
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // Show the navigation bar on other view controllers
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -79,10 +103,18 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate 
         }
     }
     
+    @IBAction func signupAction(_ sender: UIButton?) {
+        UIApplication.shared.statusBarStyle = .default
+        self.view.endEditing(true)
+        //TEMP presenter.signIn(email: emailTextField.text, password:passwordTextField.text)
+        
+    }
+
+    
     @IBAction func loginAction(_ sender: UIButton?) {
         UIApplication.shared.statusBarStyle = .default
         self.view.endEditing(true)
-        presenter.signIn(email: emailTextField.text, password:passwordTextField.text)
+        //TEMP presenter.signIn(email: emailTextField.text, password:passwordTextField.text)
     }
     
     @IBAction func facebookLogin(_ sender: UIButton) {
@@ -124,11 +156,11 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate 
     
     
     func emailFieldError() {
-        self.emailTextField.shake()
+        //TEMP self.emailTextField.shake()
     }
     
     func passwordFieldError() {
-        self.passwordTextField.shake()
+        //TEMP self.passwordTextField.shake()
     }
     
     func loggedSocialMedia() {
@@ -155,13 +187,14 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate 
     
     // MARK: - UITextFieldDelegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == self.emailTextField {
-            self.passwordTextField.becomeFirstResponder()
-        }else if textField == self.passwordTextField {
-            textField.resignFirstResponder()
-                    }else{
-            textField.resignFirstResponder()
-        }
+        //TEMP
+//        if textField == self.emailTextField {
+//            self.passwordTextField.becomeFirstResponder()
+//        }else if textField == self.passwordTextField {
+//            textField.resignFirstResponder()
+//                    }else{
+//            textField.resignFirstResponder()
+//        }
         return true
     }
     
@@ -172,10 +205,11 @@ class InitialViewController: UIViewController, InitialView, UITextFieldDelegate 
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "passwordRecovery" && (self.emailTextField.text?.isValidEmail)! {
-            let vc = segue.destination as! PasswordRecoveryViewController
-            vc.email = self.emailTextField.text
-        }
+        //TEMP
+//        if segue.identifier == "passwordRecovery" && (self.emailTextField.text?.isValidEmail)! {
+//            let vc = segue.destination as! PasswordRecoveryViewController
+//            vc.email = self.emailTextField.text
+//        }
     }
 }
 

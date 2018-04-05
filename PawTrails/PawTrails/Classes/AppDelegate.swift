@@ -181,8 +181,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func loadAuthenticationScreen() {
-            let initial = storyboard!.instantiateViewController(withIdentifier: "InitialViewController") as? InitialViewController
-            window?.rootViewController = initial
+        //TEMP
+//            let loginStoryboard = UIStoryboard(name: "Login", bundle: nil)
+//            let initial = loginStoryboard.instantiateViewController(withIdentifier: "InitialViewController") as? InitialViewController
+//            window?.rootViewController = initial
+        
+        let loginStoryboard = UIStoryboard(name: "Login", bundle: nil)
+        if let vc = loginStoryboard.instantiateViewController(withIdentifier: "InitialViewController") as? InitialViewController {
+            let navController = UINavigationController(rootViewController: vc)
+//            window!.rootViewController!.present(navController, animated: true, completion: {
+//                //TEMP self.tabBarController?.selectedIndex = 0
+//            })
+            window?.rootViewController = navController
+            //window?.rootViewController?.present(navController, animated: false, completion: nil)
+        }
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {

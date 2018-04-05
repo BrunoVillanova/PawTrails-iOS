@@ -11,9 +11,9 @@ import UIKit
 class EmailVerificationViewController: UIViewController, EmailVerificationView {
 
     @IBOutlet weak var resendEmailButton: UIButton!
-    @IBOutlet weak var checkButton: UIButton!
-    @IBOutlet weak var signOutButton: UIButton!
-    @IBOutlet weak var emailLabel: UILabel!
+    //@IBOutlet weak var checkButton: UIButton!
+    //@IBOutlet weak var signOutButton: UIButton!
+    //@IBOutlet weak var emailLabel: UILabel!
     
     fileprivate let presenter = EmailVerificationPresenter()
     
@@ -24,6 +24,20 @@ class EmailVerificationViewController: UIViewController, EmailVerificationView {
         super.viewDidLoad()
         initalize()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Hide the navigation bar on the this view controller
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // Show the navigation bar on other view controllers
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
 
     deinit {
         presenter.deteachView()
@@ -32,19 +46,21 @@ class EmailVerificationViewController: UIViewController, EmailVerificationView {
     fileprivate func initalize() {
         presenter.attachView(self)
         configureLayout()
-        emailLabel.text = email
+        //TEMP emailLabel.text = email
     }
     
     fileprivate func configureLayout() {
-        resendEmailButton.round()
-        resendEmailButton.tintColor = UIColor.secondary
-        resendEmailButton.backgroundColor = UIColor.primary
-        checkButton.round()
-        checkButton.tintColor = UIColor.secondary
-        checkButton.backgroundColor = UIColor.primary
-        signOutButton.round()
-        signOutButton.tintColor = UIColor.primary
-        signOutButton.border(color: UIColor.primary, width: 1.0)
+        
+        self.navigationController?.navigationBar.isHidden = true
+        //TEMP resendEmailButton.round()
+        //TEMP resendEmailButton.tintColor = UIColor.secondary
+        //TEMP resendEmailButton.backgroundColor = UIColor.primary
+        //TEMP checkButton.round()
+        //TEMP checkButton.tintColor = UIColor.secondary
+        //TEMP checkButton.backgroundColor = UIColor.primary
+        //TEMP signOutButton.round()
+        //TEMP signOutButton.tintColor = UIColor.primary
+        //TEMP signOutButton.border(color: UIColor.primary, width: 1.0)
     }
     
     fileprivate func dismissViewController() {
@@ -59,8 +75,13 @@ class EmailVerificationViewController: UIViewController, EmailVerificationView {
         presenter.sendVerificationEmail(email: email)
     }
     
+    @IBAction func goBackToLogin(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     @IBAction func signOutAction(_ sender: UIButton) {
-        dismissViewController()
+        //dismissViewController()
+        verified()
     }
     
     // MARK:- EmailVerificationView

@@ -258,6 +258,7 @@
 		44D5FE921EE6E9560049232F /* DataManagerPetSafeZonesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D5FE911EE6E9560049232F /* DataManagerPetSafeZonesTests.swift */; };
 		44F76575201B60A800B552FF /* AddPetUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F76574201B60A800B552FF /* AddPetUserViewController.swift */; };
 		44FEE7E62074DE1100A85A74 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44FEE7E52074DE1100A85A74 /* Login.storyboard */; };
+		44FEE7E8207521B100A85A74 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FEE7E7207521B100A85A74 /* LoginViewController.swift */; };
 		8AD2F6B7B0A8110072345C01 /* Pods_PawTrailsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E2B813BA9CAE948174F2C71 /* Pods_PawTrailsTests.framework */; };
 		E710CBA5471FDC34DDA7BEB8 /* Pods_PawTrails.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3E63257CC5E13A67F31124B /* Pods_PawTrails.framework */; };
 /* End PBXBuildFile section */
@@ -553,6 +554,7 @@
 		44D5FE911EE6E9560049232F /* DataManagerPetSafeZonesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerPetSafeZonesTests.swift; sourceTree = "<group>"; };
 		44F76574201B60A800B552FF /* AddPetUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPetUserViewController.swift; sourceTree = "<group>"; };
 		44FEE7E52074DE1100A85A74 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		44FEE7E7207521B100A85A74 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		734D05AA5E231C24EBC9332D /* Pods-PawTrails.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PawTrails.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PawTrails/Pods-PawTrails.debug.xcconfig"; sourceTree = "<group>"; };
 		85A3950B851162A9AD058D22 /* Pods-PawTrailsTests.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PawTrailsTests.beta.xcconfig"; path = "Pods/Target Support Files/Pods-PawTrailsTests/Pods-PawTrailsTests.beta.xcconfig"; sourceTree = "<group>"; };
 		A8782C798F51A66A5AFC788C /* Pods-PawTrailsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PawTrailsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PawTrailsTests/Pods-PawTrailsTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -974,6 +976,7 @@
 				15C763892016D5C0002AA7F8 /* InitialViewController.swift */,
 				15C7638A2016D5C0002AA7F8 /* EmailVerificationViewController.swift */,
 				15C7638B2016D5C0002AA7F8 /* PasswordRecoveryViewController.swift */,
+				44FEE7E7207521B100A85A74 /* LoginViewController.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -1819,6 +1822,7 @@
 				15C763FE2016D5C0002AA7F8 /* TripScreenViewController.swift in Sources */,
 				15C763F42016D5C0002AA7F8 /* PetUserTableViewController.swift in Sources */,
 				15160FED20723037008CF9F4 /* PetGenderAndNeuterViewController.swift in Sources */,
+				44FEE7E8207521B100A85A74 /* LoginViewController.swift in Sources */,
 				15AD5EAC206C4AA40069E01D /* PetWizardViewController.swift in Sources */,
 				15C764142016D5C0002AA7F8 /* PetGenderTableViewController.swift in Sources */,
 				15C7614D2016CFF3002AA7F8 /* CDSafeZone+CoreDataClass.swift in Sources */,
