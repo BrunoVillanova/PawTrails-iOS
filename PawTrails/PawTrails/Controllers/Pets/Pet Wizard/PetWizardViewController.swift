@@ -149,23 +149,22 @@ class PetWizardViewController: UIViewController {
         if let updatedPet = self.pet {
             self.showLoadingView()
             DataManager.instance.register(updatedPet, callback: { (error, registeredPet) in
-                self.hideLoadingView()
+                
                 if let error = error {
+                    self.hideLoadingView()
                     self.showMessage(error.msg.msg, type: .error)
                 } else {
                     
                     let petImage = updatedPet.image
 
                     if let registeredPet = registeredPet {
-                        
                         self.pet = registeredPet
-                        
                         if let petImage = petImage {
                             self.uploadPetImage(registeredPet.id, imageData: petImage)
                         } else {
+                            self.hideLoadingView()
                             self.goToStep(self.currentStepIndex+1)
                         }
-
                     }
                 }
             })
@@ -178,7 +177,7 @@ class PetWizardViewController: UIViewController {
         
         DataManager.instance.savePet(image: imageData, into: petID, callback: { (error) in
 
-//            self.hideLoadingView()
+            self.hideLoadingView()
             
             if let error = error {
                 self.showMessage(error.msg.msg, type: .error)

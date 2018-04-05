@@ -111,9 +111,9 @@ extension PetNameAndPhotoViewController: TOCropViewControllerDelegate {
     func cropViewController(_ cropViewController: TOCropViewController, didCropToImage image: UIImage, rect cropRect: CGRect, angle: Int) {
         
         cropViewController.dismiss(animated: true, completion: nil)
-        if let resizedImage = Toucan.Resize.resizeImage(image, size: CGSize(width: 400, height: 400)) {
+        if let resizedImage = Toucan.Resize.resizeImage(image, size: CGSize(width: 200, height: 200)) {
             petPhotoImageView.image = resizedImage
-            self.pet!.image = resizedImage.encoded
+            self.pet!.image = UIImageJPEGRepresentation(resizedImage, 100)
         }
     }
 }

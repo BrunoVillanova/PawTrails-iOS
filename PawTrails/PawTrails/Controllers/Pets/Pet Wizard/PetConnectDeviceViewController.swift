@@ -119,10 +119,6 @@ class PetConnectDeviceViewController: PetWizardStepViewController {
             self.pet!.deviceCode = Constants.deviceIdforDemo
             self.delegate?.stepCompleted(completed: true, pet: self.pet!)
             self.delegate?.goToNextStep()
-        } else if isDebug {
-            self.delegate?.stepCompleted(completed: true, pet: self.pet!)
-            self.delegate?.goToNextStep()
-            return
         } else {
             self.showLoadingView()
             APIRepository.instance.check(deviceCode, callback: {error, success in
