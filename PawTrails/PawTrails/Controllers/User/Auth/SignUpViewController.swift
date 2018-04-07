@@ -20,6 +20,7 @@ class SignUpViewController: UIViewController {
     
     fileprivate final var textFields: [UITextField]?
     fileprivate let presenter = InitialPresenter()
+    fileprivate let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,13 +80,6 @@ class SignUpViewController: UIViewController {
             self.navigationItem.rightBarButtonItem?.tintColor = PTConstants.colors.darkGray
         }
         
-//        let btnLeftMenu: UIButton = UIButton()
-//        btnLeftMenu.setImage(UIImage(named: "BackIcon"), for: UIControlState())
-//        btnLeftMenu.addTarget(self, action: #selector(backButtonTapped), for: UIControlEvents.touchUpInside)
-//        btnLeftMenu.frame = CGRect(x: 0, y: 0, width: 33, height: 27)
-//        let barButton = UIBarButtonItem(customView: btnLeftMenu)
-//        self.navigationItem.leftBarButtonItem = barButton
-        
         self.title = "Signup"
         let attributes = [NSFontAttributeName: UIFont(name: "Montserrat-Regular", size: 14)!,NSForegroundColorAttributeName: PTConstants.colors.darkGray]
         UINavigationBar.appearance().titleTextAttributes = attributes
@@ -130,13 +124,6 @@ class SignUpViewController: UIViewController {
         } else {
             alert(title: "", msg: "Passwords don't match Please reenter passwords")
         }
-        
-        
-        //        let VC =   self.storyboard!.instantiateViewController(withIdentifier: "EmailVerificationViewController") as! EmailVerificationViewController
-        //
-        //        self.navigationController?.pushViewController(VC, animated: true)
-        
-        // UserDefaults.standard.set("TEST", forKey: "token") //setObject
     }
     
     @IBAction func cancelBtnPressed(_ sender: Any) {
@@ -179,15 +166,10 @@ extension SignUpViewController: InitialView {
     }
     
     func verifyAccount(_ email:String, _ password:String) {
-        
-        if let vc = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "EmailVerificationViewController") as? EmailVerificationViewController, let pc = self.presentingViewController {
-            
-            vc.email = email
-            vc.password = password
-            
-            self.dismiss(animated: true, completion: {
-                pc.present(vc, animated: true, completion: nil)
-            })
+        self.dismiss(animated: true) {
+            self.appDelegate.presentViewController(.login, animated: false) {
+                self.appDelegate.presentViewController(.emailVerification, animated: true, completion: nil)
+            }
         }
     }
     
