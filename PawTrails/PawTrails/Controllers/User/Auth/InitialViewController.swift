@@ -45,9 +45,9 @@ class InitialViewController: UIViewController {
         super.viewDidAppear(animated)
         if isFirstTimeViewAppears {
             isFirstTimeViewAppears = false
-            appDelegate.showOnboardingIfNeeded(false)
             
             if presentEmailValidation {
+                presentEmailValidation = false
                 appDelegate.presentViewController(.emailVerification, animated: true, completion: nil)
             }
         }

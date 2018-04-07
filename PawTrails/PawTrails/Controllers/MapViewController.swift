@@ -73,7 +73,6 @@ class MapViewController: UIViewController {
         
         if isFirstTimeViewAppears {
             isFirstTimeViewAppears = false
-            appDelegate.showOnboardingIfNeeded()
         }
     }
     

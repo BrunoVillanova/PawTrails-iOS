@@ -27,7 +27,7 @@ public class SharedPreferences {
         if let value = UserDefaults.standard.string(forKey: key.rawValue) {
             return value
         }else if key == .id || key == .token {
-            (UIApplication.shared.delegate as? AppDelegate)?.loadAuthenticationScreen()
+//            (UIApplication.shared.delegate as? AppDelegate)?.loadAuthenticationScreen()
             return ""
         }else{
             return ""

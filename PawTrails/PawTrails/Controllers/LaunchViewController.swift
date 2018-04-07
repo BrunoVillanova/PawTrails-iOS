@@ -11,6 +11,7 @@ import UIKit
 class LaunchViewController: UIViewController {
 
     @IBOutlet weak var launchImageView: UIImageView!
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +52,6 @@ class LaunchViewController: UIViewController {
             launchImageView.contentMode = .center
         }
         
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         if DataManager.instance.isAuthenticated() {
             // Workaround: calling this method to validate token and check account verification status
@@ -69,19 +69,22 @@ class LaunchViewController: UIViewController {
                         showVerification = true
                     }
                     
-                    appDelegate.loadAuthenticationScreen(showVerification)
-    
+                    self.appDelegate.loadAuthenticationScreen(showVerification)
+                    self.appDelegate.showOnboardingIfNeeded(false)
+                    
                     if let rootViewController = UIApplication.shared.keyWindow?.rootViewController, let errorCode = error.errorCode {
                         rootViewController.showMessage(errorCode.description, type: .error)
                     }
                     
                 } else  {
-                    appDelegate.loadHomeScreen(animated: true)
+                    self.appDelegate.loadHomeScreen(animated: true)
+                    self.appDelegate.showOnboardingIfNeeded(false)
                 }
             }
             
         } else {
-            appDelegate.loadAuthenticationScreen()
+            self.appDelegate.loadAuthenticationScreen()
+            self.appDelegate.showOnboardingIfNeeded(false)
         }
     }
 }
