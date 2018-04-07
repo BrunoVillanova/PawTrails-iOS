@@ -62,7 +62,14 @@ class LaunchViewController: UIViewController {
                 
                 if let error = error {
                     
-                    appDelegate.loadAuthenticationScreen()
+                    
+                    var showVerification = false
+                    
+                    if let errorCode = error.errorCode, errorCode == .AccountNeedsVerification {
+                        showVerification = true
+                    }
+                    
+                    appDelegate.loadAuthenticationScreen(showVerification)
     
                     if let rootViewController = UIApplication.shared.keyWindow?.rootViewController, let errorCode = error.errorCode {
                         rootViewController.showMessage(errorCode.description, type: .error)

@@ -15,8 +15,8 @@ class PasswordRecoveryViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var sendButton: UIButton!
 
-    
     var email:String?
+    fileprivate let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,23 +41,30 @@ class PasswordRecoveryViewController: UIViewController, UITextFieldDelegate {
     
     fileprivate func configureNavigatonBar() {
         
-        let btnLeftMenu: UIButton = UIButton()
-        btnLeftMenu.setImage(UIImage(named: "BackIcon"), for: UIControlState())
-        btnLeftMenu.addTarget(self, action: #selector(backButtonTapped), for: UIControlEvents.touchUpInside)
-        btnLeftMenu.frame = CGRect(x: 0, y: 0, width: 33, height: 27)
-        let barButton = UIBarButtonItem(customView: btnLeftMenu)
-        self.navigationItem.leftBarButtonItem = barButton
+        if presentingViewController != nil {
+            let closeButton = UIBarButtonItem(image: UIImage(named: "close_icon"), style: .plain, target: self, action: #selector(closeButtonTapped))
+            self.navigationItem.rightBarButtonItem = closeButton
+            self.navigationItem.rightBarButtonItem?.tintColor = PTConstants.colors.darkGray
+        }
         
         self.title = "Forgot Password"
         let attributes = [NSFontAttributeName: UIFont(name: "Montserrat-Regular", size: 14)!,NSForegroundColorAttributeName: PTConstants.colors.darkGray]
         UINavigationBar.appearance().titleTextAttributes = attributes
     }
     
-    @IBAction func backButtonTapped() {
-        
-        self.navigationController?.popViewController(animated: true)
+    func closeButtonTapped() {
+        self.dismissAndGoToLogin()
     }
     
+    fileprivate func dismissAndGoToLogin(_ completion: (() -> Void)? = nil) {
+        view.endEditing(true)
+        self.dismiss(animated: true, completion: completion)
+    }
+    
+    @IBAction func loginNowAction(_ sender: Any) {
+        self.dismissAndGoToLogin()
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.statusBarStyle = .default
@@ -79,12 +86,12 @@ class PasswordRecoveryViewController: UIViewController, UITextFieldDelegate {
 
                 } else {
                     self.dismiss(animated: true, completion: {
-                        UIApplication.shared.keyWindow?.rootViewController!.showMessage("Recovery instructions was sent to your email!", type: GSMessageType.success,  options: [
+                        self.appDelegate.getVisibleViewController()?.showMessage("Recovery instructions was sent to your email!", type: GSMessageType.success,  options: [
                             .animation(.slide),
                             .animationDuration(0.3),
                             .autoHide(true),
                             .cornerRadius(0.0),
-                            .height(44.0),
+//                            .height(44.0),
                             .hideOnTap(true),
                             //                .margin(.init(top: 64, left: 0, bottom: 0, right: 0)),
                             //                .padding(.zero),
@@ -117,12 +124,15 @@ class PasswordRecoveryViewController: UIViewController, UITextFieldDelegate {
     
     
     func emailSent() {
-        self.view.endEditing(true)
         let alert = UIAlertController(title: "Recovery email sent", message: "Check your email and recover your password", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
-            self.presentingViewController?.dismiss(animated: true, completion: nil)
+            self.dismissAndGoToLogin()
         }))
-        self.present(alert, animated: true, completion: nil)
+        
+//        self.dismissAndGoToLogin {
+//
+//            self.present(alert, animated: true, completion: nil)
+//        }
     }
     
     

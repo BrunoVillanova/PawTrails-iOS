@@ -40,6 +40,7 @@
 		1599A625204F64940089FC8A /* SkyFloatingLabelTextField.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1599A624204F64940089FC8A /* SkyFloatingLabelTextField.framework */; };
 		1599B22A2023E82B002D4025 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1599B2292023E82B002D4025 /* SnapKit.framework */; };
 		1599B22C2023F48A002D4025 /* PTDeviceStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1599B22B2023F48A002D4025 /* PTDeviceStatusView.swift */; };
+		159EDD502076D43F006B53FF /* PTLinesBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159EDD4F2076D43F006B53FF /* PTLinesBackgroundView.swift */; };
 		15A13A1F206AAFE4005790B3 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 15A13A1E206AAFE4005790B3 /* Onboarding.storyboard */; };
 		15A13A21206AB517005790B3 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15A13A20206AB4A7005790B3 /* Montserrat-Regular.ttf */; };
 		15A13A24206AC568005790B3 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A13A23206AC568005790B3 /* OnboardingViewController.swift */; };
@@ -321,6 +322,7 @@
 		1599A624204F64940089FC8A /* SkyFloatingLabelTextField.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SkyFloatingLabelTextField.framework; path = Carthage/Build/iOS/SkyFloatingLabelTextField.framework; sourceTree = "<group>"; };
 		1599B2292023E82B002D4025 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
 		1599B22B2023F48A002D4025 /* PTDeviceStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTDeviceStatusView.swift; sourceTree = "<group>"; };
+		159EDD4F2076D43F006B53FF /* PTLinesBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTLinesBackgroundView.swift; sourceTree = "<group>"; };
 		15A13A1E206AAFE4005790B3 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		15A13A20206AB4A7005790B3 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		15A13A23206AC568005790B3 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
@@ -779,6 +781,7 @@
 				15AAE9F62022BFCA007F9080 /* PTConnectionStatusView.swift */,
 				1599B22B2023F48A002D4025 /* PTDeviceStatusView.swift */,
 				15DCFE9E205B6B6E00DF726C /* PTDonutAnnotationView.swift */,
+				159EDD4F2076D43F006B53FF /* PTLinesBackgroundView.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -1867,6 +1870,7 @@
 				15C763FC2016D5C0002AA7F8 /* SafeZoneViewController.swift in Sources */,
 				15C762842016D046002AA7F8 /* SelectPetView.swift in Sources */,
 				15C7613A2016CFF3002AA7F8 /* DataManager.swift in Sources */,
+				159EDD502076D43F006B53FF /* PTLinesBackgroundView.swift in Sources */,
 				15C7625D2016D026002AA7F8 /* Parsers.swift in Sources */,
 				15C762752016D046002AA7F8 /* ChangePasswordPresenter.swift in Sources */,
 				15C7614E2016CFF3002AA7F8 /* CDPetUser+CoreDataClass.swift in Sources */,

@@ -76,12 +76,12 @@ class EmailVerificationViewController: UIViewController, EmailVerificationView {
     }
     
     @IBAction func goBackToLogin(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func signOutAction(_ sender: UIButton) {
         //dismissViewController()
-        verified()
+        self.dismiss(animated: true, completion: nil)
     }
     
     // MARK:- EmailVerificationView

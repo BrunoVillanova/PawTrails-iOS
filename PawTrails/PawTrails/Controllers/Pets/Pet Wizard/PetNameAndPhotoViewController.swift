@@ -145,12 +145,13 @@ import SkyFloatingLabelTextField
 class PTNiceTextField: SkyFloatingLabelTextField {
 
     var labelBackgroundLayer: CALayer?
-    let marginLeft:CGFloat = 12
+    let borderLayer: CALayer = CALayer()
+    let marginLeft:CGFloat = 16
     let labelPadding:CGFloat = 8
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        borderStyle = .roundedRect
+//        borderStyle = .roundedRect
         titleFont = UIFont(name: "Montserrat-Regular", size: 10)!
         titleColor = .clear
         selectedTitleColor = .white
@@ -159,70 +160,111 @@ class PTNiceTextField: SkyFloatingLabelTextField {
         selectedLineHeight = 0
         selectedLineColor = .clear
         titleFormatter = { $0 }
+        
+        borderLayer.cornerRadius = 5
+        borderLayer.borderWidth = 1
+        borderLayer.borderColor = PTConstants.colors.lightGray.cgColor
+        self.layer.insertSublayer(borderLayer, at: 0)
+    }
+
+    override func becomeFirstResponder() -> Bool {
+        let result = super.becomeFirstResponder()
+        setTitleVisible(true, animated: true, animationCompletion: nil)
+        return result
+    }
+
+    override func resignFirstResponder() -> Bool {
+        let result = super.resignFirstResponder()
+        setTitleVisible(false, animated: true, animationCompletion: nil)
+        return result
     }
     
+    override func setTitleVisible(_ titleVisible: Bool, animated: Bool, animationCompletion: ((Bool) -> Void)?) {
+        super.setTitleVisible(titleVisible, animated: animated, animationCompletion: animationCompletion)
+        labelBackgroundLayer?.isHidden = titleVisible ? false : true
+        borderLayer.borderColor = titleVisible ? PTConstants.colors.lightBlue.cgColor : PTConstants.colors.lightGray.cgColor
+    }
+
     override func titleLabelRectForBounds(_ bounds: CGRect, editing: Bool) -> CGRect {
         let superRect = super.titleLabelRectForBounds(bounds, editing: editing)
         let newRect = CGRect(x: superRect.origin.x+marginLeft+labelPadding, y: superRect.origin.y-(superRect.size.height/2.0),
                              width: titleLabel.intrinsicContentSize.width, height: superRect.size.height)
+        updateLayerForTitleLabel(newRect)
         return newRect
     }
 
-    
-    override func editingChanged() {
-        super.editingChanged()
-        updateLayerForTitleLabel(titleLabel.frame)
-    }
-    
     override open func editingRect(forBounds bounds: CGRect) -> CGRect {
         let superRect = super.editingRect(forBounds: bounds)
         let titleHeight = self.titleHeight()
 
         let padding:CGFloat = 10
         let rect = CGRect(
-            x: superRect.origin.x,
+            x: superRect.origin.x + 16,
             y: padding,
             width: superRect.size.width,
             height: superRect.size.height + titleHeight + selectedLineHeight - padding
         )
         return rect
     }
-    
+
     override open func placeholderRect(forBounds bounds: CGRect) -> CGRect {
         let padding:CGFloat = 8
         let rect = CGRect(
-            x: 8,
-            y: 0,
+            x: 16,
+            y: 1,
             width: bounds.size.width,
             height: bounds.size.height + titleHeight() + selectedLineHeight - padding
         )
         return rect
     }
     
+    override open func textRect(forBounds bounds: CGRect) -> CGRect {
+        let superRect = super.textRect(forBounds: bounds)
+
+        let rect = CGRect(
+            x: superRect.origin.x+16,
+            y: superRect.origin.y-2,
+            width: superRect.size.width,
+            height: superRect.size.height
+        )
+        return rect
+    }
+    
+    fileprivate func commonRect() -> CGRect {
+//        let padding:CGFloat = 8
+        let rect = CGRect(
+            x: 4,
+            y: 0,
+            width: bounds.size.width,
+            height: bounds.size.height
+        )
+        return rect
+    }
     override func layoutSubviews() {
         super.layoutSubviews()
+        borderLayer.frame = CGRect(x: 0,
+                                    y: 0,
+                                    width: self.frame.size.width,
+                                    height: self.frame.size.height)
+    }
+    
+    fileprivate func updateLayerForTitleLabel(_ newRect: CGRect) {
         
         if labelBackgroundLayer == nil {
             labelBackgroundLayer = CALayer()
             labelBackgroundLayer!.backgroundColor = PTConstants.colors.lightBlue.cgColor
+            labelBackgroundLayer!.isHidden = true
             titleLabel.layer.masksToBounds = true
         }
-    }
-    
-    fileprivate func updateLayerForTitleLabel(_ newRect: CGRect) {
+        
         if let labelBackgroundLayer = labelBackgroundLayer {
-            let newRect2 = CGRect(x: newRect.origin.x-labelPadding, y: newRect.origin.y,
-                                  width: newRect.size.width+(2*labelPadding), height: newRect.size.height)
+            let newRect2 = CGRect(x: newRect.origin.x-labelPadding,
+                                  y: newRect.origin.y,
+                                  width: newRect.size.width+(2*labelPadding),
+                                  height: newRect.size.height)
             labelBackgroundLayer.frame = newRect2
             labelBackgroundLayer.cornerRadius = labelBackgroundLayer.frame.size.height/2.0
-            
-            let isVisible = isTitleVisible()
-            
-            if isVisible {
-                titleLabel.layer.superlayer?.insertSublayer(labelBackgroundLayer, below: titleLabel.layer)
-            } else {
-                labelBackgroundLayer.removeFromSuperlayer()
-            }
+            titleLabel.layer.superlayer?.insertSublayer(labelBackgroundLayer, below: titleLabel.layer)
         }
     }
 }

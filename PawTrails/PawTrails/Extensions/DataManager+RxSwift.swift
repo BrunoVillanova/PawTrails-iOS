@@ -104,6 +104,21 @@ extension DataManager {
         })
     }
     
+//    func signUp(_ email:String, _ password: String) -> Observable<APIManagerError?, Authentication?> {
+//        return Observable.create({observer in
+//            APIRepository.instance.getTripList(status) { (error, trips) in
+//                if let error = error {
+//                    observer.onError(error)
+//                } else {
+//                    observer.onNext(trips!)
+//                    observer.onCompleted()
+//                }
+//            }
+//
+//            return Disposables.create()
+//        })
+//    }
+    
     func getTrips(_ status: [Int] = [], from: Int? = nil, to: Int? = nil, page: Int? = nil) -> Observable<[Trip]> {
         return Observable.create({observer in
             APIRepository.instance.getTrips(status, from: from, to: to, page: page) { (error, trips) in

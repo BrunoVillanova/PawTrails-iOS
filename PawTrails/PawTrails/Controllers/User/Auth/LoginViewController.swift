@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController,InitialView {
+class LoginViewController: UIViewController, InitialView {
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -16,28 +16,49 @@ class LoginViewController: UIViewController,InitialView {
     @IBOutlet weak var loginButton: UIButton!
 
     fileprivate let presenter = InitialPresenter()
-
+    fileprivate final var textFields: [UITextField]?
+    fileprivate let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        presenter.attachView(self)
-        // Do any additional setup after loading the view.
+        initialize()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    fileprivate func initialize() {
+        textFields = [emailTextField, passwordTextField]
         
+        for textField in textFields! {
+            textField.delegate = self
+        }
+        
+        presenter.attachView(self)
         configureNavigatonBar()
     }
     
     fileprivate func configureNavigatonBar() {
 
-        let btnLeftMenu: UIButton = UIButton()
-        btnLeftMenu.setImage(UIImage(named: "BackIcon"), for: UIControlState())
-        btnLeftMenu.addTarget(self, action: #selector(backButtonTapped), for: UIControlEvents.touchUpInside)
-        btnLeftMenu.frame = CGRect(x: 0, y: 0, width: 33, height: 27)
-        let barButton = UIBarButtonItem(customView: btnLeftMenu)
-        self.navigationItem.leftBarButtonItem = barButton
-        
+        if presentingViewController != nil {
+            let closeButton = UIBarButtonItem(image: UIImage(named: "close_icon"), style: .plain, target: self, action: #selector(closeButtonTapped))
+            self.navigationItem.rightBarButtonItem = closeButton
+            self.navigationItem.rightBarButtonItem?.tintColor = PTConstants.colors.darkGray
+        }
+
         self.title = "Login"
         let attributes = [NSFontAttributeName: UIFont(name: "Montserrat-Regular", size: 14)!,NSForegroundColorAttributeName: PTConstants.colors.darkGray]
         UINavigationBar.appearance().titleTextAttributes = attributes
+    }
+    
+    func closeButtonTapped() {
+        self.dismiss(animated: true, completion: nil)
     }
     
     func backButtonTapped() {
@@ -45,11 +66,6 @@ class LoginViewController: UIViewController,InitialView {
         self.navigationController?.popViewController(animated: true)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     func emailFieldError() {
          self.emailTextField.shake()
     }
@@ -63,12 +79,10 @@ class LoginViewController: UIViewController,InitialView {
     }
     
     func verifyAccount(_ email:String, _ password:String) {
-        
-        if let vc = self.storyboard?.instantiateViewController(withIdentifier: "EmailVerificationViewController") as? EmailVerificationViewController {
-            vc.email = email
-            vc.password = password
-            self.present(vc, animated: true, completion: nil)
-        }
+        let vc = ViewControllers.emailVerification.viewController as! EmailVerificationViewController
+        vc.email = email
+        vc.password = password
+        self.present(vc, animated: true, completion: nil)
     }
     
     func beginLoadingContent() {
@@ -102,39 +116,34 @@ class LoginViewController: UIViewController,InitialView {
         }
     }
     
+    @IBAction func forgotPasswordAction(_ sender: Any) {
+        self.appDelegate.presentViewController(.passwordRecovery, animated: true, completion: nil)
+    }
+    
+    @IBAction func signupAction(_ sender: Any) {
+        self.dismiss(animated: true) { [unowned self] in
+            self.appDelegate.presentViewController(.signup, animated: true, completion: nil)
+        }
+    }
+    
     @IBAction func loginAction(_ sender: UIButton?) {
         UIApplication.shared.statusBarStyle = .default
         self.view.endEditing(true)
         presenter.signIn(email: emailTextField.text, password:passwordTextField.text)
     }
+}
+
+extension LoginViewController: UITextFieldDelegate {
     
-    // MARK: - UITextFieldDelegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        //TEMP
-                if textField == self.emailTextField {
-                    self.passwordTextField.becomeFirstResponder()
-                }else if textField == self.passwordTextField {
-                    textField.resignFirstResponder()
-                            }else{
-                    textField.resignFirstResponder()
-                }
+        
+        if let textFields = textFields, let textFieldIndex = textFields.index(of: textField), textFieldIndex < textFields.count-1 {
+            let nextTextField =  textFields[textFieldIndex+1]
+            nextTextField.becomeFirstResponder()
+        } else {
+            loginAction(loginButton)
+        }
+        
         return true
     }
-    
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

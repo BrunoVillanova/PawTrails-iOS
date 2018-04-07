@@ -10,11 +10,13 @@ import UIKit
 
 class PrivacyViewController: UIViewController {
 
+    @IBOutlet weak var textView: UITextView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
+        textView.contentInset = UIEdgeInsetsMake(0, 16, 0, 16)
         configureNavigatonBar()
     }
 

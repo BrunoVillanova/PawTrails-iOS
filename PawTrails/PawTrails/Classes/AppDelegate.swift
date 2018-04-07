@@ -180,22 +180,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func loadAuthenticationScreen() {
-        //TEMP
-//            let loginStoryboard = UIStoryboard(name: "Login", bundle: nil)
-//            let initial = loginStoryboard.instantiateViewController(withIdentifier: "InitialViewController") as? InitialViewController
-//            window?.rootViewController = initial
-        
-        let loginStoryboard = UIStoryboard(name: "Login", bundle: nil)
-        if let vc = loginStoryboard.instantiateViewController(withIdentifier: "InitialViewController") as? InitialViewController {
-            let navController = UINavigationController(rootViewController: vc)
-//            window!.rootViewController!.present(navController, animated: true, completion: {
-//                //TEMP self.tabBarController?.selectedIndex = 0
-//            })
-            window?.rootViewController = navController
-            //window?.rootViewController?.present(navController, animated: false, completion: nil)
-        }
-    }
+
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         return SDKApplicationDelegate.shared.application(app, open: url, options: options)
@@ -244,6 +229,99 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
+enum Storyboards {
+    case login
+    
+    var storyboard: UIStoryboard {
+        switch self {
+            case .login: return UIStoryboard(name: "Login", bundle: nil)
+        }
+    }
+}
+
+enum ViewControllers {
+    case initial, login, signup, passwordRecovery, emailVerification
+    
+    var storyboard: UIStoryboard {
+        switch self {
+            case .initial, .login, .signup, .passwordRecovery, .emailVerification: return Storyboards.login.storyboard
+        }
+    }
+    
+    var identifier: String {
+        switch self {
+            case .initial: return "InitialViewController"
+            case .login: return "LoginViewController"
+            case .signup: return "SignUpViewController"
+            case .passwordRecovery: return "PasswordRecoveryViewController"
+        case .emailVerification: return "EmailVerificationViewController"
+        }
+    }
+    
+    var navigationController: UINavigationController? {
+        switch self {
+        case .login, .signup, .passwordRecovery: return UINavigationController()
+        default: return nil
+        }
+    }
+    
+    var viewController: UIViewController {
+        return self.storyboard.instantiateViewController(withIdentifier: self.identifier)
+    }
+}
+
+//
+// MARK: Screens functions
+//
+extension AppDelegate {
+    
+    func loadAuthenticationScreen(_ presentEmailValidation: Bool = false) {
+    
+        if let vc = ViewControllers.initial.viewController as? InitialViewController {
+            vc.presentEmailValidation = presentEmailValidation
+            let navController = UINavigationController(rootViewController: vc)
+            window?.rootViewController = navController
+        }
+    }
+    
+    func presentViewController(_ viewControllerType: ViewControllers, animated: Bool = true, completion: (() -> Void)? = nil) {
+        
+        var viewControllerToPresent = viewControllerType.viewController
+        
+        if let navigationController = viewControllerType.navigationController {
+            navigationController.viewControllers = [viewControllerToPresent]
+            viewControllerToPresent = navigationController
+        }
+
+        presentViewController(viewControllerToPresent, animated: animated, completion: completion)
+    }
+    
+    func presentViewController(_ viewController: UIViewController, animated: Bool = true, completion: (() -> Void)? = nil) {
+        if let rootViewController = UIApplication.shared.keyWindow?.rootViewController {
+            
+            if let presentedViewController = rootViewController.presentedViewController {
+                presentedViewController.present(viewController, animated: animated, completion: completion)
+            } else {
+                rootViewController.present(viewController, animated: animated, completion: completion)
+            }
+        }
+    }
+    
+    func getVisibleViewController() -> UIViewController? {
+        var visibleViewController: UIViewController?
+        
+        if let rootViewController = UIApplication.shared.keyWindow?.rootViewController {
+            
+            if let presentedViewController = rootViewController.presentedViewController {
+                visibleViewController = presentedViewController
+            } else {
+                visibleViewController = rootViewController
+            }
+        }
+  
+        return visibleViewController
+    }
+}
 
 // [START ios_10_message_handling]
 @available(iOS 10, *)
