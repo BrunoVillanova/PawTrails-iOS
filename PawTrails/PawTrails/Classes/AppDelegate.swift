@@ -276,11 +276,23 @@ enum ViewControllers {
 extension AppDelegate {
     
     func loadAuthenticationScreen(_ presentEmailValidation: Bool = false) {
-    
+        
+  
         if let vc = ViewControllers.initial.viewController as? InitialViewController {
-            vc.presentEmailValidation = presentEmailValidation
+            
             let navController = UINavigationController(rootViewController: vc)
-            window?.rootViewController = navController
+            if let rootViewController = UIApplication.shared.keyWindow?.rootViewController {
+                
+                
+                UIView.transition(from: rootViewController.view, to: navController.view, duration: 0.3, options: .transitionCrossDissolve) { finished in
+                    if finished {
+                        self.window?.rootViewController = navController
+                        self.presentViewController(.login, animated: false, completion: {
+                            self.presentViewController(.emailVerification, animated: true, completion: nil)
+                        })
+                    }
+                }
+            }
         }
     }
     
