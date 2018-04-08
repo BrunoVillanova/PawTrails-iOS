@@ -33,16 +33,20 @@ class PrivacyViewController: UIViewController {
     
     fileprivate func configureNavigatonBar() {
         
-        let btnLeftMenu: UIButton = UIButton()
-        btnLeftMenu.setImage(UIImage(named: "BackIcon"), for: UIControlState())
-        btnLeftMenu.addTarget(self, action: #selector(backButtonTapped), for: UIControlEvents.touchUpInside)
-        btnLeftMenu.frame = CGRect(x: 0, y: 0, width: 33, height: 27)
-        let barButton = UIBarButtonItem(customView: btnLeftMenu)
-        self.navigationItem.leftBarButtonItem = barButton
+        if presentingViewController != nil {
+            let closeButton = UIBarButtonItem(image: UIImage(named: "close_icon"), style: .plain, target: self, action: #selector(closeButtonTapped))
+            self.navigationItem.rightBarButtonItem = closeButton
+            self.navigationItem.rightBarButtonItem?.tintColor = PTConstants.colors.darkGray
+        }
+        
         
         self.title = "Legal"
         let attributes = [NSFontAttributeName: UIFont(name: "Montserrat-Regular", size: 14)!,NSForegroundColorAttributeName: PTConstants.colors.darkGray]
         UINavigationBar.appearance().titleTextAttributes = attributes
+    }
+    
+    func closeButtonTapped() {
+        self.dismiss(animated: true)
     }
     
     func backButtonTapped() {

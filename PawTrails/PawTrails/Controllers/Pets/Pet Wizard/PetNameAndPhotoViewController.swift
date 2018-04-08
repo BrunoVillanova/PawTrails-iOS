@@ -142,16 +142,36 @@ extension PetNameAndPhotoViewController: TOCropViewControllerDelegate {
 
 import SkyFloatingLabelTextField
 
+enum PTNiceTextFieldInputType {
+    case generic, email
+    
+    func validate(_ text: String) -> Bool {
+        return true
+    }
+    
+    func transform(_ text: String) -> String {
+        switch self {
+        case .email:
+            return text.lowercased()
+        default:
+            return text
+        }
+        
+    }
+}
+
 class PTNiceTextField: SkyFloatingLabelTextField {
 
     var labelBackgroundLayer: CALayer?
     let borderLayer: CALayer = CALayer()
     let marginLeft:CGFloat = 16
     let labelPadding:CGFloat = 8
+    var inputType: PTNiceTextFieldInputType = .generic
+
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-//        borderStyle = .roundedRect
+
         titleFont = UIFont(name: "Montserrat-Regular", size: 10)!
         titleColor = .clear
         selectedTitleColor = .white
@@ -165,8 +185,21 @@ class PTNiceTextField: SkyFloatingLabelTextField {
         borderLayer.borderWidth = 1
         borderLayer.borderColor = PTConstants.colors.lightGray.cgColor
         self.layer.insertSublayer(borderLayer, at: 0)
+        
+        if self.keyboardType == .emailAddress {
+            inputType = .email
+        }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(textFieldDidChange), name: NSNotification.Name.UITextFieldTextDidChange, object: self)
+    
     }
 
+    @objc fileprivate func textFieldDidChange(notification:NSNotification) {
+        if let text = self.text {
+            self.text = inputType.transform(text)
+        }
+    }
+    
     override func becomeFirstResponder() -> Bool {
         let result = super.becomeFirstResponder()
         setTitleVisible(true, animated: true, animationCompletion: nil)
@@ -231,7 +264,6 @@ class PTNiceTextField: SkyFloatingLabelTextField {
     }
     
     fileprivate func commonRect() -> CGRect {
-//        let padding:CGFloat = 8
         let rect = CGRect(
             x: 4,
             y: 0,
@@ -267,4 +299,5 @@ class PTNiceTextField: SkyFloatingLabelTextField {
             titleLabel.layer.superlayer?.insertSublayer(labelBackgroundLayer, below: titleLabel.layer)
         }
     }
+    
 }

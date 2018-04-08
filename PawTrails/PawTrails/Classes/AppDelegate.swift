@@ -70,7 +70,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         configureUIPreferences()
 
         // KeyboardManager
-        IQKeyboardManager.sharedManager().enable = true
+//        IQKeyboardManager.
+
         
         //reset Onboarding presented
         OnboardingViewController.onboardingPresented = false
@@ -240,11 +241,11 @@ enum Storyboards {
 }
 
 enum ViewControllers {
-    case initial, login, signup, passwordRecovery, emailVerification
+    case initial, login, signup, passwordRecovery, passwordRecoverySuccess, emailVerification, termsAndPrivacy
     
     var storyboard: UIStoryboard {
         switch self {
-            case .initial, .login, .signup, .passwordRecovery, .emailVerification: return Storyboards.login.storyboard
+            case .initial, .login, .signup, .passwordRecovery, .passwordRecoverySuccess, .emailVerification, .termsAndPrivacy: return Storyboards.login.storyboard
         }
     }
     
@@ -254,13 +255,15 @@ enum ViewControllers {
             case .login: return "LoginViewController"
             case .signup: return "SignUpViewController"
             case .passwordRecovery: return "PasswordRecoveryViewController"
-        case .emailVerification: return "EmailVerificationViewController"
+            case .passwordRecoverySuccess: return "PasswordRecoverySuccessViewController"
+            case .emailVerification: return "EmailVerificationViewController"
+            case .termsAndPrivacy: return "PrivacyViewController"
         }
     }
     
     var navigationController: UINavigationController? {
         switch self {
-        case .login, .signup, .passwordRecovery: return UINavigationController()
+        case .login, .signup, .passwordRecovery, .termsAndPrivacy: return UINavigationController()
         default: return nil
         }
     }

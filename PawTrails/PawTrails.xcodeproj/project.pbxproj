@@ -238,6 +238,10 @@
 		15E6E38E206D5D6100484EAF /* GradientView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15E6E38D206D5D6100484EAF /* GradientView.framework */; };
 		15E7EFA92044B020000BFCBF /* RobotoCondensed-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15E7EFA72044B005000BFCBF /* RobotoCondensed-Regular.ttf */; };
 		15E7EFAA2044B020000BFCBF /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15E7EFA82044B012000BFCBF /* Roboto-Medium.ttf */; };
+		15FFE50E2079545B005CA1C2 /* IQKeyboardManagerSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15FFE50C2079545A005CA1C2 /* IQKeyboardManagerSwift.framework */; };
+		15FFE51120796D62005CA1C2 /* PTNiceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FFE51020796D62005CA1C2 /* PTNiceButton.swift */; };
+		15FFE51320796E4B005CA1C2 /* PasswordRecoverySuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FFE51220796E4B005CA1C2 /* PasswordRecoverySuccessViewController.swift */; };
+		15FFE51520798753005CA1C2 /* PTGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FFE51420798753005CA1C2 /* PTGradientView.swift */; };
 		4414AE6B1EA0DD5B004A5134 /* PawTrailsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4414AE6A1EA0DD5B004A5134 /* PawTrailsTests.swift */; };
 		4414AE781EA0DD8C004A5134 /* AuthManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4414AE731EA0DD8C004A5134 /* AuthManagerTests.swift */; };
 		4414AE7A1EA0DD8C004A5134 /* SocketIOManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4414AE751EA0DD8C004A5134 /* SocketIOManagerTest.swift */; };
@@ -532,6 +536,11 @@
 		15E6E38D206D5D6100484EAF /* GradientView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GradientView.framework; path = Carthage/Build/iOS/GradientView.framework; sourceTree = "<group>"; };
 		15E7EFA72044B005000BFCBF /* RobotoCondensed-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Regular.ttf"; sourceTree = "<group>"; };
 		15E7EFA82044B012000BFCBF /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		15FFE50B2079545A005CA1C2 /* IQKeyboardManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IQKeyboardManager.framework; path = Carthage/Build/iOS/IQKeyboardManager.framework; sourceTree = "<group>"; };
+		15FFE50C2079545A005CA1C2 /* IQKeyboardManagerSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IQKeyboardManagerSwift.framework; path = Carthage/Build/iOS/IQKeyboardManagerSwift.framework; sourceTree = "<group>"; };
+		15FFE51020796D62005CA1C2 /* PTNiceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTNiceButton.swift; sourceTree = "<group>"; };
+		15FFE51220796E4B005CA1C2 /* PasswordRecoverySuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRecoverySuccessViewController.swift; sourceTree = "<group>"; };
+		15FFE51420798753005CA1C2 /* PTGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTGradientView.swift; sourceTree = "<group>"; };
 		1E2B813BA9CAE948174F2C71 /* Pods_PawTrailsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PawTrailsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4414AE681EA0DD5B004A5134 /* PawTrailsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PawTrailsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4414AE6A1EA0DD5B004A5134 /* PawTrailsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PawTrailsTests.swift; sourceTree = "<group>"; };
@@ -589,6 +598,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15FFE50E2079545B005CA1C2 /* IQKeyboardManagerSwift.framework in Frameworks */,
 				1539DA2E2076643300653EF7 /* TOCropViewController.framework in Frameworks */,
 				1539DA2D2076621500653EF7 /* CropViewController.framework in Frameworks */,
 				1539DA2920765A4600653EF7 /* Toucan.framework in Frameworks */,
@@ -759,6 +769,7 @@
 		15C7621C2016D011002AA7F8 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				15FFE50F20796D45005CA1C2 /* Buttons */,
 				44B3B10F206E433800FBF8CC /* PTRulerSlider */,
 				44B3B10E206E42F200FBF8CC /* PTButton */,
 				1570C7AD203B7C1300A7F59F /* PTTripInfoView */,
@@ -782,6 +793,7 @@
 				1599B22B2023F48A002D4025 /* PTDeviceStatusView.swift */,
 				15DCFE9E205B6B6E00DF726C /* PTDonutAnnotationView.swift */,
 				159EDD4F2076D43F006B53FF /* PTLinesBackgroundView.swift */,
+				15FFE51420798753005CA1C2 /* PTGradientView.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -989,6 +1001,7 @@
 				15C7638A2016D5C0002AA7F8 /* EmailVerificationViewController.swift */,
 				15C7638B2016D5C0002AA7F8 /* PasswordRecoveryViewController.swift */,
 				44FEE7E7207521B100A85A74 /* LoginViewController.swift */,
+				15FFE51220796E4B005CA1C2 /* PasswordRecoverySuccessViewController.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -1165,6 +1178,14 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		15FFE50F20796D45005CA1C2 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				15FFE51020796D62005CA1C2 /* PTNiceButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
 		4414AE691EA0DD5B004A5134 /* PawTrailsTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -1269,6 +1290,8 @@
 		91352D1B7E01CC1C0CF51D38 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				15FFE50B2079545A005CA1C2 /* IQKeyboardManager.framework */,
+				15FFE50C2079545A005CA1C2 /* IQKeyboardManagerSwift.framework */,
 				1539DA2C2076621500653EF7 /* CropViewController.framework */,
 				1539DA2A2076620100653EF7 /* TOCropViewController.framework */,
 				1539DA2820765A4600653EF7 /* Toucan.framework */,
@@ -1397,20 +1420,20 @@
 			attributes = {
 				CLASSPREFIX = PT;
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = AttitudeTech;
 				TargetAttributes = {
 					4414AE671EA0DD5B004A5134 = {
 						CreatedOnToolsVersion = 8.3;
 						DevelopmentTeam = 7E2855LEH4;
-						LastSwiftMigration = 0920;
+						LastSwiftMigration = 0930;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 4415FF3E1E3B822900A81B13;
 					};
 					4415FF3E1E3B822900A81B13 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 7E2855LEH4;
-						LastSwiftMigration = 0920;
+						LastSwiftMigration = 0930;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -1430,7 +1453,7 @@
 					444721791F03F12A001DCDE1 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = DJBJW6R236;
-						LastSwiftMigration = 0920;
+						LastSwiftMigration = 0930;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 4415FF3E1E3B822900A81B13;
 					};
@@ -1559,6 +1582,8 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Toucan.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/CropViewController.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/TOCropViewController.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/IQKeyboardManager.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/IQKeyboardManagerSwift.framework",
 			);
 			name = "Carthage Copy Frameworks";
 			outputPaths = (
@@ -1588,6 +1613,8 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Toucan.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/CropViewController.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/TOCropViewController.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/IQKeyboardManager.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/IQKeyboardManagerSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1709,7 +1736,6 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-PawTrails/Pods-PawTrails-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFInternationalization/MDFInternationalization.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFTextAccessibility/MDFTextAccessibility.framework",
 				"${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework",
@@ -1725,7 +1751,6 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFInternationalization.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFTextAccessibility.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialComponents.framework",
@@ -1777,6 +1802,7 @@
 				15C7641C2016D5C0002AA7F8 /* GoalsViewController.swift in Sources */,
 				15C763DC2016D5C0002AA7F8 /* BSC4ViewController.swift in Sources */,
 				15C761512016CFF3002AA7F8 /* CDPetUser+CoreDataProperties.swift in Sources */,
+				15FFE51520798753005CA1C2 /* PTGradientView.swift in Sources */,
 				15C763DD2016D5C0002AA7F8 /* SelectPetForRecommandationController.swift in Sources */,
 				15B3FF1E20329DE500C08D48 /* CacheManager.swift in Sources */,
 				15C7623F2016D011002AA7F8 /* questionCells.swift in Sources */,
@@ -1829,6 +1855,7 @@
 				15C761482016CFF3002AA7F8 /* NotificationManager.swift in Sources */,
 				15C761452016CFF3002AA7F8 /* AppDelegate.swift in Sources */,
 				15C764152016D5C0002AA7F8 /* PetNameTableViewController.swift in Sources */,
+				15FFE51120796D62005CA1C2 /* PTNiceButton.swift in Sources */,
 				15C763EF2016D5C0002AA7F8 /* AirbnbDatePickerFlowLayout.swift in Sources */,
 				15C761422016CFF3002AA7F8 /* CDRepository.swift in Sources */,
 				15C761522016CFF3002AA7F8 /* CDBreed+CoreDataClass.swift in Sources */,
@@ -1940,6 +1967,7 @@
 				15C763E12016D5C0002AA7F8 /* PetsViewController.swift in Sources */,
 				15C7615B2016CFF3002AA7F8 /* SharedPreferences.swift in Sources */,
 				15C762822016D046002AA7F8 /* HomePresenter.swift in Sources */,
+				15FFE51320796E4B005CA1C2 /* PasswordRecoverySuccessViewController.swift in Sources */,
 				15C764052016D5C0002AA7F8 /* StepOneViewController.swift in Sources */,
 				15C763EC2016D5C0002AA7F8 /* SettingsView.swift in Sources */,
 				15C762572016D011002AA7F8 /* PTBatteryView.swift in Sources */,

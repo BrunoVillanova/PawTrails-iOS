@@ -57,7 +57,7 @@ enum ErrorCode: Int {
     case UserNotFound = 19
     case WrongPassword = 20
     case WrongCredentials = 21
-    
+    case NotValidEmail = 22
     case TooManyRequests = 23
     
     case WrongOTP = 24
@@ -134,18 +134,20 @@ enum ErrorCode: Int {
             return "Account Disabled, Please Contact Us."
 
         case .DateOfBirth:
-            return "Error. Please try again later"
+            return "Invadit birth date"
 
         case .GenderFormat:
-            return "Error. Please try again later"
+            return "Wrong gender format"
         case .PhoneFormat:
-            return "Error. Please try again later"
+            return "Wrong phone format"
         case .UserNotFound:
-            return "Error. Please try again later"
+            return "User not found"
         case .WrongPassword:
             return "Incorrect password. "
         case .WrongCredentials:
             return "Incorrect email or password"
+        case .NotValidEmail:
+            return "Not a valid email address"
         case .TooManyRequests:
             return "You've tried to reset too many times, please try again in 5 minutes."
 

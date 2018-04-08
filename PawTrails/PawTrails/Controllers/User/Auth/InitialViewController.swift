@@ -93,6 +93,10 @@ class InitialViewController: UIViewController {
         presenter.loginFB(vc: self)
     }
     
+    @IBAction func termsAndPrivacyAction(_ sender: Any) {
+        appDelegate.presentViewController(.termsAndPrivacy, animated: true, completion: nil)
+    }
+    
 }
 
 extension InitialViewController: InitialView {

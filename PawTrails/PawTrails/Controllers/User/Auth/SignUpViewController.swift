@@ -83,6 +83,8 @@ class SignUpViewController: UIViewController {
         self.title = "Signup"
         let attributes = [NSFontAttributeName: UIFont(name: "Montserrat-Regular", size: 14)!,NSForegroundColorAttributeName: PTConstants.colors.darkGray]
         UINavigationBar.appearance().titleTextAttributes = attributes
+        
+        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     func closeButtonTapped() {
@@ -124,6 +126,10 @@ class SignUpViewController: UIViewController {
         } else {
             alert(title: "", msg: "Passwords don't match Please reenter passwords")
         }
+    }
+    
+    @IBAction func termsAndPrivacyAction(_ sender: Any) {
+        appDelegate.presentViewController(.termsAndPrivacy, animated: true, completion: nil)
     }
     
     @IBAction func cancelBtnPressed(_ sender: Any) {

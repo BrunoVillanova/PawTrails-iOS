@@ -11,7 +11,7 @@ import GSMessages
 
 class PasswordRecoveryViewController: UIViewController, UITextFieldDelegate {
     
-    //@IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet var mainView: PTLinesBackgroundView!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var sendButton: UIButton!
 
@@ -50,6 +50,8 @@ class PasswordRecoveryViewController: UIViewController, UITextFieldDelegate {
         self.title = "Forgot Password"
         let attributes = [NSFontAttributeName: UIFont(name: "Montserrat-Regular", size: 14)!,NSForegroundColorAttributeName: PTConstants.colors.darkGray]
         UINavigationBar.appearance().titleTextAttributes = attributes
+        
+        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     func closeButtonTapped() {
@@ -85,21 +87,7 @@ class PasswordRecoveryViewController: UIViewController, UITextFieldDelegate {
                     self.showMessage(error.msg.msg, type: GSMessageType.error)
 
                 } else {
-                    self.dismiss(animated: true, completion: {
-                        self.appDelegate.getVisibleViewController()?.showMessage("Recovery instructions was sent to your email!", type: GSMessageType.success,  options: [
-                            .animation(.slide),
-                            .animationDuration(0.3),
-                            .autoHide(true),
-                            .cornerRadius(0.0),
-//                            .height(44.0),
-                            .hideOnTap(true),
-                            //                .margin(.init(top: 64, left: 0, bottom: 0, right: 0)),
-                            //                .padding(.zero),
-                            .position(.top),
-                            .textAlignment(.center),
-                            .textNumberOfLines(0),
-                            ])
-                    })
+                    self.cycleViewControllers(currentViewController: self, nextViewController: ViewControllers.passwordRecoverySuccess.viewController)
                 }
             })
         }
@@ -111,7 +99,13 @@ class PasswordRecoveryViewController: UIViewController, UITextFieldDelegate {
         self.sendRecoveryEmail(email: self.emailTextField.text ?? "", checked: true)
     }
     
-
+    @IBAction func signupAction(_ sender: Any) {
+        self.dismiss(animated: true, completion: {
+            self.appDelegate.presentViewController(.signup, animated: true, completion: nil)
+        })
+    }
+    
+    
     // MARK: - PasswordRecoveryView
     
     func errorMessage(_ error: ErrorMsg) {
@@ -124,17 +118,26 @@ class PasswordRecoveryViewController: UIViewController, UITextFieldDelegate {
     
     
     func emailSent() {
-        let alert = UIAlertController(title: "Recovery email sent", message: "Check your email and recover your password", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
-            self.dismissAndGoToLogin()
-        }))
-        
-//        self.dismissAndGoToLogin {
-//
-//            self.present(alert, animated: true, completion: nil)
-//        }
+        cycleViewControllers(currentViewController: self, nextViewController: ViewControllers.passwordRecoverySuccess.viewController)
     }
     
+    
+    fileprivate func cycleViewControllers(currentViewController: UIViewController, nextViewController: UIViewController) {
+        
+    
+        addChildViewController(nextViewController)
+        
+        nextViewController.view.frame = mainView.bounds
+        nextViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        mainView.addSubview(nextViewController.view)
+
+        UIView.transition(from: currentViewController.view, to: nextViewController.view, duration: 0.3, options: .layoutSubviews) { (finished) in
+            if finished {
+                nextViewController.didMove(toParentViewController: self)
+            }
+        }
+    }
     
     
     func beginLoadingContent() {
