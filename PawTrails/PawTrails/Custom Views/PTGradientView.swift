@@ -10,6 +10,8 @@ import UIKit
 
 class PTGradientView: UIView {
     
+    let gradient: CAGradientLayer = CAGradientLayer()
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupView()
@@ -23,13 +25,16 @@ class PTGradientView: UIView {
     fileprivate func setupView() {
         self.isOpaque = false
         self.backgroundColor = .clear
-        let gradient: CAGradientLayer = CAGradientLayer()
         
         let startingColor = UIColor(white: 0, alpha: 0.05)
         gradient.colors = [startingColor.cgColor, UIColor.clear.cgColor]
         gradient.locations = [0.0 , 0.75]
         gradient.frame = self.bounds
-        
         self.layer.insertSublayer(gradient, at: 0)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        gradient.frame = self.bounds
     }
 }
