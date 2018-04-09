@@ -255,6 +255,11 @@ class SocketIOManager: NSObject, URLSessionDelegate {
     
     func userNotSigned() {
         
+        guard let rootViewController = UIApplication.shared.keyWindow?.rootViewController, !(rootViewController is InitialViewController) else {
+            self.disconnect()
+            return
+        }
+        
         let title: String = "Authorization Needed"
         let subTitle: String = "Please, you need to login."
         
@@ -266,13 +271,10 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         let alertView = SCLAlertView(appearance: appearance)
         
         alertView.addButton("Login") {
+        
             if let rootViewController = UIApplication.shared.keyWindow?.rootViewController, !rootViewController.isKind(of: InitialViewController.self) {
-                
-//                let loginStoryboard = UIStoryboard(name: "Login", bundle: nil)
-//                if let vc = loginStoryboard.instantiateViewController(withIdentifier: "InitialViewController") as? InitialViewController {
-//                    UIApplication.shared.keyWindow?.rootViewController = vc
-//                }
-                
+
+
                 let loginStoryboard = UIStoryboard(name: "Login", bundle: nil)
                 if let vc = loginStoryboard.instantiateViewController(withIdentifier: "InitialViewController") as? InitialViewController {
                     let navController = UINavigationController(rootViewController: vc)
