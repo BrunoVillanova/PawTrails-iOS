@@ -56,6 +56,7 @@ struct Constants {
     
     static let deviceIdforDemo = "RcpWfA9PGGYz"
     
+    /////////// BEGIN apiURL
     #if DEBUG
     static let apiURL = apiURLStaging
     static let apiURLTest = apiURLTestStaging
@@ -76,7 +77,9 @@ struct Constants {
     #endif
 
     #endif
+    /////////// END apiURL
 
+//    ////////// FORCE PRODUCTION
 //    static let apiURL = apiURLProduction
 //    static let apiURLTest = apiURLTestProduction
 //    static let socketURL = socketURLProduction

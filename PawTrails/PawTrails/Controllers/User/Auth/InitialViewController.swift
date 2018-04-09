@@ -111,16 +111,7 @@ extension InitialViewController: InitialView {
     }
     
     func loadHomeScreen() {
-        guard let window = UIApplication.shared.delegate?.window else { return }
-        
-        if let currentRootViewController = window!.rootViewController {
-            let root = storyboard?.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
-            root.selectedIndex = 0
-            
-            UIView.transition(from: currentRootViewController.view, to: root.view, duration: 0.3, options: UIViewAnimationOptions.transitionCurlUp, completion: {(finished) in
-                UIApplication.shared.keyWindow?.rootViewController = root
-            })
-        }
+       appDelegate.loadHomeScreen(animated: true)
     }
     
     
