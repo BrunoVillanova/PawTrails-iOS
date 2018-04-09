@@ -1432,7 +1432,7 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 7E2855LEH4;
 						LastSwiftMigration = 0930;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -2088,10 +2088,11 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = PawTrails/Resources/PawTrails.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 7E2855LEH4;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2109,8 +2110,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.attitudetech.PawTrails.beta;
 				PRODUCT_NAME = "$(TARGET_NAME)$(PRODUCT_NAME_SUFFIX)";
 				PRODUCT_NAME_SUFFIX = " Beta";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "1043c045-e447-4133-9da7-6aa747d4f0c5";
+				PROVISIONING_PROFILE_SPECIFIER = "PawTrails Beta";
 				SWIFT_OBJC_BRIDGING_HEADER = "PawTrails/Resources/PawTrails-Bridging-Header.h";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 3.0;
@@ -2237,10 +2238,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = PawTrails/Resources/PawTrails.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 7E2855LEH4;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2258,8 +2259,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.attitudetech.PawTrails.beta;
 				PRODUCT_NAME = "$(TARGET_NAME)$(PRODUCT_NAME_SUFFIX)";
 				PRODUCT_NAME_SUFFIX = " Beta";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "1043c045-e447-4133-9da7-6aa747d4f0c5";
+				PROVISIONING_PROFILE_SPECIFIER = "PawTrails Beta";
 				SWIFT_OBJC_BRIDGING_HEADER = "PawTrails/Resources/PawTrails-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
@@ -2537,9 +2538,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = PawTrails/Resources/PawTrails.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 7E2855LEH4;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2557,8 +2558,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.attitudetech.PawTrails.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)$(PRODUCT_NAME_SUFFIX)";
 				PRODUCT_NAME_SUFFIX = " Debug";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "ed24e837-6554-426d-b341-3b706ee5351e";
+				PROVISIONING_PROFILE_SPECIFIER = "PawTrails Debug";
 				SWIFT_OBJC_BRIDGING_HEADER = "PawTrails/Resources/PawTrails-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
@@ -2575,10 +2576,11 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = PawTrails/Resources/PawTrails.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 7E2855LEH4;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2596,8 +2598,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.attitudetech.PawTrails;
 				PRODUCT_NAME = "$(TARGET_NAME)$(PRODUCT_NAME_SUFFIX)";
 				PRODUCT_NAME_SUFFIX = "";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "5876cea2-a86c-4f7e-8127-e6dd6282689b";
+				PROVISIONING_PROFILE_SPECIFIER = "PawTrails Release";
 				SWIFT_OBJC_BRIDGING_HEADER = "PawTrails/Resources/PawTrails-Bridging-Header.h";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 3.0;
