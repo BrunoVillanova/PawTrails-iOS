@@ -3491,10 +3491,10 @@ PawTrails is a product created by Attitude Technologies.
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="7TZ-Ow-5av" customClass="PTMapView" customModule="PawTrails" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="88" width="375" height="641"/>
+                                <rect key="frame" x="0.0" y="88" width="375" height="690"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="93O-q0-eKh">
-                                <rect key="frame" x="295" y="649" width="80" height="80"/>
+                                <rect key="frame" x="295" y="698" width="80" height="80"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="CTw-em-ZQU"/>
@@ -3506,7 +3506,7 @@ PawTrails is a product created by Attitude Technologies.
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0oC-dH-GlK">
-                                <rect key="frame" x="295" y="577" width="80" height="80"/>
+                                <rect key="frame" x="295" y="626" width="80" height="80"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <state key="normal" image="PetLocationpng"/>
                                 <connections>
@@ -3514,7 +3514,7 @@ PawTrails is a product created by Attitude Technologies.
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QMo-ic-gTj">
-                                <rect key="frame" x="295" y="509" width="80" height="80"/>
+                                <rect key="frame" x="295" y="558" width="80" height="80"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <state key="normal" image="UserLocation-1x-png"/>
                                 <connections>
@@ -3522,7 +3522,7 @@ PawTrails is a product created by Attitude Technologies.
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" insetsLayoutMarginsFromSafeArea="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="X26-Zz-hRg">
-                                <rect key="frame" x="16" y="587" width="275" height="142"/>
+                                <rect key="frame" x="16" y="636" width="275" height="142"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="142" id="BOg-WK-wFn"/>
@@ -3626,7 +3626,7 @@ PawTrails is a product created by Attitude Technologies.
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mac-bO-czy">
-                                <rect key="frame" x="60" y="669" width="255" height="40"/>
+                                <rect key="frame" x="60" y="718" width="255" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="gRV-GO-XGE"/>
                                 </constraints>
@@ -3646,7 +3646,7 @@ PawTrails is a product created by Attitude Technologies.
                                 </constraints>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" semanticContentAttribute="forceLeftToRight" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gL5-IH-8Ya">
-                                <rect key="frame" x="16" y="270" width="343" height="359"/>
+                                <rect key="frame" x="16" y="270" width="343" height="408"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="B3O-Gn-9LQ">
                                     <size key="itemSize" width="84" height="132"/>
@@ -5791,7 +5791,7 @@ PawTrails is a product created by Attitude Technologies.
         <!--Live Tracking Navigation-->
         <scene sceneID="79A-Bg-ZPn">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="EKY-qb-x8M" userLabel="Live Tracking Navigation" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="EKY-qb-x8M" userLabel="Live Tracking Navigation" customClass="PTNavigationViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Tracking" image="menu-tracking-1x-png" id="Omy-bL-4vv"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="zqP-Wi-dBa">
@@ -8174,6 +8174,7 @@ Last Edited on 2017-12-04
         <image name="youtube" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="SqB-Cz-CJL"/>
         <segue reference="yp5-bT-5uy"/>
         <segue reference="Rzx-2e-OhR"/>
         <segue reference="G7h-iD-Glq"/>

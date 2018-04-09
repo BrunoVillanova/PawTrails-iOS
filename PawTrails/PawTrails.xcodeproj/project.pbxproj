@@ -238,6 +238,9 @@
 		15E6E38C206C7EB400484EAF /* PetWizardStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E6E38B206C7EB400484EAF /* PetWizardStepViewController.swift */; };
 		15E7EFA92044B020000BFCBF /* RobotoCondensed-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15E7EFA72044B005000BFCBF /* RobotoCondensed-Regular.ttf */; };
 		15E7EFAA2044B020000BFCBF /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15E7EFA82044B012000BFCBF /* Roboto-Medium.ttf */; };
+		15EF8756207BF365007F27BF /* SideMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15EF8755207BF365007F27BF /* SideMenu.framework */; };
+		15EF8758207BF7BC007F27BF /* PTNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EF8757207BF7BC007F27BF /* PTNavigationViewController.swift */; };
+		15EF875B207BFF24007F27BF /* LeftMenuContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EF875A207BFF24007F27BF /* LeftMenuContentViewController.swift */; };
 		15FFE50E2079545B005CA1C2 /* IQKeyboardManagerSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15FFE50C2079545A005CA1C2 /* IQKeyboardManagerSwift.framework */; };
 		15FFE51120796D62005CA1C2 /* PTNiceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FFE51020796D62005CA1C2 /* PTNiceButton.swift */; };
 		15FFE51320796E4B005CA1C2 /* PasswordRecoverySuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FFE51220796E4B005CA1C2 /* PasswordRecoverySuccessViewController.swift */; };
@@ -537,6 +540,9 @@
 		15E6E38D206D5D6100484EAF /* GradientView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GradientView.framework; path = Carthage/Build/iOS/GradientView.framework; sourceTree = "<group>"; };
 		15E7EFA72044B005000BFCBF /* RobotoCondensed-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Regular.ttf"; sourceTree = "<group>"; };
 		15E7EFA82044B012000BFCBF /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		15EF8755207BF365007F27BF /* SideMenu.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SideMenu.framework; path = Carthage/Build/iOS/SideMenu.framework; sourceTree = "<group>"; };
+		15EF8757207BF7BC007F27BF /* PTNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTNavigationViewController.swift; sourceTree = "<group>"; };
+		15EF875A207BFF24007F27BF /* LeftMenuContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftMenuContentViewController.swift; sourceTree = "<group>"; };
 		15FFE50B2079545A005CA1C2 /* IQKeyboardManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IQKeyboardManager.framework; path = Carthage/Build/iOS/IQKeyboardManager.framework; sourceTree = "<group>"; };
 		15FFE50C2079545A005CA1C2 /* IQKeyboardManagerSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IQKeyboardManagerSwift.framework; path = Carthage/Build/iOS/IQKeyboardManagerSwift.framework; sourceTree = "<group>"; };
 		15FFE51020796D62005CA1C2 /* PTNiceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTNiceButton.swift; sourceTree = "<group>"; };
@@ -599,6 +605,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15EF8756207BF365007F27BF /* SideMenu.framework in Frameworks */,
 				15FFE50E2079545B005CA1C2 /* IQKeyboardManagerSwift.framework in Frameworks */,
 				1539DA2E2076643300653EF7 /* TOCropViewController.framework in Frameworks */,
 				1539DA2D2076621500653EF7 /* CropViewController.framework in Frameworks */,
@@ -951,6 +958,7 @@
 		15C763702016D5C0002AA7F8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				15EF8759207BFEFD007F27BF /* Left Menu */,
 				15A13A22206AC54A005790B3 /* Onboarding */,
 				15C7642D2016FDC1002AA7F8 /* Recommendation */,
 				15C7642C2016FCD7002AA7F8 /* User */,
@@ -965,6 +973,7 @@
 				15C763BB2016D5C0002AA7F8 /* MainTabBarViewController.swift */,
 				15DCFEA0205C647A00DF726C /* LaunchViewController.swift */,
 				15160FEA20719448008CF9F4 /* PTAlertViewController.swift */,
+				15EF8757207BF7BC007F27BF /* PTNavigationViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1179,6 +1188,14 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		15EF8759207BFEFD007F27BF /* Left Menu */ = {
+			isa = PBXGroup;
+			children = (
+				15EF875A207BFF24007F27BF /* LeftMenuContentViewController.swift */,
+			);
+			path = "Left Menu";
+			sourceTree = "<group>";
+		};
 		15FFE50F20796D45005CA1C2 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
@@ -1291,6 +1308,7 @@
 		91352D1B7E01CC1C0CF51D38 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				15EF8755207BF365007F27BF /* SideMenu.framework */,
 				15FFE50B2079545A005CA1C2 /* IQKeyboardManager.framework */,
 				15FFE50C2079545A005CA1C2 /* IQKeyboardManagerSwift.framework */,
 				1539DA2C2076621500653EF7 /* CropViewController.framework */,
@@ -1584,6 +1602,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/CropViewController.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/TOCropViewController.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/IQKeyboardManagerSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SideMenu.framework",
 			);
 			name = "Carthage Copy Frameworks";
 			outputPaths = (
@@ -1613,6 +1632,7 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/CropViewController.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/TOCropViewController.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/IQKeyboardManagerSwift.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SideMenu.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1879,6 +1899,7 @@
 				15AD5EA7206AD6600069E01D /* OnboardingStepViewController.swift in Sources */,
 				15C7614F2016CFF3002AA7F8 /* CDUser+CoreDataProperties.swift in Sources */,
 				15C763E82016D5C0002AA7F8 /* AdventuresListViewController.swift in Sources */,
+				15EF8758207BF7BC007F27BF /* PTNavigationViewController.swift in Sources */,
 				15C7613D2016CFF3002AA7F8 /* BEMAnimationManager.m in Sources */,
 				15C763E52016D5C0002AA7F8 /* PasswordRecoveryViewController.swift in Sources */,
 				15C763D42016D5C0002AA7F8 /* GenderTableViewController.swift in Sources */,
@@ -1939,6 +1960,7 @@
 				15C764122016D5C0002AA7F8 /* PetTypeTableViewController.swift in Sources */,
 				15C762B92016D06B002AA7F8 /* SocketIO+RxSwift.swift in Sources */,
 				15C763D82016D5C0002AA7F8 /* UsersViewController.swift in Sources */,
+				15EF875B207BFF24007F27BF /* LeftMenuContentViewController.swift in Sources */,
 				15C762BB2016D06B002AA7F8 /* Extensions.swift in Sources */,
 				15C762B52016D06B002AA7F8 /* MapUtilsManager.swift in Sources */,
 				15C764062016D5C0002AA7F8 /* GettingLocationViewController.swift in Sources */,

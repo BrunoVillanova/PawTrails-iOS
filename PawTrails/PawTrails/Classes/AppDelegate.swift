@@ -15,7 +15,7 @@ import Firebase
 import HockeySDK
 import UserNotifications
 import CocoaLumberjackSwift
-
+import SideMenu
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -70,12 +70,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         configureUIPreferences()
 
         // KeyboardManager
-//        IQKeyboardManager.
+        IQKeyboardManager.sharedManager().enable = true
 
         
         //reset Onboarding presented
         OnboardingViewController.onboardingPresented = false
-
+        
+        SideMenuManager.default.menuLeftNavigationController = ViewControllers.leftMenu.viewController as? UISideMenuNavigationController
+        SideMenuManager.default.menuAnimationBackgroundColor = .clear
+        SideMenuManager.default.menuPresentMode = .menuSlideIn
+        SideMenuManager.default.menuWidth = UIScreen.main.bounds.width * 0.80
+        SideMenuManager.default.menuAnimationFadeStrength = 0.5
+        
         if let socialMedia = DataManager.instance.isSocialMedia(), let sm = SocialMedia(rawValue: socialMedia), sm == .facebook {
             return SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         }
@@ -231,21 +237,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 enum Storyboards {
-    case login
+    case login, common
     
     var storyboard: UIStoryboard {
         switch self {
             case .login: return UIStoryboard(name: "Login", bundle: nil)
+            case .common: return UIStoryboard(name: "Common", bundle: nil)
         }
     }
 }
 
 enum ViewControllers {
-    case initial, login, signup, passwordRecovery, passwordRecoverySuccess, emailVerification, termsAndPrivacy
+    case initial, login, signup, passwordRecovery, passwordRecoverySuccess, emailVerification, termsAndPrivacy,
+         leftMenu
     
     var storyboard: UIStoryboard {
         switch self {
             case .initial, .login, .signup, .passwordRecovery, .passwordRecoverySuccess, .emailVerification, .termsAndPrivacy: return Storyboards.login.storyboard
+            case .leftMenu: return Storyboards.common.storyboard
         }
     }
     
@@ -258,6 +267,8 @@ enum ViewControllers {
             case .passwordRecoverySuccess: return "PasswordRecoverySuccessViewController"
             case .emailVerification: return "EmailVerificationViewController"
             case .termsAndPrivacy: return "PrivacyViewController"
+            // Common
+            case .leftMenu: return "LeftMenuNavigationController"
         }
     }
     
