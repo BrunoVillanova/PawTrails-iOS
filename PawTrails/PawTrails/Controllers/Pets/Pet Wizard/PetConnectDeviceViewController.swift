@@ -9,7 +9,6 @@
 import UIKit
 import swiftScan
 import SCLAlertView
-import GradientView
 
 class PetConnectDeviceViewController: PetWizardStepViewController {
 
@@ -159,35 +158,4 @@ extension PetConnectDeviceViewController: QRCodeScannerViewControllerDelegate {
         }
     }
     
-}
-
-class HeaderView: UIView {
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.setupView()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        self.setupView()
-    }
-    
-    fileprivate func setupView() {
-        let gradientView = GradientView(frame: self.bounds)
-        let gradientColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
-        // Set the gradient colors
-        gradientView.colors = [gradientColor, .white]
-        
-        // Optionally set some locations
-        gradientView.locations = [0.1, 0.7]
-        
-        // Optionally change the direction. The default is vertical.
-        gradientView.direction = .vertical
-        
-        gradientView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
-        self.addSubview(gradientView)
-        self.sendSubview(toBack: gradientView)
-    }
 }

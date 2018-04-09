@@ -30,6 +30,9 @@ class LaunchViewController: UIViewController {
     
     fileprivate func initialize() {
         
+        let attributes = [NSFontAttributeName: UIFont(name: "Montserrat-Regular", size: 14)!,NSForegroundColorAttributeName: PTConstants.colors.darkGray]
+        UINavigationBar.appearance().titleTextAttributes = attributes
+        
         var imageName: String?
         
         switch UIDevice.current.screenType {

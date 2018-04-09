@@ -53,8 +53,6 @@ class LoginViewController: UIViewController, InitialView {
         }
 
         self.title = "Login"
-        let attributes = [NSFontAttributeName: UIFont(name: "Montserrat-Regular", size: 14)!,NSForegroundColorAttributeName: PTConstants.colors.darkGray]
-        UINavigationBar.appearance().titleTextAttributes = attributes
         
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }

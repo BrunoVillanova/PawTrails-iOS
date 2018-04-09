@@ -167,6 +167,26 @@ class PTNiceTextField: SkyFloatingLabelTextField {
     let marginLeft:CGFloat = 16
     let labelPadding:CGFloat = 8
     var inputType: PTNiceTextFieldInputType = .generic
+    
+    override var inputView: UIView? {
+        didSet {
+            if inputView != nil, inputView is UIDatePicker || inputView is UIPickerView  {
+              self.addKeyboardToolbarWithButtons(inputView!)
+            }
+        }
+    }
+    
+    fileprivate func addKeyboardToolbarWithButtons(_ picker: UIView) {
+        
+        let keyboardToolBar = UIToolbar(frame: CGRect(x: CGFloat(0), y: CGFloat(0), width: CGFloat(picker.frame.size.width), height: CGFloat(25)))
+        keyboardToolBar.sizeToFit()
+        keyboardToolBar.barStyle = .default
+        self.inputAccessoryView = keyboardToolBar
+        let nextButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(self.resignFirstResponder))
+        let attributes = [NSFontAttributeName: UIFont(name: "Montserrat-Regular", size: 14)!,NSForegroundColorAttributeName: PTConstants.colors.newRed]
+        nextButton.setTitleTextAttributes(attributes, for: .normal)
+        keyboardToolBar.items = [UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil), nextButton]
+    }
 
 
     required init?(coder aDecoder: NSCoder) {
