@@ -289,7 +289,7 @@ extension AppDelegate {
                     if finished {
                         
                         self.window?.rootViewController = navController
-                        self.presentViewController(.login, animated: false, completion: {
+                        self.presentViewController(.login, animated: true, completion: {
                             if presentEmailValidation {
                                 self.presentViewController(.emailVerification, animated: true, completion: nil)
                             }
