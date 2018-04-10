@@ -78,7 +78,7 @@ class MapViewController: UIViewController {
     
     
     fileprivate func initialize() {
-
+        SocketIOManager.instance.connect()
         mapView.calloutDelegate = self
         DataManager.instance.getActivePetTrips()
             .subscribe(onNext: { (tripList) in

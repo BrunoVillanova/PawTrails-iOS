@@ -99,20 +99,9 @@ class LoginViewController: UIViewController, InitialView {
     
     func userAuthenticated() {
         self.view.endEditing(true)
-        SocketIOManager.instance.connect()
-        loadHomeScreen()
-    }
     
-    func loadHomeScreen() {
-        guard let window = UIApplication.shared.delegate?.window else { return }
-        
-        if let currentRootViewController = window!.rootViewController {
-            let root = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
-            root.selectedIndex = 0
-            
-            UIView.transition(from: currentRootViewController.view, to: root.view, duration: 0.3, options: UIViewAnimationOptions.transitionCurlUp, completion: {(finished) in
-                UIApplication.shared.keyWindow?.rootViewController = root
-            })
+        self.dismiss(animated: true) {
+            self.appDelegate.loadHomeScreen(animated: true)
         }
     }
     
