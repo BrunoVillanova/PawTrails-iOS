@@ -17,6 +17,20 @@ class PTNavigationViewController: UINavigationController {
         super.viewDidLoad()
        initialize()
     }
+    
+    override var viewControllers: [UIViewController] {
+        didSet {
+            let leftBarButton = UIBarButtonItem(image: UIImage(named: "LeftMenuIcon"), style: .plain, target: self, action: #selector(leftMenuAction))
+            leftBarButton.tintColor = PTConstants.colors.darkGray
+            self.navigationBar.topItem?.leftBarButtonItem = leftBarButton
+        }
+    }
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//
+//
+//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -24,9 +38,13 @@ class PTNavigationViewController: UINavigationController {
     }
     
     fileprivate func initialize() {
-        let leftBarButton = UIBarButtonItem(image: UIImage(named: "LeftMenuIcon"), style: .plain, target: self, action: #selector(leftMenuAction))
-        leftBarButton.tintColor = PTConstants.colors.darkGray
-        self.navigationBar.topItem?.leftBarButtonItem = leftBarButton
+        
+        if SideMenuManager.default.menuLeftNavigationController == nil {
+            SideMenuManager.default.menuLeftNavigationController = ViewController.leftMenu.viewController as? UISideMenuNavigationController
+            SideMenuManager.default.menuAnimationBackgroundColor = .clear
+            SideMenuManager.default.menuPresentMode = .menuSlideIn
+            SideMenuManager.default.menuAnimationFadeStrength = 0.5
+        }
         
         SideMenuManager.default.menuAddPanGestureToPresent(toView: self.navigationBar)
         SideMenuManager.default.menuAddScreenEdgePanGesturesToPresent(toView: self.view)

@@ -132,10 +132,11 @@ class CDRepository {
         CoreDataManager.instance.retrieve(.user, with: NSPredicate("id", .equal, id)) { (objects) in
             if let results = objects as? [CDUser] {
                 if results.count > 1 {
-                    
                     callback(DatabaseError(type: .DuplicatedEntry, entity: Entity.user, action: .get, error: nil), nil)
-                }else{
-                    callback(nil, results.first!)
+                }else if let firstResult = results.first {
+                    callback(nil, firstResult)
+                } else {
+                    callback(nil, nil)
                 }
             }else{
                 callback(DatabaseError(type: .NotFound, entity: Entity.user, action: .get, error: nil), nil)

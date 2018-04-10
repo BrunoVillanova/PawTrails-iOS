@@ -75,6 +75,11 @@ extension User {
     var toDict: [String:Any] {
         var dict = [String:Any](object:self)
         dict["id"] = id == 0 ? nil : id
+        
+        if let email = email {
+            dict["email"] = email
+        }
+       
         dict["date_of_birth"] = birthday?.toStringServer ?? ""
         dict["gender"] = gender?.code ?? ""
         

@@ -75,12 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //reset Onboarding presented
         OnboardingViewController.onboardingPresented = false
-        
-        SideMenuManager.default.menuLeftNavigationController = ViewControllers.leftMenu.viewController as? UISideMenuNavigationController
-        SideMenuManager.default.menuAnimationBackgroundColor = .clear
-        SideMenuManager.default.menuPresentMode = .menuSlideIn
-        SideMenuManager.default.menuWidth = UIScreen.main.bounds.width * 0.80
-        SideMenuManager.default.menuAnimationFadeStrength = 0.5
+
         
         if let socialMedia = DataManager.instance.isSocialMedia(), let sm = SocialMedia(rawValue: socialMedia), sm == .facebook {
             return SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
@@ -140,9 +135,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     open func loadHomeScreen(animated: Bool) {
-        let root = storyboard!.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
-        root.selectedIndex = 0
-        self.window?.rootViewController = root
+        setRootController(.liveTracking)
     }
     
     func loadTutorial() {
@@ -237,24 +230,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 enum Storyboards {
-    case login, common
+    case login, common, main
     
     var storyboard: UIStoryboard {
         switch self {
             case .login: return UIStoryboard(name: "Login", bundle: nil)
             case .common: return UIStoryboard(name: "Common", bundle: nil)
+            case .main: return UIStoryboard(name: "Main", bundle: nil)
         }
     }
 }
 
-enum ViewControllers {
+enum ViewController {
     case initial, login, signup, passwordRecovery, passwordRecoverySuccess, emailVerification, termsAndPrivacy,
-         leftMenu
+         leftMenu, liveTracking, myPets, myProfile, vetRecommendations, deviceFinder, settings, support
     
     var storyboard: UIStoryboard {
         switch self {
             case .initial, .login, .signup, .passwordRecovery, .passwordRecoverySuccess, .emailVerification, .termsAndPrivacy: return Storyboards.login.storyboard
             case .leftMenu: return Storyboards.common.storyboard
+            case .liveTracking, .myPets, .myProfile, .vetRecommendations, .deviceFinder, .settings, .support: return Storyboards.main.storyboard
         }
     }
     
@@ -269,12 +264,20 @@ enum ViewControllers {
             case .termsAndPrivacy: return "PrivacyViewController"
             // Common
             case .leftMenu: return "LeftMenuNavigationController"
+            case .liveTracking: return "LiveTrackingViewController"
+            case .myPets: return "MyPetsViewController"
+            case .myProfile: return "MyProfileViewController"
+            case .vetRecommendations: return "VetRecommendationsViewController"
+            case .deviceFinder: return "DeviceFinderViewController"
+            case .settings: return "SettingsViewController"
+            case .support: return "SupportViewController"
         }
     }
     
     var navigationController: UINavigationController? {
         switch self {
         case .login, .signup, .passwordRecovery, .termsAndPrivacy: return UINavigationController()
+        case .liveTracking, .myPets, .myProfile, .vetRecommendations, .deviceFinder, .settings, .support: return PTNavigationViewController()
         default: return nil
         }
     }
@@ -289,9 +292,29 @@ enum ViewControllers {
 //
 extension AppDelegate {
     
+    
+    func setActiveController(_ viewControllerType: ViewController) {
+        
+    }
+    
+    func setRootController(_ viewControllerType: ViewController) {
+        var viewControllerToPresent = viewControllerType.viewController
+        
+        if let navigationController = viewControllerType.navigationController {
+            
+            if let currentRootController = self.window?.rootViewController as? PTNavigationViewController {
+                currentRootController.viewControllers = [viewControllerToPresent]
+            } else {
+                navigationController.viewControllers = [viewControllerToPresent]
+                viewControllerToPresent = navigationController
+                self.window?.rootViewController = viewControllerToPresent
+            }
+        }
+    }
+    
     func loadAuthenticationScreen(_ presentEmailValidation: Bool = false) {
 
-        if let vc = ViewControllers.initial.viewController as? InitialViewController {
+        if let vc = ViewController.initial.viewController as? InitialViewController {
             
             let navController = UINavigationController(rootViewController: vc)
             if let rootViewController = UIApplication.shared.keyWindow?.rootViewController {
@@ -313,7 +336,7 @@ extension AppDelegate {
         }
     }
     
-    func presentViewController(_ viewControllerType: ViewControllers, animated: Bool = true, completion: (() -> Void)? = nil) {
+    func presentViewController(_ viewControllerType: ViewController, animated: Bool = true, completion: (() -> Void)? = nil) {
         
         var viewControllerToPresent = viewControllerType.viewController
         

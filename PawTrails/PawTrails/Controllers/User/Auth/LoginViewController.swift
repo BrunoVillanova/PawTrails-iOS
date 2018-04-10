@@ -42,6 +42,11 @@ class LoginViewController: UIViewController, InitialView {
         
         presenter.attachView(self)
         configureNavigatonBar()
+        
+        #if DEBUG
+        emailTextField.text = Constants.testUserEmailStaging
+        passwordTextField.text = Constants.testUserPasswordStaging
+        #endif
     }
     
     fileprivate func configureNavigatonBar() {
@@ -79,7 +84,7 @@ class LoginViewController: UIViewController, InitialView {
     }
     
     func verifyAccount(_ email:String, _ password:String) {
-        let vc = ViewControllers.emailVerification.viewController as! EmailVerificationViewController
+        let vc = ViewController.emailVerification.viewController as! EmailVerificationViewController
         vc.email = email
         vc.password = password
         self.present(vc, animated: true, completion: nil)
