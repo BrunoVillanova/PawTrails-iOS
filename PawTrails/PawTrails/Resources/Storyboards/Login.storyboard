@@ -367,7 +367,8 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zpG-y1-2oH" customClass="PTNiceTextField" customModule="PawTrails" customModuleProvider="target">
-                                        <rect key="frame" x="24" y="232" width="327" height="50"/>
+                                        <rect key="frame" x="24" y="179" width="327" height="50"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="pqD-VI-Qlc"/>
                                         </constraints>
@@ -376,19 +377,21 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next" textContentType="email"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iQJ-wJ-ORW" customClass="PTNiceTextField" customModule="PawTrails" customModuleProvider="target">
-                                        <rect key="frame" x="24" y="298" width="327" height="50"/>
+                                        <rect key="frame" x="24" y="245" width="327" height="50"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AiU-SF-8Hu" customClass="PTNiceTextField" customModule="PawTrails" customModuleProvider="target">
-                                        <rect key="frame" x="24" y="364" width="327" height="50"/>
+                                        <rect key="frame" x="24" y="311" width="327" height="50"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="go" secureTextEntry="YES"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GYV-VT-0yn">
-                                        <rect key="frame" x="24" y="446" width="327" height="50"/>
+                                        <rect key="frame" x="24" y="393" width="327" height="50"/>
                                         <state key="normal" image="btn_register"/>
                                         <connections>
                                             <action selector="signUpBtnPressed:" destination="fDJ-bG-Qb7" eventType="touchUpInside" id="zV7-d9-4bL"/>
@@ -415,7 +418,7 @@
                                     <constraint firstItem="GYV-VT-0yn" firstAttribute="top" secondItem="AiU-SF-8Hu" secondAttribute="bottom" constant="32" id="7cw-w3-IBO"/>
                                     <constraint firstItem="zsQ-L8-hBk" firstAttribute="trailing" secondItem="ot4-fe-GY0" secondAttribute="trailing" id="8O7-5q-aDN"/>
                                     <constraint firstItem="AiU-SF-8Hu" firstAttribute="leading" secondItem="iQJ-wJ-ORW" secondAttribute="leading" id="DFF-hK-flT"/>
-                                    <constraint firstItem="zpG-y1-2oH" firstAttribute="top" secondItem="sYA-fs-fDZ" secondAttribute="bottom" priority="999" constant="120" id="J36-Kq-XVn"/>
+                                    <constraint firstItem="zpG-y1-2oH" firstAttribute="top" secondItem="sYA-fs-fDZ" secondAttribute="bottom" priority="999" constant="67" id="J36-Kq-XVn"/>
                                     <constraint firstItem="AiU-SF-8Hu" firstAttribute="height" secondItem="iQJ-wJ-ORW" secondAttribute="height" id="R9V-A0-8Wa"/>
                                     <constraint firstItem="iQJ-wJ-ORW" firstAttribute="leading" secondItem="zpG-y1-2oH" secondAttribute="leading" id="Rpe-cg-T71"/>
                                     <constraint firstItem="GYV-VT-0yn" firstAttribute="trailing" secondItem="AiU-SF-8Hu" secondAttribute="trailing" id="Sdm-PQ-e8f"/>
