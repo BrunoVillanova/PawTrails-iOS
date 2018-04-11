@@ -1376,8 +1376,6 @@
 				4414AE641EA0DD5B004A5134 /* Sources */,
 				4414AE651EA0DD5B004A5134 /* Frameworks */,
 				4414AE661EA0DD5B004A5134 /* Resources */,
-				7609F9F64AC9DAB2BAFDBC03 /* [CP] Embed Pods Frameworks */,
-				8AFF577FE8F15CFDA31941D5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1400,7 +1398,6 @@
 				4415FF3D1E3B822900A81B13 /* Resources */,
 				15D8B6CB1FDC9BC0004B951B /* Google Services PLIST Copy */,
 				93543C9FAEDDD0332AFDC816 /* [CP] Embed Pods Frameworks */,
-				39885238018EFB6CB9FCB2C6 /* [CP] Copy Pods Resources */,
 				44136F081E8429250003B531 /* Fabric */,
 				157AC4AF1FC317FE0005A717 /* Carthage Copy Frameworks */,
 			);
@@ -1666,24 +1663,6 @@
 			shellPath = /bin/sh;
 			shellScript = "cp \"${GOOGLE_SERVICES_PLIST_FILE}\" \"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/GoogleService-Info.plist\"";
 		};
-		39885238018EFB6CB9FCB2C6 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-PawTrails/Pods-PawTrails-resources.sh",
-				$PODS_CONFIGURATION_BUILD_DIR/HockeySDK/HockeySDKResources.bundle,
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PawTrails/Pods-PawTrails-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		44136F081E8429250003B531 /* Fabric */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1714,36 +1693,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7609F9F64AC9DAB2BAFDBC03 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PawTrailsTests/Pods-PawTrailsTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8AFF577FE8F15CFDA31941D5 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PawTrailsTests/Pods-PawTrailsTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		93543C9FAEDDD0332AFDC816 /* [CP] Embed Pods Frameworks */ = {
