@@ -16,6 +16,9 @@ class InitialViewController: UIViewController {
     @IBOutlet weak var facebookButton: UIButton!
     @IBOutlet weak var createAccountButton: UIButton!
     @IBOutlet weak var agreementLabel: UILabel!
+    //For small device UI fixes
+    @IBOutlet weak var loginLabelTopContraint: NSLayoutConstraint!
+    @IBOutlet weak var loginVeiwTopContraint: NSLayoutConstraint!
     
     fileprivate let presenter = InitialPresenter()
     fileprivate let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -77,6 +80,17 @@ class InitialViewController: UIViewController {
         attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.red, range: NSRange(location: 56, length: 17))
         
         agreementLabel.attributedText = attributedString
+        
+        
+        //UI changes for smaller devices
+        switch UIDevice.current.screenType {
+            case .iPhones_5_5s_5c_SE:
+                loginVeiwTopContraint.constant = 50
+                self.view.layoutIfNeeded()
+            default:
+                break
+        }
+        
     }
     
 

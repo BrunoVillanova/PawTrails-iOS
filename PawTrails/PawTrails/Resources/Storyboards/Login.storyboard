@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -121,32 +121,37 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By signing up,  you agree to our Terms &amp; Conditions and Privacy Statement" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hSd-RU-FlP">
-                                        <rect key="frame" x="49" y="593" width="277" height="30"/>
+                                        <rect key="frame" x="49" y="592" width="277" height="45"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="54d-dx-0Oc"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pMo-Sl-oRu">
-                                        <rect key="frame" x="49" y="593" width="277" height="30"/>
+                                        <rect key="frame" x="49" y="597" width="277" height="37"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <action selector="termsAndPrivacyAction:" destination="grF-PC-ZUv" eventType="touchUpInside" id="7Nk-v7-BgG"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="pMo-Sl-oRu" firstAttribute="leading" secondItem="hSd-RU-FlP" secondAttribute="leading" id="3Jy-UJ-cVe"/>
+                                    <constraint firstItem="pMo-Sl-oRu" firstAttribute="centerY" secondItem="hSd-RU-FlP" secondAttribute="centerY" constant="1" id="1ui-kg-6K4"/>
                                     <constraint firstItem="B47-6d-aFO" firstAttribute="top" secondItem="day-4c-dir" secondAttribute="bottom" priority="999" constant="90" id="Jad-d6-Uij"/>
+                                    <constraint firstItem="XxG-MP-96c" firstAttribute="bottom" secondItem="hSd-RU-FlP" secondAttribute="bottom" constant="10" id="JfH-gz-hwK"/>
+                                    <constraint firstItem="pMo-Sl-oRu" firstAttribute="top" secondItem="hSd-RU-FlP" secondAttribute="top" constant="5" id="O3O-YT-fu6"/>
                                     <constraint firstItem="day-4c-dir" firstAttribute="centerX" secondItem="k2F-fO-Hlc" secondAttribute="centerX" id="OqO-PX-hS7"/>
                                     <constraint firstItem="B47-6d-aFO" firstAttribute="centerX" secondItem="k2F-fO-Hlc" secondAttribute="centerX" id="UF1-jf-hAh"/>
-                                    <constraint firstItem="pMo-Sl-oRu" firstAttribute="top" secondItem="hSd-RU-FlP" secondAttribute="top" id="UZN-kO-LXk"/>
-                                    <constraint firstItem="pMo-Sl-oRu" firstAttribute="trailing" secondItem="hSd-RU-FlP" secondAttribute="trailing" id="UjT-gD-dtn"/>
-                                    <constraint firstAttribute="bottom" secondItem="hSd-RU-FlP" secondAttribute="bottom" constant="24" id="bPN-CA-sPe"/>
-                                    <constraint firstAttribute="trailing" secondItem="hSd-RU-FlP" secondAttribute="trailing" constant="49" id="dZu-Wq-6js"/>
                                     <constraint firstItem="day-4c-dir" firstAttribute="top" secondItem="k2F-fO-Hlc" secondAttribute="top" priority="999" constant="80" id="loP-XJ-6SU"/>
+                                    <constraint firstItem="pMo-Sl-oRu" firstAttribute="centerX" secondItem="hSd-RU-FlP" secondAttribute="centerX" id="n4W-7H-wWS"/>
+                                    <constraint firstItem="pMo-Sl-oRu" firstAttribute="width" secondItem="hSd-RU-FlP" secondAttribute="width" id="nQU-tl-ehh"/>
+                                    <constraint firstItem="hSd-RU-FlP" firstAttribute="leading" secondItem="XxG-MP-96c" secondAttribute="leading" constant="49" id="oXx-4G-hF8"/>
                                     <constraint firstItem="B47-6d-aFO" firstAttribute="width" secondItem="k2F-fO-Hlc" secondAttribute="width" constant="-48" id="p3a-Ch-AnM"/>
-                                    <constraint firstItem="pMo-Sl-oRu" firstAttribute="bottom" secondItem="hSd-RU-FlP" secondAttribute="bottom" id="rfX-lO-hkU"/>
-                                    <constraint firstItem="hSd-RU-FlP" firstAttribute="leading" secondItem="k2F-fO-Hlc" secondAttribute="leading" constant="49" id="wvG-FJ-Ega"/>
-                                    <constraint firstItem="hSd-RU-FlP" firstAttribute="top" relation="greaterThanOrEqual" secondItem="B47-6d-aFO" secondAttribute="bottom" constant="8" id="y50-WZ-2un"/>
+                                    <constraint firstItem="pMo-Sl-oRu" firstAttribute="height" secondItem="hSd-RU-FlP" secondAttribute="height" constant="-8" id="rg9-Bv-bA4"/>
+                                    <constraint firstItem="XxG-MP-96c" firstAttribute="trailing" secondItem="hSd-RU-FlP" secondAttribute="trailing" constant="49" id="t2O-BK-Vfl"/>
                                 </constraints>
                                 <viewLayoutGuide key="safeArea" id="XxG-MP-96c"/>
                             </view>
@@ -165,12 +170,14 @@
                         <outlet property="agreementLabel" destination="hSd-RU-FlP" id="dMl-tl-MIF"/>
                         <outlet property="createAccountButton" destination="mVR-Xm-RBV" id="9CF-3h-Xik"/>
                         <outlet property="facebookButton" destination="jLh-Ld-Kaw" id="ryj-s7-mmh"/>
+                        <outlet property="loginLabelTopContraint" destination="QBk-hI-uTU" id="4g8-BG-JvU"/>
+                        <outlet property="loginVeiwTopContraint" destination="Jad-d6-Uij" id="nWp-M7-36v"/>
                         <outlet property="logoImageView" destination="day-4c-dir" id="dx9-k6-XHf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9qG-Jq-G6p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-7938" y="-1934"/>
+            <point key="canvasLocation" x="-7938.3999999999996" y="-1934.4827586206898"/>
         </scene>
         <!--Login View controller-->
         <scene sceneID="JRH-VE-v7g">
@@ -526,7 +533,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mVb-jo-E5d">
-                                                <rect key="frame" x="181" y="68" width="15" height="18"/>
+                                                <rect key="frame" x="180" y="68" width="15" height="18"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="14.399999618530273"/>
                                                 <nil key="textColor"/>
                                                 <color key="highlightedColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -630,7 +637,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m7k-yU-ahW" userLabel="Remember Password View">
-                                <rect key="frame" x="47" y="480.5" width="282.5" height="21"/>
+                                <rect key="frame" x="46.5" y="480.5" width="282.5" height="21"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I remember my password." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7IH-nN-nsd">
                                         <rect key="frame" x="0.0" y="0.0" width="194.5" height="21"/>
@@ -664,7 +671,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ia5-hn-az5" userLabel="Sign up View">
-                                <rect key="frame" x="55" y="622" width="263.5" height="21"/>
+                                <rect key="frame" x="56" y="622" width="263.5" height="21"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account?" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Xo-bQ-MN1">
                                         <rect key="frame" x="0.0" y="0.0" width="165.5" height="21"/>

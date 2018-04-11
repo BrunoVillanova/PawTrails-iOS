@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina3_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -26,17 +26,17 @@
             <objects>
                 <viewController storyboardIdentifier="wizard" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1ij-au-y9z" customClass="PetWizardViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AmO-3J-zBR">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hjr-n5-LbU" userLabel="Header View">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iIb-em-iaV" userLabel="Navbar View">
-                                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add New Pet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pN0-LT-J4h">
-                                                <rect key="frame" x="141.5" y="13.5" width="92.5" height="17.5"/>
+                                                <rect key="frame" x="114" y="13.5" width="92.5" height="17.5"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                                 <color key="textColor" red="0.25490196078431371" green="0.28235294117647058" blue="0.32156862745098036" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -49,10 +49,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kod-fR-CXb" userLabel="Step Indicator View">
-                                        <rect key="frame" x="0.0" y="64" width="375" height="26"/>
+                                        <rect key="frame" x="0.0" y="64" width="320" height="26"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Step 1 - 7" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLS-rR-qV3">
-                                                <rect key="frame" x="156.5" y="-6" width="62" height="17.5"/>
+                                                <rect key="frame" x="129" y="-6" width="62" height="17.5"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                                 <color key="textColor" red="0.25490196078431371" green="0.28235294117647058" blue="0.32156862745098036" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -77,19 +77,19 @@
                                 </constraints>
                             </view>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RiU-Xh-jUa">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                                 <items>
                                     <navigationItem id="Zgg-Hb-rLn"/>
                                 </items>
                             </navigationBar>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q0K-Wj-Gz0">
-                                <rect key="frame" x="0.0" y="90" width="375" height="529"/>
+                                <rect key="frame" x="0.0" y="90" width="320" height="342"/>
                             </containerView>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dYy-Zt-WCs" userLabel="Footer View">
-                                <rect key="frame" x="0.0" y="667" width="375" height="0.0"/>
+                                <rect key="frame" x="0.0" y="480" width="320" height="0.0"/>
                                 <subviews>
                                     <button opaque="NO" tag="69" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jso-P8-cCa">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="0.0"/>
                                         <color key="backgroundColor" red="0.98039215690000003" green="0.25490196079999999" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                         <state key="normal" title="NEXT">
@@ -110,7 +110,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OMN-PY-p28" userLabel="iPhone X Bottom View">
-                                <rect key="frame" x="0.0" y="667" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="480" width="320" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="GuX-36-gnv"/>
@@ -157,11 +157,11 @@
             <objects>
                 <viewController storyboardIdentifier="connectDevice" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xgR-R3-VF6" customClass="PetConnectDeviceViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9t4-ZB-Z5r">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NPR-rG-cNL" userLabel="Header View" customClass="PTGradientView" customModule="PawTrails" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connect Device" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WFz-Qo-cMA">
                                         <rect key="frame" x="24" y="32" width="190" height="29.5"/>
@@ -178,20 +178,20 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k3m-T7-cbc" userLabel="Content View">
-                                <rect key="frame" x="16" y="64" width="343" height="445"/>
+                                <rect key="frame" x="16" y="64" width="288" height="282"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ConnectDevice" translatesAutoresizingMaskIntoConstraints="NO" id="jDg-lN-KGH">
-                                        <rect key="frame" x="31.5" y="48" width="280" height="201"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ConnectDevice" translatesAutoresizingMaskIntoConstraints="NO" id="jDg-lN-KGH">
+                                        <rect key="frame" x="4" y="30" width="280" height="173"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="280" id="TKb-AB-H9M"/>
-                                            <constraint firstAttribute="height" constant="201" id="WgI-hH-A9H"/>
+                                            <constraint firstAttribute="height" constant="173" id="WgI-hH-A9H"/>
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lyY-TN-JOH">
-                                        <rect key="frame" x="0.0" y="249" width="343" height="196"/>
+                                        <rect key="frame" x="0.0" y="231" width="288" height="27"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connect your pet with the PawTrails app by scanning the QR code on the back of your device" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gwp-Xg-iT0">
-                                                <rect key="frame" x="42" y="72.5" width="260.5" height="51.5"/>
+                                                <rect key="frame" x="36.5" y="-10.5" width="216.5" height="68.5"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                                 <color key="textColor" red="0.25490196078431371" green="0.28235294117647058" blue="0.32156862745098036" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -200,7 +200,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="Gwp-Xg-iT0" firstAttribute="centerX" secondItem="lyY-TN-JOH" secondAttribute="centerX" id="JLL-Ds-2oR"/>
-                                            <constraint firstItem="Gwp-Xg-iT0" firstAttribute="centerY" secondItem="lyY-TN-JOH" secondAttribute="centerY" id="Olh-FM-X5s"/>
+                                            <constraint firstItem="Gwp-Xg-iT0" firstAttribute="centerY" secondItem="lyY-TN-JOH" secondAttribute="centerY" constant="10.25" id="Olh-FM-X5s"/>
                                             <constraint firstItem="Gwp-Xg-iT0" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="lyY-TN-JOH" secondAttribute="leading" constant="32" id="W08-hs-q7d"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Gwp-Xg-iT0" secondAttribute="trailing" constant="32" id="WAv-YI-eVD"/>
                                         </constraints>
@@ -211,16 +211,16 @@
                                     <constraint firstAttribute="trailing" secondItem="lyY-TN-JOH" secondAttribute="trailing" id="4cJ-FX-GEZ"/>
                                     <constraint firstItem="jDg-lN-KGH" firstAttribute="centerX" secondItem="k3m-T7-cbc" secondAttribute="centerX" id="93x-ys-VsS"/>
                                     <constraint firstItem="lyY-TN-JOH" firstAttribute="leading" secondItem="k3m-T7-cbc" secondAttribute="leading" id="B0S-NL-4Mm"/>
-                                    <constraint firstItem="lyY-TN-JOH" firstAttribute="top" secondItem="jDg-lN-KGH" secondAttribute="bottom" id="B1q-aA-4iG"/>
-                                    <constraint firstItem="jDg-lN-KGH" firstAttribute="top" secondItem="k3m-T7-cbc" secondAttribute="top" constant="48" id="G0x-2c-giE"/>
-                                    <constraint firstAttribute="bottom" secondItem="lyY-TN-JOH" secondAttribute="bottom" id="gOW-8j-eAA"/>
+                                    <constraint firstItem="lyY-TN-JOH" firstAttribute="top" secondItem="jDg-lN-KGH" secondAttribute="bottom" constant="28" id="B1q-aA-4iG"/>
+                                    <constraint firstItem="jDg-lN-KGH" firstAttribute="top" secondItem="k3m-T7-cbc" secondAttribute="top" constant="30" id="G0x-2c-giE"/>
+                                    <constraint firstAttribute="bottom" secondItem="lyY-TN-JOH" secondAttribute="bottom" constant="24" id="gOW-8j-eAA"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g5h-pE-0z9" userLabel="Footer View">
-                                <rect key="frame" x="16" y="509" width="343" height="158"/>
+                                <rect key="frame" x="16" y="354" width="288" height="126"/>
                                 <subviews>
                                     <button opaque="NO" tag="69" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bm7-W4-Epq">
-                                        <rect key="frame" x="16" y="8" width="311" height="48"/>
+                                        <rect key="frame" x="16" y="8" width="256" height="48"/>
                                         <color key="backgroundColor" red="0.98039215690000003" green="0.25490196079999999" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="JV9-Nw-UNc"/>
@@ -234,9 +234,10 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5gj-1z-aYW" userLabel="See It Later Button">
-                                        <rect key="frame" x="137" y="88" width="69" height="12"/>
+                                        <rect key="frame" x="91" y="72" width="107" height="46"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="12" id="i8V-fZ-myT"/>
+                                            <constraint firstAttribute="width" constant="107" id="jBI-CJ-WiX"/>
+                                            <constraint firstAttribute="height" constant="46" id="zV2-MY-UZe"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                         <state key="normal" title="Do it later">
@@ -249,11 +250,11 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="5gj-1z-aYW" firstAttribute="top" secondItem="bm7-W4-Epq" secondAttribute="bottom" constant="32" id="JxT-uD-rV9"/>
-                                    <constraint firstItem="5gj-1z-aYW" firstAttribute="centerX" secondItem="g5h-pE-0z9" secondAttribute="centerX" id="dPY-NP-jtn"/>
+                                    <constraint firstItem="5gj-1z-aYW" firstAttribute="centerX" secondItem="g5h-pE-0z9" secondAttribute="centerX" id="5WD-lF-VWU"/>
+                                    <constraint firstAttribute="bottom" secondItem="5gj-1z-aYW" secondAttribute="bottom" constant="8" id="CbI-Fu-Uat"/>
                                     <constraint firstItem="bm7-W4-Epq" firstAttribute="top" secondItem="g5h-pE-0z9" secondAttribute="top" constant="8" id="ln1-vl-bIe"/>
                                     <constraint firstItem="bm7-W4-Epq" firstAttribute="leading" secondItem="g5h-pE-0z9" secondAttribute="leading" constant="16" id="pC5-OT-IOD"/>
-                                    <constraint firstAttribute="bottom" secondItem="5gj-1z-aYW" secondAttribute="bottom" constant="58" id="rdj-P9-lH6"/>
+                                    <constraint firstItem="5gj-1z-aYW" firstAttribute="top" secondItem="bm7-W4-Epq" secondAttribute="bottom" constant="16" id="qkp-ci-xsV"/>
                                     <constraint firstAttribute="trailing" secondItem="bm7-W4-Epq" secondAttribute="trailing" constant="16" id="vtp-fo-RSi"/>
                                 </constraints>
                             </view>
@@ -263,7 +264,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="g5h-pE-0z9" secondAttribute="trailing" id="2f0-cm-DaE"/>
                             <constraint firstAttribute="trailingMargin" secondItem="k3m-T7-cbc" secondAttribute="trailing" id="84y-v6-4kX"/>
                             <constraint firstItem="k3m-T7-cbc" firstAttribute="leading" secondItem="9t4-ZB-Z5r" secondAttribute="leadingMargin" id="AOg-c1-a0h"/>
-                            <constraint firstItem="g5h-pE-0z9" firstAttribute="top" secondItem="k3m-T7-cbc" secondAttribute="bottom" id="G0z-hP-w3V"/>
+                            <constraint firstItem="g5h-pE-0z9" firstAttribute="top" secondItem="k3m-T7-cbc" secondAttribute="bottom" constant="8" id="G0z-hP-w3V"/>
                             <constraint firstAttribute="bottomMargin" secondItem="g5h-pE-0z9" secondAttribute="bottom" id="Jha-kg-jOF"/>
                             <constraint firstItem="k3m-T7-cbc" firstAttribute="top" secondItem="NPR-rG-cNL" secondAttribute="bottom" id="V48-dR-uSe"/>
                             <constraint firstItem="g5h-pE-0z9" firstAttribute="leading" secondItem="9t4-ZB-Z5r" secondAttribute="leadingMargin" id="eAt-CX-Rb5"/>
@@ -276,18 +277,18 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iFX-Xo-Ft1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-375.19999999999999" y="50.824587706146929"/>
+            <point key="canvasLocation" x="-376.875" y="50"/>
         </scene>
         <!--Pet Name And Photo View Controller-->
         <scene sceneID="fTI-w3-Z7q">
             <objects>
                 <viewController storyboardIdentifier="nameAndPhoto" useStoryboardIdentifierAsRestorationIdentifier="YES" id="suP-Nz-0c2" customClass="PetNameAndPhotoViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="CiT-4c-Jc1">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2J7-Mf-SHB" userLabel="Header View" customClass="PTGradientView" customModule="PawTrails" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name &amp; Photo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Y5-Vo-G48">
                                         <rect key="frame" x="24" y="32" width="175.5" height="29.5"/>
@@ -304,10 +305,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RGw-If-7bF" userLabel="Content View">
-                                <rect key="frame" x="16" y="64" width="343" height="603"/>
+                                <rect key="frame" x="16" y="64" width="288" height="416"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tMf-8x-mT3" userLabel="Pet Photo View">
-                                        <rect key="frame" x="122" y="44" width="98" height="98"/>
+                                        <rect key="frame" x="94.5" y="44" width="98" height="98"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PhotoPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="WaZ-R9-uIk">
                                                 <rect key="frame" x="0.0" y="0.0" width="98" height="98"/>
@@ -334,7 +335,7 @@
                                         </constraints>
                                     </view>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Pet Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5tI-j6-eWk" customClass="PTNiceTextField" customModule="PawTrails" customModuleProvider="target">
-                                        <rect key="frame" x="24" y="200" width="295" height="48"/>
+                                        <rect key="frame" x="24" y="200" width="240" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="A7q-Cl-R6K"/>
                                         </constraints>
@@ -380,11 +381,11 @@
             <objects>
                 <viewController storyboardIdentifier="type" useStoryboardIdentifierAsRestorationIdentifier="YES" id="JhE-4W-WDp" userLabel="Pet Type View Controller" customClass="PetTypeViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bMf-gw-Rbb">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ibg-NV-S5f" userLabel="Header View" customClass="PTGradientView" customModule="PawTrails" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pet Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HE3-o9-VOf">
                                         <rect key="frame" x="24" y="32" width="104.5" height="29.5"/>
@@ -401,10 +402,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nMf-Qc-CJU" userLabel="Content View">
-                                <rect key="frame" x="16" y="64" width="343" height="603"/>
+                                <rect key="frame" x="16" y="64" width="288" height="416"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sR8-pb-fDn">
-                                        <rect key="frame" x="24" y="44" width="295" height="559"/>
+                                        <rect key="frame" x="24" y="44" width="240" height="372"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="sNY-4M-1Ol">
                                             <size key="itemSize" width="135" height="147"/>
@@ -414,7 +415,7 @@
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="aJg-1C-QNx" customClass="PetTypeCollectionViewCell" customModule="PawTrails" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="135" height="147"/>
+                                                <rect key="frame" x="52.5" y="0.0" width="135" height="147"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                     <rect key="frame" x="0.0" y="0.0" width="135" height="147"/>
@@ -506,11 +507,11 @@
             <objects>
                 <viewController storyboardIdentifier="breed" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LBf-zs-uqK" userLabel="Pet Breed View Controller" customClass="PetBreedSelectViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bwy-HR-Tbg">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sS6-G6-mVu" userLabel="Header View" customClass="PTGradientView" customModule="PawTrails" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Breed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZWt-81-qWC">
                                         <rect key="frame" x="24" y="32" width="73" height="29.5"/>
@@ -519,7 +520,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VnO-mo-Qw9">
-                                        <rect key="frame" x="195" y="34" width="156" height="30"/>
+                                        <rect key="frame" x="140" y="34" width="156" height="30"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="14"/>
                                         <state key="normal" title="My pet is not in the list"/>
                                         <connections>
@@ -537,13 +538,13 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2S6-0O-KTO" userLabel="Content View">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="saL-JD-gIc" userLabel="Search View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bLi-Kv-GXH">
-                                                <rect key="frame" x="24" y="16" width="327" height="48"/>
+                                                <rect key="frame" x="24" y="16" width="272" height="48"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="48" id="vLq-Ic-xGP"/>
                                                 </constraints>
@@ -552,7 +553,7 @@
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" smartDashesType="no" textContentType="name"/>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Nu-7W-HLO" userLabel="Separator View">
-                                                <rect key="frame" x="0.0" y="79" width="375" height="1"/>
+                                                <rect key="frame" x="0.0" y="79" width="320" height="1"/>
                                                 <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="w2Y-eM-JEd"/>
@@ -571,14 +572,14 @@
                                         </constraints>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UYW-kn-5OL">
-                                        <rect key="frame" x="0.0" y="80" width="375" height="523"/>
+                                        <rect key="frame" x="0.0" y="80" width="320" height="336"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="PTSimpleTableViewCell" id="Ji0-0e-6vc" customClass="PTSimpleTableViewCell" customModule="PawTrails" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ji0-0e-6vc" id="Gy1-72-8XR">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wwg-4t-zlU">
@@ -659,11 +660,11 @@
             <objects>
                 <viewController storyboardIdentifier="genderAndNeuter" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CSL-aZ-fFz" customClass="PetGenderAndNeuterViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="xgB-W1-TbJ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eNX-B8-OdV" userLabel="Header View" customClass="PTGradientView" customModule="PawTrails" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gender &amp; Neuter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Elc-wn-Ixf">
                                         <rect key="frame" x="24" y="32" width="202" height="29.5"/>
@@ -680,22 +681,22 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VLE-g8-F2l" userLabel="Content View">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8AI-C0-3Je" userLabel="Gender View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="331.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="228.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q00-cc-5fx" userLabel="Container View">
-                                                <rect key="frame" x="73.5" y="84" width="228" height="164.5"/>
+                                                <rect key="frame" x="46" y="32" width="228" height="166"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Is your pet a male or female?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Gm-ou-A60">
-                                                        <rect key="frame" x="13" y="0.0" width="202" height="17.5"/>
+                                                        <rect key="frame" x="13" y="0.0" width="202" height="18"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                                         <color key="textColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mYS-v6-uXG" userLabel="Male View">
-                                                        <rect key="frame" x="0.0" y="41.5" width="98" height="123"/>
+                                                        <rect key="frame" x="0.0" y="42" width="98" height="124"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qNc-1r-cyW" customClass="PTOtherButton" customModule="PawTrails" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="98" height="98"/>
@@ -710,7 +711,7 @@
                                                                 </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Male" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zRD-5w-1uO">
-                                                                <rect key="frame" x="32" y="105.5" width="34" height="17.5"/>
+                                                                <rect key="frame" x="32" y="106" width="34" height="18"/>
                                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                                                 <color key="textColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -727,7 +728,7 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8EJ-nD-PNZ" userLabel="Female View">
-                                                        <rect key="frame" x="130" y="41" width="98" height="123.5"/>
+                                                        <rect key="frame" x="130" y="42" width="98" height="124"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1MC-pu-Dbs" customClass="PTOtherButton" customModule="PawTrails" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="98" height="98"/>
@@ -742,7 +743,7 @@
                                                                 </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Female" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8MH-jX-N8q">
-                                                                <rect key="frame" x="23" y="106" width="52.5" height="17.5"/>
+                                                                <rect key="frame" x="23" y="106" width="52.5" height="18"/>
                                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                                                 <color key="textColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -779,25 +780,25 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="juU-9r-j4C" userLabel="Neutered View">
-                                        <rect key="frame" x="0.0" y="331.5" width="375" height="271.5"/>
+                                        <rect key="frame" x="0.0" y="228.5" width="320" height="187.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VYU-6i-jJQ" userLabel="Container View">
-                                                <rect key="frame" x="25" y="83.5" width="324" height="105.5"/>
+                                                <rect key="frame" x="-2.5" y="42" width="324" height="105"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Is your dog neutered or not?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fDr-tb-g9Q">
-                                                        <rect key="frame" x="62.5" y="0.0" width="199.5" height="17.5"/>
+                                                        <rect key="frame" x="62.5" y="0.0" width="199.5" height="17"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                                         <color key="textColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vYh-Bu-iKL" userLabel="Buttons View">
-                                                        <rect key="frame" x="0.0" y="57.5" width="324" height="48"/>
+                                                        <rect key="frame" x="0.0" y="57" width="324" height="48"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A3n-u1-Wdh" userLabel="Yes Button" customClass="PTOtherButton" customModule="PawTrails" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="-0.5" width="150" height="48"/>
+                                                                <rect key="frame" x="8" y="0.0" width="142" height="48"/>
                                                                 <color key="backgroundColor" red="0.26274509800000001" green="0.50196078430000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" constant="150" id="dsk-RD-MPT"/>
+                                                                    <constraint firstAttribute="width" constant="142" id="dsk-RD-MPT"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                                                 <state key="normal" title="YES">
@@ -808,7 +809,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cet-Gj-xBd" userLabel="No Button" customClass="PTOtherButton" customModule="PawTrails" customModuleProvider="target">
-                                                                <rect key="frame" x="174" y="-0.5" width="150" height="48"/>
+                                                                <rect key="frame" x="174" y="0.0" width="142" height="48"/>
                                                                 <color key="backgroundColor" red="0.98039215686274506" green="0.25490196078431371" blue="0.41176470588235292" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                                                 <state key="normal" title="NO">
@@ -820,13 +821,13 @@
                                                             </button>
                                                         </subviews>
                                                         <constraints>
-                                                            <constraint firstAttribute="trailing" secondItem="Cet-Gj-xBd" secondAttribute="trailing" id="1Vw-mV-ImC"/>
+                                                            <constraint firstAttribute="trailing" secondItem="Cet-Gj-xBd" secondAttribute="trailing" constant="8" id="1Vw-mV-ImC"/>
                                                             <constraint firstAttribute="bottom" secondItem="Cet-Gj-xBd" secondAttribute="bottom" id="5bq-xs-aqi"/>
                                                             <constraint firstItem="A3n-u1-Wdh" firstAttribute="top" secondItem="vYh-Bu-iKL" secondAttribute="top" id="7wi-bJ-KMB"/>
                                                             <constraint firstItem="Cet-Gj-xBd" firstAttribute="leading" secondItem="A3n-u1-Wdh" secondAttribute="trailing" constant="24" id="AEj-w5-mbY"/>
                                                             <constraint firstAttribute="bottom" secondItem="A3n-u1-Wdh" secondAttribute="bottom" id="M9y-mq-6cI"/>
                                                             <constraint firstItem="Cet-Gj-xBd" firstAttribute="width" secondItem="A3n-u1-Wdh" secondAttribute="width" id="MFX-f3-TAh"/>
-                                                            <constraint firstItem="A3n-u1-Wdh" firstAttribute="leading" secondItem="vYh-Bu-iKL" secondAttribute="leading" id="TQW-Jx-YCS"/>
+                                                            <constraint firstItem="A3n-u1-Wdh" firstAttribute="leading" secondItem="vYh-Bu-iKL" secondAttribute="leading" constant="8" id="TQW-Jx-YCS"/>
                                                             <constraint firstAttribute="height" constant="48" id="vip-HB-6qk"/>
                                                             <constraint firstItem="Cet-Gj-xBd" firstAttribute="top" secondItem="A3n-u1-Wdh" secondAttribute="top" id="zIm-mK-Ixv"/>
                                                         </constraints>
@@ -883,18 +884,18 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bZ9-la-KDE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2542" y="51"/>
+            <point key="canvasLocation" x="2540.625" y="50"/>
         </scene>
         <!--Pet Birthday And Weight View Controller-->
         <scene sceneID="4W1-az-Xd4">
             <objects>
                 <viewController storyboardIdentifier="birthdayAndWeight" useStoryboardIdentifierAsRestorationIdentifier="YES" id="f4b-qR-8Tl" userLabel="Pet Birthday And Weight View Controller" customClass="PetBirthdayAndWeightViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="zAi-xQ-Mbo">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jaA-aE-THE" userLabel="Header View" customClass="PTGradientView" customModule="PawTrails" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Birthday &amp; Weight" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fvb-Pj-3wR">
                                         <rect key="frame" x="24" y="32" width="221.5" height="29.5"/>
@@ -911,22 +912,22 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LWB-Jv-keM" userLabel="Content View">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eqG-nI-37u" userLabel="Birthday View">
-                                        <rect key="frame" x="16" y="0.0" width="343" height="137.5"/>
+                                        <rect key="frame" x="16" y="0.0" width="288" height="137.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="99N-5s-1A0" userLabel="Container View">
-                                                <rect key="frame" x="0.0" y="24" width="343" height="89.5"/>
+                                                <rect key="frame" x="0.0" y="24" width="288" height="89.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="When is Your Pet Birthday?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="um6-2p-ivH">
-                                                        <rect key="frame" x="75.5" y="0.0" width="193.5" height="17.5"/>
+                                                        <rect key="frame" x="48" y="0.0" width="193.5" height="17.5"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                                         <color key="textColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select pets birthday" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="u3X-Dy-ctd" customClass="PTNiceTextField" customModule="PawTrails" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="41.5" width="343" height="48"/>
+                                                        <rect key="frame" x="0.0" y="41.5" width="288" height="48"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="48" id="PA0-5j-H8V"/>
                                                         </constraints>
@@ -955,31 +956,31 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wTa-td-2yO" userLabel="Weight View">
-                                        <rect key="frame" x="0.0" y="137.5" width="375" height="465.5"/>
+                                        <rect key="frame" x="0.0" y="137.5" width="320" height="278.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fjK-oS-xwt" userLabel="Container View">
-                                                <rect key="frame" x="0.0" y="99.5" width="375" height="267.5"/>
+                                                <rect key="frame" x="0.0" y="6" width="320" height="267.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Slide the Ruler to Set the Weight of Your Pet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dkG-Do-mmT">
-                                                        <rect key="frame" x="32.5" y="0.0" width="310" height="17.5"/>
+                                                        <rect key="frame" x="5" y="0.0" width="310" height="17.5"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                                         <color key="textColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 lbs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XnU-1y-f2K" userLabel="Lbs Label">
-                                                        <rect key="frame" x="103.5" y="25.5" width="168" height="88"/>
+                                                        <rect key="frame" x="76" y="25.5" width="168" height="88"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="72"/>
                                                         <color key="textColor" red="0.98039215690000003" green="0.25490196079999999" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="~0 kg" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XJq-aU-i2g" userLabel="Kg Label">
-                                                        <rect key="frame" x="168.5" y="111" width="38.5" height="18"/>
+                                                        <rect key="frame" x="141" y="111" width="38.5" height="18"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="14"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2UU-9L-KT1" userLabel="Slider Container View">
-                                                        <rect key="frame" x="0.0" y="188.5" width="375" height="79"/>
+                                                        <rect key="frame" x="0.0" y="188.5" width="320" height="79"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="79" id="Jtk-hv-pXB"/>
                                                         </constraints>
@@ -1046,11 +1047,11 @@
             <objects>
                 <viewController storyboardIdentifier="final" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4JW-SO-k9F" userLabel="Pet Final Step View Controller" customClass="PetWizardFinalStepViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ShN-PF-NtE">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xFu-i7-bvr" userLabel="Header View" customClass="PTGradientView" customModule="PawTrails" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Getting First Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="or2-Ah-ewk">
                                         <rect key="frame" x="24" y="32" width="261" height="29.5"/>
@@ -1067,16 +1068,16 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P16-wV-2SC" userLabel="Content View">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m7u-mf-fX6" userLabel="Getting Location View">
-                                        <rect key="frame" x="55" y="-0.5" width="264" height="603"/>
+                                        <rect key="frame" x="27.5" y="-0.5" width="264" height="416"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qNi-ZR-zqd" userLabel="Image Container">
-                                                <rect key="frame" x="0.0" y="0.0" width="264" height="422"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="264" height="291"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PlacemarkIcon" translatesAutoresizingMaskIntoConstraints="NO" id="1qU-ad-19r" userLabel="Placemark Image View">
-                                                        <rect key="frame" x="108" y="181" width="48" height="60"/>
+                                                        <rect key="frame" x="108" y="116" width="48" height="60"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="48" id="7se-40-rLy"/>
                                                             <constraint firstAttribute="height" constant="60" id="tFv-fg-xBy"/>
@@ -1089,7 +1090,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NOB-u5-It0" userLabel="Label Container">
-                                                <rect key="frame" x="0.0" y="422" width="264" height="181"/>
+                                                <rect key="frame" x="0.0" y="291" width="264" height="125"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please stay outdoors to ensure you get your first location" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w8n-2t-vDt">
                                                         <rect key="frame" x="9" y="0.0" width="247" height="34.5"/>
@@ -1120,7 +1121,7 @@
                                         </constraints>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X3i-Po-kch" userLabel="Timeout View">
-                                        <rect key="frame" x="23.5" y="101" width="328" height="402"/>
+                                        <rect key="frame" x="-4" y="7.5" width="328" height="402"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WarningIcon" translatesAutoresizingMaskIntoConstraints="NO" id="8ak-wb-OPT" userLabel="Warning Image View">
                                                 <rect key="frame" x="129" y="0.0" width="70" height="70"/>
@@ -1177,13 +1178,13 @@
                                         </constraints>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jS5-zq-Gui" userLabel="Completed View">
-                                        <rect key="frame" x="23.5" y="0.0" width="328" height="603"/>
+                                        <rect key="frame" x="-4" y="0.0" width="328" height="416"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hA4-1A-Kku" userLabel="Image Container">
-                                                <rect key="frame" x="0.0" y="0.0" width="328" height="421.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="328" height="290.5"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ConnectDevice" translatesAutoresizingMaskIntoConstraints="NO" id="Ltb-JX-vwf" userLabel="Pet Image View">
-                                                        <rect key="frame" x="24" y="156.5" width="280" height="201"/>
+                                                        <rect key="frame" x="24" y="25.5" width="280" height="201"/>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1193,7 +1194,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dw7-C0-uqL" userLabel="Button Container">
-                                                <rect key="frame" x="0.0" y="421.5" width="328" height="181.5"/>
+                                                <rect key="frame" x="0.0" y="290.5" width="328" height="125.5"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xD0-8e-55d" userLabel="Get Started Button">
                                                         <rect key="frame" x="0.0" y="0.0" width="328" height="52"/>
