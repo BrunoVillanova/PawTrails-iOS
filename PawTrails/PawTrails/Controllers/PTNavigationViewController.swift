@@ -20,17 +20,9 @@ class PTNavigationViewController: UINavigationController {
     
     override var viewControllers: [UIViewController] {
         didSet {
-            let leftBarButton = UIBarButtonItem(image: UIImage(named: "LeftMenuIcon"), style: .plain, target: self, action: #selector(leftMenuAction))
-            leftBarButton.tintColor = PTConstants.colors.darkGray
-            self.navigationBar.topItem?.leftBarButtonItem = leftBarButton
+            addLeftMenuButton()
         }
     }
-    
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//
-//
-//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -38,6 +30,9 @@ class PTNavigationViewController: UINavigationController {
     }
     
     fileprivate func initialize() {
+        
+//        addLeftMenuButton()
+        self.navigationBar.shadowImage = UIImage()
         
         if SideMenuManager.default.menuLeftNavigationController == nil {
             SideMenuManager.default.menuLeftNavigationController = ViewController.leftMenu.viewController as? UISideMenuNavigationController
@@ -52,5 +47,11 @@ class PTNavigationViewController: UINavigationController {
     
     func leftMenuAction() {
         present(SideMenuManager.default.menuLeftNavigationController!, animated: true, completion: nil)
+    }
+    
+    fileprivate func addLeftMenuButton() {
+        let leftBarButton = UIBarButtonItem(image: UIImage(named: "LeftMenuIcon"), style: .plain, target: self, action: #selector(leftMenuAction))
+        leftBarButton.tintColor = PTConstants.colors.darkGray
+        self.navigationBar.topItem?.leftBarButtonItem = leftBarButton
     }
 }

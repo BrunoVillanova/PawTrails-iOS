@@ -54,6 +54,8 @@
 		15B3FF1E20329DE500C08D48 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B3FF1D20329DE500C08D48 /* CacheManager.swift */; };
 		15C0DB6B204EFDDC0098E735 /* XLPagerTabStrip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C0DB69204EFDDC0098E735 /* XLPagerTabStrip.framework */; };
 		15C0DB6C204EFDDC0098E735 /* SCLAlertView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C0DB6A204EFDDC0098E735 /* SCLAlertView.framework */; };
+		15C74C5E207D907200ED56CC /* Support.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 15C74C5D207D907200ED56CC /* Support.storyboard */; };
+		15C74C60207DA0CA00ED56CC /* SupportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C74C5F207DA0CA00ED56CC /* SupportViewController.swift */; };
 		15C7613A2016CFF3002AA7F8 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C7610F2016CFF3002AA7F8 /* DataManager.swift */; };
 		15C7613B2016CFF3002AA7F8 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C761102016CFF3002AA7F8 /* EventManager.swift */; };
 		15C7613D2016CFF3002AA7F8 /* BEMAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C761142016CFF3002AA7F8 /* BEMAnimationManager.m */; };
@@ -343,6 +345,8 @@
 		15B3FF1D20329DE500C08D48 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		15C0DB69204EFDDC0098E735 /* XLPagerTabStrip.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XLPagerTabStrip.framework; path = Carthage/Build/iOS/XLPagerTabStrip.framework; sourceTree = "<group>"; };
 		15C0DB6A204EFDDC0098E735 /* SCLAlertView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SCLAlertView.framework; path = Carthage/Build/iOS/SCLAlertView.framework; sourceTree = "<group>"; };
+		15C74C5D207D907200ED56CC /* Support.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Support.storyboard; sourceTree = "<group>"; };
+		15C74C5F207DA0CA00ED56CC /* SupportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportViewController.swift; sourceTree = "<group>"; };
 		15C7610F2016CFF3002AA7F8 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		15C761102016CFF3002AA7F8 /* EventManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
 		15C761132016CFF3002AA7F8 /* BEMCheckBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMCheckBox.h; sourceTree = "<group>"; };
@@ -672,6 +676,7 @@
 				15AD5EA8206C35E90069E01D /* PetWizard.storyboard */,
 				44FEE7E52074DE1100A85A74 /* Login.storyboard */,
 				150EB83B207BE9CA00FEC245 /* Common.storyboard */,
+				15C74C5D207D907200ED56CC /* Support.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -974,6 +979,7 @@
 				15DCFEA0205C647A00DF726C /* LaunchViewController.swift */,
 				15160FEA20719448008CF9F4 /* PTAlertViewController.swift */,
 				15EF8757207BF7BC007F27BF /* PTNavigationViewController.swift */,
+				15C74C5F207DA0CA00ED56CC /* SupportViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1523,6 +1529,7 @@
 				15C762AE2016D06B002AA7F8 /* countrycodes.csv in Resources */,
 				1543F381206F07390069EBEB /* Montserrat-Light.ttf in Resources */,
 				15C762522016D011002AA7F8 /* BatteryLow@1x.png in Resources */,
+				15C74C5E207D907200ED56CC /* Support.storyboard in Resources */,
 				15C762542016D011002AA7F8 /* BatteryLow@3x.png in Resources */,
 				44FEE7E62074DE1100A85A74 /* Login.storyboard in Resources */,
 				15C762532016D011002AA7F8 /* Battery@3x.png in Resources */,
@@ -1906,6 +1913,7 @@
 				15C761462016CFF3002AA7F8 /* CoreDataManager.swift in Sources */,
 				15C763E02016D5C0002AA7F8 /* CalanderForActivityController.swift in Sources */,
 				15C7641B2016D5C0002AA7F8 /* FinishAdventureVC.swift in Sources */,
+				15C74C60207DA0CA00ED56CC /* SupportViewController.swift in Sources */,
 				15C764122016D5C0002AA7F8 /* PetTypeTableViewController.swift in Sources */,
 				15C762B92016D06B002AA7F8 /* SocketIO+RxSwift.swift in Sources */,
 				15C763D82016D5C0002AA7F8 /* UsersViewController.swift in Sources */,

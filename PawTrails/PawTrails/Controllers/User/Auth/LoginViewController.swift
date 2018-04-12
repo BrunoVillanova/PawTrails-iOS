@@ -58,8 +58,6 @@ class LoginViewController: UIViewController, InitialView {
         }
 
         self.title = "Login"
-        
-        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     func closeButtonTapped() {

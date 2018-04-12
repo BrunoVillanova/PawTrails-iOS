@@ -230,13 +230,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 enum Storyboards {
-    case login, common, main
+    case login, common, main, support
     
     var storyboard: UIStoryboard {
         switch self {
             case .login: return UIStoryboard(name: "Login", bundle: nil)
             case .common: return UIStoryboard(name: "Common", bundle: nil)
             case .main: return UIStoryboard(name: "Main", bundle: nil)
+            case .support: return UIStoryboard(name: "Support", bundle: nil)
         }
     }
 }
@@ -249,12 +250,14 @@ enum ViewController {
         switch self {
             case .initial, .login, .signup, .passwordRecovery, .passwordRecoverySuccess, .emailVerification, .termsAndPrivacy: return Storyboards.login.storyboard
             case .leftMenu: return Storyboards.common.storyboard
-            case .liveTracking, .myPets, .myProfile, .vetRecommendations, .deviceFinder, .settings, .support: return Storyboards.main.storyboard
+            case .liveTracking, .myPets, .myProfile, .vetRecommendations, .deviceFinder, .settings: return Storyboards.main.storyboard
+            case .support: return Storyboards.support.storyboard
         }
     }
     
     var identifier: String {
         switch self {
+            // Login
             case .initial: return "InitialViewController"
             case .login: return "LoginViewController"
             case .signup: return "SignUpViewController"
@@ -264,12 +267,14 @@ enum ViewController {
             case .termsAndPrivacy: return "PrivacyViewController"
             // Common
             case .leftMenu: return "LeftMenuNavigationController"
+            // Main
             case .liveTracking: return "LiveTrackingViewController"
             case .myPets: return "MyPetsViewController"
             case .myProfile: return "MyProfileViewController"
             case .vetRecommendations: return "VetRecommendationsViewController"
             case .deviceFinder: return "DeviceFinderViewController"
             case .settings: return "SettingsViewController"
+            // Support
             case .support: return "SupportViewController"
         }
     }

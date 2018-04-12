@@ -378,6 +378,35 @@ extension UIViewController {
         }
         
     }
+    
+    var topSafeAreaHeigh: CGFloat {
+        get {
+            var topSafeArea = CGFloat()
+            
+            if #available(iOS 11.0, *) {
+                topSafeArea = view.safeAreaInsets.top
+            } else {
+                topSafeArea = topLayoutGuide.length
+            }
+            
+            return topSafeArea
+        }
+
+    }
+    
+    var bottomSafeAreaHeight: CGFloat {
+        get {
+            var bottomSafeArea = CGFloat()
+            
+            if #available(iOS 11.0, *) {
+                bottomSafeArea = view.safeAreaInsets.bottom
+            } else {
+                bottomSafeArea = bottomLayoutGuide.length
+            }
+            
+            return bottomSafeArea
+        }
+    }
 }
 
 extension UINavigationController {

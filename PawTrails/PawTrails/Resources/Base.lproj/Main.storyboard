@@ -3487,36 +3487,36 @@ PawTrails is a product created by Attitude Technologies.
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="7TZ-Ow-5av" customClass="PTMapView" customModule="PawTrails" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="44" width="375" height="768"/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="93O-q0-eKh">
-                                <rect key="frame" x="295" y="698" width="80" height="80"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="93O-q0-eKh" userLabel="Adventure Button" customClass="MDCFloatingButton">
+                                <rect key="frame" x="307" y="710" width="56" height="56"/>
+                                <color key="backgroundColor" red="0.98039215690000003" green="0.25490196079999999" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="CTw-em-ZQU"/>
-                                    <constraint firstAttribute="width" constant="80" id="xXX-nu-vIr"/>
+                                    <constraint firstAttribute="width" secondItem="93O-q0-eKh" secondAttribute="height" multiplier="1:1" id="JTA-28-2DN"/>
+                                    <constraint firstAttribute="width" constant="56" id="xXX-nu-vIr"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="StartTrip-1x-png"/>
+                                <state key="normal" image="AdventureButtonIcon"/>
                                 <connections>
                                     <action selector="firstButtonPressed:" destination="NB9-41-O2a" eventType="touchUpInside" id="LBg-Gf-XUO"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0oC-dH-GlK">
-                                <rect key="frame" x="295" y="626" width="80" height="80"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <state key="normal" image="PetLocationpng"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0oC-dH-GlK" userLabel="Focus Pet Button" customClass="MDCFloatingButton">
+                                <rect key="frame" x="306.66666666666669" y="642" width="56" height="56"/>
+                                <color key="backgroundColor" red="0.98039215690000003" green="0.25490196079999999" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" image="FocusPetButtonIcon"/>
                                 <connections>
                                     <action selector="secButtonPressed:" destination="NB9-41-O2a" eventType="touchUpInside" id="bWf-ag-W70"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QMo-ic-gTj">
-                                <rect key="frame" x="295" y="558" width="80" height="80"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <state key="normal" image="UserLocation-1x-png"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QMo-ic-gTj" userLabel="Focus User Button" customClass="MDCFloatingButton">
+                                <rect key="frame" x="306.66666666666669" y="574" width="56" height="56"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="FocusUserButtonIcon"/>
                                 <connections>
                                     <action selector="thirdButtonPressed:" destination="NB9-41-O2a" eventType="touchUpInside" id="Bwp-mK-NYl"/>
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" insetsLayoutMarginsFromSafeArea="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="X26-Zz-hRg">
-                                <rect key="frame" x="16" y="636" width="275" height="142"/>
+                                <rect key="frame" x="16" y="636" width="286.66666666666669" height="142"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="142" id="BOg-WK-wFn"/>
@@ -3529,7 +3529,7 @@ PawTrails is a product created by Attitude Technologies.
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="cell" id="2iA-lh-XHi" customClass="PetsCollectionViewCell" customModule="PawTrails" customModuleProvider="target">
-                                        <rect key="frame" x="215" y="0.0" width="60" height="60"/>
+                                        <rect key="frame" x="226.66666666666669" y="0.0" width="60" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -3560,18 +3560,18 @@ PawTrails is a product created by Attitude Technologies.
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="yde-DI-cy3" firstAttribute="bottom" secondItem="93O-q0-eKh" secondAttribute="bottom" id="0X6-j5-Foy"/>
+                            <constraint firstItem="yde-DI-cy3" firstAttribute="bottom" secondItem="93O-q0-eKh" secondAttribute="bottom" constant="12" id="0X6-j5-Foy"/>
                             <constraint firstItem="QMo-ic-gTj" firstAttribute="height" secondItem="0oC-dH-GlK" secondAttribute="height" id="1eA-g9-xfS"/>
                             <constraint firstItem="X26-Zz-hRg" firstAttribute="leading" secondItem="yde-DI-cy3" secondAttribute="leading" constant="16" id="9hu-jg-R32"/>
-                            <constraint firstItem="0oC-dH-GlK" firstAttribute="top" secondItem="QMo-ic-gTj" secondAttribute="bottom" constant="-12" id="JQh-JR-h6b"/>
+                            <constraint firstItem="0oC-dH-GlK" firstAttribute="top" secondItem="QMo-ic-gTj" secondAttribute="bottom" constant="12" id="JQh-JR-h6b"/>
                             <constraint firstItem="0oC-dH-GlK" firstAttribute="width" secondItem="93O-q0-eKh" secondAttribute="width" id="KOe-G6-l50"/>
                             <constraint firstItem="0oC-dH-GlK" firstAttribute="height" secondItem="93O-q0-eKh" secondAttribute="height" id="M0T-xR-PZm"/>
                             <constraint firstItem="QMo-ic-gTj" firstAttribute="width" secondItem="0oC-dH-GlK" secondAttribute="width" id="MOX-lK-ECy"/>
                             <constraint firstItem="yde-DI-cy3" firstAttribute="bottom" secondItem="X26-Zz-hRg" secondAttribute="bottom" id="Rnn-IL-Ia3"/>
-                            <constraint firstItem="93O-q0-eKh" firstAttribute="top" secondItem="0oC-dH-GlK" secondAttribute="bottom" constant="-8" id="Z3a-Vy-JgZ"/>
+                            <constraint firstItem="93O-q0-eKh" firstAttribute="top" secondItem="0oC-dH-GlK" secondAttribute="bottom" constant="12" id="Z3a-Vy-JgZ"/>
                             <constraint firstItem="7TZ-Ow-5av" firstAttribute="bottom" secondItem="NQP-yG-kr5" secondAttribute="bottom" id="e1o-AI-C4D"/>
                             <constraint firstItem="QMo-ic-gTj" firstAttribute="centerX" secondItem="0oC-dH-GlK" secondAttribute="centerX" id="gw7-G7-oJd"/>
-                            <constraint firstItem="yde-DI-cy3" firstAttribute="trailing" secondItem="93O-q0-eKh" secondAttribute="trailing" id="o40-JA-HVz"/>
+                            <constraint firstItem="yde-DI-cy3" firstAttribute="trailing" secondItem="93O-q0-eKh" secondAttribute="trailing" constant="12" id="o40-JA-HVz"/>
                             <constraint firstItem="7TZ-Ow-5av" firstAttribute="trailing" secondItem="yde-DI-cy3" secondAttribute="trailing" id="oXN-PA-Rbe"/>
                             <constraint firstItem="7TZ-Ow-5av" firstAttribute="top" secondItem="yde-DI-cy3" secondAttribute="top" id="pPh-ba-6Tf"/>
                             <constraint firstItem="0oC-dH-GlK" firstAttribute="leading" secondItem="X26-Zz-hRg" secondAttribute="trailing" constant="4" id="qpw-CY-TYL"/>
@@ -7588,15 +7588,17 @@ Last Edited on 2017-12-04
         </scene>
     </scenes>
     <resources>
+        <image name="AdventureButtonIcon" width="33" height="33"/>
         <image name="AvgSpeedLabel-1x-png" width="32" height="26"/>
         <image name="BackButton-1x-png" width="56" height="56"/>
         <image name="CurrentSpeedLabel-1x-png" width="39" height="34"/>
         <image name="DeleteIcon" width="24" height="24"/>
         <image name="FinishAdventure-1x-png" width="80" height="80"/>
+        <image name="FocusPetButtonIcon" width="33" height="33"/>
+        <image name="FocusUserButtonIcon" width="33" height="33"/>
         <image name="LaunchScreenImage" width="375" height="812"/>
         <image name="PauseTripButton-1x-png" width="87" height="90"/>
         <image name="PawDeviceImage" width="114" height="50"/>
-        <image name="PetLocationpng" width="87" height="90"/>
         <image name="StartTrip-1x-png" width="87" height="90"/>
         <image name="StopTripButton-1x-png" width="87" height="89"/>
         <image name="TotalDistanceLabel-1x-png" width="36" height="39"/>

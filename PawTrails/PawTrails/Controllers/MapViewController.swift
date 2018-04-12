@@ -23,9 +23,9 @@ class MapViewController: UIViewController {
     fileprivate let presenter = HomePresenter()
     fileprivate let appDelegate = UIApplication.shared.delegate as! AppDelegate
     fileprivate let disposeBag = DisposeBag()
-    fileprivate let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
-    fileprivate let button = UIButton(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
-    fileprivate let refreshIconImage = UIImage(named: "RefreshIcon")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+    fileprivate let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+    fileprivate let button = UIButton(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+    fileprivate let refreshIconImage = UIImage(named: "RefreshButtonIcon")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
     
     var selectedPet: Pet?
     var data = [searchElement]()
@@ -40,7 +40,7 @@ class MapViewController: UIViewController {
         UIApplication.shared.statusBarStyle = .default
         button.addTarget(self, action:  #selector(self.refreshBtnPressed(_:)), for: .touchUpInside)
         button.setImage(refreshIconImage, for: .normal)
-        button.tintColor = PTConstants.colors.primary
+        button.tintColor = PTConstants.colors.darkGray
         self.navigationItem.rightBarButtonItem?.customView = button
         self.navigationItem.rightBarButtonItem?.tintColor = PTConstants.colors.primary
         
@@ -104,23 +104,12 @@ class MapViewController: UIViewController {
             
             if (petDeviceDataList.count > 0) {
                self.hideMessage()
-            } else {
-                self.showMessage("Searching for new location...", type: GSMessageType.info,  options: [
-                    .animation(.slide),
-                    .animationDuration(0.3),
-                    .autoHide(false),
-                    .cornerRadius(0.0),
-                    .hideOnTap(false),
-                    .position(.top),
-                    .textAlignment(.center),
-                    .textNumberOfLines(0),
-                    ])
             }
         }).disposed(by: disposeBag)
         
-        firstButtonfromthebottom.contentHorizontalAlignment = .fill
-        firstButtonfromthebottom.contentMode = .scaleToFill
-        firstButtonfromthebottom.imageView?.contentMode = .scaleToFill
+//        firstButtonfromthebottom.contentHorizontalAlignment = .fill
+//        firstButtonfromthebottom.contentMode = .scaleToFill
+//        firstButtonfromthebottom.imageView?.contentMode = .scaleToFill
         firstButtonfromthebottom.isEnabled = false
         
         petsCollectionView.delegate = self
@@ -172,6 +161,19 @@ class MapViewController: UIViewController {
         if presenter.pets.count != 0 {
             let petIDs = presenter.pets.map { $0.id  }
             showIndicator()
+            
+            self.showMessage("Searching for new location...", type: GSMessageType.info,  options: [
+                .animation(.slide),
+                .animationDuration(0.3),
+                .autoHide(false),
+                .cornerRadius(0.0),
+                .hideOnTap(false),
+                .position(.top),
+                .height(36.0),
+                .textAlignment(.center),
+                .textNumberOfLines(1),
+                ])
+            
             APIRepository.instance.getImmediateLocation(petIDs) { (error) in
                 self.hideIndicator()
                 if let error = error {
@@ -186,11 +188,11 @@ class MapViewController: UIViewController {
                 .animationDuration(0.3),
                 .autoHide(false),
                 .cornerRadius(0.0),
-                .height(44.0),
+                .height(36.0),
                 .hideOnTap(false),
                 .position(.top),
                 .textAlignment(.center),
-                .textNumberOfLines(0),
+                .textNumberOfLines(1),
                 ])
         }
     }
