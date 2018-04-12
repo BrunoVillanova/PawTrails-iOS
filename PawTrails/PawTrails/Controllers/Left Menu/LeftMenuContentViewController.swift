@@ -91,26 +91,22 @@ class LeftMenuContentViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
+        
+        if let menuHeaderView = self.tableView.tableHeaderView, let imageView = menuHeaderView.viewWithTag(200) as? UIImageView {
+            imageView.layer.cornerRadius = imageView.frame.size.width/2.0
+            imageView.clipsToBounds = true
+            imageView.image = UIImage(named: "menu-me-1x-png")
+        }
+        
         DataManager.instance.getUser { (error, user) in
-            
             if let user = user {
                 self.configureMenuHeader(user.name, email: user.email, imageUrl: user.imageURL)
             }
         }
-
     }
     
     func showComingSoonAlert(_ functionTitle: String) {
-        
-//        let title = "Coming Soon"
-//        let infoText = "\(functionTitle) function is currently under construction. We are working hard on the new feature, please check back later."
-//
-//        let alertView = PTAlertViewController(title, infoText: infoText, buttonTypes: [AlertButtontType.ok], titleBarStyle: .yellow, alertResult: {alert, result in
-//            alert.dismiss(animated: true, completion: nil)
-//        })
-//
-//        self.present(alertView, animated: true, completion: nil)
-        
+    
         self.dismiss(animated: true) {
             let title = "Coming Soon"
             let infoText = "\(functionTitle) function is currently under construction. We are working hard on the new feature, please check back later."
@@ -127,7 +123,7 @@ class LeftMenuContentViewController: UIViewController {
     
     fileprivate func configureMenuHeader(_ name: String?, email: String?, imageUrl: String?) {
         
-        if let menuHeaderView = self.tableView.tableHeaderView as? MenuHeaderView {
+        if let menuHeaderView = self.tableView.tableHeaderView {
             
             let imageView = menuHeaderView.viewWithTag(200) as? UIImageView
             let titleLabel = menuHeaderView.viewWithTag(201) as? UILabel
@@ -135,7 +131,7 @@ class LeftMenuContentViewController: UIViewController {
             
             if let imageUrl = imageUrl {
                 let imageUrl = URL(string: imageUrl)
-                imageView?.sd_setImage(with: imageUrl, placeholderImage: nil, options: .highPriority, completed: { (image, error, cscheType, url) in
+                imageView?.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "menu-me-1x-png"), options: .highPriority, completed: { (image, error, cscheType, url) in
                     imageView!.layer.cornerRadius = imageView!.frame.size.width/2.0
                     imageView?.clipsToBounds = true
                 })
@@ -158,18 +154,6 @@ class LeftMenuContentViewController: UIViewController {
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.plain, target:nil, action:nil)
     }
 
-}
-
-class MenuHeaderView: UIView {
-    
-    
-    fileprivate func initialize() {
-        
-    }
-    
-    func configure(_ user: User) {
-        
-    }
 }
 
 class MenuItemCell: UITableViewCell {
