@@ -72,7 +72,11 @@ class EmailVerificationViewController: UIViewController, EmailVerificationView {
     }
 
     @IBAction func sendEmailAgainAction(_ sender: UIButton) {
-        presenter.sendVerificationEmail(email: email)
+        
+        if let userEmail = UserDefaults.standard.string(forKey: "userEmail") {
+            presenter.sendVerificationEmail(email: userEmail)
+        }
+        
     }
     
     @IBAction func goBackToLogin(_ sender: UIButton) {

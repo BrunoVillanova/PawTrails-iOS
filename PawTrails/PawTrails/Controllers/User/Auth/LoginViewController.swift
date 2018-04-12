@@ -83,6 +83,7 @@ class LoginViewController: UIViewController, InitialView {
     
     func verifyAccount(_ email:String, _ password:String) {
         let vc = ViewController.emailVerification.viewController as! EmailVerificationViewController
+        UserDefaults.standard.set(email, forKey: "userEmail")
         vc.email = email
         vc.password = password
         self.present(vc, animated: true, completion: nil)
