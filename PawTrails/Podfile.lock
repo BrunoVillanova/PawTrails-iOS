@@ -8,10 +8,10 @@ PODS:
   - FirebaseAnalytics (4.0.9):
     - FirebaseCore (~> 4.0)
     - FirebaseInstanceID (~> 2.0)
-    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
     - nanopb (~> 0.3)
   - FirebaseCore (4.0.15):
-    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
   - FirebaseInstanceID (2.0.9):
     - FirebaseCore (~> 4.0)
   - FirebaseMessaging (2.1.0):
@@ -23,7 +23,7 @@ PODS:
   - GoogleToolboxForMac/Defines (2.1.3)
   - GoogleToolboxForMac/Logger (2.1.3):
     - GoogleToolboxForMac/Defines (= 2.1.3)
-  - GoogleToolboxForMac/NSData+zlib (2.1.3):
+  - "GoogleToolboxForMac/NSData+zlib (2.1.3)":
     - GoogleToolboxForMac/Defines (= 2.1.3)
   - MaterialComponents/Buttons (45.0.0):
     - MaterialComponents/Ink
@@ -70,6 +70,26 @@ DEPENDENCIES:
   - swiftScan (= 1.1.1)
   - YNDropDownMenu
 
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Firebase
+    - FirebaseAnalytics
+    - FirebaseCore
+    - FirebaseInstanceID
+    - FirebaseMessaging
+    - GoogleToolboxForMac
+    - MaterialComponents
+    - MDFInternationalization
+    - MDFTextAccessibility
+    - nanopb
+    - Protobuf
+    - Pulsator
+    - SDWebImage
+    - Socket.IO-Client-Swift
+    - StarscreamSocketIO
+    - swiftScan
+    - YNDropDownMenu
+
 SPEC CHECKSUMS:
   Firebase: 632216af3ed7f31e3be34776947fdc7546cfb572
   FirebaseAnalytics: 388b630c15713f5dbf364071f5f3d6077fb52f4e
@@ -91,4 +111,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 5011d8c5a774edc79949e2e1045a4dff55e18998
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.0
