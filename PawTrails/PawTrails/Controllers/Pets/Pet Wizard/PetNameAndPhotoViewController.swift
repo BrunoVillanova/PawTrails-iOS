@@ -11,7 +11,6 @@ import RxSwift
 import RxCocoa
 import Toucan
 import TOCropViewController
-//import CropViewController
 
 class PetNameAndPhotoViewController: PetWizardStepViewController {
 

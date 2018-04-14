@@ -11,6 +11,8 @@ import MapKit
 import RxSwift
 import GSMessages
 
+typealias RegionDidChangeCallback = (_ mapView:PTMapView?, _ animated: Bool) -> Void
+
 class PTMapView: MKMapView {
 
     let disposeBag = DisposeBag()
@@ -29,6 +31,7 @@ class PTMapView: MKMapView {
     var calloutDelegate: PTPetCalloutViewDelegate?
     var focusedPetID: Int?
     var focusedPetPolytine: MKPolyline?
+    var regionDidChange: RegionDidChangeCallback?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -456,6 +459,10 @@ extension PTMapView: MKMapViewDelegate {
             mapView.showAnnotations([userLocation], animated: true)
             alreadyFocusedOnUserLocation = true
         }
+    }
+    
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        self.regionDidChange?(self, animated)
     }
 }
 

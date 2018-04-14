@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PetCollectionViewCell" customModule="PawTrails" customModuleProvider="target">
+            <connections>
+                <outlet property="imageView" destination="aNL-Cz-OYS" id="CMm-ZP-8Ix"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aNL-Cz-OYS" customClass="PTBalloonImageView" customModule="PawTrails" customModuleProvider="target">
+                    <rect key="frame" x="4" y="4" width="52" height="52"/>
+                </imageView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="aNL-Cz-OYS" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="4" id="4eO-Ch-bk3"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="aNL-Cz-OYS" secondAttribute="bottom" constant="4" id="BTa-5e-pFl"/>
+                <constraint firstItem="aNL-Cz-OYS" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="4" id="Cwa-yT-L1C"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="aNL-Cz-OYS" secondAttribute="trailing" constant="4" id="d8O-TI-mZo"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+        </view>
+    </objects>
+</document>

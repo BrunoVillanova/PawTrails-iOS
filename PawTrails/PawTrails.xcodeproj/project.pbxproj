@@ -35,6 +35,8 @@
 		1555FFF71FDF662A00F05C76 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1555FFF61FDF662A00F05C76 /* SwiftyJSON.framework */; };
 		155F614B2028A070007D8A8B /* RxDataSources.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 155F614A2028A06F007D8A8B /* RxDataSources.framework */; };
 		155F614D20291528007D8A8B /* Differentiator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 155F614C20291527007D8A8B /* Differentiator.framework */; };
+		15639E73208064A700F44B3B /* PetCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15639E71208064A700F44B3B /* PetCollectionViewCell.swift */; };
+		15639E762080862000F44B3B /* PetCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15639E752080862000F44B3B /* PetCollectionViewCell.xib */; };
 		1570C7AC203B63DF00A7F59F /* TripDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1570C7AB203B63DF00A7F59F /* TripDetailViewController.swift */; };
 		1585469C1FDCFBCB004C82EC /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1585469B1FDCFBCB004C82EC /* Charts.framework */; };
 		1589EBC11FE3644E00280926 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1589EBC01FE3644E00280926 /* Bolts.framework */; };
@@ -325,6 +327,8 @@
 		155F614A2028A06F007D8A8B /* RxDataSources.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxDataSources.framework; path = Carthage/Build/iOS/RxDataSources.framework; sourceTree = "<group>"; };
 		155F614C20291527007D8A8B /* Differentiator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Differentiator.framework; path = Carthage/Build/iOS/Differentiator.framework; sourceTree = "<group>"; };
 		15608EF2203C7F7D0084C029 /* PawTrails 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PawTrails 2.xcdatamodel"; sourceTree = "<group>"; };
+		15639E71208064A700F44B3B /* PetCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetCollectionViewCell.swift; sourceTree = "<group>"; };
+		15639E752080862000F44B3B /* PetCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PetCollectionViewCell.xib; sourceTree = "<group>"; };
 		1570C7AB203B63DF00A7F59F /* TripDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailViewController.swift; sourceTree = "<group>"; };
 		157AC4B21FC3192E0005A717 /* Convert.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Convert.framework; path = Carthage/Build/iOS/Convert.framework; sourceTree = "<group>"; };
 		1585469B1FDCFBCB004C82EC /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = Carthage/Build/iOS/Charts.framework; sourceTree = "<group>"; };
@@ -667,13 +671,6 @@
 				15C762322016D011002AA7F8 /* PTTripInfoView.swift */,
 			);
 			path = PTTripInfoView;
-			sourceTree = "<group>";
-		};
-		15855FD5207FF91B002D1181 /* SafeZone */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = SafeZone;
 			sourceTree = "<group>";
 		};
 		15A13A1D206AAFBD005790B3 /* Storyboards */ = {
@@ -1056,6 +1053,7 @@
 		15C763912016D5C0002AA7F8 /* Pet SafeZones */ = {
 			isa = PBXGroup;
 			children = (
+				15C763A52016D5C0002AA7F8 /* SafeZoneViewController.swift */,
 				15C763922016D5C0002AA7F8 /* AddEditSafeZoneController.swift */,
 				15C763932016D5C0002AA7F8 /* SettingsView.xib */,
 				15C763942016D5C0002AA7F8 /* SettingsView.swift */,
@@ -1143,6 +1141,8 @@
 				15C7621F2016D011002AA7F8 /* questionCells.swift */,
 				15C762302016D011002AA7F8 /* PetsCollectionViewCell.swift */,
 				1523D0AD20617EB7003D8653 /* TripInfoCollectionViewCell.swift */,
+				15639E71208064A700F44B3B /* PetCollectionViewCell.swift */,
+				15639E752080862000F44B3B /* PetCollectionViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1150,9 +1150,7 @@
 		15C7642B2016FBA9002AA7F8 /* Adventure */ = {
 			isa = PBXGroup;
 			children = (
-				15855FD5207FF91B002D1181 /* SafeZone */,
 				15C763852016D5C0002AA7F8 /* CalanderForActivityController.swift */,
-				15C763A52016D5C0002AA7F8 /* SafeZoneViewController.swift */,
 				15C763CB2016D5C0002AA7F8 /* GoalsViewController.swift */,
 				15C763CD2016D5C0002AA7F8 /* SetUpYourGoalController.swift */,
 				15C763CA2016D5C0002AA7F8 /* FinishAdventureVC.swift */,
@@ -1547,6 +1545,7 @@
 				15C762552016D011002AA7F8 /* BatteryLow@2x.png in Resources */,
 				15C762422016D011002AA7F8 /* SignalFull@2x.png in Resources */,
 				15E7EFAA2044B020000BFCBF /* Roboto-Medium.ttf in Resources */,
+				15639E762080862000F44B3B /* PetCollectionViewCell.xib in Resources */,
 				15C762512016D011002AA7F8 /* Battery@2x.png in Resources */,
 				1523D0B120629691003D8653 /* DemoTrips.json in Resources */,
 				15E7EFA92044B020000BFCBF /* RobotoCondensed-Regular.ttf in Resources */,
@@ -1826,6 +1825,7 @@
 				15C764132016D5C0002AA7F8 /* PetBirthdayTableViewController.swift in Sources */,
 				15C761432016CFF3002AA7F8 /* APIRepository.swift in Sources */,
 				15C7613E2016CFF3002AA7F8 /* BEMPathManager.m in Sources */,
+				15639E73208064A700F44B3B /* PetCollectionViewCell.swift in Sources */,
 				15C762502016D011002AA7F8 /* PTBasicAnnotationView.swift in Sources */,
 				15C762AF2016D06B002AA7F8 /* Constants.swift in Sources */,
 				15C762152016D002002AA7F8 /* SelectPetsVC.swift in Sources */,

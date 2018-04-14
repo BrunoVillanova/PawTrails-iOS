@@ -10,15 +10,21 @@ import UIKit
 import YNDropDownMenu
 import MapKit
 import SkyFloatingLabelTextField
-
+import RxSwift
+import RxCocoa
+import RxDataSources
+import SnapKit
 
 class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, AddEditSafeZoneView {
     
     @IBOutlet weak var saveBtn: UIBarButtonItem!
     @IBOutlet weak var distanceLabel: UILabel!
-    @IBOutlet weak var map: MKMapView!
+    @IBOutlet weak var map: PTMapView!
+    @IBOutlet weak var focusPetButton: UIButton!
     var slider: UISlider?
     var sliderLabel: UILabel?
+    fileprivate var petsCollectionView: UICollectionView?
+    fileprivate var selectedPet: Variable<Pet?> = Variable(nil)
     
     
     let icons = ["buildings-dark-1x", "fountain-dark-1x", "girl-and-boy-dark-1x" , "home-dark-1x", "palm-tree-shape-dark-1x", "park-dark-1x"]
@@ -35,6 +41,7 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
     fileprivate let presenter = AddEditSafeZonePresenter()
     fileprivate var petLocation:MKLocation? = nil
     fileprivate var updatingPetLocation = false
+    fileprivate final let disposeBag = DisposeBag()
     
     var safezone: SafeZone?
     var petId: Int!
@@ -46,6 +53,8 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        initialize()
+        
         self.navigationItem.title = "Add Safe zone"
         
         presenter.attachView(self, safezone: safezone)
@@ -53,7 +62,7 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
         map.showsScale = false
         map.showsCompass = false
         map.mapType = .hybrid
-        map.delegate = self
+//        map.delegate = self
         
         manager.delegate = self
         let status = CLLocationManager.authorizationStatus()
@@ -161,11 +170,9 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
             })
             
         }else{
-            
-            let sonhugoCoordinate = CLLocationCoordinate2D(latitude: 39.592217, longitude: 2.662322)
-            
-            self.map.centerOn(sonhugoCoordinate, with: 50, animated: false)
-            self.map.load(with: sonhugoCoordinate, shape: shape, into: _view, callback: { (fence) in
+            self.map.showAnnotations([self.map.userLocation], animated: false)
+
+            self.map.load(with: self.map.userLocation.coordinate, shape: shape, into: _view, callback: { (fence) in
                 self.fence = fence
                 self.updateFenceDistance()
             })
@@ -180,6 +187,63 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
+    }
+    
+    fileprivate func initialize() {
+        
+        map.showGpsUpdates()
+        
+        let layout = UICollectionViewFlowLayout()
+        // Now setup the flowLayout required for drawing the cells
+        let space = 5.0 as CGFloat
+        layout.itemSize = CGSize(width:60, height:60)
+        layout.minimumInteritemSpacing = space
+        layout.minimumLineSpacing = space
+        
+        petsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        petsCollectionView!.register(PetCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        
+        DataManager.instance.pets().bind(to: petsCollectionView!.rx.items(cellIdentifier: "cell", cellType: PetCollectionViewCell.self)) { (row, pet, cell) in
+                cell.configure(pet)
+
+        }.disposed(by: disposeBag)
+        
+        petsCollectionView!.rx.modelSelected(Pet.self)
+            .bind(to: self.selectedPet)
+            .disposed(by: disposeBag)
+        
+        
+        petsCollectionView!.isHidden = true
+        petsCollectionView!.backgroundColor = .clear
+        petsCollectionView!.semanticContentAttribute = .forceRightToLeft
+        
+        self.view.insertSubview(petsCollectionView!, belowSubview: focusPetButton)
+        
+        petsCollectionView!.snp.makeConstraints { (make) in
+            make.top.equalTo(focusPetButton).offset(6)
+            make.trailing.equalTo(focusPetButton.snp.leading)
+            make.leading.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
+        
+        selectedPet.asObservable().subscribe(onNext: { (pet) in
+            if let pet = pet {
+                self.map.focusOnPet(pet)
+            }
+        }).disposed(by: disposeBag)
+        
+        map.regionDidChange = {map, animated in
+            
+            if self.fence != nil {
+                self.updateFenceDistance()
+                if !self.fenceDistanceIsIdle() && !self.changingRegion {
+                    self.changingRegion = true
+                    self.updateFenceDistance()
+                    self.changingRegion = false
+                }
+            }
+            
+        }
     }
     
     func geoCodeFence() -> (Point,Point) {
@@ -235,7 +299,15 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
     }
     
     @IBAction func startTripBtnPressed(_ sender: Any) {
-        
+        if let petsCollectionView = petsCollectionView {
+            if (!petsCollectionView.isHidden) {
+                petsCollectionView.slideInAffect(direction: kCATransitionFromLeft)
+                petsCollectionView.isHidden = true
+            } else {
+                petsCollectionView.slideInAffect(direction: kCATransitionFromRight)
+                petsCollectionView.isHidden = false
+            }
+        }
     }
     
     @IBAction func saveBtnPressed(_ sender: Any) {
@@ -322,7 +394,7 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
         hideLoadingView()
     }
     
-    func petLocationFailed(){
+    func petLocationFailed() {
         updatingPetLocation = false
         endLoadingLocation()
         alert(title: "", msg: "Couldn't locate the pet", type: .red)
@@ -377,24 +449,16 @@ extension AddEditSafeZOneController: UICollectionViewDelegate, UICollectionViewD
 extension AddEditSafeZOneController: MKMapViewDelegate {
     // MARK: - MKMapViewDelegate
     
-    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        if fence != nil {
-            updateFenceDistance()
-            if !fenceDistanceIsIdle() && !changingRegion {
-                changingRegion = true
-                updateFenceDistance()
-                changingRegion = false
-            }
-        }
-    }
+//    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+//
+//    }
     
-    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        return mapView.getRenderer(overlay: overlay)
-    }
-    
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        return mapView.getAnnotationView(annotation: annotation)
-    }
-    
+//    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+//        return mapView.getRenderer(overlay: overlay)
+//    }
+//    
+//    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+//        return mapView.getAnnotationView(annotation: annotation)
+//    }
 }
 

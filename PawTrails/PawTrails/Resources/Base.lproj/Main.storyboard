@@ -3574,29 +3574,18 @@ PawTrails is a product created by Attitude Technologies.
             </objects>
             <point key="canvasLocation" x="5436" y="-797"/>
         </scene>
-        <!--Add Edit SafeZ One Controller-->
+        <!--Safe Zone Edit Controller-->
         <scene sceneID="vYl-yT-6dt">
             <objects>
-                <viewController storyboardIdentifier="AddEditSafeZOneController" id="LyA-p9-FnQ" customClass="AddEditSafeZOneController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddEditSafeZOneController" id="LyA-p9-FnQ" userLabel="Safe Zone Edit Controller" customClass="AddEditSafeZOneController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Lvg-ba-hq5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="mGk-Mj-4GM">
-                                <rect key="frame" x="0.0" y="88" width="375" height="690"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="mGk-Mj-4GM" customClass="PTMapView" customModule="PawTrails" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="88" width="375" height="724"/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M57-KY-l6D">
-                                <rect key="frame" x="287" y="690" width="80" height="80"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="lxI-yF-anv"/>
-                                    <constraint firstAttribute="width" constant="80" id="yvF-2D-M1O"/>
-                                </constraints>
-                                <state key="normal" image="StartTrip-1x-png"/>
-                                <connections>
-                                    <action selector="startTripBtnPressed:" destination="LyA-p9-FnQ" eventType="touchUpInside" id="PJT-WX-H9I"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7YH-Dm-UcM">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7YH-Dm-UcM" userLabel="Focus User Button">
                                 <rect key="frame" x="287" y="622" width="80" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="Vqt-bO-JTg"/>
@@ -3605,6 +3594,17 @@ PawTrails is a product created by Attitude Technologies.
                                 <state key="normal" image="UserLocation-1x-png"/>
                                 <connections>
                                     <action selector="userLocationBtnPressed:" destination="LyA-p9-FnQ" eventType="touchUpInside" id="x0T-CI-IKP"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M57-KY-l6D" userLabel="Focus Pet Button">
+                                <rect key="frame" x="287" y="690" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="lxI-yF-anv"/>
+                                    <constraint firstAttribute="width" constant="80" id="yvF-2D-M1O"/>
+                                </constraints>
+                                <state key="normal" image="StartTrip-1x-png"/>
+                                <connections>
+                                    <action selector="startTripBtnPressed:" destination="LyA-p9-FnQ" eventType="touchUpInside" id="PJT-WX-H9I"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000001192092896" translatesAutoresizingMaskIntoConstraints="NO" id="ZTE-QS-qgk">
@@ -3626,7 +3626,7 @@ PawTrails is a product created by Attitude Technologies.
                             <constraint firstItem="ZTE-QS-qgk" firstAttribute="top" secondItem="MwJ-zR-dd2" secondAttribute="top" constant="300" id="nmg-sg-tyF"/>
                             <constraint firstItem="MwJ-zR-dd2" firstAttribute="bottom" secondItem="ZTE-QS-qgk" secondAttribute="bottom" constant="228" id="qyW-qt-2fh"/>
                             <constraint firstItem="MwJ-zR-dd2" firstAttribute="trailing" secondItem="M57-KY-l6D" secondAttribute="trailing" constant="8" id="sWh-BP-sj4"/>
-                            <constraint firstItem="MwJ-zR-dd2" firstAttribute="bottom" secondItem="mGk-Mj-4GM" secondAttribute="bottom" id="u3N-ji-eME"/>
+                            <constraint firstAttribute="bottom" secondItem="mGk-Mj-4GM" secondAttribute="bottom" id="u3N-ji-eME"/>
                             <constraint firstItem="mGk-Mj-4GM" firstAttribute="leading" secondItem="MwJ-zR-dd2" secondAttribute="leading" id="uL4-gL-Tde"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="MwJ-zR-dd2"/>
@@ -3641,6 +3641,7 @@ PawTrails is a product created by Attitude Technologies.
                     </navigationItem>
                     <connections>
                         <outlet property="distanceLabel" destination="ZTE-QS-qgk" id="Txw-EG-O6l"/>
+                        <outlet property="focusPetButton" destination="M57-KY-l6D" id="LmG-Ma-TJ3"/>
                         <outlet property="map" destination="mGk-Mj-4GM" id="8mR-2f-J3D"/>
                         <outlet property="saveBtn" destination="VD5-NM-bAO" id="bLC-vH-6EA"/>
                     </connections>
