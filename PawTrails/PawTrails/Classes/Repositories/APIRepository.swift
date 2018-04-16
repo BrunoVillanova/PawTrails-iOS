@@ -522,6 +522,10 @@ class APIRepository {
         APIManager.instance.perform(call: .addSafeZone, with: dict) { (error, json) in
             if error == nil, let json = json {
                 callback(nil, SafeZone(json))
+            } else if let error = error {
+                callback(error, nil)
+            } else {
+                callback(nil, nil)
             }
         }
     }

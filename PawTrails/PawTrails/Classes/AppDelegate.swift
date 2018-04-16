@@ -281,9 +281,9 @@ enum ViewController {
     
     var navigationController: UINavigationController? {
         switch self {
-        case .login, .signup, .passwordRecovery, .termsAndPrivacy: return UINavigationController()
-        case .liveTracking, .myPets, .myProfile, .vetRecommendations, .deviceFinder, .settings, .support: return PTNavigationViewController()
-        default: return nil
+            case .login, .signup, .passwordRecovery, .termsAndPrivacy: return UINavigationController()
+            case .liveTracking, .myPets, .myProfile, .vetRecommendations, .deviceFinder, .settings, .support: return PTNavigationViewController()
+            default: return nil
         }
     }
     

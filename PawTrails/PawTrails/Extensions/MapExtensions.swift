@@ -108,22 +108,40 @@ extension MKMapView {
         return self.camera.altitude
     }
     
-    func load(with coordinate: CLLocationCoordinate2D, shape: Shape, into view: UIView, fenceSide: Double = 50, callback: ((Fence)-> Void)? = nil) {
+    func load(with coordinate: CLLocationCoordinate2D, shape: Shape, into view: UIView, fenceSide: Double = 40, callback: ((Fence?)-> Void)? = nil) {
         DispatchQueue.main.async {
-//            self.addAnnotation(coordinate, color: UIColor.yellow)
 
-            let region = MKCoordinateRegionMakeWithDistance(self.centerCoordinate, fenceSide, fenceSide)
+
+            let region = MKCoordinateRegionMakeWithDistance(coordinate, fenceSide, fenceSide)
             let frame = self.convertRegion(region, toRectTo: view)
             let fence = Fence(frame: frame, shape: shape)
             self.add(fence)
             if let callback = callback { callback(fence) }
+            
+//            let distance: CLLocationDistance = fenceSide/2.0
+//            let topLeftCoordinate = self.coordinate(from: coordinate, distance: distance)
+//            self.setFence(with: coordinate, topCenter: topLeftCoordinate, shape: shape, into: view, callback: callback)
+//
+//            load(with: fence.center, topCenter: fence.topCenter, shape: shape, into: view, callback: callback)
+            
+            
+//            let radius = center.location.distance(from: topCenter.location) * 2.0
+//
+//            self.centerOn(center, with: radius, animated: false)
+//            self.setOrientation(with: center, topCenter: topCenter, into: view)
+//
+//            if isBackground {
+//                setFence(with: center, topCenter: topCenter, shape: shape, into: view, callback: callback)
+//            }else{
+//                DispatchQueue.main.async {
+//                    self.setFence(with: center, topCenter: topCenter, shape: shape, into: view, callback: callback)
+//                }
+//            }
         }
     }
     
+    
     func load(with center: CLLocationCoordinate2D, topCenter:CLLocationCoordinate2D, shape: Shape, into view: UIView, isBackground: Bool = false, callback: ((Fence?)-> Void)? = nil) {
-
-//        self.addAnnotation(center, color: UIColor.yellow)
-//        self.addAnnotation(topCenter)
         
         let radius = center.location.distance(from: topCenter.location) * 2.0
         
@@ -137,6 +155,21 @@ extension MKMapView {
                 self.setFence(with: center, topCenter: topCenter, shape: shape, into: view, callback: callback)
             }
         }
+    }
+    
+    // Create new coordinate with equal latitude and longitude distances (distance can be both positive and negative).
+    func coordinate(from coordinate: CLLocationCoordinate2D, distance: CLLocationDistance) -> CLLocationCoordinate2D {
+        return self.coordinate(from: coordinate, latitudeDistance: distance, longitudeDistance: distance)
+    }
+    
+    // Create new coordinate with latitude and longitude distances (distances can be both positive and negative).
+    func coordinate(from coordinate: CLLocationCoordinate2D, latitudeDistance: CLLocationDistance, longitudeDistance: CLLocationDistance) -> CLLocationCoordinate2D {
+        let region = MKCoordinateRegionMakeWithDistance(coordinate, latitudeDistance, longitudeDistance)
+        
+        let newLatitude = coordinate.latitude + region.span.latitudeDelta
+        let newLongitude = coordinate.longitude + region.span.longitudeDelta
+        
+        return CLLocationCoordinate2D(latitude: newLatitude, longitude: newLongitude)
     }
     
     private func setFence(with center: CLLocationCoordinate2D, topCenter:CLLocationCoordinate2D, shape: Shape, into view: UIView, callback: ((Fence?)-> Void)? = nil){

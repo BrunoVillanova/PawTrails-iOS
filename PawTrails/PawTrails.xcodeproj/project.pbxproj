@@ -35,6 +35,7 @@
 		1555FFF71FDF662A00F05C76 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1555FFF61FDF662A00F05C76 /* SwiftyJSON.framework */; };
 		155F614B2028A070007D8A8B /* RxDataSources.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 155F614A2028A06F007D8A8B /* RxDataSources.framework */; };
 		155F614D20291528007D8A8B /* Differentiator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 155F614C20291527007D8A8B /* Differentiator.framework */; };
+		156114FC2084160C002D0C54 /* YNDropDownMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 156114FB2084160C002D0C54 /* YNDropDownMenu.framework */; };
 		15639E73208064A700F44B3B /* PetCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15639E71208064A700F44B3B /* PetCollectionViewCell.swift */; };
 		15639E762080862000F44B3B /* PetCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15639E752080862000F44B3B /* PetCollectionViewCell.xib */; };
 		1570C7AC203B63DF00A7F59F /* TripDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1570C7AB203B63DF00A7F59F /* TripDetailViewController.swift */; };
@@ -327,6 +328,7 @@
 		155F614A2028A06F007D8A8B /* RxDataSources.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxDataSources.framework; path = Carthage/Build/iOS/RxDataSources.framework; sourceTree = "<group>"; };
 		155F614C20291527007D8A8B /* Differentiator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Differentiator.framework; path = Carthage/Build/iOS/Differentiator.framework; sourceTree = "<group>"; };
 		15608EF2203C7F7D0084C029 /* PawTrails 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PawTrails 2.xcdatamodel"; sourceTree = "<group>"; };
+		156114FB2084160C002D0C54 /* YNDropDownMenu.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YNDropDownMenu.framework; path = Carthage/Build/iOS/YNDropDownMenu.framework; sourceTree = "<group>"; };
 		15639E71208064A700F44B3B /* PetCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetCollectionViewCell.swift; sourceTree = "<group>"; };
 		15639E752080862000F44B3B /* PetCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PetCollectionViewCell.xib; sourceTree = "<group>"; };
 		1570C7AB203B63DF00A7F59F /* TripDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailViewController.swift; sourceTree = "<group>"; };
@@ -613,6 +615,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				156114FC2084160C002D0C54 /* YNDropDownMenu.framework in Frameworks */,
 				15EF8756207BF365007F27BF /* SideMenu.framework in Frameworks */,
 				15FFE50E2079545B005CA1C2 /* IQKeyboardManagerSwift.framework in Frameworks */,
 				1539DA2E2076643300653EF7 /* TOCropViewController.framework in Frameworks */,
@@ -1320,6 +1323,7 @@
 		91352D1B7E01CC1C0CF51D38 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				156114FB2084160C002D0C54 /* YNDropDownMenu.framework */,
 				15EF8755207BF365007F27BF /* SideMenu.framework */,
 				15FFE50B2079545A005CA1C2 /* IQKeyboardManager.framework */,
 				15FFE50C2079545A005CA1C2 /* IQKeyboardManagerSwift.framework */,
@@ -1614,6 +1618,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/TOCropViewController.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/IQKeyboardManagerSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SideMenu.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/YNDropDownMenu.framework",
 			);
 			name = "Carthage Copy Frameworks";
 			outputPaths = (
@@ -1644,6 +1649,7 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/TOCropViewController.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/IQKeyboardManagerSwift.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SideMenu.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/YNDropDownMenu.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1725,7 +1731,6 @@
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
 				"${BUILT_PRODUCTS_DIR}/StarscreamSocketIO/StarscreamSocketIO.framework",
-				"${BUILT_PRODUCTS_DIR}/YNDropDownMenu/YNDropDownMenu.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 				"${BUILT_PRODUCTS_DIR}/swiftScan/swiftScan.framework",
 			);
@@ -1740,7 +1745,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketIO.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StarscreamSocketIO.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YNDropDownMenu.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/swiftScan.framework",
 			);

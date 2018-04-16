@@ -3585,24 +3585,22 @@ PawTrails is a product created by Attitude Technologies.
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="mGk-Mj-4GM" customClass="PTMapView" customModule="PawTrails" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="88" width="375" height="724"/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7YH-Dm-UcM" userLabel="Focus User Button">
-                                <rect key="frame" x="287" y="622" width="80" height="80"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="Vqt-bO-JTg"/>
-                                    <constraint firstAttribute="width" constant="80" id="zar-cx-gev"/>
-                                </constraints>
-                                <state key="normal" image="UserLocation-1x-png"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7YH-Dm-UcM" userLabel="Focus User Button" customClass="MDCFloatingButton">
+                                <rect key="frame" x="311.33333333333331" y="669" width="56" height="33"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="FocusUserButtonIcon"/>
                                 <connections>
                                     <action selector="userLocationBtnPressed:" destination="LyA-p9-FnQ" eventType="touchUpInside" id="x0T-CI-IKP"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M57-KY-l6D" userLabel="Focus Pet Button">
-                                <rect key="frame" x="287" y="690" width="80" height="80"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M57-KY-l6D" userLabel="Focus Pet Button" customClass="MDCFloatingButton">
+                                <rect key="frame" x="311" y="714" width="56" height="56"/>
+                                <color key="backgroundColor" red="0.98039215690000003" green="0.25490196079999999" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="lxI-yF-anv"/>
-                                    <constraint firstAttribute="width" constant="80" id="yvF-2D-M1O"/>
+                                    <constraint firstAttribute="width" secondItem="M57-KY-l6D" secondAttribute="height" multiplier="1:1" id="B8K-4f-xaw"/>
+                                    <constraint firstAttribute="width" constant="56" id="yvF-2D-M1O"/>
                                 </constraints>
-                                <state key="normal" image="StartTrip-1x-png"/>
+                                <state key="normal" image="FocusPetButtonIcon"/>
                                 <connections>
                                     <action selector="startTripBtnPressed:" destination="LyA-p9-FnQ" eventType="touchUpInside" id="PJT-WX-H9I"/>
                                 </connections>
@@ -3616,7 +3614,8 @@ PawTrails is a product created by Attitude Technologies.
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="M57-KY-l6D" firstAttribute="top" secondItem="7YH-Dm-UcM" secondAttribute="bottom" constant="-12" id="ALK-12-JAE"/>
+                            <constraint firstItem="M57-KY-l6D" firstAttribute="top" secondItem="7YH-Dm-UcM" secondAttribute="bottom" constant="12" id="ALK-12-JAE"/>
+                            <constraint firstItem="7YH-Dm-UcM" firstAttribute="width" secondItem="M57-KY-l6D" secondAttribute="height" multiplier="1:1" id="DK2-O6-goe"/>
                             <constraint firstItem="mGk-Mj-4GM" firstAttribute="top" secondItem="MwJ-zR-dd2" secondAttribute="top" id="EeC-0W-DdS"/>
                             <constraint firstItem="MwJ-zR-dd2" firstAttribute="trailing" secondItem="ZTE-QS-qgk" secondAttribute="trailing" constant="100" id="FHn-5h-qaC"/>
                             <constraint firstItem="MwJ-zR-dd2" firstAttribute="bottom" secondItem="M57-KY-l6D" secondAttribute="bottom" constant="8" id="IXm-UQ-VOo"/>
