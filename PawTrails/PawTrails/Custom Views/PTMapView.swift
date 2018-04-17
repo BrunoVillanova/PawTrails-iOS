@@ -212,9 +212,10 @@ class PTMapView: MKMapView {
                 self.focusOnPets()
             }
             
-            if let focusedPetID = focusedPetID {
-                self.focusOnPet(focusedPetID)
-            }
+            // Removed to not focus everytime receives position
+//            if let focusedPetID = focusedPetID {
+//                self.focusOnPet(focusedPetID)
+//            }
         }
     }
     

@@ -4273,37 +4273,46 @@ PawTrails is a product created by Attitude Technologies.
                                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bKZ-ky-Qzy">
                                                             <rect key="frame" x="0.0" y="208" width="359" height="50"/>
                                                             <subviews>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uVl-Yr-BBO">
-                                                                    <rect key="frame" x="8" y="5" width="40" height="40"/>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uVl-Yr-BBO">
+                                                                    <rect key="frame" x="16" y="13" width="24" height="24"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="height" constant="40" id="8YQ-c1-rZY"/>
-                                                                        <constraint firstAttribute="width" constant="40" id="reu-RK-8ry"/>
+                                                                        <constraint firstAttribute="height" constant="24" id="8YQ-c1-rZY"/>
+                                                                        <constraint firstAttribute="width" secondItem="uVl-Yr-BBO" secondAttribute="height" multiplier="1:1" id="VUg-Sq-R6v"/>
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BeS-G8-9A5">
-                                                                    <rect key="frame" x="56" y="13.666666666666655" width="43" height="23.333333333333329"/>
+                                                                    <rect key="frame" x="48" y="13.666666666666655" width="43" height="23.333333333333329"/>
                                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mK7-8z-Gb1">
-                                                                    <rect key="frame" x="293" y="9.6666666666666572" width="52" height="31"/>
+                                                                    <rect key="frame" x="253" y="9.6666666666666572" width="52" height="31"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="50" id="kTW-tF-CMA"/>
                                                                     </constraints>
                                                                 </switch>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uA6-Jz-7oW" userLabel="Delete Button">
+                                                                    <rect key="frame" x="327" y="12" width="16" height="26"/>
+                                                                    <state key="normal" image="TrashIcon"/>
+                                                                    <connections>
+                                                                        <action selector="deleteButtonAction:" destination="cAc-Yn-nb2" eventType="touchUpInside" id="Gyk-2v-51M"/>
+                                                                    </connections>
+                                                                </button>
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="BeS-G8-9A5" secondAttribute="trailing" constant="20" symbolic="YES" id="DtH-b6-BvO"/>
+                                                                <constraint firstItem="uA6-Jz-7oW" firstAttribute="centerY" secondItem="bKZ-ky-Qzy" secondAttribute="centerY" id="878-Iw-9bf"/>
+                                                                <constraint firstAttribute="trailing" secondItem="uA6-Jz-7oW" secondAttribute="trailing" constant="16" id="CWE-Ee-puU"/>
                                                                 <constraint firstAttribute="bottom" secondItem="mK7-8z-Gb1" secondAttribute="bottom" constant="9.5" id="JmV-uc-tUz"/>
-                                                                <constraint firstAttribute="trailing" secondItem="mK7-8z-Gb1" secondAttribute="trailing" constant="16" id="Mgq-6d-0wS"/>
                                                                 <constraint firstItem="uVl-Yr-BBO" firstAttribute="centerY" secondItem="bKZ-ky-Qzy" secondAttribute="centerY" id="api-xu-7cV"/>
                                                                 <constraint firstItem="mK7-8z-Gb1" firstAttribute="top" secondItem="bKZ-ky-Qzy" secondAttribute="top" constant="9.5" id="cXJ-C4-dRQ"/>
+                                                                <constraint firstItem="mK7-8z-Gb1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="BeS-G8-9A5" secondAttribute="trailing" constant="16" id="gwV-eX-zIM"/>
                                                                 <constraint firstItem="mK7-8z-Gb1" firstAttribute="centerY" secondItem="bKZ-ky-Qzy" secondAttribute="centerY" id="jCx-X9-LCc"/>
                                                                 <constraint firstItem="BeS-G8-9A5" firstAttribute="leading" secondItem="uVl-Yr-BBO" secondAttribute="trailing" constant="8" id="mvO-zk-CQj"/>
                                                                 <constraint firstAttribute="height" constant="50" id="ouJ-xc-F9l"/>
-                                                                <constraint firstItem="uVl-Yr-BBO" firstAttribute="leading" secondItem="bKZ-ky-Qzy" secondAttribute="leading" constant="8" id="rAd-Ly-HiW"/>
+                                                                <constraint firstItem="uVl-Yr-BBO" firstAttribute="leading" secondItem="bKZ-ky-Qzy" secondAttribute="leading" constant="16" id="rAd-Ly-HiW"/>
+                                                                <constraint firstItem="uA6-Jz-7oW" firstAttribute="leading" secondItem="mK7-8z-Gb1" secondAttribute="trailing" constant="24" id="vGV-1g-6Ul"/>
                                                                 <constraint firstItem="BeS-G8-9A5" firstAttribute="centerY" secondItem="uVl-Yr-BBO" secondAttribute="centerY" id="vvh-Lv-7wq"/>
                                                             </constraints>
                                                         </view>
@@ -4337,13 +4346,14 @@ PawTrails is a product created by Attitude Technologies.
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1yt-WT-uYM">
-                                <rect key="frame" x="295" y="698" width="80" height="80"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1yt-WT-uYM" customClass="MDCFloatingButton">
+                                <rect key="frame" x="307" y="710" width="56" height="56"/>
+                                <color key="backgroundColor" red="0.98039215690000003" green="0.25490196079999999" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="4fe-fG-AaD"/>
-                                    <constraint firstAttribute="width" constant="80" id="99Z-di-8gn"/>
+                                    <constraint firstAttribute="width" constant="56" id="99Z-di-8gn"/>
+                                    <constraint firstAttribute="width" secondItem="1yt-WT-uYM" secondAttribute="height" multiplier="1:1" id="Ufz-TS-s5u"/>
                                 </constraints>
-                                <state key="normal" image="plus-1x"/>
+                                <state key="normal" image="PlusIcon"/>
                                 <connections>
                                     <action selector="addButton:" destination="boR-dt-8Hz" eventType="touchUpInside" id="OMg-FP-l1b"/>
                                 </connections>
@@ -4353,8 +4363,8 @@ PawTrails is a product created by Attitude Technologies.
                         <constraints>
                             <constraint firstItem="i8N-iz-ygr" firstAttribute="top" secondItem="kdn-si-lbJ" secondAttribute="top" id="FCe-H7-c7a"/>
                             <constraint firstItem="i8N-iz-ygr" firstAttribute="trailing" secondItem="30z-Ah-o28" secondAttribute="trailing" id="KQi-uY-cKk"/>
-                            <constraint firstItem="30z-Ah-o28" firstAttribute="trailing" secondItem="1yt-WT-uYM" secondAttribute="trailing" id="O4A-Oc-Wcf"/>
-                            <constraint firstItem="30z-Ah-o28" firstAttribute="bottom" secondItem="1yt-WT-uYM" secondAttribute="bottom" id="RmV-Vf-cGZ"/>
+                            <constraint firstItem="30z-Ah-o28" firstAttribute="trailing" secondItem="1yt-WT-uYM" secondAttribute="trailing" constant="12" id="O4A-Oc-Wcf"/>
+                            <constraint firstItem="30z-Ah-o28" firstAttribute="bottom" secondItem="1yt-WT-uYM" secondAttribute="bottom" constant="12" id="RmV-Vf-cGZ"/>
                             <constraint firstItem="i8N-iz-ygr" firstAttribute="leading" secondItem="30z-Ah-o28" secondAttribute="leading" id="dNq-uR-apV"/>
                             <constraint firstItem="i8N-iz-ygr" firstAttribute="bottom" secondItem="30z-Ah-o28" secondAttribute="bottom" id="hZO-Rx-NSl"/>
                         </constraints>
@@ -6626,10 +6636,12 @@ finish the Adventure?</string>
         <image name="LaunchScreenImage" width="375" height="812"/>
         <image name="PauseTripButton-1x-png" width="87" height="90"/>
         <image name="PawDeviceImage" width="114" height="50"/>
+        <image name="PlusIcon" width="33" height="33"/>
         <image name="StartTrip-1x-png" width="87" height="90"/>
         <image name="StopTripButton-1x-png" width="87" height="89"/>
         <image name="TotalDistanceLabel-1x-png" width="36" height="39"/>
         <image name="TotalTimeLabel-1x-png" width="38" height="40"/>
+        <image name="TrashIcon" width="16" height="26"/>
         <image name="UserLocation-1x-png" width="87" height="90"/>
         <image name="WechatIMG135" width="750" height="750"/>
         <image name="app-store" width="32" height="32"/>
@@ -6650,6 +6662,6 @@ finish the Adventure?</string>
         <segue reference="yp5-bT-5uy"/>
         <segue reference="Rzx-2e-OhR"/>
         <segue reference="Nln-Sh-wxV"/>
-        <segue reference="gjN-xE-RCG"/>
+        <segue reference="Avi-do-lZw"/>
     </inferredMetricsTieBreakers>
 </document>

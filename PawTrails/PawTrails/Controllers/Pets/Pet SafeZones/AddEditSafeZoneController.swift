@@ -301,11 +301,11 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
                 fenceDistance = 40
             }
             
-            fence.isIdle = fenceDistanceIsIdle()
+//            fence.isIdle = fenceDistanceIsIdle()
             
             self.distanceLabel.text = fenceDistance < 1000 ? "\(radius) m" : "\(Double(radius)/1000.0) km"
             
-            print("\(map.getZoom())")
+//            print("\(map.getZoom())")
         }
     }
     

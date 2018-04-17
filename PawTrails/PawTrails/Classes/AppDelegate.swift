@@ -223,7 +223,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UITabBar.appearance().tintColor = UIColor.primary
         UITableViewCell.appearance().tintColor = UIColor.primary
-        UISwitch.appearance().onTintColor = UIColor.primary
+//        UISwitch.appearance().onTintColor = UIColor.primary
         UISegmentedControl.appearance().tintColor = UIColor.primary
         UIActivityIndicatorView.appearance().color = UIColor.primary
     }

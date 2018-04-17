@@ -510,8 +510,9 @@ class Fence: NSObject {
         }
     }
     
+    //TODO: see why using idle color
     static var idleColor = UIColor.primary.withAlphaComponent(0.5)
-    static var noIdleColor = UIColor.red.withAlphaComponent(0.5)
+    static var noIdleColor = UIColor.primary.withAlphaComponent(0.5)
     
     convenience init(_ center: CGPoint, _ topCenter: CGPoint, shape: Shape) {
         self.init(frame: CGRect(center: center, topCenter: topCenter), shape: shape)

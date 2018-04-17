@@ -43,6 +43,7 @@ class SafeZoneViewController: UIViewController, IndicatorInfoProvider, PetView {
     
     override func viewWillAppear(_ animated: Bool) {
         self.presenter.getPet(with: self.pet.id)
+        loadAllData()
     }
     
     deinit {
@@ -150,7 +151,6 @@ class SafeZoneViewController: UIViewController, IndicatorInfoProvider, PetView {
         
         safezonesGroup.notify(queue: .main, execute: {
             self.presenter.getPet(with: self.pet.id)
-            
         })
     }
     
@@ -208,7 +208,8 @@ extension SafeZoneViewController: UITableViewDelegate, UITableViewDataSource  {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SafeZoneCell
         let safezone = presenter.safezones[indexPath.row]
         
-        cell.configure(safezone)
+        cell.configure(safezone, pet: pet)
+        cell.delegate = self
         
         cell.switcher.isEnabled = pet.isOwner
         cell.switcher.tag = indexPath.row
@@ -247,6 +248,98 @@ extension SafeZoneViewController: UITableViewDelegate, UITableViewDataSource  {
 
 }
 
+import SCLAlertView
+
+extension SafeZoneViewController: SafeZoneCellDelegate {
+    func delete(cell: SafeZoneCell, safezone: SafeZone, pet: Pet) {
+        
+        
+        let title = "Attention"
+        let infoText = "You are about to delete the Safe Zone. Are you sure you want to do this?"
+        
+        let alertView = PTAlertViewController(title, infoText: infoText, buttonTypes: [AlertButtontType.cancel, AlertButtontType.delete], titleBarStyle: .red, alertResult: {alert, result in
+            
+            alert.dismiss(animated: true, completion: nil)
+            
+            if result == .ok {
+                APIRepository.instance.removeSafeZone(by: safezone.id, to: pet.id) { error in
+                    if let error = error {
+                        Reporter.debugPrint("\(error.localizedDescription)")
+                        
+                        var errorMessage = "Error deleting SafeZone"
+                        
+                        if let errorCode = error.errorCode {
+                            errorMessage = errorMessage + "\n\n" + errorCode.description
+                        }
+                        
+                        self.showMessage(errorMessage,
+                                         type: .error,
+                                         options: [.animation(.slide),
+                                                   .animationDuration(0.3),
+                                                   .autoHide(true),
+                                                   .cornerRadius(0.0),
+                                                   .hideOnTap(true),
+                                                   .position(.top),
+                                                   .textAlignment(.center),
+                                                   .textNumberOfLines(0),
+                                                   ])
+                    } else {
+                        
+                        self.loadAllData()
+                        
+                        self.showMessage("SafeZone deleted!",
+                                         type: .success,
+                                         options: [.animation(.slide),
+                                                   .animationDuration(0.3),
+                                                   .autoHide(true),
+                                                   .cornerRadius(0.0),
+                                                   .hideOnTap(true),
+                                                   .position(.top),
+                                                   .textAlignment(.center),
+                                                   .textNumberOfLines(0),
+                                                   ])
+                    }
+                }
+            }
+        })
+        
+        self.present(alertView, animated: true, completion: nil)
+        
+//        let title: String = "Delete SafeZone?"
+//        let subTitle: String = "Cannot undo this action."
+//        let buttonOkTitle: String = "Delete SafeZone!"
+//        let buttonCancelTitle: String = "No, keep this."
+//
+//        let appearance = SCLAlertView.SCLAppearance(
+//            showCloseButton: false,
+//            showCircularIcon: true
+//        )
+//
+//        let alertView = SCLAlertView(appearance: appearance)
+//
+//        alertView.addButton(buttonOkTitle) {
+//
+//        }
+//
+//        alertView.addButton(buttonCancelTitle) {
+//            Reporter.debugPrint("User canceled action!")
+//        }
+//
+//        alertView.showTitle(
+//            title,
+//            subTitle: subTitle,
+//            style: .warning,
+//            colorStyle: 0xD4143D,
+//            colorTextButton: 0xFFFFFF,
+//            circleIconImage: UIImage(named: "DeleteForeverIcon48")
+//        )
+    }
+}
+
+protocol SafeZoneCellDelegate {
+    func delete(cell: SafeZoneCell, safezone: SafeZone, pet: Pet)
+}
+
 class SafeZoneCell: UITableViewCell {
     
     @IBOutlet weak var mainView: UIView!
@@ -254,6 +347,10 @@ class SafeZoneCell: UITableViewCell {
     @IBOutlet weak var iconeImage: UIImageView!
     @IBOutlet weak var safeZoneName: UILabel!
     @IBOutlet weak var switcher: UISwitch!
+    
+    var delegate: SafeZoneCellDelegate?
+    var currentSafezone: SafeZone?
+    var currentPet: Pet?
     
     override func awakeFromNib() {
         configureLayout()
@@ -271,7 +368,9 @@ class SafeZoneCell: UITableViewCell {
         mainView.layer.masksToBounds = true
     }
     
-    func configure(_ safezone: SafeZone) {
+    func configure(_ safezone: SafeZone, pet: Pet? = nil) {
+        currentSafezone = safezone
+        currentPet = pet
         safeZoneName.text = safezone.name
         
         if let iconImage = Icons(rawValue: safezone.image) {
@@ -285,6 +384,12 @@ class SafeZoneCell: UITableViewCell {
             safeZoneImage.image = UIImage(data: preview as Data)
         } else{
             safeZoneImage.backgroundColor = UIColor.lightGray.withAlphaComponent(0.6)
+        }
+    }
+    
+    @IBAction func deleteButtonAction(_ sender: Any) {
+        if let safezone = self.currentSafezone, let pet = self.currentPet {
+            delegate?.delete(cell: self, safezone: safezone, pet: pet)
         }
     }
 }
