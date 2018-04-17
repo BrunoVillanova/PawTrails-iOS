@@ -230,7 +230,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 enum Storyboards {
-    case login, common, main, support
+    case login, common, main, support, BCS, settings
     
     var storyboard: UIStoryboard {
         switch self {
@@ -238,20 +238,24 @@ enum Storyboards {
             case .common: return UIStoryboard(name: "Common", bundle: nil)
             case .main: return UIStoryboard(name: "Main", bundle: nil)
             case .support: return UIStoryboard(name: "Support", bundle: nil)
+            case .BCS: return UIStoryboard(name: "BCS", bundle: nil)
+            case .settings: return UIStoryboard(name: "Settings", bundle: nil)
         }
     }
 }
 
 enum ViewController {
     case initial, login, signup, passwordRecovery, passwordRecoverySuccess, emailVerification, termsAndPrivacy,
-         leftMenu, liveTracking, myPets, myProfile, vetRecommendations, deviceFinder, settings, support
+         leftMenu, liveTracking, myPets, myProfile, vetRecommendations, deviceFinder, settings, support, BCSInitial
     
     var storyboard: UIStoryboard {
         switch self {
             case .initial, .login, .signup, .passwordRecovery, .passwordRecoverySuccess, .emailVerification, .termsAndPrivacy: return Storyboards.login.storyboard
             case .leftMenu: return Storyboards.common.storyboard
-            case .liveTracking, .myPets, .myProfile, .vetRecommendations, .deviceFinder, .settings: return Storyboards.main.storyboard
+            case .liveTracking, .myPets, .myProfile, .vetRecommendations, .deviceFinder: return Storyboards.main.storyboard
             case .support: return Storyboards.support.storyboard
+            case .BCSInitial: return Storyboards.BCS.storyboard
+            case .settings: return Storyboards.settings.storyboard
         }
     }
     
@@ -273,9 +277,11 @@ enum ViewController {
             case .myProfile: return "MyProfileViewController"
             case .vetRecommendations: return "VetRecommendationsViewController"
             case .deviceFinder: return "DeviceFinderViewController"
-            case .settings: return "SettingsViewController"
+            case .settings: return "SettingsTableViewController"
             // Support
             case .support: return "SupportViewController"
+            //BCS
+            case .BCSInitial: return "BCSInitialViewController"
         }
     }
     
