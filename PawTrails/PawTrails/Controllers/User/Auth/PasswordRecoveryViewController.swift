@@ -87,7 +87,7 @@ class PasswordRecoveryViewController: UIViewController, UITextFieldDelegate {
                     self.showMessage(error.msg.msg, type: GSMessageType.error)
 
                 } else {
-                    self.cycleViewControllers(currentViewController: self, nextViewController: ViewControllers.passwordRecoverySuccess.viewController)
+                    self.cycleViewControllers(currentViewController: self, nextViewController: ViewController.passwordRecoverySuccess.viewController)
                 }
             })
         }
@@ -118,7 +118,7 @@ class PasswordRecoveryViewController: UIViewController, UITextFieldDelegate {
     
     
     func emailSent() {
-        cycleViewControllers(currentViewController: self, nextViewController: ViewControllers.passwordRecoverySuccess.viewController)
+        cycleViewControllers(currentViewController: self, nextViewController: ViewController.passwordRecoverySuccess.viewController)
     }
     
     

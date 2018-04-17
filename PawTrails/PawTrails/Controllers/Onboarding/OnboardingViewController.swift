@@ -133,6 +133,7 @@ extension OnboardingViewController: BWWalkthroughViewControllerDelegate {
     }
     
     func walkthroughCloseButtonPressed() {
+        OnboardingViewController.onboardingCompleted = true
         self.dismiss(animated: true, completion: nil)
     }
 }

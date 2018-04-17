@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		150741C5200DB4B800EB761B /* CocoaLumberjackSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 150741C3200DB4B700EB761B /* CocoaLumberjackSwift.framework */; };
 		150741C6200DB4B800EB761B /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 150741C4200DB4B700EB761B /* CocoaLumberjack.framework */; };
+		150EB83C207BE9CA00FEC245 /* Common.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 150EB83B207BE9CA00FEC245 /* Common.storyboard */; };
 		15160FEB20719448008CF9F4 /* PTAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15160FEA20719448008CF9F4 /* PTAlertViewController.swift */; };
 		15160FED20723037008CF9F4 /* PetGenderAndNeuterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15160FEC20723037008CF9F4 /* PetGenderAndNeuterViewController.swift */; };
 		15160FEF207279AE008CF9F4 /* PetBirthdayAndWeightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15160FEE207279AE008CF9F4 /* PetBirthdayAndWeightViewController.swift */; };
@@ -53,6 +54,8 @@
 		15B3FF1E20329DE500C08D48 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B3FF1D20329DE500C08D48 /* CacheManager.swift */; };
 		15C0DB6B204EFDDC0098E735 /* XLPagerTabStrip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C0DB69204EFDDC0098E735 /* XLPagerTabStrip.framework */; };
 		15C0DB6C204EFDDC0098E735 /* SCLAlertView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C0DB6A204EFDDC0098E735 /* SCLAlertView.framework */; };
+		15C74C5E207D907200ED56CC /* Support.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 15C74C5D207D907200ED56CC /* Support.storyboard */; };
+		15C74C60207DA0CA00ED56CC /* SupportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C74C5F207DA0CA00ED56CC /* SupportViewController.swift */; };
 		15C7613A2016CFF3002AA7F8 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C7610F2016CFF3002AA7F8 /* DataManager.swift */; };
 		15C7613B2016CFF3002AA7F8 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C761102016CFF3002AA7F8 /* EventManager.swift */; };
 		15C7613D2016CFF3002AA7F8 /* BEMAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C761142016CFF3002AA7F8 /* BEMAnimationManager.m */; };
@@ -237,6 +240,9 @@
 		15E6E38C206C7EB400484EAF /* PetWizardStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E6E38B206C7EB400484EAF /* PetWizardStepViewController.swift */; };
 		15E7EFA92044B020000BFCBF /* RobotoCondensed-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15E7EFA72044B005000BFCBF /* RobotoCondensed-Regular.ttf */; };
 		15E7EFAA2044B020000BFCBF /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15E7EFA82044B012000BFCBF /* Roboto-Medium.ttf */; };
+		15EF8756207BF365007F27BF /* SideMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15EF8755207BF365007F27BF /* SideMenu.framework */; };
+		15EF8758207BF7BC007F27BF /* PTNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EF8757207BF7BC007F27BF /* PTNavigationViewController.swift */; };
+		15EF875B207BFF24007F27BF /* LeftMenuContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EF875A207BFF24007F27BF /* LeftMenuContentViewController.swift */; };
 		15FFE50E2079545B005CA1C2 /* IQKeyboardManagerSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15FFE50C2079545A005CA1C2 /* IQKeyboardManagerSwift.framework */; };
 		15FFE51120796D62005CA1C2 /* PTNiceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FFE51020796D62005CA1C2 /* PTNiceButton.swift */; };
 		15FFE51320796E4B005CA1C2 /* PasswordRecoverySuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FFE51220796E4B005CA1C2 /* PasswordRecoverySuccessViewController.swift */; };
@@ -290,6 +296,7 @@
 /* Begin PBXFileReference section */
 		150741C3200DB4B700EB761B /* CocoaLumberjackSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjackSwift.framework; path = Carthage/Build/iOS/CocoaLumberjackSwift.framework; sourceTree = "<group>"; };
 		150741C4200DB4B700EB761B /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjack.framework; path = Carthage/Build/iOS/CocoaLumberjack.framework; sourceTree = "<group>"; };
+		150EB83B207BE9CA00FEC245 /* Common.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Common.storyboard; sourceTree = "<group>"; };
 		15160FEA20719448008CF9F4 /* PTAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTAlertViewController.swift; sourceTree = "<group>"; };
 		15160FEC20723037008CF9F4 /* PetGenderAndNeuterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetGenderAndNeuterViewController.swift; sourceTree = "<group>"; };
 		15160FEE207279AE008CF9F4 /* PetBirthdayAndWeightViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetBirthdayAndWeightViewController.swift; sourceTree = "<group>"; };
@@ -338,6 +345,8 @@
 		15B3FF1D20329DE500C08D48 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		15C0DB69204EFDDC0098E735 /* XLPagerTabStrip.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XLPagerTabStrip.framework; path = Carthage/Build/iOS/XLPagerTabStrip.framework; sourceTree = "<group>"; };
 		15C0DB6A204EFDDC0098E735 /* SCLAlertView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SCLAlertView.framework; path = Carthage/Build/iOS/SCLAlertView.framework; sourceTree = "<group>"; };
+		15C74C5D207D907200ED56CC /* Support.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Support.storyboard; sourceTree = "<group>"; };
+		15C74C5F207DA0CA00ED56CC /* SupportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportViewController.swift; sourceTree = "<group>"; };
 		15C7610F2016CFF3002AA7F8 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		15C761102016CFF3002AA7F8 /* EventManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
 		15C761132016CFF3002AA7F8 /* BEMCheckBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMCheckBox.h; sourceTree = "<group>"; };
@@ -535,6 +544,9 @@
 		15E6E38D206D5D6100484EAF /* GradientView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GradientView.framework; path = Carthage/Build/iOS/GradientView.framework; sourceTree = "<group>"; };
 		15E7EFA72044B005000BFCBF /* RobotoCondensed-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoCondensed-Regular.ttf"; sourceTree = "<group>"; };
 		15E7EFA82044B012000BFCBF /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		15EF8755207BF365007F27BF /* SideMenu.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SideMenu.framework; path = Carthage/Build/iOS/SideMenu.framework; sourceTree = "<group>"; };
+		15EF8757207BF7BC007F27BF /* PTNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTNavigationViewController.swift; sourceTree = "<group>"; };
+		15EF875A207BFF24007F27BF /* LeftMenuContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftMenuContentViewController.swift; sourceTree = "<group>"; };
 		15FFE50B2079545A005CA1C2 /* IQKeyboardManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IQKeyboardManager.framework; path = Carthage/Build/iOS/IQKeyboardManager.framework; sourceTree = "<group>"; };
 		15FFE50C2079545A005CA1C2 /* IQKeyboardManagerSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IQKeyboardManagerSwift.framework; path = Carthage/Build/iOS/IQKeyboardManagerSwift.framework; sourceTree = "<group>"; };
 		15FFE51020796D62005CA1C2 /* PTNiceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTNiceButton.swift; sourceTree = "<group>"; };
@@ -597,6 +609,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15EF8756207BF365007F27BF /* SideMenu.framework in Frameworks */,
 				15FFE50E2079545B005CA1C2 /* IQKeyboardManagerSwift.framework in Frameworks */,
 				1539DA2E2076643300653EF7 /* TOCropViewController.framework in Frameworks */,
 				1539DA2D2076621500653EF7 /* CropViewController.framework in Frameworks */,
@@ -662,6 +675,8 @@
 				15A13A1E206AAFE4005790B3 /* Onboarding.storyboard */,
 				15AD5EA8206C35E90069E01D /* PetWizard.storyboard */,
 				44FEE7E52074DE1100A85A74 /* Login.storyboard */,
+				150EB83B207BE9CA00FEC245 /* Common.storyboard */,
+				15C74C5D207D907200ED56CC /* Support.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -948,6 +963,7 @@
 		15C763702016D5C0002AA7F8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				15EF8759207BFEFD007F27BF /* Left Menu */,
 				15A13A22206AC54A005790B3 /* Onboarding */,
 				15C7642D2016FDC1002AA7F8 /* Recommendation */,
 				15C7642C2016FCD7002AA7F8 /* User */,
@@ -962,6 +978,8 @@
 				15C763BB2016D5C0002AA7F8 /* MainTabBarViewController.swift */,
 				15DCFEA0205C647A00DF726C /* LaunchViewController.swift */,
 				15160FEA20719448008CF9F4 /* PTAlertViewController.swift */,
+				15EF8757207BF7BC007F27BF /* PTNavigationViewController.swift */,
+				15C74C5F207DA0CA00ED56CC /* SupportViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1176,6 +1194,14 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		15EF8759207BFEFD007F27BF /* Left Menu */ = {
+			isa = PBXGroup;
+			children = (
+				15EF875A207BFF24007F27BF /* LeftMenuContentViewController.swift */,
+			);
+			path = "Left Menu";
+			sourceTree = "<group>";
+		};
 		15FFE50F20796D45005CA1C2 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
@@ -1288,6 +1314,7 @@
 		91352D1B7E01CC1C0CF51D38 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				15EF8755207BF365007F27BF /* SideMenu.framework */,
 				15FFE50B2079545A005CA1C2 /* IQKeyboardManager.framework */,
 				15FFE50C2079545A005CA1C2 /* IQKeyboardManagerSwift.framework */,
 				1539DA2C2076621500653EF7 /* CropViewController.framework */,
@@ -1355,8 +1382,6 @@
 				4414AE641EA0DD5B004A5134 /* Sources */,
 				4414AE651EA0DD5B004A5134 /* Frameworks */,
 				4414AE661EA0DD5B004A5134 /* Resources */,
-				7609F9F64AC9DAB2BAFDBC03 /* [CP] Embed Pods Frameworks */,
-				8AFF577FE8F15CFDA31941D5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1379,7 +1404,6 @@
 				4415FF3D1E3B822900A81B13 /* Resources */,
 				15D8B6CB1FDC9BC0004B951B /* Google Services PLIST Copy */,
 				93543C9FAEDDD0332AFDC816 /* [CP] Embed Pods Frameworks */,
-				39885238018EFB6CB9FCB2C6 /* [CP] Copy Pods Resources */,
 				44136F081E8429250003B531 /* Fabric */,
 				157AC4AF1FC317FE0005A717 /* Carthage Copy Frameworks */,
 			);
@@ -1495,6 +1519,7 @@
 				15C762A42016D06B002AA7F8 /* CodeScan.bundle in Resources */,
 				15C762AC2016D06B002AA7F8 /* Assets.xcassets in Resources */,
 				15C762562016D011002AA7F8 /* Battery@1x.png in Resources */,
+				150EB83C207BE9CA00FEC245 /* Common.storyboard in Resources */,
 				15C763EB2016D5C0002AA7F8 /* SettingsView.xib in Resources */,
 				1543F38B207016460069EBEB /* Montserrat-Medium.ttf in Resources */,
 				15C762582016D011002AA7F8 /* PTPetCalloutView.xib in Resources */,
@@ -1504,6 +1529,7 @@
 				15C762AE2016D06B002AA7F8 /* countrycodes.csv in Resources */,
 				1543F381206F07390069EBEB /* Montserrat-Light.ttf in Resources */,
 				15C762522016D011002AA7F8 /* BatteryLow@1x.png in Resources */,
+				15C74C5E207D907200ED56CC /* Support.storyboard in Resources */,
 				15C762542016D011002AA7F8 /* BatteryLow@3x.png in Resources */,
 				44FEE7E62074DE1100A85A74 /* Login.storyboard in Resources */,
 				15C762532016D011002AA7F8 /* Battery@3x.png in Resources */,
@@ -1580,6 +1606,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/CropViewController.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/TOCropViewController.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/IQKeyboardManagerSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SideMenu.framework",
 			);
 			name = "Carthage Copy Frameworks";
 			outputPaths = (
@@ -1609,6 +1636,7 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/CropViewController.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/TOCropViewController.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/IQKeyboardManagerSwift.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SideMenu.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1642,24 +1670,6 @@
 			shellPath = /bin/sh;
 			shellScript = "cp \"${GOOGLE_SERVICES_PLIST_FILE}\" \"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/GoogleService-Info.plist\"";
 		};
-		39885238018EFB6CB9FCB2C6 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-PawTrails/Pods-PawTrails-resources.sh",
-				$PODS_CONFIGURATION_BUILD_DIR/HockeySDK/HockeySDKResources.bundle,
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PawTrails/Pods-PawTrails-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		44136F081E8429250003B531 /* Fabric */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1690,36 +1700,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7609F9F64AC9DAB2BAFDBC03 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PawTrailsTests/Pods-PawTrailsTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8AFF577FE8F15CFDA31941D5 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PawTrailsTests/Pods-PawTrailsTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		93543C9FAEDDD0332AFDC816 /* [CP] Embed Pods Frameworks */ = {
@@ -1875,6 +1855,7 @@
 				15AD5EA7206AD6600069E01D /* OnboardingStepViewController.swift in Sources */,
 				15C7614F2016CFF3002AA7F8 /* CDUser+CoreDataProperties.swift in Sources */,
 				15C763E82016D5C0002AA7F8 /* AdventuresListViewController.swift in Sources */,
+				15EF8758207BF7BC007F27BF /* PTNavigationViewController.swift in Sources */,
 				15C7613D2016CFF3002AA7F8 /* BEMAnimationManager.m in Sources */,
 				15C763E52016D5C0002AA7F8 /* PasswordRecoveryViewController.swift in Sources */,
 				15C763D42016D5C0002AA7F8 /* GenderTableViewController.swift in Sources */,
@@ -1932,9 +1913,11 @@
 				15C761462016CFF3002AA7F8 /* CoreDataManager.swift in Sources */,
 				15C763E02016D5C0002AA7F8 /* CalanderForActivityController.swift in Sources */,
 				15C7641B2016D5C0002AA7F8 /* FinishAdventureVC.swift in Sources */,
+				15C74C60207DA0CA00ED56CC /* SupportViewController.swift in Sources */,
 				15C764122016D5C0002AA7F8 /* PetTypeTableViewController.swift in Sources */,
 				15C762B92016D06B002AA7F8 /* SocketIO+RxSwift.swift in Sources */,
 				15C763D82016D5C0002AA7F8 /* UsersViewController.swift in Sources */,
+				15EF875B207BFF24007F27BF /* LeftMenuContentViewController.swift in Sources */,
 				15C762BB2016D06B002AA7F8 /* Extensions.swift in Sources */,
 				15C762B52016D06B002AA7F8 /* MapUtilsManager.swift in Sources */,
 				15C764062016D5C0002AA7F8 /* GettingLocationViewController.swift in Sources */,
@@ -2238,6 +2221,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = PawTrails/Resources/PawTrails.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
