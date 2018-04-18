@@ -246,7 +246,7 @@ enum Storyboards {
 
 enum ViewController {
     case initial, login, signup, passwordRecovery, passwordRecoverySuccess, emailVerification, termsAndPrivacy,
-         leftMenu, liveTracking, myPets, myProfile, vetRecommendations, deviceFinder, settings, support, BCSInitial
+         leftMenu, liveTracking, myPets, myProfile, vetRecommendations, deviceFinder, settings, support, BCSInitial, changePassword, aboutUs
     
     var storyboard: UIStoryboard {
         switch self {
@@ -255,7 +255,7 @@ enum ViewController {
             case .liveTracking, .myPets, .myProfile, .vetRecommendations, .deviceFinder: return Storyboards.main.storyboard
             case .support: return Storyboards.support.storyboard
             case .BCSInitial: return Storyboards.BCS.storyboard
-            case .settings: return Storyboards.settings.storyboard
+            case .settings, .changePassword, .aboutUs : return Storyboards.settings.storyboard
         }
     }
     
@@ -277,7 +277,10 @@ enum ViewController {
             case .myProfile: return "MyProfileViewController"
             case .vetRecommendations: return "VetRecommendationsViewController"
             case .deviceFinder: return "DeviceFinderViewController"
+            //Settings
             case .settings: return "SettingsTableViewController"
+            case .changePassword: return "ChangePasswordTableViewController"
+            case .aboutUs: return "AboutPawTrails"
             // Support
             case .support: return "SupportViewController"
             //BCS

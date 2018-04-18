@@ -270,6 +270,7 @@
 		44623F0120861DB3002F618A /* BCSPetSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44623F0020861DB3002F618A /* BCSPetSelectViewController.swift */; };
 		44623F0320863441002F618A /* BCSQuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44623F0220863441002F618A /* BCSQuestionsViewController.swift */; };
 		44623F05208644DB002F618A /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44623F04208644DB002F618A /* Settings.storyboard */; };
+		44696C7920873E7100CD0E97 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44696C7820873E7100CD0E97 /* Utilities.swift */; };
 		447AF46D2021E22C0050F885 /* AllowedCharsTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447AF46C2021E22C0050F885 /* AllowedCharsTextField.swift */; };
 		447BF2AB20737A7200C11D8E /* PTUnitConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447BF2AA20737A7200C11D8E /* PTUnitConversion.swift */; };
 		448BE9681ED47F5C00665608 /* APIUserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448BE9671ED47F5C00665608 /* APIUserTest.swift */; };
@@ -589,6 +590,7 @@
 		44623F0020861DB3002F618A /* BCSPetSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BCSPetSelectViewController.swift; sourceTree = "<group>"; };
 		44623F0220863441002F618A /* BCSQuestionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BCSQuestionsViewController.swift; sourceTree = "<group>"; };
 		44623F04208644DB002F618A /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		44696C7820873E7100CD0E97 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		447AF46C2021E22C0050F885 /* AllowedCharsTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllowedCharsTextField.swift; sourceTree = "<group>"; };
 		447BF2AA20737A7200C11D8E /* PTUnitConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTUnitConversion.swift; sourceTree = "<group>"; };
 		448BE9671ED47F5C00665608 /* APIUserTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIUserTest.swift; sourceTree = "<group>"; };
@@ -961,6 +963,7 @@
 				15C7629B2016D06B002AA7F8 /* MapUtilsManager.swift */,
 				15C7629C2016D06B002AA7F8 /* Reporter.swift */,
 				447BF2AA20737A7200C11D8E /* PTUnitConversion.swift */,
+				44696C7820873E7100CD0E97 /* Utilities.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1937,6 +1940,7 @@
 				15EF8758207BF7BC007F27BF /* PTNavigationViewController.swift in Sources */,
 				15C7613D2016CFF3002AA7F8 /* BEMAnimationManager.m in Sources */,
 				15C763E52016D5C0002AA7F8 /* PasswordRecoveryViewController.swift in Sources */,
+				44696C7920873E7100CD0E97 /* Utilities.swift in Sources */,
 				15C763D42016D5C0002AA7F8 /* GenderTableViewController.swift in Sources */,
 				1543F383206F1BCE0069EBEB /* PetTypeViewController.swift in Sources */,
 				15C763D92016D5C0002AA7F8 /* ResultFromListViewController.swift in Sources */,
