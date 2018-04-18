@@ -23,7 +23,7 @@ class LeftMenuContentViewController: UIViewController {
                  viewController: ViewController.liveTracking),
         MenuItem("My Pets",
                  imageName: "MyPetsMenuIcon",
-                 viewController: ViewController.myPets),
+                 viewController: ViewController.petList),
         MenuItem("My Profile",
                  imageName: "MyProfileMenuIcon",
                  viewController: ViewController.myProfile),

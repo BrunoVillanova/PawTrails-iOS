@@ -100,7 +100,6 @@
         
         refreshControl.backgroundColor = UIColor.secondary
         refreshControl.tintColor = UIColor.primary
-//        refreshControl.addTarget(self, action: #selector(reloadPets), for: .valueChanged)
         tableView.addSubview(refreshControl)
         
         

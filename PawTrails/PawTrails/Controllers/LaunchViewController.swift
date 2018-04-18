@@ -31,11 +31,7 @@ class LaunchViewController: UIViewController {
     
     fileprivate func initialize() {
         
-        let attributes = [NSFontAttributeName: UIFont(name: "Montserrat-Medium", size: 16)!,NSForegroundColorAttributeName: PTConstants.colors.darkGray]
-        UINavigationBar.appearance().titleTextAttributes = attributes
-        
-        GSMessage.successBackgroundColor = UIColor(red: 81.0/255, green: 222.0/255, blue: 147.0/255,  alpha: 0.95)
-
+        configureUIPreferences()
         
         var imageName: String?
         
@@ -93,5 +89,23 @@ class LaunchViewController: UIViewController {
             self.appDelegate.loadAuthenticationScreen()
             self.appDelegate.showOnboardingIfNeeded(false)
         }
+    }
+    
+    private func configureUIPreferences() {
+        GSMessage.successBackgroundColor = UIColor(red: 81.0/255, green: 222.0/255, blue: 147.0/255,  alpha: 0.95)
+        
+        UINavigationBar.appearance().backgroundColor = .white
+        UINavigationBar.appearance().barTintColor = UIColor.secondary
+        UINavigationBar.appearance().tintColor = PTConstants.colors.newRed
+        let attributes = [NSFontAttributeName: UIFont(name: "Montserrat-Medium", size: 16)!,NSForegroundColorAttributeName: PTConstants.colors.darkGray]
+        UINavigationBar.appearance().titleTextAttributes = attributes
+        
+        UITabBar.appearance().tintColor = UIColor.primary
+        UITableViewCell.appearance().tintColor = PTConstants.colors.newRed
+        UISegmentedControl.appearance().tintColor = PTConstants.colors.newRed
+        UIActivityIndicatorView.appearance().color = PTConstants.colors.newRed
+        
+        UIBarButtonItem.appearance()
+            .setTitleTextAttributes([NSFontAttributeName : UIFont(name: "Montserrat-Regular", size: 14)!], for: .normal)
     }
 }

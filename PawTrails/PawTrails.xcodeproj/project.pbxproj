@@ -39,6 +39,8 @@
 		15639E73208064A700F44B3B /* PetCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15639E71208064A700F44B3B /* PetCollectionViewCell.swift */; };
 		15639E762080862000F44B3B /* PetCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15639E752080862000F44B3B /* PetCollectionViewCell.xib */; };
 		1570C7AC203B63DF00A7F59F /* TripDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1570C7AB203B63DF00A7F59F /* TripDetailViewController.swift */; };
+		157869732086784500FB3EDC /* Pets.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 157869722086784500FB3EDC /* Pets.storyboard */; };
+		15786975208678DA00FB3EDC /* PetListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15786974208678DA00FB3EDC /* PetListViewController.swift */; };
 		1585469C1FDCFBCB004C82EC /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1585469B1FDCFBCB004C82EC /* Charts.framework */; };
 		1589EBC11FE3644E00280926 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1589EBC01FE3644E00280926 /* Bolts.framework */; };
 		1599A625204F64940089FC8A /* SkyFloatingLabelTextField.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1599A624204F64940089FC8A /* SkyFloatingLabelTextField.framework */; };
@@ -332,6 +334,8 @@
 		15639E71208064A700F44B3B /* PetCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetCollectionViewCell.swift; sourceTree = "<group>"; };
 		15639E752080862000F44B3B /* PetCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PetCollectionViewCell.xib; sourceTree = "<group>"; };
 		1570C7AB203B63DF00A7F59F /* TripDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailViewController.swift; sourceTree = "<group>"; };
+		157869722086784500FB3EDC /* Pets.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Pets.storyboard; sourceTree = "<group>"; };
+		15786974208678DA00FB3EDC /* PetListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetListViewController.swift; sourceTree = "<group>"; };
 		157AC4B21FC3192E0005A717 /* Convert.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Convert.framework; path = Carthage/Build/iOS/Convert.framework; sourceTree = "<group>"; };
 		1585469B1FDCFBCB004C82EC /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = Carthage/Build/iOS/Charts.framework; sourceTree = "<group>"; };
 		1589EBC01FE3644E00280926 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Carthage/Build/iOS/Bolts.framework; sourceTree = "<group>"; };
@@ -684,6 +688,7 @@
 				44FEE7E52074DE1100A85A74 /* Login.storyboard */,
 				150EB83B207BE9CA00FEC245 /* Common.storyboard */,
 				15C74C5D207D907200ED56CC /* Support.storyboard */,
+				157869722086784500FB3EDC /* Pets.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -1049,6 +1054,7 @@
 				15C763A12016D5C0002AA7F8 /* AirbnbDatePicker.swift */,
 				15C763A22016D5C0002AA7F8 /* AirbnbDatePickerHeader.swift */,
 				15C763A32016D5C0002AA7F8 /* AirbnbDatePickerCell.swift */,
+				15786974208678DA00FB3EDC /* PetListViewController.swift */,
 			);
 			path = Pets;
 			sourceTree = "<group>";
@@ -1525,6 +1531,7 @@
 			files = (
 				15A13A21206AB517005790B3 /* Montserrat-Regular.ttf in Resources */,
 				15C762442016D011002AA7F8 /* SignalFull@1x.png in Resources */,
+				157869732086784500FB3EDC /* Pets.storyboard in Resources */,
 				15C7640A2016D5C0002AA7F8 /* SharedUsersTableViewCell.xib in Resources */,
 				15C762A42016D06B002AA7F8 /* CodeScan.bundle in Resources */,
 				15C762AC2016D06B002AA7F8 /* Assets.xcassets in Resources */,
@@ -1818,6 +1825,7 @@
 				15C7624F2016D011002AA7F8 /* PTTripInfoView.swift in Sources */,
 				15C762B02016D06B002AA7F8 /* Messages.swift in Sources */,
 				15C762B22016D06B002AA7F8 /* PTConstants.swift in Sources */,
+				15786975208678DA00FB3EDC /* PetListViewController.swift in Sources */,
 				15C762782016D046002AA7F8 /* SettingsPresenter.swift in Sources */,
 				15C761492016CFF3002AA7F8 /* APIManager.swift in Sources */,
 				15C763CF2016D5C0002AA7F8 /* SharedUsersTableViewCell.swift in Sources */,

@@ -230,7 +230,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 enum Storyboards {
-    case login, common, main, support
+    case login, common, main, support, pets
     
     var storyboard: UIStoryboard {
         switch self {
@@ -238,20 +238,22 @@ enum Storyboards {
             case .common: return UIStoryboard(name: "Common", bundle: nil)
             case .main: return UIStoryboard(name: "Main", bundle: nil)
             case .support: return UIStoryboard(name: "Support", bundle: nil)
+            case .pets: return UIStoryboard(name: "Pets", bundle: nil)
         }
     }
 }
 
 enum ViewController {
     case initial, login, signup, passwordRecovery, passwordRecoverySuccess, emailVerification, termsAndPrivacy,
-         leftMenu, liveTracking, myPets, myProfile, vetRecommendations, deviceFinder, settings, support
+         leftMenu, liveTracking, myPets, myProfile, vetRecommendations, deviceFinder, settings, support, petList, petDetail
     
     var storyboard: UIStoryboard {
         switch self {
             case .initial, .login, .signup, .passwordRecovery, .passwordRecoverySuccess, .emailVerification, .termsAndPrivacy: return Storyboards.login.storyboard
-            case .leftMenu: return Storyboards.common.storyboard
-            case .liveTracking, .myPets, .myProfile, .vetRecommendations, .deviceFinder, .settings: return Storyboards.main.storyboard
-            case .support: return Storyboards.support.storyboard
+                case .leftMenu: return Storyboards.common.storyboard
+            case .liveTracking, .myPets, .petDetail, .myProfile, .vetRecommendations, .deviceFinder, .settings: return Storyboards.main.storyboard
+                case .support: return Storyboards.support.storyboard
+                case .petList: return Storyboards.pets.storyboard
         }
     }
     
@@ -276,13 +278,16 @@ enum ViewController {
             case .settings: return "SettingsViewController"
             // Support
             case .support: return "SupportViewController"
+            // Pets
+            case .petList: return "PetListViewController"
+            case .petDetail: return "PetDetails"
         }
     }
     
     var navigationController: UINavigationController? {
         switch self {
             case .login, .signup, .passwordRecovery, .termsAndPrivacy: return UINavigationController()
-            case .liveTracking, .myPets, .myProfile, .vetRecommendations, .deviceFinder, .settings, .support: return PTNavigationViewController()
+            case .liveTracking, .myPets, .myProfile, .vetRecommendations, .deviceFinder, .settings, .support, .petList: return PTNavigationViewController()
             default: return nil
         }
     }
