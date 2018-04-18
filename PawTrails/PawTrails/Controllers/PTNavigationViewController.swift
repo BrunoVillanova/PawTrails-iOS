@@ -25,7 +25,6 @@ class PTNavigationViewController: UINavigationController {
     
     override var viewControllers: [UIViewController] {
         didSet {
-            setupShadow(false)
             addLeftMenuButton()
         }
     }

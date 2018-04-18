@@ -26,14 +26,6 @@ class SupportViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    fileprivate func initialize() {
-        self.navigationItem.title = "Support"
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.tableFooterView = nil
-        tableView.addSubview(companyLogoImageView)
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
@@ -45,6 +37,23 @@ class SupportViewController: UIViewController {
             companyLogoImageView.center = center
         }
         
+    }
+    
+    fileprivate func initialize() {
+        configureNavigationBar()
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.tableFooterView = nil
+        tableView.addSubview(companyLogoImageView)
+    }
+    
+    fileprivate func configureNavigationBar() {
+        
+        if let navigationController = self.navigationController as? PTNavigationViewController {
+            navigationController.showNavigationBarDropShadow = true
+        }
+        
+        self.navigationItem.title = "Support"
     }
 }
 
