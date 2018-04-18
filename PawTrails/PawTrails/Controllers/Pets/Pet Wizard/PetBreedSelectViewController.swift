@@ -18,7 +18,7 @@ class PetBreedSelectViewController: PetWizardStepViewController {
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     
-    final let disposeBag = DisposeBag()
+    fileprivate final let disposeBag = DisposeBag()
     fileprivate final let dataSource = RxTableViewSectionedReloadDataSource<PetBreedSection>()
     fileprivate var petBreedSections: Variable<[PetBreedSection]> = Variable([PetBreedSection]())
     fileprivate var selectedBreed: Variable<Breed?> = Variable(nil)

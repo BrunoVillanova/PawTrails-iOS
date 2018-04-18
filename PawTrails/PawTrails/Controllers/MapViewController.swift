@@ -107,9 +107,6 @@ class MapViewController: UIViewController {
             }
         }).disposed(by: disposeBag)
         
-//        firstButtonfromthebottom.contentHorizontalAlignment = .fill
-//        firstButtonfromthebottom.contentMode = .scaleToFill
-//        firstButtonfromthebottom.imageView?.contentMode = .scaleToFill
         firstButtonfromthebottom.isEnabled = false
         
         petsCollectionView.delegate = self

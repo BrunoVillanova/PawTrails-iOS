@@ -65,10 +65,10 @@ extension SupportViewController: UITableViewDataSource {
         var iconImageName: String?
         
         if indexPath.section == 0 {
-            text = "support@pawtrails.com\nWe will come back to you shortly"
+            text = "info@pawtrails.com\nWe will be in contact with you shortly"
             iconImageName = "EmailSupportIcon"
         } else {
-            text = "Ireland\n+353 (21) 432 1699\nWorking Hours:\n9:00am-5:00pm Monday Friday\nUnavailable on Public holidays"
+            text = "Ireland\n+353 (21) 432 1699\nWorking Hours:\n9:00am-5:00pm Monday to Friday\nExcluding Public Holidays"
             iconImageName = "PhoneSupportIcon"
         }
         

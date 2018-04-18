@@ -223,7 +223,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UITabBar.appearance().tintColor = UIColor.primary
         UITableViewCell.appearance().tintColor = UIColor.primary
-        UISwitch.appearance().onTintColor = UIColor.primary
+//        UISwitch.appearance().onTintColor = UIColor.primary
         UISegmentedControl.appearance().tintColor = UIColor.primary
         UIActivityIndicatorView.appearance().color = UIColor.primary
     }
@@ -281,9 +281,9 @@ enum ViewController {
     
     var navigationController: UINavigationController? {
         switch self {
-        case .login, .signup, .passwordRecovery, .termsAndPrivacy: return UINavigationController()
-        case .liveTracking, .myPets, .myProfile, .vetRecommendations, .deviceFinder, .settings, .support: return PTNavigationViewController()
-        default: return nil
+            case .login, .signup, .passwordRecovery, .termsAndPrivacy: return UINavigationController()
+            case .liveTracking, .myPets, .myProfile, .vetRecommendations, .deviceFinder, .settings, .support: return PTNavigationViewController()
+            default: return nil
         }
     }
     

@@ -217,7 +217,8 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rbx-G8-kKa" customClass="PTNiceTextField" customModule="PawTrails" customModuleProvider="target">
-                                        <rect key="frame" x="24" y="232" width="327" height="50"/>
+                                        <rect key="frame" x="24" y="190" width="327" height="50"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="33F-6f-pUw"/>
                                         </constraints>
@@ -226,20 +227,21 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next" textContentType="email"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JKn-mn-2A3" customClass="PTNiceTextField" customModule="PawTrails" customModuleProvider="target">
-                                        <rect key="frame" x="24" y="298" width="327" height="50"/>
+                                        <rect key="frame" x="24" y="256" width="327" height="50"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="go" secureTextEntry="YES"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jzl-Zq-OeH">
-                                        <rect key="frame" x="24" y="380" width="327" height="50"/>
+                                        <rect key="frame" x="24" y="338" width="327" height="50"/>
                                         <state key="normal" image="btn_Login"/>
                                         <connections>
                                             <action selector="loginAction:" destination="4jX-eP-yhF" eventType="touchUpInside" id="IxM-Eb-Zuc"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aWq-kt-8HE">
-                                        <rect key="frame" x="99" y="458" width="178" height="30"/>
+                                        <rect key="frame" x="99" y="416" width="178" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="178" id="9wJ-Dn-Tln"/>
                                             <constraint firstAttribute="height" constant="30" id="zDt-1g-G2M"/>
@@ -290,7 +292,7 @@
                                 <constraints>
                                     <constraint firstItem="Jzl-Zq-OeH" firstAttribute="top" secondItem="JKn-mn-2A3" secondAttribute="bottom" constant="32" id="3b0-ML-z23"/>
                                     <constraint firstItem="aWq-kt-8HE" firstAttribute="centerX" secondItem="Vdi-Df-XZa" secondAttribute="centerX" id="3qs-J4-hsT"/>
-                                    <constraint firstItem="rbx-G8-kKa" firstAttribute="top" secondItem="1So-tM-rVD" secondAttribute="bottom" priority="999" constant="120" id="5Gu-RI-Ncp"/>
+                                    <constraint firstItem="rbx-G8-kKa" firstAttribute="top" secondItem="1So-tM-rVD" secondAttribute="bottom" priority="999" constant="78" id="5Gu-RI-Ncp"/>
                                     <constraint firstItem="JKn-mn-2A3" firstAttribute="trailing" secondItem="rbx-G8-kKa" secondAttribute="trailing" id="760-zi-pIP"/>
                                     <constraint firstItem="fj0-Pt-ChO" firstAttribute="leading" secondItem="Vdi-Df-XZa" secondAttribute="leading" id="8ko-L7-VHi"/>
                                     <constraint firstItem="aWq-kt-8HE" firstAttribute="top" secondItem="Jzl-Zq-OeH" secondAttribute="bottom" constant="28" id="CVc-EK-939"/>
@@ -624,7 +626,8 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder=" Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tsu-pF-uYx" customClass="PTNiceTextField" customModule="PawTrails" customModuleProvider="target">
-                                <rect key="frame" x="24" y="288.5" width="327" height="50"/>
+                                <rect key="frame" x="24" y="253.5" width="327" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="wB9-5C-LCa"/>
                                 </constraints>
@@ -633,14 +636,14 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="go" textContentType="email"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Slb-M2-Og3">
-                                <rect key="frame" x="24" y="398.5" width="327" height="50"/>
+                                <rect key="frame" x="24" y="363.5" width="327" height="50"/>
                                 <state key="normal" image="btn_next_forgot_password"/>
                                 <connections>
                                     <action selector="sendAction:" destination="G0n-xB-LgE" eventType="touchUpInside" id="VMa-Uh-a7u"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m7k-yU-ahW" userLabel="Remember Password View">
-                                <rect key="frame" x="46.5" y="480.5" width="282.5" height="21"/>
+                                <rect key="frame" x="46.5" y="445.5" width="282.5" height="21"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I remember my password." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7IH-nN-nsd">
                                         <rect key="frame" x="0.0" y="0.0" width="194.5" height="21"/>
@@ -725,7 +728,7 @@
                             <constraint firstItem="e4c-IA-mb2" firstAttribute="trailing" secondItem="tsu-pF-uYx" secondAttribute="trailing" constant="24" id="d0Q-BW-rwR"/>
                             <constraint firstItem="CvA-TS-Y8X" firstAttribute="top" secondItem="e4c-IA-mb2" secondAttribute="top" priority="999" constant="80" id="fWw-U4-oKC"/>
                             <constraint firstItem="m7k-yU-ahW" firstAttribute="centerX" secondItem="e4c-IA-mb2" secondAttribute="centerX" id="l3d-lT-Tws"/>
-                            <constraint firstItem="tsu-pF-uYx" firstAttribute="top" secondItem="CvA-TS-Y8X" secondAttribute="bottom" priority="999" constant="120" id="n76-vq-PWk"/>
+                            <constraint firstItem="tsu-pF-uYx" firstAttribute="top" secondItem="CvA-TS-Y8X" secondAttribute="bottom" priority="999" constant="85" id="n76-vq-PWk"/>
                             <constraint firstItem="SEA-V2-gND" firstAttribute="leading" secondItem="e4c-IA-mb2" secondAttribute="leading" id="rsk-Jw-hr9"/>
                             <constraint firstItem="tsu-pF-uYx" firstAttribute="top" relation="greaterThanOrEqual" secondItem="CvA-TS-Y8X" secondAttribute="bottom" id="ytg-Qj-vqt"/>
                         </constraints>
@@ -741,7 +744,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gdm-B2-HCR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-7074" y="-1021"/>
+            <point key="canvasLocation" x="-7074.3999999999996" y="-1021.4392803598201"/>
         </scene>
         <!--User Register Terms-->
         <scene sceneID="ASp-90-ofZ">

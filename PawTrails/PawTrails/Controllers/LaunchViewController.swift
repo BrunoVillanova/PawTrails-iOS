@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GSMessages
 
 class LaunchViewController: UIViewController {
 
@@ -32,6 +33,9 @@ class LaunchViewController: UIViewController {
         
         let attributes = [NSFontAttributeName: UIFont(name: "Montserrat-Medium", size: 16)!,NSForegroundColorAttributeName: PTConstants.colors.darkGray]
         UINavigationBar.appearance().titleTextAttributes = attributes
+        
+        GSMessage.successBackgroundColor = UIColor(red: 81.0/255, green: 222.0/255, blue: 147.0/255,  alpha: 0.95)
+
         
         var imageName: String?
         

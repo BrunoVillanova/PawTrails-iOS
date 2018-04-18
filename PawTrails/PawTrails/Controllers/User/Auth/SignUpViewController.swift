@@ -173,6 +173,7 @@ extension SignUpViewController: InitialView {
     
     func verifyAccount(_ email:String, _ password:String) {
         self.dismiss(animated: true) {
+            UserDefaults.standard.set(email, forKey: "userEmail")
             self.appDelegate.presentViewController(.login, animated: false) {
                 self.appDelegate.presentViewController(.emailVerification, animated: true, completion: nil)
             }

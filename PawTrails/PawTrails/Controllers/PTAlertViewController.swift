@@ -26,12 +26,13 @@ enum AlertResultType {
 }
 
 enum AlertButtontType: Int {
-    case ok = 0, cancel = 1
+    case ok = 0, cancel = 1, delete = 2
     
     var title: String {
         switch self {
             case .ok: return "OK"
             case .cancel: return "Cancel"
+            case .delete: return "Delete"
         }
     }
     
@@ -39,6 +40,16 @@ enum AlertButtontType: Int {
         switch self {
             case .ok: return .ok
             case .cancel: return .cancel
+            case .delete: return .ok
+        }
+    }
+    
+    var titleColor: UIColor {
+        switch self {
+        case .delete:
+            return PTConstants.colors.newRed
+        default:
+            return PTConstants.colors.lightBlue
         }
     }
 }
@@ -143,7 +154,7 @@ class PTAlertViewController: UIViewController {
         var buttons = [UIButton]()
         
         for buttonType in buttonsTypes {
-            let button = NiceButton(title: buttonType.title)
+            let button = NiceButton(title: buttonType.title, titleColor: buttonType.titleColor)
             button.tag = buttonType.hashValue
             buttons.append(button)
         }
@@ -412,13 +423,13 @@ class NiceButton: UIButton {
         commonInit()
     }
     
-    convenience init(title: String) {
+    convenience init(title: String, titleColor: UIColor = PTConstants.colors.newRed) {
         self.init(frame: .zero)
         setTitle(title, for: .normal)
+        setTitleColor(titleColor, for: .normal)
     }
     
     fileprivate func commonInit () {
         titleLabel?.font = UIFont(name: "Montserrat-Regular", size: 15)
-        setTitleColor(PTConstants.colors.lightBlue, for: .normal)
     }
 }
