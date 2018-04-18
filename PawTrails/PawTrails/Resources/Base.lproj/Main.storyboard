@@ -4659,12 +4659,12 @@ finish the Adventure?</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="65Y-pr-wdH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1332" y="2228"/>
+            <point key="canvasLocation" x="-1830" y="2220"/>
         </scene>
         <!--Recommendation Select Pet-->
         <scene sceneID="5y6-fW-6hP">
             <objects>
-                <viewController id="8Ak-78-vA7" userLabel="Recommendation Select Pet" customClass="SelectPetForRecommandationController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SelectPetForRecommandationController" id="8Ak-78-vA7" userLabel="Recommendation Select Pet" customClass="SelectPetForRecommandationController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0GO-lD-uD3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

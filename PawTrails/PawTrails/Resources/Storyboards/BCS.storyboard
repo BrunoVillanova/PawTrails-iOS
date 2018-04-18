@@ -15,16 +15,16 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Initial View Controller-->
+        <!--Vet Recommendation-->
         <scene sceneID="gNG-Kc-7Qn">
             <objects>
-                <viewController storyboardIdentifier="BCSInitialViewController" id="SFD-i4-C9L" customClass="BCSInitialViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BCSInitialViewController" title="Vet Recommendation" id="SFD-i4-C9L" customClass="BCSInitialViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="y3o-mm-GJA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BCSLogo" translatesAutoresizingMaskIntoConstraints="NO" id="ovj-vS-apv">
-                                <rect key="frame" x="16" y="20" width="343" height="226"/>
+                                <rect key="frame" x="16" y="47" width="343" height="226"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="226" id="jpo-ht-DcE"/>
                                     <constraint firstAttribute="width" constant="343" id="lge-My-JRY"/>
@@ -43,7 +43,7 @@
                                         <color key="textColor" red="0.25490196078431371" green="0.28235294117647058" blue="0.32156862745098036" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="highlightedColor" red="0.25490196078431371" green="0.28235294117647058" blue="0.32156862745098036" alpha="1" colorSpace="calibratedRGB"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monitoring your pet’s health status by measuring it’s body condition score regularly" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bgw-ij-JRd">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monitor your pets' weight by measuring its body condition score regularly" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bgw-ij-JRd">
                                         <rect key="frame" x="8" y="72" width="355" height="72"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="72" id="SU3-2k-5Gb"/>
@@ -82,7 +82,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="pKT-Lf-NBL" kind="show" id="ZW7-yN-Tiy"/>
+                                    <segue destination="OyA-zw-bHh" kind="show" id="PfH-sT-iJt"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -92,7 +92,7 @@
                             <constraint firstItem="ovj-vS-apv" firstAttribute="centerX" secondItem="y3o-mm-GJA" secondAttribute="centerX" id="D6t-ev-Y06"/>
                             <constraint firstItem="F7s-r2-ndm" firstAttribute="centerY" secondItem="y3o-mm-GJA" secondAttribute="centerY" constant="73.5" id="E8u-AC-rtk"/>
                             <constraint firstItem="F7s-r2-ndm" firstAttribute="trailing" secondItem="jDf-mn-B6m" secondAttribute="trailing" id="GVu-1e-Dip"/>
-                            <constraint firstItem="ovj-vS-apv" firstAttribute="top" secondItem="jDf-mn-B6m" secondAttribute="top" id="Qaz-eL-kRF"/>
+                            <constraint firstItem="ovj-vS-apv" firstAttribute="top" secondItem="jDf-mn-B6m" secondAttribute="top" constant="27" id="Qaz-eL-kRF"/>
                             <constraint firstItem="ARU-1v-yCw" firstAttribute="bottom" secondItem="jDf-mn-B6m" secondAttribute="bottom" id="cK4-HH-mm7"/>
                             <constraint firstItem="ARU-1v-yCw" firstAttribute="trailing" secondItem="jDf-mn-B6m" secondAttribute="trailing" id="iDs-sR-ei1"/>
                             <constraint firstItem="F7s-r2-ndm" firstAttribute="centerX" secondItem="y3o-mm-GJA" secondAttribute="centerX" id="if1-tH-EOS"/>
@@ -336,6 +336,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VsZ-LM-gZS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="177" y="-144"/>
+        </scene>
+        <!--RecommendationNavigationController-->
+        <scene sceneID="lcy-gQ-VdA">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="RecommendationNavigationController" storyboardName="Main" referencedIdentifier="RecommendationNavigationController" id="OyA-zw-bHh" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Uq6-Gv-8ji" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-124" y="446"/>
         </scene>
     </scenes>
     <resources>

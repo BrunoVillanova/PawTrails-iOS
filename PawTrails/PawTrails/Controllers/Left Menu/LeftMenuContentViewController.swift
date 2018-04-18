@@ -29,7 +29,7 @@ class LeftMenuContentViewController: UIViewController {
                  viewController: ViewController.myProfile),
         MenuItem("Vet Recommendations",
                  imageName: "VetRecommendationsMenuIcon",
-                 viewController: ViewController.vetRecommendations),
+                 viewController: ViewController.BCSInitial),
         MenuItem("Device Finder",
                  imageName: "DeviceFinderMenuIcon",
                  action: {sender in
