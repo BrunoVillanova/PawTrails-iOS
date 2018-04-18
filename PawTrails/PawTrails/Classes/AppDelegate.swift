@@ -230,7 +230,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 enum Storyboards {
-    case login, common, main, support, pets
+
+    case login, common, main, support, pets, BCS, settings
     
     var storyboard: UIStoryboard {
         switch self {
@@ -239,21 +240,25 @@ enum Storyboards {
             case .main: return UIStoryboard(name: "Main", bundle: nil)
             case .support: return UIStoryboard(name: "Support", bundle: nil)
             case .pets: return UIStoryboard(name: "Pets", bundle: nil)
+            case .BCS: return UIStoryboard(name: "BCS", bundle: nil)
+            case .settings: return UIStoryboard(name: "Settings", bundle: nil)
         }
     }
 }
 
 enum ViewController {
     case initial, login, signup, passwordRecovery, passwordRecoverySuccess, emailVerification, termsAndPrivacy,
-         leftMenu, liveTracking, myPets, myProfile, vetRecommendations, deviceFinder, settings, support, petList, petDetail
+         leftMenu, liveTracking, myPets, myProfile, vetRecommendations, deviceFinder, settings, support, petList, petDetail, BCSInitial, changePassword, aboutUs
     
     var storyboard: UIStoryboard {
         switch self {
             case .initial, .login, .signup, .passwordRecovery, .passwordRecoverySuccess, .emailVerification, .termsAndPrivacy: return Storyboards.login.storyboard
-                case .leftMenu: return Storyboards.common.storyboard
-            case .liveTracking, .myPets, .petDetail, .myProfile, .vetRecommendations, .deviceFinder, .settings: return Storyboards.main.storyboard
-                case .support: return Storyboards.support.storyboard
-                case .petList: return Storyboards.pets.storyboard
+            case .leftMenu: return Storyboards.common.storyboard
+            case .liveTracking, .myPets, .petDetail, .myProfile, .vetRecommendations, .deviceFinder: return Storyboards.main.storyboard
+            case .support: return Storyboards.support.storyboard
+            case .petList: return Storyboards.pets.storyboard
+            case .BCSInitial: return Storyboards.BCS.storyboard
+            case .settings, .changePassword, .aboutUs : return Storyboards.settings.storyboard
         }
     }
     
@@ -275,19 +280,24 @@ enum ViewController {
             case .myProfile: return "MyProfileViewController"
             case .vetRecommendations: return "VetRecommendationsViewController"
             case .deviceFinder: return "DeviceFinderViewController"
-            case .settings: return "SettingsViewController"
+            //Settings
+            case .settings: return "SettingsTableViewController"
+            case .changePassword: return "ChangePasswordTableViewController"
+            case .aboutUs: return "AboutPawTrails"
             // Support
             case .support: return "SupportViewController"
             // Pets
             case .petList: return "PetListViewController"
             case .petDetail: return "PetDetails"
+            //BCS
+            case .BCSInitial: return "BCSInitialViewController"
         }
     }
     
     var navigationController: UINavigationController? {
         switch self {
             case .login, .signup, .passwordRecovery, .termsAndPrivacy: return UINavigationController()
-            case .liveTracking, .myPets, .myProfile, .vetRecommendations, .deviceFinder, .settings, .support, .petList: return PTNavigationViewController()
+        case .liveTracking, .myPets, .myProfile, .vetRecommendations, .deviceFinder, .settings, .support, .petList, .BCSInitial: return PTNavigationViewController()
             default: return nil
         }
     }

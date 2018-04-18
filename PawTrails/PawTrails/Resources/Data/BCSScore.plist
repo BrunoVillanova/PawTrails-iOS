@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>question</key>
+	<string>Can you easily feel the ribs and spine without applying pressure ?</string>
+	<key>title</key>
+	<string>Question 1</string>
+	<key>no</key>
+	<dict>
+		<key>title</key>
+		<string>Question 2</string>
+		<key>question</key>
+		<string>Can you feel the ribs, spine and pelvis with light pressure ? </string>
+		<key>yes</key>
+		<dict>
+			<key>title</key>
+			<string>Question 3</string>
+			<key>question</key>
+			<string>Has your dog a waistline when felt from behind the ribs to in front of the pelvis?</string>
+			<key>no</key>
+			<dict>
+				<key>result</key>
+				<dict>
+					<key>description</key>
+					<string></string>
+					<key>title</key>
+					<string>Overweight</string>
+					<key>bcs</key>
+					<string>BCS 4</string>
+				</dict>
+			</dict>
+			<key>yes</key>
+			<dict>
+				<key>result</key>
+				<dict>
+					<key>description</key>
+					<string></string>
+					<key>title</key>
+					<string>Ideal</string>
+					<key>bcs</key>
+					<string>BCS 3</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>no</key>
+		<dict>
+			<key>no</key>
+			<dict>
+				<key>result</key>
+				<dict>
+					<key>description</key>
+					<string></string>
+					<key>title</key>
+					<string>Overweight</string>
+					<key>bcs</key>
+					<string>BCS 4</string>
+				</dict>
+			</dict>
+			<key>yes</key>
+			<dict>
+				<key>result</key>
+				<dict>
+					<key>description</key>
+					<string></string>
+					<key>title</key>
+					<string>Obese</string>
+					<key>bcs</key>
+					<string>BCS 5</string>
+				</dict>
+			</dict>
+			<key>question</key>
+			<string>Does you dog have no waistline and instead a  saggy tummy and lumps of fat?</string>
+			<key>title</key>
+			<string>Question 3</string>
+		</dict>
+	</dict>
+	<key>yes</key>
+	<dict>
+		<key>title</key>
+		<string>Question 2</string>
+		<key>question</key>
+		<string>Are the ribs, spine and pelvis easily felt with no fat or muscle cover and does your dog have a very narrow waist with no visible belly?</string>
+		<key>no</key>
+		<dict>
+			<key>result</key>
+			<dict>
+				<key>description</key>
+				<string></string>
+				<key>title</key>
+				<string>Underweight</string>
+				<key>bcs</key>
+				<string>BCS 2</string>
+			</dict>
+		</dict>
+		<key>yes</key>
+		<dict>
+			<key>result</key>
+			<dict>
+				<key>description</key>
+				<string></string>
+				<key>title</key>
+				<string>Very thin</string>
+				<key>bcs</key>
+				<string>BCS 1</string>
+			</dict>
+		</dict>
+	</dict>
+</dict>
+</plist>

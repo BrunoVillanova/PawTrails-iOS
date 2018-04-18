@@ -267,6 +267,13 @@
 		4452EEF41ED5CF03004E13DC /* APIPetSafeZonesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4452EEF31ED5CF03004E13DC /* APIPetSafeZonesTests.swift */; };
 		4452EEF61ED5DD41004E13DC /* APIAuthenticationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4452EEF51ED5DD41004E13DC /* APIAuthenticationTests.swift */; };
 		446231401EE6BE4200B53C1D /* DataManagerPetSharingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4462313F1EE6BE4200B53C1D /* DataManagerPetSharingTests.swift */; };
+		44623EFD2085FA0C002F618A /* BCS.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44623EFC2085FA0C002F618A /* BCS.storyboard */; };
+		44623EFF2086004B002F618A /* BCSInitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44623EFE2086004B002F618A /* BCSInitialViewController.swift */; };
+		44623F0120861DB3002F618A /* BCSPetSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44623F0020861DB3002F618A /* BCSPetSelectViewController.swift */; };
+		44623F0320863441002F618A /* BCSQuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44623F0220863441002F618A /* BCSQuestionsViewController.swift */; };
+		44623F05208644DB002F618A /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44623F04208644DB002F618A /* Settings.storyboard */; };
+		44696C7920873E7100CD0E97 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44696C7820873E7100CD0E97 /* Utilities.swift */; };
+		44696C7B20878F6900CD0E97 /* BCSScore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44696C7A20878F6900CD0E97 /* BCSScore.plist */; };
 		447AF46D2021E22C0050F885 /* AllowedCharsTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447AF46C2021E22C0050F885 /* AllowedCharsTextField.swift */; };
 		447BF2AB20737A7200C11D8E /* PTUnitConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447BF2AA20737A7200C11D8E /* PTUnitConversion.swift */; };
 		448BE9681ED47F5C00665608 /* APIUserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448BE9671ED47F5C00665608 /* APIUserTest.swift */; };
@@ -583,6 +590,13 @@
 		4452EEF31ED5CF03004E13DC /* APIPetSafeZonesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIPetSafeZonesTests.swift; sourceTree = "<group>"; };
 		4452EEF51ED5DD41004E13DC /* APIAuthenticationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIAuthenticationTests.swift; sourceTree = "<group>"; };
 		4462313F1EE6BE4200B53C1D /* DataManagerPetSharingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerPetSharingTests.swift; sourceTree = "<group>"; };
+		44623EFC2085FA0C002F618A /* BCS.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BCS.storyboard; sourceTree = "<group>"; };
+		44623EFE2086004B002F618A /* BCSInitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BCSInitialViewController.swift; sourceTree = "<group>"; };
+		44623F0020861DB3002F618A /* BCSPetSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BCSPetSelectViewController.swift; sourceTree = "<group>"; };
+		44623F0220863441002F618A /* BCSQuestionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BCSQuestionsViewController.swift; sourceTree = "<group>"; };
+		44623F04208644DB002F618A /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		44696C7820873E7100CD0E97 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		44696C7A20878F6900CD0E97 /* BCSScore.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = BCSScore.plist; sourceTree = "<group>"; };
 		447AF46C2021E22C0050F885 /* AllowedCharsTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllowedCharsTextField.swift; sourceTree = "<group>"; };
 		447BF2AA20737A7200C11D8E /* PTUnitConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTUnitConversion.swift; sourceTree = "<group>"; };
 		448BE9671ED47F5C00665608 /* APIUserTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIUserTest.swift; sourceTree = "<group>"; };
@@ -667,6 +681,7 @@
 			isa = PBXGroup;
 			children = (
 				1523D0B020629691003D8653 /* DemoTrips.json */,
+				44696C7A20878F6900CD0E97 /* BCSScore.plist */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -689,6 +704,8 @@
 				150EB83B207BE9CA00FEC245 /* Common.storyboard */,
 				15C74C5D207D907200ED56CC /* Support.storyboard */,
 				157869722086784500FB3EDC /* Pets.storyboard */,
+				44623EFC2085FA0C002F618A /* BCS.storyboard */,
+				44623F04208644DB002F618A /* Settings.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -954,6 +971,7 @@
 				15C7629B2016D06B002AA7F8 /* MapUtilsManager.swift */,
 				15C7629C2016D06B002AA7F8 /* Reporter.swift */,
 				447BF2AA20737A7200C11D8E /* PTUnitConversion.swift */,
+				44696C7820873E7100CD0E97 /* Utilities.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1193,6 +1211,9 @@
 				15C763822016D5C0002AA7F8 /* SelectPetForRecommandationController.swift */,
 				15C763832016D5C0002AA7F8 /* ResultViewController.swift */,
 				15C763A42016D5C0002AA7F8 /* RecommandationController.swift */,
+				44623EFE2086004B002F618A /* BCSInitialViewController.swift */,
+				44623F0020861DB3002F618A /* BCSPetSelectViewController.swift */,
+				44623F0220863441002F618A /* BCSQuestionsViewController.swift */,
 			);
 			path = Recommendation;
 			sourceTree = "<group>";
@@ -1554,11 +1575,14 @@
 				15A13A1F206AAFE4005790B3 /* Onboarding.storyboard in Resources */,
 				15AD5EA9206C35E90069E01D /* PetWizard.storyboard in Resources */,
 				15C762552016D011002AA7F8 /* BatteryLow@2x.png in Resources */,
+				44623F05208644DB002F618A /* Settings.storyboard in Resources */,
 				15C762422016D011002AA7F8 /* SignalFull@2x.png in Resources */,
 				15E7EFAA2044B020000BFCBF /* Roboto-Medium.ttf in Resources */,
 				15639E762080862000F44B3B /* PetCollectionViewCell.xib in Resources */,
 				15C762512016D011002AA7F8 /* Battery@2x.png in Resources */,
 				1523D0B120629691003D8653 /* DemoTrips.json in Resources */,
+				44696C7B20878F6900CD0E97 /* BCSScore.plist in Resources */,
+				44623EFD2085FA0C002F618A /* BCS.storyboard in Resources */,
 				15E7EFA92044B020000BFCBF /* RobotoCondensed-Regular.ttf in Resources */,
 				15C762432016D011002AA7F8 /* SignalFull@3x.png in Resources */,
 			);
@@ -1856,12 +1880,14 @@
 				15C761472016CFF3002AA7F8 /* SocketIOManager.swift in Sources */,
 				15C762772016D046002AA7F8 /* InitialPresenter.swift in Sources */,
 				15C763E92016D5C0002AA7F8 /* Date.swift in Sources */,
+				44623EFF2086004B002F618A /* BCSInitialViewController.swift in Sources */,
 				15C762B42016D06B002AA7F8 /* Errors.swift in Sources */,
 				15C762B32016D06B002AA7F8 /* Reachability.swift in Sources */,
 				15160FF120728E94008CF9F4 /* PetWizardFinalStepViewController.swift in Sources */,
 				15C763F52016D5C0002AA7F8 /* AirbnbDatePickerViewController.swift in Sources */,
 				15C761592016CFF3002AA7F8 /* CDPet+CoreDataProperties.swift in Sources */,
 				15C763FE2016D5C0002AA7F8 /* TripScreenViewController.swift in Sources */,
+				44623F0120861DB3002F618A /* BCSPetSelectViewController.swift in Sources */,
 				15C763F42016D5C0002AA7F8 /* PetUserTableViewController.swift in Sources */,
 				15160FED20723037008CF9F4 /* PetGenderAndNeuterViewController.swift in Sources */,
 				44FEE7E8207521B100A85A74 /* LoginViewController.swift in Sources */,
@@ -1878,6 +1904,7 @@
 				15EF8758207BF7BC007F27BF /* PTNavigationViewController.swift in Sources */,
 				15C7613D2016CFF3002AA7F8 /* BEMAnimationManager.m in Sources */,
 				15C763E52016D5C0002AA7F8 /* PasswordRecoveryViewController.swift in Sources */,
+				44696C7920873E7100CD0E97 /* Utilities.swift in Sources */,
 				15C763D42016D5C0002AA7F8 /* GenderTableViewController.swift in Sources */,
 				1543F383206F1BCE0069EBEB /* PetTypeViewController.swift in Sources */,
 				15C763D92016D5C0002AA7F8 /* ResultFromListViewController.swift in Sources */,
@@ -1974,6 +2001,7 @@
 				15C764182016D5C0002AA7F8 /* ScanQRViewController.swift in Sources */,
 				15C7624E2016D011002AA7F8 /* PawTrailsStyleKit.swift in Sources */,
 				15C764192016D5C0002AA7F8 /* UserProfileTableViewController.swift in Sources */,
+				44623F0320863441002F618A /* BCSQuestionsViewController.swift in Sources */,
 				15C7640D2016D5C0002AA7F8 /* PrivacyViewController.swift in Sources */,
 				15C763DE2016D5C0002AA7F8 /* ResultViewController.swift in Sources */,
 				15C764082016D5C0002AA7F8 /* SuccessViewController.swift in Sources */,
