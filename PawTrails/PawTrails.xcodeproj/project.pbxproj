@@ -271,6 +271,7 @@
 		44623F0320863441002F618A /* BCSQuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44623F0220863441002F618A /* BCSQuestionsViewController.swift */; };
 		44623F05208644DB002F618A /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44623F04208644DB002F618A /* Settings.storyboard */; };
 		44696C7920873E7100CD0E97 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44696C7820873E7100CD0E97 /* Utilities.swift */; };
+		44696C7B20878F6900CD0E97 /* BCSScore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44696C7A20878F6900CD0E97 /* BCSScore.plist */; };
 		447AF46D2021E22C0050F885 /* AllowedCharsTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447AF46C2021E22C0050F885 /* AllowedCharsTextField.swift */; };
 		447BF2AB20737A7200C11D8E /* PTUnitConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447BF2AA20737A7200C11D8E /* PTUnitConversion.swift */; };
 		448BE9681ED47F5C00665608 /* APIUserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448BE9671ED47F5C00665608 /* APIUserTest.swift */; };
@@ -591,6 +592,7 @@
 		44623F0220863441002F618A /* BCSQuestionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BCSQuestionsViewController.swift; sourceTree = "<group>"; };
 		44623F04208644DB002F618A /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		44696C7820873E7100CD0E97 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		44696C7A20878F6900CD0E97 /* BCSScore.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = BCSScore.plist; sourceTree = "<group>"; };
 		447AF46C2021E22C0050F885 /* AllowedCharsTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllowedCharsTextField.swift; sourceTree = "<group>"; };
 		447BF2AA20737A7200C11D8E /* PTUnitConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTUnitConversion.swift; sourceTree = "<group>"; };
 		448BE9671ED47F5C00665608 /* APIUserTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIUserTest.swift; sourceTree = "<group>"; };
@@ -675,6 +677,7 @@
 			isa = PBXGroup;
 			children = (
 				1523D0B020629691003D8653 /* DemoTrips.json */,
+				44696C7A20878F6900CD0E97 /* BCSScore.plist */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -1574,6 +1577,7 @@
 				15639E762080862000F44B3B /* PetCollectionViewCell.xib in Resources */,
 				15C762512016D011002AA7F8 /* Battery@2x.png in Resources */,
 				1523D0B120629691003D8653 /* DemoTrips.json in Resources */,
+				44696C7B20878F6900CD0E97 /* BCSScore.plist in Resources */,
 				44623EFD2085FA0C002F618A /* BCS.storyboard in Resources */,
 				15E7EFA92044B020000BFCBF /* RobotoCondensed-Regular.ttf in Resources */,
 				15C762432016D011002AA7F8 /* SignalFull@3x.png in Resources */,
