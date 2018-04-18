@@ -238,7 +238,6 @@ class PetListCell: UITableViewCell {
 
         let shadowRadius:CGFloat = 4
         var corners: UIRectCorner = []
-        var shadowRect: CGRect = shadowView.bounds.insetBy(dx: 0, dy: 0)
         
         if isFirstRow && isLastRow {
             corners = [.topLeft, .topRight, .bottomLeft, .bottomRight]
@@ -250,23 +249,20 @@ class PetListCell: UITableViewCell {
             topLayoutConstraint.constant = 16
             bottomLayoutConstraint.constant = 0
             separatorView.isHidden = false
-            shadowRect = mainView.bounds.insetBy(dx: 0, dy: 2*shadowRadius)
         } else if isLastRow {
             corners = [.bottomLeft, .bottomRight]
             topLayoutConstraint.constant = 0
             bottomLayoutConstraint.constant = 16
             separatorView.isHidden = true
-            shadowRect = mainView.bounds.insetBy(dx: 0, dy: -2*shadowRadius)
         } else {
             topLayoutConstraint.constant = 0
             bottomLayoutConstraint.constant = 0
             separatorView.isHidden = false
-            shadowRect = mainView.bounds.insetBy(dx: 0, dy: 2*shadowRadius)
         }
         
-        print("\(corners) \(shadowRect)")
         mainView.roundCorners(corners: corners, radius: 4)
 
+        petImageView.layer.masksToBounds = true
         petImageView.layer.cornerRadius = petImageView.frame.size.height/2.0
 
         shadowView.clipsToBounds = false
@@ -286,8 +282,6 @@ class PetListCell: UITableViewCell {
     }
     
     func configure(_ pet: Pet) {
-        
-        petImageView.layer.masksToBounds = true
         self.currentPet = pet
         
         DispatchQueue.main.async {

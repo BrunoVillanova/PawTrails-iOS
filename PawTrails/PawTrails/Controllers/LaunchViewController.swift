@@ -107,5 +107,9 @@ class LaunchViewController: UIViewController {
         
         UIBarButtonItem.appearance()
             .setTitleTextAttributes([NSFontAttributeName : UIFont(name: "Montserrat-Regular", size: 14)!], for: .normal)
+        UIBarButtonItem.appearance()
+            .setTitleTextAttributes([NSFontAttributeName : UIFont(name: "Montserrat-Regular", size: 14)!], for: .selected)
+        UIBarButtonItem.appearance()
+            .setTitleTextAttributes([NSFontAttributeName : UIFont(name: "Montserrat-Regular", size: 14)!], for: .highlighted)
     }
 }

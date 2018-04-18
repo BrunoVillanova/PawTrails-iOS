@@ -49,7 +49,7 @@ class PTDeviceStatusView: UIView {
                 make.bottom.lessThanOrEqualToSuperview().offset(0)
                 
                 if signalView.superview != nil {
-                    make.left.equalTo(signalView.snp.right).offset(6)
+                    make.left.equalTo(signalView.snp.right).offset(12)
                 }
                 
                 make.right.equalToSuperview()
