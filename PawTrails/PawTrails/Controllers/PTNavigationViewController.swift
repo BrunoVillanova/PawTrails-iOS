@@ -25,6 +25,7 @@ class PTNavigationViewController: UINavigationController {
     
     override var viewControllers: [UIViewController] {
         didSet {
+            setupShadow(false)
             addLeftMenuButton()
         }
     }
@@ -66,11 +67,7 @@ class PTNavigationViewController: UINavigationController {
             self.navigationBar.layer.shadowOpacity = 0.09
             self.navigationBar.layer.masksToBounds = false
         } else {
-            self.navigationBar.layer.shadowColor = nil
-            self.navigationBar.layer.shadowOffset = CGSize.zero
-            self.navigationBar.layer.shadowRadius = 0
             self.navigationBar.layer.shadowOpacity = 0
-            self.navigationBar.layer.masksToBounds = true
         }
     }
 }

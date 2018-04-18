@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -149,17 +150,105 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GCO-5S-v2Z" userLabel="No Pets View">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tjc-wA-R9N" userLabel="Image Container">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="323.5"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ConnectDevice" translatesAutoresizingMaskIntoConstraints="NO" id="4bo-Qa-MCq" userLabel="Pet Image View">
+                                                <rect key="frame" x="47.5" y="122.5" width="280" height="201"/>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="4bo-Qa-MCq" secondAttribute="bottom" id="QwJ-mm-dPc"/>
+                                            <constraint firstItem="4bo-Qa-MCq" firstAttribute="centerX" secondItem="tjc-wA-R9N" secondAttribute="centerX" id="svk-cu-m3G"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z9t-rP-m9I" userLabel="Text Container View">
+                                        <rect key="frame" x="0.0" y="323.5" width="375" height="130.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You Currently have no pet added, please add your pet." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rw9-Rg-QW6">
+                                                <rect key="frame" x="67.5" y="48" width="240" height="34.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="240" id="UjK-3g-tZj"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
+                                                <color key="textColor" red="0.25490196078431371" green="0.28235294117647058" blue="0.32156862745098036" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="Rw9-Rg-QW6" firstAttribute="centerY" secondItem="z9t-rP-m9I" secondAttribute="centerY" id="LwS-qk-lFe"/>
+                                            <constraint firstItem="Rw9-Rg-QW6" firstAttribute="centerX" secondItem="z9t-rP-m9I" secondAttribute="centerX" id="Ocs-T5-4v2"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DgG-qw-P8T" userLabel="Button Container">
+                                        <rect key="frame" x="0.0" y="454" width="375" height="193"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PBr-tN-CG7" userLabel="Add First Pet Button" customClass="PTNiceButton" customModule="PawTrails" customModuleProvider="target">
+                                                <rect key="frame" x="24" y="0.0" width="327" height="52"/>
+                                                <color key="backgroundColor" red="0.98039215690000003" green="0.25490196079999999" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="52" id="Edj-tq-QJO"/>
+                                                    <constraint firstAttribute="width" constant="327" id="FIs-Db-iM9"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
+                                                <state key="normal" title="ADD MY FIRST PET">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="addFirstPetAction:" destination="eYj-Jw-1jN" eventType="touchUpInside" id="C1c-in-pJk"/>
+                                                </connections>
+                                            </button>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CompanyLogoColorSmall" translatesAutoresizingMaskIntoConstraints="NO" id="a0x-Ay-MIe">
+                                                <rect key="frame" x="82" y="168" width="211" height="25"/>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="a0x-Ay-MIe" firstAttribute="centerX" secondItem="DgG-qw-P8T" secondAttribute="centerX" id="6Cb-Et-V1X"/>
+                                            <constraint firstItem="PBr-tN-CG7" firstAttribute="centerX" secondItem="DgG-qw-P8T" secondAttribute="centerX" id="6ZA-AZ-07Y"/>
+                                            <constraint firstItem="PBr-tN-CG7" firstAttribute="top" secondItem="DgG-qw-P8T" secondAttribute="top" id="mJz-E4-Mx4"/>
+                                            <constraint firstItem="a0x-Ay-MIe" firstAttribute="top" relation="greaterThanOrEqual" secondItem="PBr-tN-CG7" secondAttribute="bottom" constant="16" id="nCW-eP-wFn"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="tjc-wA-R9N" firstAttribute="leading" secondItem="GCO-5S-v2Z" secondAttribute="leading" id="BPY-mG-x5r"/>
+                                    <constraint firstItem="z9t-rP-m9I" firstAttribute="leading" secondItem="GCO-5S-v2Z" secondAttribute="leading" id="Iqm-Xy-Ahm"/>
+                                    <constraint firstAttribute="trailing" secondItem="DgG-qw-P8T" secondAttribute="trailing" id="NrQ-A6-kql"/>
+                                    <constraint firstItem="DgG-qw-P8T" firstAttribute="leading" secondItem="GCO-5S-v2Z" secondAttribute="leading" id="Sih-0d-nde"/>
+                                    <constraint firstItem="z9t-rP-m9I" firstAttribute="height" secondItem="GCO-5S-v2Z" secondAttribute="height" multiplier="0.2" constant="1" id="ZBa-pK-9sm"/>
+                                    <constraint firstItem="tjc-wA-R9N" firstAttribute="top" secondItem="GCO-5S-v2Z" secondAttribute="top" id="aO5-FI-mSm"/>
+                                    <constraint firstAttribute="trailing" secondItem="tjc-wA-R9N" secondAttribute="trailing" id="bsK-Da-d6c"/>
+                                    <constraint firstItem="tjc-wA-R9N" firstAttribute="height" secondItem="GCO-5S-v2Z" secondAttribute="height" multiplier="0.5" id="nw5-kH-Dk6"/>
+                                    <constraint firstItem="DgG-qw-P8T" firstAttribute="top" secondItem="z9t-rP-m9I" secondAttribute="bottom" id="rlG-SX-bq6"/>
+                                    <constraint firstItem="z9t-rP-m9I" firstAttribute="top" secondItem="tjc-wA-R9N" secondAttribute="bottom" id="wDN-js-kxV"/>
+                                    <constraint firstAttribute="bottom" secondItem="DgG-qw-P8T" secondAttribute="bottom" id="wvS-sN-DZ2"/>
+                                    <constraint firstAttribute="trailing" secondItem="z9t-rP-m9I" secondAttribute="trailing" id="yP4-K0-wUa"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.98431372549019602" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="a0x-Ay-MIe" firstAttribute="bottom" secondItem="9Fa-zt-ymt" secondAttribute="bottom" id="43c-bO-Nlg"/>
                             <constraint firstItem="Z93-jO-RrF" firstAttribute="top" secondItem="9Fa-zt-ymt" secondAttribute="top" id="6q6-W7-s55"/>
+                            <constraint firstItem="GCO-5S-v2Z" firstAttribute="top" secondItem="9Fa-zt-ymt" secondAttribute="top" id="8FU-Ze-Aat"/>
                             <constraint firstItem="9Fa-zt-ymt" firstAttribute="trailing" secondItem="Z93-jO-RrF" secondAttribute="trailing" id="JhH-zw-rgH"/>
+                            <constraint firstAttribute="bottom" secondItem="GCO-5S-v2Z" secondAttribute="bottom" id="MFJ-Di-Dyc"/>
+                            <constraint firstItem="9Fa-zt-ymt" firstAttribute="trailing" secondItem="GCO-5S-v2Z" secondAttribute="trailing" id="ZIN-11-Nv3"/>
                             <constraint firstItem="Z93-jO-RrF" firstAttribute="leading" secondItem="9Fa-zt-ymt" secondAttribute="leading" id="aBl-dI-jT5"/>
+                            <constraint firstItem="GCO-5S-v2Z" firstAttribute="leading" secondItem="9Fa-zt-ymt" secondAttribute="leading" id="chX-kF-ZYd"/>
                             <constraint firstAttribute="bottom" secondItem="Z93-jO-RrF" secondAttribute="bottom" id="poZ-Ua-Izl"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9Fa-zt-ymt"/>
                     </view>
                     <connections>
+                        <outlet property="noPetsView" destination="GCO-5S-v2Z" id="lc7-dL-sDi"/>
                         <outlet property="tableView" destination="Z93-jO-RrF" id="Ojf-PJ-11B"/>
                     </connections>
                 </viewController>
@@ -168,4 +257,8 @@
             <point key="canvasLocation" x="140" y="136.28185907046478"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="CompanyLogoColorSmall" width="211" height="25"/>
+        <image name="ConnectDevice" width="280" height="201"/>
+    </resources>
 </document>

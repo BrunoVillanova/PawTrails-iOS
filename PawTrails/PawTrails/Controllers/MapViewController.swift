@@ -37,30 +37,11 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
-        UIApplication.shared.statusBarStyle = .default
-        button.addTarget(self, action:  #selector(self.refreshBtnPressed(_:)), for: .touchUpInside)
-        button.setImage(refreshIconImage, for: .normal)
-        button.tintColor = PTConstants.colors.darkGray
-        self.navigationItem.rightBarButtonItem?.customView = button
-        self.navigationItem.rightBarButtonItem?.tintColor = PTConstants.colors.primary
-        
-        
-        let notificationIdentifier: String = "petAdded"
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadPets), name: NSNotification.Name(rawValue: notificationIdentifier), object: nil)
-        
-        DataManager.instance.pets().subscribe(onNext: { (pets) in
-            if pets.isEmpty || pets.count == 0 {
-                self.appDelegate.showPetWizardModally(true)
-            }
-            
-        }).disposed(by: disposeBag)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         mapView.showGpsUpdates()
-        self.tabBarController?.tabBar.isHidden = false
         
         if isDisplayedPetScreen {
             reloadPets()
@@ -73,6 +54,12 @@ class MapViewController: UIViewController {
         
         if isFirstTimeViewAppears {
             isFirstTimeViewAppears = false
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let selectPetsViewController = segue.destination as? SelectPetsVC {
+            selectPetsViewController.action = selectPetsAction.startAdventure
         }
     }
     
@@ -116,9 +103,34 @@ class MapViewController: UIViewController {
         
         presenter.attachView(self)
         reloadPets()
+        
+        UIApplication.shared.statusBarStyle = .default
+        button.addTarget(self, action:  #selector(self.refreshBtnPressed(_:)), for: .touchUpInside)
+        button.setImage(refreshIconImage, for: .normal)
+        button.tintColor = PTConstants.colors.darkGray
+        self.navigationItem.rightBarButtonItem?.customView = button
+        self.navigationItem.rightBarButtonItem?.tintColor = PTConstants.colors.primary
+        
+        
+        let notificationIdentifier: String = "petAdded"
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadPets), name: NSNotification.Name(rawValue: notificationIdentifier), object: nil)
+        
+        DataManager.instance.pets().subscribe(onNext: { (pets) in
+            if pets.isEmpty || pets.count == 0 {
+                self.appDelegate.showPetWizardModally(true)
+            }
+            
+        }).disposed(by: disposeBag)
+        
+        configureNavigationBar()
+    }
+    
+    fileprivate func configureNavigationBar() {
+        if let navigationController = self.navigationController as? PTNavigationViewController {
+            navigationController.showNavigationBarDropShadow = true
+        }
     }
 
-    
     func reloadPets(){
         presenter.getPets()
     }
@@ -133,12 +145,6 @@ class MapViewController: UIViewController {
         self.alert(title: error.title, msg: error.msg)
     }
     
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let selectPetsViewController = segue.destination as? SelectPetsVC {
-            selectPetsViewController.action = selectPetsAction.startAdventure
-        }
-    }
     
     fileprivate func showIndicator() {
         refreshBarBtn.customView = self.activityIndicator

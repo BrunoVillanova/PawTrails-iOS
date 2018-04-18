@@ -2,7 +2,6 @@
 //  SettingsTableViewController.swift
 //  PawTrails
 //
-//  Created by Marc Perello on 23/03/2017.
 //  Copyright © 2017 AttitudeTech. All rights reserved.
 //
 
@@ -82,9 +81,9 @@ class SettingsTableViewController: UITableViewController, SettingsView {
         
         //self.tableView.contentInset = UIEdgeInsetsMake(-37, 0, -37, 0);
         
-        configureNavBar()
+        configureNavigationBar()
+        tableView.tableFooterView = nil
         tableView.addSubview(companyLogoImageView)
-        
     }
     
     override func viewDidLayoutSubviews() {
@@ -92,22 +91,21 @@ class SettingsTableViewController: UITableViewController, SettingsView {
         
         if let image = companyLogoImageView.image {
 
-            let originY = tableView.bounds.size.height - (image.size.height+self.bottomSafeAreaHeight+72)
+            let originY = tableView.bounds.size.height - (image.size.height+self.bottomSafeAreaHeight+84)
             companyLogoImageView.frame = CGRect(x: 0, y: originY, width: image.size.width, height: image.size.height)
             var center: CGPoint = companyLogoImageView.center
             center.x = tableView.bounds.size.width/2.0
             companyLogoImageView.center = center
         }
-        
     }
     
-    func configureNavBar() {
+    fileprivate func configureNavigationBar() {
         
-        self.navigationController?.navigationBar.layer.shadowColor = UIColor.lightGray.cgColor
-        self.navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
-        self.navigationController?.navigationBar.layer.shadowRadius = 4.0
-        self.navigationController?.navigationBar.layer.shadowOpacity = 0.5
-        self.navigationController?.navigationBar.layer.masksToBounds = false
+        if let navigationController = self.navigationController as? PTNavigationViewController {
+            navigationController.showNavigationBarDropShadow = true
+        }
+        
+        self.navigationItem.title = "Settings"
     }
     
     deinit {

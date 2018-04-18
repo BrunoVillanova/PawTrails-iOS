@@ -15,6 +15,7 @@ import SDWebImage
 class PetListViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var noPetsView: UIView!
     
     fileprivate let refreshControl = UIRefreshControl()
     fileprivate var isFirstTimeViewAppears = true
@@ -22,6 +23,7 @@ class PetListViewController: UIViewController {
     fileprivate let disposeBag = DisposeBag()
     fileprivate let dataSource = RxTableViewSectionedReloadDataSource<PetListSection>()
     fileprivate let companyLogoImageView = UIImageView(image: UIImage(named: "CompanyLogoColorSmall"))
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,13 +103,13 @@ class PetListViewController: UIViewController {
                     sections.append(PetListSection(header: "Shared with Me", items: sharedPets))
                 }
                 
-//                self.noPetsFound.isHidden = pets.count > 0;
+                self.noPetsView.isHidden = pets.count > 0;
                 return sections
             })
     }
     
     fileprivate func bindData() {
-//        noPetsFound.isHidden = true
+        noPetsView.isHidden = true
         tableView.delegate = self
         tableView.tableFooterView = UIView()
         tableView.addSubview(companyLogoImageView)
@@ -161,6 +163,10 @@ class PetListViewController: UIViewController {
             petDetailsViewController.pet = pet
             self.navigationController?.pushViewController(petDetailsViewController, animated: true)
         }
+    }
+    
+    @IBAction func addFirstPetAction(_ sender: Any) {
+        self.addPetButtonAction(sender)
     }
 }
 
