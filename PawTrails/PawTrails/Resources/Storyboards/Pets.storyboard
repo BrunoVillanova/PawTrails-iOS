@@ -38,6 +38,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Izt-Xi-vXt" userLabel="Shadow View">
+                                                    <rect key="frame" x="20" y="-42.5" width="335" height="128"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </view>
                                                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wMc-RO-nW7" userLabel="Main View">
                                                     <rect key="frame" x="16" y="16.5" width="343" height="40"/>
                                                     <subviews>
@@ -93,13 +97,23 @@
                                                                 <constraint firstItem="trt-hH-Ifj" firstAttribute="centerY" secondItem="DWR-um-V6Q" secondAttribute="centerY" id="zeP-2q-9JM"/>
                                                             </constraints>
                                                         </view>
+                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tms-gA-woK" userLabel="Separator View">
+                                                            <rect key="frame" x="0.0" y="-44" width="343" height="1"/>
+                                                            <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="1" id="j28-ad-AWG"/>
+                                                            </constraints>
+                                                        </view>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstItem="m4n-Uz-7yY" firstAttribute="top" secondItem="wMc-RO-nW7" secondAttribute="top" constant="16" id="2Rx-nQ-GrB"/>
                                                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="YfQ-dK-aDz" secondAttribute="bottom" id="Acb-Gm-3bY"/>
                                                         <constraint firstItem="YfQ-dK-aDz" firstAttribute="leading" secondItem="m4n-Uz-7yY" secondAttribute="trailing" constant="24" id="BBG-jG-fQ2"/>
+                                                        <constraint firstItem="tms-gA-woK" firstAttribute="leading" secondItem="wMc-RO-nW7" secondAttribute="leading" id="Bck-0E-YkB"/>
                                                         <constraint firstAttribute="trailing" secondItem="YfQ-dK-aDz" secondAttribute="trailing" constant="24" id="Nz8-Ib-C4i"/>
+                                                        <constraint firstAttribute="bottom" secondItem="tms-gA-woK" secondAttribute="bottom" id="SaM-bh-llf"/>
+                                                        <constraint firstAttribute="trailing" secondItem="tms-gA-woK" secondAttribute="trailing" id="YzO-VH-I9z"/>
                                                         <constraint firstItem="YfQ-dK-aDz" firstAttribute="top" relation="greaterThanOrEqual" secondItem="wMc-RO-nW7" secondAttribute="top" id="gWs-gU-U68"/>
                                                         <constraint firstAttribute="bottom" secondItem="m4n-Uz-7yY" secondAttribute="bottom" constant="16" id="ghY-uU-BS3"/>
                                                         <constraint firstItem="m4n-Uz-7yY" firstAttribute="leading" secondItem="wMc-RO-nW7" secondAttribute="leading" constant="16" id="qDP-tD-aWS"/>
@@ -109,20 +123,28 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
+                                                <constraint firstItem="Izt-Xi-vXt" firstAttribute="bottom" secondItem="wMc-RO-nW7" secondAttribute="bottom" constant="-4" id="78J-d2-FNg"/>
                                                 <constraint firstItem="wMc-RO-nW7" firstAttribute="top" secondItem="bNw-ht-thX" secondAttribute="top" constant="16" id="8N9-tG-Xqh"/>
+                                                <constraint firstItem="Izt-Xi-vXt" firstAttribute="trailing" secondItem="wMc-RO-nW7" secondAttribute="trailing" constant="-4" id="9yI-WB-hcq"/>
                                                 <constraint firstItem="wMc-RO-nW7" firstAttribute="leading" secondItem="bNw-ht-thX" secondAttribute="leading" constant="16" id="HSx-SP-MPq"/>
                                                 <constraint firstAttribute="bottom" secondItem="wMc-RO-nW7" secondAttribute="bottom" constant="16" id="K36-Qd-Xgw"/>
+                                                <constraint firstItem="Izt-Xi-vXt" firstAttribute="leading" secondItem="wMc-RO-nW7" secondAttribute="leading" constant="4" id="XId-pI-R8L"/>
+                                                <constraint firstItem="Izt-Xi-vXt" firstAttribute="top" secondItem="wMc-RO-nW7" secondAttribute="top" constant="4" id="f8P-Jq-ipL"/>
                                                 <constraint firstAttribute="trailing" secondItem="wMc-RO-nW7" secondAttribute="trailing" constant="16" id="kM6-LG-RPW"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="addressLabel" destination="0Uo-OE-RZM" id="Vjk-cU-FMW"/>
+                                            <outlet property="bottomLayoutConstraint" destination="K36-Qd-Xgw" id="NMj-df-BRz"/>
                                             <outlet property="mainView" destination="wMc-RO-nW7" id="1OB-hK-hjE"/>
                                             <outlet property="petImageView" destination="m4n-Uz-7yY" id="gwo-KI-RS0"/>
                                             <outlet property="petNameLabel" destination="DWR-um-V6Q" id="UQ7-5c-iYb"/>
+                                            <outlet property="separatorView" destination="tms-gA-woK" id="ahH-Ls-MSE"/>
+                                            <outlet property="shadowView" destination="Izt-Xi-vXt" id="F3N-NH-JeA"/>
                                             <outlet property="statusTimeLabel" destination="trt-hH-Ifj" id="GKI-r5-WfO"/>
                                             <outlet property="statusView" destination="9qv-AZ-yhE" id="Uax-Ei-vdC"/>
+                                            <outlet property="topLayoutConstraint" destination="8N9-tG-Xqh" id="ZzL-7f-j9f"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

@@ -108,9 +108,9 @@ class PetListViewController: UIViewController {
     
     fileprivate func bindData() {
 //        noPetsFound.isHidden = true
+        tableView.delegate = self
         tableView.tableFooterView = UIView()
         tableView.addSubview(companyLogoImageView)
-        tableView.delegate = self
         
         refreshControl.backgroundColor = UIColor.secondary
         refreshControl.tintColor = UIColor.primary
@@ -131,8 +131,14 @@ class PetListViewController: UIViewController {
         dataSource.configureCell = { dataSource, tableView, indexPath, element in
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PetListCell
             cell.configure(element)
+            let numberOfRows = dataSource.tableView(tableView, numberOfRowsInSection: indexPath.section)
+            let isFirstRow:Bool = indexPath.row == 0
+            let isLastRow:Bool = indexPath.row == numberOfRows-1
+            cell.isFirstRow = isFirstRow
+            cell.isLastRow = isLastRow
             return cell
         }
+    
         
         dataSource.titleForHeaderInSection = { ds, index in
             return ds.sectionModels[index].header
@@ -165,6 +171,9 @@ extension PetListViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 48
+        }
         return 24
     }
 }
@@ -186,21 +195,25 @@ extension PetListSection: SectionModelType {
 
 class PetListCell: UITableViewCell {
     
+    @IBOutlet weak var mainView: UIView!
+    @IBOutlet weak var shadowView: UIView!
+    @IBOutlet weak var separatorView: UIView!
     @IBOutlet weak var petImageView: UIImageView!
     @IBOutlet weak var petNameLabel: UILabel!
     @IBOutlet weak var statusTimeLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var statusView: PTDeviceStatusView!
-    @IBOutlet weak var mainView: UIView!
+    @IBOutlet weak var bottomLayoutConstraint: NSLayoutConstraint!
+    @IBOutlet weak var topLayoutConstraint: NSLayoutConstraint!
     
     var currentPet: Pet?
     var disposable: Disposable?
-    var showTopBorder: Bool = true {
+    var isFirstRow: Bool = true {
         didSet {
             updateLayout()
         }
     }
-    var showBottomBorder: Bool = true {
+    var isLastRow: Bool = true {
         didSet {
             updateLayout()
         }
@@ -222,28 +235,49 @@ class PetListCell: UITableViewCell {
     }
     
     fileprivate func updateLayout() {
-        
+
+        let shadowRadius:CGFloat = 4
         var corners: UIRectCorner = []
+        var shadowRect: CGRect = shadowView.bounds.insetBy(dx: 0, dy: 0)
         
-        if showTopBorder && showBottomBorder {
+        if isFirstRow && isLastRow {
             corners = [.topLeft, .topRight, .bottomLeft, .bottomRight]
-        } else if showTopBorder {
+            topLayoutConstraint.constant = 16
+            bottomLayoutConstraint.constant = 16
+            separatorView.isHidden = true
+        } else if isFirstRow {
             corners = [.topLeft, .topRight]
-        } else if showBottomBorder {
+            topLayoutConstraint.constant = 16
+            bottomLayoutConstraint.constant = 0
+            separatorView.isHidden = false
+            shadowRect = mainView.bounds.insetBy(dx: 0, dy: 2*shadowRadius)
+        } else if isLastRow {
             corners = [.bottomLeft, .bottomRight]
+            topLayoutConstraint.constant = 0
+            bottomLayoutConstraint.constant = 16
+            separatorView.isHidden = true
+            shadowRect = mainView.bounds.insetBy(dx: 0, dy: -2*shadowRadius)
+        } else {
+            topLayoutConstraint.constant = 0
+            bottomLayoutConstraint.constant = 0
+            separatorView.isHidden = false
+            shadowRect = mainView.bounds.insetBy(dx: 0, dy: 2*shadowRadius)
         }
         
+        print("\(corners) \(shadowRect)")
         mainView.roundCorners(corners: corners, radius: 4)
-        
+
         petImageView.layer.cornerRadius = petImageView.frame.size.height/2.0
-//        mainView.dropShadow(color: PTConstants.colors.darkGray, opacity: 0.8, offSet: CGSize(width: 0, height: 10), radius: 10, scale: true)
-        
-        mainView.clipsToBounds = false
-        mainView.layer.masksToBounds = false
-        mainView.layer.shadowOffset = CGSize(width: 0, height: 0)
-        mainView.layer.shadowRadius = 50
-        mainView.layer.shadowColor = PTConstants.colors.newLightGray.cgColor
-        mainView.layer.shadowOpacity = 1
+
+        shadowView.clipsToBounds = false
+        shadowView.layer.masksToBounds = false
+        shadowView.layer.shadowOffset = CGSize(width: -2, height: -2)
+        shadowView.layer.shadowRadius = shadowRadius
+        shadowView.layer.shadowColor = PTConstants.colors.darkGray.cgColor
+        shadowView.layer.shadowOpacity = 0.15
+        shadowView.layer.shadowPath = UIBezierPath(roundedRect: mainView.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: 4, height: 4)).cgPath
+        shadowView.layer.shouldRasterize = true
+        shadowView.layer.rasterizationScale = UIScreen.main.scale
     }
     
     override func layoutSubviews() {
