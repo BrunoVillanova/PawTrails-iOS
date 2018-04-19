@@ -79,6 +79,7 @@ class PTAlertViewController: UIViewController {
     }
     var textFieldInputView: UIView?
     var backgroundView: UIView?
+    let contentView = UIView(frame: .zero)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -196,6 +197,10 @@ class PTAlertViewController: UIViewController {
         }
     }
     
+    func didTapOnBackground() {
+        self.dismiss(animated: true)
+    }
+    
     func initialize() {
         
         view.backgroundColor = .clear
@@ -209,6 +214,8 @@ class PTAlertViewController: UIViewController {
         backgroundView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
+        
+        backgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapOnBackground)))
         
         self.backgroundView = backgroundView
         
@@ -276,7 +283,6 @@ class PTAlertViewController: UIViewController {
         
         // Content View
         
-        let contentView = UIView(frame: .zero)
         contentView.backgroundColor = .white
         alertContainerView.addSubview(contentView)
         
@@ -342,35 +348,53 @@ class PTAlertViewController: UIViewController {
             infoLabel.snp.makeConstraints { (make) in
                 make.bottom.equalToSuperview().offset(-24)
             }
+        } else if let last = contentView.subviews.last {
+            last.snp.makeConstraints { (make) in
+                make.leading.equalTo(last.frame.origin.x)
+                make.trailing.equalTo(-last.frame.origin.x)
+                make.top.equalTo(last.frame.origin.y)
+                make.bottom.equalTo(-last.frame.origin.y)
+                make.height.equalTo(last.frame.size.height)
+            }
         }
     
-        // Buttons View
-        buttonsView.backgroundColor = .white
-        alertContainerView.addSubview(buttonsView)
+        // Add buttons if needed
         
-        buttonsView.snp.makeConstraints { (make) in
-            make.top.equalTo(contentView.snp.bottom)
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
-            make.bottom.equalToSuperview()
-            make.height.equalTo(52)
+        if resultButtons.count > 0 {
+
+            // Buttons View
+            buttonsView.backgroundColor = .white
+            alertContainerView.addSubview(buttonsView)
+            
+            buttonsView.snp.makeConstraints { (make) in
+                make.top.equalTo(contentView.snp.bottom)
+                make.left.equalToSuperview()
+                make.right.equalToSuperview()
+                make.bottom.equalToSuperview()
+                make.height.equalTo(52)
+            }
+            
+            // Button Top SeparatorView
+            buttonsTopSeparatorView.backgroundColor = PTConstants.colors.newLightGray
+            buttonsView.addSubview(buttonsTopSeparatorView)
+            
+            buttonsTopSeparatorView.snp.makeConstraints { (make) in
+                make.top.equalToSuperview()
+                make.left.equalToSuperview()
+                make.right.equalToSuperview()
+                make.height.equalTo(1)
+            }
+            
+            
+            maxButtonSize = titleBarBackgroundImage!.size.width
+            
+            configureButtons()
+            
+        } else {
+            contentView.snp.makeConstraints { (make) in
+                make.bottom.equalToSuperview()
+            }
         }
-        
-        // Button Top SeparatorView
-        buttonsTopSeparatorView.backgroundColor = PTConstants.colors.newLightGray
-        buttonsView.addSubview(buttonsTopSeparatorView)
-
-        buttonsTopSeparatorView.snp.makeConstraints { (make) in
-            make.top.equalToSuperview()
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
-            make.height.equalTo(1)
-        }
-
-
-        maxButtonSize = titleBarBackgroundImage!.size.width
-        
-        configureButtons()
     }
 }
 

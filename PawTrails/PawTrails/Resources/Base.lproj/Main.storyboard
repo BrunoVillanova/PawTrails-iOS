@@ -1987,66 +1987,21 @@
                                     <action selector="thirdButtonPressed:" destination="NB9-41-O2a" eventType="touchUpInside" id="Bwp-mK-NYl"/>
                                 </connections>
                             </button>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" insetsLayoutMarginsFromSafeArea="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="X26-Zz-hRg">
-                                <rect key="frame" x="16" y="636" width="286.66666666666669" height="142"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="142" id="BOg-WK-wFn"/>
-                                </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="KTb-4A-cVV">
-                                    <size key="itemSize" width="60" height="60"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="cell" id="2iA-lh-XHi" customClass="PetsCollectionViewCell" customModule="PawTrails" customModuleProvider="target">
-                                        <rect key="frame" x="226.66666666666669" y="0.0" width="60" height="60"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="896-1H-CaN" customClass="PTBalloonImageView" customModule="PawTrails" customModuleProvider="target">
-                                                    <rect key="frame" x="4" y="4" width="52" height="52"/>
-                                                </imageView>
-                                            </subviews>
-                                        </view>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstItem="896-1H-CaN" firstAttribute="leading" secondItem="2iA-lh-XHi" secondAttribute="leading" constant="4" id="00S-wx-Dx8"/>
-                                            <constraint firstAttribute="bottom" secondItem="896-1H-CaN" secondAttribute="bottom" constant="4" id="7ls-mS-mdu"/>
-                                            <constraint firstItem="896-1H-CaN" firstAttribute="top" secondItem="2iA-lh-XHi" secondAttribute="top" constant="4" id="MHU-Wq-3RL"/>
-                                            <constraint firstAttribute="bottom" secondItem="896-1H-CaN" secondAttribute="bottom" constant="4" id="X6c-R1-r32"/>
-                                            <constraint firstAttribute="trailing" secondItem="896-1H-CaN" secondAttribute="trailing" constant="4" id="hvC-Eq-g3o"/>
-                                            <constraint firstAttribute="trailing" secondItem="896-1H-CaN" secondAttribute="trailing" constant="4" id="pen-m7-msN"/>
-                                            <constraint firstItem="896-1H-CaN" firstAttribute="leading" secondItem="2iA-lh-XHi" secondAttribute="leading" constant="4" id="wUz-kI-sdv"/>
-                                            <constraint firstItem="896-1H-CaN" firstAttribute="top" secondItem="2iA-lh-XHi" secondAttribute="top" constant="4" id="zAo-vl-g81"/>
-                                        </constraints>
-                                        <connections>
-                                            <outlet property="petImageCell" destination="896-1H-CaN" id="Z0l-gs-yVi"/>
-                                        </connections>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="yde-DI-cy3" firstAttribute="bottom" secondItem="93O-q0-eKh" secondAttribute="bottom" constant="12" id="0X6-j5-Foy"/>
                             <constraint firstItem="QMo-ic-gTj" firstAttribute="height" secondItem="0oC-dH-GlK" secondAttribute="height" id="1eA-g9-xfS"/>
-                            <constraint firstItem="X26-Zz-hRg" firstAttribute="leading" secondItem="yde-DI-cy3" secondAttribute="leading" constant="16" id="9hu-jg-R32"/>
                             <constraint firstItem="0oC-dH-GlK" firstAttribute="top" secondItem="QMo-ic-gTj" secondAttribute="bottom" constant="12" id="JQh-JR-h6b"/>
                             <constraint firstItem="0oC-dH-GlK" firstAttribute="width" secondItem="93O-q0-eKh" secondAttribute="width" id="KOe-G6-l50"/>
                             <constraint firstItem="0oC-dH-GlK" firstAttribute="height" secondItem="93O-q0-eKh" secondAttribute="height" id="M0T-xR-PZm"/>
                             <constraint firstItem="QMo-ic-gTj" firstAttribute="width" secondItem="0oC-dH-GlK" secondAttribute="width" id="MOX-lK-ECy"/>
-                            <constraint firstItem="yde-DI-cy3" firstAttribute="bottom" secondItem="X26-Zz-hRg" secondAttribute="bottom" id="Rnn-IL-Ia3"/>
                             <constraint firstItem="93O-q0-eKh" firstAttribute="top" secondItem="0oC-dH-GlK" secondAttribute="bottom" constant="12" id="Z3a-Vy-JgZ"/>
                             <constraint firstItem="7TZ-Ow-5av" firstAttribute="bottom" secondItem="NQP-yG-kr5" secondAttribute="bottom" id="e1o-AI-C4D"/>
                             <constraint firstItem="QMo-ic-gTj" firstAttribute="centerX" secondItem="0oC-dH-GlK" secondAttribute="centerX" id="gw7-G7-oJd"/>
                             <constraint firstItem="yde-DI-cy3" firstAttribute="trailing" secondItem="93O-q0-eKh" secondAttribute="trailing" constant="12" id="o40-JA-HVz"/>
                             <constraint firstItem="7TZ-Ow-5av" firstAttribute="trailing" secondItem="yde-DI-cy3" secondAttribute="trailing" id="oXN-PA-Rbe"/>
                             <constraint firstItem="7TZ-Ow-5av" firstAttribute="top" secondItem="yde-DI-cy3" secondAttribute="top" id="pPh-ba-6Tf"/>
-                            <constraint firstItem="0oC-dH-GlK" firstAttribute="leading" secondItem="X26-Zz-hRg" secondAttribute="trailing" constant="4" id="qpw-CY-TYL"/>
                             <constraint firstItem="7TZ-Ow-5av" firstAttribute="leading" secondItem="yde-DI-cy3" secondAttribute="leading" id="vCN-ZY-Cv2"/>
                             <constraint firstItem="0oC-dH-GlK" firstAttribute="centerX" secondItem="93O-q0-eKh" secondAttribute="centerX" id="vCc-hK-vIz"/>
                         </constraints>
@@ -2060,7 +2015,6 @@
                     <connections>
                         <outlet property="firstButtonfromthebottom" destination="93O-q0-eKh" id="xZg-ne-SSu"/>
                         <outlet property="mapView" destination="7TZ-Ow-5av" id="PYx-nl-nMr"/>
-                        <outlet property="petsCollectionView" destination="X26-Zz-hRg" id="Lqe-2i-YnP"/>
                         <outlet property="refreshBarBtn" destination="dSI-y6-ehr" id="wJM-VA-YhB"/>
                         <outlet property="secButtonFromTheBottom" destination="0oC-dH-GlK" id="ZdZ-Ck-bM1"/>
                         <outlet property="thirdButtonFromTheBottom" destination="QMo-ic-gTj" id="oCm-Ne-2d3"/>

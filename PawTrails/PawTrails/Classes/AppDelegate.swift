@@ -231,34 +231,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 enum Storyboards {
 
-    case login, common, main, support, pets, BCS, settings
+    case login, common, main, support, pets, BCS, settings, petWizard
     
     var storyboard: UIStoryboard {
         switch self {
-            case .login: return UIStoryboard(name: "Login", bundle: nil)
-            case .common: return UIStoryboard(name: "Common", bundle: nil)
-            case .main: return UIStoryboard(name: "Main", bundle: nil)
-            case .support: return UIStoryboard(name: "Support", bundle: nil)
-            case .pets: return UIStoryboard(name: "Pets", bundle: nil)
-            case .BCS: return UIStoryboard(name: "BCS", bundle: nil)
-            case .settings: return UIStoryboard(name: "Settings", bundle: nil)
+        case .login: return UIStoryboard(name: "Login", bundle: nil)
+        case .common: return UIStoryboard(name: "Common", bundle: nil)
+        case .main: return UIStoryboard(name: "Main", bundle: nil)
+        case .support: return UIStoryboard(name: "Support", bundle: nil)
+        case .pets: return UIStoryboard(name: "Pets", bundle: nil)
+        case .BCS: return UIStoryboard(name: "BCS", bundle: nil)
+        case .settings: return UIStoryboard(name: "Settings", bundle: nil)
+        case .petWizard: return UIStoryboard(name: "PetWizard", bundle: nil)
         }
     }
 }
 
 enum ViewController {
     case initial, login, signup, passwordRecovery, passwordRecoverySuccess, emailVerification, termsAndPrivacy,
-         leftMenu, liveTracking, myPets, myProfile, vetRecommendations, deviceFinder, settings, support, petList, petDetail, BCSInitial, changePassword, aboutUs
+         leftMenu, liveTracking, myPets, myProfile, vetRecommendations, deviceFinder, settings, support, petList, petDetail, petWizard, BCSInitial, changePassword, aboutUs
     
     var storyboard: UIStoryboard {
         switch self {
-            case .initial, .login, .signup, .passwordRecovery, .passwordRecoverySuccess, .emailVerification, .termsAndPrivacy: return Storyboards.login.storyboard
-            case .leftMenu: return Storyboards.common.storyboard
-            case .liveTracking, .myPets, .petDetail, .myProfile, .vetRecommendations, .deviceFinder: return Storyboards.main.storyboard
-            case .support: return Storyboards.support.storyboard
-            case .petList: return Storyboards.pets.storyboard
-            case .BCSInitial: return Storyboards.BCS.storyboard
-            case .settings, .changePassword, .aboutUs : return Storyboards.settings.storyboard
+    case .initial, .login, .signup, .passwordRecovery, .passwordRecoverySuccess, .emailVerification, .termsAndPrivacy: return Storyboards.login.storyboard
+        case .leftMenu: return Storyboards.common.storyboard
+        case .liveTracking, .myPets, .petDetail, .myProfile, .vetRecommendations, .deviceFinder: return Storyboards.main.storyboard
+        case .support: return Storyboards.support.storyboard
+        case .petList: return Storyboards.pets.storyboard
+        case .BCSInitial: return Storyboards.BCS.storyboard
+        case .settings, .changePassword, .aboutUs : return Storyboards.settings.storyboard
+        case .petWizard: return Storyboards.petWizard.storyboard
         }
     }
     
@@ -289,6 +291,7 @@ enum ViewController {
             // Pets
             case .petList: return "PetListViewController"
             case .petDetail: return "PetDetails"
+            case .petWizard: return "wizard"
             //BCS
             case .BCSInitial: return "BCSInitialViewController"
         }

@@ -14,7 +14,6 @@ import GSMessages
 class MapViewController: UIViewController {
     
     @IBOutlet weak var mapView: PTMapView!
-    @IBOutlet weak var petsCollectionView: UICollectionView!
     @IBOutlet weak var firstButtonfromthebottom: UIButton!
     @IBOutlet weak var secButtonFromTheBottom: UIButton!
     @IBOutlet weak var thirdButtonFromTheBottom: UIButton!
@@ -95,11 +94,6 @@ class MapViewController: UIViewController {
         }).disposed(by: disposeBag)
         
         firstButtonfromthebottom.isEnabled = false
-        
-        petsCollectionView.delegate = self
-        petsCollectionView.dataSource = self
-        petsCollectionView.reloadData()
-        petsCollectionView.isHidden = true
         
         presenter.attachView(self)
         reloadPets()
@@ -213,13 +207,7 @@ class MapViewController: UIViewController {
     }
     
     @IBAction func secButtonPressed(_ sender: Any) {
-        if (!self.petsCollectionView.isHidden) {
-            self.petsCollectionView.slideInAffect(direction: kCATransitionFromLeft)
-            self.petsCollectionView.isHidden = true
-        } else {
-            self.petsCollectionView.slideInAffect(direction: kCATransitionFromRight)
-            self.petsCollectionView.isHidden = false
-        }
+        showSelectPetAlert()
     }
     
     @IBAction func thirdButtonPressed(_ sender: Any) {
@@ -243,6 +231,122 @@ class MapViewController: UIViewController {
             self.navigationController?.pushViewController(petDetailsViewController, animated: true)
         }
     }
+    
+    fileprivate func showSelectPetAlert() {
+        let title = "Select Pet to Start"
+        let alertResult: AlertResult = {alert, result in
+            alert.dismiss(animated: true, completion: nil)
+        }
+        
+        let alertView = PTAlertViewController(title, buttonTypes: nil, titleBarStyle: .green,
+                                              alertResult: alertResult)
+        
+        //// TableView setup
+        
+        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: 242), style: .plain)
+        let cellIdentifier = "cell"
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        tableView.rowHeight = 82
+        tableView.separatorStyle = .none
+        
+        DataManager.instance.pets()
+            .bind(to: tableView.rx.items(cellIdentifier: cellIdentifier,
+                                         cellType: UITableViewCell.self)) {row, element, cell in
+                                            
+                                            let _ = cell.contentView.subviews.map { $0.removeFromSuperview() }
+                                            
+                                            cell.selectionStyle = .none
+                                            
+                                            let mainView = PTCircleImageTitleView(frame:  CGRect(x: 24, y: 16, width: cell.contentView.bounds.width, height: 46))
+                                            
+                                            if let petImageURLString = element.imageURL {
+                                                mainView.imageView.sd_setImage(with: URL(string: petImageURLString), completed: nil)
+                                            }
+                                            
+                                            mainView.titleLabel.text = element.name
+                                            cell.contentView.addSubview(mainView)
+                                            
+                                            let separatorView = UIView(frame: CGRect(x: 0, y: cell.contentView.bounds.height-1, width: cell.contentView.bounds.width, height: 1))
+                                            separatorView.backgroundColor = PTConstants.colors.newLightGray
+                                            separatorView.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
+                                            cell.contentView.addSubview(separatorView)
+            }
+            .disposed(by: disposeBag)
+        
+        tableView.rx.modelSelected(Pet.self)
+            .asObservable()
+            .subscribe(onNext: { (pet) in
+                alertView.dismiss(animated: true)
+                self.mapView.focusOnPet(pet)
+            })
+            .disposed(by: disposeBag)
+        
+        alertView.contentView.addSubview(tableView)
+        
+        // Footer View
+        let footerViewContainer = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 82))
+        let footerView = PTCircleImageTitleView(frame:  CGRect(x: 24, y: 16, width: 150, height: 46))
+        footerView.imageView.image = UIImage(named: "CirclePlusIcon")
+        footerView.titleLabel.text = "Add Pet"
+        footerView.addTapGestureRecognizer {
+            alertView.dismiss(animated: true, completion: {
+                let petWizard = ViewController.petWizard.viewController
+                self.present(petWizard, animated: true, completion: nil)
+            })
+        }
+        footerViewContainer.addSubview(footerView)
+        tableView.tableFooterView = footerViewContainer
+        
+        // Present
+        self.present(alertView, animated: true, completion: nil)
+    }
+    
+}
+
+class PTCircleImageTitleView: UIView {
+    
+    let imageView = UIImageView(frame: .zero)
+    let titleLabel = UILabel(frame: .zero)
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.setupView()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.setupView()
+    }
+    
+    fileprivate func setupView() {
+        // Image View
+        imageView.contentMode = .scaleAspectFit
+        self.addSubview(imageView)
+        
+        imageView.snp.makeConstraints { (make) in
+            make.left.equalToSuperview()
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.height.equalTo(46)
+            make.width.equalTo(46)
+        }
+        
+        // Title Label
+        titleLabel.font = UIFont(name: "Montserrat-Regular", size: 14)
+        titleLabel.textColor = PTConstants.colors.darkGray
+        self.addSubview(titleLabel)
+        
+        titleLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(imageView.snp.right).offset(24)
+            make.right.equalToSuperview()
+            make.centerY.equalTo(imageView)
+        }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        imageView.circle()
+    }
 }
 
 //MARK: HomeView
@@ -252,7 +356,7 @@ extension MapViewController: HomeView {
     }
     
     func loadPets(){
-        petsCollectionView.reloadData()
+
     }
     
     func reload() {
@@ -279,28 +383,6 @@ extension MapViewController: UIGestureRecognizerDelegate {
     func handleTap(gestureRecognizer: UIGestureRecognizer) {
         self.performSegue(withIdentifier: "adventrueInProgress", sender: nil)
 //        self.hideNotification()
-    }
-}
-
-//MARK: CollectionView DataSource
-extension MapViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return presenter.pets.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let pet = presenter.pets[indexPath.item]
-        let cell = petsCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! PetsCollectionViewCell
-        cell.petImageCell?.imageUrl = pet.imageURL
-        return cell
-    }
-}
-
-//MARK: CollectionView Delegate
-extension MapViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let pet = presenter.pets[indexPath.item]
-        self.mapView.focusOnPet(pet)
     }
 }
 

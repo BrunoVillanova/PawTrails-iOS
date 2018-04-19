@@ -220,14 +220,12 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
         petsCollectionView!.register(PetCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         
         DataManager.instance.pets().bind(to: petsCollectionView!.rx.items(cellIdentifier: "cell", cellType: PetCollectionViewCell.self)) { (row, pet, cell) in
-                cell.configure(pet)
-
+            cell.configure(pet)
         }.disposed(by: disposeBag)
         
         petsCollectionView!.rx.modelSelected(Pet.self)
             .bind(to: self.selectedPet)
             .disposed(by: disposeBag)
-        
         
         petsCollectionView!.isHidden = true
         petsCollectionView!.backgroundColor = .clear
@@ -257,17 +255,11 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
                     self.changingRegion = false
                 }
             }
-            
         }
     }
     
     fileprivate func configureNavigationBar() {
         self.navigationController?.navigationBar.tintColor = PTConstants.colors.newRed
-        
-//        let button = UIButton.init(type: .custom)
-//        button.setImage(UIImage.init(named:""), for: .normal)
-//        let leftBarButton = UIBarButtonItem.init(customView: button)
-//        self.navigationItem.leftBarButtonItem = leftBarButton
     }
     
     func geoCodeFence() -> (Point,Point) {

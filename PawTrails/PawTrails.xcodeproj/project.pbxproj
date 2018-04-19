@@ -39,6 +39,7 @@
 		15639E73208064A700F44B3B /* PetCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15639E71208064A700F44B3B /* PetCollectionViewCell.swift */; };
 		15639E762080862000F44B3B /* PetCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15639E752080862000F44B3B /* PetCollectionViewCell.xib */; };
 		1570C7AC203B63DF00A7F59F /* TripDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1570C7AB203B63DF00A7F59F /* TripDetailViewController.swift */; };
+		15710F0020890E1500940D6E /* ViewTapGestureExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15710EFF20890E1500940D6E /* ViewTapGestureExtension.swift */; };
 		157869732086784500FB3EDC /* Pets.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 157869722086784500FB3EDC /* Pets.storyboard */; };
 		15786975208678DA00FB3EDC /* PetListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15786974208678DA00FB3EDC /* PetListViewController.swift */; };
 		1585469C1FDCFBCB004C82EC /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1585469B1FDCFBCB004C82EC /* Charts.framework */; };
@@ -349,6 +350,7 @@
 		15639E71208064A700F44B3B /* PetCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetCollectionViewCell.swift; sourceTree = "<group>"; };
 		15639E752080862000F44B3B /* PetCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PetCollectionViewCell.xib; sourceTree = "<group>"; };
 		1570C7AB203B63DF00A7F59F /* TripDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailViewController.swift; sourceTree = "<group>"; };
+		15710EFF20890E1500940D6E /* ViewTapGestureExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTapGestureExtension.swift; sourceTree = "<group>"; };
 		157869722086784500FB3EDC /* Pets.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Pets.storyboard; sourceTree = "<group>"; };
 		15786974208678DA00FB3EDC /* PetListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetListViewController.swift; sourceTree = "<group>"; };
 		157AC4B21FC3192E0005A717 /* Convert.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Convert.framework; path = Carthage/Build/iOS/Convert.framework; sourceTree = "<group>"; };
@@ -1002,6 +1004,7 @@
 				15C762A12016D06B002AA7F8 /* MapExtensions.swift */,
 				15C762A22016D06B002AA7F8 /* Extensions.swift */,
 				15C762A32016D06B002AA7F8 /* UIButtonExtensions.swift */,
+				15710EFF20890E1500940D6E /* ViewTapGestureExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1443,8 +1446,6 @@
 				4414AE641EA0DD5B004A5134 /* Sources */,
 				4414AE651EA0DD5B004A5134 /* Frameworks */,
 				4414AE661EA0DD5B004A5134 /* Resources */,
-				DD59135C3B209F44198EA811 /* [CP] Embed Pods Frameworks */,
-				D588867EDF3AA38F572566BB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1469,7 +1470,6 @@
 				93543C9FAEDDD0332AFDC816 /* [CP] Embed Pods Frameworks */,
 				44136F081E8429250003B531 /* Fabric */,
 				157AC4AF1FC317FE0005A717 /* Carthage Copy Frameworks */,
-				40C41C500ED64E8F4522BAEE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1751,21 +1751,6 @@
 			shellPath = /bin/sh;
 			shellScript = "cp \"${GOOGLE_SERVICES_PLIST_FILE}\" \"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/GoogleService-Info.plist\"";
 		};
-		40C41C500ED64E8F4522BAEE /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PawTrails/Pods-PawTrails-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		44136F081E8429250003B531 /* Fabric */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1834,36 +1819,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PawTrails/Pods-PawTrails-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D588867EDF3AA38F572566BB /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PawTrailsTests/Pods-PawTrailsTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DD59135C3B209F44198EA811 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PawTrailsTests/Pods-PawTrailsTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2086,6 +2041,7 @@
 				15C763DE2016D5C0002AA7F8 /* ResultViewController.swift in Sources */,
 				15C764082016D5C0002AA7F8 /* SuccessViewController.swift in Sources */,
 				15C764032016D5C0002AA7F8 /* StepThreeViewController.swift in Sources */,
+				15710F0020890E1500940D6E /* ViewTapGestureExtension.swift in Sources */,
 				15C764092016D5C0002AA7F8 /* TabPageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
