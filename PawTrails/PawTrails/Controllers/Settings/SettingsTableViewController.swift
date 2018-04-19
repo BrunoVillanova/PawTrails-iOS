@@ -57,9 +57,8 @@ class SettingsTableViewController: UITableViewController, SettingsView {
                          viewController: ViewController.termsAndPrivacy)],
         [SettingsMenuItem("Send feedback",
                          imageName: "sendfeedback",
-                         action: {sender in
-                            Utilities.showComingSoonAlert("Feedback")
-        }),
+                         viewController: ViewController.feedback
+                         ),
         SettingsMenuItem("Check for update",
                          imageName: "updateIcon",
                          action: {sender in
