@@ -97,10 +97,19 @@ extension TermsViewController: UITableViewDelegate, UITableViewDataSource {
             if let data = dataArray {
                 
                 let dict = data[indexPath.section] as! NSDictionary
-                cell.descriptionLabel.text = dict.object(forKey: "description") as? String
+                if let text = dict.object(forKey: "description") as? String {
+                    
+                    let myParagraphStyle = NSMutableParagraphStyle()
+                    myParagraphStyle.lineSpacing = 5
+                    let myNsAttrStringObject = NSAttributedString.init(string: text, attributes: [NSParagraphStyleAttributeName: myParagraphStyle])
+                    
+                    cell.descriptionLabel.attributedText = myNsAttrStringObject
+                }
+            
+                
             }
             
-            cell.bgView.dropShadow(color: .lightGray, opacity: 0.5, offSet: CGSize(width: 1, height: 1), radius: 3, scale: true)
+            //cell.bgView.dropShadow(color: .lightGray, opacity: 0.5, offSet: CGSize(width: 1, height: 1), radius: 3, scale: true)
             cell.bgView.layer.cornerRadius = 5
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             return cell

@@ -419,36 +419,32 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WeL-79-lev">
-                                                    <rect key="frame" x="9" y="11" width="357" height="172"/>
+                                                    <rect key="frame" x="9" y="11" width="357" height="157"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ele-fZ-W8D">
-                                                            <rect key="frame" x="8" y="8" width="341" height="156"/>
+                                                            <rect key="frame" x="8" y="8" width="341" height="141"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <string key="text">This agreement is made between you, the “User” and Attitude Technologies Ltd of Unit 12A, South Ring Business Park, Kinsale Road, Cork, in relation to the use of the services provided by the “PawTrails App” software. By using our Services, you are agreeing to these terms. Please read them carefully.</string>
-                                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
+                                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
                                                             <color key="textColor" red="0.25490196078431371" green="0.28235294117647058" blue="0.32156862745098036" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="trailing" secondItem="Ele-fZ-W8D" secondAttribute="trailing" constant="8" id="23p-Ka-hcz"/>
-                                                        <constraint firstItem="Ele-fZ-W8D" firstAttribute="leading" secondItem="WeL-79-lev" secondAttribute="leading" constant="8" id="E86-2G-ZSe"/>
-                                                        <constraint firstItem="Ele-fZ-W8D" firstAttribute="leading" secondItem="WeL-79-lev" secondAttribute="leading" constant="8" id="NvT-hF-vwH"/>
-                                                        <constraint firstItem="Ele-fZ-W8D" firstAttribute="top" secondItem="WeL-79-lev" secondAttribute="top" constant="8" id="RV1-c6-Gt6"/>
-                                                        <constraint firstAttribute="bottom" secondItem="Ele-fZ-W8D" secondAttribute="bottom" constant="8" id="b7m-KE-4r6"/>
-                                                        <constraint firstAttribute="bottom" secondItem="Ele-fZ-W8D" secondAttribute="bottom" constant="8" id="lcL-TW-JSs"/>
-                                                        <constraint firstItem="Ele-fZ-W8D" firstAttribute="top" secondItem="WeL-79-lev" secondAttribute="top" constant="8" id="niN-Wf-Hcp"/>
-                                                        <constraint firstAttribute="trailing" secondItem="Ele-fZ-W8D" secondAttribute="trailing" constant="8" id="pZe-Kq-ax6"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Ele-fZ-W8D" secondAttribute="trailing" constant="8" id="Ya3-11-Ykg"/>
+                                                        <constraint firstItem="Ele-fZ-W8D" firstAttribute="leading" secondItem="WeL-79-lev" secondAttribute="leading" constant="8" id="Z8H-mf-Clw"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Ele-fZ-W8D" secondAttribute="bottom" constant="8" id="ZlK-qa-kGN"/>
+                                                        <constraint firstItem="Ele-fZ-W8D" firstAttribute="top" secondItem="WeL-79-lev" secondAttribute="top" constant="8" id="ua6-Nr-yOO"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstItem="WeL-79-lev" firstAttribute="leading" secondItem="suQ-1M-Y4x" secondAttribute="leadingMargin" constant="-6" id="4PB-LA-v0x"/>
-                                                <constraint firstItem="WeL-79-lev" firstAttribute="top" secondItem="suQ-1M-Y4x" secondAttribute="topMargin" id="DIC-fo-d12"/>
-                                                <constraint firstItem="WeL-79-lev" firstAttribute="trailing" secondItem="suQ-1M-Y4x" secondAttribute="trailingMargin" constant="6" id="GFe-PS-09g"/>
-                                                <constraint firstItem="WeL-79-lev" firstAttribute="bottom" secondItem="suQ-1M-Y4x" secondAttribute="bottomMargin" constant="11" id="bH5-OU-eQh"/>
+                                                <constraint firstItem="WeL-79-lev" firstAttribute="leading" secondItem="suQ-1M-Y4x" secondAttribute="leading" constant="9" id="JDb-X3-3Fd"/>
+                                                <constraint firstAttribute="trailing" secondItem="WeL-79-lev" secondAttribute="trailing" constant="9" id="JK0-Wo-4wS"/>
+                                                <constraint firstItem="WeL-79-lev" firstAttribute="top" secondItem="suQ-1M-Y4x" secondAttribute="top" constant="11" id="UOr-AF-ndV"/>
+                                                <constraint firstAttribute="bottom" secondItem="WeL-79-lev" secondAttribute="bottom" constant="15" id="rfB-GR-0nY"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
