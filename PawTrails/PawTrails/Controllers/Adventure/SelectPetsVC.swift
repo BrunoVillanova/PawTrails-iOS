@@ -196,12 +196,12 @@ class SelectPetsVC: UIViewController, PetsView, SelectPetView {
                 Reporter.debugPrint("Started Trips! \(startedTrips)")
                 self.hideLoadingView()
 
-                if let previousVc = self.presentingViewController as? UITabBarController {
+                if let rootViewController = UIApplication.shared.keyWindow?.rootViewController {
                     
                     if let nc = self.storyboard?.instantiateViewController(withIdentifier: "adventuresNavigationController") as? UINavigationController {
                         
                         self.dismiss(animated: true) {
-                            previousVc.present(nc, animated: true, completion: nil)
+                            rootViewController.present(nc, animated: true, completion: nil)
                         }
                     }
                 }
