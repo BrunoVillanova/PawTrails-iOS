@@ -112,7 +112,7 @@ class PetUserTableViewController: UITableViewController, PetUserView {
     
     func removed() {
         
-        if let profile = navigationController?.viewControllers.first(where: { $0 is PetsViewController}) as? PetsViewController {
+        if let profile = navigationController?.viewControllers.first(where: { $0 is PetListViewController}) as? PetListViewController {
             profile.reloadPets()
             navigationController?.popToViewController(profile, animated: true)
         }

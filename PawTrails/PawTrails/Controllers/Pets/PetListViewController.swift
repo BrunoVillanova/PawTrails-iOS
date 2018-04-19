@@ -82,7 +82,7 @@ class PetListViewController: UIViewController {
         appDelegate.showPetWizardModally(true)
     }
     
-    @objc fileprivate func reloadPets() {
+    @objc func reloadPets() {
         retrievePets()
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
@@ -114,8 +114,8 @@ class PetListViewController: UIViewController {
         tableView.tableFooterView = UIView()
         tableView.addSubview(companyLogoImageView)
         
-        refreshControl.backgroundColor = UIColor.secondary
-        refreshControl.tintColor = UIColor.primary
+        refreshControl.backgroundColor = .clear
+        refreshControl.tintColor = PTConstants.colors.newRed
         tableView.addSubview(refreshControl)
         
         
@@ -147,7 +147,7 @@ class PetListViewController: UIViewController {
         }
         
         Observable
-            .zip(tableView.rx.itemSelected, tableView.rx.modelSelected(PetSection.Item.self))
+            .zip(tableView.rx.itemSelected, tableView.rx.modelSelected(PetListSection.Item.self))
             .bind { [unowned self] indexPath, item in
                 self.tableView.deselectRow(at: indexPath, animated: true)
                 self.goToPetDetails(item)
@@ -198,6 +198,7 @@ extension PetListSection: SectionModelType {
         self.items = items
     }
 }
+
 
 class PetListCell: UITableViewCell {
     
@@ -306,6 +307,11 @@ class PetListCell: UITableViewCell {
             
             self.disposable = DataManager.instance.petDeviceData(pet.id, gpsMode: .smart).subscribe(onNext: {[weak self] (petDeviceData) in
                 if let petDeviceData = petDeviceData {
+                    
+                    if let deviceDate = petDeviceData.deviceData.deviceDate {
+                        self?.statusTimeLabel.text = deviceDate.timeAgoSinceNow()
+                    }
+                    
                     self?.statusView.configure(petDeviceData, animated: true)
                     
                     if let point = petDeviceData.deviceData.point {

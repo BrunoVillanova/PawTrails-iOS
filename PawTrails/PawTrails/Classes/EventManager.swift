@@ -124,19 +124,7 @@ class EventManager {
     
     private func updatePetListUI(for petId: Int, isRemove: Bool = false, in viewController: UIViewController?){
         DispatchQueue.main.async {
-            if let navigationController = viewController?.navigationController {
-                
-                if let petList = navigationController.viewControllers.first(where: { $0 is PetsViewController }) as? PetsViewController {
-                    
-                    if isRemove, let petProfile = navigationController.viewControllers.first(where: { $0 is PetInfromationViewController }) as? PetInfromationViewController, petProfile.pet.id == petId {
-                        navigationController.popToRootViewController(animated: true)
-                    }
-                    petList.reloadPets()
-                }
-                
-                
-                // changed this when deleted HomeVc
-            }else if let homeVC = viewController as? MapViewController {
+            if let homeVC = viewController as? MapViewController {
                 homeVC.reloadPets()
             }
         }

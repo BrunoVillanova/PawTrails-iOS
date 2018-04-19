@@ -62,7 +62,7 @@
                                                                     <color key="textColor" red="0.25490196078431371" green="0.28235294117647058" blue="0.32156862745098036" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="trt-hH-Ifj" userLabel="Time Label">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" ambiguous="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="trt-hH-Ifj" userLabel="Time Label">
                                                                     <rect key="frame" x="174" y="0.0" width="0.0" height="18"/>
                                                                     <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="14"/>
                                                                     <color key="textColor" red="0.25490196078431371" green="0.28235294117647058" blue="0.32156862745098036" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -160,7 +160,6 @@
                                                 <rect key="frame" x="47.5" y="122.5" width="280" height="201"/>
                                             </imageView>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="4bo-Qa-MCq" secondAttribute="bottom" id="QwJ-mm-dPc"/>
                                             <constraint firstItem="4bo-Qa-MCq" firstAttribute="centerX" secondItem="tjc-wA-R9N" secondAttribute="centerX" id="svk-cu-m3G"/>
@@ -179,7 +178,6 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="Rw9-Rg-QW6" firstAttribute="centerY" secondItem="z9t-rP-m9I" secondAttribute="centerY" id="LwS-qk-lFe"/>
                                             <constraint firstItem="Rw9-Rg-QW6" firstAttribute="centerX" secondItem="z9t-rP-m9I" secondAttribute="centerX" id="Ocs-T5-4v2"/>
@@ -207,7 +205,6 @@
                                                 <rect key="frame" x="82" y="168" width="211" height="25"/>
                                             </imageView>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="a0x-Ay-MIe" firstAttribute="centerX" secondItem="DgG-qw-P8T" secondAttribute="centerX" id="6Cb-Et-V1X"/>
                                             <constraint firstItem="PBr-tN-CG7" firstAttribute="centerX" secondItem="DgG-qw-P8T" secondAttribute="centerX" id="6ZA-AZ-07Y"/>
@@ -216,7 +213,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstItem="tjc-wA-R9N" firstAttribute="leading" secondItem="GCO-5S-v2Z" secondAttribute="leading" id="BPY-mG-x5r"/>
                                     <constraint firstItem="z9t-rP-m9I" firstAttribute="leading" secondItem="GCO-5S-v2Z" secondAttribute="leading" id="Iqm-Xy-Ahm"/>

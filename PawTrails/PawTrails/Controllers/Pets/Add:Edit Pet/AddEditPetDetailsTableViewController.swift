@@ -185,7 +185,7 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
             .textNumberOfLines(0),
             ])
         
-        if let petList = navigationController?.viewControllers.first(where: { $0 is PetsViewController}) as? PetsViewController {
+        if let petList = navigationController?.viewControllers.first(where: { $0 is PetListViewController}) as? PetListViewController {
             petList.reloadPets()
             navigationController?.popToViewController(petList, animated: true)
         }else{
@@ -221,7 +221,7 @@ class AddEditPetDetailsTableViewController: UITableViewController, UINavigationC
 //        }
         else{
             loadPet()
-            if let navigation = (navigationController?.viewControllers.first(where: { $0 is PetsViewController }) as? PetsViewController) {
+            if let navigation = (navigationController?.viewControllers.first(where: { $0 is PetListViewController }) as? PetListViewController) {
                 navigation.reloadPets()
                 self.alert(title: "", msg: "Your request has been processed", type: .blue, disableTime: 3, handler: nil)
             }
