@@ -94,21 +94,11 @@ class PTAlertViewController: UIViewController {
         if let textField = textField {
             textField.becomeFirstResponder()
         }
-        
-        if let backgroundView = backgroundView, backgroundView.alpha == 0 {
-            UIView.animate(withDuration: 0.3) {
-                backgroundView.alpha = 1
-            }
-        }
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        if let backgroundView = backgroundView, backgroundView.alpha == 1 {
-            UIView.animate(withDuration: 0.3) {
-                backgroundView.alpha = 0
-            }
-        }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
     
     convenience init (_ title: String?,
@@ -131,6 +121,9 @@ class PTAlertViewController: UIViewController {
         if let buttonTypes = buttonTypes {
             configureButtons(buttonTypes)
         }
+        
+        self.hero.isEnabled = true
+        self.hero.modalAnimationType = .fade
     }
     
     func buttonTapped(_ sender: UIButton) {
@@ -142,11 +135,6 @@ class PTAlertViewController: UIViewController {
     
     func dismiss() {
         self.dismiss(animated: false, completion: nil)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     fileprivate func configureButtons(_ buttonsTypes: [AlertButtontType]) {
@@ -214,11 +202,10 @@ class PTAlertViewController: UIViewController {
         view.isOpaque = false
         
         // Background View
-        
         let backgroundView = UIView(frame: .zero)
-        backgroundView.backgroundColor = UIColor(red: 65/255, green: 72/255, blue: 82/255, alpha: 0.7)
-        backgroundView.alpha = 0
+        backgroundView.backgroundColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.5)
         self.view.addSubview(backgroundView)
+        
         backgroundView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
@@ -233,6 +220,7 @@ class PTAlertViewController: UIViewController {
             make.top.equalToSuperview().offset(self.view.frame.size.height/4.0)
             make.centerX.equalToSuperview()
         }
+        
         // Alert View
         
         let alertContainerView = UIView(frame: .zero)
@@ -397,7 +385,6 @@ class RoundedShadowView: UIView {
             shadowLayer = CAShapeLayer()
             shadowLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: 10).cgPath
             shadowLayer.fillColor = UIColor.white.cgColor
-            
             shadowLayer.shadowColor = UIColor.darkGray.cgColor
             shadowLayer.shadowPath = shadowLayer.path
             shadowLayer.shadowOffset = CGSize(width: 2.0, height: 2.0)
@@ -405,7 +392,6 @@ class RoundedShadowView: UIView {
             shadowLayer.shadowRadius = 2
             
             layer.insertSublayer(shadowLayer, at: 0)
-            //layer.insertSublayer(shadowLayer, below: nil) // also works
         }
     }
     
