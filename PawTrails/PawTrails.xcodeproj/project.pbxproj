@@ -216,7 +216,6 @@
 		15C7640A2016D5C0002AA7F8 /* SharedUsersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15C763B72016D5C0002AA7F8 /* SharedUsersTableViewCell.xib */; };
 		15C7640B2016D5C0002AA7F8 /* YesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C763B82016D5C0002AA7F8 /* YesViewController.swift */; };
 		15C7640C2016D5C0002AA7F8 /* PieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C763B92016D5C0002AA7F8 /* PieChart.swift */; };
-		15C7640D2016D5C0002AA7F8 /* PrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C763BA2016D5C0002AA7F8 /* PrivacyViewController.swift */; };
 		15C7640E2016D5C0002AA7F8 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C763BB2016D5C0002AA7F8 /* MainTabBarViewController.swift */; };
 		15C7640F2016D5C0002AA7F8 /* AddEditPetDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C763BD2016D5C0002AA7F8 /* AddEditPetDetailsTableViewController.swift */; };
 		15C764102016D5C0002AA7F8 /* AddPetDeviceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C763BE2016D5C0002AA7F8 /* AddPetDeviceTableViewController.swift */; };
@@ -280,6 +279,9 @@
 		4467BCCD20888E1500F31BC7 /* Montserrat-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4467BCC320888E1500F31BC7 /* Montserrat-ExtraLightItalic.ttf */; };
 		4467BCCE20888E1500F31BC7 /* Montserrat-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4467BCC420888E1500F31BC7 /* Montserrat-BoldItalic.ttf */; };
 		4467BCCF20888E1500F31BC7 /* Montserrat-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4467BCC520888E1500F31BC7 /* Montserrat-Italic.ttf */; };
+		4467BCD22088C4A900F31BC7 /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4467BCD12088C4A900F31BC7 /* TermsViewController.swift */; };
+		4467BCD42088D5B500F31BC7 /* PrivacyTerms.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4467BCD32088D5B500F31BC7 /* PrivacyTerms.plist */; };
+		4467BCD62088E4EF00F31BC7 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4467BCD52088E4EF00F31BC7 /* FeedbackViewController.swift */; };
 		44696C7920873E7100CD0E97 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44696C7820873E7100CD0E97 /* Utilities.swift */; };
 		44696C7B20878F6900CD0E97 /* BCSScore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44696C7A20878F6900CD0E97 /* BCSScore.plist */; };
 		447AF46D2021E22C0050F885 /* AllowedCharsTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447AF46C2021E22C0050F885 /* AllowedCharsTextField.swift */; };
@@ -536,7 +538,6 @@
 		15C763B72016D5C0002AA7F8 /* SharedUsersTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SharedUsersTableViewCell.xib; sourceTree = "<group>"; };
 		15C763B82016D5C0002AA7F8 /* YesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YesViewController.swift; sourceTree = "<group>"; };
 		15C763B92016D5C0002AA7F8 /* PieChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieChart.swift; sourceTree = "<group>"; };
-		15C763BA2016D5C0002AA7F8 /* PrivacyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyViewController.swift; sourceTree = "<group>"; };
 		15C763BB2016D5C0002AA7F8 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		15C763BD2016D5C0002AA7F8 /* AddEditPetDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditPetDetailsTableViewController.swift; sourceTree = "<group>"; };
 		15C763BE2016D5C0002AA7F8 /* AddPetDeviceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPetDeviceTableViewController.swift; sourceTree = "<group>"; };
@@ -611,6 +612,9 @@
 		4467BCC320888E1500F31BC7 /* Montserrat-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
 		4467BCC420888E1500F31BC7 /* Montserrat-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-BoldItalic.ttf"; sourceTree = "<group>"; };
 		4467BCC520888E1500F31BC7 /* Montserrat-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Italic.ttf"; sourceTree = "<group>"; };
+		4467BCD12088C4A900F31BC7 /* TermsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
+		4467BCD32088D5B500F31BC7 /* PrivacyTerms.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PrivacyTerms.plist; sourceTree = "<group>"; };
+		4467BCD52088E4EF00F31BC7 /* FeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 		44696C7820873E7100CD0E97 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		44696C7A20878F6900CD0E97 /* BCSScore.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = BCSScore.plist; sourceTree = "<group>"; };
 		447AF46C2021E22C0050F885 /* AllowedCharsTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllowedCharsTextField.swift; sourceTree = "<group>"; };
@@ -698,6 +702,7 @@
 			children = (
 				1523D0B020629691003D8653 /* DemoTrips.json */,
 				44696C7A20878F6900CD0E97 /* BCSScore.plist */,
+				4467BCD32088D5B500F31BC7 /* PrivacyTerms.plist */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -1009,6 +1014,7 @@
 		15C763702016D5C0002AA7F8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4467BCD02088C45C00F31BC7 /* Settings */,
 				15EF8759207BFEFD007F27BF /* Left Menu */,
 				15A13A22206AC54A005790B3 /* Onboarding */,
 				15C7642D2016FDC1002AA7F8 /* Recommendation */,
@@ -1017,10 +1023,8 @@
 				15C7638F2016D5C0002AA7F8 /* Pets */,
 				15C7637D2016D5C0002AA7F8 /* UsersViewController.swift */,
 				15C7637F2016D5C0002AA7F8 /* SingleResultViewController.swift */,
-				15C763802016D5C0002AA7F8 /* AboutPawTrails.swift */,
 				15C7638D2016D5C0002AA7F8 /* MapViewController.swift */,
 				15C763B62016D5C0002AA7F8 /* TabPageViewController.swift */,
-				15C763BA2016D5C0002AA7F8 /* PrivacyViewController.swift */,
 				15C763BB2016D5C0002AA7F8 /* MainTabBarViewController.swift */,
 				15DCFEA0205C647A00DF726C /* LaunchViewController.swift */,
 				15160FEA20719448008CF9F4 /* PTAlertViewController.swift */,
@@ -1034,7 +1038,6 @@
 			isa = PBXGroup;
 			children = (
 				15C763C82016D5C0002AA7F8 /* UserProfileTableViewController.swift */,
-				15C763742016D5C0002AA7F8 /* ChangePasswordTableViewController.swift */,
 				15C763752016D5C0002AA7F8 /* EditUserProfileTableViewController.swift */,
 				15C763762016D5C0002AA7F8 /* User Details */,
 			);
@@ -1058,7 +1061,6 @@
 			isa = PBXGroup;
 			children = (
 				15C763712016D5C0002AA7F8 /* SignUpViewController.swift */,
-				15C763882016D5C0002AA7F8 /* SettingsTableViewController.swift */,
 				15C763892016D5C0002AA7F8 /* InitialViewController.swift */,
 				15C7638A2016D5C0002AA7F8 /* EmailVerificationViewController.swift */,
 				15C7638B2016D5C0002AA7F8 /* PasswordRecoveryViewController.swift */,
@@ -1355,6 +1357,18 @@
 			name = Managers;
 			sourceTree = "<group>";
 		};
+		4467BCD02088C45C00F31BC7 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				15C763882016D5C0002AA7F8 /* SettingsTableViewController.swift */,
+				4467BCD12088C4A900F31BC7 /* TermsViewController.swift */,
+				4467BCD52088E4EF00F31BC7 /* FeedbackViewController.swift */,
+				15C763802016D5C0002AA7F8 /* AboutPawTrails.swift */,
+				15C763742016D5C0002AA7F8 /* ChangePasswordTableViewController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		44B3B10E206E42F200FBF8CC /* PTButton */ = {
 			isa = PBXGroup;
 			children = (
@@ -1596,6 +1610,7 @@
 				15C763EE2016D5C0002AA7F8 /* IconCell.xib in Resources */,
 				15C762482016D011002AA7F8 /* PTTripInfoView.xib in Resources */,
 				4467BCC620888E1500F31BC7 /* Montserrat-ExtraLight.ttf in Resources */,
+				4467BCD42088D5B500F31BC7 /* PrivacyTerms.plist in Resources */,
 				15C761F92016D002002AA7F8 /* Main.storyboard in Resources */,
 				15C762AE2016D06B002AA7F8 /* countrycodes.csv in Resources */,
 				4467BCCC20888E1500F31BC7 /* Montserrat-ExtraBold.ttf in Resources */,
@@ -2038,6 +2053,7 @@
 				15C763E32016D5C0002AA7F8 /* InitialViewController.swift in Sources */,
 				15C7623E2016D011002AA7F8 /* PTBalloonImageView.swift in Sources */,
 				15C7641E2016D5C0002AA7F8 /* SetUpYourGoalController.swift in Sources */,
+				4467BCD62088E4EF00F31BC7 /* FeedbackViewController.swift in Sources */,
 				15C761462016CFF3002AA7F8 /* CoreDataManager.swift in Sources */,
 				15C763E02016D5C0002AA7F8 /* CalanderForActivityController.swift in Sources */,
 				15C7641B2016D5C0002AA7F8 /* FinishAdventureVC.swift in Sources */,
@@ -2059,6 +2075,7 @@
 				1543F389206FF2210069EBEB /* PetBreedSelectViewController.swift in Sources */,
 				1543F37F206ECBE90069EBEB /* PetNameAndPhotoViewController.swift in Sources */,
 				15C7624A2016D011002AA7F8 /* PTMapView.swift in Sources */,
+				4467BCD22088C4A900F31BC7 /* TermsViewController.swift in Sources */,
 				1599B22C2023F48A002D4025 /* PTDeviceStatusView.swift in Sources */,
 				15C763D62016D5C0002AA7F8 /* EmailTableViewController.swift in Sources */,
 				15C7614A2016CFF3002AA7F8 /* PawTrails.xcdatamodeld in Sources */,
@@ -2082,7 +2099,6 @@
 				15C7624E2016D011002AA7F8 /* PawTrailsStyleKit.swift in Sources */,
 				15C764192016D5C0002AA7F8 /* UserProfileTableViewController.swift in Sources */,
 				44623F0320863441002F618A /* BCSQuestionsViewController.swift in Sources */,
-				15C7640D2016D5C0002AA7F8 /* PrivacyViewController.swift in Sources */,
 				15C763DE2016D5C0002AA7F8 /* ResultViewController.swift in Sources */,
 				15C764082016D5C0002AA7F8 /* SuccessViewController.swift in Sources */,
 				15C764032016D5C0002AA7F8 /* StepThreeViewController.swift in Sources */,

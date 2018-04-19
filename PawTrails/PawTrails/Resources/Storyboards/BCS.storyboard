@@ -64,10 +64,10 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ARU-1v-yCw" customClass="PTButton" customModule="PawTrails" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="614" width="375" height="53"/>
+                                <rect key="frame" x="29" y="564" width="316" height="53"/>
                                 <color key="backgroundColor" red="0.97647058819999999" green="0.21960784310000001" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="53" id="vaj-9j-DUB"/>
+                                    <constraint firstAttribute="height" constant="53" id="aa7-IC-YcY"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                 <state key="normal" title="GET STARTED">
@@ -80,6 +80,10 @@
                                     <userDefinedRuntimeAttribute type="color" keyPath="customTextColor">
                                         <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="26"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="shapeName" value="RoundRect"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <segue destination="OyA-zw-bHh" kind="show" id="Qgb-ab-oe7"/>
@@ -93,10 +97,10 @@
                             <constraint firstItem="F7s-r2-ndm" firstAttribute="centerY" secondItem="y3o-mm-GJA" secondAttribute="centerY" constant="73.5" id="E8u-AC-rtk"/>
                             <constraint firstItem="F7s-r2-ndm" firstAttribute="trailing" secondItem="jDf-mn-B6m" secondAttribute="trailing" id="GVu-1e-Dip"/>
                             <constraint firstItem="ovj-vS-apv" firstAttribute="top" secondItem="jDf-mn-B6m" secondAttribute="top" constant="27" id="Qaz-eL-kRF"/>
-                            <constraint firstItem="ARU-1v-yCw" firstAttribute="bottom" secondItem="jDf-mn-B6m" secondAttribute="bottom" id="cK4-HH-mm7"/>
-                            <constraint firstItem="ARU-1v-yCw" firstAttribute="trailing" secondItem="jDf-mn-B6m" secondAttribute="trailing" id="iDs-sR-ei1"/>
+                            <constraint firstItem="ARU-1v-yCw" firstAttribute="leading" secondItem="jDf-mn-B6m" secondAttribute="leading" constant="29" id="dzk-bK-9JK"/>
                             <constraint firstItem="F7s-r2-ndm" firstAttribute="centerX" secondItem="y3o-mm-GJA" secondAttribute="centerX" id="if1-tH-EOS"/>
-                            <constraint firstItem="ARU-1v-yCw" firstAttribute="leading" secondItem="jDf-mn-B6m" secondAttribute="leading" id="sk4-Mz-K3P"/>
+                            <constraint firstItem="jDf-mn-B6m" firstAttribute="trailing" secondItem="ARU-1v-yCw" secondAttribute="trailing" constant="30" id="nJH-yl-wlt"/>
+                            <constraint firstItem="jDf-mn-B6m" firstAttribute="bottom" secondItem="ARU-1v-yCw" secondAttribute="bottom" constant="50" id="xAx-BN-2nZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jDf-mn-B6m"/>
                     </view>

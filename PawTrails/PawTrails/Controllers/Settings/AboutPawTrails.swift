@@ -18,6 +18,15 @@ class AboutPawTrails: UIViewController {
         configureNavBar()
         
      tableView.tableFooterView = UIView.init(frame: CGRect.zero)
+    
+        
+        //TODO: make the header view as table header.
+        if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
+            tableView.isScrollEnabled = true
+        }
+        else {
+            tableView.isScrollEnabled = false
+        }
         
     }
     
