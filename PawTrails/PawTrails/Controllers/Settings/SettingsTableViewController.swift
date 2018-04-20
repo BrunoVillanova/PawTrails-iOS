@@ -42,7 +42,7 @@ class SettingsTableViewController: UITableViewController, SettingsView {
                  imageName: "changepassword",
                  action: {sender in
                     if SharedPreferences.has(.socialnetwork) {
-                        Utilities.showAlert("Unavailable", infoText: "Sorry you are not allowed to change your password as you loged in with your Facebook account")
+                        Utilities.showAlert("Unavailable", infoText: "Sorry you are not allowed to change your password as you logged in with your Facebook account")
                     } else if let theSelf = sender as? UIViewController{
                         let viewController = ViewController.changePassword.viewController
                         theSelf.navigationController?.pushViewController(viewController, animated: true)
@@ -84,11 +84,7 @@ class SettingsTableViewController: UITableViewController, SettingsView {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.attachView(self)
-        loadUser()
-        configureNavigationBar()
-        tableView.tableFooterView = nil
-        tableView.addSubview(companyLogoImageView)
+        initialize()
     }
     
     override func viewDidLayoutSubviews() {
@@ -102,6 +98,15 @@ class SettingsTableViewController: UITableViewController, SettingsView {
             center.x = tableView.bounds.size.width/2.0
             companyLogoImageView.center = center
         }
+    }
+    
+    fileprivate func initialize() {
+        presenter.attachView(self)
+        loadUser()
+        configureNavigationBar()
+        tableView.tableFooterView = nil
+        tableView.register(SettingsTableViewCell.self, forCellReuseIdentifier: SettingsTableViewCell.reuseIdentifier)
+        tableView.addSubview(companyLogoImageView)
     }
     
     fileprivate func configureNavigationBar() {
@@ -203,7 +208,7 @@ class SettingsTableViewController: UITableViewController, SettingsView {
     }
     //, let user = self.users
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? SettingsTableViewCell{
+        if let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewCell.reuseIdentifier, for: indexPath) as? SettingsTableViewCell{
             
             var itemArray = menuItems[indexPath.section]
             let settingsItem = itemArray[indexPath.row] as SettingsMenuItem
@@ -213,7 +218,6 @@ class SettingsTableViewController: UITableViewController, SettingsView {
             }
             
             cell.iconImage.image = UIImage(named:settingsItem.imageName!)
-            
             cell.topSeparatorView.isHidden = indexPath.row != 0
             return cell
         } else {
@@ -262,13 +266,5 @@ class SettingsTableViewController: UITableViewController, SettingsView {
         self.present(alertView, animated: true, completion: nil)
     }
 }
-
-class SettingsTableViewCell: UITableViewCell {
-    @IBOutlet weak var iconImage: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var topSeparatorView: UIView!
-}
-
-
 
 

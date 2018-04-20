@@ -10,29 +10,37 @@ import UIKit
 import MessageUI
 
 class AboutPawTrails: UIViewController {
-
+    
     @IBOutlet weak var tableView: UITableView!
+    
+    let companyLogoImageView = UIImageView(image: UIImage(named: "CompanyLogoColorSmall"))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        configureNavBar()
-        
-     tableView.tableFooterView = UIView.init(frame: CGRect.zero)
+        initialize()
+    }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         
-        //TODO: make the header view as table header.
-        if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
-            tableView.isScrollEnabled = true
+        if let image = companyLogoImageView.image {
+            let originY = tableView.bounds.size.height - (image.size.height+self.bottomSafeAreaHeight)
+            companyLogoImageView.frame = CGRect(x: 0, y: originY, width: image.size.width, height: image.size.height)
+            var center: CGPoint = companyLogoImageView.center
+            center.x = tableView.bounds.size.width/2.0
+            companyLogoImageView.center = center
         }
-        else {
-            tableView.isScrollEnabled = false
-        }
-        
+    }
+    
+    fileprivate func initialize() {
+        configureNavBar()
+        tableView.tableFooterView = UIView()
+        tableView.register(SettingsTableViewCell.self, forCellReuseIdentifier: SettingsTableViewCell.reuseIdentifier)
+        tableView.addSubview(companyLogoImageView)
     }
     
     
     func configureNavBar() {
-        
         self.title = "About PawTrails"
         let attributes = [NSFontAttributeName: UIFont(name: "Montserrat-Regular", size: 18)!,NSForegroundColorAttributeName: PTConstants.colors.darkGray]
         UINavigationBar.appearance().titleTextAttributes = attributes
@@ -46,23 +54,10 @@ class AboutPawTrails: UIViewController {
     
     
     //MARK: Private methods
-
-     fileprivate func visitUsPressed() {
+    
+    fileprivate func visitUsPressed() {
         
         if let urlFromStr = URL(string: "https://www.pawtrails.ie") {
-            if UIApplication.shared.canOpenURL(urlFromStr) {
-                if #available(iOS 10.0, *) {
-                    UIApplication.shared.open(urlFromStr, options: [:], completionHandler: nil)
-                } else {
-                    UIApplication.shared.openURL(urlFromStr)
-                }
-            }
-    }
-    
-    }
-    
-     fileprivate func contactUsBtnPressed() {
-        if let urlFromStr = URL(string: "mailto:info@pawtrails.ie") {
             if UIApplication.shared.canOpenURL(urlFromStr) {
                 if #available(iOS 10.0, *) {
                     UIApplication.shared.open(urlFromStr, options: [:], completionHandler: nil)
@@ -74,12 +69,19 @@ class AboutPawTrails: UIViewController {
         
     }
     
+    fileprivate func contactUsBtnPressed() {
+        if let urlFromStr = URL(string: "mailto:info@pawtrails.ie") {
+            if UIApplication.shared.canOpenURL(urlFromStr) {
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(urlFromStr, options: [:], completionHandler: nil)
+                } else {
+                    UIApplication.shared.openURL(urlFromStr)
+                }
+            }
+        }
+    }
     
-    
-    
-    
-    
-     fileprivate func facebookBtnPressed() {
+    fileprivate func facebookBtnPressed() {
         if let urlFromStr = URL(string: "fb://profile/1245888162113500") {
             if UIApplication.shared.canOpenURL(urlFromStr) {
                 if #available(iOS 10.0, *) {
@@ -92,13 +94,9 @@ class AboutPawTrails: UIViewController {
                 
             }
         }
-        
-        
-        
-        
     }
     
-     fileprivate func instagramBtnPressed() {
+    fileprivate func instagramBtnPressed() {
         if let urlFromStr = URL(string: "instagram://user?username=pawtrails_smartcollar") {
             if UIApplication.shared.canOpenURL(urlFromStr) {
                 if #available(iOS 10.0, *) {
@@ -108,13 +106,13 @@ class AboutPawTrails: UIViewController {
                 }
             } else if let webURL = URL(string: "https://instagram.com/pawtrails_smartcollar") {
                 UIApplication.shared.openURL(webURL)
-
+                
             }
         }
     }
     
     fileprivate func youtubeBtnPressed() {
-        let youtubeId = "UCbHl4YKaS7UpxMHdgl5TPfQ"
+        let youtubeId = "8PKgMZPBR88"
         if let urlFromStr = URL(string: "youtube://\(youtubeId)") {
             if UIApplication.shared.canOpenURL(urlFromStr) {
                 if #available(iOS 10.0, *) {
@@ -122,17 +120,15 @@ class AboutPawTrails: UIViewController {
                 } else {
                     UIApplication.shared.openURL(urlFromStr)
                 }
-            } else if let webURL = URL(string: "https://www.youtube.com/channel/UCppa48YXV_sjcE_8rUSm6qQ?disable_polymer=true") {
+            } else if let webURL = URL(string: "https://www.youtube.com/watch?v=\(youtubeId)") {
                 UIApplication.shared.openURL(webURL)
-                
             }
         }
-        
-        
     }
-     fileprivate func rateUsOnBtnPressed() {
+    
+    fileprivate func rateUsOnBtnPressed() {
         
-            if let urlFromStr = URL(string: "https://itunes.apple.com/gb/app/pawtrails/id1321502523?mt=8&ign-mpt=uo%3D2") {
+        if let urlFromStr = URL(string: "https://itunes.apple.com/gb/app/pawtrails/id1321502523?mt=8&ign-mpt=uo%3D2") {
             if UIApplication.shared.canOpenURL(urlFromStr) {
                 if #available(iOS 10.0, *) {
                     UIApplication.shared.open(urlFromStr, options: [:], completionHandler: nil)
@@ -161,7 +157,7 @@ extension AboutPawTrails: UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? AboutUsCell{
+        if let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewCell.reuseIdentifier, for: indexPath) as? SettingsTableViewCell{
             
             switch indexPath.row {
             case 0:
@@ -182,6 +178,7 @@ extension AboutPawTrails: UITableViewDelegate,UITableViewDataSource {
             default:
                 break
             }
+            cell.topSeparatorView.isHidden = indexPath.row != 0
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "nothing", for: indexPath)
@@ -208,12 +205,5 @@ extension AboutPawTrails: UITableViewDelegate,UITableViewDataSource {
             break
         }
     }
-    
-}
-
-class AboutUsCell : UITableViewCell {
-    
-    @IBOutlet weak var iconImage: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
     
 }
