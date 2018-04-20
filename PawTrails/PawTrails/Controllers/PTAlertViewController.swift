@@ -93,18 +93,21 @@ class PTAlertViewController: UIViewController {
     var backgroundView: UIView?
     let contentView = UIView(frame: .zero)
     private var contentViewHeightConstraint: Constraint? = nil
-    var contentViewHeight: CGFloat? = nil {
-        didSet {
-            if let contentViewHeight = contentViewHeight {
-                self.contentViewHeightConstraint?.update(offset: contentViewHeight)
-                UIView.animate(withDuration: 0.3) {
-                    self.view.layoutIfNeeded()
-                }
+    var defaultButtonTitleColor = PTConstants.colors.newRed
+    var buttonTitleColor = PTConstants.colors.lightBlue
+    
+    func setContentViewHeightAnimated(_ height: CGFloat, afterHeightChanged: (() -> Void)? = nil, completion: (() -> Void)? = nil) {
+        self.contentViewHeightConstraint?.update(offset: height)
+
+        UIView.animate(withDuration: 0.3, animations: {
+            self.view.layoutIfNeeded()
+            afterHeightChanged?()
+        }) { (finished) in
+            if finished {
+                completion?()
             }
         }
     }
-    var defaultButtonTitleColor = PTConstants.colors.newRed
-    var buttonTitleColor = PTConstants.colors.lightBlue
     
     override func viewDidLoad() {
         super.viewDidLoad()
