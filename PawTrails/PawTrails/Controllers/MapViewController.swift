@@ -250,7 +250,9 @@ class MapViewController: UIViewController {
         tableView.rowHeight = rowHeight
         tableView.separatorStyle = .none
         
-        DataManager.instance.pets()
+        let pets = DataManager.instance.pets()
+        
+        pets
             .bind(to: tableView.rx.items(cellIdentifier: cellIdentifier,
                                          cellType: UITableViewCell.self)) {row, element, cell in
                                             
@@ -287,10 +289,8 @@ class MapViewController: UIViewController {
         
         alertView.contentView.addSubview(tableView)
         alertView.alertWillAppear = {alert in
-//            let numberOfRows = tableView.numberOfRows(inSection: 0)
-//            tableView.scrollToRow(at: IndexPath(row: numberOfRows-1, section: 0), at: UITableViewScrollPosition., animated: true)
             let bottomOffset = CGPoint(x: 0, y: tableView.contentSize.height - tableView.bounds.size.height)
-            tableView.setContentOffset(bottomOffset, animated: true)
+            tableView.setContentOffset(bottomOffset, animated: false)
         }
         
         // Footer View
@@ -307,17 +307,15 @@ class MapViewController: UIViewController {
         footerViewContainer.addSubview(footerView)
         tableView.tableFooterView = footerViewContainer
         
-        DataManager.instance.pets()
+        pets
             .subscribe(onNext: { (pets) in
                 let newSize = minTableViewSize + CGFloat(pets.count)*rowHeight
-                if newSize < maxTableViewSize {
-                    alertView.contentViewHeight = newSize
-                } else {
-                    alertView.contentViewHeight = maxTableViewSize
-                }
-                
-                let bottomOffset = CGPoint(x: 0, y: tableView.contentSize.height - tableView.bounds.size.height)
-                tableView.setContentOffset(bottomOffset, animated: true)
+                let theHeight = newSize < maxTableViewSize ? newSize : maxTableViewSize
+               
+                alertView.setContentViewHeightAnimated(theHeight, afterHeightChanged: {
+                    let bottomOffset = CGPoint(x: 0, y: 0)
+                    tableView.setContentOffset(bottomOffset, animated: false)
+                })
             })
             .disposed(by: disposeBag)
         
