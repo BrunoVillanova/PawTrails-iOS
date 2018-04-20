@@ -237,6 +237,7 @@
 		15C90DAE1FE36E6E008F73B3 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C90DAD1FE36E6D008F73B3 /* HockeySDK.framework */; };
 		15C90DB11FE36F56008F73B3 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C90DAF1FE36F55008F73B3 /* Fabric.framework */; };
 		15C90DB21FE36F56008F73B3 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C90DB01FE36F56008F73B3 /* Crashlytics.framework */; };
+		15D31933208A8F61004F4894 /* ViewControllerUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D31932208A8F61004F4894 /* ViewControllerUtilities.swift */; };
 		15DCFE9F205B6B6E00DF726C /* PTDonutAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DCFE9E205B6B6E00DF726C /* PTDonutAnnotationView.swift */; };
 		15DCFEA1205C647A00DF726C /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DCFEA0205C647A00DF726C /* LaunchViewController.swift */; };
 		15E6E38A206C6D4700484EAF /* PetConnectDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E6E389206C6D4700484EAF /* PetConnectDeviceViewController.swift */; };
@@ -565,6 +566,7 @@
 		15C90DAD1FE36E6D008F73B3 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HockeySDK.framework; path = Carthage/Build/iOS/HockeySDK.framework; sourceTree = "<group>"; };
 		15C90DAF1FE36F55008F73B3 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = Frameworks/Fabric.framework; sourceTree = "<group>"; };
 		15C90DB01FE36F56008F73B3 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = Frameworks/Crashlytics.framework; sourceTree = "<group>"; };
+		15D31932208A8F61004F4894 /* ViewControllerUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerUtilities.swift; sourceTree = "<group>"; };
 		15DCFE9E205B6B6E00DF726C /* PTDonutAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTDonutAnnotationView.swift; sourceTree = "<group>"; };
 		15DCFEA0205C647A00DF726C /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		15E6E389206C6D4700484EAF /* PetConnectDeviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetConnectDeviceViewController.swift; sourceTree = "<group>"; };
@@ -1014,6 +1016,7 @@
 				15C762A22016D06B002AA7F8 /* Extensions.swift */,
 				15C762A32016D06B002AA7F8 /* UIButtonExtensions.swift */,
 				15710EFF20890E1500940D6E /* ViewTapGestureExtension.swift */,
+				15D31932208A8F61004F4894 /* ViewControllerUtilities.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1935,6 +1938,7 @@
 				15FFE51120796D62005CA1C2 /* PTNiceButton.swift in Sources */,
 				15C763EF2016D5C0002AA7F8 /* AirbnbDatePickerFlowLayout.swift in Sources */,
 				15C761422016CFF3002AA7F8 /* CDRepository.swift in Sources */,
+				15D31933208A8F61004F4894 /* ViewControllerUtilities.swift in Sources */,
 				15C761522016CFF3002AA7F8 /* CDBreed+CoreDataClass.swift in Sources */,
 				15C761472016CFF3002AA7F8 /* SocketIOManager.swift in Sources */,
 				15C762772016D046002AA7F8 /* InitialPresenter.swift in Sources */,

@@ -12,7 +12,7 @@ import XLPagerTabStrip
 import MapKit
 
 
-class SafeZoneViewController: UIViewController, IndicatorInfoProvider, PetView {
+class SafeZoneViewController: PTViewController, IndicatorInfoProvider, PetView {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addButton: UIButton!
