@@ -60,7 +60,7 @@ class SettingsTableViewController: UITableViewController, SettingsView {
                          imageName: "privacy",
                          viewController: ViewController.termsAndPrivacy),
          SettingsMenuItem("Terms and Conditions",
-                         imageName: "privacy",
+                         imageName: "TermsIcon",
                          viewController: ViewController.termsAndPrivacy)],
         [SettingsMenuItem("Send Feedback",
                          imageName: "sendfeedback",
