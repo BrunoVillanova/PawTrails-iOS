@@ -233,20 +233,21 @@ class MapViewController: UIViewController {
     }
     
     fileprivate func showSelectPetAlert() {
-        let title = "Select Pet to Start"
-        let alertResult: AlertResult = {alert, result in
-            alert.dismiss(animated: true, completion: nil)
-        }
+        let title = "Select Pet to Focus"
         
-        let alertView = PTAlertViewController(title, buttonTypes: nil, titleBarStyle: .green,
-                                              alertResult: alertResult)
+        let alertView = PTAlertViewController(title, buttonTypes: nil, titleBarStyle: .green)
         
         //// TableView setup
-        
-        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: 242), style: .plain)
+        let contentX:CGFloat = 24
+        let contentY:CGFloat = 16
+        let contentHeight:CGFloat = 46
+        let rowHeight:CGFloat = 82
+        let minTableViewSize:CGFloat = 1*rowHeight
+        let maxTableViewSize:CGFloat = 3*rowHeight
+        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: minTableViewSize), style: .plain)
         let cellIdentifier = "cell"
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
-        tableView.rowHeight = 82
+        tableView.rowHeight = rowHeight
         tableView.separatorStyle = .none
         
         DataManager.instance.pets()
@@ -257,7 +258,8 @@ class MapViewController: UIViewController {
                                             
                                             cell.selectionStyle = .none
                                             
-                                            let mainView = PTCircleImageTitleView(frame:  CGRect(x: 24, y: 16, width: cell.contentView.bounds.width, height: 46))
+                                            // Main View
+                                            let mainView = PTCircleImageTitleView(frame:  CGRect(x: contentX, y: contentY, width: cell.contentView.bounds.width, height: contentHeight))
                                             
                                             if let petImageURLString = element.imageURL {
                                                 mainView.imageView.sd_setImage(with: URL(string: petImageURLString), completed: nil)
@@ -266,6 +268,7 @@ class MapViewController: UIViewController {
                                             mainView.titleLabel.text = element.name
                                             cell.contentView.addSubview(mainView)
                                             
+                                            // Separator
                                             let separatorView = UIView(frame: CGRect(x: 0, y: cell.contentView.bounds.height-1, width: cell.contentView.bounds.width, height: 1))
                                             separatorView.backgroundColor = PTConstants.colors.newLightGray
                                             separatorView.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
@@ -281,14 +284,19 @@ class MapViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
+        
         alertView.contentView.addSubview(tableView)
+//        alertView.alertWillAppear = {alert in
+//            let numberOfRows = tableView.numberOfRows(inSection: 0)
+//            tableView.scrollToRow(at: IndexPath(row: numberOfRows-1, section: 0), at: UITableViewScrollPosition., animated: true)
+//        }
         
         // Footer View
-        let footerViewContainer = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 82))
-        let footerView = PTCircleImageTitleView(frame:  CGRect(x: 24, y: 16, width: 150, height: 46))
+        let footerViewContainer = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: rowHeight))
+        let footerView = PTCircleImageTitleView(frame:  CGRect(x: contentX, y: contentY, width: footerViewContainer.bounds.size.width-contentX, height: contentHeight))
         footerView.imageView.image = UIImage(named: "CirclePlusIcon")
         footerView.titleLabel.text = "Add Pet"
-        footerView.addTapGestureRecognizer {
+        footerViewContainer.addTapGestureRecognizer {
             alertView.dismiss(animated: true, completion: {
                 let petWizard = ViewController.petWizard.viewController
                 self.present(petWizard, animated: true, completion: nil)
@@ -296,6 +304,20 @@ class MapViewController: UIViewController {
         }
         footerViewContainer.addSubview(footerView)
         tableView.tableFooterView = footerViewContainer
+        
+        DataManager.instance.pets()
+            .subscribe(onNext: { (pets) in
+                let newSize = minTableViewSize + CGFloat(pets.count)*rowHeight
+                if newSize < maxTableViewSize {
+                    alertView.contentViewHeight = newSize
+                } else {
+                    alertView.contentViewHeight = maxTableViewSize
+                }
+                
+                let numberOfRows = tableView.numberOfRows(inSection: 0)
+                tableView.scrollToRow(at: IndexPath(row: numberOfRows-1, section: 0), at: UITableViewScrollPosition.bottom, animated: false)
+            })
+            .disposed(by: disposeBag)
         
         // Present
         self.present(alertView, animated: true, completion: nil)

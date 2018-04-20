@@ -80,6 +80,17 @@ class PTAlertViewController: UIViewController {
     var textFieldInputView: UIView?
     var backgroundView: UIView?
     let contentView = UIView(frame: .zero)
+    private var contentViewHeightConstraint: Constraint? = nil
+    var contentViewHeight: CGFloat? = nil {
+        didSet {
+            if let contentViewHeight = contentViewHeight {
+                self.contentViewHeightConstraint?.update(offset: contentViewHeight)
+                UIView.animate(withDuration: 0.3) {
+                    self.view.layoutIfNeeded()
+                }
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,7 +100,7 @@ class PTAlertViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         self.alertWillAppear?(self)
         
         if let textField = textField {
@@ -108,7 +119,7 @@ class PTAlertViewController: UIViewController {
             buttonTypes: [AlertButtontType]? = [AlertButtontType.cancel, AlertButtontType.ok],
             titleBarStyle: AlertTitleBarStyle? = AlertTitleBarStyle.green,
             alertWillAppear: AlertWillAppear? = nil,
-            alertResult: AlertResult?) {
+            alertResult: AlertResult? = nil) {
         
         self.init()
         modalPresentationStyle = .overCurrentContext
@@ -350,11 +361,13 @@ class PTAlertViewController: UIViewController {
             }
         } else if let last = contentView.subviews.last {
             last.snp.makeConstraints { (make) in
-                make.leading.equalTo(last.frame.origin.x)
-                make.trailing.equalTo(-last.frame.origin.x)
-                make.top.equalTo(last.frame.origin.y)
-                make.bottom.equalTo(-last.frame.origin.y)
-                make.height.equalTo(last.frame.size.height)
+                make.edges.equalToSuperview()
+                self.contentViewHeightConstraint = make.height.equalTo(last.frame.size.height).constraint
+//                make.leading.equalTo(last.frame.origin.x)
+//                make.trailing.equalTo(-last.frame.origin.x)
+//                make.top.equalTo(last.frame.origin.y)
+//                make.bottom.equalTo(-last.frame.origin.y)
+//                make.height.equalTo(last.frame.size.height)
             }
         }
     
