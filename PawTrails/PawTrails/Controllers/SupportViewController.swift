@@ -77,7 +77,7 @@ extension SupportViewController: UITableViewDataSource {
             text = "info@pawtrails.com\nWe will be in contact with you shortly"
             iconImageName = "EmailSupportIcon"
         } else {
-            text = "Ireland\n+353 (21) 432 1699\nWorking Hours:\n9:00am-5:00pm Monday to Friday\nExcluding Public Holidays"
+            text = "Ireland\n+353 (21) 432 1699\nUK\n+44 203 026 3215\nWorking Hours:\n9:00am-5:00pm Monday to Friday\nExcluding Public Holidays"
             iconImageName = "PhoneSupportIcon"
         }
         

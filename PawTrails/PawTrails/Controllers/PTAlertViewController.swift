@@ -9,14 +9,26 @@
 import UIKit
 import SnapKit
 
+struct AlertButton {
+    var title: String?
+    var resultType: AlertResultType = .cancel
+    var isDefault: Bool = false
+    
+    init(_ title: String?, resultType: AlertResultType, isDefault: Bool? = false) {
+        self.title = title
+        self.resultType = resultType
+        self.isDefault = isDefault!
+    }
+}
+
 enum AlertTitleBarStyle {
     case green, red, yellow
     
     var backgroundImageName: String {
         switch self {
-            case .green: return "AlertViewTitleBarBackgroundGreen"
-            case .red: return "AlertViewTitleBarBackgroundRed"
-            case .yellow: return "AlertViewTitleBarBackgroundYellow"
+        case .green: return "AlertViewTitleBarBackgroundGreen"
+        case .red: return "AlertViewTitleBarBackgroundRed"
+        case .yellow: return "AlertViewTitleBarBackgroundYellow"
         }
     }
 }
@@ -30,17 +42,17 @@ enum AlertButtontType: Int {
     
     var title: String {
         switch self {
-            case .ok: return "OK"
-            case .cancel: return "Cancel"
-            case .delete: return "Delete"
+        case .ok: return "OK"
+        case .cancel: return "Cancel"
+        case .delete: return "Delete"
         }
     }
     
     var resultType: AlertResultType {
         switch self {
-            case .ok: return .ok
-            case .cancel: return .cancel
-            case .delete: return .ok
+        case .ok: return .ok
+        case .cancel: return .cancel
+        case .delete: return .ok
         }
     }
     
@@ -58,7 +70,7 @@ typealias AlertWillAppear = (_ alertViewController: PTAlertViewController) -> Vo
 typealias AlertResult = (_ alertViewController: PTAlertViewController, _ alertResult: AlertResultType) -> Void
 
 class PTAlertViewController: UIViewController {
-
+    
     var textField: UITextField?
     var infoLabel: UILabel?
     let titleLabel = UILabel(frame: .zero)
@@ -91,6 +103,8 @@ class PTAlertViewController: UIViewController {
             }
         }
     }
+    var defaultButtonTitleColor = PTConstants.colors.newRed
+    var buttonTitleColor = PTConstants.colors.lightBlue
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,7 +114,7 @@ class PTAlertViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         self.alertWillAppear?(self)
         
         if let textField = textField {
@@ -115,11 +129,13 @@ class PTAlertViewController: UIViewController {
     
     convenience init (_ title: String?,
                       infoText: String? = nil,
-            textFieldLabelTitle: String? = nil,
-            buttonTypes: [AlertButtontType]? = [AlertButtontType.cancel, AlertButtontType.ok],
-            titleBarStyle: AlertTitleBarStyle? = AlertTitleBarStyle.green,
-            alertWillAppear: AlertWillAppear? = nil,
-            alertResult: AlertResult? = nil) {
+                      textFieldLabelTitle: String? = nil,
+                      buttonTypes: [AlertButtontType]? = [AlertButtontType.cancel, AlertButtontType.ok],
+                      titleBarStyle: AlertTitleBarStyle? = AlertTitleBarStyle.green,
+                      alertWillAppear: AlertWillAppear? = nil,
+                      alertButtons: [AlertButton]? = nil,
+                      alertResult: AlertResult? = nil,
+                      defaultButtonIndex: Int? = nil) {
         
         self.init()
         modalPresentationStyle = .overCurrentContext
@@ -130,8 +146,10 @@ class PTAlertViewController: UIViewController {
         self.alertResult = alertResult
         self.titleBarStyle = titleBarStyle!
         
-        if let buttonTypes = buttonTypes {
-            configureButtons(buttonTypes)
+        if let alertButtons = alertButtons {
+            self.resultButtons = configureButtons(alertButtons)
+        } else if let buttonTypes = buttonTypes {
+            self.resultButtons = configureButtons(buttonTypes, defaultButtonIndex: defaultButtonIndex)
         }
         
         self.hero.isEnabled = true
@@ -148,18 +166,35 @@ class PTAlertViewController: UIViewController {
     func dismiss() {
         self.dismiss(animated: false, completion: nil)
     }
-
-    fileprivate func configureButtons(_ buttonsTypes: [AlertButtontType]) {
+    
+    fileprivate func configureButtons(_ buttonsTypes: [AlertButtontType], defaultButtonIndex: Int? = nil) -> [UIButton] {
         
         var buttons = [UIButton]()
         
         for buttonType in buttonsTypes {
-            let button = NiceButton(title: buttonType.title, titleColor: buttonType.titleColor)
+            var titleColor = buttonType.titleColor
+            
+            if let defaultButtonIndex = defaultButtonIndex, defaultButtonIndex == buttonsTypes.index(of: buttonType) {
+                titleColor = defaultButtonTitleColor
+            }
+            
+            let button = NiceButton(title: buttonType.title, titleColor: titleColor)
             button.tag = buttonType.hashValue
             buttons.append(button)
         }
         
-        resultButtons = buttons
+        return buttons
+    }
+    
+    fileprivate func configureButtons(_ alertButtons: [AlertButton]) -> [UIButton] {
+        return alertButtons.map { configureButton($0) }
+    }
+    
+    fileprivate func configureButton(_ alertButton: AlertButton) -> UIButton {
+        let titleColor = alertButton.isDefault ? defaultButtonTitleColor : buttonTitleColor
+        let button = NiceButton(title: alertButton.title, titleColor: titleColor)
+        button.tag = alertButton.resultType.hashValue
+        return button
     }
     
     fileprivate func configureButtons() {
@@ -182,7 +217,7 @@ class PTAlertViewController: UIViewController {
                 make.bottom.equalToSuperview()
                 
                 if i == 0 {
-                   make.left.equalToSuperview()
+                    make.left.equalToSuperview()
                 } else if i == buttons.count-1 {
                     make.right.equalToSuperview()
                 } else {
@@ -245,7 +280,7 @@ class PTAlertViewController: UIViewController {
         alertContainerView.layer.cornerRadius = 10
         alertContainerView.clipsToBounds = true
         alertContainerView.layer.masksToBounds = true
-
+        
         alertView.addSubview(alertContainerView)
         
         alertContainerView.snp.makeConstraints { (make) in
@@ -344,7 +379,7 @@ class PTAlertViewController: UIViewController {
                 } else {
                     make.top.equalToSuperview().offset(24)
                 }
-
+                
                 make.left.equalToSuperview().offset(24)
                 make.right.equalToSuperview().offset(-24)
                 make.height.equalTo(52)
@@ -363,18 +398,18 @@ class PTAlertViewController: UIViewController {
             last.snp.makeConstraints { (make) in
                 make.edges.equalToSuperview()
                 self.contentViewHeightConstraint = make.height.equalTo(last.frame.size.height).constraint
-//                make.leading.equalTo(last.frame.origin.x)
-//                make.trailing.equalTo(-last.frame.origin.x)
-//                make.top.equalTo(last.frame.origin.y)
-//                make.bottom.equalTo(-last.frame.origin.y)
-//                make.height.equalTo(last.frame.size.height)
+                //                make.leading.equalTo(last.frame.origin.x)
+                //                make.trailing.equalTo(-last.frame.origin.x)
+                //                make.top.equalTo(last.frame.origin.y)
+                //                make.bottom.equalTo(-last.frame.origin.y)
+                //                make.height.equalTo(last.frame.size.height)
             }
         }
-    
+        
         // Add buttons if needed
         
         if resultButtons.count > 0 {
-
+            
             // Buttons View
             buttonsView.backgroundColor = .white
             alertContainerView.addSubview(buttonsView)
@@ -446,7 +481,7 @@ class NiceButton: UIButton {
         commonInit()
     }
     
-    convenience init(title: String, titleColor: UIColor = PTConstants.colors.newRed) {
+    convenience init(title: String?, titleColor: UIColor = PTConstants.colors.newRed) {
         self.init(frame: .zero)
         setTitle(title, for: .normal)
         setTitleColor(titleColor, for: .normal)

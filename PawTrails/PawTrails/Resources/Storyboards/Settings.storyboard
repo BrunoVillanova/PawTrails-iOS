@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -23,46 +23,67 @@
         <scene sceneID="Xun-wU-1vF">
             <objects>
                 <tableViewController storyboardIdentifier="SettingsTableViewController" modalPresentationStyle="formSheet" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3ft-ij-BY5" userLabel="User Settings" customClass="SettingsTableViewController" customModule="PawTrails" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="70" sectionHeaderHeight="-1" sectionFooterHeight="12" id="82f-j4-CmA">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="70" sectionHeaderHeight="-1" sectionFooterHeight="12" id="82f-j4-CmA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="60" id="da5-tD-BGV" customClass="SettingsTableViewCell" customModule="PawTrails" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="55.5" width="375" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="da5-tD-BGV" id="3mQ-em-cgI">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wza-ci-Fp9">
-                                            <rect key="frame" x="54" y="19.5" width="305" height="21"/>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TRC-wa-fLs" userLabel="Top Separator View">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
+                                            <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="1" id="xYH-gp-ktx"/>
+                                            </constraints>
+                                        </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wza-ci-Fp9">
+                                            <rect key="frame" x="66" y="19.5" width="293" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="Jdk-hE-mgW"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
+                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                             <color key="textColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LiveTrackingMenuIcon" translatesAutoresizingMaskIntoConstraints="NO" id="UrE-n7-G25">
-                                            <rect key="frame" x="14" y="21" width="18" height="18"/>
+                                            <rect key="frame" x="24" y="21" width="18" height="18"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="18" id="WQU-zl-Edp"/>
                                                 <constraint firstAttribute="width" constant="18" id="tNK-7g-a08"/>
                                             </constraints>
                                         </imageView>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GCS-Wi-mSa" userLabel="Bottom Separator View">
+                                            <rect key="frame" x="0.0" y="58.5" width="375" height="1"/>
+                                            <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="1" id="MlQ-8d-rWQ"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="GCS-Wi-mSa" secondAttribute="bottom" id="0cT-Tp-imL"/>
                                         <constraint firstItem="UrE-n7-G25" firstAttribute="centerY" secondItem="3mQ-em-cgI" secondAttribute="centerY" id="GmB-6m-lHJ"/>
                                         <constraint firstItem="Wza-ci-Fp9" firstAttribute="centerY" secondItem="3mQ-em-cgI" secondAttribute="centerY" id="Rdh-1h-C4w"/>
+                                        <constraint firstItem="GCS-Wi-mSa" firstAttribute="leading" secondItem="3mQ-em-cgI" secondAttribute="leading" id="UKg-yk-Srn"/>
+                                        <constraint firstItem="TRC-wa-fLs" firstAttribute="leading" secondItem="3mQ-em-cgI" secondAttribute="leading" id="UbT-Gm-fC7"/>
+                                        <constraint firstAttribute="trailing" secondItem="GCS-Wi-mSa" secondAttribute="trailing" id="gtM-9v-cUI"/>
+                                        <constraint firstItem="TRC-wa-fLs" firstAttribute="top" secondItem="3mQ-em-cgI" secondAttribute="top" id="kci-8Q-g7Z"/>
                                         <constraint firstItem="Wza-ci-Fp9" firstAttribute="trailing" secondItem="3mQ-em-cgI" secondAttribute="trailingMargin" id="lJE-Oh-iyz"/>
-                                        <constraint firstItem="Wza-ci-Fp9" firstAttribute="leading" secondItem="UrE-n7-G25" secondAttribute="trailing" constant="22" id="miD-Mz-aeu"/>
-                                        <constraint firstItem="UrE-n7-G25" firstAttribute="leading" secondItem="3mQ-em-cgI" secondAttribute="leading" constant="14" id="nVh-Xh-177"/>
+                                        <constraint firstItem="Wza-ci-Fp9" firstAttribute="leading" secondItem="UrE-n7-G25" secondAttribute="trailing" constant="24" id="miD-Mz-aeu"/>
+                                        <constraint firstItem="UrE-n7-G25" firstAttribute="leading" secondItem="3mQ-em-cgI" secondAttribute="leading" constant="24" id="nVh-Xh-177"/>
+                                        <constraint firstAttribute="trailing" secondItem="TRC-wa-fLs" secondAttribute="trailing" id="sLW-lH-fz3"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="iconImage" destination="UrE-n7-G25" id="Fjb-6f-2JB"/>
                                     <outlet property="titleLabel" destination="Wza-ci-Fp9" id="AyD-DH-rDY"/>
+                                    <outlet property="topSeparatorView" destination="TRC-wa-fLs" id="sRQ-cw-uRI"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -464,7 +485,7 @@
                         <constraints>
                             <constraint firstItem="XJt-QK-hok" firstAttribute="trailing" secondItem="wIv-yi-ECR" secondAttribute="trailing" id="41T-vW-0EE"/>
                             <constraint firstItem="XJt-QK-hok" firstAttribute="top" secondItem="wIv-yi-ECR" secondAttribute="top" id="Ttx-4V-9sN"/>
-                            <constraint firstItem="XJt-QK-hok" firstAttribute="bottom" secondItem="wIv-yi-ECR" secondAttribute="bottom" id="dAs-SY-YMM"/>
+                            <constraint firstItem="XJt-QK-hok" firstAttribute="bottom" secondItem="TmX-la-VyK" secondAttribute="bottom" id="dAs-SY-YMM"/>
                             <constraint firstItem="XJt-QK-hok" firstAttribute="leading" secondItem="wIv-yi-ECR" secondAttribute="leading" id="m4Y-R0-3I6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="wIv-yi-ECR"/>

@@ -40,7 +40,14 @@ class SettingsTableViewController: UITableViewController, SettingsView {
     fileprivate final let menuItems = [
     [ SettingsMenuItem("Change Password",
                  imageName: "changepassword",
-                 viewController: ViewController.changePassword),
+                 action: {sender in
+                    if SharedPreferences.has(.socialnetwork) {
+                        Utilities.showAlert("Unavailable", infoText: "Sorry you are not allowed to change your password as you loged in with your Facebook account")
+                    } else if let theSelf = sender as? UIViewController{
+                        let viewController = ViewController.changePassword.viewController
+                        theSelf.navigationController?.pushViewController(viewController, animated: true)
+                    }
+                }),
         SettingsMenuItem("Notifications",
                  imageName: "notifications",
                  action: {sender in
@@ -52,18 +59,20 @@ class SettingsTableViewController: UITableViewController, SettingsView {
         SettingsMenuItem("Privacy Policy of PawTrails",
                          imageName: "privacy",
                          viewController: ViewController.termsAndPrivacy),
-         SettingsMenuItem("Terms and conditions",
+         SettingsMenuItem("Terms and Conditions",
                          imageName: "privacy",
                          viewController: ViewController.termsAndPrivacy)],
-        [SettingsMenuItem("Send feedback",
+        [SettingsMenuItem("Send Feedback",
                          imageName: "sendfeedback",
-                         viewController: ViewController.feedback
-                         ),
-        SettingsMenuItem("Check for update",
+//                         viewController: ViewController.feedback,
+                         action: {sender in
+                            Utilities.showComingSoonAlert("Send feedback")
+                        }),
+        SettingsMenuItem("Check for Update",
                          imageName: "updateIcon",
                          action: {sender in
                             Utilities.showComingSoonAlert("Check Update")
-        }),
+                         }),
         SettingsMenuItem("Logout",
                          imageName: "logout",
                          action: {sender in
@@ -77,9 +86,6 @@ class SettingsTableViewController: UITableViewController, SettingsView {
         super.viewDidLoad()
         presenter.attachView(self)
         loadUser()
-        
-        //self.tableView.contentInset = UIEdgeInsetsMake(-37, 0, -37, 0);
-        
         configureNavigationBar()
         tableView.tableFooterView = nil
         tableView.addSubview(companyLogoImageView)
@@ -171,16 +177,25 @@ class SettingsTableViewController: UITableViewController, SettingsView {
         
     }
     
-//    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//
-//        if section==0 {
-//            return 0
-//        }
-//        return 42
-//    }
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+
+        if section == 0 {
+            return 0.001
+        }
+        
+        return 12
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == 0 {
+            return nil
+        }
+        
+        return UIView(frame: CGRect(x: 0, y: 0, width: 1, height: self.tableView(tableView, heightForHeaderInSection: section)))
+    }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return 60
     }
     
     override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -198,6 +213,8 @@ class SettingsTableViewController: UITableViewController, SettingsView {
             }
             
             cell.iconImage.image = UIImage(named:settingsItem.imageName!)
+            
+            cell.topSeparatorView.isHidden = indexPath.row != 0
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "nothing", for: indexPath)
@@ -225,20 +242,31 @@ class SettingsTableViewController: UITableViewController, SettingsView {
 
     }
 
-      func logoutAction() {
-
-        let alert = UIAlertController(title: "Warning", message: "Are you sure you want to log out?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
-            self.presenter.logout()
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+    func logoutAction() {
+        let title = "Attention"
+        let infoText = "You are about to logout, by doing so you will need to login again to use PawTrails App. Are you sure you want to do this?"
+        
+        let alertButtons = [
+            AlertButton("Cancel", resultType: .cancel, isDefault: true),
+            AlertButton("Logout", resultType: .ok, isDefault: false)
+        ]
+        
+        let alertView = PTAlertViewController(title, infoText: infoText, titleBarStyle: .red, alertButtons: alertButtons, alertResult: {alert, result in
+            alert.dismiss(animated: true, completion: {
+                if result == .ok {
+                    self.presenter.logout()
+                }
+            })
+        })
+        
+        self.present(alertView, animated: true, completion: nil)
     }
 }
 
 class SettingsTableViewCell: UITableViewCell {
     @IBOutlet weak var iconImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var topSeparatorView: UIView!
 }
 
 

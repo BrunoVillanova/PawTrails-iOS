@@ -56,34 +56,34 @@ struct Constants {
     
     static let deviceIdforDemo = "RcpWfA9PGGYz"
     
-    /////////// BEGIN apiURL
-    #if DEBUG
-    static let apiURL = apiURLStaging
-    static let apiURLTest = apiURLTestStaging
-    static let socketURL = socketURLStaging
-    static let socketURLSSL = socketURLSSLStaging
-    #else
-
-    #if DEMO
-    static let apiURL = apiURLStaging
-    static let apiURLTest = apiURLTestStaging
-    static let socketURL = socketURLStaging
-    static let socketURLSSL = socketURLSSLStaging
-    #else
-    static let apiURL = apiURLProduction
-    static let apiURLTest = apiURLTestProduction
-    static let socketURL = socketURLProduction
-    static let socketURLSSL = socketURLSSLProduction
-    #endif
-
-    #endif
-    /////////// END apiURL
-
-//    ////////// FORCE PRODUCTION
+//    /////////// BEGIN apiURL
+//    #if DEBUG
+//    static let apiURL = apiURLStaging
+//    static let apiURLTest = apiURLTestStaging
+//    static let socketURL = socketURLStaging
+//    static let socketURLSSL = socketURLSSLStaging
+//    #else
+//
+//    #if DEMO
+//    static let apiURL = apiURLStaging
+//    static let apiURLTest = apiURLTestStaging
+//    static let socketURL = socketURLStaging
+//    static let socketURLSSL = socketURLSSLStaging
+//    #else
 //    static let apiURL = apiURLProduction
 //    static let apiURLTest = apiURLTestProduction
 //    static let socketURL = socketURLProduction
 //    static let socketURLSSL = socketURLSSLProduction
+//    #endif
+//
+//    #endif
+//    /////////// END apiURL
+
+    ////////// FORCE PRODUCTION
+    static let apiURL = apiURLProduction
+    static let apiURLTest = apiURLTestProduction
+    static let socketURL = socketURLProduction
+    static let socketURLSSL = socketURLSSLProduction
     
     static var testUserEmail: String {
         get {
@@ -93,7 +93,11 @@ struct Constants {
             #if DEMO
                 return testUserEmailProductionDemo
             #else
+            #if BETA
+                return testUserEmailProduction
+            #else
                 return testUserEmailStaging
+            #endif
             #endif
         }
     }
@@ -106,7 +110,11 @@ struct Constants {
             #if DEMO
                 return testUserPasswordProductionDemo
             #else
-                return testUserPasswordStaging
+            #if BETA
+            return testUserPasswordProduction
+            #else
+            return testUserPasswordStaging
+            #endif
             #endif
         }
     }
