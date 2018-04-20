@@ -286,10 +286,12 @@ class MapViewController: UIViewController {
         
         
         alertView.contentView.addSubview(tableView)
-//        alertView.alertWillAppear = {alert in
+        alertView.alertWillAppear = {alert in
 //            let numberOfRows = tableView.numberOfRows(inSection: 0)
 //            tableView.scrollToRow(at: IndexPath(row: numberOfRows-1, section: 0), at: UITableViewScrollPosition., animated: true)
-//        }
+            let bottomOffset = CGPoint(x: 0, y: tableView.contentSize.height - tableView.bounds.size.height)
+            tableView.setContentOffset(bottomOffset, animated: true)
+        }
         
         // Footer View
         let footerViewContainer = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: rowHeight))
@@ -314,8 +316,8 @@ class MapViewController: UIViewController {
                     alertView.contentViewHeight = maxTableViewSize
                 }
                 
-                let numberOfRows = tableView.numberOfRows(inSection: 0)
-                tableView.scrollToRow(at: IndexPath(row: numberOfRows-1, section: 0), at: UITableViewScrollPosition.bottom, animated: false)
+                let bottomOffset = CGPoint(x: 0, y: tableView.contentSize.height - tableView.bounds.size.height)
+                tableView.setContentOffset(bottomOffset, animated: true)
             })
             .disposed(by: disposeBag)
         
