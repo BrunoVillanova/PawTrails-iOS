@@ -68,12 +68,21 @@
                                                                     <color key="textColor" red="0.25490196078431371" green="0.28235294117647058" blue="0.32156862745098036" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9qv-AZ-yhE" userLabel="Status View" customClass="PTDeviceStatusView" customModule="PawTrails" customModuleProvider="target">
-                                                                    <rect key="frame" x="190" y="0.0" width="41" height="12"/>
-                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CqE-NJ-pMT">
+                                                                    <rect key="frame" x="170" y="-20" width="81" height="52"/>
+                                                                    <subviews>
+                                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9qv-AZ-yhE" userLabel="Status View" customClass="PTDeviceStatusView" customModule="PawTrails" customModuleProvider="target">
+                                                                            <rect key="frame" x="20" y="20" width="41" height="12"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="12" id="Nox-hI-sWA"/>
+                                                                                <constraint firstAttribute="width" constant="60" id="pqe-W8-PLb"/>
+                                                                            </constraints>
+                                                                        </view>
+                                                                    </subviews>
+                                                                    <color key="backgroundColor" red="0.98039215690000003" green="0.25490196079999999" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="height" constant="12" id="Nox-hI-sWA"/>
-                                                                        <constraint firstAttribute="width" constant="41" id="pqe-W8-PLb"/>
+                                                                        <constraint firstItem="9qv-AZ-yhE" firstAttribute="centerY" secondItem="CqE-NJ-pMT" secondAttribute="centerY" id="3V8-Ai-Bi8"/>
+                                                                        <constraint firstItem="9qv-AZ-yhE" firstAttribute="centerX" secondItem="CqE-NJ-pMT" secondAttribute="centerX" id="s8W-fX-Hds"/>
                                                                     </constraints>
                                                                 </view>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Uo-OE-RZM" userLabel="Address Label">
@@ -85,15 +94,16 @@
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
+                                                                <constraint firstAttribute="trailing" secondItem="CqE-NJ-pMT" secondAttribute="trailing" constant="16" id="6BS-5A-YBT"/>
                                                                 <constraint firstItem="0Uo-OE-RZM" firstAttribute="top" secondItem="DWR-um-V6Q" secondAttribute="bottom" constant="8" id="74g-kF-Aqy"/>
+                                                                <constraint firstItem="CqE-NJ-pMT" firstAttribute="bottom" secondItem="DWR-um-V6Q" secondAttribute="bottom" id="FIC-fD-X9H"/>
                                                                 <constraint firstItem="trt-hH-Ifj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DWR-um-V6Q" secondAttribute="trailing" constant="8" id="Haa-Xm-0ej"/>
                                                                 <constraint firstItem="DWR-um-V6Q" firstAttribute="top" secondItem="YfQ-dK-aDz" secondAttribute="top" id="Kl4-sP-1c7"/>
                                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="0Uo-OE-RZM" secondAttribute="trailing" id="LQi-WR-H7O"/>
                                                                 <constraint firstAttribute="bottom" secondItem="0Uo-OE-RZM" secondAttribute="bottom" id="OlP-xi-llJ"/>
-                                                                <constraint firstAttribute="trailing" secondItem="9qv-AZ-yhE" secondAttribute="trailing" id="QUq-wl-VCK"/>
-                                                                <constraint firstItem="9qv-AZ-yhE" firstAttribute="leading" secondItem="trt-hH-Ifj" secondAttribute="trailing" constant="16" id="lW4-VB-Jh7"/>
+                                                                <constraint firstItem="CqE-NJ-pMT" firstAttribute="top" secondItem="DWR-um-V6Q" secondAttribute="top" id="Rzt-Nu-biP"/>
                                                                 <constraint firstItem="DWR-um-V6Q" firstAttribute="leading" secondItem="YfQ-dK-aDz" secondAttribute="leading" id="nRP-PY-OYG"/>
-                                                                <constraint firstItem="9qv-AZ-yhE" firstAttribute="top" secondItem="YfQ-dK-aDz" secondAttribute="top" id="oQo-XL-msE"/>
+                                                                <constraint firstItem="CqE-NJ-pMT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="trt-hH-Ifj" secondAttribute="trailing" constant="8" id="ubl-Y2-S8Y"/>
                                                                 <constraint firstItem="0Uo-OE-RZM" firstAttribute="leading" secondItem="YfQ-dK-aDz" secondAttribute="leading" id="vy6-tX-Byo"/>
                                                                 <constraint firstItem="trt-hH-Ifj" firstAttribute="centerY" secondItem="DWR-um-V6Q" secondAttribute="centerY" id="zeP-2q-9JM"/>
                                                             </constraints>
