@@ -137,7 +137,7 @@ class PetConnectDeviceViewController: PetWizardStepViewController {
                         self.delegate?.stepCompleted(completed: true, pet: self.pet!)
                         self.delegate?.goToNextStep()
                     } else {
-                        self.showMessage("Code not available", type: .warning)
+                        self.showMessage("This device is already in use, please try another one.", type: .error, options: [.textNumberOfLines(0)])
                     }
                 }
             })
