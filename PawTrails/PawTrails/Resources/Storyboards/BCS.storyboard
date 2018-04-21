@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,11 +24,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3uR-mN-9Gt">
-                                <rect key="frame" x="0.0" y="20" width="375" height="377"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3uR-mN-9Gt" userLabel="Image View">
+                                <rect key="frame" x="0.0" y="20" width="375" height="322"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BCSLogo" translatesAutoresizingMaskIntoConstraints="NO" id="ovj-vS-apv">
-                                        <rect key="frame" x="16" y="75.5" width="343" height="226"/>
+                                        <rect key="frame" x="16" y="64" width="343" height="226"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="226" id="jpo-ht-DcE"/>
                                             <constraint firstAttribute="width" constant="343" id="lge-My-JRY"/>
@@ -37,82 +38,106 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="ovj-vS-apv" firstAttribute="centerX" secondItem="3uR-mN-9Gt" secondAttribute="centerX" id="BQM-SM-abB"/>
-                                    <constraint firstItem="ovj-vS-apv" firstAttribute="centerY" secondItem="3uR-mN-9Gt" secondAttribute="centerY" id="hOL-yt-5hS"/>
+                                    <constraint firstAttribute="bottom" secondItem="ovj-vS-apv" secondAttribute="bottom" constant="32" id="Sd5-bM-nnw"/>
+                                    <constraint firstItem="ovj-vS-apv" firstAttribute="top" secondItem="3uR-mN-9Gt" secondAttribute="top" constant="64" id="dOG-lF-vQI"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F7s-r2-ndm">
-                                <rect key="frame" x="0.0" y="331" width="375" height="152"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F7s-r2-ndm" userLabel="Text View">
+                                <rect key="frame" x="0.0" y="342" width="375" height="133.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Body Condition Score" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wdM-g7-WV5">
-                                        <rect key="frame" x="79" y="31" width="217" height="43"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1rV-ub-ATK">
+                                        <rect key="frame" x="24" y="9" width="327" height="115"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Body Condition Score" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wdM-g7-WV5">
+                                                <rect key="frame" x="55" y="0.0" width="217" height="43"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="43" id="QMX-Jc-xlR"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="20"/>
+                                                <color key="textColor" red="0.25490196078431371" green="0.28235294117647058" blue="0.32156862745098036" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="highlightedColor" red="0.25490196078431371" green="0.28235294117647058" blue="0.32156862745098036" alpha="1" colorSpace="calibratedRGB"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monitor your pets' weight by measuring its body condition score regularly" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bgw-ij-JRd">
+                                                <rect key="frame" x="0.0" y="43" width="327" height="72"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="72" id="SU3-2k-5Gb"/>
+                                                    <constraint firstAttribute="width" constant="327" id="ye3-Ka-now"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
+                                                <color key="textColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="217" id="PKH-Eq-enx"/>
-                                            <constraint firstAttribute="height" constant="43" id="QMX-Jc-xlR"/>
+                                            <constraint firstAttribute="trailing" secondItem="Bgw-ij-JRd" secondAttribute="trailing" id="5zS-Th-eUx"/>
+                                            <constraint firstItem="Bgw-ij-JRd" firstAttribute="leading" secondItem="1rV-ub-ATK" secondAttribute="leading" id="DC5-ll-Zhh"/>
+                                            <constraint firstItem="wdM-g7-WV5" firstAttribute="top" secondItem="1rV-ub-ATK" secondAttribute="top" id="I5o-a0-Vqk"/>
+                                            <constraint firstAttribute="bottom" secondItem="Bgw-ij-JRd" secondAttribute="bottom" id="PGh-Yl-8pg"/>
+                                            <constraint firstItem="Bgw-ij-JRd" firstAttribute="top" secondItem="wdM-g7-WV5" secondAttribute="bottom" id="drj-kN-u0g"/>
+                                            <constraint firstItem="wdM-g7-WV5" firstAttribute="centerX" secondItem="1rV-ub-ATK" secondAttribute="centerX" id="pW4-LW-ack"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="20"/>
-                                        <color key="textColor" red="0.25490196078431371" green="0.28235294117647058" blue="0.32156862745098036" alpha="1" colorSpace="calibratedRGB"/>
-                                        <color key="highlightedColor" red="0.25490196078431371" green="0.28235294117647058" blue="0.32156862745098036" alpha="1" colorSpace="calibratedRGB"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monitor your pets' weight by measuring its body condition score regularly" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bgw-ij-JRd">
-                                        <rect key="frame" x="8" y="72" width="355" height="72"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="72" id="SU3-2k-5Gb"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
-                                        <color key="textColor" red="0.25490196079999999" green="0.28235294119999998" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="wdM-g7-WV5" firstAttribute="top" secondItem="F7s-r2-ndm" secondAttribute="top" constant="31" id="1JO-PM-5fF"/>
-                                    <constraint firstAttribute="trailing" secondItem="Bgw-ij-JRd" secondAttribute="trailing" constant="12" id="2Wk-zV-Wkk"/>
-                                    <constraint firstItem="Bgw-ij-JRd" firstAttribute="top" secondItem="wdM-g7-WV5" secondAttribute="bottom" constant="-2" id="84X-NM-t11"/>
-                                    <constraint firstItem="Bgw-ij-JRd" firstAttribute="leading" secondItem="F7s-r2-ndm" secondAttribute="leading" constant="8" id="ftY-1b-6y4"/>
-                                    <constraint firstItem="wdM-g7-WV5" firstAttribute="centerX" secondItem="F7s-r2-ndm" secondAttribute="centerX" id="kXW-Xr-W53"/>
-                                    <constraint firstAttribute="height" constant="152" id="vvT-zJ-WtP"/>
+                                    <constraint firstItem="1rV-ub-ATK" firstAttribute="centerX" secondItem="F7s-r2-ndm" secondAttribute="centerX" id="4Bd-Ly-zv5"/>
+                                    <constraint firstItem="1rV-ub-ATK" firstAttribute="centerY" secondItem="F7s-r2-ndm" secondAttribute="centerY" id="Jui-u2-8un"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ARU-1v-yCw" customClass="PTButton" customModule="PawTrails" customModuleProvider="target">
-                                <rect key="frame" x="29" y="564" width="316" height="53"/>
-                                <color key="backgroundColor" red="0.97647058819999999" green="0.21960784310000001" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g3o-fN-rbs" userLabel="Footer View">
+                                <rect key="frame" x="0.0" y="475.5" width="375" height="191.5"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ARU-1v-yCw" customClass="PTButton" customModule="PawTrails" customModuleProvider="target">
+                                        <rect key="frame" x="24" y="32" width="327" height="53"/>
+                                        <color key="backgroundColor" red="0.97647058819999999" green="0.21960784310000001" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="327" id="UaJ-2s-0cR"/>
+                                            <constraint firstAttribute="height" constant="53" id="aa7-IC-YcY"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
+                                        <state key="normal" title="GET STARTED">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="customBGColor">
+                                                <color key="value" red="0.97647058819999999" green="0.21960784310000001" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="customTextColor">
+                                                <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="26"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="shapeName" value="RoundRect"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <segue destination="OyA-zw-bHh" kind="show" id="Qgb-ab-oe7"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="53" id="aa7-IC-YcY"/>
+                                    <constraint firstItem="ARU-1v-yCw" firstAttribute="leading" secondItem="g3o-fN-rbs" secondAttribute="leading" constant="24" id="cCB-dp-5KS"/>
+                                    <constraint firstAttribute="trailing" secondItem="ARU-1v-yCw" secondAttribute="trailing" constant="24" id="cdF-R4-jwy"/>
+                                    <constraint firstItem="ARU-1v-yCw" firstAttribute="top" secondItem="g3o-fN-rbs" secondAttribute="top" constant="32" id="rcf-vB-EJK"/>
+                                    <constraint firstItem="ARU-1v-yCw" firstAttribute="centerX" secondItem="g3o-fN-rbs" secondAttribute="centerX" id="wvz-ZN-kCJ"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
-                                <state key="normal" title="GET STARTED">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="customBGColor">
-                                        <color key="value" red="0.97647058819999999" green="0.21960784310000001" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="customTextColor">
-                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="26"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="shapeName" value="RoundRect"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <segue destination="OyA-zw-bHh" kind="show" id="Qgb-ab-oe7"/>
-                                </connections>
-                            </button>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="F7s-r2-ndm" firstAttribute="leading" secondItem="jDf-mn-B6m" secondAttribute="leading" id="9Wh-uS-0Ov"/>
-                            <constraint firstItem="F7s-r2-ndm" firstAttribute="centerY" secondItem="y3o-mm-GJA" secondAttribute="centerY" constant="73.5" id="E8u-AC-rtk"/>
+                            <constraint firstItem="jDf-mn-B6m" firstAttribute="trailing" secondItem="g3o-fN-rbs" secondAttribute="trailing" id="D9A-XF-zhL"/>
                             <constraint firstItem="F7s-r2-ndm" firstAttribute="trailing" secondItem="jDf-mn-B6m" secondAttribute="trailing" id="GVu-1e-Dip"/>
                             <constraint firstItem="jDf-mn-B6m" firstAttribute="trailing" secondItem="3uR-mN-9Gt" secondAttribute="trailing" id="O3l-To-c6z"/>
                             <constraint firstItem="3uR-mN-9Gt" firstAttribute="top" secondItem="jDf-mn-B6m" secondAttribute="top" id="QJj-be-uoF"/>
-                            <constraint firstItem="ARU-1v-yCw" firstAttribute="leading" secondItem="jDf-mn-B6m" secondAttribute="leading" constant="29" id="dzk-bK-9JK"/>
-                            <constraint firstItem="F7s-r2-ndm" firstAttribute="centerX" secondItem="y3o-mm-GJA" secondAttribute="centerX" id="if1-tH-EOS"/>
+                            <constraint firstItem="F7s-r2-ndm" firstAttribute="height" secondItem="y3o-mm-GJA" secondAttribute="height" multiplier="0.2" id="Re2-s0-dLI"/>
+                            <constraint firstItem="g3o-fN-rbs" firstAttribute="top" secondItem="F7s-r2-ndm" secondAttribute="bottom" id="UWF-bE-Jpa"/>
+                            <constraint firstItem="jDf-mn-B6m" firstAttribute="bottom" secondItem="g3o-fN-rbs" secondAttribute="bottom" id="efz-ac-oAQ"/>
+                            <constraint firstItem="F7s-r2-ndm" firstAttribute="top" secondItem="3uR-mN-9Gt" secondAttribute="bottom" id="iOC-Bs-men"/>
                             <constraint firstItem="3uR-mN-9Gt" firstAttribute="leading" secondItem="jDf-mn-B6m" secondAttribute="leading" id="ktK-Sc-f5w"/>
-                            <constraint firstItem="jDf-mn-B6m" firstAttribute="trailing" secondItem="ARU-1v-yCw" secondAttribute="trailing" constant="30" id="nJH-yl-wlt"/>
-                            <constraint firstItem="jDf-mn-B6m" firstAttribute="bottom" secondItem="ARU-1v-yCw" secondAttribute="bottom" constant="50" id="xAx-BN-2nZ"/>
-                            <constraint firstItem="F7s-r2-ndm" firstAttribute="top" secondItem="3uR-mN-9Gt" secondAttribute="bottom" constant="-66" id="zwh-a5-s3B"/>
+                            <constraint firstItem="g3o-fN-rbs" firstAttribute="leading" secondItem="jDf-mn-B6m" secondAttribute="leading" id="mLs-NS-Wjh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jDf-mn-B6m"/>
                     </view>
