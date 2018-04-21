@@ -93,6 +93,7 @@ class LaunchViewController: UIViewController {
     
     private func configureUIPreferences() {
         GSMessage.successBackgroundColor = UIColor(red: 81.0/255, green: 222.0/255, blue: 147.0/255,  alpha: 0.95)
+        GSMessage.errorBackgroundColor = PTConstants.colors.newRed
         
         UINavigationBar.appearance().backgroundColor = .white
         UINavigationBar.appearance().barTintColor = UIColor.secondary
