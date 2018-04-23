@@ -13,7 +13,7 @@ import SnapKit
 class PTConnectionStatusView: UIView {
     
     fileprivate static let noDataColor = UIColor.gray
-    fileprivate static let noConnectionColor = UIColor.red
+    fileprivate static let noConnectionColor = PTConstants.colors.newRed
     fileprivate static let connectionColor = UIColor.green
     
     let dotImageView = UIView(frame: CGRect(x: 0, y:0, width: 20, height: 20))
@@ -32,7 +32,7 @@ class PTConnectionStatusView: UIView {
     fileprivate func setup() {
         self.translatesAutoresizingMaskIntoConstraints = false
         
-        dotImageView.backgroundColor = PTConnectionStatusView.noDataColor
+        dotImageView.backgroundColor = PTConnectionStatusView.noConnectionColor
         self.addSubview(dotImageView)
         
         statusLabel.text = ""

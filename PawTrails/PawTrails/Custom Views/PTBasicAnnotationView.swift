@@ -13,18 +13,13 @@ import SDWebImage
 class PTBasicAnnotationView: MKAnnotationView {
 
     static let identifier = "PTBasicAnnotationView"
-    let pictureImageView = PTBalloonImageView(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
+    let pictureImageView = PTBalloonImageView(frame: .zero)
     var calloutView: PTPetCalloutView?
     let defaultAnimationDuration = 0.3
     var calloutDelegate: PTPetCalloutViewDelegate?
     var petFocused : Bool = true {
         didSet {
             pictureImageView.petFocused = petFocused
-        }
-    }
-    var petOffline : Bool = false {
-        didSet {
-            pictureImageView.petOffline = petOffline
         }
     }
     
@@ -81,11 +76,10 @@ class PTBasicAnnotationView: MKAnnotationView {
     
     fileprivate func initialize() {
         self.backgroundColor = UIColor.clear
-        self.centerOffset = CGPoint(x: 0, y: -30)
+        self.centerOffset = CGPoint(x: 0, y: -(pictureImageView.frame.size.width/2.0))
         self.addSubview(pictureImageView)
         self.image = nil
         pictureImageView.petFocused = petFocused
-        pictureImageView.petOffline = petOffline
     }
     
     func configureWithAnnotation(_ annotation: PTAnnotation) {
@@ -93,7 +87,7 @@ class PTBasicAnnotationView: MKAnnotationView {
             pictureImageView.imageUrl = imageUrl
             
             if let deviceConnection = annotation.petDeviceData?.deviceConnection {
-                petOffline = (deviceConnection.status == 0)
+                petFocused = (deviceConnection.status != 0)
             }
             
         }

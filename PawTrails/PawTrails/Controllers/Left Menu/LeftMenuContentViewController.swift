@@ -47,6 +47,7 @@ class LeftMenuContentViewController: UIViewController {
     
     fileprivate final let disposeBag = DisposeBag()
     fileprivate var selectedMenuItem: Variable<MenuItem?> = Variable(nil)
+    fileprivate final let userPlaceholderImage = UIImage(named: "UserPlaceholderImage")!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +59,18 @@ class LeftMenuContentViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        DataManager.instance.getUser { (error, user) in
+            if let user = user {
+                self.configureMenuHeader(user.name, email: user.email, imageUrl: user.imageURL)
+            } else {
+                self.configureMenuHeader("Guest", email: "", imageUrl: nil)
+            }
+        }
     }
     
     fileprivate func initialize() {
@@ -95,13 +108,8 @@ class LeftMenuContentViewController: UIViewController {
         if let menuHeaderView = self.tableView.tableHeaderView, let imageView = menuHeaderView.viewWithTag(200) as? UIImageView {
             imageView.layer.cornerRadius = imageView.frame.size.width/2.0
             imageView.clipsToBounds = true
-            imageView.image = UIImage(named: "menu-me-1x-png")
-        }
-        
-        DataManager.instance.getUser { (error, user) in
-            if let user = user {
-                self.configureMenuHeader(user.name, email: user.email, imageUrl: user.imageURL)
-            }
+            imageView.contentMode = .scaleAspectFill
+            imageView.image = userPlaceholderImage
         }
     }
     
@@ -131,10 +139,12 @@ class LeftMenuContentViewController: UIViewController {
             
             if let imageUrl = imageUrl {
                 let imageUrl = URL(string: imageUrl)
-                imageView?.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "menu-me-1x-png"), options: .highPriority, completed: { (image, error, cscheType, url) in
+                imageView?.sd_setImage(with: imageUrl, placeholderImage: userPlaceholderImage, options: .delayPlaceholder, completed: { (image, error, cscheType, url) in
                     imageView!.layer.cornerRadius = imageView!.frame.size.width/2.0
                     imageView?.clipsToBounds = true
                 })
+            } else {
+                imageView?.image = userPlaceholderImage
             }
             
             titleLabel?.text = name

@@ -12,27 +12,19 @@ import SDWebImage
 class PTBalloonImageView: UIImageView {
 
     let placeholderImage = UIImage(named: "PetPlaceholderImage")
+    let onlineImage = UIImage(named: "PetImageBalloonOnline")!
+    let offlineImage = UIImage(named: "PetImageBalloonOffline")!
     
     var borderImageView = UIImageView(frame: CGRect.zero)
     var pictureImageView = UIImageView(frame: CGRect.zero)
     var petFocused : Bool = true {
         didSet {
-            if petFocused {
-                borderImageView.image = #imageLiteral(resourceName: "userProfileMask-1x-png");
-            } else {
-                borderImageView.image = UIImage(named: "UserProfileMaskGray")
-            }
+            updateBackground()
         }
     }
-    var petOffline : Bool = false {
-        didSet {
-            if petOffline {
-                borderImageView.image = UIImage(named: "UserProfileMaskGray")
-            } else {
-                borderImageView.image = #imageLiteral(resourceName: "userProfileMask-1x-png");
-            }
-        }
-    }
+    
+    let backgroundLayer = CALayer()
+    fileprivate var backgroundImage: UIImage?
     
     override var image: UIImage? {
         get {
@@ -82,32 +74,35 @@ class PTBalloonImageView: UIImageView {
     
     fileprivate func initialize() {
         self.backgroundColor = .clear
-        
-        if petFocused {
-            borderImageView.image = #imageLiteral(resourceName: "userProfileMask-1x-png");
-        } else {
-            borderImageView.image = UIImage(named: "UserProfileMaskGray")
-        }
+        self.backgroundImage = petFocused ? onlineImage : offlineImage
 
         borderImageView.backgroundColor = .clear
         
         pictureImageView.backgroundColor = .clear
         pictureImageView.image = placeholderImage
-        
+    
         self.addSubview(pictureImageView)
-        self.addSubview(borderImageView)
+        
+        var frame = self.frame
+        frame.size.width = onlineImage.size.width
+        frame.size.height = onlineImage.size.height
+        self.frame = frame
+
+        self.layer.insertSublayer(backgroundLayer, at: 0)
     }
     
     override func layoutSubviews() {
-        
-        borderImageView.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
-
-        let borderSize : CGFloat = 5.0
-        var pictureFrame = borderImageView.frame
-        pictureFrame.size.height =  pictureFrame.size.height - (2.0*borderSize)
-        pictureFrame.size.width = pictureFrame.size.height
-        pictureImageView.frame = pictureFrame
-        pictureImageView.center = borderImageView.center
+        super.layoutSubviews()
+        backgroundLayer.frame = self.bounds
+        let borderSize: CGFloat = 3.5
+        let theWidth = self.bounds.size.width - (2.0*borderSize)
+        pictureImageView.frame = CGRect(x: borderSize, y: borderSize, width: theWidth, height: theWidth)
         pictureImageView.circle()
+    }
+    
+    fileprivate func updateBackground() {
+        self.backgroundImage = petFocused ? onlineImage : offlineImage
+        backgroundLayer.contents = backgroundImage?.cgImage
+        self.layer.contentsGravity = kCAGravityResizeAspect
     }
 }

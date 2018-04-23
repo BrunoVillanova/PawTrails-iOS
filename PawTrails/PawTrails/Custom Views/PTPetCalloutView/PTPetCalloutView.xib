@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -48,9 +48,18 @@
                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <view tag="200" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yKY-xA-2It" customClass="PTDeviceStatusView" customModule="PawTrails" customModuleProvider="target">
-                                    <rect key="frame" x="93" y="0.0" width="15" height="12"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T3q-ZJ-EYE" userLabel="Status View">
+                                    <rect key="frame" x="73" y="-20" width="55" height="52"/>
+                                    <subviews>
+                                        <view tag="200" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yKY-xA-2It" customClass="PTDeviceStatusView" customModule="PawTrails" customModuleProvider="target">
+                                            <rect key="frame" x="20" y="20" width="15" height="12"/>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="yKY-xA-2It" secondAttribute="trailing" id="EoV-5M-Crc"/>
+                                        <constraint firstItem="yKY-xA-2It" firstAttribute="leading" secondItem="T3q-ZJ-EYE" secondAttribute="leading" id="dJ5-8b-cyI"/>
+                                        <constraint firstItem="yKY-xA-2It" firstAttribute="centerY" secondItem="T3q-ZJ-EYE" secondAttribute="centerY" id="ejQ-wI-VdF"/>
+                                    </constraints>
                                 </view>
                                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="KeyboardArrowRightGray-Small" translatesAutoresizingMaskIntoConstraints="NO" id="eHm-lI-E0F" userLabel="Arrow Image View">
                                     <rect key="frame" x="100" y="43" width="8" height="12"/>
@@ -63,16 +72,16 @@
                                 </imageView>
                             </subviews>
                             <constraints>
-                                <constraint firstItem="yKY-xA-2It" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="jR4-gw-Sik" secondAttribute="trailing" constant="16" id="5Xh-eP-eOc"/>
                                 <constraint firstItem="jR4-gw-Sik" firstAttribute="leading" secondItem="Csl-Pg-N2l" secondAttribute="leading" id="60d-QJ-fBp"/>
+                                <constraint firstAttribute="trailing" secondItem="T3q-ZJ-EYE" secondAttribute="trailing" id="CPu-Mn-OQY"/>
                                 <constraint firstItem="jR4-gw-Sik" firstAttribute="top" secondItem="Csl-Pg-N2l" secondAttribute="top" id="HOv-fw-LvT"/>
                                 <constraint firstAttribute="bottom" secondItem="xQf-1d-aD4" secondAttribute="bottom" constant="8" id="Ky2-FS-bJi"/>
-                                <constraint firstItem="yKY-xA-2It" firstAttribute="top" secondItem="Csl-Pg-N2l" secondAttribute="top" id="LEj-wY-gTd"/>
+                                <constraint firstItem="T3q-ZJ-EYE" firstAttribute="centerY" secondItem="jR4-gw-Sik" secondAttribute="centerY" id="N6O-FS-yId"/>
                                 <constraint firstAttribute="trailing" secondItem="eHm-lI-E0F" secondAttribute="trailing" id="TFw-fF-aum"/>
                                 <constraint firstItem="eHm-lI-E0F" firstAttribute="centerY" secondItem="xQf-1d-aD4" secondAttribute="centerY" id="cdr-tj-Uh9"/>
-                                <constraint firstAttribute="trailing" secondItem="yKY-xA-2It" secondAttribute="trailing" id="d7V-zm-sXe"/>
                                 <constraint firstItem="xQf-1d-aD4" firstAttribute="top" secondItem="jR4-gw-Sik" secondAttribute="bottom" constant="4" id="gZH-ud-BFs"/>
                                 <constraint firstItem="xQf-1d-aD4" firstAttribute="leading" secondItem="Csl-Pg-N2l" secondAttribute="leading" id="mkq-in-RN0"/>
+                                <constraint firstItem="T3q-ZJ-EYE" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="jR4-gw-Sik" secondAttribute="trailing" constant="8" id="td2-OI-0gF"/>
                                 <constraint firstItem="eHm-lI-E0F" firstAttribute="leading" secondItem="xQf-1d-aD4" secondAttribute="trailing" constant="8" id="tmx-d9-IKE"/>
                             </constraints>
                         </view>
