@@ -24,6 +24,15 @@ class PTBalloonImageView: UIImageView {
             }
         }
     }
+    var petOffline : Bool = false {
+        didSet {
+            if petOffline {
+                borderImageView.image = UIImage(named: "UserProfileMaskGray")
+            } else {
+                borderImageView.image = #imageLiteral(resourceName: "userProfileMask-1x-png");
+            }
+        }
+    }
     
     override var image: UIImage? {
         get {

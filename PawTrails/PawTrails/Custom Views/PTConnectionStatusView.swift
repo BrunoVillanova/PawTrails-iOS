@@ -30,6 +30,7 @@ class PTConnectionStatusView: UIView {
     }
     
     fileprivate func setup() {
+        self.translatesAutoresizingMaskIntoConstraints = false
         
         dotImageView.backgroundColor = PTConnectionStatusView.noDataColor
         self.addSubview(dotImageView)

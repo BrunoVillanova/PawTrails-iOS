@@ -22,6 +22,11 @@ class PTBasicAnnotationView: MKAnnotationView {
             pictureImageView.petFocused = petFocused
         }
     }
+    var petOffline : Bool = false {
+        didSet {
+            pictureImageView.petOffline = petOffline
+        }
+    }
     
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
@@ -80,11 +85,17 @@ class PTBasicAnnotationView: MKAnnotationView {
         self.addSubview(pictureImageView)
         self.image = nil
         pictureImageView.petFocused = petFocused
+        pictureImageView.petOffline = petOffline
     }
     
     func configureWithAnnotation(_ annotation: PTAnnotation) {
         if let pet = annotation.pet, let imageUrl = pet.imageURL {
             pictureImageView.imageUrl = imageUrl
+            
+            if let deviceConnection = annotation.petDeviceData?.deviceConnection {
+                petOffline = (deviceConnection.status == 0)
+            }
+            
         }
     }
     
