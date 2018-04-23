@@ -39,8 +39,17 @@ extension DataManager {
                             }
                         }
                     } else {
-                        // Finally we return the pets from API
-                        observer.onNext(apiPets!)
+                        
+                        if let apiPets = apiPets {
+                            
+                            let nameAscendingSorted = apiPets.sorted { (initial, next) -> Bool in
+                                return initial.name!.compare(next.name!) == .orderedAscending
+                            }
+                           observer.onNext(nameAscendingSorted)
+                        } else {
+                            observer.onNext([])
+                        }
+
                         observer.onCompleted()
                     }
                 }

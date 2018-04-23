@@ -260,7 +260,7 @@ class PetBreedSelectViewController: PetWizardStepViewController {
                     self.selectedBreed.value = item
                     self.pet!.breeds = PetBreeds(first: item, second: nil, nil)
                 }
-                
+                self.showPetSizeInputAlert()
                 self.validateAndUpdate()
             }
             .disposed(by: disposeBag)

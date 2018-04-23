@@ -187,6 +187,7 @@ class DataManager: NSObject {
             }
         }
         let response = SharedPreferences.remove(.id) && SharedPreferences.remove(.token)
+        let _ = SharedPreferences.remove(.socialnetwork)
         SocketIOManager.instance.disconnect()
         return response
     }

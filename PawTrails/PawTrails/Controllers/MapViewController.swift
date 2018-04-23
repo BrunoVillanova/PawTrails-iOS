@@ -11,10 +11,9 @@ import MapKit
 import RxSwift
 import GSMessages
 
-class MapViewController: UIViewController {
+class MapViewController: PTViewController {
     
     @IBOutlet weak var mapView: PTMapView!
-    @IBOutlet weak var petsCollectionView: UICollectionView!
     @IBOutlet weak var firstButtonfromthebottom: UIButton!
     @IBOutlet weak var secButtonFromTheBottom: UIButton!
     @IBOutlet weak var thirdButtonFromTheBottom: UIButton!
@@ -22,7 +21,6 @@ class MapViewController: UIViewController {
     
     fileprivate let presenter = HomePresenter()
     fileprivate let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    fileprivate let disposeBag = DisposeBag()
     fileprivate let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
     fileprivate let button = UIButton(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
     fileprivate let refreshIconImage = UIImage(named: "RefreshButtonIcon")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
@@ -37,30 +35,11 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
-        UIApplication.shared.statusBarStyle = .default
-        button.addTarget(self, action:  #selector(self.refreshBtnPressed(_:)), for: .touchUpInside)
-        button.setImage(refreshIconImage, for: .normal)
-        button.tintColor = PTConstants.colors.darkGray
-        self.navigationItem.rightBarButtonItem?.customView = button
-        self.navigationItem.rightBarButtonItem?.tintColor = PTConstants.colors.primary
-        
-        
-        let notificationIdentifier: String = "petAdded"
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadPets), name: NSNotification.Name(rawValue: notificationIdentifier), object: nil)
-        
-        DataManager.instance.pets().subscribe(onNext: { (pets) in
-            if pets.isEmpty || pets.count == 0 {
-                self.appDelegate.showPetWizardModally(true)
-            }
-            
-        }).disposed(by: disposeBag)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         mapView.showGpsUpdates()
-        self.tabBarController?.tabBar.isHidden = false
         
         if isDisplayedPetScreen {
             reloadPets()
@@ -73,6 +52,12 @@ class MapViewController: UIViewController {
         
         if isFirstTimeViewAppears {
             isFirstTimeViewAppears = false
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let selectPetsViewController = segue.destination as? SelectPetsVC {
+            selectPetsViewController.action = selectPetsAction.startAdventure
         }
     }
     
@@ -109,16 +94,36 @@ class MapViewController: UIViewController {
         
         firstButtonfromthebottom.isEnabled = false
         
-        petsCollectionView.delegate = self
-        petsCollectionView.dataSource = self
-        petsCollectionView.reloadData()
-        petsCollectionView.isHidden = true
-        
         presenter.attachView(self)
         reloadPets()
+        
+        UIApplication.shared.statusBarStyle = .default
+        button.addTarget(self, action:  #selector(self.refreshBtnPressed(_:)), for: .touchUpInside)
+        button.setImage(refreshIconImage, for: .normal)
+        button.tintColor = PTConstants.colors.darkGray
+        self.navigationItem.rightBarButtonItem?.customView = button
+        self.navigationItem.rightBarButtonItem?.tintColor = PTConstants.colors.primary
+        
+        
+        let notificationIdentifier: String = "petAdded"
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadPets), name: NSNotification.Name(rawValue: notificationIdentifier), object: nil)
+        
+        DataManager.instance.pets().subscribe(onNext: { (pets) in
+            if pets.isEmpty || pets.count == 0 {
+                self.appDelegate.showPetWizardModally(true)
+            }
+            
+        }).disposed(by: disposeBag)
+        
+        configureNavigationBar()
+    }
+    
+    fileprivate func configureNavigationBar() {
+        if let navigationController = self.navigationController as? PTNavigationViewController {
+            navigationController.showNavigationBarDropShadow = true
+        }
     }
 
-    
     func reloadPets(){
         presenter.getPets()
     }
@@ -133,12 +138,6 @@ class MapViewController: UIViewController {
         self.alert(title: error.title, msg: error.msg)
     }
     
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let selectPetsViewController = segue.destination as? SelectPetsVC {
-            selectPetsViewController.action = selectPetsAction.startAdventure
-        }
-    }
     
     fileprivate func showIndicator() {
         refreshBarBtn.customView = self.activityIndicator
@@ -207,13 +206,10 @@ class MapViewController: UIViewController {
     }
     
     @IBAction func secButtonPressed(_ sender: Any) {
-        if (!self.petsCollectionView.isHidden) {
-            self.petsCollectionView.slideInAffect(direction: kCATransitionFromLeft)
-            self.petsCollectionView.isHidden = true
-        } else {
-            self.petsCollectionView.slideInAffect(direction: kCATransitionFromRight)
-            self.petsCollectionView.isHidden = false
-        }
+        showSelectPetAlert("Select Pet to Focus", selectedAction: {alert, selectedPet in
+            alert.dismiss(animated: true)
+            self.mapView.focusOnPet(selectedPet)
+        })
     }
     
     @IBAction func thirdButtonPressed(_ sender: Any) {
@@ -237,6 +233,143 @@ class MapViewController: UIViewController {
             self.navigationController?.pushViewController(petDetailsViewController, animated: true)
         }
     }
+    
+//    fileprivate func showSelectPetAlert() {
+//        let title = "Select Pet to Focus"
+//
+//        let alertView = PTAlertViewController(title, buttonTypes: nil, titleBarStyle: .green)
+//
+//        //// TableView setup
+//        let contentX:CGFloat = 24
+//        let contentY:CGFloat = 16
+//        let contentHeight:CGFloat = 46
+//        let rowHeight:CGFloat = 82
+//        let minTableViewSize:CGFloat = 1*rowHeight
+//        let maxTableViewSize:CGFloat = 3*rowHeight
+//        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: minTableViewSize), style: .plain)
+//        let cellIdentifier = "cell"
+//        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+//        tableView.rowHeight = rowHeight
+//        tableView.separatorStyle = .none
+//
+//        let pets = DataManager.instance.pets()
+//
+//        pets
+//            .bind(to: tableView.rx.items(cellIdentifier: cellIdentifier,
+//                                         cellType: UITableViewCell.self)) {row, element, cell in
+//
+//                                            let _ = cell.contentView.subviews.map { $0.removeFromSuperview() }
+//
+//                                            cell.selectionStyle = .none
+//
+//                                            // Main View
+//                                            let mainView = PTCircleImageTitleView(frame:  CGRect(x: contentX, y: contentY, width: cell.contentView.bounds.width, height: contentHeight))
+//
+//                                            if let petImageURLString = element.imageURL {
+//                                                mainView.imageView.sd_setImage(with: URL(string: petImageURLString), completed: nil)
+//                                            }
+//
+//                                            mainView.titleLabel.text = element.name
+//                                            cell.contentView.addSubview(mainView)
+//
+//                                            // Separator
+//                                            let separatorView = UIView(frame: CGRect(x: 0, y: cell.contentView.bounds.height-1, width: cell.contentView.bounds.width, height: 1))
+//                                            separatorView.backgroundColor = PTConstants.colors.newLightGray
+//                                            separatorView.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
+//                                            cell.contentView.addSubview(separatorView)
+//            }
+//            .disposed(by: disposeBag)
+//
+//        tableView.rx.modelSelected(Pet.self)
+//            .asObservable()
+//            .subscribe(onNext: { (pet) in
+//                alertView.dismiss(animated: true)
+//                self.mapView.focusOnPet(pet)
+//            })
+//            .disposed(by: disposeBag)
+//
+//
+//        alertView.contentView.addSubview(tableView)
+//        alertView.alertWillAppear = {alert in
+//            let bottomOffset = CGPoint(x: 0, y: tableView.contentSize.height - tableView.bounds.size.height)
+//            tableView.setContentOffset(bottomOffset, animated: false)
+//        }
+//
+//        // Footer View
+//        let footerViewContainer = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: rowHeight))
+//        let footerView = PTCircleImageTitleView(frame:  CGRect(x: contentX, y: contentY, width: footerViewContainer.bounds.size.width-contentX, height: contentHeight))
+//        footerView.imageView.image = UIImage(named: "CirclePlusIcon")
+//        footerView.titleLabel.text = "Add Pet"
+//        footerViewContainer.addTapGestureRecognizer {
+//            alertView.dismiss(animated: true, completion: {
+//                self.appDelegate.presentViewController(ViewController.petWizard)
+//            })
+//        }
+//        footerViewContainer.addSubview(footerView)
+//        tableView.tableFooterView = footerViewContainer
+//
+//        pets
+//            .subscribe(onNext: { (pets) in
+//                let newSize = minTableViewSize + CGFloat(pets.count)*rowHeight
+//                let theHeight = newSize < maxTableViewSize ? newSize : maxTableViewSize
+//
+//                alertView.setContentViewHeightAnimated(theHeight, afterHeightChanged: {
+//                    let bottomOffset = CGPoint(x: 0, y: 0)
+//                    tableView.setContentOffset(bottomOffset, animated: false)
+//                })
+//            })
+//            .disposed(by: disposeBag)
+//
+//        // Present
+//        self.present(alertView, animated: true, completion: nil)
+//    }
+//
+}
+
+class PTCircleImageTitleView: UIView {
+    
+    let imageView = UIImageView(frame: .zero)
+    let titleLabel = UILabel(frame: .zero)
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.setupView()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.setupView()
+    }
+    
+    fileprivate func setupView() {
+        // Image View
+        imageView.contentMode = .scaleAspectFit
+        self.addSubview(imageView)
+        
+        imageView.snp.makeConstraints { (make) in
+            make.left.equalToSuperview()
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.height.equalTo(46)
+            make.width.equalTo(46)
+        }
+        
+        // Title Label
+        titleLabel.font = UIFont(name: "Montserrat-Regular", size: 14)
+        titleLabel.textColor = PTConstants.colors.darkGray
+        self.addSubview(titleLabel)
+        
+        titleLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(imageView.snp.right).offset(24)
+            make.right.equalToSuperview()
+            make.centerY.equalTo(imageView)
+        }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        imageView.circle()
+    }
 }
 
 //MARK: HomeView
@@ -246,7 +379,7 @@ extension MapViewController: HomeView {
     }
     
     func loadPets(){
-        petsCollectionView.reloadData()
+
     }
     
     func reload() {
@@ -273,28 +406,6 @@ extension MapViewController: UIGestureRecognizerDelegate {
     func handleTap(gestureRecognizer: UIGestureRecognizer) {
         self.performSegue(withIdentifier: "adventrueInProgress", sender: nil)
 //        self.hideNotification()
-    }
-}
-
-//MARK: CollectionView DataSource
-extension MapViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return presenter.pets.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let pet = presenter.pets[indexPath.item]
-        let cell = petsCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! PetsCollectionViewCell
-        cell.petImageCell?.imageUrl = pet.imageURL
-        return cell
-    }
-}
-
-//MARK: CollectionView Delegate
-extension MapViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let pet = presenter.pets[indexPath.item]
-        self.mapView.focusOnPet(pet)
     }
 }
 

@@ -23,6 +23,7 @@ class UserProfileTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.attachView(self)
+        configureNavigationBar()
 
     }
     
@@ -61,6 +62,13 @@ class UserProfileTableViewController: UITableViewController {
             return 36.0 + label.frame.height
         }else{
             return super.tableView(tableView, heightForRowAt: indexPath)
+        }
+    }
+    
+    fileprivate func configureNavigationBar() {
+        
+        if let navigationController = self.navigationController as? PTNavigationViewController {
+            navigationController.showNavigationBarDropShadow = true
         }
     }
 }

@@ -112,7 +112,7 @@ class PetInfromationViewController: UIViewController, IndicatorInfoProvider, Pet
     }
     
     func petRemoved() {
-        if let petList = navigationController?.viewControllers.first(where: { $0 is PetsViewController}) as? PetsViewController {
+        if let petList = navigationController?.viewControllers.first(where: { $0 is PetListViewController}) as? PetListViewController {
             petList.reloadPets()
             navigationController?.popToViewController(petList, animated: true)
         }else{

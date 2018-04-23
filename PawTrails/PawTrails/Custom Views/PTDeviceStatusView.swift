@@ -16,6 +16,16 @@ class PTDeviceStatusView: UIView {
     let connectionStatusView = PTConnectionStatusView()
     var currentData: PetDeviceData?
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupView()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setupView()
+    }
+    
     override public var intrinsicContentSize: CGSize {
 
         if connectionStatusView.superview != nil {
@@ -49,7 +59,7 @@ class PTDeviceStatusView: UIView {
                 make.bottom.lessThanOrEqualToSuperview().offset(0)
                 
                 if signalView.superview != nil {
-                    make.left.equalTo(signalView.snp.right).offset(6)
+                    make.left.equalTo(signalView.snp.right).offset(12)
                 }
                 
                 make.right.equalToSuperview()
@@ -66,6 +76,11 @@ class PTDeviceStatusView: UIView {
         }
         
         self.invalidateIntrinsicContentSize()
+    }
+    
+    fileprivate func setupView() {
+        self.backgroundColor = .clear
+        self.translatesAutoresizingMaskIntoConstraints = false
     }
     
     func configure(_ petDeviceData: PetDeviceData, animated: Bool = true) {

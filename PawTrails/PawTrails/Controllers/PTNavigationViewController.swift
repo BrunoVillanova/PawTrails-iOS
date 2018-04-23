@@ -12,6 +12,11 @@ import SideMenu
 class PTNavigationViewController: UINavigationController {
 
     fileprivate let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    var showNavigationBarDropShadow: Bool = false {
+        didSet {
+            setupShadow(showNavigationBarDropShadow)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +25,7 @@ class PTNavigationViewController: UINavigationController {
     
     override var viewControllers: [UIViewController] {
         didSet {
+            setupShadow(false)
             addLeftMenuButton()
         }
     }
@@ -30,8 +36,6 @@ class PTNavigationViewController: UINavigationController {
     }
     
     fileprivate func initialize() {
-        
-//        addLeftMenuButton()
         self.navigationBar.shadowImage = UIImage()
         
         if SideMenuManager.default.menuLeftNavigationController == nil {
@@ -53,5 +57,17 @@ class PTNavigationViewController: UINavigationController {
         let leftBarButton = UIBarButtonItem(image: UIImage(named: "LeftMenuIcon"), style: .plain, target: self, action: #selector(leftMenuAction))
         leftBarButton.tintColor = PTConstants.colors.darkGray
         self.navigationBar.topItem?.leftBarButtonItem = leftBarButton
+    }
+    
+    fileprivate func setupShadow(_ enabled: Bool) {
+        if enabled {
+            self.navigationBar.layer.shadowColor = PTConstants.colors.darkGray.cgColor
+            self.navigationBar.layer.shadowOffset = CGSize(width: 0.0, height: 10)
+            self.navigationBar.layer.shadowRadius = 10
+            self.navigationBar.layer.shadowOpacity = 0.09
+            self.navigationBar.layer.masksToBounds = false
+        } else {
+            self.navigationBar.layer.shadowOpacity = 0
+        }
     }
 }

@@ -75,7 +75,6 @@ class EditUserProfileTableViewController: UITableViewController, EditUserProfile
             emailCell.accessoryType = .none
             emailCell.selectionStyle = .none
             emailCell.isUserInteractionEnabled = false
-            passwordChangeCell.isHidden = true
         }
     }
     

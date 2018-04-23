@@ -15,7 +15,7 @@ import RxCocoa
 import RxDataSources
 import SnapKit
 
-class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, AddEditSafeZoneView {
+class AddEditSafeZOneController: PTViewController, CLLocationManagerDelegate, AddEditSafeZoneView {
     
     @IBOutlet weak var saveBtn: UIBarButtonItem!
     @IBOutlet weak var distanceLabel: UILabel!
@@ -23,9 +23,6 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
     @IBOutlet weak var focusPetButton: UIButton!
     var slider: UISlider?
     var sliderLabel: UILabel?
-    fileprivate var petsCollectionView: UICollectionView?
-    fileprivate var selectedPet: Variable<Pet?> = Variable(nil)
-    
     
     let icons = ["buildings-dark-1x", "fountain-dark-1x", "girl-and-boy-dark-1x" , "home-dark-1x", "palm-tree-shape-dark-1x", "park-dark-1x"]
     var selectedIcon: Int!
@@ -41,7 +38,6 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
     fileprivate let presenter = AddEditSafeZonePresenter()
     fileprivate var petLocation:MKLocation? = nil
     fileprivate var updatingPetLocation = false
-    fileprivate final let disposeBag = DisposeBag()
     
     var safezone: SafeZone?
     var petId: Int!
@@ -208,46 +204,7 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
         configureNavigationBar()
         
         map.showGpsUpdates()
-        
-        let layout = UICollectionViewFlowLayout()
-        // Now setup the flowLayout required for drawing the cells
-        let space = 5.0 as CGFloat
-        layout.itemSize = CGSize(width:60, height:60)
-        layout.minimumInteritemSpacing = space
-        layout.minimumLineSpacing = space
-        
-        petsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        petsCollectionView!.register(PetCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-        
-        DataManager.instance.pets().bind(to: petsCollectionView!.rx.items(cellIdentifier: "cell", cellType: PetCollectionViewCell.self)) { (row, pet, cell) in
-                cell.configure(pet)
 
-        }.disposed(by: disposeBag)
-        
-        petsCollectionView!.rx.modelSelected(Pet.self)
-            .bind(to: self.selectedPet)
-            .disposed(by: disposeBag)
-        
-        
-        petsCollectionView!.isHidden = true
-        petsCollectionView!.backgroundColor = .clear
-        petsCollectionView!.semanticContentAttribute = .forceRightToLeft
-        
-        self.view.insertSubview(petsCollectionView!, belowSubview: focusPetButton)
-        
-        petsCollectionView!.snp.makeConstraints { (make) in
-            make.top.equalTo(focusPetButton)
-            make.trailing.equalTo(focusPetButton.snp.leading).offset(-16)
-            make.leading.equalToSuperview()
-            make.bottom.equalToSuperview()
-        }
-        
-        selectedPet.asObservable().subscribe(onNext: { (pet) in
-            if let pet = pet {
-                self.map.focusOnPet(pet)
-            }
-        }).disposed(by: disposeBag)
-        
         map.regionDidChange = {map, animated in
             if self.fence != nil {
                 self.updateFenceDistance()
@@ -257,17 +214,11 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
                     self.changingRegion = false
                 }
             }
-            
         }
     }
     
     fileprivate func configureNavigationBar() {
         self.navigationController?.navigationBar.tintColor = PTConstants.colors.newRed
-        
-//        let button = UIButton.init(type: .custom)
-//        button.setImage(UIImage.init(named:""), for: .normal)
-//        let leftBarButton = UIBarButtonItem.init(customView: button)
-//        self.navigationItem.leftBarButtonItem = leftBarButton
     }
     
     func geoCodeFence() -> (Point,Point) {
@@ -346,15 +297,10 @@ class AddEditSafeZOneController: UIViewController, CLLocationManagerDelegate, Ad
     }
     
     @IBAction func startTripBtnPressed(_ sender: Any) {
-        if let petsCollectionView = petsCollectionView {
-            if (!petsCollectionView.isHidden) {
-                petsCollectionView.slideInAffect(direction: kCATransitionFromLeft)
-                petsCollectionView.isHidden = true
-            } else {
-                petsCollectionView.slideInAffect(direction: kCATransitionFromRight)
-                petsCollectionView.isHidden = false
-            }
-        }
+        showSelectPetAlert("Select Pet to Focus", selectedAction: {alert, selectedPet in
+            alert.dismiss(animated: true)
+            self.map.focusOnPet(selectedPet)
+        })
     }
     
     @IBAction func saveBtnPressed(_ sender: Any) {

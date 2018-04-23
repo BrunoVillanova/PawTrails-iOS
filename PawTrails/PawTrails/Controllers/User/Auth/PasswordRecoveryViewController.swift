@@ -50,7 +50,6 @@ class PasswordRecoveryViewController: UIViewController, UITextFieldDelegate {
         self.title = "Forgot Password"
         let attributes = [NSFontAttributeName: UIFont(name: "Montserrat-Regular", size: 14)!,NSForegroundColorAttributeName: PTConstants.colors.darkGray]
         UINavigationBar.appearance().titleTextAttributes = attributes
-        
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     

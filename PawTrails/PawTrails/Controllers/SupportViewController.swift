@@ -26,14 +26,6 @@ class SupportViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    fileprivate func initialize() {
-        self.navigationItem.title = "Support"
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.tableFooterView = nil
-        tableView.addSubview(companyLogoImageView)
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
@@ -45,6 +37,23 @@ class SupportViewController: UIViewController {
             companyLogoImageView.center = center
         }
         
+    }
+    
+    fileprivate func initialize() {
+        configureNavigationBar()
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.tableFooterView = nil
+        tableView.addSubview(companyLogoImageView)
+    }
+    
+    fileprivate func configureNavigationBar() {
+        
+        if let navigationController = self.navigationController as? PTNavigationViewController {
+            navigationController.showNavigationBarDropShadow = true
+        }
+        
+        self.navigationItem.title = "Support"
     }
 }
 
@@ -68,7 +77,7 @@ extension SupportViewController: UITableViewDataSource {
             text = "info@pawtrails.com\nWe will be in contact with you shortly"
             iconImageName = "EmailSupportIcon"
         } else {
-            text = "Ireland\n+353 (21) 432 1699\nWorking Hours:\n9:00am-5:00pm Monday to Friday\nExcluding Public Holidays"
+            text = "Ireland\n+353 (21) 432 1699\nUK\n+44 203 026 3215\nWorking Hours:\n9:00am-5:00pm Monday to Friday\nExcluding Public Holidays"
             iconImageName = "PhoneSupportIcon"
         }
         

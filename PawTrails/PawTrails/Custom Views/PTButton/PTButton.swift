@@ -133,7 +133,7 @@ let defaultButtonTitleColor = UIColor(red:45/255, green: 45/255, blue: 45/255, a
         
         switch style {
         case .RoundRect:
-            debugPrint("Round")
+            self.circle()
         case .Circle:
             debugPrint("Circle")
         case .Square:

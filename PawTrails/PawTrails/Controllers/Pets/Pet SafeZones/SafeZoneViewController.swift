@@ -12,7 +12,7 @@ import XLPagerTabStrip
 import MapKit
 
 
-class SafeZoneViewController: UIViewController, IndicatorInfoProvider, PetView {
+class SafeZoneViewController: PTViewController, IndicatorInfoProvider, PetView {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addButton: UIButton!
@@ -160,7 +160,7 @@ class SafeZoneViewController: UIViewController, IndicatorInfoProvider, PetView {
     
     
     func petRemoved() {
-        if let petList = navigationController?.viewControllers.first(where: { $0 is PetsViewController}) as? PetsViewController {
+        if let petList = navigationController?.viewControllers.first(where: { $0 is PetListViewController}) as? PetListViewController {
             petList.reloadPets()
             navigationController?.popToViewController(petList, animated: true)
         }else{

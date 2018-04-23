@@ -282,23 +282,13 @@ class PTMapView: MKMapView {
     }
     
     func focusOnPets() {
-        let coordinates = self.annotations.map({ $0.coordinate })
-        if coordinates.count > 0 {
-            self.setVisibleMapFor(coordinates)
-        }
+        self.showAnnotations(self.annotations, animated: true)
     }
     
     func focusOnPet(_ pet: Pet) {
         
-        if let petAnnotationOnMap = petAnnotationOnMap(pet: pet) as PTAnnotation?? {
-
-            if let coordinate = petAnnotationOnMap?.coordinate, CLLocationCoordinate2DIsValid(coordinate) && coordinate.latitude != 0 && coordinate.longitude != 0 {
-                self.setVisibleMapFor([coordinate])
-                focusedPetID = pet.id
-            }
-            else {
-                showLocationUnavailableAlert()
-            }
+        if let petAnnotationOnMap = petAnnotationOnMap(pet: pet) {
+            self.showAnnotations([petAnnotationOnMap], animated: true)
         } else {
             showLocationUnavailableAlert()
         }
@@ -306,17 +296,8 @@ class PTMapView: MKMapView {
     
     func focusOnPet(_ petID: Int) {
         
-        if let petAnnotationOnMap = petAnnotationOnMap(petID) as PTAnnotation? {
-            let coordinate = petAnnotationOnMap.coordinate
-            if CLLocationCoordinate2DIsValid(coordinate) && coordinate.latitude != 0 && coordinate.longitude != 0 {
-                self.removeAnnotation(petAnnotationOnMap)
-                self.addAnnotation(petAnnotationOnMap)
-                focusedPetID = petID
-                self.setVisibleMapFor([petAnnotationOnMap.coordinate])
-            }
-            else {
-                showLocationUnavailableAlert()
-            }
+        if let petAnnotationOnMap = petAnnotationOnMap(petID) {
+            self.showAnnotations([petAnnotationOnMap], animated: true)
         } else {
             showLocationUnavailableAlert()
         }

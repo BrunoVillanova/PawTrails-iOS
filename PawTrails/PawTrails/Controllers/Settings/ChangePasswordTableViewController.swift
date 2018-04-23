@@ -20,9 +20,22 @@ class ChangePasswordTableViewController: UITableViewController, ChangePasswordVi
         super.viewDidLoad()
         self.presenter.attachView(self)
         self.passwordTextField.becomeFirstResponder()
+        
+        configureNavBar()
     }
     
+    private func configureNavBar() {
+        
+        self.title = "Change Password"
+        let attributes = [NSFontAttributeName: UIFont(name: "Montserrat-Regular", size: 18)!,NSForegroundColorAttributeName: PTConstants.colors.darkGray]
+        UINavigationBar.appearance().titleTextAttributes = attributes
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "BackIcon"), style: .plain, target: self, action: #selector(backButtonTapped))
+        self.navigationItem.leftBarButtonItem?.tintColor = PTConstants.colors.darkGray
+    }
     
+    func backButtonTapped() {
+        self.navigationController?.popViewController(animated: true)
+    }
     
     deinit {
         self.presenter.deteachView()

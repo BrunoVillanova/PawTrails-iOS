@@ -39,6 +39,9 @@
 		15639E73208064A700F44B3B /* PetCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15639E71208064A700F44B3B /* PetCollectionViewCell.swift */; };
 		15639E762080862000F44B3B /* PetCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15639E752080862000F44B3B /* PetCollectionViewCell.xib */; };
 		1570C7AC203B63DF00A7F59F /* TripDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1570C7AB203B63DF00A7F59F /* TripDetailViewController.swift */; };
+		15710F0020890E1500940D6E /* ViewTapGestureExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15710EFF20890E1500940D6E /* ViewTapGestureExtension.swift */; };
+		157869732086784500FB3EDC /* Pets.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 157869722086784500FB3EDC /* Pets.storyboard */; };
+		15786975208678DA00FB3EDC /* PetListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15786974208678DA00FB3EDC /* PetListViewController.swift */; };
 		1585469C1FDCFBCB004C82EC /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1585469B1FDCFBCB004C82EC /* Charts.framework */; };
 		1589EBC11FE3644E00280926 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1589EBC01FE3644E00280926 /* Bolts.framework */; };
 		1599A625204F64940089FC8A /* SkyFloatingLabelTextField.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1599A624204F64940089FC8A /* SkyFloatingLabelTextField.framework */; };
@@ -175,14 +178,12 @@
 		15C763DE2016D5C0002AA7F8 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C763832016D5C0002AA7F8 /* ResultViewController.swift */; };
 		15C763DF2016D5C0002AA7F8 /* QuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C763842016D5C0002AA7F8 /* QuestionsViewController.swift */; };
 		15C763E02016D5C0002AA7F8 /* CalanderForActivityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C763852016D5C0002AA7F8 /* CalanderForActivityController.swift */; };
-		15C763E12016D5C0002AA7F8 /* PetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C763862016D5C0002AA7F8 /* PetsViewController.swift */; };
 		15C763E22016D5C0002AA7F8 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C763882016D5C0002AA7F8 /* SettingsTableViewController.swift */; };
 		15C763E32016D5C0002AA7F8 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C763892016D5C0002AA7F8 /* InitialViewController.swift */; };
 		15C763E42016D5C0002AA7F8 /* EmailVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C7638A2016D5C0002AA7F8 /* EmailVerificationViewController.swift */; };
 		15C763E52016D5C0002AA7F8 /* PasswordRecoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C7638B2016D5C0002AA7F8 /* PasswordRecoveryViewController.swift */; };
 		15C763E72016D5C0002AA7F8 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C7638D2016D5C0002AA7F8 /* MapViewController.swift */; };
 		15C763E82016D5C0002AA7F8 /* AdventuresListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C7638E2016D5C0002AA7F8 /* AdventuresListViewController.swift */; };
-		15C763E92016D5C0002AA7F8 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C763902016D5C0002AA7F8 /* Date.swift */; };
 		15C763EA2016D5C0002AA7F8 /* AddEditSafeZoneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C763922016D5C0002AA7F8 /* AddEditSafeZoneController.swift */; };
 		15C763EB2016D5C0002AA7F8 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15C763932016D5C0002AA7F8 /* SettingsView.xib */; };
 		15C763EC2016D5C0002AA7F8 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C763942016D5C0002AA7F8 /* SettingsView.swift */; };
@@ -216,7 +217,6 @@
 		15C7640A2016D5C0002AA7F8 /* SharedUsersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15C763B72016D5C0002AA7F8 /* SharedUsersTableViewCell.xib */; };
 		15C7640B2016D5C0002AA7F8 /* YesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C763B82016D5C0002AA7F8 /* YesViewController.swift */; };
 		15C7640C2016D5C0002AA7F8 /* PieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C763B92016D5C0002AA7F8 /* PieChart.swift */; };
-		15C7640D2016D5C0002AA7F8 /* PrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C763BA2016D5C0002AA7F8 /* PrivacyViewController.swift */; };
 		15C7640E2016D5C0002AA7F8 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C763BB2016D5C0002AA7F8 /* MainTabBarViewController.swift */; };
 		15C7640F2016D5C0002AA7F8 /* AddEditPetDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C763BD2016D5C0002AA7F8 /* AddEditPetDetailsTableViewController.swift */; };
 		15C764102016D5C0002AA7F8 /* AddPetDeviceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C763BE2016D5C0002AA7F8 /* AddPetDeviceTableViewController.swift */; };
@@ -237,6 +237,7 @@
 		15C90DAE1FE36E6E008F73B3 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C90DAD1FE36E6D008F73B3 /* HockeySDK.framework */; };
 		15C90DB11FE36F56008F73B3 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C90DAF1FE36F55008F73B3 /* Fabric.framework */; };
 		15C90DB21FE36F56008F73B3 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C90DB01FE36F56008F73B3 /* Crashlytics.framework */; };
+		15D31933208A8F61004F4894 /* ViewControllerUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D31932208A8F61004F4894 /* ViewControllerUtilities.swift */; };
 		15DCFE9F205B6B6E00DF726C /* PTDonutAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DCFE9E205B6B6E00DF726C /* PTDonutAnnotationView.swift */; };
 		15DCFEA1205C647A00DF726C /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DCFEA0205C647A00DF726C /* LaunchViewController.swift */; };
 		15E6E38A206C6D4700484EAF /* PetConnectDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E6E389206C6D4700484EAF /* PetConnectDeviceViewController.swift */; };
@@ -246,6 +247,8 @@
 		15EF8756207BF365007F27BF /* SideMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15EF8755207BF365007F27BF /* SideMenu.framework */; };
 		15EF8758207BF7BC007F27BF /* PTNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EF8757207BF7BC007F27BF /* PTNavigationViewController.swift */; };
 		15EF875B207BFF24007F27BF /* LeftMenuContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EF875A207BFF24007F27BF /* LeftMenuContentViewController.swift */; };
+		15F40A4F208A7B3100DB5B1F /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F40A4D208A7B3100DB5B1F /* SettingsTableViewCell.swift */; };
+		15F40A52208A7FAB00DB5B1F /* SettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15F40A51208A7FAB00DB5B1F /* SettingsTableViewCell.xib */; };
 		15FFE50E2079545B005CA1C2 /* IQKeyboardManagerSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15FFE50C2079545A005CA1C2 /* IQKeyboardManagerSwift.framework */; };
 		15FFE51120796D62005CA1C2 /* PTNiceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FFE51020796D62005CA1C2 /* PTNiceButton.swift */; };
 		15FFE51320796E4B005CA1C2 /* PasswordRecoverySuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FFE51220796E4B005CA1C2 /* PasswordRecoverySuccessViewController.swift */; };
@@ -265,6 +268,26 @@
 		4452EEF41ED5CF03004E13DC /* APIPetSafeZonesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4452EEF31ED5CF03004E13DC /* APIPetSafeZonesTests.swift */; };
 		4452EEF61ED5DD41004E13DC /* APIAuthenticationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4452EEF51ED5DD41004E13DC /* APIAuthenticationTests.swift */; };
 		446231401EE6BE4200B53C1D /* DataManagerPetSharingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4462313F1EE6BE4200B53C1D /* DataManagerPetSharingTests.swift */; };
+		44623EFD2085FA0C002F618A /* BCS.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44623EFC2085FA0C002F618A /* BCS.storyboard */; };
+		44623EFF2086004B002F618A /* BCSInitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44623EFE2086004B002F618A /* BCSInitialViewController.swift */; };
+		44623F0120861DB3002F618A /* BCSPetSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44623F0020861DB3002F618A /* BCSPetSelectViewController.swift */; };
+		44623F0320863441002F618A /* BCSQuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44623F0220863441002F618A /* BCSQuestionsViewController.swift */; };
+		44623F05208644DB002F618A /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44623F04208644DB002F618A /* Settings.storyboard */; };
+		4467BCC620888E1500F31BC7 /* Montserrat-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4467BCBC20888E1400F31BC7 /* Montserrat-ExtraLight.ttf */; };
+		4467BCC720888E1500F31BC7 /* Montserrat-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4467BCBD20888E1400F31BC7 /* Montserrat-LightItalic.ttf */; };
+		4467BCC820888E1500F31BC7 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4467BCBE20888E1400F31BC7 /* Montserrat-SemiBold.ttf */; };
+		4467BCC920888E1500F31BC7 /* Montserrat-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4467BCBF20888E1400F31BC7 /* Montserrat-SemiBoldItalic.ttf */; };
+		4467BCCA20888E1500F31BC7 /* Montserrat-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4467BCC020888E1400F31BC7 /* Montserrat-MediumItalic.ttf */; };
+		4467BCCB20888E1500F31BC7 /* Montserrat-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4467BCC120888E1500F31BC7 /* Montserrat-ExtraBoldItalic.ttf */; };
+		4467BCCC20888E1500F31BC7 /* Montserrat-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4467BCC220888E1500F31BC7 /* Montserrat-ExtraBold.ttf */; };
+		4467BCCD20888E1500F31BC7 /* Montserrat-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4467BCC320888E1500F31BC7 /* Montserrat-ExtraLightItalic.ttf */; };
+		4467BCCE20888E1500F31BC7 /* Montserrat-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4467BCC420888E1500F31BC7 /* Montserrat-BoldItalic.ttf */; };
+		4467BCCF20888E1500F31BC7 /* Montserrat-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4467BCC520888E1500F31BC7 /* Montserrat-Italic.ttf */; };
+		4467BCD22088C4A900F31BC7 /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4467BCD12088C4A900F31BC7 /* TermsViewController.swift */; };
+		4467BCD42088D5B500F31BC7 /* PrivacyTerms.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4467BCD32088D5B500F31BC7 /* PrivacyTerms.plist */; };
+		4467BCD62088E4EF00F31BC7 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4467BCD52088E4EF00F31BC7 /* FeedbackViewController.swift */; };
+		44696C7920873E7100CD0E97 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44696C7820873E7100CD0E97 /* Utilities.swift */; };
+		44696C7B20878F6900CD0E97 /* BCSScore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44696C7A20878F6900CD0E97 /* BCSScore.plist */; };
 		447AF46D2021E22C0050F885 /* AllowedCharsTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447AF46C2021E22C0050F885 /* AllowedCharsTextField.swift */; };
 		447BF2AB20737A7200C11D8E /* PTUnitConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447BF2AA20737A7200C11D8E /* PTUnitConversion.swift */; };
 		448BE9681ED47F5C00665608 /* APIUserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448BE9671ED47F5C00665608 /* APIUserTest.swift */; };
@@ -332,6 +355,9 @@
 		15639E71208064A700F44B3B /* PetCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetCollectionViewCell.swift; sourceTree = "<group>"; };
 		15639E752080862000F44B3B /* PetCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PetCollectionViewCell.xib; sourceTree = "<group>"; };
 		1570C7AB203B63DF00A7F59F /* TripDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailViewController.swift; sourceTree = "<group>"; };
+		15710EFF20890E1500940D6E /* ViewTapGestureExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTapGestureExtension.swift; sourceTree = "<group>"; };
+		157869722086784500FB3EDC /* Pets.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Pets.storyboard; sourceTree = "<group>"; };
+		15786974208678DA00FB3EDC /* PetListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetListViewController.swift; sourceTree = "<group>"; };
 		157AC4B21FC3192E0005A717 /* Convert.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Convert.framework; path = Carthage/Build/iOS/Convert.framework; sourceTree = "<group>"; };
 		1585469B1FDCFBCB004C82EC /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = Carthage/Build/iOS/Charts.framework; sourceTree = "<group>"; };
 		1589EBC01FE3644E00280926 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Carthage/Build/iOS/Bolts.framework; sourceTree = "<group>"; };
@@ -477,14 +503,12 @@
 		15C763832016D5C0002AA7F8 /* ResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		15C763842016D5C0002AA7F8 /* QuestionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionsViewController.swift; sourceTree = "<group>"; };
 		15C763852016D5C0002AA7F8 /* CalanderForActivityController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalanderForActivityController.swift; sourceTree = "<group>"; };
-		15C763862016D5C0002AA7F8 /* PetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetsViewController.swift; sourceTree = "<group>"; };
 		15C763882016D5C0002AA7F8 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		15C763892016D5C0002AA7F8 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		15C7638A2016D5C0002AA7F8 /* EmailVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailVerificationViewController.swift; sourceTree = "<group>"; };
 		15C7638B2016D5C0002AA7F8 /* PasswordRecoveryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordRecoveryViewController.swift; sourceTree = "<group>"; };
 		15C7638D2016D5C0002AA7F8 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		15C7638E2016D5C0002AA7F8 /* AdventuresListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdventuresListViewController.swift; sourceTree = "<group>"; };
-		15C763902016D5C0002AA7F8 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		15C763922016D5C0002AA7F8 /* AddEditSafeZoneController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditSafeZoneController.swift; sourceTree = "<group>"; };
 		15C763932016D5C0002AA7F8 /* SettingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsView.xib; sourceTree = "<group>"; };
 		15C763942016D5C0002AA7F8 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -519,7 +543,6 @@
 		15C763B72016D5C0002AA7F8 /* SharedUsersTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SharedUsersTableViewCell.xib; sourceTree = "<group>"; };
 		15C763B82016D5C0002AA7F8 /* YesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YesViewController.swift; sourceTree = "<group>"; };
 		15C763B92016D5C0002AA7F8 /* PieChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieChart.swift; sourceTree = "<group>"; };
-		15C763BA2016D5C0002AA7F8 /* PrivacyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyViewController.swift; sourceTree = "<group>"; };
 		15C763BB2016D5C0002AA7F8 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		15C763BD2016D5C0002AA7F8 /* AddEditPetDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditPetDetailsTableViewController.swift; sourceTree = "<group>"; };
 		15C763BE2016D5C0002AA7F8 /* AddPetDeviceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPetDeviceTableViewController.swift; sourceTree = "<group>"; };
@@ -543,6 +566,7 @@
 		15C90DAD1FE36E6D008F73B3 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HockeySDK.framework; path = Carthage/Build/iOS/HockeySDK.framework; sourceTree = "<group>"; };
 		15C90DAF1FE36F55008F73B3 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = Frameworks/Fabric.framework; sourceTree = "<group>"; };
 		15C90DB01FE36F56008F73B3 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = Frameworks/Crashlytics.framework; sourceTree = "<group>"; };
+		15D31932208A8F61004F4894 /* ViewControllerUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerUtilities.swift; sourceTree = "<group>"; };
 		15DCFE9E205B6B6E00DF726C /* PTDonutAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTDonutAnnotationView.swift; sourceTree = "<group>"; };
 		15DCFEA0205C647A00DF726C /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		15E6E389206C6D4700484EAF /* PetConnectDeviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetConnectDeviceViewController.swift; sourceTree = "<group>"; };
@@ -553,6 +577,8 @@
 		15EF8755207BF365007F27BF /* SideMenu.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SideMenu.framework; path = Carthage/Build/iOS/SideMenu.framework; sourceTree = "<group>"; };
 		15EF8757207BF7BC007F27BF /* PTNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTNavigationViewController.swift; sourceTree = "<group>"; };
 		15EF875A207BFF24007F27BF /* LeftMenuContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftMenuContentViewController.swift; sourceTree = "<group>"; };
+		15F40A4D208A7B3100DB5B1F /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
+		15F40A51208A7FAB00DB5B1F /* SettingsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsTableViewCell.xib; sourceTree = "<group>"; };
 		15FFE50B2079545A005CA1C2 /* IQKeyboardManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IQKeyboardManager.framework; path = Carthage/Build/iOS/IQKeyboardManager.framework; sourceTree = "<group>"; };
 		15FFE50C2079545A005CA1C2 /* IQKeyboardManagerSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IQKeyboardManagerSwift.framework; path = Carthage/Build/iOS/IQKeyboardManagerSwift.framework; sourceTree = "<group>"; };
 		15FFE51020796D62005CA1C2 /* PTNiceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTNiceButton.swift; sourceTree = "<group>"; };
@@ -579,6 +605,26 @@
 		4452EEF31ED5CF03004E13DC /* APIPetSafeZonesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIPetSafeZonesTests.swift; sourceTree = "<group>"; };
 		4452EEF51ED5DD41004E13DC /* APIAuthenticationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIAuthenticationTests.swift; sourceTree = "<group>"; };
 		4462313F1EE6BE4200B53C1D /* DataManagerPetSharingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerPetSharingTests.swift; sourceTree = "<group>"; };
+		44623EFC2085FA0C002F618A /* BCS.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BCS.storyboard; sourceTree = "<group>"; };
+		44623EFE2086004B002F618A /* BCSInitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BCSInitialViewController.swift; sourceTree = "<group>"; };
+		44623F0020861DB3002F618A /* BCSPetSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BCSPetSelectViewController.swift; sourceTree = "<group>"; };
+		44623F0220863441002F618A /* BCSQuestionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BCSQuestionsViewController.swift; sourceTree = "<group>"; };
+		44623F04208644DB002F618A /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		4467BCBC20888E1400F31BC7 /* Montserrat-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraLight.ttf"; sourceTree = "<group>"; };
+		4467BCBD20888E1400F31BC7 /* Montserrat-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-LightItalic.ttf"; sourceTree = "<group>"; };
+		4467BCBE20888E1400F31BC7 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
+		4467BCBF20888E1400F31BC7 /* Montserrat-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		4467BCC020888E1400F31BC7 /* Montserrat-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-MediumItalic.ttf"; sourceTree = "<group>"; };
+		4467BCC120888E1500F31BC7 /* Montserrat-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		4467BCC220888E1500F31BC7 /* Montserrat-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBold.ttf"; sourceTree = "<group>"; };
+		4467BCC320888E1500F31BC7 /* Montserrat-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		4467BCC420888E1500F31BC7 /* Montserrat-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-BoldItalic.ttf"; sourceTree = "<group>"; };
+		4467BCC520888E1500F31BC7 /* Montserrat-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Italic.ttf"; sourceTree = "<group>"; };
+		4467BCD12088C4A900F31BC7 /* TermsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
+		4467BCD32088D5B500F31BC7 /* PrivacyTerms.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PrivacyTerms.plist; sourceTree = "<group>"; };
+		4467BCD52088E4EF00F31BC7 /* FeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
+		44696C7820873E7100CD0E97 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		44696C7A20878F6900CD0E97 /* BCSScore.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = BCSScore.plist; sourceTree = "<group>"; };
 		447AF46C2021E22C0050F885 /* AllowedCharsTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllowedCharsTextField.swift; sourceTree = "<group>"; };
 		447BF2AA20737A7200C11D8E /* PTUnitConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTUnitConversion.swift; sourceTree = "<group>"; };
 		448BE9671ED47F5C00665608 /* APIUserTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIUserTest.swift; sourceTree = "<group>"; };
@@ -663,6 +709,8 @@
 			isa = PBXGroup;
 			children = (
 				1523D0B020629691003D8653 /* DemoTrips.json */,
+				44696C7A20878F6900CD0E97 /* BCSScore.plist */,
+				4467BCD32088D5B500F31BC7 /* PrivacyTerms.plist */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -684,6 +732,9 @@
 				44FEE7E52074DE1100A85A74 /* Login.storyboard */,
 				150EB83B207BE9CA00FEC245 /* Common.storyboard */,
 				15C74C5D207D907200ED56CC /* Support.storyboard */,
+				157869722086784500FB3EDC /* Pets.storyboard */,
+				44623EFC2085FA0C002F618A /* BCS.storyboard */,
+				44623F04208644DB002F618A /* Settings.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -949,6 +1000,7 @@
 				15C7629B2016D06B002AA7F8 /* MapUtilsManager.swift */,
 				15C7629C2016D06B002AA7F8 /* Reporter.swift */,
 				447BF2AA20737A7200C11D8E /* PTUnitConversion.swift */,
+				44696C7820873E7100CD0E97 /* Utilities.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -963,6 +1015,8 @@
 				15C762A12016D06B002AA7F8 /* MapExtensions.swift */,
 				15C762A22016D06B002AA7F8 /* Extensions.swift */,
 				15C762A32016D06B002AA7F8 /* UIButtonExtensions.swift */,
+				15710EFF20890E1500940D6E /* ViewTapGestureExtension.swift */,
+				15D31932208A8F61004F4894 /* ViewControllerUtilities.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -970,6 +1024,7 @@
 		15C763702016D5C0002AA7F8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4467BCD02088C45C00F31BC7 /* Settings */,
 				15EF8759207BFEFD007F27BF /* Left Menu */,
 				15A13A22206AC54A005790B3 /* Onboarding */,
 				15C7642D2016FDC1002AA7F8 /* Recommendation */,
@@ -978,10 +1033,8 @@
 				15C7638F2016D5C0002AA7F8 /* Pets */,
 				15C7637D2016D5C0002AA7F8 /* UsersViewController.swift */,
 				15C7637F2016D5C0002AA7F8 /* SingleResultViewController.swift */,
-				15C763802016D5C0002AA7F8 /* AboutPawTrails.swift */,
 				15C7638D2016D5C0002AA7F8 /* MapViewController.swift */,
 				15C763B62016D5C0002AA7F8 /* TabPageViewController.swift */,
-				15C763BA2016D5C0002AA7F8 /* PrivacyViewController.swift */,
 				15C763BB2016D5C0002AA7F8 /* MainTabBarViewController.swift */,
 				15DCFEA0205C647A00DF726C /* LaunchViewController.swift */,
 				15160FEA20719448008CF9F4 /* PTAlertViewController.swift */,
@@ -995,7 +1048,6 @@
 			isa = PBXGroup;
 			children = (
 				15C763C82016D5C0002AA7F8 /* UserProfileTableViewController.swift */,
-				15C763742016D5C0002AA7F8 /* ChangePasswordTableViewController.swift */,
 				15C763752016D5C0002AA7F8 /* EditUserProfileTableViewController.swift */,
 				15C763762016D5C0002AA7F8 /* User Details */,
 			);
@@ -1019,7 +1071,6 @@
 			isa = PBXGroup;
 			children = (
 				15C763712016D5C0002AA7F8 /* SignUpViewController.swift */,
-				15C763882016D5C0002AA7F8 /* SettingsTableViewController.swift */,
 				15C763892016D5C0002AA7F8 /* InitialViewController.swift */,
 				15C7638A2016D5C0002AA7F8 /* EmailVerificationViewController.swift */,
 				15C7638B2016D5C0002AA7F8 /* PasswordRecoveryViewController.swift */,
@@ -1038,8 +1089,6 @@
 				15C763912016D5C0002AA7F8 /* Pet SafeZones */,
 				15C7639B2016D5C0002AA7F8 /* Pet Shared Users */,
 				15C763AE2016D5C0002AA7F8 /* PetInfromationViewController.swift */,
-				15C763862016D5C0002AA7F8 /* PetsViewController.swift */,
-				15C763902016D5C0002AA7F8 /* Date.swift */,
 				15C763972016D5C0002AA7F8 /* AirbnbDatePickerFlowLayout.swift */,
 				15C763982016D5C0002AA7F8 /* AirbnbDatePickerMonthHeader.swift */,
 				15C763992016D5C0002AA7F8 /* AirbnbDatePickerFooter.swift */,
@@ -1049,6 +1098,7 @@
 				15C763A12016D5C0002AA7F8 /* AirbnbDatePicker.swift */,
 				15C763A22016D5C0002AA7F8 /* AirbnbDatePickerHeader.swift */,
 				15C763A32016D5C0002AA7F8 /* AirbnbDatePickerCell.swift */,
+				15786974208678DA00FB3EDC /* PetListViewController.swift */,
 			);
 			path = Pets;
 			sourceTree = "<group>";
@@ -1146,6 +1196,8 @@
 				1523D0AD20617EB7003D8653 /* TripInfoCollectionViewCell.swift */,
 				15639E71208064A700F44B3B /* PetCollectionViewCell.swift */,
 				15639E752080862000F44B3B /* PetCollectionViewCell.xib */,
+				15F40A4D208A7B3100DB5B1F /* SettingsTableViewCell.swift */,
+				15F40A51208A7FAB00DB5B1F /* SettingsTableViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1187,6 +1239,9 @@
 				15C763822016D5C0002AA7F8 /* SelectPetForRecommandationController.swift */,
 				15C763832016D5C0002AA7F8 /* ResultViewController.swift */,
 				15C763A42016D5C0002AA7F8 /* RecommandationController.swift */,
+				44623EFE2086004B002F618A /* BCSInitialViewController.swift */,
+				44623F0020861DB3002F618A /* BCSPetSelectViewController.swift */,
+				44623F0220863441002F618A /* BCSQuestionsViewController.swift */,
 			);
 			path = Recommendation;
 			sourceTree = "<group>";
@@ -1199,6 +1254,16 @@
 				15A13A20206AB4A7005790B3 /* Montserrat-Regular.ttf */,
 				15E7EFA82044B012000BFCBF /* Roboto-Medium.ttf */,
 				15E7EFA72044B005000BFCBF /* RobotoCondensed-Regular.ttf */,
+				4467BCC420888E1500F31BC7 /* Montserrat-BoldItalic.ttf */,
+				4467BCC220888E1500F31BC7 /* Montserrat-ExtraBold.ttf */,
+				4467BCC120888E1500F31BC7 /* Montserrat-ExtraBoldItalic.ttf */,
+				4467BCBC20888E1400F31BC7 /* Montserrat-ExtraLight.ttf */,
+				4467BCC320888E1500F31BC7 /* Montserrat-ExtraLightItalic.ttf */,
+				4467BCC520888E1500F31BC7 /* Montserrat-Italic.ttf */,
+				4467BCBD20888E1400F31BC7 /* Montserrat-LightItalic.ttf */,
+				4467BCC020888E1400F31BC7 /* Montserrat-MediumItalic.ttf */,
+				4467BCBE20888E1400F31BC7 /* Montserrat-SemiBold.ttf */,
+				4467BCBF20888E1400F31BC7 /* Montserrat-SemiBoldItalic.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -1302,6 +1367,18 @@
 				44D5FE911EE6E9560049232F /* DataManagerPetSafeZonesTests.swift */,
 			);
 			name = Managers;
+			sourceTree = "<group>";
+		};
+		4467BCD02088C45C00F31BC7 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				15C763882016D5C0002AA7F8 /* SettingsTableViewController.swift */,
+				4467BCD12088C4A900F31BC7 /* TermsViewController.swift */,
+				4467BCD52088E4EF00F31BC7 /* FeedbackViewController.swift */,
+				15C763802016D5C0002AA7F8 /* AboutPawTrails.swift */,
+				15C763742016D5C0002AA7F8 /* ChangePasswordTableViewController.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		44B3B10E206E42F200FBF8CC /* PTButton */ = {
@@ -1525,33 +1602,49 @@
 			files = (
 				15A13A21206AB517005790B3 /* Montserrat-Regular.ttf in Resources */,
 				15C762442016D011002AA7F8 /* SignalFull@1x.png in Resources */,
+				157869732086784500FB3EDC /* Pets.storyboard in Resources */,
 				15C7640A2016D5C0002AA7F8 /* SharedUsersTableViewCell.xib in Resources */,
+				4467BCCE20888E1500F31BC7 /* Montserrat-BoldItalic.ttf in Resources */,
 				15C762A42016D06B002AA7F8 /* CodeScan.bundle in Resources */,
 				15C762AC2016D06B002AA7F8 /* Assets.xcassets in Resources */,
+				4467BCC920888E1500F31BC7 /* Montserrat-SemiBoldItalic.ttf in Resources */,
 				15C762562016D011002AA7F8 /* Battery@1x.png in Resources */,
 				150EB83C207BE9CA00FEC245 /* Common.storyboard in Resources */,
 				15C763EB2016D5C0002AA7F8 /* SettingsView.xib in Resources */,
+				4467BCCA20888E1500F31BC7 /* Montserrat-MediumItalic.ttf in Resources */,
 				1543F38B207016460069EBEB /* Montserrat-Medium.ttf in Resources */,
+				4467BCC820888E1500F31BC7 /* Montserrat-SemiBold.ttf in Resources */,
 				15C762582016D011002AA7F8 /* PTPetCalloutView.xib in Resources */,
+				4467BCCF20888E1500F31BC7 /* Montserrat-Italic.ttf in Resources */,
 				15C763EE2016D5C0002AA7F8 /* IconCell.xib in Resources */,
 				15C762482016D011002AA7F8 /* PTTripInfoView.xib in Resources */,
+				4467BCC620888E1500F31BC7 /* Montserrat-ExtraLight.ttf in Resources */,
+				4467BCD42088D5B500F31BC7 /* PrivacyTerms.plist in Resources */,
 				15C761F92016D002002AA7F8 /* Main.storyboard in Resources */,
 				15C762AE2016D06B002AA7F8 /* countrycodes.csv in Resources */,
+				4467BCCC20888E1500F31BC7 /* Montserrat-ExtraBold.ttf in Resources */,
 				1543F381206F07390069EBEB /* Montserrat-Light.ttf in Resources */,
 				15C762522016D011002AA7F8 /* BatteryLow@1x.png in Resources */,
 				15C74C5E207D907200ED56CC /* Support.storyboard in Resources */,
 				15C762542016D011002AA7F8 /* BatteryLow@3x.png in Resources */,
 				44FEE7E62074DE1100A85A74 /* Login.storyboard in Resources */,
 				15C762532016D011002AA7F8 /* Battery@3x.png in Resources */,
+				15F40A52208A7FAB00DB5B1F /* SettingsTableViewCell.xib in Resources */,
+				4467BCCD20888E1500F31BC7 /* Montserrat-ExtraLightItalic.ttf in Resources */,
 				15C763FD2016D5C0002AA7F8 /* ProfileCollectionViewCell.xib in Resources */,
 				15A13A1F206AAFE4005790B3 /* Onboarding.storyboard in Resources */,
+				4467BCC720888E1500F31BC7 /* Montserrat-LightItalic.ttf in Resources */,
 				15AD5EA9206C35E90069E01D /* PetWizard.storyboard in Resources */,
+				4467BCCB20888E1500F31BC7 /* Montserrat-ExtraBoldItalic.ttf in Resources */,
 				15C762552016D011002AA7F8 /* BatteryLow@2x.png in Resources */,
+				44623F05208644DB002F618A /* Settings.storyboard in Resources */,
 				15C762422016D011002AA7F8 /* SignalFull@2x.png in Resources */,
 				15E7EFAA2044B020000BFCBF /* Roboto-Medium.ttf in Resources */,
 				15639E762080862000F44B3B /* PetCollectionViewCell.xib in Resources */,
 				15C762512016D011002AA7F8 /* Battery@2x.png in Resources */,
 				1523D0B120629691003D8653 /* DemoTrips.json in Resources */,
+				44696C7B20878F6900CD0E97 /* BCSScore.plist in Resources */,
+				44623EFD2085FA0C002F618A /* BCS.storyboard in Resources */,
 				15E7EFA92044B020000BFCBF /* RobotoCondensed-Regular.ttf in Resources */,
 				15C762432016D011002AA7F8 /* SignalFull@3x.png in Resources */,
 			);
@@ -1818,6 +1911,7 @@
 				15C7624F2016D011002AA7F8 /* PTTripInfoView.swift in Sources */,
 				15C762B02016D06B002AA7F8 /* Messages.swift in Sources */,
 				15C762B22016D06B002AA7F8 /* PTConstants.swift in Sources */,
+				15786975208678DA00FB3EDC /* PetListViewController.swift in Sources */,
 				15C762782016D046002AA7F8 /* SettingsPresenter.swift in Sources */,
 				15C761492016CFF3002AA7F8 /* APIManager.swift in Sources */,
 				15C763CF2016D5C0002AA7F8 /* SharedUsersTableViewCell.swift in Sources */,
@@ -1844,16 +1938,18 @@
 				15FFE51120796D62005CA1C2 /* PTNiceButton.swift in Sources */,
 				15C763EF2016D5C0002AA7F8 /* AirbnbDatePickerFlowLayout.swift in Sources */,
 				15C761422016CFF3002AA7F8 /* CDRepository.swift in Sources */,
+				15D31933208A8F61004F4894 /* ViewControllerUtilities.swift in Sources */,
 				15C761522016CFF3002AA7F8 /* CDBreed+CoreDataClass.swift in Sources */,
 				15C761472016CFF3002AA7F8 /* SocketIOManager.swift in Sources */,
 				15C762772016D046002AA7F8 /* InitialPresenter.swift in Sources */,
-				15C763E92016D5C0002AA7F8 /* Date.swift in Sources */,
+				44623EFF2086004B002F618A /* BCSInitialViewController.swift in Sources */,
 				15C762B42016D06B002AA7F8 /* Errors.swift in Sources */,
 				15C762B32016D06B002AA7F8 /* Reachability.swift in Sources */,
 				15160FF120728E94008CF9F4 /* PetWizardFinalStepViewController.swift in Sources */,
 				15C763F52016D5C0002AA7F8 /* AirbnbDatePickerViewController.swift in Sources */,
 				15C761592016CFF3002AA7F8 /* CDPet+CoreDataProperties.swift in Sources */,
 				15C763FE2016D5C0002AA7F8 /* TripScreenViewController.swift in Sources */,
+				44623F0120861DB3002F618A /* BCSPetSelectViewController.swift in Sources */,
 				15C763F42016D5C0002AA7F8 /* PetUserTableViewController.swift in Sources */,
 				15160FED20723037008CF9F4 /* PetGenderAndNeuterViewController.swift in Sources */,
 				44FEE7E8207521B100A85A74 /* LoginViewController.swift in Sources */,
@@ -1863,6 +1959,7 @@
 				15C762762016D046002AA7F8 /* PasswordRecoveryPresenter.swift in Sources */,
 				15C7627A2016D046002AA7F8 /* UserProfilePresenter.swift in Sources */,
 				15C764042016D5C0002AA7F8 /* SignUpYourDeviceVC.swift in Sources */,
+				15F40A4F208A7B3100DB5B1F /* SettingsTableViewCell.swift in Sources */,
 				15E6E38A206C6D4700484EAF /* PetConnectDeviceViewController.swift in Sources */,
 				15AD5EA7206AD6600069E01D /* OnboardingStepViewController.swift in Sources */,
 				15C7614F2016CFF3002AA7F8 /* CDUser+CoreDataProperties.swift in Sources */,
@@ -1870,6 +1967,7 @@
 				15EF8758207BF7BC007F27BF /* PTNavigationViewController.swift in Sources */,
 				15C7613D2016CFF3002AA7F8 /* BEMAnimationManager.m in Sources */,
 				15C763E52016D5C0002AA7F8 /* PasswordRecoveryViewController.swift in Sources */,
+				44696C7920873E7100CD0E97 /* Utilities.swift in Sources */,
 				15C763D42016D5C0002AA7F8 /* GenderTableViewController.swift in Sources */,
 				1543F383206F1BCE0069EBEB /* PetTypeViewController.swift in Sources */,
 				15C763D92016D5C0002AA7F8 /* ResultFromListViewController.swift in Sources */,
@@ -1922,6 +2020,7 @@
 				15C763E32016D5C0002AA7F8 /* InitialViewController.swift in Sources */,
 				15C7623E2016D011002AA7F8 /* PTBalloonImageView.swift in Sources */,
 				15C7641E2016D5C0002AA7F8 /* SetUpYourGoalController.swift in Sources */,
+				4467BCD62088E4EF00F31BC7 /* FeedbackViewController.swift in Sources */,
 				15C761462016CFF3002AA7F8 /* CoreDataManager.swift in Sources */,
 				15C763E02016D5C0002AA7F8 /* CalanderForActivityController.swift in Sources */,
 				15C7641B2016D5C0002AA7F8 /* FinishAdventureVC.swift in Sources */,
@@ -1943,6 +2042,7 @@
 				1543F389206FF2210069EBEB /* PetBreedSelectViewController.swift in Sources */,
 				1543F37F206ECBE90069EBEB /* PetNameAndPhotoViewController.swift in Sources */,
 				15C7624A2016D011002AA7F8 /* PTMapView.swift in Sources */,
+				4467BCD22088C4A900F31BC7 /* TermsViewController.swift in Sources */,
 				1599B22C2023F48A002D4025 /* PTDeviceStatusView.swift in Sources */,
 				15C763D62016D5C0002AA7F8 /* EmailTableViewController.swift in Sources */,
 				15C7614A2016CFF3002AA7F8 /* PawTrails.xcdatamodeld in Sources */,
@@ -1953,7 +2053,6 @@
 				15C764162016D5C0002AA7F8 /* PetSizeTableViewController.swift in Sources */,
 				15C763CE2016D5C0002AA7F8 /* SignUpViewController.swift in Sources */,
 				15C7640C2016D5C0002AA7F8 /* PieChart.swift in Sources */,
-				15C763E12016D5C0002AA7F8 /* PetsViewController.swift in Sources */,
 				15C7615B2016CFF3002AA7F8 /* SharedPreferences.swift in Sources */,
 				15C762822016D046002AA7F8 /* HomePresenter.swift in Sources */,
 				15FFE51320796E4B005CA1C2 /* PasswordRecoverySuccessViewController.swift in Sources */,
@@ -1966,10 +2065,11 @@
 				15C764182016D5C0002AA7F8 /* ScanQRViewController.swift in Sources */,
 				15C7624E2016D011002AA7F8 /* PawTrailsStyleKit.swift in Sources */,
 				15C764192016D5C0002AA7F8 /* UserProfileTableViewController.swift in Sources */,
-				15C7640D2016D5C0002AA7F8 /* PrivacyViewController.swift in Sources */,
+				44623F0320863441002F618A /* BCSQuestionsViewController.swift in Sources */,
 				15C763DE2016D5C0002AA7F8 /* ResultViewController.swift in Sources */,
 				15C764082016D5C0002AA7F8 /* SuccessViewController.swift in Sources */,
 				15C764032016D5C0002AA7F8 /* StepThreeViewController.swift in Sources */,
+				15710F0020890E1500940D6E /* ViewTapGestureExtension.swift in Sources */,
 				15C764092016D5C0002AA7F8 /* TabPageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

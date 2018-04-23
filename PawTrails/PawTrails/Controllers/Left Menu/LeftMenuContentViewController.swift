@@ -23,7 +23,7 @@ class LeftMenuContentViewController: UIViewController {
                  viewController: ViewController.liveTracking),
         MenuItem("My Pets",
                  imageName: "MyPetsMenuIcon",
-                 viewController: ViewController.myPets),
+                 viewController: ViewController.petList),
         MenuItem("My Profile",
                  imageName: "MyProfileMenuIcon",
                  viewController: ViewController.myProfile),
@@ -37,12 +37,12 @@ class LeftMenuContentViewController: UIViewController {
                         sender.showComingSoonAlert("Device finder")
                     }
                  }),
-        MenuItem("Settings",
-                 imageName: "SettingsMenuIcon",
-                 viewController: ViewController.settings),
         MenuItem("Support",
                  imageName: "SupportMenuIcon",
-                 viewController: ViewController.support)
+                 viewController: ViewController.support),
+        MenuItem("Settings",
+                 imageName: "SettingsMenuIcon",
+                 viewController: ViewController.settings)
         ]
     
     fileprivate final let disposeBag = DisposeBag()
