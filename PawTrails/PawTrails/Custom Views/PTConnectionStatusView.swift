@@ -40,8 +40,7 @@ class PTConnectionStatusView: UIView {
         
         dotImageView.snp.makeConstraints { (make) -> Void in
             make.width.height.equalTo(10)
-            make.top.equalToSuperview()
-            make.bottom.equalToSuperview().priority(ConstraintPriority.low)
+            make.centerY.equalToSuperview()
             make.left.equalToSuperview()
             make.right.equalTo(statusLabel.snp.left).offset(-4)
         }

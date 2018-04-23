@@ -189,6 +189,7 @@ class SocketIOManager: NSObject, URLSessionDelegate {
                         // Update connection
                         if newPetDeviceData.deviceConnection.statusTime >= existing.deviceConnection.statusTime {
                             updated.deviceConnection = newPetDeviceData.deviceConnection
+                            updated.deviceConnection.statusTime = newPetDeviceData.deviceConnection.statusTime
                         }
                         
                         // Update LBS
@@ -199,9 +200,9 @@ class SocketIOManager: NSObject, URLSessionDelegate {
                         }
                         
                         // Update Position
-                        if newPetDeviceData.deviceData.deviceTime! >= existing.deviceData.deviceTime! {
+                        if let newDeviceTime = newPetDeviceData.deviceData.deviceTime, let existingDeviceTime = existing.deviceData.deviceTime, newDeviceTime >= existingDeviceTime {
                             updated.deviceData.point = newPetDeviceData.deviceData.point
-                            updated.deviceData.deviceTime = newPetDeviceData.deviceData.deviceTime
+                            updated.deviceData.deviceTime = newDeviceTime
                         }
                         
                         if let index = currentPetDeviceDataList.index(of: existing) {

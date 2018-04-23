@@ -59,7 +59,7 @@ class PTDeviceStatusView: UIView {
                 make.bottom.lessThanOrEqualToSuperview().offset(0)
                 
                 if signalView.superview != nil {
-                    make.left.equalTo(signalView.snp.right).offset(12)
+                    make.left.equalTo(signalView.snp.right).offset(8)
                 }
                 
                 make.right.equalToSuperview()
@@ -71,7 +71,9 @@ class PTDeviceStatusView: UIView {
         
         if connectionStatusView.superview != nil {
             connectionStatusView.snp.remakeConstraints { (make) -> Void in
-                make.edges.equalToSuperview()
+//                make.left.equalToSuperview().priority(.low)
+                make.centerY.equalToSuperview()
+                make.right.equalToSuperview()
             }
         }
         
@@ -79,8 +81,9 @@ class PTDeviceStatusView: UIView {
     }
     
     fileprivate func setupView() {
-        self.backgroundColor = .clear
-        self.translatesAutoresizingMaskIntoConstraints = false
+//        self.backgroundColor = .clear
+//        self.translatesAutoresizingMaskIntoConstraints = false
+//        connectionStatusView.backgroundColor = .cyan
     }
     
     func configure(_ petDeviceData: PetDeviceData, animated: Bool = true) {

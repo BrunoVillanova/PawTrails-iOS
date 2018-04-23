@@ -62,27 +62,29 @@
                                                                     <color key="textColor" red="0.25490196078431371" green="0.28235294117647058" blue="0.32156862745098036" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" ambiguous="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="trt-hH-Ifj" userLabel="Time Label">
-                                                                    <rect key="frame" x="174" y="0.0" width="0.0" height="18"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" ambiguous="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="trt-hH-Ifj" userLabel="Time Label">
+                                                                    <rect key="frame" x="163" y="0.0" width="0.0" height="18"/>
                                                                     <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="14"/>
                                                                     <color key="textColor" red="0.25490196078431371" green="0.28235294117647058" blue="0.32156862745098036" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CqE-NJ-pMT">
-                                                                    <rect key="frame" x="170" y="-20" width="81" height="52"/>
+                                                                    <rect key="frame" x="171" y="-20" width="60" height="52"/>
                                                                     <subviews>
                                                                         <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9qv-AZ-yhE" userLabel="Status View" customClass="PTDeviceStatusView" customModule="PawTrails" customModuleProvider="target">
-                                                                            <rect key="frame" x="20" y="20" width="41" height="12"/>
+                                                                            <rect key="frame" x="0.0" y="20" width="60" height="12"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="12" id="Nox-hI-sWA"/>
-                                                                                <constraint firstAttribute="width" constant="60" id="pqe-W8-PLb"/>
+                                                                                <constraint firstAttribute="width" relation="lessThanOrEqual" priority="999" constant="60" id="pqe-W8-PLb"/>
                                                                             </constraints>
                                                                         </view>
                                                                     </subviews>
-                                                                    <color key="backgroundColor" red="0.98039215690000003" green="0.25490196079999999" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <constraints>
                                                                         <constraint firstItem="9qv-AZ-yhE" firstAttribute="centerY" secondItem="CqE-NJ-pMT" secondAttribute="centerY" id="3V8-Ai-Bi8"/>
-                                                                        <constraint firstItem="9qv-AZ-yhE" firstAttribute="centerX" secondItem="CqE-NJ-pMT" secondAttribute="centerX" id="s8W-fX-Hds"/>
+                                                                        <constraint firstItem="9qv-AZ-yhE" firstAttribute="leading" secondItem="CqE-NJ-pMT" secondAttribute="leading" id="GlR-uE-ZJO"/>
+                                                                        <constraint firstItem="9qv-AZ-yhE" firstAttribute="top" relation="greaterThanOrEqual" secondItem="CqE-NJ-pMT" secondAttribute="top" id="PIT-6O-Ghe"/>
+                                                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="9qv-AZ-yhE" secondAttribute="bottom" id="Sfb-nl-ZB5"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="9qv-AZ-yhE" secondAttribute="trailing" id="VHb-YQ-a8j"/>
                                                                     </constraints>
                                                                 </view>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Uo-OE-RZM" userLabel="Address Label">
@@ -94,7 +96,7 @@
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="trailing" secondItem="CqE-NJ-pMT" secondAttribute="trailing" constant="16" id="6BS-5A-YBT"/>
+                                                                <constraint firstAttribute="trailing" secondItem="CqE-NJ-pMT" secondAttribute="trailing" id="6BS-5A-YBT"/>
                                                                 <constraint firstItem="0Uo-OE-RZM" firstAttribute="top" secondItem="DWR-um-V6Q" secondAttribute="bottom" constant="8" id="74g-kF-Aqy"/>
                                                                 <constraint firstItem="CqE-NJ-pMT" firstAttribute="bottom" secondItem="DWR-um-V6Q" secondAttribute="bottom" id="FIC-fD-X9H"/>
                                                                 <constraint firstItem="trt-hH-Ifj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DWR-um-V6Q" secondAttribute="trailing" constant="8" id="Haa-Xm-0ej"/>
@@ -103,7 +105,7 @@
                                                                 <constraint firstAttribute="bottom" secondItem="0Uo-OE-RZM" secondAttribute="bottom" id="OlP-xi-llJ"/>
                                                                 <constraint firstItem="CqE-NJ-pMT" firstAttribute="top" secondItem="DWR-um-V6Q" secondAttribute="top" id="Rzt-Nu-biP"/>
                                                                 <constraint firstItem="DWR-um-V6Q" firstAttribute="leading" secondItem="YfQ-dK-aDz" secondAttribute="leading" id="nRP-PY-OYG"/>
-                                                                <constraint firstItem="CqE-NJ-pMT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="trt-hH-Ifj" secondAttribute="trailing" constant="8" id="ubl-Y2-S8Y"/>
+                                                                <constraint firstItem="CqE-NJ-pMT" firstAttribute="leading" secondItem="trt-hH-Ifj" secondAttribute="trailing" constant="8" id="ubl-Y2-S8Y"/>
                                                                 <constraint firstItem="0Uo-OE-RZM" firstAttribute="leading" secondItem="YfQ-dK-aDz" secondAttribute="leading" id="vy6-tX-Byo"/>
                                                                 <constraint firstItem="trt-hH-Ifj" firstAttribute="centerY" secondItem="DWR-um-V6Q" secondAttribute="centerY" id="zeP-2q-9JM"/>
                                                             </constraints>
@@ -181,7 +183,7 @@
                                         <rect key="frame" x="0.0" y="323.5" width="375" height="130.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You Currently have no pet added, please add your pet." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rw9-Rg-QW6">
-                                                <rect key="frame" x="67.5" y="48" width="240" height="34.5"/>
+                                                <rect key="frame" x="67.5" y="48.5" width="240" height="34.5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="240" id="UjK-3g-tZj"/>
                                                 </constraints>

@@ -79,7 +79,7 @@ struct Constants {
     #endif
     /////////// END apiURL
 
-//    ////////// FORCE PRODUCTION
+    ////////// FORCE PRODUCTION
 //    static let apiURL = apiURLProduction
 //    static let apiURLTest = apiURLTestProduction
 //    static let socketURL = socketURLProduction
@@ -110,6 +110,4 @@ struct Constants {
             #endif
         }
     }
-    
-    
 }
