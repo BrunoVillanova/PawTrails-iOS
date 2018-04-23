@@ -168,8 +168,10 @@
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ConnectDevice" translatesAutoresizingMaskIntoConstraints="NO" id="4bo-Qa-MCq" userLabel="Pet Image View">
                                                 <rect key="frame" x="47.5" y="122.5" width="280" height="201"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </imageView>
                                         </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="4bo-Qa-MCq" secondAttribute="bottom" id="QwJ-mm-dPc"/>
                                             <constraint firstItem="4bo-Qa-MCq" firstAttribute="centerX" secondItem="tjc-wA-R9N" secondAttribute="centerX" id="svk-cu-m3G"/>

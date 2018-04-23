@@ -340,12 +340,20 @@ extension PetDeviceData {
 
 extension DeviceData {
     
+    var deviceDate: Date? {
+        get {
+            if let deviceTime = self.deviceTime {
+                return Date.init(timeIntervalSince1970: TimeInterval(deviceTime))
+            }
+            return nil
+        }
+    }
+    
     init() {
         id = 0
         point = nil
         speed = nil
         deviceTime = nil
-        deviceDate = nil
         lbsTimestamp = 0
         batteryLevel = 0
         networkLevel = 0
@@ -383,10 +391,8 @@ extension DeviceData {
         
         if let deviceTime = json["deviceTime"] as? Int64 {
             self.deviceTime = deviceTime
-            self.deviceDate = Date.init(timeIntervalSince1970: TimeInterval(deviceTime))
         } else {
             self.deviceTime = nil
-            self.deviceDate = nil
         }
         
         if let speed = json["speed"] as? Float {
@@ -411,7 +417,6 @@ extension DeviceData {
         networkLevel = cdPetDeviceData.netSignal
         
         deviceTime = cdPetDeviceData.deviceTime
-        deviceDate = Date.init(timeIntervalSince1970: TimeInterval(cdPetDeviceData.deviceTime))
         lbsTimestamp = cdPetDeviceData.lbsTimestamp
     }
 }

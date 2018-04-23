@@ -44,8 +44,8 @@ class LoginViewController: UIViewController, InitialView {
         configureNavigatonBar()
         
         #if DEBUG
-        emailTextField.text = Constants.testUserEmailStaging
-        passwordTextField.text = Constants.testUserPasswordStaging
+        emailTextField.text = Constants.testUserEmail
+        passwordTextField.text = Constants.testUserPassword
         #endif
     }
     

@@ -243,7 +243,6 @@ struct DeviceData {
     var point: Point?
     var speed: Float?
     var deviceTime: Int64?
-    var deviceDate: Date?
     // LBS data
     var lbsTimestamp: Int64
     var batteryLevel: Int16

@@ -53,15 +53,6 @@ fileprivate enum channel {
         case .gpsUpdates: return "gpsUpdates"
         }
     }
-    
-    static func gpsUpdatesName(for petId: Int) -> String {
-        return "gpsUpdates"
-    }
-    
-    // to return pets.
-    static func joinRoom(for petIds: [Int]) -> String {
-        return "pets"
-    }
 }
 
 
@@ -181,16 +172,51 @@ class SocketIOManager: NSObject, URLSessionDelegate {
         
         socketReactive?.on(channel.gpsUpdates.name).subscribe(onNext: { (data) in
             Reporter.debugPrint("SocketIO -> GPS Updates")
-            
-            if let petDeviceData = PetDeviceData.fromJson(data.first) {
-                for newPetDeviceData in petDeviceData {
-                    if !self.petGpsUpdates.value.contains(newPetDeviceData) {  // if there is a name in the new list also in the old list
-                        Reporter.debugPrint("SocketIO -> Setting petGpsUpdates.value")
-                        self.petGpsUpdates.value = petDeviceData
-                        return
+
+            if let petDeviceDataList = PetDeviceData.fromJson(data.first) {
+                Reporter.debugPrint("-------------------------------------------\n")
+
+                
+                var currentPetDeviceDataList = self.petGpsUpdates.value
+                for newPetDeviceData in petDeviceDataList {
+                    Reporter.debugPrint("SocketIO -> Setting petGpsUpdates.value")
+                    
+                    if let existing = currentPetDeviceDataList.first(where: { (pdd) -> Bool in
+                        return pdd.pet.id == newPetDeviceData.pet.id
+                    }) {
+                        var updated = existing
+                        
+                        // Update connection
+                        if newPetDeviceData.deviceConnection.statusTime >= existing.deviceConnection.statusTime {
+                            updated.deviceConnection = newPetDeviceData.deviceConnection
+                        }
+                        
+                        // Update LBS
+                        if newPetDeviceData.deviceData.lbsTimestamp >= existing.deviceData.lbsTimestamp {
+                            updated.deviceData.lbsTimestamp = newPetDeviceData.deviceData.lbsTimestamp
+                            updated.deviceData.batteryLevel = newPetDeviceData.deviceData.batteryLevel
+                            updated.deviceData.networkLevel = newPetDeviceData.deviceData.networkLevel
+                        }
+                        
+                        // Update Position
+                        if newPetDeviceData.deviceData.deviceTime! >= existing.deviceData.deviceTime! {
+                            updated.deviceData.point = newPetDeviceData.deviceData.point
+                            updated.deviceData.deviceTime = newPetDeviceData.deviceData.deviceTime
+                        }
+                        
+                        if let index = currentPetDeviceDataList.index(of: existing) {
+                            currentPetDeviceDataList.remove(at: index)
+                        }
+                        
+                        currentPetDeviceDataList.append(updated)
+                        
+                    } else {
+                        currentPetDeviceDataList.append(newPetDeviceData)
                     }
                 }
-
+                self.petGpsUpdates.value = currentPetDeviceDataList
+            } else {
+                Reporter.debugPrint("ERROR PARSING DEVICEDATA\n")
             }
             
         }).disposed(by: disposeBag)

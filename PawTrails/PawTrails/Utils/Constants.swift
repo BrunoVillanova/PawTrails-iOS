@@ -93,11 +93,7 @@ struct Constants {
             #if DEMO
                 return testUserEmailProductionDemo
             #else
-            #if BETA
-                return testUserEmailProduction
-            #else
                 return testUserEmailStaging
-            #endif
             #endif
         }
     }
@@ -110,11 +106,7 @@ struct Constants {
             #if DEMO
                 return testUserPasswordProductionDemo
             #else
-            #if BETA
-            return testUserPasswordProduction
-            #else
-            return testUserPasswordStaging
-            #endif
+                return testUserPasswordStaging
             #endif
         }
     }
