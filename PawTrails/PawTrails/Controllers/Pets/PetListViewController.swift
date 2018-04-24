@@ -172,8 +172,7 @@ class PetListViewController: UIViewController {
 
 extension PetListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let title = section == 0 ? "My Own Pets" : "Shared with Me"
-        return PTTableViewHeader(title)
+        return PTTableViewHeader(self.dataSource.sectionModels[section].header)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
