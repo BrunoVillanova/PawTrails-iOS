@@ -277,11 +277,13 @@ extension PetBreeds {
 }
 
 extension PetDeviceData {
-    init() {
-        id = 0
-        deviceData = DeviceData()
-        pet = Pet()
-        deviceConnection = DeviceConnection()
+
+    
+    init(_ id: Int = 0, deviceData: DeviceData = DeviceData(), pet: Pet = Pet(), deviceConnection:DeviceConnection =  DeviceConnection()) {
+        self.id = id
+        self.deviceData = deviceData
+        self.pet = pet
+        self.deviceConnection = deviceConnection
     }
     
     init(_ json: [String:Any]) {

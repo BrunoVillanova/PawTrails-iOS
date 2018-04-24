@@ -108,6 +108,10 @@ class PetWizardFinalStepViewController: PetWizardStepViewController {
                         }
                     }
                 }).disposed(by: disposeBag)
+            
+            APIRepository.instance.getImmediateLocation([pet.id]) { (error) in
+         
+            }
         }
     }
     

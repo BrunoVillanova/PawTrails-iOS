@@ -184,32 +184,41 @@ class SocketIOManager: NSObject, URLSessionDelegate {
                     if let existing = currentPetDeviceDataList.first(where: { (pdd) -> Bool in
                         return pdd.pet.id == newPetDeviceData.pet.id
                     }) {
+                        // Archive the given instance
                         var updated = existing
+                        var deviceConnection = existing.deviceConnection
+                        var deviceData = existing.deviceData
                         
                         // Update connection
                         if newPetDeviceData.deviceConnection.statusTime >= existing.deviceConnection.statusTime {
-                            updated.deviceConnection = newPetDeviceData.deviceConnection
-                            updated.deviceConnection.statusTime = newPetDeviceData.deviceConnection.statusTime
+                            deviceConnection.status = newPetDeviceData.deviceConnection.status
+                            deviceConnection.statusTime = newPetDeviceData.deviceConnection.statusTime
                         }
                         
                         // Update LBS
                         if newPetDeviceData.deviceData.lbsTimestamp >= existing.deviceData.lbsTimestamp {
-                            updated.deviceData.lbsTimestamp = newPetDeviceData.deviceData.lbsTimestamp
-                            updated.deviceData.batteryLevel = newPetDeviceData.deviceData.batteryLevel
-                            updated.deviceData.networkLevel = newPetDeviceData.deviceData.networkLevel
+                            deviceData.lbsTimestamp = newPetDeviceData.deviceData.lbsTimestamp
+                            deviceData.batteryLevel = newPetDeviceData.deviceData.batteryLevel
+                            deviceData.networkLevel = newPetDeviceData.deviceData.networkLevel
                         }
                         
                         // Update Position
-                        if let newDeviceTime = newPetDeviceData.deviceData.deviceTime, let existingDeviceTime = existing.deviceData.deviceTime, newDeviceTime >= existingDeviceTime {
-                            updated.deviceData.point = newPetDeviceData.deviceData.point
-                            updated.deviceData.deviceTime = newDeviceTime
+                        if let newDeviceTime = newPetDeviceData.deviceData.deviceTime, let existingDeviceTime = existing.deviceData.deviceTime, newDeviceTime >= existingDeviceTime, let point = newPetDeviceData.deviceData.point {
+                            deviceData.point = point
+                            deviceData.deviceTime = newDeviceTime
+                        } else if existing.deviceData.deviceTime == nil {
+                            deviceData.point = newPetDeviceData.deviceData.point
+                            deviceData.deviceTime = newPetDeviceData.deviceData.deviceTime
                         }
+                        
+                        updated.deviceConnection = deviceConnection
+                        updated.deviceData = deviceData
+
+                        currentPetDeviceDataList.append(updated)
                         
                         if let index = currentPetDeviceDataList.index(of: existing) {
                             currentPetDeviceDataList.remove(at: index)
                         }
-                        
-                        currentPetDeviceDataList.append(updated)
                         
                     } else {
                         currentPetDeviceDataList.append(newPetDeviceData)
